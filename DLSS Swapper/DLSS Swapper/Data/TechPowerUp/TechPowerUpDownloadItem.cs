@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Data.TechPowerUp
 {
-    record TechPowerUpDownloadItem
+    public record TechPowerUpDownloadItem
     {
         [JsonPropertyName("filename")]
-        public string FileName { get; }
+        public string FileName { get; set; }
 
         [JsonPropertyName("md5_hash")]
-        public string MD5Hash { get; }
+        public string MD5Hash { get;  set; }
     }
 }

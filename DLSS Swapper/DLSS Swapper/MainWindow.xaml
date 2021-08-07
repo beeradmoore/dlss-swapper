@@ -1,0 +1,26 @@
+﻿<Window
+    x:Class="DLSS_Swapper.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DLSS_Swapper"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d">
+
+    <muxc:NavigationView x:Name="MainNavigationView"
+                         ItemInvoked="MainNavigationView_ItemInvoked" 
+                         IsSettingsVisible="false"
+                         PaneDisplayMode="LeftCompact"
+                         IsBackButtonVisible="Collapsed"                        
+                         Loaded="MainNavigationView_Loaded">
+        <muxc:NavigationView.MenuItems>
+            <muxc:NavigationViewItem Content="Games" Tag="Games">
+                <muxc:NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE7FC;"/>
+                </muxc:NavigationViewItem.Icon>
+            </muxc:NavigationViewItem>
+            <muxc:NavigationViewItem Icon="Download" Content="Download" Tag="Download" />
+        </muxc:NavigationView.MenuItems>
+        <Frame x:Name="ContentFrame" />
+    </muxc:NavigationView>
+</Window>

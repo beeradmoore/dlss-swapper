@@ -52,7 +52,7 @@ namespace DLSS_Swapper
 
             if (page == "Games")
             {
-                //pageType = typeof(GameGridPage);
+                pageType = typeof(GameGridPage);
             }
             else if (page == "Download")
             {
@@ -74,9 +74,32 @@ namespace DLSS_Swapper
             }
         }
 
-        void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
+        async void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
         {
-            GoToPage("Download");
+            GoToPage("Games");
+
+            if (Settings.HasShownWarning == false)
+            {
+                var dialog = new ContentDialog()
+                {
+                    Title = "Warning",
+                    CloseButtonText = "Okay",
+                    Content = @"Replacing dlls on your computer can be dangerous.
+
+Placing a malicious dll into a game is just as bad as running Linking_park_-_nUmB_mp3.exe that you just downloaded from LimeWire.
+
+This tool will download dlls from TechPowerUp, it's up to you if you consider them a trusted source.
+
+Use at your own risk.",
+                    XamlRoot = MainNavigationView.XamlRoot,
+                };
+                await dialog.ShowAsync();
+
+                Settings.HasShownWarning = true;
+            }
+
+
+
         }
     }
 }

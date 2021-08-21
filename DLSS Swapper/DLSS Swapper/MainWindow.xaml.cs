@@ -18,6 +18,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -77,6 +78,28 @@ namespace DLSS_Swapper
         async void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
         {
             GoToPage("Games");
+
+            if (Settings.HasShownWorkInProgress == false)
+            {
+                var dialog = new ContentDialog()
+                {
+                    Title = "Work in Progress - Please Read",
+                    CloseButtonText = "Okay",
+                    Content = @"DLSS Swapper not complete. This is an early beta, as such it may be somewhat confusing and not user friendly in its operation. 
+
+For more details on how to use the tool please see the 'How to use' section of our wiki.",
+                    PrimaryButtonText = "View wiki",
+                    XamlRoot = MainNavigationView.XamlRoot,
+                };
+                var didClick = await dialog.ShowAsync();
+
+                Settings.HasShownWorkInProgress = true;
+
+                if (didClick == ContentDialogResult.Primary)
+                {
+                    await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/How-to-use"));
+                }
+            }
 
             if (Settings.HasShownWarning == false)
             {

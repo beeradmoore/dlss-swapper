@@ -5,3 +5,6 @@ obj/
 .DS_Store
 *.user
 *.cache
+*.pfx
+AppPackages/
+BundleArtifacts/

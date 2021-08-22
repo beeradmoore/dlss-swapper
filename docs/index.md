@@ -1,36 +1,36 @@
+DLSS Swapper is a tool that allows you to conveniently download, manage, and swap DLSS dlls allowing you to upgrade or downgrade DLSS version in a game without the game needing an update.
 
-You can use the [editor on GitHub](https://github.com/beeradmoore/dlss-swapper/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+## Why would you want to change the DLSS dlls in your game?
+See [this](https://youtube.com/clip/UgzYyeox3s7jFJZAvYF4AaABCQ) clip, or better yet just watch the entire video ([Lego Builder's Journey Ray Tracing Showcase + DLSS 2.2 Upgrades Analysis](https://www.youtube.com/watch?v=dtbqJXb1UDw)) from Digital Foundry. DLSS 2.2 discussions start at 11:40.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+## Please note
+This tool does **NOT** allow you to add DLSS to games that don't support it.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+This tool does **NOT** guarantee that swapping DLSS dlls will:
+- Improve DLSS performance
+- Reduce DLSS artifacts
+- Give a crash free expereince
 
-```markdown
-Syntax highlighted code block
+In many cases you may fix some issues, in other cases you may prevent a game from launching (until you restore your original dll, provided in the tool).
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+Happy experimenting. As my old uni professor once said,
 
-1. Numbered
-2. List
+> The good thing about computer [science] is we will never die wondering 'what if..?'
 
-**Bold** and _Italic_ and `Code` text
+Please feel free to Tweet your gaming experience with the #dlssswapper hashtag, or tag me ([@beeradmoore](https://twitter.com/beeradmoore)) directly.
 
-[Link](url) and ![Image](src)
-```
+## How do I get it?
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Check our [install instructions](https://beeradmoore.github.io/dlss-swapper/install/).
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/beeradmoore/dlss-swapper/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## How do I use it?
 
-### Support or Contact
+Check our [usage notes](https://beeradmoore.github.io/dlss-swapper/usage/).
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+
+## It would be cool if DLSS Swapper could...
+File a [feature request](https://github.com/beeradmoore/dlss-swapper/issues)
+

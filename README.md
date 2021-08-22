@@ -1,24 +1,38 @@
 # DLSS Swapper
 
 
-More detailed readme coming soon.
+DLSS Swapper is a tool that allows you to conveniently download, manage, and swap DLSS dlls allowing you to upgrade or downgrade DLSS version in a game without the game needing an update.
+
+## Why would you want to change the DLSS dlls in your game?
+See [this](https://youtube.com/clip/UgzYyeox3s7jFJZAvYF4AaABCQ) clip, or better yet just watch the entire video ([Lego Builder's Journey Ray Tracing Showcase + DLSS 2.2 Upgrades Analysis](https://www.youtube.com/watch?v=dtbqJXb1UDw)) from Digital Foundry. DLSS 2.2 discussions start at 11:40.
 
 
-### What is this?
-Tool for downloading, managing, and swapping out DLSS (Deep Learning Super Sampling) dlls in games on your computer.
+## Please note
+This tool does **NOT** allow you to add DLSS to games that don't support it.
+
+This tool does **NOT** guarantee that swapping DLSS dlls will:
+- Improve DLSS performance
+- Reduce DLSS artifacts
+- Give a crash free expereince
+
+In many cases you may fix some issues, in other cases you may prevent a game from launching (until you restore your original dll, provided in the tool).
 
 
-### But why?
-DLSS gets updates from nVidia, but often studios are not updating DLSS within their own games. See [this](https://www.youtube.com/watch?v=dtbqJXb1UDw) video from Digital Foundry as to why you may want to manually update DLSS yourself.
+Happy experimenting. As my old uni professor once said,
+
+> The good thing about computer [science] is we will never die wondering 'what if..?'
+
+Please feel free to Tweet your gaming experience with the #dlssswapper hashtag, or tag me ([@beeradmoore](https://twitter.com/beeradmoore)) directly.
+
+## How do I get it?
+
+Check our [install instructions](https://beeradmoore.github.io/dlss-swapper/install/).
 
 
-### What games are supported?
-Any Steam game that suppoorts DLSS __should__ work.
+## How do I use it?
+
+Check our [usage notes](https://beeradmoore.github.io/dlss-swapper/usage/).
 
 
-### Where are the dlls coming from?
-DLSS Swapper has an in-built tool to download zips from [TechPowerUp](https://www.techpowerup.com/download/nvidia-dlss-dll/). If you want to source your own dlls you can do so by putting them your My Documents folder in the following path `Documents/DLSS Swapper/dlls/<dll_version>/nvngx_dlss.dll`
-
-
-### But what if TechPowerUp upload a malicious dll?
-Like any tool, please use at your risk. I'll add a way to verify dlls with known file hashes. I have this hand curated list of dlls [here](https://github.com/beeradmoore/dlss_version_tracker) and their hashes. Maybe this will be incorperated at some point (assuming you trust me to give correct hashes 🤓)
+## It would be cool if DLSS Swapper could...
+File a [feature request](https://github.com/beeradmoore/dlss-swapper/issues)

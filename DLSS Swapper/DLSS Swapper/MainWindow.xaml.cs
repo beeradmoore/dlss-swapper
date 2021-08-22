@@ -87,8 +87,8 @@ namespace DLSS_Swapper
                     CloseButtonText = "Okay",
                     Content = @"DLSS Swapper not complete. This is an early beta, as such it may be somewhat confusing and not user friendly in its operation. 
 
-For more details on how to use the tool please see the 'How to use' section of our wiki.",
-                    PrimaryButtonText = "View wiki",
+For more details on how to use the tool please see the 'Usage' section of our site.",
+                    PrimaryButtonText = "View Usage",
                     XamlRoot = MainNavigationView.XamlRoot,
                 };
                 var didClick = await dialog.ShowAsync();
@@ -97,7 +97,7 @@ For more details on how to use the tool please see the 'How to use' section of o
 
                 if (didClick == ContentDialogResult.Primary)
                 {
-                    await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/How-to-use"));
+                    await Launcher.LaunchUriAsync(new Uri("https://beeradmoore.github.io/dlss-swapper/usage/"));
                 }
             }
 

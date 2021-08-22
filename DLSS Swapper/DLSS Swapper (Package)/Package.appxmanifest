@@ -8,11 +8,11 @@
 
   <Identity
     Name="cc5a0fee-f182-4d02-a177-3c2f002b4f34"
-    Publisher="CN=brads"
-    Version="0.9.0.0" />
+    Publisher="CN=dlss-swapper"
+    Version="0.9.1.0" />
 
   <Properties>
-    <DisplayName>DLSS Swapper (Package)</DisplayName>
+    <DisplayName>DLSS Swapper</DisplayName>
     <PublisherDisplayName>beeradmoore</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
@@ -31,8 +31,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="DLSS Swapper (Package)"
-        Description="DLSS Swapper (Package)"
+        DisplayName="DLSS Swapper"
+        Description="DLSS Swapper is a tool that allows users to download, manage, and swap DLSS dlls contained in certain games installed on their computer."
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
         Square44x44Logo="Images\Square44x44Logo.png">

@@ -23,11 +23,10 @@ _NOTE: Only install and trust certificates from sources you trust_
 
 ![Certificate Import Wizard asking user if they want to import the certificate into a certificate store based on what type of certificate it is or if you want to install them to a specific certificate store](https://beeradmoore.github.io/dlss-swapper/images/install/certificate_3.png)
 
-6. In the `Select Certificate Store` popup select `Third-Party Root Certification Authorities` and then click `OK`. This will take you back to the screen displayed in step 5, click `Next`.
+6. In the `Select Certificate Store` popup select `Trusted People` and then click `OK`. This will take you back to the screen displayed in step 5, click `Next`.
 
-7. Your final certifcate import summary should look like this. Select `Finish` to install the certificate.
+7. Select `Finish` to install the certificate.
 
-![Certificate Import Wizard showing the certificate store is selected by the user](https://beeradmoore.github.io/dlss-swapper/images/install/certificate_5.png)
 
 
 ### Downloading Installer

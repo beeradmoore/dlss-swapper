@@ -1,37 +1,45 @@
 ## Install Instructions
 
-You can use the [editor on GitHub](https://github.com/beeradmoore/dlss-swapper/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+Until DLSS Swapper is on the Windows Store you will need to either trust our signing certificate + download installer from Github, or build the application from source.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Trusting Signing Certificate
+Downloading, installing, and trusting the signing certificate only needs to be done once. After this you can install and update DLSS Swapper any time and as often as you want.
 
-### Markdown
+_NOTE: Only install and trust certificates from sources you trust_
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+1. Download our [signing certificate](https://beeradmoore.github.io/dlss-swapper/downloads/dlss-swapper.cer). 
 
-```markdown
-Syntax highlighted code block
+2. Either double click the .cer file or right mouse click on it and select `Install Certificate`
 
-# Header 1
-## Header 2
-### Header 3
+3. At the certificate prompt select `Install Certificate...`
 
-- Bulleted
-- List
+![Windows certificate summary showing that this certificate is currently not trusted](https://beeradmoore.github.io/dlss-swapper/images/install/certificate_1.png)
 
-1. Numbered
-2. List
+4. Change `Store Location` to `Local Machine` and click `Next`
 
-**Bold** and _Italic_ and `Code` text
+![Certificate Import Wizard asking user what store location they want to us eto install the current certificate. Options being current user and local machine](https://beeradmoore.github.io/dlss-swapper/images/install/certificate_2.png)
 
-[Link](url) and ![Image](src)
-```
+5. Select the option for `Place all certificates in the following store` and then click `Browse...`
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+![Certificate Import Wizard asking user if they want to import the certificate into a certificate store based on what type of certificate it is or if you want to install them to a specific certificate store](https://beeradmoore.github.io/dlss-swapper/images/install/certificate_3.png)
 
-### Jekyll Themes
+6. In the `Select Certificate Store` popup select `Trusted Root Certification Authorities` and then click `OK`. This will take you back to the screen displayed in step 5, click `Next`.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/beeradmoore/dlss-swapper/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+![Select Certificate Store window showing Trusted Rooter Certification Authorities is selected](https://beeradmoore.github.io/dlss-swapper/images/install/certificate_4.png)
 
-### Support or Contact
+7. Your final certifcate import summary should look like this. Select `Finish` to install the certificate.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+![Certificate Import Wizard showing the certificate store is selected by the user, is the Trusted Root Certification Auhorities, and Content is Certificate](https://beeradmoore.github.io/dlss-swapper/images/install/certificate_5.png)
+
+
+### Downloading Installer
+Installers for DLSS Swapper will be uploaded to the [releases section](https://github.com/beeradmoore/dlss-swapper/releases) in our Github repository.
+
+They have an extension of .msixbundle, so don't be looking for .exe files.
+
+### Running The Installer
+If all goes well running the .msixbundle file you downloaded and clicking `Install` should be all you need to do. This will install any aditional dependencies you require to run DLSS Swapper.
+
+![Animated gif showing the user click install and then seeing the installing progress bar go from 0-100% and give the option for the user to then launch the application](https://beeradmoore.github.io/dlss-swapper/images/install/installer_1.gif)
+
+If you have any problems installing please check if someone has already reported a similar problem in the [issues section](https://github.com/beeradmoore/dlss-swapper/issues) on our Github repository. If that doesn't solve your problem please create a new issue so we can try get you up and running.

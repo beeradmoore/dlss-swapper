@@ -32,7 +32,7 @@ namespace DLSS_Swapper
     {
         public MainWindow()
         {
-            Title = "DLSS Swapper";
+            Title = "DLSS Swapper [beta]";
             this.InitializeComponent();
         }
 

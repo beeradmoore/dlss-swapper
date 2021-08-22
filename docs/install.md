@@ -42,4 +42,8 @@ If all goes well running the .msixbundle file you downloaded and clicking `Insta
 
 ![Animated gif showing the user click install and then seeing the installing progress bar go from 0-100% and give the option for the user to then launch the application](https://beeradmoore.github.io/dlss-swapper/images/install/installer_1.gif)
 
+If your installer says `Untrusted App` please review and re-attempt the steps from `Trusting Signing Certificate` section above.
+
+![Installer showing an error that it is not trusted](https://beeradmoore.github.io/dlss-swapper/images/install/installer_2.png)
+
 If you have any problems installing please check if someone has already reported a similar problem in the [issues section](https://github.com/beeradmoore/dlss-swapper/issues) on our Github repository. If that doesn't solve your problem please create a new issue so we can try get you up and running.

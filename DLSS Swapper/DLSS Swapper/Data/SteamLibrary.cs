@@ -48,7 +48,7 @@ namespace DLSS_Swapper.Data
                     {
                         var libraryFoldersFileText = File.ReadAllText(libraryFoldersFile);
 
-                        var regex = new Regex(@"^(\s*)""(.*)""(\s*)""(?<path>.*)""$", RegexOptions.Multiline);
+                        var regex = new Regex(@"^([ \t]*)""(.*)""([ \t]*)""(?<path>.*)""$", RegexOptions.Multiline);
                         var matches = regex.Matches(libraryFoldersFileText);
                         if (matches.Count > 0)
                         {
@@ -114,7 +114,7 @@ namespace DLSS_Swapper.Data
                 var appManifest = File.ReadAllText(appManifestPath);
                 var game = new Game();
 
-                var regex = new Regex(@"^(\s*)""name""(\s*)""(?<name>.*)""$", RegexOptions.Multiline);
+                var regex = new Regex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline);
                 var matches = regex.Matches(appManifest);
                 if (matches.Count == 0)
                 {
@@ -123,7 +123,7 @@ namespace DLSS_Swapper.Data
 
                 game.Title = matches[0].Groups["name"].ToString();
 
-                regex = new Regex(@"^(\s*)""installdir""(\s*)""(?<installdir>.*)""$", RegexOptions.Multiline);
+                regex = new Regex(@"^([ \t]*)""installdir""([ \t]*)""(?<installdir>.*)""$", RegexOptions.Multiline);
                 matches = regex.Matches(appManifest);
                 if (matches.Count == 0)
                 {
@@ -137,7 +137,7 @@ namespace DLSS_Swapper.Data
                 game.InstallPath = Path.Combine(baseDir, "common", installDir);
 
 
-                regex = new Regex(@"^(\s*)""appid""(\s*)""(?<appid>.*)""$", RegexOptions.Multiline);
+                regex = new Regex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline);
                 matches = regex.Matches(appManifest);
                 if (matches.Count == 0)
                 {

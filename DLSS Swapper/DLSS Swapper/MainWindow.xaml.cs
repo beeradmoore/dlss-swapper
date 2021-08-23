@@ -111,9 +111,7 @@ For more details on how to use the tool please see the 'Usage' section of our si
 
 Placing a malicious dll into a game is just as bad as running Linking_park_-_nUmB_mp3.exe that you just downloaded from LimeWire.
 
-This tool will download dlls from TechPowerUp, it's up to you if you consider them a trusted source.
-
-Use at your own risk.",
+Future protections and validations will come in a future update.",
                     XamlRoot = MainNavigationView.XamlRoot,
                 };
                 await dialog.ShowAsync();

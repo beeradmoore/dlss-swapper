@@ -48,14 +48,18 @@ namespace DLSS_Swapper.Data
                     {
                         var libraryFoldersFileText = File.ReadAllText(libraryFoldersFile);
 
-                        var regex = new Regex(@"^(\s*)""path""(\s*)""(?<path>.*)""$", RegexOptions.Multiline);
+                        var regex = new Regex(@"^(\s*)""(.*)""(\s*)""(?<path>.*)""$", RegexOptions.Multiline);
                         var matches = regex.Matches(libraryFoldersFileText);
                         if (matches.Count > 0)
                         {
                             foreach (Match match in matches)
                             {
+                                // This is weird, but for some reason some libraryfolders.vdf are formatted very differnetly than others.
                                 var path = match.Groups["path"].ToString();
-                                libraryFolders.Add(Path.Combine(path, "steamapps"));
+                                if (Directory.Exists(path))
+                                {
+                                    libraryFolders.Add(Path.Combine(path, "steamapps"));
+                                }
                             }
                         }
                     }

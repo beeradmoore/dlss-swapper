@@ -18,6 +18,7 @@
     <None Remove="Pages\DLSSPickerPage.xaml" />
     <None Remove="Pages\GameGridPage.xaml" />
     <None Remove="Pages\TechPowerUpDownloadPage.xaml" />
+    <None Remove="UserControls\DLSSPickerControl.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +28,12 @@
     <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.3" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UserControls\DLSSPickerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

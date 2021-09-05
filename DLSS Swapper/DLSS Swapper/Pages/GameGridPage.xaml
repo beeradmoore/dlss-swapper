@@ -24,7 +24,7 @@
 
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:Game">
-                    <Grid Width="200" ColumnSpacing="0" RowSpacing="0" Margin="0,0,10,10">
+                    <Grid Width="200" ColumnSpacing="0" RowSpacing="0" Margin="0,0,10,10" Background="Black">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
@@ -33,9 +33,9 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="{Binding Title}" Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Text="{Binding Title}" Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
 
-                        <Image Width="200" Height="300" Grid.RowSpan="2" Source="{Binding HeaderImage}"  />
+                        <Image Width="200" Height="300" Grid.RowSpan="2" Source="{Binding HeaderImage}" />
 
                         <Grid VerticalAlignment="Bottom"  Background="#88000000" Padding="8" ColumnSpacing="8">
 
@@ -48,8 +48,8 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Column="0" FontWeight="Bold" Text="DLSS" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSSVersion}" VerticalAlignment="Center" HorizontalAlignment="Right"  />
+                            <TextBlock Grid.Column="0" FontWeight="Bold" Text="DLSS" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" />
+                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSSVersion}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" />
                         </Grid>
                     </Grid>
                 </DataTemplate>

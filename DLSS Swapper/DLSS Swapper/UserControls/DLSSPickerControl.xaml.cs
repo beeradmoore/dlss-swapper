@@ -17,21 +17,18 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace DLSS_Swapper.Pages
+namespace DLSS_Swapper.UserControls
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class DLSSPickerPage : Page
+    public sealed partial class DLSSPickerControl : UserControl
     {
         Game _game;
         public List<LocalDll> LocalDlls { get; } = new List<LocalDll>();
 
-        public DLSSPickerPage(Game game, List<LocalDll> localDlls)
+        public DLSSPickerControl(Game game, List<LocalDll> localDlls)
         {
             _game = game;
             LocalDlls.AddRange(localDlls);
-            
+
             this.InitializeComponent();
             DataContext = this;
 
@@ -40,7 +37,6 @@ namespace DLSS_Swapper.Pages
             {
                 VersionComboBox.SelectedItem = detectedVersion;
             }
-            //_game.CurrentDLSSVersion
         }
 
         internal LocalDll GetSelectedLocalDll()

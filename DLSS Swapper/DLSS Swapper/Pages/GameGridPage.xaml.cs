@@ -134,13 +134,13 @@ namespace DLSS_Swapper.Pages
                     return;
                 }
 
-                var dlssPickerPage = new DLSSPickerPage(game, _localDlls);
+                var dlssPickerControl = new DLSSPickerControl(game, _localDlls);
                 dialog = new ContentDialog();
                 dialog.Title = "Select DLSS Version";
                 dialog.PrimaryButtonText = "Update";
                 dialog.CloseButtonText = "Cancel";
                 dialog.DefaultButton = ContentDialogButton.Primary;
-                dialog.Content = dlssPickerPage;
+                dialog.Content = dlssPickerControl;
                 dialog.XamlRoot = this.XamlRoot;
 
                 if (String.IsNullOrEmpty(game.BaseDLSSVersion) == false)
@@ -153,7 +153,7 @@ namespace DLSS_Swapper.Pages
 
                 if (result == ContentDialogResult.Primary)
                 {
-                    var selectedDll = dlssPickerPage.GetSelectedLocalDll();
+                    var selectedDll = dlssPickerControl.GetSelectedLocalDll();
                     bool didUpdate = game.UpdateDll(selectedDll);
 
                     if (didUpdate == false)

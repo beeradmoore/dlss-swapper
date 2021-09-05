@@ -24,7 +24,7 @@
 
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:Game">
-                    <Grid Width="200" ColumnSpacing="0" RowSpacing="0" Margin="0,0,10,10" Background="Black">
+                    <Grid Width="200" Height="300" ColumnSpacing="0" RowSpacing="0" Margin="0,0,10,10" Background="Black">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>

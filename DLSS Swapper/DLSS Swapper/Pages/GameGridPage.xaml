@@ -11,16 +11,34 @@
     Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="220" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <GridView x:Name="MainGridView" ItemsSource="{Binding Games}" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20"  >
+        <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,25,5,0">
+            <TextBlock Text="Filters" FontSize="24"/>
+            <StackPanel>
+                <CheckBox x:Name="DLSSCheckbox" VerticalAlignment="Center" Content="Has DLSS" IsThreeState="True" IsChecked="{x:Null}" Indeterminate="DLSS_Checkbox_Indeterminate" Checked="DLSS_Checkbox_Checked" Unchecked="DLSS_Checkbox_UnChecked"/>
+                
+                <!-- Filter By Platform WIP
+                <CheckBox VerticalAlignment="Center" Content="Steam" IsThreeState="True" IsChecked="{x:Null}" IsEnabled="False"/>
+                <CheckBox VerticalAlignment="Center" Content="Epic Games" IsThreeState="True" IsChecked="{x:Null}" IsEnabled="False"/>
+                <CheckBox VerticalAlignment="Center" Content="Rockstar Social Club" IsThreeState="True" IsChecked="{x:Null}" IsEnabled="False"/>
+                -->
+            </StackPanel>
+        </StackPanel>
+
+
+
+
+
+        <GridView x:Name="MainGridView" ItemsSource="{Binding FilteredGames}" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20" >
 
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:Game">
@@ -60,5 +78,5 @@
             <muxc:ProgressRing IsActive="True"  Width="60" Height="60" />
         </Grid>
     </Grid>
-    
+
 </Page>

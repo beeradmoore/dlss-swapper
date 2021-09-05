@@ -30,7 +30,8 @@ namespace DLSS_Swapper.Pages
     /// </summary>
     public sealed partial class GameGridPage : Page
     {
-        public ObservableCollection<Game> Games { get; } = new ObservableCollection<Game>();
+        public ObservableCollection<Game> AllGames { get; } = new ObservableCollection<Game>();
+        public ObservableCollection<Game> FilteredGames { get; } = new ObservableCollection<Game>();
         List<LocalDll> _localDlls { get; } = new List<LocalDll>();
         List<TechPowerUpDllHash> _dlssHashes { get; }  = new List<TechPowerUpDllHash>();
 
@@ -72,9 +73,11 @@ namespace DLSS_Swapper.Pages
             DispatcherQueue.TryEnqueue(() => {
                 foreach (var game in steamGames)
                 {
-                    Games.Add(game);
+                    AllGames.Add(game);
+                    FilteredGames.Add(game);
                 }
             });
+            
         }
 
         async Task LoadDllHashes()
@@ -183,6 +186,39 @@ namespace DLSS_Swapper.Pages
                     }
                 }
             }
+        }
+
+        private void UpdateFilteredList()
+        {
+            FilteredGames.Clear();
+            foreach (Game currentGame in AllGames)
+            {
+                if (currentGame.HasDLSS && DLSSCheckbox.IsChecked == true)
+                    FilteredGames.Add(currentGame);
+                else if (!currentGame.HasDLSS && DLSSCheckbox.IsChecked == false)
+                {
+                    FilteredGames.Add(currentGame);
+                }
+                else if(DLSSCheckbox.IsChecked == null)
+                {
+                    FilteredGames.Add(currentGame);
+                }
+            }
+        }
+
+        private void DLSS_Checkbox_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateFilteredList();
+        }
+
+        private void DLSS_Checkbox_Indeterminate(object sender, RoutedEventArgs e)
+        {
+            UpdateFilteredList();
+        }
+
+        private void DLSS_Checkbox_UnChecked(object sender, RoutedEventArgs e)
+        {
+            UpdateFilteredList();
         }
     }
 }

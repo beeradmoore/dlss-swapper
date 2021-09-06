@@ -11,6 +11,14 @@ namespace DLSS_Swapper.Data
 {
     class SteamLibrary : IGameLibrary
     {
+        public string Name => "Steam";
+
+        List<Game> _loadedGames = new List<Game>();
+        public List<Game> LoadedGames { get { return _loadedGames; } }
+
+        List<Game> _loadedDLSSGames = new List<Game>();
+        public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
+
         public bool IsInstalled()
         {
             return (GetInstallPath() != null);
@@ -18,6 +26,9 @@ namespace DLSS_Swapper.Data
 
         public async Task<List<Game>> ListGamesAsync()
         {
+            _loadedGames.Clear();
+            _loadedDLSSGames.Clear();
+
             // If we don't detect a steam install patg return an empty list.
             var installPath = GetInstallPath();
             if (String.IsNullOrWhiteSpace(installPath))
@@ -85,6 +96,9 @@ namespace DLSS_Swapper.Data
                         }
                     }
                 }
+                games.Sort();
+                _loadedGames.AddRange(games);
+                _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));
 
                 return games;
             });

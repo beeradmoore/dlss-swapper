@@ -1,5 +1,7 @@
 ﻿using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.TechPowerUp;
+using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -17,6 +19,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -30,9 +33,12 @@ namespace DLSS_Swapper.Pages
     /// </summary>
     public sealed partial class GameGridPage : Page
     {
-        public ObservableCollection<Game> Games { get; } = new ObservableCollection<Game>();
+        public List<IGameLibrary> GameLibraries { get; } = new List<IGameLibrary>();
+
         List<LocalDll> _localDlls { get; } = new List<LocalDll>();
         List<TechPowerUpDllHash> _dlssHashes { get; }  = new List<TechPowerUpDllHash>();
+
+        bool _loadingGamesAndDlls = false;
 
         public GameGridPage()
         {
@@ -62,19 +68,81 @@ namespace DLSS_Swapper.Pages
             });
         }
 
+
         async Task LoadGamesAsync()
         {
-            var steamLibrary = new SteamLibrary();
-            var steamGames = await steamLibrary.ListGamesAsync();
+            GameLibraries.Clear();
 
-            steamGames.Sort();
+            // TODO: Settings to enable/disable game libraries.
+
+            var steamLibrary = new SteamLibrary();
+            GameLibraries.Add(steamLibrary);
+            var steamGamesTask = steamLibrary.ListGamesAsync();
+
+            // More game libraries go here.
+
+            // Await them all to finish loading games.
+            await Task.WhenAll(steamGamesTask);
 
             DispatcherQueue.TryEnqueue(() => {
-                foreach (var game in steamGames)
-                {
-                    Games.Add(game);
-                }
+                FilterGames();
             });
+        }
+
+        void FilterGames()
+        {
+            // TODO: Remove weird hack which otherwise causes MainGridView_SelectionChanged to fire when changing MainGridView.ItemsSource.
+            MainGridView.SelectionChanged -= MainGridView_SelectionChanged;
+
+            //MainGridView.ItemsSource = null;
+
+            if (Settings.GroupGameLibrariesTogether)
+            {
+
+                var collectionViewSource = new CollectionViewSource()
+                {
+                    IsSourceGrouped = true,
+                    Source = GameLibraries,
+                };
+
+                if (Settings.HideNonDLSSGames)
+                {
+                    collectionViewSource.ItemsPath = new PropertyPath("LoadedDLSSGames");
+                }
+                else
+                {
+                    collectionViewSource.ItemsPath = new PropertyPath("LoadedGames");
+                }
+
+                MainGridView.ItemsSource = collectionViewSource.View;
+            }
+            else
+            {
+                var games = new List<Game>();
+
+                if (Settings.HideNonDLSSGames)
+                {
+                    foreach (var gameLibrary in GameLibraries)
+                    {
+                        games.AddRange(gameLibrary.LoadedGames.Where(g => g.HasDLSS == true));
+                    }
+                }
+                else
+                {
+                    foreach (var gameLibrary in GameLibraries)
+                    {
+                        games.AddRange(gameLibrary.LoadedGames);
+                    }
+                }
+
+                games.Sort();
+
+                MainGridView.ItemsSource = games;
+            }
+
+            // TODO: Remove weird hack which otherwise causes MainGridView_SelectionChanged to fire when changing MainGridView.ItemsSource.
+            MainGridView.SelectedIndex = -1;
+            MainGridView.SelectionChanged += MainGridView_SelectionChanged;
         }
 
         async Task LoadDllHashes()
@@ -98,16 +166,7 @@ namespace DLSS_Swapper.Pages
 
         async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            var tasks = new List<Task>();
-            tasks.Add(LoadGamesAsync());
-            tasks.Add(LoadDllHashes());
-            tasks.Add(LoadLocalDlls());
-
-            await Task.WhenAll(tasks);
-
-            DispatcherQueue.TryEnqueue(() => {
-                LoadingStackPanel.Visibility = Visibility.Collapsed;
-            });
+            await LoadGamesAndDlls();
         }
 
         async void MainGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -142,7 +201,7 @@ namespace DLSS_Swapper.Pages
                 dialog.DefaultButton = ContentDialogButton.Primary;
                 dialog.Content = dlssPickerControl;
                 dialog.XamlRoot = this.XamlRoot;
-
+                
                 if (String.IsNullOrEmpty(game.BaseDLSSVersion) == false)
                 {
                     dialog.SecondaryButtonText = "Reset";
@@ -182,6 +241,61 @@ namespace DLSS_Swapper.Pages
                         await dialog.ShowAsync();
                     }
                 }
+            }
+        }
+
+
+
+        async Task LoadGamesAndDlls()
+        {
+            if (_loadingGamesAndDlls)
+                return;
+
+            _loadingGamesAndDlls = true;
+
+            // TODO: Fade?
+            LoadingStackPanel.Visibility = Visibility.Visible;
+
+            var tasks = new List<Task>();
+            tasks.Add(LoadGamesAsync());
+            tasks.Add(LoadDllHashes());
+            tasks.Add(LoadLocalDlls());
+
+
+            await Task.WhenAll(tasks);
+
+            DispatcherQueue.TryEnqueue(() => {
+                LoadingStackPanel.Visibility = Visibility.Collapsed;
+                _loadingGamesAndDlls = false;
+            });
+        }
+
+        async void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            await LoadGamesAndDlls();
+        }
+
+        async void FilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            var gameFilterControl = new GameFilterControl();
+
+            var dialog = new ContentDialog();
+            dialog.Title = "Filter";
+            dialog.PrimaryButtonText = "Apply";
+            dialog.CloseButtonText = "Cancel";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.Content = gameFilterControl;
+            dialog.XamlRoot = this.XamlRoot;
+
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                Settings.HideNonDLSSGames = gameFilterControl.IsHideNonDLSSGamesChecked();
+                Settings.GroupGameLibrariesTogether = gameFilterControl.IsGroupGameLibrariesTogetherChecked();
+
+                FilterGames();
             }
         }
     }

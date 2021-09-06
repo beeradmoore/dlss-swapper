@@ -46,7 +46,37 @@ namespace DLSS_Swapper
             }
         }
 
-        
+
+
+        static bool _hideNonDLSSGames = true;
+        public static bool HideNonDLSSGames
+        {
+            get { return _hideNonDLSSGames; }
+            set
+            {
+                if (_hideNonDLSSGames != value)
+                {
+                    _hideNonDLSSGames = value;
+                    ApplicationData.Current.LocalSettings.Values["HideNonDLSSGames"] = value;
+                }
+            }
+        }
+
+
+        static bool _groupGameLibrariesTogether = false;
+        public static bool GroupGameLibrariesTogether
+        {
+            get { return _groupGameLibrariesTogether; }
+            set
+            {
+                if (_groupGameLibrariesTogether != value)
+                {
+                    _groupGameLibrariesTogether = value;
+                    ApplicationData.Current.LocalSettings.Values["GroupGameLibrariesTogether"] = value;
+                }
+            }
+        }
+
         static Settings()
         {
             // Load BaseDirectory from settings.
@@ -68,6 +98,22 @@ namespace DLSS_Swapper
                 }
             }
 
+            if (localSettings.Values.TryGetValue("HideNonDLSSGames", out object tempHideNonDLSSGames))
+            {
+                if (tempHideNonDLSSGames is bool hideNonDLSSGames)
+                {
+                    _hideNonDLSSGames = hideNonDLSSGames;
+                }
+            }
+
+            if (localSettings.Values.TryGetValue("GroupGameLibrariesTogether", out object tempGroupGameLibrariesTogether))
+            {
+                if (tempGroupGameLibrariesTogether is bool groupGameLibrariesTogether)
+                {
+                    _groupGameLibrariesTogether = groupGameLibrariesTogether;
+                }
+            }
+
             if (localSettings.Values.TryGetValue("BaseDirectory", out object tempObject))
             {
                 if (tempObject is string baseDirectory && Directory.Exists(baseDirectory))
@@ -83,6 +129,7 @@ namespace DLSS_Swapper
                 localSettings.Values["BaseDirectory"] = _baseDirectory;
             }
         }
+
         public static void InitDirectories()
         {
             // TODO: Error handling

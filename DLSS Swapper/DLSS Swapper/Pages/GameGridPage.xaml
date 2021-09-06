@@ -17,11 +17,29 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <GridView x:Name="MainGridView" ItemsSource="{Binding Games}" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20"  >
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <AppBarButton Icon="Refresh" Label="Refresh" Click="RefreshButton_Click" />
+            <AppBarButton Icon="Filter" Label="Filter" Click="FilterButton_Click" />
+        </StackPanel>
 
+        <GridView Grid.Row="1" x:Name="MainGridView" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20"  >
+            <GridView.GroupStyle>
+                <GroupStyle HidesIfEmpty="True">
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0">
+                                <TextBlock Text="{Binding Name}" Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </GridView.GroupStyle>
+            
+            
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:Game">
                     <Grid Width="200" Height="300" ColumnSpacing="0" RowSpacing="0" Margin="0,0,10,10" Background="Black">
@@ -56,9 +74,12 @@
 
             </GridView.ItemTemplate>
         </GridView>
-        <Grid x:Name="LoadingStackPanel" Background="Black" >
-            <muxc:ProgressRing IsActive="True"  Width="60" Height="60" />
+
+        <Grid x:Name="LoadingStackPanel" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <!--SystemControlAcrylicElementBrush-->
+            <muxc:ProgressRing IsActive="True" Width="60" Height="60" />
         </Grid>
+        
     </Grid>
     
 </Page>

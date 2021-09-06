@@ -15,10 +15,10 @@
     <PackageIconUrl />
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Pages\DLSSPickerPage.xaml" />
     <None Remove="Pages\GameGridPage.xaml" />
     <None Remove="Pages\TechPowerUpDownloadPage.xaml" />
     <None Remove="UserControls\DLSSPickerControl.xaml" />
+    <None Remove="UserControls\GameFilterControl.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,12 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Pages\DLSSPickerPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
     <Page Update="Pages\GameGridPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -50,6 +44,12 @@
 
   <ItemGroup>
     <Page Update="Pages\TechPowerUpDownloadPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UserControls\GameFilterControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

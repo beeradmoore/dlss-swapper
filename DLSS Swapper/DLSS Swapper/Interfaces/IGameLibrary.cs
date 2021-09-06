@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Interfaces
 {
-    interface IGameLibrary
+    public interface IGameLibrary
     {
+        string Name { get; }
+        List<Game> LoadedGames { get; }
+        List<Game> LoadedDLSSGames { get; }
+
         Task<List<Game>> ListGamesAsync();
         bool IsInstalled();
     }

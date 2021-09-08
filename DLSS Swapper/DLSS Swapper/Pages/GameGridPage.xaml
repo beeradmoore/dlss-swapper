@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:data="using:DLSS_Swapper.Data"
+    xmlns:data="using:DLSS_Swapper.Data" xmlns:media="using:Microsoft.UI.Xaml.Media"
     mc:Ignorable="d"
     Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -26,7 +26,7 @@
             <AppBarButton Icon="Filter" Label="Filter" Click="FilterButton_Click" />
         </StackPanel>
 
-        <GridView Grid.Row="1" x:Name="MainGridView" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20"  >
+        <GridView Grid.Row="1" x:Name="MainGridView" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20">
             <GridView.GroupStyle>
                 <GroupStyle HidesIfEmpty="True">
                     <GroupStyle.HeaderTemplate>
@@ -75,8 +75,10 @@
             </GridView.ItemTemplate>
         </GridView>
 
-        <Grid x:Name="LoadingStackPanel" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <!--SystemControlAcrylicElementBrush-->
+        <Grid x:Name="LoadingStackPanel" Grid.Row="1">
+            <Grid.Background>
+                <media:AcrylicBrush TintColor="Black" TintOpacity="0.2" TintLuminosityOpacity="0.1"/>
+            </Grid.Background>
             <muxc:ProgressRing IsActive="True" Width="60" Height="60" />
         </Grid>
         

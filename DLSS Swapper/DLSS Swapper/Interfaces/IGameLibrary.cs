@@ -9,11 +9,12 @@ namespace DLSS_Swapper.Interfaces
 {
     public interface IGameLibrary
     {
+
         string Name { get; }
         List<Game> LoadedGames { get; }
         List<Game> LoadedDLSSGames { get; }
 
-        Task<List<Game>> ListGamesAsync();
+        Task<List<Game>> ListGamesAsync(IProgress<Game> progress);
         bool IsInstalled();
     }
 }

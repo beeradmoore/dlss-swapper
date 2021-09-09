@@ -1,6 +1,7 @@
 ﻿using DLSS_Swapper.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,15 +22,15 @@ namespace DLSS_Swapper.Data
 
         public bool IsInstalled()
         {
-            return (GetInstallPath() != null);
+            return GetInstallPath() != null;
         }
 
-        public async Task<List<Game>> ListGamesAsync()
+        public async Task<List<Game>> ListGamesAsync(IProgress<Game> progress)
         {
             _loadedGames.Clear();
             _loadedDLSSGames.Clear();
 
-            // If we don't detect a steam install patg return an empty list.
+            // If we don't detect a steam install path return an empty list.
             var installPath = GetInstallPath();
             if (String.IsNullOrWhiteSpace(installPath))
             {
@@ -91,6 +92,7 @@ namespace DLSS_Swapper.Data
                             var game = GetGameFromAppManifest(appManifest);
                             if (game != null)
                             {
+                                progress.Report(game);
                                 games.Add(game);
                             }
                         }
@@ -98,7 +100,7 @@ namespace DLSS_Swapper.Data
                 }
                 games.Sort();
                 _loadedGames.AddRange(games);
-                _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));
+                _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS));
 
                 return games;
             });

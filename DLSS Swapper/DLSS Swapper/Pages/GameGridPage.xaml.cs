@@ -40,10 +40,13 @@ namespace DLSS_Swapper.Pages
 
         bool _loadingGamesAndDlls = false;
 
+        ObservableCollection<Game> games = new ObservableCollection<Game>();
+
         public GameGridPage()
         {
             this.InitializeComponent();
             DataContext = this;
+            MainGridView.ItemsSource = games;
         }
 
         async Task LoadLocalDlls()
@@ -53,7 +56,7 @@ namespace DLSS_Swapper.Pages
                 var dlssDlls = Directory.GetFiles(Settings.DllsDirectory, "nvngx_dlss.dll", SearchOption.AllDirectories);
                 foreach (var dlssDll in dlssDlls)
                 {
-                    // lol gross.
+
                     var directoryVersion = Path.GetFileName(Path.GetDirectoryName(dlssDll));
                     var fileVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
                     var dlssVersion = $"{fileVersionInfo.FileMajorPart}.{fileVersionInfo.FileMinorPart}.{fileVersionInfo.FileBuildPart}.{fileVersionInfo.FilePrivatePart}";
@@ -75,79 +78,44 @@ namespace DLSS_Swapper.Pages
 
             // TODO: Settings to enable/disable game libraries.
 
+            games.Clear();
+            GC.Collect();
+
+            var progress = new Progress<Game>(game =>
+            {
+                //skip game if user chose to hide non-DLSS games
+                if (Settings.HideNonDLSSGames && !game.HasDLSS)
+                {
+                    return;
+                }
+
+                //insert game in correct order (alphabetically)
+                int i = 0;
+                while (i < games.Count && Comparer<Game>.Default.Compare(games[i], game) < 0)
+                {
+                    i++;
+                }
+
+                games.Insert(i, game);
+            });
+
+            List<Task> loadGameLibraries = new List<Task>();
+
             var steamLibrary = new SteamLibrary();
             GameLibraries.Add(steamLibrary);
-            var steamGamesTask = steamLibrary.ListGamesAsync();
+            loadGameLibraries.Add(steamLibrary.ListGamesAsync(progress));
 
-            // More game libraries go here.
+            var ubisoftLibrary = new UbisoftLibrary();
+            GameLibraries.Add(ubisoftLibrary);
+            loadGameLibraries.Add(ubisoftLibrary.ListGamesAsync(progress));
 
-            // Await them all to finish loading games.
-            await Task.WhenAll(steamGamesTask);
+            await Task.WhenAll(loadGameLibraries);
 
-            DispatcherQueue.TryEnqueue(() => {
-                FilterGames();
-            });
-        }
-
-        void FilterGames()
-        {
-            // TODO: Remove weird hack which otherwise causes MainGridView_SelectionChanged to fire when changing MainGridView.ItemsSource.
-            MainGridView.SelectionChanged -= MainGridView_SelectionChanged;
-
-            //MainGridView.ItemsSource = null;
-
-            if (Settings.GroupGameLibrariesTogether)
-            {
-
-                var collectionViewSource = new CollectionViewSource()
-                {
-                    IsSourceGrouped = true,
-                    Source = GameLibraries,
-                };
-
-                if (Settings.HideNonDLSSGames)
-                {
-                    collectionViewSource.ItemsPath = new PropertyPath("LoadedDLSSGames");
-                }
-                else
-                {
-                    collectionViewSource.ItemsPath = new PropertyPath("LoadedGames");
-                }
-
-                MainGridView.ItemsSource = collectionViewSource.View;
-            }
-            else
-            {
-                var games = new List<Game>();
-
-                if (Settings.HideNonDLSSGames)
-                {
-                    foreach (var gameLibrary in GameLibraries)
-                    {
-                        games.AddRange(gameLibrary.LoadedGames.Where(g => g.HasDLSS == true));
-                    }
-                }
-                else
-                {
-                    foreach (var gameLibrary in GameLibraries)
-                    {
-                        games.AddRange(gameLibrary.LoadedGames);
-                    }
-                }
-
-                games.Sort();
-
-                MainGridView.ItemsSource = games;
-            }
-
-            // TODO: Remove weird hack which otherwise causes MainGridView_SelectionChanged to fire when changing MainGridView.ItemsSource.
-            MainGridView.SelectedIndex = -1;
-            MainGridView.SelectionChanged += MainGridView_SelectionChanged;
         }
 
         async Task LoadDllHashes()
         {
-            var url = "https://gist.githubusercontent.com/beeradmoore/3467646864751964dbf22f462c2e5b1e/raw/techpowerup_dlss_dll_hashes.json";
+            string url = "https://gist.githubusercontent.com/beeradmoore/3467646864751964dbf22f462c2e5b1e/raw/techpowerup_dlss_dll_hashes.json";
 
             try
             {
@@ -160,7 +128,7 @@ namespace DLSS_Swapper.Pages
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"LoadDllHashes Error: {err.Message}");
+                Debug.WriteLine($"LoadDllHashes Error: {err.Message}");
             }
         }
 
@@ -181,7 +149,7 @@ namespace DLSS_Swapper.Pages
             {
                 ContentDialog dialog;
 
-                if (game.HasDLSS == false)
+                if (!game.HasDLSS)
                 {
                     dialog = new ContentDialog();
                     //dialog.Title = "Error";
@@ -208,7 +176,6 @@ namespace DLSS_Swapper.Pages
                 }
 
                 var result = await dialog.ShowAsync();
-
 
                 if (result == ContentDialogResult.Primary)
                 {
@@ -244,8 +211,6 @@ namespace DLSS_Swapper.Pages
             }
         }
 
-
-
         async Task LoadGamesAndDlls()
         {
             if (_loadingGamesAndDlls)
@@ -253,7 +218,6 @@ namespace DLSS_Swapper.Pages
 
             _loadingGamesAndDlls = true;
 
-            // TODO: Fade?
             LoadingStackPanel.Visibility = Visibility.Visible;
 
             var tasks = new List<Task>();
@@ -295,7 +259,7 @@ namespace DLSS_Swapper.Pages
                 Settings.HideNonDLSSGames = gameFilterControl.IsHideNonDLSSGamesChecked();
                 Settings.GroupGameLibrariesTogether = gameFilterControl.IsGroupGameLibrariesTogetherChecked();
 
-                FilterGames();
+               await LoadGamesAndDlls();
             }
         }
     }

@@ -12,6 +12,14 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.Resources>
+            <Storyboard x:Name="DisplayLoadingScreen">
+                <FadeInThemeAnimation Storyboard.TargetName="LoadingStackPanel"/>
+            </Storyboard>
+            <Storyboard x:Name="HideLoadingScreen">
+                <FadeOutThemeAnimation Storyboard.TargetName="LoadingStackPanel" Completed="FadeOutThemeAnimation_Completed"/>
+            </Storyboard>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>

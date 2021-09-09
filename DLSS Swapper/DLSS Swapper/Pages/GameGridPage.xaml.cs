@@ -219,17 +219,17 @@ namespace DLSS_Swapper.Pages
             _loadingGamesAndDlls = true;
 
             LoadingStackPanel.Visibility = Visibility.Visible;
+            DisplayLoadingScreen.Begin();
 
             var tasks = new List<Task>();
             tasks.Add(LoadGamesAsync());
             tasks.Add(LoadDllHashes());
             tasks.Add(LoadLocalDlls());
 
-
             await Task.WhenAll(tasks);
 
             DispatcherQueue.TryEnqueue(() => {
-                LoadingStackPanel.Visibility = Visibility.Collapsed;
+                HideLoadingScreen.Begin();
                 _loadingGamesAndDlls = false;
             });
         }
@@ -261,6 +261,11 @@ namespace DLSS_Swapper.Pages
 
                await LoadGamesAndDlls();
             }
+        }
+
+        private void FadeOutThemeAnimation_Completed(object sender, object e)
+        {
+            LoadingStackPanel.Visibility = Visibility.Collapsed;
         }
     }
 }

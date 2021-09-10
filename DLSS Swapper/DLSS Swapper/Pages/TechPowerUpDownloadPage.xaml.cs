@@ -92,7 +92,12 @@ namespace DLSS_Swapper.Pages
                 var localItem = TechPowerUpItems.FirstOrDefault<TechPowerUpLocalItem>(x => x.DownloadItem.FileName == filename);
                 if (localItem != null)
                 {
-                    localItem.StartDownload(url);
+                    var progress = new Progress<int>();
+                    progress.ProgressChanged += (sender, e) =>
+                    {
+                        localItem.DownloadPercent = e;
+                    };
+                    localItem.StartDownload(url, progress);
                 }
             }
         }

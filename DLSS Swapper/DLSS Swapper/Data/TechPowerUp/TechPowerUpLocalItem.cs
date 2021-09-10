@@ -110,7 +110,7 @@ namespace DLSS_Swapper.Data.TechPowerUp
             return String.Empty;
         }
 
-        public void StartDownload(string url)
+        public void StartDownload(string url, IProgress<int> progress)
         {
             Task.Run(async () =>
             {
@@ -135,28 +135,19 @@ namespace DLSS_Swapper.Data.TechPowerUp
                                     int bytesRead = 0;
                                     long bytesDownloaded = 0;
                                     double contentLength = (double)response.Content.Headers.ContentLength.Value;
-                                    int lastPercent = 0;
                                     while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                                     {
                                         await file.WriteAsync(buffer, 0, bytesRead);
 
                                         bytesDownloaded += bytesRead;
-                                        int currentPercent = (int)((bytesDownloaded / contentLength) * 100.0);
-                                        if (currentPercent > lastPercent + 10)
-                                        {
-                                            lastPercent += 10;
-                                            ((App)Application.Current).Window.DispatcherQueue.TryEnqueue(() =>
-                                            {
-                                                DownloadPercent = currentPercent;
-                                                System.Diagnostics.Debug.WriteLine(DownloadPercent);
-                                            });
-                                        }
+                                        progress.Report((int)(bytesDownloaded / contentLength * 100.0));
                                     }
                                 }
                             }
 
                             await ExtractDll();
                         }
+                        
                         else
                         {
                             ((App)Application.Current).Window.DispatcherQueue.TryEnqueue(async () =>

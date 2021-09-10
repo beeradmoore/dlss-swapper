@@ -75,7 +75,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Column="0" FontWeight="Bold" Text="DLSS" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" />
-                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSSVersion}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" />
+                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSSVersion, TargetNullValue=N/A}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" />
                         </Grid>
                     </Grid>
                 </DataTemplate>

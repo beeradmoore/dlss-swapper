@@ -18,8 +18,8 @@ namespace DLSS_Swapper.Data
 
         public string HeaderImage { get; set; }
 
-        string _baseDLSSVersion;
-        public string BaseDLSSVersion
+        Version _baseDLSSVersion;
+        public Version BaseDLSSVersion
         {
             get { return _baseDLSSVersion; }
             set
@@ -32,8 +32,8 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        string _currentDLSSVersion;
-        public string CurrentDLSSVersion
+        Version _currentDLSSVersion;
+        public Version CurrentDLSSVersion
         {
             get { return _currentDLSSVersion; }
             set
@@ -52,8 +52,8 @@ namespace DLSS_Swapper.Data
         /// </summary>
         public void DetectDLSS()
         {
-            BaseDLSSVersion = "";
-            CurrentDLSSVersion = "N/A";
+            BaseDLSSVersion = null;
+            CurrentDLSSVersion = null;
 
             /*
             //Handle multiple DLSS dll files found in game install path
@@ -71,14 +71,14 @@ namespace DLSS_Swapper.Data
                 HasDLSS = true;
 
                 FileVersionInfo dllVersionInfo = FileVersionInfo.GetVersionInfo(firstDll);
-                CurrentDLSSVersion = dllVersionInfo.FileVersion.Replace(",", ".");
+                CurrentDLSSVersion = new Version(dllVersionInfo.FileVersion.Replace(',', '.'));
 
                 //found a version of DLSS, check for base DLL (will be next to original)
                 string basePath = Path.Combine(Path.GetDirectoryName(firstDll), "nvngx_dlss.dll.dlsss");
                 if (File.Exists(basePath))
                 {
                     FileVersionInfo dllBaseVersionInfo = FileVersionInfo.GetVersionInfo(basePath);
-                    BaseDLSSVersion = dllBaseVersionInfo.FileVersion.Replace(",", ".");
+                    BaseDLSSVersion = new Version(dllBaseVersionInfo.FileVersion.Replace(',', '.'));
                 }
             }
             else
@@ -96,7 +96,7 @@ namespace DLSS_Swapper.Data
             }
 
             var versionInfo = FileVersionInfo.GetVersionInfo(foundDllBackups.First());
-            var resetToVersion = $"{versionInfo.FileMajorPart}.{versionInfo.FileMinorPart}.{versionInfo.FileBuildPart}.{versionInfo.FilePrivatePart}";
+            var resetToVersion = new Version(versionInfo.FileVersion.Replace(',', '.'));
 
             foreach (var dll in foundDllBackups)
             {
@@ -114,7 +114,7 @@ namespace DLSS_Swapper.Data
             }
 
             CurrentDLSSVersion = resetToVersion;
-            BaseDLSSVersion = String.Empty;
+            BaseDLSSVersion = null;
 
             return true;
         }
@@ -133,9 +133,9 @@ namespace DLSS_Swapper.Data
             }
             
             var versionInfo = FileVersionInfo.GetVersionInfo(localDll.Filename);
-            var targetDllVersion = $"{versionInfo.FileMajorPart}.{versionInfo.FileMinorPart}.{versionInfo.FileBuildPart}.{versionInfo.FilePrivatePart}";
+            var targetDllVersion = new Version(versionInfo.FileVersion.Replace(',', '.'));
 
-            var baseDllVersion = String.Empty;
+            Version baseDllVersion = null;
 
             // Backup old dlls.
             foreach (var dll in foundDlls)
@@ -147,7 +147,7 @@ namespace DLSS_Swapper.Data
                     try
                     {
                         var defaultVersionInfo = FileVersionInfo.GetVersionInfo(dll);
-                        baseDllVersion = $"{defaultVersionInfo.FileMajorPart}.{defaultVersionInfo.FileMinorPart}.{defaultVersionInfo.FileBuildPart}.{defaultVersionInfo.FilePrivatePart}";
+                        baseDllVersion = new Version(defaultVersionInfo.FileVersion.Replace(',', '.'));
 
                         File.Copy(dll, targetDllPath, true);
                     }
@@ -173,7 +173,7 @@ namespace DLSS_Swapper.Data
             }
 
             CurrentDLSSVersion = targetDllVersion;
-            if (String.IsNullOrEmpty(baseDllVersion) == false)
+            if (baseDllVersion != null)
             {
                 BaseDLSSVersion = baseDllVersion;
             }

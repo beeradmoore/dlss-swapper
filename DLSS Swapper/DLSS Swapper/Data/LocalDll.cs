@@ -14,7 +14,7 @@ namespace DLSS_Swapper.Data
     {
         public string Filename { get; }
 
-        public string Version { get; }
+        public Version Version { get; }
 
         public ulong VersionNumber { get; }
 
@@ -28,11 +28,11 @@ namespace DLSS_Swapper.Data
 
             var versionInfo = FileVersionInfo.GetVersionInfo(filename);
 
-            Version = $"{versionInfo.FileMajorPart}.{versionInfo.FileMinorPart}.{versionInfo.FileBuildPart}.{versionInfo.FilePrivatePart}";
-            VersionNumber = ((ulong)versionInfo.FileMajorPart << 48) +
-                         ((ulong)versionInfo.FileMinorPart << 32) +
-                         ((ulong)versionInfo.FileBuildPart << 16) +
-                         ((ulong)versionInfo.FilePrivatePart);
+            Version = new Version(versionInfo.FileVersion.Replace(',', '.'));
+            VersionNumber = ((ulong)Version.Major << 48) +
+                         ((ulong)Version.Minor << 32) +
+                         ((ulong)Version.Build << 16) +
+                         ((ulong)Version.Revision);
 
             using (var stream = File.OpenRead(filename))
             {
@@ -54,7 +54,7 @@ namespace DLSS_Swapper.Data
 
         public override string ToString()
         {
-            return Version;
+            return Version.ToString();
         }
 
         public int CompareTo(LocalDll other)

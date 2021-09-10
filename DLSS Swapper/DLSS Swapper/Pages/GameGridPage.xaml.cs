@@ -53,13 +53,13 @@ namespace DLSS_Swapper.Pages
         {
             await Task.Run(() =>
             {
+                _localDlls.Clear();
                 var dlssDlls = Directory.GetFiles(Settings.DllsDirectory, "nvngx_dlss.dll", SearchOption.AllDirectories);
                 foreach (var dlssDll in dlssDlls)
                 {
-
-                    var directoryVersion = Path.GetFileName(Path.GetDirectoryName(dlssDll));
+                    var directoryVersion = new Version(Path.GetFileName(Path.GetDirectoryName(dlssDll)));
                     var fileVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
-                    var dlssVersion = $"{fileVersionInfo.FileMajorPart}.{fileVersionInfo.FileMinorPart}.{fileVersionInfo.FileBuildPart}.{fileVersionInfo.FilePrivatePart}";
+                    var dlssVersion = new Version(fileVersionInfo.FileVersion.Replace(',', '.'));
 
                     // TODO : Validate with hash?. But how can we secure valid hashes?
                     if (directoryVersion == dlssVersion)
@@ -170,7 +170,7 @@ namespace DLSS_Swapper.Pages
                 dialog.Content = dlssPickerControl;
                 dialog.XamlRoot = this.XamlRoot;
                 
-                if (String.IsNullOrEmpty(game.BaseDLSSVersion) == false)
+                if (game.BaseDLSSVersion != null)
                 {
                     dialog.SecondaryButtonText = "Reset";
                 }

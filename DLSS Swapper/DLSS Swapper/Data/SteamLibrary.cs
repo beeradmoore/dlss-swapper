@@ -25,6 +25,7 @@ namespace DLSS_Swapper.Data
             return GetInstallPath() != null;
         }
 
+
         public async Task<List<Game>> ListGamesAsync(IProgress<Game> progress)
         {
             _loadedGames.Clear();
@@ -58,20 +59,15 @@ namespace DLSS_Swapper.Data
                 {
                     try
                     {
-                        var libraryFoldersFileText = File.ReadAllText(libraryFoldersFile);
+                        StreamReader sr = new StreamReader(libraryFoldersFile);
+                        var fmt = new Sledge.Formats.Valve.SerialisedObjectFormatter();
+                        var libraryFolderFile = fmt.Deserialize(sr.BaseStream);
 
-                        var regex = new Regex(@"^([ \t]*)""(.*)""([ \t]*)""(?<path>.*)""$", RegexOptions.Multiline);
-                        var matches = regex.Matches(libraryFoldersFileText);
-                        if (matches.Count > 0)
+                        foreach (var libraryFile in libraryFolderFile)
                         {
-                            foreach (Match match in matches)
+                            foreach (var library in libraryFile.Children)
                             {
-                                // This is weird, but for some reason some libraryfolders.vdf are formatted very differnetly than others.
-                                var path = match.Groups["path"].ToString();
-                                if (Directory.Exists(path))
-                                {
-                                    libraryFolders.Add(Path.Combine(path, "steamapps"));
-                                }
+                                libraryFolders.Add(Path.Combine(library.Properties.FirstOrDefault(x => x.Key == "path").Value, "steamapps"));
                             }
                         }
                     }

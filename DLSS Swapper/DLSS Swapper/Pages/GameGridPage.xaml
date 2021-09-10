@@ -85,9 +85,12 @@
 
         <Grid x:Name="LoadingStackPanel" Grid.Row="1">
             <Grid.Background>
-                <media:AcrylicBrush TintColor="Black" TintOpacity="0.2" TintLuminosityOpacity="0.1"/>
+                <media:AcrylicBrush TintColor="{ThemeResource SystemAccentColor}" TintOpacity="0.2" TintLuminosityOpacity="0.1"/>
             </Grid.Background>
-            <muxc:ProgressRing IsActive="True" Width="60" Height="60" />
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <muxc:ProgressRing IsActive="True" Width="60" Height="60" />
+                <TextBlock x:Name="LoadingProgress" FontWeight="Bold" Margin="0,10,0,0" Foreground="White"/>
+            </StackPanel>
         </Grid>
         
     </Grid>

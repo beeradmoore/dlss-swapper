@@ -97,6 +97,11 @@ namespace DLSS_Swapper.Pages
                 }
 
                 games.Insert(i, game);
+
+                ((App)Application.Current).Window.DispatcherQueue.TryEnqueue(() =>
+                {
+                    LoadingProgress.Text = $"Found {games.Count} games";
+                });
             });
 
             List<Task> loadGameLibraries = new List<Task>();

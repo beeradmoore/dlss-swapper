@@ -47,34 +47,38 @@ namespace DLSS_Swapper.Data
         }
         public bool HasDLSS { get; set; }
 
+        /// <summary>
+        /// Search for DLSS .dll file
+        /// </summary>
         public void DetectDLSS()
         {
-            BaseDLSSVersion = String.Empty;
+            BaseDLSSVersion = "";
             CurrentDLSSVersion = "N/A";
-            var dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", SearchOption.AllDirectories);
-            if (dlssDlls.Length > 0)
+
+            /*
+            //Handle multiple DLSS dll files found in game install path
+            foreach (var dlssDll in Directory.EnumerateFiles(InstallPath, "nvngx_dlss.dll", SearchOption.AllDirectories))
+            {
+
+            }
+            */
+
+            var dlssDlls = Directory.EnumerateFiles(InstallPath, "nvngx_dlss.dll", SearchOption.AllDirectories);
+            var firstDll = dlssDlls.FirstOrDefault();
+
+            if (firstDll != null)
             {
                 HasDLSS = true;
 
-                // TODO: Handle a single folder with various versions of DLSS detected.
-                // Currently we are just using the first.
+                FileVersionInfo dllVersionInfo = FileVersionInfo.GetVersionInfo(firstDll);
+                CurrentDLSSVersion = dllVersionInfo.FileVersion.Replace(",", ".");
 
-                foreach (var dlssDll in dlssDlls)
+                //found a version of DLSS, check for base DLL (will be next to original)
+                string basePath = Path.Combine(Path.GetDirectoryName(firstDll), "nvngx_dlss.dll.dlsss");
+                if (File.Exists(basePath))
                 {
-                    var dllVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
-                    CurrentDLSSVersion = dllVersionInfo.FileVersion.Replace(",", ".");
-                    break;
-                }
-
-                dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll.dlsss", SearchOption.AllDirectories);
-                if (dlssDlls.Length > 0)
-                {
-                    foreach (var dlssDll in dlssDlls)
-                    {
-                        var dllVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
-                        BaseDLSSVersion = dllVersionInfo.FileVersion.Replace(",", ".");
-                        break;
-                    }
+                    FileVersionInfo dllBaseVersionInfo = FileVersionInfo.GetVersionInfo(basePath);
+                    BaseDLSSVersion = dllBaseVersionInfo.FileVersion.Replace(",", ".");
                 }
             }
             else

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Sledge.Formats.Valve;
 
 namespace DLSS_Swapper.Data
 {
@@ -60,8 +61,8 @@ namespace DLSS_Swapper.Data
                     try
                     {
                         StreamReader sr = new StreamReader(libraryFoldersFile);
-                        var fmt = new Sledge.Formats.Valve.SerialisedObjectFormatter();
-                        var libraryFolderFile = fmt.Deserialize(sr.BaseStream);
+                        SerialisedObjectFormatter fmt = new SerialisedObjectFormatter();
+                        IEnumerable<SerialisedObject> libraryFolderFile = fmt.Deserialize(sr.BaseStream);
 
                         foreach (var libraryFile in libraryFolderFile)
                         {
@@ -123,41 +124,20 @@ namespace DLSS_Swapper.Data
         {
             try
             {
-                var appManifest = File.ReadAllText(appManifestPath);
                 var game = new Game();
 
-                var regex = new Regex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline);
-                var matches = regex.Matches(appManifest);
-                if (matches.Count == 0)
-                {
-                    return null;
-                }
+                StreamReader sr = new StreamReader(appManifestPath);
+                SerialisedObjectFormatter fmt = new SerialisedObjectFormatter();
+                SerialisedObject appManifestFile = fmt.Deserialize(sr.BaseStream).FirstOrDefault();
 
-                game.Title = matches[0].Groups["name"].ToString();
+                game.Title = appManifestFile.Properties.FirstOrDefault(x => x.Key == "name").Value;
 
-                regex = new Regex(@"^([ \t]*)""installdir""([ \t]*)""(?<installdir>.*)""$", RegexOptions.Multiline);
-                matches = regex.Matches(appManifest);
-                if (matches.Count == 0)
-                {
-                    return null;
-                }
-
-                var installDir = matches[0].Groups["installdir"].ToString();
-
-                var baseDir = Path.GetDirectoryName(appManifestPath);
-
+                string installDir = appManifestFile.Properties.FirstOrDefault(x => x.Key == "installdir").Value;
+                string baseDir = Path.GetDirectoryName(appManifestPath);
                 game.InstallPath = Path.Combine(baseDir, "common", installDir);
 
-
-                regex = new Regex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline);
-                matches = regex.Matches(appManifest);
-                if (matches.Count == 0)
-                {
-                    return null;
-                }
-                game.HeaderImage = $"https://steamcdn-a.akamaihd.net/steam/apps/{matches[0].Groups["appid"] }/library_600x900_2x.jpg"; // header.jpg";
-
-                game.DetectDLSS();
+                game.HeaderImage = $"https://steamcdn-a.akamaihd.net/steam/apps/{appManifestFile.Properties.FirstOrDefault(x => x.Key == "appid").Value}/library_600x900_2x.jpg"; // header.jpg";
+                
                 return game;
             }
             catch (Exception err)

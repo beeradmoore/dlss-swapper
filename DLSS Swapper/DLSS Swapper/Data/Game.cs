@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.UI.Xaml;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -47,45 +48,23 @@ namespace DLSS_Swapper.Data
         }
         public bool HasDLSS { get; set; }
 
-        /// <summary>
-        /// Search for DLSS .dll file
-        /// </summary>
-        public void DetectDLSS()
+        bool _dlssChecked;
+        public bool DLSSChecked
         {
-            BaseDLSSVersion = null;
-            CurrentDLSSVersion = null;
-
-            /*
-            //Handle multiple DLSS dll files found in game install path
-            foreach (var dlssDll in Directory.EnumerateFiles(InstallPath, "nvngx_dlss.dll", SearchOption.AllDirectories))
+            get { return _dlssChecked; }
+            set
             {
-
-            }
-            */
-
-            var dlssDlls = Directory.EnumerateFiles(InstallPath, "nvngx_dlss.dll", SearchOption.AllDirectories);
-            var firstDll = dlssDlls.FirstOrDefault();
-
-            if (firstDll != null)
-            {
-                HasDLSS = true;
-
-                FileVersionInfo dllVersionInfo = FileVersionInfo.GetVersionInfo(firstDll);
-                CurrentDLSSVersion = new Version(dllVersionInfo.FileVersion.Replace(',', '.'));
-
-                //found a version of DLSS, check for base DLL (will be next to original)
-                string basePath = Path.Combine(Path.GetDirectoryName(firstDll), "nvngx_dlss.dll.dlsss");
-                if (File.Exists(basePath))
+                if (_dlssChecked != value)
                 {
-                    FileVersionInfo dllBaseVersionInfo = FileVersionInfo.GetVersionInfo(basePath);
-                    BaseDLSSVersion = new Version(dllBaseVersionInfo.FileVersion.Replace(',', '.'));
+                    _dlssChecked = value;
+                    NotifyPropertyChanged();
+                    DLSSCheckedEvent?.Invoke(HasDLSS);
                 }
             }
-            else
-            {
-                HasDLSS = false;
-            }
         }
+
+        public delegate void DLSSCheckedDelegate(bool hasDLSS);
+        public event DLSSCheckedDelegate DLSSCheckedEvent;
 
         internal bool ResetDll()
         {

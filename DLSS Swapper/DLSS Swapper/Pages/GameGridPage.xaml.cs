@@ -83,39 +83,58 @@ namespace DLSS_Swapper.Pages
 
             var progress = new Progress<Game>(game =>
             {
-                //skip game if user chose to hide non-DLSS games
-                if (Settings.HideNonDLSSGames && !game.HasDLSS)
+                if(!Settings.HideNonDLSSGames)
                 {
-                    return;
+                    //insert game in correct order (alphabetically)
+                    int i = 0;
+                    while (i < games.Count && Comparer<Game>.Default.Compare(games[i], game) < 0)
+                    {
+                        i++;
+                    }
+
+                    games.Insert(i, game);
+
+                    DLSSDLLSearcher.AddToSearchQueue(game);
+
+                    ((App)Application.Current).Window.DispatcherQueue.TryEnqueue(() =>
+                    {
+                        LoadingProgress.Text = $"Found {games.Count} games";
+                    });
                 }
-
-                //insert game in correct order (alphabetically)
-                int i = 0;
-                while (i < games.Count && Comparer<Game>.Default.Compare(games[i], game) < 0)
-                {
-                    i++;
-                }
-
-                games.Insert(i, game);
-
-                ((App)Application.Current).Window.DispatcherQueue.TryEnqueue(() =>
-                {
-                    LoadingProgress.Text = $"Found {games.Count} games";
-                });
             });
 
+            GameLibraries.Add(new SteamLibrary());
+            GameLibraries.Add(new UbisoftLibrary());
+
             List<Task> loadGameLibraries = new List<Task>();
-
-            var steamLibrary = new SteamLibrary();
-            GameLibraries.Add(steamLibrary);
-            loadGameLibraries.Add(steamLibrary.ListGamesAsync(progress));
-
-            var ubisoftLibrary = new UbisoftLibrary();
-            GameLibraries.Add(ubisoftLibrary);
-            loadGameLibraries.Add(ubisoftLibrary.ListGamesAsync(progress));
+            foreach(IGameLibrary library in GameLibraries)
+            {
+                loadGameLibraries.Add(library.ListGamesAsync(progress));
+            }
 
             await Task.WhenAll(loadGameLibraries);
 
+            foreach(IGameLibrary library in GameLibraries)
+            {
+                foreach (Game game in library.LoadedGames)
+                {
+                    game.DLSSCheckedEvent += (hasDLSS) =>
+                    {
+                        if (Settings.HideNonDLSSGames && hasDLSS)
+                        {
+                            library.LoadedDLSSGames.Add(game);
+                            //insert game in correct order (alphabetically)
+                            int i = 0;
+                            while (i < games.Count && Comparer<Game>.Default.Compare(games[i], game) < 0)
+                            {
+                                i++;
+                            }
+                            games.Insert(i, game);
+                        }
+                    };
+                    DLSSDLLSearcher.AddToSearchQueue(game);
+                }
+            }
         }
 
         async Task LoadDllHashes()
@@ -227,14 +246,16 @@ namespace DLSS_Swapper.Pages
             DisplayLoadingScreen.Begin();
 
             var tasks = new List<Task>();
-            tasks.Add(LoadGamesAsync());
             tasks.Add(LoadDllHashes());
             tasks.Add(LoadLocalDlls());
 
-            await Task.WhenAll(tasks);
+            _ = Task.WhenAll(tasks);
+
+            await LoadGamesAsync();
+
+            HideLoadingScreen.Begin();
 
             DispatcherQueue.TryEnqueue(() => {
-                HideLoadingScreen.Begin();
                 _loadingGamesAndDlls = false;
             });
         }

@@ -92,7 +92,6 @@ namespace DLSS_Swapper.Data
                 Game game = new Game();
                 game.Title = di.Name;
                 game.InstallPath = installDir;
-                game.DetectDLSS();
 
                 return game;
             }

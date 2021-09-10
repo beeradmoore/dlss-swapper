@@ -43,8 +43,6 @@ namespace DLSS_Swapper.Data
             // Tasks are whack.
             return await Task.Run<List<Game>>(() =>
             {
-                var games = new List<Game>();
-
                 // Base steamapps folder contains libraryfolders.vdf which has references to other steamapps folders.
                 // All of these folders contain appmanifest_[some_id].acf which contains information about the game.
                 // We parse all of these files with jank regex, rather than building a parser.
@@ -90,16 +88,14 @@ namespace DLSS_Swapper.Data
                             if (game != null)
                             {
                                 progress.Report(game);
-                                games.Add(game);
+                                _loadedGames.Add(game);
                             }
                         }
                     }
                 }
-                games.Sort();
-                _loadedGames.AddRange(games);
-                _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS));
+                _loadedGames.Sort();
 
-                return games;
+                return _loadedGames;
             });
         }
 

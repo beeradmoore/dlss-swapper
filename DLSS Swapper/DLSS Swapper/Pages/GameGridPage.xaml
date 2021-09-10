@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:data="using:DLSS_Swapper.Data" xmlns:media="using:Microsoft.UI.Xaml.Media"
+    xmlns:data="using:DLSS_Swapper.Data" xmlns:media="using:Microsoft.UI.Xaml.Media" xmlns:converters="using:DLSS_Swapper.Converters"
     mc:Ignorable="d"
     Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -19,6 +19,9 @@
             <Storyboard x:Name="HideLoadingScreen">
                 <FadeOutThemeAnimation Storyboard.TargetName="LoadingStackPanel" Completed="FadeOutThemeAnimation_Completed"/>
             </Storyboard>
+            <converters:BoolToVisibleConverter x:Key="bool2vis"/>
+            <converters:InverseBoolToVisibleConverter x:Key="invbool2vis"/>
+            
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -75,7 +78,8 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Column="0" FontWeight="Bold" Text="DLSS" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" />
-                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSSVersion, TargetNullValue=N/A}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" />
+                            <muxc:ProgressRing Grid.Column="1" Visibility="{Binding DLSSChecked, Converter={StaticResource invbool2vis}}" IsActive="True" Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Column="1" Visibility="{Binding DLSSChecked, Converter={StaticResource bool2vis}}" Text="{Binding CurrentDLSSVersion, TargetNullValue=N/A}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" />
                         </Grid>
                     </Grid>
                 </DataTemplate>

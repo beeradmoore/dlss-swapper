@@ -157,7 +157,7 @@ namespace DLSS_Swapper.Data
                 {
                     return null;
                 }
-                game.HeaderImage = $"https://steamcdn-a.akamaihd.net/steam/apps/{matches[0].Groups["appid"] }/library_600x900_2x.jpg"; // header.jpg";
+                game.HeaderImage = $"https://steamcdn-a.akamaihd.net/steam/apps/{matches[0].Groups["appid"]}/library_600x900_2x.jpg"; // header.jpg";
 
                 game.DetectDLSS();
                 return game;

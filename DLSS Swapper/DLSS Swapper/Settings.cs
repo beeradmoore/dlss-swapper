@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -77,6 +78,50 @@ namespace DLSS_Swapper
             }
         }
 
+        static ElementTheme _appTheme = ElementTheme.Default;
+        public static ElementTheme AppTheme
+        {
+            get { return _appTheme; }
+            set
+            {
+                if (_appTheme != value)
+                {
+                    _appTheme = value;
+                    ApplicationData.Current.LocalSettings.Values["AppTheme"] = (int)value;
+                }
+            }
+        }
+
+        static bool _allowExperimental = false;
+        public static bool AllowExperimental
+        {
+            get { return _allowExperimental; }
+            set
+            {
+                if (_allowExperimental != value)
+                {
+                    _allowExperimental = value;
+                    ApplicationData.Current.LocalSettings.Values["AllowExperimental"] = value;
+                }
+            }
+        }
+
+
+        static bool _allowUntrusted = false;
+        public static bool AllowUntrusted
+        {
+            get { return _allowUntrusted; }
+            set
+            {
+                if (_allowUntrusted != value)
+                {
+                    _allowUntrusted = value;
+                    ApplicationData.Current.LocalSettings.Values["AllowUntrusted"] = value;
+                }
+            }
+        }
+
+
         static Settings()
         {
             // Load BaseDirectory from settings.
@@ -127,6 +172,32 @@ namespace DLSS_Swapper
             {
                 _baseDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DLSS Swapper");
                 localSettings.Values["BaseDirectory"] = _baseDirectory;
+            }
+
+            if (localSettings.Values.TryGetValue("AppTheme", out object tempAppTheme))
+            {
+                if (tempAppTheme is int appTheme)
+                {
+                    _appTheme = (ElementTheme)appTheme;
+                }
+            }
+
+
+            if (localSettings.Values.TryGetValue("AllowExperimental", out object tempAllowExperimental))
+            {
+                if (tempAllowExperimental is bool allowExperimental)
+                {
+                    _allowExperimental = allowExperimental;
+                }
+            }
+
+
+            if (localSettings.Values.TryGetValue("AllowUntrusted", out object tempAllowUntrusted))
+            {
+                if (tempAllowUntrusted is bool allowUntrusted)
+                {
+                    _allowUntrusted = allowUntrusted;
+                }
             }
         }
 

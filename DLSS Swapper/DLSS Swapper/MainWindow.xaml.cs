@@ -30,10 +30,14 @@ namespace DLSS_Swapper
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        public static NavigationView NavigationView;
         public MainWindow()
         {
             Title = "DLSS Swapper [ beta ]";
             this.InitializeComponent();
+            NavigationView = MainNavigationView;
+
+            MainNavigationView.RequestedTheme = (ElementTheme)Settings.AppTheme;
         }
 
         void MainNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -58,6 +62,10 @@ namespace DLSS_Swapper
             else if (page == "Download")
             {
                 pageType = typeof(TechPowerUpDownloadPage);
+            }
+            else if (page == "Settings")
+            {
+                pageType = typeof(SettingsPage);
             }
 
             foreach (NavigationViewItem navigationViewItem in MainNavigationView.MenuItems)

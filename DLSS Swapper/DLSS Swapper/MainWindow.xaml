@@ -9,9 +9,8 @@
 
     <muxc:NavigationView x:Name="MainNavigationView"
                          ItemInvoked="MainNavigationView_ItemInvoked" 
-                         IsSettingsVisible="false"
                          PaneDisplayMode="LeftCompact"
-                         IsBackButtonVisible="Collapsed"                        
+                         IsBackButtonVisible="Collapsed"      
                          Loaded="MainNavigationView_Loaded">
         <muxc:NavigationView.MenuItems>
             <muxc:NavigationViewItem Content="Games" Tag="Games">

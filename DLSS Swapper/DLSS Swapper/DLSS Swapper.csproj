@@ -15,6 +15,7 @@
     <PackageIconUrl />
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Pages\DownloadPage.xaml" />
     <None Remove="Pages\GameGridPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
     <None Remove="Pages\TechPowerUpDownloadPage.xaml" />
@@ -29,6 +30,12 @@
     <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.4" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\DownloadPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

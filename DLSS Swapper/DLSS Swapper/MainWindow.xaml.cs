@@ -61,7 +61,7 @@ namespace DLSS_Swapper
             }
             else if (page == "Download")
             {
-                pageType = typeof(TechPowerUpDownloadPage);
+                pageType = typeof(DownloadPage);
             }
             else if (page == "Settings")
             {

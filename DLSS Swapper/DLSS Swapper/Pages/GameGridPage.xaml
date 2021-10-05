@@ -9,6 +9,7 @@
     xmlns:data="using:DLSS_Swapper.Data"
     mc:Ignorable="d"
     Loaded="Page_Loaded"
+    NavigationCacheMode="Required"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>

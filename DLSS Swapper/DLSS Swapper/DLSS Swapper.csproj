@@ -15,6 +15,7 @@
     <PackageIconUrl />
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Interfaces\InitialLoadingPage.xaml" />
     <None Remove="Pages\DownloadPage.xaml" />
     <None Remove="Pages\GameGridPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
@@ -34,6 +35,7 @@
 
   <ItemGroup>
     <Page Update="Pages\DownloadPage.xaml">
+    <Page Update="Pages\InitialLoadingPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

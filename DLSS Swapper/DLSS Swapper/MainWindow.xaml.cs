@@ -1,5 +1,4 @@
 ﻿using AsyncAwaitBestPractices;
-using DLSS_Swapper.Data.TechPowerUp;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Pages;
 using Microsoft.UI.Xaml;
@@ -11,6 +10,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -32,9 +32,13 @@ namespace DLSS_Swapper
     public sealed partial class MainWindow : Window
     {
         public static NavigationView NavigationView;
+
+
+        DLSSRecords _dlssRecords = new DLSSRecords();
+
         public MainWindow()
         {
-            Title = "DLSS Swapper [ beta ]";
+            Title = "DLSS Swapper [beta]";
             this.InitializeComponent();
             NavigationView = MainNavigationView;
 
@@ -90,6 +94,8 @@ namespace DLSS_Swapper
 
         async void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
         {
+            // Load from cache, or download if not found.
+            var loadDlssRecrodsTask = LoadDLSSRecordsAsync();
 
             if (Settings.HasShownWorkInProgress == false)
             {
@@ -130,6 +136,31 @@ More protections and validations will come in a future update.",
 
                 Settings.HasShownWarning = true;
             }
+
+            var didLoadDlssRecords = await loadDlssRecrodsTask;
+            if (didLoadDlssRecords == false)
+            {
+                var dialog = new ContentDialog()
+                {
+                    Title = "Error",
+                    CloseButtonText = "Close",
+                    PrimaryButtonText = "Github Issues",
+                    Content = @"We were unable to load dlss_records.json from your computer or from the internet. 
+
+If this keeps happening please file an report in our issue tracker on Github.
+
+DLSS Swapper will close now.",
+                    XamlRoot = MainNavigationView.XamlRoot,
+                };
+                var response = await dialog.ShowAsync();
+                if (response == ContentDialogResult.Primary)
+                {
+                    await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/issues"));
+                }
+
+                Close();
+            }
+
 
             if (ShouldMigrate())
             {
@@ -174,6 +205,116 @@ Migration will not be attempted again on next launch.",
             // We are now ready to show the games list.
             LoadingStackPanel.Visibility = Visibility.Collapsed;
             GoToPage("Games");
+        }
+
+
+
+        /// <summary>
+        /// Attempts to load DLSS records from disk or from the web depending what happened.
+        /// </summary>
+        /// <returns>True if we expect there are now valid DLSS records loaded into memory.</returns>
+        async Task<bool> LoadDLSSRecordsAsync()
+        {
+            // Only auto check for updates once every 12 hours.
+            var timeSinceLastUpdate = DateTimeOffset.Now - Settings.LastRecordsRefresh;
+            if (timeSinceLastUpdate.TotalHours > 12)
+            {
+                var didUpdate = await UpdateDLSSRecordsAsync();
+                if (didUpdate)
+                {
+                    return true;
+                }
+            }
+
+            // If we were unable to auto-load lets try load cached.
+            var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            try
+            {
+                var dlssRecordsFile = await storageFolder.GetFileAsync("dlss_records.json");
+                using (var stream = await dlssRecordsFile.OpenSequentialReadAsync())
+                {
+                    var items = await JsonSerializer.DeserializeAsync<DLSSRecords>(stream.AsStreamForRead());
+
+                    _dlssRecords.Stable.Clear();
+                    _dlssRecords.Stable.AddRange(items.Stable);
+
+                    _dlssRecords.Experimental.Clear();
+                    _dlssRecords.Experimental.AddRange(items.Experimental);
+                }
+                return true;
+            }
+            catch (FileNotFoundException)
+            {
+                // If the file was not found we will download fresh records list (possibly for a second time)
+                return await UpdateDLSSRecordsAsync();
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine($"LoadDLSSRecords Error: {err.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Attempts to load dlss_records.json from dlss-archive.
+        /// </summary>
+        /// <returns>True if the dlss recrods manifest was downloaded and saved successfully</returns>
+        async Task<bool> UpdateDLSSRecordsAsync()
+        {
+            var url = "https://raw.githubusercontent.com/beeradmoore/dlss-archive/main/dlss_records.json";
+
+            try
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider 
+                    // adding a "fast UpdateDLSSRecords" which will quit early if we were unable to load in 10sec 
+                    // which would then fall back to loading local.
+                    using (var client = new HttpClient())
+                    {
+                        using (var stream = await client.GetStreamAsync(url))
+                        {
+                            await stream.CopyToAsync(memoryStream);
+                        }
+                    }
+
+                    memoryStream.Position = 0;
+
+                    var items = await JsonSerializer.DeserializeAsync<DLSSRecords>(memoryStream);
+
+                    _dlssRecords.Stable.Clear();
+                    _dlssRecords.Stable.AddRange(items.Stable);
+
+                    _dlssRecords.Experimental.Clear();
+                    _dlssRecords.Experimental.AddRange(items.Experimental);
+
+                    memoryStream.Position = 0;
+
+                    var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                    try
+                    {
+                        var dlssRecordsFile = await storageFolder.CreateFileAsync("dlss_records.json", Windows.Storage.CreationCollisionOption.ReplaceExisting);
+                        using (var writeStream = await dlssRecordsFile.OpenStreamForWriteAsync())
+                        {
+                            await memoryStream.CopyToAsync(writeStream);
+                        }
+                        // Update settings for auto refresh.
+                        Settings.LastRecordsRefresh = DateTime.Now;
+                        return true;
+                    }
+                    catch (Exception err)
+                    {
+                        Console.WriteLine($"UpdateDLSSRecords Error: {err.Message}");
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine($"UpdateDLSSRecords Error: {err.Message}");
+            }
+
+            return false;
+        }
 
         // TODO: Remove in a future release.
         /// <summary>

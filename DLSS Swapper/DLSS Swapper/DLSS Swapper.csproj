@@ -19,7 +19,6 @@
     <None Remove="Pages\DownloadPage.xaml" />
     <None Remove="Pages\GameGridPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
-    <None Remove="Pages\TechPowerUpDownloadPage.xaml" />
     <None Remove="UserControls\DLSSPickerControl.xaml" />
     <None Remove="UserControls\GameFilterControl.xaml" />
   </ItemGroup>
@@ -34,8 +33,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Pages\DownloadPage.xaml">
     <Page Update="Pages\InitialLoadingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\DownloadPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -54,12 +58,6 @@
 
   <ItemGroup>
     <Page Update="Pages\GameGridPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Pages\TechPowerUpDownloadPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

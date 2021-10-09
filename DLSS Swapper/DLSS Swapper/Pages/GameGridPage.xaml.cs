@@ -1,5 +1,4 @@
 ﻿using DLSS_Swapper.Data;
-using DLSS_Swapper.Data.TechPowerUp;
 using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
@@ -36,7 +35,6 @@ namespace DLSS_Swapper.Pages
         public List<IGameLibrary> GameLibraries { get; } = new List<IGameLibrary>();
 
         List<LocalDll> _localDlls { get; } = new List<LocalDll>();
-        List<TechPowerUpDllHash> _dlssHashes { get; }  = new List<TechPowerUpDllHash>();
 
         bool _loadingGamesAndDlls = false;
 
@@ -48,6 +46,8 @@ namespace DLSS_Swapper.Pages
 
         async Task LoadLocalDlls()
         {
+            // TODO: I dont think this is required anymore.
+            /*
             await Task.Run(() =>
             {
                 var dlssDlls = Directory.GetFiles(Settings.DllsDirectory, "nvngx_dlss.dll", SearchOption.AllDirectories);
@@ -66,6 +66,7 @@ namespace DLSS_Swapper.Pages
                     _localDlls.Sort();
                 }
             });
+            */
         }
 
 
@@ -145,25 +146,7 @@ namespace DLSS_Swapper.Pages
             MainGridView.SelectionChanged += MainGridView_SelectionChanged;
         }
 
-        async Task LoadDllHashes()
-        {
-            var url = "https://gist.githubusercontent.com/beeradmoore/3467646864751964dbf22f462c2e5b1e/raw/techpowerup_dlss_dll_hashes.json";
-
-            try
-            {
-                using var client = new HttpClient();
-                using var stream = await client.GetStreamAsync(url);
-
-                var items = await JsonSerializer.DeserializeAsync<List<TechPowerUpDllHash>>(stream);
-                _dlssHashes.Clear();
-                _dlssHashes.AddRange(items);
-            }
-            catch (Exception err)
-            {
-                System.Diagnostics.Debug.WriteLine($"LoadDllHashes Error: {err.Message}");
-            }
-        }
-
+       
         async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             await LoadGamesAndDlls();
@@ -258,8 +241,6 @@ namespace DLSS_Swapper.Pages
 
             var tasks = new List<Task>();
             tasks.Add(LoadGamesAsync());
-            tasks.Add(LoadDllHashes());
-            tasks.Add(LoadLocalDlls());
 
 
             await Task.WhenAll(tasks);

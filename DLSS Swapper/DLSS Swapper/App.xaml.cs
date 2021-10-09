@@ -38,7 +38,6 @@ namespace DLSS_Swapper
         public App()
         {
             this.InitializeComponent();
-            Settings.InitDirectories();
         }
 
         /// <summary>

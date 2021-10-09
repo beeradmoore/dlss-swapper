@@ -11,13 +11,6 @@ namespace DLSS_Swapper
 {
     public static class Settings
     {
-        private static string _baseDirectory;
-        public static string BaseDirectory => _baseDirectory;
-
-        public static string TechPowerUpDownloadsDirectory => Path.Combine(BaseDirectory, "Downloads", "TechPowerUp");
-
-        public static string DllsDirectory => Path.Combine(BaseDirectory, "dlls");
-
         static bool _hasShownWarning = false;
         public static bool HasShownWarning
         {
@@ -46,7 +39,6 @@ namespace DLSS_Swapper
                 }
             }
         }
-
 
 
         static bool _hideNonDLSSGames = true;
@@ -121,6 +113,20 @@ namespace DLSS_Swapper
             }
         }
 
+        static DateTimeOffset _lastRecordsRefresh = DateTimeOffset.MinValue;
+        public static DateTimeOffset LastRecordsRefresh
+        {
+            get { return _lastRecordsRefresh; }
+            set
+            {
+                if (_lastRecordsRefresh != value)
+                {
+                    _lastRecordsRefresh = value;
+                    ApplicationData.Current.LocalSettings.Values["LastRecordsRefresh"] = Windows.Foundation.PropertyValue.CreateDateTime(value);
+                }
+            }
+        }
+
         static bool _migrationAttempted = false;
         public static bool MigrationAttempted
         {
@@ -172,21 +178,6 @@ namespace DLSS_Swapper
                 }
             }
 
-            if (localSettings.Values.TryGetValue("BaseDirectory", out object tempObject))
-            {
-                if (tempObject is string baseDirectory && Directory.Exists(baseDirectory))
-                {
-                    _baseDirectory = baseDirectory;
-                }
-            }
-
-            // If BaseDirectory is not found we should default it.
-            if (String.IsNullOrWhiteSpace(_baseDirectory))
-            {
-                _baseDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DLSS Swapper");
-                localSettings.Values["BaseDirectory"] = _baseDirectory;
-            }
-
             if (localSettings.Values.TryGetValue("AppTheme", out object tempAppTheme))
             {
                 if (tempAppTheme is int appTheme)
@@ -194,7 +185,6 @@ namespace DLSS_Swapper
                     _appTheme = (ElementTheme)appTheme;
                 }
             }
-
 
             if (localSettings.Values.TryGetValue("AllowExperimental", out object tempAllowExperimental))
             {
@@ -204,7 +194,6 @@ namespace DLSS_Swapper
                 }
             }
 
-
             if (localSettings.Values.TryGetValue("AllowUntrusted", out object tempAllowUntrusted))
             {
                 if (tempAllowUntrusted is bool allowUntrusted)
@@ -212,27 +201,17 @@ namespace DLSS_Swapper
                     _allowUntrusted = allowUntrusted;
                 }
             }
-        }
 
-        public static void InitDirectories()
-        {
-            // TODO: Error handling
-
-            if (Directory.Exists(BaseDirectory) == false)
+            if (localSettings.Values.TryGetValue("LastRecordsRefresh", out object tempLastRecordsRefresh))
             {
-                Directory.CreateDirectory(BaseDirectory);
+                if (tempLastRecordsRefresh is DateTimeOffset lastRecordsRefresh)
+                {
+                    _lastRecordsRefresh = lastRecordsRefresh;
+                }
             }
 
-            if (Directory.Exists(TechPowerUpDownloadsDirectory) == false)
-            {
-                Directory.CreateDirectory(TechPowerUpDownloadsDirectory);
-            }
-
-            if (Directory.Exists(DllsDirectory) == false)
             if (localSettings.Values.TryGetValue("MigrationAttempted", out object tempMigrationAttempted))
             {
-                Directory.CreateDirectory(DllsDirectory);
-            }
                 if (tempMigrationAttempted is bool migrationAttempted)
                 {
                     _migrationAttempted = migrationAttempted;

@@ -1,5 +1,6 @@
 ﻿using AsyncAwaitBestPractices;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Pages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -8,8 +9,10 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MvvmHelpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -33,8 +36,7 @@ namespace DLSS_Swapper
     {
         public static NavigationView NavigationView;
 
-
-        DLSSRecords _dlssRecords = new DLSSRecords();
+        public ObservableRangeCollection<DLSSRecord> CurrentDLSSRecords { get; } = new ObservableRangeCollection<DLSSRecord>();
 
         public MainWindow()
         {
@@ -184,7 +186,7 @@ If you choose to delete the old folder then everything inside ""Documents/DLSS S
                 else
                 {
                     bool shouldDelete = (migrationDialogResult == ContentDialogResult.Secondary);
-                    bool didMigrate = await Migrate(shouldDelete);
+                    bool didMigrate = await MigrateAsync(shouldDelete);
                     if (didMigrate == false)
                     {
                         var didntDeleteMessage = (shouldDelete ? " We didn't attempt to delete files." : String.Empty); 
@@ -207,7 +209,31 @@ Migration will not be attempted again on next launch.",
             GoToPage("Games");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        internal void FilterDLSSRecords()
+        {
+            var newDlssRecordsList = new List<DLSSRecord>();
+            if (Settings.AllowUntrusted)
+            {
+                newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Stable);
+            }
+            else
+            {
+                newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Stable.Where(x => x.IsSignatureValid == true));
+            }
 
+            if (Settings.AllowExperimental)
+            {
+                newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Experimental);
+            }
+
+
+            newDlssRecordsList.Sort();
+            CurrentDLSSRecords.Clear();
+            CurrentDLSSRecords.AddRange(newDlssRecordsList);
+        }
 
         /// <summary>
         /// Attempts to load DLSS records from disk or from the web depending what happened.
@@ -234,12 +260,8 @@ Migration will not be attempted again on next launch.",
                 using (var stream = await dlssRecordsFile.OpenSequentialReadAsync())
                 {
                     var items = await JsonSerializer.DeserializeAsync<DLSSRecords>(stream.AsStreamForRead());
-
-                    _dlssRecords.Stable.Clear();
-                    _dlssRecords.Stable.AddRange(items.Stable);
-
-                    _dlssRecords.Experimental.Clear();
-                    _dlssRecords.Experimental.AddRange(items.Experimental);
+                    UpdateDLSSRecordsList(items);
+                    //await UpdateDLSSRecordsListAsync(items);
                 }
                 return true;
             }
@@ -255,11 +277,25 @@ Migration will not be attempted again on next launch.",
             }
         }
 
+        internal void UpdateDLSSRecordsList(DLSSRecords dlssRecords)
+        {
+            App.CurrentApp.DLSSRecords.Stable.Clear();
+            App.CurrentApp.DLSSRecords.Stable.AddRange(dlssRecords.Stable);
+
+            App.CurrentApp.DLSSRecords.Experimental.Clear();
+            App.CurrentApp.DLSSRecords.Experimental.AddRange(dlssRecords.Experimental);
+
+            FilterDLSSRecords();
+
+            //await App.CurrentApp.LoadLocalRecordsAsync();
+            App.CurrentApp.LoadLocalRecords();            
+        }
+
         /// <summary>
         /// Attempts to load dlss_records.json from dlss-archive.
         /// </summary>
         /// <returns>True if the dlss recrods manifest was downloaded and saved successfully</returns>
-        async Task<bool> UpdateDLSSRecordsAsync()
+        internal async Task<bool> UpdateDLSSRecordsAsync()
         {
             var url = "https://raw.githubusercontent.com/beeradmoore/dlss-archive/main/dlss_records.json";
 
@@ -269,24 +305,18 @@ Migration will not be attempted again on next launch.",
                 {
                     // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider 
                     // adding a "fast UpdateDLSSRecords" which will quit early if we were unable to load in 10sec 
-                    // which would then fall back to loading local.
-                    using (var client = new HttpClient())
+                    // which would then fall back to loading local.                    
+                    using (var stream = await App.CurrentApp.HttpClient.GetStreamAsync(url))
                     {
-                        using (var stream = await client.GetStreamAsync(url))
-                        {
-                            await stream.CopyToAsync(memoryStream);
-                        }
+                        await stream.CopyToAsync(memoryStream);
                     }
 
                     memoryStream.Position = 0;
 
                     var items = await JsonSerializer.DeserializeAsync<DLSSRecords>(memoryStream);
 
-                    _dlssRecords.Stable.Clear();
-                    _dlssRecords.Stable.AddRange(items.Stable);
-
-                    _dlssRecords.Experimental.Clear();
-                    _dlssRecords.Experimental.AddRange(items.Experimental);
+                    UpdateDLSSRecordsList(items);
+                    //await UpdateDLSSRecordsListAsync(items);
 
                     memoryStream.Position = 0;
 
@@ -352,7 +382,7 @@ Migration will not be attempted again on next launch.",
         /// </summary>
         /// <param name="shouldDelete">If we should delete the old DLSS Swapper folder in documents after migration.</param>
         /// <returns>True if migration was successful</returns>
-        async Task<bool> Migrate(bool shouldDelete)
+        async Task<bool> MigrateAsync(bool shouldDelete)
         {
             LoadingProgressText.Text = "Migrating";
 
@@ -386,13 +416,11 @@ Migration will not be attempted again on next launch.",
                 var versionInfo = FileVersionInfo.GetVersionInfo(dllFile);
 
 
-                var versionNumber = ((ulong)versionInfo.FileMajorPart << 48) +
-                         ((ulong)versionInfo.FileMinorPart << 32) +
-                         ((ulong)versionInfo.FileBuildPart << 16) +
-                         ((ulong)versionInfo.FilePrivatePart);
+                var versionNumber = versionInfo.GetFileVersionNumber();
 
-                var knownDLSSVersions = _dlssRecords.Stable.Where(x => x.VersionNumber == versionNumber).ToList();
-                
+                var knownDLSSVersions = new List<DLSSRecord>();
+                knownDLSSVersions.AddRange(App.CurrentApp.DLSSRecords.Stable.Where(x => x.VersionNumber == versionNumber));
+                knownDLSSVersions.AddRange(App.CurrentApp.DLSSRecords.Experimental.Where(x => x.VersionNumber == versionNumber));
                 // If we don't have a matching DLSS Version then who knows what this is.
                 if (knownDLSSVersions.Count == 0)
                 {
@@ -400,23 +428,11 @@ Migration will not be attempted again on next launch.",
                     continue;
                 }
 
-                var md5Hash = String.Empty;
-                try
-                {
-                    using (var stream = File.OpenRead(dllFile))
-                    {
-                        using (var md5 = System.Security.Cryptography.MD5.Create())
-                        {
-                            var hash = md5.ComputeHash(stream);
-                            md5Hash = BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
-                        }
-                    }
-                }
-                catch (Exception )
+                var md5Hash = versionInfo.GetMD5Hash();
+                if (String.IsNullOrEmpty(md5Hash))
                 {
                     // Error checking MD5 of file, skip over it.
                     didMigrateAll = false;
-                    continue;
                 }
 
                 // Unless we are able to narrow this down to a single DLSS records we will skip over it.
@@ -426,7 +442,7 @@ Migration will not be attempted again on next launch.",
                     didMigrateAll = false;
                     continue;
                 }
-                var dlssVersion = $"{versionInfo.FileMajorPart}.{versionInfo.FileMinorPart}.{versionInfo.FileBuildPart}.{versionInfo.FilePrivatePart}";
+                var dlssVersion = versionInfo.GetFormattedFileVersion();
 
                 // Files are stored in a folder like 
                 // 2.2.18.0_77A75B96DD2D36A4A291F3939D59C221

@@ -71,6 +71,7 @@ namespace DLSS_Swapper.Pages
             if (e.OriginalSource is ToggleSwitch toggleSwitch)
             {
                 Settings.AllowExperimental = toggleSwitch.IsOn;
+                App.CurrentApp.MainWindow.FilterDLSSRecords();
             }
         }
 
@@ -79,6 +80,7 @@ namespace DLSS_Swapper.Pages
             if (e.OriginalSource is ToggleSwitch toggleSwitch)
             {
                 Settings.AllowUntrusted = toggleSwitch.IsOn;
+                App.CurrentApp.MainWindow.FilterDLSSRecords();
             }
         }
     }

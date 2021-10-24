@@ -1,16 +1,19 @@
-﻿using Microsoft.UI.Xaml;
+using DLSS_Swapper.Data;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
+using MvvmHelpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -26,10 +29,19 @@ namespace DLSS_Swapper
     /// </summary>
     public partial class App : Application
     {
-        private Window _window;
-        public Window Window => _window;
+        MainWindow _window;
+        public MainWindow MainWindow => _window;
 
-        public MainWindow MainWindow => (MainWindow)_window;
+        public static App CurrentApp => (App)Application.Current;
+
+        internal DLSSRecords DLSSRecords { get; } = new DLSSRecords();
+        internal List<LocalRecord> LocalRecords { get; } = new List<LocalRecord>();
+        internal List<DLSSRecord> FilteredDLSSRecords { get; } = new List<DLSSRecord>();
+
+        internal HttpClient _httpClient = new HttpClient();
+        public HttpClient HttpClient => _httpClient;
+        //public ObservableRangeCollection<DLSSRecord> CurrentDLSSRecords { get; } = new ObservableRangeCollection<DLSSRecord>();
+
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -37,6 +49,11 @@ namespace DLSS_Swapper
         /// </summary>
         public App()
         {
+            var version = Windows.ApplicationModel.Package.Current.Id.Version;
+            var versionString = String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper v{versionString}");
+
             this.InitializeComponent();
         }
 
@@ -51,5 +68,87 @@ namespace DLSS_Swapper
             _window.Activate();
         }
 
+
+        internal void LoadLocalRecordFromDLSSRecord(DLSSRecord dlssRecord)
+        {
+            var expectedPath = Path.Combine("dlls", $"{dlssRecord.Version}_{dlssRecord.MD5Hash}", "nvngx_dlss.dll");
+            System.Diagnostics.Debug.WriteLine($"ExpectedPath: {expectedPath}");
+            // Load record.
+            var localRecord = LocalRecord.FromExpectedPath(expectedPath);
+
+            // If the record exists we will update existing properties, if not we add it as new property.
+            var existingLocalRecord = LocalRecords.FirstOrDefault(x => x.Equals(localRecord));
+            if (existingLocalRecord == null)
+            {
+                dlssRecord.LocalRecord = localRecord;
+                LocalRecords.Add(localRecord);
+            }
+            else
+            {
+                existingLocalRecord.UpdateFromNewLocalRecord(localRecord);
+
+                // Probably don't need to set this again.
+                dlssRecord.LocalRecord = existingLocalRecord;
+            }
+        }
+
+        /*
+        // Disabled because the non-async method seems faster.
+        internal async Task LoadLocalRecordFromDLSSRecordAsync(DLSSRecord dlssRecord)
+        {
+            var expectedPath = Path.Combine("dlls", $"{dlssRecord.Version}_{dlssRecord.MD5Hash}", "nvngx_dlss.dll");
+            System.Diagnostics.Debug.WriteLine($"ExpectedPath: {expectedPath}");
+            // Load record.
+            var localRecord = await LocalRecord.FromExpectedPathAsync(expectedPath);
+
+            // If the record exists we will update existing properties, if not we add it as new property.
+            var existingLocalRecord = LocalRecords.FirstOrDefault(x => x.Equals(localRecord));
+            if (existingLocalRecord == null)
+            {
+                dlssRecord.LocalRecord = localRecord;
+                LocalRecords.Add(localRecord);
+            }
+            else
+            {
+                existingLocalRecord.UpdateFromNewLocalRecord(localRecord);
+
+                // Probably don't need to set this again.
+                dlssRecord.LocalRecord = existingLocalRecord;
+            }
+        }
+        */
+
+        internal void LoadLocalRecords()
+        {
+            // We attempt to load all local records, even if experemental is not enabled.
+            foreach (var dlssRecord in DLSSRecords.Stable)
+            {
+                LoadLocalRecordFromDLSSRecord(dlssRecord);
+            }
+            foreach (var dlssRecord in DLSSRecords.Experimental)
+            {
+                LoadLocalRecordFromDLSSRecord(dlssRecord);
+            }
+        }
+
+
+        /*
+        // Disabled because the non-async method seems faster. 
+        internal async Task LoadLocalRecordsAsync()
+        {
+            var tasks = new List<Task>();
+
+            // We attempt to load all local records, even if experemental is not enabled.
+            foreach (var dlssRecord in DLSSRecords.Stable)
+            {
+                tasks.Add(LoadLocalRecordFromDLSSRecordAsync(dlssRecord));
+            }
+            foreach (var dlssRecord in DLSSRecords.Experimental)
+            {
+                tasks.Add(LoadLocalRecordFromDLSSRecordAsync(dlssRecord));
+            }
+            await Task.WhenAll(tasks);
+        }
+        */
     }
 }

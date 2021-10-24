@@ -40,10 +40,18 @@
                 </GroupStyle>
             </GridView.GroupStyle>
 
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="8"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </GridView.ItemContainerStyle>
 
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:Game">
-                    <Grid Width="200" Height="300" ColumnSpacing="0" RowSpacing="0" Margin="0,0,10,10" Background="Black">
+                    <Grid Width="200" Height="300" ColumnSpacing="0" RowSpacing="0" Margin="0" Background="Black">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>

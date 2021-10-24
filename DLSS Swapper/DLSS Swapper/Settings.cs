@@ -216,7 +216,7 @@ namespace DLSS_Swapper
                 {
                     _migrationAttempted = migrationAttempted;
                 }
-            }            
+            }
         }
     }
 }

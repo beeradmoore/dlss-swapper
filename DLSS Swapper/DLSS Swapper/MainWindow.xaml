@@ -11,7 +11,7 @@
 
     <Grid MinWidth="400">
 
-        
+
         <muxc:NavigationView x:Name="MainNavigationView" Grid.Row="1"
                              ItemInvoked="MainNavigationView_ItemInvoked" 
                              PaneDisplayMode="LeftCompact"
@@ -29,15 +29,15 @@
         </muxc:NavigationView>
 
         <Grid x:Name="LoadingStackPanel" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RowSpacing="10">
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
+
             <muxc:ProgressRing Grid.Row="0" x:Name="LoadingProgressRing" IsActive="True" Width="60" Height="60" IsIndeterminate="true" VerticalAlignment="Bottom" />
             <TextBlock Grid.Row="1" x:Name="LoadingProgressText" VerticalAlignment="Top" Text="Loading" HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" />
-            
+
         </Grid>
     </Grid>
 </Window>

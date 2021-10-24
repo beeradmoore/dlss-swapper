@@ -23,7 +23,7 @@ namespace DLSS_Swapper.Pages
     public sealed partial class SettingsPage : Page
     {
         //https://github.com/microsoft/Xaml-Controls-Gallery/blob/6450265cc94da5b2fac5e1e22d1be35dc66c402e/XamlControlsGallery/Navigation/NavigationRootPage.xaml.cs#L32
-        
+
 
         public string Version
         {

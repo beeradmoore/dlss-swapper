@@ -38,6 +38,6 @@ namespace DLSS_Swapper.Extensions
                     ((ulong)fileVersionInfo.FileMinorPart << 32) +
                     ((ulong)fileVersionInfo.FileBuildPart << 16) +
                     ((ulong)fileVersionInfo.FilePrivatePart);
-        }        
+        }
     }
 }

@@ -86,7 +86,7 @@ namespace DLSS_Swapper.Data
             var filename = "";
             return WinTrust.VerifyEmbeddedSignature(filename);
         }
-        
+
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -121,14 +121,15 @@ namespace DLSS_Swapper.Data
             LocalRecord.HasDownloadError = false;
             LocalRecord.DownloadErrorMessage = String.Empty;
             NotifyPropertyChanged("LocalRecord");
-            
+
             _cancellationTokenSource = new CancellationTokenSource();
             var cancellationToken = _cancellationTokenSource.Token;
             var response = await App.CurrentApp.HttpClient.GetAsync(DownloadUrl, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
 
-                dispatcherQueue.TryEnqueue(() => {
+                dispatcherQueue.TryEnqueue(() =>
+                {
                     LocalRecord.IsDownloading = false;
                     LocalRecord.DownloadProgress = 0;
                     LocalRecord.HasDownloadError = true;
@@ -144,7 +145,7 @@ namespace DLSS_Swapper.Data
             var buffer = new byte[1024 * 8];
             var isMoreToRead = true;
 
-         
+
 
             var guid = Guid.NewGuid().ToString().ToUpper();
 
@@ -240,7 +241,7 @@ namespace DLSS_Swapper.Data
                 var dlssFolder = await dllsFolder.CreateFolderAsync($"{dlssVersion}_{MD5Hash}", Windows.Storage.CreationCollisionOption.OpenIfExists);
                 var dlssFile = Path.Combine(dlssFolder.Path, "nvngx_dlss.dll");
                 File.Move(tempDllFile, dlssFile, true);
-                
+
                 dispatcherQueue.TryEnqueue(() =>
                 {
                     LocalRecord.IsDownloaded = true;
@@ -251,7 +252,7 @@ namespace DLSS_Swapper.Data
 
                 return (true, String.Empty, false);
             }
-            catch (TaskCanceledException )
+            catch (TaskCanceledException)
             {
                 dispatcherQueue.TryEnqueue(() =>
                 {

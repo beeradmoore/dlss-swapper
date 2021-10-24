@@ -13,7 +13,7 @@
         <converters:BytesToMegaBytesConverter x:Key="BytesToMegaBytesConverter" />
         <ct_converters:StringVisibilityConverter x:Key="StringVisibilityConverter" />
     </UserControl.Resources>
-  
+
     <StackPanel Orientation="Vertical">
         <TextBlock IsTextSelectionEnabled="True">
             <Run FontWeight="Bold">Version: </Run>

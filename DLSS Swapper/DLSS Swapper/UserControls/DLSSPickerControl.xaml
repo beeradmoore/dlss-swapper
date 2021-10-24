@@ -15,7 +15,7 @@
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
         <converters:DLSSStateVisibilityConverter x:Key="IsNotFoundConverter" DesierdState="NotFound" />
     </UserControl.Resources>
-    
+
     <Grid>
 
         <ListView x:Name="DLSSRecordsListView" ItemsSource="{Binding DLSSRecords}" MaxHeight="400">
@@ -42,6 +42,6 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        
+
     </Grid>
 </UserControl>

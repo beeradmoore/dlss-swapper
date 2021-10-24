@@ -12,7 +12,7 @@
     <Grid>
         <ScrollViewer Grid.Row="0">
             <StackPanel HorizontalAlignment="Left" Padding="56,0,56,56">
-                
+
                 <TextBlock 
                     Text="Settings"
                     Style="{StaticResource TitleTextBlockStyle}"
@@ -75,7 +75,8 @@
                     Text="Contributors" />
                 <RichTextBlock Margin="0,12,0,0">
                     <Paragraph>
-                        Brad Moore (<Hyperlink NavigateUri="https://twitter.com/beeradmoore">@beeradmoore</Hyperlink>)
+                        Brad Moore (
+                        <Hyperlink NavigateUri="https://twitter.com/beeradmoore">@beeradmoore</Hyperlink> )
                     </Paragraph>
                 </RichTextBlock>
             </StackPanel>

@@ -41,7 +41,7 @@ namespace DLSS_Swapper
             TRUST_E_SUBJECT_FORM_UNKNOWN = 0x800B0003,
 
             // Unknown trust provider.
-            TRUST_E_PROVIDER_UNKNOWN = 0x800B0001, 
+            TRUST_E_PROVIDER_UNKNOWN = 0x800B0001,
 
             //    TRUST_E_EXPLICIT_DISTRUST
             //      Returned if the hash representing the subject is trusted as
@@ -101,7 +101,7 @@ namespace DLSS_Swapper
         {
             public UInt32 cbStruct { get; private set; }                // = sizeof(WINTRUST_FILE_INFO)
             public IntPtr pcwszFilePath { get; private set; }           // required, file name to be verified
-            public IntPtr hFile { get; private set;  }                     // optional, open handle to FilePath
+            public IntPtr hFile { get; private set; }                     // optional, open handle to FilePath
             public IntPtr pgKnownSubject { get; private set; }  // optional, subject type if it is known
 
             public WinTrustFileInfo(string filePath)
@@ -275,7 +275,7 @@ namespace DLSS_Swapper
                 var WVTPolicyGUID = new Guid(WINTRUST_ACTION_GENERIC_VERIFY_V2);
 
                 // Initialize the WinVerifyTrust input data structure.
-               
+
 
                 // Default all fields to 0.
                 ///memset(&WinTrustData, 0, sizeof(WinTrustData));

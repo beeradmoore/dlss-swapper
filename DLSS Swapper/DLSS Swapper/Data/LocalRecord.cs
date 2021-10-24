@@ -149,7 +149,7 @@ namespace DLSS_Swapper.Data
             {
                 var dlssPath = Path.GetDirectoryName(Path.Combine(storageFolder.Path, ExpectedPath));
                 Directory.Delete(dlssPath, true);
-                
+
                 IsDownloaded = false;
                 IsDownloading = false;
                 DownloadProgress = 0;

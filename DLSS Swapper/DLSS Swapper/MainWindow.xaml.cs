@@ -189,7 +189,7 @@ If you choose to delete the old folder then everything inside ""Documents/DLSS S
                     bool didMigrate = await MigrateAsync(shouldDelete);
                     if (didMigrate == false)
                     {
-                        var didntDeleteMessage = (shouldDelete ? " We didn't attempt to delete files." : String.Empty); 
+                        var didntDeleteMessage = (shouldDelete ? " We didn't attempt to delete files." : String.Empty);
                         dialog = new ContentDialog()
                         {
                             Title = "Ohno",
@@ -288,7 +288,7 @@ Migration will not be attempted again on next launch.",
             FilterDLSSRecords();
 
             //await App.CurrentApp.LoadLocalRecordsAsync();
-            App.CurrentApp.LoadLocalRecords();            
+            App.CurrentApp.LoadLocalRecords();
         }
 
         /// <summary>
@@ -480,7 +480,7 @@ Migration will not be attempted again on next launch.",
                         }
                     }
                 }
-                catch (Exception )
+                catch (Exception)
                 {
                     // This can happen if the migration folder already exists, or we were unable to write the file.
                     // In those cases we want to just say 🤷‍ and move on.
@@ -496,7 +496,7 @@ Migration will not be attempted again on next launch.",
                         {
                             await dlssFolder?.DeleteAsync(Windows.Storage.StorageDeleteOption.PermanentDelete);
                         }
-                        catch (Exception )
+                        catch (Exception)
                         {
                             // Sometimes you wonder how you got here. We failed to migrate the file, but also failed to delete it... Yikes.
                         }
@@ -510,7 +510,7 @@ Migration will not be attempted again on next launch.",
                 {
                     Directory.Delete(oldDirectory, true);
                 }
-                catch (Exception )
+                catch (Exception)
                 {
                     // NOOP
                 }

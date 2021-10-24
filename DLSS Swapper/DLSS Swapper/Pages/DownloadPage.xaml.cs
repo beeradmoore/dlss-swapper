@@ -77,7 +77,7 @@ namespace DLSS_Swapper.Pages
             CurrentDLSSRecords = App.CurrentApp.MainWindow.CurrentDLSSRecords;
 
             RefreshCommand = new AsyncCommand(RefreshListAsync, _ => !IsRefreshing);
-            ExportAllCommand = new AsyncCommand(ExportAllAsync, _ => !IsExporting);            
+            ExportAllCommand = new AsyncCommand(ExportAllAsync, _ => !IsExporting);
             DeleteRecordCommand = new AsyncCommand<DLSSRecord>(async (record) => await DeleteRecordAsync(record));
             DownloadRecordCommand = new AsyncCommand<DLSSRecord>(async (record) => await DownloadRecordAsync(record));
             CancelDownloadRecordCommand = new AsyncCommand<DLSSRecord>(async (record) => await CancelDownloadRecordAsync(record));
@@ -138,7 +138,7 @@ namespace DLSS_Swapper.Pages
 
                 if (saveFile != null)
                 {
-                   
+
                     using (var fileStream = File.Create(saveFile.Path))
                     {
                         using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create))
@@ -192,7 +192,7 @@ namespace DLSS_Swapper.Pages
             {
                 var didDelete = record.LocalRecord.Delete();
                 if (didDelete)
-                { 
+                {
                     record.NotifyPropertyChanged(nameof(record.LocalRecord));
                 }
                 else
@@ -240,11 +240,11 @@ namespace DLSS_Swapper.Pages
                 savePicker.SuggestedFileName = $"nvngx_dlss_{record.Version}.zip";
                 WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
                 var saveFile = await savePicker.PickSaveFileAsync();
-           
+
                 if (saveFile != null)
                 {
                     var fullExpectedPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, record.LocalRecord.ExpectedPath);
-              
+
                     using (var fileStream = File.Create(saveFile.Path))
                     {
                         using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create))

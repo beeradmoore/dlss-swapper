@@ -42,7 +42,7 @@ namespace DLSS_Swapper.Pages
             DataContext = this;
         }
 
-        
+
         async Task LoadGamesAsync()
         {
             GameLibraries.Clear();
@@ -58,7 +58,8 @@ namespace DLSS_Swapper.Pages
             // Await them all to finish loading games.
             await Task.WhenAll(steamGamesTask);
 
-            DispatcherQueue.TryEnqueue(() => {
+            DispatcherQueue.TryEnqueue(() =>
+            {
                 FilterGames();
             });
         }
@@ -119,7 +120,7 @@ namespace DLSS_Swapper.Pages
             MainGridView.SelectionChanged += MainGridView_SelectionChanged;
         }
 
-       
+
         async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             await LoadGamesAndDlls();
@@ -159,7 +160,7 @@ namespace DLSS_Swapper.Pages
                 dialog.Content = dlssPickerControl;
                 dialog.XamlRoot = XamlRoot;
                 dialog.RequestedTheme = Settings.AppTheme;
-                
+
                 if (String.IsNullOrEmpty(game.BaseDLSSVersion) == false)
                 {
                     dialog.SecondaryButtonText = "Reset";
@@ -238,7 +239,8 @@ namespace DLSS_Swapper.Pages
 
             await Task.WhenAll(tasks);
 
-            DispatcherQueue.TryEnqueue(() => {
+            DispatcherQueue.TryEnqueue(() =>
+            {
                 LoadingStackPanel.Visibility = Visibility.Collapsed;
                 _loadingGamesAndDlls = false;
             });

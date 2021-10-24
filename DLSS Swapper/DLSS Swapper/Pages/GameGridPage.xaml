@@ -39,8 +39,8 @@
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
             </GridView.GroupStyle>
-            
-            
+
+
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:Game">
                     <Grid Width="200" Height="300" ColumnSpacing="0" RowSpacing="0" Margin="0,0,10,10" Background="Black">
@@ -80,7 +80,7 @@
             <!--SystemControlAcrylicElementBrush-->
             <muxc:ProgressRing IsActive="True" Width="60" Height="60" />
         </Grid>
-        
+
     </Grid>
-    
+
 </Page>

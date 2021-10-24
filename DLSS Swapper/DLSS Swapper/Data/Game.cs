@@ -76,7 +76,7 @@ namespace DLSS_Swapper.Data
         }
 
 
-        
+
 
 
         public bool HasDLSS { get; set; }
@@ -204,7 +204,7 @@ namespace DLSS_Swapper.Data
             }
 
 
-            
+
             foreach (var dll in foundDlls)
             {
                 try

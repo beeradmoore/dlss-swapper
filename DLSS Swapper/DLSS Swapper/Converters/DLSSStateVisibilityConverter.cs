@@ -47,7 +47,7 @@ namespace DLSS_Swapper.Converters
                     {
                         return false;
                     }
-                    
+
                     if (localRecord.IsDownloaded)
                     {
                         return false;

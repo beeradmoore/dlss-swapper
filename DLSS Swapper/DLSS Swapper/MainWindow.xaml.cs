@@ -189,7 +189,11 @@ If you choose to delete the old folder then everything inside ""Documents/DLSS S
                 {
                     bool shouldDelete = (migrationDialogResult == ContentDialogResult.Secondary);
                     bool didMigrate = await MigrateAsync(shouldDelete);
-                    if (didMigrate == false)
+                    if (didMigrate)
+                    {
+                        App.CurrentApp.LoadLocalRecords();
+                    }
+                    else
                     {
                         var didntDeleteMessage = (shouldDelete ? " We didn't attempt to delete files." : String.Empty);
                         dialog = new ContentDialog()

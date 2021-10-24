@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,13 +11,6 @@ namespace DLSS_Swapper
 {
     public static class Settings
     {
-        private static string _baseDirectory;
-        public static string BaseDirectory => _baseDirectory;
-
-        public static string TechPowerUpDownloadsDirectory => Path.Combine(BaseDirectory, "Downloads", "TechPowerUp");
-
-        public static string DllsDirectory => Path.Combine(BaseDirectory, "dlls");
-
         static bool _hasShownWarning = false;
         public static bool HasShownWarning
         {
@@ -47,7 +41,6 @@ namespace DLSS_Swapper
         }
 
 
-
         static bool _hideNonDLSSGames = true;
         public static bool HideNonDLSSGames
         {
@@ -73,6 +66,77 @@ namespace DLSS_Swapper
                 {
                     _groupGameLibrariesTogether = value;
                     ApplicationData.Current.LocalSettings.Values["GroupGameLibrariesTogether"] = value;
+                }
+            }
+        }
+
+        static ElementTheme _appTheme = ElementTheme.Default;
+        public static ElementTheme AppTheme
+        {
+            get { return _appTheme; }
+            set
+            {
+                if (_appTheme != value)
+                {
+                    _appTheme = value;
+                    ApplicationData.Current.LocalSettings.Values["AppTheme"] = (int)value;
+                }
+            }
+        }
+
+        static bool _allowExperimental = false;
+        public static bool AllowExperimental
+        {
+            get { return _allowExperimental; }
+            set
+            {
+                if (_allowExperimental != value)
+                {
+                    _allowExperimental = value;
+                    ApplicationData.Current.LocalSettings.Values["AllowExperimental"] = value;
+                }
+            }
+        }
+
+
+        static bool _allowUntrusted = false;
+        public static bool AllowUntrusted
+        {
+            get { return _allowUntrusted; }
+            set
+            {
+                if (_allowUntrusted != value)
+                {
+                    _allowUntrusted = value;
+                    ApplicationData.Current.LocalSettings.Values["AllowUntrusted"] = value;
+                }
+            }
+        }
+
+        static DateTimeOffset _lastRecordsRefresh = DateTimeOffset.MinValue;
+        public static DateTimeOffset LastRecordsRefresh
+        {
+            get { return _lastRecordsRefresh; }
+            set
+            {
+                if (_lastRecordsRefresh != value)
+                {
+                    _lastRecordsRefresh = value;
+                    ApplicationData.Current.LocalSettings.Values["LastRecordsRefresh"] = Windows.Foundation.PropertyValue.CreateDateTime(value);
+                }
+            }
+        }
+
+        static bool _migrationAttempted = false;
+        public static bool MigrationAttempted
+        {
+            get { return _migrationAttempted; }
+            set
+            {
+                if (_migrationAttempted != value)
+                {
+                    _migrationAttempted = value;
+                    ApplicationData.Current.LocalSettings.Values["MigrationAttempted"] = value;
                 }
             }
         }
@@ -114,40 +178,45 @@ namespace DLSS_Swapper
                 }
             }
 
-            if (localSettings.Values.TryGetValue("BaseDirectory", out object tempObject))
+            if (localSettings.Values.TryGetValue("AppTheme", out object tempAppTheme))
             {
-                if (tempObject is string baseDirectory && Directory.Exists(baseDirectory))
+                if (tempAppTheme is int appTheme)
                 {
-                    _baseDirectory = baseDirectory;
+                    _appTheme = (ElementTheme)appTheme;
                 }
             }
 
-            // If BaseDirectory is not found we should default it.
-            if (String.IsNullOrWhiteSpace(_baseDirectory))
+            if (localSettings.Values.TryGetValue("AllowExperimental", out object tempAllowExperimental))
             {
-                _baseDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DLSS Swapper");
-                localSettings.Values["BaseDirectory"] = _baseDirectory;
-            }
-        }
-
-        public static void InitDirectories()
-        {
-            // TODO: Error handling
-
-            if (Directory.Exists(BaseDirectory) == false)
-            {
-                Directory.CreateDirectory(BaseDirectory);
+                if (tempAllowExperimental is bool allowExperimental)
+                {
+                    _allowExperimental = allowExperimental;
+                }
             }
 
-            if (Directory.Exists(TechPowerUpDownloadsDirectory) == false)
+            if (localSettings.Values.TryGetValue("AllowUntrusted", out object tempAllowUntrusted))
             {
-                Directory.CreateDirectory(TechPowerUpDownloadsDirectory);
+                if (tempAllowUntrusted is bool allowUntrusted)
+                {
+                    _allowUntrusted = allowUntrusted;
+                }
             }
 
-            if (Directory.Exists(DllsDirectory) == false)
+            if (localSettings.Values.TryGetValue("LastRecordsRefresh", out object tempLastRecordsRefresh))
             {
-                Directory.CreateDirectory(DllsDirectory);
+                if (tempLastRecordsRefresh is DateTimeOffset lastRecordsRefresh)
+                {
+                    _lastRecordsRefresh = lastRecordsRefresh;
+                }
             }
+
+            if (localSettings.Values.TryGetValue("MigrationAttempted", out object tempMigrationAttempted))
+            {
+                if (tempMigrationAttempted is bool migrationAttempted)
+                {
+                    _migrationAttempted = migrationAttempted;
+                }
+            }            
         }
     }
 }

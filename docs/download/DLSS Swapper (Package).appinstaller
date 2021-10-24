@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <AppInstaller
 	Uri="https://beeradmoore.github.io/dlss-swapper/download/DLSS Swapper (Package).appinstaller"
 	Version="0.9.3.0" xmlns="http://schemas.microsoft.com/appx/appinstaller/2017/2">

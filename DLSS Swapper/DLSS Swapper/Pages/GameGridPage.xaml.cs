@@ -1,5 +1,4 @@
 ﻿using DLSS_Swapper.Data;
-using DLSS_Swapper.Data.TechPowerUp;
 using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
@@ -35,9 +34,6 @@ namespace DLSS_Swapper.Pages
     {
         public List<IGameLibrary> GameLibraries { get; } = new List<IGameLibrary>();
 
-        List<LocalDll> _localDlls { get; } = new List<LocalDll>();
-        List<TechPowerUpDllHash> _dlssHashes { get; }  = new List<TechPowerUpDllHash>();
-
         bool _loadingGamesAndDlls = false;
 
         public GameGridPage()
@@ -46,29 +42,7 @@ namespace DLSS_Swapper.Pages
             DataContext = this;
         }
 
-        async Task LoadLocalDlls()
-        {
-            await Task.Run(() =>
-            {
-                var dlssDlls = Directory.GetFiles(Settings.DllsDirectory, "nvngx_dlss.dll", SearchOption.AllDirectories);
-                foreach (var dlssDll in dlssDlls)
-                {
-                    // lol gross.
-                    var directoryVersion = Path.GetFileName(Path.GetDirectoryName(dlssDll));
-                    var fileVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
-                    var dlssVersion = $"{fileVersionInfo.FileMajorPart}.{fileVersionInfo.FileMinorPart}.{fileVersionInfo.FileBuildPart}.{fileVersionInfo.FilePrivatePart}";
-
-                    // TODO : Validate with hash?. But how can we secure valid hashes?
-                    if (directoryVersion == dlssVersion)
-                    {
-                        _localDlls.Add(new LocalDll(dlssDll));
-                    }
-                    _localDlls.Sort();
-                }
-            });
-        }
-
-
+        
         async Task LoadGamesAsync()
         {
             GameLibraries.Clear();
@@ -145,25 +119,7 @@ namespace DLSS_Swapper.Pages
             MainGridView.SelectionChanged += MainGridView_SelectionChanged;
         }
 
-        async Task LoadDllHashes()
-        {
-            var url = "https://gist.githubusercontent.com/beeradmoore/3467646864751964dbf22f462c2e5b1e/raw/techpowerup_dlss_dll_hashes.json";
-
-            try
-            {
-                using var client = new HttpClient();
-                using var stream = await client.GetStreamAsync(url);
-
-                var items = await JsonSerializer.DeserializeAsync<List<TechPowerUpDllHash>>(stream);
-                _dlssHashes.Clear();
-                _dlssHashes.AddRange(items);
-            }
-            catch (Exception err)
-            {
-                System.Diagnostics.Debug.WriteLine($"LoadDllHashes Error: {err.Message}");
-            }
-        }
-
+       
         async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             await LoadGamesAndDlls();
@@ -188,19 +144,21 @@ namespace DLSS_Swapper.Pages
                     dialog.PrimaryButtonText = "Okay";
                     dialog.DefaultButton = ContentDialogButton.Primary;
                     dialog.Content = $"DLSS was not detected in {game.Title}.";
-                    dialog.XamlRoot = this.XamlRoot;
+                    dialog.XamlRoot = XamlRoot;
+                    dialog.RequestedTheme = Settings.AppTheme;
                     await dialog.ShowAsync();
                     return;
                 }
 
-                var dlssPickerControl = new DLSSPickerControl(game, _localDlls);
+                var dlssPickerControl = new DLSSPickerControl(game);
                 dialog = new ContentDialog();
                 dialog.Title = "Select DLSS Version";
-                dialog.PrimaryButtonText = "Update";
+                dialog.PrimaryButtonText = "Swap";
                 dialog.CloseButtonText = "Cancel";
                 dialog.DefaultButton = ContentDialogButton.Primary;
                 dialog.Content = dlssPickerControl;
-                dialog.XamlRoot = this.XamlRoot;
+                dialog.XamlRoot = XamlRoot;
+                dialog.RequestedTheme = Settings.AppTheme;
                 
                 if (String.IsNullOrEmpty(game.BaseDLSSVersion) == false)
                 {
@@ -212,8 +170,24 @@ namespace DLSS_Swapper.Pages
 
                 if (result == ContentDialogResult.Primary)
                 {
-                    var selectedDll = dlssPickerControl.GetSelectedLocalDll();
-                    bool didUpdate = game.UpdateDll(selectedDll);
+                    var selectedDLSSRecord = dlssPickerControl.GetSelectedDLSSRecord();
+
+                    if (selectedDLSSRecord.LocalRecord.IsDownloading == true || selectedDLSSRecord.LocalRecord.IsDownloaded == false)
+                    {
+                        // TODO: Initiate download here.
+                        dialog = new ContentDialog();
+                        dialog.Title = "Error";
+                        dialog.CloseButtonText = "Okay";
+                        dialog.DefaultButton = ContentDialogButton.Close;
+                        dialog.Content = "Please download the DLSS record from the downloads page first.";
+                        dialog.XamlRoot = XamlRoot;
+                        dialog.RequestedTheme = Settings.AppTheme;
+                        await dialog.ShowAsync();
+                        return;
+                    }
+
+
+                    bool didUpdate = game.UpdateDll(selectedDLSSRecord);
 
                     if (didUpdate == false)
                     {
@@ -222,7 +196,8 @@ namespace DLSS_Swapper.Pages
                         dialog.PrimaryButtonText = "Okay";
                         dialog.DefaultButton = ContentDialogButton.Primary;
                         dialog.Content = "Unable to update DLSS dll. You may need to repair your game manually.";
-                        dialog.XamlRoot = this.XamlRoot;
+                        dialog.XamlRoot = XamlRoot;
+                        dialog.RequestedTheme = Settings.AppTheme;
                         await dialog.ShowAsync();
                     }
                 }
@@ -237,7 +212,8 @@ namespace DLSS_Swapper.Pages
                         dialog.PrimaryButtonText = "Okay";
                         dialog.DefaultButton = ContentDialogButton.Primary;
                         dialog.Content = "Unable to reset to default. Please repair your game manually.";
-                        dialog.XamlRoot = this.XamlRoot;
+                        dialog.XamlRoot = XamlRoot;
+                        dialog.RequestedTheme = Settings.AppTheme;
                         await dialog.ShowAsync();
                     }
                 }
@@ -258,8 +234,6 @@ namespace DLSS_Swapper.Pages
 
             var tasks = new List<Task>();
             tasks.Add(LoadGamesAsync());
-            tasks.Add(LoadDllHashes());
-            tasks.Add(LoadLocalDlls());
 
 
             await Task.WhenAll(tasks);
@@ -285,7 +259,8 @@ namespace DLSS_Swapper.Pages
             dialog.CloseButtonText = "Cancel";
             dialog.DefaultButton = ContentDialogButton.Primary;
             dialog.Content = gameFilterControl;
-            dialog.XamlRoot = this.XamlRoot;
+            dialog.XamlRoot = XamlRoot;
+            dialog.RequestedTheme = Settings.AppTheme;
 
 
             var result = await dialog.ShowAsync();

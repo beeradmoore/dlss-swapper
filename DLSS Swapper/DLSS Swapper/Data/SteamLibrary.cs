@@ -50,7 +50,7 @@ namespace DLSS_Swapper.Data
                 var baseSteamAppsFolder = Path.Combine(installPath, "steamapps");
 
                 var libraryFolders = new List<string>();
-                libraryFolders.Add(baseSteamAppsFolder);
+                libraryFolders.Add(Helpers.PathHelpers.NormalizePath(baseSteamAppsFolder));
 
                 var libraryFoldersFile = Path.Combine(baseSteamAppsFolder, "libraryfolders.vdf");
                 if (File.Exists(libraryFoldersFile))
@@ -69,7 +69,7 @@ namespace DLSS_Swapper.Data
                                 var path = match.Groups["path"].ToString();
                                 if (Directory.Exists(path))
                                 {
-                                    libraryFolders.Add(Path.Combine(path, "steamapps"));
+                                    libraryFolders.Add(Helpers.PathHelpers.NormalizePath(Path.Combine(path, "steamapps")));
                                 }
                             }
                         }
@@ -80,6 +80,9 @@ namespace DLSS_Swapper.Data
                         System.Diagnostics.Debug.WriteLine($"ERROR: Unable to parse libraryfolders.vdf, {err.Message}");
                     }
                 }
+
+                // Makes sure all library folders are unique.
+                libraryFolders = libraryFolders.Distinct().ToList();
 
                 foreach (var libraryFolder in libraryFolders)
                 {

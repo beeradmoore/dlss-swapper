@@ -4,23 +4,40 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DLSS_Swapper"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    mc:Ignorable="d" >
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    >
 
-    <muxc:NavigationView x:Name="MainNavigationView"
-                         ItemInvoked="MainNavigationView_ItemInvoked" 
-                         IsSettingsVisible="false"
-                         PaneDisplayMode="LeftCompact"
-                         IsBackButtonVisible="Collapsed"                        
-                         Loaded="MainNavigationView_Loaded">
-        <muxc:NavigationView.MenuItems>
-            <muxc:NavigationViewItem Content="Games" Tag="Games">
-                <muxc:NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xE7FC;"/>
-                </muxc:NavigationViewItem.Icon>
-            </muxc:NavigationViewItem>
-            <muxc:NavigationViewItem Icon="Download" Content="Download" Tag="Download" />
-        </muxc:NavigationView.MenuItems>
-        <Frame x:Name="ContentFrame" />
-    </muxc:NavigationView>
+    <Grid MinWidth="400">
+
+        
+        <muxc:NavigationView x:Name="MainNavigationView" Grid.Row="1"
+                             ItemInvoked="MainNavigationView_ItemInvoked" 
+                             PaneDisplayMode="LeftCompact"
+                             IsBackButtonVisible="Collapsed"      
+                             Loaded="MainNavigationView_Loaded">
+            <muxc:NavigationView.MenuItems>
+                <muxc:NavigationViewItem Content="Games" Tag="Games">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE7FC;"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItem Icon="Download" Content="Download" Tag="Download" />
+            </muxc:NavigationView.MenuItems>
+            <Frame x:Name="ContentFrame" />
+        </muxc:NavigationView>
+
+        <Grid x:Name="LoadingStackPanel" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RowSpacing="10">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <muxc:ProgressRing Grid.Row="0" x:Name="LoadingProgressRing" IsActive="True" Width="60" Height="60" IsIndeterminate="true" VerticalAlignment="Bottom" />
+            <TextBlock Grid.Row="1" x:Name="LoadingProgressText" VerticalAlignment="Top" Text="Loading" HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" />
+            
+        </Grid>
+    </Grid>
 </Window>

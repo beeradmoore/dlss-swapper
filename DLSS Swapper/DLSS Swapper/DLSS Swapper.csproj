@@ -15,19 +15,53 @@
     <PackageIconUrl />
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Interfaces\InitialLoadingPage.xaml" />
+    <None Remove="Pages\DownloadPage.xaml" />
     <None Remove="Pages\GameGridPage.xaml" />
-    <None Remove="Pages\TechPowerUpDownloadPage.xaml" />
+    <None Remove="Pages\SettingsPage.xaml" />
     <None Remove="UserControls\DLSSPickerControl.xaml" />
+    <None Remove="UserControls\DLSSRecordInfoControl.xaml" />
     <None Remove="UserControls\GameFilterControl.xaml" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AsyncAwaitBestPractices" Version="6.0.0" />
-    <PackageReference Include="Microsoft.ProjectReunion" Version="0.8.3" />
-    <PackageReference Include="Microsoft.ProjectReunion.Foundation" Version="0.8.3" />
-    <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.3" />
+    <PackageReference Include="AsyncAwaitBestPractices" Version="6.0.2" />
+    <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="6.0.2" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.0.3" />
+    <PackageReference Include="Humanizer" Version="2.11.10" />
+    <PackageReference Include="Microsoft.ProjectReunion" Version="0.8.5" />
+    <PackageReference Include="Microsoft.ProjectReunion.Foundation" Version="0.8.5" />
+    <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.5" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+    <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UserControls\DLSSRecordInfoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\InitialLoadingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\DownloadPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>
@@ -38,12 +72,6 @@
 
   <ItemGroup>
     <Page Update="Pages\GameGridPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Pages\TechPowerUpDownloadPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

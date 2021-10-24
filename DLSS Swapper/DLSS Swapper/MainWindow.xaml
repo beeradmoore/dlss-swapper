@@ -11,8 +11,34 @@
 
     <Grid MinWidth="400">
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid x:Name="appTitleBar" Grid.Row="0" Padding="12,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Image
+                x:Name="AppFontIcon"
+                Width="16"
+                Height="16" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Source="/Images/Square44x44Logo.png" />
+            <TextBlock
+                x:Name="AppTitle"
+                Grid.Column="1"
+                Margin="20,0,0,0"
+                VerticalAlignment="Center"
+                Style="{StaticResource CaptionTextBlockStyle}"
+                Text="DLSS Swapper" />
+        </Grid>
+        
 
-        <muxc:NavigationView x:Name="MainNavigationView" Grid.Row="1"
+        <muxc:NavigationView Grid.Row="1" x:Name="MainNavigationView"
                              ItemInvoked="MainNavigationView_ItemInvoked" 
                              PaneDisplayMode="LeftCompact"
                              IsBackButtonVisible="Collapsed"      
@@ -28,7 +54,7 @@
             <Frame x:Name="ContentFrame" />
         </muxc:NavigationView>
 
-        <Grid x:Name="LoadingStackPanel" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RowSpacing="10">
+        <Grid x:Name="LoadingStackPanel" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RowSpacing="10" Grid.Row="1">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />

@@ -1,4 +1,4 @@
-using DLSS_Swapper.Data;
+﻿using DLSS_Swapper.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -65,6 +65,8 @@ namespace DLSS_Swapper
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             _window = new MainWindow();
+            _window.ExtendsContentIntoTitleBar = true;
+            _window.SetTitleBar(_window.AppTitleBar);
             _window.Activate();
         }
 

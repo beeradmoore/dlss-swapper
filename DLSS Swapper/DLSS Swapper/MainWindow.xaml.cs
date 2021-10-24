@@ -34,6 +34,8 @@ namespace DLSS_Swapper
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        public Grid AppTitleBar => appTitleBar;
+
         public static NavigationView NavigationView;
 
         public ObservableRangeCollection<DLSSRecord> CurrentDLSSRecords { get; } = new ObservableRangeCollection<DLSSRecord>();

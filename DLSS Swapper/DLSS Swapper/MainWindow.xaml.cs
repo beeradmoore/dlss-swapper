@@ -68,9 +68,9 @@ namespace DLSS_Swapper
             {
                 pageType = typeof(GameGridPage);
             }
-            else if (page == "Download")
+            else if (page == "Library")
             {
-                pageType = typeof(DownloadPage);
+                pageType = typeof(LibraryPage);
             }
             else if (page == "Settings")
             {

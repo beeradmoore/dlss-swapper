@@ -49,7 +49,7 @@
                         <FontIcon Glyph="&#xE7FC;"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Icon="Download" Content="Download" Tag="Download" />
+                <muxc:NavigationViewItem Icon="Library" Content="Library" Tag="Library" />
             </muxc:NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" />
         </muxc:NavigationView>

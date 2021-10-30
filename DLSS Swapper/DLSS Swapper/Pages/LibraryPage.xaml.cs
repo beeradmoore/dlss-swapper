@@ -30,7 +30,7 @@ namespace DLSS_Swapper.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class DownloadPage : Page, INotifyPropertyChanged
+    public sealed partial class LibraryPage : Page, INotifyPropertyChanged
     {
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand ExportAllCommand { get; }
@@ -72,7 +72,7 @@ namespace DLSS_Swapper.Pages
 
         public ObservableRangeCollection<DLSSRecord> CurrentDLSSRecords { get; }
 
-        public DownloadPage()
+        public LibraryPage()
         {
             CurrentDLSSRecords = App.CurrentApp.MainWindow.CurrentDLSSRecords;
 

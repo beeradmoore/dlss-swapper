@@ -16,8 +16,8 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Interfaces\InitialLoadingPage.xaml" />
-    <None Remove="Pages\DownloadPage.xaml" />
     <None Remove="Pages\GameGridPage.xaml" />
+    <None Remove="Pages\LibraryPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
     <None Remove="UserControls\DLSSPickerControl.xaml" />
     <None Remove="UserControls\DLSSRecordInfoControl.xaml" />
@@ -50,7 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Pages\DownloadPage.xaml">
+    <Page Update="Pages\LibraryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

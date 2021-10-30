@@ -103,7 +103,6 @@ namespace DLSS_Swapper.Pages
             IsRefreshing = true;
 
             var didUpdate = await App.CurrentApp.MainWindow.UpdateDLSSRecordsAsync();
-            didUpdate = false;
             if (didUpdate)
             {
                 App.CurrentApp.MainWindow.FilterDLSSRecords();

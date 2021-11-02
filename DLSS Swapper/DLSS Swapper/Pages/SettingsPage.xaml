@@ -79,6 +79,18 @@
                         <Hyperlink NavigateUri="https://twitter.com/beeradmoore">@beeradmoore</Hyperlink> )
                     </Paragraph>
                 </RichTextBlock>
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Report an problem" />
+                <RichTextBlock Margin="0,12,0,0">
+                    <Paragraph>
+                        You can report any problems on our
+                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub issues</Hyperlink> page
+                    </Paragraph>
+                </RichTextBlock>
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>

@@ -212,8 +212,6 @@ namespace DLSS_Swapper.Pages
             {
                 try
                 {
-                    //var filename = Path.GetFileName(openFile.Path);
-
                     var dlssRecord = DLSSRecord.FromImportedFile(openFile.Path);
 
                     var existingRecords = App.CurrentApp.ImportedDLSSRecords.Where(x => x.VersionNumber == dlssRecord.VersionNumber && x.MD5Hash.Equals(dlssRecord.MD5Hash, StringComparison.InvariantCultureIgnoreCase)).ToList();

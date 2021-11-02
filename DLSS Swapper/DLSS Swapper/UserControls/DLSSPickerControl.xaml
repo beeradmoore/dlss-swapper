@@ -30,11 +30,11 @@
 
                         <TextBlock Grid.Column="0" Text="{Binding FullName}" />
 
-                        <ProgressRing Grid.Column="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsDownloadingConverter}}" Minimum="0" Maximum="100" IsIndeterminate="false" Value="{Binding LocalRecord.DownloadProgress}" HorizontalAlignment="Right" Width="20" Height="20"  />
+                        <ProgressRing Grid.Column="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsDownloadingConverter}}" ToolTipService.ToolTip="Downloading" Minimum="0" Maximum="100" IsIndeterminate="false" Value="{Binding LocalRecord.DownloadProgress}" HorizontalAlignment="Right" Width="20" Height="20"  />
 
-                        <FontIcon Grid.Column="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsNotFoundConverter}}" HorizontalAlignment="Right" Glyph="&#xE896;" Width="20" Height="20" />
+                        <FontIcon Grid.Column="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsNotFoundConverter}}" ToolTipService.ToolTip="Requires download" HorizontalAlignment="Right" Glyph="&#xE896;" Width="20" Height="20" />
 
-                        <FontIcon Grid.Column="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsImportedConverter}}" HorizontalAlignment="Right" Glyph="&#xE7B8;" Width="20" Height="20" />
+                        <FontIcon Grid.Column="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsImportedConverter}}" ToolTipService.ToolTip="Imported" HorizontalAlignment="Right" Glyph="&#xE7B8;" Width="20" Height="20" />
                         
                     </Grid>
                 </DataTemplate>

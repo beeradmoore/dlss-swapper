@@ -238,7 +238,14 @@ Migration will not be attempted again on next launch.",
 
             if (Settings.AllowExperimental)
             {
-                newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Experimental);
+                if (Settings.AllowUntrusted)
+                {
+                    newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Experimental);
+                }
+                else
+                {
+                    newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Experimental.Where(x => x.IsSignatureValid == true));
+                }
             }
 
             newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords);

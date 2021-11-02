@@ -230,10 +230,12 @@ Migration will not be attempted again on next launch.",
             if (Settings.AllowUntrusted)
             {
                 newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Stable);
+                newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords);
             }
             else
             {
                 newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Stable.Where(x => x.IsSignatureValid == true));
+                newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords.Where(x => x.IsSignatureValid == true));
             }
 
             if (Settings.AllowExperimental)
@@ -248,7 +250,6 @@ Migration will not be attempted again on next launch.",
                 }
             }
 
-            newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords);
 
             newDlssRecordsList.Sort();
             CurrentDLSSRecords.Clear();

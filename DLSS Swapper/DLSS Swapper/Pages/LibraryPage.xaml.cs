@@ -234,6 +234,44 @@ namespace DLSS_Swapper.Pages
                         }
                     }
                     
+
+                    // Check if the dll passes windows cert validation. If it doesn't and user has not allowed untrusted then error.
+                    if (Settings.AllowUntrusted == false && dlssRecord.IsSignatureValid == false)
+                    {
+                        // If it already exists prompt the user if they want to overwrite it.
+                        dialog = new ContentDialog();
+                        dialog.CloseButtonText = "Okay";
+                        dialog.Title = "Import Failed";
+                        dialog.Content = $"The dll you imported ({openFile.Path}) is not signed with a valid certificate. If you believe this is a mistake and you want to import anyway enable \"Allow Untrusted\" in DLSS Swapper settings.\n\nONLY enable this setting if you trust where you got the dll from.";
+                        dialog.XamlRoot = XamlRoot;
+                        dialog.RequestedTheme = Settings.AppTheme;
+                        response = await dialog.ShowAsync();
+                        return;
+                    }
+
+
+                    // Do gross basic checks to see if it is a DLSS dll (this isn't a security check, its a sanity check)
+                    var fileVersionInfo = FileVersionInfo.GetVersionInfo(openFile.Path);
+                    if (fileVersionInfo.InternalName.Contains("dlss", StringComparison.InvariantCultureIgnoreCase) == false ||
+                        fileVersionInfo.FileDescription.Contains("dlss", StringComparison.InvariantCultureIgnoreCase) == false)
+                    {
+
+                        // If it already exists prompt the user if they want to overwrite it.
+                        dialog = new ContentDialog();
+                        dialog.Title = "Possible Issue With DLL Imported";
+                        dialog.PrimaryButtonText = "Import Anyway";
+                        dialog.CloseButtonText = "Cancel";
+                        dialog.Content = $"It appears the dll you imported potentially isn't a legitimate NVIDIA DLSS dll. Continue only if you trust the source where you obtained the dll.";
+                        dialog.XamlRoot = XamlRoot;
+                        dialog.RequestedTheme = Settings.AppTheme;
+                        response = await dialog.ShowAsync();
+                        if (response != ContentDialogResult.Primary)
+                        {
+                            return;
+                        }
+                    }
+
+
                     // Copy new record to where it should live in DLSS Swapper app directory.
                     var fullExpectedFileName = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, dlssRecord.LocalRecord.ExpectedPath);
                     var fullExpectedPath = Path.GetDirectoryName(fullExpectedFileName);

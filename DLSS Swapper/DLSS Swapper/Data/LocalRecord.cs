@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -84,8 +84,19 @@ namespace DLSS_Swapper.Data
             }
         }
 
-
-
+        bool _isImported = false;
+        public bool IsImported
+        {
+            get { return _isImported; }
+            set
+            {
+                if (_isDownloading != value)
+                {
+                    _isImported = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
         private LocalRecord()
         {
@@ -155,6 +166,7 @@ namespace DLSS_Swapper.Data
                 DownloadProgress = 0;
                 HasDownloadError = false;
                 DownloadErrorMessage = String.Empty;
+                // We don't update IsImported here as that wont change.
                 return true;
             }
             catch (Exception)
@@ -200,7 +212,7 @@ namespace DLSS_Swapper.Data
             DownloadProgress = localRecord.DownloadProgress;
             HasDownloadError = localRecord.HasDownloadError;
             DownloadErrorMessage = localRecord.DownloadErrorMessage;
-
+            IsImported = localRecord.IsImported;
         }
 
         public bool Equals(LocalRecord other)

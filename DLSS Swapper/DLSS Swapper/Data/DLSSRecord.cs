@@ -1,4 +1,4 @@
-using DLSS_Swapper.Extensions;
+﻿using DLSS_Swapper.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,9 +17,6 @@ namespace DLSS_Swapper.Data
 {
     public class DLSSRecord : IComparable<DLSSRecord>, INotifyPropertyChanged
     {
-        [JsonIgnore]
-        public string Filename { get; set; }
-
         [JsonPropertyName("version")]
         public string Version { get; set; }
 
@@ -303,6 +300,31 @@ namespace DLSS_Swapper.Data
                 }
 
             }
+        }
+
+        internal static DLSSRecord FromImportedFile(string fileName)
+        {
+            if (File.Exists(fileName) == false)
+            {
+                return null;
+            }
+
+            var versionInfo = FileVersionInfo.GetVersionInfo(fileName);
+
+            var dlssRecord = new DLSSRecord()
+            {
+                Version = versionInfo.GetFormattedFileVersion(),
+                VersionNumber = versionInfo.GetFileVersionNumber(),
+                MD5Hash = versionInfo.GetMD5Hash(),
+                FileSize = 3,
+                ZipFileSize = 0,
+                ZipMD5Hash = String.Empty,
+                IsSignatureValid = WinTrust.VerifyEmbeddedSignature(fileName),
+            };
+
+            App.CurrentApp.LoadLocalRecordFromDLSSRecord(dlssRecord, true);
+
+            return dlssRecord;
         }
     }
 }

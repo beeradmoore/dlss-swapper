@@ -1,4 +1,5 @@
 ﻿using DLSS_Swapper.Data;
+using DLSS_Swapper.Extensions;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -12,6 +13,7 @@ using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -34,6 +36,7 @@ namespace DLSS_Swapper.Pages
     {
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand ExportAllCommand { get; }
+        public AsyncCommand ImportCommand { get; }
         public AsyncCommand<DLSSRecord> DeleteRecordCommand { get; }
         public AsyncCommand<DLSSRecord> DownloadRecordCommand { get; }
         public AsyncCommand<DLSSRecord> CancelDownloadRecordCommand { get; }
@@ -78,6 +81,7 @@ namespace DLSS_Swapper.Pages
 
             RefreshCommand = new AsyncCommand(RefreshListAsync, _ => !IsRefreshing);
             ExportAllCommand = new AsyncCommand(ExportAllAsync, _ => !IsExporting);
+            ImportCommand = new AsyncCommand(ImportAsync);
             DeleteRecordCommand = new AsyncCommand<DLSSRecord>(async (record) => await DeleteRecordAsync(record));
             DownloadRecordCommand = new AsyncCommand<DLSSRecord>(async (record) => await DownloadRecordAsync(record));
             CancelDownloadRecordCommand = new AsyncCommand<DLSSRecord>(async (record) => await CancelDownloadRecordAsync(record));
@@ -135,29 +139,31 @@ namespace DLSS_Swapper.Pages
                 WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
                 var saveFile = await savePicker.PickSaveFileAsync();
 
-                if (saveFile != null)
+                // User cancelled.
+                if (saveFile == null)
                 {
+                    return;
+                }
 
-                    using (var fileStream = File.Create(saveFile.Path))
+                using (var fileStream = File.Create(saveFile.Path))
+                {
+                    using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create))
                     {
-                        using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create))
-                        {
-                            var allDlssRecords = new List<DLSSRecord>();
-                            allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Stable);
-                            allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Experimental);
+                        var allDlssRecords = new List<DLSSRecord>();
+                        allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Stable);
+                        allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Experimental);
 
-                            foreach (var dlssRecord in allDlssRecords)
+                        foreach (var dlssRecord in allDlssRecords)
+                        {
+                            if (dlssRecord.LocalRecord?.IsDownloaded == true)
                             {
-                                if (dlssRecord.LocalRecord?.IsDownloaded == true)
+                                var fullExpectedPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, dlssRecord.LocalRecord.ExpectedPath);
+                                var internalZipDir = dlssRecord.Version.ToString();
+                                if (String.IsNullOrEmpty(dlssRecord.AdditionalLabel) == false)
                                 {
-                                    var fullExpectedPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, dlssRecord.LocalRecord.ExpectedPath);
-                                    var internalZipDir = dlssRecord.Version.ToString();
-                                    if (String.IsNullOrEmpty(dlssRecord.AdditionalLabel) == false)
-                                    {
-                                        internalZipDir += " " + dlssRecord.AdditionalLabel;
-                                    }
-                                    zipArchive.CreateEntryFromFile(fullExpectedPath, Path.Combine(internalZipDir, Path.GetFileName(fullExpectedPath)));
+                                    internalZipDir += " " + dlssRecord.AdditionalLabel;
                                 }
+                                zipArchive.CreateEntryFromFile(fullExpectedPath, Path.Combine(internalZipDir, Path.GetFileName(fullExpectedPath)));
                             }
                         }
                     }
@@ -178,6 +184,90 @@ namespace DLSS_Swapper.Pages
             }
         }
 
+        async Task ImportAsync()
+        {
+            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
+            var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
+            openPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            openPicker.FileTypeFilter.Add(".dll");
+            WinRT.Interop.InitializeWithWindow.Initialize(openPicker, hwnd);
+            var openFile = await openPicker.PickSingleFileAsync();
+
+            // User cancelled.
+            if (openFile == null)
+            {
+                return;
+            }
+
+            
+            var dialog = new ContentDialog();
+            dialog.PrimaryButtonText = "Import";
+            dialog.CloseButtonText = "Cancel";
+            dialog.Title = "Reminder";
+            dialog.Content = $"Only import DLLs from sources you trust.";
+            dialog.XamlRoot = XamlRoot;
+            dialog.RequestedTheme = Settings.AppTheme;
+            var response = await dialog.ShowAsync();
+            if (response == ContentDialogResult.Primary)
+            {
+                try
+                {
+                    //var filename = Path.GetFileName(openFile.Path);
+
+                    var dlssRecord = DLSSRecord.FromImportedFile(openFile.Path);
+
+                    var existingRecords = App.CurrentApp.ImportedDLSSRecords.Where(x => x.VersionNumber == dlssRecord.VersionNumber && x.MD5Hash.Equals(dlssRecord.MD5Hash, StringComparison.InvariantCultureIgnoreCase)).ToList();
+                    if (existingRecords.Count > 0)
+                    {
+                        // If it already exists prompt the user if they want to overwrite it.
+                        dialog = new ContentDialog();
+                        dialog.PrimaryButtonText = "Overwrite";
+                        dialog.CloseButtonText = "Cancel";
+                        dialog.Title = "Imported DLSS Record Exists";
+                        dialog.Content = $"It appears you have already impored DLSS v{dlssRecord.Version}";
+                        dialog.XamlRoot = XamlRoot;
+                        dialog.RequestedTheme = Settings.AppTheme;
+                        response = await dialog.ShowAsync();
+                        if (response != ContentDialogResult.Primary)
+                        {
+                            return;
+                        }
+                    }
+                    
+                    // Copy new record to where it should live in DLSS Swapper app directory.
+                    var fullExpectedFileName = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, dlssRecord.LocalRecord.ExpectedPath);
+                    var fullExpectedPath = Path.GetDirectoryName(fullExpectedFileName);
+                    if (Directory.Exists(fullExpectedPath) == false)
+                    {
+                        Directory.CreateDirectory(fullExpectedPath);
+                    }
+                    File.Copy(openFile.Path, fullExpectedFileName, true);
+
+                    // If there were other records we are overwriting we remove them.
+                    foreach (var existingRecord in existingRecords)
+                    {
+                        App.CurrentApp.ImportedDLSSRecords.Remove(existingRecord);
+                    }
+                    
+                    // Add our new record.
+                    App.CurrentApp.ImportedDLSSRecords.Add(dlssRecord);
+                    var didSave = await App.CurrentApp.SaveImportedDLSSRecordsAsync();
+                    if (didSave == false)
+                    {
+
+                        return;
+                    }
+
+                    App.CurrentApp.MainWindow.FilterDLSSRecords();
+                }
+                catch (Exception err)
+                {
+                    int x = 0;
+                    // TODO: ERROR
+                }
+            }
+        }
+
         async Task DeleteRecordAsync(DLSSRecord record)
         {
             var dialog = new ContentDialog();
@@ -192,7 +282,15 @@ namespace DLSS_Swapper.Pages
                 var didDelete = record.LocalRecord.Delete();
                 if (didDelete)
                 {
-                    record.NotifyPropertyChanged(nameof(record.LocalRecord));
+                    if (record.LocalRecord.IsImported)
+                    {
+                        App.CurrentApp.ImportedDLSSRecords.Remove(record);
+                        App.CurrentApp.MainWindow.FilterDLSSRecords();
+                    }
+                    else
+                    {
+                        record.NotifyPropertyChanged(nameof(record.LocalRecord));
+                    }
                 }
                 else
                 {

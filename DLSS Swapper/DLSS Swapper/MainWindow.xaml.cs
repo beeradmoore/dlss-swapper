@@ -100,6 +100,7 @@ namespace DLSS_Swapper
         {
             // Load from cache, or download if not found.
             var loadDlssRecrodsTask = LoadDLSSRecordsAsync();
+            var loadImportedDlssRecords = LoadImportedDLSSRecordsAsync();
 
             if (Settings.HasShownWorkInProgress == false)
             {
@@ -165,6 +166,11 @@ DLSS Swapper will close now.",
                 Close();
             }
 
+            await loadImportedDlssRecords;
+
+            FilterDLSSRecords();
+            //await App.CurrentApp.LoadLocalRecordsAsync();
+            App.CurrentApp.LoadLocalRecords();
 
             if (ShouldMigrate())
             {
@@ -235,6 +241,7 @@ Migration will not be attempted again on next launch.",
                 newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Experimental);
             }
 
+            newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords);
 
             newDlssRecordsList.Sort();
             CurrentDLSSRecords.Clear();
@@ -283,6 +290,30 @@ Migration will not be attempted again on next launch.",
             }
         }
 
+        internal async Task LoadImportedDLSSRecordsAsync()
+        {
+            var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            try
+            {
+                var importedDlssRecordsFile = await storageFolder.GetFileAsync("imported_dlss_records.json");
+                using (var stream = await importedDlssRecordsFile.OpenSequentialReadAsync())
+                {
+                    var items = await JsonSerializer.DeserializeAsync<List<DLSSRecord>>(stream.AsStreamForRead());
+                    UpdateImportedDLSSRecordsList(items);
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                // NOOP.
+                return;
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine($"LoadDLSSRecords Error: {err.Message}");
+                return;
+            }
+        }
+
         internal void UpdateDLSSRecordsList(DLSSRecords dlssRecords)
         {
             App.CurrentApp.DLSSRecords.Stable.Clear();
@@ -290,11 +321,12 @@ Migration will not be attempted again on next launch.",
 
             App.CurrentApp.DLSSRecords.Experimental.Clear();
             App.CurrentApp.DLSSRecords.Experimental.AddRange(dlssRecords.Experimental);
+        }
 
-            FilterDLSSRecords();
-
-            //await App.CurrentApp.LoadLocalRecordsAsync();
-            App.CurrentApp.LoadLocalRecords();
+        internal void UpdateImportedDLSSRecordsList(List<DLSSRecord> localDlssRecords)
+        {
+            App.CurrentApp.ImportedDLSSRecords.Clear();
+            App.CurrentApp.ImportedDLSSRecords.AddRange(localDlssRecords);
         }
 
         /// <summary>

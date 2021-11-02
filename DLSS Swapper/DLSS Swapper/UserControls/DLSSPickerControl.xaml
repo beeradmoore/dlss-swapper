@@ -14,6 +14,7 @@
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadingConverter" DesierdState="Downloading" />
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
         <converters:DLSSStateVisibilityConverter x:Key="IsNotFoundConverter" DesierdState="NotFound" />
+        <converters:DLSSStateVisibilityConverter x:Key="IsImportedConverter" DesierdState="Imported" />
     </UserControl.Resources>
 
     <Grid>
@@ -32,6 +33,9 @@
                         <ProgressRing Grid.Column="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsDownloadingConverter}}" Minimum="0" Maximum="100" IsIndeterminate="false" Value="{Binding LocalRecord.DownloadProgress}" HorizontalAlignment="Right" Width="20" Height="20"  />
 
                         <FontIcon Grid.Column="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsNotFoundConverter}}" HorizontalAlignment="Right" Glyph="&#xE896;" Width="20" Height="20" />
+
+                        <FontIcon Grid.Column="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsImportedConverter}}" HorizontalAlignment="Right" Glyph="&#xE7B8;" Width="20" Height="20" />
+                        
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

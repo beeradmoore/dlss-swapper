@@ -1,4 +1,4 @@
-using DLSS_Swapper.Data;
+﻿using DLSS_Swapper.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -23,17 +23,17 @@ namespace DLSS_Swapper.UserControls
     public sealed partial class DLSSPickerControl : UserControl
     {
         Game _game;
-        public List<DLSSRecord> DLSSRecords { get; }
+        public List<DLSSRecord> DLSSRecords { get; } = new List<DLSSRecord>();
 
         public DLSSPickerControl(Game game)
         {
             _game = game;
-            DLSSRecords = ((App)App.Current).MainWindow.CurrentDLSSRecords.ToList();
-
+            DLSSRecords.AddRange(App.CurrentApp.MainWindow.CurrentDLSSRecords);
 
             this.InitializeComponent();
             DataContext = this;
 
+            // TODO: If you select an imported DLSS 
             var detectedVersion = DLSSRecords.FirstOrDefault(v => v.MD5Hash == game.CurrentDLSSHash);
             if (detectedVersion == null)
             {

@@ -1,4 +1,4 @@
-using DLSS_Swapper.Data;
+﻿using DLSS_Swapper.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 using System;
@@ -54,6 +54,10 @@ namespace DLSS_Swapper.Converters
                     }
 
                     return true;
+                }
+                else if (DesierdState == "Imported")
+                {
+                    return localRecord.IsImported;
                 }
             }
             return false;

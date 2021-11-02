@@ -9,10 +9,12 @@ using Microsoft.UI.Xaml.Navigation;
 using MvvmHelpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -35,8 +37,7 @@ namespace DLSS_Swapper
         public static App CurrentApp => (App)Application.Current;
 
         internal DLSSRecords DLSSRecords { get; } = new DLSSRecords();
-        internal List<LocalRecord> LocalRecords { get; } = new List<LocalRecord>();
-        internal List<DLSSRecord> FilteredDLSSRecords { get; } = new List<DLSSRecord>();
+        internal List<DLSSRecord> ImportedDLSSRecords { get; } = new List<DLSSRecord>();
 
         internal HttpClient _httpClient = new HttpClient();
         public HttpClient HttpClient => _httpClient;
@@ -64,6 +65,7 @@ namespace DLSS_Swapper
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+
             _window = new MainWindow();
             _window.ExtendsContentIntoTitleBar = true;
             _window.SetTitleBar(_window.AppTitleBar);
@@ -71,26 +73,28 @@ namespace DLSS_Swapper
         }
 
 
-        internal void LoadLocalRecordFromDLSSRecord(DLSSRecord dlssRecord)
+        internal void LoadLocalRecordFromDLSSRecord(DLSSRecord dlssRecord, bool isImportedRecord = false)
         {
-            var expectedPath = Path.Combine("dlls", $"{dlssRecord.Version}_{dlssRecord.MD5Hash}", "nvngx_dlss.dll");
+            var dllsPath = isImportedRecord ? "imported_dlls" : "dlls";
+            var expectedPath = Path.Combine(dllsPath, $"{dlssRecord.Version}_{dlssRecord.MD5Hash}", "nvngx_dlss.dll");
             System.Diagnostics.Debug.WriteLine($"ExpectedPath: {expectedPath}");
             // Load record.
             var localRecord = LocalRecord.FromExpectedPath(expectedPath);
 
+            if (isImportedRecord)
+            {
+                localRecord.IsImported = true;
+                localRecord.IsDownloaded = true;
+            }
+
             // If the record exists we will update existing properties, if not we add it as new property.
-            var existingLocalRecord = LocalRecords.FirstOrDefault(x => x.Equals(localRecord));
-            if (existingLocalRecord == null)
+            if (dlssRecord.LocalRecord == null)
             {
                 dlssRecord.LocalRecord = localRecord;
-                LocalRecords.Add(localRecord);
             }
             else
             {
-                existingLocalRecord.UpdateFromNewLocalRecord(localRecord);
-
-                // Probably don't need to set this again.
-                dlssRecord.LocalRecord = existingLocalRecord;
+                dlssRecord.LocalRecord.UpdateFromNewLocalRecord(localRecord);
             }
         }
 
@@ -131,6 +135,10 @@ namespace DLSS_Swapper
             {
                 LoadLocalRecordFromDLSSRecord(dlssRecord);
             }
+            foreach (var dlssRecord in ImportedDLSSRecords)
+            {
+                LoadLocalRecordFromDLSSRecord(dlssRecord, true);
+            }
         }
 
 
@@ -152,5 +160,23 @@ namespace DLSS_Swapper
             await Task.WhenAll(tasks);
         }
         */
+
+
+
+        internal async Task<bool> SaveImportedDLSSRecordsAsync()
+        {
+            try
+            {
+                var importedDlssRecordsFile = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "imported_dlss_records.json");
+                var json = JsonSerializer.Serialize<List<DLSSRecord>>(App.CurrentApp.ImportedDLSSRecords);
+                await File.WriteAllTextAsync(importedDlssRecordsFile, json);
+                return true;
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine($"LoadDLSSRecords Error: {err.Message}");
+                return false;
+            }
+        }
     }
 }

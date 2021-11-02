@@ -10,6 +10,14 @@
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
+
+            <Style TargetType="FontIcon">
+                <Setter Property="FontFamily" Value ="/Assets/Fonts/Segoe-Fluent-Icons.ttf#Segoe Fluent Icons"/>
+            </Style>
+
+            <Style TargetType="FontIcon" x:Name="SagoeFluentIconsFontIcon">
+                <Setter Property="FontFamily" Value ="/Assets/Fonts/Segoe-Fluent-Icons.ttf#Segoe Fluent Icons"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows10.0.19041.0</TargetFramework>
@@ -15,6 +15,7 @@
     <PackageIconUrl />
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\Fonts\Segoe-Fluent-Icons.ttf" />
     <None Remove="Interfaces\InitialLoadingPage.xaml" />
     <None Remove="Pages\GameGridPage.xaml" />
     <None Remove="Pages\LibraryPage.xaml" />

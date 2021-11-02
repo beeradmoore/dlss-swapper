@@ -23,8 +23,16 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-            <AppBarButton Icon="Refresh" Label="Refresh" Click="RefreshButton_Click" />
-            <AppBarButton Icon="Filter" Label="Filter" Click="FilterButton_Click" />
+            <AppBarButton Label="Refresh" Click="RefreshButton_Click">
+                <AppBarButton.Content>
+                    <FontIcon Glyph="&#xE72C;" />
+                </AppBarButton.Content>
+            </AppBarButton>
+            <AppBarButton Icon="Filter" Label="Filter" Click="FilterButton_Click">
+                <AppBarButton.Content>
+                    <FontIcon Glyph="&#xE71C;" />
+                </AppBarButton.Content>
+            </AppBarButton>
         </StackPanel>
 
         <GridView Grid.Row="1" x:Name="MainGridView" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20"  >

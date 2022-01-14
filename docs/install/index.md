@@ -7,27 +7,27 @@ Downloading, installing, and trusting the signing certificate only needs to be d
 
 _NOTE: Only install and trust certificates from sources you trust_
 
-1. Download our [signing certificate](https://beeradmoore.github.io/dlss-swapper/downloads/dlss-swapper.cer). 
+1 - Download our [signing certificate](https://beeradmoore.github.io/dlss-swapper/downloads/dlss-swapper.cer). 
 
-2. Either double click the .cer file or right mouse click on it and select `Install Certificate`
+2 - Either double click the .cer file or right mouse click on it and select `Install Certificate`
 
-3. At the certificate prompt select `Install Certificate...`
+3 - At the certificate prompt select `Install Certificate...`
 
 ![Windows certificate summary showing that this certificate is currently not trusted](https://beeradmoore.github.io/dlss-swapper/images/install/certificate_1.png)
 
-4. Change `Store Location` to `Local Machine` and click `Next`
+4 - Change `Store Location` to `Local Machine` and click `Next`
 
 ![Certificate Import Wizard asking user what store location they want to us eto install the current certificate. Options being current user and local machine](https://beeradmoore.github.io/dlss-swapper/images/install/certificate_2.png)
 
-5. Select the option for `Place all certificates in the following store` and then click `Browse...`
+5 - Select the option for `Place all certificates in the following store` and then click `Browse...`
 
 ![Certificate Import Wizard asking user if they want to import the certificate into a certificate store based on what type of certificate it is or if you want to install them to a specific certificate store](https://beeradmoore.github.io/dlss-swapper/images/install/certificate_3.png)
 
-6. In the `Select Certificate Store` popup select `Trusted People` and then click `OK`. This will take you back to the screen displayed in step 5, click `Next`.
+6 - In the `Select Certificate Store` popup select `Trusted People` and then click `OK`. This will take you back to the screen displayed in step 5, click `Next`.
 
 ![Select Certificate Store window showing Trusted People is selected](https://beeradmoore.github.io/dlss-swapper/images/install/certificate_4.png)
 
-7. Your final certifcate import summary should look like this. Select `Finish` to install the certificate.
+7 - Your final certifcate import summary should look like this. Select `Finish` to install the certificate.
 
 ![Certificate Import Wizard showing the certificate store is selected by the user, is Trusted People, and Content is Certificate](https://beeradmoore.github.io/dlss-swapper/images/install/certificate_5.png)
 

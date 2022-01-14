@@ -9,7 +9,7 @@
   <Identity
     Name="cc5a0fee-f182-4d02-a177-3c2f002b4f34"
     Publisher="CN=dlss-swapper"
-    Version="0.9.6.0" />
+    Version="0.9.7.0" />
 
   <Properties>
     <DisplayName>DLSS Swapper</DisplayName>

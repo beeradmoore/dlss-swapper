@@ -60,8 +60,16 @@
                         DLSS Swapper is a tool that helps you to conveniently download, manage, and swap DLSS dlls allowing you to upgrade or downgrade DLSS version in a game without the game needing an update.
                     </Paragraph>
                     <Paragraph Margin="0,12,0,0">
-                        Source code:
-                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper">GitHub</Hyperlink>
+                        Github:
+                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper">beeradmoore/dlss-swapper</Hyperlink>
+                    </Paragraph>
+                    <Paragraph Margin="0,0,0,0">
+                        Twitter:
+                        <Hyperlink NavigateUri="https://twitter.com/dlss_swapper">@dlss_swapper</Hyperlink>
+                    </Paragraph>
+                    <Paragraph Margin="0,0,0,0">
+                        Reddit:
+                        <Hyperlink NavigateUri="https://www.reddit.com/r/DLSS_Swapper/">r/DLSS_Swapper</Hyperlink>
                     </Paragraph>
                 </RichTextBlock>
                 <TextBlock Margin="0,12,0,0">
@@ -75,22 +83,21 @@
                     Text="Contributors" />
                 <RichTextBlock Margin="0,12,0,0">
                     <Paragraph>
-                        Brad Moore (
-                        <Hyperlink NavigateUri="https://twitter.com/beeradmoore">@beeradmoore</Hyperlink> )
+                        Brad Moore ( <Hyperlink NavigateUri="https://twitter.com/beeradmoore">@beeradmoore</Hyperlink> )
                     </Paragraph>
                 </RichTextBlock>
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Report an problem" />
+                    Text="Report a problem" />
                 <RichTextBlock Margin="0,12,0,0">
                     <Paragraph>
                         You can report any problems on our
-                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub issues</Hyperlink> page
+                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub issues</Hyperlink> page.
                     </Paragraph>
                 </RichTextBlock>
-                
+
             </StackPanel>
         </ScrollViewer>
     </Grid>

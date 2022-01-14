@@ -22,7 +22,7 @@ Happy experimenting. As my old uni professor once said,
 
 > The good thing about computer [science] is we will never die wondering 'what if..?'
 
-Please feel free to Tweet your gaming experience with the #dlssswapper hashtag, or tag me ([@beeradmoore](https://twitter.com/beeradmoore)) directly.
+Please come and share your DLSS exprience over in [r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/).
 
 ## How do I get it?
 

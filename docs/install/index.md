@@ -33,16 +33,10 @@ _NOTE: Only install and trust certificates from sources you trust_
 
 
 ### Downloading Installer
-You can initiate a download from our dedicated [download page](https://beeradmoore.github.io/dlss-swapper/download/).
-
-Builds will also be uploaded to the [releases section](https://github.com/beeradmoore/dlss-swapper/releases) in our Github repository.
-
-They have an extension of .msixbundle, so don't be looking for .exe files.
+Builds will be uploaded to the [releases section](https://github.com/beeradmoore/dlss-swapper/releases) in our Github repository. Download `DLSS-Swapper.appinstaller` for the latest release.
 
 ### Running The Installer
-
-
-If all goes as planned clicking `Install` should be all you need to do. This will install any additional dependencies you require to run DLSS Swapper.
+If all goes as planned running `DLSS-Swapper.appinstaller` should be all you need to do. This will install any additional dependencies you require to run DLSS Swapper.
 
 ![Animated gif showing the user click install and then seeing the installing progress bar go from 0-100% and give the option for the user to then launch the application](https://beeradmoore.github.io/dlss-swapper/images/install/installer_1.gif)
 
@@ -50,7 +44,7 @@ If your installer says `Untrusted App` please review and re-attempt the steps fr
 
 ![Installer showing an error that it is not trusted](https://beeradmoore.github.io/dlss-swapper/images/install/installer_2.png)
 
-If you have any problems installing please check if someone has already reported a similar problem in the [issues section](https://github.com/beeradmoore/dlss-swapper/issues) on our Github repository. If that doesn't solve your problem please create a new issue so we can try get you up and running.
+If you have any problems installing please try install each of the `dependency-xxx.msix` files on the associated with that release. Then check if someone has already reported a similar problem in the [issues section](https://github.com/beeradmoore/dlss-swapper/issues) on our Github repository. If that doesn't solve your problem please create a new issue so we can try get you up and running.
 
 ### Updating
 DLSS Swapper has an silent updater built in. If a new build is available it will be downloaded and installed in the background. The next time you launch the app you will have an updated build.

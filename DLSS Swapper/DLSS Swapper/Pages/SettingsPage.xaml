@@ -83,7 +83,7 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Report an problem" />
+                    Text="Report a problem" />
                 <RichTextBlock Margin="0,12,0,0">
                     <Paragraph>
                         You can report any problems on our

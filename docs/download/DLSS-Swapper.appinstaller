@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <AppInstaller
 	Uri="https://beeradmoore.github.io/dlss-swapper/download/DLSS-Swapper.appinstaller"
-	Version="0.9.6.0" xmlns="http://schemas.microsoft.com/appx/appinstaller/2017/2">
+	Version="0.9.7.0" xmlns="http://schemas.microsoft.com/appx/appinstaller/2017/2">
 	<MainBundle
 		Name="cc5a0fee-f182-4d02-a177-3c2f002b4f34"
-		Version="0.9.6.0"
+		Version="0.9.7.0"
 		Publisher="CN=dlss-swapper"
-		Uri="https://github.com/beeradmoore/dlss-swapper/releases/download/v0.9.6.0/bundle-x64.msixbundle" />
+		Uri="https://github.com/beeradmoore/dlss-swapper/releases/download/v0.9.7.0/bundle-x64.msixbundle" />
 	<Dependencies>
 		<Package
 			Name="Microsoft.ProjectReunion.0.8"
 			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
 			ProcessorArchitecture="x64"
-			Uri="https://github.com/beeradmoore/dlss-swapper/releases/download/v0.9.6.0/dependency-Microsoft.ProjectReunion.0.8.msix"
+			Uri="https://github.com/beeradmoore/dlss-swapper/releases/download/v0.9.7.0/dependency-Microsoft.ProjectReunion.0.8.msix"
 			Version="8005.278.2204.0" />
 		<Package
 			Name="Microsoft.VCLibs.140.00.UWPDesktop"
 			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
 			ProcessorArchitecture="x64"
-			Uri="https://github.com/beeradmoore/dlss-swapper/releases/download/v0.9.6.0/dependency-Microsoft.VCLibs.x64.14.00.Desktop.appx"
+			Uri="https://github.com/beeradmoore/dlss-swapper/releases/download/v0.9.7.0/dependency-Microsoft.VCLibs.x64.14.00.Desktop.appx"
 			Version="14.0.30035.0" />
 		<Package
 			Name="Microsoft.VCLibs.140.00"
 			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
 			ProcessorArchitecture="x64"
-			Uri="https://github.com/beeradmoore/dlss-swapper/releases/download/v0.9.6.0/dependency-Microsoft.VCLibs.x64.14.00.appx"
+			Uri="https://github.com/beeradmoore/dlss-swapper/releases/download/v0.9.7.0/dependency-Microsoft.VCLibs.x64.14.00.appx"
 			Version="14.0.30035.0" />
 	</Dependencies>
 	<UpdateSettings>

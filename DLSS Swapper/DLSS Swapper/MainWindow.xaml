@@ -4,23 +4,66 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DLSS_Swapper"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    mc:Ignorable="d" >
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    >
 
-    <muxc:NavigationView x:Name="MainNavigationView"
-                         ItemInvoked="MainNavigationView_ItemInvoked" 
-                         IsSettingsVisible="false"
-                         PaneDisplayMode="LeftCompact"
-                         IsBackButtonVisible="Collapsed"                        
-                         Loaded="MainNavigationView_Loaded">
-        <muxc:NavigationView.MenuItems>
-            <muxc:NavigationViewItem Content="Games" Tag="Games">
-                <muxc:NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xE7FC;"/>
-                </muxc:NavigationViewItem.Icon>
-            </muxc:NavigationViewItem>
-            <muxc:NavigationViewItem Icon="Download" Content="Download" Tag="Download" />
-        </muxc:NavigationView.MenuItems>
-        <Frame x:Name="ContentFrame" />
-    </muxc:NavigationView>
+    <Grid MinWidth="400">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid x:Name="appTitleBar" Grid.Row="0" Padding="12,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Image
+                x:Name="AppFontIcon"
+                Width="16"
+                Height="16" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Source="/Images/Square44x44Logo.png" />
+            <TextBlock
+                x:Name="AppTitle"
+                Grid.Column="1"
+                Margin="20,0,0,0"
+                VerticalAlignment="Center"
+                Style="{StaticResource CaptionTextBlockStyle}"
+                Text="DLSS Swapper" />
+        </Grid>
+        
+
+        <muxc:NavigationView Grid.Row="1" x:Name="MainNavigationView"
+                             ItemInvoked="MainNavigationView_ItemInvoked" 
+                             PaneDisplayMode="LeftCompact"
+                             IsBackButtonVisible="Collapsed"      
+                             Loaded="MainNavigationView_Loaded">
+            <muxc:NavigationView.MenuItems>
+                <muxc:NavigationViewItem Content="Games" Tag="Games">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE7FC;"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItem Icon="Library" Content="Library" Tag="Library" />
+            </muxc:NavigationView.MenuItems>
+            <Frame x:Name="ContentFrame" />
+        </muxc:NavigationView>
+
+        <Grid x:Name="LoadingStackPanel" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RowSpacing="10" Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <muxc:ProgressRing Grid.Row="0" x:Name="LoadingProgressRing" IsActive="True" Width="60" Height="60" IsIndeterminate="true" VerticalAlignment="Bottom" />
+            <TextBlock Grid.Row="1" x:Name="LoadingProgressText" VerticalAlignment="Top" Text="Loading" HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" />
+
+        </Grid>
+    </Grid>
 </Window>

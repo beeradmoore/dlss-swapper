@@ -11,6 +11,14 @@ namespace DLSS_Swapper.Data
 {
     class SteamLibrary : IGameLibrary
     {
+        public string Name => "Steam";
+
+        List<Game> _loadedGames = new List<Game>();
+        public List<Game> LoadedGames { get { return _loadedGames; } }
+
+        List<Game> _loadedDLSSGames = new List<Game>();
+        public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
+
         public bool IsInstalled()
         {
             return (GetInstallPath() != null);
@@ -18,6 +26,9 @@ namespace DLSS_Swapper.Data
 
         public async Task<List<Game>> ListGamesAsync()
         {
+            _loadedGames.Clear();
+            _loadedDLSSGames.Clear();
+
             // If we don't detect a steam install patg return an empty list.
             var installPath = GetInstallPath();
             if (String.IsNullOrWhiteSpace(installPath))
@@ -39,7 +50,7 @@ namespace DLSS_Swapper.Data
                 var baseSteamAppsFolder = Path.Combine(installPath, "steamapps");
 
                 var libraryFolders = new List<string>();
-                libraryFolders.Add(baseSteamAppsFolder);
+                libraryFolders.Add(Helpers.PathHelpers.NormalizePath(baseSteamAppsFolder));
 
                 var libraryFoldersFile = Path.Combine(baseSteamAppsFolder, "libraryfolders.vdf");
                 if (File.Exists(libraryFoldersFile))
@@ -58,7 +69,7 @@ namespace DLSS_Swapper.Data
                                 var path = match.Groups["path"].ToString();
                                 if (Directory.Exists(path))
                                 {
-                                    libraryFolders.Add(Path.Combine(path, "steamapps"));
+                                    libraryFolders.Add(Helpers.PathHelpers.NormalizePath(Path.Combine(path, "steamapps")));
                                 }
                             }
                         }
@@ -69,6 +80,9 @@ namespace DLSS_Swapper.Data
                         System.Diagnostics.Debug.WriteLine($"ERROR: Unable to parse libraryfolders.vdf, {err.Message}");
                     }
                 }
+
+                // Makes sure all library folders are unique.
+                libraryFolders = libraryFolders.Distinct().ToList();
 
                 foreach (var libraryFolder in libraryFolders)
                 {
@@ -85,6 +99,9 @@ namespace DLSS_Swapper.Data
                         }
                     }
                 }
+                games.Sort();
+                _loadedGames.AddRange(games);
+                _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));
 
                 return games;
             });
@@ -143,7 +160,7 @@ namespace DLSS_Swapper.Data
                 {
                     return null;
                 }
-                game.HeaderImage = $"https://steamcdn-a.akamaihd.net/steam/apps/{matches[0].Groups["appid"] }/library_600x900_2x.jpg"; // header.jpg";
+                game.HeaderImage = $"https://steamcdn-a.akamaihd.net/steam/apps/{matches[0].Groups["appid"]}/library_600x900_2x.jpg"; // header.jpg";
 
                 game.DetectDLSS();
                 return game;

@@ -1,0 +1,104 @@
+﻿<Page
+    x:Class="DLSS_Swapper.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DLSS_Swapper.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    NavigationCacheMode="Required"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <ScrollViewer Grid.Row="0">
+            <StackPanel HorizontalAlignment="Left" Padding="56,0,56,56">
+
+                <TextBlock 
+                    Text="Settings"
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    Margin="0,12,0,0" />
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Theme Mode" />
+                <StackPanel x:Name="ThemePanel" Margin="0,10,0,0">
+                    <RadioButton x:Name="LightThemeRadioButton" GroupName="ThemeGroup" Tag="Light" Checked="ThemeRadioButton_Checked" Content="Light" />
+                    <RadioButton x:Name="DarkThemeRadioButton" GroupName="ThemeGroup" Tag="Dark" Checked="ThemeRadioButton_Checked" Content="Dark" />
+                    <RadioButton x:Name="DefaultThemeRadioButton" GroupName="ThemeGroup" Tag="Default" Checked="ThemeRadioButton_Checked" Content="Use system setting" />
+                </StackPanel>
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Allow Untrusted" />
+                <StackPanel Margin="0,10,0,0">
+                    <ToggleSwitch x:Name="AllowUntrustedToggleSwitch" Toggled="AllowUntrusted_Toggled" OffContent="No" OnContent="Yes" Margin="0,0,0,4"/>
+                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
+                        DLSS dlls are checked if they are trusted in Windows by validating the signature before being swapped into a game folder. If a dll fails signature validation then it will not be used. It is recommended to keep this off as the only known DLSS dlls to fail signature validation are 1.0.11 and 1.0.13.
+                    </TextBlock>
+                </StackPanel>
+
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Allow Experimental" />
+                <StackPanel Margin="0,10,0,0">
+                    <ToggleSwitch x:Name="AllowExperimentalToggleSwitch" Toggled="AllowExperimental_Toggled" OffContent="No" OnContent="Yes" Margin="0,0,0,4"/>
+                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
+                        Experimental DLSS models are sometimes released by NVIDIA for testing. You can find more information about this on the <Hyperlink NavigateUri="https://developer.nvidia.com/dlss/research">DLSS research page</Hyperlink>.
+                    </TextBlock>
+                </StackPanel>
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="About" />
+                <RichTextBlock Margin="0,12,0,0">
+                    <Paragraph>
+                        DLSS Swapper is a tool that helps you to conveniently download, manage, and swap DLSS dlls allowing you to upgrade or downgrade DLSS version in a game without the game needing an update.
+                    </Paragraph>
+                    <Paragraph Margin="0,12,0,0">
+                        Github:
+                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper">beeradmoore/dlss-swapper</Hyperlink>
+                    </Paragraph>
+                    <Paragraph Margin="0,0,0,0">
+                        Twitter:
+                        <Hyperlink NavigateUri="https://twitter.com/dlss_swapper">@dlss_swapper</Hyperlink>
+                    </Paragraph>
+                    <Paragraph Margin="0,0,0,0">
+                        Reddit:
+                        <Hyperlink NavigateUri="https://www.reddit.com/r/DLSS_Swapper/">r/DLSS_Swapper</Hyperlink>
+                    </Paragraph>
+                </RichTextBlock>
+                <TextBlock Margin="0,12,0,0">
+                    Version: 
+                    <Run Text="{x:Bind Version}" />
+                </TextBlock>
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Contributors" />
+                <RichTextBlock Margin="0,12,0,0">
+                    <Paragraph>
+                        Brad Moore ( <Hyperlink NavigateUri="https://twitter.com/beeradmoore">@beeradmoore</Hyperlink> )
+                    </Paragraph>
+                </RichTextBlock>
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Report a problem" />
+                <RichTextBlock Margin="0,12,0,0">
+                    <Paragraph>
+                        You can report any problems on our
+                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub issues</Hyperlink> page.
+                    </Paragraph>
+                </RichTextBlock>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

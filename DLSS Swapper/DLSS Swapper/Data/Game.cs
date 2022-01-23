@@ -1,4 +1,5 @@
-﻿using System;
+using DLSS_Swapper.Extensions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -45,6 +46,39 @@ namespace DLSS_Swapper.Data
                 }
             }
         }
+
+        string _currentDLSSHash;
+        public string CurrentDLSSHash
+        {
+            get { return _currentDLSSHash; }
+            set
+            {
+                if (_currentDLSSHash != value)
+                {
+                    _currentDLSSHash = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        string _baseDLSSHash;
+        public string BaseDLSSHash
+        {
+            get { return _baseDLSSHash; }
+            set
+            {
+                if (_baseDLSSHash != value)
+                {
+                    _baseDLSSHash = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+
+
+
+
         public bool HasDLSS { get; set; }
 
         public void DetectDLSS()
@@ -62,7 +96,8 @@ namespace DLSS_Swapper.Data
                 foreach (var dlssDll in dlssDlls)
                 {
                     var dllVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
-                    CurrentDLSSVersion = dllVersionInfo.FileVersion.Replace(",", ".");
+                    CurrentDLSSVersion = dllVersionInfo.GetFormattedFileVersion();
+                    CurrentDLSSHash = dllVersionInfo.GetMD5Hash();
                     break;
                 }
 
@@ -72,7 +107,8 @@ namespace DLSS_Swapper.Data
                     foreach (var dlssDll in dlssDlls)
                     {
                         var dllVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
-                        BaseDLSSVersion = dllVersionInfo.FileVersion.Replace(",", ".");
+                        BaseDLSSVersion = dllVersionInfo.GetFormattedFileVersion();
+                        BaseDLSSHash = dllVersionInfo.GetMD5Hash();
                         break;
                     }
                 }
@@ -115,9 +151,9 @@ namespace DLSS_Swapper.Data
             return true;
         }
 
-        internal bool UpdateDll(LocalDll localDll)
+        internal bool UpdateDll(DLSSRecord dlssRecord)
         {
-            if (localDll == null)
+            if (dlssRecord == null)
             {
                 return false;
             }
@@ -127,9 +163,21 @@ namespace DLSS_Swapper.Data
             {
                 return false;
             }
-            
-            var versionInfo = FileVersionInfo.GetVersionInfo(localDll.Filename);
-            var targetDllVersion = $"{versionInfo.FileMajorPart}.{versionInfo.FileMinorPart}.{versionInfo.FileBuildPart}.{versionInfo.FilePrivatePart}";
+
+
+            var newDllPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, dlssRecord.LocalRecord.ExpectedPath);
+
+            // Validate new DLL
+            if (Settings.AllowUntrusted == false)
+            {
+                bool isTrusted = WinTrust.VerifyEmbeddedSignature(newDllPath);
+                if (isTrusted == false)
+                {
+                    return false;
+                }
+            }
+
+
 
             var baseDllVersion = String.Empty;
 
@@ -155,11 +203,13 @@ namespace DLSS_Swapper.Data
                 }
             }
 
+
+
             foreach (var dll in foundDlls)
             {
                 try
                 {
-                    File.Copy(localDll.Filename, dll, true);
+                    File.Copy(newDllPath, dll, true);
                 }
                 catch (Exception err)
                 {
@@ -168,11 +218,12 @@ namespace DLSS_Swapper.Data
                 }
             }
 
-            CurrentDLSSVersion = targetDllVersion;
+            CurrentDLSSVersion = dlssRecord.Version;
             if (String.IsNullOrEmpty(baseDllVersion) == false)
             {
                 BaseDLSSVersion = baseDllVersion;
             }
+
             return true;
         }
 

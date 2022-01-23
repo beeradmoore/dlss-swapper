@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml;
+using Humanizer;
 using Microsoft.UI.Xaml.Data;
 using System;
 using System.Collections.Generic;
@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Converters
 {
-    class InverseBoolToVisibleConverter : IValueConverter
+    class BytesToMegaBytesConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is Boolean boolValue)
+
+            if (value is long bytes)
             {
-                return boolValue ? Visibility.Collapsed : Visibility.Visible;
+                return bytes.Bytes().Humanize("mb");
             }
 
-            return Visibility.Collapsed;
+            return String.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

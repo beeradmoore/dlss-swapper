@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MvvmHelpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,35 +18,36 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace DLSS_Swapper.Pages
+namespace DLSS_Swapper.UserControls
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class DLSSPickerPage : Page
+    public sealed partial class DLSSPickerControl : UserControl
     {
         Game _game;
-        public List<LocalDll> LocalDlls { get; } = new List<LocalDll>();
+        public List<DLSSRecord> DLSSRecords { get; } = new List<DLSSRecord>();
 
-        public DLSSPickerPage(Game game, List<LocalDll> localDlls)
+        public DLSSPickerControl(Game game)
         {
             _game = game;
-            LocalDlls.AddRange(localDlls);
-            
+            DLSSRecords.AddRange(App.CurrentApp.MainWindow.CurrentDLSSRecords);
+
             this.InitializeComponent();
             DataContext = this;
 
-            var detectedVersion = LocalDlls.FirstOrDefault(v => v.Version == game.CurrentDLSSVersion);
-            if (detectedVersion != null)
+            // TODO: If you select an imported DLSS 
+            var detectedVersion = DLSSRecords.FirstOrDefault(v => v.MD5Hash == game.CurrentDLSSHash);
+            if (detectedVersion == null)
             {
-                VersionComboBox.SelectedItem = detectedVersion;
+
             }
-            //_game.CurrentDLSSVersion
+            else
+            {
+                DLSSRecordsListView.SelectedItem = detectedVersion;
+            }
         }
 
-        internal LocalDll GetSelectedLocalDll()
+        internal DLSSRecord GetSelectedDLSSRecord()
         {
-            return (VersionComboBox.SelectedItem as LocalDll);
+            return DLSSRecordsListView.SelectedItem as DLSSRecord;
         }
     }
 }

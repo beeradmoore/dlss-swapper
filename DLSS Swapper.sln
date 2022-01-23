@@ -9,44 +9,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLSS Swapper", "DLSS Swappe
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|arm64 = Debug|arm64
 		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|arm64 = Release|arm64
 		Release|x64 = Release|x64
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Debug|arm64.ActiveCfg = Debug|arm64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Debug|arm64.Build.0 = Debug|arm64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Debug|arm64.Deploy.0 = Debug|arm64
 		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Debug|x64.ActiveCfg = Debug|x64
 		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Debug|x64.Build.0 = Debug|x64
 		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Debug|x64.Deploy.0 = Debug|x64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Debug|x86.ActiveCfg = Debug|x86
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Debug|x86.Build.0 = Debug|x86
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Debug|x86.Deploy.0 = Debug|x86
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release|arm64.ActiveCfg = Release|arm64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release|arm64.Build.0 = Release|arm64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release|arm64.Deploy.0 = Release|arm64
 		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release|x64.ActiveCfg = Release|x64
 		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release|x64.Build.0 = Release|x64
 		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release|x64.Deploy.0 = Release|x64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release|x86.ActiveCfg = Release|x86
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release|x86.Build.0 = Release|x86
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release|x86.Deploy.0 = Release|x86
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Debug|arm64.ActiveCfg = Debug|arm64
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Debug|arm64.Build.0 = Debug|arm64
 		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Debug|x64.ActiveCfg = Debug|x64
 		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Debug|x64.Build.0 = Debug|x64
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Debug|x86.ActiveCfg = Debug|x86
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Debug|x86.Build.0 = Debug|x86
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Release|arm64.ActiveCfg = Release|arm64
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Release|arm64.Build.0 = Release|arm64
 		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Release|x64.ActiveCfg = Release|x64
 		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Release|x64.Build.0 = Release|x64
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Release|x86.ActiveCfg = Release|x86
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

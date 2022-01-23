@@ -9,6 +9,7 @@
     xmlns:data="using:DLSS_Swapper.Data"
     mc:Ignorable="d"
     Loaded="Page_Loaded"
+    NavigationCacheMode="Required"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
@@ -17,14 +18,48 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <GridView x:Name="MainGridView" ItemsSource="{Binding Games}" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20"  >
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <AppBarButton Label="Refresh" Click="RefreshButton_Click">
+                <AppBarButton.Content>
+                    <FontIcon Glyph="&#xE72C;" />
+                </AppBarButton.Content>
+            </AppBarButton>
+            <AppBarButton Icon="Filter" Label="Filter" Click="FilterButton_Click">
+                <AppBarButton.Content>
+                    <FontIcon Glyph="&#xE71C;" />
+                </AppBarButton.Content>
+            </AppBarButton>
+        </StackPanel>
+
+        <GridView Grid.Row="1" x:Name="MainGridView" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20"  >
+            <GridView.GroupStyle>
+                <GroupStyle HidesIfEmpty="True">
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0">
+                                <TextBlock Text="{Binding Name}" Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </GridView.GroupStyle>
+
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="8"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </GridView.ItemContainerStyle>
 
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:Game">
-                    <Grid Width="200" ColumnSpacing="0" RowSpacing="0" Margin="0,0,10,10">
+                    <Grid Width="200" Height="300" ColumnSpacing="0" RowSpacing="0" Margin="0" Background="Black">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
@@ -33,9 +68,9 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="{Binding Title}" Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Text="{Binding Title}" Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
 
-                        <Image Width="200" Height="300" Grid.RowSpan="2" Source="{Binding HeaderImage}"  />
+                        <Image Width="200" Height="300" Grid.RowSpan="2" Source="{Binding HeaderImage}" />
 
                         <Grid VerticalAlignment="Bottom"  Background="#88000000" Padding="8" ColumnSpacing="8">
 
@@ -48,17 +83,20 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Column="0" FontWeight="Bold" Text="DLSS" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSSVersion}" VerticalAlignment="Center" HorizontalAlignment="Right"  />
+                            <TextBlock Grid.Column="0" FontWeight="Bold" Text="DLSS" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" />
+                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSSVersion}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" />
                         </Grid>
                     </Grid>
                 </DataTemplate>
 
             </GridView.ItemTemplate>
         </GridView>
-        <Grid x:Name="LoadingStackPanel" Background="Black" >
-            <muxc:ProgressRing IsActive="True"  Width="60" Height="60" />
+
+        <Grid x:Name="LoadingStackPanel" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <!--SystemControlAcrylicElementBrush-->
+            <muxc:ProgressRing IsActive="True" Width="60" Height="60" />
         </Grid>
+
     </Grid>
-    
+
 </Page>

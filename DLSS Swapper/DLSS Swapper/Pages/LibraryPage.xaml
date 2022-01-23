@@ -1,0 +1,146 @@
+﻿<Page
+    x:Class="DLSS_Swapper.Pages.LibraryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DLSS_Swapper.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:data="using:DLSS_Swapper.Data" xmlns:ct_converters="using:CommunityToolkit.WinUI.UI.Converters" xmlns:converters="using:DLSS_Swapper.Converters"
+    mc:Ignorable="d"    
+    NavigationCacheMode="Required"
+    x:Name="thisPage"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <converters:DLSSStateVisibilityConverter x:Key="IsDownloadingConverter" DesierdState="Downloading" />
+        <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
+        <converters:DLSSStateVisibilityConverter x:Key="IsNotFoundConverter" DesierdState="NotFound" />
+        <converters:DLSSStateVisibilityConverter x:Key="IsLocalConverter" DesierdState="Imported" />
+        <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Page.Resources>
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Padding="16,0,16,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Library" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <AppBarButton HorizontalAlignment="Right"  Label="Import" Command="{Binding ImportCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE8B5;"  />
+                    </AppBarButton.Content>
+                </AppBarButton>
+                <AppBarButton HorizontalAlignment="Right" Label="Export All" Command="{Binding ExportAllCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xEDE1;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+                <AppBarButton HorizontalAlignment="Right" Label="Refresh" Command="{Binding RefreshCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE72C;"  />
+                    </AppBarButton.Content>
+                </AppBarButton>
+            </StackPanel>
+        </Grid>
+
+
+        <GridView Grid.Row="1" x:Name="MainGridView" ItemsSource="{Binding CurrentDLSSRecords}" SizeChanged="MainGridView_SizeChanged" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Margin="16">
+
+
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="8"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </GridView.ItemContainerStyle>
+
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="data:DLSSRecord">
+                    <Grid BorderThickness="0" Padding="8" ColumnSpacing="8" RowSpacing="8" Background="{ThemeResource SolidBackgroundFillColorBase}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="{Binding FullName}" HorizontalAlignment="Stretch" ToolTipService.ToolTip="{Binding FullName}" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="NoWrap" />
+
+                        <!-- Imported -->
+                        <StackPanel Grid.Row="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsLocalConverter}}" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Left">
+                            <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE7B8;" ToolTipService.ToolTip="Imported" />
+                        </StackPanel>
+
+                        <!-- Not downloaded -->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right" Visibility="{Binding LocalRecord, Converter={StaticResource IsNotFoundConverter}}">
+
+                            <Button ToolTipService.ToolTip="Download Error" Visibility="{Binding LocalRecord.HasDownloadError, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding ElementName=thisPage, Path=ShowDownloadErrorCommand}" CommandParameter="{x:Bind }">
+                                <Button.Content>
+                                    <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE783;"/>
+                                </Button.Content>
+                            </Button>
+
+                            <Button ToolTipService.ToolTip="Download" Command="{Binding ElementName=thisPage, Path=DownloadRecordCommand}" CommandParameter="{x:Bind }">
+                                <Button.Content>
+                                    <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE896;"/>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+                        <!-- Downloading -->
+                        <Grid Grid.Row="1" ColumnSpacing="8" Visibility="{Binding LocalRecord, Converter={StaticResource IsDownloadingConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <ProgressBar Grid.Column="0" Minimum="0" Maximum="100" Value="{Binding LocalRecord.DownloadProgress}" VerticalAlignment="Center" />
+                            <Button Grid.Column="1" ToolTipService.ToolTip="Cancel" Command="{Binding ElementName=thisPage, Path=CancelDownloadRecordCommand}" CommandParameter="{x:Bind }">
+                                <Button.Content>
+                                    <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE711;"/>
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+
+                        <!-- Downloaded -->
+                        <StackPanel Grid.Row="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsDownloadedConverter}}" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+                            <Button ToolTipService.ToolTip="Export" Command="{Binding ElementName=thisPage, Path=ExportRecordCommand}" CommandParameter="{x:Bind }">
+                                <Button.Content>
+                                    <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xEDE1;"/>
+                                </Button.Content>
+                            </Button>
+                            <Button ToolTipService.ToolTip="Delete" Command="{Binding ElementName=thisPage, Path=DeleteRecordCommand}" CommandParameter="{x:Bind }">
+                                <Button.Content>
+                                    <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE74D;"/>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+                    </Grid>
+                </DataTemplate>
+
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+</Page>

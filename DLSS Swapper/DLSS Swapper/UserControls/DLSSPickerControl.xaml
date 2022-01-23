@@ -1,0 +1,51 @@
+<UserControl
+    x:Class="DLSS_Swapper.UserControls.DLSSPickerControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DLSS_Swapper.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:DLSS_Swapper.Data"
+    xmlns:ct_converters="using:CommunityToolkit.WinUI.UI.Converters"
+    xmlns:converters="using:DLSS_Swapper.Converters"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converters:DLSSStateVisibilityConverter x:Key="IsDownloadingConverter" DesierdState="Downloading" />
+        <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
+        <converters:DLSSStateVisibilityConverter x:Key="IsNotFoundConverter" DesierdState="NotFound" />
+        <converters:DLSSStateVisibilityConverter x:Key="IsImportedConverter" DesierdState="Imported" />
+    </UserControl.Resources>
+
+    <Grid>
+
+        <ListView x:Name="DLSSRecordsListView" ItemsSource="{Binding DLSSRecords}" MaxHeight="400">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:DLSSRecord">
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="{Binding FullName}" />
+
+                        <ProgressRing Grid.Column="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsDownloadingConverter}}" ToolTipService.ToolTip="Downloading" Minimum="0" Maximum="100" IsIndeterminate="false" Value="{Binding LocalRecord.DownloadProgress}" HorizontalAlignment="Right" Width="20" Height="20"  />
+
+                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsNotFoundConverter}}" ToolTipService.ToolTip="Requires download" HorizontalAlignment="Right" Glyph="&#xE896;" Width="20" Height="20" />
+
+                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsImportedConverter}}" ToolTipService.ToolTip="Imported" HorizontalAlignment="Right" Glyph="&#xE7B8;" Width="20" Height="20" />
+                        
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+    </Grid>
+</UserControl>

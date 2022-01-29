@@ -85,12 +85,12 @@ namespace DLSS_Swapper.Data
         {
             BaseDLSSVersion = String.Empty;
             CurrentDLSSVersion = "N/A";
-            System.Diagnostics.Debug.WriteLine($"Before first Directory.GetFiles for {Title}");
+
             var enumerationOptions = new EnumerationOptions();
             enumerationOptions.RecurseSubdirectories = true;
             enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
             var dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
-            System.Diagnostics.Debug.WriteLine($"After first Directory.GetFiles for {Title}");
+
             if (dlssDlls.Length > 0)
             {
                 HasDLSS = true;

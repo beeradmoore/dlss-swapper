@@ -83,7 +83,9 @@
                     Text="Contributors" />
                 <RichTextBlock Margin="0,12,0,0">
                     <Paragraph>
-                        Brad Moore ( <Hyperlink NavigateUri="https://twitter.com/beeradmoore">@beeradmoore</Hyperlink> )
+                        <Hyperlink NavigateUri="https://github.com/beeradmoore">Brad Moore</Hyperlink> (<Hyperlink NavigateUri="https://twitter.com/beeradmoore">@beeradmoore</Hyperlink>)
+                        <LineBreak />
+                        <Hyperlink NavigateUri="https://github.com/tamodolo">tamodolo</Hyperlink>
                     </Paragraph>
                 </RichTextBlock>
 

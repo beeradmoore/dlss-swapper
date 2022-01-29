@@ -85,7 +85,12 @@ namespace DLSS_Swapper.Data
         {
             BaseDLSSVersion = String.Empty;
             CurrentDLSSVersion = "N/A";
-            var dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", SearchOption.AllDirectories);
+
+            var enumerationOptions = new EnumerationOptions();
+            enumerationOptions.RecurseSubdirectories = true;
+            enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
+            var dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
+
             if (dlssDlls.Length > 0)
             {
                 HasDLSS = true;
@@ -101,7 +106,7 @@ namespace DLSS_Swapper.Data
                     break;
                 }
 
-                dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll.dlsss", SearchOption.AllDirectories);
+                dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll.dlsss", enumerationOptions);
                 if (dlssDlls.Length > 0)
                 {
                     foreach (var dlssDll in dlssDlls)
@@ -121,7 +126,10 @@ namespace DLSS_Swapper.Data
 
         internal bool ResetDll()
         {
-            var foundDllBackups = Directory.GetFiles(InstallPath, "nvngx_dlss.dll.dlsss", SearchOption.AllDirectories);
+            var enumerationOptions = new EnumerationOptions();
+            enumerationOptions.RecurseSubdirectories = true;
+            enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
+            var foundDllBackups = Directory.GetFiles(InstallPath, "nvngx_dlss.dll.dlsss", enumerationOptions);
             if (foundDllBackups.Length == 0)
             {
                 return false;
@@ -157,8 +165,10 @@ namespace DLSS_Swapper.Data
             {
                 return false;
             }
-
-            var foundDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", SearchOption.AllDirectories);
+            var enumerationOptions = new EnumerationOptions();
+            enumerationOptions.RecurseSubdirectories = true;
+            enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
+            var foundDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
             if (foundDlls.Length == 0)
             {
                 return false;

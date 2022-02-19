@@ -30,13 +30,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AsyncAwaitBestPractices" Version="6.0.2" />
-    <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="6.0.2" />
+    <PackageReference Include="AsyncAwaitBestPractices" Version="6.0.4" />
+    <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="6.0.4" />
     <PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.0.3" />
-    <PackageReference Include="Humanizer" Version="2.11.10" />
-    <PackageReference Include="Microsoft.ProjectReunion" Version="0.8.5" />
-    <PackageReference Include="Microsoft.ProjectReunion.Foundation" Version="0.8.5" />
-    <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.5" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.Markdown" Version="7.0.3" />
+    <PackageReference Include="Humanizer" Version="2.14.1" />
+    <PackageReference Include="Microsoft.ProjectReunion" Version="0.8.6" />
+    <PackageReference Include="Microsoft.ProjectReunion.Foundation" Version="0.8.6" />
+    <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.6" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <Manifest Include="$(ApplicationManifest)" />

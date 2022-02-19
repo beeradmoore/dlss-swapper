@@ -42,7 +42,7 @@ namespace DLSS_Swapper
 
         public MainWindow()
         {
-            Title = "DLSS Swapper [beta]";
+            Title = "DLSS Swapper";
             this.InitializeComponent();
             NavigationView = MainNavigationView;
 

@@ -127,20 +127,6 @@ namespace DLSS_Swapper
             }
         }
 
-        static bool _migrationAttempted = false;
-        public static bool MigrationAttempted
-        {
-            get { return _migrationAttempted; }
-            set
-            {
-                if (_migrationAttempted != value)
-                {
-                    _migrationAttempted = value;
-                    ApplicationData.Current.LocalSettings.Values["MigrationAttempted"] = value;
-                }
-            }
-        }
-
 
         static ulong _lastPromptWasForVersion = 0L;
         public static ulong LastPromptWasForVersion
@@ -222,14 +208,6 @@ namespace DLSS_Swapper
                 if (tempLastRecordsRefresh is DateTimeOffset lastRecordsRefresh)
                 {
                     _lastRecordsRefresh = lastRecordsRefresh;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("MigrationAttempted", out object tempMigrationAttempted))
-            {
-                if (tempMigrationAttempted is bool migrationAttempted)
-                {
-                    _migrationAttempted = migrationAttempted;
                 }
             }
 

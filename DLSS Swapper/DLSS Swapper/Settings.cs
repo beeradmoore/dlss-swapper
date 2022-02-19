@@ -26,21 +26,6 @@ namespace DLSS_Swapper
         }
 
 
-        static bool _hasShownWorkInProgress = false;
-        public static bool HasShownWorkInProgress
-        {
-            get { return _hasShownWorkInProgress; }
-            set
-            {
-                if (_hasShownWorkInProgress != value)
-                {
-                    _hasShownWorkInProgress = value;
-                    ApplicationData.Current.LocalSettings.Values["HasShownWorkInProgress"] = value;
-                }
-            }
-        }
-
-
         static bool _hideNonDLSSGames = true;
         public static bool HideNonDLSSGames
         {
@@ -152,14 +137,6 @@ namespace DLSS_Swapper
                 if (tempHasShownWarning is bool hasShownWarning)
                 {
                     _hasShownWarning = hasShownWarning;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("HasShownWorkInProgress", out object tempHasShownWorkInProgress))
-            {
-                if (tempHasShownWorkInProgress is bool hasShownWorkInProgress)
-                {
-                    _hasShownWorkInProgress = hasShownWorkInProgress;
                 }
             }
 

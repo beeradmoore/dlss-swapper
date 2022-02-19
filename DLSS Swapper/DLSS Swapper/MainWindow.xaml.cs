@@ -118,28 +118,6 @@ namespace DLSS_Swapper
             var loadDlssRecrodsTask = LoadDLSSRecordsAsync();
             var loadImportedDlssRecords = LoadImportedDLSSRecordsAsync();
 
-            if (Settings.HasShownWorkInProgress == false)
-            {
-                var dialog = new ContentDialog()
-                {
-                    Title = "Work in Progress - Please Read",
-                    CloseButtonText = "Okay",
-                    Content = @"DLSS Swapper not complete. This is an early beta, as such it may be somewhat confusing and not user friendly in its operation. 
-
-For more details on how to use the tool please see the 'Usage' section of our site.",
-                    PrimaryButtonText = "View Usage",
-                    XamlRoot = MainNavigationView.XamlRoot,
-                };
-                var didClick = await dialog.ShowAsync();
-
-                Settings.HasShownWorkInProgress = true;
-
-                if (didClick == ContentDialogResult.Primary)
-                {
-                    await Launcher.LaunchUriAsync(new Uri("https://beeradmoore.github.io/dlss-swapper/usage/"));
-                }
-            }
-
             if (Settings.HasShownWarning == false)
             {
                 var dialog = new ContentDialog()

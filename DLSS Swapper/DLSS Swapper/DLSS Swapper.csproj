@@ -13,6 +13,10 @@
     <Company>beeradmoore</Company>
     <PackageIcon></PackageIcon>
     <PackageIconUrl />
+    <Configurations>Debug;Release;Release_WindowsStore</Configurations>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WindowsStore|x64'">
+    <Optimize>True</Optimize>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\Fonts\Segoe-Fluent-Icons.ttf" />

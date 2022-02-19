@@ -36,6 +36,12 @@ namespace DLSS_Swapper
 
         public static App CurrentApp => (App)Application.Current;
 
+#if RELEASE_WINDOWSSTORE
+        public const bool IsWindowsStoreBuild = true;
+#else
+        public const bool IsWindowsStoreBuild = false;
+#endif
+
         internal DLSSRecords DLSSRecords { get; } = new DLSSRecords();
         internal List<DLSSRecord> ImportedDLSSRecords { get; } = new List<DLSSRecord>();
 

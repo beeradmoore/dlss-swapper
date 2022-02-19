@@ -1,15 +1,19 @@
-﻿using Microsoft.UI.Xaml;
+﻿using CommunityToolkit.WinUI.UI.Controls;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MvvmHelpers.Commands;
+using MvvmHelpers.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
@@ -30,13 +34,32 @@ namespace DLSS_Swapper.Pages
             get
             {
                 var version = Windows.ApplicationModel.Package.Current.Id.Version;
-                return String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+                return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+            }
+        }
+
+        private AsyncCommand _checkForUpdateCommand;
+        public AsyncCommand CheckForUpdatesCommand => _checkForUpdateCommand ??= new AsyncCommand(CheckForUpdatesAsync, _=> !IsCheckingForUpdates);
+
+        bool _isCheckingForUpdates;
+        public bool IsCheckingForUpdates
+        {
+            get => _isCheckingForUpdates;
+            set
+            {
+                if (_isCheckingForUpdates != value)
+                {
+                    _isCheckingForUpdates = value;
+                    CheckForUpdatesCommand.RaiseCanExecuteChanged();
+                }
             }
         }
 
         public SettingsPage()
         {
             this.InitializeComponent();
+
+            DataContext = this;
 
             // Initilize defaults.
             LightThemeRadioButton.IsChecked = Settings.AppTheme == ElementTheme.Light;
@@ -82,6 +105,25 @@ namespace DLSS_Swapper.Pages
                 Settings.AllowUntrusted = toggleSwitch.IsOn;
                 App.CurrentApp.MainWindow.FilterDLSSRecords();
             }
+        }
+
+        // We only check for updates for builds which are not from the Windows Store.
+        async Task CheckForUpdatesAsync()
+        {
+#if !RELEASE_WINDOWSSTORE
+            IsCheckingForUpdates = true;
+            var githubUpdater = new Data.GitHub.GitHubUpdater();
+            var newUpdate = await githubUpdater.CheckForNewGitHubRelease();      
+            if (newUpdate == null)
+            {
+                IsCheckingForUpdates = false;
+                return;
+            }
+
+            await githubUpdater.DisplayNewUpdateDialog(newUpdate, this);
+
+            IsCheckingForUpdates = false;
+#endif
         }
     }
 }

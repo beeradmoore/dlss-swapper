@@ -42,7 +42,7 @@ namespace DLSS_Swapper
 
         public MainWindow()
         {
-            Title = "DLSS Swapper [beta]";
+            Title = "DLSS Swapper";
             this.InitializeComponent();
             NavigationView = MainNavigationView;
 
@@ -98,6 +98,22 @@ namespace DLSS_Swapper
 
         async void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
         {
+            var gitHubUpdater = new Data.GitHub.GitHubUpdater();
+            // If this is a new build, fetch updates to display to the user.
+            Task<Data.GitHub.GitHubRelease> releaseNotesTask = null;
+            if (CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated)
+            {
+                var currentAppVersion = Windows.ApplicationModel.Package.Current.Id.Version;
+                releaseNotesTask = gitHubUpdater.GetReleaseFromTag($"v{currentAppVersion.Major}.{currentAppVersion.Minor}.{currentAppVersion.Build}.{currentAppVersion.Revision}"); 
+            }
+
+#if !RELEASE_WINDOWSSTORE
+            // If this is a GitHub build check if there is a new version.
+            // Lazy blocks to allow mul
+            Task<Data.GitHub.GitHubRelease> newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease();
+#endif
+
+
             // Load from cache, or download if not found.
             var loadDlssRecrodsTask = LoadDLSSRecordsAsync();
             var loadImportedDlssRecords = LoadImportedDLSSRecordsAsync();
@@ -219,6 +235,26 @@ Migration will not be attempted again on next launch.",
             // We are now ready to show the games list.
             LoadingStackPanel.Visibility = Visibility.Collapsed;
             GoToPage("Games");
+
+            if (releaseNotesTask != null)
+            {
+                await releaseNotesTask;
+                if (releaseNotesTask.Result != null)
+                {
+                    gitHubUpdater?.DisplayWhatsNewDialog(releaseNotesTask.Result, MainNavigationView);
+                }
+            }
+
+#if !RELEASE_WINDOWSSTORE
+            await newUpdateTask;
+            if (newUpdateTask.Result != null)
+            {
+                if (gitHubUpdater.HasPromptedBefore(newUpdateTask.Result) == false)
+                {
+                    await gitHubUpdater.DisplayNewUpdateDialog(newUpdateTask.Result, MainNavigationView);
+                }
+            }       
+#endif
         }
 
         /// <summary>

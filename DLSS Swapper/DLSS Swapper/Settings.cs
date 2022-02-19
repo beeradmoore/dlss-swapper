@@ -141,6 +141,21 @@ namespace DLSS_Swapper
             }
         }
 
+
+        static ulong _lastPromptWasForVersion = 0L;
+        public static ulong LastPromptWasForVersion
+        {
+            get { return _lastPromptWasForVersion; }
+            set
+            {
+                if (_lastPromptWasForVersion != value)
+                {
+                    _lastPromptWasForVersion = value;
+                    ApplicationData.Current.LocalSettings.Values["LastPromptWasForVersion"] = _lastPromptWasForVersion;
+                }
+            }
+        }
+
         static Settings()
         {
             // Load BaseDirectory from settings.
@@ -215,6 +230,14 @@ namespace DLSS_Swapper
                 if (tempMigrationAttempted is bool migrationAttempted)
                 {
                     _migrationAttempted = migrationAttempted;
+                }
+            }
+
+            if (localSettings.Values.TryGetValue("LastPromptWasForVersion", out object tempLastPromptWasForVersion))
+            {
+                if (tempLastPromptWasForVersion is ulong lastPromptWasForVersion)
+                {
+                    _lastPromptWasForVersion = lastPromptWasForVersion;
                 }
             }
         }

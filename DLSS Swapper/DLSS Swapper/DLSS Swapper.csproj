@@ -13,6 +13,10 @@
     <Company>beeradmoore</Company>
     <PackageIcon></PackageIcon>
     <PackageIconUrl />
+    <Configurations>Debug;Release;Release_WindowsStore</Configurations>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WindowsStore|x64'">
+    <Optimize>True</Optimize>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\Fonts\Segoe-Fluent-Icons.ttf" />
@@ -22,7 +26,8 @@
     <PackageReference Include="AsyncAwaitBestPractices" Version="6.0.4" />
     <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="6.0.4" />
     <PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.1.2" />
-    <PackageReference Include="Humanizer" Version="2.13.14" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.Markdown" Version="7.1.2" />
+    <PackageReference Include="Humanizer" Version="2.14.1" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />

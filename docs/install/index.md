@@ -1,9 +1,8 @@
 ## Recommended Install Instructions
 
-DLSS Swapper is now on the Windows Store! You can install builds directly from GitHub using the manual method below, however they will not automatically update when a new version is available (although they will tell you about it). 
+DLSS Swapper is now on the Windows Store! You can install builds directly from GitHub using the manual method below, however they will not automatically update when a new version is available (although they will tell you about it).
 
-[<img src="https://beeradmoore.github.io/dlss-swapper/images/windows_store_badge.png" alt="Windows Store badge" width="300" />](https://www.microsoft.com/store/apps/9NNL4H1PTJBL)
-
+<a href="https://www.microsoft.com/store/apps/9NNL4H1PTJBL" target="_blank"><img src="https://beeradmoore.github.io/dlss-swapper/images/windows_store_badge.png" alt="Windows Store install link" width="300" /></a>
 
 ## Manual Install Instructions
 To install a GitHub build of DLSS Swapper you will need to trust our signing certificate and download installer from Github, or build the application from source.

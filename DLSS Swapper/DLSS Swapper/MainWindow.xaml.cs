@@ -118,23 +118,6 @@ namespace DLSS_Swapper
             var loadDlssRecrodsTask = LoadDLSSRecordsAsync();
             var loadImportedDlssRecords = LoadImportedDLSSRecordsAsync();
 
-            if (Settings.HasShownWarning == false)
-            {
-                var dialog = new ContentDialog()
-                {
-                    Title = "Warning",
-                    CloseButtonText = "Okay",
-                    Content = @"Replacing dlls on your computer can be dangerous.
-
-Placing a malicious dll into a game is just as bad as running Linking_park_-_nUmB_mp3.exe that you just downloaded from LimeWire.
-
-More protections and validations will come in a future update.",
-                    XamlRoot = MainNavigationView.XamlRoot,
-                };
-                await dialog.ShowAsync();
-
-                Settings.HasShownWarning = true;
-            }
 
             var didLoadDlssRecords = await loadDlssRecrodsTask;
             if (didLoadDlssRecords == false)

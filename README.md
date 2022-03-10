@@ -28,7 +28,7 @@ Please come and share your DLSS exprience over in [r/DLSS_Swapper](https://www.r
 
 ## How do I get it?
 
-Install from the [https://www.microsoft.com/store/apps/9NNL4H1PTJBL](Microsoft Store), or look at our [manual install instructions](https://beeradmoore.github.io/dlss-swapper/install/).
+Install from the [Microsoft Store](https://www.microsoft.com/store/apps/9NNL4H1PTJBL), or look at our [manual install instructions](https://beeradmoore.github.io/dlss-swapper/install/).
 
 
 ## How do I use it?

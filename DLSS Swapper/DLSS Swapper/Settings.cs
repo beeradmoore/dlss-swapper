@@ -127,6 +127,23 @@ namespace DLSS_Swapper
             }
         }
 
+        // TODO: Remove after 0.9.9 release.
+#if !RELEASE_WINDOWSSTORE
+        static bool _hasShownWindowsStoreUpdateMessage = false;
+        public static bool HasShownWindowsStoreUpdateMessage
+        {
+            get { return _hasShownWindowsStoreUpdateMessage; }
+            set
+            {
+                if (_hasShownWindowsStoreUpdateMessage != value)
+                {
+                    _hasShownWindowsStoreUpdateMessage = value;
+                    ApplicationData.Current.LocalSettings.Values["HasShownWindowsStoreUpdateMessage"] = value;
+                }
+            }
+        }
+#endif
+
         static Settings()
         {
             // Load BaseDirectory from settings.
@@ -195,6 +212,18 @@ namespace DLSS_Swapper
                     _lastPromptWasForVersion = lastPromptWasForVersion;
                 }
             }
+
+            // TODO: Remove after 0.9.9 release.
+#if !RELEASE_WINDOWSSTORE
+            if (localSettings.Values.TryGetValue("HasShownWindowsStoreUpdateMessage", out object tempHasShownWindowsStoreUpdateMessage))
+            {
+                if (tempHasShownWindowsStoreUpdateMessage is bool hasShownWindowsStoreUpdateMessage)
+                {
+                    _hasShownWindowsStoreUpdateMessage = hasShownWindowsStoreUpdateMessage;
+                }
+            }
+#endif
+
         }
     }
 }

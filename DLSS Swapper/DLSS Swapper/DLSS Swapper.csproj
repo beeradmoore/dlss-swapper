@@ -19,6 +19,9 @@
     <Optimize>True</Optimize>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Assets\Images\windows_store_badge.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Assets\Fonts\Segoe-Fluent-Icons.ttf" />
     <None Remove="Interfaces\InitialLoadingPage.xaml" />
     <None Remove="Pages\GameGridPage.xaml" />

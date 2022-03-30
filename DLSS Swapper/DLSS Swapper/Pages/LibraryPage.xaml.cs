@@ -186,6 +186,25 @@ namespace DLSS_Swapper.Pages
 
         async Task ImportAsync()
         {
+
+            if (Settings.HasShownWarning == false)
+            {
+                var warningDialog = new ContentDialog()
+                {
+                    Title = "Warning",
+                    CloseButtonText = "Okay",
+                    Content = @"Replacing dlls on your computer can be dangerous.
+
+Placing a malicious dll into a game is as bad as running Linking_park_-_nUmB_mp3.exe that you just downloaded from LimeWire.
+
+Only import dlls from sources you trust.",
+                    XamlRoot = XamlRoot,
+                };
+                await warningDialog.ShowAsync();
+
+                Settings.HasShownWarning = true;
+            }
+
             var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
             var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
             openPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;

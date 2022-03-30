@@ -2,13 +2,17 @@
     x:Class="DLSS_Swapper.Pages.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DLSS_Swapper.Pages"
+    xmlns:local="using:DLSS_Swapper"
+    xmlns:converters="using:DLSS_Swapper.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI.UI"
     mc:Ignorable="d"
     NavigationCacheMode="Required"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        <converters:InverseBoolToVisibleConverter x:Key="InverseBoolToVisibleConverter" />
+    </Page.Resources>
     <Grid>
         <ScrollViewer Grid.Row="0">
             <StackPanel HorizontalAlignment="Left" Padding="56,0,56,56">
@@ -76,6 +80,7 @@
                     Version: 
                     <Run Text="{x:Bind Version}" />
                 </TextBlock>
+                <Button Content="Check for updates" Margin="0,12,0,0" Command="{Binding CheckForUpdatesCommand}" Visibility="{x:Bind local:App.IsWindowsStoreBuild, Converter={StaticResource InverseBoolToVisibleConverter}}" />
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
@@ -100,6 +105,16 @@
                     </Paragraph>
                 </RichTextBlock>
 
+                <Image 
+                    Margin="0,40,0,0"
+                    IsTapEnabled="true"
+                    Tapped="WindowsStoreBadge_Tapped"
+                    Source="/Assets/Images/windows_store_badge.png"
+                    Width="300"
+                    Visibility="{x:Bind local:App.IsWindowsStoreBuild, Converter={StaticResource InverseBoolToVisibleConverter}}"
+                    HorizontalAlignment="Center"
+                    ui:FrameworkElementExtensions.Cursor="Hand"
+                    />
             </StackPanel>
         </ScrollViewer>
     </Grid>

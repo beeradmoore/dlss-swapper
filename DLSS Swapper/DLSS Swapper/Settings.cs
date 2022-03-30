@@ -26,21 +26,6 @@ namespace DLSS_Swapper
         }
 
 
-        static bool _hasShownWorkInProgress = false;
-        public static bool HasShownWorkInProgress
-        {
-            get { return _hasShownWorkInProgress; }
-            set
-            {
-                if (_hasShownWorkInProgress != value)
-                {
-                    _hasShownWorkInProgress = value;
-                    ApplicationData.Current.LocalSettings.Values["HasShownWorkInProgress"] = value;
-                }
-            }
-        }
-
-
         static bool _hideNonDLSSGames = true;
         public static bool HideNonDLSSGames
         {
@@ -127,19 +112,37 @@ namespace DLSS_Swapper
             }
         }
 
-        static bool _migrationAttempted = false;
-        public static bool MigrationAttempted
+
+        static ulong _lastPromptWasForVersion = 0L;
+        public static ulong LastPromptWasForVersion
         {
-            get { return _migrationAttempted; }
+            get { return _lastPromptWasForVersion; }
             set
             {
-                if (_migrationAttempted != value)
+                if (_lastPromptWasForVersion != value)
                 {
-                    _migrationAttempted = value;
-                    ApplicationData.Current.LocalSettings.Values["MigrationAttempted"] = value;
+                    _lastPromptWasForVersion = value;
+                    ApplicationData.Current.LocalSettings.Values["LastPromptWasForVersion"] = _lastPromptWasForVersion;
                 }
             }
         }
+
+        // TODO: Remove after 0.9.9 release.
+#if !RELEASE_WINDOWSSTORE
+        static bool _hasShownWindowsStoreUpdateMessage = false;
+        public static bool HasShownWindowsStoreUpdateMessage
+        {
+            get { return _hasShownWindowsStoreUpdateMessage; }
+            set
+            {
+                if (_hasShownWindowsStoreUpdateMessage != value)
+                {
+                    _hasShownWindowsStoreUpdateMessage = value;
+                    ApplicationData.Current.LocalSettings.Values["HasShownWindowsStoreUpdateMessage"] = value;
+                }
+            }
+        }
+#endif
 
         static Settings()
         {
@@ -151,14 +154,6 @@ namespace DLSS_Swapper
                 if (tempHasShownWarning is bool hasShownWarning)
                 {
                     _hasShownWarning = hasShownWarning;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("HasShownWorkInProgress", out object tempHasShownWorkInProgress))
-            {
-                if (tempHasShownWorkInProgress is bool hasShownWorkInProgress)
-                {
-                    _hasShownWorkInProgress = hasShownWorkInProgress;
                 }
             }
 
@@ -210,13 +205,25 @@ namespace DLSS_Swapper
                 }
             }
 
-            if (localSettings.Values.TryGetValue("MigrationAttempted", out object tempMigrationAttempted))
+            if (localSettings.Values.TryGetValue("LastPromptWasForVersion", out object tempLastPromptWasForVersion))
             {
-                if (tempMigrationAttempted is bool migrationAttempted)
+                if (tempLastPromptWasForVersion is ulong lastPromptWasForVersion)
                 {
-                    _migrationAttempted = migrationAttempted;
+                    _lastPromptWasForVersion = lastPromptWasForVersion;
                 }
             }
+
+            // TODO: Remove after 0.9.9 release.
+#if !RELEASE_WINDOWSSTORE
+            if (localSettings.Values.TryGetValue("HasShownWindowsStoreUpdateMessage", out object tempHasShownWindowsStoreUpdateMessage))
+            {
+                if (tempHasShownWindowsStoreUpdateMessage is bool hasShownWindowsStoreUpdateMessage)
+                {
+                    _hasShownWindowsStoreUpdateMessage = hasShownWindowsStoreUpdateMessage;
+                }
+            }
+#endif
+
         }
     }
 }

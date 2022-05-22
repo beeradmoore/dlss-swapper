@@ -78,7 +78,7 @@
                           Padding="8"
                           Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                           BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                          CornerRadius="8,8,0,0"
+                          CornerRadius="8"
                           ColumnSpacing="8" RowSpacing="8" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />

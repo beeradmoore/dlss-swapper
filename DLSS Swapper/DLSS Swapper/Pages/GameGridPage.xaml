@@ -23,7 +23,7 @@
 
 
         <Grid Grid.Row="0" Padding="16,0,16,0">
-            <TextBlock Text="Games" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock Text="Games" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <AppBarButton Label="Refresh" Click="RefreshButton_Click">

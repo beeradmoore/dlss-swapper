@@ -32,7 +32,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="DLSS Library" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="0" Margin="16,0,0,0" Text="Library" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
 
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <AppBarButton HorizontalAlignment="Right"  Label="Import" Command="{Binding ImportCommand}">

@@ -1,5 +1,7 @@
 # DLSS Swapper
 
+<a href="https://www.microsoft.com/store/apps/9NNL4H1PTJBL" target="_blank"><img src="https://beeradmoore.github.io/dlss-swapper/images/windows_store_badge.png" alt="Windows Store install link" width="300" /></a>
+
 
 DLSS Swapper is a tool that allows you to conveniently download, manage, and swap DLSS dlls allowing you to upgrade or downgrade DLSS version in a game without the game needing an update.
 
@@ -26,7 +28,7 @@ Please come and share your DLSS exprience over in [r/DLSS_Swapper](https://www.r
 
 ## How do I get it?
 
-Check our [install instructions](https://beeradmoore.github.io/dlss-swapper/install/).
+Install from the [Microsoft Store](https://www.microsoft.com/store/apps/9NNL4H1PTJBL), or look at our [manual install instructions](https://beeradmoore.github.io/dlss-swapper/install/).
 
 
 ## How do I use it?

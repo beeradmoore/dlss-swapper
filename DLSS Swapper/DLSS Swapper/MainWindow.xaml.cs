@@ -67,6 +67,8 @@ namespace DLSS_Swapper
                 appWindowTitleBar.ExtendsContentIntoTitleBar = true;
                 appWindowTitleBar.IconShowOptions = IconShowOptions.HideIconAndSystemMenu;
 
+                RootGrid.RowDefinitions[0].Height = new GridLength(32);
+
                 /*
                 appWindowTitleBar.SetDragRectangles(new Windows.Graphics.RectInt32[]
                 {

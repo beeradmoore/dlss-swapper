@@ -31,6 +31,8 @@ namespace DLSS_Swapper
     /// </summary>
     public partial class App : Application
     {
+        public ElementTheme GlobalElementTheme { get; set; }
+
         MainWindow _window;
         public MainWindow MainWindow => _window;
 
@@ -61,6 +63,8 @@ namespace DLSS_Swapper
 
             _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper v{versionString}");
 
+            GlobalElementTheme = Settings.AppTheme;
+
             this.InitializeComponent();
         }
 
@@ -71,10 +75,7 @@ namespace DLSS_Swapper
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-
             _window = new MainWindow();
-            _window.ExtendsContentIntoTitleBar = true;
-            _window.SetTitleBar(_window.AppTitleBar);
             _window.Activate();
         }
 

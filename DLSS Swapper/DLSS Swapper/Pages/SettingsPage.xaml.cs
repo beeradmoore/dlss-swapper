@@ -85,7 +85,7 @@ namespace DLSS_Swapper.Pages
                     };
 
                     Settings.AppTheme = newTheme;
-                    MainWindow.NavigationView.RequestedTheme = newTheme;
+                    ((App)Application.Current)?.MainWindow?.UpdateColors(newTheme);
                 }
             }
         }

@@ -34,6 +34,7 @@
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0-preview3" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="System.Management" Version="6.0.0" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>

@@ -9,8 +9,7 @@
     xmlns:data="using:DLSS_Swapper.Data"
     mc:Ignorable="d"
     Loaded="Page_Loaded"
-    NavigationCacheMode="Required"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    NavigationCacheMode="Required">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -22,7 +21,11 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+
+        <Grid Grid.Row="0" Padding="16,0,16,0">
+            <TextBlock Text="Games" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <AppBarButton Label="Refresh" Click="RefreshButton_Click">
                 <AppBarButton.Content>
                     <FontIcon Glyph="&#xE72C;" />
@@ -34,6 +37,7 @@
                 </AppBarButton.Content>
             </AppBarButton>
         </StackPanel>
+        </Grid>
 
         <GridView Grid.Row="1" x:Name="MainGridView" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20"  >
             <GridView.GroupStyle>
@@ -59,7 +63,7 @@
 
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:Game">
-                    <Grid Width="200" Height="300" ColumnSpacing="0" RowSpacing="0" Margin="0" Background="Black">
+                    <Grid Width="200" Height="300" CornerRadius="8" BorderThickness="1" ColumnSpacing="0" RowSpacing="0" Margin="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>

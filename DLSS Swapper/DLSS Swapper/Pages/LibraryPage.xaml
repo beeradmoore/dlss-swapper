@@ -7,8 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:data="using:DLSS_Swapper.Data" xmlns:ct_converters="using:CommunityToolkit.WinUI.UI.Converters" xmlns:converters="using:DLSS_Swapper.Converters"
     mc:Ignorable="d"    
     NavigationCacheMode="Required"
-    x:Name="thisPage"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    x:Name="thisPage">
     <Page.Resources>
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadingConverter" DesierdState="Downloading" />
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
@@ -33,7 +32,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Library" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="0" Margin="16,0,0,0" Text="Library" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
 
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <AppBarButton HorizontalAlignment="Right"  Label="Import" Command="{Binding ImportCommand}">
@@ -75,7 +74,12 @@
 
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:DLSSRecord">
-                    <Grid BorderThickness="0" Padding="8" ColumnSpacing="8" RowSpacing="8" Background="{ThemeResource SolidBackgroundFillColorBase}">
+                    <Grid BorderThickness="1"
+                          Padding="8"
+                          Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                          BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                          CornerRadius="8"
+                          ColumnSpacing="8" RowSpacing="8" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>

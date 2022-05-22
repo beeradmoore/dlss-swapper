@@ -9,14 +9,14 @@
     mc:Ignorable="d"
     >
 
-    <Grid MinWidth="400">
+    <Grid x:Name="RootGrid" MinWidth="400">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="28" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <Grid x:Name="appTitleBar" Grid.Row="0" Padding="12,0,0,0">
+
+        <Grid x:Name="AppTitleBar" Grid.Row="0" Padding="12,0,0,0" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -42,7 +42,8 @@
                              ItemInvoked="MainNavigationView_ItemInvoked" 
                              PaneDisplayMode="LeftCompact"
                              IsBackButtonVisible="Collapsed"      
-                             Loaded="MainNavigationView_Loaded">
+                             Loaded="MainNavigationView_Loaded"
+                             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem Content="Games" Tag="Games">
                     <muxc:NavigationViewItem.Icon>

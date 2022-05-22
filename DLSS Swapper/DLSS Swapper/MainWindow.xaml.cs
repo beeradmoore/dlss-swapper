@@ -3,6 +3,8 @@ using CommunityToolkit.WinUI.UI.Controls;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Pages;
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -25,6 +27,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
+using Windows.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -36,7 +39,8 @@ namespace DLSS_Swapper
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        public Grid AppTitleBar => appTitleBar;
+        bool _isCustomizationSupported;
+        ThemeWatcher _themeWatcher;
 
         public static NavigationView NavigationView;
 
@@ -46,9 +50,44 @@ namespace DLSS_Swapper
         {
             Title = "DLSS Swapper";
             this.InitializeComponent();
+
+            _isCustomizationSupported = AppWindowTitleBar.IsCustomizationSupported();
+            
+            _themeWatcher = new ThemeWatcher();
+            _themeWatcher.ThemeChanged += ThemeWatcher_ThemeChanged;
+            _themeWatcher.Start();
+
             NavigationView = MainNavigationView;
 
-            MainNavigationView.RequestedTheme = (ElementTheme)Settings.AppTheme;
+
+            if (_isCustomizationSupported)
+            {
+                var appWindow = GetAppWindowForCurrentWindow();
+                var appWindowTitleBar = appWindow.TitleBar;
+                appWindowTitleBar.ExtendsContentIntoTitleBar = true;
+                appWindowTitleBar.IconShowOptions = IconShowOptions.HideIconAndSystemMenu;
+
+                RootGrid.RowDefinitions[0].Height = new GridLength(32);
+
+                /*
+                appWindowTitleBar.SetDragRectangles(new Windows.Graphics.RectInt32[]
+                {
+                    new Windows.Graphics.RectInt32(0, 0, 1, 1),
+                });
+                */
+            }
+            else
+            {
+                RootGrid.RowDefinitions[0].Height = new GridLength(28);
+
+                ExtendsContentIntoTitleBar = true;
+                SetTitleBar(AppTitleBar);
+            }
+
+            
+            UpdateColors(Settings.AppTheme);
+
+            //MainNavigationView.RequestedTheme = (ElementTheme)Settings.AppTheme;
         }
 
         void MainNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -430,6 +469,159 @@ DLSS Swapper will close now.",
             }
 
             return false;
+        }
+
+        internal void UpdateColors(ElementTheme theme)
+        {
+            ((App)Application.Current).GlobalElementTheme = theme;
+
+            if (theme == ElementTheme.Light)
+            {
+                UpdateColorsLight();
+            }
+            else if (theme == ElementTheme.Dark)
+            {
+                UpdateColorsDark();
+            }
+            else
+            {
+                var osApplicationTheme = _themeWatcher.GetWindowsApplicationTheme();
+                if (osApplicationTheme == ApplicationTheme.Light)
+                {
+                    UpdateColorsLight();
+                }
+                else if (osApplicationTheme == ApplicationTheme.Dark)
+                {
+                    UpdateColorsDark();
+                }
+            }
+        }
+
+        void UpdateColorsLight()
+        {
+            RootGrid.RequestedTheme = ElementTheme.Light;
+
+
+            var app = ((App)Application.Current);
+            var theme = app.Resources.MergedDictionaries[1].ThemeDictionaries["Light"] as ResourceDictionary;
+
+
+            if (_isCustomizationSupported)
+            {
+                var appWindow = GetAppWindowForCurrentWindow();
+                var appWindowTitleBar = appWindow.TitleBar;
+
+
+                appWindowTitleBar.ButtonBackgroundColor = (Color)theme["ButtonBackgroundColor"];
+                appWindowTitleBar.ButtonForegroundColor = (Color)theme["ButtonForegroundColor"];
+                appWindowTitleBar.ButtonHoverBackgroundColor = (Color)theme["ButtonHoverBackgroundColor"];
+                appWindowTitleBar.ButtonHoverForegroundColor = (Color)theme["ButtonHoverForegroundColor"];
+                appWindowTitleBar.ButtonInactiveBackgroundColor = (Color)theme["ButtonInactiveBackgroundColor"];
+                appWindowTitleBar.ButtonInactiveForegroundColor = (Color)theme["ButtonInactiveForegroundColor"];
+                appWindowTitleBar.ButtonPressedBackgroundColor = (Color)theme["ButtonPressedBackgroundColor"];
+                appWindowTitleBar.ButtonPressedForegroundColor = (Color)theme["ButtonPressedForegroundColor"];
+
+            }
+            else
+            {
+                var appResources = Application.Current.Resources;
+                // Removes the tint on title bar
+                appResources["WindowCaptionBackground"] = theme["WindowCaptionBackground"];
+                appResources["WindowCaptionBackgroundDisabled"] = theme["WindowCaptionBackgroundDisabled"];
+                // Sets the tint of the forground of the buttons
+                appResources["WindowCaptionForeground"] = theme["WindowCaptionForeground"];
+                appResources["WindowCaptionForegroundDisabled"] = theme["WindowCaptionForegroundDisabled"];
+
+                appResources["WindowCaptionButtonBackgroundPointerOver"] = theme["WindowCaptionButtonBackgroundPointerOver"];
+
+
+                RepaintCurrentWindow();
+            }
+        }
+
+        void UpdateColorsDark()
+        {
+            RootGrid.RequestedTheme = ElementTheme.Dark;
+
+            var app = ((App)Application.Current);
+            var theme = app.Resources.MergedDictionaries[1].ThemeDictionaries["Dark"] as ResourceDictionary;
+
+
+            if (_isCustomizationSupported)
+            {
+                var appWindow = GetAppWindowForCurrentWindow();
+                var appWindowTitleBar = appWindow.TitleBar;
+
+                appWindowTitleBar.ButtonBackgroundColor = (Color)theme["ButtonBackgroundColor"];
+                appWindowTitleBar.ButtonForegroundColor = (Color)theme["ButtonForegroundColor"];
+                appWindowTitleBar.ButtonHoverBackgroundColor = (Color)theme["ButtonHoverBackgroundColor"];
+                appWindowTitleBar.ButtonHoverForegroundColor = (Color)theme["ButtonHoverForegroundColor"];
+                appWindowTitleBar.ButtonInactiveBackgroundColor = (Color)theme["ButtonInactiveBackgroundColor"];
+                appWindowTitleBar.ButtonInactiveForegroundColor = (Color)theme["ButtonInactiveForegroundColor"];
+                appWindowTitleBar.ButtonPressedBackgroundColor = (Color)theme["ButtonPressedBackgroundColor"];
+                appWindowTitleBar.ButtonPressedForegroundColor = (Color)theme["ButtonPressedForegroundColor"];
+            }
+            else
+            {
+                var appResources = Application.Current.Resources;
+
+                // Removes the tint on title bar
+                appResources["WindowCaptionBackground"] = theme["WindowCaptionBackground"];
+                appResources["WindowCaptionBackgroundDisabled"] = theme["WindowCaptionBackgroundDisabled"];
+                // Sets the tint of the forground of the buttons
+                appResources["WindowCaptionForeground"] = theme["WindowCaptionForeground"];
+                appResources["WindowCaptionForegroundDisabled"] = theme["WindowCaptionForegroundDisabled"];
+
+                appResources["WindowCaptionButtonBackgroundPointerOver"] = theme["WindowCaptionButtonBackgroundPointerOver"];
+
+                RepaintCurrentWindow();
+            }
+        }
+
+        AppWindow GetAppWindowForCurrentWindow()
+        {
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            var myWndId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
+            return AppWindow.GetFromWindowId(myWndId);
+        }
+
+        // to trigger repaint tracking task id 38044406
+        void RepaintCurrentWindow()
+        {
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+
+            var activeWindow = Win32.GetActiveWindow();
+            if (hWnd == activeWindow)
+            {
+                Win32.SendMessage(hWnd, Win32.WM_ACTIVATE, Win32.WA_INACTIVE, IntPtr.Zero);
+                Win32.SendMessage(hWnd, Win32.WM_ACTIVATE, Win32.WA_ACTIVE, IntPtr.Zero);
+            }
+            else
+            {
+                Win32.SendMessage(hWnd, Win32.WM_ACTIVATE, Win32.WA_ACTIVE, IntPtr.Zero);
+                Win32.SendMessage(hWnd, Win32.WM_ACTIVATE, Win32.WA_INACTIVE, IntPtr.Zero);
+            }
+        }
+
+        void ThemeWatcher_ThemeChanged(object sender, ApplicationTheme e)
+        {
+            var globalTheme = ((App)Application.Current).GlobalElementTheme;
+
+            if (globalTheme == ElementTheme.Default)
+            {
+                var osApplicationTheme = _themeWatcher.GetWindowsApplicationTheme();
+
+                DispatcherQueue.TryEnqueue(() => {
+                     if (osApplicationTheme == ApplicationTheme.Light)
+                    {
+                        UpdateColorsLight();
+                    }
+                    else if (osApplicationTheme == ApplicationTheme.Dark)
+                    {
+                        UpdateColorsDark();
+                    }
+                });
+            }
         }
     }
 }

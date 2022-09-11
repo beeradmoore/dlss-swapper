@@ -65,6 +65,7 @@ namespace DLSS_Swapper
         public App()
         {
             Logger.Init();
+            Logger.Info("App launch");
 
             var version = Windows.ApplicationModel.Package.Current.Id.Version;
             var versionString = String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
@@ -92,7 +93,7 @@ namespace DLSS_Swapper
         {
             var dllsPath = isImportedRecord ? "imported_dlls" : "dlls";
             var expectedPath = Path.Combine(dllsPath, $"{dlssRecord.Version}_{dlssRecord.MD5Hash}", "nvngx_dlss.dll");
-            System.Diagnostics.Debug.WriteLine($"ExpectedPath: {expectedPath}");
+            Logger.Debug($"ExpectedPath: {expectedPath}");
             // Load record.
             var localRecord = LocalRecord.FromExpectedPath(expectedPath);
 
@@ -118,7 +119,7 @@ namespace DLSS_Swapper
         internal async Task LoadLocalRecordFromDLSSRecordAsync(DLSSRecord dlssRecord)
         {
             var expectedPath = Path.Combine("dlls", $"{dlssRecord.Version}_{dlssRecord.MD5Hash}", "nvngx_dlss.dll");
-            System.Diagnostics.Debug.WriteLine($"ExpectedPath: {expectedPath}");
+            Logger.Debug($"ExpectedPath: {expectedPath}");
             // Load record.
             var localRecord = await LocalRecord.FromExpectedPathAsync(expectedPath);
 
@@ -189,7 +190,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Debug.WriteLine($"LoadDLSSRecords Error: {err.Message}");
+                Logger.Debug($"LoadDLSSRecords Error: {err.Message}");
                 return false;
             }
         }

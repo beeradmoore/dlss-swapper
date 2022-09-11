@@ -129,7 +129,7 @@ namespace DLSS_Swapper.Data
             };
 
             var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-            System.Diagnostics.Debug.WriteLine($"StorageFolder: {storageFolder.Path}");
+            Logger.Debug($"StorageFolder: {storageFolder.Path}");
             try
             {
                 var dlssFile = await storageFolder.GetFileAsync(expectedPath);

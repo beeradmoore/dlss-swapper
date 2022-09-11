@@ -21,7 +21,7 @@ namespace DLSS_Swapper.Extensions
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"Error calling GetMD5Hash on {fileVersionInfo.FileName}, {err.Message}");
+                Logger.Debug($"Error calling GetMD5Hash on {fileVersionInfo.FileName}, {err.Message}");
             }
 
             return String.Empty;

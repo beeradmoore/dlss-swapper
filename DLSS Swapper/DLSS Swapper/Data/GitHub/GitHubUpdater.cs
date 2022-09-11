@@ -28,7 +28,7 @@ namespace DLSS_Swapper.Data.GitHub
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"FetchLatestRelease Error: {err.Message}");
+                Logger.Debug($"FetchLatestRelease Error: {err.Message}");
                 // NOOP
                 return null;
             }
@@ -42,7 +42,7 @@ namespace DLSS_Swapper.Data.GitHub
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"GetFromTag Error: {err.Message}");
+                Logger.Debug($"GetFromTag Error: {err.Message}");
                 // NOOP
                 return null;
             }

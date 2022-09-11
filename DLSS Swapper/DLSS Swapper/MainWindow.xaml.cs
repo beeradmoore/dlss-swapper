@@ -372,7 +372,7 @@ DLSS Swapper will close now.",
             }
             catch (Exception err)
             {
-                Console.WriteLine($"LoadDLSSRecords Error: {err.Message}");
+                Logger.Debug($"LoadDLSSRecords Error: {err.Message}");
                 return false;
             }
         }
@@ -396,7 +396,7 @@ DLSS Swapper will close now.",
             }
             catch (Exception err)
             {
-                Debug.WriteLine($"LoadDLSSRecords Error: {err.Message}");
+                Logger.Debug($"LoadDLSSRecords Error: {err.Message}");
                 return;
             }
         }
@@ -459,13 +459,13 @@ DLSS Swapper will close now.",
                     }
                     catch (Exception err)
                     {
-                        Console.WriteLine($"UpdateDLSSRecords Error: {err.Message}");
+                        Logger.Debug($"UpdateDLSSRecords Error: {err.Message}");
                     }
                 }
             }
             catch (Exception err)
             {
-                Console.WriteLine($"UpdateDLSSRecords Error: {err.Message}");
+                Logger.Debug($"UpdateDLSSRecords Error: {err.Message}");
             }
 
             return false;

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation.Diagnostics;
 using Windows.Storage;
 
 namespace DLSS_Swapper
@@ -144,8 +145,23 @@ namespace DLSS_Swapper
         }
 #endif
 
+        static LoggingLevel _loggingLevel = LoggingLevel.Off;
+        public static LoggingLevel LoggingLevel
+        {
+            get { return _loggingLevel; }
+            set
+            {
+                if (_loggingLevel != value)
+                {
+                    _loggingLevel = value;
+                    ApplicationData.Current.LocalSettings.Values["LoggingLevel"] = (int)_loggingLevel;
+                }
+            }
+        }
+
         static Settings()
         {
+
             // Load BaseDirectory from settings.
             var localSettings = ApplicationData.Current.LocalSettings;
 
@@ -224,6 +240,14 @@ namespace DLSS_Swapper
             }
 #endif
 
+
+            if (localSettings.Values.TryGetValue("LoggingLevel", out object tempLoggingLevel))
+            {
+                if (tempLoggingLevel is int loggingLevel)
+                {
+                    _loggingLevel = (LoggingLevel)loggingLevel;
+                }
+            }
         }
     }
 }

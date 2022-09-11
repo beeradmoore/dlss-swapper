@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.WinUI.UI.Controls;
+using log4net.Repository.Hierarchy;
+using log4net;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -17,8 +19,14 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Diagnostics;
 using Windows.System;
 using Windows.UI.ViewManagement;
+using log4net.Config;
+using log4net.Core;
+using log4net.Appender;
+using log4net.Layout;
+using System.Diagnostics;
 
 namespace DLSS_Swapper.Pages
 {
@@ -56,11 +64,14 @@ namespace DLSS_Swapper.Pages
             }
         }
 
+        public IEnumerable<LoggingLevel> LoggingLevels = Enum.GetValues(typeof(LoggingLevel)).Cast<LoggingLevel>();
+
+        public string CurrentLogPath => Path.Combine(Path.GetTempPath(), $"dlss_swapper.{DateTime.Now.ToString("yyyy.MM.dd")}.log");
+
         public SettingsPage()
         {
             this.InitializeComponent();
 
-            DataContext = this;
 
             // Initilize defaults.
             LightThemeRadioButton.IsChecked = Settings.AppTheme == ElementTheme.Light;
@@ -69,6 +80,9 @@ namespace DLSS_Swapper.Pages
 
             AllowUntrustedToggleSwitch.IsOn = Settings.AllowUntrusted;
             AllowExperimentalToggleSwitch.IsOn = Settings.AllowExperimental;
+            LoggingComboBox.SelectedItem = Settings.LoggingLevel;
+
+            DataContext = this;
         }
 
         void ThemeRadioButton_Checked(object sender, RoutedEventArgs e)
@@ -214,6 +228,40 @@ namespace DLSS_Swapper.Pages
             };
             
             await dialog.ShowAsync();
+        }
+
+        private void LoggingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Any() && e.AddedItems[0] is LoggingLevel loggingLevel && Settings.LoggingLevel != loggingLevel)
+            {
+                // Update settings
+                Settings.LoggingLevel = loggingLevel;
+
+                // Reconfigure
+                Logger.ChangeLoggingLevel(loggingLevel);
+            }
+        }
+
+        private async void LogFile_Click(Hyperlink sender, HyperlinkClickEventArgs args)
+        {
+            try
+            {
+                Process.Start("explorer.exe", $"/select,{CurrentLogPath}");
+            }
+            catch (Exception err)
+            {
+                Logger.Debug($"LogFile_Click Error: {err.Message}");
+
+                var dialog = new ContentDialog()
+                {
+                    Title = "Oops",
+                    CloseButtonText = "Okay",
+                    Content = "Could not open your log file directly from DLSS Swapper. Please try open it manually.",
+                    XamlRoot = XamlRoot,
+                };
+
+                await dialog.ShowAsync();
+            }
         }
     }
 }

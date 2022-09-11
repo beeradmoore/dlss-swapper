@@ -1,4 +1,10 @@
 ﻿using DLSS_Swapper.Data;
+using log4net;
+using log4net.Appender;
+using log4net.Config;
+using log4net.Core;
+using log4net.Layout;
+using log4net.Repository.Hierarchy;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -58,6 +64,8 @@ namespace DLSS_Swapper
         /// </summary>
         public App()
         {
+            Logger.Init();
+
             var version = Windows.ApplicationModel.Package.Current.Id.Version;
             var versionString = String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
 

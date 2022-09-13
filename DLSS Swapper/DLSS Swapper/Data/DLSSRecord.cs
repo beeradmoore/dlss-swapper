@@ -264,7 +264,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Debug($"ERROR: {err.Message}");
+                Logger.Error(err.Message);
 
                 dispatcherQueue.TryEnqueue(() =>
                 {

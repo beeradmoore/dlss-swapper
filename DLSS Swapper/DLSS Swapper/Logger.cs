@@ -3,92 +3,99 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using log4net;
-using log4net.Appender;
-using log4net.Config;
-using log4net.Core;
-using log4net.Layout;
-using log4net.Repository.Hierarchy;
+using Serilog;
+using Serilog.Core;
+using Serilog.Events;
 
 namespace DLSS_Swapper
 {
     public enum LoggingLevel : int
     {
         Off = 0,
-        Info = 10,
+        Verbose = 10,
         Debug = 20,
+        Info = 30,
+        Warning = 40,
+        Error = 50,
     }
 
     internal static class Logger
     {
-
-        private static readonly ILog logger = LogManager.GetLogger(typeof(App));
-
+        static string loggingFile => Path.Combine(Path.GetTempPath(), "dlss_swapper_.log");
+        static LoggingLevelSwitch levelSwitch = new LoggingLevelSwitch(Serilog.Events.LogEventLevel.Fatal);
         internal static void Init()
         {
-            var hierarchy = (Hierarchy)LogManager.GetRepository();
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.ControlledBy(levelSwitch)
+                .WriteTo.Debug()
+                .WriteTo.File(loggingFile, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7)
+                .CreateLogger();
 
-            var patternLayout = new PatternLayout();
-            patternLayout.ConversionPattern = "%date [%thread] %-5level - %message%newline";
-            patternLayout.ActivateOptions();
+            ChangeLoggingLevel(Settings.LoggingLevel);
+        }
 
-            var roller = new RollingFileAppender();
-            roller.AppendToFile = true;
-            roller.File = Path.Combine(Path.GetTempPath(), "dlss_swapper");
-            roller.Layout = patternLayout;
-            roller.MaxSizeRollBackups = 5;
-            roller.RollingStyle = RollingFileAppender.RollingMode.Date;
-            roller.StaticLogFileName = false;
-            roller.DatePattern = ".yyyy.MM.dd'.log'";
-            roller.ActivateOptions();
-            hierarchy.Root.AddAppender(roller);
+        public static string GetCurrentLogPath()
+        {
+            var directory = Path.GetDirectoryName(loggingFile);
+            var withoutExtension = Path.GetFileNameWithoutExtension(loggingFile);
+            var justExtension = Path.GetExtension(loggingFile);
 
-            var console = new ConsoleAppender();
-            console.ActivateOptions();
-            hierarchy.Root.AddAppender(console);
-
-            var debug = new DebugAppender();
-            debug.ActivateOptions();
-            hierarchy.Root.AddAppender(debug);
-
-            var memory = new MemoryAppender();
-            memory.ActivateOptions();
-            hierarchy.Root.AddAppender(memory);
-
-            hierarchy.Root.Level = Settings.LoggingLevel switch
-            {
-                LoggingLevel.Debug => Level.Debug,
-                LoggingLevel.Info => Level.Info,
-                _ => Level.Off,
-            };
-            BasicConfigurator.Configure(hierarchy);
+            return Path.Combine(directory, $"{withoutExtension}{DateTime.Now.ToString("yyyyMMdd")}{justExtension}");
         }
 
         public static void ChangeLoggingLevel(LoggingLevel loggingLevel)
         {
-            var hierarchy = (Hierarchy)LogManager.GetRepository();
-            hierarchy.Root.Level = Settings.LoggingLevel switch
+            // Off is secretly fatal as I don't know how to turn off logging :|
+            levelSwitch.MinimumLevel = Settings.LoggingLevel switch
             {
-                LoggingLevel.Debug => Level.Debug,
-                LoggingLevel.Info => Level.Info,
-                _ => Level.Off,
+                LoggingLevel.Verbose => LogEventLevel.Verbose,
+                LoggingLevel.Debug => LogEventLevel.Debug,
+                LoggingLevel.Info => LogEventLevel.Information,
+                LoggingLevel.Warning => LogEventLevel.Warning,
+                LoggingLevel.Error => LogEventLevel.Error,
+                _ => LogEventLevel.Fatal,
             };
-            hierarchy.RaiseConfigurationChanged(EventArgs.Empty);
         }
 
-        [Conditional("DEBUG")]
-        public static void Debug(string message)
+
+        public static void Verbose(string message, [CallerMemberName] string memberName = null, [CallerFilePath] string sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
         {
-            System.Diagnostics.Debug.WriteLine($"DEBUG - {message}");
-            logger.Debug(message);
+            Log.Verbose(FormatLine(message, memberName, sourceFilePath, sourceLineNumber));
         }
 
-        public static void Info(string message)
+        public static void Debug(string message, [CallerMemberName] string memberName = null, [CallerFilePath] string sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
         {
-            System.Diagnostics.Debug.WriteLine($"INFO - {message}");
-            logger.Info(message);
+            Log.Debug(FormatLine(message, memberName, sourceFilePath, sourceLineNumber));
+        }
+
+        public static void Info(string message, [CallerMemberName] string memberName = null, [CallerFilePath] string sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
+        {
+            Log.Information(FormatLine(message, memberName, sourceFilePath, sourceLineNumber));
+        }
+
+        public static void Warning(string message, [CallerMemberName] string memberName = null, [CallerFilePath] string sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
+        {
+            Log.Warning(FormatLine(message, memberName, sourceFilePath, sourceLineNumber));
+        }
+
+        public static void Error(string message, [CallerMemberName] string memberName = null, [CallerFilePath] string sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
+        {
+            Log.Error(FormatLine(message, memberName, sourceFilePath, sourceLineNumber));
+        }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        static string FormatLine(string message, string memberName, string sourceFilePath, int sourceLineNumber)
+        {
+            if (memberName is null || sourceFilePath is null || sourceLineNumber == 0)
+            {
+                return message;
+            }
+
+            return $"{Path.GetFileName(sourceFilePath)}:{sourceLineNumber} {memberName} - {message}";
         }
     }
 }

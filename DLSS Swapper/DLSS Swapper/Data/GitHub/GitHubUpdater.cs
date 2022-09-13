@@ -28,8 +28,8 @@ namespace DLSS_Swapper.Data.GitHub
             }
             catch (Exception err)
             {
-                Logger.Debug($"FetchLatestRelease Error: {err.Message}");
                 // NOOP
+                Logger.Error(err.Message);
                 return null;
             }
         }
@@ -42,8 +42,8 @@ namespace DLSS_Swapper.Data.GitHub
             }
             catch (Exception err)
             {
-                Logger.Debug($"GetFromTag Error: {err.Message}");
                 // NOOP
+                Logger.Error(err.Message);
                 return null;
             }
         }

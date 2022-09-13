@@ -1,4 +1,4 @@
-using DLSS_Swapper.Extensions;
+﻿using DLSS_Swapper.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -148,7 +148,7 @@ namespace DLSS_Swapper.Data
                 }
                 catch (Exception err)
                 {
-                    Logger.Debug($"ResetDll Error: {err.Message}");
+                    Logger.Error(err.Message);
                     return false;
                 }
             }
@@ -207,7 +207,7 @@ namespace DLSS_Swapper.Data
                     }
                     catch (Exception err)
                     {
-                        Logger.Debug($"UpdateDll Error: {err.Message}");
+                        Logger.Error(err.Message);
                         return false;
                     }
                 }
@@ -223,7 +223,7 @@ namespace DLSS_Swapper.Data
                 }
                 catch (Exception err)
                 {
-                    Logger.Debug($"UpdateDll Error: {err.Message}");
+                    Logger.Error(err.Message);
                     return false;
                 }
             }

@@ -145,7 +145,8 @@ namespace DLSS_Swapper
         }
 #endif
 
-        static LoggingLevel _loggingLevel = LoggingLevel.Off;
+        // Don't forget to change this back to off.
+        static LoggingLevel _loggingLevel = LoggingLevel.Verbose;
         public static LoggingLevel LoggingLevel
         {
             get { return _loggingLevel; }

@@ -1,6 +1,4 @@
 ﻿using CommunityToolkit.WinUI.UI.Controls;
-using log4net.Repository.Hierarchy;
-using log4net;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -22,10 +20,6 @@ using Windows.Foundation.Collections;
 using Windows.Foundation.Diagnostics;
 using Windows.System;
 using Windows.UI.ViewManagement;
-using log4net.Config;
-using log4net.Core;
-using log4net.Appender;
-using log4net.Layout;
 using System.Diagnostics;
 
 namespace DLSS_Swapper.Pages
@@ -66,7 +60,7 @@ namespace DLSS_Swapper.Pages
 
         public IEnumerable<LoggingLevel> LoggingLevels = Enum.GetValues(typeof(LoggingLevel)).Cast<LoggingLevel>();
 
-        public string CurrentLogPath => Path.Combine(Path.GetTempPath(), $"dlss_swapper.{DateTime.Now.ToString("yyyy.MM.dd")}.log");
+        public string CurrentLogPath => Logger.GetCurrentLogPath();
 
         public SettingsPage()
         {
@@ -246,11 +240,18 @@ namespace DLSS_Swapper.Pages
         {
             try
             {
-                Process.Start("explorer.exe", $"/select,{CurrentLogPath}");
+                if (File.Exists(CurrentLogPath))
+                {
+                    Process.Start("explorer.exe", $"/select,{CurrentLogPath}");
+                }
+                else
+                {
+                    Process.Start("explorer.exe", Path.GetDirectoryName(CurrentLogPath));
+                }
             }
             catch (Exception err)
             {
-                Logger.Debug($"LogFile_Click Error: {err.Message}");
+                Logger.Error(err.Message);
 
                 var dialog = new ContentDialog()
                 {

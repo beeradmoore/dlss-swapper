@@ -77,7 +77,7 @@ namespace DLSS_Swapper.Data
                     catch (Exception err)
                     {
                         // TODO: Report
-                        Logger.Debug($"ERROR: Unable to parse libraryfolders.vdf, {err.Message}");
+                        Logger.Error($"Unable to parse libraryfolders.vdf, {err.Message}");
                     }
                 }
 
@@ -119,7 +119,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Debug($"IsInstalled Error: {err.Message}");
+                Logger.Error(err.Message);
                 return null;
             }
         }
@@ -167,7 +167,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Debug($"Error GetGameFromAppManifest: {err.Message}");
+                Logger.Error(err.Message);
                 return null;
             }
         }

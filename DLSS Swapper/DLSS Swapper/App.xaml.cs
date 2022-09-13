@@ -1,10 +1,4 @@
 ﻿using DLSS_Swapper.Data;
-using log4net;
-using log4net.Appender;
-using log4net.Config;
-using log4net.Core;
-using log4net.Layout;
-using log4net.Repository.Hierarchy;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -65,10 +59,12 @@ namespace DLSS_Swapper
         public App()
         {
             Logger.Init();
-            Logger.Info("App launch");
 
             var version = Windows.ApplicationModel.Package.Current.Id.Version;
             var versionString = String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+
+
+            Logger.Info($"App launch - v{versionString}", null);
 
             _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper v{versionString}");
 
@@ -93,7 +89,7 @@ namespace DLSS_Swapper
         {
             var dllsPath = isImportedRecord ? "imported_dlls" : "dlls";
             var expectedPath = Path.Combine(dllsPath, $"{dlssRecord.Version}_{dlssRecord.MD5Hash}", "nvngx_dlss.dll");
-            Logger.Debug($"ExpectedPath: {expectedPath}");
+            
             // Load record.
             var localRecord = LocalRecord.FromExpectedPath(expectedPath);
 
@@ -190,7 +186,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Debug($"LoadDLSSRecords Error: {err.Message}");
+                Logger.Error(err.Message);
                 return false;
             }
         }

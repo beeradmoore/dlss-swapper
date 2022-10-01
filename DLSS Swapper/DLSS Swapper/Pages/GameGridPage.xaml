@@ -74,8 +74,13 @@
 
                         <TextBlock Text="{Binding Title}" Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
 
-                        <Image Width="200" Height="300" Grid.RowSpan="2" Source="{Binding HeaderImage}" />
-
+                        <!-- Weird, but allows image to strecth centered rather than left align -->
+                        <Border BorderThickness="0" Width="200" Height="300">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding HeaderImage}" Stretch="UniformToFill"/>
+                            </Border.Background>
+                        </Border>
+                        
                         <Grid VerticalAlignment="Bottom"  Background="#88000000" Padding="8" ColumnSpacing="8">
 
                             <Grid.ColumnDefinitions>

@@ -1,4 +1,4 @@
-using DLSS_Swapper.Extensions;
+﻿using DLSS_Swapper.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Data
 {
-    public class Game : IComparable<Game>, INotifyPropertyChanged
+    public abstract class Game : IComparable<Game>, INotifyPropertyChanged
     {
         public string Title { get; set; }
 
         public string InstallPath { get; set; }
 
-        public string HeaderImage { get; set; }
+        public abstract string HeaderImage { get; }
 
         string _baseDLSSVersion;
         public string BaseDLSSVersion

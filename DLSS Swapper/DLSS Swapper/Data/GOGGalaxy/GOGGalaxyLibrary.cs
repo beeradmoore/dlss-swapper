@@ -66,82 +66,59 @@ namespace DLSS_Swapper.Data.GOGGalaxy
 
             foreach (var installedBaseProduct in installedBaseProducts)
             {
-                var limitedDetail = limitedDetails.FirstOrDefault(x => x.ProductId == installedBaseProduct.ProductId);
-                if (limitedDetail == null)
+                try
                 {
-                    continue;
-                }
-
-                var localCoverImages = new List<string>();
-
-                var releaseKey = $"gog_{limitedDetail.ProductId}";
-                var fallbackImage = limitedDetail.ImagesData?.Logo2x ?? String.Empty;
-                var gamePieces = db.Query<GamePiece>("SELECT * FROM GamePieces WHERE releaseKey=? AND gamePieceTypeId=?", releaseKey, gamePieceTypeId);
-                if (gamePieces?.Any() == true)
-                {
-                    foreach (var gamePiece in gamePieces)
+                    var limitedDetail = limitedDetails.FirstOrDefault(x => x.ProductId == installedBaseProduct.ProductId);
+                    if (limitedDetail == null)
                     {
-                        var originalImages = gamePiece.GetValueAsOriginalImages();
-                        if (String.IsNullOrEmpty(originalImages.VerticalCover))
+                        continue;
+                    }
+
+                    var localCoverImages = new List<string>();
+
+                    var releaseKey = $"gog_{limitedDetail.ProductId}";
+                    var fallbackImage = limitedDetail.ImagesData?.Logo2x ?? String.Empty;
+                    var gamePieces = db.Query<GamePiece>("SELECT * FROM GamePieces WHERE releaseKey=? AND gamePieceTypeId=?", releaseKey, gamePieceTypeId);
+                    if (gamePieces?.Any() == true)
+                    {
+                        foreach (var gamePiece in gamePieces)
                         {
-                            fallbackImage = originalImages.VerticalCover;
-                            break;
+                            var originalImages = gamePiece.GetValueAsOriginalImages();
+                            if (String.IsNullOrEmpty(originalImages.VerticalCover))
+                            {
+                                fallbackImage = originalImages.VerticalCover;
+                                break;
+                            }
                         }
                     }
-                }
 
-                var webCaches = db.Query<WebCache>("SELECT * FROM WebCache WHERE releaseKey=?", releaseKey);
-                foreach (var webCache in webCaches)
-                {
-                    var webCacheResource = db.Query<WebCacheResource>("SELECT * FROM WebCacheResources WHERE webCacheId=? AND webCacheResourceTypeId=?", webCache.Id, webCacheResourceTypeId).FirstOrDefault();
-                    if (webCacheResource != null)
+                    var webCaches = db.Query<WebCache>("SELECT * FROM WebCache WHERE releaseKey=?", releaseKey);
+                    foreach (var webCache in webCaches)
                     {
-                        localCoverImages.Add(Path.Combine(programDataDirectory, "GOG.com", "Galaxy", "webcache", webCache.UserId.ToString(), "gog", limitedDetail.ProductId.ToString(), webCacheResource.Filename));                        
+                        var webCacheResource = db.Query<WebCacheResource>("SELECT * FROM WebCacheResources WHERE webCacheId=? AND webCacheResourceTypeId=?", webCache.Id, webCacheResourceTypeId).FirstOrDefault();
+                        if (webCacheResource != null)
+                        {
+                            localCoverImages.Add(Path.Combine(programDataDirectory, "GOG.com", "Galaxy", "webcache", webCache.UserId.ToString(), "gog", limitedDetail.ProductId.ToString(), webCacheResource.Filename));
+                        }
                     }
+
+
+                    var game = new GOGGame(localCoverImages, fallbackImage)
+                    {
+                        Title = limitedDetail.Title,
+                        InstallPath = installedBaseProduct.InstallationPath,
+                        //HeaderImage = limitedDetail.ImagesData?.Logo?.Replace("_logo.", "_vertical_cover."),
+                    };
+
+
+                    game.DetectDLSS();
+                    games.Add(game);
                 }
-
-
-                var game = new GOGGame(localCoverImages, fallbackImage)
+                catch (Exception err)
                 {
-                    Title = limitedDetail.Title,
-                    InstallPath = installedBaseProduct.InstallationPath,
-                    //HeaderImage = limitedDetail.ImagesData?.Logo?.Replace("_logo.", "_vertical_cover."),
-                };
-
-                /*
-                
-                GamePieces
-                releaseKey,gamePieceTypeId,userId,value
-                gog_1207658927,378,46988767830580582,"{""background"":""https:\/\/images.gog.com\/2c40bb032307ae1c58fccca9075bec260b844b868175d5c80047e5e6e6e60313_glx_bg_top_padding_7.webp?namespace=gamesdb"",""squareIcon"":""https:\/\/images.gog.com\/3870137e89407386f33fd4c136cc3e4d09dc60c900704220f40fb72baa01b577_glx_square_icon_v2.webp?namespace=gamesdb"",""verticalCover"":""https:\/\/images.gog.com\/3870137e89407386f33fd4c136cc3e4d09dc60c900704220f40fb72baa01b577_glx_vertical_cover.webp?namespace=gamesdb""}"
-
-
-                WebCache
-                id,releaseKey,userId
-                141,gog_1207658927,46988767830580582
-
-
-                WebCacheResources
-                webCacheId,webCacheResourceTypeId,filename
-                141,2,3870137e89407386f33fd4c136cc3e4d09dc60c900704220f40fb72baa01b577_glx_square_icon_v2.webp
-                141,3,3870137e89407386f33fd4c136cc3e4d09dc60c900704220f40fb72baa01b577_glx_vertical_cover.webp
-
-
-                WebCacheResourceTypes
-                id,type
-                1,background
-                2,squareIcon
-                3,verticalCover
-
-
-                C:\ProgramData\GOG.com\Galaxy\webcache\46988767830580582\gog\1207658927\3870137e89407386f33fd4c136cc3e4d09dc60c900704220f40fb72baa01b577_glx_vertical_cover.webp
-
-                */
-
-                // HeaderImage listed here and in webcache folder are different.
-                game.DetectDLSS();
-                games.Add(game);
+                    Logger.Error($"Could not load {installedBaseProduct.ProductId} - {err.Message}");
+                }
             }
-
 
             db.Close();
             db = null;

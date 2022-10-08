@@ -76,11 +76,11 @@ namespace DLSS_Swapper.Data.GOGGalaxy
                     // Make sure failed deserialize doens't crash the app.
                     try
                     {
-                        _imagesData = System.Text.Json.JsonSerializer.Deserialize<LimitedDetailImages>(Images);
+                        _imagesData = JsonSerializer.Deserialize<LimitedDetailImages>(Images);
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine($"Error deserialzing GOG images data for {Title}");
+                        Logger.Error($"Error deserialzing GOG images data for {Title}");
                     }
                 }
 

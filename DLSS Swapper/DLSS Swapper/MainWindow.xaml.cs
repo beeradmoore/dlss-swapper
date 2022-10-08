@@ -367,12 +367,13 @@ DLSS Swapper will close now.",
             }
             catch (FileNotFoundException)
             {
+                Logger.Warning("dlss_records.json not found, attempting to update from internet");
                 // If the file was not found we will download fresh records list (possibly for a second time)
                 return await UpdateDLSSRecordsAsync();
             }
             catch (Exception err)
             {
-                Console.WriteLine($"LoadDLSSRecords Error: {err.Message}");
+                Logger.Error(err.Message);
                 return false;
             }
         }
@@ -396,7 +397,7 @@ DLSS Swapper will close now.",
             }
             catch (Exception err)
             {
-                Debug.WriteLine($"LoadDLSSRecords Error: {err.Message}");
+                Logger.Error(err.Message);
                 return;
             }
         }
@@ -459,13 +460,13 @@ DLSS Swapper will close now.",
                     }
                     catch (Exception err)
                     {
-                        Console.WriteLine($"UpdateDLSSRecords Error: {err.Message}");
+                        Logger.Error(err.Message);
                     }
                 }
             }
             catch (Exception err)
             {
-                Console.WriteLine($"UpdateDLSSRecords Error: {err.Message}");
+                Logger.Error(err.Message);
             }
 
             return false;

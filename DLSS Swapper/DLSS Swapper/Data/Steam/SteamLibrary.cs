@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace DLSS_Swapper.Data
+namespace DLSS_Swapper.Data.Steam
 {
     class SteamLibrary : IGameLibrary
     {
@@ -19,9 +19,11 @@ namespace DLSS_Swapper.Data
         List<Game> _loadedDLSSGames = new List<Game>();
         public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
 
+        string _installPath = String.Empty;
+
         public bool IsInstalled()
         {
-            return (GetInstallPath() != null);
+            return GetInstallPath() != null;
         }
 
         public async Task<List<Game>> ListGamesAsync()
@@ -31,14 +33,14 @@ namespace DLSS_Swapper.Data
 
             // If we don't detect a steam install patg return an empty list.
             var installPath = GetInstallPath();
-            if (String.IsNullOrWhiteSpace(installPath))
+            if (string.IsNullOrWhiteSpace(installPath))
             {
                 return new List<Game>();
             }
 
             // I hope this runs on a background thread. 
             // Tasks are whack.
-            return await Task.Run<List<Game>>(() =>
+            return await Task.Run(() =>
             {
                 var games = new List<Game>();
 
@@ -107,18 +109,29 @@ namespace DLSS_Swapper.Data
             });
         }
 
-        string? GetInstallPath()
+        string GetInstallPath()
         {
+            if (String.IsNullOrEmpty(_installPath) == false)
+            {
+                return _installPath;
+            }
+
             try
             {
                 // Only focused on x64 machines.
                 var steamRegistryKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Valve\Steam");
                 // if steamRegistryKey is null then steam is not installed.
                 var installPath = steamRegistryKey?.GetValue("InstallPath") as String;
+                if (String.IsNullOrEmpty(installPath))
+                {
+                    _installPath = installPath;
+                }
+
                 return installPath;
             }
             catch (Exception err)
             {
+                _installPath = String.Empty;
                 Logger.Error(err.Message);
                 return null;
             }
@@ -129,7 +142,7 @@ namespace DLSS_Swapper.Data
             try
             {
                 var appManifest = File.ReadAllText(appManifestPath);
-                var game = new Game();
+                var game = new SteamGame(GetInstallPath());
 
                 var regex = new Regex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline);
                 var matches = regex.Matches(appManifest);
@@ -160,7 +173,7 @@ namespace DLSS_Swapper.Data
                 {
                     return null;
                 }
-                game.HeaderImage = $"https://steamcdn-a.akamaihd.net/steam/apps/{matches[0].Groups["appid"]}/library_600x900_2x.jpg"; // header.jpg";
+                game.AppId = matches[0].Groups["appid"].Value;
 
                 game.DetectDLSS();
                 return game;

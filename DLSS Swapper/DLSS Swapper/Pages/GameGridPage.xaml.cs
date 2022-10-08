@@ -1,4 +1,6 @@
 ﻿using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.GOGGalaxy;
+using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
@@ -49,21 +51,19 @@ namespace DLSS_Swapper.Pages
 
             // TODO: Settings to enable/disable game libraries.
 
-            // TODO: Restore Steam library.
-            
-            //var steamLibrary = new SteamLibrary();
+            var steamLibrary = new SteamLibrary();
             var gogGalaxyLibrary = new GOGGalaxyLibrary();
 
-            //GameLibraries.Add(steamLibrary);
+            GameLibraries.Add(steamLibrary);
             GameLibraries.Add(gogGalaxyLibrary);
 
-            //var steamGamesTask = steamLibrary.ListGamesAsync();
+            var steamGamesTask = steamLibrary.ListGamesAsync();
             var gogGalaxyLibraryTask = gogGalaxyLibrary.ListGamesAsync();
 
             // More game libraries go here.
 
             // Await them all to finish loading games.
-            //await Task.WhenAll(steamGamesTask);
+            await Task.WhenAll(steamGamesTask);
             await Task.WhenAll(gogGalaxyLibraryTask);
             
 

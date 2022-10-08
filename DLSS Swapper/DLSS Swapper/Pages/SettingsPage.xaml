@@ -54,6 +54,19 @@
                     </TextBlock>
                 </StackPanel>
 
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Logging" />
+                <StackPanel Margin="0,10,0,0">
+                    <ComboBox x:Name="LoggingComboBox" ItemsSource="{x:Bind LoggingLevels}" SelectionChanged="LoggingComboBox_SelectionChanged" />
+                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
+                        This will write a log to your temp folder which should help diagnose issues. Your current log file is <Hyperlink Click="LogFile_Click"><Run Text="{x:Bind CurrentLogPath}" /></Hyperlink>.
+                    </TextBlock>
+                </StackPanel>
+
+
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"

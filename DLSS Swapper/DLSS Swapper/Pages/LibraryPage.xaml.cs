@@ -171,7 +171,7 @@ namespace DLSS_Swapper.Pages
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"ExportRecordAsync Error: {err.Message}");
+                Logger.Error(err.Message);
 
                 // If the fullExpectedPath does not exist, or there was an error writing it.
                 var dialog = new ContentDialog();
@@ -317,8 +317,8 @@ Only import dlls from sources you trust.",
                 }
                 catch (Exception err)
                 {
-                    int x = 0;
                     // TODO: ERROR
+                    Logger.Error(err.Message);
                 }
             }
         }
@@ -408,7 +408,7 @@ Only import dlls from sources you trust.",
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"ExportRecordAsync Error: {err.Message}");
+                Logger.Error(err.Message);
 
                 // If the fullExpectedPath does not exist, or there was an error writing it.
                 var dialog = new ContentDialog();

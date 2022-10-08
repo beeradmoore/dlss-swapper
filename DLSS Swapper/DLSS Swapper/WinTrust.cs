@@ -340,7 +340,7 @@ namespace DLSS_Swapper
                                 subject.
                         */
                         validSignature = true;
-                        System.Diagnostics.Debug.WriteLine("The file \"%s\" is signed and the signature was verified.", fileName);
+                        Logger.Info($"The file \"{fileName}\" is signed and the signature was verified.");
                         break;
 
                     case WinVerifyTrustResult.TRUST_E_NOSIGNATURE:
@@ -354,13 +354,13 @@ namespace DLSS_Swapper
                             (uint)WinVerifyTrustResult.TRUST_E_PROVIDER_UNKNOWN == dwLastError)
                         {
                             // The file was not signed.
-                            System.Diagnostics.Debug.WriteLine("The file \"%s\" is not signed.", fileName);
+                            Logger.Warning($"The file \"{fileName}\" is not signed.");
                         }
                         else
                         {
                             // The signature was not valid or there was an error 
                             // opening the file.
-                            System.Diagnostics.Debug.WriteLine("An unknown error occurred trying to verify the signature of the \"%s\" file.", fileName);
+                            Logger.Error($"An unknown error occurred trying to verify the signature of the \"{fileName}\" file.");
                         }
 
                         break;
@@ -368,12 +368,12 @@ namespace DLSS_Swapper
                     case WinVerifyTrustResult.TRUST_E_EXPLICIT_DISTRUST:
                         // The hash that represents the subject or the publisher 
                         // is not allowed by the admin or user.
-                        System.Diagnostics.Debug.WriteLine("The signature is present, but specifically disallowed.");
+                        Logger.Warning("The signature is present, but specifically disallowed.");
                         break;
 
                     case WinVerifyTrustResult.TRUST_E_SUBJECT_NOT_TRUSTED:
                         // The user clicked "No" when asked to install and run.
-                        System.Diagnostics.Debug.WriteLine("The signature is present, but not trusted.");
+                        Logger.Error("The signature is present, but not trusted.");
                         break;
 
                     case WinVerifyTrustResult.CRYPT_E_SECURITY_SETTINGS:
@@ -383,19 +383,19 @@ namespace DLSS_Swapper
                         admin policy has disabled user trust. No signature, 
                         publisher or time stamp errors.
                         */
-                        System.Diagnostics.Debug.WriteLine("CRYPT_E_SECURITY_SETTINGS - The hash representing the subject or the publisher wasn't explicitly trusted by the admin and admin policy has disabled user trust. No signature, publisher or timestamp errors.");
+                        Logger.Error("CRYPT_E_SECURITY_SETTINGS - The hash representing the subject or the publisher wasn't explicitly trusted by the admin and admin policy has disabled user trust. No signature, publisher or timestamp errors.");
                         break;
 
                     case WinVerifyTrustResult.CRYPT_E_FILE_ERROR:
                         //An error occurred while reading or writing to a file.
-                        System.Diagnostics.Debug.WriteLine("CRYPT_E_FILE_ERROR - An error occurred while reading or writing to a file.");
+                        Logger.Error("CRYPT_E_FILE_ERROR - An error occurred while reading or writing to a file.");
                         break;
 
                     default:
                         // The UI was disabled in dwUIChoice or the admin policy 
                         // has disabled user trust. lStatus contains the 
                         // publisher or time stamp chain error.
-                        System.Diagnostics.Debug.WriteLine("Error is: 0x%x.\n", lStatus);
+                        Logger.Error($"Error is: 0x{lStatus}.");
                         break;
                 }
 
@@ -406,8 +406,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"VerifyEmbeddedSignature Error: {err.Message}");
-
+                Logger.Error(err.Message);
             }
             finally
             {
@@ -449,7 +448,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"VerifyEmbeddedSignature Error: {err.Message}");
+                Logger.Error(err.Message);
                 return false;
             }
             finally

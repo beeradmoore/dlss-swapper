@@ -83,7 +83,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"ThemeWatcher Error: {err.Message}");
+                Logger.Error(err.Message);
             }
 
             try
@@ -95,10 +95,10 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"ThemeWatcher Error: {err.Message}");
+                Logger.Error(err.Message);
             }
 
-            System.Diagnostics.Debug.WriteLine($"ThemeWatcher Start ({DateTimeOffset.UtcNow.ToUnixTimeSeconds()}): {GetWindowsTheme()}, {HighContrast}");
+            Logger.Info($"{GetWindowsTheme()}, {HighContrast}");
 
         }
 
@@ -123,14 +123,14 @@ namespace DLSS_Swapper
 
         private void ContrastWatcher_EventArrived(object sender, EventArrivedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine($"ContrastWatcher_EventArrived ({DateTimeOffset.UtcNow.ToUnixTimeSeconds()}): {GetWindowsTheme()}, {HighContrast}");
+            Logger.Info($"{GetWindowsTheme()}, {HighContrast}");
 
             ContrastChanged?.Invoke(this, HighContrast);
         }
 
         private void ThemeWatcher_EventArrived(object sender, EventArrivedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine($"ThemeWatcher_EventArrived ({DateTimeOffset.UtcNow.ToUnixTimeSeconds()}): {GetWindowsTheme()}, {HighContrast}");
+            Logger.Info($"{GetWindowsTheme()}, {HighContrast}");
 
             ThemeChanged?.Invoke(this, GetWindowsApplicationTheme());
         }
@@ -143,15 +143,13 @@ namespace DLSS_Swapper
                 {
                     if (key?.GetValue(RegistryThemeValueName) is int registryValue)
                     {
-                        System.Diagnostics.Debug.WriteLine($"RegistryValue: {registryValue}");
                         return registryValue > 0 ? ApplicationTheme.Light : ApplicationTheme.Dark;
                     }
-
                 }
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"GetWindowsTheme Error: {err.Message}");
+                Logger.Error(err.Message);
             }
 
             return _defaultApplicationTheme;
@@ -168,19 +166,17 @@ namespace DLSS_Swapper
                 {
                     if (key?.GetValue(RegistryThemeValueName) is int registryValue)
                     {
-                        System.Diagnostics.Debug.WriteLine($"RegistryValue: {registryValue}");
                         theme = registryValue > 0 ? WindowsTheme.Light : WindowsTheme.Dark;
 
                         return theme;
                     }
-
                 }
 
                 return theme;
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"GetWindowsTheme Error: {err.Message}");
+                Logger.Error(err.Message);
                 return theme;
             }
         }

@@ -79,7 +79,7 @@ namespace DLSS_Swapper.Data.Steam
                     catch (Exception err)
                     {
                         // TODO: Report
-                        System.Diagnostics.Debug.WriteLine($"ERROR: Unable to parse libraryfolders.vdf, {err.Message}");
+                        Logger.Error($"Unable to parse libraryfolders.vdf, {err.Message}");
                     }
                 }
 
@@ -132,7 +132,7 @@ namespace DLSS_Swapper.Data.Steam
             catch (Exception err)
             {
                 _installPath = String.Empty;
-                System.Diagnostics.Debug.WriteLine($"IsInstalled Error: {err.Message}");
+                Logger.Error(err.Message);
                 return null;
             }
         }
@@ -180,7 +180,7 @@ namespace DLSS_Swapper.Data.Steam
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine($"Error GetGameFromAppManifest: {err.Message}");
+                Logger.Error(err.Message);
                 return null;
             }
         }

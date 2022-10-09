@@ -243,6 +243,23 @@ namespace DLSS_Swapper
                 Settings.HasShownWindowsStoreUpdateMessage = true;
             }
 
+
+
+            if (Settings.HasShownMultiplayerWarning == false)
+            {
+                var dialog = new ContentDialog()
+                {
+                    Title = "Note for multiplayer games",
+                    CloseButtonText = "Okay",
+                    Content = "While swapping DLSS versions should not be considered cheating, certain anti-cheat systems may not be happy with you if the files in your game directory are not what the game was distributed with.\n\nBecause of this we recommend using caution for multiplayer games.",
+                    XamlRoot = MainNavigationView.XamlRoot,
+                };
+
+                var result = await dialog.ShowAsync();
+
+                Settings.HasShownMultiplayerWarning = true;
+            }
+
 #endif
 
             var didLoadDlssRecords = await loadDlssRecrodsTask;

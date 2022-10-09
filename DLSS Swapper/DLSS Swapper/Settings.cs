@@ -26,6 +26,19 @@ namespace DLSS_Swapper
             }
         }
 
+        static bool _hasShownMultiplayerWarning = false;
+        public static bool HasShownMultiplayerWarning
+        {
+            get { return _hasShownMultiplayerWarning; }
+            set
+            {
+                if (_hasShownMultiplayerWarning != value)
+                {
+                    _hasShownMultiplayerWarning = value;
+                    ApplicationData.Current.LocalSettings.Values["HasShownMultiplayerWarning"] = value;
+                }
+            }
+        }
 
         static bool _hideNonDLSSGames = true;
         public static bool HideNonDLSSGames
@@ -173,6 +186,16 @@ namespace DLSS_Swapper
                     _hasShownWarning = hasShownWarning;
                 }
             }
+
+
+            if (localSettings.Values.TryGetValue("HasShownMultiplayerWarning", out object tempHasShownMultiplayerWarning))
+            {
+                if (tempHasShownMultiplayerWarning is bool hasShownMultiplayerWarning)
+                {
+                    _hasShownMultiplayerWarning = hasShownMultiplayerWarning;
+                }
+            }
+                        
 
             if (localSettings.Values.TryGetValue("HideNonDLSSGames", out object tempHideNonDLSSGames))
             {

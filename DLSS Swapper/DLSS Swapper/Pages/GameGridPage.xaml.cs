@@ -1,6 +1,7 @@
 ﻿using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.GOGGalaxy;
 using DLSS_Swapper.Data.Steam;
+using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
@@ -53,19 +54,23 @@ namespace DLSS_Swapper.Pages
 
             var steamLibrary = new SteamLibrary();
             var gogGalaxyLibrary = new GOGGalaxyLibrary();
+            var ubisoftConnectLibrary = new UbisoftConnectLibrary();
 
             GameLibraries.Add(steamLibrary);
             GameLibraries.Add(gogGalaxyLibrary);
+            GameLibraries.Add(ubisoftConnectLibrary);
 
             var steamGamesTask = steamLibrary.ListGamesAsync();
             var gogGalaxyLibraryTask = gogGalaxyLibrary.ListGamesAsync();
+            var ubisoftConnectLibraryTask = ubisoftConnectLibrary.ListGamesAsync();
 
             // More game libraries go here.
 
             // Await them all to finish loading games.
             await Task.WhenAll(steamGamesTask);
             await Task.WhenAll(gogGalaxyLibraryTask);
-            
+            await Task.WhenAll(ubisoftConnectLibraryTask);
+
 
             DispatcherQueue.TryEnqueue(() =>
             {

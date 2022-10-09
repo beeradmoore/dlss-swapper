@@ -119,15 +119,17 @@ namespace DLSS_Swapper.Data.Steam
             try
             {
                 // Only focused on x64 machines.
-                var steamRegistryKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Valve\Steam");
-                // if steamRegistryKey is null then steam is not installed.
-                var installPath = steamRegistryKey?.GetValue("InstallPath") as String;
-                if (String.IsNullOrEmpty(installPath))
+                using (var steamRegistryKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Valve\Steam"))
                 {
-                    _installPath = installPath;
-                }
+                    // if steamRegistryKey is null then steam is not installed.
+                    var installPath = steamRegistryKey?.GetValue("InstallPath") as String;
+                    if (String.IsNullOrEmpty(installPath))
+                    {
+                        _installPath = installPath;
+                    }
 
-                return installPath;
+                    return installPath;
+                }
             }
             catch (Exception err)
             {

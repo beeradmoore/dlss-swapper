@@ -32,7 +32,7 @@ namespace DLSS_Swapper.Data.GOGGalaxy
 
             // If we don't detect a GOG Galaxy install path return an empty list.
             var storageFileLocation = GetStorageFileLocation();
-            if (string.IsNullOrWhiteSpace(storageFileLocation))
+            if (String.IsNullOrWhiteSpace(storageFileLocation))
             {
                 return new List<Game>();
             }
@@ -138,7 +138,7 @@ namespace DLSS_Swapper.Data.GOGGalaxy
                 return storageFileLocation;
             }
 
-            return null;
+            return String.Empty;
         }
     }
 }

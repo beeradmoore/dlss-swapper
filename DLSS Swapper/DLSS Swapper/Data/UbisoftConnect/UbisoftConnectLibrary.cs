@@ -25,7 +25,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         public bool IsInstalled()
         {
-            return GetInstallPath() != null;
+            return String.IsNullOrEmpty(GetInstallPath()) == false;
         }
 
 
@@ -34,6 +34,11 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             _loadedGames.Clear();
             _loadedDLSSGames.Clear();
             var games = new List<Game>();
+
+            if (IsInstalled() == false)
+            {
+                return games;
+            }
 
             var configurationPath = Path.Combine(GetInstallPath(), "cache", "configuration", "configurations");
             var assetsPath = Path.Combine(GetInstallPath(), "cache", "assets");
@@ -266,21 +271,25 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 // Only focused on x64 machines.
                 using (var ubisoftConnectRegistryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Ubisoft\Launcher"))
                 {
+                    if (ubisoftConnectRegistryKey == null)
+                    {
+                        return String.Empty;
+                    }
                     // if ubisoftConnectRegistryKey is null then steam is not installed.
                     var installPath = ubisoftConnectRegistryKey?.GetValue("InstallDir") as String;
-                    if (String.IsNullOrEmpty(installPath))
+                    if (String.IsNullOrEmpty(installPath) == false)
                     {
                         _installPath = installPath;
                     }
 
-                    return installPath;
+                    return _installPath ?? String.Empty;
                 }
             }
             catch (Exception err)
             {
                 _installPath = String.Empty;
                 Logger.Error(err.Message);
-                return null;
+                return String.Empty;
             }
         }        
     }

@@ -23,7 +23,7 @@ namespace DLSS_Swapper.Data.Steam
 
         public bool IsInstalled()
         {
-            return GetInstallPath() != null;
+            return String.IsNullOrEmpty(GetInstallPath()) == false;
         }
 
         public async Task<List<Game>> ListGamesAsync()
@@ -33,7 +33,7 @@ namespace DLSS_Swapper.Data.Steam
 
             // If we don't detect a steam install patg return an empty list.
             var installPath = GetInstallPath();
-            if (string.IsNullOrWhiteSpace(installPath))
+            if (String.IsNullOrEmpty(installPath))
             {
                 return new List<Game>();
             }
@@ -128,14 +128,14 @@ namespace DLSS_Swapper.Data.Steam
                         _installPath = installPath;
                     }
 
-                    return installPath;
+                    return installPath ?? String.Empty;
                 }
             }
             catch (Exception err)
             {
                 _installPath = String.Empty;
                 Logger.Error(err.Message);
-                return null;
+                return String.Empty;
             }
         }
 

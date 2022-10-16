@@ -24,11 +24,7 @@ namespace DLSS_Swapper.Data.EpicGameStore
 
         public bool IsInstalled()
         {
-            if (String.IsNullOrEmpty(GetEpicRootDirectory()))
-            {
-                return false;
-            }
-            return true;
+            return String.IsNullOrEmpty(GetEpicRootDirectory()) == false;
         }
 
         public async Task<List<Game>> ListGamesAsync()

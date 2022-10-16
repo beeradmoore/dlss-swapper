@@ -22,7 +22,7 @@ namespace DLSS_Swapper.Data.GOGGalaxy
 
         public bool IsInstalled()
         {
-            return GetStorageFileLocation() != null;
+            return String.IsNullOrEmpty(GetStorageFileLocation()) == false;
         }
 
         public async Task<List<Game>> ListGamesAsync()

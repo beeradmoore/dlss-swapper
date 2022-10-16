@@ -124,7 +124,7 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        internal bool ResetDll()
+        internal (bool Success, string Message, bool PromptToRelaunchAsAdmin) ResetDll()
         {
             var enumerationOptions = new EnumerationOptions();
             enumerationOptions.RecurseSubdirectories = true;
@@ -132,7 +132,7 @@ namespace DLSS_Swapper.Data
             var foundDllBackups = Directory.GetFiles(InstallPath, "nvngx_dlss.dll.dlsss", enumerationOptions);
             if (foundDllBackups.Length == 0)
             {
-                return false;
+                return (false, "Unable to reset to default. Please repair your game manually.", false);
             }
 
             var versionInfo = FileVersionInfo.GetVersionInfo(foundDllBackups.First());
@@ -146,24 +146,41 @@ namespace DLSS_Swapper.Data
                     var targetDllPath = Path.Combine(dllPath, "nvngx_dlss.dll");
                     File.Move(dll, targetDllPath, true);
                 }
+                catch (UnauthorizedAccessException err)
+                {
+                    Logger.Error($"UnauthorizedAccessException: {err.Message}");
+                    if (App.CurrentApp.IsRunningAsAdministrator())
+                    {
+                        return (false, "Unable to reset to default. Please repair your game manually.", false);
+                    }
+                    else
+                    {
+                        return (false, "Unable to reset to default. Running DLSS Swapper as administrator may fix this.", true);
+                    }
+                }
                 catch (Exception err)
                 {
                     Logger.Error(err.Message);
-                    return false;
+                    return (false, "Unable to reset to default. Please repair your game manually.", false);
                 }
             }
 
             CurrentDLSSVersion = resetToVersion;
             BaseDLSSVersion = String.Empty;
 
-            return true;
+            return (true, String.Empty, false);
         }
 
-        internal bool UpdateDll(DLSSRecord dlssRecord)
+        /// <summary>
+        /// Attempts to update a DLSS dll in a given game.
+        /// </summary>
+        /// <param name="dlssRecord"></param>
+        /// <returns>Tuple containing a boolean of Success, if this is false there will be an error message in the Message response.</returns>
+        internal (bool Success, string Message, bool PromptToRelaunchAsAdmin) UpdateDll(DLSSRecord dlssRecord)
         {
             if (dlssRecord == null)
             {
-                return false;
+                return (false, "Unable to swap DLSS dll as your DLSS record was not found.", false);
             }
             var enumerationOptions = new EnumerationOptions();
             enumerationOptions.RecurseSubdirectories = true;
@@ -171,7 +188,7 @@ namespace DLSS_Swapper.Data
             var foundDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
             if (foundDlls.Length == 0)
             {
-                return false;
+                return (false, "Unable to swap DLSS dll as there were no DLSS records to update.", false);
             }
 
 
@@ -183,7 +200,7 @@ namespace DLSS_Swapper.Data
                 bool isTrusted = WinTrust.VerifyEmbeddedSignature(newDllPath);
                 if (isTrusted == false)
                 {
-                    return false;
+                    return (false, "Unable to swap DLSS dll as we are unable to verify the signature of the DLSS version you are trying to use.\nIf you wish to override this decision please enable 'Allow Untrusted' in settings.", false);
                 }
             }
 
@@ -205,10 +222,23 @@ namespace DLSS_Swapper.Data
 
                         File.Copy(dll, targetDllPath, true);
                     }
+                    catch (UnauthorizedAccessException err)
+                    {
+                        Logger.Error($"UnauthorizedAccessException: {err.Message}");
+                        if (App.CurrentApp.IsRunningAsAdministrator())
+                        {
+                            return (false, "Unable to swap DLSS dll as we are unable to write to the target directory.", false);
+
+                        }
+                        else
+                        {
+                            return (false, "Unable to swap DLSS dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
+                        }
+                    }
                     catch (Exception err)
                     {
                         Logger.Error(err.Message);
-                        return false;
+                        return (false, "Unable to swap DLSS dll. Please check your error log for more information.", false);
                     }
                 }
             }
@@ -221,10 +251,23 @@ namespace DLSS_Swapper.Data
                 {
                     File.Copy(newDllPath, dll, true);
                 }
+                catch (UnauthorizedAccessException err)
+                {
+                    Logger.Error($"UnauthorizedAccessException: {err.Message}");
+                    if (App.CurrentApp.IsRunningAsAdministrator())
+                    {
+                        return (false, "Unable to swap DLSS dll as we are unable to write to the target directory.", false);
+
+                    }
+                    else
+                    {
+                        return (false, "Unable to swap DLSS dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
+                    }
+                }
                 catch (Exception err)
                 {
                     Logger.Error(err.Message);
-                    return false;
+                    return (false, "Unable to swap DLSS dll. Please check your error log for more information.", false);
                 }
             }
 
@@ -234,7 +277,7 @@ namespace DLSS_Swapper.Data
                 BaseDLSSVersion = baseDllVersion;
             }
 
-            return true;
+            return (true, String.Empty, false);
         }
 
         #region IComparable<Game>

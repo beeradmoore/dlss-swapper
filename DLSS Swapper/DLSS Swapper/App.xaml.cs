@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
@@ -190,5 +191,38 @@ namespace DLSS_Swapper
                 return false;
             }
         }
+
+
+        internal bool IsRunningAsAdministrator()
+        {
+            var principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
+        /*
+        // Disabled as I am unsure how to prompt to run as admin.
+        internal void RelaunchAsAdministrator()
+        {
+            //var currentExe = Process.GetCurrentProcess().MainModule.FileName;
+
+            //var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+            //executingAssembly.FullName;
+            
+            // So this does prompt UAC, this was temporarily used to copy files in UpdateDll and ResetDll
+            // but it would prompt for every action. 
+            //var startInfo = new ProcessStartInfo()
+            //{
+            //    WindowStyle = ProcessWindowStyle.Hidden,
+            //    FileName = "cmd.exe",
+            //    Arguments = $"/C copy \"{dll}\" \"{targetDllPath}\"",
+            //    UseShellExecute = true,
+            //    Verb = "runas",
+            //};
+            //Process.Start(startInfo);
+
+            MainWindow.Close();
+            //Logger.Error(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        }
+        */
     }
 }

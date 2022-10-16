@@ -20,6 +20,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -202,35 +203,61 @@ namespace DLSS_Swapper.Pages
                         return;
                     }
 
+                    var didUpdate = game.UpdateDll(selectedDLSSRecord);
 
-                    bool didUpdate = game.UpdateDll(selectedDLSSRecord);
-
-                    if (didUpdate == false)
+                    if (didUpdate.Success == false)
                     {
                         dialog = new ContentDialog();
                         dialog.Title = "Error";
                         dialog.PrimaryButtonText = "Okay";
                         dialog.DefaultButton = ContentDialogButton.Primary;
-                        dialog.Content = "Unable to update DLSS dll. You may need to repair your game manually.";
+                        /*
+                        // Disabled as I am unsure how to prompt to run as admin.
+                        if (didUpdate.PromptToRelaunchAsAdmin == true)
+                        {
+                            dialog.SecondaryButtonText = "Relaunch as Administrator";
+                        }
+                        */
+                        dialog.Content = didUpdate.Message;
                         dialog.XamlRoot = XamlRoot;
                         dialog.RequestedTheme = Settings.AppTheme;
-                        await dialog.ShowAsync();
+                        var dialogResult = await dialog.ShowAsync();
+                        /*
+                        // Disabled as I am unsure how to prompt to run as admin.
+                        if (didUpdate.PromptToRelaunchAsAdmin == true && dialogResult == ContentDialogResult.Secondary)
+                        {
+                            App.CurrentApp.RelaunchAsAdministrator();
+                        }
+                        */
                     }
                 }
                 else if (result == ContentDialogResult.Secondary)
                 {
-                    bool didReset = game.ResetDll();
+                    var didReset = game.ResetDll();
 
-                    if (didReset == false)
+                    if (didReset.Success == false)
                     {
                         dialog = new ContentDialog();
                         dialog.Title = "Error";
                         dialog.PrimaryButtonText = "Okay";
                         dialog.DefaultButton = ContentDialogButton.Primary;
-                        dialog.Content = "Unable to reset to default. Please repair your game manually.";
+                        dialog.Content = didReset.Message;
+                        /*
+                        // Disabled as I am unsure how to prompt to run as admin.
+                        if (didReset.PromptToRelaunchAsAdmin == true)
+                        {
+                            dialog.SecondaryButtonText = "Relaunch as Administrator";
+                        }
+                        */
                         dialog.XamlRoot = XamlRoot;
                         dialog.RequestedTheme = Settings.AppTheme;
-                        await dialog.ShowAsync();
+                        var dialogResult = await dialog.ShowAsync();/*
+                        // Disabled as I am unsure how to prompt to run as admin.
+                        if (didReset.PromptToRelaunchAsAdmin == true && dialogResult == ContentDialogResult.Secondary)
+                        {
+                            App.CurrentApp.RelaunchAsAdministrator();
+                        }
+                        */
                     }
                 }
             }

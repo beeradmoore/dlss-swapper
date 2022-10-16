@@ -86,6 +86,17 @@ namespace DLSS_Swapper.Data
             BaseDLSSVersion = String.Empty;
             CurrentDLSSVersion = "N/A";
 
+
+            if (String.IsNullOrEmpty(InstallPath))
+            {
+                return;
+            }
+
+            if (Directory.Exists(InstallPath) == false)
+            {
+                return;
+            }
+
             var enumerationOptions = new EnumerationOptions();
             enumerationOptions.RecurseSubdirectories = true;
             enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;

@@ -1,4 +1,5 @@
 ﻿using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.EpicGameStore;
 using DLSS_Swapper.Data.GOGGalaxy;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
@@ -58,21 +59,24 @@ namespace DLSS_Swapper.Pages
             var gogGalaxyLibrary = new GOGGalaxyLibrary();
             var ubisoftConnectLibrary = new UbisoftConnectLibrary();
             var xboxLibrary = new XboxLibrary();
+            var epicGameStoreLibary = new EpicGameStoreLibrary();
 
             GameLibraries.Add(steamLibrary);
             GameLibraries.Add(gogGalaxyLibrary);
             GameLibraries.Add(ubisoftConnectLibrary);
             GameLibraries.Add(xboxLibrary);
+            GameLibraries.Add(epicGameStoreLibary);
 
             var steamGamesTask = steamLibrary.ListGamesAsync();
             var gogGalaxyLibraryTask = gogGalaxyLibrary.ListGamesAsync();
             var ubisoftConnectLibraryTask = ubisoftConnectLibrary.ListGamesAsync();
             var xboxLibraryTask = xboxLibrary.ListGamesAsync();
+            var epicGameStoreLibaryTask = epicGameStoreLibary.ListGamesAsync();
 
             // More game libraries go here.
 
             // Await them all to finish loading games.
-            await Task.WhenAll(steamGamesTask, gogGalaxyLibraryTask, ubisoftConnectLibraryTask, xboxLibraryTask);
+            await Task.WhenAll(steamGamesTask, gogGalaxyLibraryTask, ubisoftConnectLibraryTask, xboxLibraryTask, epicGameStoreLibaryTask);
             
             DispatcherQueue.TryEnqueue(() =>
             {

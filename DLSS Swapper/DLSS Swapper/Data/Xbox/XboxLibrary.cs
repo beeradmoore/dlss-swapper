@@ -19,6 +19,7 @@ namespace DLSS_Swapper.Data.Xbox
 {
     internal class XboxLibrary : IGameLibrary
     {
+        public GameLibrary GameLibrary => GameLibrary.XboxApp;
         public string Name => "Xbox App";
 
         List<Game> _loadedGames = new List<Game>();

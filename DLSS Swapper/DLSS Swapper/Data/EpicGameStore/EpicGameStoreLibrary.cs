@@ -13,7 +13,7 @@ namespace DLSS_Swapper.Data.EpicGameStore
 {
     internal class EpicGameStoreLibrary : IGameLibrary
     {
-
+        public GameLibrary GameLibrary => GameLibrary.EpicGamesStore;
         public string Name => "Epic Games Store";
 
         List<Game> _loadedGames = new List<Game>();

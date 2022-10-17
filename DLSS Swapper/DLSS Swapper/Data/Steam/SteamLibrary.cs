@@ -11,6 +11,7 @@ namespace DLSS_Swapper.Data.Steam
 {
     class SteamLibrary : IGameLibrary
     {
+        public GameLibrary GameLibrary => GameLibrary.Steam;
         public string Name => "Steam";
 
         List<Game> _loadedGames = new List<Game>();

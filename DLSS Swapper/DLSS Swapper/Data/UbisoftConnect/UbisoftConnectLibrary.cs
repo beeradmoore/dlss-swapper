@@ -13,6 +13,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 {
     internal class UbisoftConnectLibrary : IGameLibrary
     {
+        public GameLibrary GameLibrary => GameLibrary.UbisoftConnect;
         public string Name => "Ubisoft Connect";
 
         List<Game> _loadedGames = new List<Game>();

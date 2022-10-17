@@ -12,6 +12,7 @@ namespace DLSS_Swapper.Data.GOGGalaxy
 {
     internal class GOGGalaxyLibrary : IGameLibrary
     {
+        public GameLibrary GameLibrary => GameLibrary.GoG;
         public string Name => "GOG Galaxy";
 
         List<Game> _loadedGames = new List<Game>();

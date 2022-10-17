@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Activation;
 using Windows.Foundation.Diagnostics;
 using Windows.Storage;
 
@@ -173,6 +174,35 @@ namespace DLSS_Swapper
             }
         }
 
+        static uint _enabledGameLibraries = uint.MaxValue;
+        public static uint EnabledGameLibraries
+        {
+            get { return _enabledGameLibraries; }
+            set
+            {
+                if (_enabledGameLibraries != value)
+                {
+                    _enabledGameLibraries = value;
+                    ApplicationData.Current.LocalSettings.Values["EnabledGameLibraries"] = (uint)_enabledGameLibraries;
+                }
+            }
+        }
+
+
+        static bool _wasLoadingGames = false;
+        public static bool WasLoadingGames
+        {
+            get { return _wasLoadingGames; }
+            set
+            {
+                if (_wasLoadingGames != value)
+                {
+                    _wasLoadingGames = value;
+                    ApplicationData.Current.LocalSettings.Values["WasLoadingGames"] = value;
+                }
+            }
+        }
+
         static Settings()
         {
 
@@ -270,6 +300,22 @@ namespace DLSS_Swapper
                 if (tempLoggingLevel is int loggingLevel)
                 {
                     _loggingLevel = (LoggingLevel)loggingLevel;
+                }
+            }
+
+            if (localSettings.Values.TryGetValue("EnabledGameLibraries", out object tempEnabledGameLibraries))
+            {
+                if (tempEnabledGameLibraries is uint enabledGameLibraries)
+                {
+                    _enabledGameLibraries = enabledGameLibraries;
+                }
+            }
+
+            if (localSettings.Values.TryGetValue("WasLoadingGames", out object tempWasLoadingGames))
+            {
+                if (tempWasLoadingGames is bool wasLoadingGames)
+                {
+                    _wasLoadingGames = wasLoadingGames;
                 }
             }
         }

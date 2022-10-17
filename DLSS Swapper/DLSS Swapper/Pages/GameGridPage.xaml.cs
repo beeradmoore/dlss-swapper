@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
@@ -46,38 +47,107 @@ namespace DLSS_Swapper.Pages
         {
             this.InitializeComponent();
             DataContext = this;
+
         }
 
 
         async Task LoadGamesAsync()
         {
+            // Added this check so if we get to here and this is true we probably crashed loading games last time and we should prompt for that.
+            if (Settings.WasLoadingGames)
+            {
+                var richTextBlock = new RichTextBlock();
+                var paragraph = new Paragraph()
+                {
+                    Margin = new Thickness(0, 0, 0, 0),
+                };
+                paragraph.Inlines.Add(new Run()
+                {
+                    Text = "DLSS Swapper had an issue loading game libraries.  Please try disabling a game library below. You can re-enable these options later in the settings.",
+                });
+                richTextBlock.Blocks.Add(paragraph);
+                paragraph = new Paragraph()
+                {
+                    Margin = new Thickness(0, 0, 0, 0),
+                };
+                paragraph.Inlines.Add(new Run()
+                {
+                    Text = "If this keeps happening please file a bug report ",
+                });
+                var hyperLink = new Hyperlink()
+                {
+                    NavigateUri = new Uri("https://github.com/beeradmoore/dlss-swapper/issues"),
+
+                };
+                hyperLink.Inlines.Add(new Run()
+                {
+                    Text = "here"
+                });
+                paragraph.Inlines.Add(hyperLink);
+                paragraph.Inlines.Add(new Run()
+                {
+                    Text = ".",
+                });
+                richTextBlock.Blocks.Add(paragraph);
+
+
+
+
+                var grid = new Grid()
+                {
+                    RowSpacing = 10,
+                };
+                grid.RowDefinitions.Add(new RowDefinition());
+                grid.RowDefinitions.Add(new RowDefinition());
+
+                Grid.SetRow(richTextBlock, 0);
+                grid.Children.Add(richTextBlock);
+
+
+                var gameLibrarySelectorControl = new GameLibrarySelectorControl();
+
+                Grid.SetRow(gameLibrarySelectorControl, 1);
+                grid.Children.Add(gameLibrarySelectorControl);
+
+
+                var dialog = new ContentDialog();
+                dialog.Title = "Failed to load game libraries";
+                dialog.PrimaryButtonText = "Save";
+                dialog.SecondaryButtonText = "Cancel";
+                dialog.DefaultButton = ContentDialogButton.Primary;
+                dialog.Content = grid;
+                dialog.XamlRoot = XamlRoot;
+                dialog.RequestedTheme = Settings.AppTheme;
+                var result = await dialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    gameLibrarySelectorControl.Save();
+                }
+            }
+
+            Settings.WasLoadingGames = true;
+
             GameLibraries.Clear();
 
-            // TODO: Settings to enable/disable game libraries.
 
-            var steamLibrary = new SteamLibrary();
-            var gogGalaxyLibrary = new GOGGalaxyLibrary();
-            var ubisoftConnectLibrary = new UbisoftConnectLibrary();
-            var xboxLibrary = new XboxLibrary();
-            var epicGameStoreLibary = new EpicGameStoreLibrary();
-
-            GameLibraries.Add(steamLibrary);
-            GameLibraries.Add(gogGalaxyLibrary);
-            GameLibraries.Add(ubisoftConnectLibrary);
-            GameLibraries.Add(xboxLibrary);
-            GameLibraries.Add(epicGameStoreLibary);
-
-            var steamGamesTask = steamLibrary.ListGamesAsync();
-            var gogGalaxyLibraryTask = gogGalaxyLibrary.ListGamesAsync();
-            var ubisoftConnectLibraryTask = ubisoftConnectLibrary.ListGamesAsync();
-            var xboxLibraryTask = xboxLibrary.ListGamesAsync();
-            var epicGameStoreLibaryTask = epicGameStoreLibary.ListGamesAsync();
-
-            // More game libraries go here.
+            // Auto game library loading.
+            // Simply adding IGameLibrary interface means we will load the games.
+            var loadGameTasks = new List<Task>(); 
+            foreach (GameLibrary gameLibraryEnum in Enum.GetValues(typeof(GameLibrary)))
+            {
+                var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
+                if (gameLibrary.IsEnabled())
+                {
+                    GameLibraries.Add(gameLibrary);
+                    loadGameTasks.Add(gameLibrary.ListGamesAsync());
+                }
+            }
 
             // Await them all to finish loading games.
-            await Task.WhenAll(steamGamesTask, gogGalaxyLibraryTask, ubisoftConnectLibraryTask, xboxLibraryTask, epicGameStoreLibaryTask);
-            
+            await Task.WhenAll(loadGameTasks);
+
+            Settings.WasLoadingGames = false;
+
             DispatcherQueue.TryEnqueue(() =>
             {
                 FilterGames();

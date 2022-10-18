@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace DLSS_Swapper.Data.EpicGameStore
+namespace DLSS_Swapper.Data.EpicGamesStore
 {
     internal class ManifestFile
     {

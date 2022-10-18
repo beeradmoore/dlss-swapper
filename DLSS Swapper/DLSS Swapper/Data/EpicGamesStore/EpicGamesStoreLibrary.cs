@@ -9,9 +9,9 @@ using DLSS_Swapper.Interfaces;
 using Microsoft.UI.Xaml.Controls;
 using Windows.Security.Authentication.OnlineId;
 
-namespace DLSS_Swapper.Data.EpicGameStore
+namespace DLSS_Swapper.Data.EpicGamesStore
 {
-    internal class EpicGameStoreLibrary : IGameLibrary
+    internal class EpicGamesStoreLibrary : IGameLibrary
     {
         public GameLibrary GameLibrary => GameLibrary.EpicGamesStore;
         public string Name => "Epic Games Store";
@@ -130,7 +130,7 @@ namespace DLSS_Swapper.Data.EpicGameStore
                         }
                     }
 
-                    var game = new EpicGameStoreGame(manifest.CatalogItemId, remoteHeaderUrl)
+                    var game = new EpicGamesStoreGame(manifest.CatalogItemId, remoteHeaderUrl)
                     {
                         Title = manifest.DisplayName,
                         InstallPath = manifest.InstallLocation,

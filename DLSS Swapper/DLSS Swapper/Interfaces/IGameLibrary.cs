@@ -1,5 +1,5 @@
 ﻿using DLSS_Swapper.Data;
-using DLSS_Swapper.Data.EpicGameStore;
+using DLSS_Swapper.Data.EpicGamesStore;
 using DLSS_Swapper.Data.GOGGalaxy;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
@@ -41,7 +41,7 @@ namespace DLSS_Swapper.Interfaces
             {
                 GameLibrary.Steam => new SteamLibrary(),
                 GameLibrary.GoG => new GOGGalaxyLibrary(),
-                GameLibrary.EpicGamesStore => new EpicGameStoreLibrary(),
+                GameLibrary.EpicGamesStore => new EpicGamesStoreLibrary(),
                 GameLibrary.UbisoftConnect => new UbisoftConnectLibrary(),
                 GameLibrary.XboxApp => new XboxLibrary(),
                 _ => throw new Exception($"Could not load game library {gameLibrary}"),

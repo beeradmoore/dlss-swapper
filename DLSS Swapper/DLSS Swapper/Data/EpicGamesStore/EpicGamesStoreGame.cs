@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DLSS_Swapper.Data.EpicGameStore
+namespace DLSS_Swapper.Data.EpicGamesStore
 {
-    internal class EpicGameStoreGame : Game
+    internal class EpicGamesStoreGame : Game
     {
         string _id = String.Empty;
         string _remoteHeaderImage = String.Empty;
@@ -39,7 +39,7 @@ namespace DLSS_Swapper.Data.EpicGameStore
         }
 
 
-        public EpicGameStoreGame(string id, string remoteHeaderImage)
+        public EpicGamesStoreGame(string id, string remoteHeaderImage)
         {
             _id = id;
             _remoteHeaderImage = remoteHeaderImage;

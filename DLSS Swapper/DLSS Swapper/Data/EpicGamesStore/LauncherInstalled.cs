@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace DLSS_Swapper.Data.EpicGameStore
+namespace DLSS_Swapper.Data.EpicGamesStore
 {
     // Did not end up using LauncherInstalled.dat but keeping this here incase we ever do wish to.
     /*

@@ -95,46 +95,53 @@ namespace DLSS_Swapper.Data.EpicGameStore
             var foundManifestFiles = Directory.GetFiles(manifestsDirectory, "*.item");
             foreach (var manifestFile in foundManifestFiles)
             {
-                var manifestJsonData = await File.ReadAllTextAsync(manifestFile).ConfigureAwait(false);
-                var manifest = JsonSerializer.Deserialize<ManifestFile>(manifestJsonData);
-
-                // Check that it is a game.
-                if (manifest?.AppCategories.Contains("games") != true)
+                try
                 {
-                    continue;
-                }
+                    var manifestJsonData = await File.ReadAllTextAsync(manifestFile).ConfigureAwait(false);
+                    var manifest = JsonSerializer.Deserialize<ManifestFile>(manifestJsonData);
 
-                var remoteHeaderUrl = String.Empty;
-                if (cacheItemsDictionary.ContainsKey(manifest.CatalogItemId))
-                {
-                    var cacheItem = cacheItemsDictionary[manifest.CatalogItemId];
-                    if (cacheItem.KeyImages?.Any() == true)
+                    // Check that it is a game.
+                    if (manifest?.AppCategories.Contains("games") != true)
                     {
-                        // Try get desired image.
-                        var dieselGameBoxTall = cacheItem.KeyImages.FirstOrDefault(x => x.Type == "DieselGameBoxTall");
-                        if (dieselGameBoxTall != null && String.IsNullOrEmpty(dieselGameBoxTall.Url) == false)
+                        continue;
+                    }
+
+                    var remoteHeaderUrl = String.Empty;
+                    if (cacheItemsDictionary.ContainsKey(manifest.CatalogItemId))
+                    {
+                        var cacheItem = cacheItemsDictionary[manifest.CatalogItemId];
+                        if (cacheItem.KeyImages?.Any() == true)
                         {
-                            remoteHeaderUrl = dieselGameBoxTall.Url;
-                        }
-                        else
-                        {
-                            // Then fallback image.
-                            var dieselGameBox = cacheItem.KeyImages.FirstOrDefault(x => x.Type == "DieselGameBox");
-                            if (dieselGameBox != null && String.IsNullOrEmpty(dieselGameBox.Url) == false)
+                            // Try get desired image.
+                            var dieselGameBoxTall = cacheItem.KeyImages.FirstOrDefault(x => x.Type == "DieselGameBoxTall");
+                            if (dieselGameBoxTall != null && String.IsNullOrEmpty(dieselGameBoxTall.Url) == false)
                             {
                                 remoteHeaderUrl = dieselGameBoxTall.Url;
                             }
+                            else
+                            {
+                                // Then fallback image.
+                                var dieselGameBox = cacheItem.KeyImages.FirstOrDefault(x => x.Type == "DieselGameBox");
+                                if (dieselGameBox != null && String.IsNullOrEmpty(dieselGameBox.Url) == false)
+                                {
+                                    remoteHeaderUrl = dieselGameBox.Url;
+                                }
+                            }
                         }
                     }
-                }
 
-                var game = new EpicGameStoreGame(manifest.CatalogItemId, remoteHeaderUrl)
+                    var game = new EpicGameStoreGame(manifest.CatalogItemId, remoteHeaderUrl)
+                    {
+                        Title = manifest.DisplayName,
+                        InstallPath = manifest.InstallLocation,
+                    };
+                    game.DetectDLSS();
+                    games.Add(game);
+                }
+                catch (Exception err)
                 {
-                    Title = manifest.DisplayName,
-                    InstallPath = manifest.InstallLocation,
-                };
-                game.DetectDLSS();
-                games.Add(game);
+                    Logger.Error(err.Message);
+                }
             }
 
             _loadedGames.AddRange(games);

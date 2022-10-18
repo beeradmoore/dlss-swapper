@@ -22,6 +22,11 @@ namespace DLSS_Swapper.Data.EpicGameStore
                     return _lastHeaderImage;
                 }
 
+                if (String.IsNullOrEmpty(_remoteHeaderImage))
+                {
+                    return String.Empty;
+                }
+
                 // TODO: Add remote image to queue to download for next time.
 
                 // If the remote image doens't already have query arguments lets add some to load a smaller image.

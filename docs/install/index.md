@@ -1,6 +1,6 @@
 ## Recommended Install Instructions
 
-DLSS Swapper is now on the Windows Store! You can install builds directly from GitHub using the manual method below, however they will not automatically update when a new version is available (although they will tell you about it).
+DLSS Swapper is now on the Windows Store! You can install builds directly from GitHub using the manual method below, however they will not automatically update when a new version is available (although you will still be notified in app about updates).
 
 <a href="https://www.microsoft.com/store/apps/9NNL4H1PTJBL" target="_blank"><img src="https://beeradmoore.github.io/dlss-swapper/images/windows_store_badge.png" alt="Windows Store install link" width="300" /></a>
 
@@ -50,6 +50,6 @@ If your installer says `Untrusted App` please review and re-attempt the steps fr
 If you have any problems installing please try install each of the `dependency-xxx.msix` files on the associated with that release. Then check if someone has already reported a similar problem in the [issues section](https://github.com/beeradmoore/dlss-swapper/issues) on our Github repository. If that doesn't solve your problem please create a new issue so we can try get you up and running.
 
 ### Updating
-DLSS Swapper has an silent updater built in. If a new build is available it will be downloaded and installed in the background. The next time you launch the app you will have an updated build.
+If you installed via the Windows Store DLSS Swapper should update automatically.
 
-If that system breaks you can also check the [releases section](https://github.com/beeradmoore/dlss-swapper/releases) in our Github repository.
+If you installed via GitHub you will be notified about a new update on launch. You can also manually check for updates in settings. Unlike the Windows Store version, DLSS Swapper from GitHub will not update automatically. If you are ever unsure you can always check the [releases section](https://github.com/beeradmoore/dlss-swapper/releases) in our Github repository.

@@ -9,7 +9,10 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+
+#if WINDOWS_STORE
 using Windows.Storage;
+#endif
 
 namespace DLSS_Swapper
 {
@@ -430,10 +433,11 @@ namespace DLSS_Swapper
             return settings;
         }
 #else
+        string _settingsJsonPath = Path.Combine(App.CurrentApp.GetLocalFolder(), "settings.json");
         void SaveJson()
         {
             var settingsJson = JsonSerializer.Serialize(this, new JsonSerializerOptions() { WriteIndented = true });
-            File.WriteAllText("settings.json", settingsJson);
+            File.WriteAllText(_settingsJsonPath, settingsJson);
         }
 
         private static Settings FromJson()
@@ -441,13 +445,13 @@ namespace DLSS_Swapper
             var settings = new Settings();
             try
             {
-                if (File.Exists("settings.json") == false)
+                if (File.Exists(settings._settingsJsonPath) == false)
                 {
                     settings.SaveJson();
                 }
                 else
                 {
-                    var settingsJsonText = File.ReadAllText("settings.json");
+                    var settingsJsonText = File.ReadAllText(settings._settingsJsonPath);
                     var settingsJsonObject = JsonSerializer.Deserialize<Settings>(settingsJsonText);
                     if (settingsJsonObject != null)
                     {
@@ -462,7 +466,7 @@ namespace DLSS_Swapper
                 // We failed to load (or save initial) settings.json, so lets delete it and try agian next launch.
                 try
                 {
-                    File.Delete("settings.json");
+                    File.Delete(settings._settingsJsonPath);
                 }
                 catch (Exception err2)
                 {

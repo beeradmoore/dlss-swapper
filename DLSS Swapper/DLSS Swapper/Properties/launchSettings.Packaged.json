@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "DLSS Swapper (Wnidows Store)": {
+    "DLSS Swapper (Windows Store)": {
       "commandName": "MsixPackage"
       /* "commandLineArgs": ""  Command line arguments to pass to the app. */
       /* "alwaysReinstallApp": false,  Uninstall and then reinstall the app. All information about the app state is deleted. */

@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "DLSS Swapper (Wnidows Store)": {
+      "commandName": "MsixPackage"
+      /* "commandLineArgs": ""  Command line arguments to pass to the app. */
+      /* "alwaysReinstallApp": false,  Uninstall and then reinstall the app. All information about the app state is deleted. */
+      /* "remoteDebugEnabled": false,  Indicates that the debugger should attach to a process on a remote machine. */
+      /* "allowLocalNetworkLoopbackProperty": true,  Allow the app to make network calls to the device it is installed on. */
+      /* "authenticationMode": "Windows",  The authentication scheme to use when connecting to the remote machine. */
+      /* "doNotLaunchApp": false,  Do not launch the app, but debug my code when it starts. */
+      /* "remoteDebugMachine": "",  The name of the remote machine. */
+      /* "nativeDebugging": false  Enable debugging for managed and native code together, also known as mixed-mode debugging. */
+    }
+  }
+}

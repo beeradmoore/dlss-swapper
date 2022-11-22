@@ -110,7 +110,7 @@ namespace DLSS_Swapper.Data
                 ExpectedPath = expectedPath,
             };
 
-            var fullExpectedPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, expectedPath);
+            var fullExpectedPath = Path.Combine(App.CurrentApp.GetLocalFolder(), expectedPath);
             if (File.Exists(fullExpectedPath))
             {
                 localRecord.IsDownloaded = true;

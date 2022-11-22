@@ -203,7 +203,7 @@ namespace DLSS_Swapper.Data
             }
 
 
-            var newDllPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, dlssRecord.LocalRecord.ExpectedPath);
+            var newDllPath = Path.Combine(App.CurrentApp.GetLocalFolder(), dlssRecord.LocalRecord.ExpectedPath);
 
             // Validate new DLL
             if (Settings.Instance.AllowUntrusted == false)

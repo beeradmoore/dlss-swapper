@@ -291,14 +291,21 @@ DLSS Swapper will close now.",
                 }
             }
 
-            // If we were unable to auto-load lets try load cached.
-            var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             try
             {
+#if WINDOWS_STORE
+                // If we were unable to auto-load lets try load cached.
+                var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 var dlssRecordsFile = await storageFolder.GetFileAsync("dlss_records.json");
                 using (var stream = await dlssRecordsFile.OpenSequentialReadAsync())
                 {
                     var items = await JsonSerializer.DeserializeAsync<DLSSRecords>(stream.AsStreamForRead());
+#else
+                using (var stream = File.OpenRead(Path.Combine(App.CurrentApp.GetLocalFolder(), "dlss_records.json")))
+                {
+                    var items = await JsonSerializer.DeserializeAsync<DLSSRecords>(stream);
+#endif
+                
                     UpdateDLSSRecordsList(items);
                     //await UpdateDLSSRecordsListAsync(items);
                 }
@@ -319,13 +326,19 @@ DLSS Swapper will close now.",
 
         internal async Task LoadImportedDLSSRecordsAsync()
         {
-            var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             try
             {
+#if WINDOWS_STORE
+                var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 var importedDlssRecordsFile = await storageFolder.GetFileAsync("imported_dlss_records.json");
                 using (var stream = await importedDlssRecordsFile.OpenSequentialReadAsync())
                 {
                     var items = await JsonSerializer.DeserializeAsync<List<DLSSRecord>>(stream.AsStreamForRead());
+#else
+                using (var stream = File.OpenRead(Path.Combine(App.CurrentApp.GetLocalFolder(), "imported_dlss_records.json")))
+                {
+                    var items = await JsonSerializer.DeserializeAsync<List<DLSSRecord>>(stream);
+#endif
                     UpdateImportedDLSSRecordsList(items);
                 }
             }
@@ -384,13 +397,17 @@ DLSS Swapper will close now.",
                     //await UpdateDLSSRecordsListAsync(items);
 
                     memoryStream.Position = 0;
-
-                    var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                     try
                     {
+#if WINDOWS_STORE
+                        var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                         var dlssRecordsFile = await storageFolder.CreateFileAsync("dlss_records.json", Windows.Storage.CreationCollisionOption.ReplaceExisting);
                         using (var writeStream = await dlssRecordsFile.OpenStreamForWriteAsync())
                         {
+#else
+                        using (var writeStream = File.OpenWrite(Path.Combine(App.CurrentApp.GetLocalFolder(), "dlss_records.json")))
+                        {
+#endif
                             await memoryStream.CopyToAsync(writeStream);
                         }
                         // Update settings for auto refresh.

@@ -178,7 +178,7 @@ namespace DLSS_Swapper
         {
             try
             {
-                var importedDlssRecordsFile = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "imported_dlss_records.json");
+                var importedDlssRecordsFile = Path.Combine(App.CurrentApp.GetLocalFolder(), "imported_dlss_records.json");
                 var json = JsonSerializer.Serialize<List<DLSSRecord>>(App.CurrentApp.ImportedDLSSRecords);
                 await File.WriteAllTextAsync(importedDlssRecordsFile, json);
                 return true;
@@ -232,6 +232,20 @@ namespace DLSS_Swapper
             return new Version(packageVersion.Major, packageVersion.Minor, packageVersion.Build, packageVersion.Revision);
 #else
             return Assembly.GetExecutingAssembly().GetName().Version;
+#endif
+        } 
+
+        public string GetLocalFolder()
+        {
+#if WINDOWS_STORE
+            return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+#else
+            if (Directory.Exists("local_data") == false)
+            {
+                Directory.CreateDirectory("local_data");
+            }
+
+            return Path.Combine(Directory.GetCurrentDirectory(), "local_data");
 #endif
         }
     }

@@ -141,14 +141,18 @@ namespace DLSS_Swapper
         {
             var gitHubUpdater = new Data.GitHub.GitHubUpdater();
             // If this is a new build, fetch updates to display to the user.
+
+            // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
+            /*
             Task<Data.GitHub.GitHubRelease> releaseNotesTask = null;
             if (CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated)
             {
-                var currentAppVersion = Windows.ApplicationModel.Package.Current.Id.Version;
+                var currentAppVersion = App.CurrentApp.GetVersion();
                 releaseNotesTask = gitHubUpdater.GetReleaseFromTag($"v{currentAppVersion.Major}.{currentAppVersion.Minor}.{currentAppVersion.Build}.{currentAppVersion.Revision}"); 
             }
+            */
 
-#if !RELEASE_WINDOWSSTORE
+#if !WINDOWS_STORE
             // If this is a GitHub build check if there is a new version.
             // Lazy blocks to allow mul
             Task<Data.GitHub.GitHubRelease> newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease();
@@ -210,6 +214,9 @@ DLSS Swapper will close now.",
             LoadingStackPanel.Visibility = Visibility.Collapsed;
             GoToPage("Games");
 
+
+            // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
+            /*
             if (releaseNotesTask != null)
             {
                 await releaseNotesTask;
@@ -218,8 +225,9 @@ DLSS Swapper will close now.",
                     gitHubUpdater?.DisplayWhatsNewDialog(releaseNotesTask.Result, MainNavigationView);
                 }
             }
+            */
 
-#if !RELEASE_WINDOWSSTORE
+#if !WINDOWS_STORE
             await newUpdateTask;
             if (newUpdateTask.Result != null)
             {

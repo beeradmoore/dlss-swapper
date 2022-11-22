@@ -48,7 +48,7 @@ namespace DLSS_Swapper.Data.GitHub
             }
         }
 
-#if !RELEASE_WINDOWSSTORE
+#if !WINDOWS_STORE
         /// <summary>
         /// Queries GitHub and returns a GitHubRelease only if a newer version was detected, otherwise null
         /// </summary>
@@ -62,8 +62,7 @@ namespace DLSS_Swapper.Data.GitHub
             }
 
             var latestVersion = latestRelease.GetVersionNumber();
-
-            var version = Windows.ApplicationModel.Package.Current.Id.Version;
+            var version = App.CurrentApp.GetVersion();
             var currentVersion = ((ulong)version.Major << 48) +
                 ((ulong)version.Minor << 32) +
                 ((ulong)version.Build << 16) +
@@ -107,7 +106,7 @@ namespace DLSS_Swapper.Data.GitHub
             }
 
 
-            var version = Windows.ApplicationModel.Package.Current.Id.Version;
+            var version = App.CurrentApp.GetVersion();
             var currentVerion = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
 
             var yourVersion = $"You currently have {currentVerion} installed.\n\n";

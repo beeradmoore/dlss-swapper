@@ -9,8 +9,6 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation.Diagnostics;
 using Windows.Storage;
 
 namespace DLSS_Swapper

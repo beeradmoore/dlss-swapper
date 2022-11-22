@@ -36,7 +36,7 @@ namespace DLSS_Swapper.Pages
         {
             get
             {
-                var version = Windows.ApplicationModel.Package.Current.Id.Version;
+                var version = App.CurrentApp.GetVersion();
                 return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
             }
         }
@@ -119,7 +119,7 @@ namespace DLSS_Swapper.Pages
         // We only check for updates for builds which are not from the Windows Store.
         async Task CheckForUpdatesAsync()
         {
-#if !RELEASE_WINDOWSSTORE
+#if !WINDOWS_STORE
             IsCheckingForUpdates = true;
             var githubUpdater = new Data.GitHub.GitHubUpdater();
             var newUpdate = await githubUpdater.CheckForNewGitHubRelease();      

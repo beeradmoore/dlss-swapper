@@ -13,14 +13,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -39,7 +36,8 @@ namespace DLSS_Swapper
 
         public static App CurrentApp => (App)Application.Current;
 
-#if RELEASE_WINDOWSSTORE
+
+#if WINDOWS_STORE
         public const bool IsWindowsStoreBuild = true;
 #else
         public const bool IsWindowsStoreBuild = false;
@@ -61,7 +59,7 @@ namespace DLSS_Swapper
         {
             Logger.Init();
 
-            var version = Windows.ApplicationModel.Package.Current.Id.Version;
+            var version = GetVersion();
             var versionString = String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
 
 
@@ -224,5 +222,17 @@ namespace DLSS_Swapper
             //Logger.Error(System.Reflection.Assembly.GetExecutingAssembly().Location);
         }
         */
+
+
+
+        public Version GetVersion()
+        {
+#if WINDOWS_STORE
+            var packageVersion = Windows.ApplicationModel.Package.Current.Id.Version;
+            return new Version(packageVersion.Major, packageVersion.Minor, packageVersion.Build, packageVersion.Revision);
+#else
+            return Assembly.GetExecutingAssembly().GetName().Version;
+#endif
+        }
     }
 }

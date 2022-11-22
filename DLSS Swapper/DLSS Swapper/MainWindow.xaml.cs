@@ -159,91 +159,6 @@ namespace DLSS_Swapper
             var loadDlssRecrodsTask = LoadDLSSRecordsAsync();
             var loadImportedDlssRecords = LoadImportedDLSSRecordsAsync();
 
-            // TODO: Remove after 0.9.9 release.
-#if !RELEASE_WINDOWSSTORE
-            if (Settings.HasShownWindowsStoreUpdateMessage == false)
-            {
-                // This is a long mess and so much easier in xaml.
-                var richTextBlock = new RichTextBlock();
-                var paragraph = new Paragraph()
-                {
-                    Margin = new Thickness(0, 0, 0, 0),
-                };
-                paragraph.Inlines.Add(new Run()
-                {
-                    Text = "The recommended way to install DLSS Swapper is now via the Windows Store.",
-                });
-                richTextBlock.Blocks.Add(paragraph);
-                paragraph = new Paragraph()
-                {
-                    Margin = new Thickness(0, 12, 0, 0),
-                };
-                paragraph.Inlines.Add(new Run()
-                {
-                    Text = "GitHub releases tab will still be updated with new releases, however the app will no longer silently update to the latest version. ",
-                });
-                richTextBlock.Blocks.Add(paragraph);
-                paragraph = new Paragraph()
-                {
-                    Margin = new Thickness(0, 12, 0, 0),
-                };
-                paragraph.Inlines.Add(new Run()
-                {
-                    Text = "To transition to the Windows Store build it is recommended that you uninstall DLSS Swapper and its develeper certifciate. You can do this by following the ",
-                });
-                var hyperLink = new Hyperlink()
-                {
-                    NavigateUri = new Uri("https://beeradmoore.github.io/dlss-swapper/uninstall/"),
-
-                };
-                hyperLink.Inlines.Add(new Run()
-                {
-                    Text = "uninstall instructions"
-                });
-                paragraph.Inlines.Add(hyperLink);
-                paragraph.Inlines.Add(new Run()
-                {
-                    Text = " and then installing from the ",
-                });
-                hyperLink = new Hyperlink()
-                {
-                    NavigateUri = new Uri("https://www.microsoft.com/store/apps/9NNL4H1PTJBL"),
-
-                };
-                hyperLink.Inlines.Add(new Run()
-                {
-                    Text = "Windows Store"
-                });
-                paragraph.Inlines.Add(hyperLink);
-                paragraph.Inlines.Add(new Run()
-                {
-                    Text = ".",
-                });
-                richTextBlock.Blocks.Add(paragraph);
-                paragraph = new Paragraph()
-                {
-                    Margin = new Thickness(0, 12, 0, 0),
-                };
-                paragraph.Inlines.Add(new Run()
-                {
-                    Text = "(open both links now as this dialog will close when you uninstall)",
-                });
-                richTextBlock.Blocks.Add(paragraph);
-
-                var dialog = new ContentDialog()
-                {
-                    Title = "DLSS Swapper is coming to the Windows Store!",
-                    CloseButtonText = "Okay",
-                    Content = richTextBlock,
-                    XamlRoot = MainNavigationView.XamlRoot,
-                }; 
-
-                var result = await dialog.ShowAsync();
-
-                Settings.HasShownWindowsStoreUpdateMessage = true;
-            }
-
-
     
             if (Settings.Instance.HasShownMultiplayerWarning == false)
             {
@@ -260,7 +175,6 @@ namespace DLSS_Swapper
                 Settings.Instance.HasShownMultiplayerWarning = true;
             }
 
-#endif
 
             var didLoadDlssRecords = await loadDlssRecrodsTask;
             if (didLoadDlssRecords == false)

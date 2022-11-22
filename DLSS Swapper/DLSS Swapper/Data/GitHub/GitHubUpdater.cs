@@ -83,7 +83,7 @@ namespace DLSS_Swapper.Data.GitHub
         internal bool HasPromptedBefore(GitHubRelease gitHubRelease)
         {
             var thisVersion = gitHubRelease.GetVersionNumber();
-            var lastVersionPromptedFor = Settings.LastPromptWasForVersion;
+            var lastVersionPromptedFor = Settings.Instance.LastPromptWasForVersion;
 
             if (lastVersionPromptedFor == 0)
             {
@@ -101,9 +101,9 @@ namespace DLSS_Swapper.Data.GitHub
         {
             // Update settings so we won't auto prompt for this version (or lower) ever again.
             var versionNumber = gitHubRelease.GetVersionNumber();
-            if (versionNumber > Settings.LastPromptWasForVersion)
+            if (versionNumber > Settings.Instance.LastPromptWasForVersion)
             {
-                Settings.LastPromptWasForVersion = versionNumber;
+                Settings.Instance.LastPromptWasForVersion = versionNumber;
             }
 
 
@@ -127,7 +127,7 @@ namespace DLSS_Swapper.Data.GitHub
                     Content = contentUpdate,
                 },
                 XamlRoot = rootElement.XamlRoot,
-                RequestedTheme = Settings.AppTheme,
+                RequestedTheme = Settings.Instance.AppTheme,
             };
             var result = await dialog.ShowAsync();
 
@@ -153,7 +153,7 @@ namespace DLSS_Swapper.Data.GitHub
                     Content = contentUpdate,
                 },
                 XamlRoot = rootElement.XamlRoot,
-                RequestedTheme = Settings.AppTheme,
+                RequestedTheme = Settings.Instance.AppTheme,
             };
             await dialog.ShowAsync();
         }

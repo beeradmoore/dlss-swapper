@@ -1,9 +1,13 @@
 ﻿using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation.Diagnostics;
@@ -11,10 +15,18 @@ using Windows.Storage;
 
 namespace DLSS_Swapper
 {
-    public static class Settings
+    public class Settings
     {
-        static bool _hasShownWarning = false;
-        public static bool HasShownWarning
+        static Settings _instance = null;
+
+#if WINDOWS_STORE
+        public static Settings Instance => _instance ??= Settings.FromLocalSettings();
+#else
+        public static Settings Instance => _instance ??= Settings.FromJson();
+#endif
+
+        bool _hasShownWarning = false;
+        public bool HasShownWarning
         {
             get { return _hasShownWarning; }
             set
@@ -22,13 +34,23 @@ namespace DLSS_Swapper
                 if (_hasShownWarning != value)
                 {
                     _hasShownWarning = value;
+
+                    // If this is the inital load we don't trigger any saves.
+                    if (_isLoading)
+                    {
+                        return;
+                    }
+#if WINDOWS_STORE
                     ApplicationData.Current.LocalSettings.Values["HasShownWarning"] = value;
+#else
+                    SaveJson();
+#endif
                 }
             }
         }
 
-        static bool _hasShownMultiplayerWarning = false;
-        public static bool HasShownMultiplayerWarning
+        bool _hasShownMultiplayerWarning = false;
+        public bool HasShownMultiplayerWarning
         {
             get { return _hasShownMultiplayerWarning; }
             set
@@ -36,13 +58,23 @@ namespace DLSS_Swapper
                 if (_hasShownMultiplayerWarning != value)
                 {
                     _hasShownMultiplayerWarning = value;
+
+                    // If this is the inital load we don't trigger any saves.
+                    if (_isLoading)
+                    {
+                        return;
+                    }
+#if WINDOWS_STORE
                     ApplicationData.Current.LocalSettings.Values["HasShownMultiplayerWarning"] = value;
+#else
+                    SaveJson();
+#endif
                 }
             }
         }
 
-        static bool _hideNonDLSSGames = true;
-        public static bool HideNonDLSSGames
+        bool _hideNonDLSSGames = true;
+        public bool HideNonDLSSGames
         {
             get { return _hideNonDLSSGames; }
             set
@@ -50,14 +82,24 @@ namespace DLSS_Swapper
                 if (_hideNonDLSSGames != value)
                 {
                     _hideNonDLSSGames = value;
+
+                    // If this is the inital load we don't trigger any saves.
+                    if (_isLoading)
+                    {
+                        return;
+                    }
+#if WINDOWS_STORE
                     ApplicationData.Current.LocalSettings.Values["HideNonDLSSGames"] = value;
+#else
+                    SaveJson();
+#endif
                 }
             }
         }
 
 
-        static bool _groupGameLibrariesTogether = false;
-        public static bool GroupGameLibrariesTogether
+        bool _groupGameLibrariesTogether = false;
+        public bool GroupGameLibrariesTogether
         {
             get { return _groupGameLibrariesTogether; }
             set
@@ -65,13 +107,23 @@ namespace DLSS_Swapper
                 if (_groupGameLibrariesTogether != value)
                 {
                     _groupGameLibrariesTogether = value;
+
+                    // If this is the inital load we don't trigger any saves.
+                    if (_isLoading)
+                    {
+                        return;
+                    }
+#if WINDOWS_STORE
                     ApplicationData.Current.LocalSettings.Values["GroupGameLibrariesTogether"] = value;
+#else
+                    SaveJson();
+#endif
                 }
             }
         }
 
-        static ElementTheme _appTheme = ElementTheme.Default;
-        public static ElementTheme AppTheme
+        ElementTheme _appTheme = ElementTheme.Default;
+        public ElementTheme AppTheme
         {
             get { return _appTheme; }
             set
@@ -79,13 +131,23 @@ namespace DLSS_Swapper
                 if (_appTheme != value)
                 {
                     _appTheme = value;
+
+                    // If this is the inital load we don't trigger any saves.
+                    if (_isLoading)
+                    {
+                        return;
+                    }
+#if WINDOWS_STORE
                     ApplicationData.Current.LocalSettings.Values["AppTheme"] = (int)value;
+#else
+                    SaveJson();
+#endif
                 }
             }
         }
 
-        static bool _allowExperimental = false;
-        public static bool AllowExperimental
+        bool _allowExperimental = false;
+        public bool AllowExperimental
         {
             get { return _allowExperimental; }
             set
@@ -93,14 +155,24 @@ namespace DLSS_Swapper
                 if (_allowExperimental != value)
                 {
                     _allowExperimental = value;
+
+                    // If this is the inital load we don't trigger any saves.
+                    if (_isLoading)
+                    {
+                        return;
+                    }
+#if WINDOWS_STORE
                     ApplicationData.Current.LocalSettings.Values["AllowExperimental"] = value;
+#else
+                    SaveJson();
+#endif
                 }
             }
         }
 
 
-        static bool _allowUntrusted = false;
-        public static bool AllowUntrusted
+        bool _allowUntrusted = false;
+        public bool AllowUntrusted
         {
             get { return _allowUntrusted; }
             set
@@ -108,13 +180,23 @@ namespace DLSS_Swapper
                 if (_allowUntrusted != value)
                 {
                     _allowUntrusted = value;
+
+                    // If this is the inital load we don't trigger any saves.
+                    if (_isLoading)
+                    {
+                        return;
+                    }
+#if WINDOWS_STORE
                     ApplicationData.Current.LocalSettings.Values["AllowUntrusted"] = value;
+#else
+                    SaveJson();
+#endif
                 }
             }
         }
 
-        static DateTimeOffset _lastRecordsRefresh = DateTimeOffset.MinValue;
-        public static DateTimeOffset LastRecordsRefresh
+        DateTimeOffset _lastRecordsRefresh = DateTimeOffset.MinValue;
+        public DateTimeOffset LastRecordsRefresh
         {
             get { return _lastRecordsRefresh; }
             set
@@ -122,14 +204,24 @@ namespace DLSS_Swapper
                 if (_lastRecordsRefresh != value)
                 {
                     _lastRecordsRefresh = value;
+
+                    // If this is the inital load we don't trigger any saves.
+                    if (_isLoading)
+                    {
+                        return;
+                    }
+#if WINDOWS_STORE
                     ApplicationData.Current.LocalSettings.Values["LastRecordsRefresh"] = Windows.Foundation.PropertyValue.CreateDateTime(value);
+#else
+                    SaveJson();
+#endif
                 }
             }
         }
 
 
-        static ulong _lastPromptWasForVersion = 0L;
-        public static ulong LastPromptWasForVersion
+        ulong _lastPromptWasForVersion = 0L;
+        public ulong LastPromptWasForVersion
         {
             get { return _lastPromptWasForVersion; }
             set
@@ -137,31 +229,25 @@ namespace DLSS_Swapper
                 if (_lastPromptWasForVersion != value)
                 {
                     _lastPromptWasForVersion = value;
+
+                    // If this is the inital load we don't trigger any saves.
+                    if (_isLoading)
+                    {
+                        return;
+                    }
+#if WINDOWS_STORE
                     ApplicationData.Current.LocalSettings.Values["LastPromptWasForVersion"] = _lastPromptWasForVersion;
+#else
+                    SaveJson();
+#endif
                 }
             }
         }
 
-        // TODO: Remove after 0.9.9 release.
-#if !RELEASE_WINDOWSSTORE
-        static bool _hasShownWindowsStoreUpdateMessage = false;
-        public static bool HasShownWindowsStoreUpdateMessage
-        {
-            get { return _hasShownWindowsStoreUpdateMessage; }
-            set
-            {
-                if (_hasShownWindowsStoreUpdateMessage != value)
-                {
-                    _hasShownWindowsStoreUpdateMessage = value;
-                    ApplicationData.Current.LocalSettings.Values["HasShownWindowsStoreUpdateMessage"] = value;
-                }
-            }
-        }
-#endif
 
         // Don't forget to change this back to off.
-        static LoggingLevel _loggingLevel = LoggingLevel.Error;
-        public static LoggingLevel LoggingLevel
+        LoggingLevel _loggingLevel = LoggingLevel.Error;
+        public LoggingLevel LoggingLevel
         {
             get { return _loggingLevel; }
             set
@@ -169,13 +255,23 @@ namespace DLSS_Swapper
                 if (_loggingLevel != value)
                 {
                     _loggingLevel = value;
+
+                    // If this is the inital load we don't trigger any saves.
+                    if (_isLoading)
+                    {
+                        return;
+                    }
+#if WINDOWS_STORE
                     ApplicationData.Current.LocalSettings.Values["LoggingLevel"] = (int)_loggingLevel;
+#else
+                    SaveJson();
+#endif
                 }
             }
         }
 
-        static uint _enabledGameLibraries = uint.MaxValue;
-        public static uint EnabledGameLibraries
+        uint _enabledGameLibraries = uint.MaxValue;
+        public uint EnabledGameLibraries
         {
             get { return _enabledGameLibraries; }
             set
@@ -183,14 +279,24 @@ namespace DLSS_Swapper
                 if (_enabledGameLibraries != value)
                 {
                     _enabledGameLibraries = value;
+
+                    // If this is the inital load we don't trigger any saves.
+                    if (_isLoading)
+                    {
+                        return;
+                    }
+#if WINDOWS_STORE
                     ApplicationData.Current.LocalSettings.Values["EnabledGameLibraries"] = (uint)_enabledGameLibraries;
+#else
+                    SaveJson();
+#endif
                 }
             }
         }
 
 
-        static bool _wasLoadingGames = false;
-        public static bool WasLoadingGames
+        bool _wasLoadingGames = false;
+        public bool WasLoadingGames
         {
             get { return _wasLoadingGames; }
             set
@@ -198,22 +304,36 @@ namespace DLSS_Swapper
                 if (_wasLoadingGames != value)
                 {
                     _wasLoadingGames = value;
+
+                    if (_isLoading)
+                    {
+                        return;
+                    }
+#if WINDOWS_STORE
                     ApplicationData.Current.LocalSettings.Values["WasLoadingGames"] = value;
+#else
+                    SaveJson();
+#endif
                 }
             }
         }
 
-        static Settings()
-        {
+        // Used to prevent saving data while we are loading.
+        bool _isLoading = true;
 
-            // Load BaseDirectory from settings.
+
+#if WINDOWS_STORE
+        private static Settings FromLocalSettings()
+        {
+            var settings = new Settings();
+
             var localSettings = ApplicationData.Current.LocalSettings;
 
             if (localSettings.Values.TryGetValue("HasShownWarning", out object tempHasShownWarning))
             {
                 if (tempHasShownWarning is bool hasShownWarning)
                 {
-                    _hasShownWarning = hasShownWarning;
+                    settings._hasShownWarning = hasShownWarning;
                 }
             }
 
@@ -222,7 +342,7 @@ namespace DLSS_Swapper
             {
                 if (tempHasShownMultiplayerWarning is bool hasShownMultiplayerWarning)
                 {
-                    _hasShownMultiplayerWarning = hasShownMultiplayerWarning;
+                    settings._hasShownMultiplayerWarning = hasShownMultiplayerWarning;
                 }
             }
                         
@@ -231,7 +351,7 @@ namespace DLSS_Swapper
             {
                 if (tempHideNonDLSSGames is bool hideNonDLSSGames)
                 {
-                    _hideNonDLSSGames = hideNonDLSSGames;
+                    settings._hideNonDLSSGames = hideNonDLSSGames;
                 }
             }
 
@@ -239,7 +359,7 @@ namespace DLSS_Swapper
             {
                 if (tempGroupGameLibrariesTogether is bool groupGameLibrariesTogether)
                 {
-                    _groupGameLibrariesTogether = groupGameLibrariesTogether;
+                    settings._groupGameLibrariesTogether = groupGameLibrariesTogether;
                 }
             }
 
@@ -247,7 +367,7 @@ namespace DLSS_Swapper
             {
                 if (tempAppTheme is int appTheme)
                 {
-                    _appTheme = (ElementTheme)appTheme;
+                    settings._appTheme = (ElementTheme)appTheme;
                 }
             }
 
@@ -255,7 +375,7 @@ namespace DLSS_Swapper
             {
                 if (tempAllowExperimental is bool allowExperimental)
                 {
-                    _allowExperimental = allowExperimental;
+                    settings._allowExperimental = allowExperimental;
                 }
             }
 
@@ -263,7 +383,7 @@ namespace DLSS_Swapper
             {
                 if (tempAllowUntrusted is bool allowUntrusted)
                 {
-                    _allowUntrusted = allowUntrusted;
+                    settings._allowUntrusted = allowUntrusted;
                 }
             }
 
@@ -271,7 +391,7 @@ namespace DLSS_Swapper
             {
                 if (tempLastRecordsRefresh is DateTimeOffset lastRecordsRefresh)
                 {
-                    _lastRecordsRefresh = lastRecordsRefresh;
+                    settings._lastRecordsRefresh = lastRecordsRefresh;
                 }
             }
 
@@ -279,27 +399,15 @@ namespace DLSS_Swapper
             {
                 if (tempLastPromptWasForVersion is ulong lastPromptWasForVersion)
                 {
-                    _lastPromptWasForVersion = lastPromptWasForVersion;
+                    settings._lastPromptWasForVersion = lastPromptWasForVersion;
                 }
             }
-
-            // TODO: Remove after 0.9.9 release.
-#if !RELEASE_WINDOWSSTORE
-            if (localSettings.Values.TryGetValue("HasShownWindowsStoreUpdateMessage", out object tempHasShownWindowsStoreUpdateMessage))
-            {
-                if (tempHasShownWindowsStoreUpdateMessage is bool hasShownWindowsStoreUpdateMessage)
-                {
-                    _hasShownWindowsStoreUpdateMessage = hasShownWindowsStoreUpdateMessage;
-                }
-            }
-#endif
-
 
             if (localSettings.Values.TryGetValue("LoggingLevel", out object tempLoggingLevel))
             {
                 if (tempLoggingLevel is int loggingLevel)
                 {
-                    _loggingLevel = (LoggingLevel)loggingLevel;
+                    settings._loggingLevel = (LoggingLevel)loggingLevel;
                 }
             }
 
@@ -307,7 +415,7 @@ namespace DLSS_Swapper
             {
                 if (tempEnabledGameLibraries is uint enabledGameLibraries)
                 {
-                    _enabledGameLibraries = enabledGameLibraries;
+                    settings._enabledGameLibraries = enabledGameLibraries;
                 }
             }
 
@@ -315,9 +423,60 @@ namespace DLSS_Swapper
             {
                 if (tempWasLoadingGames is bool wasLoadingGames)
                 {
-                    _wasLoadingGames = wasLoadingGames;
+                    settings._wasLoadingGames = wasLoadingGames;
                 }
             }
+            
+            // Toggle _isLoading back to false.
+            settings._isLoading = false;
+            return settings;
         }
+#else
+        void SaveJson()
+        {
+            var settingsJson = JsonSerializer.Serialize(this, new JsonSerializerOptions() { WriteIndented = true });
+            File.WriteAllText("settings.json", settingsJson);
+        }
+
+        private static Settings FromJson()
+        {
+            var settings = new Settings();
+            try
+            {
+                if (File.Exists("settings.json") == false)
+                {
+                    settings.SaveJson();
+                }
+                else
+                {
+                    var settingsJsonText = File.ReadAllText("settings.json");
+                    var settingsJsonObject = JsonSerializer.Deserialize<Settings>(settingsJsonText);
+                    if (settingsJsonObject != null)
+                    {
+                        settings = settingsJsonObject;
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+
+                // We failed to load (or save initial) settings.json, so lets delete it and try agian next launch.
+                try
+                {
+                    File.Delete("settings.json");
+                }
+                catch (Exception err2)
+                {
+                    // Something really bad happened and we couldn't delete it either.
+                    Logger.Error(err2.Message);
+                }
+            }
+
+            // Toggle _isLoading back to false.
+            settings._isLoading = false;
+            return settings;
+        }
+#endif
     }
 }

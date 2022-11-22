@@ -69,7 +69,7 @@ namespace DLSS_Swapper
 
             _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper v{versionString}");
 
-            GlobalElementTheme = Settings.AppTheme;
+            GlobalElementTheme = Settings.Instance.AppTheme;
 
             this.InitializeComponent();
         }

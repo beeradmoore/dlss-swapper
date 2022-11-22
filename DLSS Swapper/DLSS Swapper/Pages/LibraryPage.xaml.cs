@@ -120,7 +120,7 @@ namespace DLSS_Swapper.Pages
                 errorDialog.CloseButtonText = "Okay";
                 errorDialog.Content = "Unable to update DLSS records.";
                 errorDialog.XamlRoot = XamlRoot;
-                errorDialog.RequestedTheme = Settings.AppTheme;
+                errorDialog.RequestedTheme = Settings.Instance.AppTheme;
                 await errorDialog.ShowAsync();
             }
 
@@ -179,7 +179,7 @@ namespace DLSS_Swapper.Pages
                 dialog.CloseButtonText = "Okay";
                 dialog.Content = "Could not export DLSS dll.";
                 dialog.XamlRoot = XamlRoot;
-                dialog.RequestedTheme = Settings.AppTheme;
+                dialog.RequestedTheme = Settings.Instance.AppTheme;
                 await dialog.ShowAsync();
             }
         }
@@ -187,7 +187,7 @@ namespace DLSS_Swapper.Pages
         async Task ImportAsync()
         {
 
-            if (Settings.HasShownWarning == false)
+            if (Settings.Instance.HasShownWarning == false)
             {
                 var warningDialog = new ContentDialog()
                 {
@@ -202,7 +202,7 @@ Only import dlls from sources you trust.",
                 };
                 await warningDialog.ShowAsync();
 
-                Settings.HasShownWarning = true;
+                Settings.Instance.HasShownWarning = true;
             }
 
             var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
@@ -225,7 +225,7 @@ Only import dlls from sources you trust.",
             dialog.Title = "Reminder";
             dialog.Content = $"Only import DLLs from sources you trust.";
             dialog.XamlRoot = XamlRoot;
-            dialog.RequestedTheme = Settings.AppTheme;
+            dialog.RequestedTheme = Settings.Instance.AppTheme;
             var response = await dialog.ShowAsync();
             if (response == ContentDialogResult.Primary)
             {
@@ -243,7 +243,7 @@ Only import dlls from sources you trust.",
                         dialog.Title = "Imported DLSS Record Exists";
                         dialog.Content = $"It appears you have already impored DLSS v{dlssRecord.Version}";
                         dialog.XamlRoot = XamlRoot;
-                        dialog.RequestedTheme = Settings.AppTheme;
+                        dialog.RequestedTheme = Settings.Instance.AppTheme;
                         response = await dialog.ShowAsync();
                         if (response != ContentDialogResult.Primary)
                         {
@@ -253,7 +253,7 @@ Only import dlls from sources you trust.",
                     
 
                     // Check if the dll passes windows cert validation. If it doesn't and user has not allowed untrusted then error.
-                    if (Settings.AllowUntrusted == false && dlssRecord.IsSignatureValid == false)
+                    if (Settings.Instance.AllowUntrusted == false && dlssRecord.IsSignatureValid == false)
                     {
                         // If it already exists prompt the user if they want to overwrite it.
                         dialog = new ContentDialog();
@@ -261,7 +261,7 @@ Only import dlls from sources you trust.",
                         dialog.Title = "Import Failed";
                         dialog.Content = $"The dll you imported ({openFile.Path}) is not signed with a valid certificate. If you believe this is a mistake and you want to import anyway enable \"Allow Untrusted\" in DLSS Swapper settings.\n\nONLY enable this setting if you trust where you got the dll from.";
                         dialog.XamlRoot = XamlRoot;
-                        dialog.RequestedTheme = Settings.AppTheme;
+                        dialog.RequestedTheme = Settings.Instance.AppTheme;
                         response = await dialog.ShowAsync();
                         return;
                     }
@@ -280,7 +280,7 @@ Only import dlls from sources you trust.",
                         dialog.CloseButtonText = "Cancel";
                         dialog.Content = $"It appears the dll you imported potentially isn't a legitimate NVIDIA DLSS dll. Continue only if you trust the source where you obtained the dll.";
                         dialog.XamlRoot = XamlRoot;
-                        dialog.RequestedTheme = Settings.AppTheme;
+                        dialog.RequestedTheme = Settings.Instance.AppTheme;
                         response = await dialog.ShowAsync();
                         if (response != ContentDialogResult.Primary)
                         {
@@ -330,7 +330,7 @@ Only import dlls from sources you trust.",
             dialog.CloseButtonText = "Cancel";
             dialog.Content = $"Delete DLSS v{record.Version}?";
             dialog.XamlRoot = XamlRoot;
-            dialog.RequestedTheme = Settings.AppTheme;
+            dialog.RequestedTheme = Settings.Instance.AppTheme;
             var response = await dialog.ShowAsync();
             if (response == ContentDialogResult.Primary)
             {
@@ -354,7 +354,7 @@ Only import dlls from sources you trust.",
                     errorDialog.CloseButtonText = "Okay";
                     errorDialog.Content = "Unable to delete DLSS record.";
                     errorDialog.XamlRoot = XamlRoot;
-                    errorDialog.RequestedTheme = Settings.AppTheme;
+                    errorDialog.RequestedTheme = Settings.Instance.AppTheme;
                     await errorDialog.ShowAsync();
                 }
             }
@@ -370,7 +370,7 @@ Only import dlls from sources you trust.",
                 dialog.CloseButtonText = "Okay";
                 dialog.Content = result.Message;
                 dialog.XamlRoot = XamlRoot;
-                dialog.RequestedTheme = Settings.AppTheme;
+                dialog.RequestedTheme = Settings.Instance.AppTheme;
                 await dialog.ShowAsync();
             }
         }
@@ -416,7 +416,7 @@ Only import dlls from sources you trust.",
                 dialog.CloseButtonText = "Okay";
                 dialog.Content = "Could not export DLSS dll.";
                 dialog.XamlRoot = XamlRoot;
-                dialog.RequestedTheme = Settings.AppTheme;
+                dialog.RequestedTheme = Settings.Instance.AppTheme;
                 await dialog.ShowAsync();
             }
         }
@@ -428,7 +428,7 @@ Only import dlls from sources you trust.",
             dialog.CloseButtonText = "Okay";
             dialog.Content = record.LocalRecord.DownloadErrorMessage;
             dialog.XamlRoot = XamlRoot;
-            dialog.RequestedTheme = Settings.AppTheme;
+            dialog.RequestedTheme = Settings.Instance.AppTheme;
             await dialog.ShowAsync();
         }
 
@@ -447,7 +447,7 @@ Only import dlls from sources you trust.",
                 dialog.CloseButtonText = "Cancel";
                 dialog.Content = new DLSSRecordInfoControl(dlssRecord);
                 dialog.XamlRoot = XamlRoot;
-                dialog.RequestedTheme = Settings.AppTheme;
+                dialog.RequestedTheme = Settings.Instance.AppTheme;
                 await dialog.ShowAsync();
             }
         }

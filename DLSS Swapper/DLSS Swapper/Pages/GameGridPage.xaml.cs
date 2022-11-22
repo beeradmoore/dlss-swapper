@@ -54,7 +54,7 @@ namespace DLSS_Swapper.Pages
         async Task LoadGamesAsync()
         {
             // Added this check so if we get to here and this is true we probably crashed loading games last time and we should prompt for that.
-            if (Settings.WasLoadingGames)
+            if (Settings.Instance.WasLoadingGames)
             {
                 var richTextBlock = new RichTextBlock();
                 var paragraph = new Paragraph()
@@ -117,7 +117,7 @@ namespace DLSS_Swapper.Pages
                 dialog.DefaultButton = ContentDialogButton.Primary;
                 dialog.Content = grid;
                 dialog.XamlRoot = XamlRoot;
-                dialog.RequestedTheme = Settings.AppTheme;
+                dialog.RequestedTheme = Settings.Instance.AppTheme;
                 var result = await dialog.ShowAsync();
                 if (result == ContentDialogResult.Primary)
                 {
@@ -125,7 +125,7 @@ namespace DLSS_Swapper.Pages
                 }
             }
 
-            Settings.WasLoadingGames = true;
+            Settings.Instance.WasLoadingGames = true;
 
             GameLibraries.Clear();
 
@@ -146,7 +146,7 @@ namespace DLSS_Swapper.Pages
             // Await them all to finish loading games.
             await Task.WhenAll(loadGameTasks);
 
-            Settings.WasLoadingGames = false;
+            Settings.Instance.WasLoadingGames = false;
 
             DispatcherQueue.TryEnqueue(() =>
             {
@@ -161,7 +161,7 @@ namespace DLSS_Swapper.Pages
 
             //MainGridView.ItemsSource = null;
 
-            if (Settings.GroupGameLibrariesTogether)
+            if (Settings.Instance.GroupGameLibrariesTogether)
             {
 
                 var collectionViewSource = new CollectionViewSource()
@@ -170,7 +170,7 @@ namespace DLSS_Swapper.Pages
                     Source = GameLibraries,
                 };
 
-                if (Settings.HideNonDLSSGames)
+                if (Settings.Instance.HideNonDLSSGames)
                 {
                     collectionViewSource.ItemsPath = new PropertyPath("LoadedDLSSGames");
                 }
@@ -185,7 +185,7 @@ namespace DLSS_Swapper.Pages
             {
                 var games = new List<Game>();
 
-                if (Settings.HideNonDLSSGames)
+                if (Settings.Instance.HideNonDLSSGames)
                 {
                     foreach (var gameLibrary in GameLibraries)
                     {
@@ -236,7 +236,7 @@ namespace DLSS_Swapper.Pages
                     dialog.DefaultButton = ContentDialogButton.Primary;
                     dialog.Content = $"DLSS was not detected in {game.Title}.";
                     dialog.XamlRoot = XamlRoot;
-                    dialog.RequestedTheme = Settings.AppTheme;
+                    dialog.RequestedTheme = Settings.Instance.AppTheme;
                     await dialog.ShowAsync();
                     return;
                 }
@@ -249,7 +249,7 @@ namespace DLSS_Swapper.Pages
                 dialog.DefaultButton = ContentDialogButton.Primary;
                 dialog.Content = dlssPickerControl;
                 dialog.XamlRoot = XamlRoot;
-                dialog.RequestedTheme = Settings.AppTheme;
+                dialog.RequestedTheme = Settings.Instance.AppTheme;
 
                 if (String.IsNullOrEmpty(game.BaseDLSSVersion) == false)
                 {
@@ -272,7 +272,7 @@ namespace DLSS_Swapper.Pages
                         dialog.DefaultButton = ContentDialogButton.Close;
                         dialog.Content = "Please download the DLSS record from the downloads page first.";
                         dialog.XamlRoot = XamlRoot;
-                        dialog.RequestedTheme = Settings.AppTheme;
+                        dialog.RequestedTheme = Settings.Instance.AppTheme;
                         await dialog.ShowAsync();
                         return;
                     }
@@ -294,7 +294,7 @@ namespace DLSS_Swapper.Pages
                         */
                         dialog.Content = didUpdate.Message;
                         dialog.XamlRoot = XamlRoot;
-                        dialog.RequestedTheme = Settings.AppTheme;
+                        dialog.RequestedTheme = Settings.Instance.AppTheme;
                         var dialogResult = await dialog.ShowAsync();
                         /*
                         // Disabled as I am unsure how to prompt to run as admin.
@@ -324,7 +324,7 @@ namespace DLSS_Swapper.Pages
                         }
                         */
                         dialog.XamlRoot = XamlRoot;
-                        dialog.RequestedTheme = Settings.AppTheme;
+                        dialog.RequestedTheme = Settings.Instance.AppTheme;
                         var dialogResult = await dialog.ShowAsync();/*
                         // Disabled as I am unsure how to prompt to run as admin.
                         if (didReset.PromptToRelaunchAsAdmin == true && dialogResult == ContentDialogResult.Secondary)
@@ -378,15 +378,15 @@ namespace DLSS_Swapper.Pages
             dialog.DefaultButton = ContentDialogButton.Primary;
             dialog.Content = gameFilterControl;
             dialog.XamlRoot = XamlRoot;
-            dialog.RequestedTheme = Settings.AppTheme;
+            dialog.RequestedTheme = Settings.Instance.AppTheme;
 
 
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary)
             {
-                Settings.HideNonDLSSGames = gameFilterControl.IsHideNonDLSSGamesChecked();
-                Settings.GroupGameLibrariesTogether = gameFilterControl.IsGroupGameLibrariesTogetherChecked();
+                Settings.Instance.HideNonDLSSGames = gameFilterControl.IsHideNonDLSSGamesChecked();
+                Settings.Instance.GroupGameLibrariesTogether = gameFilterControl.IsGroupGameLibrariesTogetherChecked();
 
                 FilterGames();
             }

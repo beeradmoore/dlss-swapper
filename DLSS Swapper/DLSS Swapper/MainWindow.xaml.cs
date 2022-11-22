@@ -85,9 +85,9 @@ namespace DLSS_Swapper
             }
 
             
-            UpdateColors(Settings.AppTheme);
+            UpdateColors(Settings.Instance.AppTheme);
 
-            //MainNavigationView.RequestedTheme = (ElementTheme)Settings.AppTheme;
+            //MainNavigationView.RequestedTheme = (ElementTheme)Settings.Instance.AppTheme;
         }
 
         void MainNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -244,8 +244,8 @@ namespace DLSS_Swapper
             }
 
 
-
-            if (Settings.HasShownMultiplayerWarning == false)
+    
+            if (Settings.Instance.HasShownMultiplayerWarning == false)
             {
                 var dialog = new ContentDialog()
                 {
@@ -257,7 +257,7 @@ namespace DLSS_Swapper
 
                 var result = await dialog.ShowAsync();
 
-                Settings.HasShownMultiplayerWarning = true;
+                Settings.Instance.HasShownMultiplayerWarning = true;
             }
 
 #endif
@@ -323,7 +323,7 @@ DLSS Swapper will close now.",
         internal void FilterDLSSRecords()
         {
             var newDlssRecordsList = new List<DLSSRecord>();
-            if (Settings.AllowUntrusted)
+            if (Settings.Instance.AllowUntrusted)
             {
                 newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Stable);
                 newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords);
@@ -334,9 +334,9 @@ DLSS Swapper will close now.",
                 newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords.Where(x => x.IsSignatureValid == true));
             }
 
-            if (Settings.AllowExperimental)
+            if (Settings.Instance.AllowExperimental)
             {
-                if (Settings.AllowUntrusted)
+                if (Settings.Instance.AllowUntrusted)
                 {
                     newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Experimental);
                 }
@@ -359,7 +359,7 @@ DLSS Swapper will close now.",
         async Task<bool> LoadDLSSRecordsAsync()
         {
             // Only auto check for updates once every 12 hours.
-            var timeSinceLastUpdate = DateTimeOffset.Now - Settings.LastRecordsRefresh;
+            var timeSinceLastUpdate = DateTimeOffset.Now - Settings.Instance.LastRecordsRefresh;
             if (timeSinceLastUpdate.TotalHours > 12)
             {
                 var didUpdate = await UpdateDLSSRecordsAsync();
@@ -472,7 +472,7 @@ DLSS Swapper will close now.",
                             await memoryStream.CopyToAsync(writeStream);
                         }
                         // Update settings for auto refresh.
-                        Settings.LastRecordsRefresh = DateTime.Now;
+                        Settings.Instance.LastRecordsRefresh = DateTime.Now;
                         return true;
                     }
                     catch (Exception err)

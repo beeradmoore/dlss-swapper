@@ -34,7 +34,7 @@ namespace DLSS_Swapper
                 .WriteTo.File(loggingFile, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7)
                 .CreateLogger();
 
-            ChangeLoggingLevel(Settings.LoggingLevel);
+            ChangeLoggingLevel(Settings.Instance.LoggingLevel);
         }
 
         public static string GetCurrentLogPath()
@@ -49,7 +49,7 @@ namespace DLSS_Swapper
         public static void ChangeLoggingLevel(LoggingLevel loggingLevel)
         {
             // Off is secretly fatal as I don't know how to turn off logging :|
-            levelSwitch.MinimumLevel = Settings.LoggingLevel switch
+            levelSwitch.MinimumLevel = Settings.Instance.LoggingLevel switch
             {
                 LoggingLevel.Verbose => LogEventLevel.Verbose,
                 LoggingLevel.Debug => LogEventLevel.Debug,

@@ -81,7 +81,7 @@ namespace DLSS_Swapper.UserControls
                 }
             }
 
-            Settings.EnabledGameLibraries = enabledGameLibraries;
+            Settings.Instance.EnabledGameLibraries = enabledGameLibraries;
         }
     }
 }

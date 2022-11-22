@@ -206,7 +206,7 @@ namespace DLSS_Swapper.Data
             var newDllPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, dlssRecord.LocalRecord.ExpectedPath);
 
             // Validate new DLL
-            if (Settings.AllowUntrusted == false)
+            if (Settings.Instance.AllowUntrusted == false)
             {
                 bool isTrusted = WinTrust.VerifyEmbeddedSignature(newDllPath);
                 if (isTrusted == false)

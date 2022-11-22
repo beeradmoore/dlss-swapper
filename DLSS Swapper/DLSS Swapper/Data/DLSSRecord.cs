@@ -226,7 +226,7 @@ namespace DLSS_Swapper.Data
                     throw new Exception("Downloaded file was invalid.");
                 }
 
-                if (Settings.AllowUntrusted == false)
+                if (Settings.Instance.AllowUntrusted == false)
                 {
                     var isTrusted = WinTrust.VerifyEmbeddedSignature(tempDllFile);
                     if (isTrusted == false)

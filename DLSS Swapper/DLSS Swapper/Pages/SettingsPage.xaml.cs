@@ -68,13 +68,13 @@ namespace DLSS_Swapper.Pages
 
 
             // Initilize defaults.
-            LightThemeRadioButton.IsChecked = Settings.AppTheme == ElementTheme.Light;
-            DarkThemeRadioButton.IsChecked = Settings.AppTheme == ElementTheme.Dark;
-            DefaultThemeRadioButton.IsChecked = Settings.AppTheme == ElementTheme.Default;
+            LightThemeRadioButton.IsChecked = Settings.Instance.AppTheme == ElementTheme.Light;
+            DarkThemeRadioButton.IsChecked = Settings.Instance.AppTheme == ElementTheme.Dark;
+            DefaultThemeRadioButton.IsChecked = Settings.Instance.AppTheme == ElementTheme.Default;
 
-            AllowUntrustedToggleSwitch.IsOn = Settings.AllowUntrusted;
-            AllowExperimentalToggleSwitch.IsOn = Settings.AllowExperimental;
-            LoggingComboBox.SelectedItem = Settings.LoggingLevel;
+            AllowUntrustedToggleSwitch.IsOn = Settings.Instance.AllowUntrusted;
+            AllowExperimentalToggleSwitch.IsOn = Settings.Instance.AllowExperimental;
+            LoggingComboBox.SelectedItem = Settings.Instance.LoggingLevel;
 
             DataContext = this;
         }
@@ -92,7 +92,7 @@ namespace DLSS_Swapper.Pages
                         _ => ElementTheme.Default,
                     };
 
-                    Settings.AppTheme = newTheme;
+                    Settings.Instance.AppTheme = newTheme;
                     ((App)Application.Current)?.MainWindow?.UpdateColors(newTheme);
                 }
             }
@@ -102,7 +102,7 @@ namespace DLSS_Swapper.Pages
         {
             if (e.OriginalSource is ToggleSwitch toggleSwitch)
             {
-                Settings.AllowExperimental = toggleSwitch.IsOn;
+                Settings.Instance.AllowExperimental = toggleSwitch.IsOn;
                 App.CurrentApp.MainWindow.FilterDLSSRecords();
             }
         }
@@ -111,7 +111,7 @@ namespace DLSS_Swapper.Pages
         {
             if (e.OriginalSource is ToggleSwitch toggleSwitch)
             {
-                Settings.AllowUntrusted = toggleSwitch.IsOn;
+                Settings.Instance.AllowUntrusted = toggleSwitch.IsOn;
                 App.CurrentApp.MainWindow.FilterDLSSRecords();
             }
         }
@@ -226,10 +226,10 @@ namespace DLSS_Swapper.Pages
 
         private void LoggingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Any() && e.AddedItems[0] is LoggingLevel loggingLevel && Settings.LoggingLevel != loggingLevel)
+            if (e.AddedItems.Any() && e.AddedItems[0] is LoggingLevel loggingLevel && Settings.Instance.LoggingLevel != loggingLevel)
             {
                 // Update settings
-                Settings.LoggingLevel = loggingLevel;
+                Settings.Instance.LoggingLevel = loggingLevel;
 
                 // Reconfigure
                 Logger.ChangeLoggingLevel(loggingLevel);

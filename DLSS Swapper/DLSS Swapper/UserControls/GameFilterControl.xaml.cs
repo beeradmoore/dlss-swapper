@@ -64,12 +64,12 @@ namespace DLSS_Swapper.UserControls
         {
             this.InitializeComponent();
 
-            //HideNonDLSSGames = Settings.HideNonDLSSGames;
-            //GroupGameLibrariesTogether = Settings.GroupGameLibrariesTogether;
+            //HideNonDLSSGames = Settings.Instance.HideNonDLSSGames;
+            //GroupGameLibrariesTogether = Settings.Instance.GroupGameLibrariesTogether;
             //this.DataContext = this;
 
-            HideNonDLSSGamesCheckBox.IsChecked = Settings.HideNonDLSSGames;
-            GroupGameLibrariesTogetherCheckBox.IsChecked = Settings.GroupGameLibrariesTogether;
+            HideNonDLSSGamesCheckBox.IsChecked = Settings.Instance.HideNonDLSSGames;
+            GroupGameLibrariesTogetherCheckBox.IsChecked = Settings.Instance.GroupGameLibrariesTogether;
 
         }
 

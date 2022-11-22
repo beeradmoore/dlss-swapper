@@ -36,7 +36,7 @@
   </Target>
 
   <ItemGroup>
-    <None Remove="Assets\Fonts\Segoe-Fluent-Icons.ttf" />
+    <!--<None Remove="Assets\Fonts\Segoe-Fluent-Icons.ttf" />-->
     <None Remove="Properties\launchSettings.json" />
   </ItemGroup>
 

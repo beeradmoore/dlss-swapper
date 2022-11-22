@@ -10,7 +10,7 @@
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
-    <WindowsPackageType>None</WindowsPackageType>
+    <!--<WindowsPackageType>None</WindowsPackageType>-->
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <Configurations>Debug;Release;Debug_WindowsStore;Release_WindowsStore</Configurations>
   </PropertyGroup>

@@ -18,13 +18,11 @@ Global
 		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug_WindowsStore|x64.Deploy.0 = Debug_WindowsStore|x64
 		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug|x64.ActiveCfg = Debug|x64
 		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug|x64.Build.0 = Debug|x64
-		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug|x64.Deploy.0 = Debug|x64
 		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release_WindowsStore|x64.ActiveCfg = Release_WindowsStore|x64
 		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release_WindowsStore|x64.Build.0 = Release_WindowsStore|x64
 		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release_WindowsStore|x64.Deploy.0 = Release_WindowsStore|x64
 		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release|x64.ActiveCfg = Release|x64
 		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release|x64.Build.0 = Release|x64
-		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release|x64.Deploy.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

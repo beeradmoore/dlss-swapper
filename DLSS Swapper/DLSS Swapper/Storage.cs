@@ -28,7 +28,7 @@ namespace DLSS_Swapper
 
         static Storage()
         {
-#if !WINDOW_STORE
+#if !WINDOWS_STORE
             try
             {
                 // Create storage directory if it doesn't exist.

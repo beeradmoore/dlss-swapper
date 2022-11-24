@@ -222,20 +222,6 @@ namespace DLSS_Swapper
 #else
             return Assembly.GetExecutingAssembly().GetName().Version;
 #endif
-        } 
-
-        public string GetLocalFolder()
-        {
-#if WINDOWS_STORE
-            return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
-#else
-            if (Directory.Exists("local_data") == false)
-            {
-                Directory.CreateDirectory("local_data");
-            }
-
-            return Path.Combine(Directory.GetCurrentDirectory(), "local_data");
-#endif
         }
     }
 }

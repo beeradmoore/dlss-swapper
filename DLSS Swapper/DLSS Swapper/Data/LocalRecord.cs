@@ -110,7 +110,7 @@ namespace DLSS_Swapper.Data
                 ExpectedPath = expectedPath,
             };
 
-            var fullExpectedPath = Path.Combine(App.CurrentApp.GetLocalFolder(), expectedPath);
+            var fullExpectedPath = Path.Combine(Storage.GetStorageFolder(), expectedPath);
             if (File.Exists(fullExpectedPath))
             {
                 localRecord.IsDownloaded = true;
@@ -155,10 +155,9 @@ namespace DLSS_Swapper.Data
 
         internal bool Delete()
         {
-            var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             try
             {
-                var dlssPath = Path.GetDirectoryName(Path.Combine(storageFolder.Path, ExpectedPath));
+                var dlssPath = Path.GetDirectoryName(Path.Combine(Storage.GetStorageFolder(), ExpectedPath));
                 Directory.Delete(dlssPath, true);
 
                 IsDownloaded = false;
@@ -169,8 +168,9 @@ namespace DLSS_Swapper.Data
                 // We don't update IsImported here as that wont change.
                 return true;
             }
-            catch (Exception)
+            catch (Exception err)
             {
+                Logger.Error(err.Message);
                 return false;
             }
         }

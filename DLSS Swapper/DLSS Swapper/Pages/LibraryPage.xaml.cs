@@ -157,7 +157,7 @@ namespace DLSS_Swapper.Pages
                         {
                             if (dlssRecord.LocalRecord?.IsDownloaded == true)
                             {
-                                var fullExpectedPath = Path.Combine(App.CurrentApp.GetLocalFolder(), dlssRecord.LocalRecord.ExpectedPath);
+                                var fullExpectedPath = Path.Combine(Storage.GetStorageFolder(), dlssRecord.LocalRecord.ExpectedPath);
                                 var internalZipDir = dlssRecord.Version.ToString();
                                 if (String.IsNullOrEmpty(dlssRecord.AdditionalLabel) == false)
                                 {
@@ -290,7 +290,7 @@ Only import dlls from sources you trust.",
 
 
                     // Copy new record to where it should live in DLSS Swapper app directory.
-                    var fullExpectedFileName = Path.Combine(App.CurrentApp.GetLocalFolder(), dlssRecord.LocalRecord.ExpectedPath);
+                    var fullExpectedFileName = Path.Combine(Storage.GetStorageFolder(), dlssRecord.LocalRecord.ExpectedPath);
                     var fullExpectedPath = Path.GetDirectoryName(fullExpectedFileName);
                     if (Directory.Exists(fullExpectedPath) == false)
                     {
@@ -395,7 +395,7 @@ Only import dlls from sources you trust.",
 
                 if (saveFile != null)
                 {
-                    var fullExpectedPath = Path.Combine(App.CurrentApp.GetLocalFolder(), record.LocalRecord.ExpectedPath);
+                    var fullExpectedPath = Path.Combine(Storage.GetStorageFolder(), record.LocalRecord.ExpectedPath);
 
                     using (var fileStream = File.Create(saveFile.Path))
                     {

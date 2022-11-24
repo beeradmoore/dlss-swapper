@@ -146,7 +146,7 @@ namespace DLSS_Swapper.Data
 
             var guid = Guid.NewGuid().ToString().ToUpper();
 
-            var tempPath = Windows.Storage.ApplicationData.Current.TemporaryFolder.Path;
+            var tempPath = Storage.GetTemp();
             var tempZipFile = Path.Combine(tempPath, $"{guid}.zip");
             var tempDllFile = Path.Combine(tempPath, $"{guid}.dll");
             try
@@ -202,11 +202,6 @@ namespace DLSS_Swapper.Data
                 });
 
 
-                var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-                var dllsFolder = await storageFolder.CreateFolderAsync("dlls", Windows.Storage.CreationCollisionOption.OpenIfExists);
-
-
-
                 using (var archive = ZipFile.OpenRead(tempZipFile))
                 {
                     var zippedDlls = archive.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
@@ -235,8 +230,8 @@ namespace DLSS_Swapper.Data
                     }
                 }
 
-                var dlssFolder = await dllsFolder.CreateFolderAsync($"{dlssVersion}_{MD5Hash}", Windows.Storage.CreationCollisionOption.OpenIfExists);
-                var dlssFile = Path.Combine(dlssFolder.Path, "nvngx_dlss.dll");
+                var dlssFolder = Storage.CreateFolderAsync(Path.Combine("dlls", $"{dlssVersion}_{MD5Hash}"));
+                var dlssFile = Path.Combine(dlssFolder, "nvngx_dlss.dll");
                 File.Move(tempDllFile, dlssFile, true);
 
                 dispatcherQueue.TryEnqueue(() =>

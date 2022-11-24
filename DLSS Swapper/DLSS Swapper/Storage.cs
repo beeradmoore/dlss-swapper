@@ -47,11 +47,9 @@ namespace DLSS_Swapper
 
         public static async Task<T> LoadJsonAsync<T>(string filename) where T : class 
         {
-            //
 #if WINDOWS_STORE
             try
             {
-                //C:\Users\brads\AppData\Local\Packages\0d3bcc7f-138b-48c9-a3e9-06743f19bae7_fema15f4eyjc8\LocalState
                 var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 if (await storageFolder.FileExistsAsync(filename) == false)
                 {
@@ -121,6 +119,40 @@ namespace DLSS_Swapper
                 Logger.Error(err.Message);
                 return false;
             }
+        }
+
+        public static string GetTemp()
+        {
+#if WINDOWS_STORE
+            return Windows.Storage.ApplicationData.Current.TemporaryFolder.Path;
+#else
+            return Path.GetTempPath();
+#endif
+        }
+
+        public static string GetStorageFolder()
+        {
+#if WINDOWS_STORE
+            return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+#else
+            return unpackagedStoragePath;
+#endif
+        }
+
+        public static string CreateFolderAsync(string path)
+        {
+#if WINDOWS_STORE
+            var createdPath = AsyncHelper.RunSync(() => Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync(path, Windows.Storage.CreationCollisionOption.OpenIfExists).AsTask());
+            return createdPath.Path;
+#else
+            var desiredPath = Path.Combine(unpackagedStoragePath, path);
+            if (Directory.Exists(desiredPath) == false)
+            {
+                Directory.CreateDirectory(desiredPath);
+            }
+            return desiredPath;
+#endif
+            // , Windows.Storage.CreationCollisionOption.OpenIfExists
         }
     }
 }

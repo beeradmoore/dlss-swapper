@@ -176,18 +176,7 @@ namespace DLSS_Swapper
 
         internal async Task<bool> SaveImportedDLSSRecordsAsync()
         {
-            try
-            {
-                var importedDlssRecordsFile = Path.Combine(App.CurrentApp.GetLocalFolder(), "imported_dlss_records.json");
-                var json = JsonSerializer.Serialize<List<DLSSRecord>>(App.CurrentApp.ImportedDLSSRecords);
-                await File.WriteAllTextAsync(importedDlssRecordsFile, json);
-                return true;
-            }
-            catch (Exception err)
-            {
-                Logger.Error(err.Message);
-                return false;
-            }
+            return await Storage.SaveJsonAsync(App.CurrentApp.ImportedDLSSRecords, "imported_dlss_records.json");
         }
 
 

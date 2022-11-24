@@ -1,14 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 #if WINDOWS_STORE
 using Windows.Storage;
@@ -322,7 +313,6 @@ namespace DLSS_Swapper
         // Used to prevent saving data while we are loading.
         bool _isLoading = true;
 
-
 #if WINDOWS_STORE
         private static Settings FromLocalSettings()
         {
@@ -433,46 +423,24 @@ namespace DLSS_Swapper
             return settings;
         }
 #else
-        string _settingsJsonPath = Path.Combine(App.CurrentApp.GetLocalFolder(), "settings.json");
         void SaveJson()
         {
-            var settingsJson = JsonSerializer.Serialize(this, new JsonSerializerOptions() { WriteIndented = true });
-            File.WriteAllText(_settingsJsonPath, settingsJson);
+            AsyncHelper.RunSync(() => Storage.SaveJsonAsync(this, "settings.json"));
         }
 
-        private static Settings FromJson()
+        static Settings FromJson()
         {
             var settings = new Settings();
-            try
-            {
-                if (File.Exists(settings._settingsJsonPath) == false)
-                {
-                    settings.SaveJson();
-                }
-                else
-                {
-                    var settingsJsonText = File.ReadAllText(settings._settingsJsonPath);
-                    var settingsJsonObject = JsonSerializer.Deserialize<Settings>(settingsJsonText);
-                    if (settingsJsonObject != null)
-                    {
-                        settings = settingsJsonObject;
-                    }
-                }
-            }
-            catch (Exception err)
-            {
-                Logger.Error(err.Message);
 
-                // We failed to load (or save initial) settings.json, so lets delete it and try agian next launch.
-                try
-                {
-                    File.Delete(settings._settingsJsonPath);
-                }
-                catch (Exception err2)
-                {
-                    // Something really bad happened and we couldn't delete it either.
-                    Logger.Error(err2.Message);
-                }
+            var settingsFromJson = AsyncHelper.RunSync(() => Storage.LoadJsonAsync<Settings>("settings.json"));
+            // If we couldn't load settings then save the defaults.
+            if (settingsFromJson == null)
+            {
+                settings.SaveJson();
+            }
+            else
+            { 
+                settings = settingsFromJson;
             }
 
             // Toggle _isLoading back to false.

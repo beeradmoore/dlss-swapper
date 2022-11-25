@@ -23,11 +23,12 @@
             </Grid.ColumnDefinitions>
             <Image
                 x:Name="AppFontIcon"
-                Width="16"
-                Height="16" 
+                Width="20"
+                Height="20" 
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Source="/Images/Square44x44Logo.png" />
+                Grid.Column="0"
+                Source="Assets/icon_256.png" />
             <TextBlock
                 x:Name="AppTitle"
                 Grid.Column="1"

@@ -21,6 +21,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -41,15 +42,33 @@ namespace DLSS_Swapper
     {
         bool _isCustomizationSupported;
         ThemeWatcher _themeWatcher;
+        IntPtr _windowIcon;
 
         public static NavigationView NavigationView;
 
         public ObservableRangeCollection<DLSSRecord> CurrentDLSSRecords { get; } = new ObservableRangeCollection<DLSSRecord>();
 
+
+        [DllImport("shell32.dll", CharSet = CharSet.Auto)]
+        static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, string iconPath, ref IntPtr index);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern int DestroyIcon(IntPtr hIcon);
+
         public MainWindow()
         {
             Title = "DLSS Swapper";
             this.InitializeComponent();
+
+            // Release the icon.
+            Closed += (object sender, WindowEventArgs args) =>
+            {
+                if (_windowIcon != IntPtr.Zero)
+                {
+                    DestroyIcon(_windowIcon);
+                    _windowIcon = IntPtr.Zero;
+                }
+            };
 
             _isCustomizationSupported = AppWindowTitleBar.IsCustomizationSupported();
             
@@ -64,22 +83,12 @@ namespace DLSS_Swapper
             {
                 var appWindow = GetAppWindowForCurrentWindow();
                 var appWindowTitleBar = appWindow.TitleBar;
-                appWindowTitleBar.ExtendsContentIntoTitleBar = true;
-                appWindowTitleBar.IconShowOptions = IconShowOptions.HideIconAndSystemMenu;
-
+                appWindowTitleBar.ExtendsContentIntoTitleBar = true;                
                 RootGrid.RowDefinitions[0].Height = new GridLength(32);
-
-                /*
-                appWindowTitleBar.SetDragRectangles(new Windows.Graphics.RectInt32[]
-                {
-                    new Windows.Graphics.RectInt32(0, 0, 1, 1),
-                });
-                */
             }
             else
             {
                 RootGrid.RowDefinitions[0].Height = new GridLength(28);
-
                 ExtendsContentIntoTitleBar = true;
                 SetTitleBar(AppTitleBar);
             }
@@ -88,7 +97,39 @@ namespace DLSS_Swapper
             UpdateColors(Settings.Instance.AppTheme);
 
             //MainNavigationView.RequestedTheme = (ElementTheme)Settings.Instance.AppTheme;
+            
+            SetIcon();
         }
+
+
+        /// <summary>
+        /// Default the Window Icon to the icon stored in the .exe, if any.
+        /// 
+        /// The Icon can be overriden by callers by calling SetIcon themselves.
+        /// </summary>
+        /// via this MAUI PR https://github.com/dotnet/maui/pull/6900
+        void SetIcon()
+        {
+            var processPath = Environment.ProcessPath;
+            if (!string.IsNullOrEmpty(processPath))
+            {
+                var index = IntPtr.Zero; // 0 = first icon in resources
+                _windowIcon = ExtractAssociatedIcon(IntPtr.Zero, processPath, ref index);
+                if (_windowIcon != IntPtr.Zero)
+                {
+                    var windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(this);
+
+                    var appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(windowHandle));
+                    if (appWindow is not null)
+                    {
+                        var iconId = Win32Interop.GetIconIdFromIcon(_windowIcon);
+                        appWindow.SetIcon(iconId);
+                    }
+                }
+            }
+        }
+
+    
 
         void MainNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {

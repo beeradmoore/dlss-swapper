@@ -47,7 +47,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
             var lineNumber = 0;
             var stringBuilder = new StringBuilder();
-            var isReadingData = false;
+            //var isReadingData = false;
             var foundItems = 0;
 
 
@@ -60,7 +60,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             {
                 if (line.EndsWith("version: 2.0"))
                 {
-                    isReadingData = true;
+                    //isReadingData = true;
                     stringBuilder.Clear();
                     stringBuilder.AppendLine("version: 2.0");
                 }
@@ -76,7 +76,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                     }
                     else
                     {
-                        isReadingData = false;
+                        //isReadingData = false;
                         var data = stringBuilder.ToString();
                         ++foundItems;
                         stringBuilder.Clear();

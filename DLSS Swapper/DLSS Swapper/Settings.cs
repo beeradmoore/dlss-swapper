@@ -11,11 +11,10 @@ namespace DLSS_Swapper
     {
         static Settings _instance = null;
 
-#if WINDOWS_STORE
-        public static Settings Instance => _instance ??= Settings.FromLocalSettings();
-#else
         public static Settings Instance => _instance ??= Settings.FromJson();
-#endif
+        
+        // We default this to false to prevent saves firing when loading from json.
+        bool _autoSave = false;
 
         bool _hasShownWarning = false;
         public bool HasShownWarning
@@ -26,17 +25,10 @@ namespace DLSS_Swapper
                 if (_hasShownWarning != value)
                 {
                     _hasShownWarning = value;
-
-                    // If this is the inital load we don't trigger any saves.
-                    if (_isLoading)
+                    if (_autoSave)
                     {
-                        return;
+                        SaveJson();
                     }
-#if WINDOWS_STORE
-                    ApplicationData.Current.LocalSettings.Values["HasShownWarning"] = value;
-#else
-                    SaveJson();
-#endif
                 }
             }
         }
@@ -50,17 +42,10 @@ namespace DLSS_Swapper
                 if (_hasShownMultiplayerWarning != value)
                 {
                     _hasShownMultiplayerWarning = value;
-
-                    // If this is the inital load we don't trigger any saves.
-                    if (_isLoading)
+                    if (_autoSave)
                     {
-                        return;
+                        SaveJson();
                     }
-#if WINDOWS_STORE
-                    ApplicationData.Current.LocalSettings.Values["HasShownMultiplayerWarning"] = value;
-#else
-                    SaveJson();
-#endif
                 }
             }
         }
@@ -74,17 +59,10 @@ namespace DLSS_Swapper
                 if (_hideNonDLSSGames != value)
                 {
                     _hideNonDLSSGames = value;
-
-                    // If this is the inital load we don't trigger any saves.
-                    if (_isLoading)
+                    if (_autoSave)
                     {
-                        return;
+                        SaveJson();
                     }
-#if WINDOWS_STORE
-                    ApplicationData.Current.LocalSettings.Values["HideNonDLSSGames"] = value;
-#else
-                    SaveJson();
-#endif
                 }
             }
         }
@@ -99,17 +77,10 @@ namespace DLSS_Swapper
                 if (_groupGameLibrariesTogether != value)
                 {
                     _groupGameLibrariesTogether = value;
-
-                    // If this is the inital load we don't trigger any saves.
-                    if (_isLoading)
+                    if (_autoSave)
                     {
-                        return;
+                        SaveJson();
                     }
-#if WINDOWS_STORE
-                    ApplicationData.Current.LocalSettings.Values["GroupGameLibrariesTogether"] = value;
-#else
-                    SaveJson();
-#endif
                 }
             }
         }
@@ -123,17 +94,10 @@ namespace DLSS_Swapper
                 if (_appTheme != value)
                 {
                     _appTheme = value;
-
-                    // If this is the inital load we don't trigger any saves.
-                    if (_isLoading)
+                    if (_autoSave)
                     {
-                        return;
+                        SaveJson();
                     }
-#if WINDOWS_STORE
-                    ApplicationData.Current.LocalSettings.Values["AppTheme"] = (int)value;
-#else
-                    SaveJson();
-#endif
                 }
             }
         }
@@ -147,17 +111,10 @@ namespace DLSS_Swapper
                 if (_allowExperimental != value)
                 {
                     _allowExperimental = value;
-
-                    // If this is the inital load we don't trigger any saves.
-                    if (_isLoading)
+                    if (_autoSave)
                     {
-                        return;
+                        SaveJson();
                     }
-#if WINDOWS_STORE
-                    ApplicationData.Current.LocalSettings.Values["AllowExperimental"] = value;
-#else
-                    SaveJson();
-#endif
                 }
             }
         }
@@ -172,17 +129,10 @@ namespace DLSS_Swapper
                 if (_allowUntrusted != value)
                 {
                     _allowUntrusted = value;
-
-                    // If this is the inital load we don't trigger any saves.
-                    if (_isLoading)
+                    if (_autoSave)
                     {
-                        return;
+                        SaveJson();
                     }
-#if WINDOWS_STORE
-                    ApplicationData.Current.LocalSettings.Values["AllowUntrusted"] = value;
-#else
-                    SaveJson();
-#endif
                 }
             }
         }
@@ -196,17 +146,10 @@ namespace DLSS_Swapper
                 if (_lastRecordsRefresh != value)
                 {
                     _lastRecordsRefresh = value;
-
-                    // If this is the inital load we don't trigger any saves.
-                    if (_isLoading)
+                    if (_autoSave)
                     {
-                        return;
+                        SaveJson();
                     }
-#if WINDOWS_STORE
-                    ApplicationData.Current.LocalSettings.Values["LastRecordsRefresh"] = Windows.Foundation.PropertyValue.CreateDateTime(value);
-#else
-                    SaveJson();
-#endif
                 }
             }
         }
@@ -221,17 +164,10 @@ namespace DLSS_Swapper
                 if (_lastPromptWasForVersion != value)
                 {
                     _lastPromptWasForVersion = value;
-
-                    // If this is the inital load we don't trigger any saves.
-                    if (_isLoading)
+                    if (_autoSave)
                     {
-                        return;
+                        SaveJson();
                     }
-#if WINDOWS_STORE
-                    ApplicationData.Current.LocalSettings.Values["LastPromptWasForVersion"] = _lastPromptWasForVersion;
-#else
-                    SaveJson();
-#endif
                 }
             }
         }
@@ -247,17 +183,10 @@ namespace DLSS_Swapper
                 if (_loggingLevel != value)
                 {
                     _loggingLevel = value;
-
-                    // If this is the inital load we don't trigger any saves.
-                    if (_isLoading)
+                    if (_autoSave)
                     {
-                        return;
+                        SaveJson();
                     }
-#if WINDOWS_STORE
-                    ApplicationData.Current.LocalSettings.Values["LoggingLevel"] = (int)_loggingLevel;
-#else
-                    SaveJson();
-#endif
                 }
             }
         }
@@ -271,17 +200,10 @@ namespace DLSS_Swapper
                 if (_enabledGameLibraries != value)
                 {
                     _enabledGameLibraries = value;
-
-                    // If this is the inital load we don't trigger any saves.
-                    if (_isLoading)
+                    if (_autoSave)
                     {
-                        return;
+                        SaveJson();
                     }
-#if WINDOWS_STORE
-                    ApplicationData.Current.LocalSettings.Values["EnabledGameLibraries"] = (uint)_enabledGameLibraries;
-#else
-                    SaveJson();
-#endif
                 }
             }
         }
@@ -296,25 +218,17 @@ namespace DLSS_Swapper
                 if (_wasLoadingGames != value)
                 {
                     _wasLoadingGames = value;
-
-                    if (_isLoading)
+                    if (_autoSave)
                     {
-                        return;
+                        SaveJson();
                     }
-#if WINDOWS_STORE
-                    ApplicationData.Current.LocalSettings.Values["WasLoadingGames"] = value;
-#else
-                    SaveJson();
-#endif
                 }
             }
         }
 
-        // Used to prevent saving data while we are loading.
-        bool _isLoading = true;
 
 #if WINDOWS_STORE
-        private static Settings FromLocalSettings()
+        static Settings FromLocalSettings()
         {
             var settings = new Settings();
 
@@ -417,25 +331,35 @@ namespace DLSS_Swapper
                     settings._wasLoadingGames = wasLoadingGames;
                 }
             }
-            
-            // Toggle _isLoading back to false.
-            settings._isLoading = false;
+
+            // We only care about loading from here once. 
+            // After we have got the values we will attempt to save as json.
+            // It we fail to save as json these settings will be lost.
+            localSettings.Values.Clear();
+
             return settings;
         }
-#else
+#endif
+
         void SaveJson()
         {
-            AsyncHelper.RunSync(() => Storage.SaveJsonAsync(this, "settings.json"));
+            AsyncHelper.RunSync(() => Storage.SaveSettingsJsonAsync(this));
         }
 
         static Settings FromJson()
         {
-            var settings = new Settings();
+            Settings settings = null;
 
-            var settingsFromJson = AsyncHelper.RunSync(() => Storage.LoadJsonAsync<Settings>("settings.json"));
+            var settingsFromJson = AsyncHelper.RunSync(() => Storage.LoadSettingsJsonAsync<Settings>());
             // If we couldn't load settings then save the defaults.
             if (settingsFromJson == null)
             {
+#if WINDOWS_STORE
+                // If we are loading from an existing Windows Store build we want to copy over existing settings and then save as a json.
+                settings = FromLocalSettings();
+#else
+                settings = new Settings();
+#endif
                 settings.SaveJson();
             }
             else
@@ -443,10 +367,9 @@ namespace DLSS_Swapper
                 settings = settingsFromJson;
             }
 
-            // Toggle _isLoading back to false.
-            settings._isLoading = false;
+            // Re-enable auto save.
+            settings._autoSave = true;
             return settings;
         }
-#endif
     }
 }

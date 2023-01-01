@@ -17,7 +17,6 @@
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
-  <!-- If we are building for Windows Store set the WINDOWS_STORE defined constant -->
   <PropertyGroup Condition="'$(Configuration)'=='Release' Or '$(Configuration)'=='Release_WindowsStore'">
     <Optimize>True</Optimize>
   </PropertyGroup>
@@ -25,9 +24,16 @@
   <!-- If we are building for Windows Store set the WINDOWS_STORE defined constant -->
   <PropertyGroup Condition="'$(Configuration)'=='Debug_WindowsStore' Or '$(Configuration)'=='Release_WindowsStore'">
     <DefineConstants>WINDOWS_STORE</DefineConstants>
+    <WindowsPackageType>MSIX</WindowsPackageType>
   </PropertyGroup>
 
-  <!-- If we are building for the Windows Store copy the packaged launchSettings.json -->
+    <!-- If we are not building for Windows Store still set the WindowsPackageType to none -->
+    <PropertyGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release'">
+      <WindowsPackageType>None</WindowsPackageType>
+    </PropertyGroup>
+
+
+    <!-- If we are building for the Windows Store copy the packaged launchSettings.json -->
   <Target Name="PreBuildPackaged" BeforeTargets="PreBuildEvent" Condition="'$(DefineConstants.Contains(`WINDOWS_STORE`))' == 'true'">
     <Exec Command="xcopy &quot;$(ProjectDir)Properties\launchSettings.Packaged.json&quot; &quot;$(ProjectDir)Properties\launchSettings.json&quot; /Y" />
   </Target>
@@ -36,6 +42,20 @@
   <Target Name="PreBuildUnpackged" BeforeTargets="PreBuildEvent" Condition="'$(DefineConstants.Contains(`WINDOWS_STORE`))' == 'false'">
     <Exec Command="xcopy &quot;$(ProjectDir)Properties\launchSettings.Unpackaged.json&quot; &quot;$(ProjectDir)Properties\launchSettings.json&quot; /Y" />
   </Target>
+
+  <ItemGroup Condition="'$(DefineConstants.Contains(`WINDOWS_STORE`))' == 'true'">
+      <None Update="StoredData\**">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(DefineConstants.Contains(`WINDOWS_STORE`))' == 'false'">
+      <Compile Remove="StoredData\dlss_zip\**" />
+      <None Remove="StoredData\dlss_zip\**" />
+      <None Update="StoredData\static_json\**">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Assets\BadgeLogo.scale-100.png" />
@@ -298,7 +318,7 @@
     <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="System.Management" Version="7.0.0" />
-    <PackageReference Include="YamlDotNet" Version="12.2.1" />
+    <PackageReference Include="YamlDotNet" Version="12.3.1" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 

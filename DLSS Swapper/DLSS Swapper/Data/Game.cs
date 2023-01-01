@@ -1,9 +1,11 @@
 ﻿using DLSS_Swapper.Extensions;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -202,20 +204,42 @@ namespace DLSS_Swapper.Data
                 return (false, "Unable to swap DLSS dll as there were no DLSS records to update.", false);
             }
 
+            var tempPath = Storage.GetTemp();
+            var tempDllFile = Path.Combine(tempPath, $"nvngx_dlss_{dlssRecord.MD5Hash}", $"nvngx_dlss.dll");
+            Storage.CreateDirectoryForFileIfNotExists(tempDllFile);
 
-            var newDllPath = Path.Combine(Storage.GetStorageFolder(), dlssRecord.LocalRecord.ExpectedPath);
+            using (var archive = ZipFile.OpenRead(dlssRecord.LocalRecord.ExpectedPath))
+            {
+                var zippedDlls = archive.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
+                if (zippedDlls.Length == 0)
+                {
+                    throw new Exception("DLSS zip was invalid (no dll found).");
+                }
+                else if (zippedDlls.Length > 1)
+                {
+                    throw new Exception("DLSS zip was invalid (more than one dll found).");
+                }
+
+                zippedDlls[0].ExtractToFile(tempDllFile, true);
+            }
+
+            var versionInfo = FileVersionInfo.GetVersionInfo(tempDllFile);
+
+            var dlssVersion = versionInfo.GetFormattedFileVersion();
+            if (dlssRecord.MD5Hash != versionInfo.GetMD5Hash())
+            {
+                return (false, "Unable to swap DLSS dll as zip was invalid (dll hash was invalid).", false);
+            }
 
             // Validate new DLL
             if (Settings.Instance.AllowUntrusted == false)
             {
-                bool isTrusted = WinTrust.VerifyEmbeddedSignature(newDllPath);
+                var isTrusted = WinTrust.VerifyEmbeddedSignature(tempDllFile);
                 if (isTrusted == false)
                 {
                     return (false, "Unable to swap DLSS dll as we are unable to verify the signature of the DLSS version you are trying to use.\nIf you wish to override this decision please enable 'Allow Untrusted' in settings.", false);
                 }
             }
-
-
 
             var baseDllVersion = String.Empty;
 
@@ -260,7 +284,7 @@ namespace DLSS_Swapper.Data
             {
                 try
                 {
-                    File.Copy(newDllPath, dll, true);
+                    File.Copy(tempDllFile, dll, true);
                 }
                 catch (UnauthorizedAccessException err)
                 {
@@ -286,6 +310,16 @@ namespace DLSS_Swapper.Data
             if (String.IsNullOrEmpty(baseDllVersion) == false)
             {
                 BaseDLSSVersion = baseDllVersion;
+            }
+
+            try
+            {
+                File.Delete(tempDllFile);
+            }
+            catch (Exception err)
+            {
+                // NOOP
+                Logger.Error(err.Message);
             }
 
             return (true, String.Empty, false);

@@ -180,11 +180,10 @@ namespace DLSS_Swapper
 
         async void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
         {
-            var gitHubUpdater = new Data.GitHub.GitHubUpdater();
-            // If this is a new build, fetch updates to display to the user.
 
             // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
             /*
+            // If this is a new build, fetch updates to display to the user.
             Task<Data.GitHub.GitHubRelease> releaseNotesTask = null;
             if (CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated)
             {
@@ -194,6 +193,8 @@ namespace DLSS_Swapper
             */
 
 #if !WINDOWS_STORE
+            var gitHubUpdater = new Data.GitHub.GitHubUpdater();
+
             // If this is a GitHub build check if there is a new version.
             // Lazy blocks to allow mul
             Task<Data.GitHub.GitHubRelease> newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease();
@@ -202,7 +203,7 @@ namespace DLSS_Swapper
 
             // Load from cache, or download if not found.
             var loadDlssRecrodsTask = LoadDLSSRecordsAsync();
-            var loadImportedDlssRecords = LoadImportedDLSSRecordsAsync();
+            var loadImportedDlssRecordsTask = LoadImportedDLSSRecordsAsync();
 
     
             if (Settings.Instance.HasShownMultiplayerWarning == false)
@@ -245,7 +246,7 @@ DLSS Swapper will close now.",
                 Close();
             }
 
-            await loadImportedDlssRecords;
+            await loadImportedDlssRecordsTask;
 
             FilterDLSSRecords();
             //await App.CurrentApp.LoadLocalRecordsAsync();
@@ -321,6 +322,7 @@ DLSS Swapper will close now.",
         /// <returns>True if we expect there are now valid DLSS records loaded into memory.</returns>
         async Task<bool> LoadDLSSRecordsAsync()
         {
+#if !WINDOWS_STORE
             // Only auto check for updates once every 12 hours.
             var timeSinceLastUpdate = DateTimeOffset.Now - Settings.Instance.LastRecordsRefresh;
             if (timeSinceLastUpdate.TotalHours > 12)
@@ -328,20 +330,26 @@ DLSS Swapper will close now.",
                 var didUpdate = await UpdateDLSSRecordsAsync();
                 if (didUpdate)
                 {
+                    // If we did upda
                     return true;
                 }
             }
+#endif
 
             try
             {
                 // If we were unable to auto-load lets try load cached.
-                var items = await Storage.LoadJsonAsync<DLSSRecords>("dlss_records.json");
+                var items = await Storage.LoadDLSSRecordsJsonAsync();
                
                 // If items could not be loaded then we should attempt to upload dlss_records from the dlss-archive.
                 if (items == null)
                 {
+#if WINDOWS_STORE
+                    return false;
+#else
                     return await UpdateDLSSRecordsAsync();
-                }   
+#endif
+                }
                 else
                 {
                     UpdateDLSSRecordsList(items);
@@ -357,7 +365,7 @@ DLSS Swapper will close now.",
 
         internal async Task LoadImportedDLSSRecordsAsync()
         {
-            var items = await Storage.LoadJsonAsync<List<DLSSRecord>>("imported_dlss_records.json");
+            var items = await Storage.LoadImportedDLSSRecordsJsonAsync();
             if (items != null)
             {
                 UpdateImportedDLSSRecordsList(items);
@@ -379,6 +387,7 @@ DLSS Swapper will close now.",
             App.CurrentApp.ImportedDLSSRecords.AddRange(localDlssRecords);
         }
 
+#if !WINDOWS_STORE
         /// <summary>
         /// Attempts to load dlss_records.json from dlss-archive.
         /// </summary>
@@ -408,7 +417,7 @@ DLSS Swapper will close now.",
                     memoryStream.Position = 0;
                     try
                     {
-                        await Storage.SaveJsonAsync(items, "dlss_records.json");
+                        await Storage.SaveDLSSRecordsJsonAsync(items);
                         // Update settings for auto refresh.
                         Settings.Instance.LastRecordsRefresh = DateTime.Now;
                         return true;
@@ -426,6 +435,7 @@ DLSS Swapper will close now.",
 
             return false;
         }
+#endif
 
         internal void UpdateColors(ElementTheme theme)
         {

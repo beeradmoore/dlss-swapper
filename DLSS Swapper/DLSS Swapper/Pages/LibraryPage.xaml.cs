@@ -106,6 +106,9 @@ namespace DLSS_Swapper.Pages
         {
             IsRefreshing = true;
 
+#if WINDOWS_STORE
+            await Task.Delay(500);
+#else
             var didUpdate = await App.CurrentApp.MainWindow.UpdateDLSSRecordsAsync();
             if (didUpdate)
             {
@@ -123,7 +126,7 @@ namespace DLSS_Swapper.Pages
                 errorDialog.RequestedTheme = Settings.Instance.AppTheme;
                 await errorDialog.ShowAsync();
             }
-
+#endif
             IsRefreshing = false;
         }
 
@@ -186,7 +189,6 @@ namespace DLSS_Swapper.Pages
 
         async Task ImportAsync()
         {
-
             if (Settings.Instance.HasShownWarning == false)
             {
                 var warningDialog = new ContentDialog()
@@ -290,12 +292,13 @@ Only import dlls from sources you trust.",
 
 
                     // Copy new record to where it should live in DLSS Swapper app directory.
-                    var fullExpectedFileName = Path.Combine(Storage.GetStorageFolder(), dlssRecord.LocalRecord.ExpectedPath);
+                    var fullExpectedFileName = dlssRecord.LocalRecord.ExpectedPath;
                     var fullExpectedPath = Path.GetDirectoryName(fullExpectedFileName);
                     if (Directory.Exists(fullExpectedPath) == false)
                     {
                         Directory.CreateDirectory(fullExpectedPath);
                     }
+                    // TODO: CREATE ZIP HERE
                     File.Copy(openFile.Path, fullExpectedFileName, true);
 
                     // If there were other records we are overwriting we remove them.
@@ -395,15 +398,7 @@ Only import dlls from sources you trust.",
 
                 if (saveFile != null)
                 {
-                    var fullExpectedPath = Path.Combine(Storage.GetStorageFolder(), record.LocalRecord.ExpectedPath);
-
-                    using (var fileStream = File.Create(saveFile.Path))
-                    {
-                        using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create))
-                        {
-                            zipArchive.CreateEntryFromFile(fullExpectedPath, Path.GetFileName(fullExpectedPath));
-                        }
-                    }
+                    File.Copy(record.LocalRecord.ExpectedPath, saveFile.Path, true);
                 }
             }
             catch (Exception err)
@@ -431,7 +426,6 @@ Only import dlls from sources you trust.",
             dialog.RequestedTheme = Settings.Instance.AppTheme;
             await dialog.ShowAsync();
         }
-
 
         async void MainGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

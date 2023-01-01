@@ -103,7 +103,9 @@ namespace DLSS_Swapper.Data
 
         internal async Task<(bool Success, string Message, bool Cancelled)> DownloadAsync(Action<int> ProgressCallback = null)
         {
-
+#if WINDOWS_STORE
+            return (false, "Windows Store builds can not download DLSS updates.", false);
+#else
             var dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
 
             if (String.IsNullOrEmpty(DownloadUrl))
@@ -148,7 +150,10 @@ namespace DLSS_Swapper.Data
 
             var tempPath = Storage.GetTemp();
             var tempZipFile = Path.Combine(tempPath, $"{guid}.zip");
-            var tempDllFile = Path.Combine(tempPath, $"{guid}.dll");
+
+            var targetZipDirectory = Path.Combine(Storage.GetStorageFolder(), "dlss_zip");
+            Storage.CreateDirectoryIfNotExists(targetZipDirectory);
+
             try
             {
                 using (var fileStream = new FileStream(tempZipFile, FileMode.Create, FileAccess.ReadWrite, FileShare.None, buffer.Length, true))
@@ -201,38 +206,10 @@ namespace DLSS_Swapper.Data
                     NotifyPropertyChanged("LocalRecord");
                 });
 
+                
 
-                using (var archive = ZipFile.OpenRead(tempZipFile))
-                {
-                    var zippedDlls = archive.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
-                    if (zippedDlls.Length != 1)
-                    {
-                        throw new Exception("Downloaded file was invalid.");
-                    }
+                File.Move(tempZipFile, Path.Combine(targetZipDirectory, $"{Version}_{MD5Hash}.zip"), true);
 
-                    zippedDlls[0].ExtractToFile(tempDllFile, true);
-                }
-
-                var versionInfo = FileVersionInfo.GetVersionInfo(tempDllFile);
-
-                var dlssVersion = versionInfo.GetFormattedFileVersion();
-                if (MD5Hash != versionInfo.GetMD5Hash())
-                {
-                    throw new Exception("Downloaded file was invalid.");
-                }
-
-                if (Settings.Instance.AllowUntrusted == false)
-                {
-                    var isTrusted = WinTrust.VerifyEmbeddedSignature(tempDllFile);
-                    if (isTrusted == false)
-                    {
-                        throw new Exception("Downloaded file was not trusted by Windows.");
-                    }
-                }
-
-                var dlssFolder = Storage.CreateFolderAsync(Path.Combine("dlls", $"{dlssVersion}_{MD5Hash}"));
-                var dlssFile = Path.Combine(dlssFolder, "nvngx_dlss.dll");
-                File.Move(tempDllFile, dlssFile, true);
 
                 dispatcherQueue.TryEnqueue(() =>
                 {
@@ -284,17 +261,8 @@ namespace DLSS_Swapper.Data
                 {
                     // NOOP
                 }
-
-                try
-                {
-                    File.Delete(tempDllFile);
-                }
-                catch (Exception)
-                {
-                    // NOOP
-                }
-
             }
+#endif
         }
 
         internal static DLSSRecord FromImportedFile(string fileName)
@@ -316,6 +284,8 @@ namespace DLSS_Swapper.Data
                 ZipMD5Hash = String.Empty,
                 IsSignatureValid = WinTrust.VerifyEmbeddedSignature(fileName),
             };
+
+            // TODO: Maybe don't load from here.
 
             App.CurrentApp.LoadLocalRecordFromDLSSRecord(dlssRecord, true);
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -110,8 +111,8 @@ namespace DLSS_Swapper.Data
                 ExpectedPath = expectedPath,
             };
 
-            var fullExpectedPath = Path.Combine(Storage.GetStorageFolder(), expectedPath);
-            if (File.Exists(fullExpectedPath))
+            var exists = File.Exists(expectedPath);
+            if (File.Exists(expectedPath))
             {
                 localRecord.IsDownloaded = true;
             }
@@ -155,10 +156,12 @@ namespace DLSS_Swapper.Data
 
         internal bool Delete()
         {
+#if WINDOWS_STORE
+            return false;
+#else
             try
             {
-                var dlssPath = Path.GetDirectoryName(Path.Combine(Storage.GetStorageFolder(), ExpectedPath));
-                Directory.Delete(dlssPath, true);
+                File.Delete(ExpectedPath);
 
                 IsDownloaded = false;
                 IsDownloading = false;
@@ -173,6 +176,7 @@ namespace DLSS_Swapper.Data
                 Logger.Error(err.Message);
                 return false;
             }
+#endif
         }
 
         /*

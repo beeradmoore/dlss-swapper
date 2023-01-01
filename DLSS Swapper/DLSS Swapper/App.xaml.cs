@@ -86,8 +86,19 @@ namespace DLSS_Swapper
 
         internal void LoadLocalRecordFromDLSSRecord(DLSSRecord dlssRecord, bool isImportedRecord = false)
         {
-            var dllsPath = isImportedRecord ? "imported_dlls" : "dlls";
-            var expectedPath = Path.Combine(dllsPath, $"{dlssRecord.Version}_{dlssRecord.MD5Hash}", "nvngx_dlss.dll");
+#if WINDOWS_STORE
+            var dllsPath = Path.Combine(AppContext.BaseDirectory, "StoredData", "dlss_zip");
+            if (isImportedRecord)
+            {
+                dllsPath = Path.Combine(Storage.GetStorageFolder(), "imported_dlss_zip");
+            }
+#elif PORTABLE
+
+#else
+            var dllsPath = Path.Combine(Storage.GetStorageFolder(), (isImportedRecord ? "imported_dlss_zip" : "dlss_zip"));
+#endif
+
+            var expectedPath = Path.Combine(dllsPath, $"{dlssRecord.Version}_{dlssRecord.MD5Hash}.zip");
             
             // Load record.
             var localRecord = LocalRecord.FromExpectedPath(expectedPath);
@@ -176,7 +187,7 @@ namespace DLSS_Swapper
 
         internal async Task<bool> SaveImportedDLSSRecordsAsync()
         {
-            return await Storage.SaveJsonAsync(App.CurrentApp.ImportedDLSSRecords, "imported_dlss_records.json");
+            return await Storage.SaveImportedDLSSRecordsJsonAsync(App.CurrentApp.ImportedDLSSRecords);
         }
 
 

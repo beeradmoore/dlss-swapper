@@ -1,7 +1,8 @@
 {
   "profiles": {
     "DLSS Swapper (Windows Store)": {
-      "commandName": "MsixPackage"
+      "commandName": "MsixPackage",      
+      "nativeDebugging": true
       /* "commandLineArgs": ""  Command line arguments to pass to the app. */
       /* "alwaysReinstallApp": false,  Uninstall and then reinstall the app. All information about the app state is deleted. */
       /* "remoteDebugEnabled": false,  Indicates that the debugger should attach to a process on a remote machine. */

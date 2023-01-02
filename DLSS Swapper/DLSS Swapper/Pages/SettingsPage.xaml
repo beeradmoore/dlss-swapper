@@ -102,7 +102,7 @@
                     Version: 
                     <Run Text="{x:Bind Version}" />
                 </TextBlock>
-                <Button Content="Check for updates" Margin="0,12,0,0" Command="{Binding CheckForUpdatesCommand}" Visibility="{x:Bind local:App.IsWindowsStoreBuild, Converter={StaticResource InverseBoolToVisibleConverter}}" />
+                <Button Content="Check for updates" Margin="0,12,0,0" Command="{Binding CheckForUpdatesCommand}" />
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"

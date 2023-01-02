@@ -119,7 +119,22 @@ namespace DLSS_Swapper.Pages
         // We only check for updates for builds which are not from the Windows Store.
         async Task CheckForUpdatesAsync()
         {
-#if !WINDOWS_STORE
+#if WINDOWS_STORE
+            var dialog = new ContentDialog()
+            {
+                Title = "Open Windows Store",
+                CloseButtonText = "Cancel",
+                PrimaryButtonText = "Open",
+                Content = "We are unable to automatically check for updates from the Windows Store. Opening the DLSS Swapper Windows Store page should show if there is an update available.",
+                XamlRoot = XamlRoot,
+                RequestedTheme = Settings.Instance.AppTheme,
+            };
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                await Launcher.LaunchUriAsync(new Uri("ms-windows-store://pdp/?ProductId=9NNL4H1PTJBL"));
+            }
+#else
             IsCheckingForUpdates = true;
             var githubUpdater = new Data.GitHub.GitHubUpdater();
             var newUpdate = await githubUpdater.CheckForNewGitHubRelease();      
@@ -131,6 +146,7 @@ namespace DLSS_Swapper.Pages
                     CloseButtonText = "Okay",
                     Content = "No new updates are available.",
                     XamlRoot = XamlRoot,
+                    RequestedTheme = Settings.Instance.AppTheme,
                 };
                 await dialog.ShowAsync();
 

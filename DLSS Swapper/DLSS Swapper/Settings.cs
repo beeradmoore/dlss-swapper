@@ -350,7 +350,7 @@ namespace DLSS_Swapper
         {
             Settings settings = null;
 
-            var settingsFromJson = AsyncHelper.RunSync(() => Storage.LoadSettingsJsonAsync<Settings>());
+            var settingsFromJson = AsyncHelper.RunSync(() => Storage.LoadSettingsJsonAsync());
             // If we couldn't load settings then save the defaults.
             if (settingsFromJson == null)
             {

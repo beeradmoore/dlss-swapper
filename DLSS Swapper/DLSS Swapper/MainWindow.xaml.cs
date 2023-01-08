@@ -3,6 +3,7 @@ using CommunityToolkit.WinUI.UI.Controls;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Pages;
+using DLSS_Swapper.UserControls;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -208,14 +209,13 @@ namespace DLSS_Swapper
     
             if (Settings.Instance.HasShownMultiplayerWarning == false)
             {
-                var dialog = new ContentDialog()
+                var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
                     Title = "Note for multiplayer games",
                     CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
                     Content = "While swapping DLSS versions should not be considered cheating, certain anti-cheat systems may not be happy with you if the files in your game directory are not what the game was distributed with.\n\nBecause of this we recommend using caution for multiplayer games.",
-                    XamlRoot = MainNavigationView.XamlRoot,
                 };
-
                 var result = await dialog.ShowAsync();
 
                 Settings.Instance.HasShownMultiplayerWarning = true;
@@ -225,17 +225,17 @@ namespace DLSS_Swapper
             var didLoadDlssRecords = await loadDlssRecrodsTask;
             if (didLoadDlssRecords == false)
             {
-                var dialog = new ContentDialog()
+                var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
                     Title = "Error",
                     CloseButtonText = "Close",
                     PrimaryButtonText = "Github Issues",
+                    DefaultButton = ContentDialogButton.Primary,
                     Content = @"We were unable to load dlss_records.json from your computer or from the internet. 
 
 If this keeps happening please file an report in our issue tracker on Github.
 
 DLSS Swapper will close now.",
-                    XamlRoot = MainNavigationView.XamlRoot,
                 };
                 var response = await dialog.ShowAsync();
                 if (response == ContentDialogResult.Primary)

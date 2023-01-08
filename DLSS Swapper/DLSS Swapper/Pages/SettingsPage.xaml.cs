@@ -21,6 +21,7 @@ using Windows.Foundation.Diagnostics;
 using Windows.System;
 using Windows.UI.ViewManagement;
 using System.Diagnostics;
+using DLSS_Swapper.UserControls;
 
 namespace DLSS_Swapper.Pages
 {
@@ -120,14 +121,13 @@ namespace DLSS_Swapper.Pages
         async Task CheckForUpdatesAsync()
         {
 #if WINDOWS_STORE
-            var dialog = new ContentDialog()
+            var dialog = new EasyContentDialog(XamlRoot)
             {
                 Title = "Open Windows Store",
                 CloseButtonText = "Cancel",
                 PrimaryButtonText = "Open",
+                DefaultButton = ContentDialogButton.Primary,
                 Content = "We are unable to automatically check for updates from the Windows Store. Opening the DLSS Swapper Windows Store page should show if there is an update available.",
-                XamlRoot = XamlRoot,
-                RequestedTheme = Settings.Instance.AppTheme,
             };
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
@@ -141,12 +141,11 @@ namespace DLSS_Swapper.Pages
             if (newUpdate == null)
             {
 
-                var dialog = new ContentDialog()
+                var dialog = new EasyContentDialog(XamlRoot)
                 {
                     CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
                     Content = "No new updates are available.",
-                    XamlRoot = XamlRoot,
-                    RequestedTheme = Settings.Instance.AppTheme,
                 };
                 await dialog.ShowAsync();
 
@@ -229,12 +228,12 @@ namespace DLSS_Swapper.Pages
             });
             richTextBlock.Blocks.Add(paragraph);
 
-            var dialog = new ContentDialog()
+            var dialog = new EasyContentDialog(XamlRoot)
             {
                 Title = "DLSS Swapper is available on the Windows Store",
                 CloseButtonText = "Okay",
+                DefaultButton = ContentDialogButton.Close,
                 Content = richTextBlock,
-                XamlRoot = XamlRoot,
             };
             
             await dialog.ShowAsync();
@@ -269,12 +268,12 @@ namespace DLSS_Swapper.Pages
             {
                 Logger.Error(err.Message);
 
-                var dialog = new ContentDialog()
+                var dialog = new EasyContentDialog(XamlRoot)
                 {
                     Title = "Oops",
                     CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
                     Content = "Could not open your log file directly from DLSS Swapper. Please try open it manually.",
-                    XamlRoot = XamlRoot,
                 };
 
                 await dialog.ShowAsync();

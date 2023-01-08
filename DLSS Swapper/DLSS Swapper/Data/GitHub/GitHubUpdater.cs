@@ -5,6 +5,7 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.WinUI.UI.Controls;
+using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Windows.System;
@@ -116,17 +117,16 @@ namespace DLSS_Swapper.Data.GitHub
                 Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
             };
 
-            var dialog = new ContentDialog()
+            var dialog = new EasyContentDialog(rootElement.XamlRoot)
             {
                 Title = $"Update Available - {gitHubRelease.Name}",
                 PrimaryButtonText = "Update",
                 CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
                 Content = new ScrollViewer()
                 {
                     Content = contentUpdate,
                 },
-                XamlRoot = rootElement.XamlRoot,
-                RequestedTheme = Settings.Instance.AppTheme,
             };
             var result = await dialog.ShowAsync();
 
@@ -143,16 +143,15 @@ namespace DLSS_Swapper.Data.GitHub
                 Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
             };
 
-            var dialog = new ContentDialog()
+            var dialog = new EasyContentDialog(rootElement.XamlRoot)
             {
                 Title = $"DLSS Swapper just updated - {gitHubRelease.Name}",
-                PrimaryButtonText = "Cancel",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Close,
                 Content = new ScrollViewer()
                 {
                     Content = contentUpdate,
                 },
-                XamlRoot = rootElement.XamlRoot,
-                RequestedTheme = Settings.Instance.AppTheme,
             };
             await dialog.ShowAsync();
         }

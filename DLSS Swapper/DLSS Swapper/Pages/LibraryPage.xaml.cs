@@ -118,12 +118,13 @@ namespace DLSS_Swapper.Pages
             }
             else
             {
-                var errorDialog = new ContentDialog();
-                errorDialog.Title = "Error";
-                errorDialog.CloseButtonText = "Okay";
-                errorDialog.Content = "Unable to update DLSS records.";
-                errorDialog.XamlRoot = XamlRoot;
-                errorDialog.RequestedTheme = Settings.Instance.AppTheme;
+                var errorDialog = new EasyContentDialog(XamlRoot)
+                {
+                    Title = "Error",
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = "Unable to update DLSS records.",
+                };
                 await errorDialog.ShowAsync();
             }
 #endif
@@ -177,12 +178,13 @@ namespace DLSS_Swapper.Pages
                 Logger.Error(err.Message);
 
                 // If the fullExpectedPath does not exist, or there was an error writing it.
-                var dialog = new ContentDialog();
-                dialog.Title = "Error";
-                dialog.CloseButtonText = "Okay";
-                dialog.Content = "Could not export DLSS dll.";
-                dialog.XamlRoot = XamlRoot;
-                dialog.RequestedTheme = Settings.Instance.AppTheme;
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    Title = "Error",
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = "Could not export DLSS dll.",
+                };
                 await dialog.ShowAsync();
             }
         }
@@ -191,16 +193,16 @@ namespace DLSS_Swapper.Pages
         {
             if (Settings.Instance.HasShownWarning == false)
             {
-                var warningDialog = new ContentDialog()
+                var warningDialog = new EasyContentDialog(XamlRoot)
                 {
                     Title = "Warning",
                     CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
                     Content = @"Replacing dlls on your computer can be dangerous.
 
 Placing a malicious dll into a game is as bad as running Linking_park_-_nUmB_mp3.exe that you just downloaded from LimeWire.
 
 Only import dlls from sources you trust.",
-                    XamlRoot = XamlRoot,
                 };
                 await warningDialog.ShowAsync();
 
@@ -220,14 +222,15 @@ Only import dlls from sources you trust.",
                 return;
             }
 
-            
-            var dialog = new ContentDialog();
-            dialog.PrimaryButtonText = "Import";
-            dialog.CloseButtonText = "Cancel";
-            dialog.Title = "Reminder";
-            dialog.Content = $"Only import DLLs from sources you trust.";
-            dialog.XamlRoot = XamlRoot;
-            dialog.RequestedTheme = Settings.Instance.AppTheme;
+
+            var dialog = new EasyContentDialog(XamlRoot)
+            {
+                PrimaryButtonText = "Import",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
+                Title = "Reminder",
+                Content = $"Only import DLLs from sources you trust.",
+            };
             var response = await dialog.ShowAsync();
             if (response == ContentDialogResult.Primary)
             {
@@ -239,31 +242,33 @@ Only import dlls from sources you trust.",
                     if (existingRecords.Count > 0)
                     {
                         // If it already exists prompt the user if they want to overwrite it.
-                        dialog = new ContentDialog();
-                        dialog.PrimaryButtonText = "Overwrite";
-                        dialog.CloseButtonText = "Cancel";
-                        dialog.Title = "Imported DLSS Record Exists";
-                        dialog.Content = $"It appears you have already impored DLSS v{dlssRecord.Version}";
-                        dialog.XamlRoot = XamlRoot;
-                        dialog.RequestedTheme = Settings.Instance.AppTheme;
+                        dialog = new EasyContentDialog(XamlRoot)
+                        {
+                            PrimaryButtonText = "Overwrite",
+                            CloseButtonText = "Cancel",
+                            DefaultButton = ContentDialogButton.Primary,
+                            Title = "Imported DLSS Record Exists",
+                            Content = $"It appears you have already impored DLSS v{dlssRecord.Version}",
+                        };
                         response = await dialog.ShowAsync();
                         if (response != ContentDialogResult.Primary)
                         {
                             return;
                         }
                     }
-                    
+
 
                     // Check if the dll passes windows cert validation. If it doesn't and user has not allowed untrusted then error.
                     if (Settings.Instance.AllowUntrusted == false && dlssRecord.IsSignatureValid == false)
                     {
                         // If it already exists prompt the user if they want to overwrite it.
-                        dialog = new ContentDialog();
-                        dialog.CloseButtonText = "Okay";
-                        dialog.Title = "Import Failed";
-                        dialog.Content = $"The dll you imported ({openFile.Path}) is not signed with a valid certificate. If you believe this is a mistake and you want to import anyway enable \"Allow Untrusted\" in DLSS Swapper settings.\n\nONLY enable this setting if you trust where you got the dll from.";
-                        dialog.XamlRoot = XamlRoot;
-                        dialog.RequestedTheme = Settings.Instance.AppTheme;
+                        dialog = new EasyContentDialog(XamlRoot)
+                        {
+                            CloseButtonText = "Okay",
+                            DefaultButton = ContentDialogButton.Close,
+                            Title = "Import Failed",
+                            Content = $"The dll you imported ({openFile.Path}) is not signed with a valid certificate. If you believe this is a mistake and you want to import anyway enable \"Allow Untrusted\" in DLSS Swapper settings.\n\nONLY enable this setting if you trust where you got the dll from.",
+                        };
                         response = await dialog.ShowAsync();
                         return;
                     }
@@ -276,13 +281,14 @@ Only import dlls from sources you trust.",
                     {
 
                         // If it already exists prompt the user if they want to overwrite it.
-                        dialog = new ContentDialog();
-                        dialog.Title = "Possible Issue With DLL Imported";
-                        dialog.PrimaryButtonText = "Import Anyway";
-                        dialog.CloseButtonText = "Cancel";
-                        dialog.Content = $"It appears the dll you imported potentially isn't a legitimate NVIDIA DLSS dll. Continue only if you trust the source where you obtained the dll.";
-                        dialog.XamlRoot = XamlRoot;
-                        dialog.RequestedTheme = Settings.Instance.AppTheme;
+                        dialog = new EasyContentDialog(XamlRoot)
+                        { 
+                            Title = "Possible Issue With DLL Imported",
+                            PrimaryButtonText = "Import Anyway",
+                            CloseButtonText = "Cancel",
+                            DefaultButton = ContentDialogButton.Primary,
+                            Content = $"It appears the dll you imported potentially isn't a legitimate NVIDIA DLSS dll. Continue only if you trust the source where you obtained the dll.",
+                        };
                         response = await dialog.ShowAsync();
                         if (response != ContentDialogResult.Primary)
                         {
@@ -328,12 +334,13 @@ Only import dlls from sources you trust.",
 
         async Task DeleteRecordAsync(DLSSRecord record)
         {
-            var dialog = new ContentDialog();
-            dialog.PrimaryButtonText = "Delete";
-            dialog.CloseButtonText = "Cancel";
-            dialog.Content = $"Delete DLSS v{record.Version}?";
-            dialog.XamlRoot = XamlRoot;
-            dialog.RequestedTheme = Settings.Instance.AppTheme;
+            var dialog = new EasyContentDialog(XamlRoot)
+            {
+                PrimaryButtonText = "Delete",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
+                Content = $"Delete DLSS v{record.Version}?",
+            };
             var response = await dialog.ShowAsync();
             if (response == ContentDialogResult.Primary)
             {
@@ -352,12 +359,13 @@ Only import dlls from sources you trust.",
                 }
                 else
                 {
-                    var errorDialog = new ContentDialog();
-                    errorDialog.Title = "Error";
-                    errorDialog.CloseButtonText = "Okay";
-                    errorDialog.Content = "Unable to delete DLSS record.";
-                    errorDialog.XamlRoot = XamlRoot;
-                    errorDialog.RequestedTheme = Settings.Instance.AppTheme;
+                    var errorDialog = new EasyContentDialog(XamlRoot)
+                    {
+                        Title = "Error",
+                        CloseButtonText = "Okay",
+                        DefaultButton = ContentDialogButton.Close,
+                        Content = "Unable to delete DLSS record.",
+                    };
                     await errorDialog.ShowAsync();
                 }
             }
@@ -368,12 +376,13 @@ Only import dlls from sources you trust.",
             var result = await record?.DownloadAsync();
             if (result.Success == false && result.Cancelled == false)
             {
-                var dialog = new ContentDialog();
-                dialog.Title = "Error";
-                dialog.CloseButtonText = "Okay";
-                dialog.Content = result.Message;
-                dialog.XamlRoot = XamlRoot;
-                dialog.RequestedTheme = Settings.Instance.AppTheme;
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    Title = "Error",
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = result.Message,
+                };
                 await dialog.ShowAsync();
             }
         }
@@ -406,24 +415,25 @@ Only import dlls from sources you trust.",
                 Logger.Error(err.Message);
 
                 // If the fullExpectedPath does not exist, or there was an error writing it.
-                var dialog = new ContentDialog();
-                dialog.Title = "Error";
-                dialog.CloseButtonText = "Okay";
-                dialog.Content = "Could not export DLSS dll.";
-                dialog.XamlRoot = XamlRoot;
-                dialog.RequestedTheme = Settings.Instance.AppTheme;
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    Title = "Error",
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = "Could not export DLSS dll.",
+                };
                 await dialog.ShowAsync();
             }
         }
 
         async Task ShowDownloadErrorAsync(DLSSRecord record)
         {
-            var dialog = new ContentDialog();
-            dialog.Title = "Error";
-            dialog.CloseButtonText = "Okay";
-            dialog.Content = record.LocalRecord.DownloadErrorMessage;
-            dialog.XamlRoot = XamlRoot;
-            dialog.RequestedTheme = Settings.Instance.AppTheme;
+            var dialog = new EasyContentDialog(XamlRoot)
+            { 
+                Title = "Error",
+                CloseButtonText = "Okay",
+                Content = record.LocalRecord.DownloadErrorMessage,
+            };
             await dialog.ShowAsync();
         }
 
@@ -437,11 +447,12 @@ Only import dlls from sources you trust.",
             MainGridView.SelectedIndex = -1;
             if (e.AddedItems[0] is DLSSRecord dlssRecord)
             {
-                var dialog = new ContentDialog();
-                dialog.CloseButtonText = "Cancel";
-                dialog.Content = new DLSSRecordInfoControl(dlssRecord);
-                dialog.XamlRoot = XamlRoot;
-                dialog.RequestedTheme = Settings.Instance.AppTheme;
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    CloseButtonText = "Cancel",
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = new DLSSRecordInfoControl(dlssRecord),
+                };
                 await dialog.ShowAsync();
             }
         }

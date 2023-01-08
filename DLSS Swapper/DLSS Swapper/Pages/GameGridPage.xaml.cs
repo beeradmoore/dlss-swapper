@@ -110,14 +110,14 @@ namespace DLSS_Swapper.Pages
                 grid.Children.Add(gameLibrarySelectorControl);
 
 
-                var dialog = new ContentDialog();
-                dialog.Title = "Failed to load game libraries";
-                dialog.PrimaryButtonText = "Save";
-                dialog.SecondaryButtonText = "Cancel";
-                dialog.DefaultButton = ContentDialogButton.Primary;
-                dialog.Content = grid;
-                dialog.XamlRoot = XamlRoot;
-                dialog.RequestedTheme = Settings.Instance.AppTheme;
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    Title = "Failed to load game libraries",
+                    PrimaryButtonText = "Save",
+                    SecondaryButtonText = "Cancel",
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = grid,
+                };
                 var result = await dialog.ShowAsync();
                 if (result == ContentDialogResult.Primary)
                 {
@@ -226,30 +226,30 @@ namespace DLSS_Swapper.Pages
             MainGridView.SelectedIndex = -1;
             if (e.AddedItems[0] is Game game)
             {
-                ContentDialog dialog;
+                EasyContentDialog dialog;
 
                 if (game.HasDLSS == false)
                 {
-                    dialog = new ContentDialog();
-                    //dialog.Title = "Error";
-                    dialog.PrimaryButtonText = "Okay";
-                    dialog.DefaultButton = ContentDialogButton.Primary;
-                    dialog.Content = $"DLSS was not detected in {game.Title}.";
-                    dialog.XamlRoot = XamlRoot;
-                    dialog.RequestedTheme = Settings.Instance.AppTheme;
+                    dialog = new EasyContentDialog(XamlRoot)
+                    {
+                        //dialog.Title = "Error";
+                        PrimaryButtonText = "Okay",
+                        DefaultButton = ContentDialogButton.Primary,
+                        Content = $"DLSS was not detected in {game.Title}.",
+                    };
                     await dialog.ShowAsync();
                     return;
                 }
 
                 var dlssPickerControl = new DLSSPickerControl(game);
-                dialog = new ContentDialog();
-                dialog.Title = "Select DLSS Version";
-                dialog.PrimaryButtonText = "Swap";
-                dialog.CloseButtonText = "Cancel";
-                dialog.DefaultButton = ContentDialogButton.Primary;
-                dialog.Content = dlssPickerControl;
-                dialog.XamlRoot = XamlRoot;
-                dialog.RequestedTheme = Settings.Instance.AppTheme;
+                dialog = new EasyContentDialog(XamlRoot)
+                { 
+                    Title = "Select DLSS Version",
+                    PrimaryButtonText = "Swap",
+                    CloseButtonText = "Cancel",
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = dlssPickerControl,
+                };
 
                 if (String.IsNullOrEmpty(game.BaseDLSSVersion) == false)
                 {
@@ -266,13 +266,13 @@ namespace DLSS_Swapper.Pages
                     if (selectedDLSSRecord.LocalRecord.IsDownloading == true || selectedDLSSRecord.LocalRecord.IsDownloaded == false)
                     {
                         // TODO: Initiate download here.
-                        dialog = new ContentDialog();
-                        dialog.Title = "Error";
-                        dialog.CloseButtonText = "Okay";
-                        dialog.DefaultButton = ContentDialogButton.Close;
-                        dialog.Content = "Please download the DLSS record from the downloads page first.";
-                        dialog.XamlRoot = XamlRoot;
-                        dialog.RequestedTheme = Settings.Instance.AppTheme;
+                        dialog = new EasyContentDialog(XamlRoot)
+                        {
+                            Title = "Error",
+                            CloseButtonText = "Okay",
+                            DefaultButton = ContentDialogButton.Close,
+                            Content = "Please download the DLSS record from the downloads page first.",
+                        };
                         await dialog.ShowAsync();
                         return;
                     }
@@ -281,10 +281,13 @@ namespace DLSS_Swapper.Pages
 
                     if (didUpdate.Success == false)
                     {
-                        dialog = new ContentDialog();
-                        dialog.Title = "Error";
-                        dialog.PrimaryButtonText = "Okay";
-                        dialog.DefaultButton = ContentDialogButton.Primary;
+                        dialog = new EasyContentDialog(XamlRoot)
+                        {
+                            Title = "Error",
+                            PrimaryButtonText = "Okay",
+                            DefaultButton = ContentDialogButton.Primary,
+                            Content = didUpdate.Message,
+                        };
                         /*
                         // Disabled as I am unsure how to prompt to run as admin.
                         if (didUpdate.PromptToRelaunchAsAdmin == true)
@@ -292,9 +295,6 @@ namespace DLSS_Swapper.Pages
                             dialog.SecondaryButtonText = "Relaunch as Administrator";
                         }
                         */
-                        dialog.Content = didUpdate.Message;
-                        dialog.XamlRoot = XamlRoot;
-                        dialog.RequestedTheme = Settings.Instance.AppTheme;
                         var dialogResult = await dialog.ShowAsync();
                         /*
                         // Disabled as I am unsure how to prompt to run as admin.
@@ -311,11 +311,13 @@ namespace DLSS_Swapper.Pages
 
                     if (didReset.Success == false)
                     {
-                        dialog = new ContentDialog();
-                        dialog.Title = "Error";
-                        dialog.PrimaryButtonText = "Okay";
-                        dialog.DefaultButton = ContentDialogButton.Primary;
-                        dialog.Content = didReset.Message;
+                        dialog = new EasyContentDialog(XamlRoot)
+                        {
+                            Title = "Error",
+                            PrimaryButtonText = "Okay",
+                            DefaultButton = ContentDialogButton.Primary,
+                            Content = didReset.Message,
+                        };
                         /*
                         // Disabled as I am unsure how to prompt to run as admin.
                         if (didReset.PromptToRelaunchAsAdmin == true)
@@ -323,8 +325,6 @@ namespace DLSS_Swapper.Pages
                             dialog.SecondaryButtonText = "Relaunch as Administrator";
                         }
                         */
-                        dialog.XamlRoot = XamlRoot;
-                        dialog.RequestedTheme = Settings.Instance.AppTheme;
                         var dialogResult = await dialog.ShowAsync();/*
                         // Disabled as I am unsure how to prompt to run as admin.
                         if (didReset.PromptToRelaunchAsAdmin == true && dialogResult == ContentDialogResult.Secondary)
@@ -371,16 +371,14 @@ namespace DLSS_Swapper.Pages
         {
             var gameFilterControl = new GameFilterControl();
 
-            var dialog = new ContentDialog();
-            dialog.Title = "Filter";
-            dialog.PrimaryButtonText = "Apply";
-            dialog.CloseButtonText = "Cancel";
-            dialog.DefaultButton = ContentDialogButton.Primary;
-            dialog.Content = gameFilterControl;
-            dialog.XamlRoot = XamlRoot;
-            dialog.RequestedTheme = Settings.Instance.AppTheme;
-
-
+            var dialog = new EasyContentDialog(XamlRoot)
+            {
+                Title = "Filter",
+                PrimaryButtonText = "Apply",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
+                Content = gameFilterControl,
+            };
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary)

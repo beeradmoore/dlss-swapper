@@ -94,7 +94,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" Text="{Binding FullName}" HorizontalAlignment="Stretch" ToolTipService.ToolTip="{Binding FullName}" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="NoWrap" />
+                        <TextBlock Grid.Row="0" Text="{Binding DisplayName}" HorizontalAlignment="Stretch" ToolTipService.ToolTip="{Binding DisplayName}" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="NoWrap" />
 
                         <!-- Imported -->
                         <StackPanel Grid.Row="1" Visibility="{Binding LocalRecord, Converter={StaticResource IsLocalConverter}}" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Left">

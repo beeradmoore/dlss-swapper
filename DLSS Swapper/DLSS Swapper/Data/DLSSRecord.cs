@@ -64,7 +64,58 @@ namespace DLSS_Swapper.Data
             }
         }
 
+        string _displayVersion = String.Empty;
         [JsonIgnore]
+        public string DisplayVersion
+        {
+            get
+            {
+                // return cached version.
+                if (_displayVersion != String.Empty)
+                {
+                    return _displayVersion;
+                }
+
+
+                var version = Version.AsSpan();
+
+                // Remove all the .0's, such that 2.5.0.0 becomes 2.5
+                while (version.EndsWith(".0"))
+                {
+                    version = version.Slice(0, version.Length - 2);
+                }
+
+                _displayVersion = version.ToString();
+
+                // If the value is a single value, eg 1, make it 1.0
+                if (_displayVersion.Length == 1)
+                {
+                    _displayVersion = $"{_displayVersion}.0";
+                }
+
+                return _displayVersion;
+            }
+        }
+
+        /// <summary>
+        /// Returns the display version (eg 2.5.0.0 slimmed down to 2.5) and prefixes with v, and suffix with additional label if it exists.
+        /// </summary>
+        [JsonIgnore]
+        public string DisplayName
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(AdditionalLabel))
+                {
+                    return $"v{DisplayVersion}";
+                }
+
+                return $"v{DisplayVersion} ({AdditionalLabel})";
+            }
+        }
+
+
+                [JsonIgnore]
         public LocalRecord LocalRecord { get; set; }
 
         public int CompareTo(DLSSRecord other)
@@ -75,13 +126,6 @@ namespace DLSS_Swapper.Data
             }
 
             return other.VersionNumber.CompareTo(VersionNumber);
-        }
-
-
-        public bool ValidateLocalSignature()
-        {
-            var filename = "";
-            return WinTrust.VerifyEmbeddedSignature(filename);
         }
 
 

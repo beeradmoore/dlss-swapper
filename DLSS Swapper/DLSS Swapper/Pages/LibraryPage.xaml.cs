@@ -19,10 +19,12 @@ using System.IO.Compression;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Security.Authentication.OnlineId;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -189,6 +191,157 @@ namespace DLSS_Swapper.Pages
             }
         }
 
+
+        async Task ImportDLL(string filename)
+        {
+            var versionInfo = FileVersionInfo.GetVersionInfo(filename);
+
+            // Can't import DLSS v3 dlls at this time.
+            if (versionInfo.FileDescription.Contains("DLSS-G", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return;
+            }
+
+            // Can't import if it isn't a DLSS dll file.
+            if (versionInfo.FileDescription.Contains("DLSS", StringComparison.InvariantCultureIgnoreCase) == false)
+            {
+                return;
+            }
+
+            var isTrusted = WinTrust.VerifyEmbeddedSignature(filename);
+
+            // Don't do anything with untrusted dlls.
+            if (Settings.Instance.AllowUntrusted == false && isTrusted == false)
+            {
+                return;
+            }
+
+            /* OLD CODE
+            // Check if the dll passes windows cert validation. If it doesn't and user has not allowed untrusted then error.
+            if (Settings.Instance.AllowUntrusted == false && dlssRecord.IsSignatureValid == false)
+            {
+                // If it already exists prompt the user if they want to overwrite it.
+                dialog = new EasyContentDialog(XamlRoot)
+                {
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Title = "Import Failed",
+                    Content = $"The dll you imported ({openFile.Path}) is not signed with a valid certificate. If you believe this is a mistake and you want to import anyway enable \"Allow Untrusted\" in DLSS Swapper settings.\n\nONLY enable this setting if you trust where you got the dll from.",
+                };
+                response = await dialog.ShowAsync();
+                return;
+            }
+            */
+
+            var dllHash = versionInfo.GetMD5Hash();
+
+            var existingImportedDlls = App.CurrentApp.ImportedDLSSRecords.Where(x => String.Equals(x.MD5Hash, dllHash, StringComparison.InvariantCultureIgnoreCase));
+            // If the dll is already imported don't import it again.
+            if (existingImportedDlls.Any())
+            {
+                return;
+            }
+
+            // If the dll exists 
+            /*
+            if (App.CurrentApp.DLSSRecords.DLLExists(dllHash, true))
+            {
+                return;
+            }
+            */
+
+
+
+            var fileInfo = new FileInfo(filename);
+            var zipFilename = $"{versionInfo.GetFormattedFileVersion()}_{dllHash}.zip";
+            var finalZipPath = Path.Combine(Storage.GetStorageFolder(), "imported_dlss_zip", zipFilename);
+            Storage.CreateDirectoryForFileIfNotExists(finalZipPath);
+            
+
+            // The plan here was to check if importing is equivilant of downloading the file and if so consider it the downloaded file.
+            // The zip hash (and zip filesize) does not match if we create the zip here so it seems odd to have that as a value.
+            // We could potentially just consider the ziphash only used for downloading and not on disk validation.
+            /*
+            var existingDLSSRecord = App.CurrentApp.DLSSRecords.GetRecordFromHash(dllHash);
+            if (existingDLSSRecord != null)
+            {
+                var tempExtractPath = Path.Combine(Storage.GetTemp(), "import");
+                Storage.CreateDirectoryIfNotExists(tempExtractPath);
+                var tempZipFile = Path.Combine(tempExtractPath, Path.GetFileNameWithoutExtension(filename)) + ".zip";
+
+
+                using (var zipFile = File.Open(tempZipFile, FileMode.Create))
+                {
+                    using (var zipArchive = new ZipArchive(zipFile, ZipArchiveMode.Create, true))
+                    {
+                        zipArchive.CreateEntryFromFile(filename, Path.GetFileName("nvngx_dlss.dll"));
+                    }
+
+                    zipFile.Position = 0;
+                    var size = zipFile.Length;
+                    // Once again, MD5 should never be used to check if a file has been tampered with.
+                    // We are simply using it to check the integrity of the downloaded/extracted file.
+                    using (var md5 = MD5.Create())
+                    {
+                        var hash = md5.ComputeHash(zipFile);
+                        var zipHash = BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
+                    }
+                }
+            }
+            */
+
+            var tempExtractPath = Path.Combine(Storage.GetTemp(), "import");
+            Storage.CreateDirectoryIfNotExists(tempExtractPath);
+
+            var tempZipFile = Path.Combine(tempExtractPath, zipFilename);
+
+            var dlssRecord = new DLSSRecord()
+            {
+                Version = versionInfo.GetFormattedFileVersion(),
+                VersionNumber = versionInfo.GetFileVersionNumber(),
+                MD5Hash = dllHash,
+                FileSize = fileInfo.Length,
+                ZipFileSize = 0,
+                ZipMD5Hash = String.Empty,
+                IsSignatureValid = isTrusted,
+            };
+
+            using (var zipFile = File.Open(tempZipFile, FileMode.Create))
+            {
+                using (var zipArchive = new ZipArchive(zipFile, ZipArchiveMode.Create, true))
+                {
+                    zipArchive.CreateEntryFromFile(filename, Path.GetFileName("nvngx_dlss.dll"));
+                }
+
+                zipFile.Position = 0;
+
+                dlssRecord.ZipFileSize = zipFile.Length;
+                // Once again, MD5 should never be used to check if a file has been tampered with.
+                // We are simply using it to check the integrity of the downloaded/extracted file.
+                using (var md5 = MD5.Create())
+                {
+                    var hash = md5.ComputeHash(zipFile);
+                    dlssRecord.ZipMD5Hash = BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
+                }
+            }
+
+            // Move new record to where it should live in DLSS Swapper app directory.
+            File.Move(tempZipFile, finalZipPath, true);
+            
+            dlssRecord.LocalRecord = LocalRecord.FromExpectedPath(finalZipPath, true);
+
+            // Add our new record.
+            App.CurrentApp.ImportedDLSSRecords.Add(dlssRecord);
+            var didSave = await Storage.SaveImportedDLSSRecordsJsonAsync();
+            if (didSave == false)
+            {
+
+                return;
+            }
+
+            App.CurrentApp.MainWindow.FilterDLSSRecords();
+        }
+
         async Task ImportAsync()
         {
             if (Settings.Instance.HasShownWarning == false)
@@ -213,6 +366,7 @@ Only import dlls from sources you trust.",
             var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
             openPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
             openPicker.FileTypeFilter.Add(".dll");
+            openPicker.FileTypeFilter.Add(".zip");
             WinRT.Interop.InitializeWithWindow.Initialize(openPicker, hwnd);
             var openFile = await openPicker.PickSingleFileAsync();
 
@@ -234,100 +388,73 @@ Only import dlls from sources you trust.",
             var response = await dialog.ShowAsync();
             if (response == ContentDialogResult.Primary)
             {
+                if (File.Exists(openFile.Path) == false)
+                {
+                 
+                    return;
+                }
+
+
+                // Used only if we import a zip
+                var tempExtractPath = Path.Combine(Storage.GetTemp(), "import");
+                
                 try
                 {
-                    var dlssRecord = DLSSRecord.FromImportedFile(openFile.Path);
-
-                    var existingRecords = App.CurrentApp.ImportedDLSSRecords.Where(x => x.VersionNumber == dlssRecord.VersionNumber && x.MD5Hash.Equals(dlssRecord.MD5Hash, StringComparison.InvariantCultureIgnoreCase)).ToList();
-                    if (existingRecords.Count > 0)
+                    if (openFile.Path.EndsWith(".zip"))
                     {
-                        // If it already exists prompt the user if they want to overwrite it.
-                        dialog = new EasyContentDialog(XamlRoot)
+                        using (var archive = ZipFile.OpenRead(openFile.Path))
                         {
-                            PrimaryButtonText = "Overwrite",
-                            CloseButtonText = "Cancel",
-                            DefaultButton = ContentDialogButton.Primary,
-                            Title = "Imported DLSS Record Exists",
-                            Content = $"It appears you have already impored DLSS v{dlssRecord.Version}",
-                        };
-                        response = await dialog.ShowAsync();
-                        if (response != ContentDialogResult.Primary)
-                        {
-                            return;
+                            var zippedDlls = archive.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
+                            if (zippedDlls.Length == 0)
+                            {
+                                throw new Exception("Zip did not contain any dlls..");
+                            }
+
+                            Storage.CreateDirectoryIfNotExists(tempExtractPath);
+
+                            foreach (var zippedDll in zippedDlls)
+                            {
+                                var tempFile = Path.Combine(tempExtractPath, $"nvngx_dlss_{Guid.NewGuid().ToString("D")}.dll");
+                                zippedDll.ExtractToFile(tempFile);
+                                await ImportDLL(tempFile);
+
+                                // Clean up temp file.
+                                File.Delete(tempFile);
+                            }
                         }
                     }
-
-
-                    // Check if the dll passes windows cert validation. If it doesn't and user has not allowed untrusted then error.
-                    if (Settings.Instance.AllowUntrusted == false && dlssRecord.IsSignatureValid == false)
+                    else
                     {
-                        // If it already exists prompt the user if they want to overwrite it.
-                        dialog = new EasyContentDialog(XamlRoot)
-                        {
-                            CloseButtonText = "Okay",
-                            DefaultButton = ContentDialogButton.Close,
-                            Title = "Import Failed",
-                            Content = $"The dll you imported ({openFile.Path}) is not signed with a valid certificate. If you believe this is a mistake and you want to import anyway enable \"Allow Untrusted\" in DLSS Swapper settings.\n\nONLY enable this setting if you trust where you got the dll from.",
-                        };
-                        response = await dialog.ShowAsync();
-                        return;
+                        await ImportDLL(openFile.Path);
                     }
-
-
-                    // Do gross basic checks to see if it is a DLSS dll (this isn't a security check, its a sanity check)
-                    var fileVersionInfo = FileVersionInfo.GetVersionInfo(openFile.Path);
-                    if (fileVersionInfo.InternalName.Contains("dlss", StringComparison.InvariantCultureIgnoreCase) == false ||
-                        fileVersionInfo.FileDescription.Contains("dlss", StringComparison.InvariantCultureIgnoreCase) == false)
-                    {
-
-                        // If it already exists prompt the user if they want to overwrite it.
-                        dialog = new EasyContentDialog(XamlRoot)
-                        { 
-                            Title = "Possible Issue With DLL Imported",
-                            PrimaryButtonText = "Import Anyway",
-                            CloseButtonText = "Cancel",
-                            DefaultButton = ContentDialogButton.Primary,
-                            Content = $"It appears the dll you imported potentially isn't a legitimate NVIDIA DLSS dll. Continue only if you trust the source where you obtained the dll.",
-                        };
-                        response = await dialog.ShowAsync();
-                        if (response != ContentDialogResult.Primary)
-                        {
-                            return;
-                        }
-                    }
-
-
-                    // Copy new record to where it should live in DLSS Swapper app directory.
-                    var fullExpectedFileName = dlssRecord.LocalRecord.ExpectedPath;
-                    var fullExpectedPath = Path.GetDirectoryName(fullExpectedFileName);
-                    if (Directory.Exists(fullExpectedPath) == false)
-                    {
-                        Directory.CreateDirectory(fullExpectedPath);
-                    }
-                    // TODO: CREATE ZIP HERE
-                    File.Copy(openFile.Path, fullExpectedFileName, true);
-
-                    // If there were other records we are overwriting we remove them.
-                    foreach (var existingRecord in existingRecords)
-                    {
-                        App.CurrentApp.ImportedDLSSRecords.Remove(existingRecord);
-                    }
-                    
-                    // Add our new record.
-                    App.CurrentApp.ImportedDLSSRecords.Add(dlssRecord);
-                    var didSave = await App.CurrentApp.SaveImportedDLSSRecordsAsync();
-                    if (didSave == false)
-                    {
-
-                        return;
-                    }
-
-                    App.CurrentApp.MainWindow.FilterDLSSRecords();
                 }
                 catch (Exception err)
                 {
-                    // TODO: ERROR
+                    // Clean up tempExtractPath if it exists
+                    if (Directory.Exists(tempExtractPath))
+                    {
+                        try
+                        {
+                            Directory.Delete(tempExtractPath, true);
+                        }
+                        catch (Exception err2)
+                        {
+                            Logger.Error(err2.Message);
+                        }
+                    }
+
                     Logger.Error(err.Message);
+
+
+                    // TODO: Button to open error log
+                    dialog = new EasyContentDialog(XamlRoot)
+                    {
+                        CloseButtonText = "Okay",
+                        DefaultButton = ContentDialogButton.Close,
+                        Title = "Error",
+                        Content = $"Could not import record. Please see your error log for more information.",
+                    };
+                    await dialog.ShowAsync();
                 }
             }
         }
@@ -350,6 +477,7 @@ Only import dlls from sources you trust.",
                     if (record.LocalRecord.IsImported)
                     {
                         App.CurrentApp.ImportedDLSSRecords.Remove(record);
+                        Storage.SaveImportedDLSSRecordsJsonAsync().SafeFireAndForget();
                         App.CurrentApp.MainWindow.FilterDLSSRecords();
                     }
                     else

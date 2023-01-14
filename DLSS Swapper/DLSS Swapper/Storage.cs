@@ -289,9 +289,8 @@ namespace DLSS_Swapper
         /// <summary>
         /// Saves the imported DLSS records to imported_dlss_records.json
         /// </summary>
-        /// <param name="importedDLSSRecords">Imported DLSS records list to save</param>
         /// <returns></returns>
-        internal static async Task<bool> SaveImportedDLSSRecordsJsonAsync(List<DLSSRecord> importedDLSSRecords)
+        internal static async Task<bool> SaveImportedDLSSRecordsJsonAsync()
         {
             var importedDLSSRecordsFile = Path.Combine(GetDynamicJsonFolder(), "imported_dlss_records.json");
             CreateDirectoryForFileIfNotExists(importedDLSSRecordsFile);
@@ -299,7 +298,7 @@ namespace DLSS_Swapper
             {
                 using (var stream = File.Open(importedDLSSRecordsFile, FileMode.Create))
                 {
-                    await JsonSerializer.SerializeAsync(stream, importedDLSSRecords, jsonSerializerOptions);
+                    await JsonSerializer.SerializeAsync(stream, App.CurrentApp.ImportedDLSSRecords, jsonSerializerOptions);
                 }
                 return true;
             }

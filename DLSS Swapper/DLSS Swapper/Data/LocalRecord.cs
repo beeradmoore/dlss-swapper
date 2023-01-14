@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.UI.Xaml.Documents;
 
 namespace DLSS_Swapper.Data
 {
@@ -104,17 +105,20 @@ namespace DLSS_Swapper.Data
 
         }
 
-        public static LocalRecord FromExpectedPath(string expectedPath)
+        public static LocalRecord FromExpectedPath(string expectedPath, bool imported = false)
         {
             var localRecord = new LocalRecord()
             {
                 ExpectedPath = expectedPath,
             };
 
-            var exists = File.Exists(expectedPath);
             if (File.Exists(expectedPath))
             {
                 localRecord.IsDownloaded = true;
+                if (imported)
+                {
+                    localRecord.IsImported = true;
+                }
             }
 
             return localRecord;
@@ -157,6 +161,19 @@ namespace DLSS_Swapper.Data
         internal bool Delete()
         {
 #if WINDOWS_STORE
+            if (IsImported)
+            {
+                try
+                {
+                    File.Delete(ExpectedPath);
+                    return true;
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err.Message);
+                    return false;
+                }
+            }
             return false;
 #else
             try

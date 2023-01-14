@@ -17,6 +17,7 @@
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
         <converters:DLSSStateVisibilityConverter x:Key="IsNotFoundConverter" DesierdState="NotFound" />
         <converters:DLSSStateVisibilityConverter x:Key="IsLocalConverter" DesierdState="Imported" />
+        <converters:LibraryDeleteButtonVisbilityConverter x:Key="LibraryDeleteButtonVisbilityConverter" />
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <converters:InverseBoolToVisibleConverter x:Key="InverseBoolToVisibleConverter" />
     </Page.Resources>
@@ -139,7 +140,7 @@
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xEDE1;"/>
                                 </Button.Content>
                             </Button>
-                            <Button ToolTipService.ToolTip="Delete" Command="{Binding ElementName=thisPage, Path=DeleteRecordCommand}" CommandParameter="{x:Bind }" Visibility="{x:Bind local:App.IsWindowsStoreBuild, Converter={StaticResource InverseBoolToVisibleConverter}}">
+                            <Button ToolTipService.ToolTip="Delete" Command="{Binding ElementName=thisPage, Path=DeleteRecordCommand}" CommandParameter="{x:Bind }" Visibility="{Binding LocalRecord, Converter={StaticResource LibraryDeleteButtonVisbilityConverter}}">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE74D;"/>
                                 </Button.Content>

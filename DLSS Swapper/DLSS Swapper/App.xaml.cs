@@ -101,7 +101,7 @@ namespace DLSS_Swapper
             var expectedPath = Path.Combine(dllsPath, $"{dlssRecord.Version}_{dlssRecord.MD5Hash}.zip");
             
             // Load record.
-            var localRecord = LocalRecord.FromExpectedPath(expectedPath);
+            var localRecord = LocalRecord.FromExpectedPath(expectedPath, isImportedRecord);
 
             if (isImportedRecord)
             {
@@ -183,12 +183,6 @@ namespace DLSS_Swapper
         }
         */
 
-
-
-        internal async Task<bool> SaveImportedDLSSRecordsAsync()
-        {
-            return await Storage.SaveImportedDLSSRecordsJsonAsync(App.CurrentApp.ImportedDLSSRecords);
-        }
 
 
         internal bool IsRunningAsAdministrator()

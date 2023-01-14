@@ -115,7 +115,7 @@ namespace DLSS_Swapper.Data
         }
 
 
-                [JsonIgnore]
+        [JsonIgnore]
         public LocalRecord LocalRecord { get; set; }
 
         public int CompareTo(DLSSRecord other)
@@ -309,6 +309,8 @@ namespace DLSS_Swapper.Data
 #endif
         }
 
+
+        /*
         internal static DLSSRecord FromImportedFile(string fileName)
         {
             if (File.Exists(fileName) == false)
@@ -335,5 +337,6 @@ namespace DLSS_Swapper.Data
 
             return dlssRecord;
         }
+        */
     }
 }

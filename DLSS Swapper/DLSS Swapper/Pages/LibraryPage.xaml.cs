@@ -192,7 +192,7 @@ namespace DLSS_Swapper.Pages
         }
 
 
-        async Task ImportDLL(string filename)
+        void ImportDLL(string filename)
         {
             var versionInfo = FileVersionInfo.GetVersionInfo(filename);
 
@@ -427,7 +427,7 @@ Only import dlls from sources you trust.",
 
                                 try
                                 {
-                                    await ImportDLL(tempFile);
+                                    ImportDLL(tempFile);
                                     ++importSuccessCount;
                                 }
                                 catch (Exception)
@@ -455,7 +455,7 @@ Only import dlls from sources you trust.",
                     }
                     else
                     {
-                        await ImportDLL(openFile.Path);
+                        ImportDLL(openFile.Path);
                         ++importSuccessCount;
 
                         await Storage.SaveImportedDLSSRecordsJsonAsync();

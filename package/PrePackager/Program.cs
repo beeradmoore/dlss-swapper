@@ -2,19 +2,19 @@
 using PrePackager;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 
-
-
-// Look for the specific folder in the DLSS Swapper app labelled StoredData. This is where we store data for DLSS Swapper for the Windows Store.
+// Keep going up directories until we are in the package directory, then go up one more. From there we want to use src/StoredData.
+// This is where we store data for DLSS Swapper for the Windows Store.
 var storedDataPath = String.Empty;
 var currentSearchPath = Directory.GetCurrentDirectory() ?? String.Empty;
 do
 {
     var directoryParent = Directory.GetParent(currentSearchPath)?.ToString() ?? String.Empty;
-    if (Path.GetFileName(directoryParent) == "DLSS Swapper")
+    if (Path.GetFileName(directoryParent) == "package")
     {
-        var tempStoredDataPath = Path.Combine(directoryParent, "DLSS Swapper", "StoredData");
+        var tempStoredDataPath = Path.Combine(Directory.GetParent(directoryParent)?.ToString() ?? String.Empty, "src", "StoredData");
         if (Directory.Exists(tempStoredDataPath))
         {
             storedDataPath = tempStoredDataPath;

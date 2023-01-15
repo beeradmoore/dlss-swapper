@@ -9,5 +9,5 @@ obj/
 AppPackages/
 BundleArtifacts/
 UpgradeLog.htm
-DLSS Swapper/DLSS Swapper/Properties/launchSettings.json
+src/Properties/launchSettings.json
 StoredData/

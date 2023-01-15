@@ -199,13 +199,13 @@ namespace DLSS_Swapper.Pages
             // Can't import DLSS v3 dlls at this time.
             if (versionInfo.FileDescription.Contains("DLSS-G", StringComparison.InvariantCultureIgnoreCase))
             {
-                return;
+                throw new Exception($"Could not import \"{filename}\", appears to be a DLSS 3 (frame generation) file.");
             }
 
             // Can't import if it isn't a DLSS dll file.
             if (versionInfo.FileDescription.Contains("DLSS", StringComparison.InvariantCultureIgnoreCase) == false)
             {
-                return;
+                throw new Exception($"Could not import \"{filename}\", does not appear to be a DLSS dll.");
             }
 
             var isTrusted = WinTrust.VerifyEmbeddedSignature(filename);
@@ -213,7 +213,7 @@ namespace DLSS_Swapper.Pages
             // Don't do anything with untrusted dlls.
             if (Settings.Instance.AllowUntrusted == false && isTrusted == false)
             {
-                return;
+                throw new Exception($"Could not import \"{filename}\", file is not trusted by Windows.");
             }
 
             /* OLD CODE
@@ -239,7 +239,7 @@ namespace DLSS_Swapper.Pages
             // If the dll is already imported don't import it again.
             if (existingImportedDlls.Any())
             {
-                return;
+                throw new Exception($"Could not import \"{filename}\", file appears to have been imported previously.");
             }
 
             // If the dll exists 
@@ -332,14 +332,6 @@ namespace DLSS_Swapper.Pages
 
             // Add our new record.
             App.CurrentApp.ImportedDLSSRecords.Add(dlssRecord);
-            var didSave = await Storage.SaveImportedDLSSRecordsJsonAsync();
-            if (didSave == false)
-            {
-
-                return;
-            }
-
-            App.CurrentApp.MainWindow.FilterDLSSRecords();
         }
 
         async Task ImportAsync()
@@ -390,16 +382,32 @@ Only import dlls from sources you trust.",
             {
                 if (File.Exists(openFile.Path) == false)
                 {
-                 
                     return;
                 }
 
+                var loadingDialog = new EasyContentDialog(XamlRoot)
+                {
+                    Title = "Importing",
+                    // I would like this to be a progress ring but for some reason the ring will not show.
+                    Content = new ProgressBar()
+                    {
+                        IsIndeterminate = true,
+                    },
+                };
+                _ = loadingDialog.ShowAsync();
+
+                // Give UI time to update and show import screen.
+                await Task.Delay(50);
 
                 // Used only if we import a zip
                 var tempExtractPath = Path.Combine(Storage.GetTemp(), "import");
-                
+
+                var importPartiallyFailed = false;
                 try
                 {
+                    var importSuccessCount = 0;
+                    var importFailureCount = 0;
+
                     if (openFile.Path.EndsWith(".zip"))
                     {
                         using (var archive = ZipFile.OpenRead(openFile.Path))
@@ -416,20 +424,59 @@ Only import dlls from sources you trust.",
                             {
                                 var tempFile = Path.Combine(tempExtractPath, $"nvngx_dlss_{Guid.NewGuid().ToString("D")}.dll");
                                 zippedDll.ExtractToFile(tempFile);
-                                await ImportDLL(tempFile);
+
+                                try
+                                {
+                                    await ImportDLL(tempFile);
+                                    ++importSuccessCount;
+                                }
+                                catch (Exception)
+                                {
+                                    importPartiallyFailed = true;
+                                    ++importFailureCount;
+                                }
 
                                 // Clean up temp file.
                                 File.Delete(tempFile);
                             }
                         }
+
+                        // We still save if some records have been imported.
+                        if (importSuccessCount > 0)
+                        {
+                            await Storage.SaveImportedDLSSRecordsJsonAsync();
+                            App.CurrentApp.MainWindow.FilterDLSSRecords();
+                        }
+
+                        if (importPartiallyFailed)
+                        {
+                            throw new Exception($"From the zip import, {importSuccessCount} DLSS dlls succeeded and {importFailureCount} failed.");
+                        }
                     }
                     else
                     {
                         await ImportDLL(openFile.Path);
+                        ++importSuccessCount;
+
+                        await Storage.SaveImportedDLSSRecordsJsonAsync();
+                        App.CurrentApp.MainWindow.FilterDLSSRecords();
                     }
+
+                    loadingDialog.Hide();
+
+                    dialog = new EasyContentDialog(XamlRoot)
+                    {
+                        CloseButtonText = "Okay",
+                        DefaultButton = ContentDialogButton.Close,
+                        Title = "Success",
+                        Content = $"Imported {importSuccessCount} DLSS dll record{(importSuccessCount == 1 ? String.Empty : "s")}.",
+                    };
+                    await dialog.ShowAsync();
                 }
                 catch (Exception err)
                 {
+                    loadingDialog.Hide();
+
                     // Clean up tempExtractPath if it exists
                     if (Directory.Exists(tempExtractPath))
                     {

@@ -135,6 +135,16 @@ namespace DLSS_Swapper.Pages
 
         async Task ExportAllAsync()
         {
+            var exportingDialog = new EasyContentDialog(XamlRoot)
+            {
+                Title = "Exporting",
+                // I would like this to be a progress ring but for some reason the ring will not show.
+                Content = new ProgressBar()
+                {
+                    IsIndeterminate = true,
+                },
+            };
+
             try
             {
                 var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
@@ -151,6 +161,13 @@ namespace DLSS_Swapper.Pages
                     return;
                 }
 
+                _ = exportingDialog.ShowAsync();
+
+                // Give UI time to update and show import screen.
+                await Task.Delay(50);
+
+                var exportCount = 0;
+
                 using (var fileStream = File.Create(saveFile.Path))
                 {
                     using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create))
@@ -158,25 +175,43 @@ namespace DLSS_Swapper.Pages
                         var allDlssRecords = new List<DLSSRecord>();
                         allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Stable);
                         allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Experimental);
+                        allDlssRecords.AddRange(App.CurrentApp.ImportedDLSSRecords);
 
                         foreach (var dlssRecord in allDlssRecords)
                         {
                             if (dlssRecord.LocalRecord?.IsDownloaded == true)
                             {
-                                var fullExpectedPath = Path.Combine(Storage.GetStorageFolder(), dlssRecord.LocalRecord.ExpectedPath);
+                                var fullExpectedPath = dlssRecord.LocalRecord.ExpectedPath;
                                 var internalZipDir = dlssRecord.Version.ToString();
                                 if (String.IsNullOrEmpty(dlssRecord.AdditionalLabel) == false)
                                 {
                                     internalZipDir += " " + dlssRecord.AdditionalLabel;
                                 }
-                                zipArchive.CreateEntryFromFile(fullExpectedPath, Path.Combine(internalZipDir, Path.GetFileName(fullExpectedPath)));
+                                
+                                
+                                //zipArchive.CreateEntryFromFile(fullExpectedPath, Path.Combine(internalZipDir, Path.GetFileName(fullExpectedPath)));
+
+                                ++exportCount;
                             }
                         }
                     }
                 }
+
+                exportingDialog.Hide();
+
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Title = "Success",
+                    Content = $"Exported {exportCount} DLSS dll{(exportCount == 1 ? String.Empty : "s")}.",
+                };
+                await dialog.ShowAsync();
             }
             catch (Exception err)
             {
+                exportingDialog.Hide();
+
                 Logger.Error(err.Message);
 
                 // If the fullExpectedPath does not exist, or there was an error writing it.
@@ -570,23 +605,51 @@ Only import dlls from sources you trust.",
 
         async Task ExportRecordAsync(DLSSRecord record)
         {
+            var exportingDialog = new EasyContentDialog(XamlRoot)
+            {
+                Title = "Exporting",
+                // I would like this to be a progress ring but for some reason the ring will not show.
+                Content = new ProgressBar()
+                {
+                    IsIndeterminate = true,
+                },
+            };
+
             try
             {
                 var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
                 var savePicker = new Windows.Storage.Pickers.FileSavePicker();
                 savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
                 savePicker.FileTypeChoices.Add("Zip archive", new List<string>() { ".zip" });
-                savePicker.SuggestedFileName = $"nvngx_dlss_{record.Version}.zip";
+                savePicker.SuggestedFileName = $"nvngx_dlss_{record.DisplayName.Replace(" ", "_")}.zip";
                 WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
                 var saveFile = await savePicker.PickSaveFileAsync();
 
                 if (saveFile != null)
                 {
+                    // This will likley not be seen, but keeping it here incase export is very slow (eg. copy over very slow network).
+                    _ = exportingDialog.ShowAsync();
+
+                    // Give UI time to update and show import screen.
+                    await Task.Delay(50);
+
                     File.Copy(record.LocalRecord.ExpectedPath, saveFile.Path, true);
+
+                    exportingDialog.Hide();
+
+                    var dialog = new EasyContentDialog(XamlRoot)
+                    {
+                        Title = "Success",
+                        CloseButtonText = "Okay",
+                        DefaultButton = ContentDialogButton.Close,
+                        Content = $"Exported DLSS {record.DisplayName}.",
+                    };
+                    await dialog.ShowAsync();
                 }
             }
             catch (Exception err)
             {
+                exportingDialog.Hide();
                 Logger.Error(err.Message);
 
                 // If the fullExpectedPath does not exist, or there was an error writing it.

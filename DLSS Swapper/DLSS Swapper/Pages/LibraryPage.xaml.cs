@@ -135,6 +135,26 @@ namespace DLSS_Swapper.Pages
 
         async Task ExportAllAsync()
         {
+            // Check that there are records to export first.
+            var allDlssRecords = new List<DLSSRecord>();
+            allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Stable.Where(x => x.LocalRecord.IsDownloaded));
+            allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Experimental.Where(x => x.LocalRecord.IsDownloaded));
+            allDlssRecords.AddRange(App.CurrentApp.ImportedDLSSRecords.Where(x => x.LocalRecord.IsDownloaded));
+
+            if (allDlssRecords.Count == 0)
+            {
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Title = "Error",
+                    Content = $"You have no DLSS records to export.",
+                };
+                await dialog.ShowAsync();
+                return;
+            }
+
+
             var exportingDialog = new EasyContentDialog(XamlRoot)
             {
                 Title = "Exporting",
@@ -145,6 +165,8 @@ namespace DLSS_Swapper.Pages
                 },
             };
 
+            var tempExportPath = Path.Combine(Storage.GetTemp(), "export");
+            var finalExportZip = String.Empty;
             try
             {
                 var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
@@ -161,6 +183,10 @@ namespace DLSS_Swapper.Pages
                     return;
                 }
 
+                finalExportZip = saveFile.Path;
+
+                Storage.CreateDirectoryIfNotExists(tempExportPath);
+
                 _ = exportingDialog.ShowAsync();
 
                 // Give UI time to update and show import screen.
@@ -168,31 +194,50 @@ namespace DLSS_Swapper.Pages
 
                 var exportCount = 0;
 
-                using (var fileStream = File.Create(saveFile.Path))
+                using (var fileStream = File.Create(finalExportZip))
                 {
                     using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create))
                     {
-                        var allDlssRecords = new List<DLSSRecord>();
-                        allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Stable);
-                        allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Experimental);
-                        allDlssRecords.AddRange(App.CurrentApp.ImportedDLSSRecords);
-
                         foreach (var dlssRecord in allDlssRecords)
                         {
-                            if (dlssRecord.LocalRecord?.IsDownloaded == true)
+                            var internalZipDir = dlssRecord.DisplayName;
+                            if (dlssRecord.LocalRecord.IsImported == true)
                             {
-                                var fullExpectedPath = dlssRecord.LocalRecord.ExpectedPath;
-                                var internalZipDir = dlssRecord.Version.ToString();
-                                if (String.IsNullOrEmpty(dlssRecord.AdditionalLabel) == false)
-                                {
-                                    internalZipDir += " " + dlssRecord.AdditionalLabel;
-                                }
-                                
-                                
-                                //zipArchive.CreateEntryFromFile(fullExpectedPath, Path.Combine(internalZipDir, Path.GetFileName(fullExpectedPath)));
-
-                                ++exportCount;
+                                internalZipDir = Path.Combine("Imported", internalZipDir);
                             }
+
+                            using (var dlssFileStream = File.OpenRead(dlssRecord.LocalRecord.ExpectedPath))
+                            {
+                                using (var dlssZip = new ZipArchive(dlssFileStream, ZipArchiveMode.Read))
+                                {
+                                    var zippedDlls = dlssZip.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
+                                        
+                                    // If there is more than one dll something has gone wrong.
+                                    if (zippedDlls.Length != 1)
+                                    {
+                                        throw new Exception($"Could not export due to \"{dlssRecord.LocalRecord.ExpectedPath}\" having {zippedDlls.Length} dlls instead of 1.");
+                                    }
+
+                                    var tempFileExportPath = Path.Combine(tempExportPath, Guid.NewGuid().ToString("D"));
+                                    Storage.CreateDirectoryIfNotExists(tempFileExportPath);
+
+                                    var tempFile = Path.Combine(tempFileExportPath, Path.GetFileName(zippedDlls[0].Name));
+                                    zippedDlls[0].ExtractToFile(tempFile);
+                                    zipArchive.CreateEntryFromFile(tempFile, Path.Combine(internalZipDir, Path.GetFileName(tempFile)));
+
+                                    // Try clean up as we go.
+                                    try
+                                    {
+                                        Directory.Delete(tempFileExportPath, true);
+                                    }
+                                    catch
+                                    {
+                                        // NOOP
+                                    }
+                                }
+                            }                                
+
+                            ++exportCount;
                         }
                     }
                 }
@@ -210,6 +255,22 @@ namespace DLSS_Swapper.Pages
             }
             catch (Exception err)
             {
+                // If we failed to export lets delete teh temp zip file that was create.
+                if (String.IsNullOrEmpty(finalExportZip) == false && File.Exists(finalExportZip))
+                {
+                    try
+                    {
+                        if (File.Exists(finalExportZip))
+                        {
+                            File.Delete(finalExportZip);
+                        }
+                    }
+                    catch (Exception err2)
+                    {
+                        Logger.Error(err2.Message);
+                    }
+                }
+
                 exportingDialog.Hide();
 
                 Logger.Error(err.Message);
@@ -223,6 +284,21 @@ namespace DLSS_Swapper.Pages
                     Content = "Could not export DLSS dll.",
                 };
                 await dialog.ShowAsync();
+            }
+            finally
+            {
+                // Clean up temp export path.
+                try
+                {
+                    if (Directory.Exists(tempExportPath))
+                    {
+                        Directory.Delete(tempExportPath, true);
+                    }
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err.Message);
+                }
             }
         }
 

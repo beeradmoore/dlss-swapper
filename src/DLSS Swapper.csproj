@@ -36,12 +36,12 @@
 
     <!-- If we are building for the Windows Store copy the packaged launchSettings.json -->
   <Target Name="PreBuildPackaged" BeforeTargets="PreBuildEvent" Condition="'$(DefineConstants.Contains(`WINDOWS_STORE`))' == 'true'">
-    <Exec Command="xcopy &quot;$(ProjectDir)Properties\launchSettings.Packaged.json&quot; &quot;$(ProjectDir)Properties\launchSettings.json&quot; /Y" />
+    <Exec Command="copy &quot;$(ProjectDir)Properties\launchSettings.Packaged.json&quot; &quot;$(ProjectDir)Properties\launchSettings.json&quot; /Y" />
   </Target>
 
   <!-- If we are not building for the Windows Store copy the unpackaged launchSettings.json -->
   <Target Name="PreBuildUnpackged" BeforeTargets="PreBuildEvent" Condition="'$(DefineConstants.Contains(`WINDOWS_STORE`))' == 'false'">
-    <Exec Command="xcopy &quot;$(ProjectDir)Properties\launchSettings.Unpackaged.json&quot; &quot;$(ProjectDir)Properties\launchSettings.json&quot; /Y" />
+    <Exec Command="copy &quot;$(ProjectDir)Properties\launchSettings.Unpackaged.json&quot; &quot;$(ProjectDir)Properties\launchSettings.json&quot; /Y" />
   </Target>
 
   <ItemGroup Condition="'$(DefineConstants.Contains(`WINDOWS_STORE`))' == 'true'">

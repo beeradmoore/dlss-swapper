@@ -16,6 +16,14 @@
     <PackageIcon>Asssets\icon_256.png</PackageIcon>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Never</AppxBundle>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <PackageCertificateThumbprint>FE5FF30FB93EC351E8ADA5D7D7B436A52B34DA5B</PackageCertificateThumbprint>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release' Or '$(Configuration)'=='Release_WindowsStore'">
@@ -51,7 +59,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(DefineConstants.Contains(`WINDOWS_STORE`))' == 'false'">
-      <Compile Remove="StoredData\dlss_zip\**" />
+      <None Remove="StoredData\dlss_zip\**" />
       <None Remove="StoredData\dlss_zip\**" />
       <None Update="StoredData\static_json\**">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -114,6 +122,7 @@
     <None Remove="Assets\Wide310x150Logo.scale-150.png" />
     <None Remove="Assets\Wide310x150Logo.scale-200.png" />
     <None Remove="Assets\Wide310x150Logo.scale-400.png" />
+    <None Remove="DLSS Swapper_TemporaryKey.pfx" />
     <None Remove="Properties\launchSettings.json" />
   </ItemGroup>
 

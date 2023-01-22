@@ -11,10 +11,10 @@ var storedDataPath = String.Empty;
 var currentSearchPath = Directory.GetCurrentDirectory() ?? String.Empty;
 do
 {
-    var directoryParent = Directory.GetParent(currentSearchPath)?.ToString() ?? String.Empty;
-    if (Path.GetFileName(directoryParent) == "package")
+    System.Diagnostics.Debug.WriteLine($"Checking {currentSearchPath}");
+    if (Path.GetFileName(currentSearchPath) == "package")
     {
-        var tempStoredDataPath = Path.Combine(Directory.GetParent(directoryParent)?.ToString() ?? String.Empty, "src", "StoredData");
+        var tempStoredDataPath = Path.Combine(Directory.GetParent(currentSearchPath)?.ToString() ?? String.Empty, "src", "StoredData");
         if (Directory.Exists(tempStoredDataPath))
         {
             storedDataPath = tempStoredDataPath;
@@ -25,7 +25,7 @@ do
         }
         break;
     }
-    currentSearchPath = directoryParent;
+    currentSearchPath = Directory.GetParent(currentSearchPath)?.ToString() ?? String.Empty;
 } while (currentSearchPath != String.Empty);
 
 // If it can't be found, abort.

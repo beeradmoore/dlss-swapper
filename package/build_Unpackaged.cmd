@@ -29,10 +29,11 @@ echo Building installer
 echo ################################
 echo.
 
-makensis.exe Installer\Installer.nsi || goto :error
+DEL NSIS\installer.exe > NUL 2>&1
+makensis.exe NSIS\Installer.nsi || goto :error
  
 REM Move the installer to the output folder.
-move Installer\installer.exe "Output\DLSS Swapper-%app_version%-installer.exe" || goto :error
+move NSIS\installer.exe "Output\DLSS Swapper-%app_version%-installer.exe" || goto :error
 
 REM Everything is fine, go to the end of the file.
 goto :EOF

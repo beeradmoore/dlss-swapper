@@ -12,7 +12,7 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <!--<WindowsPackageType>None</WindowsPackageType>-->
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
-    <Configurations>Debug;Release;Debug_WindowsStore;Release_WindowsStore</Configurations>
+    <Configurations>Debug;Release;Debug_MicrosoftStore;Release_MicrosoftStore</Configurations>
     <PackageIcon>Asssets\icon_256.png</PackageIcon>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
@@ -26,39 +26,39 @@
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)'=='Release' Or '$(Configuration)'=='Release_WindowsStore'">
+  <PropertyGroup Condition="'$(Configuration)'=='Release' Or '$(Configuration)'=='Release_MicrosoftStore'">
     <Optimize>True</Optimize>
   </PropertyGroup>
 
-  <!-- If we are building for Windows Store set the WINDOWS_STORE defined constant -->
-  <PropertyGroup Condition="'$(Configuration)'=='Debug_WindowsStore' Or '$(Configuration)'=='Release_WindowsStore'">
-    <DefineConstants>WINDOWS_STORE</DefineConstants>
+  <!-- If we are building for Microsoft Store set the MICROSOFT_STORE defined constant -->
+  <PropertyGroup Condition="'$(Configuration)'=='Debug_MicrosoftStore' Or '$(Configuration)'=='Release_MicrosoftStore'">
+    <DefineConstants>MICROSOFT_STORE</DefineConstants>
     <WindowsPackageType>MSIX</WindowsPackageType>
   </PropertyGroup>
 
-    <!-- If we are not building for Windows Store still set the WindowsPackageType to none -->
+    <!-- If we are not building for Microsoft Store still set the WindowsPackageType to none -->
     <PropertyGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release'">
       <WindowsPackageType>None</WindowsPackageType>
     </PropertyGroup>
 
 
-    <!-- If we are building for the Windows Store copy the packaged launchSettings.json -->
-  <Target Name="PreBuildPackaged" BeforeTargets="PreBuildEvent" Condition="'$(DefineConstants.Contains(`WINDOWS_STORE`))' == 'true'">
+    <!-- If we are building for the Microsoft Store copy the packaged launchSettings.json -->
+  <Target Name="PreBuildPackaged" BeforeTargets="PreBuildEvent" Condition="'$(DefineConstants.Contains(`MICROSOFT_STORE`))' == 'true'">
     <Exec Command="copy &quot;$(ProjectDir)Properties\launchSettings.Packaged.json&quot; &quot;$(ProjectDir)Properties\launchSettings.json&quot; /Y" />
   </Target>
 
-  <!-- If we are not building for the Windows Store copy the unpackaged launchSettings.json -->
-  <Target Name="PreBuildUnpackged" BeforeTargets="PreBuildEvent" Condition="'$(DefineConstants.Contains(`WINDOWS_STORE`))' == 'false'">
+  <!-- If we are not building for the Microsoft Store copy the unpackaged launchSettings.json -->
+  <Target Name="PreBuildUnpackged" BeforeTargets="PreBuildEvent" Condition="'$(DefineConstants.Contains(`MICROSOFT_STORE`))' == 'false'">
     <Exec Command="copy &quot;$(ProjectDir)Properties\launchSettings.Unpackaged.json&quot; &quot;$(ProjectDir)Properties\launchSettings.json&quot; /Y" />
   </Target>
 
-  <ItemGroup Condition="'$(DefineConstants.Contains(`WINDOWS_STORE`))' == 'true'">
+  <ItemGroup Condition="'$(DefineConstants.Contains(`MICROSOFT_STORE`))' == 'true'">
       <None Update="StoredData\**">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(DefineConstants.Contains(`WINDOWS_STORE`))' == 'false'">
+  <ItemGroup Condition="'$(DefineConstants.Contains(`MICROSOFT_STORE`))' == 'false'">
       <None Remove="StoredData\dlss_zip\**" />
       <None Remove="StoredData\dlss_zip\**" />
       <None Update="StoredData\static_json\**">

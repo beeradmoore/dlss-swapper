@@ -108,7 +108,7 @@ namespace DLSS_Swapper.Pages
         {
             IsRefreshing = true;
 
-#if WINDOWS_STORE
+#if MICROSOFT_STORE
             await Task.Delay(500);
 #else
             var didUpdate = await App.CurrentApp.MainWindow.UpdateDLSSRecordsAsync();

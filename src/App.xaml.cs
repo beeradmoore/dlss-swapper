@@ -37,10 +37,10 @@ namespace DLSS_Swapper
         public static App CurrentApp => (App)Application.Current;
 
 
-#if WINDOWS_STORE
-        public const bool IsWindowsStoreBuild = true;
+#if MICROSOFT_STORE
+        public const bool IsMicrosoftStoreBuild = true;
 #else
-        public const bool IsWindowsStoreBuild = false;
+        public const bool IsMicrosoftStoreBuild = false;
 #endif
 
         internal DLSSRecords DLSSRecords { get; } = new DLSSRecords();
@@ -86,7 +86,7 @@ namespace DLSS_Swapper
 
         internal void LoadLocalRecordFromDLSSRecord(DLSSRecord dlssRecord, bool isImportedRecord = false)
         {
-#if WINDOWS_STORE
+#if MICROSOFT_STORE
             var dllsPath = Path.Combine(AppContext.BaseDirectory, "StoredData", "dlss_zip");
             if (isImportedRecord)
             {
@@ -221,7 +221,7 @@ namespace DLSS_Swapper
 
         public Version GetVersion()
         {
-#if WINDOWS_STORE
+#if MICROSOFT_STORE
             var packageVersion = Windows.ApplicationModel.Package.Current.Id.Version;
             return new Version(packageVersion.Major, packageVersion.Minor, packageVersion.Build, packageVersion.Revision);
 #else

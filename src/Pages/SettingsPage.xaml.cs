@@ -117,17 +117,17 @@ namespace DLSS_Swapper.Pages
             }
         }
 
-        // We only check for updates for builds which are not from the Windows Store.
+        // We only check for updates for builds which are not from the Microsoft Store.
         async Task CheckForUpdatesAsync()
         {
-#if WINDOWS_STORE
+#if MICROSOFT_STORE
             var dialog = new EasyContentDialog(XamlRoot)
             {
-                Title = "Open Windows Store",
+                Title = "Open Microsoft Store",
                 CloseButtonText = "Cancel",
                 PrimaryButtonText = "Open",
                 DefaultButton = ContentDialogButton.Primary,
-                Content = "We are unable to automatically check for updates from the Windows Store. Opening the DLSS Swapper Windows Store page should show if there is an update available.",
+                Content = "We are unable to automatically check for updates from the Microsoft Store. Opening the DLSS Swapper Microsoft Store page should show if there is an update available.",
             };
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
@@ -159,7 +159,7 @@ namespace DLSS_Swapper.Pages
 #endif
         }
 
-        async void WindowsStoreBadge_Tapped(object sender, TappedRoutedEventArgs e)
+        async void MicrosoftStoreBadge_Tapped(object sender, TappedRoutedEventArgs e)
         {
             // This is a long mess and so much easier in xaml.
             var richTextBlock = new RichTextBlock();
@@ -169,7 +169,7 @@ namespace DLSS_Swapper.Pages
             };
             paragraph.Inlines.Add(new Run()
             {
-                Text = "The recommended way to install DLSS Swapper is now via the Windows Store.",
+                Text = "The recommended way to install DLSS Swapper is now via the Microsoft Store.",
             });
             richTextBlock.Blocks.Add(paragraph);
             paragraph = new Paragraph()
@@ -187,7 +187,7 @@ namespace DLSS_Swapper.Pages
             };
             paragraph.Inlines.Add(new Run()
             {
-                Text = "To transition to the Windows Store build it is recommended that you uninstall DLSS Swapper and its develeper certifciate. You can do this by following the ",
+                Text = "To transition to the Microsoft Store build it is recommended that you uninstall DLSS Swapper and its develeper certifciate. You can do this by following the ",
             });
             var hyperLink = new Hyperlink()
             {
@@ -210,7 +210,7 @@ namespace DLSS_Swapper.Pages
             };
             hyperLink.Inlines.Add(new Run()
             {
-                Text = "Windows Store"
+                Text = "Microsoft Store"
             });
             paragraph.Inlines.Add(hyperLink);
             paragraph.Inlines.Add(new Run()
@@ -230,7 +230,7 @@ namespace DLSS_Swapper.Pages
 
             var dialog = new EasyContentDialog(XamlRoot)
             {
-                Title = "DLSS Swapper is available on the Windows Store",
+                Title = "DLSS Swapper is available on the Microsoft Store",
                 CloseButtonText = "Okay",
                 DefaultButton = ContentDialogButton.Close,
                 Content = richTextBlock,

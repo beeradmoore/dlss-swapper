@@ -147,8 +147,8 @@ namespace DLSS_Swapper.Data
 
         internal async Task<(bool Success, string Message, bool Cancelled)> DownloadAsync(Action<int> ProgressCallback = null)
         {
-#if WINDOWS_STORE
-            return (false, "Windows Store builds can not download DLSS updates.", false);
+#if MICROSOFT_STORE
+            return (false, "Microsoft Store builds can not download DLSS updates.", false);
 #else
             var dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
 

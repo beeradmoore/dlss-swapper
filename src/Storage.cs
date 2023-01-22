@@ -25,7 +25,7 @@ namespace DLSS_Swapper
             WriteIndented = true
         };
 
-#if WINDOWS_STORE
+#if MICROSOFT_STORE
         static string storagePath => Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 #elif PORTABLE
         static string storagePath => Path.Combine(Directory.GetCurrentDirectory(), "StoredData");
@@ -36,7 +36,7 @@ namespace DLSS_Swapper
 
         static Storage()
         {
-#if !WINDOWS_STORE
+#if !MICROSOFT_STORE
             // Create directories if they doesn't exist.
             //CreateDirectoryIfNotExists(GetTemp());
             CreateDirectoryIfNotExists(GetStorageFolder());
@@ -47,7 +47,7 @@ namespace DLSS_Swapper
 
         public static string GetTemp()
         {
-#if WINDOWS_STORE
+#if MICROSOFT_STORE
             var path = Windows.Storage.ApplicationData.Current.TemporaryFolder.Path;
 #elif PORTABLE
             var path = Path.Combine(storagePath, "temp");
@@ -66,7 +66,7 @@ namespace DLSS_Swapper
 
         static string GetStaticJsonFolder()
         {
-#if WINDOWS_STORE
+#if MICROSOFT_STORE
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "StoredData", "static_json");
 #elif PORTABLE
             return Path.Combine(Directory.GetCurrentDirectory(), "StoredData", "static_json");
@@ -167,9 +167,9 @@ namespace DLSS_Swapper
             }
         }
 
-#if !WINDOWS_STORE
+#if !MICROSOFT_STORE
         /// <summary>
-        /// Saves DLSSRecords object to the known position for a dynamic dlss_records.json file. This is excluded from the Windows Store build as there is no dynamic dlss_records.json file. 
+        /// Saves DLSSRecords object to the known position for a dynamic dlss_records.json file. This is excluded from the Microsoft Store build as there is no dynamic dlss_records.json file. 
         /// </summary>
         /// <param name="items">DLSSRecords object to be saved</param>
         /// <returns>true if the object was saved</returns>
@@ -199,9 +199,9 @@ namespace DLSS_Swapper
         /// <returns>DLSSRecords object. This object could be null if we failed to load DLSS records</returns>
         internal static async Task<DLSSRecords> LoadDLSSRecordsJsonAsync()
         {  
-            // No dyanmic dlss_records.json file for Windows Store so don't even bother loading it.
+            // No dyanmic dlss_records.json file for Microsoft Store so don't even bother loading it.
             var dlssRecordsFile = Path.Combine(GetDynamicJsonFolder(), "dlss_records.json");
-#if !WINDOWS_STORE
+#if !MICROSOFT_STORE
           
             if (File.Exists(dlssRecordsFile))
             {

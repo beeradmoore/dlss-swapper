@@ -1,14 +1,14 @@
 ## Recommended Install Instructions
 
 > **Note:**
-> DLSS Swapper is currently unavailable on the Windows Store. It will hopefully be restored soon. If you'd like to know more please see this [comment](https://github.com/beeradmoore/dlss-swapper/issues/96#issuecomment-1320977249).
+> DLSS Swapper is currently unavailable on the Microsoft Store. It will hopefully be restored soon. If you'd like to know more please see this [comment](https://github.com/beeradmoore/dlss-swapper/issues/96#issuecomment-1320977249).
 
 
 
-~~DLSS Swapper is now on the Windows Store!~~ You can install builds directly from GitHub using the manual method below, however they will not automatically update when a new version is available (although you will still be notified in app about updates).
+~~DLSS Swapper is now on the Microsoft Store!~~ You can install builds directly from GitHub using the manual method below, however they will not automatically update when a new version is available (although you will still be notified in app about updates).
 
 <!--
-<a href="https://www.microsoft.com/store/apps/9NNL4H1PTJBL" target="_blank"><img src="https://beeradmoore.github.io/dlss-swapper/images/windows_store_badge.png" alt="Windows Store install link" width="300" /></a>-->
+<a href="https://www.microsoft.com/store/apps/9NNL4H1PTJBL" target="_blank"><img src="https://beeradmoore.github.io/dlss-swapper/images/microsoft_store_badge.png" alt="Microsoft Store install link" width="300" /></a>-->
 
 ## Manual Install Instructions
 To install a GitHub build of DLSS Swapper you will need to trust our signing certificate and download installer from Github, or build the application from source.
@@ -56,6 +56,6 @@ If your installer says `Untrusted App` please review and re-attempt the steps fr
 If you have any problems installing please try install each of the `dependency-xxx.msix` files on the associated with that release. Then check if someone has already reported a similar problem in the [issues section](https://github.com/beeradmoore/dlss-swapper/issues) on our Github repository. If that doesn't solve your problem please create a new issue so we can try get you up and running.
 
 ### Updating
-~~If you installed via the Windows Store DLSS Swapper should update automatically.~~
+~~If you installed via the Microsoft Store DLSS Swapper should update automatically.~~
 
-If you installed via GitHub you will be notified about a new update on launch. You can also manually check for updates in settings. Unlike the Windows Store version, DLSS Swapper from GitHub will not update automatically. If you are ever unsure you can always check the [releases section](https://github.com/beeradmoore/dlss-swapper/releases) in our Github repository.
+If you installed via GitHub you will be notified about a new update on launch. You can also manually check for updates in settings. Unlike the Microsoft Store version, DLSS Swapper from GitHub will not update automatically. If you are ever unsure you can always check the [releases section](https://github.com/beeradmoore/dlss-swapper/releases) in our Github repository.

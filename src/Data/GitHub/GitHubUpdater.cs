@@ -13,7 +13,7 @@ using Windows.System;
 namespace DLSS_Swapper.Data.GitHub
 {
     /// <summary>
-    /// Helper class to be notified of updates in non-Windows Store builds of the app (which is Debug and Release builds)
+    /// Helper class to be notified of updates in non-Microsoft Store builds of the app (which is Debug and Release builds)
     /// </summary>
     internal class GitHubUpdater
     {
@@ -49,7 +49,7 @@ namespace DLSS_Swapper.Data.GitHub
             }
         }
 
-#if !WINDOWS_STORE
+#if !MICROSOFT_STORE
         /// <summary>
         /// Queries GitHub and returns a GitHubRelease only if a newer version was detected, otherwise null
         /// </summary>

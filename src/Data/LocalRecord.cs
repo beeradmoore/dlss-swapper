@@ -160,7 +160,7 @@ namespace DLSS_Swapper.Data
 
         internal bool Delete()
         {
-#if WINDOWS_STORE
+#if MICROSOFT_STORE
             if (IsImported)
             {
                 try

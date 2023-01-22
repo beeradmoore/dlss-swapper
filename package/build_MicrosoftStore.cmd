@@ -25,7 +25,7 @@ echo ################################
 echo.
 
 dotnet publish "..\src\DLSS Swapper.csproj" ^
-    -c Release_WindowsStore ^
+    -c Release_MicrosoftStore ^
     -r win10-x64 ^
     --self-contained false ^
     -p:Platform=x64 ^
@@ -46,10 +46,10 @@ echo.
 REM Build mapping file.
 (
     echo [Files]
-    echo "..\src\bin\publish\microsoft_store\DLSS Swapper_%app_version%_x64_Release_WindowsStore_Test\DLSS Swapper_%app_version%_x64_Release_WindowsStore.msix" "DLSS_Swapper_%app_version%_x64_Release_WindowsStore.msix"
+    echo "..\src\bin\publish\microsoft_store\DLSS Swapper_%app_version%_x64_Release_MicrosoftStore_Test\DLSS Swapper_%app_version%_x64_Release_MicrosoftStore.msix" "DLSS_Swapper_%app_version%_x64_Release_MicrosoftStore.msix"
 ) > ..\src\bin\publish\microsoft_store\mapping_file || goto :error
 
-SET msix_bundle_file="..\src\bin\publish\microsoft_store\DLSS Swapper-%app_version%-WindowsStore.msixbundle"
+SET msix_bundle_file="..\src\bin\publish\microsoft_store\DLSS Swapper-%app_version%-MicrosoftStore.msixbundle"
 
 REM Delete the bundle file if it already exists.
 DEL %msix_bundle_file% > NUL 2>&1

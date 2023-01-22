@@ -130,10 +130,10 @@
                 <Image 
                     Margin="0,40,0,0"
                     IsTapEnabled="true"
-                    Tapped="WindowsStoreBadge_Tapped"
-                    Source="Assets/windows_store_badge.png"
+                    Tapped="MicrosoftStoreBadge_Tapped"
+                    Source="Assets/microsoft_store_badge.png"
                     Width="300"
-                    Visibility="{x:Bind local:App.IsWindowsStoreBuild, Converter={StaticResource InverseBoolToVisibleConverter}}"
+                    Visibility="{x:Bind local:App.IsMicrosoftStoreBuild, Converter={StaticResource InverseBoolToVisibleConverter}}"
                     HorizontalAlignment="Center"
                     ui:FrameworkElementExtensions.Cursor="Hand"
                     />

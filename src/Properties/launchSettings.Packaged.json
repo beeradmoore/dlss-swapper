@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "DLSS Swapper (Windows Store)": {
+    "DLSS Swapper (Microsoft Store)": {
       "commandName": "MsixPackage",      
       "nativeDebugging": true
       /* "commandLineArgs": ""  Command line arguments to pass to the app. */

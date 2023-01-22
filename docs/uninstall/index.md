@@ -11,7 +11,7 @@
 
 
 ## Additional instructions if you installed via GitHub
-When you originally installed DLSS Swapper from GitHub you also need to install a developer certificate. If you are migrating to the [Windows Store version](https://www.microsoft.com/store/apps/9NNL4H1PTJBL) or are just cleaning this app out you should remove this. If you have only ever installed via the Windows Store this does not apply to you.
+When you originally installed DLSS Swapper from GitHub you also need to install a developer certificate. If you are migrating to the [Microsoft Store version](https://www.microsoft.com/store/apps/9NNL4H1PTJBL) or are just cleaning this app out you should remove this. If you have only ever installed via the Microsoft Store this does not apply to you.
 
 1. Open `Manage user certificates`
 

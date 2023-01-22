@@ -193,7 +193,7 @@ namespace DLSS_Swapper
             }
             */
 
-#if !WINDOWS_STORE
+#if !MICROSOFT_STORE
             var gitHubUpdater = new Data.GitHub.GitHubUpdater();
 
             // If this is a GitHub build check if there is a new version.
@@ -269,7 +269,7 @@ DLSS Swapper will close now.",
             }
             */
 
-#if !WINDOWS_STORE
+#if !MICROSOFT_STORE
             await newUpdateTask;
             if (newUpdateTask.Result != null)
             {
@@ -322,7 +322,7 @@ DLSS Swapper will close now.",
         /// <returns>True if we expect there are now valid DLSS records loaded into memory.</returns>
         async Task<bool> LoadDLSSRecordsAsync()
         {
-#if !WINDOWS_STORE
+#if !MICROSOFT_STORE
             // Only auto check for updates once every 12 hours.
             var timeSinceLastUpdate = DateTimeOffset.Now - Settings.Instance.LastRecordsRefresh;
             if (timeSinceLastUpdate.TotalHours > 12)
@@ -344,7 +344,7 @@ DLSS Swapper will close now.",
                 // If items could not be loaded then we should attempt to upload dlss_records from the dlss-archive.
                 if (items == null)
                 {
-#if WINDOWS_STORE
+#if MICROSOFT_STORE
                     return false;
 #else
                     return await UpdateDLSSRecordsAsync();
@@ -387,7 +387,7 @@ DLSS Swapper will close now.",
             App.CurrentApp.ImportedDLSSRecords.AddRange(localDlssRecords);
         }
 
-#if !WINDOWS_STORE
+#if !MICROSOFT_STORE
         /// <summary>
         /// Attempts to load dlss_records.json from dlss-archive.
         /// </summary>

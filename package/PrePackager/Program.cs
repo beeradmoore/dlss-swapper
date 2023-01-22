@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 
 // Keep going up directories until we are in the package directory, then go up one more. From there we want to use src/StoredData.
-// This is where we store data for DLSS Swapper for the Windows Store.
+// This is where we store data for DLSS Swapper for the Microsoft Store.
 var storedDataPath = String.Empty;
 var currentSearchPath = Directory.GetCurrentDirectory() ?? String.Empty;
 do

@@ -25,7 +25,7 @@ namespace DLSS_Swapper.Converters
                     return Visibility.Visible;
                 }
 
-                if (localRecord.IsDownloaded == true && App.IsWindowsStoreBuild == false)
+                if (localRecord.IsDownloaded == true && App.IsMicrosoftStoreBuild == false)
                 {
                     return Visibility.Visible;
                 }

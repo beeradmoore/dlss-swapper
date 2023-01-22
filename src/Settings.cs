@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI.Xaml;
 using System;
 
-#if WINDOWS_STORE
+#if MICROSOFT_STORE
 using Windows.Storage;
 #endif
 
@@ -227,7 +227,7 @@ namespace DLSS_Swapper
         }
 
 
-#if WINDOWS_STORE
+#if MICROSOFT_STORE
         static Settings FromLocalSettings()
         {
             var settings = new Settings();
@@ -354,8 +354,8 @@ namespace DLSS_Swapper
             // If we couldn't load settings then save the defaults.
             if (settingsFromJson == null)
             {
-#if WINDOWS_STORE
-                // If we are loading from an existing Windows Store build we want to copy over existing settings and then save as a json.
+#if MICROSOFT_STORE
+                // If we are loading from an existing Microsoft Store build we want to copy over existing settings and then save as a json.
                 settings = FromLocalSettings();
 #else
                 settings = new Settings();

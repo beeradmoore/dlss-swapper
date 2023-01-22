@@ -3,6 +3,8 @@
 set app_version=1.0.0.0
 set initial_directory=%cd%
 
+goto :installer
+
 REM create the output folder if it doesn't already exist.
 mkdir Output > NUL 2>&1
 
@@ -29,6 +31,7 @@ echo Building installer
 echo ################################
 echo.
 
+:installer 
 DEL NSIS\installer.exe > NUL 2>&1
 makensis.exe NSIS\Installer.nsi || goto :error
  

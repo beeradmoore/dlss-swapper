@@ -1,5 +1,7 @@
-﻿!include "MUI.nsh"
+﻿!include "MUI2.nsh"
 !include LogicLib.nsh
+
+
 
  # define name of installer
 OutFile "installer.exe"
@@ -20,18 +22,27 @@ Function .onInit
 
 FunctionEnd
 
-
 # For removing Start Menu shortcut in Windows 7
 #RequestExecutionLevel user
 RequestExecutionLevel highest
 
-;--------------------------------
-;Pages
+; App version information
+Name "DLSS Swapper"
+!define MUI_ICON "..\..\src\Assets\icon.ico"
+!define MUI_VERSION "1.0.0.0"
+!define MUI_PRODUCT "DLSS Swapper"
+VIProductVersion "1.0.0.0"
+VIAddVersionKey "ProductName" "DLSS Swapper"
+VIAddVersionKey "ProductVersion" "1.0.0.0"
+VIAddVersionKey "FileDescription" "DLSS Swapper installer"
+VIAddVersionKey "FileVersion" "1.0.0.0"
+
+; Pages
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
  
-# These indented statements modify settings for MUI_PAGE_FINISH
+; These indented statements modify settings for MUI_PAGE_FINISH
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_FINISHPAGE_RUN
 !define MUI_FINISHPAGE_RUN_CHECKED
@@ -43,9 +54,10 @@ RequestExecutionLevel highest
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
 
-;Languages
+
+; Languages
 !insertmacro MUI_LANGUAGE "English"
- 
+
 
 
 # start default section

@@ -1,39 +1,33 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.1.32210.238
+VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "DLSS Swapper (Package)", "DLSS Swapper\DLSS Swapper (Package)\DLSS Swapper (Package).wapproj", "{0A039442-0EC1-47AA-A7EE-1990F887F20C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DLSS Swapper", "DLSS Swapper\DLSS Swapper\DLSS Swapper.csproj", "{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DLSS Swapper", "src\DLSS Swapper.csproj", "{63586228-FDDE-4E35-9138-7FF35ED61EC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_WindowsStore|x64 = Debug_WindowsStore|x64
 		Debug|x64 = Debug|x64
 		Release_WindowsStore|x64 = Release_WindowsStore|x64
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Debug|x64.ActiveCfg = Debug|x64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Debug|x64.Build.0 = Debug|x64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Debug|x64.Deploy.0 = Debug|x64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release_WindowsStore|x64.ActiveCfg = Release_WindowsStore|x64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release_WindowsStore|x64.Build.0 = Release_WindowsStore|x64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release_WindowsStore|x64.Deploy.0 = Release_WindowsStore|x64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release|x64.ActiveCfg = Release|x64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release|x64.Build.0 = Release|x64
-		{0A039442-0EC1-47AA-A7EE-1990F887F20C}.Release|x64.Deploy.0 = Release|x64
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Debug|x64.ActiveCfg = Debug|x64
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Debug|x64.Build.0 = Debug|x64
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Release_WindowsStore|x64.ActiveCfg = Release_WindowsStore|x64
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Release_WindowsStore|x64.Build.0 = Release_WindowsStore|x64
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Release|x64.ActiveCfg = Release|x64
-		{F9AC0C27-0A4B-4CB5-8387-6ACECB1BDB6D}.Release|x64.Build.0 = Release|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug_WindowsStore|x64.ActiveCfg = Debug_WindowsStore|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug_WindowsStore|x64.Build.0 = Debug_WindowsStore|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug_WindowsStore|x64.Deploy.0 = Debug_WindowsStore|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug|x64.ActiveCfg = Debug|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug|x64.Build.0 = Debug|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release_WindowsStore|x64.ActiveCfg = Release_WindowsStore|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release_WindowsStore|x64.Build.0 = Release_WindowsStore|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release_WindowsStore|x64.Deploy.0 = Release_WindowsStore|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release|x64.ActiveCfg = Release|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {25AB2B33-AFFD-4086-9021-D23859723F3A}
+		SolutionGuid = {F184BD5E-34A3-4A6C-BB68-09DAC5BD2093}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,72 @@
+﻿<Application
+    x:Class="DLSS_Swapper.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DLSS_Swapper">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <!-- Other merged dictionaries here -->
+
+
+                <ResourceDictionary>
+                    <ResourceDictionary.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Dark">
+                            <Color x:Key="WindowCaptionBackground">Transparent</Color>
+                            <Color x:Key="WindowCaptionBackgroundDisabled">Transparent</Color>
+                            <Color x:Key="WindowCaptionForeground">#FFFFFF</Color>
+                            <Color x:Key="WindowCaptionForegroundDisabled">#666666</Color>
+                            <Color x:Key="WindowCaptionButtonBackgroundPointerOver">#191919</Color>
+
+                            <Color x:Key="BackgroundLevel0">#202020</Color>
+                            <Color x:Key="BackgroundLevel1">#272727</Color>
+                            <Color x:Key="BackgroundLevel2">#323232</Color>
+
+                            <Color x:Key="ButtonBackgroundColor">#202020</Color>
+                            <Color x:Key="ButtonForegroundColor">#FFFFFF</Color>
+                            <Color x:Key="ButtonHoverBackgroundColor">#2D2D2D</Color>
+                            <Color x:Key="ButtonHoverForegroundColor">#FFFFFF</Color>
+                            <Color x:Key="ButtonInactiveBackgroundColor">#202020</Color>
+                            <Color x:Key="ButtonInactiveForegroundColor">#737373</Color>
+                            <Color x:Key="ButtonPressedBackgroundColor">#292929</Color>
+                            <Color x:Key="ButtonPressedForegroundColor">#A7A7A7</Color>
+                        </ResourceDictionary>
+                        <ResourceDictionary x:Key="Light">
+                            <Color x:Key="WindowCaptionBackground">Transparent</Color>
+                            <Color x:Key="WindowCaptionBackgroundDisabled">Transparent</Color>
+                            <Color x:Key="WindowCaptionForeground">#000000</Color>
+                            <Color x:Key="WindowCaptionForegroundDisabled">#999999</Color>
+                            <Color x:Key="WindowCaptionButtonBackgroundPointerOver">#E6E6E6</Color>
+
+                            <Color x:Key="BackgroundLevel0">#F3F3F3</Color>
+                            <Color x:Key="BackgroundLevel1">#F9F9F9</Color>
+                            <Color x:Key="BackgroundLevel2">#FDFDFD</Color>
+
+                            <Color x:Key="ButtonBackgroundColor">#F3F3F3</Color>
+                            <Color x:Key="ButtonForegroundColor">#000000</Color>
+                            <Color x:Key="ButtonHoverBackgroundColor">#E9E9E9</Color>
+                            <Color x:Key="ButtonHoverForegroundColor">#000000</Color>
+                            <Color x:Key="ButtonInactiveBackgroundColor">#F3F3F3</Color>
+                            <Color x:Key="ButtonInactiveForegroundColor">#9B9B9B</Color>
+                            <Color x:Key="ButtonPressedBackgroundColor">#EDEDED</Color>
+                            <Color x:Key="ButtonPressedForegroundColor">#5F5F5F</Color>
+                        </ResourceDictionary>
+                        <ResourceDictionary x:Key="HighContrast">
+
+                        </ResourceDictionary>
+                    </ResourceDictionary.ThemeDictionaries>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Other app resources here -->
+
+            <Style TargetType="FontIcon">
+                <Setter Property="FontFamily" Value ="Assets/Fonts/Segoe-Fluent-Icons.ttf#Segoe Fluent Icons"/>
+            </Style>
+
+            <Style TargetType="FontIcon" x:Name="SagoeFluentIconsFontIcon">
+                <Setter Property="FontFamily" Value ="Assets/Fonts/Segoe-Fluent-Icons.ttf#Segoe Fluent Icons"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

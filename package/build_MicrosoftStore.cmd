@@ -4,7 +4,7 @@ set app_version=1.0.0.0
 set initial_directory=%cd%
 
 REM create the output folder if it doesn't already exist.
-mkdir output > NUL 2>&1
+mkdir Output > NUL 2>&1
 
 REM Don't forget to update this when using a new WindowsAppSDK installed package.
 SET PATH=%PATH%;"C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\"
@@ -68,7 +68,7 @@ REM Sign the bundle file.
 SignTool.exe sign /v /fd SHA256 /a %msix_bundle_file% || goto :error
 
 REM Move the installer to the output folder.
-move %msix_bundle_file% output || goto :error
+move %msix_bundle_file% Output || goto :error
 
 
 REM Everything is fine, go to the end of the file.

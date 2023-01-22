@@ -4,7 +4,7 @@ set app_version=1.0.0.0
 set initial_directory=%cd%
 
 REM create the output folder if it doesn't already exist.
-mkdir output > NUL 2>&1
+mkdir Output > NUL 2>&1
 
 echo.
 echo ################################
@@ -32,7 +32,7 @@ echo.
 makensis.exe Installer\Installer.nsi || goto :error
  
 REM Move the installer to the output folder.
-move Installer\installer.exe "output\DLSS Swapper-%app_version%-installer.exe" || goto :error
+move Installer\installer.exe "Output\DLSS Swapper-%app_version%-installer.exe" || goto :error
 
 REM Everything is fine, go to the end of the file.
 goto :EOF

@@ -4,7 +4,7 @@ set app_version=1.0.0.0
 set initial_directory=%cd%
 
 REM create the output folder if it doesn't already exist.
-mkdir output > NUL 2>&1
+mkdir Output > NUL 2>&1
 
 echo.
 echo ################################
@@ -30,7 +30,7 @@ echo Zipping app
 echo ################################
 echo.
 
-powershell Compress-Archive -Path "..\src\bin\publish\portable\*" -DestinationPath "output\DLSS` Swapper-%app_version%-portable.zip" || goto :error
+powershell Compress-Archive -Path "..\src\bin\publish\portable\*" -DestinationPath "Output\DLSS` Swapper-%app_version%-portable.zip" || goto :error
 
 REM Everything is fine, go to the end of the file.
 goto :EOF

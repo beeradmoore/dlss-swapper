@@ -93,7 +93,7 @@ namespace DLSS_Swapper
                 dllsPath = Path.Combine(Storage.GetStorageFolder(), "imported_dlss_zip");
             }
 #elif PORTABLE
-
+            var dllsPath = Path.Combine("StoredData", (isImportedRecord ? "imported_dlss_zip" : "dlss_zip"));
 #else
             var dllsPath = Path.Combine(Storage.GetStorageFolder(), (isImportedRecord ? "imported_dlss_zip" : "dlss_zip"));
 #endif

@@ -50,7 +50,7 @@ namespace DLSS_Swapper
 #if WINDOWS_STORE
             var path = Windows.Storage.ApplicationData.Current.TemporaryFolder.Path;
 #elif PORTABLE
-            var path = Path.Combine(unpackagedStoragePath, "temp");
+            var path = Path.Combine(storagePath, "temp");
             CreateDirectoryIfNotExists(path);
 #else
             var path = Path.Combine(Path.GetTempPath(), "DLSS Swapper");

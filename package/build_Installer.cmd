@@ -3,8 +3,6 @@
 set app_version=1.0.1.0
 set initial_directory=%cd%
 
-goto :installer
-
 REM create the output folder if it doesn't already exist.
 mkdir Output > NUL 2>&1
 

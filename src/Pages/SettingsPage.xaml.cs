@@ -82,6 +82,11 @@ namespace DLSS_Swapper.Pages
 
         void ThemeRadioButton_Checked(object sender, RoutedEventArgs e)
         {
+            if (DataContext == null)
+            {
+                return;
+            }
+
             if (e.OriginalSource is RadioButton radioButton)
             {
                 if (radioButton.Tag is string radioButtonTag)
@@ -101,6 +106,11 @@ namespace DLSS_Swapper.Pages
 
         void AllowExperimental_Toggled(object sender, RoutedEventArgs e)
         {
+            if (DataContext == null)
+            {
+                return;
+            }
+
             if (e.OriginalSource is ToggleSwitch toggleSwitch)
             {
                 Settings.Instance.AllowExperimental = toggleSwitch.IsOn;
@@ -110,6 +120,11 @@ namespace DLSS_Swapper.Pages
 
         void AllowUntrusted_Toggled(object sender, RoutedEventArgs e)
         {
+            if (DataContext == null)
+            {
+                return;
+            }
+
             if (e.OriginalSource is ToggleSwitch toggleSwitch)
             {
                 Settings.Instance.AllowUntrusted = toggleSwitch.IsOn;
@@ -241,6 +256,11 @@ namespace DLSS_Swapper.Pages
 
         private void LoggingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (DataContext == null)
+            {
+                return;
+            }
+
             if (e.AddedItems.Any() && e.AddedItems[0] is LoggingLevel loggingLevel && Settings.Instance.LoggingLevel != loggingLevel)
             {
                 // Update settings

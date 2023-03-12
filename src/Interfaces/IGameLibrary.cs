@@ -22,7 +22,8 @@ namespace DLSS_Swapper.Interfaces
         EpicGamesStore = 4,
         UbisoftConnect = 8,
         XboxApp = 16,
-        //SelfManaged = 32,
+        //EAapp = 32,
+        //SelfManaged = 64,
     };
 
     public interface IGameLibrary

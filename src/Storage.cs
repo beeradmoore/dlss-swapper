@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace DLSS_Swapper
 #if MICROSOFT_STORE
         static string storagePath => Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 #elif PORTABLE
-        static string storagePath => Path.Combine(Directory.GetCurrentDirectory(), "StoredData");
+        static string storagePath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "StoredData");
 #else
         static string storagePath => Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "DLSS Swapper");
 #endif
@@ -69,9 +70,9 @@ namespace DLSS_Swapper
 #if MICROSOFT_STORE
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "StoredData", "static_json");
 #elif PORTABLE
-            return Path.Combine(Directory.GetCurrentDirectory(), "StoredData", "static_json");
+            return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "StoredData", "static_json");
 #else
-            return Path.Combine(Directory.GetCurrentDirectory(), "StoredData", "static_json"); ;
+            return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "StoredData", "static_json"); ;
 #endif
         }
 

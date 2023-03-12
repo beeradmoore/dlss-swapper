@@ -22,6 +22,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.Json;
@@ -181,6 +182,24 @@ namespace DLSS_Swapper
 
         async void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
         {
+
+            {
+
+
+                var assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                var getCurrentDirectory = Directory.GetCurrentDirectory();
+                var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
+                {
+                    Title = "Paths",
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = $"GetCurrentDirectory: {getCurrentDirectory}\n\nassemblyPath: {assemblyPath}\n\nbaseDir: {baseDir}",
+                };
+                var result = await dialog.ShowAsync();
+
+
+            }
 
             // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
             /*

@@ -29,13 +29,13 @@ RequestExecutionLevel highest
 ; App version information
 Name "DLSS Swapper"
 !define MUI_ICON "..\..\src\Assets\icon.ico"
-!define MUI_VERSION "1.0.0.0"
+!define MUI_VERSION "1.0.1.0"
 !define MUI_PRODUCT "DLSS Swapper"
-VIProductVersion "1.0.0.0"
+VIProductVersion "1.0.1.0"
 VIAddVersionKey "ProductName" "DLSS Swapper"
-VIAddVersionKey "ProductVersion" "1.0.0.0"
+VIAddVersionKey "ProductVersion" "1.0.1.0"
 VIAddVersionKey "FileDescription" "DLSS Swapper installer"
-VIAddVersionKey "FileVersion" "1.0.0.0"
+VIAddVersionKey "FileVersion" "1.0.1.0"
 
 ; Pages
 !insertmacro MUI_PAGE_WELCOME

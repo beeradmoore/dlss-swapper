@@ -1,6 +1,6 @@
 @echo off
 
-set app_version=1.0.0.0
+set app_version=1.0.1.0
 set initial_directory=%cd%
 
 goto :installer

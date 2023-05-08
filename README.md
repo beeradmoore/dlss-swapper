@@ -31,7 +31,7 @@ Please, come and share your DLSS exprience over in [r/DLSS_Swapper](https://www.
 > **Note:**
 > DLSS Swapper is currently unavailable on the Microsoft Store. It will hopefully be restored soon. If you'd like to know more, please see this [comment](https://github.com/beeradmoore/dlss-swapper/issues/96#issuecomment-1320977249).
 
-~~Install from the [Microsoft Store](https://www.microsoft.com/store/apps/9NNL4H1PTJBL)~~, or look at our [manual install instructions](https://beeradmoore.github.io/dlss-swapper/install/).
+~~Install from the [Microsoft Store](https://www.microsoft.com/store/apps/9NNL4H1PTJBL), or~~ look at our [manual install instructions](https://beeradmoore.github.io/dlss-swapper/install/).
 
 
 ## How do I use it?
@@ -40,4 +40,4 @@ Check our [usage notes](https://beeradmoore.github.io/dlss-swapper/usage/).
 
 
 ## It would be cool if DLSS Swapper could...
-File a [feature request](https://github.com/beeradmoore/dlss-swapper/issues)
+Create a [feature request](https://github.com/beeradmoore/dlss-swapper/issues).

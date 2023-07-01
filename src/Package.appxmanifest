@@ -10,7 +10,7 @@
   <Identity
     Name="55588beeradmoore.DLSSSwapper"
     Publisher="CN=09891394-7164-4123-AE6F-DC48EF06C2DA"
-    Version="1.0.1.0" />
+    Version="1.0.2.0" />
   <mp:PhoneIdentity PhoneProductId="c0ab7734-5ac5-4d6c-996e-1d74f3bf55a8" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
 
   <Properties>

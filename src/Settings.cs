@@ -1,10 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using System;
 
-#if MICROSOFT_STORE
-using Windows.Storage;
-#endif
-
 namespace DLSS_Swapper
 {
     public class Settings
@@ -226,121 +222,6 @@ namespace DLSS_Swapper
             }
         }
 
-
-#if MICROSOFT_STORE
-        static Settings FromLocalSettings()
-        {
-            var settings = new Settings();
-
-            var localSettings = ApplicationData.Current.LocalSettings;
-
-            if (localSettings.Values.TryGetValue("HasShownWarning", out object tempHasShownWarning))
-            {
-                if (tempHasShownWarning is bool hasShownWarning)
-                {
-                    settings._hasShownWarning = hasShownWarning;
-                }
-            }
-
-
-            if (localSettings.Values.TryGetValue("HasShownMultiplayerWarning", out object tempHasShownMultiplayerWarning))
-            {
-                if (tempHasShownMultiplayerWarning is bool hasShownMultiplayerWarning)
-                {
-                    settings._hasShownMultiplayerWarning = hasShownMultiplayerWarning;
-                }
-            }
-                        
-
-            if (localSettings.Values.TryGetValue("HideNonDLSSGames", out object tempHideNonDLSSGames))
-            {
-                if (tempHideNonDLSSGames is bool hideNonDLSSGames)
-                {
-                    settings._hideNonDLSSGames = hideNonDLSSGames;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("GroupGameLibrariesTogether", out object tempGroupGameLibrariesTogether))
-            {
-                if (tempGroupGameLibrariesTogether is bool groupGameLibrariesTogether)
-                {
-                    settings._groupGameLibrariesTogether = groupGameLibrariesTogether;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("AppTheme", out object tempAppTheme))
-            {
-                if (tempAppTheme is int appTheme)
-                {
-                    settings._appTheme = (ElementTheme)appTheme;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("AllowExperimental", out object tempAllowExperimental))
-            {
-                if (tempAllowExperimental is bool allowExperimental)
-                {
-                    settings._allowExperimental = allowExperimental;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("AllowUntrusted", out object tempAllowUntrusted))
-            {
-                if (tempAllowUntrusted is bool allowUntrusted)
-                {
-                    settings._allowUntrusted = allowUntrusted;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("LastRecordsRefresh", out object tempLastRecordsRefresh))
-            {
-                if (tempLastRecordsRefresh is DateTimeOffset lastRecordsRefresh)
-                {
-                    settings._lastRecordsRefresh = lastRecordsRefresh;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("LastPromptWasForVersion", out object tempLastPromptWasForVersion))
-            {
-                if (tempLastPromptWasForVersion is ulong lastPromptWasForVersion)
-                {
-                    settings._lastPromptWasForVersion = lastPromptWasForVersion;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("LoggingLevel", out object tempLoggingLevel))
-            {
-                if (tempLoggingLevel is int loggingLevel)
-                {
-                    settings._loggingLevel = (LoggingLevel)loggingLevel;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("EnabledGameLibraries", out object tempEnabledGameLibraries))
-            {
-                if (tempEnabledGameLibraries is uint enabledGameLibraries)
-                {
-                    settings._enabledGameLibraries = enabledGameLibraries;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("WasLoadingGames", out object tempWasLoadingGames))
-            {
-                if (tempWasLoadingGames is bool wasLoadingGames)
-                {
-                    settings._wasLoadingGames = wasLoadingGames;
-                }
-            }
-
-            // We only care about loading from here once. 
-            // After we have got the values we will attempt to save as json.
-            // It we fail to save as json these settings will be lost.
-            localSettings.Values.Clear();
-
-            return settings;
-        }
-#endif
-
         void SaveJson()
         {
             AsyncHelper.RunSync(() => Storage.SaveSettingsJsonAsync(this));
@@ -354,12 +235,7 @@ namespace DLSS_Swapper
             // If we couldn't load settings then save the defaults.
             if (settingsFromJson == null)
             {
-#if MICROSOFT_STORE
-                // If we are loading from an existing Microsoft Store build we want to copy over existing settings and then save as a json.
-                settings = FromLocalSettings();
-#else
                 settings = new Settings();
-#endif
                 settings.SaveJson();
             }
             else

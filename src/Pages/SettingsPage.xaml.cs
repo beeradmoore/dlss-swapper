@@ -132,24 +132,8 @@ namespace DLSS_Swapper.Pages
             }
         }
 
-        // We only check for updates for builds which are not from the Microsoft Store.
         async Task CheckForUpdatesAsync()
         {
-#if MICROSOFT_STORE
-            var dialog = new EasyContentDialog(XamlRoot)
-            {
-                Title = "Open Microsoft Store",
-                CloseButtonText = "Cancel",
-                PrimaryButtonText = "Open",
-                DefaultButton = ContentDialogButton.Primary,
-                Content = "We are unable to automatically check for updates from the Microsoft Store. Opening the DLSS Swapper Microsoft Store page should show if there is an update available.",
-            };
-            var result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
-            {
-                await Launcher.LaunchUriAsync(new Uri("ms-windows-store://pdp/?ProductId=9NNL4H1PTJBL"));
-            }
-#else
             IsCheckingForUpdates = true;
             var githubUpdater = new Data.GitHub.GitHubUpdater();
             var newUpdate = await githubUpdater.CheckForNewGitHubRelease();      
@@ -171,87 +155,6 @@ namespace DLSS_Swapper.Pages
             await githubUpdater.DisplayNewUpdateDialog(newUpdate, this);
 
             IsCheckingForUpdates = false;
-#endif
-        }
-
-        async void MicrosoftStoreBadge_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            // This is a long mess and so much easier in xaml.
-            var richTextBlock = new RichTextBlock();
-            var paragraph = new Paragraph()
-            {
-                Margin = new Thickness(0, 0, 0, 0),
-            };
-            paragraph.Inlines.Add(new Run()
-            {
-                Text = "The recommended way to install DLSS Swapper is now via the Microsoft Store.",
-            });
-            richTextBlock.Blocks.Add(paragraph);
-            paragraph = new Paragraph()
-            {
-                Margin = new Thickness(0, 12, 0, 0),
-            };
-            paragraph.Inlines.Add(new Run()
-            {
-                Text = "GitHub releases tab will still be updated with new releases, however the app will no longer silently update to the latest version. ",
-            });
-            richTextBlock.Blocks.Add(paragraph);
-            paragraph = new Paragraph()
-            {
-                Margin = new Thickness(0, 12, 0, 0),
-            };
-            paragraph.Inlines.Add(new Run()
-            {
-                Text = "To transition to the Microsoft Store build it is recommended that you uninstall DLSS Swapper and its develeper certifciate. You can do this by following the ",
-            });
-            var hyperLink = new Hyperlink()
-            {
-                NavigateUri = new Uri("https://beeradmoore.github.io/dlss-swapper/uninstall/"),
-
-            };
-            hyperLink.Inlines.Add(new Run()
-            {
-                Text = "uninstall instructions"
-            });
-            paragraph.Inlines.Add(hyperLink);
-            paragraph.Inlines.Add(new Run()
-            {
-                Text = " and then installing from the ",
-            });
-            hyperLink = new Hyperlink()
-            {
-                NavigateUri = new Uri("https://www.microsoft.com/store/apps/9NNL4H1PTJBL"),
-
-            };
-            hyperLink.Inlines.Add(new Run()
-            {
-                Text = "Microsoft Store"
-            });
-            paragraph.Inlines.Add(hyperLink);
-            paragraph.Inlines.Add(new Run()
-            {
-                Text = ".",
-            });
-            richTextBlock.Blocks.Add(paragraph);
-            paragraph = new Paragraph()
-            {
-                Margin = new Thickness(0, 12, 0, 0),
-            };
-            paragraph.Inlines.Add(new Run()
-            {
-                Text = "(open both links now as this dialog will close when you uninstall)",
-            });
-            richTextBlock.Blocks.Add(paragraph);
-
-            var dialog = new EasyContentDialog(XamlRoot)
-            {
-                Title = "DLSS Swapper is available on the Microsoft Store",
-                CloseButtonText = "Okay",
-                DefaultButton = ContentDialogButton.Close,
-                Content = richTextBlock,
-            };
-            
-            await dialog.ShowAsync();
         }
 
         private void LoggingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

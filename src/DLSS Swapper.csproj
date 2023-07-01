@@ -10,9 +10,9 @@
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
-    <!--<WindowsPackageType>None</WindowsPackageType>-->
+    <WindowsPackageType>None</WindowsPackageType>
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
-    <Configurations>Debug;Release;Debug_MicrosoftStore;Release_MicrosoftStore</Configurations>
+    <Configurations>Debug;Release</Configurations>
     <PackageIcon>Asssets\icon_256.png</PackageIcon>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
@@ -27,39 +27,11 @@
     <Version>1.0.2.0</Version>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)'=='Release' Or '$(Configuration)'=='Release_MicrosoftStore'">
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <Optimize>True</Optimize>
   </PropertyGroup>
 
-  <!-- If we are building for Microsoft Store set the MICROSOFT_STORE defined constant -->
-  <PropertyGroup Condition="'$(Configuration)'=='Debug_MicrosoftStore' Or '$(Configuration)'=='Release_MicrosoftStore'">
-    <DefineConstants>MICROSOFT_STORE</DefineConstants>
-    <WindowsPackageType>MSIX</WindowsPackageType>
-  </PropertyGroup>
-
-    <!-- If we are not building for Microsoft Store still set the WindowsPackageType to none -->
-    <PropertyGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release'">
-      <WindowsPackageType>None</WindowsPackageType>
-    </PropertyGroup>
-
-
-    <!-- If we are building for the Microsoft Store copy the packaged launchSettings.json -->
-  <Target Name="PreBuildPackaged" BeforeTargets="PreBuildEvent" Condition="'$(DefineConstants.Contains(`MICROSOFT_STORE`))' == 'true'">
-    <Exec Command="copy &quot;$(ProjectDir)Properties\launchSettings.Packaged.json&quot; &quot;$(ProjectDir)Properties\launchSettings.json&quot; /Y" />
-  </Target>
-
-  <!-- If we are not building for the Microsoft Store copy the unpackaged launchSettings.json -->
-  <Target Name="PreBuildUnpackged" BeforeTargets="PreBuildEvent" Condition="'$(DefineConstants.Contains(`MICROSOFT_STORE`))' == 'false'">
-    <Exec Command="copy &quot;$(ProjectDir)Properties\launchSettings.Unpackaged.json&quot; &quot;$(ProjectDir)Properties\launchSettings.json&quot; /Y" />
-  </Target>
-
-  <ItemGroup Condition="'$(DefineConstants.Contains(`MICROSOFT_STORE`))' == 'true'">
-      <None Update="StoredData\**">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(DefineConstants.Contains(`MICROSOFT_STORE`))' == 'false'">
+  <ItemGroup>
       <None Remove="StoredData\dlss_zip\**" />
       <None Remove="StoredData\dlss_zip\**" />
       <None Update="StoredData\static_json\**">
@@ -124,7 +96,6 @@
     <None Remove="Assets\Wide310x150Logo.scale-200.png" />
     <None Remove="Assets\Wide310x150Logo.scale-400.png" />
     <None Remove="DLSS Swapper_TemporaryKey.pfx" />
-    <None Remove="Properties\launchSettings.json" />
   </ItemGroup>
 
 

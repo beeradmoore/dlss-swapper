@@ -26,9 +26,7 @@ namespace DLSS_Swapper
             WriteIndented = true
         };
 
-#if MICROSOFT_STORE
-        static string storagePath => Windows.Storage.ApplicationData.Current.LocalFolder.Path;
-#elif PORTABLE
+#if PORTABLE
         static string storagePath => Path.Combine(AppContext.BaseDirectory, "StoredData");
 #else
         static string storagePath => Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "DLSS Swapper");
@@ -37,20 +35,16 @@ namespace DLSS_Swapper
 
         static Storage()
         {
-#if !MICROSOFT_STORE
             // Create directories if they doesn't exist.
             //CreateDirectoryIfNotExists(GetTemp());
             CreateDirectoryIfNotExists(GetStorageFolder());
             CreateDirectoryIfNotExists(GetDynamicJsonFolder());
-#endif
         }
 
 
         public static string GetTemp()
         {
-#if MICROSOFT_STORE
-            var path = Windows.Storage.ApplicationData.Current.TemporaryFolder.Path;
-#elif PORTABLE
+#if PORTABLE
             var path = Path.Combine(storagePath, "temp");
             CreateDirectoryIfNotExists(path);
 #else
@@ -67,9 +61,7 @@ namespace DLSS_Swapper
 
         static string GetStaticJsonFolder()
         {
-#if MICROSOFT_STORE
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "StoredData", "static_json");
-#elif PORTABLE
+#if PORTABLE
             return Path.Combine(AppContext.BaseDirectory, "StoredData", "static_json");
 #else
             return Path.Combine(AppContext.BaseDirectory, "StoredData", "static_json"); ;
@@ -168,9 +160,8 @@ namespace DLSS_Swapper
             }
         }
 
-#if !MICROSOFT_STORE
         /// <summary>
-        /// Saves DLSSRecords object to the known position for a dynamic dlss_records.json file. This is excluded from the Microsoft Store build as there is no dynamic dlss_records.json file. 
+        /// Saves DLSSRecords object to the known position for a dynamic dlss_records.json file.
         /// </summary>
         /// <param name="items">DLSSRecords object to be saved</param>
         /// <returns>true if the object was saved</returns>
@@ -191,7 +182,6 @@ namespace DLSS_Swapper
                 return false;
             }
         }
-#endif
 
 
         /// <summary>
@@ -200,10 +190,8 @@ namespace DLSS_Swapper
         /// <returns>DLSSRecords object. This object could be null if we failed to load DLSS records</returns>
         internal static async Task<DLSSRecords> LoadDLSSRecordsJsonAsync()
         {  
-            // No dyanmic dlss_records.json file for Microsoft Store so don't even bother loading it.
             var dlssRecordsFile = Path.Combine(GetDynamicJsonFolder(), "dlss_records.json");
-#if !MICROSOFT_STORE
-          
+
             if (File.Exists(dlssRecordsFile))
             {
                 try
@@ -223,7 +211,6 @@ namespace DLSS_Swapper
                     return new DLSSRecords();
                 }
             }
-#endif
 
             // If we got to here there is no dynamic dlss_records.json file to load, so load static one instead.
             dlssRecordsFile = Path.Combine(GetStaticJsonFolder(), "dlss_records.json");

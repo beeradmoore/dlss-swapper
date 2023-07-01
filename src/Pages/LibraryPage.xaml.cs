@@ -108,9 +108,6 @@ namespace DLSS_Swapper.Pages
         {
             IsRefreshing = true;
 
-#if MICROSOFT_STORE
-            await Task.Delay(500);
-#else
             var didUpdate = await App.CurrentApp.MainWindow.UpdateDLSSRecordsAsync();
             if (didUpdate)
             {
@@ -129,7 +126,7 @@ namespace DLSS_Swapper.Pages
                 };
                 await errorDialog.ShowAsync();
             }
-#endif
+
             IsRefreshing = false;
         }
 

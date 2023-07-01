@@ -12,3 +12,4 @@ UpgradeLog.htm
 src/Properties/launchSettings.json
 StoredData/
 package/Output/
+.vscode/

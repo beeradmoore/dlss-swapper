@@ -160,22 +160,6 @@ namespace DLSS_Swapper.Data
 
         internal bool Delete()
         {
-#if MICROSOFT_STORE
-            if (IsImported)
-            {
-                try
-                {
-                    File.Delete(ExpectedPath);
-                    return true;
-                }
-                catch (Exception err)
-                {
-                    Logger.Error(err.Message);
-                    return false;
-                }
-            }
-            return false;
-#else
             try
             {
                 File.Delete(ExpectedPath);
@@ -193,7 +177,6 @@ namespace DLSS_Swapper.Data
                 Logger.Error(err.Message);
                 return false;
             }
-#endif
         }
 
         /*

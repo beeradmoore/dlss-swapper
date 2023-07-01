@@ -135,48 +135,65 @@ namespace DLSS_Swapper
 
         void MainNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            //FrameNavigationOptions navOptions = new FrameNavigationOptions();
-            //navOptions.TransitionInfoOverride = args.RecommendedNavigationTransitionInfo;
-
-            if (args.InvokedItem is String invokedItem)
+            if (args.IsSettingsInvoked)
+            {
+                GoToPage("Settings");
+            }
+            else if (args.InvokedItemContainer.Tag is String invokedItem)
             {
                 GoToPage(invokedItem);
             }
+            else
+            {
+                Logger.Error($"MainNavigationView_ItemInvoked for a page that was not found. ({args.InvokedItemContainer?.Tag}, {args.InvokedItem})");
+            }
         }
+
+
+        GameGridPage gameGridPage = null;
+        LibraryPage libraryPage = null;
+        SettingsPage settingsPage = null;
 
         void GoToPage(string page)
         {
-            Type pageType = null;
-
             if (page == "Games")
             {
-                pageType = typeof(GameGridPage);
+                if (ContentFrame.Content is null || ContentFrame.Content as Page != gameGridPage)
+                {
+                    ContentFrame.Content = gameGridPage ??= new GameGridPage();
+                }
             }
             else if (page == "Library")
             {
-                pageType = typeof(LibraryPage);
+                if (ContentFrame.Content is null || ContentFrame.Content as Page != libraryPage)
+                {
+                    ContentFrame.Content = libraryPage ??= new LibraryPage();
+                }
             }
             else if (page == "Settings")
             {
-                pageType = typeof(SettingsPage);
-            }
-            else if (page == "InitialLoading")
-            {
-                pageType = typeof(InitialLoadingPage);
-            }
-
-            foreach (NavigationViewItem navigationViewItem in MainNavigationView.MenuItems)
-            {
-                if (navigationViewItem.Tag.ToString() == page)
+                if (ContentFrame.Content is null || ContentFrame.Content as Page != settingsPage)
                 {
-                    MainNavigationView.SelectedItem = navigationViewItem;
-                    break;
+                    ContentFrame.Content = settingsPage ??= new SettingsPage();
                 }
             }
-
-            if (pageType != null)
+            else
             {
-                ContentFrame.Navigate(pageType);
+                Logger.Error($"Attempting to navigate to a page that was not found, {page}");
+                return;
+            }
+
+            // Only try manually set selected item if is not already selected. 
+            if (MainNavigationView.SelectedItem is null || (MainNavigationView.SelectedItem is String selectedItem && selectedItem != page))
+            {
+                foreach (NavigationViewItem navigationViewItem in MainNavigationView.MenuItems)
+                {
+                    if (navigationViewItem.Tag.ToString() == page)
+                    {
+                        MainNavigationView.SelectedItem = navigationViewItem;
+                        break;
+                    }
+                }
             }
         }
 

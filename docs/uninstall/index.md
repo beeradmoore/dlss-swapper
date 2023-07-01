@@ -1,5 +1,9 @@
-## Uninstall DLSS Swapper
-1. Open apps & features by opening `Settings` > `Apps` > `Apps & features` (or you can try click [here](	ms-settings:appsfeatures))
+## Uninstall DLSS Swapper Beta
+Versions of DLSS Swapper before v1.0 could be installed from the Microsoft Store or by installing from GitHub (which also involved installing and trusting our custom certificates). As of v1.0 the app is no longer available on Microsoft Store, nor does it require installing custom certificates.
+
+These instructions are specifically for people to remove the Microsoft Store version of the game and/or our custom certificates.
+
+1. Open apps & features by opening `Settings` > `Apps` > `Apps & features` (or you can try click [here](ms-settings:appsfeatures))
 
 2. Search `DLSS Swapper`.
 
@@ -11,7 +15,7 @@
 
 
 ## Additional instructions if you installed via GitHub
-When you originally installed DLSS Swapper from GitHub you also need to install a developer certificate. If you are migrating to the [Microsoft Store version](https://www.microsoft.com/store/apps/9NNL4H1PTJBL) or are just cleaning this app out you should remove this. If you have only ever installed via the Microsoft Store this does not apply to you.
+If you have only ever installed via the Microsoft Store this section does not apply to you. This is only for those who originally installed from GitHub which also required that you install a developer certificate.
 
 1. Open `Manage user certificates`
 

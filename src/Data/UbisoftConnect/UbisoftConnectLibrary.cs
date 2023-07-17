@@ -57,35 +57,38 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 return games;
             }
 
-
-            var installs = new Dictionary<int, UbisoftGameRegistryRecord>();
-
+            // Gat a list of installed games.
+            // NOTE: Some games are installed from Ubisoft Connect via Steam (eg. Far Cry: Blood Dragon)
+            // Those titles will show up in the Steam games list.
+            // Ironically Ubisoft Connect may show double gamess listed here if you do indeed own it from uplay/ubisoft connect and from 3rd party stores.
+            var installedTitles = new Dictionary<int, UbisoftGameRegistryRecord>();
             try
             {
-                // Only focused on x64 machines.
                 using (var ubisoftConnectInstallsKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Ubisoft\Launcher\Installs"))
                 {
+                    // if ubisoftConnectRegistryKey is null then Ubisoft is not installed .
                     if (ubisoftConnectInstallsKey == null)
                     {
                         throw new Exception("Could not detect ubisoftConnectInstallsKey");
                     }
-                    // if ubisoftConnectRegistryKey is null then steam is not installed.
+
                     var subKeyNames = ubisoftConnectInstallsKey.GetSubKeyNames();
                     foreach (var subKeyName in subKeyNames)
                     {
+                        // Only use the subKeyName that is a number (which is the installId.
                         if (Int32.TryParse(subKeyName, out var installId))
                         {
-                            using (var ubisoftConnectInstallDirKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\WOW6432Node\Ubisoft\Launcher\Installs\{subKeyName}"))
+                            using (var ubisoftConnectInstallDirKey = ubisoftConnectInstallsKey.OpenSubKey(subKeyName))
                             {
                                 if (ubisoftConnectInstallDirKey == null)
                                 {
                                     break;
                                 }
 
-                                var gameInstallDir = ubisoftConnectInstallDirKey?.GetValue("InstallDir") as String;
+                                var gameInstallDir = ubisoftConnectInstallDirKey.GetValue("InstallDir") as String;
                                 if (String.IsNullOrEmpty(gameInstallDir) == false)
                                 {
-                                    installs[installId] = new UbisoftGameRegistryRecord()
+                                    installedTitles[installId] = new UbisoftGameRegistryRecord()
                                     {
                                         InstallId = installId,
                                         InstallPath = gameInstallDir,
@@ -99,46 +102,67 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             catch (Exception err)
             {
                 Logger.Error($"Error getting list of installs: {err.Message}");
+                return games;
+            }
+
+            // Could not detect any installed games.
+            if (installedTitles.Count == 0)
+            {
+                Logger.Info("Unable to load any Ubisoft Connect games, maybe none are installed?");
+                return games;
             }
 
             var configurationPath = Path.Combine(GetInstallPath(), "cache", "configuration", "configurations");
             var assetsPath = Path.Combine(GetInstallPath(), "cache", "assets");
+
 
             var yamlDeserializer = new DeserializerBuilder()
                 .IgnoreUnmatchedProperties()
                 .WithNamingConvention(UnderscoredNamingConvention.Instance)
                 .Build();
 
-            var configurationFileData = await File.ReadAllBytesAsync(configurationPath);
+            // Load data from the configurations file. This is the data the game+dlc that the user has access.
+            // Not sure what happens if you are on a shared PC.
+            var configurationFileData = await File.ReadAllBytesAsync(configurationPath).ConfigureAwait(false);
 
+            // This file contains multiple game records seperated by some custom header. 
+            // We split this apart base on the methods from https://github.com/lutris/lutris/blob/d908066d97e61b2f33715fe9bdff6c02cc7fbc80/lutris/util/ubisoft/parser.py
+            // and then return it as a list of games which we then check to see if it is in the installed list above.
             var configurationRecords = ParseConfiguration(configurationFileData);
             foreach (var configurationRecord in configurationRecords)
             {
-                if (installs.ContainsKey(configurationRecord.InstallId))
+                // TODO: Remove htis true.
+                // Only bother trying to read the game data if the install list 
+                if (installedTitles.ContainsKey(configurationRecord.InstallId))
                 {
+                    // Copy the yaml out for the game into a memory stream to load.
                     using (var memoryStream = new MemoryStream(configurationRecord.Size))
                     {
                         memoryStream.Write(configurationFileData, configurationRecord.Offset, configurationRecord.Size);
                         memoryStream.Position = 0;
+
                         using (var reader = new StreamReader(memoryStream))
                         {
                             try
                             {
                                 var ubisoftConnectConfigurationItem = yamlDeserializer.Deserialize<UbisoftConnectConfigurationItem>(reader);
 
-                                // This is bad.
-                                if (ubisoftConnectConfigurationItem == null || ubisoftConnectConfigurationItem.Version == null || ubisoftConnectConfigurationItem.Root == null)
+                                // This is less than ideal. This usually happens with DLC or pre-orders. 
+                                if (ubisoftConnectConfigurationItem == null || ubisoftConnectConfigurationItem.Root == null)
                                 {
-                                    Logger.Error("Could not load Ubisoft Connect item.");
+                                    Logger.Info("Could not load Ubisoft Connect item. This is sometimes expected for certain titles.");
                                     continue;
                                 }
 
-                                // If Version isn't 2.0 we will just not load any games.
+                                // Unsure if we care about version at the moment. 
+                                /*
                                 if (ubisoftConnectConfigurationItem.Version != "2.0")
                                 {
+                                    // If Version isn't 2.0 we will just not load any games.
                                     Logger.Error($"Unknown item version. Expected 2.0, found {ubisoftConnectConfigurationItem.Version}");
                                     continue;
                                 }
+                                */
 
                                 // This can be expected. If there is no installer item there is no game to install.
                                 if (ubisoftConnectConfigurationItem.Root.Installer == null)
@@ -149,7 +173,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                 // This is not expected. 
                                 if (ubisoftConnectConfigurationItem.Root.StartGame == null)
                                 {
-                                    Logger.Error($"StartGameNode is null for {ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier}.");
+                                    Logger.Info($"StartGameNode is null for {ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier}. This is likely a region specific installer.");
                                     continue;
                                 }
 
@@ -181,7 +205,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                 var game = new UbisoftConnectGame(localImage, remoteImage)
                                 {
                                     Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier,
-                                    InstallPath = installs[configurationRecord.InstallId].InstallPath,
+                                    InstallPath = installedTitles[configurationRecord.InstallId].InstallPath,
                                 };
                                 game.DetectDLSS();
                                 games.Add(game);
@@ -196,12 +220,46 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             }
 
             games.Sort();
+
             _loadedGames.AddRange(games);
             _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));
 
             return games;
         }
 
+        string GetInstallPath()
+        {
+            if (String.IsNullOrEmpty(_installPath) == false)
+            {
+                return _installPath;
+            }
+
+            try
+            {
+                // Only focused on x64 machines.
+                using (var ubisoftConnectRegistryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Ubisoft\Launcher"))
+                {
+                    if (ubisoftConnectRegistryKey == null)
+                    {
+                        return String.Empty;
+                    }
+                    // if ubisoftConnectRegistryKey is null then steam is not installed.
+                    var installPath = ubisoftConnectRegistryKey?.GetValue("InstallDir") as String;
+                    if (String.IsNullOrEmpty(installPath) == false)
+                    {
+                        _installPath = installPath;
+                    }
+
+                    return _installPath ?? String.Empty;
+                }
+            }
+            catch (Exception err)
+            {
+                _installPath = String.Empty;
+                Logger.Error(err.Message);
+                return String.Empty;
+            }
+        }
 
         // Based on the methods from
         // https://github.com/lutris/lutris/blob/d908066d97e61b2f33715fe9bdff6c02cc7fbc80/lutris/util/ubisoft/parser.py
@@ -260,7 +318,8 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             return records;
         }
 
-
+        // Based on the methods from
+        // https://github.com/lutris/lutris/blob/d908066d97e61b2f33715fe9bdff6c02cc7fbc80/lutris/util/ubisoft/parser.py
         (int objectSize, int installId, int launchId, int headerSize) ParseConfigurationHeader(ReadOnlySpan<byte> header, bool secondEight = false)
         {
 
@@ -345,7 +404,8 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             }
         }
 
-
+        // Based on the methods from
+        // https://github.com/lutris/lutris/blob/d908066d97e61b2f33715fe9bdff6c02cc7fbc80/lutris/util/ubisoft/parser.py
         int ConvertData(int data)
         {
             //calculate object size (konrad's formula)
@@ -363,83 +423,5 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             }
             return data;
         }
-
-        string GetInstallPathFromRegister(string register)
-        {
-            if (String.IsNullOrEmpty(register))
-            {
-                return String.Empty;
-            }
-
-            var registerParts = register.Split("\\");
-            if (registerParts.Length == 0)
-            {
-                return String.Empty;
-            }
-            var registryHive = registerParts[0] switch
-            {
-                "HKEY_LOCAL_MACHINE" => RegistryHive.LocalMachine,
-                "HKEY_CURRENT_USER" => RegistryHive.CurrentUser,
-                _ => RegistryHive.PerformanceData, // This should never be where a game is installed. So we use this to abort.
-            };
-
-            if (registryHive == RegistryHive.PerformanceData)
-            {
-                return String.Empty;
-            }
-
-            using (var baseKey = RegistryKey.OpenBaseKey(registryHive, RegistryView.Registry32))
-            {
-                if (baseKey == null)
-                {
-                    return String.Empty;
-                }
-
-                var targetSubKey = String.Join("\\", registerParts[1..^1]);
-                using (var subKey = baseKey.OpenSubKey(targetSubKey, false))
-                {
-                    if (subKey == null)
-                    {
-                        return String.Empty;
-                    }
-
-                    return subKey.GetValue(registerParts.Last(), String.Empty) as String ?? String.Empty;
-                }
-            }    
-        }
-
-        string GetInstallPath()
-        {
-            if (String.IsNullOrEmpty(_installPath) == false)
-            {
-                return _installPath;
-            }
-
-            try
-            {
-                // Only focused on x64 machines.
-                using (var ubisoftConnectRegistryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Ubisoft\Launcher"))
-                {
-                    if (ubisoftConnectRegistryKey == null)
-                    {
-                        return String.Empty;
-                    }
-                    // if ubisoftConnectRegistryKey is null then steam is not installed.
-                    var installPath = ubisoftConnectRegistryKey?.GetValue("InstallDir") as String;
-                    if (String.IsNullOrEmpty(installPath) == false)
-                    {
-                        _installPath = installPath;
-                    }
-
-                    return _installPath ?? String.Empty;
-                }
-            }
-            catch (Exception err)
-            {
-                _installPath = String.Empty;
-                Logger.Error(err.Message);
-                return String.Empty;
-            }
-        }        
     }
 }

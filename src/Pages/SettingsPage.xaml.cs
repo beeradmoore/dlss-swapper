@@ -11,6 +11,7 @@ using MvvmHelpers.Commands;
 using MvvmHelpers.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -21,6 +22,8 @@ using Windows.Foundation.Diagnostics;
 using Windows.System;
 using Windows.UI.ViewManagement;
 using System.Diagnostics;
+using Windows.Storage.Pickers;
+using ColorCode.Common;
 using DLSS_Swapper.UserControls;
 
 namespace DLSS_Swapper.Pages
@@ -42,6 +45,8 @@ namespace DLSS_Swapper.Pages
             }
         }
 
+        public ObservableCollection<string> CustomDirectories { get; } = new ObservableCollection<string>();
+
         private AsyncCommand _checkForUpdateCommand;
         public AsyncCommand CheckForUpdatesCommand => _checkForUpdateCommand ??= new AsyncCommand(CheckForUpdatesAsync, _=> !IsCheckingForUpdates);
 
@@ -58,6 +63,9 @@ namespace DLSS_Swapper.Pages
                 }
             }
         }
+        
+        private AsyncCommand _addCustomDirectoryCommand;
+        public AsyncCommand AddCustomDirectoryCommand => _addCustomDirectoryCommand ??= new AsyncCommand(AddCustomDirectoryAsync);
 
         public IEnumerable<LoggingLevel> LoggingLevels = Enum.GetValues(typeof(LoggingLevel)).Cast<LoggingLevel>();
 
@@ -78,6 +86,7 @@ namespace DLSS_Swapper.Pages
             LoggingComboBox.SelectedItem = Settings.Instance.LoggingLevel;
 
             DataContext = this;
+            Settings.Instance.Directories.ForEach(AddToCustomDirectories);
         }
 
         void ThemeRadioButton_Checked(object sender, RoutedEventArgs e)
@@ -201,6 +210,87 @@ namespace DLSS_Swapper.Pages
 
                 await dialog.ShowAsync();
             }
+        }
+
+        async Task AddCustomDirectoryAsync()
+        {
+            var folderPicker = new FolderPicker { SuggestedStartLocation = PickerLocationId.ComputerFolder };
+
+            try
+            {
+                // Associate the HWND with the folder picker
+                IntPtr hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
+                WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
+
+                var folder = await folderPicker.PickSingleFolderAsync();
+
+                if (folder == null)
+                {
+                    return;
+                }
+
+                // If top level directory throw error.
+                if (folder.Path == Path.GetPathRoot(folder.Path))
+                {
+                    throw new InvalidOperationException($"Do not add a top level directory: {folder.Path}");
+                }
+
+                AddToCustomDirectories(folder.Path);
+                Settings.Instance.AddDirectory(folder.Path);
+            }
+            catch (Exception ex)
+            {
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = "Error:\n" + ex.Message,
+                };
+                await dialog.ShowAsync();
+            }
+        }
+
+        private void AddToCustomDirectories(string directory)
+        {
+            if (CustomDirectories.Contains(directory))
+            {
+                return;
+            }
+
+            CustomDirectories.Add(directory);
+            CustomDirectories.SortStable((s, s1) => String.Compare(s, s1, StringComparison.CurrentCulture));
+
+            if (!Settings.Instance.Directories.Contains(directory))
+            {
+                Settings.Instance.AddDirectory(directory);
+            }
+
+            CustomDirectoryView.UpdateLayout();
+        }
+
+        private void RemoveDirectory_OnClick(object sender, RoutedEventArgs e)
+        {
+            var parent = ((Button)sender).Parent as Expander;
+            if (parent != null)
+            {
+                parent.IsExpanded = false;
+            }
+
+            var directory = ((Button)sender).CommandParameter as string;
+            RemoveCustomDirectories(directory);
+        }
+
+        private void RemoveCustomDirectories(string directory)
+        {
+            if (!CustomDirectories.Contains(directory))
+            {
+                return;
+            }
+
+            CustomDirectories.Remove(directory);
+            Settings.Instance.RemoveDirectory(directory);
+
+            CustomDirectoryView.UpdateLayout();
         }
     }
 }

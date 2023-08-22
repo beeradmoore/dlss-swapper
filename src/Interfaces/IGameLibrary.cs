@@ -4,6 +4,7 @@ using DLSS_Swapper.Data.GOG;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;
+using DLSS_Swapper.Data.CustomDirectory;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace DLSS_Swapper.Interfaces
         EpicGamesStore = 4,
         UbisoftConnect = 8,
         XboxApp = 16,
-        //SelfManaged = 32,
+        CustomDirectories = 32
     };
 
     public interface IGameLibrary
@@ -44,6 +45,7 @@ namespace DLSS_Swapper.Interfaces
                 GameLibrary.EpicGamesStore => new EpicGamesStoreLibrary(),
                 GameLibrary.UbisoftConnect => new UbisoftConnectLibrary(),
                 GameLibrary.XboxApp => new XboxLibrary(),
+                GameLibrary.CustomDirectories => new CustomLibrary(),
                 _ => throw new Exception($"Could not load game library {gameLibrary}"),
             };
         }

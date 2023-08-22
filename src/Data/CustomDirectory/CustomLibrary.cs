@@ -20,12 +20,9 @@ public class CustomLibrary : IGameLibrary
         var games = new List<Game>();
         var directories = Settings.Instance.Directories;
 
-        var tasks = directories.Select(dir => Task.Run(() => GetGamesFromDirectory(dir)));
+        var tasks = directories.Select(directory => GetGamesFromDirectoryAsync(directory, games));
 
-        foreach (var gameDirectory in await Task.WhenAll(tasks))
-        {
-            games.AddRange(gameDirectory);
-        }
+        await Task.WhenAll(tasks);
 
         games.Sort();
         LoadedGames.AddRange(games);
@@ -33,22 +30,22 @@ public class CustomLibrary : IGameLibrary
 
         return games;
     }
-    
-    private IEnumerable<Game> GetGamesFromDirectory(string directory)
-    {
-        var games = new List<Game>();
 
+    private static async Task GetGamesFromDirectoryAsync(string directory, ICollection<Game> games)
+    {
         if (!Directory.Exists(directory))
         {
-            return games;
+            return;
         }
 
-        foreach (var gameDirectory in Directory.GetDirectories(directory))
+        var tasks = new List<Task>();
+
+        foreach (var dir in Directory.GetDirectories(directory))
         {
-            games.Add(new CustomGame(Path.GetFileName(gameDirectory), gameDirectory));
+            tasks.Add(Task.Run(() => games.Add(new CustomGame(Path.GetFileName(dir), dir))));
         }
 
-        return games;
+        await Task.WhenAll(tasks);
     }
 
     public bool IsInstalled()

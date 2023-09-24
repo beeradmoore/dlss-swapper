@@ -75,6 +75,9 @@ Section
   CreateShortcut "$SMPROGRAMS\DLSS Swapper.lnk" "$INSTDIR\DLSS Swapper.exe"
 
   WriteRegStr SHCTX "${UNINST_KEY}" "DisplayName" "DLSS Swapper"
+  WriteRegStr SHCTX "${UNINST_KEY}" "DisplayVersion" "1.0.2.0"
+  WriteRegStr SHCTX "${UNINST_KEY}" "Publisher" "beeradmoore"
+  WriteRegStr SHCTX "${UNINST_KEY}" "DisplayIcon" "$\"$INSTDIR\DLSS Swapper.exe$\""
   WriteRegStr SHCTX "${UNINST_KEY}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
   WriteRegStr SHCTX "${UNINST_KEY}" "InstallLocation" $INSTDIR
 

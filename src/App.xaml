@@ -15,43 +15,43 @@
                     <ResourceDictionary.ThemeDictionaries>
                         <ResourceDictionary x:Key="Dark">
                             <ui:Color x:Key="WindowCaptionBackground">Transparent</ui:Color>
-                            <ui:Color x:Key="WindowCaptionBackgroundDisabled">Transparent</ui:Color>
-                            <ui:Color x:Key="WindowCaptionForeground">#FFFFFF</ui:Color>
-                            <ui:Color x:Key="WindowCaptionForegroundDisabled">#666666</ui:Color>
-                            <ui:Color x:Key="WindowCaptionButtonBackgroundPointerOver">#191919</ui:Color>
+                            <Color x:Key="WindowCaptionBackgroundDisabled">Transparent</Color>
+                            <Color x:Key="WindowCaptionForeground">#FFFFFF</Color>
+                            <Color x:Key="WindowCaptionForegroundDisabled">#666666</Color>
+                            <Color x:Key="WindowCaptionButtonBackgroundPointerOver">#191919</Color>
 
-                            <ui:Color x:Key="BackgroundLevel0">#202020</ui:Color>
-                            <ui:Color x:Key="BackgroundLevel1">#272727</ui:Color>
-                            <ui:Color x:Key="BackgroundLevel2">#323232</ui:Color>
+                            <Color x:Key="BackgroundLevel0">#202020</Color>
+                            <Color x:Key="BackgroundLevel1">#272727</Color>
+                            <Color x:Key="BackgroundLevel2">#323232</Color>
 
-                            <ui:Color x:Key="ButtonBackgroundColor">#202020</ui:Color>
-                            <ui:Color x:Key="ButtonForegroundColor">#FFFFFF</ui:Color>
-                            <ui:Color x:Key="ButtonHoverBackgroundColor">#2D2D2D</ui:Color>
-                            <ui:Color x:Key="ButtonHoverForegroundColor">#FFFFFF</ui:Color>
-                            <ui:Color x:Key="ButtonInactiveBackgroundColor">#202020</ui:Color>
-                            <ui:Color x:Key="ButtonInactiveForegroundColor">#737373</ui:Color>
-                            <ui:Color x:Key="ButtonPressedBackgroundColor">#292929</ui:Color>
-                            <ui:Color x:Key="ButtonPressedForegroundColor">#A7A7A7</ui:Color>
+                            <Color x:Key="ButtonBackgroundColor">#202020</Color>
+                            <Color x:Key="ButtonForegroundColor">#FFFFFF</Color>
+                            <Color x:Key="ButtonHoverBackgroundColor">#2D2D2D</Color>
+                            <Color x:Key="ButtonHoverForegroundColor">#FFFFFF</Color>
+                            <Color x:Key="ButtonInactiveBackgroundColor">#202020</Color>
+                            <Color x:Key="ButtonInactiveForegroundColor">#737373</Color>
+                            <Color x:Key="ButtonPressedBackgroundColor">#292929</Color>
+                            <Color x:Key="ButtonPressedForegroundColor">#A7A7A7</Color>
                         </ResourceDictionary>
                         <ResourceDictionary x:Key="Light">
-                            <ui:Color x:Key="WindowCaptionBackground">Transparent</ui:Color>
-                            <ui:Color x:Key="WindowCaptionBackgroundDisabled">Transparent</ui:Color>
-                            <ui:Color x:Key="WindowCaptionForeground">#000000</ui:Color>
-                            <ui:Color x:Key="WindowCaptionForegroundDisabled">#999999</ui:Color>
-                            <ui:Color x:Key="WindowCaptionButtonBackgroundPointerOver">#E6E6E6</ui:Color>
+                            <Color x:Key="WindowCaptionBackground">Transparent</Color>
+                            <Color x:Key="WindowCaptionBackgroundDisabled">Transparent</Color>
+                            <Color x:Key="WindowCaptionForeground">#000000</Color>
+                            <Color x:Key="WindowCaptionForegroundDisabled">#999999</Color>
+                            <Color x:Key="WindowCaptionButtonBackgroundPointerOver">#E6E6E6</Color>
 
-                            <ui:Color x:Key="BackgroundLevel0">#F3F3F3</ui:Color>
-                            <ui:Color x:Key="BackgroundLevel1">#F9F9F9</ui:Color>
-                            <ui:Color x:Key="BackgroundLevel2">#FDFDFD</ui:Color>
+                            <Color x:Key="BackgroundLevel0">#F3F3F3</Color>
+                            <Color x:Key="BackgroundLevel1">#F9F9F9</Color>
+                            <Color x:Key="BackgroundLevel2">#FDFDFD</Color>
 
-                            <ui:Color x:Key="ButtonBackgroundColor">#F3F3F3</ui:Color>
-                            <ui:Color x:Key="ButtonForegroundColor">#000000</ui:Color>
-                            <ui:Color x:Key="ButtonHoverBackgroundColor">#E9E9E9</ui:Color>
-                            <ui:Color x:Key="ButtonHoverForegroundColor">#000000</ui:Color>
-                            <ui:Color x:Key="ButtonInactiveBackgroundColor">#F3F3F3</ui:Color>
-                            <ui:Color x:Key="ButtonInactiveForegroundColor">#9B9B9B</ui:Color>
-                            <ui:Color x:Key="ButtonPressedBackgroundColor">#EDEDED</ui:Color>
-                            <ui:Color x:Key="ButtonPressedForegroundColor">#5F5F5F</ui:Color>
+                            <Color x:Key="ButtonBackgroundColor">#F3F3F3</Color>
+                            <Color x:Key="ButtonForegroundColor">#000000</Color>
+                            <Color x:Key="ButtonHoverBackgroundColor">#E9E9E9</Color>
+                            <Color x:Key="ButtonHoverForegroundColor">#000000</Color>
+                            <Color x:Key="ButtonInactiveBackgroundColor">#F3F3F3</Color>
+                            <Color x:Key="ButtonInactiveForegroundColor">#9B9B9B</Color>
+                            <Color x:Key="ButtonPressedBackgroundColor">#EDEDED</Color>
+                            <Color x:Key="ButtonPressedForegroundColor">#5F5F5F</Color>
                         </ResourceDictionary>
                         <ResourceDictionary x:Key="HighContrast">
 

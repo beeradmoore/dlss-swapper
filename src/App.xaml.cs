@@ -263,5 +263,19 @@ namespace DLSS_Swapper
         {
             return Assembly.GetExecutingAssembly().GetName().Version;
         }
+
+        public string GetVersionString()
+        {
+            var version = GetVersion();
+            if (version.Build == 0 && version.Revision == 0)
+            {
+                return $"{version.Major}.{version.Minor}";
+            }
+            else if (version.Revision == 0)
+            {
+                return $"{version.Major}.{version.Minor}.{version.Build}";
+            }
+            return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+        }
     }
 }

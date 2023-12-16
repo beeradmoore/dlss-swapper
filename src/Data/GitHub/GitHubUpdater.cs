@@ -106,8 +106,7 @@ namespace DLSS_Swapper.Data.GitHub
             }
 
 
-            var version = App.CurrentApp.GetVersion();
-            var currentVerion = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+            var currentVerion = App.CurrentApp.GetVersionString();
 
             var yourVersion = $"You currently have {currentVerion} installed.\n\n";
             var contentUpdate = new MarkdownTextBlock()

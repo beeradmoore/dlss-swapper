@@ -33,14 +33,7 @@ namespace DLSS_Swapper.Pages
         //https://github.com/microsoft/Xaml-Controls-Gallery/blob/6450265cc94da5b2fac5e1e22d1be35dc66c402e/XamlControlsGallery/Navigation/NavigationRootPage.xaml.cs#L32
 
 
-        public string Version
-        {
-            get
-            {
-                var version = App.CurrentApp.GetVersion();
-                return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
-            }
-        }
+        public string Version => App.CurrentApp.GetVersionString();
 
         private AsyncCommand _checkForUpdateCommand;
         public AsyncCommand CheckForUpdatesCommand => _checkForUpdateCommand ??= new AsyncCommand(CheckForUpdatesAsync, _=> !IsCheckingForUpdates);

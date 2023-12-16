@@ -139,8 +139,7 @@ Section
   WriteUninstaller "$INSTDIR\uninstall.exe"
   FileWrite $UninstLog "uninstall.exe$\r$\n"
 
-  ; Calculate install size. This will be updated in app to include
-  ; data from %LOCALAPPDATA%\DLSS Swapper\
+  ; Calculate install size. This will be updated in app to include data from LOCALAPPDATA\DLSS Swapper
   ${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
   IntFmt $0 "0x%08X" $0
   
@@ -167,8 +166,6 @@ SectionEnd
 
 ; uninstaller section start
 Section "Uninstall"
-  #$LOCALAPPDATA
-  #$APPDATAS
 
   ;Can't uninstall if uninstall log is missing!
   IfFileExists "$INSTDIR\${UninstLog}" +3
@@ -211,6 +208,9 @@ Section "Uninstall"
   Pop $R2
   Pop $R1
   Pop $R0
+
+  ; Remove downloaded and imported DLSS dlls.
+  RMDir /r "$LOCALAPPDATA\DLSS Swapper\"
   
   ; Remove registry keys
   DeleteRegKey SHCTX "${UNINST_KEY}"

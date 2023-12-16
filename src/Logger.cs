@@ -24,7 +24,7 @@ namespace DLSS_Swapper
 
     internal static class Logger
     {
-        static string loggingFile => Path.Combine(Path.GetTempPath(), "dlss_swapper_.log");
+        static string loggingFile => Path.Combine(Storage.GetTemp(), "dlss_swapper_.log");
         static LoggingLevelSwitch levelSwitch = new LoggingLevelSwitch(Serilog.Events.LogEventLevel.Fatal);
         internal static void Init()
         {

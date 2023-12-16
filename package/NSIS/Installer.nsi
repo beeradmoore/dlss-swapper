@@ -1,6 +1,7 @@
 ﻿!include "MUI2.nsh"
 !include "LogicLib.nsh"
 !include "StrContains.nsh"
+!include "FileFunc.nsh"
 
 ; define name of installer
 OutFile "installer.exe"
@@ -138,6 +139,11 @@ Section
   WriteUninstaller "$INSTDIR\uninstall.exe"
   FileWrite $UninstLog "uninstall.exe$\r$\n"
 
+  ; Calculate install size. This will be updated in app to include
+  ; data from %LOCALAPPDATA%\DLSS Swapper\
+  ${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
+  IntFmt $0 "0x%08X" $0
+  
   # create a shortcut named "new shortcut" in the start menu programs directory
   # point the new shortcut at the program uninstaller
   CreateShortcut "$SMPROGRAMS\DLSS Swapper.lnk" "$INSTDIR\DLSS Swapper.exe"
@@ -148,6 +154,7 @@ Section
   WriteRegStr SHCTX "${UNINST_KEY}" "DisplayIcon" "$\"$INSTDIR\DLSS Swapper.exe$\""
   WriteRegStr SHCTX "${UNINST_KEY}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
   WriteRegStr SHCTX "${UNINST_KEY}" "InstallLocation" $INSTDIR
+  WriteRegDWORD SHCTX "${UNINST_KEY}" "EstimatedSize" "$0"
 SectionEnd
 
 

@@ -17,6 +17,7 @@ using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Principal;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -74,7 +75,59 @@ namespace DLSS_Swapper
         {
             _window = new MainWindow();
             _window.Activate();
+
+            // No need to calculate this for portable app.
+#if !PORTABLE
+            var calculateInstallSizeThread = new Thread(CalculateInstallSize);
+            calculateInstallSizeThread.Start();
+#endif
         }
+
+#if !PORTABLE
+        void CalculateInstallSize()
+        {
+            try
+            {
+                long installSize = 0;
+                installSize += CalculateDirectorySize(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DLSS Swapper"));
+
+                using (var dlssSwapperRegistryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\DLSS Swapper", true))
+                {
+                    var installLocation = dlssSwapperRegistryKey?.GetValue("InstallLocation") as String;
+                    if (String.IsNullOrEmpty(installLocation) == false && Directory.Exists(installLocation) == true)
+                    {
+                        installSize += CalculateDirectorySize(installLocation);
+                    }
+
+                    if (installSize > 0)
+                    {
+                        var installSizeKB = (int)(installSize / 1000);
+                        dlssSwapperRegistryKey?.SetValue("EstimatedSize", installSizeKB, Microsoft.Win32.RegistryValueKind.DWord);
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
+        }
+
+        long CalculateDirectorySize(string path)
+        {
+            var directorySize = 0L;
+            var fileCount = 0;
+            var directoryInfo = new DirectoryInfo(path);
+            foreach (var fileInfo in directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories))
+            {
+                directorySize += fileInfo.Length;
+                ++fileCount;
+            }
+
+            //Logger.Debug($"{path} has {fileCount} files for a total size of {directorySize} bytes");
+
+            return directorySize;
+        }
+#endif
 
 
         internal void LoadLocalRecordFromDLSSRecord(DLSSRecord dlssRecord, bool isImportedRecord = false)

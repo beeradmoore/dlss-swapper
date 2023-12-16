@@ -104,26 +104,30 @@
                 </TextBlock>
                 <Button Content="Check for updates" Margin="0,12,0,0" Command="{Binding CheckForUpdatesCommand}" />
 
+                
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Contributors" />
+                    Text="Give Feedback" />
                 <RichTextBlock Margin="0,12,0,0">
                     <Paragraph>
-                        <Hyperlink NavigateUri="https://github.com/beeradmoore">Brad Moore</Hyperlink> (<Hyperlink NavigateUri="https://twitter.com/beeradmoore">@beeradmoore</Hyperlink>)
-                        <LineBreak />
-                        <Hyperlink NavigateUri="https://github.com/tamodolo">tamodolo</Hyperlink>
+                        You can suggest a feature or report a problem or on the DLSS Swapper
+                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub repository</Hyperlink>.
                     </Paragraph>
                 </RichTextBlock>
 
+                
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Report a problem" />
+                    Text="Special Thanks" />
                 <RichTextBlock Margin="0,12,0,0">
                     <Paragraph>
-                        You can report any problems on our
-                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub issues</Hyperlink> page.
+                        DLSS Swapper is only possible thanks to its
+                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/graphs/contributors">contributors</Hyperlink>
+                        and the people who have filed
+                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">feedback</Hyperlink> to help improve the product.
+                        <LineBreak />(also NVIDIA for DLSS 😊)
                     </Paragraph>
                 </RichTextBlock>
 

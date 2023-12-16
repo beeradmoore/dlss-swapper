@@ -31,10 +31,14 @@ echo.
 
 :installer 
 DEL NSIS\installer.exe > NUL 2>&1
+DEL NSIS\FileList.nsh > NUL 2>&1
+
+powershell Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; ./NSIS/create_nsh_file_list.ps1 || goto :error
+
 makensis.exe NSIS\Installer.nsi || goto :error
  
 REM Move the installer to the output folder.
-move NSIS\installer.exe "Output\DLSS Swapper-%app_version%-installer.exe" || goto :error
+move NSIS\installer.exe "Output\DLSS-Swapper-%app_version%-installer.exe" || goto :error
 
 REM Everything is fine, go to the end of the file.
 goto :EOF

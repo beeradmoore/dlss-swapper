@@ -13,3 +13,4 @@ src/Properties/launchSettings.json
 StoredData/
 package/Output/
 .vscode/
+package/NSIS/FileList.nsh

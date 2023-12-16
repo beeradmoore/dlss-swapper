@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.WinUI;
 using CommunityToolkit.WinUI.UI.Controls;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
@@ -115,23 +116,29 @@ namespace DLSS_Swapper.Data.GitHub
                 Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
             };
 
-            var dialog = new EasyContentDialog(rootElement.XamlRoot)
-            {
-                Title = $"Update Available - {gitHubRelease.Name}",
-                PrimaryButtonText = "Update",
-                CloseButtonText = "Cancel",
-                DefaultButton = ContentDialogButton.Primary,
-                Content = new ScrollViewer()
-                {
-                    Content = contentUpdate,
-                },
-            };
-            var result = await dialog.ShowAsync();
 
-            if (result == ContentDialogResult.Primary)
+            var dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
+            await dispatcherQueue.EnqueueAsync(async () =>
             {
-                await Launcher.LaunchUriAsync(new Uri(gitHubRelease.HtmlUrl));
-            }
+                var dialog = new EasyContentDialog(rootElement.XamlRoot)
+                {
+                    Title = $"Update Available - {gitHubRelease.Name}",
+                    PrimaryButtonText = "Update",
+                    CloseButtonText = "Cancel",
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = new ScrollViewer()
+                    {
+                        Content = contentUpdate,
+                    },
+                };
+                var result = await dialog.ShowAsync();
+
+                if (result == ContentDialogResult.Primary)
+                {
+                    await Launcher.LaunchUriAsync(new Uri(gitHubRelease.HtmlUrl));
+                }
+            });
+
         }
         internal async Task DisplayWhatsNewDialog(GitHubRelease gitHubRelease, Control rootElement)
         {

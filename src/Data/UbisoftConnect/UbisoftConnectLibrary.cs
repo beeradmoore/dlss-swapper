@@ -64,35 +64,38 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             var installedTitles = new Dictionary<int, UbisoftGameRegistryRecord>();
             try
             {
-                using (var ubisoftConnectInstallsKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Ubisoft\Launcher\Installs"))
+                using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
                 {
-                    // if ubisoftConnectRegistryKey is null then Ubisoft is not installed .
-                    if (ubisoftConnectInstallsKey == null)
+                    using (var ubisoftConnectInstallsKey = hklm.OpenSubKey(@"SOFTWARE\Ubisoft\Launcher\Installs"))
                     {
-                        throw new Exception("Could not detect ubisoftConnectInstallsKey");
-                    }
-
-                    var subKeyNames = ubisoftConnectInstallsKey.GetSubKeyNames();
-                    foreach (var subKeyName in subKeyNames)
-                    {
-                        // Only use the subKeyName that is a number (which is the installId.
-                        if (Int32.TryParse(subKeyName, out var installId))
+                        // if ubisoftConnectRegistryKey is null then Ubisoft is not installed .
+                        if (ubisoftConnectInstallsKey == null)
                         {
-                            using (var ubisoftConnectInstallDirKey = ubisoftConnectInstallsKey.OpenSubKey(subKeyName))
-                            {
-                                if (ubisoftConnectInstallDirKey == null)
-                                {
-                                    break;
-                                }
+                            throw new Exception("Could not detect ubisoftConnectInstallsKey");
+                        }
 
-                                var gameInstallDir = ubisoftConnectInstallDirKey.GetValue("InstallDir") as String;
-                                if (String.IsNullOrEmpty(gameInstallDir) == false)
+                        var subKeyNames = ubisoftConnectInstallsKey.GetSubKeyNames();
+                        foreach (var subKeyName in subKeyNames)
+                        {
+                            // Only use the subKeyName that is a number (which is the installId.
+                            if (Int32.TryParse(subKeyName, out var installId))
+                            {
+                                using (var ubisoftConnectInstallDirKey = ubisoftConnectInstallsKey.OpenSubKey(subKeyName))
                                 {
-                                    installedTitles[installId] = new UbisoftGameRegistryRecord()
+                                    if (ubisoftConnectInstallDirKey == null)
                                     {
-                                        InstallId = installId,
-                                        InstallPath = gameInstallDir,
-                                    };
+                                        break;
+                                    }
+
+                                    var gameInstallDir = ubisoftConnectInstallDirKey.GetValue("InstallDir") as String;
+                                    if (String.IsNullOrEmpty(gameInstallDir) == false)
+                                    {
+                                        installedTitles[installId] = new UbisoftGameRegistryRecord()
+                                        {
+                                            InstallId = installId,
+                                            InstallPath = gameInstallDir,
+                                        };
+                                    }
                                 }
                             }
                         }
@@ -236,21 +239,23 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
             try
             {
-                // Only focused on x64 machines.
-                using (var ubisoftConnectRegistryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Ubisoft\Launcher"))
+                using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
                 {
-                    if (ubisoftConnectRegistryKey == null)
+                    using (var ubisoftConnectRegistryKey = hklm.OpenSubKey(@"SOFTWARE\Ubisoft\Launcher"))
                     {
-                        return String.Empty;
-                    }
-                    // if ubisoftConnectRegistryKey is null then steam is not installed.
-                    var installPath = ubisoftConnectRegistryKey?.GetValue("InstallDir") as String;
-                    if (String.IsNullOrEmpty(installPath) == false)
-                    {
-                        _installPath = installPath;
-                    }
+                        if (ubisoftConnectRegistryKey == null)
+                        {
+                            return String.Empty;
+                        }
+                        // if ubisoftConnectRegistryKey is null then steam is not installed.
+                        var installPath = ubisoftConnectRegistryKey?.GetValue("InstallDir") as String;
+                        if (String.IsNullOrEmpty(installPath) == false)
+                        {
+                            _installPath = installPath;
+                        }
 
-                    return _installPath ?? String.Empty;
+                        return _installPath ?? String.Empty;
+                    }
                 }
             }
             catch (Exception err)

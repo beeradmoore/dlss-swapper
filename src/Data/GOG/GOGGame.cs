@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DLSS_Swapper.Data.GOGGalaxy
+namespace DLSS_Swapper.Data.GOG
 {
     internal class GOGGame : Game
     {
-        List<string> _potentialLocalHeaders;
-        string _fallbackHeaderUrl;
+        public int Id { get; set; } = -1;
+
+        public List<string> PotentialLocalHeaders { get; } = new List<string>();
+        public string FallbackHeaderUrl { get; set; } = String.Empty;
+
         string _lastHeaderImage = String.Empty;
         
         public override string HeaderImage
@@ -23,7 +26,7 @@ namespace DLSS_Swapper.Data.GOGGalaxy
                     return _lastHeaderImage;
                 }
 
-                foreach (var potentialLocalHeader in _potentialLocalHeaders)
+                foreach (var potentialLocalHeader in PotentialLocalHeaders)
                 {
                     if (File.Exists(potentialLocalHeader))
                     {
@@ -32,16 +35,14 @@ namespace DLSS_Swapper.Data.GOGGalaxy
                     }
                 }
 
-                _lastHeaderImage = _fallbackHeaderUrl;
+                _lastHeaderImage = FallbackHeaderUrl;
                 return _lastHeaderImage;
             }
         }
 
 
-        public GOGGame(List<string> potentialLocalHeaders, string fallbackHeaderUrl)
+        public GOGGame()
         {
-            _potentialLocalHeaders = potentialLocalHeaders;
-            _fallbackHeaderUrl = fallbackHeaderUrl;
 
         }
     }

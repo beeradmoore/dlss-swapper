@@ -1,4 +1,5 @@
 ﻿using DLSS_Swapper.Interfaces;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -119,17 +120,19 @@ namespace DLSS_Swapper.Data.Steam
 
             try
             {
-                // Only focused on x64 machines.
-                using (var steamRegistryKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Valve\Steam"))
+                using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
                 {
-                    // if steamRegistryKey is null then steam is not installed.
-                    var installPath = steamRegistryKey?.GetValue("InstallPath") as String;
-                    if (String.IsNullOrEmpty(installPath))
+                    using (var steamRegistryKey = hklm.OpenSubKey(@"SOFTWARE\Valve\Steam"))
                     {
-                        _installPath = installPath;
-                    }
+                        // if steamRegistryKey is null then steam is not installed.
+                        var installPath = steamRegistryKey?.GetValue("InstallPath") as String;
+                        if (String.IsNullOrEmpty(installPath))
+                        {
+                            _installPath = installPath;
+                        }
 
-                    return installPath ?? String.Empty;
+                        return installPath ?? String.Empty;
+                    }
                 }
             }
             catch (Exception err)

@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.Win32;
 using MvvmHelpers;
 using System;
 using System.Collections.Generic;
@@ -91,7 +92,7 @@ namespace DLSS_Swapper
                 long installSize = 0;
                 installSize += CalculateDirectorySize(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DLSS Swapper"));
 
-                using (var dlssSwapperRegistryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\DLSS Swapper", true))
+                using (var dlssSwapperRegistryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\DLSS Swapper", true))
                 {
                     var installLocation = dlssSwapperRegistryKey?.GetValue("InstallLocation") as String;
                     if (String.IsNullOrEmpty(installLocation) == false && Directory.Exists(installLocation) == true)

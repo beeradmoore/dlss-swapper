@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DLSS_Swapper.Data.GOGGalaxy
+namespace DLSS_Swapper.Data.GOG
 {
     internal class GOGGame : Game
     {

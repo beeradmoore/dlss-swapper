@@ -1,6 +1,6 @@
 ﻿using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.EpicGamesStore;
-using DLSS_Swapper.Data.GOGGalaxy;
+using DLSS_Swapper.Data.GOG;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;

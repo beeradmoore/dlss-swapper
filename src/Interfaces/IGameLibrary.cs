@@ -1,6 +1,6 @@
 ﻿using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.EpicGamesStore;
-using DLSS_Swapper.Data.GOGGalaxy;
+using DLSS_Swapper.Data.GOG;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;
@@ -18,7 +18,7 @@ namespace DLSS_Swapper.Interfaces
     public enum GameLibrary : uint
     {
         Steam = 1,
-        GoG = 2,
+        GOG = 2,
         EpicGamesStore = 4,
         UbisoftConnect = 8,
         XboxApp = 16,
@@ -40,7 +40,7 @@ namespace DLSS_Swapper.Interfaces
             return gameLibrary switch
             {
                 GameLibrary.Steam => new SteamLibrary(),
-                GameLibrary.GoG => new GOGGalaxyLibrary(),
+                GameLibrary.GOG => new GOGLibrary(),
                 GameLibrary.EpicGamesStore => new EpicGamesStoreLibrary(),
                 GameLibrary.UbisoftConnect => new UbisoftConnectLibrary(),
                 GameLibrary.XboxApp => new XboxLibrary(),

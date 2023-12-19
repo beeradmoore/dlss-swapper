@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using SQLite;
 
-namespace DLSS_Swapper.Data.GOGGalaxy
+namespace DLSS_Swapper.Data.GOG
 {
     internal class InstalledBaseProduct
     {

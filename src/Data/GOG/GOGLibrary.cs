@@ -12,10 +12,8 @@ using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
 using Serilog;
 using SQLite;
-using Windows.Gaming.XboxLive.Storage;
-using static DLSS_Swapper.Data.GOGGalaxy.LimitedDetail;
 
-namespace DLSS_Swapper.Data.GOGGalaxy
+namespace DLSS_Swapper.Data.GOG
 {
     internal class GOGLibrary : IGameLibrary
     {

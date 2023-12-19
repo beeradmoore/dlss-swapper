@@ -193,6 +193,33 @@ namespace DLSS_Swapper.Data.GOGGalaxy
         }
     }
 
+    internal class ResourceImages
+    {
+        [JsonPropertyName("images\\background")]
+        public string Background { get; set; }
+
+        [JsonPropertyName("images\\logo")]
+        public string Logo { get; set; }
+
+        [JsonPropertyName("images\\logo2x")]
+        public string Logo2x { get; set; }
+
+        [JsonPropertyName("images\\icon")]
+        public string Icon { get; set; }
+
+        [JsonPropertyName("images\\sidebarIcon")]
+        public string SidebarIcon { get; set; }
+
+        [JsonPropertyName("images\\sidebarIcon2x")]
+        public string SidebarIcon2x { get; set; }
+
+        [JsonPropertyName("images\\menuNotificationAv")]
+        public string MenuNotificationAv { get; set; }
+
+        [JsonPropertyName("images\\menuNotificationAv2")]
+        public string MenuNotificationAv2 { get; set; }
+    }
+
 
 
     //originalImages

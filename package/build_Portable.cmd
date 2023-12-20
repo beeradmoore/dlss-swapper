@@ -14,7 +14,7 @@ echo.
 
 dotnet publish "..\src\DLSS Swapper.csproj" ^
     -c Release ^
-    -r win10-x64 ^
+    -r win-x64 ^
     --self-contained true ^
     -p:Platform=x64 ^
     -p:PublishReadyToRun=true ^

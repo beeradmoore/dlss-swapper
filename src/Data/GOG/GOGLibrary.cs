@@ -224,7 +224,7 @@ namespace DLSS_Swapper.Data.GOG
 
                             using (var resourcesStream = resourcesEntry.Open())
                             {
-                                var limitedDetailImages = JsonSerializer.Deserialize<ResourceImages>(resourcesStream);
+                                var limitedDetailImages = JsonSerializer.Deserialize(resourcesStream, SourceGenerationContext.Default.ResourceImages);
                                 if (limitedDetailImages == null)
                                 {
                                     Logger.Error($"Unable to deserialize resources.json for {gogGame.Id}.");

@@ -26,7 +26,7 @@ namespace DLSS_Swapper.Data.GitHub
         {
             try
             {
-                return await App.CurrentApp.HttpClient.GetFromJsonAsync<GitHubRelease>("https://api.github.com/repos/beeradmoore/dlss-swapper/releases/latest").ConfigureAwait(false);
+                return await App.CurrentApp.HttpClient.GetFromJsonAsync("https://api.github.com/repos/beeradmoore/dlss-swapper/releases/latest", SourceGenerationContext.Default.GitHubRelease).ConfigureAwait(false);
             }
             catch (Exception err)
             {
@@ -40,7 +40,7 @@ namespace DLSS_Swapper.Data.GitHub
         {
             try
             {
-                return await App.CurrentApp.HttpClient.GetFromJsonAsync<GitHubRelease>($"https://api.github.com/repos/beeradmoore/dlss-swapper/releases/tags/{tag}").ConfigureAwait(false);
+                return await App.CurrentApp.HttpClient.GetFromJsonAsync($"https://api.github.com/repos/beeradmoore/dlss-swapper/releases/tags/{tag}", SourceGenerationContext.Default.GitHubRelease).ConfigureAwait(false);
             }
             catch (Exception err)
             {

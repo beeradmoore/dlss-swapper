@@ -119,6 +119,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             var assetsPath = Path.Combine(GetInstallPath(), "cache", "assets");
 
 
+            //var yamlDeserializer = new StaticDeserializerBuilder(new Helpers.StaticContext())
             var yamlDeserializer = new DeserializerBuilder()
                 .IgnoreUnmatchedProperties()
                 .WithNamingConvention(UnderscoredNamingConvention.Instance)

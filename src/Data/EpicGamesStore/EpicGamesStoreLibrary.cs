@@ -77,7 +77,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         await fileStream.CopyToAsync(memoryStream).ConfigureAwait(false);
                         var catalogCacheBase64 = Encoding.UTF8.GetString(memoryStream.ToArray());
                         var catalogCacheJson = Convert.FromBase64String(catalogCacheBase64);
-                        cacheItemsArray = JsonSerializer.Deserialize<CacheItem[]>(catalogCacheJson);                       
+                        cacheItemsArray = JsonSerializer.Deserialize(catalogCacheJson, SourceGenerationContext.Default.CacheItemArray);                       
                     }
                 }
 
@@ -98,7 +98,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                 try
                 {
                     var manifestJsonData = await File.ReadAllTextAsync(manifestFile).ConfigureAwait(false);
-                    var manifest = JsonSerializer.Deserialize<ManifestFile>(manifestJsonData);
+                    var manifest = JsonSerializer.Deserialize(manifestJsonData, SourceGenerationContext.Default.ManifestFile);
 
                     // Check that it is a game.
                     if (manifest?.AppCategories.Contains("games") != true)

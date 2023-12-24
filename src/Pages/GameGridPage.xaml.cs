@@ -133,7 +133,7 @@ namespace DLSS_Swapper.Pages
             // Auto game library loading.
             // Simply adding IGameLibrary interface means we will load the games.
             var loadGameTasks = new List<Task>(); 
-            foreach (GameLibrary gameLibraryEnum in Enum.GetValues(typeof(GameLibrary)))
+            foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
             {
                 var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
                 if (gameLibrary.IsEnabled())

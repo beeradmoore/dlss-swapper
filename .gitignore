@@ -6,6 +6,7 @@ obj/
 *.user
 *.cache
 *.pfx
+*.obj
 AppPackages/
 BundleArtifacts/
 UpgradeLog.htm

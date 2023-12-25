@@ -24,7 +24,7 @@ Function .onInit
 FunctionEnd
 
 ; On uninstall, confirm you want to remove downloaded/imported DLSS files.
-Function un.onGUIInit
+Function un.onInit
   MessageBox MB_YESNO "Are you sure you want to uninstall $(^Name)?$\r$\n$\r$\nThis will also remove downloaded and imported files. Changes to your games will remain as they are." /SD IDYES IDYES NoAbort
   Abort
   NoAbort:

@@ -32,7 +32,7 @@ namespace DLSS_Swapper.UserControls
 
 
             var gameLibraryEnumList = new List<GameLibrary>();
-            foreach (GameLibrary gameLibraryEnum in Enum.GetValues(typeof(GameLibrary)))
+            foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
             {
                 gameLibraryEnumList.Add(gameLibraryEnum);
             }

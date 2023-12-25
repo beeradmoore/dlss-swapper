@@ -106,7 +106,7 @@ namespace DLSS_Swapper
 
             public WinTrustFileInfo(string filePath)
             {
-                cbStruct = (UInt32)Marshal.SizeOf(typeof(WinTrustFileInfo));
+                cbStruct = (UInt32)Marshal.SizeOf<WinTrustFileInfo>();
                 pcwszFilePath = Marshal.StringToCoTaskMemAuto(filePath);
                 hFile = IntPtr.Zero;
                 pgKnownSubject = IntPtr.Zero;
@@ -202,7 +202,7 @@ namespace DLSS_Swapper
             // constructor for silent WinTrustDataChoice.File check
             public WinTrustData(WinTrustFileInfo fileInfo)
             {
-                cbStruct = (UInt32)Marshal.SizeOf(typeof(WinTrustData));
+                cbStruct = (UInt32)Marshal.SizeOf<WinTrustData>();
                 pPolicyCallbackData = IntPtr.Zero;
                 pSIPClientData = IntPtr.Zero;
                 dwUIChoice = WinTrustDataUIChoice.None;
@@ -224,7 +224,7 @@ namespace DLSS_Swapper
                 }
 
                 WinTrustFileInfo wtfiData = fileInfo;
-                pFile = Marshal.AllocCoTaskMem(Marshal.SizeOf(typeof(WinTrustFileInfo)));
+                pFile = Marshal.AllocCoTaskMem(Marshal.SizeOf<WinTrustFileInfo>());
                 Marshal.StructureToPtr(wtfiData, pFile, false);
             }
 
@@ -281,7 +281,7 @@ namespace DLSS_Swapper
                 ///memset(&WinTrustData, 0, sizeof(WinTrustData));
                 WinTrustData = new WinTrustData(FileData)
                 {
-                    cbStruct = (UInt32)Marshal.SizeOf(typeof(WinTrustData)),
+                    cbStruct = (UInt32)Marshal.SizeOf<WinTrustData>(),
 
                     // Use default code signing EKU.
                     pPolicyCallbackData = IntPtr.Zero,

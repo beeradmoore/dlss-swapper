@@ -23,7 +23,8 @@ namespace DLSS_Swapper
 
         static JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions()
         {
-            WriteIndented = true
+            WriteIndented = true,
+            TypeInfoResolver = SourceGenerationContext.Default,
         };
 
 #if PORTABLE
@@ -123,7 +124,7 @@ namespace DLSS_Swapper
             {
                 using (var stream = File.Open(settingsFile, FileMode.Create))
                 {
-                    await JsonSerializer.SerializeAsync(stream, settings, jsonSerializerOptions);
+                    await JsonSerializer.SerializeAsync(stream, settings, SourceGenerationContext.Default.Settings);
                 }
             }
             catch (Exception err)
@@ -150,7 +151,7 @@ namespace DLSS_Swapper
             {
                 using (var stream = File.Open(settingsFile, FileMode.Open))
                 {
-                    return await JsonSerializer.DeserializeAsync<Settings>(stream);
+                    return await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.Settings);
                 }
             }
             catch (Exception err)
@@ -172,7 +173,7 @@ namespace DLSS_Swapper
             {
                 using (var stream = File.Open(dlssRecordsFile, FileMode.Create))
                 {
-                    await JsonSerializer.SerializeAsync(stream, items, jsonSerializerOptions);
+                    await JsonSerializer.SerializeAsync(stream, items, SourceGenerationContext.Default.DLSSRecords);
                 }
                 return true;
             }
@@ -198,7 +199,7 @@ namespace DLSS_Swapper
                 {
                     using (var stream = File.Open(dlssRecordsFile, FileMode.Open))
                     {
-                        var dlssRecords = await JsonSerializer.DeserializeAsync<DLSSRecords>(stream);
+                        var dlssRecords = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.DLSSRecords);
                         if (dlssRecords != null)
                         {
                             return dlssRecords;
@@ -220,7 +221,7 @@ namespace DLSS_Swapper
                 {
                     using (var stream = File.Open(dlssRecordsFile, FileMode.Open))
                     {
-                        var dlssRecords = await JsonSerializer.DeserializeAsync<DLSSRecords>(stream);
+                        var dlssRecords = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.DLSSRecords);
                         if (dlssRecords != null)
                         {
                             return dlssRecords;
@@ -257,7 +258,7 @@ namespace DLSS_Swapper
                 {
                     using (var stream = File.Open(importedDLSSRecordsFile, FileMode.Open))
                     {
-                        var importedDLSSRecords = await JsonSerializer.DeserializeAsync<List<DLSSRecord>>(stream);
+                        var importedDLSSRecords = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.ListDLSSRecord);
                         if (importedDLSSRecords != null)
                         {
                             return importedDLSSRecords;
@@ -286,7 +287,7 @@ namespace DLSS_Swapper
             {
                 using (var stream = File.Open(importedDLSSRecordsFile, FileMode.Create))
                 {
-                    await JsonSerializer.SerializeAsync(stream, App.CurrentApp.ImportedDLSSRecords, jsonSerializerOptions);
+                    await JsonSerializer.SerializeAsync(stream, App.CurrentApp.ImportedDLSSRecords, SourceGenerationContext.Default.ListDLSSRecord);
                 }
                 return true;
             }

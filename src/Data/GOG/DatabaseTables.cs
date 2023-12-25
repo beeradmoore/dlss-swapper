@@ -76,7 +76,7 @@ namespace DLSS_Swapper.Data.GOG
                     // Make sure failed deserialize doens't crash the app.
                     try
                     {
-                        _imagesData = JsonSerializer.Deserialize<LimitedDetailImages>(Images);
+                        _imagesData = JsonSerializer.Deserialize(Images, SourceGenerationContext.Default.LimitedDetailImages);
                     }
                     catch (Exception)
                     {
@@ -189,34 +189,34 @@ namespace DLSS_Swapper.Data.GOG
 
         internal GamePieceOriginalImages GetValueAsOriginalImages()
         {
-            return JsonSerializer.Deserialize<GamePieceOriginalImages>(Value);
+            return JsonSerializer.Deserialize(Value, SourceGenerationContext.Default.GamePieceOriginalImages);
         }
     }
 
     internal class ResourceImages
     {
-        [JsonPropertyName("images\\background")]
+        [JsonPropertyName("images\\\\background")]
         public string Background { get; set; }
 
-        [JsonPropertyName("images\\logo")]
+        [JsonPropertyName("images\\\\logo")]
         public string Logo { get; set; }
 
-        [JsonPropertyName("images\\logo2x")]
+        [JsonPropertyName("images\\\\logo2x")]
         public string Logo2x { get; set; }
 
-        [JsonPropertyName("images\\icon")]
+        [JsonPropertyName("images\\\\icon")]
         public string Icon { get; set; }
 
-        [JsonPropertyName("images\\sidebarIcon")]
+        [JsonPropertyName("images\\\\sidebarIcon")]
         public string SidebarIcon { get; set; }
 
-        [JsonPropertyName("images\\sidebarIcon2x")]
+        [JsonPropertyName("images\\\\sidebarIcon2x")]
         public string SidebarIcon2x { get; set; }
 
-        [JsonPropertyName("images\\menuNotificationAv")]
+        [JsonPropertyName("images\\\\menuNotificationAv")]
         public string MenuNotificationAv { get; set; }
 
-        [JsonPropertyName("images\\menuNotificationAv2")]
+        [JsonPropertyName("images\\\\menuNotificationAv2")]
         public string MenuNotificationAv2 { get; set; }
     }
 

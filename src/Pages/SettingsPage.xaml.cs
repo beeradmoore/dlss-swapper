@@ -52,7 +52,7 @@ namespace DLSS_Swapper.Pages
             }
         }
 
-        public IEnumerable<LoggingLevel> LoggingLevels = Enum.GetValues(typeof(LoggingLevel)).Cast<LoggingLevel>();
+        public IEnumerable<LoggingLevel> LoggingLevels = Enum.GetValues<LoggingLevel>();
 
         public string CurrentLogPath => Logger.GetCurrentLogPath();
 

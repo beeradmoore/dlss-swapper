@@ -415,7 +415,7 @@ DLSS Swapper will close now.",
                     }
                     memoryStream.Position = 0;
 
-                    var items = await JsonSerializer.DeserializeAsync<DLSSRecords>(memoryStream);
+                    var items = await JsonSerializer.DeserializeAsync(memoryStream, SourceGenerationContext.Default.DLSSRecords);
 
                     UpdateDLSSRecordsList(items);
                     //await UpdateDLSSRecordsListAsync(items);

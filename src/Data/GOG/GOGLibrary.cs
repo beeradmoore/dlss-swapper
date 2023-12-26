@@ -81,6 +81,13 @@ namespace DLSS_Swapper.Data.GOG
                             var gameName = gameKey.GetValue("gameName") as String;
                             var gamePath = gameKey.GetValue("path") as String;
 
+                            // If the entry is DLC we don't need to show it as an individual item.
+                            var dependsOn = gameKey.GetValue("dependsOn") as String;
+                            if (String.IsNullOrEmpty(dependsOn) == false)
+                            {
+                                continue;
+                            }
+
                             if (Int32.TryParse(gameId, out int gameIdInt) == true && String.IsNullOrEmpty(gameName) == false && String.IsNullOrEmpty(gamePath) == false)
                             {
                                 var game = new GOGGame()

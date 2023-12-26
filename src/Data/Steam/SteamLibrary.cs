@@ -95,6 +95,12 @@ namespace DLSS_Swapper.Data.Steam
                         var appManifests = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
                         foreach (var appManifest in appManifests)
                         {
+                            // Don't bother adding Steamworks Common Redistributables.
+                            if (appManifest.EndsWith("appmanifest_228980.acf") == true)
+                            {
+                                continue;
+                            }
+
                             var game = GetGameFromAppManifest(appManifest);
                             if (game != null)
                             {

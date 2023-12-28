@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="DLSS_Swapper.UserControls.ManuallyAddGameControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DLSS_Swapper.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid ColumnSpacing="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Width="200" Height="300" CornerRadius="8" BorderThickness="1" ColumnSpacing="0" RowSpacing="0" Margin="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+
+            <TextBlock Text="Add Cover&#10;(optional)" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{ThemeResource ButtonForegroundColor}" />
+
+            <!-- Weird, but allows image to strecth centered rather than left align -->
+            <Border BorderThickness="0" Width="200" Height="300">
+                <Border.Background>
+                    <ImageBrush ImageSource="{Binding HeaderImage}" Stretch="UniformToFill"/>
+                </Border.Background>
+            </Border>
+
+            <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding AddCoverImageCommand}" />
+        </Grid>
+
+        <!--
+        <Grid Grid.Column="1" RowSpacing="8" ColumnSpacing="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Game path:" FontWeight="Bold" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="0" IsReadOnly="True" Text="{Binding GamePath}" VerticalAlignment="Top"/>
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Game name:" FontWeight="Bold" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding GameName}" VerticalAlignment="Top"/>
+
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="DLSS detected: " FontWeight="Bold" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding DLSSDetectedText}" VerticalAlignment="Center" />
+
+        </Grid>
+        -->
+        
+        <StackPanel Orientation="Vertical" Grid.Column="1">
+            <TextBlock Text="Game name" FontWeight="Bold" />
+            <TextBox Text="{Binding GameName}" />
+            <TextBlock Text="Game path" FontWeight="Bold" Padding="0,20,0,0" />
+            <TextBox IsReadOnly="True" Text="{Binding GamePath}" />
+            <TextBlock Text="DLSS detected" FontWeight="Bold" Padding="0,20,0,0" />
+            <TextBlock Text="{Binding DLSSDetectedText}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -26,17 +26,22 @@
             <TextBlock Text="Games" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <AppBarButton Label="Refresh" Click="RefreshButton_Click">
-                <AppBarButton.Content>
-                    <FontIcon Glyph="&#xE72C;" />
-                </AppBarButton.Content>
-            </AppBarButton>
-            <AppBarButton Icon="Filter" Label="Filter" Click="FilterButton_Click">
-                <AppBarButton.Content>
-                    <FontIcon Glyph="&#xE71C;" />
-                </AppBarButton.Content>
-            </AppBarButton>
-        </StackPanel>
+                <AppBarButton Label="Add Game" Click="AddGameButton_Click">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE710;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+                <AppBarButton Label="Refresh" Click="RefreshButton_Click">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE72C;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+                <AppBarButton Icon="Filter" Label="Filter" Click="FilterButton_Click">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE71C;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+            </StackPanel>
         </Grid>
 
         <GridView Grid.Row="1" x:Name="MainGridView" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20"  >

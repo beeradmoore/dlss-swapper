@@ -38,8 +38,6 @@ namespace DLSS_Swapper.Pages
 
         public string Version => App.CurrentApp.GetVersionString();
 
-        public ObservableCollection<string> CustomDirectories { get; } = new ObservableCollection<string>();
-
         private AsyncCommand _checkForUpdateCommand;
         public AsyncCommand CheckForUpdatesCommand => _checkForUpdateCommand ??= new AsyncCommand(CheckForUpdatesAsync, _=> !IsCheckingForUpdates);
 
@@ -56,9 +54,10 @@ namespace DLSS_Swapper.Pages
                 }
             }
         }
-        
+        /*
         private AsyncCommand _addCustomDirectoryCommand;
         public AsyncCommand AddCustomDirectoryCommand => _addCustomDirectoryCommand ??= new AsyncCommand(AddCustomDirectoryAsync);
+        */
 
         public IEnumerable<LoggingLevel> LoggingLevels = Enum.GetValues<LoggingLevel>();
 
@@ -67,7 +66,6 @@ namespace DLSS_Swapper.Pages
         public SettingsPage()
         {
             this.InitializeComponent();
-
 
             // Initilize defaults.
             LightThemeRadioButton.IsChecked = Settings.Instance.AppTheme == ElementTheme.Light;
@@ -79,7 +77,6 @@ namespace DLSS_Swapper.Pages
             LoggingComboBox.SelectedItem = Settings.Instance.LoggingLevel;
 
             DataContext = this;
-            Settings.Instance.Directories.ForEach(AddToCustomDirectories);
         }
 
         void ThemeRadioButton_Checked(object sender, RoutedEventArgs e)
@@ -205,6 +202,7 @@ namespace DLSS_Swapper.Pages
             }
         }
 
+        /*
         async Task AddCustomDirectoryAsync()
         {
             var folderPicker = new FolderPicker { SuggestedStartLocation = PickerLocationId.ComputerFolder };
@@ -285,5 +283,6 @@ namespace DLSS_Swapper.Pages
 
             CustomDirectoryView.UpdateLayout();
         }
+        */
     }
 }

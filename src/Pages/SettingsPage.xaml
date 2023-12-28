@@ -12,11 +12,14 @@
     NavigationCacheMode="Required">
     <Page.Resources>
         <converters:InverseBoolToVisibleConverter x:Key="InverseBoolToVisibleConverter" />
+        
+        <!--
         <DataTemplate x:Name="CustomDirectoryTemplate">
             <Expander Header="{Binding}" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" IsExpanded="False">
                 <Button Content="Remove" Click="RemoveDirectory_OnClick" Margin="0" CommandParameter="{Binding}" />
             </Expander>
         </DataTemplate>
+        -->
     </Page.Resources>
     <Grid>
         <ScrollViewer Grid.Row="0">
@@ -46,6 +49,7 @@
                     <usercontrols:GameLibrarySelectorControl SavesWhenToggled="true" />
                 </StackPanel>
                 
+                <!--
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
@@ -60,6 +64,7 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
+                -->
                 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"

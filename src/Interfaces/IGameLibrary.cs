@@ -23,7 +23,7 @@ namespace DLSS_Swapper.Interfaces
         EpicGamesStore = 4,
         UbisoftConnect = 8,
         XboxApp = 16,
-        CustomDirectories = 32
+        ManuallyAdded = 32
     };
 
     public interface IGameLibrary
@@ -45,7 +45,7 @@ namespace DLSS_Swapper.Interfaces
                 GameLibrary.EpicGamesStore => new EpicGamesStoreLibrary(),
                 GameLibrary.UbisoftConnect => new UbisoftConnectLibrary(),
                 GameLibrary.XboxApp => new XboxLibrary(),
-                GameLibrary.CustomDirectories => new CustomLibrary(),
+                GameLibrary.ManuallyAdded => new ManuallyAddedLibrary(),
                 _ => throw new Exception($"Could not load game library {gameLibrary}"),
             };
         }

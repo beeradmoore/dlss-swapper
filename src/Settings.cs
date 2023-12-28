@@ -223,7 +223,28 @@ namespace DLSS_Swapper
                 }
             }
         }
+
+
+        bool _hasShownManuallyAddingGamesNotice = false;
+        public bool HasShownManuallyAddingGamesNotice
+        {
+            get { return _hasShownManuallyAddingGamesNotice; }
+            set
+            {
+                if (_hasShownManuallyAddingGamesNotice != value)
+                {
+                    _hasShownManuallyAddingGamesNotice = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
         
+
+        /*
         public List<string> Directories { get; set; } = new List<string>();
 
         public void AddDirectory(string directory)
@@ -250,6 +271,10 @@ namespace DLSS_Swapper
                 SaveJson();
             }
         }
+        */
+
+
+
 
         void SaveJson()
         {

@@ -6,10 +6,10 @@ using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Data.CustomDirectory;
 
-public class CustomLibrary : IGameLibrary
+public class ManuallyAddedLibrary : IGameLibrary
 {
-    public GameLibrary GameLibrary => GameLibrary.CustomDirectories;
-    public string Name => "Custom Directories";
+    public GameLibrary GameLibrary => GameLibrary.ManuallyAdded;
+    public string Name => "Manually Added";
 
     public List<Game> LoadedGames { get; } = new List<Game>();
 
@@ -18,6 +18,8 @@ public class CustomLibrary : IGameLibrary
     public async Task<List<Game>> ListGamesAsync()
     {
         var games = new List<Game>();
+
+        /*
         var directories = Settings.Instance.Directories;
 
         var tasks = directories.Select(directory => GetGamesFromDirectoryAsync(directory, games));
@@ -27,10 +29,12 @@ public class CustomLibrary : IGameLibrary
         games.Sort();
         LoadedGames.AddRange(games);
         LoadedDLSSGames.AddRange(games.Where(g => g.HasDLSS));
+        */
 
         return games;
     }
 
+    /*
     private static async Task GetGamesFromDirectoryAsync(string directory, ICollection<Game> games)
     {
         if (!Directory.Exists(directory))
@@ -42,14 +46,16 @@ public class CustomLibrary : IGameLibrary
 
         foreach (var dir in Directory.GetDirectories(directory))
         {
-            tasks.Add(Task.Run(() => games.Add(new CustomGame(Path.GetFileName(dir), dir))));
+            tasks.Add(Task.Run(() => games.Add(new ManuallyAddedGame(Path.GetFileName(dir), dir))));
         }
 
         await Task.WhenAll(tasks);
     }
+    */
 
     public bool IsInstalled()
     {
-        return Settings.Instance.Directories.Count > 0;
+        return true;
+        //        return Settings.Instance.Directories.Count > 0;
     }
 }

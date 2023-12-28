@@ -98,6 +98,7 @@
     <None Remove="Assets\Wide310x150Logo.scale-400.png" />
     <None Remove="DLSS Swapper_TemporaryKey.pfx" />
     <None Remove="global.json" />
+    <None Remove="UserControls\ManuallyAddGameControl.xaml" />
   </ItemGroup>
 
 
@@ -284,6 +285,9 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Page Update="UserControls\ManuallyAddGameControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
     </ItemGroup>
     
   <ItemGroup>

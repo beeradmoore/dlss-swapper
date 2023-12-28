@@ -1,6 +1,8 @@
-﻿using DLSS_Swapper.Data;
+﻿using CommunityToolkit.WinUI.UI.Controls;
+using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.EpicGamesStore;
 using DLSS_Swapper.Data.GOG;
+using DLSS_Swapper.Data.GitHub;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;
@@ -28,6 +30,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Pickers;
+using Windows.System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -360,6 +364,129 @@ namespace DLSS_Swapper.Pages
                 LoadingStackPanel.Visibility = Visibility.Collapsed;
                 _loadingGamesAndDlls = false;
             });
+        }
+
+        async void AddGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Settings.Instance.HasShownManuallyAddingGamesNotice == false)
+            {
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    Title = "Note for manually adding games",
+                    PrimaryButtonText = "Add games",
+                    SecondaryButtonText = "Report issue",
+                    CloseButtonText = "Cancel",
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = new MarkdownTextBlock()
+                    {
+                        Text = @"DLSS Swapper should find games from your installed game libraries automatically. If your game is not listed there may be a few settings preventing it. Please check:
+
+- Games list filter is not set to ""Hide non-DLSS games""
+- Specific game library is enabled in settings
+
+If you have checked these and your game is still not showing up there may be a bug. We would appreciate it if you could report the issue on our GitHub repository so we can make a fix and have your games better detected in the future.",
+                        Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
+                    },
+                };
+                var result = await dialog.ShowAsync();
+
+                if (result == ContentDialogResult.None)
+                {
+                    return;
+                }
+                
+
+                if (result == ContentDialogResult.Primary)
+                {
+                    // Only dismiss the notice for good once the user has proceeded to add games.
+                    Settings.Instance.HasShownManuallyAddingGamesNotice = true;
+                    await AddGameManually();
+                }
+                else if (result == ContentDialogResult.Secondary)
+                {
+                    await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/issues"));
+                }
+            }
+            else
+            {
+                await AddGameManually();
+            }
+
+        }
+
+        async Task AddGameManually()
+        {
+            var folderPicker = new FolderPicker()
+            {
+                SuggestedStartLocation = PickerLocationId.ComputerFolder,
+            };
+
+            var gamePath = String.Empty;
+            try
+            {
+                // Associate the HWND with the folder picker
+                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
+                WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
+
+                var folder = await folderPicker.PickSingleFolderAsync();
+
+                if (folder == null)
+                {
+                    return;
+                }
+
+                gamePath = folder.Path;
+
+                // If top level directory throw error.
+                if (gamePath == Path.GetPathRoot(gamePath))
+                {
+                    var dialog = new EasyContentDialog(XamlRoot)
+                    {
+                        CloseButtonText = "Okay",
+                        DefaultButton = ContentDialogButton.Close,
+                        Title = "Error",
+                        Content = "Adding top level directory is not supported. Please add the root of your game directory.",
+                    };
+                    await dialog.ShowAsync();
+                    return;
+                }
+
+
+                var addGameDialog = new EasyContentDialog(XamlRoot)
+                {
+                    CloseButtonText = "Cancel",
+                    PrimaryButtonText = "Add Game",
+                    //DefaultButton = ContentDialogButton.Close,
+                    Content = new ManuallyAddGameControl(gamePath),
+                };
+                addGameDialog.Resources["ContentDialogMinWidth"] = 700;
+                addGameDialog.Resources["ContentDialogMaxWidth"] = 700;
+
+                var addGameResult = await addGameDialog.ShowAsync();
+                if (addGameResult == ContentDialogResult.Primary)
+                {
+
+                }
+                //AddToCustomDirectories(folder.Path);
+                //Settings.Instance.AddDirectory(folder.Path);
+            }
+            catch (Exception err)
+            {
+                Logger.Error($"Attempted to manually add game from path {gamePath} but got an error. ({err.Message})");
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    Title = "Error adding your game",
+                    CloseButtonText = "Close",
+                    PrimaryButtonText = "Report issue",
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = $"There was a problem and your game could not be added at this time. Please report this issue.\n\nError message: {err.Message}",
+                };
+                var result = await dialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/issues"));
+                }
+            }
         }
 
         async void RefreshButton_Click(object sender, RoutedEventArgs e)

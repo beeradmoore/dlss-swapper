@@ -42,79 +42,79 @@ namespace DLSS_Swapper.Data.Steam
 
             // I hope this runs on a background thread. 
             // Tasks are whack.
-            return await Task.Run(() =>
+          
+            var games = new List<Game>();
+
+            // Base steamapps folder contains libraryfolders.vdf which has references to other steamapps folders.
+            // All of these folders contain appmanifest_[some_id].acf which contains information about the game.
+            // We parse all of these files with jank regex, rather than building a parser.
+            // If we ever need to this page probably contains info on how to do that, https://developer.valvesoftware.com/wiki/KeyValues
+
+            var baseSteamAppsFolder = Path.Combine(installPath, "steamapps");
+
+            var libraryFolders = new List<string>();
+            libraryFolders.Add(Helpers.PathHelpers.NormalizePath(baseSteamAppsFolder));
+
+            var libraryFoldersFile = Path.Combine(baseSteamAppsFolder, "libraryfolders.vdf");
+            if (File.Exists(libraryFoldersFile))
             {
-                var games = new List<Game>();
-
-                // Base steamapps folder contains libraryfolders.vdf which has references to other steamapps folders.
-                // All of these folders contain appmanifest_[some_id].acf which contains information about the game.
-                // We parse all of these files with jank regex, rather than building a parser.
-                // If we ever need to this page probably contains info on how to do that, https://developer.valvesoftware.com/wiki/KeyValues
-
-                var baseSteamAppsFolder = Path.Combine(installPath, "steamapps");
-
-                var libraryFolders = new List<string>();
-                libraryFolders.Add(Helpers.PathHelpers.NormalizePath(baseSteamAppsFolder));
-
-                var libraryFoldersFile = Path.Combine(baseSteamAppsFolder, "libraryfolders.vdf");
-                if (File.Exists(libraryFoldersFile))
+                try
                 {
-                    try
-                    {
-                        var libraryFoldersFileText = File.ReadAllText(libraryFoldersFile);
+                    var libraryFoldersFileText = File.ReadAllText(libraryFoldersFile);
 
-                        var regex = new Regex(@"^([ \t]*)""(.*)""([ \t]*)""(?<path>.*)""$", RegexOptions.Multiline);
-                        var matches = regex.Matches(libraryFoldersFileText);
-                        if (matches.Count > 0)
+                    var regex = new Regex(@"^([ \t]*)""(.*)""([ \t]*)""(?<path>.*)""$", RegexOptions.Multiline);
+                    var matches = regex.Matches(libraryFoldersFileText);
+                    if (matches.Count > 0)
+                    {
+                        foreach (Match match in matches)
                         {
-                            foreach (Match match in matches)
+                            // This is weird, but for some reason some libraryfolders.vdf are formatted very differnetly than others.
+                            var path = match.Groups["path"].ToString();
+                            if (Directory.Exists(path))
                             {
-                                // This is weird, but for some reason some libraryfolders.vdf are formatted very differnetly than others.
-                                var path = match.Groups["path"].ToString();
-                                if (Directory.Exists(path))
-                                {
-                                    libraryFolders.Add(Helpers.PathHelpers.NormalizePath(Path.Combine(path, "steamapps")));
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception err)
-                    {
-                        // TODO: Report
-                        Logger.Error($"Unable to parse libraryfolders.vdf, {err.Message}");
-                    }
-                }
-
-                // Makes sure all library folders are unique.
-                libraryFolders = libraryFolders.Distinct().ToList();
-
-                foreach (var libraryFolder in libraryFolders)
-                {
-                    if (Directory.Exists(libraryFolder))
-                    {
-                        var appManifests = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
-                        foreach (var appManifest in appManifests)
-                        {
-                            // Don't bother adding Steamworks Common Redistributables.
-                            if (appManifest.EndsWith("appmanifest_228980.acf") == true)
-                            {
-                                continue;
-                            }
-
-                            var game = GetGameFromAppManifest(appManifest);
-                            if (game != null)
-                            {
-                                games.Add(game);
+                                libraryFolders.Add(Helpers.PathHelpers.NormalizePath(Path.Combine(path, "steamapps")));
                             }
                         }
                     }
                 }
-                games.Sort();
-                _loadedGames.AddRange(games);
-                _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));
+                catch (Exception err)
+                {
+                    // TODO: Report
+                    Logger.Error($"Unable to parse libraryfolders.vdf, {err.Message}");
+                }
+            }
 
-                return games;
-            });
+            // Makes sure all library folders are unique.
+            libraryFolders = libraryFolders.Distinct().ToList();
+
+            foreach (var libraryFolder in libraryFolders)
+            {
+                if (Directory.Exists(libraryFolder))
+                {
+                    var appManifests = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
+                    foreach (var appManifest in appManifests)
+                    {
+                        // Don't bother adding Steamworks Common Redistributables.
+                        if (appManifest.EndsWith("appmanifest_228980.acf") == true)
+                        {
+                            continue;
+                        }
+
+                        var game = GetGameFromAppManifest(appManifest);
+                        if (game != null)
+                        {
+                            await game.SaveToDatabaseAsync();
+                            game.ProcessGame();
+                            games.Add(game);
+                        }
+                    }
+                }
+            }
+            games.Sort();
+            _loadedGames.AddRange(games);
+            _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));
+
+            return games;
         }
 
         public static string GetInstallPath()
@@ -186,8 +186,6 @@ namespace DLSS_Swapper.Data.Steam
 
                 game.InstallPath = Path.Combine(baseDir, "common", installDir);
 
-
-                game.ProcessGame();
                 return game;
             }
             catch (Exception err)

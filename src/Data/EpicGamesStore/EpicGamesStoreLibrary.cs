@@ -137,6 +137,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         Title = manifest.DisplayName,
                         InstallPath = manifest.InstallLocation,
                     };
+                    await game.SaveToDatabaseAsync();
                     game.ProcessGame();
                     games.Add(game);
                 }

@@ -253,6 +253,7 @@ namespace DLSS_Swapper.Data.GOG
                     }
                 }
 
+                await gogGame.SaveToDatabaseAsync();
                 // Set thumbnails, check DLSS.
                 gogGame.ProcessGame();
             }

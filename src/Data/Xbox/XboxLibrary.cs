@@ -192,7 +192,7 @@ namespace DLSS_Swapper.Data.Xbox
                             InstallPath = package.InstalledPath,
                         };
                         game.SetLocalHeaderImages(gameNamesToFindPackages[packageName]);
-
+                        await game.SaveToDatabaseAsync();
                         game.ProcessGame();
                         games.Add(game);
                     }

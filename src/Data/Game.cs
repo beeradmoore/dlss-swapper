@@ -151,7 +151,7 @@ namespace DLSS_Swapper.Data
 
 
                 // Now update all the data on the UI therad.
-                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
                 {
                     HasDLSS = hasDLSS;
                     if (hasDLSS)
@@ -169,6 +169,8 @@ namespace DLSS_Swapper.Data
                         BaseDLSSHash = String.Empty;
                     }
                     Processing = false;
+
+                    await SaveToDatabaseAsync();
                 });
             });
         }
@@ -232,8 +234,14 @@ namespace DLSS_Swapper.Data
                 }
             }
 
-            CurrentDLSSVersion = resetToVersion;
-            BaseDLSSVersion = String.Empty;
+            App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+            {
+                CurrentDLSSVersion = resetToVersion;
+                BaseDLSSVersion = String.Empty;
+                await SaveToDatabaseAsync();
+            });
+
+
 
             return (true, String.Empty, false);
         }
@@ -360,11 +368,16 @@ namespace DLSS_Swapper.Data
                 }
             }
 
-            CurrentDLSSVersion = dlssRecord.Version;
-            if (String.IsNullOrEmpty(baseDllVersion) == false)
+
+            App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
             {
-                BaseDLSSVersion = baseDllVersion;
-            }
+                CurrentDLSSVersion = dlssRecord.Version;
+                if (String.IsNullOrEmpty(baseDllVersion) == false)
+                {
+                    BaseDLSSVersion = baseDllVersion;
+                }
+                await SaveToDatabaseAsync();
+            });
 
             try
             {
@@ -476,6 +489,28 @@ namespace DLSS_Swapper.Data
                     File.Delete(tempFile);
                 }
             }
+        }
+
+        public async Task SaveToDatabaseAsync()
+        {
+            try
+            {
+                var rowsChanged = await App.CurrentApp.Database.InsertOrReplaceAsync(this);
+                if (rowsChanged == 0)
+                {
+                    Logger.Error($"Tried to save game to database but rowsChanged was 0.");
+                }
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
+        }
+
+        public void Delete()
+        {
+            // TODO: Delete image cache
+            // TODO: Remove from sqlite DB
         }
     }
 }

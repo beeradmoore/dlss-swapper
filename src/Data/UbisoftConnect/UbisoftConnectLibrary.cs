@@ -213,6 +213,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                     LocalHeaderImage = localImage,
                                     RemoteHeaderImage = remoteImage,
                                 };
+                                await game.SaveToDatabaseAsync();
                                 game.ProcessGame();
                                 games.Add(game);
                             }

@@ -301,6 +301,7 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.231115000" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.2428" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />

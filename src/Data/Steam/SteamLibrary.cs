@@ -21,7 +21,7 @@ namespace DLSS_Swapper.Data.Steam
         List<Game> _loadedDLSSGames = new List<Game>();
         public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
 
-        string _installPath = String.Empty;
+        static string _installPath = String.Empty;
 
         public bool IsInstalled()
         {
@@ -117,7 +117,7 @@ namespace DLSS_Swapper.Data.Steam
             });
         }
 
-        string GetInstallPath()
+        public static string GetInstallPath()
         {
             if (String.IsNullOrEmpty(_installPath) == false)
             {
@@ -154,10 +154,18 @@ namespace DLSS_Swapper.Data.Steam
             try
             {
                 var appManifest = File.ReadAllText(appManifestPath);
-                var game = new SteamGame(GetInstallPath());
 
-                var regex = new Regex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline);
+                var regex = new Regex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline);
                 var matches = regex.Matches(appManifest);
+                if (matches.Count == 0)
+                {
+                    return null;
+                }
+
+                var game = new SteamGame(matches[0].Groups["appid"].Value);
+
+                regex = new Regex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline);
+                matches = regex.Matches(appManifest);
                 if (matches.Count == 0)
                 {
                     return null;
@@ -179,15 +187,7 @@ namespace DLSS_Swapper.Data.Steam
                 game.InstallPath = Path.Combine(baseDir, "common", installDir);
 
 
-                regex = new Regex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline);
-                matches = regex.Matches(appManifest);
-                if (matches.Count == 0)
-                {
-                    return null;
-                }
-                game.AppId = matches[0].Groups["appid"].Value;
-
-                game.DetectDLSS();
+                game.ProcessGame();
                 return game;
             }
             catch (Exception err)

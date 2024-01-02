@@ -88,16 +88,14 @@ namespace DLSS_Swapper.Data.GOG
                                 continue;
                             }
 
-                            if (Int32.TryParse(gameId, out int gameIdInt) == true && String.IsNullOrEmpty(gameName) == false && String.IsNullOrEmpty(gamePath) == false)
+                            if (String.IsNullOrEmpty(gameName) == false && String.IsNullOrEmpty(gamePath) == false)
                             {
-                                var game = new GOGGame()
+                                var game = new GOGGame(gameId)
                                 {
-                                    Id = gameIdInt,
                                     Title = gameName,
                                     InstallPath = gamePath,
                                 };
 
-                                game.DetectDLSS();
 
                                 gogGames.Add(game);
                             }
@@ -122,7 +120,7 @@ namespace DLSS_Swapper.Data.GOG
             {
                 //await Task.Delay(1);
                 var db = new SQLiteAsyncConnection(storageFileLocation, SQLiteOpenFlags.ReadOnly);
-              
+                
                 // Default resource type for verticalCover images is 3. We default to this, but we also add try load it incase it changes.
                 var webCacheResourceTypeId = 3;
                 var webCacheResourceType = (await db.QueryAsync<WebCacheResourceType>("SELECT * FROM WebCacheResourceTypes WHERE type=?", "verticalCover").ConfigureAwait(false)).FirstOrDefault();
@@ -155,7 +153,7 @@ namespace DLSS_Swapper.Data.GOG
                         }
                         */
 
-                        var limitedDetail = (await db.QueryAsync<LimitedDetail>("SELECT * FROM LimitedDetails WHERE ProductId=? LIMIT 1", gogGame.Id).ConfigureAwait(false)).FirstOrDefault();
+                        var limitedDetail = (await db.QueryAsync<LimitedDetail>("SELECT * FROM LimitedDetails WHERE ProductId=? LIMIT 1", gogGame.PlatformId).ConfigureAwait(false)).FirstOrDefault();
                         if (limitedDetail == null)
                         {
                             continue;
@@ -163,7 +161,7 @@ namespace DLSS_Swapper.Data.GOG
 
                         var localCoverImages = new List<string>();
 
-                        var releaseKey = $"gog_{gogGame.Id}";
+                        var releaseKey = $"gog_{gogGame.PlatformId}";
                         var fallbackImage = limitedDetail.ImagesData?.Logo2x ?? String.Empty;
                         var gamePieces = (await db.QueryAsync<GamePiece>("SELECT * FROM GamePieces WHERE releaseKey=? AND gamePieceTypeId=?", releaseKey, gamePieceTypeId).ConfigureAwait(false));
                         if (gamePieces?.Any() == true)
@@ -185,7 +183,7 @@ namespace DLSS_Swapper.Data.GOG
                             var webCacheResource = (await db.QueryAsync<WebCacheResource>("SELECT * FROM WebCacheResources WHERE webCacheId=? AND webCacheResourceTypeId=? LIMIT 1", webCache.Id, webCacheResourceTypeId).ConfigureAwait(false)).FirstOrDefault();
                             if (webCacheResource != null)
                             {
-                                var localCoverImage = Path.Combine(programDataDirectory, "GOG.com", "Galaxy", "webcache", webCache.UserId.ToString(), "gog", gogGame.Id.ToString(), webCacheResource.Filename);
+                                var localCoverImage = Path.Combine(programDataDirectory, "GOG.com", "Galaxy", "webcache", webCache.UserId.ToString(), "gog", gogGame.PlatformId.ToString(), webCacheResource.Filename);
                                 if (File.Exists(localCoverImage))
                                 {
                                     localCoverImages.Add(localCoverImage);
@@ -193,8 +191,8 @@ namespace DLSS_Swapper.Data.GOG
                             }
                         }
 
-
-                        var currentGame = gogGames.FirstOrDefault<GOGGame>(game => game.Id == limitedDetail.ProductId);
+                        var productId = limitedDetail.ProductId.ToString();
+                        var currentGame = gogGames.FirstOrDefault<GOGGame>(game => game.PlatformId == productId);
                         if (currentGame != null)
                         {
                             currentGame.FallbackHeaderUrl = fallbackImage;
@@ -204,7 +202,7 @@ namespace DLSS_Swapper.Data.GOG
                     }
                     catch (Exception err)
                     {
-                        Logger.Error($"Could not load {gogGame.Id} - {err.Message}");
+                        Logger.Error($"Could not load {gogGame.PlatformId} - {err.Message}");
                     }
                 }
 
@@ -225,7 +223,7 @@ namespace DLSS_Swapper.Data.GOG
                             var resourcesEntry = zip.GetEntry("resources.json");
                             if (resourcesEntry == null)
                             {
-                                Logger.Error($"Unable to load resources.json for {gogGame.Id}.");
+                                Logger.Error($"Unable to load resources.json for {gogGame.PlatformId}.");
                                 continue;
                             }
 
@@ -234,7 +232,7 @@ namespace DLSS_Swapper.Data.GOG
                                 var limitedDetailImages = JsonSerializer.Deserialize(resourcesStream, SourceGenerationContext.Default.ResourceImages);
                                 if (limitedDetailImages == null)
                                 {
-                                    Logger.Error($"Unable to deserialize resources.json for {gogGame.Id}.");
+                                    Logger.Error($"Unable to deserialize resources.json for {gogGame.PlatformId}.");
                                     continue;
                                 }
 
@@ -251,9 +249,12 @@ namespace DLSS_Swapper.Data.GOG
                     }
                     else
                     {
-                        Logger.Error($"Unable to get covers through any methods for {gogGame.Id}.");
+                        Logger.Error($"Unable to get covers through any methods for {gogGame.PlatformId}.");
                     }
                 }
+
+                // Set thumbnails, check DLSS.
+                gogGame.ProcessGame();
             }
 
             _loadedGames.AddRange(gogGames);

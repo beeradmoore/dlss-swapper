@@ -40,6 +40,7 @@ namespace DLSS_Swapper
             //CreateDirectoryIfNotExists(GetTemp());
             CreateDirectoryIfNotExists(GetStorageFolder());
             CreateDirectoryIfNotExists(GetDynamicJsonFolder());
+            CreateDirectoryIfNotExists(GetImageCachePath());
         }
 
 
@@ -72,6 +73,16 @@ namespace DLSS_Swapper
         static string GetDynamicJsonFolder()
         {
             return Path.Combine(storagePath, "json");
+        }
+
+        public static string GetDBPath()
+        {
+            return Path.Combine(storagePath, "dlss_swapper.db");
+        }
+
+        public static string GetImageCachePath()
+        {
+            return Path.Combine(storagePath, "image_cache");
         }
 
         /// <summary>

@@ -34,8 +34,13 @@ namespace DLSS_Swapper.UserControls
             GamePath = gamePath;       
             GameName = Path.GetFileName(gamePath);
 
-            game = new ManuallyAddedGame(GameName, gamePath);
-            game.DetectDLSS();
+            // Temp ID
+            game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
+            {
+                Title = GameName,
+                InstallPath = GamePath,
+            };
+            game.ProcessGame();
             dLSSDetectedText = game.HasDLSS ? "Yes" : "No";
         }
 
@@ -67,7 +72,7 @@ namespace DLSS_Swapper.UserControls
             }
             catch (Exception err)
             {
-
+                Logger.Error(err.Message);
             }
         }
     }

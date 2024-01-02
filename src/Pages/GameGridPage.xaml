@@ -86,7 +86,7 @@
                         <!-- Weird, but allows image to strecth centered rather than left align -->
                         <Border BorderThickness="0" Width="200" Height="300">
                             <Border.Background>
-                                <ImageBrush ImageSource="{Binding HeaderImage}" Stretch="UniformToFill"/>
+                                <ImageBrush ImageSource="{Binding CoverImage}" Stretch="UniformToFill"/>
                             </Border.Background>
                         </Border>
                         

@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using DLSS_Swapper.Interfaces;
+using SQLite;
 
 namespace DLSS_Swapper.Data.CustomDirectory;
 
+[Table("ManuallyAddedGame")]
 public class ManuallyAddedGame : Game
 {
-    public override string HeaderImage => String.Empty;
+    public override GameLibrary GameLibrary => GameLibrary.ManuallyAdded;
 
-    public override string ID => "manual_X";
+//    public override string HeaderImage => String.Empty;
 
     public ManuallyAddedGame()
     {
 
     }
-
-    public ManuallyAddedGame(String name, String path)
+    public ManuallyAddedGame(string id)
     {
-        Title = name;
-        InstallPath = path;
-        
-        DetectDLSS();
+        PlatformId = id;
+        SetID();
+    }
+
+    protected override void UpdateCacheImage()
+    {
+        // NOOP, the image is manually managed by the user.
     }
 }

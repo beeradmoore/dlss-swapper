@@ -206,12 +206,14 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                     }
                                 }
 
-                                var game = new UbisoftConnectGame(localImage, remoteImage)
+                                var game = new UbisoftConnectGame(configurationRecord.InstallId.ToString())
                                 {
                                     Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier,
                                     InstallPath = installedTitles[configurationRecord.InstallId].InstallPath,
+                                    LocalHeaderImage = localImage,
+                                    RemoteHeaderImage = remoteImage,
                                 };
-                                game.DetectDLSS();
+                                game.ProcessGame();
                                 games.Add(game);
                             }
                             catch (Exception err)

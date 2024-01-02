@@ -186,13 +186,14 @@ namespace DLSS_Swapper.Data.Xbox
 
                     try
                     {
-
-                        var game = new XboxGame(gameNamesToFindPackages[packageName])
+                        var game = new XboxGame(package.Id.FamilyName)
                         {
                             Title = package.DisplayName,
                             InstallPath = package.InstalledPath,
                         };
-                        game.DetectDLSS();
+                        game.SetLocalHeaderImages(gameNamesToFindPackages[packageName]);
+
+                        game.ProcessGame();
                         games.Add(game);
                     }
                     catch (Exception err)

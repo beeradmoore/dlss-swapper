@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 using Microsoft.UI.Xaml.Controls;
+using Windows.Foundation.Metadata;
 using Windows.Security.Authentication.OnlineId;
 
 namespace DLSS_Swapper.Data.EpicGamesStore
@@ -130,12 +131,13 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         }
                     }
 
-                    var game = new EpicGamesStoreGame(manifest.CatalogItemId, remoteHeaderUrl)
+                    var game = new EpicGamesStoreGame(manifest.CatalogItemId) //remoteHeaderUrl)
                     {
+                        RemoteHeaderImage = remoteHeaderUrl,
                         Title = manifest.DisplayName,
                         InstallPath = manifest.InstallLocation,
                     };
-                    game.DetectDLSS();
+                    game.ProcessGame();
                     games.Add(game);
                 }
                 catch (Exception err)

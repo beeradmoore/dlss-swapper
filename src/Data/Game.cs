@@ -80,6 +80,9 @@ namespace DLSS_Swapper.Data
 
 
 
+        [ObservableProperty]
+        [property: Ignore]
+        bool processing = false;
 
         public bool HasDLSS { get; set; }
 

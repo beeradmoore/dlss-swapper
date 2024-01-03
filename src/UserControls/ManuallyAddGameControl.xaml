@@ -20,45 +20,18 @@
             <!-- Weird, but allows image to strecth centered rather than left align -->
             <Border BorderThickness="0" Width="200" Height="300">
                 <Border.Background>
-                    <ImageBrush ImageSource="{Binding HeaderImage}" Stretch="UniformToFill"/>
+                    <ImageBrush ImageSource="{Binding CoverImage}" Stretch="UniformToFill"/>
                 </Border.Background>
             </Border>
 
-            <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding AddCoverImageCommand}" />
+            <Button HorizontalAlignment="Stretch" Background="Transparent" VerticalAlignment="Stretch" Command="{Binding AddCoverImageCommand}" />
         </Grid>
 
-        <!--
-        <Grid Grid.Column="1" RowSpacing="8" ColumnSpacing="8">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="Game path:" FontWeight="Bold" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Grid.Row="0" IsReadOnly="True" Text="{Binding GamePath}" VerticalAlignment="Top"/>
-
-            <TextBlock Grid.Column="0" Grid.Row="1" Text="Game name:" FontWeight="Bold" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding GameName}" VerticalAlignment="Top"/>
-
-            <TextBlock Grid.Column="0" Grid.Row="2" Text="DLSS detected: " FontWeight="Bold" VerticalAlignment="Center" />
-            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding DLSSDetectedText}" VerticalAlignment="Center" />
-
-        </Grid>
-        -->
-        
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <TextBlock Text="Game name" FontWeight="Bold" />
             <TextBox Text="{Binding GameName}" />
             <TextBlock Text="Game path" FontWeight="Bold" Padding="0,20,0,0" />
-            <TextBox IsReadOnly="True" Text="{Binding GamePath}" />
+            <TextBox IsReadOnly="True" Text="{Binding InstallPath}" />
             <TextBlock Text="DLSS detected" FontWeight="Bold" Padding="0,20,0,0" />
             <TextBlock Text="{Binding DLSSDetectedText}" />
         </StackPanel>

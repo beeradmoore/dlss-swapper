@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data.CustomDirectory;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml;
+using Windows.Gaming.Input;
 using Windows.Storage.Pickers;
 
 namespace DLSS_Swapper.UserControls
@@ -15,10 +18,10 @@ namespace DLSS_Swapper.UserControls
     {
         ManuallyAddedGame game;
 
-        public string GamePath { get; private set; } = String.Empty;
+        public string InstallPath { get; private set; } = String.Empty;
 
         [ObservableProperty]
-        string headerImage = String.Empty;
+        string coverImage = String.Empty;
 
         [ObservableProperty]
         string gameName = String.Empty;
@@ -28,25 +31,28 @@ namespace DLSS_Swapper.UserControls
 
         WeakReference<ManuallyAddGameControl> manuallyAddGameControl = null;
 
-        public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string gamePath)
+        public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath)
         {
             this.manuallyAddGameControl = new WeakReference<ManuallyAddGameControl>(manuallyAddGameControl);
-            GamePath = gamePath;       
-            GameName = Path.GetFileName(gamePath);
+            InstallPath = installPath;       
+            GameName = Path.GetFileName(installPath);
 
             // Temp ID
             game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
             {
                 Title = GameName,
-                InstallPath = GamePath,
+                InstallPath = InstallPath,
             };
-            game.ProcessGame();
+            game.ProcessGame(false);
             dLSSDetectedText = game.HasDLSS ? "Yes" : "No";
         }
 
         [RelayCommand]
         async Task AddCoverImage()
         {
+            // There isn't really a nice way to remove a cover as we can't prompt the user again.
+            // So we are just going to let them replace it, if they want to remove it they are going to have to
+            // cancel and add the game again.
             try
             {
                 var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
@@ -61,14 +67,14 @@ namespace DLSS_Swapper.UserControls
                 fileOpenPicker.FileTypeFilter.Add(".webp");
                 WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);
 
-                var headerImageFile = await fileOpenPicker.PickSingleFileAsync();
+                var coverImageFile = await fileOpenPicker.PickSingleFileAsync();
 
-                if (headerImageFile == null)
+                if (coverImageFile == null)
                 {
                     return;
                 }
 
-                HeaderImage = headerImageFile.Path;
+                CoverImage = coverImageFile.Path;
             }
             catch (Exception err)
             {

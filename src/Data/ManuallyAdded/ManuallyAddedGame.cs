@@ -22,6 +22,11 @@ public class ManuallyAddedGame : Game
         SetID();
     }
 
+    public void ImportCoverImage(string imagePath)
+    {
+        ResizeCover(imagePath);
+    }
+
     protected override void UpdateCacheImage()
     {
         // NOOP, the image is manually managed by the user.

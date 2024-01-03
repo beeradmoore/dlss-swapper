@@ -17,45 +17,27 @@ public class ManuallyAddedLibrary : IGameLibrary
 
     public async Task<List<Game>> ListGamesAsync()
     {
+        LoadedGames.Clear();
+        LoadedDLSSGames.Clear();
+
         var games = new List<Game>();
 
-        /*
-        var directories = Settings.Instance.Directories;
-
-        var tasks = directories.Select(directory => GetGamesFromDirectoryAsync(directory, games));
-
-        await Task.WhenAll(tasks);
+        var dbGames = await App.CurrentApp.Database.QueryAsync<ManuallyAddedGame>("SELECT * FROM ManuallyAddedGame");
+        foreach (var dbGame in dbGames)
+        {
+            dbGame.ProcessGame();
+            games.Add(dbGame);
+        }
 
         games.Sort();
         LoadedGames.AddRange(games);
         LoadedDLSSGames.AddRange(games.Where(g => g.HasDLSS));
-        */
-
+        
         return games;
     }
-
-    /*
-    private static async Task GetGamesFromDirectoryAsync(string directory, ICollection<Game> games)
-    {
-        if (!Directory.Exists(directory))
-        {
-            return;
-        }
-
-        var tasks = new List<Task>();
-
-        foreach (var dir in Directory.GetDirectories(directory))
-        {
-            tasks.Add(Task.Run(() => games.Add(new ManuallyAddedGame(Path.GetFileName(dir), dir))));
-        }
-
-        await Task.WhenAll(tasks);
-    }
-    */
 
     public bool IsInstalled()
     {
         return true;
-        //        return Settings.Instance.Directories.Count > 0;
     }
 }

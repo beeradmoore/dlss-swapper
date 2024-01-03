@@ -88,7 +88,7 @@ namespace DLSS_Swapper.Data
         /// <summary>
         /// Detects DLSS and updates cover image.
         /// </summary>
-        public void ProcessGame()
+        public void ProcessGame(bool autoSave = true)
         {
             if (String.IsNullOrEmpty(InstallPath))
             {
@@ -168,9 +168,13 @@ namespace DLSS_Swapper.Data
                         BaseDLSSVersion = String.Empty;
                         BaseDLSSHash = String.Empty;
                     }
-                    Processing = false;
 
-                    await SaveToDatabaseAsync();
+                    if (autoSave)
+                    {
+                        await SaveToDatabaseAsync();
+                    }
+                    
+                    Processing = false;
                 });
             });
         }
@@ -507,10 +511,22 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        public void Delete()
+        public async Task DeleteAsync()
         {
-            // TODO: Delete image cache
-            // TODO: Remove from sqlite DB
+            try
+            {
+                await App.CurrentApp.Database.DeleteAsync(this);
+
+                var thumbnailImages = Directory.GetFiles(Storage.GetImageCachePath(), $"{ID}_*", SearchOption.AllDirectories);
+                foreach (var thumbnailImage in thumbnailImages)
+                {
+                    File.Delete(thumbnailImage);
+                }
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
         }
     }
 }

@@ -32,6 +32,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Pickers;
 using Windows.System;
+using DLSS_Swapper.Data.CustomDirectory;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -451,24 +452,59 @@ If you have checked these and your game is still not showing up there may be a b
                     return;
                 }
 
+                var manualGameLibrary = GameLibraries.Single(x => x.GameLibrary == GameLibrary.ManuallyAdded);
 
+                // This will allow adding existing game manually, EG. Steam game can be added manually. There will be some bad things
+                // in the UI where a user may update DLSS in the Steam copy but does not show up as changed in the manually added version.
+                // The workaround to this would be to check all games here but it will have the flaw of missing a game (eg. if Steam is disabled,
+                // install game on Steam, manually add game to DLSS Swapper, then enable Steam. We can check every library when adding their games
+                // that they don't exist in ManuallyAdded list, but then its a real pain to have to answer the questions of "Why doesn't game X show
+                // in the Steam section".
+                // Keeping this like this allows users to disable Steam but add the one specific Steam game they want to be able to swap DLSS in.
+                var gameFolderAlreadyExists = manualGameLibrary.LoadedGames.Any(x => x.InstallPath == gamePath);
+                if (gameFolderAlreadyExists == true)
+                {
+                    var dialog = new EasyContentDialog(XamlRoot)
+                    {
+                        Title = "Error adding your game",
+                        CloseButtonText = "Close",
+                        Content = $"The game path \"{gamePath}\" already exists and can't be added again.",
+                    };
+                    await dialog.ShowAsync();
+                    return;
+                }
+
+                var manuallyAddGameControl = new ManuallyAddGameControl(gamePath);
                 var addGameDialog = new EasyContentDialog(XamlRoot)
                 {
                     CloseButtonText = "Cancel",
                     PrimaryButtonText = "Add Game",
                     //DefaultButton = ContentDialogButton.Close,
-                    Content = new ManuallyAddGameControl(gamePath),
+                    Content = manuallyAddGameControl,
                 };
                 addGameDialog.Resources["ContentDialogMinWidth"] = 700;
                 addGameDialog.Resources["ContentDialogMaxWidth"] = 700;
 
                 var addGameResult = await addGameDialog.ShowAsync();
-                if (addGameResult == ContentDialogResult.Primary)
+                if (addGameResult == ContentDialogResult.Primary && manuallyAddGameControl.DataContext is ManuallyAddGameModel manuallyAddGameModel)
                 {
+                   
 
+                    var game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
+                    {
+                        Title = manuallyAddGameModel.GameName,
+                        InstallPath = manuallyAddGameModel.InstallPath,
+                    };
+                    if (String.IsNullOrEmpty(manuallyAddGameModel.CoverImage) == false)
+                    {
+                        game.ImportCoverImage(manuallyAddGameModel.CoverImage);
+                    }
+                    await game.SaveToDatabaseAsync();
+                    game.ProcessGame();
+                    
+                    await manualGameLibrary.ListGamesAsync();
+                    FilterGames();
                 }
-                //AddToCustomDirectories(folder.Path);
-                //Settings.Instance.AddDirectory(folder.Path);
             }
             catch (Exception err)
             {

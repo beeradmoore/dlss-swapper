@@ -233,6 +233,23 @@ namespace DLSS_Swapper.Pages
             MainGridView.SelectedIndex = -1;
             if (e.AddedItems[0] is Game game)
             {
+                /*
+                //var mainGrid = Content as Grid;
+                var dialog2 = new EasyContentDialog(XamlRoot)
+                {
+                    //dialog.Title = "Error";
+                    PrimaryButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = $"DLSS was not detected in {game.Title}.",
+                };
+                await dialog2.ShowAsync();
+                return;*/
+
+                var gameControl = new GameControl(game);
+              
+                gameControl.ShowAsync();
+
+                return;
                 EasyContentDialog dialog;
 
                 if (game.HasDLSS == false)

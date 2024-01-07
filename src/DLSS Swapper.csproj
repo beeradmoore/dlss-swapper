@@ -99,6 +99,7 @@
     <None Remove="DLSS Swapper_TemporaryKey.pfx" />
     <None Remove="global.json" />
     <None Remove="Themes\FakeContentDialogStyle.xaml" />
+    <None Remove="UserControls\GameControl.xaml" />
     <None Remove="UserControls\ManuallyAddGameControl.xaml" />
   </ItemGroup>
 
@@ -287,6 +288,9 @@
             <PackagePath>\</PackagePath>
         </None>
         <Page Update="Themes\FakeContentDialogStyle.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Update="UserControls\GameControl.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>
         <Page Update="UserControls\ManuallyAddGameControl.xaml">

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Png;
@@ -18,6 +19,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.Storage.Pickers;
 
 namespace DLSS_Swapper.Data
 {
@@ -39,7 +41,7 @@ namespace DLSS_Swapper.Data
 
         [ObservableProperty]
         [property: Column("cover_image")]
-        string coverImage = String.Empty;
+        string coverImage = null;
 
         [ObservableProperty]
         [property: Column("base_dlss_version")]
@@ -62,6 +64,10 @@ namespace DLSS_Swapper.Data
         bool hasDLSS = false;
 
         [ObservableProperty]
+        [property: Column("notes")]
+        string notes = String.Empty;
+
+        [ObservableProperty]
         [property: Ignore]
         bool processing = false;
 
@@ -69,7 +75,10 @@ namespace DLSS_Swapper.Data
         public abstract GameLibrary GameLibrary { get; }
 
         [Ignore]
-        string expectedCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_600_900.webp");
+        public string ExpectedCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_600_900.webp");
+        
+        [Ignore]        
+        public string ExpectedCustomCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_custom_600_900.webp");
 
         protected void SetID()
         {
@@ -182,15 +191,26 @@ namespace DLSS_Swapper.Data
         void LoadCoverImage()
         {
             // TODO: Update if the image last write is > 1 week old or something
-            if (File.Exists(expectedCoverImage))
+
+            if (File.Exists(ExpectedCustomCoverImage))
             {
+                // If a custom cover exists use it.
                 App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
-                    CoverImage = expectedCoverImage;
+                    CoverImage = ExpectedCustomCoverImage;
+                });
+            }
+            else if (File.Exists(ExpectedCoverImage))
+            {
+                // If a standard cover exists use it.
+                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    CoverImage = ExpectedCoverImage;
                 });
             }
             else
             {
+                // If no cover exists use the abstracted method to get the game as expect for this library.
                 UpdateCacheImage();
             }
         }
@@ -433,13 +453,59 @@ namespace DLSS_Swapper.Data
                         Mode = ResizeMode.Min, // If image is smaller it won't be resized up.
                     };
                     image.Mutate(x => x.Resize(resizeOptions));
-                    //image.SaveAsPng(expectedCoverImage);
-                    image.SaveAsWebp(expectedCoverImage);
+                    //image.SaveAsPng(ExpectedCoverImage);
+                    image.SaveAsWebp(ExpectedCoverImage);
+                    //image.SaveAsJpeg(ExpectedCoverImage);
                 }
 
                 App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
-                    CoverImage = expectedCoverImage;
+                    CoverImage = ExpectedCoverImage;
+                });
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
+        }
+
+
+        public void AddCustomCover(string imageSource)
+        {
+            using (var fileStream = File.OpenRead(imageSource))
+            {
+                AddCustomCover(fileStream);
+            }
+        }
+
+        public void AddCustomCover(Stream stream)
+        {
+            // TODO: 
+            // - find optimal format (eg, is displaying 100 webp images more intense than 100 png images)
+            // - load image based on scale
+            try
+            {
+                using (var image = SixLabors.ImageSharp.Image.Load(stream))
+                {
+                    // If images are really big we resize to at least 3x the 200x300 we display as.
+                    // In future this should be updated to resize to display scale.
+                    // If the image is smaller than this we are just saving as png.
+                    var resizeOptions = new ResizeOptions()
+                    {
+                        Size = new Size(200 * 3, 300 * 3),
+                        Sampler = KnownResamplers.Lanczos5,
+                        Mode = ResizeMode.Min, // If image is smaller it won't be resized up.
+                    };
+                    image.Mutate(x => x.Resize(resizeOptions));
+                    //image.SaveAsPng(ExpectedCustomCoverImage);
+                    image.SaveAsWebp(ExpectedCustomCoverImage);
+                    //image.SaveAsJpeg(ExpectedCustomCoverImage);
+                }
+
+                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    CoverImage = null;
+                    CoverImage = ExpectedCustomCoverImage;
                 });
             }
             catch (Exception err)
@@ -522,6 +588,61 @@ namespace DLSS_Swapper.Data
                 {
                     File.Delete(thumbnailImage);
                 }
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
+        }
+
+
+        public async Task PromptToRemoveCustomCover()
+        {
+            var dialog = new EasyContentDialog(App.CurrentApp.MainWindow.Content.XamlRoot)
+            {
+                Title = $"Remove custom cover?",
+                PrimaryButtonText = "Remove",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
+                Content = "Are you sure you want to remove the custom cover image?",
+            };
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                if (File.Exists(ExpectedCustomCoverImage))
+                {
+                    File.Delete(ExpectedCustomCoverImage);
+                }
+
+                // Will load default or attempt to fetch fresh.
+                LoadCoverImage();
+            }
+        }
+
+        public async Task PromptToBrowseCustomCover()
+        {
+            try
+            {
+                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
+                var fileOpenPicker = new FileOpenPicker()
+                {
+                    SuggestedStartLocation = PickerLocationId.PicturesLibrary,
+                    ViewMode = PickerViewMode.Thumbnail,
+                };
+                fileOpenPicker.FileTypeFilter.Add(".jpg");
+                fileOpenPicker.FileTypeFilter.Add(".jpeg");
+                fileOpenPicker.FileTypeFilter.Add(".png");
+                fileOpenPicker.FileTypeFilter.Add(".webp");
+                WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);
+
+                var coverImageFile = await fileOpenPicker.PickSingleFileAsync();
+
+                if (coverImageFile == null)
+                {
+                    return;
+                }
+
+                AddCustomCover(coverImageFile.Path);
             }
             catch (Exception err)
             {

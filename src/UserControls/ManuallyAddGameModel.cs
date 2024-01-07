@@ -11,75 +11,38 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using Windows.Gaming.Input;
 using Windows.Storage.Pickers;
+using DLSS_Swapper.Data;
 
 namespace DLSS_Swapper.UserControls
 {
     internal partial class ManuallyAddGameModel : ObservableObject
     {
         ManuallyAddedGame game;
+        public ManuallyAddedGame Game => game;
 
-        public string InstallPath { get; private set; } = String.Empty;
-
-        [ObservableProperty]
-        string coverImage = String.Empty;
-
-        [ObservableProperty]
-        string gameName = String.Empty;
-
-        [ObservableProperty]
-        string dLSSDetectedText = String.Empty;
-
-        WeakReference<ManuallyAddGameControl> manuallyAddGameControl = null;
+        WeakReference<ManuallyAddGameControl> manuallyAddGameControlWeakReference = null;
 
         public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath)
         {
-            this.manuallyAddGameControl = new WeakReference<ManuallyAddGameControl>(manuallyAddGameControl);
-            InstallPath = installPath;       
-            GameName = Path.GetFileName(installPath);
+            manuallyAddGameControlWeakReference = new WeakReference<ManuallyAddGameControl>(manuallyAddGameControl);
 
-            // Temp ID
             game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
             {
-                Title = GameName,
-                InstallPath = InstallPath,
+                Title = Path.GetFileName(installPath),
+                InstallPath = installPath,
             };
-            game.ProcessGame(false);
-            dLSSDetectedText = game.HasDLSS ? "Yes" : "No";
         }
 
         [RelayCommand]
-        async Task AddCoverImage()
+        async Task AddCoverImageAsync()
         {
-            // There isn't really a nice way to remove a cover as we can't prompt the user again.
-            // So we are just going to let them replace it, if they want to remove it they are going to have to
-            // cancel and add the game again.
-            try
+            if (game.CoverImage == game.ExpectedCustomCoverImage)
             {
-                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
-                var fileOpenPicker = new FileOpenPicker()
-                {
-                    SuggestedStartLocation = PickerLocationId.PicturesLibrary,
-                    ViewMode = PickerViewMode.Thumbnail,
-                };
-                fileOpenPicker.FileTypeFilter.Add(".jpg");
-                fileOpenPicker.FileTypeFilter.Add(".jpeg");
-                fileOpenPicker.FileTypeFilter.Add(".png");
-                fileOpenPicker.FileTypeFilter.Add(".webp");
-                WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);
-
-                var coverImageFile = await fileOpenPicker.PickSingleFileAsync();
-
-                if (coverImageFile == null)
-                {
-                    return;
-                }
-
-                CoverImage = coverImageFile.Path;
+                await game.PromptToRemoveCustomCover();
+                return;
             }
-            catch (Exception err)
-            {
-                Logger.Error(err.Message);
-            }
+
+            await game.PromptToBrowseCustomCover();
         }
     }
 }

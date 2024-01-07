@@ -33,6 +33,8 @@ using Windows.Foundation.Collections;
 using Windows.Storage.Pickers;
 using Windows.System;
 using DLSS_Swapper.Data.CustomDirectory;
+using System.Text;
+using CommunityToolkit.WinUI.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -422,7 +424,7 @@ If you have checked these and your game is still not showing up there may be a b
                 SuggestedStartLocation = PickerLocationId.ComputerFolder,
             };
 
-            var gamePath = String.Empty;
+            var installPath = String.Empty;
             try
             {
                 // Associate the HWND with the folder picker
@@ -436,10 +438,10 @@ If you have checked these and your game is still not showing up there may be a b
                     return;
                 }
 
-                gamePath = folder.Path;
+                installPath = folder.Path;
 
                 // If top level directory throw error.
-                if (gamePath == Path.GetPathRoot(gamePath))
+                if (installPath == Path.GetPathRoot(installPath))
                 {
                     var dialog = new EasyContentDialog(XamlRoot)
                     {
@@ -461,54 +463,52 @@ If you have checked these and your game is still not showing up there may be a b
                 // that they don't exist in ManuallyAdded list, but then its a real pain to have to answer the questions of "Why doesn't game X show
                 // in the Steam section".
                 // Keeping this like this allows users to disable Steam but add the one specific Steam game they want to be able to swap DLSS in.
-                var gameFolderAlreadyExists = manualGameLibrary.LoadedGames.Any(x => x.InstallPath == gamePath);
+                var gameFolderAlreadyExists = manualGameLibrary.LoadedGames.Any(x => x.InstallPath == installPath);
                 if (gameFolderAlreadyExists == true)
                 {
                     var dialog = new EasyContentDialog(XamlRoot)
                     {
                         Title = "Error adding your game",
                         CloseButtonText = "Close",
-                        Content = $"The game path \"{gamePath}\" already exists and can't be added again.",
+                        Content = $"The install path \"{installPath}\" already exists and can't be added again.",
                     };
                     await dialog.ShowAsync();
                     return;
                 }
 
-                var manuallyAddGameControl = new ManuallyAddGameControl(gamePath);
-                var addGameDialog = new EasyContentDialog(XamlRoot)
+                var manuallyAddGameControl = new ManuallyAddGameControl(installPath);
+                var addGameDialog = new FakeContentDialog() //XamlRoot
                 {
                     CloseButtonText = "Cancel",
                     PrimaryButtonText = "Add Game",
-                    //DefaultButton = ContentDialogButton.Close,
+                    DefaultButton = ContentDialogButton.Primary,
                     Content = manuallyAddGameControl,
                 };
                 addGameDialog.Resources["ContentDialogMinWidth"] = 700;
                 addGameDialog.Resources["ContentDialogMaxWidth"] = 700;
 
                 var addGameResult = await addGameDialog.ShowAsync();
-                if (addGameResult == ContentDialogResult.Primary && manuallyAddGameControl.DataContext is ManuallyAddGameModel manuallyAddGameModel)
+                if (manuallyAddGameControl.DataContext is ManuallyAddGameModel manuallyAddGameModel)
                 {
-                   
+                    if (addGameResult == ContentDialogResult.Primary)
+                    {
+                        var game = manuallyAddGameModel.Game;
+                        await game.SaveToDatabaseAsync();
+                        game.ProcessGame();
 
-                    var game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
-                    {
-                        Title = manuallyAddGameModel.GameName,
-                        InstallPath = manuallyAddGameModel.InstallPath,
-                    };
-                    if (String.IsNullOrEmpty(manuallyAddGameModel.CoverImage) == false)
-                    {
-                        game.ImportCoverImage(manuallyAddGameModel.CoverImage);
+                        await manualGameLibrary.ListGamesAsync();
+                        FilterGames();
                     }
-                    await game.SaveToDatabaseAsync();
-                    game.ProcessGame();
-                    
-                    await manualGameLibrary.ListGamesAsync();
-                    FilterGames();
+                    else
+                    {
+                        // Cleanup if user is going back.
+                        await manuallyAddGameModel.Game.DeleteAsync();
+                    }
                 }
             }
             catch (Exception err)
             {
-                Logger.Error($"Attempted to manually add game from path {gamePath} but got an error. ({err.Message})");
+                Logger.Error($"Attempted to manually add game from path {installPath} but got an error. ({err.Message})");
                 var dialog = new EasyContentDialog(XamlRoot)
                 {
                     Title = "Error adding your game",

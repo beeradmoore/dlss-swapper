@@ -30,5 +30,6 @@ public class ManuallyAddedGame : Game
     protected override void UpdateCacheImage()
     {
         // NOOP, the image is manually managed by the user.
+        CoverImage = null;
     }
 }

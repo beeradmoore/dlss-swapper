@@ -20,20 +20,22 @@
             <!-- Weird, but allows image to strecth centered rather than left align -->
             <Border BorderThickness="0" Width="200" Height="300">
                 <Border.Background>
-                    <ImageBrush ImageSource="{Binding CoverImage}" Stretch="UniformToFill"/>
+                    <ImageBrush Stretch="UniformToFill">
+                        <ImageBrush.ImageSource>
+                            <BitmapImage CreateOptions="IgnoreImageCache" UriSource="{Binding Game.CoverImage, Mode=OneWay}"/>
+                        </ImageBrush.ImageSource>
+                    </ImageBrush>
                 </Border.Background>
             </Border>
 
-            <Button HorizontalAlignment="Stretch" Background="Transparent" VerticalAlignment="Stretch" Command="{Binding AddCoverImageCommand}" />
+            <Button HorizontalAlignment="Stretch" Background="Transparent" VerticalAlignment="Stretch" Command="{Binding AddCoverImageCommand}" AllowDrop="True" DragEnter="CoverButton_DragEnter" DragOver="CoverButton_DragOver" Drop="CoverButton_Drop" />
         </Grid>
 
-        <StackPanel Orientation="Vertical" Grid.Column="1">
-            <TextBlock Text="Game name" FontWeight="Bold" />
-            <TextBox Text="{Binding GameName}" />
-            <TextBlock Text="Game path" FontWeight="Bold" Padding="0,20,0,0" />
-            <TextBox IsReadOnly="True" Text="{Binding InstallPath}" />
-            <TextBlock Text="DLSS detected" FontWeight="Bold" Padding="0,20,0,0" />
-            <TextBlock Text="{Binding DLSSDetectedText}" />
+        <StackPanel Orientation="Vertical" Spacing="4" Grid.Column="1">
+            <TextBlock Text="Name" FontWeight="Bold" />
+            <TextBox Text="{Binding Game.Title}" />
+            <TextBlock Text="Install path" FontWeight="Bold" Padding="0,20,0,0" />
+            <TextBox IsReadOnly="True" Text="{Binding Game.InstallPath}" />
         </StackPanel>
     </Grid>
 </UserControl>

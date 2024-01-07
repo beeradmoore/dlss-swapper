@@ -58,6 +58,10 @@
                         </ResourceDictionary>
                     </ResourceDictionary.ThemeDictionaries>
                 </ResourceDictionary>
+
+
+                <ResourceDictionary Source="Themes/FakeContentDialogStyle.xaml" />
+                
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
 

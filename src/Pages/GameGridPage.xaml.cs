@@ -244,10 +244,9 @@ namespace DLSS_Swapper.Pages
                 };
                 await dialog2.ShowAsync();
                 return;*/
-
-                var gameControl = new GameControl(game);
-              
-                gameControl.ShowAsync();
+            
+                var gameControl = new GameControl(game);              
+                await gameControl.ShowAsync();
 
                 return;
                 EasyContentDialog dialog;

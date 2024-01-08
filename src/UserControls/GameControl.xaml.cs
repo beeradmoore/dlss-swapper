@@ -30,74 +30,40 @@ using Windows.Storage;
 
 namespace DLSS_Swapper.UserControls
 {
-    public sealed partial class GameControl : UserControl
+    public sealed partial class GameControl : FakeContentDialog
     {
         public GameControl(Game game)
         {
             this.InitializeComponent();
 
+            Resources["ContentDialogMinWidth"] = 700;
+            
             DataContext = new GameControlModel(this, game);
         }
 
-        public void ShowAsync()
+        protected override void OnApplyTemplate()
         {
-            if (App.CurrentApp.MainWindow.Content is Grid rootGrid)
+            base.OnApplyTemplate();
+
+            var dialogSpace = this.GetTemplateChild("DialogSpace") as Grid;
+
+            var leftButtons = new ContentControl()
             {
-                var mainNavigationView = rootGrid.FindChild<NavigationView>(x => x.Name == "MainNavigationView");
-                var appTitleBar = rootGrid.FindChild<Grid>(x => x.Name == "AppTitleBar");
+                Template = Resources["LeftButtonsControlTemplate"] as ControlTemplate,
+            };
+            leftButtons.DataContext = DataContext;
+            Grid.SetRow(leftButtons, 1);
+            dialogSpace.Children.Add(leftButtons);
 
 
-                Grid.SetColumnSpan(this, rootGrid.ColumnDefinitions.Count);
-                Grid.SetRowSpan(this, rootGrid.RowDefinitions.Count);
-               // mainNavigationView.IsEnabled = false;
-               // GridContent.Margin = new Thickness(20, 20 + appTitleBar.ActualHeight, 20, 20);
-
-                rootGrid.Children.Add(this);
-
-
-                //colorStoryboard.Begin();
-
-                /*
-                var storyboard = new Storyboard();
-                var colorAnimation = new ColorAnimation();
-                colorAnimation.From = Colors.Transparent;
-                colorAnimation.To = Colors.Black;
-                colorAnimation.Duration = new Duration(TimeSpan.FromSeconds(4));
-
-                Storyboard.SetTarget(colorAnimation, this);
-                Storyboard.SetTargetProperty(colorAnimation, "(Background).(SolidColorBrush.Color)");
-
-                storyboard.Children.Add(colorAnimation);
-
-                storyboard.Begin();
-                */
-
-
-            }
-            /*
-
-            //<UserControl.Resources>
-        < Storyboard x: Name = "colorStoryboard" >
-
-            < !--Animate the background color of the canvas from red to green
-        over 4 seconds. -- >
-            < ColorAnimation Storyboard.TargetName = "myStackPanel" Storyboard.TargetProperty = "(Panel.Background).(SolidColorBrush.Color)" From = "Transparent" To = "Black" Duration = "0:0:4" />
-
-        </ Storyboard >
-    </ UserControl.Resources >
-            colorStoryboard.Begin();
-            */
-        }
-
-        public void Hide()
-        {
-            if (App.CurrentApp.MainWindow.Content is Grid rootGrid)
+            var rightButtons = new ContentControl()
             {
-                rootGrid.Children.Remove(this);
-            }
+                Template = Resources["RightButtonsControlTemplate"] as ControlTemplate,
+            };
+            rightButtons.DataContext = DataContext;
+            Grid.SetRow(rightButtons, 1);
+            dialogSpace.Children.Add(rightButtons);
         }
-
-
 
 
         string[] customCoverValidFileTypes = new string[]
@@ -120,7 +86,7 @@ namespace DLSS_Swapper.UserControls
             // Default to this.           
             coverDragDropAcceptedOperation = DataPackageOperation.None;
             coverDragDropDragUIOverrideCaption = String.Empty;
-            
+
             e.AcceptedOperation = coverDragDropAcceptedOperation;
             e.DragUIOverride.Caption = coverDragDropDragUIOverrideCaption;
 
@@ -184,5 +150,8 @@ namespace DLSS_Swapper.UserControls
                 Logger.Error("You may only drag over a single cover");
             }
         }
+
+
+
     }
 }

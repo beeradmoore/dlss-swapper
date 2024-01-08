@@ -71,6 +71,8 @@ internal partial class GameControlModel : ObservableObject
                 AcceptsReturn = true,
             };
             // This needs to be set after AcceptsReturn otherwise it will strip out the \r
+            textBox.Text = Game.Notes;
+
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
                 Title = $"Notes - {Game.Title}",

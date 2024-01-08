@@ -15,6 +15,7 @@
     <usercontrols:FakeContentDialog.Resources>
 
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
+        <ct_converters:BoolToObjectConverter x:Key="FavouriteTextConverter" TrueValue="Favourited" FalseValue="Click to favourite" />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteGlyphConverter" TrueValue="&#xE735;" FalseValue="&#xE734;" />
 
         <ControlTemplate x:Key="LeftButtonsControlTemplate" TargetType="ContentControl">

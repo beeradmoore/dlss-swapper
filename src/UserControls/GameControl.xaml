@@ -15,6 +15,7 @@
     <usercontrols:FakeContentDialog.Resources>
 
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
+        <ct_converters:BoolToObjectConverter x:Key="FavouriteGlyphConverter" TrueValue="&#xE735;" FalseValue="&#xE734;" />
 
         <ControlTemplate x:Key="LeftButtonsControlTemplate" TargetType="ContentControl">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" XYFocusKeyboardNavigation="Enabled" Padding="{ThemeResource ContentDialogPadding}" Background="{TemplateBinding Background}" Spacing="8">
@@ -30,7 +31,11 @@
                     </Button.Content>
                 </Button>
 
-                <!--  <Button IsTabStop="False" Content="Notes" Style="{ThemeResource DefaultButtonStyle}" ElementSoundMode="FocusOnly" HorizontalAlignment="Right" />-->
+                <Button Command="{Binding FavouriteCommand}" ToolTipService.ToolTip="{Binding Game.IsFavourite, Converter={StaticResource FavouriteTextConverter}}">
+                    <Button.Content>
+                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="{Binding Game.IsFavourite, Converter={StaticResource FavouriteGlyphConverter}}"/>
+                    </Button.Content>
+                </Button>
             </StackPanel>
         </ControlTemplate>
 

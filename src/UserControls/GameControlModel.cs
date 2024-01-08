@@ -158,4 +158,11 @@ internal partial class GameControlModel : ObservableObject
         }
     }
 
+    [RelayCommand]
+    async Task FavouriteAsync()
+    {
+        Game.IsFavourite = !Game.IsFavourite;
+        await Game.SaveToDatabaseAsync();
+    }
+
 }

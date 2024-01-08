@@ -68,6 +68,10 @@ namespace DLSS_Swapper.Data
         string notes = String.Empty;
 
         [ObservableProperty]
+        [property: Column("is_favourite")]
+        bool isFavourite = false;
+
+        [ObservableProperty]
         [property: Ignore]
         bool processing = false;
 

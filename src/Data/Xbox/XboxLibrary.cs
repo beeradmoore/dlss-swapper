@@ -28,7 +28,15 @@ namespace DLSS_Swapper.Data.Xbox
         List<Game> _loadedDLSSGames = new List<Game>();
         public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
 
+        public Type GameType => typeof(XboxGame);
 
+        static XboxLibrary instance = null;
+        public static XboxLibrary Instance => instance ??= new XboxLibrary();
+
+        private XboxLibrary()
+        {
+
+        }
 
         public bool IsInstalled()
         {

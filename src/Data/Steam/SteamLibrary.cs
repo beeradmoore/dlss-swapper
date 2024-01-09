@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,17 @@ namespace DLSS_Swapper.Data.Steam
         List<Game> _loadedDLSSGames = new List<Game>();
         public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
 
+        public Type GameType => typeof(SteamGame);
+
+        static SteamLibrary instance = null;
+        public static SteamLibrary Instance => instance ??= new SteamLibrary();
+
         static string _installPath = String.Empty;
+
+        private SteamLibrary()
+        {
+
+        }
 
         public bool IsInstalled()
         {

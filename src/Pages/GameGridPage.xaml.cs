@@ -35,12 +35,25 @@ using Windows.System;
 using DLSS_Swapper.Data.CustomDirectory;
 using System.Text;
 using CommunityToolkit.WinUI.UI;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.CodeDom;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace DLSS_Swapper.Pages
 {
+    public class GameGroup
+    {
+        public string Name { get; private set; } = String.Empty;
+        public ObservableCollection<Game> Games { get; private set; } = null;
+
+        public GameGroup(string name, ObservableCollection<Game> games)
+        {
+            Name = name;
+            Games = games;
+        }
+    }
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -48,13 +61,19 @@ namespace DLSS_Swapper.Pages
     {
         public List<IGameLibrary> GameLibraries { get; } = new List<IGameLibrary>();
 
+        public List<GameGroup> GroupedGameGroups { get; } = new List<GameGroup>();
+        public List<GameGroup> UngroupedGameGroups { get; } = new List<GameGroup>();
+        
+        ObservableCollection<Game> FavouriteGames = new ObservableCollection<Game>();
+        ObservableCollection<Game> AllGames = new ObservableCollection<Game>();
+
         bool _loadingGamesAndDlls = false;
 
         public GameGridPage()
         {
             this.InitializeComponent();
-            DataContext = this;
 
+            DataContext = this;
         }
 
 
@@ -136,7 +155,6 @@ namespace DLSS_Swapper.Pages
 
             GameLibraries.Clear();
 
-
             // Auto game library loading.
             // Simply adding IGameLibrary interface means we will load the games.
             var loadGameTasks = new List<Task>(); 
@@ -217,10 +235,16 @@ namespace DLSS_Swapper.Pages
             MainGridView.SelectionChanged += MainGridView_SelectionChanged;
         }
 
-
+        bool hasFirstLoaded = false;
         async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            await LoadGamesAndDlls();
+            if (hasFirstLoaded)
+            {
+                return;
+            }
+            hasFirstLoaded = true;
+            //await LoadGamesAndDlls();
+            await LoadGames();
         }
 
         async void MainGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -360,7 +384,61 @@ namespace DLSS_Swapper.Pages
             }
         }
 
+        async Task LoadGames()
+        {
 
+            var steamLibrary1 = IGameLibrary.GetGameLibrary(GameLibrary.Steam);
+            var steamLibrary2 = IGameLibrary.GetGameLibrary(GameLibrary.Steam);
+
+
+            Debugger.Break();
+
+            foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
+            {
+                var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
+
+                if (gameLibraryEnum == GameLibrary.Steam)
+                {
+                    var query = App.CurrentApp.Database.Table<ManuallyAddedGame>().ToListAsync();
+
+                }
+                else if(gameLibraryEnum == GameLibrary.GOG)
+                {
+
+                }
+                else if(gameLibraryEnum == GameLibrary.EpicGamesStore)
+                {
+
+                }
+                else if(gameLibraryEnum == GameLibrary.UbisoftConnect)
+                {
+
+                }
+                else if(gameLibraryEnum == GameLibrary.XboxApp)
+                {
+
+                }
+                else if(gameLibraryEnum == GameLibrary.ManuallyAdded)
+                {
+                    var query = App.CurrentApp.Database.Table<ManuallyAddedGame>().ToListAsync();
+
+                }
+                else
+                {
+
+                }
+
+                //.Where(s => s.Symbol.StartsWith("A"));
+
+                //.get..
+                //GameLibraries.Add(gameLibrary);
+            }
+
+
+            return;
+
+
+        }
 
         async Task LoadGamesAndDlls()
         {

@@ -32,20 +32,20 @@ namespace DLSS_Swapper.Interfaces
         string Name { get; }
         List<Game> LoadedGames { get; }
         List<Game> LoadedDLSSGames { get; }
+        Type GameType { get; }
 
         Task<List<Game>> ListGamesAsync();
         bool IsInstalled();
 
         static IGameLibrary GetGameLibrary(GameLibrary gameLibrary)
         {
-            return gameLibrary switch
-            {
-                GameLibrary.Steam => new SteamLibrary(),
-                GameLibrary.GOG => new GOGLibrary(),
-                GameLibrary.EpicGamesStore => new EpicGamesStoreLibrary(),
-                GameLibrary.UbisoftConnect => new UbisoftConnectLibrary(),
-                GameLibrary.XboxApp => new XboxLibrary(),
-                GameLibrary.ManuallyAdded => new ManuallyAddedLibrary(),
+            return gameLibrary switch { 
+                GameLibrary.Steam => SteamLibrary.Instance,
+                GameLibrary.GOG => GOGLibrary.Instance,
+                GameLibrary.EpicGamesStore => EpicGamesStoreLibrary.Instance,
+                GameLibrary.UbisoftConnect => UbisoftConnectLibrary.Instance,
+                GameLibrary.XboxApp => XboxLibrary.Instance,
+                GameLibrary.ManuallyAdded => ManuallyAddedLibrary.Instance,
                 _ => throw new Exception($"Could not load game library {gameLibrary}"),
             };
         }

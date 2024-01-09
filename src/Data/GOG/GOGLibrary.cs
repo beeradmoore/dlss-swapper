@@ -26,6 +26,16 @@ namespace DLSS_Swapper.Data.GOG
         List<Game> _loadedDLSSGames = new List<Game>();
         public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
 
+        public Type GameType => typeof(GOGGame);
+
+        static GOGLibrary instance = null;
+        public static GOGLibrary Instance => instance ??= new GOGLibrary();
+
+        private GOGLibrary()
+        {
+
+        }
+
         public bool IsInstalled()
         {
             // We check for the registry key as offline installers will still make this, even if

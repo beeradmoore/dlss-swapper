@@ -38,6 +38,16 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         List<Game> _loadedDLSSGames = new List<Game>();
         public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
 
+        public Type GameType => typeof(UbisoftConnectGame);
+
+        static UbisoftConnectLibrary instance = null;
+        public static UbisoftConnectLibrary Instance => instance ??= new UbisoftConnectLibrary();
+
+        private UbisoftConnectLibrary()
+        {
+
+        }
+
         string _installPath = String.Empty;
 
         public bool IsInstalled()

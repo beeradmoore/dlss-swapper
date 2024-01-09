@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,17 @@ public class ManuallyAddedLibrary : IGameLibrary
     public List<Game> LoadedGames { get; } = new List<Game>();
 
     public List<Game> LoadedDLSSGames { get; } = new List<Game>();
+
+    public Type GameType => typeof(ManuallyAddedGame);
+
+
+    static ManuallyAddedLibrary instance = null;
+    public static ManuallyAddedLibrary Instance => instance ??= new ManuallyAddedLibrary();
+
+    private ManuallyAddedLibrary()
+    {
+
+    }
 
     public async Task<List<Game>> ListGamesAsync()
     {

@@ -23,6 +23,16 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         List<Game> _loadedDLSSGames = new List<Game>();
         public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
 
+        public Type GameType => typeof(EpicGamesStoreGame);
+
+        static EpicGamesStoreLibrary instance = null;
+        public static EpicGamesStoreLibrary Instance => instance ??= new EpicGamesStoreLibrary();
+
+        private EpicGamesStoreLibrary()
+        {
+
+        }
+
         public bool IsInstalled()
         {
             return String.IsNullOrEmpty(GetEpicRootDirectory()) == false;

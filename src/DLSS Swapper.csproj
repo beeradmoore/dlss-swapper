@@ -24,7 +24,8 @@
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <PackageCertificateThumbprint>FE5FF30FB93EC351E8ADA5D7D7B436A52B34DA5B</PackageCertificateThumbprint>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <Version>1.0.4.0</Version>
+    <Version>1.0.5.0</Version>
+    <UseRidGraph>true</UseRidGraph>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">

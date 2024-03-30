@@ -85,55 +85,65 @@ namespace DLSS_Swapper.Data
 
         public void DetectDLSS()
         {
-            BaseDLSSVersion = String.Empty;
-            CurrentDLSSVersion = "N/A";
-
-
-            if (String.IsNullOrEmpty(InstallPath))
+            try
             {
-                return;
-            }
+                Logger.Info($"Looking for DLSS in {InstallPath}");
 
-            if (Directory.Exists(InstallPath) == false)
-            {
-                return;
-            }
+                BaseDLSSVersion = String.Empty;
+                CurrentDLSSVersion = "N/A";
 
-            var enumerationOptions = new EnumerationOptions();
-            enumerationOptions.RecurseSubdirectories = true;
-            enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
-            var dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
 
-            if (dlssDlls.Length > 0)
-            {
-                HasDLSS = true;
-
-                // TODO: Handle a single folder with various versions of DLSS detected.
-                // Currently we are just using the first.
-
-                foreach (var dlssDll in dlssDlls)
+                if (String.IsNullOrEmpty(InstallPath))
                 {
-                    var dllVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
-                    CurrentDLSSVersion = dllVersionInfo.GetFormattedFileVersion();
-                    CurrentDLSSHash = dllVersionInfo.GetMD5Hash();
-                    break;
+                    return;
                 }
 
-                dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll.dlsss", enumerationOptions);
+                if (Directory.Exists(InstallPath) == false)
+                {
+                    return;
+                }
+
+                var enumerationOptions = new EnumerationOptions();
+                enumerationOptions.RecurseSubdirectories = true;
+                enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
+                var dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
+                Logger.Info($"Found {dlssDlls.Length} dlls.");
+
                 if (dlssDlls.Length > 0)
                 {
+                    HasDLSS = true;
+
+                    // TODO: Handle a single folder with various versions of DLSS detected.
+                    // Currently we are just using the first.
+
                     foreach (var dlssDll in dlssDlls)
                     {
                         var dllVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
-                        BaseDLSSVersion = dllVersionInfo.GetFormattedFileVersion();
-                        BaseDLSSHash = dllVersionInfo.GetMD5Hash();
+                        CurrentDLSSVersion = dllVersionInfo.GetFormattedFileVersion();
+                        CurrentDLSSHash = dllVersionInfo.GetMD5Hash();
                         break;
                     }
+
+                    dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll.dlsss", enumerationOptions);
+                    if (dlssDlls.Length > 0)
+                    {
+                        foreach (var dlssDll in dlssDlls)
+                        {
+                            var dllVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
+                            BaseDLSSVersion = dllVersionInfo.GetFormattedFileVersion();
+                            BaseDLSSHash = dllVersionInfo.GetMD5Hash();
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    HasDLSS = false;
                 }
             }
-            else
+            catch (Exception err)
             {
-                HasDLSS = false;
+                Logger.Error($"Error trying to find DLSS dlls, {err.Message}");
             }
         }
 

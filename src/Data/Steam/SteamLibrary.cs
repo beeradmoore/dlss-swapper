@@ -53,6 +53,7 @@ namespace DLSS_Swapper.Data.Steam
 
                 var baseSteamAppsFolder = Path.Combine(installPath, "steamapps");
 
+                Logger.Info($"Base steamspps folder: {baseSteamAppsFolder}");
                 var libraryFolders = new List<string>();
                 libraryFolders.Add(Helpers.PathHelpers.NormalizePath(baseSteamAppsFolder));
 
@@ -88,27 +89,57 @@ namespace DLSS_Swapper.Data.Steam
                 // Makes sure all library folders are unique.
                 libraryFolders = libraryFolders.Distinct().ToList();
 
+                Logger.Info($"Found {libraryFolders.Count} library folders.");
                 foreach (var libraryFolder in libraryFolders)
                 {
-                    if (Directory.Exists(libraryFolder))
-                    {
-                        var appManifests = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
-                        foreach (var appManifest in appManifests)
-                        {
-                            // Don't bother adding Steamworks Common Redistributables.
-                            if (appManifest.EndsWith("appmanifest_228980.acf") == true)
-                            {
-                                continue;
-                            }
+                    Logger.Info(libraryFolder);
+                }
 
-                            var game = GetGameFromAppManifest(appManifest);
-                            if (game != null)
+                foreach (var libraryFolder in libraryFolders)
+                {
+                    try
+                    {
+                        if (Directory.Exists(libraryFolder))
+                        {
+
+                            var appManifests = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
+                            foreach (var appManifest in appManifests)
                             {
-                                games.Add(game);
+                                Logger.Info($"Loading app manifest file {appManifest}");
+
+                                // Don't bother adding Steamworks Common Redistributables.
+                                if (appManifest.EndsWith("appmanifest_228980.acf") == true)
+                                {
+                                    continue;
+                                }
+
+                                var game = GetGameFromAppManifest(appManifest);
+                                if (game != null)
+                                {
+                                    Logger.Info($"Loaded {game.Title}, installed to {game.InstallPath}");
+                                    games.Add(game);
+                                }
+                                else
+                                {
+                                    Logger.Error($"Could not load app manifest {Path.GetFileName(appManifest)}");
+
+                                }
                             }
                         }
+                        else
+                        {
+                            Logger.Info($"Library folder does not exist: {libraryFolder}");
+
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        Logger.Error($"Unable to load game or game directory, {err.Message}");
                     }
                 }
+
+                Logger.Info($"Loaded {games.Count} games.");
+
                 games.Sort();
                 _loadedGames.AddRange(games);
                 _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));

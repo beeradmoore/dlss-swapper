@@ -60,6 +60,12 @@ namespace DLSS_Swapper
 
             Logger.Info($"App launch - v{versionString}", null);
 
+            Logger.Verbose("Test verbose log");
+            Logger.Debug("Test debug log");
+            Logger.Info("Test info log");
+            Logger.Warning("Test warning log");
+            Logger.Error("Test error log");
+
             _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper v{versionString}");
 
             GlobalElementTheme = Settings.Instance.AppTheme;

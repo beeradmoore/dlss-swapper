@@ -38,6 +38,16 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         List<Game> _loadedDLSSGames = new List<Game>();
         public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
 
+        public Type GameType => typeof(UbisoftConnectGame);
+
+        static UbisoftConnectLibrary instance = null;
+        public static UbisoftConnectLibrary Instance => instance ??= new UbisoftConnectLibrary();
+
+        private UbisoftConnectLibrary()
+        {
+
+        }
+
         string _installPath = String.Empty;
 
         public bool IsInstalled()
@@ -206,12 +216,15 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                     }
                                 }
 
-                                var game = new UbisoftConnectGame(localImage, remoteImage)
+                                var game = new UbisoftConnectGame(configurationRecord.InstallId.ToString())
                                 {
                                     Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier,
                                     InstallPath = installedTitles[configurationRecord.InstallId].InstallPath,
+                                    LocalHeaderImage = localImage,
+                                    RemoteHeaderImage = remoteImage,
                                 };
-                                game.DetectDLSS();
+                                await game.SaveToDatabaseAsync();
+                                game.ProcessGame();
                                 games.Add(game);
                             }
                             catch (Exception err)

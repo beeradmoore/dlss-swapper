@@ -15,3 +15,4 @@ StoredData/
 package/Output/
 .vscode/
 package/NSIS/FileList.nsh
+.idea/

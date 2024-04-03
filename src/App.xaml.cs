@@ -1,4 +1,11 @@
 ﻿using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.CustomDirectory;
+using DLSS_Swapper.Data.EpicGamesStore;
+using DLSS_Swapper.Data.GOG;
+using DLSS_Swapper.Data.Steam;
+using DLSS_Swapper.Data.UbisoftConnect;
+using DLSS_Swapper.Data.Xbox;
+using DLSS_Swapper.Interfaces;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -8,6 +15,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using MvvmHelpers;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -43,6 +51,11 @@ namespace DLSS_Swapper
 
         internal HttpClient _httpClient = new HttpClient();
         public HttpClient HttpClient => _httpClient;
+
+
+        SQLiteAsyncConnection database;
+        public SQLiteAsyncConnection Database => database;
+
         //public ObservableRangeCollection<DLSSRecord> CurrentDLSSRecords { get; } = new ObservableRangeCollection<DLSSRecord>();
 
 
@@ -63,6 +76,69 @@ namespace DLSS_Swapper
             _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper v{versionString}");
 
             GlobalElementTheme = Settings.Instance.AppTheme;
+
+            database = new SQLiteAsyncConnection(Storage.GetDBPath());
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await database.CreateTableAsync<SteamGame>();
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err.Message);
+                }
+
+
+                try
+                {
+                    await database.CreateTableAsync<GOGGame>();
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err.Message);
+                }
+
+
+                try
+                {
+                    await database.CreateTableAsync<EpicGamesStoreGame>();
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err.Message);
+                }
+
+
+                try
+                {
+                    await database.CreateTableAsync<UbisoftConnectGame>();
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err.Message);
+                }
+
+
+                try
+                {
+                    await database.CreateTableAsync<XboxGame>();
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err.Message);
+                }
+
+
+                try
+                {
+                    await database.CreateTableAsync<ManuallyAddedGame>();
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err.Message);
+                }
+            });
 
             this.InitializeComponent();
         }

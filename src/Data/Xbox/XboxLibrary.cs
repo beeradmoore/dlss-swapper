@@ -28,7 +28,15 @@ namespace DLSS_Swapper.Data.Xbox
         List<Game> _loadedDLSSGames = new List<Game>();
         public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
 
+        public Type GameType => typeof(XboxGame);
 
+        static XboxLibrary instance = null;
+        public static XboxLibrary Instance => instance ??= new XboxLibrary();
+
+        private XboxLibrary()
+        {
+
+        }
 
         public bool IsInstalled()
         {
@@ -186,13 +194,14 @@ namespace DLSS_Swapper.Data.Xbox
 
                     try
                     {
-
-                        var game = new XboxGame(gameNamesToFindPackages[packageName])
+                        var game = new XboxGame(package.Id.FamilyName)
                         {
                             Title = package.DisplayName,
                             InstallPath = package.InstalledPath,
                         };
-                        game.DetectDLSS();
+                        game.SetLocalHeaderImages(gameNamesToFindPackages[packageName]);
+                        await game.SaveToDatabaseAsync();
+                        game.ProcessGame();
                         games.Add(game);
                     }
                     catch (Exception err)

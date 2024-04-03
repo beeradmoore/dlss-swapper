@@ -1,5 +1,13 @@
-﻿using DLSS_Swapper.Extensions;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using DLSS_Swapper.Extensions;
+using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Processing.Processors.Transforms;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,86 +17,92 @@ using System.IO.Compression;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Windows.Storage.Pickers;
 
 namespace DLSS_Swapper.Data
 {
-    public abstract class Game : IComparable<Game>, INotifyPropertyChanged
+    public abstract partial class Game : ObservableObject, IComparable<Game> //, INotifyPropertyChanged
     {
-        public string Title { get; set; }
+        [PrimaryKey]
+        [Column("id")]
+        public string ID { get; set; } = String.Empty;
 
+        [Column("platform_id")]
+        public string PlatformId { get; set; } = String.Empty;
+
+        [ObservableProperty]
+        [property: Column("title")]
+        string title = String.Empty;
+
+        [Column("install_path")]
         public string InstallPath { get; set; }
 
-        public abstract string HeaderImage { get; }
+        [ObservableProperty]
+        [property: Column("cover_image")]
+        string coverImage = null;
 
-        string _baseDLSSVersion;
-        public string BaseDLSSVersion
+        [ObservableProperty]
+        [property: Column("base_dlss_version")]
+        string baseDLSSVersion = String.Empty;
+
+        [ObservableProperty]
+        [property: Column("current_dlss_version")]
+        string currentDLSSVersion = String.Empty;
+
+        [ObservableProperty]
+        [property: Column("current_dlss_hash")]
+        string currentDLSSHash = String.Empty;
+
+        [ObservableProperty]
+        [property: Column("base_dlss_hash")]
+        string baseDLSSHash = String.Empty;
+
+        [ObservableProperty]
+        [property: Column("has_dlss")]
+        bool hasDLSS = false;
+
+        [ObservableProperty]
+        [property: Column("notes")]
+        string notes = String.Empty;
+
+        [ObservableProperty]
+        [property: Column("is_favourite")]
+        bool isFavourite = false;
+
+        [ObservableProperty]
+        [property: Ignore]
+        bool processing = false;
+
+        [Ignore]
+        public abstract GameLibrary GameLibrary { get; }
+
+        [Ignore]
+        public string ExpectedCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_600_900.webp");
+        
+        [Ignore]        
+        public string ExpectedCustomCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_custom_600_900.webp");
+
+        protected void SetID()
         {
-            get { return _baseDLSSVersion; }
-            set
+            ID = GameLibrary switch
             {
-                if (_baseDLSSVersion != value)
-                {
-                    _baseDLSSVersion = value;
-                    NotifyPropertyChanged();
-                }
-            }
+                GameLibrary.Steam => $"steam_{PlatformId}",
+                GameLibrary.GOG => $"gog_{PlatformId}",
+                GameLibrary.EpicGamesStore => $"epicgamesstore_{PlatformId}",
+                GameLibrary.UbisoftConnect => $"ubisoftconnect_{PlatformId}",
+                GameLibrary.XboxApp => $"xboxapp_{PlatformId}",
+                GameLibrary.ManuallyAdded => $"manuallyadded_{PlatformId}",
+                _ => throw new Exception($"Unknown GameLibrary {GameLibrary} while setting ID"),
+            };
         }
 
-        string _currentDLSSVersion;
-        public string CurrentDLSSVersion
+        /// <summary>
+        /// Detects DLSS and updates cover image.
+        /// </summary>
+        public void ProcessGame(bool autoSave = true)
         {
-            get { return _currentDLSSVersion; }
-            set
-            {
-                if (_currentDLSSVersion != value)
-                {
-                    _currentDLSSVersion = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-
-        string _currentDLSSHash;
-        public string CurrentDLSSHash
-        {
-            get { return _currentDLSSHash; }
-            set
-            {
-                if (_currentDLSSHash != value)
-                {
-                    _currentDLSSHash = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-
-        string _baseDLSSHash;
-        public string BaseDLSSHash
-        {
-            get { return _baseDLSSHash; }
-            set
-            {
-                if (_baseDLSSHash != value)
-                {
-                    _baseDLSSHash = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-
-
-
-
-
-        public bool HasDLSS { get; set; }
-
-        public void DetectDLSS()
-        {
-            BaseDLSSVersion = String.Empty;
-            CurrentDLSSVersion = "N/A";
-
-
             if (String.IsNullOrEmpty(InstallPath))
             {
                 return;
@@ -99,43 +113,113 @@ namespace DLSS_Swapper.Data
                 return;
             }
 
-            var enumerationOptions = new EnumerationOptions();
-            enumerationOptions.RecurseSubdirectories = true;
-            enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
-            var dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
+            Processing = true;
 
-            if (dlssDlls.Length > 0)
+            ThreadPool.QueueUserWorkItem((stateInfo) =>
             {
-                HasDLSS = true;
+                LoadCoverImage();
 
-                // TODO: Handle a single folder with various versions of DLSS detected.
-                // Currently we are just using the first.
+                var enumerationOptions = new EnumerationOptions();
+                enumerationOptions.RecurseSubdirectories = true;
+                enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
+                var dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
 
-                foreach (var dlssDll in dlssDlls)
-                {
-                    var dllVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
-                    CurrentDLSSVersion = dllVersionInfo.GetFormattedFileVersion();
-                    CurrentDLSSHash = dllVersionInfo.GetMD5Hash();
-                    break;
-                }
+                var hasDLSS = false;
+                var currentDLSSVersion = String.Empty;
+                var currentDLSSHash = String.Empty;
+                var baseDLSSVersion = String.Empty;
+                var baseDLSSHash = String.Empty;
 
-                dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll.dlsss", enumerationOptions);
                 if (dlssDlls.Length > 0)
                 {
+                    hasDLSS = true;
+
+                    // TODO: Handle a single folder with various versions of DLSS detected.
+                    // Currently we are just using the first.
+
                     foreach (var dlssDll in dlssDlls)
                     {
                         var dllVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
-                        BaseDLSSVersion = dllVersionInfo.GetFormattedFileVersion();
-                        BaseDLSSHash = dllVersionInfo.GetMD5Hash();
+                        currentDLSSVersion = dllVersionInfo.GetFormattedFileVersion();
+                        currentDLSSHash = dllVersionInfo.GetMD5Hash();
                         break;
                     }
+
+                    dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll.dlsss", enumerationOptions);
+                    if (dlssDlls.Length > 0)
+                    {
+                        foreach (var dlssDll in dlssDlls)
+                        {
+                            var dllVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
+                            baseDLSSVersion = dllVersionInfo.GetFormattedFileVersion();
+                            baseDLSSHash = dllVersionInfo.GetMD5Hash();
+                            break;
+                        }
+                    }
                 }
+                else
+                {
+                    hasDLSS = false;
+                }
+
+
+                // Now update all the data on the UI therad.
+                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+                {
+                    HasDLSS = hasDLSS;
+                    if (hasDLSS)
+                    {
+                        CurrentDLSSVersion = currentDLSSVersion;
+                        CurrentDLSSHash = currentDLSSHash;
+                        BaseDLSSVersion = baseDLSSVersion;
+                        BaseDLSSHash = baseDLSSHash;
+                    }
+                    else
+                    {
+                        CurrentDLSSVersion = "N/A";
+                        CurrentDLSSHash = String.Empty;
+                        BaseDLSSVersion = String.Empty;
+                        BaseDLSSHash = String.Empty;
+                    }
+
+                    if (autoSave)
+                    {
+                        await SaveToDatabaseAsync();
+                    }
+                    
+                    Processing = false;
+                });
+            });
+        }
+
+        void LoadCoverImage()
+        {
+            // TODO: Update if the image last write is > 1 week old or something
+
+            if (File.Exists(ExpectedCustomCoverImage))
+            {
+                // If a custom cover exists use it.
+                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    CoverImage = ExpectedCustomCoverImage;
+                });
+            }
+            else if (File.Exists(ExpectedCoverImage))
+            {
+                // If a standard cover exists use it.
+                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    CoverImage = ExpectedCoverImage;
+                });
             }
             else
             {
-                HasDLSS = false;
+                // If no cover exists use the abstracted method to get the game as expect for this library.
+                UpdateCacheImage();
             }
         }
+
+        protected abstract void UpdateCacheImage();
 
         internal (bool Success, string Message, bool PromptToRelaunchAsAdmin) ResetDll()
         {
@@ -178,8 +262,14 @@ namespace DLSS_Swapper.Data
                 }
             }
 
-            CurrentDLSSVersion = resetToVersion;
-            BaseDLSSVersion = String.Empty;
+            App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+            {
+                CurrentDLSSVersion = resetToVersion;
+                BaseDLSSVersion = String.Empty;
+                await SaveToDatabaseAsync();
+            });
+
+
 
             return (true, String.Empty, false);
         }
@@ -306,11 +396,16 @@ namespace DLSS_Swapper.Data
                 }
             }
 
-            CurrentDLSSVersion = dlssRecord.Version;
-            if (String.IsNullOrEmpty(baseDllVersion) == false)
+
+            App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
             {
-                BaseDLSSVersion = baseDllVersion;
-            }
+                CurrentDLSSVersion = dlssRecord.Version;
+                if (String.IsNullOrEmpty(baseDllVersion) == false)
+                {
+                    BaseDLSSVersion = baseDllVersion;
+                }
+                await SaveToDatabaseAsync();
+            });
 
             try
             {
@@ -332,13 +427,231 @@ namespace DLSS_Swapper.Data
         }
         #endregion
 
+        /*
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-        void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+        */
 
+
+        protected void ResizeCover(string imageSource)
+        {
+            // TODO: 
+            // - find optimal format (eg, is displaying 100 webp images more intense than 100 png images)
+            // - load image based on scale
+            try
+            {
+                using (var image = SixLabors.ImageSharp.Image.Load(imageSource))
+                {
+                    // If images are really big we resize to at least 3x the 200x300 we display as.
+                    // In future this should be updated to resize to display scale.
+                    // If the image is smaller than this we are just saving as png.
+                    var resizeOptions = new ResizeOptions()
+                    {
+                        Size = new Size(200 * 3, 300 * 3),
+                        Sampler = KnownResamplers.Lanczos5,
+                        Mode = ResizeMode.Min, // If image is smaller it won't be resized up.
+                    };
+                    image.Mutate(x => x.Resize(resizeOptions));
+                    //image.SaveAsPng(ExpectedCoverImage);
+                    image.SaveAsWebp(ExpectedCoverImage);
+                    //image.SaveAsJpeg(ExpectedCoverImage);
+                }
+
+                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    CoverImage = ExpectedCoverImage;
+                });
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
+        }
+
+
+        public void AddCustomCover(string imageSource)
+        {
+            using (var fileStream = File.OpenRead(imageSource))
+            {
+                AddCustomCover(fileStream);
+            }
+        }
+
+        public void AddCustomCover(Stream stream)
+        {
+            // TODO: 
+            // - find optimal format (eg, is displaying 100 webp images more intense than 100 png images)
+            // - load image based on scale
+            try
+            {
+                using (var image = SixLabors.ImageSharp.Image.Load(stream))
+                {
+                    // If images are really big we resize to at least 3x the 200x300 we display as.
+                    // In future this should be updated to resize to display scale.
+                    // If the image is smaller than this we are just saving as png.
+                    var resizeOptions = new ResizeOptions()
+                    {
+                        Size = new Size(200 * 3, 300 * 3),
+                        Sampler = KnownResamplers.Lanczos5,
+                        Mode = ResizeMode.Min, // If image is smaller it won't be resized up.
+                    };
+                    image.Mutate(x => x.Resize(resizeOptions));
+                    //image.SaveAsPng(ExpectedCustomCoverImage);
+                    image.SaveAsWebp(ExpectedCustomCoverImage);
+                    //image.SaveAsJpeg(ExpectedCustomCoverImage);
+                }
+
+                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    CoverImage = null;
+                    CoverImage = ExpectedCustomCoverImage;
+                });
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
+        }
+
+        protected async void DownloadCover(string url)
+        {
+            var extension = Path.GetExtension(url);
+
+            // Path.GetExtension retains query arguments, so ths will remove them if they exist.
+            if (extension.Contains('?'))
+            {
+                extension = extension.Substring(0, extension.IndexOf("?"));
+            }
+            var tempFile = Path.Combine(Storage.GetTemp(), $"{ID}.{extension}");
+
+
+            try
+            {
+                using (var fileStream = new FileStream(tempFile, FileMode.Create))
+                {
+                    var httpResponseMessage = await App.CurrentApp.HttpClient.GetAsync(url, System.Net.Http.HttpCompletionOption.ResponseHeadersRead);
+                    if (httpResponseMessage.IsSuccessStatusCode == false)
+                    {
+                        return;
+                    }
+
+                    // This could be optimised by loading stream directly to ImageSharp and skip
+                    // the save/load to disk.
+                    using (var stream = httpResponseMessage.Content.ReadAsStream())
+                    {
+                        stream.CopyTo(fileStream);
+                    }
+                }
+
+                // Now if the image is downloaded lets resize it, 
+                ResizeCover(tempFile);
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
+            finally
+            {
+                // Cleanup temp file.
+                if (File.Exists(tempFile))
+                {
+                    File.Delete(tempFile);
+                }
+            }
+        }
+
+        public async Task SaveToDatabaseAsync()
+        {
+            try
+            {
+                var rowsChanged = await App.CurrentApp.Database.InsertOrReplaceAsync(this);
+                if (rowsChanged == 0)
+                {
+                    Logger.Error($"Tried to save game to database but rowsChanged was 0.");
+                }
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
+        }
+
+        public async Task DeleteAsync()
+        {
+            try
+            {
+                await App.CurrentApp.Database.DeleteAsync(this);
+
+                var thumbnailImages = Directory.GetFiles(Storage.GetImageCachePath(), $"{ID}_*", SearchOption.AllDirectories);
+                foreach (var thumbnailImage in thumbnailImages)
+                {
+                    File.Delete(thumbnailImage);
+                }
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
+        }
+
+
+        public async Task PromptToRemoveCustomCover()
+        {
+            var dialog = new EasyContentDialog(App.CurrentApp.MainWindow.Content.XamlRoot)
+            {
+                Title = $"Remove custom cover?",
+                PrimaryButtonText = "Remove",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
+                Content = "Are you sure you want to remove the custom cover image?",
+            };
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                if (File.Exists(ExpectedCustomCoverImage))
+                {
+                    File.Delete(ExpectedCustomCoverImage);
+                }
+
+                // Will load default or attempt to fetch fresh.
+                LoadCoverImage();
+            }
+        }
+
+        public async Task PromptToBrowseCustomCover()
+        {
+            try
+            {
+                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
+                var fileOpenPicker = new FileOpenPicker()
+                {
+                    SuggestedStartLocation = PickerLocationId.PicturesLibrary,
+                    ViewMode = PickerViewMode.Thumbnail,
+                };
+                fileOpenPicker.FileTypeFilter.Add(".jpg");
+                fileOpenPicker.FileTypeFilter.Add(".jpeg");
+                fileOpenPicker.FileTypeFilter.Add(".png");
+                fileOpenPicker.FileTypeFilter.Add(".webp");
+                WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);
+
+                var coverImageFile = await fileOpenPicker.PickSingleFileAsync();
+
+                if (coverImageFile == null)
+                {
+                    return;
+                }
+
+                AddCustomCover(coverImageFile.Path);
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
+        }
     }
 }

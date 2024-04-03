@@ -1,5 +1,7 @@
 ﻿using Microsoft.UI.Xaml;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DLSS_Swapper
 {
@@ -221,6 +223,58 @@ namespace DLSS_Swapper
                 }
             }
         }
+
+
+        bool _hasShownManuallyAddingGamesNotice = false;
+        public bool HasShownManuallyAddingGamesNotice
+        {
+            get { return _hasShownManuallyAddingGamesNotice; }
+            set
+            {
+                if (_hasShownManuallyAddingGamesNotice != value)
+                {
+                    _hasShownManuallyAddingGamesNotice = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        
+
+        /*
+        public List<string> Directories { get; set; } = new List<string>();
+
+        public void AddDirectory(string directory)
+        {
+            if (Directories.Contains(directory))
+            {
+                return;
+            }
+            
+            Directories.Add(directory);
+            
+            if (_autoSave)
+            {
+                SaveJson();
+            }
+        }
+        
+        public void RemoveDirectory(string directory)
+        {
+            Directories.Remove(directory);
+            
+            if (_autoSave)
+            {
+                SaveJson();
+            }
+        }
+        */
+
+
+
 
         void SaveJson()
         {

@@ -1,6 +1,8 @@
-﻿using DLSS_Swapper.Data;
+﻿using CommunityToolkit.WinUI.UI.Controls;
+using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.EpicGamesStore;
 using DLSS_Swapper.Data.GOG;
+using DLSS_Swapper.Data.GitHub;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;
@@ -28,12 +30,30 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Pickers;
+using Windows.System;
+using DLSS_Swapper.Data.CustomDirectory;
+using System.Text;
+using CommunityToolkit.WinUI.UI;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.CodeDom;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace DLSS_Swapper.Pages
 {
+    public class GameGroup
+    {
+        public string Name { get; private set; } = String.Empty;
+        public ObservableCollection<Game> Games { get; private set; } = null;
+
+        public GameGroup(string name, ObservableCollection<Game> games)
+        {
+            Name = name;
+            Games = games;
+        }
+    }
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -41,13 +61,19 @@ namespace DLSS_Swapper.Pages
     {
         public List<IGameLibrary> GameLibraries { get; } = new List<IGameLibrary>();
 
+        public List<GameGroup> GroupedGameGroups { get; } = new List<GameGroup>();
+        public List<GameGroup> UngroupedGameGroups { get; } = new List<GameGroup>();
+        
+        ObservableCollection<Game> FavouriteGames = new ObservableCollection<Game>();
+        ObservableCollection<Game> AllGames = new ObservableCollection<Game>();
+
         bool _loadingGamesAndDlls = false;
 
         public GameGridPage()
         {
             this.InitializeComponent();
-            DataContext = this;
 
+            DataContext = this;
         }
 
 
@@ -129,7 +155,6 @@ namespace DLSS_Swapper.Pages
 
             GameLibraries.Clear();
 
-
             // Auto game library loading.
             // Simply adding IGameLibrary interface means we will load the games.
             var loadGameTasks = new List<Task>(); 
@@ -210,10 +235,16 @@ namespace DLSS_Swapper.Pages
             MainGridView.SelectionChanged += MainGridView_SelectionChanged;
         }
 
-
+        bool hasFirstLoaded = false;
         async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            await LoadGamesAndDlls();
+            if (hasFirstLoaded)
+            {
+                return;
+            }
+            hasFirstLoaded = true;
+            //await LoadGamesAndDlls();
+            await LoadGames();
         }
 
         async void MainGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -226,6 +257,22 @@ namespace DLSS_Swapper.Pages
             MainGridView.SelectedIndex = -1;
             if (e.AddedItems[0] is Game game)
             {
+                /*
+                //var mainGrid = Content as Grid;
+                var dialog2 = new EasyContentDialog(XamlRoot)
+                {
+                    //dialog.Title = "Error";
+                    PrimaryButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = $"DLSS was not detected in {game.Title}.",
+                };
+                await dialog2.ShowAsync();
+                return;*/
+            
+                var gameControl = new GameControl(game);              
+                await gameControl.ShowAsync();
+
+                return;
                 EasyContentDialog dialog;
 
                 if (game.HasDLSS == false)
@@ -337,7 +384,61 @@ namespace DLSS_Swapper.Pages
             }
         }
 
+        async Task LoadGames()
+        {
 
+            var steamLibrary1 = IGameLibrary.GetGameLibrary(GameLibrary.Steam);
+            var steamLibrary2 = IGameLibrary.GetGameLibrary(GameLibrary.Steam);
+
+
+            Debugger.Break();
+
+            foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
+            {
+                var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
+
+                if (gameLibraryEnum == GameLibrary.Steam)
+                {
+                    var query = App.CurrentApp.Database.Table<ManuallyAddedGame>().ToListAsync();
+
+                }
+                else if(gameLibraryEnum == GameLibrary.GOG)
+                {
+
+                }
+                else if(gameLibraryEnum == GameLibrary.EpicGamesStore)
+                {
+
+                }
+                else if(gameLibraryEnum == GameLibrary.UbisoftConnect)
+                {
+
+                }
+                else if(gameLibraryEnum == GameLibrary.XboxApp)
+                {
+
+                }
+                else if(gameLibraryEnum == GameLibrary.ManuallyAdded)
+                {
+                    var query = App.CurrentApp.Database.Table<ManuallyAddedGame>().ToListAsync();
+
+                }
+                else
+                {
+
+                }
+
+                //.Where(s => s.Symbol.StartsWith("A"));
+
+                //.get..
+                //GameLibraries.Add(gameLibrary);
+            }
+
+
+            return;
+
+
+        }
 
         async Task LoadGamesAndDlls()
         {
@@ -360,6 +461,162 @@ namespace DLSS_Swapper.Pages
                 LoadingStackPanel.Visibility = Visibility.Collapsed;
                 _loadingGamesAndDlls = false;
             });
+        }
+
+        async void AddGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Settings.Instance.HasShownManuallyAddingGamesNotice == false)
+            {
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    Title = "Note for manually adding games",
+                    PrimaryButtonText = "Add games",
+                    SecondaryButtonText = "Report issue",
+                    CloseButtonText = "Cancel",
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = new MarkdownTextBlock()
+                    {
+                        Text = @"DLSS Swapper should find games from your installed game libraries automatically. If your game is not listed there may be a few settings preventing it. Please check:
+
+- Games list filter is not set to ""Hide non-DLSS games""
+- Specific game library is enabled in settings
+
+If you have checked these and your game is still not showing up there may be a bug. We would appreciate it if you could report the issue on our GitHub repository so we can make a fix and have your games better detected in the future.",
+                        Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
+                    },
+                };
+                var result = await dialog.ShowAsync();
+
+                if (result == ContentDialogResult.None)
+                {
+                    return;
+                }
+                
+
+                if (result == ContentDialogResult.Primary)
+                {
+                    // Only dismiss the notice for good once the user has proceeded to add games.
+                    Settings.Instance.HasShownManuallyAddingGamesNotice = true;
+                    await AddGameManually();
+                }
+                else if (result == ContentDialogResult.Secondary)
+                {
+                    await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/issues"));
+                }
+            }
+            else
+            {
+                await AddGameManually();
+            }
+
+        }
+
+        async Task AddGameManually()
+        {
+            var folderPicker = new FolderPicker()
+            {
+                SuggestedStartLocation = PickerLocationId.ComputerFolder,
+            };
+
+            var installPath = String.Empty;
+            try
+            {
+                // Associate the HWND with the folder picker
+                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
+                WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
+
+                var folder = await folderPicker.PickSingleFolderAsync();
+
+                if (folder == null)
+                {
+                    return;
+                }
+
+                installPath = folder.Path;
+
+                // If top level directory throw error.
+                if (installPath == Path.GetPathRoot(installPath))
+                {
+                    var dialog = new EasyContentDialog(XamlRoot)
+                    {
+                        CloseButtonText = "Okay",
+                        DefaultButton = ContentDialogButton.Close,
+                        Title = "Error",
+                        Content = "Adding top level directory is not supported. Please add the root of your game directory.",
+                    };
+                    await dialog.ShowAsync();
+                    return;
+                }
+
+                var manualGameLibrary = GameLibraries.Single(x => x.GameLibrary == GameLibrary.ManuallyAdded);
+
+                // This will allow adding existing game manually, EG. Steam game can be added manually. There will be some bad things
+                // in the UI where a user may update DLSS in the Steam copy but does not show up as changed in the manually added version.
+                // The workaround to this would be to check all games here but it will have the flaw of missing a game (eg. if Steam is disabled,
+                // install game on Steam, manually add game to DLSS Swapper, then enable Steam. We can check every library when adding their games
+                // that they don't exist in ManuallyAdded list, but then its a real pain to have to answer the questions of "Why doesn't game X show
+                // in the Steam section".
+                // Keeping this like this allows users to disable Steam but add the one specific Steam game they want to be able to swap DLSS in.
+                var gameFolderAlreadyExists = manualGameLibrary.LoadedGames.Any(x => x.InstallPath == installPath);
+                if (gameFolderAlreadyExists == true)
+                {
+                    var dialog = new EasyContentDialog(XamlRoot)
+                    {
+                        Title = "Error adding your game",
+                        CloseButtonText = "Close",
+                        Content = $"The install path \"{installPath}\" already exists and can't be added again.",
+                    };
+                    await dialog.ShowAsync();
+                    return;
+                }
+
+                var manuallyAddGameControl = new ManuallyAddGameControl(installPath);
+                var addGameDialog = new FakeContentDialog() //XamlRoot
+                {
+                    CloseButtonText = "Cancel",
+                    PrimaryButtonText = "Add Game",
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = manuallyAddGameControl,
+                };
+                addGameDialog.Resources["ContentDialogMinWidth"] = 700;
+                addGameDialog.Resources["ContentDialogMaxWidth"] = 700;
+
+                var addGameResult = await addGameDialog.ShowAsync();
+                if (manuallyAddGameControl.DataContext is ManuallyAddGameModel manuallyAddGameModel)
+                {
+                    if (addGameResult == ContentDialogResult.Primary)
+                    {
+                        var game = manuallyAddGameModel.Game;
+                        await game.SaveToDatabaseAsync();
+                        game.ProcessGame();
+
+                        await manualGameLibrary.ListGamesAsync();
+                        FilterGames();
+                    }
+                    else
+                    {
+                        // Cleanup if user is going back.
+                        await manuallyAddGameModel.Game.DeleteAsync();
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                Logger.Error($"Attempted to manually add game from path {installPath} but got an error. ({err.Message})");
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    Title = "Error adding your game",
+                    CloseButtonText = "Close",
+                    PrimaryButtonText = "Report issue",
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = $"There was a problem and your game could not be added at this time. Please report this issue.\n\nError message: {err.Message}",
+                };
+                var result = await dialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/issues"));
+                }
+            }
         }
 
         async void RefreshButton_Click(object sender, RoutedEventArgs e)

@@ -79,7 +79,6 @@ VIAddVersionKey "ProductVersion" "1.0.5.0"
 VIAddVersionKey "FileDescription" "DLSS Swapper installer"
 VIAddVersionKey "FileVersion" "1.0.5.0"
 
-
 ; Pages
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_DIRECTORY

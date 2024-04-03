@@ -20,6 +20,9 @@ Steps to reproduce the behavior:
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
+**Logs**
+If relevant please attach your log file. See the Settings screen in DLSS Swapper for the location of your current log file.
+
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 

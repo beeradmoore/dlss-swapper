@@ -156,15 +156,30 @@ namespace DLSS_Swapper.Data
 
             _cancellationTokenSource?.Cancel();
 
-            LocalRecord.IsDownloading = true;
-            LocalRecord.DownloadProgress = 0;
-            LocalRecord.HasDownloadError = false;
-            LocalRecord.DownloadErrorMessage = String.Empty;
-            NotifyPropertyChanged("LocalRecord");
-
             _cancellationTokenSource = new CancellationTokenSource();
             var cancellationToken = _cancellationTokenSource.Token;
-            var response = await App.CurrentApp.HttpClient.GetAsync(DownloadUrl, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+
+            HttpResponseMessage response;
+            try
+            {
+                response = await App.CurrentApp.HttpClient.GetAsync(DownloadUrl, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+
+            LocalRecord.IsDownloading = true;
+            LocalRecord.DownloadProgress = 0;
+                NotifyPropertyChanged("LocalRecord");
+            }
+            catch (HttpRequestException ex)
+            {
+                Logger.Error(ex.Message);
+
+                LocalRecord.IsDownloading = false;
+                LocalRecord.HasDownloadError = true;
+                LocalRecord.DownloadErrorMessage = "Could not download DLSS. Please check your internet connection!";
+            NotifyPropertyChanged("LocalRecord");
+
+                return (false, "Could not download DLSS. Please check your internet connection!", false);
+            }
+            
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
 

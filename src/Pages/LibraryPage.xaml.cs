@@ -657,7 +657,7 @@ Only import dlls from sources you trust.",
         async Task DownloadRecordAsync(DLSSRecord record)
         {
             var result = await record?.DownloadAsync();
-            if (result.Success == false && result.Cancelled == false)
+            if (result.Success is false && result.Cancelled is false)
             {
                 var dialog = new EasyContentDialog(XamlRoot)
                 {
@@ -666,6 +666,7 @@ Only import dlls from sources you trust.",
                     DefaultButton = ContentDialogButton.Close,
                     Content = result.Message,
                 };
+
                 await dialog.ShowAsync();
             }
         }

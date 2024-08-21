@@ -149,7 +149,7 @@ namespace DLSS_Swapper.Data
         {
             var dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
 
-            if (String.IsNullOrEmpty(DownloadUrl))
+            if (string.IsNullOrWhiteSpace(DownloadUrl))
             {
                 return (false, "Invalid download URL.", false);
             }
@@ -164,8 +164,8 @@ namespace DLSS_Swapper.Data
             {
                 response = await App.CurrentApp.HttpClient.GetAsync(DownloadUrl, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
 
-            LocalRecord.IsDownloading = true;
-            LocalRecord.DownloadProgress = 0;
+                LocalRecord.IsDownloading = true;
+                LocalRecord.DownloadProgress = 0;
                 NotifyPropertyChanged("LocalRecord");
             }
             catch (HttpRequestException ex)
@@ -175,14 +175,13 @@ namespace DLSS_Swapper.Data
                 LocalRecord.IsDownloading = false;
                 LocalRecord.HasDownloadError = true;
                 LocalRecord.DownloadErrorMessage = "Could not download DLSS. Please check your internet connection!";
-            NotifyPropertyChanged("LocalRecord");
+                NotifyPropertyChanged("LocalRecord");
 
                 return (false, "Could not download DLSS. Please check your internet connection!", false);
             }
             
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
-
                 dispatcherQueue.TryEnqueue(() =>
                 {
                     LocalRecord.IsDownloading = false;
@@ -199,8 +198,6 @@ namespace DLSS_Swapper.Data
             var totalBytesRead = 0L;
             var buffer = new byte[1024 * 8];
             var isMoreToRead = true;
-
-
 
             var guid = Guid.NewGuid().ToString().ToUpper();
 
@@ -262,10 +259,7 @@ namespace DLSS_Swapper.Data
                     NotifyPropertyChanged("LocalRecord");
                 });
 
-                
-
                 File.Move(tempZipFile, Path.Combine(targetZipDirectory, $"{Version}_{MD5Hash}.zip"), true);
-
 
                 dispatcherQueue.TryEnqueue(() =>
                 {
@@ -286,7 +280,6 @@ namespace DLSS_Swapper.Data
                     LocalRecord.IsDownloaded = false;
                     NotifyPropertyChanged("LocalRecord");
                 });
-
 
                 return (false, String.Empty, true);
             }

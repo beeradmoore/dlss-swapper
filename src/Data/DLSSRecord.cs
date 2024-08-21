@@ -180,7 +180,7 @@ namespace DLSS_Swapper.Data
                 return (false, "Could not download DLSS. Please check your internet connection!", false);
             }
             
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (response.StatusCode is not System.Net.HttpStatusCode.OK)
             {
                 dispatcherQueue.TryEnqueue(() =>
                 {
@@ -218,7 +218,7 @@ namespace DLSS_Swapper.Data
                         {
                             var bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken).ConfigureAwait(false);
 
-                            if (bytesRead == 0)
+                            if (bytesRead is 0)
                             {
                                 isMoreToRead = false;
                                 continue;
@@ -227,7 +227,6 @@ namespace DLSS_Swapper.Data
                             await fileStream.WriteAsync(buffer, 0, bytesRead, cancellationToken).ConfigureAwait(false);
 
                             totalBytesRead += bytesRead;
-
 
                             if ((DateTimeOffset.Now - lastUpdated).TotalMilliseconds > 100)
                             {

@@ -288,21 +288,17 @@ namespace DLSS_Swapper.Pages
                             DefaultButton = ContentDialogButton.Primary,
                             Content = didUpdate.Message,
                         };
-                        /*
-                        // Disabled as I am unsure how to prompt to run as admin.
-                        if (didUpdate.PromptToRelaunchAsAdmin == true)
+
+                        if (didUpdate.PromptToRelaunchAsAdmin is true)
                         {
                             dialog.SecondaryButtonText = "Relaunch as Administrator";
                         }
-                        */
+
                         var dialogResult = await dialog.ShowAsync();
-                        /*
-                        // Disabled as I am unsure how to prompt to run as admin.
-                        if (didUpdate.PromptToRelaunchAsAdmin == true && dialogResult == ContentDialogResult.Secondary)
+                        if (dialogResult is ContentDialogResult.Secondary)
                         {
-                            App.CurrentApp.RelaunchAsAdministrator();
+                            App.CurrentApp.RestartAsAdmin();
                         }
-                        */
                     }
                 }
                 else if (result == ContentDialogResult.Secondary)
@@ -318,20 +314,17 @@ namespace DLSS_Swapper.Pages
                             DefaultButton = ContentDialogButton.Primary,
                             Content = didReset.Message,
                         };
-                        /*
-                        // Disabled as I am unsure how to prompt to run as admin.
-                        if (didReset.PromptToRelaunchAsAdmin == true)
+
+                        if (didReset.PromptToRelaunchAsAdmin is true)
                         {
                             dialog.SecondaryButtonText = "Relaunch as Administrator";
                         }
-                        */
-                        var dialogResult = await dialog.ShowAsync();/*
-                        // Disabled as I am unsure how to prompt to run as admin.
-                        if (didReset.PromptToRelaunchAsAdmin == true && dialogResult == ContentDialogResult.Secondary)
+
+                        var dialogResult = await dialog.ShowAsync();
+                        if (dialogResult is ContentDialogResult.Secondary)
                         {
-                            App.CurrentApp.RelaunchAsAdministrator();
+                            App.CurrentApp.RestartAsAdmin();
                         }
-                        */
                     }
                 }
             }

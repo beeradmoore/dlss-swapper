@@ -1,17 +1,12 @@
-﻿using DLSS_Swapper.Extensions;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
-using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using DLSS_Swapper.Extensions;
 
 namespace DLSS_Swapper.Data
 {
@@ -114,7 +109,6 @@ namespace DLSS_Swapper.Data
             }
         }
 
-
         [JsonIgnore]
         public LocalRecord LocalRecord { get; set; }
 
@@ -128,13 +122,14 @@ namespace DLSS_Swapper.Data
             return other.VersionNumber.CompareTo(VersionNumber);
         }
 
-
         #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
         internal void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        
         #endregion
 
         private CancellationTokenSource _cancellationTokenSource;

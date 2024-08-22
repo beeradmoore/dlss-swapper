@@ -149,7 +149,7 @@ namespace DLSS_Swapper.Data
         {
             var dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
 
-            if (string.IsNullOrWhiteSpace(DownloadUrl))
+            if (string.IsNullOrEmpty(DownloadUrl))
             {
                 return (false, "Invalid download URL.", false);
             }

@@ -20,7 +20,7 @@
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <converters:InverseBoolToVisibleConverter x:Key="InverseBoolToVisibleConverter" />
     </Page.Resources>
-
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -53,9 +53,14 @@
             </StackPanel>
         </Grid>
 
-
-        <GridView Grid.Row="1" x:Name="MainGridView" ItemsSource="{Binding CurrentDLSSRecords}" SizeChanged="MainGridView_SizeChanged" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Margin="16">
-
+        <InfoBar x:Name="AdminInfoBar"
+                 Grid.Row="1"
+                 IsOpen="True"
+                 Severity="Warning"
+                 IsClosable="False"
+                 Title="Administrative Privileges Granted"
+                 Message="This app is running with administrative privileges."
+                 Visibility="{Binding RunsAsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" />
 
         <GridView Grid.Row="2" x:Name="MainGridView" ItemsSource="{Binding CurrentDLSSRecords}" SizeChanged="MainGridView_SizeChanged" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Margin="16">
             <GridView.ItemsPanel>

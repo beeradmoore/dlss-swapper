@@ -43,6 +43,8 @@ namespace DLSS_Swapper.Pages
 
         bool _loadingGamesAndDlls = false;
 
+        public bool RunsAsAdmin { get; } = Environment.IsPrivilegedProcess;
+
         public GameGridPage()
         {
             this.InitializeComponent();

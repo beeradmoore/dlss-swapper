@@ -11,6 +11,7 @@
     NavigationCacheMode="Required">
     <Page.Resources>
         <converters:InverseBoolToVisibleConverter x:Key="InverseBoolToVisibleConverter" />
+        <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -32,10 +33,14 @@
             </StackPanel>
         </Grid>
 
-                <TextBlock 
-                    Text="Settings"
-                    Style="{StaticResource TitleTextBlockStyle}"
-                    Margin="0,12,0,0" />
+        <InfoBar x:Name="AdminInfoBar"
+                 Grid.Row="1"
+                 IsOpen="True"
+                 Severity="Warning"
+                 IsClosable="False"
+                 Title="Administrative Privileges Granted"
+                 Message="This app is running with administrative privileges."
+                 Visibility="{Binding RunsAsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" />
 
         <ScrollViewer Grid.Row="2">
             <StackPanel HorizontalAlignment="Left" Padding="56,0,56,56">

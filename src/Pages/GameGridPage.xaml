@@ -47,7 +47,7 @@
              IsOpen="True"
              Severity="Warning"
              IsClosable="False"
-             Title="Administrative Privileges Granted"
+             Title="Warning"
              Message="This app is running with administrative privileges."
              Visibility="{Binding RunsAsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" />
 

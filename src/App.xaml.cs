@@ -224,7 +224,7 @@ namespace DLSS_Swapper
         }
         */
 
-        public bool IsRunningAsAdmin()
+        public bool IsAdminUser()
         {
             using WindowsIdentity identity = WindowsIdentity.GetCurrent();
             WindowsPrincipal principal = new WindowsPrincipal(identity);

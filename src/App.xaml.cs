@@ -10,6 +10,7 @@ using Microsoft.Win32;
 using MvvmHelpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace DLSS_Swapper
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public partial class App : Application
+    public sealed partial class App : Application
     {
         public ElementTheme GlobalElementTheme { get; set; }
 
@@ -204,7 +205,6 @@ namespace DLSS_Swapper
             }
         }
 
-
         /*
         // Disabled because the non-async method seems faster. 
         internal async Task LoadLocalRecordsAsync()
@@ -224,12 +224,36 @@ namespace DLSS_Swapper
         }
         */
 
-
-
-        internal bool IsRunningAsAdministrator()
+        public bool IsAdminUser()
         {
-            var principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            using WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
+        public void RestartAsAdmin()
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                UseShellExecute = true,
+                WorkingDirectory = Environment.CurrentDirectory,
+                FileName = Assembly.GetExecutingAssembly().GetName().Name,
+                Verb = "runas"
+            };
+
+            try
+            {
+                Process.Start(startInfo);
+                Logger.Info("Restarting as admin.");
+            }
+            catch (Win32Exception)
+            {
+                Logger.Warning("User refused the elevation.");
+                return;
+            }
+
+            App.CurrentApp.Exit();
         }
 
         /*
@@ -257,8 +281,6 @@ namespace DLSS_Swapper
             //Logger.Error(System.Reflection.Assembly.GetExecutingAssembly().Location);
         }
         */
-
-
 
         public Version GetVersion()
         {

@@ -162,13 +162,13 @@ namespace DLSS_Swapper.Data
                 catch (UnauthorizedAccessException err)
                 {
                     Logger.Error($"UnauthorizedAccessException: {err.Message}");
-                    if (App.CurrentApp.IsRunningAsAdministrator())
+                    if (App.CurrentApp.IsAdminUser() is false)
                     {
-                        return (false, "Unable to reset to default. Please repair your game manually.", false);
+                        return (false, "Unable to reset to default. Running DLSS Swapper as administrator may fix this.", true);
                     }
                     else
                     {
-                        return (false, "Unable to reset to default. Running DLSS Swapper as administrator may fix this.", true);
+                        return (false, "Unable to reset to default. Please repair your game manually.", false);
                     }
                 }
                 catch (Exception err)
@@ -260,14 +260,14 @@ namespace DLSS_Swapper.Data
                     catch (UnauthorizedAccessException err)
                     {
                         Logger.Error($"UnauthorizedAccessException: {err.Message}");
-                        if (App.CurrentApp.IsRunningAsAdministrator())
+                        if (App.CurrentApp.IsAdminUser() is false)
                         {
-                            return (false, "Unable to swap DLSS dll as we are unable to write to the target directory.", false);
+                            return (false, "Unable to swap DLSS dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
 
                         }
                         else
                         {
-                            return (false, "Unable to swap DLSS dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
+                            return (false, "Unable to swap DLSS dll as we are unable to write to the target directory.", false);
                         }
                     }
                     catch (Exception err)
@@ -289,14 +289,13 @@ namespace DLSS_Swapper.Data
                 catch (UnauthorizedAccessException err)
                 {
                     Logger.Error($"UnauthorizedAccessException: {err.Message}");
-                    if (App.CurrentApp.IsRunningAsAdministrator())
+                    if (App.CurrentApp.IsAdminUser() is false)
                     {
-                        return (false, "Unable to swap DLSS dll as we are unable to write to the target directory.", false);
-
+                        return (false, "Unable to swap DLSS dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
                     }
                     else
                     {
-                        return (false, "Unable to swap DLSS dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
+                        return (false, "Unable to swap DLSS dll as we are unable to write to the target directory.", false);
                     }
                 }
                 catch (Exception err)

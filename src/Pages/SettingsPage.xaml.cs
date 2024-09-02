@@ -40,6 +40,7 @@ namespace DLSS_Swapper.Pages
 
         private AsyncCommand _checkForUpdateCommand;
         public AsyncCommand CheckForUpdatesCommand => _checkForUpdateCommand ??= new AsyncCommand(CheckForUpdatesAsync, _=> !IsCheckingForUpdates);
+        public bool RunsAsAdmin { get; } = Environment.IsPrivilegedProcess;
 
         bool _isCheckingForUpdates;
         public bool IsCheckingForUpdates

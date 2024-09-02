@@ -1,17 +1,12 @@
-﻿using DLSS_Swapper.Extensions;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
-using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using DLSS_Swapper.Extensions;
 
 namespace DLSS_Swapper.Data
 {
@@ -114,7 +109,6 @@ namespace DLSS_Swapper.Data
             }
         }
 
-
         [JsonIgnore]
         public LocalRecord LocalRecord { get; set; }
 
@@ -128,13 +122,14 @@ namespace DLSS_Swapper.Data
             return other.VersionNumber.CompareTo(VersionNumber);
         }
 
-
         #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
         internal void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        
         #endregion
 
         private CancellationTokenSource _cancellationTokenSource;
@@ -149,25 +144,39 @@ namespace DLSS_Swapper.Data
         {
             var dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
 
-            if (String.IsNullOrEmpty(DownloadUrl))
+            if (string.IsNullOrEmpty(DownloadUrl))
             {
                 return (false, "Invalid download URL.", false);
             }
 
             _cancellationTokenSource?.Cancel();
 
-            LocalRecord.IsDownloading = true;
-            LocalRecord.DownloadProgress = 0;
-            LocalRecord.HasDownloadError = false;
-            LocalRecord.DownloadErrorMessage = String.Empty;
-            NotifyPropertyChanged("LocalRecord");
-
             _cancellationTokenSource = new CancellationTokenSource();
             var cancellationToken = _cancellationTokenSource.Token;
-            var response = await App.CurrentApp.HttpClient.GetAsync(DownloadUrl, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
-            {
 
+            HttpResponseMessage response;
+            try
+            {
+                response = await App.CurrentApp.HttpClient.GetAsync(DownloadUrl, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+
+                LocalRecord.IsDownloading = true;
+                LocalRecord.DownloadProgress = 0;
+                NotifyPropertyChanged("LocalRecord");
+            }
+            catch (HttpRequestException ex)
+            {
+                Logger.Error(ex.Message);
+
+                LocalRecord.IsDownloading = false;
+                LocalRecord.HasDownloadError = true;
+                LocalRecord.DownloadErrorMessage = "Could not download DLSS. Please check your internet connection!";
+                NotifyPropertyChanged("LocalRecord");
+
+                return (false, "Could not download DLSS. Please check your internet connection!", false);
+            }
+            
+            if (response.StatusCode is not System.Net.HttpStatusCode.OK)
+            {
                 dispatcherQueue.TryEnqueue(() =>
                 {
                     LocalRecord.IsDownloading = false;
@@ -184,8 +193,6 @@ namespace DLSS_Swapper.Data
             var totalBytesRead = 0L;
             var buffer = new byte[1024 * 8];
             var isMoreToRead = true;
-
-
 
             var guid = Guid.NewGuid().ToString().ToUpper();
 
@@ -206,7 +213,7 @@ namespace DLSS_Swapper.Data
                         {
                             var bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken).ConfigureAwait(false);
 
-                            if (bytesRead == 0)
+                            if (bytesRead is 0)
                             {
                                 isMoreToRead = false;
                                 continue;
@@ -215,7 +222,6 @@ namespace DLSS_Swapper.Data
                             await fileStream.WriteAsync(buffer, 0, bytesRead, cancellationToken).ConfigureAwait(false);
 
                             totalBytesRead += bytesRead;
-
 
                             if ((DateTimeOffset.Now - lastUpdated).TotalMilliseconds > 100)
                             {
@@ -247,10 +253,7 @@ namespace DLSS_Swapper.Data
                     NotifyPropertyChanged("LocalRecord");
                 });
 
-                
-
                 File.Move(tempZipFile, Path.Combine(targetZipDirectory, $"{Version}_{MD5Hash}.zip"), true);
-
 
                 dispatcherQueue.TryEnqueue(() =>
                 {
@@ -271,7 +274,6 @@ namespace DLSS_Swapper.Data
                     LocalRecord.IsDownloaded = false;
                     NotifyPropertyChanged("LocalRecord");
                 });
-
 
                 return (false, String.Empty, true);
             }

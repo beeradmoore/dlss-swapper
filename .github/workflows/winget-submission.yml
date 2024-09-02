@@ -11,6 +11,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Submit package to Windows Package Manager Community Repository
+        if: '!github.event.release.prerelease'
         run: |
 
           $packageId = "beeradmoore.dlss-swapper"

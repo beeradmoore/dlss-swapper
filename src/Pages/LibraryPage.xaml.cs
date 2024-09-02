@@ -1,16 +1,4 @@
-﻿using DLSS_Swapper.Data;
-using DLSS_Swapper.Extensions;
-using DLSS_Swapper.UserControls;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using MvvmHelpers;
-using MvvmHelpers.Commands;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -21,10 +9,13 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Security.Authentication.OnlineId;
+using DLSS_Swapper.Data;
+using DLSS_Swapper.Extensions;
+using DLSS_Swapper.UserControls;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using MvvmHelpers;
+using MvvmHelpers.Commands;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -44,7 +35,7 @@ namespace DLSS_Swapper.Pages
         public AsyncCommand<DLSSRecord> CancelDownloadRecordCommand { get; }
         public AsyncCommand<DLSSRecord> ExportRecordCommand { get; }
         public AsyncCommand<DLSSRecord> ShowDownloadErrorCommand { get; }
-
+        public bool RunsAsAdmin { get; } = Environment.IsPrivilegedProcess;
 
         bool _isRefreshing;
         public bool IsRefreshing
@@ -657,7 +648,7 @@ Only import dlls from sources you trust.",
         async Task DownloadRecordAsync(DLSSRecord record)
         {
             var result = await record?.DownloadAsync();
-            if (result.Success == false && result.Cancelled == false)
+            if (result.Success is false && result.Cancelled is false)
             {
                 var dialog = new EasyContentDialog(XamlRoot)
                 {
@@ -666,6 +657,7 @@ Only import dlls from sources you trust.",
                     DefaultButton = ContentDialogButton.Close,
                     Content = result.Message,
                 };
+
                 await dialog.ShowAsync();
             }
         }

@@ -1,5 +1,5 @@
-﻿using Microsoft.UI.Xaml;
-using System;
+﻿using System;
+using Microsoft.UI.Xaml;
 
 namespace DLSS_Swapper
 {
@@ -10,9 +10,9 @@ namespace DLSS_Swapper
         public static Settings Instance => _instance ??= Settings.FromJson();
         
         // We default this to false to prevent saves firing when loading from json.
-        bool _autoSave = false;
+        private bool _autoSave = false;
 
-        bool _hasShownWarning = false;
+        private bool _hasShownWarning = false;
         public bool HasShownWarning
         {
             get { return _hasShownWarning; }
@@ -29,7 +29,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _hasShownMultiplayerWarning = false;
+        private bool _hasShownMultiplayerWarning = false;
         public bool HasShownMultiplayerWarning
         {
             get { return _hasShownMultiplayerWarning; }
@@ -46,7 +46,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _hideNonDLSSGames = true;
+        private bool _hideNonDLSSGames = true;
         public bool HideNonDLSSGames
         {
             get { return _hideNonDLSSGames; }
@@ -63,8 +63,7 @@ namespace DLSS_Swapper
             }
         }
 
-
-        bool _groupGameLibrariesTogether = false;
+        private bool _groupGameLibrariesTogether = false;
         public bool GroupGameLibrariesTogether
         {
             get { return _groupGameLibrariesTogether; }
@@ -81,7 +80,7 @@ namespace DLSS_Swapper
             }
         }
 
-        ElementTheme _appTheme = ElementTheme.Default;
+        private ElementTheme _appTheme = ElementTheme.Default;
         public ElementTheme AppTheme
         {
             get { return _appTheme; }
@@ -98,7 +97,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _allowExperimental = false;
+        private bool _allowExperimental = false;
         public bool AllowExperimental
         {
             get { return _allowExperimental; }
@@ -115,8 +114,7 @@ namespace DLSS_Swapper
             }
         }
 
-
-        bool _allowUntrusted = false;
+        private bool _allowUntrusted = false;
         public bool AllowUntrusted
         {
             get { return _allowUntrusted; }
@@ -133,7 +131,24 @@ namespace DLSS_Swapper
             }
         }
 
-        DateTimeOffset _lastRecordsRefresh = DateTimeOffset.MinValue;
+        private bool _hideNotDownloadedVersions = false;
+        public bool HideNotDownloadedVersions
+        {
+            get { return _hideNotDownloadedVersions; }
+            set
+            {
+                if (_hideNotDownloadedVersions != value)
+                {
+                    _hideNotDownloadedVersions = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        private DateTimeOffset _lastRecordsRefresh = DateTimeOffset.MinValue;
         public DateTimeOffset LastRecordsRefresh
         {
             get { return _lastRecordsRefresh; }
@@ -150,8 +165,7 @@ namespace DLSS_Swapper
             }
         }
 
-
-        ulong _lastPromptWasForVersion = 0L;
+        private ulong _lastPromptWasForVersion = 0L;
         public ulong LastPromptWasForVersion
         {
             get { return _lastPromptWasForVersion; }
@@ -168,9 +182,8 @@ namespace DLSS_Swapper
             }
         }
 
-
         // Don't forget to change this back to off.
-        LoggingLevel _loggingLevel = LoggingLevel.Error;
+        private LoggingLevel _loggingLevel = LoggingLevel.Error;
         public LoggingLevel LoggingLevel
         {
             get { return _loggingLevel; }
@@ -187,7 +200,7 @@ namespace DLSS_Swapper
             }
         }
 
-        uint _enabledGameLibraries = uint.MaxValue;
+        private uint _enabledGameLibraries = uint.MaxValue;
         public uint EnabledGameLibraries
         {
             get { return _enabledGameLibraries; }
@@ -204,8 +217,7 @@ namespace DLSS_Swapper
             }
         }
 
-
-        bool _wasLoadingGames = false;
+        private bool _wasLoadingGames = false;
         public bool WasLoadingGames
         {
             get { return _wasLoadingGames; }
@@ -222,18 +234,18 @@ namespace DLSS_Swapper
             }
         }
 
-        void SaveJson()
+        private void SaveJson()
         {
             AsyncHelper.RunSync(() => Storage.SaveSettingsJsonAsync(this));
         }
 
-        static Settings FromJson()
+        private static Settings FromJson()
         {
             Settings settings = null;
 
             var settingsFromJson = AsyncHelper.RunSync(() => Storage.LoadSettingsJsonAsync());
             // If we couldn't load settings then save the defaults.
-            if (settingsFromJson == null)
+            if (settingsFromJson is null)
             {
                 settings = new Settings();
                 settings.SaveJson();

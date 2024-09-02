@@ -1,27 +1,14 @@
-﻿using CommunityToolkit.WinUI.UI.Controls;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Documents;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using MvvmHelpers.Commands;
-using MvvmHelpers.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Foundation.Diagnostics;
-using Windows.System;
-using Windows.UI.ViewManagement;
-using System.Diagnostics;
 using DLSS_Swapper.UserControls;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Documents;
+using MvvmHelpers.Commands;
 
 namespace DLSS_Swapper.Pages
 {
@@ -31,7 +18,6 @@ namespace DLSS_Swapper.Pages
     public sealed partial class SettingsPage : Page
     {
         //https://github.com/microsoft/Xaml-Controls-Gallery/blob/6450265cc94da5b2fac5e1e22d1be35dc66c402e/XamlControlsGallery/Navigation/NavigationRootPage.xaml.cs#L32
-
 
         public string Version => App.CurrentApp.GetVersionString();
 
@@ -61,22 +47,22 @@ namespace DLSS_Swapper.Pages
         {
             this.InitializeComponent();
 
-
             // Initilize defaults.
-            LightThemeRadioButton.IsChecked = Settings.Instance.AppTheme == ElementTheme.Light;
-            DarkThemeRadioButton.IsChecked = Settings.Instance.AppTheme == ElementTheme.Dark;
-            DefaultThemeRadioButton.IsChecked = Settings.Instance.AppTheme == ElementTheme.Default;
+            LightThemeRadioButton.IsChecked = Settings.Instance.AppTheme is ElementTheme.Light;
+            DarkThemeRadioButton.IsChecked = Settings.Instance.AppTheme is ElementTheme.Dark;
+            DefaultThemeRadioButton.IsChecked = Settings.Instance.AppTheme is ElementTheme.Default;
 
             AllowUntrustedToggleSwitch.IsOn = Settings.Instance.AllowUntrusted;
             AllowExperimentalToggleSwitch.IsOn = Settings.Instance.AllowExperimental;
+            HideNotDownloadedToggleSwitch.IsOn = Settings.Instance.HideNotDownloadedVersions;
             LoggingComboBox.SelectedItem = Settings.Instance.LoggingLevel;
 
             DataContext = this;
         }
 
-        void ThemeRadioButton_Checked(object sender, RoutedEventArgs e)
+        private void ThemeRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (DataContext == null)
+            if (DataContext is null)
             {
                 return;
             }
@@ -98,9 +84,9 @@ namespace DLSS_Swapper.Pages
             }
         }
 
-        void AllowExperimental_Toggled(object sender, RoutedEventArgs e)
+        private void AllowExperimental_Toggled(object sender, RoutedEventArgs e)
         {
-            if (DataContext == null)
+            if (DataContext is null)
             {
                 return;
             }
@@ -112,9 +98,9 @@ namespace DLSS_Swapper.Pages
             }
         }
 
-        void AllowUntrusted_Toggled(object sender, RoutedEventArgs e)
+        private void AllowUntrusted_Toggled(object sender, RoutedEventArgs e)
         {
-            if (DataContext == null)
+            if (DataContext is null)
             {
                 return;
             }
@@ -126,20 +112,33 @@ namespace DLSS_Swapper.Pages
             }
         }
 
-        async Task CheckForUpdatesAsync()
+        private void HideNotDownloaded_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is null)
+            {
+                return;
+            }
+
+            if (e.OriginalSource is ToggleSwitch toggleSwitch)
+            {
+                Settings.Instance.HideNotDownloadedVersions = toggleSwitch.IsOn;
+            }
+        }
+
+        private async Task CheckForUpdatesAsync()
         {
             IsCheckingForUpdates = true;
             var githubUpdater = new Data.GitHub.GitHubUpdater();
             var newUpdate = await githubUpdater.CheckForNewGitHubRelease();      
-            if (newUpdate == null)
+            if (newUpdate is null)
             {
-
                 var dialog = new EasyContentDialog(XamlRoot)
                 {
                     CloseButtonText = "Okay",
                     DefaultButton = ContentDialogButton.Close,
                     Content = "No new updates are available.",
                 };
+
                 await dialog.ShowAsync();
 
                 IsCheckingForUpdates = false;
@@ -153,7 +152,7 @@ namespace DLSS_Swapper.Pages
 
         private void LoggingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (DataContext == null)
+            if (DataContext is null)
             {
                 return;
             }

@@ -52,4 +52,39 @@ public class ManuallyAddedLibrary : IGameLibrary
     {
         return true;
     }
+
+    public async Task<List<Game>> LoadFromCacheAsync()
+    {
+        try
+        {
+            var games = await App.CurrentApp.Database.Table<ManuallyAddedGame>().ToListAsync();
+            return games.ToList<Game>();
+        }
+        catch (Exception err)
+        {
+            Logger.Error(err.Message);
+        }
+        return new List<Game>();
+    }
+
+    public async Task LoadGamesAsync()
+    {
+        await Task.Delay(1);
+    }
+
+    public async Task LoadGamesFromCacheAsync()
+    {
+        try
+        {
+            var games = await App.CurrentApp.Database.Table<ManuallyAddedGame>().ToArrayAsync();
+            foreach (var game in games)
+            {
+                GameManager.Instance.AddGame(game);
+            }
+        }
+        catch (Exception err)
+        {
+            Logger.Error(err.Message);
+        }
+    }
 }

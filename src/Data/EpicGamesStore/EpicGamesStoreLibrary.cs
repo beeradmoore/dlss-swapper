@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -172,6 +173,41 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             }
 
             return String.Empty;
+        }
+
+        public async Task<List<Game>> LoadFromCacheAsync()
+        {
+            try
+            {
+                var games = await App.CurrentApp.Database.Table<EpicGamesStoreGame>().ToListAsync();                
+                return games.ToList<Game>();
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
+            return new List<Game>();
+        }
+
+        public async Task LoadGamesAsync()
+        {
+            await Task.Delay(1);
+        }
+
+        public async Task LoadGamesFromCacheAsync()
+        {
+            try
+            {
+                var games = await App.CurrentApp.Database.Table<EpicGamesStoreGame>().ToArrayAsync();
+                foreach (var game in games)
+                {
+                    GameManager.Instance.AddGame(game);
+                }
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
         }
     }
 }

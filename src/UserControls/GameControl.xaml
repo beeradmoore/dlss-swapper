@@ -6,7 +6,7 @@
     xmlns:usercontrols="using:DLSS_Swapper.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ct_converters="using:CommunityToolkit.WinUI.UI.Converters"
+    xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=usercontrols:GameControlModel, IsDesignTimeCreatable=True}"
     HorizontalAlignment="Stretch"
@@ -46,7 +46,11 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" XYFocusKeyboardNavigation="Enabled" Padding="{ThemeResource ContentDialogPadding}" Background="{TemplateBinding Background}" Spacing="8">
                 <Button Content="Remove" Visibility="{Binding CanRemove, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding RemoveCommand}" />
-                <Button x:Name="CloseButton" IsTabStop="False" Content="Close" Style="{ThemeResource DefaultButtonStyle}" ElementSoundMode="FocusOnly" Command="{Binding CloseCommand}" />
+                <Button x:Name="CloseButton" IsTabStop="False" Content="Close" Style="{ThemeResource DefaultButtonStyle}" ElementSoundMode="FocusOnly" Command="{Binding CloseCommand}" KeyboardAcceleratorPlacementMode="Hidden">
+                    <Button.KeyboardAccelerators>
+                        <KeyboardAccelerator Key="Escape" Modifiers="None" />
+                    </Button.KeyboardAccelerators>
+                </Button>
             </StackPanel>
         </ControlTemplate>
 

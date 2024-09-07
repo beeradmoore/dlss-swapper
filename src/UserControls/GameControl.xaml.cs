@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using CommunityToolkit.WinUI.UI;
 using DLSS_Swapper.Data;
 using Humanizer;
 using Microsoft.UI;
@@ -35,6 +34,20 @@ namespace DLSS_Swapper.UserControls
         public GameControl(Game game)
         {
             this.InitializeComponent();
+
+
+            // This only works if the grid background has focus.
+            /*
+            KeyUp += (object sender, KeyRoutedEventArgs e) => {
+                if (e.Key == Windows.System.VirtualKey.Escape)
+                {
+                    if (DataContext is GameControlModel gameControlModel && gameControlModel.CloseCommand.CanExecute(null))
+                    {
+                        gameControlModel.CloseCommand.Execute(null);
+                    }
+                }
+            };
+            */
 
             Resources["ContentDialogMinWidth"] = 700;
             
@@ -151,7 +164,9 @@ namespace DLSS_Swapper.UserControls
             }
         }
 
-
-
+        private void KeyboardAccelerator_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            Debugger.Break();
+        }
     }
 }

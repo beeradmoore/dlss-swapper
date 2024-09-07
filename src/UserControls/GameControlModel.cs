@@ -95,6 +95,7 @@ internal partial class GameControlModel : ObservableObject
     async Task ViewHistoryAsync()
     {
         //ViewHistoryCommand
+        await Task.Delay(100);
     }
 
     [RelayCommand]

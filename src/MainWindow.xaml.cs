@@ -1,5 +1,4 @@
 ﻿using AsyncAwaitBestPractices;
-using CommunityToolkit.WinUI.UI.Controls;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Pages;

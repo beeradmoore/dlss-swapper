@@ -23,7 +23,7 @@ using Windows.Storage.Pickers;
 
 namespace DLSS_Swapper.Data
 {
-    public abstract partial class Game : ObservableObject, IComparable<Game> //, INotifyPropertyChanged
+    public abstract partial class Game : ObservableObject, IComparable<Game>, IEquatable<Game> //, INotifyPropertyChanged
     {
         [PrimaryKey]
         [Column("id")]
@@ -651,6 +651,21 @@ namespace DLSS_Swapper.Data
             {
                 Logger.Error(err.Message);
             }
+        }
+
+        public bool Equals(Game other)
+        {
+            if (ID == other.ID)
+            {
+                return true;
+            }
+
+            if (PlatformId == other.PlatformId)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

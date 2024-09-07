@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using CommunityToolkit.WinUI.UI.Controls;
 using DLSS_Swapper.Pages;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;

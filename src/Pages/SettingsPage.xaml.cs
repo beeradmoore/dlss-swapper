@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.WinUI.UI.Controls;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -23,7 +22,6 @@ using Windows.System;
 using Windows.UI.ViewManagement;
 using System.Diagnostics;
 using Windows.Storage.Pickers;
-using ColorCode.Common;
 using DLSS_Swapper.UserControls;
 
 namespace DLSS_Swapper.Pages

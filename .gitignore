@@ -16,3 +16,4 @@ package/Output/
 .vscode/
 package/NSIS/FileList.nsh
 .idea/
+docs/_site/

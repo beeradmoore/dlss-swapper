@@ -225,15 +225,15 @@ namespace DLSS_Swapper
         }
 
 
-        bool _hasShownManuallyAddingGamesNotice = false;
-        public bool HasShownManuallyAddingGamesNotice
+        bool _dontShowManuallyAddingGamesNotice = false;
+        public bool DontShowManuallyAddingGamesNotice
         {
-            get { return _hasShownManuallyAddingGamesNotice; }
+            get { return _dontShowManuallyAddingGamesNotice; }
             set
             {
-                if (_hasShownManuallyAddingGamesNotice != value)
+                if (_dontShowManuallyAddingGamesNotice != value)
                 {
-                    _hasShownManuallyAddingGamesNotice = value;
+                    _dontShowManuallyAddingGamesNotice = value;
                     if (_autoSave)
                     {
                         SaveJson();
@@ -242,7 +242,27 @@ namespace DLSS_Swapper
             }
         }
 
+        bool _hasShownAddGameFolderMessage = false;
+        public bool HasShownAddGameFolderMessage
+        {
+            get { return _hasShownAddGameFolderMessage; }
+            set
+            {
+                if (_hasShownAddGameFolderMessage != value)
+                {
+                    _hasShownAddGameFolderMessage = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+
         
+
+
 
         /*
         public List<string> Directories { get; set; } = new List<string>();

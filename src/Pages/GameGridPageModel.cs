@@ -13,12 +13,15 @@ using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.UserControls;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Media;
 using Windows.Storage.Pickers;
 using Windows.System;
+using Windows.UI.Text;
 
 namespace DLSS_Swapper.Pages;
 
@@ -80,31 +83,43 @@ internal partial class GameGridPageModel : ObservableObject
     [RelayCommand]
     async Task AddManualGameButtonAsync()
     {
-        if (Settings.Instance.HasShownManuallyAddingGamesNotice == false)
+        if (Settings.Instance.DontShowManuallyAddingGamesNotice == false)
         {
+            var dontShowAgainCheckbox = new CheckBox()
+            {
+                Content = new TextBlock()
+                {
+                    Text = "Don't show again",
+                },
+            };
+
             var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
             {
                 Title = "Note for manually adding games",
-                PrimaryButtonText = "Add games",
-                SecondaryButtonText = "Report issue",
+                PrimaryButtonText = "Add Game",
+                SecondaryButtonText = "Report Issue",
                 CloseButtonText = "Cancel",
                 DefaultButton = ContentDialogButton.Primary,
-                Content = new MarkdownTextBlock()
+                Content = new StackPanel()
                 {
-                    Text = @"DLSS Swapper should find games from your installed game libraries automatically. If your game is not listed there may be a few settings preventing it. Please check:
+                    Children = {
+                        new TextBlock()
+                        {
+                            TextWrapping = TextWrapping.Wrap,
+                            Text = @"DLSS Swapper should find games from your installed game libraries automatically. If your game is not listed there may be a few settings preventing it. Please check:
 
-&nbsp;
-
-- &nbsp; Games list filter is not set to ""Hide non-DLSS games""
-- &nbsp; Specific game library is enabled in settings
-
-&nbsp;
+- Games list filter is not set to ""Hide non-DLSS games""
+- Specific game library is enabled in settings
 
 If you have checked these and your game is still not showing up there may be a bug. We would appreciate it if you could report the issue on our GitHub repository so we can make a fix and have your games better detected in the future.",
-                    Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
-                    Config = new MarkdownConfig(),
-                },
+                        },
+                        dontShowAgainCheckbox,
+                    },
+                    Orientation = Orientation.Vertical,
+                    Spacing = 16,
+                },                    
             };
+
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.None)
@@ -116,7 +131,10 @@ If you have checked these and your game is still not showing up there may be a b
             if (result == ContentDialogResult.Primary)
             {
                 // Only dismiss the notice for good once the user has proceeded to add games.
-                Settings.Instance.HasShownManuallyAddingGamesNotice = true;
+                if (dontShowAgainCheckbox.IsChecked == true)
+                {
+                    Settings.Instance.DontShowManuallyAddingGamesNotice = true;
+                }
                 await AddGameManually();
             }
             else if (result == ContentDialogResult.Secondary)
@@ -132,9 +150,51 @@ If you have checked these and your game is still not showing up there may be a b
 
     async Task AddGameManually()
     {
+        if (Settings.Instance.HasShownAddGameFolderMessage == false)
+        {
+            var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
+            {
+                Title = "Another note for manually adding games",
+                PrimaryButtonText = "Add Game",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
+                Content = new TextBlock()
+                {
+                    TextWrapping = TextWrapping.Wrap,
+                    Inlines =
+                    {
+                        new Run() { Text = "You must select your " },
+                        new Run() { Text = "game", FontStyle = FontStyle.Italic },
+                        new Run() { Text = " directory, not your " },
+                        new Run() { Text = "games", FontStyle = FontStyle.Italic },
+                        new Run() { Text = " directory." },
+                        new Run() { Text = "\n\n" },
+                        new Run() { Text = "For example, iff you have a game at:\n" },
+                        new Run() { Text = "C:\\Program Files\\MyGamesFolder\\MyFavouriteGame\\" },
+                        new Run() { Text = "\n\n" },
+                        new Run() { Text = "You would select the " },
+                        new Run() { Text = "MyFavouriteGame", FontWeight = FontWeights.Bold },
+                        new Run() { Text = " directory and not the " },
+                        new Run() { Text = "MyGamesFolder", FontWeight = FontWeights.Bold },
+                        new Run() { Text = " directory." },
+                    },
+                },
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.None)
+            {
+                return;
+            }
+
+            Settings.Instance.HasShownAddGameFolderMessage = true;
+        }
+
+
         var folderPicker = new FolderPicker()
         {
             SuggestedStartLocation = PickerLocationId.ComputerFolder,
+            CommitButtonText = "Select Game Folder",
         };
 
         var installPath = String.Empty;

@@ -93,11 +93,16 @@ internal partial class GameGridPageModel : ObservableObject
                 {
                     Text = @"DLSS Swapper should find games from your installed game libraries automatically. If your game is not listed there may be a few settings preventing it. Please check:
 
-- Games list filter is not set to ""Hide non-DLSS games""
-- Specific game library is enabled in settings
+&nbsp;
+
+- &nbsp; Games list filter is not set to ""Hide non-DLSS games""
+- &nbsp; Specific game library is enabled in settings
+
+&nbsp;
 
 If you have checked these and your game is still not showing up there may be a bug. We would appreciate it if you could report the issue on our GitHub repository so we can make a fix and have your games better detected in the future.",
                     Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
+                    Config = new MarkdownConfig(),
                 },
             };
             var result = await dialog.ShowAsync();

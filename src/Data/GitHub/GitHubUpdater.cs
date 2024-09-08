@@ -113,6 +113,7 @@ namespace DLSS_Swapper.Data.GitHub
             {
                 Text = yourVersion + gitHubRelease.Body,
                 Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
+                Config = new MarkdownConfig(),
             };
 
 
@@ -145,6 +146,7 @@ namespace DLSS_Swapper.Data.GitHub
             {
                 Text = gitHubRelease.Body,
                 Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
+                Config = new MarkdownConfig(),
             };
 
             var dialog = new EasyContentDialog(rootElement.XamlRoot)

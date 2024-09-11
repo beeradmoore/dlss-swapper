@@ -338,10 +338,12 @@ If you have checked these and your game is still not showing up there may be a b
         //gameGridPage.MainGridView.SelectionChanged -= MainGridView_SelectionChanged;
 
         //MainGridView.ItemsSource = null;
-        //CurrentCollectionView = null;
+        CurrentCollectionView = null;
+        CurrentCollectionView = GameManager.Instance.GetGameCollection();
+
         if (Settings.Instance.GroupGameLibrariesTogether)
         {
-            CurrentCollectionView = GameManager.Instance.GroupedGameCollectionViewSource.View;
+            //CurrentCollectionView = GameManager.Instance.GroupedGameCollectionViewSource.View;
 
             /*
             var collectionViewSource = new CollectionViewSource()
@@ -364,7 +366,7 @@ If you have checked these and your game is still not showing up there may be a b
         }
         else
         {
-            CurrentCollectionView = GameManager.Instance.UngroupedGameCollectionViewSource.View;
+            //CurrentCollectionView = GameManager.Instance.UngroupedGameCollectionViewSource.View;
 
             /*
             var games = new List<Game>();

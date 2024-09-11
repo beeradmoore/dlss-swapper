@@ -49,9 +49,9 @@ internal partial class GameManager : ObservableObject
     Dictionary<GameLibrary, AdvancedCollectionView> libraryGamesView = new Dictionary<GameLibrary, AdvancedCollectionView>();
 
 
-    Predicate<object> GetPredicateForAllGames(bool showOnlyDLSSGames)
+    Predicate<object> GetPredicateForAllGames(bool hideNonDLSSGames)
     {
-        if (showOnlyDLSSGames)
+        if (hideNonDLSSGames)
         {
             return (obj) =>
             {
@@ -66,9 +66,9 @@ internal partial class GameManager : ObservableObject
         };
     }
 
-    Predicate<object> GetPredicateForFavouriteGames(bool showOnlyDLSSGames)
+    Predicate<object> GetPredicateForFavouriteGames(bool hideNonDLSSGames)
     {
-        if (showOnlyDLSSGames)
+        if (hideNonDLSSGames)
         {
             return (obj) =>
             {
@@ -84,9 +84,9 @@ internal partial class GameManager : ObservableObject
     }
 
 
-    Predicate<object> GetPredicateForLibraryGames(GameLibrary library, bool showOnlyDLSSGames)
+    Predicate<object> GetPredicateForLibraryGames(GameLibrary library, bool hideNonDLSSGames)
     {
-        if (showOnlyDLSSGames)
+        if (hideNonDLSSGames)
         {
             return (obj) =>
             {
@@ -106,13 +106,12 @@ internal partial class GameManager : ObservableObject
         //AllGames.CollectionChanged += AllGames_CollectionChanged;
         //AllGames.CollectionChanged += AllGames_CollectionChanged;
         FavouriteGamesView = new AdvancedCollectionView(AllGames, true);
-        FavouriteGamesView.Filter = GetPredicateForFavouriteGames(false);
+        FavouriteGamesView.Filter = GetPredicateForFavouriteGames(Settings.Instance.HideNonDLSSGames);
         FavouriteGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
         FavouriteGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
-
         AllGamesView = new AdvancedCollectionView(AllGames, true);
-        AllGamesView.Filter = GetPredicateForAllGames(false);
+        AllGamesView.Filter = GetPredicateForAllGames(Settings.Instance.HideNonDLSSGames);
         //AllGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
         AllGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
         
@@ -137,7 +136,7 @@ internal partial class GameManager : ObservableObject
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
 
             var gameView = new AdvancedCollectionView(AllGames, true);
-            gameView.Filter = GetPredicateForLibraryGames(gameLibraryEnum, false);
+            gameView.Filter = GetPredicateForLibraryGames(gameLibraryEnum, Settings.Instance.HideNonDLSSGames);
             gameView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
             libraryGamesView[gameLibraryEnum] = gameView;
@@ -222,14 +221,49 @@ internal partial class GameManager : ObservableObject
         }
     }
 
+    public ICollectionView GetGameCollection()
+    {
+        // Refresh all filters.
+        using (FavouriteGamesView.DeferRefresh())
+        {
+            FavouriteGamesView.Filter = GetPredicateForFavouriteGames(Settings.Instance.HideNonDLSSGames);
+        }
+
+        using (AllGamesView.DeferRefresh())
+        {
+            AllGamesView.Filter = GetPredicateForAllGames(Settings.Instance.HideNonDLSSGames);
+        }
+
+
+        if (Settings.Instance.GroupGameLibrariesTogether)
+        {
+            // Only refresh librarys when we are going to the grouped view.
+            foreach (var keyValuePair in libraryGamesView)
+            {
+                using (keyValuePair.Value.DeferRefresh())
+                {
+                    keyValuePair.Value.Filter = GetPredicateForLibraryGames(keyValuePair.Key, Settings.Instance.HideNonDLSSGames);
+                }
+            }
+
+            return GroupedGameCollectionViewSource.View;
+        }
+        else
+        {
+            return UngroupedGameCollectionViewSource.View;
+        }
+    }
+
     public Game AddGame(Game game)
     {
         lock (gameLock)
         {
             if (AllGames.Contains(game) == true)
             {
-                //Debugger.Break();
+                // This probably checks the game collection twice looking for the game.
+                // We could do away with this, but in theory this if is never hit
                 var firstGame = AllGames.First<Game>(x => x.Equals(game));
+                Debugger.Break();
                 return firstGame;
             }
             else
@@ -237,7 +271,6 @@ internal partial class GameManager : ObservableObject
                 AllGames.Add(game);
                 return game;
             }
-            //GamesByLibrary[game.GameLibrary].Add(game);
         }
     }
 

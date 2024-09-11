@@ -44,7 +44,7 @@ namespace DLSS_Swapper.UserControls
             {
                 var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
                 var toggleSwitch = new ToggleSwitch();
-                toggleSwitch.IsOn = gameLibrary.IsEnabled();
+                toggleSwitch.IsOn = gameLibrary.IsEnabled;
                 toggleSwitch.OffContent = $"{gameLibrary.Name} disabled";
                 toggleSwitch.OnContent = $"{gameLibrary.Name} enabled";
                 toggleSwitch.Tag = gameLibraryEnum;

@@ -182,7 +182,10 @@ internal partial class GameManager : ObservableObject
         foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
-            tasks[gameLibraryEnum] = gameLibrary.LoadGamesFromCacheAsync();
+            if (gameLibrary.IsEnabled)
+            {
+                tasks[gameLibraryEnum] = gameLibrary.LoadGamesFromCacheAsync();
+            }
         }
 
         await Task.WhenAll(tasks.Values);

@@ -53,10 +53,13 @@ namespace DLSS_Swapper.Interfaces
             };
         }
 
-        public bool IsEnabled()
+        public bool IsEnabled
         {
-            var enabledGameLibraries = (GameLibrary)Settings.Instance.EnabledGameLibraries;
-            return enabledGameLibraries.HasFlag(GameLibrary);
+            get
+            {
+                var enabledGameLibraries = (GameLibrary)Settings.Instance.EnabledGameLibraries;
+                return enabledGameLibraries.HasFlag(GameLibrary);
+            }
         }
 
         public void Disable()

@@ -40,7 +40,7 @@
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <AppBarButton Label="Add Game" Command="{Binding AddManualGameButtonCommand}" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}">
+                <AppBarButton Label="Add Game" Command="{Binding AddManualGameButtonCommand}" IsEnabled="{Binding IsGameListLoading, Converter={StaticResource BoolNegationConverter}}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE710;" />
                     </AppBarButton.Content>
@@ -50,7 +50,7 @@
                         <FontIcon Glyph="&#xE72C;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Icon="Filter" Label="Filter" Command="{Binding FilterGamesButtonCommand}" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}">
+                <AppBarButton Icon="Filter" Label="Filter" Command="{Binding FilterGamesButtonCommand}" IsEnabled="{Binding IsGameListLoading, Converter={StaticResource BoolNegationConverter}}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE71C;" />
                     </AppBarButton.Content>
@@ -142,13 +142,6 @@
 
             </GridView.ItemTemplate>
         </GridView>
-
-        <!--SystemControlAcrylicElementBrush-->
-        <!--
-        <Grid x:Name="LoadingStackPanel" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <muxc:ProgressRing IsActive="True" Width="60" Height="60" />
-        </Grid>
-        -->
 
     </Grid>
 

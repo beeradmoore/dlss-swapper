@@ -42,6 +42,18 @@ namespace DLSS_Swapper.Data.EpicGamesStore
 
             DownloadCover(RemoteHeaderImage);
         }
-        
+
+        public override bool UpdateFromGame(Game game)
+        {
+            var didChange = ParentUpdateFromGame(game);
+
+            if (game is EpicGamesStoreGame epicGamesStoreGame)
+            {
+                //_localHeaderImages = xboxGame._localHeaderImages;
+            }
+
+            return didChange;
+        }
+
     }
 }

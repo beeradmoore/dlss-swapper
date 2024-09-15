@@ -142,12 +142,12 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         }
                     }
 
-                    var game = new EpicGamesStoreGame(manifest.CatalogItemId) //remoteHeaderUrl)
-                    {
-                        RemoteHeaderImage = remoteHeaderUrl,
-                        Title = manifest.DisplayName,
-                        InstallPath = manifest.InstallLocation,
-                    };
+                   
+                    var game = GameManager.Instance.GetGame<EpicGamesStoreGame>(manifest.CatalogItemId) ?? new EpicGamesStoreGame(manifest.CatalogItemId);
+                    game.RemoteHeaderImage = remoteHeaderUrl;
+                    game.Title = manifest.DisplayName;
+                    game.InstallPath = manifest.InstallLocation;
+                    
                     await game.SaveToDatabaseAsync();
                     game.ProcessGame();
                     games.Add(game);
@@ -198,9 +198,10 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         {
             try
             {
-                var games = await App.CurrentApp.Database.Table<EpicGamesStoreGame>().ToArrayAsync();
+                var games = await App.CurrentApp.Database.Table<EpicGamesStoreGame>().ToArrayAsync().ConfigureAwait(false);
                 foreach (var game in games)
                 {
+                    await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }
             }

@@ -194,11 +194,9 @@ namespace DLSS_Swapper.Data.Xbox
 
                     try
                     {
-                        var game = new XboxGame(package.Id.FamilyName)
-                        {
-                            Title = package.DisplayName,
-                            InstallPath = package.InstalledPath,
-                        };
+                        var game = GameManager.Instance.GetGame<XboxGame>(package.Id.FamilyName) ?? new XboxGame(package.Id.FamilyName);
+                        game.Title = package.DisplayName;
+                        game.InstallPath = package.InstalledPath;
                         game.SetLocalHeaderImages(gameNamesToFindPackages[packageName]);
                         await game.SaveToDatabaseAsync();
                         game.ProcessGame();
@@ -244,9 +242,10 @@ namespace DLSS_Swapper.Data.Xbox
         {
             try
             {
-                var games = await App.CurrentApp.Database.Table<XboxGame>().ToArrayAsync();
+                var games = await App.CurrentApp.Database.Table<XboxGame>().ToArrayAsync().ConfigureAwait(false);
                 foreach (var game in games)
                 {
+                    await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }                
             }

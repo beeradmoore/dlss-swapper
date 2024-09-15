@@ -41,5 +41,17 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
             DownloadCover(RemoteHeaderImage);
         }
+
+        public override bool UpdateFromGame(Game game)
+        {
+            var didChange = ParentUpdateFromGame(game);
+
+            if (game is UbisoftConnectGame ubisoftConnectGame)
+            {
+                //_localHeaderImages = xboxGame._localHeaderImages;
+            }
+
+            return didChange;
+        }
     }
 }

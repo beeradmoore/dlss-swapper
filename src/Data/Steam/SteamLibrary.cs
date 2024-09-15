@@ -173,7 +173,8 @@ namespace DLSS_Swapper.Data.Steam
                     return null;
                 }
 
-                var game = new SteamGame(matches[0].Groups["appid"].Value);
+                var steamGameAppId = matches[0].Groups["appid"].Value;
+                var game = GameManager.Instance.GetGame<SteamGame>(steamGameAppId) ?? new SteamGame(steamGameAppId);
 
                 regex = new Regex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline);
                 matches = regex.Matches(appManifest);
@@ -229,9 +230,10 @@ namespace DLSS_Swapper.Data.Steam
         {
             try
             {
-                var games = await App.CurrentApp.Database.Table<SteamGame>().ToArrayAsync();
+                var games = await App.CurrentApp.Database.Table<SteamGame>().ToArrayAsync().ConfigureAwait(false);
                 foreach (var game in games)
                 {
+                    await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }
             }

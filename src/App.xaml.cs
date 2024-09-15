@@ -139,6 +139,15 @@ namespace DLSS_Swapper
                 {
                     Logger.Error(err.Message);
                 }
+
+                try
+                {
+                    await database.CreateTableAsync<GameAsset>();
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err.Message);
+                }
             });
 
             this.InitializeComponent();

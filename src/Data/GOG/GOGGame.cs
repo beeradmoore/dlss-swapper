@@ -39,5 +39,17 @@ namespace DLSS_Swapper.Data.GOG
 
             DownloadCover(FallbackHeaderUrl);
         }
+
+        public override bool UpdateFromGame(Game game)
+        {
+            var didChange = ParentUpdateFromGame(game);
+
+            if (game is GOGGame gogGame)
+            {
+                //_localHeaderImages = xboxGame._localHeaderImages;
+            }
+
+            return didChange;
+        }
     }
 }

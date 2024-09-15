@@ -100,12 +100,9 @@ namespace DLSS_Swapper.Data.GOG
 
                             if (String.IsNullOrEmpty(gameName) == false && String.IsNullOrEmpty(gamePath) == false)
                             {
-                                var game = new GOGGame(gameId)
-                                {
-                                    Title = gameName,
-                                    InstallPath = gamePath,
-                                };
-
+                                var game = GameManager.Instance.GetGame<GOGGame>(gameId) ?? new GOGGame(gameId);
+                                game.Title = gameName;
+                                game.InstallPath = gamePath;
 
                                 gogGames.Add(game);
                             }
@@ -313,9 +310,10 @@ namespace DLSS_Swapper.Data.GOG
         {
             try
             {
-                var games = await App.CurrentApp.Database.Table<GOGGame>().ToArrayAsync();
+                var games = await App.CurrentApp.Database.Table<GOGGame>().ToArrayAsync().ConfigureAwait(false);
                 foreach (var game in games)
                 {
+                    await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }
             }

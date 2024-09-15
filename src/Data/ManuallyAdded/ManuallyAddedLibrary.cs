@@ -76,9 +76,10 @@ public class ManuallyAddedLibrary : IGameLibrary
     {
         try
         {
-            var games = await App.CurrentApp.Database.Table<ManuallyAddedGame>().ToArrayAsync();
+            var games = await App.CurrentApp.Database.Table<ManuallyAddedGame>().ToArrayAsync().ConfigureAwait(false);
             foreach (var game in games)
             {
+                await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                 GameManager.Instance.AddGame(game);
             }
         }

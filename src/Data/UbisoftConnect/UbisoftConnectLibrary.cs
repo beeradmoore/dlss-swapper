@@ -216,13 +216,11 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                     }
                                 }
 
-                                var game = new UbisoftConnectGame(configurationRecord.InstallId.ToString())
-                                {
-                                    Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier,
-                                    InstallPath = installedTitles[configurationRecord.InstallId].InstallPath,
-                                    LocalHeaderImage = localImage,
-                                    RemoteHeaderImage = remoteImage,
-                                };
+                                var game = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString()) ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString());
+                                game.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;
+                                game.InstallPath = installedTitles[configurationRecord.InstallId].InstallPath;
+                                game.LocalHeaderImage = localImage;
+                                game.RemoteHeaderImage = remoteImage;
                                 await game.SaveToDatabaseAsync();
                                 game.ProcessGame();
                                 games.Add(game);
@@ -466,9 +464,10 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         {
             try
             {
-                var games = await App.CurrentApp.Database.Table<UbisoftConnectGame>().ToArrayAsync();
+                var games = await App.CurrentApp.Database.Table<UbisoftConnectGame>().ToArrayAsync().ConfigureAwait(false);
                 foreach (var game in games)
                 {
+                    await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }
             }

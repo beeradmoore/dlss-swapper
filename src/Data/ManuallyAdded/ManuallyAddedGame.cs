@@ -32,4 +32,18 @@ public class ManuallyAddedGame : Game
         // NOOP, the image is manually managed by the user.
         CoverImage = null;
     }
+
+    public override bool UpdateFromGame(Game game)
+    {
+        var didChange = ParentUpdateFromGame(game);
+
+        //Debugger.Break();
+
+        if (game is ManuallyAddedGame manuallyAddedGame)
+        {
+            //_localHeaderImages = xboxGame._localHeaderImages;
+        }
+
+        return didChange;
+    }
 }

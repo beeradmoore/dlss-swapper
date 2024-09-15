@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -20,7 +21,7 @@ internal partial class GameManager : ObservableObject
     //public ObservableCollection<Game> FavouriteGames { get; } = new ObservableCollection<Game>();
     public ObservableCollection<Game> AllGames { get; } = new ObservableCollection<Game>();
 
-    Dictionary<GameLibrary, ObservableCollection<Game>> GamesByLibrary { get; } = new Dictionary<GameLibrary, ObservableCollection<Game>>();
+    //ConcurrentDictionary<GameLibrary, ConcurrentBag<Game>> GamesByLibrary { get; } = new ConcurrentDictionary<GameLibrary, ConcurrentBag<Game>>();
 
     public CollectionViewSource GroupedGameCollectionViewSource { get; init; }
     public CollectionViewSource UngroupedGameCollectionViewSource { get; init; }
@@ -104,7 +105,7 @@ internal partial class GameManager : ObservableObject
     private GameManager()
     {
         //AllGames.CollectionChanged += AllGames_CollectionChanged;
-        //AllGames.CollectionChanged += AllGames_CollectionChanged;
+        
         FavouriteGamesView = new AdvancedCollectionView(AllGames, true);
         FavouriteGamesView.Filter = GetPredicateForFavouriteGames(Settings.Instance.HideNonDLSSGames);
         FavouriteGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
@@ -163,17 +164,24 @@ internal partial class GameManager : ObservableObject
 
     }
 
+    /*
     private void AllGames_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
     {
         if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
         {
-            //e.ne
+            foreach (Game game in e.NewItems)
+            {
+                GamesByLibrary.AddOrUpdate(game.GameLibrary,
+                    (key) => new ConcurrentBag<Game>() { game }, 
+                    (key, bag) => { bag.Add(game); return bag; });
+            }
         }
         else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
         {
 
         }
     }
+    */
 
     public async Task LoadGamesFromCacheAsync()
     {
@@ -192,31 +200,25 @@ internal partial class GameManager : ObservableObject
 
     public async Task LoadGamesAsync()
     {
-        await Task.Delay(1);
-        return;
-
-        var tasks = new Dictionary<GameLibrary, Task<List<Game>>>();
+        var tasks = new List<Task<List<Game>>>();
         foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
-            tasks[gameLibraryEnum] = gameLibrary.ListGamesAsync();
+            if (gameLibrary.IsEnabled)
+            {
+                tasks.Add(gameLibrary.ListGamesAsync());
+            }
         }
 
-        await Task.WhenAll(tasks.Values);
-
-        foreach (var gameTasks in tasks)
+        // Add games to the game library when the tasks is completed.
+        while (tasks.Any())
         {
-            if (gameTasks.Value.Result.Any())
+            var completedTask = await Task.WhenAny(tasks);
+            tasks.Remove(completedTask);
+
+            foreach (var game in completedTask.Result)
             {
-                //GamesByLibrary[gameTasks.Key] = new ObservableCollection<Game>(gameTasks.Value.Result);
-                foreach (var game in gameTasks.Value.Result)
-                {
-                    AddGame(game);
-                }
-            }
-            else
-            {
-                //GamesByLibrary[gameTasks.Key] = new ObservableCollection<Game>();
+                AddGame(game);
             }
         }
     }
@@ -262,9 +264,11 @@ internal partial class GameManager : ObservableObject
             {
                 // This probably checks the game collection twice looking for the game.
                 // We could do away with this, but in theory this if is never hit
-                var firstGame = AllGames.First<Game>(x => x.Equals(game));
-                Debugger.Break();
-                return firstGame;
+                var oldGame = AllGames.First(x => x.Equals(game));
+                oldGame.UpdateFromGame(game);
+
+                //Debugger.Break();
+                return oldGame;
             }
             else
             {
@@ -286,6 +290,28 @@ internal partial class GameManager : ObservableObject
             AllGames.Remove(game);
             //GamesByLibrary[game.GameLibrary].Remove(game);
         }
+    }
+
+    
+    public TGame? GetGame<TGame>(string platformId) where TGame : Game
+    {
+        lock (gameLock)
+        {
+            // TODO: Is there a better way to do this list?
+            foreach (var game in AllGames)
+            {
+                if (game is TGame platformGame)
+                {
+                    Debug.WriteLine($"Test - {game.ID}");
+                    if (game.PlatformId == platformId)
+                    {
+                        return platformGame;
+                    }
+                }                
+            }
+        }
+
+        return null;
     }
 
 

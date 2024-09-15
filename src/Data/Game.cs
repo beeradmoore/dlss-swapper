@@ -84,6 +84,12 @@ namespace DLSS_Swapper.Data
         [Ignore]        
         public string ExpectedCustomCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_custom_600_900.webp");
 
+        [Ignore]
+        public List<GameAsset> GameAssets { get; } = new List<GameAsset>();
+
+        [Ignore]
+        public bool NeedsReload { get; set; } = false;
+
         protected void SetID()
         {
             ID = GameLibrary switch
@@ -115,59 +121,119 @@ namespace DLSS_Swapper.Data
 
             Processing = true;
 
-            ThreadPool.QueueUserWorkItem((stateInfo) =>
+            ThreadPool.QueueUserWorkItem(async (stateInfo) =>
             {
                 LoadCoverImage();
 
                 var enumerationOptions = new EnumerationOptions();
                 enumerationOptions.RecurseSubdirectories = true;
                 enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
-                var dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
 
-                var hasDLSS = false;
-                var currentDLSSVersion = String.Empty;
-                var currentDLSSHash = String.Empty;
-                var baseDLSSVersion = String.Empty;
-                var baseDLSSHash = String.Empty;
+                var oldGameAssets = GameAssets.ToList();
+                GameAssets.Clear();
+                await App.CurrentApp.Database.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false); ;
+          
+                // TODO: See if changing these to filter specific files, or getting very *.dll and looking for our specific ones is faster
 
-                if (dlssDlls.Length > 0)
+                var dlssDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
+                var dlssgDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlssg.dll", enumerationOptions);
+                var dlssdDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlssd.dll", enumerationOptions);
+                
+                foreach (var dlssDllPath in dlssDllPaths)
                 {
-                    hasDLSS = true;
-
-                    // TODO: Handle a single folder with various versions of DLSS detected.
-                    // Currently we are just using the first.
-
-                    foreach (var dlssDll in dlssDlls)
+                    var gameAsset = new GameAsset()
                     {
-                        var dllVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
-                        currentDLSSVersion = dllVersionInfo.GetFormattedFileVersion();
-                        currentDLSSHash = dllVersionInfo.GetMD5Hash();
-                        break;
-                    }
+                        Id = ID,
+                        AssetType = GameAssetType.DLSS,
+                        Path = dlssDllPath,
+                    };
+                    gameAsset.LoadVersionAndHash();
+                    GameAssets.Add(gameAsset);
 
-                    dlssDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll.dlsss", enumerationOptions);
-                    if (dlssDlls.Length > 0)
+                    var backupGameAsset = gameAsset.GetBackup();
+                    if (backupGameAsset is not null)
                     {
-                        foreach (var dlssDll in dlssDlls)
-                        {
-                            var dllVersionInfo = FileVersionInfo.GetVersionInfo(dlssDll);
-                            baseDLSSVersion = dllVersionInfo.GetFormattedFileVersion();
-                            baseDLSSHash = dllVersionInfo.GetMD5Hash();
-                            break;
-                        }
+                        GameAssets.Add(backupGameAsset);
                     }
                 }
-                else
+
+
+                foreach (var dlssDllPath in dlssgDllPaths)
                 {
-                    hasDLSS = false;
+                    var gameAsset = new GameAsset()
+                    {
+                        Id = ID,
+                        AssetType = GameAssetType.DLSS_FG,
+                        Path = dlssDllPath,
+                    };
+                    gameAsset.LoadVersionAndHash();
+                    GameAssets.Add(gameAsset);
+
+                    var backupGameAsset = gameAsset.GetBackup();
+                    if (backupGameAsset is not null)
+                    {
+                        GameAssets.Add(backupGameAsset);
+                    }
+                }
+
+
+                foreach (var dlssDll in dlssdDllPaths)
+                {
+                    var gameAsset = new GameAsset()
+                    {
+                        Id = ID,
+                        AssetType = GameAssetType.DLSS_RR,
+                        Path = dlssDll,
+                    };
+                    gameAsset.LoadVersionAndHash();
+                    GameAssets.Add(gameAsset);
+
+                    var backupGameAsset = gameAsset.GetBackup();
+                    if (backupGameAsset is not null)
+                    {
+                        GameAssets.Add(backupGameAsset);
+                    }
+                }
+
+                HasDLSS = false;
+
+                if (GameAssets.Any())
+                {
+                    await App.CurrentApp.Database.InsertAllAsync(GameAssets).ConfigureAwait(false);
+
+                    var dlssGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS).ToList();
+                    var dlssgGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_FG).ToList();
+                    var dlssdGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_RR).ToList();
+
+                    var dlssGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_BACKUP).ToList();
+                    var dlssgGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_FG_BACKUP).ToList();
+                    var dlssdGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_RR_BACKUP).ToList();
+
+                    HasDLSS = dlssGameAssets.Any();
+
+                    if (HasDLSS)
+                    {
+                        var firstDlss = dlssGameAssets.First();
+
+                    }
+                    var currentDLSSVersion = String.Empty;
+                    var currentDLSSHash = String.Empty;
+                    var baseDLSSVersion = String.Empty;
+                    var baseDLSSHash = String.Empty;
+
+
+                }
+
+                if (autoSave)
+                {
+                    await SaveToDatabaseAsync();
                 }
 
 
                 // Now update all the data on the UI therad.
                 App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
                 {
-                    HasDLSS = hasDLSS;
-                    if (hasDLSS)
+                    if (HasDLSS)
                     {
                         CurrentDLSSVersion = currentDLSSVersion;
                         CurrentDLSSHash = currentDLSSHash;
@@ -182,10 +248,6 @@ namespace DLSS_Swapper.Data
                         BaseDLSSHash = String.Empty;
                     }
 
-                    if (autoSave)
-                    {
-                        await SaveToDatabaseAsync();
-                    }
                     
                     Processing = false;
                 });
@@ -666,6 +728,78 @@ namespace DLSS_Swapper.Data
             }
 
             return false;
+        }
+
+        protected bool ParentUpdateFromGame(Game game)
+        {
+            var didChange = false;
+
+            if (Title != game.Title)
+            {
+                Title = game.Title;
+                didChange = true;
+            }
+
+            if (InstallPath != game.InstallPath)
+            {
+                InstallPath = game.InstallPath;
+                didChange = true;
+            }
+
+            if (CoverImage != game.CoverImage)
+            {
+                CoverImage = game.CoverImage;
+                didChange = true;
+            }
+
+            if (BaseDLSSVersion != game.BaseDLSSVersion)
+            {
+                BaseDLSSVersion = game.BaseDLSSVersion;
+                didChange = true;
+            }
+
+            if (BaseDLSSHash != game.BaseDLSSHash)
+            {
+                BaseDLSSHash = game.BaseDLSSHash;
+                didChange = true;
+            }
+
+            if (CurrentDLSSVersion != game.CurrentDLSSVersion)
+            {
+                CurrentDLSSVersion = game.CurrentDLSSVersion;
+                didChange = true;
+            }
+
+            if (CurrentDLSSHash != game.CurrentDLSSHash)
+            {
+                CurrentDLSSHash = game.CurrentDLSSHash;
+                didChange = true;
+            }
+
+            if (HasDLSS != game.HasDLSS)
+            {
+                HasDLSS = game.HasDLSS;
+                didChange = true;
+            }
+
+            // We don't copy across the following properties as it is assume this object has the latest revisions:
+            // - Notes
+            // - IsFavourite
+
+            return didChange;
+        }
+
+        public abstract bool UpdateFromGame(Game game);
+
+        public async Task LoadGameAssetsFromCacheAsync()
+        {
+            GameAssets.Clear();
+
+            var gameAssets = await App.CurrentApp.Database.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();
+            if (gameAssets.Any())
+            {
+                GameAssets.AddRange(gameAssets);
+            }
         }
     }
 }

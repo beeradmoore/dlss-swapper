@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using DLSS_Swapper.Interfaces;
 using SQLite;
@@ -40,6 +41,13 @@ namespace DLSS_Swapper.Data.Xbox
                     return;
                 }
             }
+        }
+
+        public override bool UpdateFromGame(Game game)
+        {
+            var didChange = ParentUpdateFromGame(game);
+
+            return didChange;
         }
     }
 }

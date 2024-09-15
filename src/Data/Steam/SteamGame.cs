@@ -38,5 +38,12 @@ namespace DLSS_Swapper.Data.Steam
             // If it doesn't exist, load from web.
             DownloadCover($"https://steamcdn-a.akamaihd.net/steam/apps/{PlatformId}/library_600x900_2x.jpg");
         }
+
+        public override bool UpdateFromGame(Game game)
+        {
+            var didChange = ParentUpdateFromGame(game);
+
+            return didChange;
+        }
     }
 }

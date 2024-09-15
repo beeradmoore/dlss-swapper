@@ -49,8 +49,6 @@ internal partial class GameGridPageModel : ObservableObject
     {
         this.gameGridPage = gameGridPage;
 
-        IsDLSSLoading = false;
-        IsGameListLoading = false;
         /* 
         CurrentCollectionViewSource = null; new CollectionViewSource()
         {
@@ -71,13 +69,13 @@ internal partial class GameGridPageModel : ObservableObject
 
     public async Task InitialLoadAsync()
     {
-        //await Task.Delay(1);
-
-        //IsGameListLoading = true;
-        // IsDLSSLoading = true;
-
         await GameManager.Instance.LoadGamesFromCacheAsync();
+        
+        IsGameListLoading = false;
+
         await GameManager.Instance.LoadGamesAsync();
+
+        IsDLSSLoading = false;
     }
 
     [RelayCommand]

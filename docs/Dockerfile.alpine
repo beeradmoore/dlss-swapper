@@ -4,6 +4,7 @@ RUN apk update && apk add --no-cache make build-base git
 
 COPY Gemfile .
 
+RUN gem update bundler
 RUN bundle install
 
 WORKDIR /src/site

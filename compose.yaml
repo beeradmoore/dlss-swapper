@@ -1,7 +1,0 @@
-services:
-  github-pages:
-    volumes:
-      - '${PWD}/docs/:/src/site/'
-    ports:
-      - '4000:4000'
-    image: markcrossfield/pages-gem:231-alpine

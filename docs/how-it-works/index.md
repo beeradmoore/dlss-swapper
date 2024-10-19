@@ -54,3 +54,7 @@ The `LoadGamesFromCacheAsync` method is implemented in each class that implement
 Locks for thread safety, checks if the `Game` object is already present in `AllGames`. If it is we return that already existing game to prevent duplicate objects of the same game. If it does not we add it and then return that object.
 
 When a game is added the filters and predicates of the `AdvancedCollectionView` do their job and will determine if the game is show to the already bound `GridView` on `GameGridPage`.
+
+
+### GameManager - LoadGamesAsync 
+test

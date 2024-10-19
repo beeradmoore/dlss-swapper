@@ -17,3 +17,4 @@ package/Output/
 package/NSIS/FileList.nsh
 .idea/
 docs/_site/
+docs/.sass-cache/

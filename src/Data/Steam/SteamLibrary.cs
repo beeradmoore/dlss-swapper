@@ -24,10 +24,10 @@ namespace DLSS_Swapper.Data.Steam
 
         public Type GameType => typeof(SteamGame);
 
-        static SteamLibrary instance = null;
+        static SteamLibrary? instance = null;
         public static SteamLibrary Instance => instance ??= new SteamLibrary();
 
-        static string _installPath = String.Empty;
+        static string _installPath = string.Empty;
 
         private SteamLibrary()
         {
@@ -36,7 +36,7 @@ namespace DLSS_Swapper.Data.Steam
 
         public bool IsInstalled()
         {
-            return String.IsNullOrEmpty(GetInstallPath()) == false;
+            return string.IsNullOrEmpty(GetInstallPath()) == false;
         }
 
         public async Task<List<Game>> ListGamesAsync()
@@ -46,7 +46,7 @@ namespace DLSS_Swapper.Data.Steam
 
             // If we don't detect a steam install patg return an empty list.
             var installPath = GetInstallPath();
-            if (String.IsNullOrEmpty(installPath))
+            if (string.IsNullOrEmpty(installPath))
             {
                 return new List<Game>();
             }
@@ -112,7 +112,7 @@ namespace DLSS_Swapper.Data.Steam
                         }
 
                         var game = GetGameFromAppManifest(appManifest);
-                        if (game != null)
+                        if (game is not null)
                         {
                             await game.SaveToDatabaseAsync();
                             game.ProcessGame();
@@ -130,7 +130,7 @@ namespace DLSS_Swapper.Data.Steam
 
         public static string GetInstallPath()
         {
-            if (String.IsNullOrEmpty(_installPath) == false)
+            if (string.IsNullOrEmpty(_installPath) == false)
             {
                 return _installPath;
             }
@@ -142,25 +142,21 @@ namespace DLSS_Swapper.Data.Steam
                     using (var steamRegistryKey = hklm.OpenSubKey(@"SOFTWARE\Valve\Steam"))
                     {
                         // if steamRegistryKey is null then steam is not installed.
-                        var installPath = steamRegistryKey?.GetValue("InstallPath") as String;
-                        if (String.IsNullOrEmpty(installPath))
-                        {
-                            _installPath = installPath;
-                        }
-
-                        return installPath ?? String.Empty;
+                        _installPath = (steamRegistryKey?.GetValue("InstallPath") as string) ?? string.Empty;
+                        
+                        return _installPath;
                     }
                 }
             }
             catch (Exception err)
             {
-                _installPath = String.Empty;
+                _installPath = string.Empty;
                 Logger.Error(err.Message);
-                return String.Empty;
+                return string.Empty;
             }
         }
 
-        internal Game GetGameFromAppManifest(string appManifestPath)
+        internal Game? GetGameFromAppManifest(string appManifestPath)
         {
             try
             {
@@ -195,6 +191,10 @@ namespace DLSS_Swapper.Data.Steam
                 var installDir = matches[0].Groups["installdir"].ToString();
 
                 var baseDir = Path.GetDirectoryName(appManifestPath);
+                if (string.IsNullOrEmpty(baseDir))
+                {
+                    return null;
+                }
 
                 game.InstallPath = Path.Combine(baseDir, "common", installDir);
 

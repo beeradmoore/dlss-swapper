@@ -13,7 +13,7 @@ namespace DLSS_Swapper.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value == null)
+            if (value is null)
             {
                 return Visibility.Collapsed;
             }

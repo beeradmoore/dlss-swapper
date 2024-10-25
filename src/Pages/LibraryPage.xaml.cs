@@ -88,8 +88,8 @@ namespace DLSS_Swapper.Pages
 
 
         #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        public event PropertyChangedEventHandler? PropertyChanged = null;
+        void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -125,9 +125,9 @@ namespace DLSS_Swapper.Pages
         {
             // Check that there are records to export first.
             var allDlssRecords = new List<DLSSRecord>();
-            allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Stable.Where(x => x.LocalRecord.IsDownloaded));
-            allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Experimental.Where(x => x.LocalRecord.IsDownloaded));
-            allDlssRecords.AddRange(App.CurrentApp.ImportedDLSSRecords.Where(x => x.LocalRecord.IsDownloaded));
+            allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Stable.Where(x => x.LocalRecord?.IsDownloaded == true));
+            allDlssRecords.AddRange(App.CurrentApp.DLSSRecords.Experimental.Where(x => x.LocalRecord?.IsDownloaded == true));
+            allDlssRecords.AddRange(App.CurrentApp.ImportedDLSSRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
 
             if (allDlssRecords.Count == 0)
             {
@@ -154,7 +154,7 @@ namespace DLSS_Swapper.Pages
             };
 
             var tempExportPath = Path.Combine(Storage.GetTemp(), "export");
-            var finalExportZip = String.Empty;
+            var finalExportZip = string.Empty;
             try
             {
                 var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
@@ -166,7 +166,7 @@ namespace DLSS_Swapper.Pages
                 var saveFile = await savePicker.PickSaveFileAsync();
 
                 // User cancelled.
-                if (saveFile == null)
+                if (saveFile is null)
                 {
                     return;
                 }
@@ -188,6 +188,11 @@ namespace DLSS_Swapper.Pages
                     {
                         foreach (var dlssRecord in allDlssRecords)
                         {
+                            if (dlssRecord.LocalRecord is null)
+                            {
+                                continue;
+                            }
+
                             var internalZipDir = dlssRecord.DisplayName;
                             if (dlssRecord.LocalRecord.IsImported == true)
                             {
@@ -237,14 +242,14 @@ namespace DLSS_Swapper.Pages
                     CloseButtonText = "Okay",
                     DefaultButton = ContentDialogButton.Close,
                     Title = "Success",
-                    Content = $"Exported {exportCount} DLSS dll{(exportCount == 1 ? String.Empty : "s")}.",
+                    Content = $"Exported {exportCount} DLSS dll{(exportCount == 1 ? string.Empty : "s")}.",
                 };
                 await dialog.ShowAsync();
             }
             catch (Exception err)
             {
                 // If we failed to export lets delete teh temp zip file that was create.
-                if (String.IsNullOrEmpty(finalExportZip) == false && File.Exists(finalExportZip))
+                if (string.IsNullOrEmpty(finalExportZip) == false && File.Exists(finalExportZip))
                 {
                     try
                     {
@@ -296,13 +301,13 @@ namespace DLSS_Swapper.Pages
             var versionInfo = FileVersionInfo.GetVersionInfo(filename);
 
             // Can't import DLSS v3 dlls at this time.
-            if (versionInfo.FileDescription.Contains("DLSS-G", StringComparison.InvariantCultureIgnoreCase))
+            if (versionInfo.FileDescription?.Contains("DLSS-G", StringComparison.InvariantCultureIgnoreCase) == true)
             {
                 throw new Exception($"Could not import \"{filename}\", appears to be a DLSS 3 (frame generation) file.");
             }
 
             // Can't import if it isn't a DLSS dll file.
-            if (versionInfo.FileDescription.Contains("DLSS", StringComparison.InvariantCultureIgnoreCase) == false)
+            if (versionInfo.FileDescription?.Contains("DLSS", StringComparison.InvariantCultureIgnoreCase) == false)
             {
                 throw new Exception($"Could not import \"{filename}\", does not appear to be a DLSS dll.");
             }
@@ -334,7 +339,7 @@ namespace DLSS_Swapper.Pages
 
             var dllHash = versionInfo.GetMD5Hash();
 
-            var existingImportedDlls = App.CurrentApp.ImportedDLSSRecords.Where(x => String.Equals(x.MD5Hash, dllHash, StringComparison.InvariantCultureIgnoreCase));
+            var existingImportedDlls = App.CurrentApp.ImportedDLSSRecords.Where(x => string.Equals(x.MD5Hash, dllHash, StringComparison.InvariantCultureIgnoreCase));
             // If the dll is already imported don't import it again.
             if (existingImportedDlls.Any())
             {
@@ -355,14 +360,14 @@ namespace DLSS_Swapper.Pages
             var zipFilename = $"{versionInfo.GetFormattedFileVersion()}_{dllHash}.zip";
             var finalZipPath = Path.Combine(Storage.GetStorageFolder(), "imported_dlss_zip", zipFilename);
             Storage.CreateDirectoryForFileIfNotExists(finalZipPath);
-            
+
 
             // The plan here was to check if importing is equivilant of downloading the file and if so consider it the downloaded file.
             // The zip hash (and zip filesize) does not match if we create the zip here so it seems odd to have that as a value.
             // We could potentially just consider the ziphash only used for downloading and not on disk validation.
             /*
             var existingDLSSRecord = App.CurrentApp.DLSSRecords.GetRecordFromHash(dllHash);
-            if (existingDLSSRecord != null)
+            if (existingDLSSRecord is not null)
             {
                 var tempExtractPath = Path.Combine(Storage.GetTemp(), "import");
                 Storage.CreateDirectoryIfNotExists(tempExtractPath);
@@ -401,7 +406,7 @@ namespace DLSS_Swapper.Pages
                 MD5Hash = dllHash,
                 FileSize = fileInfo.Length,
                 ZipFileSize = 0,
-                ZipMD5Hash = String.Empty,
+                ZipMD5Hash = string.Empty,
                 IsSignatureValid = isTrusted,
             };
 
@@ -462,7 +467,7 @@ Only import dlls from sources you trust.",
             var openFile = await openPicker.PickSingleFileAsync();
 
             // User cancelled.
-            if (openFile == null)
+            if (openFile is null)
             {
                 return;
             }
@@ -568,7 +573,7 @@ Only import dlls from sources you trust.",
                         CloseButtonText = "Okay",
                         DefaultButton = ContentDialogButton.Close,
                         Title = "Success",
-                        Content = $"Imported {importSuccessCount} DLSS dll record{(importSuccessCount == 1 ? String.Empty : "s")}.",
+                        Content = $"Imported {importSuccessCount} DLSS dll record{(importSuccessCount == 1 ? string.Empty : "s")}.",
                     };
                     await dialog.ShowAsync();
                 }
@@ -607,6 +612,12 @@ Only import dlls from sources you trust.",
 
         async Task DeleteRecordAsync(DLSSRecord record)
         {
+            if (record.LocalRecord is null)
+            {
+                Logger.Error("Could not delete record, LocalRecord is null.");
+                return;
+            }
+
             var dialog = new EasyContentDialog(XamlRoot)
             {
                 PrimaryButtonText = "Delete",
@@ -647,7 +658,7 @@ Only import dlls from sources you trust.",
 
         async Task DownloadRecordAsync(DLSSRecord record)
         {
-            var result = await record?.DownloadAsync();
+            var result = await record.DownloadAsync();
             if (result.Success is false && result.Cancelled is false)
             {
                 var dialog = new EasyContentDialog(XamlRoot)
@@ -670,6 +681,11 @@ Only import dlls from sources you trust.",
 
         async Task ExportRecordAsync(DLSSRecord record)
         {
+            if (record.LocalRecord is null)
+            {
+                return;
+            }
+
             var exportingDialog = new EasyContentDialog(XamlRoot)
             {
                 Title = "Exporting",
@@ -690,7 +706,7 @@ Only import dlls from sources you trust.",
                 WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
                 var saveFile = await savePicker.PickSaveFileAsync();
 
-                if (saveFile != null)
+                if (saveFile is not null)
                 {
                     // This will likley not be seen, but keeping it here incase export is very slow (eg. copy over very slow network).
                     _ = exportingDialog.ShowAsync();
@@ -735,7 +751,7 @@ Only import dlls from sources you trust.",
             { 
                 Title = "Error",
                 CloseButtonText = "Okay",
-                Content = record.LocalRecord.DownloadErrorMessage,
+                Content = record.LocalRecord?.DownloadErrorMessage ?? "Could not download at this time.",
             };
             await dialog.ShowAsync();
         }

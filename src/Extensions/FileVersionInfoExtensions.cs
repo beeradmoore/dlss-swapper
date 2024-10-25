@@ -24,7 +24,7 @@ namespace DLSS_Swapper.Extensions
                 Logger.Error($"{fileVersionInfo.FileName}, {err.Message}");
             }
 
-            return String.Empty;
+            return string.Empty;
         }
 
         internal static string GetFormattedFileVersion(this FileVersionInfo fileVersionInfo)

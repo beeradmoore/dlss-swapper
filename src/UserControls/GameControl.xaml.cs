@@ -60,22 +60,25 @@ namespace DLSS_Swapper.UserControls
 
             var dialogSpace = this.GetTemplateChild("DialogSpace") as Grid;
 
-            var leftButtons = new ContentControl()
+            if (dialogSpace is not null)
             {
-                Template = Resources["LeftButtonsControlTemplate"] as ControlTemplate,
-            };
-            leftButtons.DataContext = DataContext;
-            Grid.SetRow(leftButtons, 1);
-            dialogSpace.Children.Add(leftButtons);
+                var leftButtons = new ContentControl()
+                {
+                    Template = Resources["LeftButtonsControlTemplate"] as ControlTemplate,
+                };
+                leftButtons.DataContext = DataContext;
+                Grid.SetRow(leftButtons, 1);
+                dialogSpace.Children.Add(leftButtons);
 
 
-            var rightButtons = new ContentControl()
-            {
-                Template = Resources["RightButtonsControlTemplate"] as ControlTemplate,
-            };
-            rightButtons.DataContext = DataContext;
-            Grid.SetRow(rightButtons, 1);
-            dialogSpace.Children.Add(rightButtons);
+                var rightButtons = new ContentControl()
+                {
+                    Template = Resources["RightButtonsControlTemplate"] as ControlTemplate,
+                };
+                rightButtons.DataContext = DataContext;
+                Grid.SetRow(rightButtons, 1);
+                dialogSpace.Children.Add(rightButtons);
+            }
         }
 
 
@@ -89,7 +92,7 @@ namespace DLSS_Swapper.UserControls
         };
 
         DataPackageOperation coverDragDropAcceptedOperation = DataPackageOperation.None;
-        string coverDragDropDragUIOverrideCaption = String.Empty;
+        string coverDragDropDragUIOverrideCaption = string.Empty;
 
         async void CoverButton_DragEnter(object sender, DragEventArgs e)
         {
@@ -98,7 +101,7 @@ namespace DLSS_Swapper.UserControls
 
             // Default to this.           
             coverDragDropAcceptedOperation = DataPackageOperation.None;
-            coverDragDropDragUIOverrideCaption = String.Empty;
+            coverDragDropDragUIOverrideCaption = string.Empty;
 
             e.AcceptedOperation = coverDragDropAcceptedOperation;
             e.DragUIOverride.Caption = coverDragDropDragUIOverrideCaption;
@@ -110,7 +113,12 @@ namespace DLSS_Swapper.UserControls
             {
                 var storageFile = items[0] as StorageFile;
 
-                if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
+                if (storageFile is null)
+                {
+                    coverDragDropAcceptedOperation = DataPackageOperation.None;
+                    coverDragDropDragUIOverrideCaption = "storageFile is null";
+                }
+                else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.Copy;
                     coverDragDropDragUIOverrideCaption = "Add custom cover";
@@ -142,8 +150,11 @@ namespace DLSS_Swapper.UserControls
             if (items.Count == 1)
             {
                 var storageFile = items[0] as StorageFile;
-
-                if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
+                if (storageFile is null)
+                {
+                    Logger.Error("storageFile is null");
+                }
+                else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
                 {
                     using (var stream = await storageFile.OpenStreamForReadAsync())
                     {

@@ -25,7 +25,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         private record UbisoftGameRegistryRecord
         {
             internal int InstallId { get; init; } = 0;
-            internal string InstallPath { get; init; } = String.Empty;
+            internal string InstallPath { get; init; } = string.Empty;
         }
 
 
@@ -40,7 +40,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         public Type GameType => typeof(UbisoftConnectGame);
 
-        static UbisoftConnectLibrary instance = null;
+        static UbisoftConnectLibrary? instance = null;
         public static UbisoftConnectLibrary Instance => instance ??= new UbisoftConnectLibrary();
 
         private UbisoftConnectLibrary()
@@ -48,11 +48,11 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         }
 
-        string _installPath = String.Empty;
+        string _installPath = string.Empty;
 
         public bool IsInstalled()
         {
-            return String.IsNullOrEmpty(GetInstallPath()) == false;
+            return string.IsNullOrEmpty(GetInstallPath()) == false;
         }
 
 
@@ -79,7 +79,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                     using (var ubisoftConnectInstallsKey = hklm.OpenSubKey(@"SOFTWARE\Ubisoft\Launcher\Installs"))
                     {
                         // if ubisoftConnectRegistryKey is null then Ubisoft is not installed .
-                        if (ubisoftConnectInstallsKey == null)
+                        if (ubisoftConnectInstallsKey is null)
                         {
                             throw new Exception("Could not detect ubisoftConnectInstallsKey");
                         }
@@ -92,13 +92,13 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                             {
                                 using (var ubisoftConnectInstallDirKey = ubisoftConnectInstallsKey.OpenSubKey(subKeyName))
                                 {
-                                    if (ubisoftConnectInstallDirKey == null)
+                                    if (ubisoftConnectInstallDirKey is null)
                                     {
                                         break;
                                     }
 
-                                    var gameInstallDir = ubisoftConnectInstallDirKey.GetValue("InstallDir") as String;
-                                    if (String.IsNullOrEmpty(gameInstallDir) == false)
+                                    var gameInstallDir = ubisoftConnectInstallDirKey.GetValue("InstallDir") as string;
+                                    if (string.IsNullOrEmpty(gameInstallDir) == false)
                                     {
                                         installedTitles[installId] = new UbisoftGameRegistryRecord()
                                         {
@@ -162,7 +162,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                 var ubisoftConnectConfigurationItem = yamlDeserializer.Deserialize<UbisoftConnectConfigurationItem>(reader);
 
                                 // This is less than ideal. This usually happens with DLC or pre-orders. 
-                                if (ubisoftConnectConfigurationItem == null || ubisoftConnectConfigurationItem.Root == null)
+                                if (ubisoftConnectConfigurationItem is null || ubisoftConnectConfigurationItem.Root is null)
                                 {
                                     Logger.Info("Could not load Ubisoft Connect item. This is sometimes expected for certain titles.");
                                     continue;
@@ -179,22 +179,22 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                 */
 
                                 // This can be expected. If there is no installer item there is no game to install.
-                                if (ubisoftConnectConfigurationItem.Root.Installer == null)
+                                if (ubisoftConnectConfigurationItem.Root.Installer is null)
                                 {
                                     continue;
                                 }
 
                                 // This is not expected. 
-                                if (ubisoftConnectConfigurationItem.Root.StartGame == null)
+                                if (ubisoftConnectConfigurationItem.Root.StartGame is null)
                                 {
                                     Logger.Info($"StartGameNode is null for {ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier}. This is likely a region specific installer.");
                                     continue;
                                 }
 
 
-                                var localImage = String.Empty;
-                                var remoteImage = String.Empty;
-                                if (ubisoftConnectConfigurationItem.Root.LogoImage != null)
+                                var localImage = string.Empty;
+                                var remoteImage = string.Empty;
+                                if (ubisoftConnectConfigurationItem.Root.LogoImage is not null)
                                 {
                                     if (ubisoftConnectConfigurationItem.Root.ThumbImage.EndsWith(".jpg", StringComparison.InvariantCultureIgnoreCase) || ubisoftConnectConfigurationItem.Root.ThumbImage.EndsWith(".png", StringComparison.InvariantCultureIgnoreCase))
                                     {
@@ -244,7 +244,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         string GetInstallPath()
         {
-            if (String.IsNullOrEmpty(_installPath) == false)
+            if (string.IsNullOrEmpty(_installPath) == false)
             {
                 return _installPath;
             }
@@ -255,26 +255,26 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 {
                     using (var ubisoftConnectRegistryKey = hklm.OpenSubKey(@"SOFTWARE\Ubisoft\Launcher"))
                     {
-                        if (ubisoftConnectRegistryKey == null)
+                        if (ubisoftConnectRegistryKey is null)
                         {
-                            return String.Empty;
+                            return string.Empty;
                         }
                         // if ubisoftConnectRegistryKey is null then steam is not installed.
-                        var installPath = ubisoftConnectRegistryKey?.GetValue("InstallDir") as String;
-                        if (String.IsNullOrEmpty(installPath) == false)
+                        var installPath = ubisoftConnectRegistryKey?.GetValue("InstallDir") as string;
+                        if (string.IsNullOrEmpty(installPath) == false)
                         {
                             _installPath = installPath;
                         }
 
-                        return _installPath ?? String.Empty;
+                        return _installPath ?? string.Empty;
                     }
                 }
             }
             catch (Exception err)
             {
-                _installPath = String.Empty;
+                _installPath = string.Empty;
                 Logger.Error(err.Message);
-                return String.Empty;
+                return string.Empty;
             }
         }
 

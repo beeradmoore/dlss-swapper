@@ -36,7 +36,7 @@ namespace DLSS_Swapper.Pages
 
         public string Version => App.CurrentApp.GetVersionString();
 
-        private AsyncCommand _checkForUpdateCommand;
+        private AsyncCommand? _checkForUpdateCommand = null;
         public AsyncCommand CheckForUpdatesCommand => _checkForUpdateCommand ??= new AsyncCommand(CheckForUpdatesAsync, _=> !IsCheckingForUpdates);
         public bool RunsAsAdmin { get; } = Environment.IsPrivilegedProcess;
 
@@ -80,7 +80,7 @@ namespace DLSS_Swapper.Pages
 
         void ThemeRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (DataContext == null)
+            if (DataContext is null)
             {
                 return;
             }
@@ -97,14 +97,14 @@ namespace DLSS_Swapper.Pages
                     };
 
                     Settings.Instance.AppTheme = newTheme;
-                    ((App)Application.Current)?.MainWindow?.UpdateColors(newTheme);
+                    ((App)Application.Current).MainWindow.UpdateColors(newTheme);
                 }
             }
         }
 
         void AllowExperimental_Toggled(object sender, RoutedEventArgs e)
         {
-            if (DataContext == null)
+            if (DataContext is null)
             {
                 return;
             }
@@ -118,7 +118,7 @@ namespace DLSS_Swapper.Pages
 
         void AllowUntrusted_Toggled(object sender, RoutedEventArgs e)
         {
-            if (DataContext == null)
+            if (DataContext is null)
             {
                 return;
             }
@@ -135,7 +135,7 @@ namespace DLSS_Swapper.Pages
             IsCheckingForUpdates = true;
             var githubUpdater = new Data.GitHub.GitHubUpdater();
             var newUpdate = await githubUpdater.CheckForNewGitHubRelease();      
-            if (newUpdate == null)
+            if (newUpdate is null)
             {
 
                 var dialog = new EasyContentDialog(XamlRoot)
@@ -157,7 +157,7 @@ namespace DLSS_Swapper.Pages
 
         private void LoggingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (DataContext == null)
+            if (DataContext is null)
             {
                 return;
             }
@@ -182,7 +182,7 @@ namespace DLSS_Swapper.Pages
                 }
                 else
                 {
-                    Process.Start("explorer.exe", Path.GetDirectoryName(CurrentLogPath));
+                    Process.Start("explorer.exe", Logger.LogDirectory);
                 }
             }
             catch (Exception err)
@@ -214,7 +214,7 @@ namespace DLSS_Swapper.Pages
 
                 var folder = await folderPicker.PickSingleFolderAsync();
 
-                if (folder == null)
+                if (folder is null)
                 {
                     return;
                 }
@@ -248,7 +248,7 @@ namespace DLSS_Swapper.Pages
             }
 
             CustomDirectories.Add(directory);
-            CustomDirectories.SortStable((s, s1) => String.Compare(s, s1, StringComparison.CurrentCulture));
+            CustomDirectories.SortStable((s, s1) => string.Compare(s, s1, StringComparison.CurrentCulture));
 
             if (!Settings.Instance.Directories.Contains(directory))
             {
@@ -261,7 +261,7 @@ namespace DLSS_Swapper.Pages
         private void RemoveDirectory_OnClick(object sender, RoutedEventArgs e)
         {
             var parent = ((Button)sender).Parent as Expander;
-            if (parent != null)
+            if (parent is not null)
             {
                 parent.IsExpanded = false;
             }

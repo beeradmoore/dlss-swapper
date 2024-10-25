@@ -76,6 +76,8 @@ namespace DLSS_Swapper.Pages
 
         async Task LoadGamesAsync()
         {
+            // TODO: REMOVE
+            await Task.Delay(1);
             /*
             // Added this check so if we get to here and this is true we probably crashed loading games last time and we should prompt for that.
             if (Settings.Instance.WasLoadingGames)
@@ -251,7 +253,7 @@ namespace DLSS_Swapper.Pages
                     Content = dlssPickerControl,
                 };
 
-                if (String.IsNullOrEmpty(game.BaseDLSSVersion) == false)
+                if (string.IsNullOrEmpty(game.BaseDLSSVersion) == false)
                 {
                     dialog.SecondaryButtonText = "Reset";
                 }
@@ -352,6 +354,9 @@ namespace DLSS_Swapper.Pages
 
         async Task LoadGamesAndDlls()
         {
+            // TODO: REMOVE
+            await Task.Delay(1);
+
             if (_loadingGamesAndDlls)
                 return;
 

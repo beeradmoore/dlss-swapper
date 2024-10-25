@@ -14,7 +14,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         public override GameLibrary GameLibrary => GameLibrary.EpicGamesStore;
 
         [Column("remote_header_image")]
-        public string RemoteHeaderImage { get; set;  } = String.Empty;
+        public string RemoteHeaderImage { get; set;  } = string.Empty;
 
         public EpicGamesStoreGame()
         {
@@ -29,7 +29,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
 
         protected override void UpdateCacheImage()
         {
-            if (String.IsNullOrEmpty(RemoteHeaderImage))
+            if (string.IsNullOrEmpty(RemoteHeaderImage))
             {
                 return;
             }

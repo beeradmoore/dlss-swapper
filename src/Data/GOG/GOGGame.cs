@@ -13,7 +13,7 @@ namespace DLSS_Swapper.Data.GOG
         public override GameLibrary GameLibrary => GameLibrary.GOG;
 
         public List<string> PotentialLocalHeaders { get; } = new List<string>();
-        public string FallbackHeaderUrl { get; set; } = String.Empty;
+        public string FallbackHeaderUrl { get; set; } = string.Empty;
 
         public GOGGame()
         {

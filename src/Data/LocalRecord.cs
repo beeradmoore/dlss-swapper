@@ -13,7 +13,7 @@ namespace DLSS_Swapper.Data
 {
     public class LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChanged
     {
-        public string ExpectedPath { get; private set; }
+        public string ExpectedPath { get; private set; } = string.Empty;
 
         bool _isDownloaded = false;
         public bool IsDownloaded
@@ -72,7 +72,7 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        string _downloadErrorMessage = String.Empty;
+        string _downloadErrorMessage = string.Empty;
         public string DownloadErrorMessage
         {
             get { return _downloadErrorMessage; }
@@ -151,8 +151,8 @@ namespace DLSS_Swapper.Data
         */
 
         #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        public event PropertyChangedEventHandler? PropertyChanged = null;
+        void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -168,7 +168,7 @@ namespace DLSS_Swapper.Data
                 IsDownloading = false;
                 DownloadProgress = 0;
                 HasDownloadError = false;
-                DownloadErrorMessage = String.Empty;
+                DownloadErrorMessage = string.Empty;
                 // We don't update IsImported here as that wont change.
                 return true;
             }
@@ -192,7 +192,7 @@ namespace DLSS_Swapper.Data
                 IsDownloading = false;
                 DownloadProgress = 0;
                 HasDownloadError = false;
-                DownloadErrorMessage = String.Empty;
+                DownloadErrorMessage = string.Empty;
                 return true;
             }
             catch (Exception)
@@ -219,16 +219,21 @@ namespace DLSS_Swapper.Data
             IsImported = localRecord.IsImported;
         }
 
-        public bool Equals(LocalRecord other)
+        public bool Equals(LocalRecord? other)
         {
-            // Make sure other and other.ExpectedPath are not null or empty. This also means
-            // that this.ExpectedPath can't be null or empty and have this return true.
-            if (String.IsNullOrWhiteSpace(other?.ExpectedPath))
+            if (other is null)
             {
                 return false;
             }
 
-            return String.Equals(ExpectedPath, other.ExpectedPath, StringComparison.InvariantCultureIgnoreCase);
+            // Make sure other and other.ExpectedPath are not null or empty. This also means
+            // that this.ExpectedPath can't be null or empty and have this return true.
+            if (string.IsNullOrWhiteSpace(other.ExpectedPath))
+            {
+                return false;
+            }
+
+            return string.Equals(ExpectedPath, other.ExpectedPath, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

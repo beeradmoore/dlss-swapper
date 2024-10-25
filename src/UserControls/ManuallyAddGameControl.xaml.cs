@@ -43,7 +43,7 @@ namespace DLSS_Swapper.UserControls
                 ".bmp",
         };
         DataPackageOperation coverDragDropAcceptedOperation = DataPackageOperation.None;
-        string coverDragDropDragUIOverrideCaption = String.Empty;
+        string coverDragDropDragUIOverrideCaption = string.Empty;
 
         async void CoverButton_DragEnter(object sender, DragEventArgs e)
         {
@@ -51,7 +51,7 @@ namespace DLSS_Swapper.UserControls
 
             // Default to this.           
             coverDragDropAcceptedOperation = DataPackageOperation.None;
-            coverDragDropDragUIOverrideCaption = String.Empty;
+            coverDragDropDragUIOverrideCaption = string.Empty;
 
             e.AcceptedOperation = coverDragDropAcceptedOperation;
             e.DragUIOverride.Caption = coverDragDropDragUIOverrideCaption;
@@ -63,7 +63,12 @@ namespace DLSS_Swapper.UserControls
             {
                 var storageFile = items[0] as StorageFile;
 
-                if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
+                if (storageFile is null)
+                {
+                    coverDragDropAcceptedOperation = DataPackageOperation.None;
+                    coverDragDropDragUIOverrideCaption = $"storageFile is null";
+                }
+                else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.Copy;
                     coverDragDropDragUIOverrideCaption = "Add custom cover";
@@ -94,7 +99,11 @@ namespace DLSS_Swapper.UserControls
             {
                 var storageFile = items[0] as StorageFile;
 
-                if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
+                if (storageFile is null)
+                {
+                    Logger.Error($"storageFile is null");
+                }
+                else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
                 {
                     using (var stream = await storageFile.OpenStreamForReadAsync())
                     {

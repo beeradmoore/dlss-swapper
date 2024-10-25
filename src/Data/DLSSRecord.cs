@@ -13,25 +13,25 @@ namespace DLSS_Swapper.Data
     public class DLSSRecord : IComparable<DLSSRecord>, INotifyPropertyChanged
     {
         [JsonPropertyName("version")]
-        public string Version { get; set; }
+        public string Version { get; set; } = string.Empty;
 
         [JsonPropertyName("version_number")]
         public ulong VersionNumber { get; set; }
 
         [JsonPropertyName("additional_label")]
-        public string AdditionalLabel { get; set; } = String.Empty;
+        public string AdditionalLabel { get; set; } = string.Empty;
 
         [JsonPropertyName("md5_hash")]
-        public string MD5Hash { get; set; }
+        public string MD5Hash { get; set; } = string.Empty;
 
         [JsonPropertyName("zip_md5_hash")]
-        public string ZipMD5Hash { get; set; }
+        public string ZipMD5Hash { get; set; } = string.Empty;
 
         [JsonPropertyName("download_url")]
-        public string DownloadUrl { get; set; } = String.Empty;
+        public string DownloadUrl { get; set; } = string.Empty;
 
         [JsonPropertyName("file_description")]
-        public string FileDescription { get; set; } = String.Empty;
+        public string FileDescription { get; set; } = string.Empty;
 
         [JsonIgnore]
         public DateTime SignedDateTime { get; set; } = DateTime.MinValue;
@@ -50,7 +50,7 @@ namespace DLSS_Swapper.Data
         {
             get
             {
-                if (String.IsNullOrEmpty(AdditionalLabel))
+                if (string.IsNullOrEmpty(AdditionalLabel))
                 {
                     return Version;
                 }
@@ -59,14 +59,14 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        string _displayVersion = String.Empty;
+        string _displayVersion = string.Empty;
         [JsonIgnore]
         public string DisplayVersion
         {
             get
             {
                 // return cached version.
-                if (_displayVersion != String.Empty)
+                if (_displayVersion != string.Empty)
                 {
                     return _displayVersion;
                 }
@@ -100,7 +100,7 @@ namespace DLSS_Swapper.Data
         {
             get
             {
-                if (String.IsNullOrEmpty(AdditionalLabel))
+                if (string.IsNullOrEmpty(AdditionalLabel))
                 {
                     return $"v{DisplayVersion}";
                 }
@@ -110,10 +110,15 @@ namespace DLSS_Swapper.Data
         }
 
         [JsonIgnore]
-        public LocalRecord LocalRecord { get; set; }
+        public LocalRecord? LocalRecord { get; set; } = null;
 
-        public int CompareTo(DLSSRecord other)
+        public int CompareTo(DLSSRecord? other)
         {
+            if (other is null)
+            {
+                return -1;
+            }
+
             if (VersionNumber == other.VersionNumber)
             {
                 return other.AdditionalLabel.CompareTo(AdditionalLabel);
@@ -124,15 +129,15 @@ namespace DLSS_Swapper.Data
 
         #region INotifyPropertyChanged
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        internal void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        public event PropertyChangedEventHandler? PropertyChanged = null;
+        internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         
         #endregion
 
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource? _cancellationTokenSource;
 
         internal void CancelDownload()
         {
@@ -140,13 +145,18 @@ namespace DLSS_Swapper.Data
             _cancellationTokenSource = null;
         }
 
-        internal async Task<(bool Success, string Message, bool Cancelled)> DownloadAsync(Action<int> ProgressCallback = null)
+        internal async Task<(bool Success, string Message, bool Cancelled)> DownloadAsync(Action<int>? ProgressCallback = null)
         {
             var dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
 
             if (string.IsNullOrEmpty(DownloadUrl))
             {
                 return (false, "Invalid download URL.", false);
+            }
+
+            if (LocalRecord is null)
+            {
+                return (false, "Local record is null.", false);
             }
 
             _cancellationTokenSource?.Cancel();
@@ -263,7 +273,7 @@ namespace DLSS_Swapper.Data
                     NotifyPropertyChanged("LocalRecord");
                 });
 
-                return (true, String.Empty, false);
+                return (true, string.Empty, false);
             }
             catch (TaskCanceledException)
             {
@@ -275,7 +285,7 @@ namespace DLSS_Swapper.Data
                     NotifyPropertyChanged("LocalRecord");
                 });
 
-                return (false, String.Empty, true);
+                return (false, string.Empty, true);
             }
             catch (Exception err)
             {
@@ -325,7 +335,7 @@ namespace DLSS_Swapper.Data
                 MD5Hash = versionInfo.GetMD5Hash(),
                 FileSize = 3,
                 ZipFileSize = 0,
-                ZipMD5Hash = String.Empty,
+                ZipMD5Hash = string.Empty,
                 IsSignatureValid = WinTrust.VerifyEmbeddedSignature(fileName),
             };
 

@@ -7,7 +7,7 @@ namespace DLSS_Swapper
 {
     public class Settings
     {
-        static Settings _instance = null;
+        static Settings? _instance = null;
 
         public static Settings Instance => _instance ??= Settings.FromJson();
         
@@ -303,11 +303,11 @@ namespace DLSS_Swapper
 
         static Settings FromJson()
         {
-            Settings settings = null;
+            Settings? settings = null;
 
             var settingsFromJson = AsyncHelper.RunSync(() => Storage.LoadSettingsJsonAsync());
             // If we couldn't load settings then save the defaults.
-            if (settingsFromJson == null)
+            if (settingsFromJson is null)
             {
                 settings = new Settings();
                 settings.SaveJson();

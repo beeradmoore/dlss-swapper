@@ -81,7 +81,7 @@ public class FakeContentDialog : Control
                nameof(CloseButtonText),
                typeof(string),
                typeof(FakeContentDialog),
-               new PropertyMetadata(String.Empty));
+               new PropertyMetadata(string.Empty));
 
     public string CloseButtonText
     {
@@ -185,7 +185,7 @@ public class FakeContentDialog : Control
                nameof(PrimaryButtonText),
                typeof(string),
                typeof(FakeContentDialog),
-               new PropertyMetadata(String.Empty));
+               new PropertyMetadata(string.Empty));
 
     public string PrimaryButtonText
     {
@@ -237,7 +237,7 @@ public class FakeContentDialog : Control
                nameof(SecondaryButtonText),
                typeof(string),
                typeof(FakeContentDialog),
-               new PropertyMetadata(String.Empty));
+               new PropertyMetadata(string.Empty));
 
     public string SecondaryButtonText
     {
@@ -273,7 +273,7 @@ public class FakeContentDialog : Control
 
 
 
-    TaskCompletionSource<ContentDialogResult> taskCompletionSource;
+    TaskCompletionSource<ContentDialogResult> taskCompletionSource = new TaskCompletionSource<ContentDialogResult>();
 
     public FakeContentDialog()
     {
@@ -284,8 +284,6 @@ public class FakeContentDialog : Control
 
     public Task<ContentDialogResult> ShowAsync()
     {
-        taskCompletionSource = new TaskCompletionSource<ContentDialogResult>();
-
         if (((App)App.Current).MainWindow.Content is Grid rootGrid)
         {
             /*
@@ -344,23 +342,34 @@ public class FakeContentDialog : Control
         var secondaryButton = GetTemplateChild("SecondaryButton") as Button;
         var closeButton = GetTemplateChild("CloseButton") as Button;
 
-        primaryButton.Command = new RelayCommand(() =>
+        if (primaryButton is not null)
         {
-            HideImplementation(ContentDialogResult.Primary);
-            PrimaryButtonCommand?.Execute(PrimaryButtonCommandParameter);
-        });
-        secondaryButton.Command = new RelayCommand(() =>
-        {
-            HideImplementation(ContentDialogResult.Secondary);
-            SecondaryButtonCommand?.Execute(SecondaryButtonCommandParameter);
-        });
-        closeButton.Command = new RelayCommand(() =>
-        {
-            HideImplementation(ContentDialogResult.None);
-            CloseButtonCommand?.Execute(CloseButtonCommandParameter);
-        });
+            primaryButton.Command = new RelayCommand(() =>
+            {
+                HideImplementation(ContentDialogResult.Primary);
+                PrimaryButtonCommand?.Execute(PrimaryButtonCommandParameter);
+            });
+        }
 
-        if (Title is String title && TitleTemplate == null)
+        if (secondaryButton is not null)
+        {
+            secondaryButton.Command = new RelayCommand(() =>
+            {
+                HideImplementation(ContentDialogResult.Secondary);
+                SecondaryButtonCommand?.Execute(SecondaryButtonCommandParameter);
+            });
+        }
+
+        if (closeButton is not null)
+        {
+            closeButton.Command = new RelayCommand(() =>
+            {
+                HideImplementation(ContentDialogResult.None);
+                CloseButtonCommand?.Execute(CloseButtonCommandParameter);
+            });
+        }
+
+        if (Title is string title && TitleTemplate is null)
         {
             // For some reason this doens't just work. Removing the ContentControl.Template xaml works but I
             // can't replicate it here. Nor can I set a blank ControlTemplate to override it.
@@ -420,9 +429,9 @@ public class FakeContentDialog : Control
             - PrimaryAndCloseVisible
             - SecondaryAndCloseVisible
         */
-        var hasPrimary = String.IsNullOrEmpty(PrimaryButtonText) == false;
-        var hasSecondary = String.IsNullOrEmpty(SecondaryButtonText) == false;
-        var hasClose = String.IsNullOrEmpty(CloseButtonText) == false;
+        var hasPrimary = string.IsNullOrEmpty(PrimaryButtonText) == false;
+        var hasSecondary = string.IsNullOrEmpty(SecondaryButtonText) == false;
+        var hasClose = string.IsNullOrEmpty(CloseButtonText) == false;
 
         if (hasPrimary == true && hasSecondary == true && hasClose == true)
         {

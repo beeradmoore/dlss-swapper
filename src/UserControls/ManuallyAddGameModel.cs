@@ -20,7 +20,7 @@ namespace DLSS_Swapper.UserControls
         ManuallyAddedGame game;
         public ManuallyAddedGame Game => game;
 
-        WeakReference<ManuallyAddGameControl> manuallyAddGameControlWeakReference = null;
+        WeakReference<ManuallyAddGameControl> manuallyAddGameControlWeakReference;
 
         public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath)
         {

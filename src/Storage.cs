@@ -98,6 +98,11 @@ namespace DLSS_Swapper
                 return false;
             }
             var directory = Path.GetDirectoryName(path);
+            if (string.IsNullOrEmpty(directory))
+            {
+                Logger.Error("A directory should not be empty in CreateDirectoryForFileIfNotExists");
+                return false;
+            }
             return CreateDirectoryIfNotExists(directory);
         }
 
@@ -148,7 +153,7 @@ namespace DLSS_Swapper
         /// Loads settings from settings.json in the apps dynamic json folder.
         /// </summary>
         /// <returns>Settings object, or null if it could not be loaded</returns>
-        internal static async Task<Settings> LoadSettingsJsonAsync()
+        internal static async Task<Settings?> LoadSettingsJsonAsync()
         {
             var settingsFile = Path.Combine(GetDynamicJsonFolder(), "settings.json");
 
@@ -211,7 +216,7 @@ namespace DLSS_Swapper
                     using (var stream = File.Open(dlssRecordsFile, FileMode.Open))
                     {
                         var dlssRecords = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.DLSSRecords);
-                        if (dlssRecords != null)
+                        if (dlssRecords is not null)
                         {
                             return dlssRecords;
                         } 
@@ -233,7 +238,7 @@ namespace DLSS_Swapper
                     using (var stream = File.Open(dlssRecordsFile, FileMode.Open))
                     {
                         var dlssRecords = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.DLSSRecords);
-                        if (dlssRecords != null)
+                        if (dlssRecords is not null)
                         {
                             return dlssRecords;
                         }
@@ -270,7 +275,7 @@ namespace DLSS_Swapper
                     using (var stream = File.Open(importedDLSSRecordsFile, FileMode.Open))
                     {
                         var importedDLSSRecords = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.ListDLSSRecord);
-                        if (importedDLSSRecords != null)
+                        if (importedDLSSRecords is not null)
                         {
                             return importedDLSSRecords;
                         }

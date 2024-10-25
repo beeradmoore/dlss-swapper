@@ -26,7 +26,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
 
         public Type GameType => typeof(EpicGamesStoreGame);
 
-        static EpicGamesStoreLibrary instance = null;
+        static EpicGamesStoreLibrary? instance = null;
         public static EpicGamesStoreLibrary Instance => instance ??= new EpicGamesStoreLibrary();
 
         private EpicGamesStoreLibrary()
@@ -36,7 +36,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
 
         public bool IsInstalled()
         {
-            return String.IsNullOrEmpty(GetEpicRootDirectory()) == false;
+            return string.IsNullOrEmpty(GetEpicRootDirectory()) == false;
         }
 
         public async Task<List<Game>> ListGamesAsync()
@@ -48,7 +48,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             var epicRootDirectory = GetEpicRootDirectory();
 
             // EGS can be installed and pass this check even if there are no games installed.
-            if (String.IsNullOrWhiteSpace(epicRootDirectory) || Directory.Exists(epicRootDirectory) == false)
+            if (string.IsNullOrWhiteSpace(epicRootDirectory) || Directory.Exists(epicRootDirectory) == false)
             {
                 return games;
             }
@@ -93,7 +93,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                     }
                 }
 
-                if (cacheItemsArray?.Any() != false)
+                if (cacheItemsArray?.Any() == true)
                 {
                     foreach (var cacheItem in cacheItemsArray)
                     {
@@ -118,7 +118,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         continue;
                     }
 
-                    var remoteHeaderUrl = String.Empty;
+                    var remoteHeaderUrl = string.Empty;
                     if (cacheItemsDictionary.ContainsKey(manifest.CatalogItemId))
                     {
                         var cacheItem = cacheItemsDictionary[manifest.CatalogItemId];
@@ -126,7 +126,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         {
                             // Try get desired image.
                             var dieselGameBoxTall = cacheItem.KeyImages.FirstOrDefault(x => x.Type == "DieselGameBoxTall");
-                            if (dieselGameBoxTall != null && String.IsNullOrEmpty(dieselGameBoxTall.Url) == false)
+                            if (dieselGameBoxTall is not null && string.IsNullOrEmpty(dieselGameBoxTall.Url) == false)
                             {
                                 remoteHeaderUrl = dieselGameBoxTall.Url;
                             }
@@ -134,7 +134,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                             {
                                 // Then fallback image.
                                 var dieselGameBox = cacheItem.KeyImages.FirstOrDefault(x => x.Type == "DieselGameBox");
-                                if (dieselGameBox != null && String.IsNullOrEmpty(dieselGameBox.Url) == false)
+                                if (dieselGameBox is not null && string.IsNullOrEmpty(dieselGameBox.Url) == false)
                                 {
                                     remoteHeaderUrl = dieselGameBox.Url;
                                 }
@@ -172,7 +172,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                 return epicRootDirectory;
             }
 
-            return String.Empty;
+            return string.Empty;
         }
 
         public async Task<List<Game>> LoadFromCacheAsync()

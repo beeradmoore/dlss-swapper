@@ -14,47 +14,47 @@ namespace DLSS_Swapper.Data.GitHub
     internal class GitHubRelease
     {
         [JsonPropertyName("html_url")]
-        public string HtmlUrl { get; set; }
+        public string HtmlUrl { get; set; } = string.Empty;
         // https://github.com/beeradmoore/dlss-swapper/releases/tag/v0.9.8.0
 
         [JsonPropertyName("tag_name")]
-        public string TagName { get; set; }
+        public string TagName { get; set; } = string.Empty;
         // v0.9.8.0
 
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         // v0.9.8.0
 
         [JsonPropertyName("draft")]
-        public bool Draft { get; set; }
+        public bool Draft { get; set; } = false;
         // false
 
         [JsonPropertyName("prerelease")]
-        public bool PreRelease { get; set; }
+        public bool PreRelease { get; set; } = false;
         // false
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = string.Empty;
         // 2022-01-29T04:57:30Z
 
         [JsonIgnore]
         public DateTime CreateAtDateTime => DateTime.Parse(CreatedAt);
 
         [JsonPropertyName("published_at")]
-        public string PublishedAt { get; set; }
+        public string PublishedAt { get; set; } = string.Empty;
         // 2022-01-29T05:02:29Z
 
         public DateTime PublishedAtDateTime => DateTime.Parse(PublishedAt);
 
         [JsonPropertyName("body")]
-        public string Body { get; set; }
+        public string Body { get; set; } = string.Empty;
         // ## What's Changed\r\n* Fixed issue where circular symbolic links would...
 
         internal ulong GetVersionNumber()
         {
             // Name should always start with a version, it could be in the format v1, v1.1, v1.1.1, or v1.1.1.1
             var firstPartOfName = Name?.Split(" ").FirstOrDefault()?.Trim();
-            if (firstPartOfName == null || firstPartOfName.StartsWith("v", StringComparison.InvariantCultureIgnoreCase) == false)
+            if (firstPartOfName is null || firstPartOfName.StartsWith("v", StringComparison.InvariantCultureIgnoreCase) == false)
             {
                 return 0;
             }

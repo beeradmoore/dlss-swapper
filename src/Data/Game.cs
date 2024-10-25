@@ -27,37 +27,37 @@ namespace DLSS_Swapper.Data
     {
         [PrimaryKey]
         [Column("id")]
-        public string ID { get; set; } = String.Empty;
+        public string ID { get; set; } = string.Empty;
 
         [Column("platform_id")]
-        public string PlatformId { get; set; } = String.Empty;
+        public string PlatformId { get; set; } = string.Empty;
 
         [ObservableProperty]
         [property: Column("title")]
-        string title = String.Empty;
+        string title = string.Empty;
 
         [Column("install_path")]
-        public string InstallPath { get; set; }
+        public string InstallPath { get; set; } = string.Empty;
 
         [ObservableProperty]
         [property: Column("cover_image")]
-        string coverImage = null;
+        string coverImage = string.Empty;
 
         [ObservableProperty]
         [property: Column("base_dlss_version")]
-        string baseDLSSVersion = String.Empty;
+        string baseDLSSVersion = string.Empty;
 
         [ObservableProperty]
         [property: Column("current_dlss_version")]
-        string currentDLSSVersion = String.Empty;
+        string currentDLSSVersion = string.Empty;
 
         [ObservableProperty]
         [property: Column("current_dlss_hash")]
-        string currentDLSSHash = String.Empty;
+        string currentDLSSHash = string.Empty;
 
         [ObservableProperty]
         [property: Column("base_dlss_hash")]
-        string baseDLSSHash = String.Empty;
+        string baseDLSSHash = string.Empty;
 
         [ObservableProperty]
         [property: Column("has_dlss")]
@@ -65,7 +65,7 @@ namespace DLSS_Swapper.Data
 
         [ObservableProperty]
         [property: Column("notes")]
-        string notes = String.Empty;
+        string notes = string.Empty;
 
         [ObservableProperty]
         [property: Column("is_favourite")]
@@ -109,7 +109,7 @@ namespace DLSS_Swapper.Data
         /// </summary>
         public void ProcessGame(bool autoSave = true)
         {
-            if (String.IsNullOrEmpty(InstallPath))
+            if (string.IsNullOrEmpty(InstallPath))
             {
                 return;
             }
@@ -197,6 +197,13 @@ namespace DLSS_Swapper.Data
 
                 HasDLSS = false;
 
+
+                var newCurrentDLSSVersion = string.Empty;
+                var newCurrentDLSSHash = string.Empty;
+                var newBaseDLSSVersion = string.Empty;
+                var newBaseDLSSHash = string.Empty;
+
+
                 if (GameAssets.Any())
                 {
                     await App.CurrentApp.Database.InsertAllAsync(GameAssets).ConfigureAwait(false);
@@ -209,18 +216,13 @@ namespace DLSS_Swapper.Data
                     var dlssgGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_FG_BACKUP).ToList();
                     var dlssdGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_RR_BACKUP).ToList();
 
-                    HasDLSS = dlssGameAssets.Any();
+                    HasDLSS = true; // = dlssGameAssets.Any();
 
                     if (HasDLSS)
                     {
                         var firstDlss = dlssGameAssets.First();
 
                     }
-                    var currentDLSSVersion = String.Empty;
-                    var currentDLSSHash = String.Empty;
-                    var baseDLSSVersion = String.Empty;
-                    var baseDLSSHash = String.Empty;
-
 
                 }
 
@@ -231,21 +233,21 @@ namespace DLSS_Swapper.Data
 
 
                 // Now update all the data on the UI therad.
-                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
                     if (HasDLSS)
                     {
-                        CurrentDLSSVersion = currentDLSSVersion;
-                        CurrentDLSSHash = currentDLSSHash;
-                        BaseDLSSVersion = baseDLSSVersion;
-                        BaseDLSSHash = baseDLSSHash;
+                        CurrentDLSSVersion = newCurrentDLSSVersion;
+                        CurrentDLSSHash = newCurrentDLSSHash;
+                        BaseDLSSVersion = newBaseDLSSVersion;
+                        BaseDLSSHash = newBaseDLSSHash;
                     }
                     else
                     {
                         CurrentDLSSVersion = "N/A";
-                        CurrentDLSSHash = String.Empty;
-                        BaseDLSSVersion = String.Empty;
-                        BaseDLSSHash = String.Empty;
+                        CurrentDLSSHash = string.Empty;
+                        BaseDLSSVersion = string.Empty;
+                        BaseDLSSHash = string.Empty;
                     }
 
                     
@@ -302,6 +304,10 @@ namespace DLSS_Swapper.Data
                 try
                 {
                     var dllPath = Path.GetDirectoryName(dll);
+                    if (string.IsNullOrEmpty(dllPath))
+                    {
+                        throw new Exception("dllPath was null or empty.");
+                    }
                     var targetDllPath = Path.Combine(dllPath, "nvngx_dlss.dll");
                     File.Move(dll, targetDllPath, true);
                 }
@@ -327,13 +333,13 @@ namespace DLSS_Swapper.Data
             App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
             {
                 CurrentDLSSVersion = resetToVersion;
-                BaseDLSSVersion = String.Empty;
+                BaseDLSSVersion = string.Empty;
                 await SaveToDatabaseAsync();
             });
 
 
 
-            return (true, String.Empty, false);
+            return (true, string.Empty, false);
         }
 
         /// <summary>
@@ -343,10 +349,16 @@ namespace DLSS_Swapper.Data
         /// <returns>Tuple containing a boolean of Success, if this is false there will be an error message in the Message response.</returns>
         internal (bool Success, string Message, bool PromptToRelaunchAsAdmin) UpdateDll(DLSSRecord dlssRecord)
         {
-            if (dlssRecord == null)
+            if (dlssRecord is null)
             {
                 return (false, "Unable to swap DLSS dll as your DLSS record was not found.", false);
             }
+
+            if (dlssRecord.LocalRecord is null)
+            {
+                return (false, "Unable to swap DLSS dll as your local DLSS record was not found.", false);
+            }
+
             var enumerationOptions = new EnumerationOptions();
             enumerationOptions.RecurseSubdirectories = true;
             enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
@@ -393,12 +405,18 @@ namespace DLSS_Swapper.Data
                 }
             }
 
-            var baseDllVersion = String.Empty;
+            var baseDllVersion = string.Empty;
 
             // Backup old dlls.
             foreach (var dll in foundDlls)
             {
                 var dllPath = Path.GetDirectoryName(dll);
+                if (string.IsNullOrEmpty(dllPath))
+                {
+                    Logger.Error("dllPath was null or empty.");
+                    return (false, "Unable to swap DLSS dll. Please check your error log for more information.", false);
+                }
+
                 var targetDllPath = Path.Combine(dllPath, "nvngx_dlss.dll.dlsss");
                 if (File.Exists(targetDllPath) == false)
                 {
@@ -461,7 +479,7 @@ namespace DLSS_Swapper.Data
             App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
             {
                 CurrentDLSSVersion = dlssRecord.Version;
-                if (String.IsNullOrEmpty(baseDllVersion) == false)
+                if (string.IsNullOrEmpty(baseDllVersion) == false)
                 {
                     BaseDLSSVersion = baseDllVersion;
                 }
@@ -478,19 +496,24 @@ namespace DLSS_Swapper.Data
                 Logger.Error(err.Message);
             }
 
-            return (true, String.Empty, false);
+            return (true, string.Empty, false);
         }
 
         #region IComparable<Game>
-        public int CompareTo(Game other)
+        public int CompareTo(Game? other)
         {
-            return Title?.CompareTo(other.Title) ?? -1;
+            if (other is null)
+            {
+                return -1;
+            }
+
+            return Title.CompareTo(other.Title);
         }
         #endregion
 
         /*
         #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged = null;
         void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -569,7 +592,7 @@ namespace DLSS_Swapper.Data
 
                 App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
-                    CoverImage = null;
+                    CoverImage = string.Empty;
                     CoverImage = ExpectedCustomCoverImage;
                 });
             }
@@ -702,7 +725,7 @@ namespace DLSS_Swapper.Data
 
                 var coverImageFile = await fileOpenPicker.PickSingleFileAsync();
 
-                if (coverImageFile == null)
+                if (coverImageFile is null)
                 {
                     return;
                 }
@@ -715,8 +738,13 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        public bool Equals(Game other)
+        public bool Equals(Game? other)
         {
+            if (other is null)
+            {
+                return false;
+            }
+
             if (ID == other.ID)
             {
                 return true;
@@ -798,6 +826,12 @@ namespace DLSS_Swapper.Data
             var gameAssets = await App.CurrentApp.Database.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();
             if (gameAssets.Any())
             {
+                foreach (var gameAsset in gameAssets)
+                {
+                     
+                }
+                // TODO: Check each game asset, if it exists and matches what we expect then we can skip loading it again
+                // If it isn't found or doesn't match, need to re-scan.
                 GameAssets.AddRange(gameAssets);
             }
         }

@@ -45,8 +45,6 @@ namespace DLSS_Swapper
         ThemeWatcher _themeWatcher;
         IntPtr _windowIcon;
 
-        public static NavigationView NavigationView;
-
         public ObservableRangeCollection<DLSSRecord> CurrentDLSSRecords { get; } = new ObservableRangeCollection<DLSSRecord>();
 
 
@@ -76,8 +74,6 @@ namespace DLSS_Swapper
             _themeWatcher = new ThemeWatcher();
             _themeWatcher.ThemeChanged += ThemeWatcher_ThemeChanged;
             _themeWatcher.Start();
-
-            NavigationView = MainNavigationView;
 
 
             if (_isCustomizationSupported)
@@ -138,7 +134,7 @@ namespace DLSS_Swapper
             {
                 GoToPage("Settings");
             }
-            else if (args.InvokedItemContainer.Tag is String invokedItem)
+            else if (args.InvokedItemContainer.Tag is string invokedItem)
             {
                 GoToPage(invokedItem);
             }
@@ -149,9 +145,9 @@ namespace DLSS_Swapper
         }
 
 
-        GameGridPage gameGridPage = null;
-        LibraryPage libraryPage = null;
-        SettingsPage settingsPage = null;
+        GameGridPage? gameGridPage = null;
+        LibraryPage? libraryPage = null;
+        SettingsPage? settingsPage = null;
 
         void GoToPage(string page)
         {
@@ -183,7 +179,7 @@ namespace DLSS_Swapper
             }
 
             // Only try manually set selected item if is not already selected. 
-            if (MainNavigationView.SelectedItem is null || (MainNavigationView.SelectedItem is String selectedItem && selectedItem != page))
+            if (MainNavigationView.SelectedItem is null || (MainNavigationView.SelectedItem is string selectedItem && selectedItem != page))
             {
                 foreach (NavigationViewItem navigationViewItem in MainNavigationView.MenuItems)
                 {
@@ -213,7 +209,7 @@ namespace DLSS_Swapper
 
             // If this is a GitHub build check if there is a new version.
             // Lazy blocks to allow mul
-            Task<Data.GitHub.GitHubRelease> newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease();
+            var newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease();
 
 
             // Load from cache, or download if not found.
@@ -273,10 +269,10 @@ DLSS Swapper will close now.",
 
             // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
             /*
-            if (releaseNotesTask != null)
+            if (releaseNotesTask is not null)
             {
                 await releaseNotesTask;
-                if (releaseNotesTask.Result != null)
+                if (releaseNotesTask.Result is not null)
                 {
                     gitHubUpdater?.DisplayWhatsNewDialog(releaseNotesTask.Result, MainNavigationView);
                 }
@@ -284,7 +280,7 @@ DLSS Swapper will close now.",
             */
 
             await newUpdateTask;
-            if (newUpdateTask.Result != null)
+            if (newUpdateTask.Result is not null)
             {
                 if (gitHubUpdater.HasPromptedBefore(newUpdateTask.Result) == false)
                 {
@@ -301,12 +297,12 @@ DLSS Swapper will close now.",
             var newDlssRecordsList = new List<DLSSRecord>();
             if (Settings.Instance.AllowUntrusted)
             {
-                newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Stable);
+                newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords.Stable);
                 newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords);
             }
             else
             {
-                newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Stable.Where(x => x.IsSignatureValid == true));
+                newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords.Stable.Where(x => x.IsSignatureValid == true));
                 newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords.Where(x => x.IsSignatureValid == true));
             }
 
@@ -314,11 +310,11 @@ DLSS Swapper will close now.",
             {
                 if (Settings.Instance.AllowUntrusted)
                 {
-                    newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Experimental);
+                    newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords.Experimental);
                 }
                 else
                 {
-                    newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Experimental.Where(x => x.IsSignatureValid == true));
+                    newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords.Experimental.Where(x => x.IsSignatureValid == true));
                 }
             }
 
@@ -352,7 +348,7 @@ DLSS Swapper will close now.",
                 var items = await Storage.LoadDLSSRecordsJsonAsync();
                
                 // If items could not be loaded then we should attempt to upload dlss_records from the dlss-archive.
-                if (items == null)
+                if (items is null)
                 {
                     return await UpdateDLSSRecordsAsync();
                 }
@@ -372,7 +368,7 @@ DLSS Swapper will close now.",
         internal async Task LoadImportedDLSSRecordsAsync()
         {
             var items = await Storage.LoadImportedDLSSRecordsJsonAsync();
-            if (items != null)
+            if (items is not null)
             {
                 UpdateImportedDLSSRecordsList(items);
             }
@@ -415,7 +411,10 @@ DLSS Swapper will close now.",
                     memoryStream.Position = 0;
 
                     var items = await JsonSerializer.DeserializeAsync(memoryStream, SourceGenerationContext.Default.DLSSRecords);
-
+                    if (items is null)
+                    {
+                        throw new Exception("Could not deserialize dlss_records.json.");
+                    }
                     UpdateDLSSRecordsList(items);
                     //await UpdateDLSSRecordsListAsync(items);
 
@@ -476,6 +475,10 @@ DLSS Swapper will close now.",
             var app = ((App)Application.Current);
             var theme = app.Resources.MergedDictionaries[1].ThemeDictionaries["Light"] as ResourceDictionary;
 
+            if (theme is null)
+            {
+                return;
+            }
 
             if (_isCustomizationSupported)
             {
@@ -517,6 +520,10 @@ DLSS Swapper will close now.",
             var app = ((App)Application.Current);
             var theme = app.Resources.MergedDictionaries[1].ThemeDictionaries["Dark"] as ResourceDictionary;
 
+            if (theme is null)
+            {
+                return;
+            }
 
             if (_isCustomizationSupported)
             {
@@ -574,7 +581,7 @@ DLSS Swapper will close now.",
             }
         }
 
-        void ThemeWatcher_ThemeChanged(object sender, ApplicationTheme e)
+        void ThemeWatcher_ThemeChanged(object? sender, ApplicationTheme e)
         {
             var globalTheme = ((App)Application.Current).GlobalElementTheme;
 

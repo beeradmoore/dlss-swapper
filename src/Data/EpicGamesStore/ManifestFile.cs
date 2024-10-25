@@ -18,16 +18,16 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         //public bool bIsIncompleteInstall { get; set; }
 
         //[JsonPropertyName("LaunchCommand")]
-        //public string LaunchCommand { get; set; } = String.Empty;
+        //public string LaunchCommand { get; set; } = string.Empty;
 
         //[JsonPropertyName("LaunchExecutable")]
-        //public string LaunchExecutable { get; set; } = String.Empty;
+        //public string LaunchExecutable { get; set; } = string.Empty;
 
         //[JsonPropertyName("ManifestLocation")]
-        //public string ManifestLocation { get; set; } = String.Empty;
+        //public string ManifestLocation { get; set; } = string.Empty;
 
         //[JsonPropertyName("ManifestHash")]
-        //public string ManifestHash { get; set; } = String.Empty;
+        //public string ManifestHash { get; set; } = string.Empty;
 
         //[JsonPropertyName("bIsApplication")]
         //public bool IsApplication { get; set; }
@@ -69,16 +69,16 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         //public List<???> CompatibleApps { get; set; }
 
         [JsonPropertyName("DisplayName")]
-        public string DisplayName { get; set; } = String.Empty;
+        public string DisplayName { get; set; } = string.Empty;
 
         //[JsonPropertyName("InstallationGuid")]
-        //public string InstallationGuid { get; set; } = String.Empty;
+        //public string InstallationGuid { get; set; } = string.Empty;
 
         [JsonPropertyName("InstallLocation")]
-        public string InstallLocation { get; set; } = String.Empty;
+        public string InstallLocation { get; set; } = string.Empty;
 
         //[JsonPropertyName("InstallSessionId")]
-        //public string InstallSessionId { get; set; } = String.Empty;
+        //public string InstallSessionId { get; set; } = string.Empty;
 
         //[JsonPropertyName("InstallTags")]
         //public List<???> InstallTags { get; set; }
@@ -87,34 +87,34 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         //public List<???> InstallComponents { get; set; }
 
         //[JsonPropertyName("HostInstallationGuid")]
-        //public string HostInstallationGuid { get; set; } = String.Empty;
+        //public string HostInstallationGuid { get; set; } = string.Empty;
 
         //[JsonPropertyName("PrereqIds")]
         //public List<???> PrereqIds { get; set; }
 
         //[JsonPropertyName("PrereqSHA1Hash")]
-        //public string PrereqSHA1Hash { get; set; } = String.Empty;
+        //public string PrereqSHA1Hash { get; set; } = string.Empty;
 
         //[JsonPropertyName("LastPrereqSucceededSHA1Hash")]
-        //public string LastPrereqSucceededSHA1Hash { get; set; } = String.Empty;
+        //public string LastPrereqSucceededSHA1Hash { get; set; } = string.Empty;
 
         //[JsonPropertyName("StagingLocation")]
-        //public string StagingLocation { get; set; } = String.Empty;
+        //public string StagingLocation { get; set; } = string.Empty;
 
         //[JsonPropertyName("TechnicalType")]
-        //public string TechnicalType { get; set; } = String.Empty;
+        //public string TechnicalType { get; set; } = string.Empty;
 
         //[JsonPropertyName("VaultThumbnailUrl")]
-        //public string VaultThumbnailUrl { get; set; } = String.Empty;
+        //public string VaultThumbnailUrl { get; set; } = string.Empty;
 
         //[JsonPropertyName("VaultTitleText")]
-        //public string VaultTitleText { get; set; } = String.Empty;
+        //public string VaultTitleText { get; set; } = string.Empty;
 
         //[JsonPropertyName("InstallSize")]
         //public long InstallSize { get; set; }
 
         //[JsonPropertyName("MainWindowProcessName")]
-        //public string MainWindowProcessName { get; set; } = String.Empty;
+        //public string MainWindowProcessName { get; set; } = string.Empty;
 
         //[JsonPropertyName("ProcessNames")]
         //public List<???> ProcessNames { get; set; }
@@ -123,31 +123,31 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         //public List<???> BackgroundProcessNames { get; set; }
 
         //[JsonPropertyName("MandatoryAppFolderName")]
-        //public string MandatoryAppFolderName { get; set; } = String.Empty;
+        //public string MandatoryAppFolderName { get; set; } = string.Empty;
 
         //[JsonPropertyName("OwnershipToken")]
-        //public string OwnershipToken { get; set; } = String.Empty;
+        //public string OwnershipToken { get; set; } = string.Empty;
 
         //[JsonPropertyName("CatalogNamespace")]
-        //public string CatalogNamespace { get; set; } = String.Empty;
+        //public string CatalogNamespace { get; set; } = string.Empty;
 
         [JsonPropertyName("CatalogItemId")]
-        public string CatalogItemId { get; set; } = String.Empty;
+        public string CatalogItemId { get; set; } = string.Empty;
 
         //[JsonPropertyName("AppName")]
-        //public string AppName { get; set; } = String.Empty;
+        //public string AppName { get; set; } = string.Empty;
 
         //[JsonPropertyName("AppVersionString")]
-        //public string AppVersionString { get; set; } = String.Empty;
+        //public string AppVersionString { get; set; } = string.Empty;
 
         //[JsonPropertyName("MainGameCatalogNamespace")]
-        //public string MainGameCatalogNamespace { get; set; } = String.Empty;
+        //public string MainGameCatalogNamespace { get; set; } = string.Empty;
 
         //[JsonPropertyName("MainGameCatalogItemId")]
-        //public string MainGameCatalogItemId { get; set; } = String.Empty;
+        //public string MainGameCatalogItemId { get; set; } = string.Empty;
 
         //[JsonPropertyName("MainGameAppName")]
-        //public string MainGameAppName { get; set; } = String.Empty;
+        //public string MainGameAppName { get; set; } = string.Empty;
 
         //[JsonPropertyName("AllowedUriEnvVars")]
         //public List<???> AllowedUriEnvVars { get; set; }

@@ -46,7 +46,7 @@ internal partial class GameControlModel : ObservableObject
         {
             Logger.Error(err.Message);
 
-            if (gameControlWeakReference.TryGetTarget(out GameControl gameControl))
+            if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
             {
                 var dialog = new EasyContentDialog(gameControl.XamlRoot)
                 {
@@ -62,7 +62,7 @@ internal partial class GameControlModel : ObservableObject
     [RelayCommand]
     async Task EditNotesAsync()
     {
-        if (gameControlWeakReference.TryGetTarget(out GameControl gameControl))
+        if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
         {
             var textBox = new TextBox()
             {
@@ -85,7 +85,7 @@ internal partial class GameControlModel : ObservableObject
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
-                Game.Notes = textBox.Text ?? String.Empty;
+                Game.Notes = textBox.Text ?? string.Empty;
                 await Game.SaveToDatabaseAsync();
             }
         }
@@ -95,6 +95,7 @@ internal partial class GameControlModel : ObservableObject
     async Task ViewHistoryAsync()
     {
         //ViewHistoryCommand
+        // TODO: implement
         await Task.Delay(100);
     }
 
@@ -113,7 +114,7 @@ internal partial class GameControlModel : ObservableObject
     [RelayCommand]
     void Close()
     {
-        if (gameControlWeakReference.TryGetTarget(out GameControl gameControl))
+        if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
         {
             gameControl.Hide();
         }
@@ -122,7 +123,7 @@ internal partial class GameControlModel : ObservableObject
     [RelayCommand]
     async Task RemoveAsync()
     {
-        if (gameControlWeakReference.TryGetTarget(out GameControl gameControl))
+        if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
         {
             // This should never happen
             if (CanRemove == false)

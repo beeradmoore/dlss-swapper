@@ -42,8 +42,8 @@ namespace DLSS_Swapper
     {
         public ElementTheme GlobalElementTheme { get; set; }
 
-        MainWindow _window;
-        public MainWindow MainWindow => _window;
+        MainWindow? _window;
+        public MainWindow MainWindow => _window ??= new MainWindow();
 
         public static App CurrentApp => (App)Application.Current;
 
@@ -69,7 +69,7 @@ namespace DLSS_Swapper
             Logger.Init();
 
             var version = GetVersion();
-            var versionString = String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+            var versionString = string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
 
 
             Logger.Info($"App launch - v{versionString}", null);
@@ -158,10 +158,9 @@ namespace DLSS_Swapper
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            _window = new MainWindow();
-            _window.Activate();
+            MainWindow.Activate();
 
             // No need to calculate this for portable app.
 #if !PORTABLE
@@ -180,8 +179,8 @@ namespace DLSS_Swapper
 
                 using (var dlssSwapperRegistryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\DLSS Swapper", true))
                 {
-                    var installLocation = dlssSwapperRegistryKey?.GetValue("InstallLocation") as String;
-                    if (String.IsNullOrEmpty(installLocation) == false && Directory.Exists(installLocation) == true)
+                    var installLocation = dlssSwapperRegistryKey?.GetValue("InstallLocation") as string;
+                    if (string.IsNullOrEmpty(installLocation) == false && Directory.Exists(installLocation) == true)
                     {
                         installSize += CalculateDirectorySize(installLocation);
                     }
@@ -237,7 +236,7 @@ namespace DLSS_Swapper
             }
 
             // If the record exists we will update existing properties, if not we add it as new property.
-            if (dlssRecord.LocalRecord == null)
+            if (dlssRecord.LocalRecord is null)
             {
                 dlssRecord.LocalRecord = localRecord;
             }
@@ -258,7 +257,7 @@ namespace DLSS_Swapper
 
             // If the record exists we will update existing properties, if not we add it as new property.
             var existingLocalRecord = LocalRecords.FirstOrDefault(x => x.Equals(localRecord));
-            if (existingLocalRecord == null)
+            if (existingLocalRecord is null)
             {
                 dlssRecord.LocalRecord = localRecord;
                 LocalRecords.Add(localRecord);
@@ -369,7 +368,7 @@ namespace DLSS_Swapper
 
         public Version GetVersion()
         {
-            return Assembly.GetExecutingAssembly().GetName().Version;
+            return Assembly.GetExecutingAssembly().GetName().Version ?? new Version();
         }
 
         public string GetVersionString()

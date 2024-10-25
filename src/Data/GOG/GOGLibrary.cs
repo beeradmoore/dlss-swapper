@@ -28,7 +28,7 @@ namespace DLSS_Swapper.Data.GOG
 
         public Type GameType => typeof(GOGGame);
 
-        static GOGLibrary instance = null;
+        static GOGLibrary? instance = null;
         public static GOGLibrary Instance => instance ??= new GOGLibrary();
 
         private GOGLibrary()
@@ -44,7 +44,7 @@ namespace DLSS_Swapper.Data.GOG
             {
                 using (var registryKey = hklm.OpenSubKey(@"SOFTWARE\GOG.com\Games"))
                 {
-                    if (registryKey != null)
+                    if (registryKey is not null)
                     {
                         return true;
                     }
@@ -71,7 +71,7 @@ namespace DLSS_Swapper.Data.GOG
             {
                 using (var registryKey = hklm.OpenSubKey(@"SOFTWARE\GOG.com\Games"))
                 {
-                    if (registryKey == null)
+                    if (registryKey is null)
                     {
                         // Something bad happened.
                         return new List<Game>(); ;
@@ -82,30 +82,48 @@ namespace DLSS_Swapper.Data.GOG
                     {
                         using (var gameKey = registryKey.OpenSubKey(subkey))
                         {
-                            if (gameKey == null)
+                            if (gameKey is null)
                             {
                                 continue;
                             }
 
-                            var gameId = gameKey.GetValue("gameID") as String;
-                            var gameName = gameKey.GetValue("gameName") as String;
-                            var gamePath = gameKey.GetValue("path") as String;
+                            var gameId = gameKey.GetValue("gameID") as string;
+                            var gameName = gameKey.GetValue("gameName") as string;
+                            var gamePath = gameKey.GetValue("path") as string;
+
+                            if (string.IsNullOrEmpty(gameId))
+                            {
+                                Logger.Error("Issue loading GOG Game, no gameId found.");
+                                continue;
+                            }
+
+
+                            if (string.IsNullOrEmpty(gameName))
+                            {
+                                Logger.Error("Issue loading GOG Game, no gameName found.");
+                                continue;
+                            }
+
+
+                            if (string.IsNullOrEmpty(gamePath))
+                            {
+                                Logger.Error("Issue loading GOG Game, no gamePath found.");
+                                continue;
+                            }
+
 
                             // If the entry is DLC we don't need to show it as an individual item.
-                            var dependsOn = gameKey.GetValue("dependsOn") as String;
-                            if (String.IsNullOrEmpty(dependsOn) == false)
+                            var dependsOn = gameKey.GetValue("dependsOn") as string;
+                            if (string.IsNullOrEmpty(dependsOn) == false)
                             {
                                 continue;
                             }
 
-                            if (String.IsNullOrEmpty(gameName) == false && String.IsNullOrEmpty(gamePath) == false)
-                            {
-                                var game = GameManager.Instance.GetGame<GOGGame>(gameId) ?? new GOGGame(gameId);
-                                game.Title = gameName;
-                                game.InstallPath = gamePath;
+                            var game = GameManager.Instance.GetGame<GOGGame>(gameId) ?? new GOGGame(gameId);
+                            game.Title = gameName;
+                            game.InstallPath = gamePath;
 
-                                gogGames.Add(game);
-                            }
+                            gogGames.Add(game);
                         }
                     }
                 }
@@ -123,7 +141,7 @@ namespace DLSS_Swapper.Data.GOG
 
             // If GOG Galaxy is installed we can get images from it.
             var storageFileLocation = GetStorageFileLocation();
-            if (String.IsNullOrWhiteSpace(storageFileLocation) == false && File.Exists(storageFileLocation) == true)
+            if (string.IsNullOrWhiteSpace(storageFileLocation) == false && File.Exists(storageFileLocation) == true)
             {
                 //await Task.Delay(1);
                 var db = new SQLiteAsyncConnection(storageFileLocation, SQLiteOpenFlags.ReadOnly);
@@ -131,7 +149,7 @@ namespace DLSS_Swapper.Data.GOG
                 // Default resource type for verticalCover images is 3. We default to this, but we also add try load it incase it changes.
                 var webCacheResourceTypeId = 3;
                 var webCacheResourceType = (await db.QueryAsync<WebCacheResourceType>("SELECT * FROM WebCacheResourceTypes WHERE type=?", "verticalCover").ConfigureAwait(false)).FirstOrDefault();
-                if (webCacheResourceType != null)
+                if (webCacheResourceType is not null)
                 {
                     webCacheResourceTypeId = webCacheResourceType.Id;
                 }
@@ -139,7 +157,7 @@ namespace DLSS_Swapper.Data.GOG
                 // Default resource type for originalImages is 378. We default to this, but we also add try load it incase it changes.
                 var gamePieceTypeId = 378;
                 var gamePieceType = (await db.QueryAsync<GamePieceType>("SELECT * FROM GamePieceTypes WHERE type=?", "originalImages").ConfigureAwait(false)).FirstOrDefault();
-                if (gamePieceType != null)
+                if (gamePieceType is not null)
                 {
                     gamePieceTypeId = gamePieceType.Id;
                 }
@@ -154,14 +172,14 @@ namespace DLSS_Swapper.Data.GOG
                     {
                         /*
                         var installedBaseProduct = (await db.QueryAsync<InstalledBaseProduct>("SELECT * FRO< InstalledBaseProducts WHERE ProductId=? LIMIT 1", gogGame.Id).ConfigureAwait(false)).FirstOrDefault();
-                        if (installedBaseProduct == null)
+                        if (installedBaseProduct is null)
                         {
                             continue;
                         }
                         */
 
                         var limitedDetail = (await db.QueryAsync<LimitedDetail>("SELECT * FROM LimitedDetails WHERE ProductId=? LIMIT 1", gogGame.PlatformId).ConfigureAwait(false)).FirstOrDefault();
-                        if (limitedDetail == null)
+                        if (limitedDetail is null)
                         {
                             continue;
                         }
@@ -169,14 +187,14 @@ namespace DLSS_Swapper.Data.GOG
                         var localCoverImages = new List<string>();
 
                         var releaseKey = $"gog_{gogGame.PlatformId}";
-                        var fallbackImage = limitedDetail.ImagesData?.Logo2x ?? String.Empty;
+                        var fallbackImage = limitedDetail.ImagesData?.Logo2x ?? string.Empty;
                         var gamePieces = (await db.QueryAsync<GamePiece>("SELECT * FROM GamePieces WHERE releaseKey=? AND gamePieceTypeId=?", releaseKey, gamePieceTypeId).ConfigureAwait(false));
                         if (gamePieces?.Any() == true)
                         {
                             foreach (var gamePiece in gamePieces)
                             {
                                 var originalImages = gamePiece.GetValueAsOriginalImages();
-                                if (String.IsNullOrEmpty(originalImages.VerticalCover))
+                                if (string.IsNullOrEmpty(originalImages?.VerticalCover) == false)
                                 {
                                     fallbackImage = originalImages.VerticalCover;
                                     break;
@@ -188,7 +206,7 @@ namespace DLSS_Swapper.Data.GOG
                         foreach (var webCache in webCaches)
                         {
                             var webCacheResource = (await db.QueryAsync<WebCacheResource>("SELECT * FROM WebCacheResources WHERE webCacheId=? AND webCacheResourceTypeId=? LIMIT 1", webCache.Id, webCacheResourceTypeId).ConfigureAwait(false)).FirstOrDefault();
-                            if (webCacheResource != null)
+                            if (webCacheResource is not null)
                             {
                                 var localCoverImage = Path.Combine(programDataDirectory, "GOG.com", "Galaxy", "webcache", webCache.UserId.ToString(), "gog", gogGame.PlatformId.ToString(), webCacheResource.Filename);
                                 if (File.Exists(localCoverImage))
@@ -200,7 +218,7 @@ namespace DLSS_Swapper.Data.GOG
 
                         var productId = limitedDetail.ProductId.ToString();
                         var currentGame = gogGames.FirstOrDefault<GOGGame>(game => game.PlatformId == productId);
-                        if (currentGame != null)
+                        if (currentGame is not null)
                         {
                             currentGame.FallbackHeaderUrl = fallbackImage;
                             currentGame.PotentialLocalHeaders.Clear();
@@ -220,7 +238,7 @@ namespace DLSS_Swapper.Data.GOG
             // Check for games that are installed locally, but not added to GOG Galaxy.
             foreach (var gogGame in gogGames)
             {
-                if (String.IsNullOrEmpty(gogGame.FallbackHeaderUrl))
+                if (string.IsNullOrEmpty(gogGame.FallbackHeaderUrl))
                 {
                     var webcachePath = Path.Combine(gogGame.InstallPath, "webcache.zip");
                     if (File.Exists(webcachePath))
@@ -228,7 +246,7 @@ namespace DLSS_Swapper.Data.GOG
                         using (var zip = ZipFile.Open(webcachePath, ZipArchiveMode.Read))
                         {
                             var resourcesEntry = zip.GetEntry("resources.json");
-                            if (resourcesEntry == null)
+                            if (resourcesEntry is null)
                             {
                                 Logger.Error($"Unable to load resources.json for {gogGame.PlatformId}.");
                                 continue;
@@ -237,13 +255,13 @@ namespace DLSS_Swapper.Data.GOG
                             using (var resourcesStream = resourcesEntry.Open())
                             {
                                 var limitedDetailImages = JsonSerializer.Deserialize(resourcesStream, SourceGenerationContext.Default.ResourceImages);
-                                if (limitedDetailImages == null)
+                                if (limitedDetailImages is null)
                                 {
                                     Logger.Error($"Unable to deserialize resources.json for {gogGame.PlatformId}.");
                                     continue;
                                 }
 
-                                if (String.IsNullOrEmpty(limitedDetailImages.Logo) == false)
+                                if (string.IsNullOrEmpty(limitedDetailImages.Logo) == false)
                                 {
                                     var url = $"https://images.gog.com/{limitedDetailImages.Logo}";
                                     url = url.Replace("glx_logo", "glx_vertical_cover");
@@ -284,7 +302,7 @@ namespace DLSS_Swapper.Data.GOG
                 return storageFileLocation;
             }
 
-            return String.Empty;
+            return string.Empty;
         }
 
         public async Task<List<Game>> LoadFromCacheAsync()

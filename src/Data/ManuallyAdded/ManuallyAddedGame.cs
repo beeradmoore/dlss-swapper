@@ -10,7 +10,7 @@ public class ManuallyAddedGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.ManuallyAdded;
 
-//    public override string HeaderImage => String.Empty;
+//    public override string HeaderImage => string.Empty;
 
     public ManuallyAddedGame()
     {
@@ -30,7 +30,7 @@ public class ManuallyAddedGame : Game
     protected override void UpdateCacheImage()
     {
         // NOOP, the image is manually managed by the user.
-        CoverImage = null;
+        CoverImage = string.Empty;
     }
 
     public override bool UpdateFromGame(Game game)

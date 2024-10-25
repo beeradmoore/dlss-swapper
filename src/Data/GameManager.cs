@@ -117,7 +117,7 @@ internal partial class GameManager : ObservableObject
         AllGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
         
 
-        allGamesGroup = new GameGroup(String.Empty, AllGamesView);
+        allGamesGroup = new GameGroup(string.Empty, AllGamesView);
         favouriteGamesGroup = new GameGroup("Favourites", FavouriteGamesView);
 
         var groupedList = new List<GameGroup>()

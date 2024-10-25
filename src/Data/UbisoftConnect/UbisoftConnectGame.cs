@@ -15,10 +15,10 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         public override GameLibrary GameLibrary => GameLibrary.UbisoftConnect;
 
         [Column("local_header_image")]
-        public string LocalHeaderImage { get; set; } = String.Empty;
+        public string LocalHeaderImage { get; set; } = string.Empty;
 
         [Column("remote_header_image")]
-        public string RemoteHeaderImage { get; set; } = String.Empty;
+        public string RemoteHeaderImage { get; set; } = string.Empty;
 
         public UbisoftConnectGame()
         {

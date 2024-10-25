@@ -22,7 +22,7 @@ namespace DLSS_Swapper.Data.GitHub
         /// Queries GitHub and returns the latest GitHubRelease object, or null if the request failed.
         /// </summary>
         /// <returns>Latest GitHubRelease object, or null if the request failed</returns>
-        internal async Task<GitHubRelease> FetchLatestRelease()
+        internal async Task<GitHubRelease?> FetchLatestRelease()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace DLSS_Swapper.Data.GitHub
             }
         }
 
-        internal async Task<GitHubRelease> GetReleaseFromTag(string tag)
+        internal async Task<GitHubRelease?> GetReleaseFromTag(string tag)
         {
             try
             {
@@ -54,10 +54,10 @@ namespace DLSS_Swapper.Data.GitHub
         /// Queries GitHub and returns a GitHubRelease only if a newer version was detected, otherwise null
         /// </summary>
         /// <returns>GitHubRelease object if an update is available, otherwise null.</returns>
-        internal async Task<GitHubRelease> CheckForNewGitHubRelease()
+        internal async Task<GitHubRelease?> CheckForNewGitHubRelease()
         {
             var latestRelease = await FetchLatestRelease().ConfigureAwait(false);
-            if (latestRelease == null)
+            if (latestRelease is null)
             {
                 return null;
             }

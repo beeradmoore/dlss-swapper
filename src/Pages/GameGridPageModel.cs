@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
-using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
@@ -42,7 +42,7 @@ internal partial class GameGridPageModel : ObservableObject
     public bool IsLoading => (IsGameListLoading || IsDLSSLoading);
 
     [ObservableProperty]
-    ICollectionView currentCollectionView = null;
+    ICollectionView? currentCollectionView = null;
 
 
     public GameGridPageModel(GameGridPage gameGridPage)
@@ -64,17 +64,22 @@ internal partial class GameGridPageModel : ObservableObject
         };
         */
 
+
+
         ApplyGameGroupFilter();
      }
 
     public async Task InitialLoadAsync()
     {
+        /*
         await GameManager.Instance.LoadGamesFromCacheAsync();
         
         IsGameListLoading = false;
-
+        */
+        
         await GameManager.Instance.LoadGamesAsync();
 
+        IsGameListLoading = false;
         IsDLSSLoading = false;
     }
 
@@ -195,7 +200,7 @@ If you have checked these and your game is still not showing up there may be a b
             CommitButtonText = "Select Game Folder",
         };
 
-        var installPath = String.Empty;
+        var installPath = string.Empty;
         try
         {
             // Associate the HWND with the folder picker
@@ -204,7 +209,7 @@ If you have checked these and your game is still not showing up there may be a b
 
             var folder = await folderPicker.PickSingleFolderAsync();
 
-            if (folder == null)
+            if (folder is null)
             {
                 return;
             }

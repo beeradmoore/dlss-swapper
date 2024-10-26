@@ -79,10 +79,16 @@ namespace DLSS_Swapper.Data
         public abstract GameLibrary GameLibrary { get; }
 
         [Ignore]
-        public string ExpectedCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_600_900.webp");
-        
-        [Ignore]        
-        public string ExpectedCustomCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_custom_600_900.webp");
+        //public string ExpectedCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_600_900.jpg");
+        //public string ExpectedCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_600_900.png");
+        public string ExpectedCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_400_600.png");
+        //public string ExpectedCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_600_900.webp");
+
+        [Ignore]
+        //public string ExpectedCustomCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_custom_600_900.jpg");
+        //public string ExpectedCustomCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_custom_600_900.png");
+        public string ExpectedCustomCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_custom_400_600.png");
+        //public string ExpectedCustomCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_custom_600_900.webp");
 
         [Ignore]
         public List<GameAsset> GameAssets { get; } = new List<GameAsset>();
@@ -531,18 +537,18 @@ namespace DLSS_Swapper.Data
             {
                 using (var image = SixLabors.ImageSharp.Image.Load(imageSource))
                 {
-                    // If images are really big we resize to at least 3x the 200x300 we display as.
+                    // If images are really big we resize to at least 2x the 200x300 we display as.
                     // In future this should be updated to resize to display scale.
                     // If the image is smaller than this we are just saving as png.
                     var resizeOptions = new ResizeOptions()
                     {
-                        Size = new Size(200 * 3, 300 * 3),
+                        Size = new Size(200 * 2, 300 * 2),
                         Sampler = KnownResamplers.Lanczos5,
                         Mode = ResizeMode.Min, // If image is smaller it won't be resized up.
                     };
                     image.Mutate(x => x.Resize(resizeOptions));
-                    //image.SaveAsPng(ExpectedCoverImage);
-                    image.SaveAsWebp(ExpectedCoverImage);
+                    image.SaveAsPng(ExpectedCoverImage);
+                    //image.SaveAsWebp(ExpectedCoverImage);
                     //image.SaveAsJpeg(ExpectedCoverImage);
                 }
 

@@ -770,7 +770,7 @@ namespace DLSS_Swapper.Data
 
             if (InstallPath != game.InstallPath)
             {
-                InstallPath = game.InstallPath;
+                InstallPath = PathHelpers.NormalizePath(game.InstallPath);
                 didChange = true;
             }
 

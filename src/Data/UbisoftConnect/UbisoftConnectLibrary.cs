@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
 using YamlDotNet.Serialization;
@@ -103,7 +104,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                         installedTitles[installId] = new UbisoftGameRegistryRecord()
                                         {
                                             InstallId = installId,
-                                            InstallPath = gameInstallDir,
+                                            InstallPath = PathHelpers.NormalizePath(gameInstallDir),
                                         };
                                     }
                                 }
@@ -218,7 +219,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
                                 var game = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString()) ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString());
                                 game.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;
-                                game.InstallPath = installedTitles[configurationRecord.InstallId].InstallPath;
+                                game.InstallPath = PathHelpers.NormalizePath(installedTitles[configurationRecord.InstallId].InstallPath);
                                 game.LocalHeaderImage = localImage;
                                 game.RemoteHeaderImage = remoteImage;
                                 await game.SaveToDatabaseAsync();

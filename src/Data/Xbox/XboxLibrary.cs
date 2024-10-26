@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Windows.Management.Deployment;
 using Windows.UI.StartScreen;
@@ -212,7 +213,7 @@ namespace DLSS_Swapper.Data.Xbox
                     {
                         var game = GameManager.Instance.GetGame<XboxGame>(familyName) ?? new XboxGame(familyName);
                         game.Title = package.DisplayName;
-                        game.InstallPath = package.InstalledPath;
+                        game.InstallPath = PathHelpers.NormalizePath(package.InstalledPath);
                         game.SetLocalHeaderImages(gameNamesToFindPackages[packageName]);
                         await game.SaveToDatabaseAsync();
                         game.ProcessGame();

@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml;
 using Windows.Gaming.Input;
 using Windows.Storage.Pickers;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.UserControls
 {
@@ -29,7 +30,7 @@ namespace DLSS_Swapper.UserControls
             game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
             {
                 Title = Path.GetFileName(installPath),
-                InstallPath = installPath,
+                InstallPath = PathHelpers.NormalizePath(installPath),
             };
         }
 

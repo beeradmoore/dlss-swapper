@@ -1,4 +1,5 @@
-﻿using DLSS_Swapper.Interfaces;
+﻿using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -207,7 +208,7 @@ namespace DLSS_Swapper.Data.Steam
                     return null;
                 }
 
-                game.InstallPath = Path.Combine(baseDir, "common", installDir);
+                game.InstallPath = PathHelpers.NormalizePath(Path.Combine(baseDir, "common", installDir));
 
                 return game;
             }

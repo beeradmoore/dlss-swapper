@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
 using Serilog;
@@ -121,7 +122,7 @@ namespace DLSS_Swapper.Data.GOG
 
                             var game = GameManager.Instance.GetGame<GOGGame>(gameId) ?? new GOGGame(gameId);
                             game.Title = gameName;
-                            game.InstallPath = gamePath;
+                            game.InstallPath = PathHelpers.NormalizePath(gamePath);
 
                             gogGames.Add(game);
                         }

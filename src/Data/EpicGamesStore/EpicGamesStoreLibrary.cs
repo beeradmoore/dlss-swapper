@@ -6,6 +6,7 @@ using System.Management;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Microsoft.UI.Xaml.Controls;
 using Windows.Foundation.Metadata;
@@ -152,7 +153,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                     var game = GameManager.Instance.GetGame<EpicGamesStoreGame>(manifest.CatalogItemId) ?? new EpicGamesStoreGame(manifest.CatalogItemId);
                     game.RemoteHeaderImage = remoteHeaderUrl;
                     game.Title = manifest.DisplayName;
-                    game.InstallPath = manifest.InstallLocation;
+                    game.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
                     
                     await game.SaveToDatabaseAsync();
                     game.ProcessGame();

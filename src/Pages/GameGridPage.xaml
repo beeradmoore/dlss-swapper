@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
+    xmlns:converters="using:DLSS_Swapper.Converters"
     xmlns:data="using:DLSS_Swapper.Data"
     xmlns:pages="using:DLSS_Swapper.Pages"
     mc:Ignorable="d"
@@ -16,6 +17,10 @@
         <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter" />
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
         <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+        <converters:BitmapImageUriConverter x:Key="BitmapImageUriConverter" />
+
+
+        
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -116,7 +121,7 @@
                             <Border.Background>
                                 <ImageBrush Stretch="UniformToFill">
                                     <ImageBrush.ImageSource>
-                                        <BitmapImage CreateOptions="IgnoreImageCache" UriSource="{Binding CoverImage, Mode=OneWay}"/>
+                                        <BitmapImage CreateOptions="IgnoreImageCache" UriSource="{Binding CoverImage, Mode=OneWay, Converter={StaticResource BitmapImageUriConverter}}"/>
                                     </ImageBrush.ImageSource>
                                 </ImageBrush>
                             </Border.Background>

@@ -118,6 +118,12 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         continue;
                     }
 
+                    // Check that is is the base game
+                    if (manifest.AppName != manifest.MainGameAppName)
+                    {
+                        continue;
+                    }
+
                     var remoteHeaderUrl = string.Empty;
                     if (cacheItemsDictionary.ContainsKey(manifest.CatalogItemId))
                     {

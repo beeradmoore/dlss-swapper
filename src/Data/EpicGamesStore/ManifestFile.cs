@@ -134,8 +134,8 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         [JsonPropertyName("CatalogItemId")]
         public string CatalogItemId { get; set; } = string.Empty;
 
-        //[JsonPropertyName("AppName")]
-        //public string AppName { get; set; } = string.Empty;
+        [JsonPropertyName("AppName")]
+        public string AppName { get; set; } = string.Empty;
 
         //[JsonPropertyName("AppVersionString")]
         //public string AppVersionString { get; set; } = string.Empty;
@@ -146,8 +146,8 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         //[JsonPropertyName("MainGameCatalogItemId")]
         //public string MainGameCatalogItemId { get; set; } = string.Empty;
 
-        //[JsonPropertyName("MainGameAppName")]
-        //public string MainGameAppName { get; set; } = string.Empty;
+        [JsonPropertyName("MainGameAppName")]
+        public string MainGameAppName { get; set; } = string.Empty;
 
         //[JsonPropertyName("AllowedUriEnvVars")]
         //public List<???> AllowedUriEnvVars { get; set; }

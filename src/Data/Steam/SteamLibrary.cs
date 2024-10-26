@@ -45,15 +45,17 @@ namespace DLSS_Swapper.Data.Steam
             _loadedDLSSGames.Clear();
 
             // If we don't detect a steam install patg return an empty list.
-            var installPath = GetInstallPath();
-            if (string.IsNullOrEmpty(installPath))
+            if (IsInstalled() == false)
             {
                 return new List<Game>();
             }
 
+            var installPath = GetInstallPath();
+
+
             // I hope this runs on a background thread. 
             // Tasks are whack.
-          
+
             var games = new List<Game>();
 
             // Base steamapps folder contains libraryfolders.vdf which has references to other steamapps folders.
@@ -141,9 +143,18 @@ namespace DLSS_Swapper.Data.Steam
                 {
                     using (var steamRegistryKey = hklm.OpenSubKey(@"SOFTWARE\Valve\Steam"))
                     {
-                        // if steamRegistryKey is null then steam is not installed.
-                        _installPath = (steamRegistryKey?.GetValue("InstallPath") as string) ?? string.Empty;
-                        
+                        // if steamRegistryKey is null then Steam is not installed.
+                        if (steamRegistryKey is null)
+                        {
+                            return string.Empty;
+                        }
+
+                        var installPath = steamRegistryKey.GetValue("InstallPath") as string ?? string.Empty;
+                        if (string.IsNullOrEmpty(installPath) == false && Directory.Exists(installPath))
+                        {
+                            _installPath = installPath;
+                        }
+
                         return _installPath;
                     }
                 }

@@ -255,18 +255,19 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 {
                     using (var ubisoftConnectRegistryKey = hklm.OpenSubKey(@"SOFTWARE\Ubisoft\Launcher"))
                     {
+                        // if ubisoftConnectRegistryKey is null then Ubisoft Connect is not installed.
                         if (ubisoftConnectRegistryKey is null)
                         {
                             return string.Empty;
                         }
-                        // if ubisoftConnectRegistryKey is null then steam is not installed.
-                        var installPath = ubisoftConnectRegistryKey?.GetValue("InstallDir") as string;
+
+                        var installPath = ubisoftConnectRegistryKey.GetValue("InstallDir") as string;
                         if (string.IsNullOrEmpty(installPath) == false)
                         {
                             _installPath = installPath;
                         }
 
-                        return _installPath ?? string.Empty;
+                        return _installPath;
                     }
                 }
             }

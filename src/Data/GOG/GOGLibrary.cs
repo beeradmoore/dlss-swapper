@@ -75,7 +75,8 @@ namespace DLSS_Swapper.Data.GOG
                     if (registryKey is null)
                     {
                         // Something bad happened.
-                        return new List<Game>(); ;
+                        // TODO: Clear cache?
+                        return new List<Game>();
                     }
 
                     // For each of the installed games, setup an initial GOG

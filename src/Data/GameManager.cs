@@ -302,7 +302,6 @@ internal partial class GameManager : ObservableObject
             {
                 if (game is TGame platformGame)
                 {
-                    Debug.WriteLine($"Test - {game.ID}");
                     if (game.PlatformId == platformId)
                     {
                         return platformGame;

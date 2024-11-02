@@ -313,7 +313,7 @@
   <ItemGroup>
     <PackageReference Include="AsyncAwaitBestPractices" Version="8.0.0" />
     <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="8.0.0" />
-    <PackageReference Include="CommunityToolkit.Labs.WinUI.Controls.MarkdownTextBlock" Version="0.1.241015-build.1760" />
+    <PackageReference Include="CommunityToolkit.Labs.WinUI.Controls.MarkdownTextBlock" Version="0.1.241031-build.1775" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
     <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.1.240916" />
     <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.1.240916" />

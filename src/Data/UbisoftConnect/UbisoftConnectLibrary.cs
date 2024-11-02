@@ -68,6 +68,8 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 return games;
             }
 
+            var cachedGames = GameManager.Instance.GetGames<UbisoftConnectGame>();
+
             // Gat a list of installed games.
             // NOTE: Some games are installed from Ubisoft Connect via Steam (eg. Far Cry: Blood Dragon)
             // Those titles will show up in the Steam games list.
@@ -236,6 +238,16 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             }
 
             games.Sort();
+
+            // Delete games that are no longer loaded, they are likely uninstalled
+            foreach (var cachedGame in cachedGames)
+            {
+                // Game is to be deleted.
+                if (games.Contains(cachedGame) == false)
+                {
+                    await cachedGame.DeleteAsync();
+                }
+            }
 
             _loadedGames.AddRange(games);
             _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));

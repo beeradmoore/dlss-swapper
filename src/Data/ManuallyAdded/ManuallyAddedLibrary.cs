@@ -32,6 +32,8 @@ public class ManuallyAddedLibrary : IGameLibrary
         LoadedGames.Clear();
         LoadedDLSSGames.Clear();
 
+        // Not monitoring for cachedGames like in other libraries, as every game is from cache anyway.
+
         var games = new List<Game>();
 
         var dbGames = await App.CurrentApp.Database.QueryAsync<ManuallyAddedGame>("SELECT * FROM ManuallyAddedGame");

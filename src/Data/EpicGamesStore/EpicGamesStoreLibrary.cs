@@ -54,6 +54,9 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                 return games;
             }
 
+            var cachedGames = GameManager.Instance.GetGames<EpicGamesStoreGame>();
+
+
             // Appears we may not need data from LauncherInstalled.dat if we just parse files in EpicGamesLauncher\Data\Manifests instead
             /*
             // Check the launcher installed file exists.
@@ -162,6 +165,16 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                 catch (Exception err)
                 {
                     Logger.Error(err.Message);
+                }
+            }
+
+            // Delete games that are no longer loaded, they are likely uninstalled
+            foreach (var cachedGame in cachedGames)
+            {
+                // Game is to be deleted.
+                if (games.Contains(cachedGame) == false)
+                {
+                    await cachedGame.DeleteAsync();
                 }
             }
 

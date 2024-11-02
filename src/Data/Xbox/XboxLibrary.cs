@@ -59,6 +59,7 @@ namespace DLSS_Swapper.Data.Xbox
                 return games;
             }
 
+            var cachedGames = GameManager.Instance.GetGames<XboxGame>();
 
             var gameNamesToFindPackages = new Dictionary<string, List<string>>();
 
@@ -227,6 +228,17 @@ namespace DLSS_Swapper.Data.Xbox
             }
 
             games.Sort();
+
+            // Delete games that are no longer loaded, they are likely uninstalled
+            foreach (var cachedGame in cachedGames)
+            {
+                // Game is to be deleted.
+                if (games.Contains(cachedGame) == false)
+                {
+                    await cachedGame.DeleteAsync();
+                }
+            }
+
             _loadedGames.AddRange(games);
             _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));
 

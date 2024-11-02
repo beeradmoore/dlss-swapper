@@ -314,4 +314,20 @@ internal partial class GameManager : ObservableObject
     }
 
 
+
+    public List<TGame> GetGames<TGame>() where TGame : Game
+    {
+        lock (gameLock)
+        {
+            var games = new List<TGame>();
+            foreach (var game in AllGames)
+            {
+                if (game is TGame tGame)
+                {
+                    games.Add(tGame);
+                }
+            }
+            return games;           
+        }
+    }
 }

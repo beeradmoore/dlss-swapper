@@ -66,6 +66,8 @@ namespace DLSS_Swapper.Data.GOG
                 return new List<Game>();
             }
 
+            var cachedGames = GameManager.Instance.GetGames<GOGGame>();
+
             var gogGames = new List<GOGGame>();
 
             using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
@@ -283,6 +285,14 @@ namespace DLSS_Swapper.Data.GOG
                 await gogGame.SaveToDatabaseAsync();
                 // Set thumbnails, check DLSS.
                 gogGame.ProcessGame();
+            // Delete games that are no longer loaded, they are likely uninstalled
+            foreach (var cachedGame in cachedGames)
+            {
+                // Game is to be deleted.
+                if (gogGames.Contains(cachedGame) == false)
+                {
+                    await cachedGame.DeleteAsync();                    
+                }
             }
 
             _loadedGames.AddRange(gogGames);

@@ -236,25 +236,6 @@ namespace DLSS_Swapper.Data.Xbox
             return games;
         }
 
-        public async Task<List<Game>> LoadFromCacheAsync()
-        {
-            try
-            {
-                var games = await App.CurrentApp.Database.Table<XboxGame>().ToListAsync();
-                return games.ToList<Game>();
-            }
-            catch (Exception err)
-            {
-                Logger.Error(err.Message);
-            }
-            return new List<Game>();
-        }
-
-        public async Task LoadGamesAsync()
-        {
-            await Task.Delay(1);
-        }
-
         public async Task LoadGamesFromCacheAsync()
         {
             try

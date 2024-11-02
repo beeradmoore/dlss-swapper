@@ -443,25 +443,6 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             return data;
         }
 
-        public async Task<List<Game>> LoadFromCacheAsync()
-        {
-            try
-            {
-                var games = await App.CurrentApp.Database.Table<UbisoftConnectGame>().ToListAsync();
-                return games.ToList<Game>();
-            }
-            catch (Exception err)
-            {
-                Logger.Error(err.Message);
-            }
-            return new List<Game>();
-        }
-
-        public async Task LoadGamesAsync()
-        {
-            await Task.Delay(1);
-        }
-
         public async Task LoadGamesFromCacheAsync()
         {
             try

@@ -98,14 +98,26 @@ namespace DLSS_Swapper.Data
 
         protected void SetID()
         {
+            // Seeing as we use ID, it sure would be a shame if a PlatformId was set to "C:\Program Files\"
+            // So try to remove all funky characters before 
+
+            var platformId = PlatformId;
+            foreach (var invalidPathChar in PathHelpers.InvalidFileNamePathChars)
+            {
+                if (platformId.Contains(invalidPathChar))
+                {
+                    platformId = platformId.Replace(invalidPathChar, '_');
+                }
+            }
+
             ID = GameLibrary switch
             {
-                GameLibrary.Steam => $"steam_{PlatformId}",
-                GameLibrary.GOG => $"gog_{PlatformId}",
-                GameLibrary.EpicGamesStore => $"epicgamesstore_{PlatformId}",
-                GameLibrary.UbisoftConnect => $"ubisoftconnect_{PlatformId}",
-                GameLibrary.XboxApp => $"xboxapp_{PlatformId}",
-                GameLibrary.ManuallyAdded => $"manuallyadded_{PlatformId}",
+                GameLibrary.Steam => $"steam_{platformId}",
+                GameLibrary.GOG => $"gog_{platformId}",
+                GameLibrary.EpicGamesStore => $"epicgamesstore_{platformId}",
+                GameLibrary.UbisoftConnect => $"ubisoftconnect_{platformId}",
+                GameLibrary.XboxApp => $"xboxapp_{platformId}",
+                GameLibrary.ManuallyAdded => $"manuallyadded_{platformId}",
                 _ => throw new Exception($"Unknown GameLibrary {GameLibrary} while setting ID"),
             };
         }

@@ -115,6 +115,11 @@ namespace DLSS_Swapper.Data
         /// </summary>
         public void ProcessGame(bool autoSave = true)
         {
+            App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            {
+                NeedsReload = false;
+            });
+
             if (string.IsNullOrEmpty(InstallPath))
             {
                 return;
@@ -125,26 +130,28 @@ namespace DLSS_Swapper.Data
                 return;
             }
 
-            Processing = true;
+            App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            {
+                Processing = true;
+                HasDLSS = false;
+            });
 
             ThreadPool.QueueUserWorkItem(async (stateInfo) =>
             {
-                LoadCoverImage();
-
                 var enumerationOptions = new EnumerationOptions();
                 enumerationOptions.RecurseSubdirectories = true;
                 enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
 
                 var oldGameAssets = GameAssets.ToList();
                 GameAssets.Clear();
-                await App.CurrentApp.Database.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false); ;
-          
+                await App.CurrentApp.Database.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+
                 // TODO: See if changing these to filter specific files, or getting very *.dll and looking for our specific ones is faster
 
                 var dlssDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
                 var dlssgDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlssg.dll", enumerationOptions);
                 var dlssdDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlssd.dll", enumerationOptions);
-                
+
                 foreach (var dlssDllPath in dlssDllPaths)
                 {
                     var gameAsset = new GameAsset()
@@ -201,18 +208,20 @@ namespace DLSS_Swapper.Data
                     }
                 }
 
-                HasDLSS = false;
-
 
                 var newCurrentDLSSVersion = string.Empty;
                 var newCurrentDLSSHash = string.Empty;
                 var newBaseDLSSVersion = string.Empty;
                 var newBaseDLSSHash = string.Empty;
 
+                var newHasDLSS = false;
 
                 if (GameAssets.Any())
                 {
-                    await App.CurrentApp.Database.InsertAllAsync(GameAssets).ConfigureAwait(false);
+                    //App.CurrentApp.Database.ExecuteAsync
+                    //savePoint is not valid, and should be the result of a call to SaveTransactionPoint.
+
+                    await App.CurrentApp.Database.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
 
                     var dlssGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS).ToList();
                     var dlssgGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_FG).ToList();
@@ -222,26 +231,24 @@ namespace DLSS_Swapper.Data
                     var dlssgGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_FG_BACKUP).ToList();
                     var dlssdGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_RR_BACKUP).ToList();
 
-                    HasDLSS = true; // = dlssGameAssets.Any();
-
-                    if (HasDLSS)
+                    newHasDLSS = dlssGameAssets.Any();
+                    
+                    if (newHasDLSS)
                     {
                         var firstDlss = dlssGameAssets.First();
-
+                        newCurrentDLSSVersion = firstDlss.Version;
+                        newCurrentDLSSHash = firstDlss.Hash;
                     }
-
                 }
 
-                if (autoSave)
-                {
-                    await SaveToDatabaseAsync();
-                }
 
 
                 // Now update all the data on the UI therad.
-                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
                 {
-                    if (HasDLSS)
+                    HasDLSS = newHasDLSS;
+
+                    if (newHasDLSS)
                     {
                         CurrentDLSSVersion = newCurrentDLSSVersion;
                         CurrentDLSSHash = newCurrentDLSSHash;
@@ -256,8 +263,13 @@ namespace DLSS_Swapper.Data
                         BaseDLSSHash = string.Empty;
                     }
 
-                    
                     Processing = false;
+
+
+                    if (autoSave)
+                    {
+                        await SaveToDatabaseAsync();
+                    }
                 });
             });
         }
@@ -675,13 +687,55 @@ namespace DLSS_Swapper.Data
         {
             try
             {
-                await App.CurrentApp.Database.DeleteAsync(this);
+                // Sometimes when a game is uninstalled the backup files are not removed, so ensure they are.
+                // https://github.com/beeradmoore/dlss-swapper/issues/236
 
+                var gameAssets = await App.CurrentApp.Database.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();
+                foreach (var cachedGameAsset in gameAssets)
+                {
+                    // If its a file we made we should attempt to delete it.
+                    if (cachedGameAsset.AssetType == GameAssetType.DLSS_BACKUP ||
+                        cachedGameAsset.AssetType == GameAssetType.DLSS_FG_BACKUP ||
+                        cachedGameAsset.AssetType == GameAssetType.DLSS_RR_BACKUP ||
+                        cachedGameAsset.AssetType == GameAssetType.FSR_BACKUP)
+                    {
+                        if (File.Exists(cachedGameAsset.Path))
+                        {
+                            Logger.Info($"Deleting {cachedGameAsset.Path}");
+                            try
+                            {
+                                File.Delete(cachedGameAsset.Path);
+                            }
+                            catch (Exception err)
+                            {
+                                Logger.Error($"Could not delete {cachedGameAsset.Path}, {err.Message}");
+                            }
+                        }
+                    }
+                }
+                await App.CurrentApp.Database.Table<GameAsset>().DeleteAsync(ga => ga.Id == ID).ConfigureAwait(false);
+
+               
+                // Delete the thumbnails.
                 var thumbnailImages = Directory.GetFiles(Storage.GetImageCachePath(), $"{ID}_*", SearchOption.AllDirectories);
                 foreach (var thumbnailImage in thumbnailImages)
                 {
-                    File.Delete(thumbnailImage);
+                    try
+                    {
+                        Logger.Info($"Deleting {thumbnailImage}");
+                        File.Delete(thumbnailImage);
+                    }
+                    catch (Exception err)
+                    {
+                        Logger.Error($"Could not delete {thumbnailImage}, {err.Message}");
+                    }
                 }
+
+                // Delete the game itself.
+                await App.CurrentApp.Database.DeleteAsync(this).ConfigureAwait(false);
+
+                // Remove the game from the list.
+                GameManager.Instance.RemoveGame(this);
             }
             catch (Exception err)
             {
@@ -827,18 +881,60 @@ namespace DLSS_Swapper.Data
 
         public async Task LoadGameAssetsFromCacheAsync()
         {
-            GameAssets.Clear();
+            LoadCoverImage();
 
+            GameAssets.Clear();
             var gameAssets = await App.CurrentApp.Database.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();
+            GameAssets.AddRange(gameAssets);
+
+            // If there is no known current DLSS version we want to do a full reload.
+            if (string.IsNullOrEmpty(CurrentDLSSVersion) == true || string.IsNullOrEmpty(CurrentDLSSHash) == true)
+            {
+                NeedsReload = true;
+                return;
+            }
+
+            
             if (gameAssets.Any())
             {
                 foreach (var gameAsset in gameAssets)
                 {
-                     
+                    // Check that each of the game assets exist, after we will check if they are what we expect them to be
+                    if (File.Exists(gameAsset.Path) == false)
+                    {
+                        NeedsReload = true;
+                        Processing = true;
+                        break;
+                    }                     
                 }
-                // TODO: Check each game asset, if it exists and matches what we expect then we can skip loading it again
-                // If it isn't found or doesn't match, need to re-scan.
-                GameAssets.AddRange(gameAssets);
+
+                if (NeedsReload == false)
+                {
+                    var firstDlssVersion = gameAssets.FirstOrDefault(x => x.AssetType == GameAssetType.DLSS);
+                    if (firstDlssVersion is null)
+                    {
+                        NeedsReload = true;
+                        Processing = true;
+                    }
+                    else
+                    {
+                        var fileVersionInfo = FileVersionInfo.GetVersionInfo(firstDlssVersion.Path);
+                        var freshVersion = fileVersionInfo.GetFormattedFileVersion();
+
+                        if (CurrentDLSSVersion != freshVersion)
+                        {
+                            NeedsReload = true;
+                            Processing = true;
+                        }
+                        else
+                        {
+
+                            // NO-OP, last used DLSS is the same version that we last saw, it is also still on the disk as we expected.
+                            NeedsReload = false;
+                            Processing = false;
+                        }
+                    }
+                }
             }
         }
     }

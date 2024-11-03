@@ -123,9 +123,17 @@ namespace DLSS_Swapper.Data.GOG
                                 continue;
                             }
 
-                            var game = GameManager.Instance.GetGame<GOGGame>(gameId) ?? new GOGGame(gameId);
+                            var gameFromCache = GameManager.Instance.GetGame<GOGGame>(gameId);
+                            var game = gameFromCache ?? new GOGGame(gameId);
                             game.Title = gameName;
                             game.InstallPath = PathHelpers.NormalizePath(gamePath);
+
+                            // If the game does not need a reload, check if we loaded from cache.
+                            // If we didn't load it from cache we will later need to call ProcessGame.
+                            if (game.NeedsReload == false && gameFromCache is null)
+                            {
+                                game.NeedsReload = true;
+                            }
 
                             gogGames.Add(game);
                         }
@@ -136,6 +144,7 @@ namespace DLSS_Swapper.Data.GOG
             // No installed games found.
             if (gogGames.Count == 0)
             {
+                // TODO: Flush cache?
                 return new List<Game>();
             }
 
@@ -283,8 +292,13 @@ namespace DLSS_Swapper.Data.GOG
                 }
 
                 await gogGame.SaveToDatabaseAsync();
-                // Set thumbnails, check DLSS.
-                gogGame.ProcessGame();
+
+                if (gogGame.NeedsReload == true)
+                {
+                    gogGame.ProcessGame();
+                }
+            }
+
             // Delete games that are no longer loaded, they are likely uninstalled
             foreach (var cachedGame in cachedGames)
             {
@@ -324,7 +338,14 @@ namespace DLSS_Swapper.Data.GOG
                 var games = await App.CurrentApp.Database.Table<GOGGame>().ToArrayAsync().ConfigureAwait(false);
                 foreach (var game in games)
                 {
+                    game.Processing = true;
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
+
+                    // If we won't be reloading the game we can mark it as finished processing.
+                    if (game.NeedsReload == false)
+                    {
+                        game.Processing = false;
+                    }
                     GameManager.Instance.AddGame(game);
                 }
             }

@@ -152,14 +152,26 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         }
                     }
 
-                   
-                    var game = GameManager.Instance.GetGame<EpicGamesStoreGame>(manifest.CatalogItemId) ?? new EpicGamesStoreGame(manifest.CatalogItemId);
+                    var gameFromCache = GameManager.Instance.GetGame<EpicGamesStoreGame>(manifest.CatalogItemId);
+                    var game = gameFromCache ?? new EpicGamesStoreGame(manifest.CatalogItemId);
                     game.RemoteHeaderImage = remoteHeaderUrl;
                     game.Title = manifest.DisplayName;
                     game.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
                     
                     await game.SaveToDatabaseAsync();
-                    game.ProcessGame();
+
+                    // If the game does not need a reload, check if we loaded from cache.
+                    // If we didn't load it from cache we will later need to call ProcessGame.
+                    if (game.NeedsReload == false && gameFromCache is null)
+                    {
+                        game.NeedsReload = true;
+                    }
+
+                    if (game.NeedsReload == true)
+                    {
+                        game.ProcessGame();
+                    }
+
                     games.Add(game);
                 }
                 catch (Exception err)

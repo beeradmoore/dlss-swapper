@@ -219,13 +219,26 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                     }
                                 }
 
-                                var game = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString()) ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString());
+                                var gameFromCache = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString());
+                                var game = gameFromCache ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString());
                                 game.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;
                                 game.InstallPath = PathHelpers.NormalizePath(installedTitles[configurationRecord.InstallId].InstallPath);
                                 game.LocalHeaderImage = localImage;
                                 game.RemoteHeaderImage = remoteImage;
                                 await game.SaveToDatabaseAsync();
-                                game.ProcessGame();
+
+                                // If the game does not need a reload, check if we loaded from cache.
+                                // If we didn't load it from cache we will later need to call ProcessGame.
+                                if (game.NeedsReload == false && gameFromCache is null)
+                                {
+                                    game.NeedsReload = true;
+                                }
+
+                                if (game.NeedsReload == true)
+                                {
+                                    game.ProcessGame();
+                                }
+
                                 games.Add(game);
                             }
                             catch (Exception err)

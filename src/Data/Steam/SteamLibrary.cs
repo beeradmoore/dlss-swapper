@@ -120,7 +120,10 @@ namespace DLSS_Swapper.Data.Steam
                         if (game is not null)
                         {
                             await game.SaveToDatabaseAsync();
-                            game.ProcessGame();
+                            if (game.NeedsReload == true)
+                            {
+                                game.ProcessGame();
+                            }
                             games.Add(game);
                         }
                     }
@@ -195,7 +198,9 @@ namespace DLSS_Swapper.Data.Steam
                 }
 
                 var steamGameAppId = matches[0].Groups["appid"].Value;
-                var game = GameManager.Instance.GetGame<SteamGame>(steamGameAppId) ?? new SteamGame(steamGameAppId);
+
+                var gameFromCache = GameManager.Instance.GetGame<SteamGame>(steamGameAppId);
+                var game = gameFromCache ?? new SteamGame(steamGameAppId);
 
                 regex = new Regex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline);
                 matches = regex.Matches(appManifest);
@@ -222,6 +227,13 @@ namespace DLSS_Swapper.Data.Steam
                 }
 
                 game.InstallPath = PathHelpers.NormalizePath(Path.Combine(baseDir, "common", installDir));
+
+                // If the game does not need a reload, check if we loaded from cache.
+                // If we didn't load it from cache we will later need to call ProcessGame.
+                if (game.NeedsReload == false && gameFromCache is null)
+                {
+                    game.NeedsReload = true;
+                }
 
                 return game;
             }

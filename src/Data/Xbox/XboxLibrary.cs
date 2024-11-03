@@ -212,12 +212,24 @@ namespace DLSS_Swapper.Data.Xbox
 
                     try
                     {
-                        var game = GameManager.Instance.GetGame<XboxGame>(familyName) ?? new XboxGame(familyName);
+                        var gameFromCache = GameManager.Instance.GetGame<XboxGame>(familyName);
+                        var game = gameFromCache  ?? new XboxGame(familyName);
                         game.Title = package.DisplayName;
                         game.InstallPath = PathHelpers.NormalizePath(package.InstalledPath);
                         game.SetLocalHeaderImages(gameNamesToFindPackages[packageName]);
                         await game.SaveToDatabaseAsync();
-                        game.ProcessGame();
+
+                        // If the game does not need a reload, check if we loaded from cache.
+                        // If we didn't load it from cache we will later need to call ProcessGame.
+                        if (game.NeedsReload == false && gameFromCache is null)
+                        {
+                            game.NeedsReload = true;
+                        }
+
+                        if (game.NeedsReload == true)
+                        {
+                            game.ProcessGame();
+                        }
                         games.Add(game);
                     }
                     catch (Exception err)

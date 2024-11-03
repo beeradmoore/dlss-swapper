@@ -25,18 +25,18 @@ namespace DLSS_Swapper.Data.Steam
             SetID();
         }
 
-        protected override void UpdateCacheImage()
+        protected override async Task UpdateCacheImageAsync()
         {
             // Try get image from the local disk first.
             var localHeaderImagePath = Path.Combine(SteamLibrary.GetInstallPath(), "appcache", "librarycache", $"{PlatformId}_library_600x900.jpg");
             if (File.Exists(localHeaderImagePath))
             {
-                ResizeCover(localHeaderImagePath);
+                await ResizeCoverAsync(localHeaderImagePath).ConfigureAwait(false);
                 return;
             }
 
             // If it doesn't exist, load from web.
-            DownloadCover($"https://steamcdn-a.akamaihd.net/steam/apps/{PlatformId}/library_600x900_2x.jpg");
+            await DownloadCoverAsync($"https://steamcdn-a.akamaihd.net/steam/apps/{PlatformId}/library_600x900_2x.jpg").ConfigureAwait(false);
         }
 
         public override bool UpdateFromGame(Game game)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 using SQLite;
 
@@ -30,14 +31,14 @@ namespace DLSS_Swapper.Data.Xbox
             _localHeaderImages = localHeaderImages;
         }
 
-        protected override void UpdateCacheImage()
+        protected override async Task UpdateCacheImageAsync()
         {
             foreach (var localHeaderImage in _localHeaderImages)
             {
                 var headerImage = Path.Combine(InstallPath, localHeaderImage);
                 if (File.Exists(headerImage))
                 {
-                    ResizeCover(headerImage);
+                    await ResizeCoverAsync(headerImage).ConfigureAwait(false);
                     return;
                 }
             }

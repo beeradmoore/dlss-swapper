@@ -27,7 +27,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             SetID();
         }
 
-        protected override void UpdateCacheImage()
+        protected override async Task UpdateCacheImageAsync()
         {
             if (string.IsNullOrEmpty(RemoteHeaderImage))
             {
@@ -40,7 +40,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                 RemoteHeaderImage = RemoteHeaderImage + "?w=600&h=900&resize=1";
             }
 
-            DownloadCover(RemoteHeaderImage);
+            await DownloadCoverAsync(RemoteHeaderImage).ConfigureAwait(false);
         }
 
         public override bool UpdateFromGame(Game game)

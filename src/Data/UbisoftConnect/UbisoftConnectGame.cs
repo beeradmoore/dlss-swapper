@@ -31,15 +31,15 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             SetID();
         }
 
-        protected override void UpdateCacheImage()
+        protected override async Task UpdateCacheImageAsync()
         {
             if (File.Exists(LocalHeaderImage))
             {
-                ResizeCover(LocalHeaderImage);
+                await ResizeCoverAsync(LocalHeaderImage).ConfigureAwait(false);
                 return;
             }
 
-            DownloadCover(RemoteHeaderImage);
+            await DownloadCoverAsync(RemoteHeaderImage).ConfigureAwait(false);
         }
 
         public override bool UpdateFromGame(Game game)

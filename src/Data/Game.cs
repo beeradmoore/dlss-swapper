@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using DLSS_Swapper.Extensions;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
@@ -41,7 +42,7 @@ namespace DLSS_Swapper.Data
 
         [ObservableProperty]
         [property: Column("cover_image")]
-        string coverImage = string.Empty;
+        string? coverImage = null;
 
         [ObservableProperty]
         [property: Column("base_dlss_version")]
@@ -95,6 +96,9 @@ namespace DLSS_Swapper.Data
 
         [Ignore]
         public bool NeedsReload { get; set; } = false;
+
+        bool _isLoadingCoverImage = false;
+
 
         protected void SetID()
         {
@@ -286,8 +290,16 @@ namespace DLSS_Swapper.Data
             });
         }
 
-        void LoadCoverImage()
+
+        public async Task LoadCoverImageAsync()
         {
+            if (_isLoadingCoverImage == true)
+            {
+                return;
+            }
+
+            _isLoadingCoverImage = true;
+
             // TODO: Update if the image last write is > 1 week old or something
 
             if (File.Exists(ExpectedCustomCoverImage))
@@ -309,11 +321,13 @@ namespace DLSS_Swapper.Data
             else
             {
                 // If no cover exists use the abstracted method to get the game as expect for this library.
-                UpdateCacheImage();
+                await UpdateCacheImageAsync();
             }
+
+            _isLoadingCoverImage = false;
         }
 
-        protected abstract void UpdateCacheImage();
+        protected abstract Task UpdateCacheImageAsync();
 
         internal (bool Success, string Message, bool PromptToRelaunchAsAdmin) ResetDll()
         {
@@ -552,14 +566,14 @@ namespace DLSS_Swapper.Data
         */
 
 
-        protected void ResizeCover(string imageSource)
+        protected async Task ResizeCoverAsync(string imageSource)
         {
             // TODO: 
             // - find optimal format (eg, is displaying 100 webp images more intense than 100 png images)
             // - load image based on scale
             try
             {
-                using (var image = SixLabors.ImageSharp.Image.Load(imageSource))
+                using (var image = await SixLabors.ImageSharp.Image.LoadAsync(imageSource))
                 {
                     // If images are really big we resize to at least 2x the 200x300 we display as.
                     // In future this should be updated to resize to display scale.
@@ -615,14 +629,13 @@ namespace DLSS_Swapper.Data
                         Mode = ResizeMode.Min, // If image is smaller it won't be resized up.
                     };
                     image.Mutate(x => x.Resize(resizeOptions));
-                    //image.SaveAsPng(ExpectedCustomCoverImage);
-                    image.SaveAsWebp(ExpectedCustomCoverImage);
+                    image.SaveAsPng(ExpectedCustomCoverImage);
+                    //image.SaveAsWebp(ExpectedCustomCoverImage);
                     //image.SaveAsJpeg(ExpectedCustomCoverImage);
                 }
 
                 App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
-                    CoverImage = string.Empty;
                     CoverImage = ExpectedCustomCoverImage;
                 });
             }
@@ -632,7 +645,7 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        protected async void DownloadCover(string url)
+        protected async Task DownloadCoverAsync(string url)
         {
             var extension = Path.GetExtension(url);
 
@@ -641,14 +654,14 @@ namespace DLSS_Swapper.Data
             {
                 extension = extension.Substring(0, extension.IndexOf("?"));
             }
-            var tempFile = Path.Combine(Storage.GetTemp(), $"{ID}.{extension}");
+            var tempFile = Path.Combine(Storage.GetTemp(), $"{ID}{extension}");
 
 
             try
             {
                 using (var fileStream = new FileStream(tempFile, FileMode.Create))
                 {
-                    var httpResponseMessage = await App.CurrentApp.HttpClient.GetAsync(url, System.Net.Http.HttpCompletionOption.ResponseHeadersRead);
+                    var httpResponseMessage = await App.CurrentApp.HttpClient.GetAsync(url, System.Net.Http.HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
                     if (httpResponseMessage.IsSuccessStatusCode == false)
                     {
                         return;
@@ -658,16 +671,17 @@ namespace DLSS_Swapper.Data
                     // the save/load to disk.
                     using (var stream = httpResponseMessage.Content.ReadAsStream())
                     {
-                        stream.CopyTo(fileStream);
+                        await stream.CopyToAsync(fileStream).ConfigureAwait(false);
                     }
                 }
 
                 // Now if the image is downloaded lets resize it, 
-                ResizeCover(tempFile);
+                await ResizeCoverAsync(tempFile).ConfigureAwait(false);
             }
             catch (Exception err)
             {
                 Logger.Error(err.Message);
+                Debugger.Break();
             }
             finally
             {
@@ -687,11 +701,13 @@ namespace DLSS_Swapper.Data
                 if (rowsChanged == 0)
                 {
                     Logger.Error($"Tried to save game to database but rowsChanged was 0.");
+                    Debugger.Break();
                 }
             }
             catch (Exception err)
             {
                 Logger.Error(err.Message);
+                Debugger.Break();
             }
         }
 
@@ -775,7 +791,7 @@ namespace DLSS_Swapper.Data
                 }
 
                 // Will load default or attempt to fetch fresh.
-                LoadCoverImage();
+                await LoadCoverImageAsync();
             }
         }
 
@@ -893,7 +909,7 @@ namespace DLSS_Swapper.Data
 
         public async Task LoadGameAssetsFromCacheAsync()
         {
-            LoadCoverImage();
+            await LoadCoverImageAsync();
 
             GameAssets.Clear();
             var gameAssets = await App.CurrentApp.Database.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();

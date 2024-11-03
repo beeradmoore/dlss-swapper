@@ -26,18 +26,18 @@ namespace DLSS_Swapper.Data.GOG
             SetID();
         }
 
-        protected override void UpdateCacheImage()
+        protected override async Task UpdateCacheImageAsync()
         {
             foreach (var potentialLocalHeader in PotentialLocalHeaders)
             {
                 if (File.Exists(potentialLocalHeader))
                 {
-                    ResizeCover(potentialLocalHeader);
+                    await ResizeCoverAsync(potentialLocalHeader).ConfigureAwait(false);
                     return;
                 }
             }
 
-            DownloadCover(FallbackHeaderUrl);
+            await DownloadCoverAsync(FallbackHeaderUrl).ConfigureAwait(false);
         }
 
         public override bool UpdateFromGame(Game game)

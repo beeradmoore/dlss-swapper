@@ -26,9 +26,10 @@ namespace DLSS_Swapper.Data.Xbox
             SetID();
         }
 
-        internal void SetLocalHeaderImages(List<string> localHeaderImages)
+        internal async void SetLocalHeaderImagesAsync(List<string> localHeaderImages)
         {
             _localHeaderImages = localHeaderImages;
+            await LoadCoverImageAsync();
         }
 
         protected override async Task UpdateCacheImageAsync()

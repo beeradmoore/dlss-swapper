@@ -592,6 +592,7 @@ namespace DLSS_Swapper.Data
 
                 App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
+                    CoverImage = null;
                     CoverImage = ExpectedCoverImage;
                 });
             }

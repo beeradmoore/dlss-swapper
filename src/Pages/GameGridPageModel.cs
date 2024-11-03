@@ -71,15 +71,12 @@ internal partial class GameGridPageModel : ObservableObject
 
     public async Task InitialLoadAsync()
     {
-        /*
         await GameManager.Instance.LoadGamesFromCacheAsync();
         
         IsGameListLoading = false;
-        */
-        
+          
         await GameManager.Instance.LoadGamesAsync();
 
-        IsGameListLoading = false;
         IsDLSSLoading = false;
     }
 

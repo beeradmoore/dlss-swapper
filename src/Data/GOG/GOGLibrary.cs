@@ -55,7 +55,7 @@ namespace DLSS_Swapper.Data.GOG
             return false;
         }
 
-        public async Task<List<Game>> ListGamesAsync()
+        public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
         {
             IsInstalled();
             _loadedGames.Clear();
@@ -293,7 +293,7 @@ namespace DLSS_Swapper.Data.GOG
 
                 await gogGame.SaveToDatabaseAsync();
 
-                if (gogGame.NeedsReload == true)
+                if (gogGame.NeedsReload == true || forceLoadAll == true)
                 {
                     gogGame.ProcessGame();
                 }

@@ -89,7 +89,7 @@
                     <TextBlock Text="Name" FontWeight="Bold" />
                     <TextBox Text="{Binding Game.Title}" IsReadOnly="True" />
 
-                    <TextBlock Text="Install path" FontWeight="Bold" Padding="0,20,0,0" />
+                    <TextBlock Text="Install path" FontWeight="Bold" Padding="0,8,0,0" />
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -103,6 +103,67 @@
                             </Button.Content>
                         </Button>
                     </Grid>
+                    
+                    <Grid HorizontalAlignment="Stretch" ColumnSpacing="16" RowSpacing="4" Padding="0,8,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="0" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="DLSS" FontWeight="Bold" />
+                        <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Text="{Binding Game.CurrentDLSS.Version}" IsReadOnly="True"></TextBox>
+                        
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="DLSS Frame Generation" FontWeight="Bold" />
+                        <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Text="{Binding Game.CurrentDLSS_FG.Version}" IsReadOnly="True"></TextBox>
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="DLSS Ray Reconstruction" FontWeight="Bold" />
+                        <TextBox Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" Text="{Binding Game.CurrentDLSS_RR.Version}" IsReadOnly="True"></TextBox>
+                    </Grid>
+
+
+                    <Grid HorizontalAlignment="Stretch" ColumnSpacing="16" RowSpacing="4" Padding="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="FSR 3.1 (DirectX 12)" FontWeight="Bold" />
+                        <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Text="{Binding Game.CurrentFSR_31_DX12.Version, FallbackValue='Not found'}" IsReadOnly="True"></TextBox>
+
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="FSR 3.1 (Vulkan)" FontWeight="Bold" />
+                        <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Text="{Binding Game.CurrentFSR_31_VK.Version, FallbackValue='Not found'}" IsReadOnly="True"></TextBox>
+                    </Grid>
+
+                    
+                    <Grid HorizontalAlignment="Stretch" ColumnSpacing="16" RowSpacing="4" Padding="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="XeSS" FontWeight="Bold" />
+                        <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Text="{Binding Game.CurrentXeSS.Version}" IsReadOnly="True"></TextBox>
+                    </Grid>
+
+
 
 
 

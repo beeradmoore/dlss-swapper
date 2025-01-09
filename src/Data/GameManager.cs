@@ -198,7 +198,7 @@ internal partial class GameManager : ObservableObject
         await Task.WhenAll(tasks.Values);
     }
 
-    public async Task LoadGamesAsync()
+    public async Task LoadGamesAsync(bool forceLoadAll = false)
     {
         var tasks = new List<Task<List<Game>>>();
         foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
@@ -206,7 +206,7 @@ internal partial class GameManager : ObservableObject
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
             if (gameLibrary.IsEnabled)
             {
-                tasks.Add(gameLibrary.ListGamesAsync());
+                tasks.Add(gameLibrary.ListGamesAsync(forceLoadAll));
             }
         }
 

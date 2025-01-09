@@ -47,7 +47,7 @@ namespace DLSS_Swapper.Data.Xbox
         }
 
 
-        public async Task<List<Game>> ListGamesAsync()
+        public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
         {
             _loadedGames.Clear();
             _loadedDLSSGames.Clear();
@@ -227,7 +227,7 @@ namespace DLSS_Swapper.Data.Xbox
                             game.NeedsReload = true;
                         }
 
-                        if (game.NeedsReload == true)
+                        if (game.NeedsReload == true || forceLoadAll == true)
                         {
                             game.ProcessGame();
                         }

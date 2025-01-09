@@ -34,7 +34,7 @@ namespace DLSS_Swapper.Interfaces
         List<Game> LoadedDLSSGames { get; }
         Type GameType { get; }
 
-        Task<List<Game>> ListGamesAsync();
+        Task<List<Game>> ListGamesAsync(bool forceLoadAll);
         Task LoadGamesFromCacheAsync();
         bool IsInstalled();
 

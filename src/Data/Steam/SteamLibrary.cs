@@ -40,7 +40,7 @@ namespace DLSS_Swapper.Data.Steam
             return string.IsNullOrEmpty(GetInstallPath()) == false;
         }
 
-        public async Task<List<Game>> ListGamesAsync()
+        public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
         {
             _loadedGames.Clear();
             _loadedDLSSGames.Clear();
@@ -120,7 +120,7 @@ namespace DLSS_Swapper.Data.Steam
                         if (game is not null)
                         {
                             await game.SaveToDatabaseAsync();
-                            if (game.NeedsReload == true)
+                            if (game.NeedsReload == true || forceLoadAll == true)
                             {
                                 game.ProcessGame();
                             }

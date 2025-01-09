@@ -99,6 +99,25 @@ namespace DLSS_Swapper.Data
 
         bool _isLoadingCoverImage = false;
 
+        [Ignore]
+        public GameAsset? CurrentDLSS { get; set; } = null;
+
+        [Ignore]
+        
+        public GameAsset? CurrentDLSS_FG { get; set; } = null;
+
+        [Ignore]
+        public GameAsset? CurrentDLSS_RR { get; set; } = null;
+
+        [Ignore]
+        public GameAsset? CurrentFSR_31_DX12 { get; set; } = null;
+
+        [Ignore]
+        public GameAsset? CurrentFSR_31_VK { get; set; } = null;
+
+        [Ignore]
+        public GameAsset? CurrentXeSS { get; set; } = null;
+
 
         protected void SetID()
         {
@@ -163,66 +182,97 @@ namespace DLSS_Swapper.Data
                 await App.CurrentApp.Database.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
 
                 // TODO: See if changing these to filter specific files, or getting very *.dll and looking for our specific ones is faster
+                var dllPaths = Directory.GetFiles(InstallPath, "*.dll", enumerationOptions);
 
+                /*
                 var dlssDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
                 var dlssgDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlssg.dll", enumerationOptions);
                 var dlssdDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlssd.dll", enumerationOptions);
+                var xessDllPaths = Directory.GetFiles(InstallPath, "libxess.dll", enumerationOptions);
+                */
 
-                foreach (var dlssDllPath in dlssDllPaths)
+                foreach (var dllPath in dllPaths)
                 {
-                    var gameAsset = new GameAsset()
-                    {
-                        Id = ID,
-                        AssetType = GameAssetType.DLSS,
-                        Path = dlssDllPath,
-                    };
-                    gameAsset.LoadVersionAndHash();
-                    GameAssets.Add(gameAsset);
+                    var dllName = Path.GetFileName(dllPath);
 
+                    // The case of these files should never change, right?
+                    if (dllName == "nvngx_dlss.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.DLSS,
+                            Path = dllPath,
+                        };
+                        gameAsset.LoadVersionAndHash();
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "nvngx_dlssg.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.DLSS_FG,
+                            Path = dllPath,
+                        };
+                        gameAsset.LoadVersionAndHash();
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "nvngx_dlssd.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.DLSS_RR,
+                            Path = dllPath,
+                        };
+                        gameAsset.LoadVersionAndHash();
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "amd_fidelityfx_dx12.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.FSR_31_DX12,
+                            Path = dllPath,
+                        };
+                        gameAsset.LoadVersionAndHash();
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "amd_fidelityfx_vk.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.FSR_31_VK,
+                            Path = dllPath,
+                        };
+                        gameAsset.LoadVersionAndHash();
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "libxess.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.XeSS,
+                            Path = dllPath,
+                        };
+                        gameAsset.LoadVersionAndHash();
+                        GameAssets.Add(gameAsset);
+                    }
+
+                    /*
                     var backupGameAsset = gameAsset.GetBackup();
                     if (backupGameAsset is not null)
                     {
                         GameAssets.Add(backupGameAsset);
                     }
+                    */
                 }
 
 
-                foreach (var dlssDllPath in dlssgDllPaths)
-                {
-                    var gameAsset = new GameAsset()
-                    {
-                        Id = ID,
-                        AssetType = GameAssetType.DLSS_FG,
-                        Path = dlssDllPath,
-                    };
-                    gameAsset.LoadVersionAndHash();
-                    GameAssets.Add(gameAsset);
-
-                    var backupGameAsset = gameAsset.GetBackup();
-                    if (backupGameAsset is not null)
-                    {
-                        GameAssets.Add(backupGameAsset);
-                    }
-                }
-
-
-                foreach (var dlssDll in dlssdDllPaths)
-                {
-                    var gameAsset = new GameAsset()
-                    {
-                        Id = ID,
-                        AssetType = GameAssetType.DLSS_RR,
-                        Path = dlssDll,
-                    };
-                    gameAsset.LoadVersionAndHash();
-                    GameAssets.Add(gameAsset);
-
-                    var backupGameAsset = gameAsset.GetBackup();
-                    if (backupGameAsset is not null)
-                    {
-                        GameAssets.Add(backupGameAsset);
-                    }
-                }
 
 
                 var newCurrentDLSSVersion = string.Empty;
@@ -726,7 +776,9 @@ namespace DLSS_Swapper.Data
                     if (cachedGameAsset.AssetType == GameAssetType.DLSS_BACKUP ||
                         cachedGameAsset.AssetType == GameAssetType.DLSS_FG_BACKUP ||
                         cachedGameAsset.AssetType == GameAssetType.DLSS_RR_BACKUP ||
-                        cachedGameAsset.AssetType == GameAssetType.FSR_BACKUP)
+                        cachedGameAsset.AssetType == GameAssetType.FSR_31_DX12_BACKUP ||
+                        cachedGameAsset.AssetType == GameAssetType.FSR_31_VK_BACKUP ||
+                        cachedGameAsset.AssetType == GameAssetType.XeSS_BACKUP)
                     {
                         if (File.Exists(cachedGameAsset.Path))
                         {
@@ -771,7 +823,6 @@ namespace DLSS_Swapper.Data
                 Logger.Error(err.Message);
             }
         }
-
 
         public async Task PromptToRemoveCustomCover()
         {
@@ -915,6 +966,34 @@ namespace DLSS_Swapper.Data
             GameAssets.Clear();
             var gameAssets = await App.CurrentApp.Database.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();
             GameAssets.AddRange(gameAssets);
+
+            foreach (var gameAsset in gameAssets)
+            {
+                if (gameAsset.AssetType == GameAssetType.DLSS)
+                {
+                    CurrentDLSS = gameAsset;
+                }
+                else if(gameAsset.AssetType == GameAssetType.DLSS_FG)
+                {
+                    CurrentDLSS_FG = gameAsset;
+                }
+                else if(gameAsset.AssetType == GameAssetType.DLSS_RR)
+                {
+                    CurrentDLSS_RR = gameAsset;
+                }
+                else if(gameAsset.AssetType == GameAssetType.FSR_31_DX12)
+                {
+                    CurrentFSR_31_DX12 = gameAsset;
+                }
+                else if(gameAsset.AssetType == GameAssetType.FSR_31_VK)
+                {
+                    CurrentFSR_31_VK = gameAsset;
+                }
+                else if(gameAsset.AssetType == GameAssetType.XeSS)
+                {
+                    CurrentXeSS = gameAsset;
+                }
+            }
 
             // If there is no known current DLSS version we want to do a full reload.
             if (string.IsNullOrEmpty(CurrentDLSSVersion) == true || string.IsNullOrEmpty(CurrentDLSSHash) == true)

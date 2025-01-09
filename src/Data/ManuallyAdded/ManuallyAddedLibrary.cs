@@ -27,7 +27,7 @@ public class ManuallyAddedLibrary : IGameLibrary
 
     }
 
-    public async Task<List<Game>> ListGamesAsync()
+    public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
     {
         LoadedGames.Clear();
         LoadedDLSSGames.Clear();
@@ -39,6 +39,8 @@ public class ManuallyAddedLibrary : IGameLibrary
         var dbGames = await App.CurrentApp.Database.QueryAsync<ManuallyAddedGame>("SELECT * FROM ManuallyAddedGame");
         foreach (var dbGame in dbGames)
         {
+
+            // TODO: Handle process game
             dbGame.ProcessGame();
             games.Add(dbGame);
         }
@@ -62,6 +64,7 @@ public class ManuallyAddedLibrary : IGameLibrary
             var games = await App.CurrentApp.Database.Table<ManuallyAddedGame>().ToArrayAsync().ConfigureAwait(false);
             foreach (var game in games)
             {
+                // TODO: Handle process game
                 await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                 GameManager.Instance.AddGame(game);
             }

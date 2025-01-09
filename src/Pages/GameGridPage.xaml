@@ -7,6 +7,7 @@
     xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
     xmlns:converters="using:DLSS_Swapper.Converters"
     xmlns:data="using:DLSS_Swapper.Data"
+    xmlns:system="using:System"
     xmlns:pages="using:DLSS_Swapper.Pages"
     mc:Ignorable="d"
     d:DataContext="pages:GameGridPageModel"
@@ -69,7 +70,7 @@
                  IsClosable="False"
                  Title="Warning"
                  Message="This app is running with administrative privileges."
-                 Visibility="{Binding RunsAsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" />
+                 Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
         </Grid>
 
         <GridView Grid.Row="1" x:Name="MainGridView" ItemsSource="{Binding CurrentCollectionView, Mode=OneWay}" IsSynchronizedWithCurrentItem="False" SelectionMode="Single" Padding="20" SelectionChanged="MainGridView_SelectionChanged">

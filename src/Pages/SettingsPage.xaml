@@ -7,6 +7,7 @@
     xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
     xmlns:converters="using:DLSS_Swapper.Converters"
     xmlns:usercontrols="using:DLSS_Swapper.UserControls"
+    xmlns:system="using:System"
     xmlns:local="using:DLSS_Swapper"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
@@ -40,7 +41,7 @@
                  IsClosable="False"
                  Title="Warning"
                  Message="This app is running with administrative privileges."
-                 Visibility="{Binding RunsAsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" />
+                 Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
         <ScrollViewer Grid.Row="2">
             <StackPanel HorizontalAlignment="Left" Padding="56,0,56,56">

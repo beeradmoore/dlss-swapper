@@ -29,8 +29,6 @@ internal partial class GameGridPageModel : ObservableObject
 {
     GameGridPage gameGridPage;
 
-    public bool RunsAsAdmin { get; } = Environment.IsPrivilegedProcess;
-
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLoading))]
     bool isGameListLoading = true;

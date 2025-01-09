@@ -62,7 +62,7 @@
                  IsClosable="False"
                  Title="Warning"
                  Message="This app is running with administrative privileges."
-                 Visibility="{Binding RunsAsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" />
+                 Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
         <GridView Grid.Row="2" x:Name="MainGridView" ItemsSource="{Binding CurrentDLSSRecords}" SizeChanged="MainGridView_SizeChanged" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Margin="16">
             <GridView.ItemsPanel>

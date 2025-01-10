@@ -21,7 +21,7 @@
 
         <ListView x:Name="DLSSRecordsListView" ItemsSource="{Binding DLSSRecords}" MaxHeight="400">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="data:DLSSRecord">
+                <DataTemplate x:DataType="data:DLLRecord">
                     <Grid HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />

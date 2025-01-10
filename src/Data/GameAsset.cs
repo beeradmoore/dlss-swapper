@@ -14,16 +14,16 @@ public enum GameAssetType
 {
     Unknown,
     DLSS,
-    DLSS_FG,
-    DLSS_RR,
+    DLSS_G,
+    DLSS_D,
     FSR_31_DX12,
     FSR_31_VK,
     XeSS,
 
 
     DLSS_BACKUP,
-    DLSS_FG_BACKUP,
-    DLSS_RR_BACKUP,
+    DLSS_G_BACKUP,
+    DLSS_D_BACKUP,
     FSR_31_DX12_BACKUP,
     FSR_31_VK_BACKUP,
     XeSS_BACKUP,
@@ -64,8 +64,8 @@ public class GameAsset
         var backypType = AssetType switch
         {
             GameAssetType.DLSS => GameAssetType.DLSS_BACKUP,
-            GameAssetType.DLSS_FG => GameAssetType.DLSS_FG_BACKUP,
-            GameAssetType.DLSS_RR => GameAssetType.DLSS_RR_BACKUP,
+            GameAssetType.DLSS_G => GameAssetType.DLSS_G_BACKUP,
+            GameAssetType.DLSS_D => GameAssetType.DLSS_D_BACKUP,
             GameAssetType.FSR_31_DX12 => GameAssetType.FSR_31_DX12_BACKUP,
             GameAssetType.FSR_31_VK => GameAssetType.FSR_31_VK_BACKUP,
             GameAssetType.XeSS => GameAssetType.XeSS_BACKUP,

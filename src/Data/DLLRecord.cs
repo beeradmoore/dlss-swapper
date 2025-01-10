@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
@@ -10,7 +11,7 @@ using DLSS_Swapper.Extensions;
 
 namespace DLSS_Swapper.Data
 {
-    public class DLSSRecord : IComparable<DLSSRecord>, INotifyPropertyChanged
+    public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
     {
         [JsonPropertyName("version")]
         public string Version { get; set; } = string.Empty;
@@ -38,6 +39,9 @@ namespace DLSS_Swapper.Data
 
         [JsonPropertyName("is_signature_valid")]
         public bool IsSignatureValid { get; set; }
+
+        [JsonPropertyName("is_dev_file")]
+        public bool IsDevFile { get; set; } = false;
 
         [JsonPropertyName("file_size")]
         public long FileSize { get; set; }
@@ -112,7 +116,10 @@ namespace DLSS_Swapper.Data
         [JsonIgnore]
         public LocalRecord? LocalRecord { get; set; } = null;
 
-        public int CompareTo(DLSSRecord? other)
+        [JsonIgnore]
+        public GameAssetType AssetType { get; set; } = GameAssetType.Unknown;
+
+        public int CompareTo(DLLRecord? other)
         {
             if (other is null)
             {
@@ -121,7 +128,12 @@ namespace DLSS_Swapper.Data
 
             if (VersionNumber == other.VersionNumber)
             {
-                return other.AdditionalLabel.CompareTo(AdditionalLabel);
+                if (IsDevFile == other.IsDevFile)
+                {
+                    return other.AdditionalLabel.CompareTo(AdditionalLabel);
+                }
+                
+                return other.IsDevFile.CompareTo(IsDevFile);
             }
 
             return other.VersionNumber.CompareTo(VersionNumber);
@@ -147,8 +159,8 @@ namespace DLSS_Swapper.Data
 
         internal async Task<(bool Success, string Message, bool Cancelled)> DownloadAsync(Action<int>? ProgressCallback = null)
         {
-            var dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
-
+            var dispatcherQueue = App.CurrentApp.MainWindow.DispatcherQueue;
+            var threadId =  Thread.CurrentThread.ManagedThreadId;
             if (string.IsNullOrEmpty(DownloadUrl))
             {
                 return (false, "Invalid download URL.", false);
@@ -209,7 +221,7 @@ namespace DLSS_Swapper.Data
             var tempPath = Storage.GetTemp();
             var tempZipFile = Path.Combine(tempPath, $"{guid}.zip");
 
-            var targetZipDirectory = Path.Combine(Storage.GetStorageFolder(), "dlss_zip");
+            var targetZipDirectory = DLLManager.Instance.GetExpectedZipPath(this, false);
             Storage.CreateDirectoryIfNotExists(targetZipDirectory);
 
             try
@@ -243,6 +255,7 @@ namespace DLSS_Swapper.Data
                                         var percent = (int)Math.Ceiling((totalBytesRead / (double)totalDownloadSize) * 100L);
                                         ProgressCallback?.Invoke(percent);
                                         LocalRecord.DownloadProgress = percent;
+                                        Debug.WriteLine($"Precent: {percent}");
                                         NotifyPropertyChanged("LocalRecord");
                                     });
                                 }
@@ -346,5 +359,19 @@ namespace DLSS_Swapper.Data
             return dlssRecord;
         }
         */
+
+        public string GetAssetTypeName()
+        {
+            return AssetType switch
+            {
+                GameAssetType.DLSS => "DLSS",
+                GameAssetType.DLSS_G => "DLSS Frame Generation",
+                GameAssetType.DLSS_D => "DLSS Ray Reconstruction",
+                GameAssetType.FSR_31_DX12 => "FSR 3.1 DirectX 12",
+                GameAssetType.FSR_31_VK => "FSR 3.1 Vulkan",
+                GameAssetType.XeSS => "XeSS",
+                _ => throw new Exception($"Unknown AssetType: {AssetType}"),
+            };
+        }
     }
 }

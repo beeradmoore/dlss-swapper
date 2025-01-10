@@ -45,9 +45,6 @@ namespace DLSS_Swapper
         ThemeWatcher _themeWatcher;
         IntPtr _windowIcon;
 
-        public ObservableRangeCollection<DLSSRecord> CurrentDLSSRecords { get; } = new ObservableRangeCollection<DLSSRecord>();
-
-
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, string iconPath, ref IntPtr index);
 
@@ -214,7 +211,7 @@ namespace DLSS_Swapper
 
             // Load from cache, or download if not found.
             var loadDlssRecrodsTask = LoadDLSSRecordsAsync();
-            var loadImportedDlssRecordsTask = LoadImportedDLSSRecordsAsync();
+            var loadImportedDlssRecordsTask = LoadImportedManifestAsync();
 
     
             if (Settings.Instance.HasShownMultiplayerWarning == false)
@@ -241,7 +238,7 @@ namespace DLSS_Swapper
                     CloseButtonText = "Close",
                     PrimaryButtonText = "Github Issues",
                     DefaultButton = ContentDialogButton.Primary,
-                    Content = @"We were unable to load dlss_records.json from your computer or from the internet. 
+                    Content = @"We were unable to load manifest.json from your computer or from the internet. 
 
 If this keeps happening please file an report in our issue tracker on Github.
 
@@ -258,9 +255,9 @@ DLSS Swapper will close now.",
 
             await loadImportedDlssRecordsTask;
 
-            FilterDLSSRecords();
+            FilterDLLRecords();
             //await App.CurrentApp.LoadLocalRecordsAsync();
-            App.CurrentApp.LoadLocalRecords();
+            DLLManager.Instance.LoadLocalRecords();
 
             // We are now ready to show the games list.
             LoadingStackPanel.Visibility = Visibility.Collapsed;
@@ -292,36 +289,28 @@ DLSS Swapper will close now.",
         /// <summary>
         /// 
         /// </summary>
-        internal void FilterDLSSRecords()
+        // Previously: FilterDLSSRecords
+        internal void FilterDLLRecords()
         {
-            var newDlssRecordsList = new List<DLSSRecord>();
+            // TODO: Reimplement
+            /*
+            var newDlssRecordsList = new List<DLLRecord>();
             if (Settings.Instance.AllowUntrusted)
             {
-                newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords.Stable);
-                newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords);
+                newDlssRecordsList.AddRange(App.CurrentApp.Manifest.DLSS);
+                newDlssRecordsList.AddRange(App.CurrentApp.ImportedManifest.DLSS);
             }
             else
             {
-                newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords.Stable.Where(x => x.IsSignatureValid == true));
-                newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords.Where(x => x.IsSignatureValid == true));
+                newDlssRecordsList.AddRange(App.CurrentApp.Manifest.DLSS.Where(x => x.IsSignatureValid == true));
+                newDlssRecordsList.AddRange(App.CurrentApp.ImportedManifest.DLSS.Where(x => x.IsSignatureValid == true));
             }
-
-            if (Settings.Instance.AllowExperimental)
-            {
-                if (Settings.Instance.AllowUntrusted)
-                {
-                    newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords.Experimental);
-                }
-                else
-                {
-                    newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords.Experimental.Where(x => x.IsSignatureValid == true));
-                }
-            }
-
 
             newDlssRecordsList.Sort();
             CurrentDLSSRecords.Clear();
             CurrentDLSSRecords.AddRange(newDlssRecordsList);
+            */
+
         }
 
         /// <summary>
@@ -334,7 +323,7 @@ DLSS Swapper will close now.",
             var timeSinceLastUpdate = DateTimeOffset.Now - Settings.Instance.LastRecordsRefresh;
             if (timeSinceLastUpdate.TotalHours > 12)
             {
-                var didUpdate = await UpdateDLSSRecordsAsync();
+                var didUpdate = await UpdateManifestAsync();
                 if (didUpdate)
                 {
                     // If we did upda
@@ -345,16 +334,16 @@ DLSS Swapper will close now.",
             try
             {
                 // If we were unable to auto-load lets try load cached.
-                var items = await Storage.LoadDLSSRecordsJsonAsync();
+                var manifest = await Storage.LoadManifestJsonAsync();
                
-                // If items could not be loaded then we should attempt to upload dlss_records from the dlss-archive.
-                if (items is null)
+                // If manifest could not be loaded then we should attempt to upload dlss_records from the dlss-archive.
+                if (manifest is null)
                 {
-                    return await UpdateDLSSRecordsAsync();
+                    return await UpdateManifestAsync();
                 }
                 else
                 {
-                    UpdateDLSSRecordsList(items);
+                    DLLManager.Instance.UpdateDLLRecordLists(manifest);
                 }
                 return true;
             }
@@ -365,44 +354,40 @@ DLSS Swapper will close now.",
             }
         }
 
-        internal async Task LoadImportedDLSSRecordsAsync()
+        // Previously: LoadImportedDLSSRecordsAsync
+        internal async Task LoadImportedManifestAsync()
         {
-            var items = await Storage.LoadImportedDLSSRecordsJsonAsync();
-            if (items is not null)
+            var manifest = await Storage.LoadImportedManifestJsonAsync();
+            if (manifest is not null)
             {
-                UpdateImportedDLSSRecordsList(items);
+                UpdateImportedManifestList(manifest);
             }
         }
 
-        internal void UpdateDLSSRecordsList(DLSSRecords dlssRecords)
+        // Previously: UpdateImportedDLSSRecordsList
+        internal void UpdateImportedManifestList(Manifest importedManifest)
         {
-            App.CurrentApp.DLSSRecords.Stable.Clear();
-            App.CurrentApp.DLSSRecords.Stable.AddRange(dlssRecords.Stable);
-
-            App.CurrentApp.DLSSRecords.Experimental.Clear();
-            App.CurrentApp.DLSSRecords.Experimental.AddRange(dlssRecords.Experimental);
-        }
-
-        internal void UpdateImportedDLSSRecordsList(List<DLSSRecord> localDlssRecords)
-        {
+            // TODO: Reimplement
+            /*
             App.CurrentApp.ImportedDLSSRecords.Clear();
             App.CurrentApp.ImportedDLSSRecords.AddRange(localDlssRecords);
+            */
         }
 
         /// <summary>
-        /// Attempts to load dlss_records.json from dlss-archive.
+        /// Attempts to load manifest.json from dlss-swapper-manifest-builder.
         /// </summary>
         /// <returns>True if the dlss recrods manifest was downloaded and saved successfully</returns>
-        internal async Task<bool> UpdateDLSSRecordsAsync()
+        internal async Task<bool> UpdateManifestAsync()
         {
-            var url = "https://raw.githubusercontent.com/beeradmoore/dlss-archive/main/dlss_records.json";
+            var url = "https://downloads.dlss-swapper.beeradmoore.com/manifest.json";
 
             try
             {
                 using (var memoryStream = new MemoryStream())
                 {
                     // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider 
-                    // adding a "fast UpdateDLSSRecords" which will quit early if we were unable to load in 10sec 
+                    // adding a "fast UpdateManifest" which will quit early if we were unable to load in 10sec 
                     // which would then fall back to loading local.                    
                     using (var stream = await App.CurrentApp.HttpClient.GetStreamAsync(url))
                     {
@@ -410,18 +395,18 @@ DLSS Swapper will close now.",
                     }
                     memoryStream.Position = 0;
 
-                    var items = await JsonSerializer.DeserializeAsync(memoryStream, SourceGenerationContext.Default.DLSSRecords);
-                    if (items is null)
+                    var manifest = await JsonSerializer.DeserializeAsync(memoryStream, SourceGenerationContext.Default.Manifest);
+                    if (manifest is null)
                     {
-                        throw new Exception("Could not deserialize dlss_records.json.");
+                        throw new Exception("Could not deserialize manifest.json.");
                     }
-                    UpdateDLSSRecordsList(items);
+                    DLLManager.Instance.UpdateDLLRecordLists(manifest);
                     //await UpdateDLSSRecordsListAsync(items);
 
                     memoryStream.Position = 0;
                     try
                     {
-                        await Storage.SaveDLSSRecordsJsonAsync(items);
+                        await Storage.SaveManifestJsonAsync(manifest);
                         // Update settings for auto refresh.
                         Settings.Instance.LastRecordsRefresh = DateTime.Now;
                         return true;

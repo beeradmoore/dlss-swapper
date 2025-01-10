@@ -23,12 +23,12 @@ namespace DLSS_Swapper.UserControls
     public sealed partial class DLSSPickerControl : UserControl
     {
         Game _game;
-        public List<DLSSRecord> DLSSRecords { get; } = new List<DLSSRecord>();
+        public List<DLLRecord> DLSSRecords { get; } = new List<DLLRecord>();
 
         public DLSSPickerControl(Game game)
         {
             _game = game;
-            DLSSRecords.AddRange(App.CurrentApp.MainWindow.CurrentDLSSRecords);
+            DLSSRecords.AddRange(DLLManager.Instance.DLSSRecords);
 
             this.InitializeComponent();
             DataContext = this;
@@ -45,9 +45,9 @@ namespace DLSS_Swapper.UserControls
             }
         }
 
-        internal DLSSRecord? GetSelectedDLSSRecord()
+        internal DLLRecord? GetSelectedDLSSRecord()
         {
-            return DLSSRecordsListView.SelectedItem as DLSSRecord;
+            return DLSSRecordsListView.SelectedItem as DLLRecord;
         }
     }
 }

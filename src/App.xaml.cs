@@ -47,8 +47,8 @@ namespace DLSS_Swapper
 
         public static App CurrentApp => (App)Application.Current;
 
-        internal DLSSRecords DLSSRecords { get; } = new DLSSRecords();
-        internal List<DLSSRecord> ImportedDLSSRecords { get; } = new List<DLSSRecord>();
+        //internal Manifest Manifest { get; } = new Manifest();
+        internal Manifest ImportedManifest { get; } = new Manifest();
 
         internal HttpClient _httpClient = new HttpClient();
         public HttpClient HttpClient => _httpClient;
@@ -56,8 +56,6 @@ namespace DLSS_Swapper
 
         SQLiteAsyncConnection database;
         public SQLiteAsyncConnection Database => database;
-
-        //public ObservableRangeCollection<DLSSRecord> CurrentDLSSRecords { get; } = new ObservableRangeCollection<DLSSRecord>();
 
 
         /// <summary>
@@ -79,6 +77,7 @@ namespace DLSS_Swapper
             GlobalElementTheme = Settings.Instance.AppTheme;
 
             database = new SQLiteAsyncConnection(Storage.GetDBPath());
+            
             Task.Run(async () =>
             {
                 try
@@ -215,37 +214,6 @@ namespace DLSS_Swapper
         }
 #endif
 
-
-        internal void LoadLocalRecordFromDLSSRecord(DLSSRecord dlssRecord, bool isImportedRecord = false)
-        {
-#if PORTABLE
-            var dllsPath = Path.Combine("StoredData", (isImportedRecord ? "imported_dlss_zip" : "dlss_zip"));
-#else
-            var dllsPath = Path.Combine(Storage.GetStorageFolder(), (isImportedRecord ? "imported_dlss_zip" : "dlss_zip"));
-#endif
-
-            var expectedPath = Path.Combine(dllsPath, $"{dlssRecord.Version}_{dlssRecord.MD5Hash}.zip");
-            
-            // Load record.
-            var localRecord = LocalRecord.FromExpectedPath(expectedPath, isImportedRecord);
-
-            if (isImportedRecord)
-            {
-                localRecord.IsImported = true;
-                localRecord.IsDownloaded = true;
-            }
-
-            // If the record exists we will update existing properties, if not we add it as new property.
-            if (dlssRecord.LocalRecord is null)
-            {
-                dlssRecord.LocalRecord = localRecord;
-            }
-            else
-            {
-                dlssRecord.LocalRecord.UpdateFromNewLocalRecord(localRecord);
-            }
-        }
-
         /*
         // Disabled because the non-async method seems faster.
         internal async Task LoadLocalRecordFromDLSSRecordAsync(DLSSRecord dlssRecord)
@@ -272,22 +240,6 @@ namespace DLSS_Swapper
         }
         */
 
-        internal void LoadLocalRecords()
-        {
-            // We attempt to load all local records, even if experemental is not enabled.
-            foreach (var dlssRecord in DLSSRecords.Stable)
-            {
-                LoadLocalRecordFromDLSSRecord(dlssRecord);
-            }
-            foreach (var dlssRecord in DLSSRecords.Experimental)
-            {
-                LoadLocalRecordFromDLSSRecord(dlssRecord);
-            }
-            foreach (var dlssRecord in ImportedDLSSRecords)
-            {
-                LoadLocalRecordFromDLSSRecord(dlssRecord, true);
-            }
-        }
 
         /*
         // Disabled because the non-async method seems faster. 

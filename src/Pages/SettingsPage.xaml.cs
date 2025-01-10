@@ -111,7 +111,7 @@ namespace DLSS_Swapper.Pages
             if (e.OriginalSource is ToggleSwitch toggleSwitch)
             {
                 Settings.Instance.AllowExperimental = toggleSwitch.IsOn;
-                App.CurrentApp.MainWindow.FilterDLSSRecords();
+                App.CurrentApp.MainWindow.FilterDLLRecords();
             }
         }
 
@@ -125,7 +125,7 @@ namespace DLSS_Swapper.Pages
             if (e.OriginalSource is ToggleSwitch toggleSwitch)
             {
                 Settings.Instance.AllowUntrusted = toggleSwitch.IsOn;
-                App.CurrentApp.MainWindow.FilterDLSSRecords();
+                App.CurrentApp.MainWindow.FilterDLLRecords();
             }
         }
 

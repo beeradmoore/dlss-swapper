@@ -10,38 +10,38 @@
     xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <converters:BytesToMegaBytesConverter x:Key="BytesToMegaBytesConverter" />
+        <converters:BytesToKiloBytesConverter x:Key="BytesToKiloBytesConverter" />
         <ct_converters:StringVisibilityConverter x:Key="StringVisibilityConverter" />
     </UserControl.Resources>
 
     <StackPanel Orientation="Vertical">
         <TextBlock IsTextSelectionEnabled="True">
             <Run FontWeight="Bold">Version: </Run>
-            <Run Text="{Binding Version}"/>
+            <Run Text="{x:Bind DLLRecord.Version}"/>
         </TextBlock>
-        <TextBlock IsTextSelectionEnabled="True" Visibility="{Binding AdditionalLabel, Converter={StaticResource StringVisibilityConverter}}">
+        <TextBlock IsTextSelectionEnabled="True" Visibility="{x:Bind DLLRecord.AdditionalLabel, Converter={StaticResource StringVisibilityConverter}}">
             <Run FontWeight="Bold">Label: </Run>
-            <Run Text="{Binding AdditionalLabel}"/>
+            <Run Text="{x:Bind DLLRecord.AdditionalLabel}"/>
         </TextBlock>
         <TextBlock IsTextSelectionEnabled="True">
             <Run FontWeight="Bold">File size: </Run>
-            <Run Text="{Binding FileSize, Converter={StaticResource BytesToMegaBytesConverter}}"/>
+            <Run Text="{x:Bind DLLRecord.FileSize, Converter={StaticResource BytesToKiloBytesConverter}}"/>
         </TextBlock>
         <TextBlock IsTextSelectionEnabled="True">
             <Run FontWeight="Bold">Download file size: </Run>
-            <Run Text="{Binding ZipFileSize, Converter={StaticResource BytesToMegaBytesConverter}}"/>
+            <Run Text="{x:Bind DLLRecord.ZipFileSize, Converter={StaticResource BytesToKiloBytesConverter}}"/>
         </TextBlock>
         <TextBlock IsTextSelectionEnabled="True">
             <Run FontWeight="Bold">File description: </Run>
-            <Run Text="{Binding FileDescription}"/>
+            <Run Text="{x:Bind DLLRecord.FileDescription}"/>
         </TextBlock>
         <TextBlock IsTextSelectionEnabled="True">
             <Run FontWeight="Bold">MD5 hash: </Run>
-            <Run Text="{Binding MD5Hash}"/>
+            <Run Text="{x:Bind DLLRecord.MD5Hash}"/>
         </TextBlock>
         <TextBlock IsTextSelectionEnabled="True">
             <Run FontWeight="Bold">Zip MD5 hash: </Run>
-            <Run Text="{Binding ZipMD5Hash}"/>
+            <Run Text="{x:Bind DLLRecord.ZipMD5Hash}"/>
         </TextBlock>
 
     </StackPanel>

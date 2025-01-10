@@ -212,7 +212,7 @@ namespace DLSS_Swapper.Data
                         var gameAsset = new GameAsset()
                         {
                             Id = ID,
-                            AssetType = GameAssetType.DLSS_FG,
+                            AssetType = GameAssetType.DLSS_G,
                             Path = dllPath,
                         };
                         gameAsset.LoadVersionAndHash();
@@ -223,7 +223,7 @@ namespace DLSS_Swapper.Data
                         var gameAsset = new GameAsset()
                         {
                             Id = ID,
-                            AssetType = GameAssetType.DLSS_RR,
+                            AssetType = GameAssetType.DLSS_D,
                             Path = dllPath,
                         };
                         gameAsset.LoadVersionAndHash();
@@ -290,12 +290,12 @@ namespace DLSS_Swapper.Data
                     await App.CurrentApp.Database.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
 
                     var dlssGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS).ToList();
-                    var dlssgGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_FG).ToList();
-                    var dlssdGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_RR).ToList();
+                    var dlssgGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_G).ToList();
+                    var dlssdGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_D).ToList();
 
                     var dlssGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_BACKUP).ToList();
-                    var dlssgGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_FG_BACKUP).ToList();
-                    var dlssdGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_RR_BACKUP).ToList();
+                    var dlssgGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_G_BACKUP).ToList();
+                    var dlssdGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_D_BACKUP).ToList();
 
                     newHasDLSS = dlssGameAssets.Any();
                     
@@ -441,7 +441,7 @@ namespace DLSS_Swapper.Data
         /// </summary>
         /// <param name="dlssRecord"></param>
         /// <returns>Tuple containing a boolean of Success, if this is false there will be an error message in the Message response.</returns>
-        internal (bool Success, string Message, bool PromptToRelaunchAsAdmin) UpdateDll(DLSSRecord dlssRecord)
+        internal (bool Success, string Message, bool PromptToRelaunchAsAdmin) UpdateDll(DLLRecord dlssRecord)
         {
             if (dlssRecord is null)
             {
@@ -751,6 +751,7 @@ namespace DLSS_Swapper.Data
                 var rowsChanged = await App.CurrentApp.Database.InsertOrReplaceAsync(this);
                 if (rowsChanged == 0)
                 {
+                    // This appears to change to different games in different libraries.
                     Logger.Error($"Tried to save game to database but rowsChanged was 0.");
                     Debugger.Break();
                 }
@@ -774,8 +775,8 @@ namespace DLSS_Swapper.Data
                 {
                     // If its a file we made we should attempt to delete it.
                     if (cachedGameAsset.AssetType == GameAssetType.DLSS_BACKUP ||
-                        cachedGameAsset.AssetType == GameAssetType.DLSS_FG_BACKUP ||
-                        cachedGameAsset.AssetType == GameAssetType.DLSS_RR_BACKUP ||
+                        cachedGameAsset.AssetType == GameAssetType.DLSS_G_BACKUP ||
+                        cachedGameAsset.AssetType == GameAssetType.DLSS_D_BACKUP ||
                         cachedGameAsset.AssetType == GameAssetType.FSR_31_DX12_BACKUP ||
                         cachedGameAsset.AssetType == GameAssetType.FSR_31_VK_BACKUP ||
                         cachedGameAsset.AssetType == GameAssetType.XeSS_BACKUP)
@@ -973,11 +974,11 @@ namespace DLSS_Swapper.Data
                 {
                     CurrentDLSS = gameAsset;
                 }
-                else if(gameAsset.AssetType == GameAssetType.DLSS_FG)
+                else if(gameAsset.AssetType == GameAssetType.DLSS_G)
                 {
                     CurrentDLSS_FG = gameAsset;
                 }
-                else if(gameAsset.AssetType == GameAssetType.DLSS_RR)
+                else if(gameAsset.AssetType == GameAssetType.DLSS_D)
                 {
                     CurrentDLSS_RR = gameAsset;
                 }

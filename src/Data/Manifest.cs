@@ -26,4 +26,10 @@ internal class Manifest
 
     [JsonPropertyName("xess")]
     public List<DLLRecord> XeSS { get; set; } = new List<DLLRecord>();
+
+    [JsonPropertyName("xell")]
+    public List<DLLRecord> XeLL { get; set; } = new List<DLLRecord>();
+    
+    [JsonPropertyName("xess_fg")]
+    public List<DLLRecord> XeSS_FG { get; set; } = new List<DLLRecord>();
 }

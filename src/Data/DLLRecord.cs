@@ -370,6 +370,8 @@ namespace DLSS_Swapper.Data
                 GameAssetType.FSR_31_DX12 => "FSR 3.1 DirectX 12",
                 GameAssetType.FSR_31_VK => "FSR 3.1 Vulkan",
                 GameAssetType.XeSS => "XeSS",
+                GameAssetType.XeLL => "XeLL",
+                GameAssetType.XeSS_FG => "XeSS Frame Generation",
                 _ => throw new Exception($"Unknown AssetType: {AssetType}"),
             };
         }

@@ -19,6 +19,8 @@ public enum GameAssetType
     FSR_31_DX12,
     FSR_31_VK,
     XeSS,
+    XeLL,
+    XeSS_FG,
 
 
     DLSS_BACKUP,
@@ -27,6 +29,8 @@ public enum GameAssetType
     FSR_31_DX12_BACKUP,
     FSR_31_VK_BACKUP,
     XeSS_BACKUP,
+    XeLL_BACKUP,
+    XeSS_FG_BACKUP,
 }
 
 public class GameAsset
@@ -69,6 +73,8 @@ public class GameAsset
             GameAssetType.FSR_31_DX12 => GameAssetType.FSR_31_DX12_BACKUP,
             GameAssetType.FSR_31_VK => GameAssetType.FSR_31_VK_BACKUP,
             GameAssetType.XeSS => GameAssetType.XeSS_BACKUP,
+            GameAssetType.XeLL => GameAssetType.XeLL_BACKUP,
+            GameAssetType.XeSS_FG => GameAssetType.XeSS_FG_BACKUP,
             _ => GameAssetType.Unknown
         };
 

@@ -102,8 +102,7 @@ namespace DLSS_Swapper.Data
         [Ignore]
         public GameAsset? CurrentDLSS { get; set; } = null;
 
-        [Ignore]
-        
+        [Ignore]        
         public GameAsset? CurrentDLSS_FG { get; set; } = null;
 
         [Ignore]
@@ -118,6 +117,14 @@ namespace DLSS_Swapper.Data
         [Ignore]
         public GameAsset? CurrentXeSS { get; set; } = null;
 
+        [Ignore]
+        public GameAsset? CurrentXeLL { get; set; } = null;
+
+        [Ignore]
+        public GameAsset? CurrentXeSS_FG { get; set; } = null;
+
+
+        
 
         protected void SetID()
         {
@@ -257,6 +264,28 @@ namespace DLSS_Swapper.Data
                         {
                             Id = ID,
                             AssetType = GameAssetType.XeSS,
+                            Path = dllPath,
+                        };
+                        gameAsset.LoadVersionAndHash();
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "libxell.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.XeLL,
+                            Path = dllPath,
+                        };
+                        gameAsset.LoadVersionAndHash();
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "libxess_fg.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.XeSS_FG,
                             Path = dllPath,
                         };
                         gameAsset.LoadVersionAndHash();
@@ -990,9 +1019,17 @@ namespace DLSS_Swapper.Data
                 {
                     CurrentFSR_31_VK = gameAsset;
                 }
-                else if(gameAsset.AssetType == GameAssetType.XeSS)
+                else if (gameAsset.AssetType == GameAssetType.XeSS)
                 {
                     CurrentXeSS = gameAsset;
+                }
+                else if (gameAsset.AssetType == GameAssetType.XeLL)
+                {
+                    CurrentXeLL = gameAsset;
+                }
+                else if (gameAsset.AssetType == GameAssetType.XeSS_FG)
+                {
+                    CurrentXeSS_FG = gameAsset;
                 }
             }
 

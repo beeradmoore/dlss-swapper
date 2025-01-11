@@ -53,6 +53,8 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         dllRecordGroups.Add(new DLLRecordGroup("FSR 3.1 (DirectX 12)", DLLManager.Instance.FSR31DX12Records ));
         dllRecordGroups.Add(new DLLRecordGroup("FSR 3.1 (Vulkan)", DLLManager.Instance.FSR31VKRecords));
         dllRecordGroups.Add(new DLLRecordGroup("XeSS", DLLManager.Instance.XeSSRecords));
+        dllRecordGroups.Add(new DLLRecordGroup("XeLL", DLLManager.Instance.XeLLRecords));
+        dllRecordGroups.Add(new DLLRecordGroup("XeSS Frame Generation", DLLManager.Instance.XeSSFGRecords));
 
         LibraryCollectionViewSource = new CollectionViewSource()
         {
@@ -95,6 +97,8 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         allDllRecords.AddRange(DLLManager.Instance.FSR31DX12Records.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.FSR31VKRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.XeSSRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.XeLLRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.XeSSFGRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
 
         // TODO: Add local records
         //allDlssRecords.AddRange(App.CurrentApp.ImportedDLSSRecords.Where(x => x.LocalRecord?.IsDownloaded == true));

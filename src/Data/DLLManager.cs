@@ -19,6 +19,8 @@ internal class DLLManager
     public ObservableRangeCollection<DLLRecord> FSR31DX12Records { get; } = new ObservableRangeCollection<DLLRecord>();
     public ObservableRangeCollection<DLLRecord> FSR31VKRecords { get; } = new ObservableRangeCollection<DLLRecord>();
     public ObservableRangeCollection<DLLRecord> XeSSRecords { get; } = new ObservableRangeCollection<DLLRecord>();
+    public ObservableRangeCollection<DLLRecord> XeLLRecords { get; } = new ObservableRangeCollection<DLLRecord>();
+    public ObservableRangeCollection<DLLRecord> XeSSFGRecords { get; } = new ObservableRangeCollection<DLLRecord>();
 
     internal void LoadFromManifest()
     {
@@ -84,6 +86,24 @@ internal class DLLManager
         }
         XeSSRecords.Clear();
         XeSSRecords.AddRange(manifest.XeSS);
+
+
+        manifest.XeLL.Sort();
+        foreach (var dllRecord in manifest.XeLL)
+        {
+            dllRecord.AssetType = GameAssetType.XeLL;
+        }
+        XeLLRecords.Clear();
+        XeLLRecords.AddRange(manifest.XeLL);
+
+
+        manifest.XeSS_FG.Sort();
+        foreach (var dllRecord in manifest.XeSS_FG)
+        {
+            dllRecord.AssetType = GameAssetType.XeSS_FG;
+        }
+        XeSSFGRecords.Clear();
+        XeSSFGRecords.AddRange(manifest.XeSS_FG);
     }
 
     internal void LoadLocalRecords()
@@ -96,6 +116,8 @@ internal class DLLManager
             FSR31DX12Records,
             FSR31VKRecords,
             XeSSRecords,
+            XeLLRecords,
+            XeSSFGRecords
         };
 
         foreach (var recordList in allLocalRecords)
@@ -125,6 +147,8 @@ internal class DLLManager
             GameAssetType.FSR_31_DX12 => "fsr_31_dx12",
             GameAssetType.FSR_31_VK => "fsr_31_vk",
             GameAssetType.XeSS => "xess",
+            GameAssetType.XeLL => "xell",
+            GameAssetType.XeSS_FG => "xess_fg",
             _ => string.Empty,
         };
 

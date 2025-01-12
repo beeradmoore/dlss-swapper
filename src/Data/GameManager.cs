@@ -57,7 +57,7 @@ internal partial class GameManager : ObservableObject
             return (obj) =>
             {
                 var game = (Game)obj;
-                return game.HasDLSS;
+                return game.HasSwappableItems;
             };
         }
 
@@ -74,7 +74,7 @@ internal partial class GameManager : ObservableObject
             return (obj) =>
             {
                 var game = (Game)obj;
-                return game.IsFavourite && game.HasDLSS;
+                return game.IsFavourite && game.HasSwappableItems;
             };
         }
 
@@ -92,7 +92,7 @@ internal partial class GameManager : ObservableObject
             return (obj) =>
             {
                 var game = (Game)obj;
-                return game.GameLibrary == library && game.HasDLSS;
+                return game.GameLibrary == library && game.HasSwappableItems;
             };
         }
 

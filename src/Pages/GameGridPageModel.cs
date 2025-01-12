@@ -109,7 +109,7 @@ internal partial class GameGridPageModel : ObservableObject
                             TextWrapping = TextWrapping.Wrap,
                             Text = @"DLSS Swapper should find games from your installed game libraries automatically. If your game is not listed there may be a few settings preventing it. Please check:
 
-- Games list filter is not set to ""Hide non-DLSS games""
+- Games list filter is not set to ""Hide games with no swappable items""
 - Specific game library is enabled in settings
 
 If you have checked these and your game is still not showing up there may be a bug. We would appreciate it if you could report the issue on our GitHub repository so we can make a fix and have your games better detected in the future.",
@@ -340,61 +340,6 @@ If you have checked these and your game is still not showing up there may be a b
         //MainGridView.ItemsSource = null;
         CurrentCollectionView = null;
         CurrentCollectionView = GameManager.Instance.GetGameCollection();
-
-        if (Settings.Instance.GroupGameLibrariesTogether)
-        {
-            //CurrentCollectionView = GameManager.Instance.GroupedGameCollectionViewSource.View;
-
-            /*
-            var collectionViewSource = new CollectionViewSource()
-            {
-                IsSourceGrouped = true,
-                Source = GameLibraries,
-            };
-
-            if (Settings.Instance.HideNonDLSSGames)
-            {
-                collectionViewSource.ItemsPath = new PropertyPath("LoadedDLSSGames");
-            }
-            else
-            {
-                collectionViewSource.ItemsPath = new PropertyPath("LoadedGames");
-            }
-
-            MainGridView.ItemsSource = collectionViewSource.View;
-            */
-        }
-        else
-        {
-            //CurrentCollectionView = GameManager.Instance.UngroupedGameCollectionViewSource.View;
-
-            /*
-            var games = new List<Game>();
-
-            if (Settings.Instance.HideNonDLSSGames)
-            {
-                foreach (var gameLibrary in GameLibraries)
-                {
-                    games.AddRange(gameLibrary.LoadedGames.Where(g => g.HasDLSS == true));
-                }
-            }
-            else
-            {
-                foreach (var gameLibrary in GameLibraries)
-                {
-                    games.AddRange(gameLibrary.LoadedGames);
-                }
-            }
-            games.Sort();
-
-            MainGridView.ItemsSource = games;
-            */
-        }
-
-        // TODO: Remove weird hack which otherwise causes MainGridView_SelectionChanged to fire when changing MainGridView.ItemsSource.
-        //gameGridPage.MainGridView.SelectedIndex = -1;
-        //gameGridPage.MainGridView.SelectionChanged += MainGridView_SelectionChanged;
-        
     }
 
 }

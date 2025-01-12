@@ -253,7 +253,7 @@ namespace DLSS_Swapper.Data.Xbox
             }
 
             _loadedGames.AddRange(games);
-            _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));
+            _loadedDLSSGames.AddRange(games.Where(g => g.HasSwappableItems == true));
 
             // Dumb workaround for async Task method. 
             await Task.Delay(10);

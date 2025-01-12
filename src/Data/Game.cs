@@ -44,6 +44,7 @@ namespace DLSS_Swapper.Data
         [property: Column("cover_image")]
         string? coverImage = null;
 
+        /*
         [ObservableProperty]
         [property: Column("base_dlss_version")]
         string baseDLSSVersion = string.Empty;
@@ -63,6 +64,11 @@ namespace DLSS_Swapper.Data
         [ObservableProperty]
         [property: Column("has_dlss")]
         bool hasDLSS = false;
+        */
+
+        [ObservableProperty]
+        [property: Column("has_swappable_items")]
+        bool hasSwappableItems = false;
 
         [ObservableProperty]
         [property: Column("notes")]
@@ -122,9 +128,7 @@ namespace DLSS_Swapper.Data
 
         [Ignore]
         public GameAsset? CurrentXeSS_FG { get; set; } = null;
-
-
-        
+                
 
         protected void SetID()
         {
@@ -175,7 +179,7 @@ namespace DLSS_Swapper.Data
             App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
             {
                 Processing = true;
-                HasDLSS = false;
+                HasSwappableItems = false;
             });
 
             ThreadPool.QueueUserWorkItem(async (stateInfo) =>
@@ -302,38 +306,15 @@ namespace DLSS_Swapper.Data
                 }
 
 
-
-
-                var newCurrentDLSSVersion = string.Empty;
-                var newCurrentDLSSHash = string.Empty;
-                var newBaseDLSSVersion = string.Empty;
-                var newBaseDLSSHash = string.Empty;
-
-                var newHasDLSS = false;
+                var newHasSwappableItems = false;
 
                 if (GameAssets.Any())
                 {
+                    newHasSwappableItems = true;
+
                     //App.CurrentApp.Database.ExecuteAsync
                     //savePoint is not valid, and should be the result of a call to SaveTransactionPoint.
-
-                    await App.CurrentApp.Database.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
-
-                    var dlssGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS).ToList();
-                    var dlssgGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_G).ToList();
-                    var dlssdGameAssets = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_D).ToList();
-
-                    var dlssGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_BACKUP).ToList();
-                    var dlssgGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_G_BACKUP).ToList();
-                    var dlssdGameAssetsBackups = GameAssets.Where(d => d.AssetType == GameAssetType.DLSS_D_BACKUP).ToList();
-
-                    newHasDLSS = dlssGameAssets.Any();
-                    
-                    if (newHasDLSS)
-                    {
-                        var firstDlss = dlssGameAssets.First();
-                        newCurrentDLSSVersion = firstDlss.Version;
-                        newCurrentDLSSHash = firstDlss.Hash;
-                    }
+                    await App.CurrentApp.Database.InsertAllAsync(GameAssets, false).ConfigureAwait(false);                  
                 }
 
 
@@ -341,30 +322,14 @@ namespace DLSS_Swapper.Data
                 // Now update all the data on the UI therad.
                 App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
                 {
-                    HasDLSS = newHasDLSS;
-
-                    if (newHasDLSS)
-                    {
-                        CurrentDLSSVersion = newCurrentDLSSVersion;
-                        CurrentDLSSHash = newCurrentDLSSHash;
-                        BaseDLSSVersion = newBaseDLSSVersion;
-                        BaseDLSSHash = newBaseDLSSHash;
-                    }
-                    else
-                    {
-                        CurrentDLSSVersion = "N/A";
-                        CurrentDLSSHash = string.Empty;
-                        BaseDLSSVersion = string.Empty;
-                        BaseDLSSHash = string.Empty;
-                    }
-
-                    Processing = false;
-
+                    HasSwappableItems = newHasSwappableItems;
 
                     if (autoSave)
                     {
                         await SaveToDatabaseAsync();
                     }
+
+                    Processing = false;
                 });
             });
         }
@@ -410,6 +375,9 @@ namespace DLSS_Swapper.Data
 
         internal (bool Success, string Message, bool PromptToRelaunchAsAdmin) ResetDll()
         {
+            // TODO: This needs to handle all the different types of DLLs we have now.
+
+            /*
             var enumerationOptions = new EnumerationOptions();
             enumerationOptions.RecurseSubdirectories = true;
             enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
@@ -460,7 +428,7 @@ namespace DLSS_Swapper.Data
                 await SaveToDatabaseAsync();
             });
 
-
+            */
 
             return (true, string.Empty, false);
         }
@@ -482,6 +450,10 @@ namespace DLSS_Swapper.Data
                 return (false, "Unable to swap DLSS dll as your local DLSS record was not found.", false);
             }
 
+            return (false, "TO FIX.", false);
+
+            // TODO: Fix for new DLL system
+            /*
             var enumerationOptions = new EnumerationOptions();
             enumerationOptions.RecurseSubdirectories = true;
             enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
@@ -620,6 +592,7 @@ namespace DLSS_Swapper.Data
             }
 
             return (true, string.Empty, false);
+            */
         }
 
         #region IComparable<Game>
@@ -808,7 +781,9 @@ namespace DLSS_Swapper.Data
                         cachedGameAsset.AssetType == GameAssetType.DLSS_D_BACKUP ||
                         cachedGameAsset.AssetType == GameAssetType.FSR_31_DX12_BACKUP ||
                         cachedGameAsset.AssetType == GameAssetType.FSR_31_VK_BACKUP ||
-                        cachedGameAsset.AssetType == GameAssetType.XeSS_BACKUP)
+                        cachedGameAsset.AssetType == GameAssetType.XeSS_BACKUP ||
+                        cachedGameAsset.AssetType == GameAssetType.XeSS_FG_BACKUP ||
+                        cachedGameAsset.AssetType == GameAssetType.XeLL_BACKUP)
                     {
                         if (File.Exists(cachedGameAsset.Path))
                         {
@@ -950,33 +925,9 @@ namespace DLSS_Swapper.Data
                 didChange = true;
             }
 
-            if (BaseDLSSVersion != game.BaseDLSSVersion)
+            if (HasSwappableItems != game.HasSwappableItems)
             {
-                BaseDLSSVersion = game.BaseDLSSVersion;
-                didChange = true;
-            }
-
-            if (BaseDLSSHash != game.BaseDLSSHash)
-            {
-                BaseDLSSHash = game.BaseDLSSHash;
-                didChange = true;
-            }
-
-            if (CurrentDLSSVersion != game.CurrentDLSSVersion)
-            {
-                CurrentDLSSVersion = game.CurrentDLSSVersion;
-                didChange = true;
-            }
-
-            if (CurrentDLSSHash != game.CurrentDLSSHash)
-            {
-                CurrentDLSSHash = game.CurrentDLSSHash;
-                didChange = true;
-            }
-
-            if (HasDLSS != game.HasDLSS)
-            {
-                HasDLSS = game.HasDLSS;
+                HasSwappableItems = game.HasSwappableItems;
                 didChange = true;
             }
 
@@ -1032,14 +983,6 @@ namespace DLSS_Swapper.Data
                     CurrentXeSS_FG = gameAsset;
                 }
             }
-
-            // If there is no known current DLSS version we want to do a full reload.
-            if (string.IsNullOrEmpty(CurrentDLSSVersion) == true || string.IsNullOrEmpty(CurrentDLSSHash) == true)
-            {
-                NeedsReload = true;
-                return;
-            }
-
             
             if (gameAssets.Any())
             {
@@ -1067,6 +1010,8 @@ namespace DLSS_Swapper.Data
                         var fileVersionInfo = FileVersionInfo.GetVersionInfo(firstDlssVersion.Path);
                         var freshVersion = fileVersionInfo.GetFormattedFileVersion();
 
+                        // TODO: FIX
+                        /*
                         if (CurrentDLSSVersion != freshVersion)
                         {
                             NeedsReload = true;
@@ -1074,13 +1019,19 @@ namespace DLSS_Swapper.Data
                         }
                         else
                         {
-
                             // NO-OP, last used DLSS is the same version that we last saw, it is also still on the disk as we expected.
                             NeedsReload = false;
                             Processing = false;
                         }
+                        */
                     }
                 }
+            }
+            else
+            {
+                // If there is no known current DLSS version we want to do a full reload incase the game got updated.
+                NeedsReload = true;
+                return;
             }
         }
     }

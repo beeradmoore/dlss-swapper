@@ -142,7 +142,7 @@ namespace DLSS_Swapper.Data.Steam
             }
 
             _loadedGames.AddRange(games);
-            _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));
+            _loadedDLSSGames.AddRange(games.Where(g => g.HasSwappableItems == true));
 
             return games;
         }

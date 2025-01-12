@@ -34,6 +34,8 @@ namespace DLSS_Swapper.UserControls
             DataContext = this;
 
             // TODO: If you select an imported DLSS 
+            // TODO: FIX
+            /*
             var detectedVersion = DLSSRecords.FirstOrDefault(v => v.MD5Hash == game.CurrentDLSSHash);
             if (detectedVersion is null)
             {
@@ -43,6 +45,7 @@ namespace DLSS_Swapper.UserControls
             {
                 DLSSRecordsListView.SelectedItem = detectedVersion;
             }
+            */
         }
 
         internal DLLRecord? GetSelectedDLSSRecord()

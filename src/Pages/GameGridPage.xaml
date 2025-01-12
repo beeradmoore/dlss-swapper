@@ -140,7 +140,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Column="0" FontWeight="Bold" Text="DLSS" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" />
-                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSSVersion}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Visibility="{Binding Processing, Converter={StaticResource InverseBoolToVisibilityConverter}}" />
+                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSS.Version, FallbackValue='N/A'}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Visibility="{Binding Processing, Converter={StaticResource InverseBoolToVisibilityConverter}}" />
                             <ProgressRing Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Width="16" Height="16" Visibility="{Binding Processing, Converter={StaticResource BoolToVisibilityConverter}}" />
                         </Grid>
                     </Grid>

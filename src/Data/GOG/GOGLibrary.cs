@@ -310,7 +310,7 @@ namespace DLSS_Swapper.Data.GOG
             }
 
             _loadedGames.AddRange(gogGames);
-            _loadedDLSSGames.AddRange(gogGames.Where(g => g.HasDLSS == true));
+            _loadedDLSSGames.AddRange(gogGames.Where(g => g.HasSwappableItems == true));
 
             return new List<Game>(gogGames);
         }

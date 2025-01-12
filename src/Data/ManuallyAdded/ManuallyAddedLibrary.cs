@@ -47,7 +47,7 @@ public class ManuallyAddedLibrary : IGameLibrary
 
         games.Sort();
         LoadedGames.AddRange(games);
-        LoadedDLSSGames.AddRange(games.Where(g => g.HasDLSS));
+        LoadedDLSSGames.AddRange(games.Where(g => g.HasSwappableItems));
         
         return games;
     }

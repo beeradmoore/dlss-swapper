@@ -210,7 +210,7 @@ namespace DLSS_Swapper
 
 
             // Load from cache, or download if not found.
-            var loadDlssRecrodsTask = LoadDLSSRecordsAsync();
+            var loadDlssRecrodsTask = LoadDLLRecordsAsync();
             var loadImportedDlssRecordsTask = LoadImportedManifestAsync();
 
     
@@ -317,7 +317,8 @@ DLSS Swapper will close now.",
         /// Attempts to load DLSS records from disk or from the web depending what happened.
         /// </summary>
         /// <returns>True if we expect there are now valid DLSS records loaded into memory.</returns>
-        async Task<bool> LoadDLSSRecordsAsync()
+        // Previously LoadDLSSRecordsAsync
+        async Task<bool> LoadDLLRecordsAsync()
         {
             // Only auto check for updates once every 12 hours.
             var timeSinceLastUpdate = DateTimeOffset.Now - Settings.Instance.LastRecordsRefresh;

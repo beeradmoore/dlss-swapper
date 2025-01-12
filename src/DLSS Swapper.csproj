@@ -94,6 +94,7 @@
     <None Remove="DLSS Swapper_TemporaryKey.pfx" />
     <None Remove="global.json" />
     <None Remove="Themes\FakeContentDialogStyle.xaml" />
+    <None Remove="UserControls\DLLPickerComboBox.xaml" />
     <None Remove="UserControls\GameControl.xaml" />
     <None Remove="UserControls\ManuallyAddGameControl.xaml" />
   </ItemGroup>
@@ -282,6 +283,9 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Page Update="UserControls\DLLPickerComboBox.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
         <Page Update="Themes\FakeContentDialogStyle.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>

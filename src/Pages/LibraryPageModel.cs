@@ -26,12 +26,6 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
 {
     LibraryPage libraryPage;
 
-    public AsyncCommand<DLLRecord> DeleteRecordCommand { get; }
-    public AsyncCommand<DLLRecord> DownloadRecordCommand { get; }
-    public AsyncCommand<DLLRecord> CancelDownloadRecordCommand { get; }
-    public AsyncCommand<DLLRecord> ExportRecordCommand { get; }
-    public AsyncCommand<DLLRecord> ShowDownloadErrorCommand { get; }
-
     public CollectionViewSource LibraryCollectionViewSource { get; init; }
 
     List<DLLRecordGroup> dllRecordGroups;
@@ -39,12 +33,6 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
     public LibraryPageModel(LibraryPage libraryPage)
     {
         this.libraryPage = libraryPage;
-
-        DeleteRecordCommand = new AsyncCommand<DLLRecord>(async (record) => await DeleteRecordAsync(record));
-        DownloadRecordCommand = new AsyncCommand<DLLRecord>(async (record) => await DownloadRecordAsync(record));
-        CancelDownloadRecordCommand = new AsyncCommand<DLLRecord>(async (record) => await CancelDownloadRecordAsync(record));
-        ExportRecordCommand = new AsyncCommand<DLLRecord>(async (record) => await ExportRecordAsync(record));
-        ShowDownloadErrorCommand = new AsyncCommand<DLLRecord>(async (record) => await ShowDownloadErrorAsync(record));
 
         dllRecordGroups = new List<DLLRecordGroup>();
         dllRecordGroups.Add(new DLLRecordGroup("DLSS", DLLManager.Instance.DLSSRecords ));
@@ -110,7 +98,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                 CloseButtonText = "Okay",
                 DefaultButton = ContentDialogButton.Close,
                 Title = "Error",
-                Content = $"You have no DLSS records to export.",
+                Content = $"You have no DLL records to export.",
             };
             await dialog.ShowAsync();
             return;
@@ -557,6 +545,7 @@ Only import dlls from sources you trust.",
         }
     }
 
+    [RelayCommand]
     async Task DeleteRecordAsync(DLLRecord record)
     {
         if (record.LocalRecord is null)
@@ -606,6 +595,7 @@ Only import dlls from sources you trust.",
         }
     }
 
+    [RelayCommand(AllowConcurrentExecutions = true)]
     async Task DownloadRecordAsync(DLLRecord record)
     {
         var result = await record.DownloadAsync();
@@ -623,12 +613,14 @@ Only import dlls from sources you trust.",
         }
     }
 
+    [RelayCommand]
     async Task CancelDownloadRecordAsync(DLLRecord record)
     {
         record?.CancelDownload();
         await Task.Delay(10);
     }
 
+    [RelayCommand]
     async Task ExportRecordAsync(DLLRecord record)
     {
         if (record.LocalRecord is null)
@@ -640,7 +632,7 @@ Only import dlls from sources you trust.",
         {
             Title = "Exporting",
             // I would like this to be a progress ring but for some reason the ring will not show.
-            Content = new ProgressBar()
+            Content = new ProgressRing()
             {
                 IsIndeterminate = true,
             },
@@ -652,7 +644,7 @@ Only import dlls from sources you trust.",
             var savePicker = new Windows.Storage.Pickers.FileSavePicker();
             savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
             savePicker.FileTypeChoices.Add("Zip archive", new List<string>() { ".zip" });
-            savePicker.SuggestedFileName = $"nvngx_dlss_{record.DisplayName.Replace(" ", "_")}.zip";
+            savePicker.SuggestedFileName = $"dlss_swapper_export_{record.DisplayName.Replace(" ", "_")}.zip";
             WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
             var saveFile = await savePicker.PickSaveFileAsync();
 
@@ -673,7 +665,7 @@ Only import dlls from sources you trust.",
                     Title = "Success",
                     CloseButtonText = "Okay",
                     DefaultButton = ContentDialogButton.Close,
-                    Content = $"Exported DLSS {record.DisplayName}.",
+                    Content = $"Exported DLL {record.DisplayName}.",
                 };
                 await dialog.ShowAsync();
             }
@@ -689,12 +681,13 @@ Only import dlls from sources you trust.",
                 Title = "Error",
                 CloseButtonText = "Okay",
                 DefaultButton = ContentDialogButton.Close,
-                Content = "Could not export DLSS dll.",
+                Content = "Could not export DLL.",
             };
             await dialog.ShowAsync();
         }
     }
 
+    [RelayCommand]
     async Task ShowDownloadErrorAsync(DLLRecord record)
     {
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)

@@ -31,6 +31,8 @@ namespace DLSS_Swapper.UserControls
 {
     public sealed partial class GameControl : FakeContentDialog
     {
+        public GameControlModel ViewModel { get; private set; }
+
         public GameControl(Game game)
         {
             this.InitializeComponent();
@@ -50,8 +52,9 @@ namespace DLSS_Swapper.UserControls
             */
 
             Resources["ContentDialogMinWidth"] = 700;
-            
-            DataContext = new GameControlModel(this, game);
+
+            ViewModel = new GameControlModel(this, game);
+            DataContext = ViewModel;
         }
 
         protected override void OnApplyTemplate()

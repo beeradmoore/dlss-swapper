@@ -100,15 +100,15 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _allowExperimental = false;
-        public bool AllowExperimental
+        bool _allowDebugDlls = false;
+        public bool AllowDebugDlls
         {
-            get { return _allowExperimental; }
+            get { return _allowDebugDlls; }
             set
             {
-                if (_allowExperimental != value)
+                if (_allowDebugDlls != value)
                 {
-                    _allowExperimental = value;
+                    _allowDebugDlls = value;
                     if (_autoSave)
                     {
                         SaveJson();
@@ -116,6 +116,7 @@ namespace DLSS_Swapper
                 }
             }
         }
+
 
 
         bool _allowUntrusted = false;

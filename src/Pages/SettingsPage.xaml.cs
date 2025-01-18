@@ -71,7 +71,7 @@ namespace DLSS_Swapper.Pages
             DefaultThemeRadioButton.IsChecked = Settings.Instance.AppTheme == ElementTheme.Default;
 
             AllowUntrustedToggleSwitch.IsOn = Settings.Instance.AllowUntrusted;
-            AllowExperimentalToggleSwitch.IsOn = Settings.Instance.AllowExperimental;
+            AllowDebugDllsToggleSwitch.IsOn = Settings.Instance.AllowDebugDlls;
             LoggingComboBox.SelectedItem = Settings.Instance.LoggingLevel;
 
             DataContext = this;
@@ -101,7 +101,7 @@ namespace DLSS_Swapper.Pages
             }
         }
 
-        void AllowExperimental_Toggled(object sender, RoutedEventArgs e)
+        void AllowDebugDlls_Toggled(object sender, RoutedEventArgs e)
         {
             if (DataContext is null)
             {
@@ -110,7 +110,7 @@ namespace DLSS_Swapper.Pages
 
             if (e.OriginalSource is ToggleSwitch toggleSwitch)
             {
-                Settings.Instance.AllowExperimental = toggleSwitch.IsOn;
+                Settings.Instance.AllowDebugDlls = toggleSwitch.IsOn;
                 App.CurrentApp.MainWindow.FilterDLLRecords();
             }
         }

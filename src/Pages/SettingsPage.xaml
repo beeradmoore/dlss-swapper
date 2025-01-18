@@ -96,11 +96,11 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Allow Experimental" />
+                    Text="Allow Debug DLLs" />
                 <StackPanel Margin="0,10,0,0">
-                    <ToggleSwitch x:Name="AllowExperimentalToggleSwitch" Toggled="AllowExperimental_Toggled" OffContent="No" OnContent="Yes" Margin="0,0,0,4"/>
+                    <ToggleSwitch x:Name="AllowDebugDllsToggleSwitch" Toggled="AllowDebugDlls_Toggled" OffContent="No" OnContent="Yes" Margin="0,0,0,4"/>
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
-                        Experimental DLSS models are sometimes released by NVIDIA for testing. You can find more information about this on the <Hyperlink NavigateUri="https://developer.nvidia.com/dlss/research">DLSS research page</Hyperlink>.
+                        SDKs sometimes release debug DLLs which allow additional on-screen information to be displayed.
                     </TextBlock>
                 </StackPanel>
 

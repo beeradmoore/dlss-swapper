@@ -4,13 +4,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ct_converters="using:CommunityToolkit.WinUI.UI.Converters"
+    xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
     xmlns:converters="using:DLSS_Swapper.Converters"
     xmlns:usercontrols="using:DLSS_Swapper.UserControls"
+    xmlns:system="using:System"
+    xmlns:local="using:DLSS_Swapper"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
     <Page.Resources>
-        <converters:InverseBoolToVisibleConverter x:Key="InverseBoolToVisibleConverter" />
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Page.Resources>
     <Grid>
@@ -40,7 +41,7 @@
                  IsClosable="False"
                  Title="Warning"
                  Message="This app is running with administrative privileges."
-                 Visibility="{Binding RunsAsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" />
+                 Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
         <ScrollViewer Grid.Row="2">
             <StackPanel HorizontalAlignment="Left" Padding="56,0,56,56">
@@ -63,6 +64,23 @@
                     <usercontrols:GameLibrarySelectorControl SavesWhenToggled="true" />
                 </StackPanel>
                 
+                <!--
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Custom Directories" />
+                <Button Content="＋ Add Directory" Margin="0,12,0,0" Command="{Binding AddCustomDirectoryCommand}" />
+                <ListView x:Name="CustomDirectoryView" Margin="0,9,0,0" SelectionMode="None" ItemTemplate="{StaticResource CustomDirectoryTemplate}" ItemsSource="{Binding CustomDirectories}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Margin" Value="0, 3"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+                -->
+                
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
@@ -78,11 +96,11 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Allow Experimental" />
+                    Text="Allow Debug DLLs" />
                 <StackPanel Margin="0,10,0,0">
-                    <ToggleSwitch x:Name="AllowExperimentalToggleSwitch" Toggled="AllowExperimental_Toggled" OffContent="No" OnContent="Yes" Margin="0,0,0,4"/>
+                    <ToggleSwitch x:Name="AllowDebugDllsToggleSwitch" Toggled="AllowDebugDlls_Toggled" OffContent="No" OnContent="Yes" Margin="0,0,0,4"/>
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
-                        Experimental DLSS models are sometimes released by NVIDIA for testing. You can find more information about this on the <Hyperlink NavigateUri="https://developer.nvidia.com/dlss/research">DLSS research page</Hyperlink>.
+                        SDKs sometimes release debug DLLs which allow additional on-screen information to be displayed.
                     </TextBlock>
                 </StackPanel>
 

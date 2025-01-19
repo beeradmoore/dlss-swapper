@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <RootNamespace>DLSS_Swapper</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x64</Platforms>
@@ -15,24 +15,19 @@
     <Configurations>Debug;Release</Configurations>
     <PackageIcon>Asssets\icon_256.png</PackageIcon>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
-    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-    <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <AppxBundle>Never</AppxBundle>
-    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <PackageCertificateThumbprint>FE5FF30FB93EC351E8ADA5D7D7B436A52B34DA5B</PackageCertificateThumbprint>
-    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <Version>1.0.5.0</Version>
     <UseRidGraph>true</UseRidGraph>
+    <Nullable>enable</Nullable>     
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <Optimize>True</Optimize>
   </PropertyGroup>
 
-  <ItemGroup>
+ 
+
+    <ItemGroup>
       <None Remove="StoredData\dlss_zip\**" />
       <None Remove="StoredData\dlss_zip\**" />
       <None Update="StoredData\static_json\**">
@@ -98,6 +93,10 @@
     <None Remove="Assets\Wide310x150Logo.scale-400.png" />
     <None Remove="DLSS Swapper_TemporaryKey.pfx" />
     <None Remove="global.json" />
+    <None Remove="Themes\FakeContentDialogStyle.xaml" />
+    <None Remove="UserControls\DLLPickerControl.xaml" />
+    <None Remove="UserControls\GameControl.xaml" />
+    <None Remove="UserControls\ManuallyAddGameControl.xaml" />
   </ItemGroup>
 
 
@@ -284,27 +283,46 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Page Update="UserControls\DLLPickerControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Update="Themes\FakeContentDialogStyle.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Update="UserControls\GameControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Update="UserControls\ManuallyAddGameControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
     </ItemGroup>
     
   <ItemGroup>
-    <PackageReference Include="AsyncAwaitBestPractices" Version="7.0.0" />
-    <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="7.0.0" />
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-    <PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.1.2" />
-    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.Markdown" Version="7.1.2" />
+    <PackageReference Include="AsyncAwaitBestPractices" Version="9.0.0" />
+    <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="9.0.0" />
+    <PackageReference Include="CommunityToolkit.Labs.WinUI.Controls.MarkdownTextBlock" Version="0.1.250103-build.1988" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.1.240916" />
+    <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.1.240916" />
+    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240916" />
+    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.1.240916" />
     <PackageReference Include="Humanizer" Version="2.14.1" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2903.40" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.231115000" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.2428" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250108002" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
-    <PackageReference Include="Serilog" Version="3.1.1" />
-    <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
-    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="System.Management" Version="8.0.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.6" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
+    <PackageReference Include="System.Management" Version="9.0.1" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="System.Private.Uri" Version="4.3.2" />
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
-    <PackageReference Include="YamlDotNet" Version="13.7.1" />
+    <PackageReference Include="YamlDotNet" Version="16.3.0" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 

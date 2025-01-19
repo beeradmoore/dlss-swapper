@@ -21,7 +21,7 @@ namespace DLSS_Swapper.Data.GOG
         public int LanguageId { get; set; }
 
         [Column("installationPath")]
-        public string InstallationPath { get; set; }
+        public string InstallationPath { get; set; } = string.Empty;
 
         [Column("installationId")]
         public long InstallationId { get; set; }
@@ -30,10 +30,10 @@ namespace DLSS_Swapper.Data.GOG
         public long BuildId { get; set; }
 
         [Column("branch")]
-        public string Branch { get; set; }
+        public string Branch { get; set; } = string.Empty;
 
         [Column("installationDate")]
-        public string InstallationDate { get; set; }
+        public string InstallationDate { get; set; } = string.Empty;
     }
 
     internal class LimitedDetail
@@ -54,24 +54,24 @@ namespace DLSS_Swapper.Data.GOG
         public long StoredAt { get; set; } // Datetime?
 
         [Column("title")]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         [Column("links")]
-        public string Links { get; set; }
+        public string Links { get; set; } = string.Empty;
 
         [Column("images")]
-        public string Images { get; set; }
+        public string Images { get; set; } = string.Empty;
 
         [Column("ProductDetailsResponseId")]
         public int ProductDetailsResponseId { get; set; }
 
-        LimitedDetailImages _imagesData = null;
+        LimitedDetailImages? _imagesData = null;
         [SQLite.Ignore]
-        public LimitedDetailImages ImagesData
+        public LimitedDetailImages? ImagesData
         {
             get
             {
-                if (_imagesData == null && String.IsNullOrEmpty(Images) == false)
+                if (_imagesData is null && string.IsNullOrEmpty(Images) == false)
                 {
                     // Make sure failed deserialize doens't crash the app.
                     try
@@ -92,28 +92,28 @@ namespace DLSS_Swapper.Data.GOG
         internal class LimitedDetailImages
         {
             [JsonPropertyName("background")]
-            public string Background { get; set; }
+            public string Background { get; set; } = string.Empty;
 
             [JsonPropertyName("icon")]
-            public string Icon { get; set; }
+            public string Icon { get; set; } = string.Empty;
 
             [JsonPropertyName("logo")]
-            public string Logo { get; set; }
+            public string Logo { get; set; } = string.Empty;
 
             [JsonPropertyName("logo2x")]
-            public string Logo2x { get; set; }
+            public string Logo2x { get; set; } = string.Empty;
 
             [JsonPropertyName("menuNotificationAv")]
-            public string MenuNotificationAv { get; set; }
+            public string MenuNotificationAv { get; set; } = string.Empty;
 
             [JsonPropertyName("menuNotificationAv2")]
-            public string MenuNotificationAv2 { get; set; }
+            public string MenuNotificationAv2 { get; set; } = string.Empty;
 
             [JsonPropertyName("sidebarIcon")]
-            public string SidebarIcon { get; set; }
+            public string SidebarIcon { get; set; } = string.Empty;
 
             [JsonPropertyName("sidebarIcon2x")]
-            public string SidebarIcon2x { get; set; }
+            public string SidebarIcon2x { get; set; } = string.Empty;
         }
     }
 
@@ -123,7 +123,7 @@ namespace DLSS_Swapper.Data.GOG
         public int Id { get; set; }
 
         [Column("releaseKey")]
-        public string ReleaseKey { get; set; }
+        public string ReleaseKey { get; set; } = string.Empty;
 
         [Column("userId")]
         public long UserId { get; set; }
@@ -138,7 +138,7 @@ namespace DLSS_Swapper.Data.GOG
         public int WebCacheResourceTypeId { get; set; }
 
         [Column("filename")]
-        public string Filename { get; set; }
+        public string Filename { get; set; } = string.Empty;
     }
 
     internal class WebCacheResourceType
@@ -147,7 +147,7 @@ namespace DLSS_Swapper.Data.GOG
         public int Id { get; set; }
 
         [Column("type")]
-        public string Type { get; set; }
+        public string Type { get; set; } = string.Empty;
     }
 
 
@@ -157,14 +157,14 @@ namespace DLSS_Swapper.Data.GOG
         public int Id { get; set; }
 
         [Column("type")]
-        public string Type { get; set; }
+        public string Type { get; set; } = string.Empty;
     }
 
 
     internal class GamePiece
     {
         [Column("releaseKey")]
-        public string ReleaseKey { get; set; }
+        public string ReleaseKey { get; set; } = string.Empty;
 
         [Column("gamePieceTypeId")]
         public int GamePieceTypeId { get; set; }
@@ -173,21 +173,21 @@ namespace DLSS_Swapper.Data.GOG
         public long UserId { get; set; }
 
         [Column("value")]
-        public string Value { get; set; }
+        public string Value { get; set; } = string.Empty;
 
         internal class GamePieceOriginalImages
         {
             [JsonPropertyName("background")]
-            public string Background { get; set; }
+            public string Background { get; set; } = string.Empty;
 
             [JsonPropertyName("squareIcon")]
-            public string SquareIcon { get; set; }
+            public string SquareIcon { get; set; } = string.Empty;
 
             [JsonPropertyName("verticalCover")]
-            public string VerticalCover { get; set; }
+            public string VerticalCover { get; set; } = string.Empty;
         }
 
-        internal GamePieceOriginalImages GetValueAsOriginalImages()
+        internal GamePieceOriginalImages? GetValueAsOriginalImages()
         {
             return JsonSerializer.Deserialize(Value, SourceGenerationContext.Default.GamePieceOriginalImages);
         }
@@ -196,28 +196,28 @@ namespace DLSS_Swapper.Data.GOG
     internal class ResourceImages
     {
         [JsonPropertyName("images\\\\background")]
-        public string Background { get; set; }
+        public string Background { get; set; } = string.Empty;
 
         [JsonPropertyName("images\\\\logo")]
-        public string Logo { get; set; }
+        public string Logo { get; set; } = string.Empty;
 
         [JsonPropertyName("images\\\\logo2x")]
-        public string Logo2x { get; set; }
+        public string Logo2x { get; set; } = string.Empty;
 
         [JsonPropertyName("images\\\\icon")]
-        public string Icon { get; set; }
+        public string Icon { get; set; } = string.Empty;
 
         [JsonPropertyName("images\\\\sidebarIcon")]
-        public string SidebarIcon { get; set; }
+        public string SidebarIcon { get; set; } = string.Empty;
 
         [JsonPropertyName("images\\\\sidebarIcon2x")]
-        public string SidebarIcon2x { get; set; }
+        public string SidebarIcon2x { get; set; } = string.Empty;
 
         [JsonPropertyName("images\\\\menuNotificationAv")]
-        public string MenuNotificationAv { get; set; }
+        public string MenuNotificationAv { get; set; } = string.Empty;
 
         [JsonPropertyName("images\\\\menuNotificationAv2")]
-        public string MenuNotificationAv2 { get; set; }
+        public string MenuNotificationAv2 { get; set; } = string.Empty;
     }
 
 

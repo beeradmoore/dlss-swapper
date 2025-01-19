@@ -1,41 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DLSS_Swapper.Interfaces;
+using SQLite;
 
 namespace DLSS_Swapper.Data.UbisoftConnect
 {
+    [Table("UbisoftConnectGame")]
     internal class UbisoftConnectGame : Game
     {
-        string _lastHeaderImage = String.Empty;
-        public override string HeaderImage
+        public override GameLibrary GameLibrary => GameLibrary.UbisoftConnect;
+
+        [Column("local_header_image")]
+        public string LocalHeaderImage { get; set; } = string.Empty;
+
+        [Column("remote_header_image")]
+        public string RemoteHeaderImage { get; set; } = string.Empty;
+
+        public UbisoftConnectGame()
         {
-            get
-            { 
-                // If we have detected this, return it other wise we figure it out.
-                if (String.IsNullOrEmpty(_lastHeaderImage) == false)
-                {
-                    return _lastHeaderImage;
-                }
 
-                if (System.IO.File.Exists(_localHeaderImage))
-                {
-                    _lastHeaderImage = _localHeaderImage;
-                    return _localHeaderImage;
-                }
-
-                return _remoteHeaderImage;
-            }
         }
 
-        string _localHeaderImage;
-        string _remoteHeaderImage;
-
-        public UbisoftConnectGame(string localHeaderImage, string remoteHeaderImage)
+        public UbisoftConnectGame(string installId)
         {
-            _localHeaderImage = localHeaderImage;
-            _remoteHeaderImage = remoteHeaderImage;
+            PlatformId = installId;
+            SetID();
+        }
+
+        protected override async Task UpdateCacheImageAsync()
+        {
+            if (File.Exists(LocalHeaderImage))
+            {
+                await ResizeCoverAsync(LocalHeaderImage).ConfigureAwait(false);
+                return;
+            }
+
+            await DownloadCoverAsync(RemoteHeaderImage).ConfigureAwait(false);
+        }
+
+        public override bool UpdateFromGame(Game game)
+        {
+            var didChange = ParentUpdateFromGame(game);
+
+            if (game is UbisoftConnectGame ubisoftConnectGame)
+            {
+                //_localHeaderImages = xboxGame._localHeaderImages;
+            }
+
+            return didChange;
         }
     }
 }

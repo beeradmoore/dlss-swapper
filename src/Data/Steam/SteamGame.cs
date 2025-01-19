@@ -4,46 +4,46 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DLSS_Swapper.Interfaces;
+using SQLite;
 
 namespace DLSS_Swapper.Data.Steam
 {
+    [Table("SteamGame")]
     internal class SteamGame : Game
     {
-        string _steamInstallPath = String.Empty;
+        public override GameLibrary GameLibrary => GameLibrary.Steam;
 
-        string _lastHeaderImage = String.Empty;
-        public override string HeaderImage
+        public SteamGame()
         {
-            get
-            {
-                // If we have detected this, return it other wise we figure it out.
-                if (String.IsNullOrEmpty(_lastHeaderImage) == false)
-                {
-                    return _lastHeaderImage;
-                }
 
-
-
-                var localHeaderImagePath = Path.Combine(_steamInstallPath, "appcache", "librarycache", $"{AppId}_library_600x900.jpg");
-                if (File.Exists(localHeaderImagePath))
-                {
-                    _lastHeaderImage = localHeaderImagePath;
-                    return _lastHeaderImage;
-                }
-
-
-                // Fall back to web image.
-                _lastHeaderImage = $"https://steamcdn-a.akamaihd.net/steam/apps/{AppId}/library_600x900_2x.jpg"; // header.jpg";
-
-                return _lastHeaderImage;
-            }
         }
 
-        public string AppId { get; set; } = String.Empty;
-
-        public SteamGame(string steamInstallPath)
+        public SteamGame(string appId)
         {
-            _steamInstallPath = steamInstallPath;
+            PlatformId = appId;
+            SetID();
+        }
+
+        protected override async Task UpdateCacheImageAsync()
+        {
+            // Try get image from the local disk first.
+            var localHeaderImagePath = Path.Combine(SteamLibrary.GetInstallPath(), "appcache", "librarycache", $"{PlatformId}_library_600x900.jpg");
+            if (File.Exists(localHeaderImagePath))
+            {
+                await ResizeCoverAsync(localHeaderImagePath).ConfigureAwait(false);
+                return;
+            }
+
+            // If it doesn't exist, load from web.
+            await DownloadCoverAsync($"https://steamcdn-a.akamaihd.net/steam/apps/{PlatformId}/library_600x900_2x.jpg").ConfigureAwait(false);
+        }
+
+        public override bool UpdateFromGame(Game game)
+        {
+            var didChange = ParentUpdateFromGame(game);
+
+            return didChange;
         }
     }
 }

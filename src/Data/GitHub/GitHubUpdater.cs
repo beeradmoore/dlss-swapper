@@ -4,8 +4,8 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
 using CommunityToolkit.WinUI;
-using CommunityToolkit.WinUI.UI.Controls;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -22,7 +22,7 @@ namespace DLSS_Swapper.Data.GitHub
         /// Queries GitHub and returns the latest GitHubRelease object, or null if the request failed.
         /// </summary>
         /// <returns>Latest GitHubRelease object, or null if the request failed</returns>
-        internal async Task<GitHubRelease> FetchLatestRelease()
+        internal async Task<GitHubRelease?> FetchLatestRelease()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace DLSS_Swapper.Data.GitHub
             }
         }
 
-        internal async Task<GitHubRelease> GetReleaseFromTag(string tag)
+        internal async Task<GitHubRelease?> GetReleaseFromTag(string tag)
         {
             try
             {
@@ -54,10 +54,10 @@ namespace DLSS_Swapper.Data.GitHub
         /// Queries GitHub and returns a GitHubRelease only if a newer version was detected, otherwise null
         /// </summary>
         /// <returns>GitHubRelease object if an update is available, otherwise null.</returns>
-        internal async Task<GitHubRelease> CheckForNewGitHubRelease()
+        internal async Task<GitHubRelease?> CheckForNewGitHubRelease()
         {
             var latestRelease = await FetchLatestRelease().ConfigureAwait(false);
-            if (latestRelease == null)
+            if (latestRelease is null)
             {
                 return null;
             }
@@ -113,6 +113,7 @@ namespace DLSS_Swapper.Data.GitHub
             {
                 Text = yourVersion + gitHubRelease.Body,
                 Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
+                Config = new MarkdownConfig(),
             };
 
 
@@ -145,6 +146,7 @@ namespace DLSS_Swapper.Data.GitHub
             {
                 Text = gitHubRelease.Body,
                 Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
+                Config = new MarkdownConfig(),
             };
 
             var dialog = new EasyContentDialog(rootElement.XamlRoot)

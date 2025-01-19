@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.WinUI.UI.Controls;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -11,6 +10,7 @@ using MvvmHelpers.Commands;
 using MvvmHelpers.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -21,6 +21,7 @@ using Windows.Foundation.Diagnostics;
 using Windows.System;
 using Windows.UI.ViewManagement;
 using System.Diagnostics;
+using Windows.Storage.Pickers;
 using DLSS_Swapper.UserControls;
 
 namespace DLSS_Swapper.Pages
@@ -35,9 +36,8 @@ namespace DLSS_Swapper.Pages
 
         public string Version => App.CurrentApp.GetVersionString();
 
-        private AsyncCommand _checkForUpdateCommand;
+        private AsyncCommand? _checkForUpdateCommand = null;
         public AsyncCommand CheckForUpdatesCommand => _checkForUpdateCommand ??= new AsyncCommand(CheckForUpdatesAsync, _=> !IsCheckingForUpdates);
-        public bool RunsAsAdmin { get; } = Environment.IsPrivilegedProcess;
 
         bool _isCheckingForUpdates;
         public bool IsCheckingForUpdates
@@ -52,6 +52,10 @@ namespace DLSS_Swapper.Pages
                 }
             }
         }
+        /*
+        private AsyncCommand _addCustomDirectoryCommand;
+        public AsyncCommand AddCustomDirectoryCommand => _addCustomDirectoryCommand ??= new AsyncCommand(AddCustomDirectoryAsync);
+        */
 
         public IEnumerable<LoggingLevel> LoggingLevels = Enum.GetValues<LoggingLevel>();
 
@@ -61,14 +65,13 @@ namespace DLSS_Swapper.Pages
         {
             this.InitializeComponent();
 
-
             // Initilize defaults.
             LightThemeRadioButton.IsChecked = Settings.Instance.AppTheme == ElementTheme.Light;
             DarkThemeRadioButton.IsChecked = Settings.Instance.AppTheme == ElementTheme.Dark;
             DefaultThemeRadioButton.IsChecked = Settings.Instance.AppTheme == ElementTheme.Default;
 
             AllowUntrustedToggleSwitch.IsOn = Settings.Instance.AllowUntrusted;
-            AllowExperimentalToggleSwitch.IsOn = Settings.Instance.AllowExperimental;
+            AllowDebugDllsToggleSwitch.IsOn = Settings.Instance.AllowDebugDlls;
             LoggingComboBox.SelectedItem = Settings.Instance.LoggingLevel;
 
             DataContext = this;
@@ -76,7 +79,7 @@ namespace DLSS_Swapper.Pages
 
         void ThemeRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (DataContext == null)
+            if (DataContext is null)
             {
                 return;
             }
@@ -93,28 +96,28 @@ namespace DLSS_Swapper.Pages
                     };
 
                     Settings.Instance.AppTheme = newTheme;
-                    ((App)Application.Current)?.MainWindow?.UpdateColors(newTheme);
+                    ((App)Application.Current).MainWindow.UpdateColors(newTheme);
                 }
             }
         }
 
-        void AllowExperimental_Toggled(object sender, RoutedEventArgs e)
+        void AllowDebugDlls_Toggled(object sender, RoutedEventArgs e)
         {
-            if (DataContext == null)
+            if (DataContext is null)
             {
                 return;
             }
 
             if (e.OriginalSource is ToggleSwitch toggleSwitch)
             {
-                Settings.Instance.AllowExperimental = toggleSwitch.IsOn;
-                App.CurrentApp.MainWindow.FilterDLSSRecords();
+                Settings.Instance.AllowDebugDlls = toggleSwitch.IsOn;
+                App.CurrentApp.MainWindow.FilterDLLRecords();
             }
         }
 
         void AllowUntrusted_Toggled(object sender, RoutedEventArgs e)
         {
-            if (DataContext == null)
+            if (DataContext is null)
             {
                 return;
             }
@@ -122,7 +125,7 @@ namespace DLSS_Swapper.Pages
             if (e.OriginalSource is ToggleSwitch toggleSwitch)
             {
                 Settings.Instance.AllowUntrusted = toggleSwitch.IsOn;
-                App.CurrentApp.MainWindow.FilterDLSSRecords();
+                App.CurrentApp.MainWindow.FilterDLLRecords();
             }
         }
 
@@ -131,7 +134,7 @@ namespace DLSS_Swapper.Pages
             IsCheckingForUpdates = true;
             var githubUpdater = new Data.GitHub.GitHubUpdater();
             var newUpdate = await githubUpdater.CheckForNewGitHubRelease();      
-            if (newUpdate == null)
+            if (newUpdate is null)
             {
 
                 var dialog = new EasyContentDialog(XamlRoot)
@@ -153,7 +156,7 @@ namespace DLSS_Swapper.Pages
 
         private void LoggingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (DataContext == null)
+            if (DataContext is null)
             {
                 return;
             }
@@ -178,7 +181,7 @@ namespace DLSS_Swapper.Pages
                 }
                 else
                 {
-                    Process.Start("explorer.exe", Path.GetDirectoryName(CurrentLogPath));
+                    Process.Start("explorer.exe", Logger.LogDirectory);
                 }
             }
             catch (Exception err)
@@ -196,5 +199,88 @@ namespace DLSS_Swapper.Pages
                 await dialog.ShowAsync();
             }
         }
+
+        /*
+        async Task AddCustomDirectoryAsync()
+        {
+            var folderPicker = new FolderPicker { SuggestedStartLocation = PickerLocationId.ComputerFolder };
+
+            try
+            {
+                // Associate the HWND with the folder picker
+                IntPtr hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
+                WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
+
+                var folder = await folderPicker.PickSingleFolderAsync();
+
+                if (folder is null)
+                {
+                    return;
+                }
+
+                // If top level directory throw error.
+                if (folder.Path == Path.GetPathRoot(folder.Path))
+                {
+                    throw new InvalidOperationException($"Do not add a top level directory: {folder.Path}");
+                }
+
+                AddToCustomDirectories(folder.Path);
+                Settings.Instance.AddDirectory(folder.Path);
+            }
+            catch (Exception ex)
+            {
+                var dialog = new EasyContentDialog(XamlRoot)
+                {
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = "Error:\n" + ex.Message,
+                };
+                await dialog.ShowAsync();
+            }
+        }
+
+        private void AddToCustomDirectories(string directory)
+        {
+            if (CustomDirectories.Contains(directory))
+            {
+                return;
+            }
+
+            CustomDirectories.Add(directory);
+            CustomDirectories.SortStable((s, s1) => string.Compare(s, s1, StringComparison.CurrentCulture));
+
+            if (!Settings.Instance.Directories.Contains(directory))
+            {
+                Settings.Instance.AddDirectory(directory);
+            }
+
+            CustomDirectoryView.UpdateLayout();
+        }
+
+        private void RemoveDirectory_OnClick(object sender, RoutedEventArgs e)
+        {
+            var parent = ((Button)sender).Parent as Expander;
+            if (parent is not null)
+            {
+                parent.IsExpanded = false;
+            }
+
+            var directory = ((Button)sender).CommandParameter as string;
+            RemoveCustomDirectories(directory);
+        }
+
+        private void RemoveCustomDirectories(string directory)
+        {
+            if (!CustomDirectories.Contains(directory))
+            {
+                return;
+            }
+
+            CustomDirectories.Remove(directory);
+            Settings.Instance.RemoveDirectory(directory);
+
+            CustomDirectoryView.UpdateLayout();
+        }
+        */
     }
 }

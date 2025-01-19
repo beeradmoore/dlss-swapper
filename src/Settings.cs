@@ -1,11 +1,13 @@
 ﻿using Microsoft.UI.Xaml;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DLSS_Swapper
 {
     public class Settings
     {
-        static Settings _instance = null;
+        static Settings? _instance = null;
 
         public static Settings Instance => _instance ??= Settings.FromJson();
         
@@ -98,15 +100,15 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _allowExperimental = false;
-        public bool AllowExperimental
+        bool _allowDebugDlls = false;
+        public bool AllowDebugDlls
         {
-            get { return _allowExperimental; }
+            get { return _allowDebugDlls; }
             set
             {
-                if (_allowExperimental != value)
+                if (_allowDebugDlls != value)
                 {
-                    _allowExperimental = value;
+                    _allowDebugDlls = value;
                     if (_autoSave)
                     {
                         SaveJson();
@@ -114,6 +116,7 @@ namespace DLSS_Swapper
                 }
             }
         }
+
 
 
         bool _allowUntrusted = false;
@@ -222,6 +225,78 @@ namespace DLSS_Swapper
             }
         }
 
+
+        bool _dontShowManuallyAddingGamesNotice = false;
+        public bool DontShowManuallyAddingGamesNotice
+        {
+            get { return _dontShowManuallyAddingGamesNotice; }
+            set
+            {
+                if (_dontShowManuallyAddingGamesNotice != value)
+                {
+                    _dontShowManuallyAddingGamesNotice = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        bool _hasShownAddGameFolderMessage = false;
+        public bool HasShownAddGameFolderMessage
+        {
+            get { return _hasShownAddGameFolderMessage; }
+            set
+            {
+                if (_hasShownAddGameFolderMessage != value)
+                {
+                    _hasShownAddGameFolderMessage = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+
+        
+
+
+
+        /*
+        public List<string> Directories { get; set; } = new List<string>();
+
+        public void AddDirectory(string directory)
+        {
+            if (Directories.Contains(directory))
+            {
+                return;
+            }
+            
+            Directories.Add(directory);
+            
+            if (_autoSave)
+            {
+                SaveJson();
+            }
+        }
+        
+        public void RemoveDirectory(string directory)
+        {
+            Directories.Remove(directory);
+            
+            if (_autoSave)
+            {
+                SaveJson();
+            }
+        }
+        */
+
+
+
+
         void SaveJson()
         {
             AsyncHelper.RunSync(() => Storage.SaveSettingsJsonAsync(this));
@@ -229,11 +304,11 @@ namespace DLSS_Swapper
 
         static Settings FromJson()
         {
-            Settings settings = null;
+            Settings? settings = null;
 
             var settingsFromJson = AsyncHelper.RunSync(() => Storage.LoadSettingsJsonAsync());
             // If we couldn't load settings then save the defaults.
-            if (settingsFromJson == null)
+            if (settingsFromJson is null)
             {
                 settings = new Settings();
                 settings.SaveJson();

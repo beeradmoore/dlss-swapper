@@ -1,4 +1,4 @@
-using Humanizer;
+﻿using Humanizer;
 using Microsoft.UI.Xaml.Data;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace DLSS_Swapper.Converters
                 return bytes.Bytes().Humanize("mb");
             }
 
-            return String.Empty;
+            return string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

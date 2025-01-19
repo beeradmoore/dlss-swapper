@@ -48,7 +48,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _hideNonDLSSGames = true;
+        bool _hideNonDLSSGames = false;
         public bool HideNonDLSSGames
         {
             get { return _hideNonDLSSGames; }
@@ -66,7 +66,7 @@ namespace DLSS_Swapper
         }
 
 
-        bool _groupGameLibrariesTogether = false;
+        bool _groupGameLibrariesTogether = true;
         public bool GroupGameLibrariesTogether
         {
             get { return _groupGameLibrariesTogether; }

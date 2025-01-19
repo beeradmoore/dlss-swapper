@@ -37,7 +37,6 @@ namespace DLSS_Swapper.UserControls
         {
             this.InitializeComponent();
 
-
             // This only works if the grid background has focus.
             /*
             KeyUp += (object sender, KeyRoutedEventArgs e) => {

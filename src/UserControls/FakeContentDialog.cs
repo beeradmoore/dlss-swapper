@@ -289,7 +289,7 @@ public class FakeContentDialog : Control
             /*
             var mainNavigationView = rootGrid.FindChild<NavigationView>(x => x.Name == "MainNavigationView");
             var appTitleBar = rootGrid.FindChild<Grid>(x => x.Name == "AppTitleBar");
-             */
+            */
 
             Grid.SetColumnSpan(this, rootGrid.ColumnDefinitions.Count);
             Grid.SetRowSpan(this, rootGrid.RowDefinitions.Count);
@@ -297,6 +297,7 @@ public class FakeContentDialog : Control
             XamlRoot = rootGrid.XamlRoot;
             
             rootGrid.Children.Add(this);
+            Focus(FocusState.Programmatic);
         }
 
         return taskCompletionSource.Task;

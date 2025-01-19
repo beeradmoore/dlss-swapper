@@ -199,4 +199,36 @@ internal class DLLManager
         }
     }
 
+    public string GetAssetTypeName(GameAssetType assetType)
+    {
+        return assetType switch
+        {
+            GameAssetType.DLSS => "DLSS",
+            GameAssetType.DLSS_G => "DLSS Frame Generation",
+            GameAssetType.DLSS_D => "DLSS Ray Reconstruction",
+            GameAssetType.FSR_31_DX12 => "FSR 3.1 DirectX 12",
+            GameAssetType.FSR_31_VK => "FSR 3.1 Vulkan",
+            GameAssetType.XeSS => "XeSS",
+            GameAssetType.XeLL => "XeLL",
+            GameAssetType.XeSS_FG => "XeSS Frame Generation",
+            _ => throw new Exception($"Unknown AssetType: {assetType}"),
+        };
+    }
+
+
+    public GameAssetType GetAssetBackupType(GameAssetType assetType)
+    {
+        return assetType switch
+        {
+            GameAssetType.DLSS => GameAssetType.DLSS_BACKUP,
+            GameAssetType.DLSS_G => GameAssetType.DLSS_G_BACKUP,
+            GameAssetType.DLSS_D => GameAssetType.DLSS_D_BACKUP,
+            GameAssetType.FSR_31_DX12 => GameAssetType.FSR_31_DX12_BACKUP,
+            GameAssetType.FSR_31_VK => GameAssetType.FSR_31_VK_BACKUP,
+            GameAssetType.XeSS => GameAssetType.XeSS_BACKUP,
+            GameAssetType.XeLL => GameAssetType.XeLL_BACKUP,
+            GameAssetType.XeSS_FG => GameAssetType.XeSS_FG_BACKUP,
+            _ => throw new Exception($"Unknown AssetType: {assetType}"),
+        };
+    }
 }

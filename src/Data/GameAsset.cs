@@ -13,6 +13,7 @@ namespace DLSS_Swapper.Data;
 public enum GameAssetType
 {
     Unknown,
+
     DLSS,
     DLSS_G,
     DLSS_D,
@@ -21,7 +22,6 @@ public enum GameAssetType
     XeSS,
     XeLL,
     XeSS_FG,
-
 
     DLSS_BACKUP,
     DLSS_G_BACKUP,
@@ -33,7 +33,7 @@ public enum GameAssetType
     XeSS_FG_BACKUP,
 }
 
-public class GameAsset
+public class GameAsset : IEquatable<GameAsset>
 {
     [Indexed]
     [property: Column("id")]
@@ -98,5 +98,24 @@ public class GameAsset
         backupGameAsset.LoadVersionAndHash();
 
         return backupGameAsset;
+    }
+
+    public bool Equals(GameAsset? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        return Id.Equals(other.Id) &&
+            AssetType.Equals(other.AssetType) &&
+            Path.Equals(other.Path) &&
+            Version.Equals(other.Version) &&
+            Hash.Equals(other.Hash);
     }
 }

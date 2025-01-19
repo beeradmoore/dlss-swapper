@@ -154,7 +154,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                            continue;
                        }
 
-                       var internalZipDir = dllRecord.GetAssetTypeName();
+                        var internalZipDir = DLLManager.Instance.GetAssetTypeName(dllRecord.AssetType);
                        if (dllRecord.LocalRecord.IsImported == true)
                        {
                            internalZipDir = Path.Combine("Imported", internalZipDir);
@@ -554,7 +554,7 @@ Only import dlls from sources you trust.",
             return;
         }
 
-        var assetTypeName = record.GetAssetTypeName();
+        var assetTypeName = DLLManager.Instance.GetAssetTypeName(record.AssetType);
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
             PrimaryButtonText = "Delete",

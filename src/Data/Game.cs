@@ -105,29 +105,37 @@ namespace DLSS_Swapper.Data
 
         bool _isLoadingCoverImage = false;
 
-        [Ignore]
-        public GameAsset? CurrentDLSS { get; set; } = null;
+        [ObservableProperty]
+        [property:Ignore]
+        GameAsset? currentDLSS = null;
 
-        [Ignore]        
-        public GameAsset? CurrentDLSS_FG { get; set; } = null;
+        [ObservableProperty]
+        [property: Ignore]
+        GameAsset? currentDLSS_G = null;
 
-        [Ignore]
-        public GameAsset? CurrentDLSS_RR { get; set; } = null;
+        [ObservableProperty]
+        [property: Ignore]
+        GameAsset? currentDLSS_D = null;
 
-        [Ignore]
-        public GameAsset? CurrentFSR_31_DX12 { get; set; } = null;
+        [ObservableProperty]
+        [property: Ignore]
+        GameAsset? currentFSR_31_DX12 = null;
 
-        [Ignore]
-        public GameAsset? CurrentFSR_31_VK { get; set; } = null;
+        [ObservableProperty]
+        [property: Ignore]
+        GameAsset? currentFSR_31_VK = null;
 
-        [Ignore]
-        public GameAsset? CurrentXeSS { get; set; } = null;
+        [ObservableProperty]
+        [property: Ignore]
+        GameAsset? currentXeSS = null;
 
-        [Ignore]
-        public GameAsset? CurrentXeLL { get; set; } = null;
+        [ObservableProperty]
+        [property: Ignore]
+        GameAsset? currentXeLL = null;
 
-        [Ignore]
-        public GameAsset? CurrentXeSS_FG { get; set; } = null;
+        [ObservableProperty]
+        [property: Ignore]
+        GameAsset? currentXeSS_FG = null;
                 
 
         protected void SetID()
@@ -217,6 +225,8 @@ namespace DLSS_Swapper.Data
                         };
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
+
+                        LoadBackupForGameAsset(gameAsset);
                     }
                     else if (dllName == "nvngx_dlssg.dll")
                     {
@@ -228,6 +238,8 @@ namespace DLSS_Swapper.Data
                         };
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
+
+                        LoadBackupForGameAsset(gameAsset);
                     }
                     else if (dllName == "nvngx_dlssd.dll")
                     {
@@ -239,6 +251,8 @@ namespace DLSS_Swapper.Data
                         };
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
+
+                        LoadBackupForGameAsset(gameAsset);
                     }
                     else if (dllName == "amd_fidelityfx_dx12.dll")
                     {
@@ -250,6 +264,8 @@ namespace DLSS_Swapper.Data
                         };
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
+
+                        LoadBackupForGameAsset(gameAsset);
                     }
                     else if (dllName == "amd_fidelityfx_vk.dll")
                     {
@@ -261,6 +277,8 @@ namespace DLSS_Swapper.Data
                         };
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
+
+                        LoadBackupForGameAsset(gameAsset);
                     }
                     else if (dllName == "libxess.dll")
                     {
@@ -272,6 +290,8 @@ namespace DLSS_Swapper.Data
                         };
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
+
+                        LoadBackupForGameAsset(gameAsset);
                     }
                     else if (dllName == "libxell.dll")
                     {
@@ -283,6 +303,8 @@ namespace DLSS_Swapper.Data
                         };
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
+
+                        LoadBackupForGameAsset(gameAsset);
                     }
                     else if (dllName == "libxess_fg.dll")
                     {
@@ -294,6 +316,8 @@ namespace DLSS_Swapper.Data
                         };
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
+
+                        LoadBackupForGameAsset(gameAsset);
                     }
 
                     /*
@@ -332,6 +356,22 @@ namespace DLSS_Swapper.Data
                     Processing = false;
                 });
             });
+        }
+
+        void LoadBackupForGameAsset(GameAsset gameAsset)
+        {
+            var backupPath = $"{gameAsset.Path}.dlsss";
+            if (File.Exists(backupPath))
+            {
+                var gameAssetBackup = new GameAsset()
+                {
+                    Id = ID,
+                    AssetType = DLLManager.Instance.GetAssetBackupType(gameAsset.AssetType),
+                    Path = backupPath,
+                };
+                gameAssetBackup.LoadVersionAndHash();
+                GameAssets.Add(gameAssetBackup);
+            }
         }
 
 
@@ -373,34 +413,34 @@ namespace DLSS_Swapper.Data
 
         protected abstract Task UpdateCacheImageAsync();
 
-        internal (bool Success, string Message, bool PromptToRelaunchAsAdmin) ResetDll()
+        internal async Task<(bool Success, string Message, bool PromptToRelaunchAsAdmin)> ResetDllAsync(GameAssetType gameAssetType)
         {
-            // TODO: This needs to handle all the different types of DLLs we have now.
+            var backupRecordType = DLLManager.Instance.GetAssetBackupType(gameAssetType);
+            var existingBackupRecords = this.GameAssets.Where(x => x.AssetType == backupRecordType).ToList();
 
-            /*
-            var enumerationOptions = new EnumerationOptions();
-            enumerationOptions.RecurseSubdirectories = true;
-            enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
-            var foundDllBackups = Directory.GetFiles(InstallPath, "nvngx_dlss.dll.dlsss", enumerationOptions);
-            if (foundDllBackups.Length == 0)
+            if (existingBackupRecords.Count == 0)
             {
+                Logger.Info("No backup records found.");
                 return (false, "Unable to reset to default. Please repair your game manually.", false);
             }
-
-            var versionInfo = FileVersionInfo.GetVersionInfo(foundDllBackups.First());
-            var resetToVersion = $"{versionInfo.FileMajorPart}.{versionInfo.FileMinorPart}.{versionInfo.FileBuildPart}.{versionInfo.FilePrivatePart}";
-
-            foreach (var dll in foundDllBackups)
+            else if (existingBackupRecords.Count == 1)
             {
+                var existingBackupRecord = existingBackupRecords[0];
+
+                var primaryRecordName = existingBackupRecord.Path.Replace(".dlsss", string.Empty);
+                var existingRecords = this.GameAssets.Where(x => x.AssetType == gameAssetType && x.Path.Equals(primaryRecordName)).ToList();
+
+                if (existingRecords.Count != 1)
+                {
+                    Logger.Info("Backup record was found, existing records were not.");
+                    return (false, "Unable to reset to default. Please repair your game manually.", false);
+                }
+
+                var existingRecord = existingRecords[0];
+
                 try
                 {
-                    var dllPath = Path.GetDirectoryName(dll);
-                    if (string.IsNullOrEmpty(dllPath))
-                    {
-                        throw new Exception("dllPath was null or empty.");
-                    }
-                    var targetDllPath = Path.Combine(dllPath, "nvngx_dlss.dll");
-                    File.Move(dll, targetDllPath, true);
+                    File.Move(existingBackupRecord.Path, existingRecord.Path, true);
                 }
                 catch (UnauthorizedAccessException err)
                 {
@@ -419,18 +459,33 @@ namespace DLSS_Swapper.Data
                     Logger.Error(err.Message);
                     return (false, "Unable to reset to default. Please repair your game manually.", false);
                 }
+
+                var newGameAsset = new GameAsset()
+                {
+                    Id = ID,
+                    AssetType = gameAssetType,
+                    Path = existingRecord.Path,
+                    Version = existingBackupRecord.Version,
+                    Hash = existingBackupRecord.Hash,
+                };
+
+                UpdateCurrentAsset(newGameAsset, gameAssetType);
+
+                GameAssets.Remove(existingRecord);
+                GameAssets.Remove(existingBackupRecord);
+                GameAssets.Add(newGameAsset);
+
+                // Update game assets list by deleting and re-adding.
+                await App.CurrentApp.Database.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+                await App.CurrentApp.Database.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
+
+                return (true, string.Empty, false);
             }
-
-            App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+            else
             {
-                CurrentDLSSVersion = resetToVersion;
-                BaseDLSSVersion = string.Empty;
-                await SaveToDatabaseAsync();
-            });
-
-            */
-
-            return (true, string.Empty, false);
+                Logger.Error("Expected 1 backup records. Founds more.");
+                return (false, "Unable to reset to default. Please repair your game manually.", false);
+            }
         }
 
         /// <summary>
@@ -438,57 +493,65 @@ namespace DLSS_Swapper.Data
         /// </summary>
         /// <param name="dlssRecord"></param>
         /// <returns>Tuple containing a boolean of Success, if this is false there will be an error message in the Message response.</returns>
-        internal (bool Success, string Message, bool PromptToRelaunchAsAdmin) UpdateDll(DLLRecord dlssRecord)
+        internal async Task<(bool Success, string Message, bool PromptToRelaunchAsAdmin)> UpdateDllAsync(DLLRecord dllRecord)
         {
-            if (dlssRecord is null)
+            if (dllRecord is null)
             {
-                return (false, "Unable to swap DLSS dll as your DLSS record was not found.", false);
+                return (false, "Unable to swap dll as your dll record was not found.", false);
             }
 
-            if (dlssRecord.LocalRecord is null)
+            if (dllRecord.LocalRecord is null)
             {
-                return (false, "Unable to swap DLSS dll as your local DLSS record was not found.", false);
+                return (false, "Unable to swap dll as your local dll record was not found.", false);
             }
 
-            return (false, "TO FIX.", false);
-
-            // TODO: Fix for new DLL system
-            /*
-            var enumerationOptions = new EnumerationOptions();
-            enumerationOptions.RecurseSubdirectories = true;
-            enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
-            var foundDlls = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
-            if (foundDlls.Length == 0)
+            if (File.Exists(dllRecord.LocalRecord.ExpectedPath) == false)
             {
-                return (false, "Unable to swap DLSS dll as there were no DLSS records to update.", false);
+                return (false, "Downloaded zip not found.", false);
             }
+
+            var existingRecords = this.GameAssets.Where(x => x.AssetType == dllRecord.AssetType).ToList();
+            if (existingRecords.Count == 0)
+            {
+                return (false, "Unable to swap dll as there were no dll records to update.", false);
+            }
+
+            var backupRecordType = DLLManager.Instance.GetAssetBackupType(dllRecord.AssetType);
+            var existingBackupRecords = this.GameAssets.Where(x => x.AssetType == backupRecordType).ToList();
+            
+            // TODO: Handle more than the first record.
+            var currentRecord = existingRecords[0];
+
+            var recordFileName = Path.GetFileName(currentRecord.Path);
+            var recordFileNameWithoutExtension = Path.GetFileNameWithoutExtension(currentRecord.Path);
 
             var tempPath = Storage.GetTemp();
-            var tempDllFile = Path.Combine(tempPath, $"nvngx_dlss_{dlssRecord.MD5Hash}", $"nvngx_dlss.dll");
+            var tempDllFile = Path.Combine(tempPath, $"{recordFileNameWithoutExtension}_{dllRecord.MD5Hash}", recordFileName);
             Storage.CreateDirectoryForFileIfNotExists(tempDllFile);
 
-            using (var archive = ZipFile.OpenRead(dlssRecord.LocalRecord.ExpectedPath))
+
+            using (var archive = ZipFile.OpenRead(dllRecord.LocalRecord.ExpectedPath))
             {
-                var zippedDlls = archive.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
+                var zippedDlls = archive.Entries.Where(x => x.Name == recordFileName).ToArray();
                 if (zippedDlls.Length == 0)
                 {
-                    throw new Exception("DLSS zip was invalid (no dll found).");
+                    throw new Exception("Dll zip was invalid (no dll found).");
                 }
                 else if (zippedDlls.Length > 1)
                 {
-                    throw new Exception("DLSS zip was invalid (more than one dll found).");
+                    throw new Exception("Dll zip was invalid (more than one dll found).");
                 }
 
                 zippedDlls[0].ExtractToFile(tempDllFile, true);
             }
 
             var versionInfo = FileVersionInfo.GetVersionInfo(tempDllFile);
-
-            var dlssVersion = versionInfo.GetFormattedFileVersion();
-            if (dlssRecord.MD5Hash != versionInfo.GetMD5Hash())
+            var dllVersion = versionInfo.GetFormattedFileVersion();
+            if (dllRecord.MD5Hash != versionInfo.GetMD5Hash())
             {
-                return (false, "Unable to swap DLSS dll as zip was invalid (dll hash was invalid).", false);
+                return (false, "Unable to swap dll as zip was invalid (dll hash was invalid).", false);
             }
+
 
             // Validate new DLL
             if (Settings.Instance.AllowUntrusted == false)
@@ -496,90 +559,118 @@ namespace DLSS_Swapper.Data
                 var isTrusted = WinTrust.VerifyEmbeddedSignature(tempDllFile);
                 if (isTrusted == false)
                 {
-                    return (false, "Unable to swap DLSS dll as we are unable to verify the signature of the DLSS version you are trying to use.\nIf you wish to override this decision please enable 'Allow Untrusted' in settings.", false);
+                    return (false, "Unable to swap dll as we are unable to verify the signature of the version you are trying to use.\nIf you wish to override this decision please enable 'Allow Untrusted' in settings.", false);
                 }
             }
 
-            var baseDllVersion = string.Empty;
+            var newGameAssets = new List<GameAsset>();
 
-            // Backup old dlls.
-            foreach (var dll in foundDlls)
+            if (existingBackupRecords.Count == 0)
             {
-                var dllPath = Path.GetDirectoryName(dll);
-                if (string.IsNullOrEmpty(dllPath))
+                // Backup old dlls if no backup exists.
+                foreach (var existingRecord in existingRecords)
                 {
-                    Logger.Error("dllPath was null or empty.");
-                    return (false, "Unable to swap DLSS dll. Please check your error log for more information.", false);
-                }
-
-                var targetDllPath = Path.Combine(dllPath, "nvngx_dlss.dll.dlsss");
-                if (File.Exists(targetDllPath) == false)
-                {
-                    try
+                    var dllPath = Path.GetDirectoryName(existingRecord.Path);
+                    if (string.IsNullOrEmpty(dllPath))
                     {
-                        var defaultVersionInfo = FileVersionInfo.GetVersionInfo(dll);
-                        baseDllVersion = $"{defaultVersionInfo.FileMajorPart}.{defaultVersionInfo.FileMinorPart}.{defaultVersionInfo.FileBuildPart}.{defaultVersionInfo.FilePrivatePart}";
-
-                        File.Copy(dll, targetDllPath, true);
+                        Logger.Error("dllPath was null or empty.");
+                        return (false, "Unable to swap dll. Please check your error log for more information.", false);
                     }
-                    catch (UnauthorizedAccessException err)
-                    {
-                        Logger.Error($"UnauthorizedAccessException: {err.Message}");
-                        if (App.CurrentApp.IsAdminUser() is false)
-                        {
-                            return (false, "Unable to swap DLSS dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
 
-                        }
-                        else
-                        {
-                            return (false, "Unable to swap DLSS dll as we are unable to write to the target directory.", false);
-                        }
-                    }
-                    catch (Exception err)
+                    // Ensure we don't do anything if the target exists.
+                    var backupDllPath = Path.Combine(dllPath, $"{recordFileName}.dlsss");
+                    if (File.Exists(backupDllPath) == false)
                     {
-                        Logger.Error(err.Message);
-                        return (false, "Unable to swap DLSS dll. Please check your error log for more information.", false);
+                        try
+                        {
+                            var defaultVersionInfo = FileVersionInfo.GetVersionInfo(existingRecord.Path);
+                            File.Copy(existingRecord.Path, backupDllPath);
+
+                            var backupGameAsset = new GameAsset()
+                            {
+                                Id = ID,
+                                AssetType = backupRecordType,
+                                Path = backupDllPath,
+                                Version = existingRecord.Version,
+                                Hash = existingRecord.Hash,
+                            };
+                            newGameAssets.Add(backupGameAsset);
+                        }
+                        catch (UnauthorizedAccessException err)
+                        {
+                            Logger.Error($"UnauthorizedAccessException: {err.Message}");
+                            if (App.CurrentApp.IsAdminUser() is false)
+                            {
+                                return (false, "Unable to swap dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
+
+                            }
+                            else
+                            {
+                                return (false, "Unable to swap dll as we are unable to write to the target directory.", false);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            Logger.Error(err.Message);
+                            return (false, "Unable to swap dll. Please check your error log for more information.", false);
+                        }
                     }
                 }
             }
 
-
-
-            foreach (var dll in foundDlls)
+            foreach (var existingRecord in existingRecords)
             {
                 try
                 {
-                    File.Copy(tempDllFile, dll, true);
+                    File.Copy(tempDllFile, existingRecord.Path, true);
+                    
+                    var newGameAsset = new GameAsset()
+                    {
+                        Id = ID,
+                        AssetType = dllRecord.AssetType,
+                        Path = existingRecord.Path,
+                        Version = dllVersion,
+                        Hash = dllRecord.MD5Hash,
+                    };
+                    // No need to call LoadVersionAndHash, the data is already here.
+                    newGameAssets.Add(newGameAsset);
                 }
                 catch (UnauthorizedAccessException err)
                 {
                     Logger.Error($"UnauthorizedAccessException: {err.Message}");
                     if (App.CurrentApp.IsAdminUser() is false)
                     {
-                        return (false, "Unable to swap DLSS dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
+                        return (false, "Unable to swap dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
                     }
                     else
                     {
-                        return (false, "Unable to swap DLSS dll as we are unable to write to the target directory.", false);
+                        return (false, "Unable to DLSS dll as we are unable to write to the target directory.", false);
                     }
                 }
                 catch (Exception err)
                 {
                     Logger.Error(err.Message);
-                    return (false, "Unable to swap DLSS dll. Please check your error log for more information.", false);
+                    return (false, "Unable to swap dll. Please check your error log for more information.", false);
                 }
             }
 
-
-            App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+            foreach (var existingRecrod in existingRecords)
             {
-                CurrentDLSSVersion = dlssRecord.Version;
-                if (string.IsNullOrEmpty(baseDllVersion) == false)
-                {
-                    BaseDLSSVersion = baseDllVersion;
-                }
-                await SaveToDatabaseAsync();
-            });
+                var didRemove = GameAssets.Remove(existingRecrod);
+            }
+            GameAssets.AddRange(newGameAssets);
+
+            // This should never be null.
+            var firstNewGameAsset = newGameAssets.FirstOrDefault(x => x.AssetType == dllRecord.AssetType);
+            if (firstNewGameAsset is not null)
+            {
+                UpdateCurrentAsset(firstNewGameAsset, dllRecord.AssetType);
+            }
+
+            // Update game assets list by deleting and re-adding.
+            await App.CurrentApp.Database.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+            await App.CurrentApp.Database.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
+
 
             try
             {
@@ -592,7 +683,57 @@ namespace DLSS_Swapper.Data
             }
 
             return (true, string.Empty, false);
-            */
+        }
+
+        void UpdateCurrentAsset(GameAsset newGameAsset, GameAssetType gameAssetType)
+        {
+            App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            {
+                if (gameAssetType == GameAssetType.DLSS)
+                {
+                    CurrentDLSS = null;
+                    CurrentDLSS = newGameAsset;
+                }
+                else if (gameAssetType == GameAssetType.DLSS_G)
+                {
+                    CurrentDLSS_G = null;
+                    CurrentDLSS_G = newGameAsset;
+                }
+                else if (gameAssetType == GameAssetType.DLSS_D)
+                {
+                    CurrentDLSS_D = null;
+                    CurrentDLSS_D = newGameAsset;
+                }
+                else if (gameAssetType == GameAssetType.FSR_31_DX12)
+                {
+                    CurrentFSR_31_DX12 = null;
+                    CurrentFSR_31_DX12 = newGameAsset;
+                }
+                else if (gameAssetType == GameAssetType.FSR_31_VK)
+                {
+                    CurrentFSR_31_VK = null;
+                    CurrentFSR_31_VK = newGameAsset;
+                }
+                else if (gameAssetType == GameAssetType.XeSS)
+                {
+                    CurrentXeSS = null;
+                    CurrentXeSS = newGameAsset;
+                }
+                else if (gameAssetType == GameAssetType.XeLL)
+                {
+                    CurrentXeLL = null;
+                    CurrentXeLL = newGameAsset;
+                }
+                else if (gameAssetType  == GameAssetType.XeSS_FG)
+                {
+                    CurrentXeSS_FG = null;
+                    CurrentXeSS_FG = newGameAsset;
+                }
+                else
+                {
+                    Logger.Error($"Unknown AssetType: {gameAssetType}");
+                }
+            });
         }
 
         #region IComparable<Game>
@@ -753,9 +894,10 @@ namespace DLSS_Swapper.Data
                 var rowsChanged = await App.CurrentApp.Database.InsertOrReplaceAsync(this);
                 if (rowsChanged == 0)
                 {
+                    // TODO: Fix why this happens occasionally to reandom games.
                     // This appears to change to different games in different libraries.
                     Logger.Error($"Tried to save game to database but rowsChanged was 0.");
-                    Debugger.Break();
+                    //Debugger.Break();
                 }
             }
             catch (Exception err)
@@ -931,6 +1073,54 @@ namespace DLSS_Swapper.Data
                 didChange = true;
             }
 
+            if (CurrentDLSS != game.CurrentDLSS)
+            {
+                CurrentDLSS = game.CurrentDLSS;
+                didChange = true;
+            }
+
+            if (CurrentDLSS_G != game.CurrentDLSS_G)
+            {
+                CurrentDLSS_G = game.CurrentDLSS_G;
+                didChange = true;
+            }
+
+            if (CurrentDLSS_D != game.CurrentDLSS_D)
+            {
+                CurrentDLSS_D = game.CurrentDLSS_D;
+                didChange = true;
+            }
+
+            if (CurrentFSR_31_DX12 != game.CurrentFSR_31_DX12)
+            {
+                CurrentFSR_31_DX12 = game.CurrentFSR_31_DX12;
+                didChange = true;
+            }
+
+            if (CurrentFSR_31_VK != game.CurrentFSR_31_VK)
+            {
+                CurrentFSR_31_VK = game.CurrentFSR_31_VK;
+                didChange = true;
+            }
+
+            if (CurrentXeSS != game.CurrentXeSS)
+            {
+                CurrentXeSS = game.CurrentXeSS;
+                didChange = true;
+            }
+
+            if (CurrentXeLL != game.CurrentXeLL)
+            {
+                CurrentXeLL = game.CurrentXeLL;
+                didChange = true;
+            }
+
+            if (CurrentXeSS_FG != game.CurrentXeSS_FG)
+            {
+                CurrentXeSS_FG = game.CurrentXeSS_FG;
+                didChange = true;
+            }
+
             // We don't copy across the following properties as it is assume this object has the latest revisions:
             // - Notes
             // - IsFavourite
@@ -956,11 +1146,11 @@ namespace DLSS_Swapper.Data
                 }
                 else if(gameAsset.AssetType == GameAssetType.DLSS_G)
                 {
-                    CurrentDLSS_FG = gameAsset;
+                    CurrentDLSS_G = gameAsset;
                 }
                 else if(gameAsset.AssetType == GameAssetType.DLSS_D)
                 {
-                    CurrentDLSS_RR = gameAsset;
+                    CurrentDLSS_D = gameAsset;
                 }
                 else if(gameAsset.AssetType == GameAssetType.FSR_31_DX12)
                 {
@@ -1024,8 +1214,8 @@ namespace DLSS_Swapper.Data
                             Processing = false;
                         }
                         */
-                    }
-                }
+        }
+    }
             }
             else
             {

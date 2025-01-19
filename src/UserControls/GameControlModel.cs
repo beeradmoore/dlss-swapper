@@ -22,149 +22,12 @@ public partial class GameControlModel : ObservableObject
 
     public bool CanRemove => Game.GameLibrary == Interfaces.GameLibrary.ManuallyAdded;
 
-    public List<DLLRecord> DLSSRecords { get; } = new List<DLLRecord>(DLLManager.Instance.DLSSRecords);
-    public List<DLLRecord> DLSSGRecords { get; } = new List<DLLRecord>(DLLManager.Instance.DLSSGRecords);
-    public List<DLLRecord> DLSSDRecords { get; } = new List<DLLRecord>(DLLManager.Instance.DLSSDRecords);
-    public List<DLLRecord> FSR31DX12Records { get; } = new List<DLLRecord>(DLLManager.Instance.FSR31DX12Records);
-    public List<DLLRecord> FSR31VKRecords { get; } = new List<DLLRecord>(DLLManager.Instance.FSR31VKRecords);
-    public List<DLLRecord> XeSSRecords { get; } = new List<DLLRecord>(DLLManager.Instance.XeSSRecords);
-    public List<DLLRecord> XeLLRecords { get; } = new List<DLLRecord>(DLLManager.Instance.XeLLRecords);
-    public List<DLLRecord> XeSSFGRecords { get; } = new List<DLLRecord>(DLLManager.Instance.XeSSFGRecords);
-
-    [ObservableProperty]
-    DLLRecord? currentDLSS;
-
-    [ObservableProperty]
-    DLLRecord? currentDLSSG;
-    
-    [ObservableProperty]
-    DLLRecord? currentDLSSD;
-    
-    [ObservableProperty]
-    DLLRecord? currentFSR31DX12;
-    
-    [ObservableProperty]
-    DLLRecord? currentFSR31VK;
-
-    [ObservableProperty]
-    DLLRecord? currentXeSS;
-
-    [ObservableProperty]
-    DLLRecord? currentXeLL;
-
-    [ObservableProperty]
-    DLLRecord? currentXeSSFG;
-
-    public bool IsDLSSAvailable { get; private set; } = false;
-    public bool IsDLSSGAvailable { get; private set; } = false;
-    public bool IsDLSSDAvailable { get; private set; } = false;
-    public bool IsFSR31DX12Available { get; private set; } = false;
-    public bool IsFSR31VKAvailable { get; private set; } = false;
-    public bool IsXeSSAvailable { get; private set; } = false;
-    public bool IsXeLLAvailable { get; private set; } = false;
-    public bool IsXeSSFGAvailable { get; private set; } = false;
-
     public GameControlModel(GameControl gameControl, Game game)
     {
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
-
-        if (Game.CurrentDLSS is not null)
-        {
-            IsDLSSAvailable = true;
-            CurrentDLSS = DLSSRecords.FirstOrDefault(v => v.MD5Hash == Game.CurrentDLSS.Hash);
-            if (CurrentDLSS is null)
-            {
-                Debug.WriteLine($"DLSS not found in manifest: {Game.CurrentDLSS.Version}, {Game.CurrentDLSS.Hash}, from {Game.Title}");
-            }
-        }
-
-        if (Game.CurrentDLSS_FG is not null)
-        {
-            IsDLSSGAvailable = true;
-            CurrentDLSSG = DLSSGRecords.FirstOrDefault(v => v.MD5Hash == Game.CurrentDLSS_FG.Hash);
-            if (CurrentDLSSG is null)
-            {
-                Debug.WriteLine($"DLSS G not found in manifest: {Game.CurrentDLSS_FG.Version}, {Game.CurrentDLSS_FG.Hash}, from {Game.Title}");
-            }
-        }
-
-        if (Game.CurrentDLSS_RR is not null)
-        {
-            IsDLSSDAvailable = true;
-            CurrentDLSSD = DLSSDRecords.FirstOrDefault(v => v.MD5Hash == Game.CurrentDLSS_RR.Hash);
-            if (CurrentDLSSD is null)
-            {
-                Debug.WriteLine($"DLSS D not found in manifest: {Game.CurrentDLSS_RR.Version}, {Game.CurrentDLSS_RR.Hash}, from {Game.Title}");
-            }
-        }
-
-        if (Game.CurrentFSR_31_DX12 is not null)
-        {
-            IsFSR31DX12Available = true;
-            CurrentFSR31DX12 = FSR31DX12Records.FirstOrDefault(v => v.MD5Hash == Game.CurrentFSR_31_DX12.Hash);
-            if (CurrentFSR31DX12 is null)
-            {
-                Debug.WriteLine($"FSR_31_DX12 not found in manifest: {Game.CurrentFSR_31_DX12.Version}, {Game.CurrentFSR_31_DX12.Hash}, from {Game.Title}");
-            }
-        }
-
-        if (Game.CurrentFSR_31_VK is not null)
-        {
-            IsFSR31VKAvailable = true;
-            CurrentFSR31VK = FSR31VKRecords.FirstOrDefault(v => v.MD5Hash == Game.CurrentFSR_31_VK.Hash);
-            if (CurrentFSR31VK is null)
-            {
-                Debug.WriteLine($"FSR_31_VK not found in manifest: {Game.CurrentFSR_31_VK.Version}, {Game.CurrentFSR_31_VK.Hash}, from {Game.Title}");
-            }
-        }
-
-        if (Game.CurrentXeSS is not null)
-        {
-            IsXeSSAvailable = true;
-            CurrentXeSS = XeSSRecords.FirstOrDefault(v => v.MD5Hash == Game.CurrentXeSS.Hash);
-            if (CurrentXeSS is null)
-            {
-                Debug.WriteLine($"XeSS not found in manifest: {Game.CurrentXeSS.Version}, {Game.CurrentXeSS.Hash}, from {Game.Title}");
-            }
-        }
-
-        if (Game.CurrentXeLL is not null)
-        {
-            IsXeLLAvailable = true;
-            CurrentXeLL = XeLLRecords.FirstOrDefault(v => v.MD5Hash == Game.CurrentXeLL.Hash);
-            if (CurrentXeLL is null)
-            {
-                Debug.WriteLine($"XeLL not found in manifest: {Game.CurrentXeLL.Version}, {Game.CurrentXeLL.Hash}, from {Game.Title}");
-            }
-        }
-
-        if (Game.CurrentXeSS_FG is not null)
-        {
-            IsXeSSFGAvailable = true;
-            CurrentXeSSFG = XeSSFGRecords.FirstOrDefault(v => v.MD5Hash == Game.CurrentXeSS_FG.Hash);
-            if (CurrentXeSSFG is null)
-            {
-                Debug.WriteLine($"XeSS FG not found in manifest: {Game.CurrentXeSS_FG.Version}, {Game.CurrentXeSS_FG.Hash}, from {Game.Title}");
-            }
-        }
     }
 
-    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
-    {
-        base.OnPropertyChanged(e);
-
-        if (e.PropertyName == nameof(CurrentDLSS))
-        {
-            if (CurrentDLSS is not null)
-            {
-                if (CurrentDLSS.MD5Hash != Game.CurrentDLSSHash)
-                {
-                    // TODO: Change DLSS
-                }
-            }
-        }
-    }
 
     [RelayCommand]
     async Task OpenInstallPathAsync()
@@ -306,10 +169,22 @@ public partial class GameControlModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task DLLChangedAsync(DLLRecord dllRecord)
+    async Task ChangeRecordAsync(GameAssetType gameAssetType)
     {
-        await Task.Delay(2500);
+        if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+        {
+            var dialog = new EasyContentDialog(gameControl.XamlRoot)
+            {
+                Title = $"Select {DLLManager.Instance.GetAssetTypeName(gameAssetType)} version",
+                PrimaryButtonText = "Swap",
+                IsPrimaryButtonEnabled = false,
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
+            };
 
+            var dllPickerControl = new DLLPickerControl(dialog, Game, gameAssetType);
+            dialog.Content = dllPickerControl;
+            await dialog.ShowAsync();
+        }
     }
-
 }

@@ -19,7 +19,7 @@
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteTextConverter" TrueValue="Favourited" FalseValue="Click to favourite" />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteGlyphConverter" TrueValue="&#xE735;" FalseValue="&#xE734;" />
-        <ct_converters:EmptyObjectToObjectConverter x:Key="EmptyObjectToObjectConverter" NotEmptyValue="True" EmptyValue="False" />
+        <ct_converters:EmptyObjectToObjectConverter x:Key="NullObjectToBoolConverter" NotEmptyValue="True" EmptyValue="False" />
 
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadingConverter" DesierdState="Downloading" />
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
@@ -34,12 +34,20 @@
                     </Button.Content>
                 </Button>
 
+                <!--
                 <Button ToolTipService.ToolTip="History" Command="{Binding ViewHistoryCommand}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE81C;"/>
                     </Button.Content>
                 </Button>
 
+                <Button ToolTipService.ToolTip="Reset All" Command="{Binding ResetAllCommand}">
+                    <Button.Content>
+                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xED62;"/>
+                    </Button.Content>
+                </Button>
+                -->
+                
                 <Button Command="{Binding FavouriteCommand}" ToolTipService.ToolTip="{Binding  Game.IsFavourite, Converter={StaticResource FavouriteTextConverter}}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="{Binding Game.IsFavourite, Converter={StaticResource FavouriteGlyphConverter}}"/>
@@ -61,25 +69,6 @@
                 </Button>
             </StackPanel>
         </ControlTemplate>
-
-        <DataTemplate x:Key="DLLRecordDataTemplate" x:DataType="data:DLLRecord">
-
-            <Grid HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="{x:Bind FullName}" />
-
-                <ProgressRing Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsDownloadingConverter}}" ToolTipService.ToolTip="Downloading" Minimum="0" Maximum="100" IsIndeterminate="false" Value="{x:Bind LocalRecord.DownloadProgress}" HorizontalAlignment="Right" Width="20" Height="20"  />
-
-                <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsNotFoundConverter}}" ToolTipService.ToolTip="Requires download" HorizontalAlignment="Right" Glyph="&#xE896;" Width="20" Height="20" />
-
-                <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsImportedConverter}}" ToolTipService.ToolTip="Imported" HorizontalAlignment="Right" Glyph="&#xE7B8;" Width="20" Height="20" />
-
-            </Grid>
-        </DataTemplate>
 
     </usercontrols:FakeContentDialog.Resources>
 
@@ -114,7 +103,7 @@
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Spacing="4">
                     <TextBlock Text="Name" FontWeight="Bold" />
-                    <TextBox Text="{x:Bind ViewModel.Game.Title}" IsReadOnly="True" />
+                    <TextBox Text="{x:Bind ViewModel.Game.Title, Mode=OneWay}" IsReadOnly="True" />
 
                     <TextBlock Text="Install path" FontWeight="Bold" Padding="0,8,0,0" />
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="8">
@@ -146,43 +135,14 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Column="0" Grid.Row="0" Text="DLSS" FontWeight="Bold" />
-                        <!-- <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Text="{x:Bind ViewModel.Game.CurrentDLSS.Version}" IsReadOnly="True"></TextBox> -->
-                        <!--<usercontrols:DLLPickerComboBox Grid.Column="0" Grid.Row="1" Game="{x:Bind ViewModel.Game}" GameAssetType="{x:Bind data:GameAssetType.DLSS}" SelectionChangedCommand="{x:Bind ViewModel.DLLChangedCommand}" />-->
-                        <ComboBox 
-                            Grid.Column="0"
-                            Grid.Row="1"
-                            ItemsSource="{x:Bind ViewModel.DLSSRecords}"
-                            IsEnabled="{x:Bind ViewModel.IsDLSSAvailable}"
-                            SelectedItem="{x:Bind ViewModel.CurrentDLSS}"
-                            PlaceholderText="{x:Bind ViewModel.Game.CurrentDLSS.Version, FallbackValue='Not found'}"
-                            ItemTemplate="{StaticResource DLLRecordDataTemplate}"
-                            HorizontalAlignment="Stretch" />
+                        <Button Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS.Version, FallbackValue='Not found', Mode=TwoWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
                         <TextBlock Grid.Column="1" Grid.Row="0" Text="DLSS Frame Generation" FontWeight="Bold" />
-                        <!-- <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Text="{x:Bind ViewModel.Game.CurrentDLSS_FG.Version}" IsReadOnly="True"></TextBox> -->
-                        <!-- <usercontrols:DLLPickerComboBox Grid.Column="1" Grid.Row="1" Game="{x:Bind ViewModel.Game}" GameAssetType="{x:Bind data:GameAssetType.DLSS_G}" /> -->
-                        <ComboBox 
-                            Grid.Column="1"
-                            Grid.Row="1"
-                            ItemsSource="{x:Bind ViewModel.DLSSGRecords}"
-                            IsEnabled="{x:Bind ViewModel.IsDLSSGAvailable}"
-                            SelectedItem="{x:Bind ViewModel.CurrentDLSSG}"
-                            PlaceholderText="{x:Bind ViewModel.Game.CurrentDLSS_FG.Version, FallbackValue='Not found'}"
-                            ItemTemplate="{StaticResource DLLRecordDataTemplate}"
-                            HorizontalAlignment="Stretch" />
-                        
+                        <Button Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_G.Version, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+
                         <TextBlock Grid.Column="0" Grid.Row="3" Text="DLSS Ray Reconstruction" FontWeight="Bold" />
-                        <!-- <TextBox Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" Text="{x:Bind ViewModel.Game.CurrentDLSS_RR.Version}" IsReadOnly="True"></TextBox> -->
-                        <!-- <usercontrols:DLLPickerComboBox Grid.Column="0" Grid.Row="4" Game="{x:Bind ViewModel.Game}" GameAssetType="{x:Bind data:GameAssetType.DLSS_D}" /> -->
-                        <ComboBox 
-                            Grid.Column="0"
-                            Grid.Row="4"
-                            ItemsSource="{x:Bind ViewModel.DLSSDRecords}"
-                            IsEnabled="{x:Bind ViewModel.IsDLSSDAvailable}"
-                            SelectedItem="{x:Bind ViewModel.CurrentDLSSD}"
-                            PlaceholderText="{x:Bind ViewModel.Game.CurrentDLSS_RR.Version, FallbackValue='Not found'}"
-                            ItemTemplate="{StaticResource DLLRecordDataTemplate}"
-                            HorizontalAlignment="Stretch" />
+                        <Button Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_D.Version, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+
                     </Grid>
 
 
@@ -198,30 +158,12 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Column="0" Grid.Row="0" Text="FSR 3.1 (DirectX 12)" FontWeight="Bold" />
-                        <!--<TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Text="{x:Bind ViewModel.Game.CurrentFSR_31_DX12.Version, FallbackValue='Not found'}" IsReadOnly="True"></TextBox> -->
-                        <!-- <usercontrols:DLLPickerComboBox Grid.Column="0" Grid.Row="1" Game="{x:Bind ViewModel.Game}" GameAssetType="{x:Bind data:GameAssetType.FSR_31_DX12}" /> -->
-                        <ComboBox 
-                            Grid.Column="0"
-                            Grid.Row="1"
-                            ItemsSource="{x:Bind ViewModel.FSR31DX12Records}"
-                            IsEnabled="{x:Bind ViewModel.IsFSR31DX12Available}"
-                            SelectedItem="{x:Bind ViewModel.CurrentFSR31DX12}"
-                            PlaceholderText="{x:Bind ViewModel.Game.CurrentFSR_31_DX12.Version, FallbackValue='Not found'}"
-                            ItemTemplate="{StaticResource DLLRecordDataTemplate}"
-                            HorizontalAlignment="Stretch" />
+                        <Button Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentFSR_31_DX12, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentFSR_31_DX12.Version, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.FSR_31_DX12}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+
 
                         <TextBlock Grid.Column="1" Grid.Row="0" Text="FSR 3.1 (Vulkan)" FontWeight="Bold" />
-                        <!-- <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Text="{x:Bind ViewModel.Game.CurrentFSR_31_VK.Version, FallbackValue='Not found'}" IsReadOnly="True"></TextBox> -->
-                        <!-- <usercontrols:DLLPickerComboBox Grid.Column="1" Grid.Row="1" Game="{x:Bind ViewModel.Game}" GameAssetType="{x:Bind data:GameAssetType.FSR_31_VK}" /> -->
-                        <ComboBox 
-                            Grid.Column="1"
-                            Grid.Row="1"
-                            ItemsSource="{x:Bind ViewModel.FSR31VKRecords}"
-                            IsEnabled="{x:Bind ViewModel.IsFSR31VKAvailable}"
-                            SelectedItem="{x:Bind ViewModel.CurrentFSR31VK}"
-                            PlaceholderText="{x:Bind ViewModel.Game.CurrentFSR_31_VK.Version, FallbackValue='Not found'}"
-                            ItemTemplate="{StaticResource DLLRecordDataTemplate}"
-                            HorizontalAlignment="Stretch" />
+                        <Button Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentFSR_31_VK, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentFSR_31_VK.Version, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.FSR_31_VK}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+
                     </Grid>
 
                     
@@ -240,54 +182,18 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Column="0" Grid.Row="0" Text="XeSS" FontWeight="Bold" />
-                        <!-- <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Text="{x:Bind ViewModel.Game.CurrentXeSS.Version}" IsReadOnly="True"></TextBox> -->
-                        <!-- <usercontrols:DLLPickerComboBox Grid.Column="0" Grid.Row="1" Game="{x:Bind ViewModel.Game}" GameAssetType="{x:Bind data:GameAssetType.XeSS}" /> -->
-                        <ComboBox 
-                            Grid.Column="0"
-                            Grid.Row="1"
-                            ItemsSource="{x:Bind ViewModel.XeSSRecords}"
-                            IsEnabled="{x:Bind ViewModel.IsXeSSAvailable}"
-                            SelectedItem="{x:Bind ViewModel.CurrentXeSS}"
-                            PlaceholderText="{x:Bind ViewModel.Game.CurrentXeSS.Version, FallbackValue='Not found'}"
-                            ItemTemplate="{StaticResource DLLRecordDataTemplate}"
-                            HorizontalAlignment="Stretch" />
+                        <Button Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentXeSS, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentXeSS.Version, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeSS}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+
 
                         <TextBlock Grid.Column="1" Grid.Row="0" Text="XeSS Frame Generation" FontWeight="Bold" />
-                        <!-- <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Text="{x:Bind ViewModel.Game.CurrentXeSS.Version}" IsReadOnly="True"></TextBox> -->
-                        <!-- <usercontrols:DLLPickerComboBox Grid.Column="0" Grid.Row="1" Game="{x:Bind ViewModel.Game}" GameAssetType="{x:Bind data:GameAssetType.XeSS}" /> -->
-                        <ComboBox 
-                            Grid.Column="1"
-                            Grid.Row="1"
-                            ItemsSource="{x:Bind ViewModel.XeSSFGRecords}"
-                            IsEnabled="{x:Bind ViewModel.IsXeSSFGAvailable}"
-                            SelectedItem="{x:Bind ViewModel.CurrentXeSSFG}"
-                            PlaceholderText="{x:Bind ViewModel.Game.CurrentXeSS_FG.Version, FallbackValue='Not found'}"
-                            ItemTemplate="{StaticResource DLLRecordDataTemplate}"
-                            HorizontalAlignment="Stretch" />
+                        <Button Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentXeSS_FG, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentXeSS_FG.Version, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeSS_FG}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
 
                         <TextBlock Grid.Column="0" Grid.Row="3" Text="XeLL" FontWeight="Bold" />
-                        <!-- <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Text="{x:Bind ViewModel.Game.CurrentXeSS.Version}" IsReadOnly="True"></TextBox> -->
-                        <!-- <usercontrols:DLLPickerComboBox Grid.Column="0" Grid.Row="1" Game="{x:Bind ViewModel.Game}" GameAssetType="{x:Bind data:GameAssetType.XeSS}" /> -->
-                        <ComboBox 
-                            Grid.Column="0"
-                            Grid.Row="4"
-                            ItemsSource="{x:Bind ViewModel.XeLLRecords}"
-                            IsEnabled="{x:Bind ViewModel.IsXeLLAvailable}"
-                            SelectedItem="{x:Bind ViewModel.CurrentXeLL}"
-                            PlaceholderText="{x:Bind ViewModel.Game.CurrentXeLL.Version, FallbackValue='Not found'}"
-                            ItemTemplate="{StaticResource DLLRecordDataTemplate}"
-                            HorizontalAlignment="Stretch" />
+                        <Button Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentXeLL, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentXeLL.Version, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeLL}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+
                     </Grid>
 
-
-
-
-
-                    <!--
-                            <TextBlock Text="DLSS detected" FontWeight="Bold" Padding="0,20,0,0" />
-                            <TextBlock Text="{Binding DLSSDetectedText}" />
-                            -->
                 </StackPanel>
             </Grid>
 

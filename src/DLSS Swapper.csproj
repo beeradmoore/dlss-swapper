@@ -94,7 +94,7 @@
     <None Remove="DLSS Swapper_TemporaryKey.pfx" />
     <None Remove="global.json" />
     <None Remove="Themes\FakeContentDialogStyle.xaml" />
-    <None Remove="UserControls\DLLPickerComboBox.xaml" />
+    <None Remove="UserControls\DLLPickerControl.xaml" />
     <None Remove="UserControls\GameControl.xaml" />
     <None Remove="UserControls\ManuallyAddGameControl.xaml" />
   </ItemGroup>
@@ -283,7 +283,7 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
-        <Page Update="UserControls\DLLPickerComboBox.xaml">
+        <Page Update="UserControls\DLLPickerControl.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>
         <Page Update="Themes\FakeContentDialogStyle.xaml">
@@ -300,7 +300,7 @@
   <ItemGroup>
     <PackageReference Include="AsyncAwaitBestPractices" Version="9.0.0" />
     <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="9.0.0" />
-    <PackageReference Include="CommunityToolkit.Labs.WinUI.Controls.MarkdownTextBlock" Version="0.1.241031-build.1775" />
+    <PackageReference Include="CommunityToolkit.Labs.WinUI.Controls.MarkdownTextBlock" Version="0.1.250103-build.1988" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.1.240916" />
     <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.1.240916" />

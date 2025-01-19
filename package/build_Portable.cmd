@@ -30,7 +30,7 @@ echo Zipping app
 echo ################################
 echo.
 
-powershell Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; Import-Module Microsoft.PowerShell.Archive; Compress-Archive -Force -Path "..\src\bin\publish\portable\*" -DestinationPath "Output\DLSS.Swapper-%app_version%-portable.zip" || goto :error
+pwsh.exe -ExecutionPolicy Bypass -Command Import-Module Microsoft.PowerShell.Archive; Compress-Archive -Force -Path "..\src\bin\publish\portable\*" -DestinationPath "Output\DLSS.Swapper-%app_version%-portable.zip" || goto :error
 
 REM Everything is fine, go to the end of the file.
 goto :EOF

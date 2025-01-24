@@ -200,6 +200,11 @@ namespace DLSS_Swapper.Pages
             }
         }
 
+        void Acknowledgements_Click(Hyperlink sender, HyperlinkClickEventArgs args)
+        {
+            // TODO: 
+        }
+
         /*
         async Task AddCustomDirectoryAsync()
         {

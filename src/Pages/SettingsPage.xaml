@@ -121,10 +121,14 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="About" />
-                <RichTextBlock Margin="0,12,0,0">
-                    <Paragraph>
-                        DLSS Swapper is a tool that helps you to conveniently download, manage, and swap DLSS dlls allowing you to upgrade or downgrade DLSS version in a game without the game needing an update.
-                    </Paragraph>
+
+                <TextBlock Margin="0,12,0,0">
+                    Version: 
+                    <Run Text="{x:Bind Version}" />
+                </TextBlock>
+                <Button Content="Check for updates" Margin="0,12,0,0" Command="{Binding CheckForUpdatesCommand}" />
+
+                <RichTextBlock Margin="0,24,0,0">
                     <Paragraph Margin="0,12,0,0">
                         Github:
                         <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper">beeradmoore/dlss-swapper</Hyperlink>
@@ -137,13 +141,10 @@
                         Reddit:
                         <Hyperlink NavigateUri="https://www.reddit.com/r/DLSS_Swapper/">r/DLSS_Swapper</Hyperlink>
                     </Paragraph>
+                    <Paragraph Margin="0,12,0,0">
+                        <Hyperlink Click="Acknowledgements_Click">Acknowledgements</Hyperlink>                        
+                    </Paragraph>
                 </RichTextBlock>
-                <TextBlock Margin="0,12,0,0">
-                    Version: 
-                    <Run Text="{x:Bind Version}" />
-                </TextBlock>
-                <Button Content="Check for updates" Margin="0,12,0,0" Command="{Binding CheckForUpdatesCommand}" />
-
                 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
@@ -153,21 +154,6 @@
                     <Paragraph>
                         You can suggest a feature or report a problem or on the DLSS Swapper
                         <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub repository</Hyperlink>.
-                    </Paragraph>
-                </RichTextBlock>
-
-                
-                <TextBlock
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    Margin="0,40,0,0"
-                    Text="Special Thanks" />
-                <RichTextBlock Margin="0,12,0,0">
-                    <Paragraph>
-                        DLSS Swapper is only possible thanks to its
-                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/graphs/contributors">contributors</Hyperlink>
-                        and the people who have filed
-                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">feedback</Hyperlink> to help improve the product.
-                        <LineBreak />(also NVIDIA for DLSS 😊)
                     </Paragraph>
                 </RichTextBlock>
 

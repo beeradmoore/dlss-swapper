@@ -80,7 +80,19 @@
                     </ListView.ItemContainerStyle>
                 </ListView>
                 -->
-                
+
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="DLSS Developer Options" />
+                <StackPanel Margin="0,10,0,0">
+                    <CheckBox Content="Show on-screen indicator" Checked="DLSSShowIndicator_Checked"  Margin="0,0,0,4"/>
+                    <CheckBox Content="Enable logging to file" Checked="DLSSEnableLogging_Checked" Margin="0,0,0,4"/>
+                    <CheckBox Content="Verbose logging" Checked="DLSSVerboseLogging_Checked" Margin="0,0,0,4"/>
+                    <CheckBox Content="Enable logging to console window" Checked="DLSSLoggingToWindow_Checked"  Margin="0,0,0,4"/>
+                </StackPanel>
+
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"

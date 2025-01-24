@@ -23,6 +23,7 @@ using Windows.UI.ViewManagement;
 using System.Diagnostics;
 using Windows.Storage.Pickers;
 using DLSS_Swapper.UserControls;
+using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.Pages
 {
@@ -52,6 +53,8 @@ namespace DLSS_Swapper.Pages
                 }
             }
         }
+
+        DLSSSettingsManager _dlssSettingsManager = new DLSSSettingsManager();
         /*
         private AsyncCommand _addCustomDirectoryCommand;
         public AsyncCommand AddCustomDirectoryCommand => _addCustomDirectoryCommand ??= new AsyncCommand(AddCustomDirectoryAsync);
@@ -203,6 +206,94 @@ namespace DLSS_Swapper.Pages
         void Acknowledgements_Click(Hyperlink sender, HyperlinkClickEventArgs args)
         {
             // TODO: 
+        }
+
+        void DLSSShowIndicator_Checked(object sender, RoutedEventArgs e)
+        {
+            var couldUpdate = false;
+
+            if (sender is CheckBox checkBox)
+            {
+                if (checkBox.IsChecked == true)
+                {
+                    couldUpdate =_dlssSettingsManager.SetShowDlssIndicator(true);
+                }
+                else if (checkBox.IsChecked == false)
+                {
+                    couldUpdate = _dlssSettingsManager.SetShowDlssIndicator(false);
+                }
+            }
+
+            if (couldUpdate == false)
+            {
+                // TODO: 
+            }
+        }
+
+        void DLSSEnableLogging_Checked(object sender, RoutedEventArgs e)
+        {
+            var couldUpdate = false;
+
+            if (sender is CheckBox checkBox)
+            {
+                if (checkBox.IsChecked == true)
+                {
+                    couldUpdate = _dlssSettingsManager.SetLogLevel(1);
+                }
+                else if (checkBox.IsChecked == false)
+                {
+                    couldUpdate = _dlssSettingsManager.SetLogLevel(0);
+                }
+            }
+
+            if (couldUpdate == false)
+            {
+                // TODO: 
+            }
+        }
+
+        void DLSSVerboseLogging_Checked(object sender, RoutedEventArgs e)
+        {
+            var couldUpdate = false;
+
+            if (sender is CheckBox checkBox)
+            {
+                if (checkBox.IsChecked == true)
+                {
+                    couldUpdate = _dlssSettingsManager.SetLogLevel(2);
+                }
+                else if (checkBox.IsChecked == false)
+                {
+                    couldUpdate = _dlssSettingsManager.SetLogLevel(1);
+                }
+            }
+
+            if (couldUpdate == false)
+            {
+                // TODO: 
+            }
+        }
+
+        void DLSSLoggingToWindow_Checked(object sender, RoutedEventArgs e)
+        {
+            var couldUpdate = false;
+
+            if (sender is CheckBox checkBox)
+            {
+                if (checkBox.IsChecked == true)
+                {
+                    couldUpdate = _dlssSettingsManager.SetLoggingWindow(1);
+                }
+                else if (checkBox.IsChecked == false)
+                {
+                    couldUpdate = _dlssSettingsManager.SetLoggingWindow(0);
+                }
+            }
+
+            if (couldUpdate == false)
+            {
+                // TODO: 
+            }
         }
 
         /*

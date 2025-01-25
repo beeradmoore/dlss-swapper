@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.WinUI;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
@@ -335,7 +336,10 @@ namespace DLSS_Swapper.Data
 
 
                 var newHasSwappableItems = false;
-
+                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    UpdateCurrentDLLsFromGameAssets();
+                });
                 if (GameAssets.Any())
                 {
                     newHasSwappableItems = true;
@@ -1157,37 +1161,36 @@ namespace DLSS_Swapper.Data
 
         public abstract bool UpdateFromGame(Game game);
 
-        public async Task LoadGameAssetsFromCacheAsync()
+        void UpdateCurrentDLLsFromGameAssets()
         {
-            await LoadCoverImageAsync();
+            CurrentDLSS = null;
+            CurrentDLSS_G = null;
+            CurrentDLSS_D = null;
+            CurrentFSR_31_DX12 = null;
+            CurrentFSR_31_VK = null;
+            CurrentXeSS = null;
+            CurrentXeLL = null;
+            CurrentXeSS_FG = null;
 
-            GameAssets.Clear();
-            List<GameAsset> gameAssets;
-            using (await Database.Instance.Mutex.LockAsync())
-            {
-                gameAssets = await Database.Instance.Connection.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();
-            }
-            GameAssets.AddRange(gameAssets);
-
-            foreach (var gameAsset in gameAssets)
+            foreach (var gameAsset in GameAssets)
             {
                 if (gameAsset.AssetType == GameAssetType.DLSS)
                 {
                     CurrentDLSS = gameAsset;
                 }
-                else if(gameAsset.AssetType == GameAssetType.DLSS_G)
+                else if (gameAsset.AssetType == GameAssetType.DLSS_G)
                 {
                     CurrentDLSS_G = gameAsset;
                 }
-                else if(gameAsset.AssetType == GameAssetType.DLSS_D)
+                else if (gameAsset.AssetType == GameAssetType.DLSS_D)
                 {
                     CurrentDLSS_D = gameAsset;
                 }
-                else if(gameAsset.AssetType == GameAssetType.FSR_31_DX12)
+                else if (gameAsset.AssetType == GameAssetType.FSR_31_DX12)
                 {
                     CurrentFSR_31_DX12 = gameAsset;
                 }
-                else if(gameAsset.AssetType == GameAssetType.FSR_31_VK)
+                else if (gameAsset.AssetType == GameAssetType.FSR_31_VK)
                 {
                     CurrentFSR_31_VK = gameAsset;
                 }
@@ -1204,7 +1207,22 @@ namespace DLSS_Swapper.Data
                     CurrentXeSS_FG = gameAsset;
                 }
             }
-            
+
+        }
+        public async Task LoadGameAssetsFromCacheAsync()
+        {
+            await LoadCoverImageAsync();
+
+            GameAssets.Clear();
+            List<GameAsset> gameAssets;
+            using (await Database.Instance.Mutex.LockAsync())
+            {
+                gameAssets = await Database.Instance.Connection.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();
+            }
+            GameAssets.AddRange(gameAssets);
+
+            UpdateCurrentDLLsFromGameAssets();
+
             if (gameAssets.Any())
             {
                 foreach (var gameAsset in gameAssets)

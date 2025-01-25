@@ -218,7 +218,7 @@
                                             </Grid.RowDefinitions>
                                             <ContentControl x:Name="Title" Margin="{ThemeResource ContentDialogTitleMargin}" Content="{TemplateBinding Title}" ContentTemplate="{TemplateBinding TitleTemplate}" FontSize="20" FontFamily="{StaticResource ContentControlThemeFontFamily}" FontWeight="SemiBold" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Left" VerticalAlignment="Top" IsTabStop="False">
                                                 <ContentControl.Template>
-                                                    <ControlTemplate TargetType="usercontrols:FakeContentDialog">
+                                                    <ControlTemplate TargetType="ContentControl">
                                                         <ContentPresenter Content="{TemplateBinding Content}"
                                 MaxLines="2"
                                 TextWrapping="Wrap"

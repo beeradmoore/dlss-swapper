@@ -472,7 +472,11 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         {
             try
             {
-                var games = await App.CurrentApp.Database.Table<UbisoftConnectGame>().ToArrayAsync().ConfigureAwait(false);
+                UbisoftConnectGame[] games;
+                using (await Database.Instance.Mutex.LockAsync())
+                {
+                    games = await Database.Instance.Connection.Table<UbisoftConnectGame>().ToArrayAsync().ConfigureAwait(false);
+                }
                 foreach (var game in games)
                 {
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);

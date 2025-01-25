@@ -35,8 +35,11 @@ public class ManuallyAddedLibrary : IGameLibrary
         // Not monitoring for cachedGames like in other libraries, as every game is from cache anyway.
 
         var games = new List<Game>();
-
-        var dbGames = await App.CurrentApp.Database.QueryAsync<ManuallyAddedGame>("SELECT * FROM ManuallyAddedGame");
+        List<ManuallyAddedGame> dbGames;
+        using (await Database.Instance.Mutex.LockAsync())
+        {
+            dbGames = await Database.Instance.Connection.Table<ManuallyAddedGame>().ToListAsync().ConfigureAwait(false);
+        }
         foreach (var dbGame in dbGames)
         {
 
@@ -61,7 +64,11 @@ public class ManuallyAddedLibrary : IGameLibrary
     {
         try
         {
-            var games = await App.CurrentApp.Database.Table<ManuallyAddedGame>().ToArrayAsync().ConfigureAwait(false);
+            ManuallyAddedGame[] games;
+            using (await Database.Instance.Mutex.LockAsync())
+            {
+                games = await Database.Instance.Connection.Table<ManuallyAddedGame>().ToArrayAsync().ConfigureAwait(false);
+            }
             foreach (var game in games)
             {
                 // TODO: Handle process game

@@ -54,10 +54,6 @@ namespace DLSS_Swapper
         public HttpClient HttpClient => _httpClient;
 
 
-        SQLiteAsyncConnection database;
-        public SQLiteAsyncConnection Database => database;
-
-
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -76,78 +72,7 @@ namespace DLSS_Swapper
 
             GlobalElementTheme = Settings.Instance.AppTheme;
 
-            database = new SQLiteAsyncConnection(Storage.GetDBPath());
-            
-            Task.Run(async () =>
-            {
-                try
-                {
-                    await database.CreateTableAsync<SteamGame>();
-                }
-                catch (Exception err)
-                {
-                    Logger.Error(err.Message);
-                }
-
-
-                try
-                {
-                    await database.CreateTableAsync<GOGGame>();
-                }
-                catch (Exception err)
-                {
-                    Logger.Error(err.Message);
-                }
-
-
-                try
-                {
-                    await database.CreateTableAsync<EpicGamesStoreGame>();
-                }
-                catch (Exception err)
-                {
-                    Logger.Error(err.Message);
-                }
-
-
-                try
-                {
-                    await database.CreateTableAsync<UbisoftConnectGame>();
-                }
-                catch (Exception err)
-                {
-                    Logger.Error(err.Message);
-                }
-
-
-                try
-                {
-                    await database.CreateTableAsync<XboxGame>();
-                }
-                catch (Exception err)
-                {
-                    Logger.Error(err.Message);
-                }
-
-
-                try
-                {
-                    await database.CreateTableAsync<ManuallyAddedGame>();
-                }
-                catch (Exception err)
-                {
-                    Logger.Error(err.Message);
-                }
-
-                try
-                {
-                    await database.CreateTableAsync<GameAsset>();
-                }
-                catch (Exception err)
-                {
-                    Logger.Error(err.Message);
-                }
-            });
+            Database.Instance.Init();
 
             this.InitializeComponent();
         }

@@ -198,8 +198,10 @@ namespace DLSS_Swapper.Data
 
                 var oldGameAssets = GameAssets.ToList();
                 GameAssets.Clear();
-                await App.CurrentApp.Database.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
-
+                using (await Database.Instance.Mutex.LockAsync())
+                {
+                    await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+                }
                 // TODO: See if changing these to filter specific files, or getting very *.dll and looking for our specific ones is faster
                 var dllPaths = Directory.GetFiles(InstallPath, "*.dll", enumerationOptions);
 
@@ -338,7 +340,10 @@ namespace DLSS_Swapper.Data
 
                     //App.CurrentApp.Database.ExecuteAsync
                     //savePoint is not valid, and should be the result of a call to SaveTransactionPoint.
-                    await App.CurrentApp.Database.InsertAllAsync(GameAssets, false).ConfigureAwait(false);                  
+                    using (await Database.Instance.Mutex.LockAsync())
+                    {
+                        await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
+                    }
                 }
 
 
@@ -476,8 +481,11 @@ namespace DLSS_Swapper.Data
                 GameAssets.Add(newGameAsset);
 
                 // Update game assets list by deleting and re-adding.
-                await App.CurrentApp.Database.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
-                await App.CurrentApp.Database.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
+                using (await Database.Instance.Mutex.LockAsync())
+                {
+                    await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+                    await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
+                }
 
                 return (true, string.Empty, false);
             }
@@ -668,8 +676,11 @@ namespace DLSS_Swapper.Data
             }
 
             // Update game assets list by deleting and re-adding.
-            await App.CurrentApp.Database.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
-            await App.CurrentApp.Database.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
+            using (await Database.Instance.Mutex.LockAsync())
+            {
+                await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+                await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
+            }
 
 
             try
@@ -891,7 +902,12 @@ namespace DLSS_Swapper.Data
         {
             try
             {
-                var rowsChanged = await App.CurrentApp.Database.InsertOrReplaceAsync(this);
+                var rowsChanged = -1;
+                using (await Database.Instance.Mutex.LockAsync())
+                {
+                    rowsChanged = await Database.Instance.Connection.InsertOrReplaceAsync(this);
+                    // tODO: Configure await
+                }
                 if (rowsChanged == 0)
                 {
                     // TODO: Fix why this happens occasionally to reandom games.
@@ -914,7 +930,11 @@ namespace DLSS_Swapper.Data
                 // Sometimes when a game is uninstalled the backup files are not removed, so ensure they are.
                 // https://github.com/beeradmoore/dlss-swapper/issues/236
 
-                var gameAssets = await App.CurrentApp.Database.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();
+                List<GameAsset> gameAssets;
+                using (await Database.Instance.Mutex.LockAsync())
+                {
+                    gameAssets = await Database.Instance.Connection.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();
+                }
                 foreach (var cachedGameAsset in gameAssets)
                 {
                     // If its a file we made we should attempt to delete it.
@@ -941,8 +961,10 @@ namespace DLSS_Swapper.Data
                         }
                     }
                 }
-                await App.CurrentApp.Database.Table<GameAsset>().DeleteAsync(ga => ga.Id == ID).ConfigureAwait(false);
-
+                using (await Database.Instance.Mutex.LockAsync())
+                {
+                    await Database.Instance.Connection.Table<GameAsset>().DeleteAsync(ga => ga.Id == ID).ConfigureAwait(false);
+                }
                
                 // Delete the thumbnails.
                 var thumbnailImages = Directory.GetFiles(Storage.GetImageCachePath(), $"{ID}_*", SearchOption.AllDirectories);
@@ -960,7 +982,10 @@ namespace DLSS_Swapper.Data
                 }
 
                 // Delete the game itself.
-                await App.CurrentApp.Database.DeleteAsync(this).ConfigureAwait(false);
+                using (await Database.Instance.Mutex.LockAsync())
+                {
+                    await Database.Instance.Connection.DeleteAsync(this).ConfigureAwait(false);
+                }
 
                 // Remove the game from the list.
                 GameManager.Instance.RemoveGame(this);
@@ -1135,7 +1160,11 @@ namespace DLSS_Swapper.Data
             await LoadCoverImageAsync();
 
             GameAssets.Clear();
-            var gameAssets = await App.CurrentApp.Database.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();
+            List<GameAsset> gameAssets;
+            using (await Database.Instance.Mutex.LockAsync())
+            {
+                gameAssets = await Database.Instance.Connection.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();
+            }
             GameAssets.AddRange(gameAssets);
 
             foreach (var gameAsset in gameAssets)

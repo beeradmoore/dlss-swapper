@@ -265,7 +265,11 @@ namespace DLSS_Swapper.Data.Xbox
         {
             try
             {
-                var games = await App.CurrentApp.Database.Table<XboxGame>().ToArrayAsync().ConfigureAwait(false);
+                XboxGame[] games;
+                using (await Database.Instance.Mutex.LockAsync())
+                {
+                    games = await Database.Instance.Connection.Table<XboxGame>().ToArrayAsync().ConfigureAwait(false);
+                }
                 foreach (var game in games)
                 {
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);

@@ -211,7 +211,11 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         {
             try
             {
-                var games = await App.CurrentApp.Database.Table<EpicGamesStoreGame>().ToArrayAsync().ConfigureAwait(false);
+                EpicGamesStoreGame[] games;
+                using (await Database.Instance.Mutex.LockAsync())
+                {
+                    games = await Database.Instance.Connection.Table<EpicGamesStoreGame>().ToArrayAsync().ConfigureAwait(false);
+                }
                 foreach (var game in games)
                 {
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);

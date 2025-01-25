@@ -248,7 +248,11 @@ namespace DLSS_Swapper.Data.Steam
         {
             try
             {
-                var games = await App.CurrentApp.Database.Table<SteamGame>().ToArrayAsync().ConfigureAwait(false);
+                SteamGame[] games;
+                using (await Database.Instance.Mutex.LockAsync())
+                {
+                    games = await Database.Instance.Connection.Table<SteamGame>().ToArrayAsync().ConfigureAwait(false);
+                }
                 foreach (var game in games)
                 {
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);

@@ -335,7 +335,11 @@ namespace DLSS_Swapper.Data.GOG
         {
             try
             {
-                var games = await App.CurrentApp.Database.Table<GOGGame>().ToArrayAsync().ConfigureAwait(false);
+                GOGGame[] games;
+                using (await Database.Instance.Mutex.LockAsync())
+                {
+                    games = await Database.Instance.Connection.Table<GOGGame>().ToArrayAsync().ConfigureAwait(false);
+                }
                 foreach (var game in games)
                 {
                     game.Processing = true;

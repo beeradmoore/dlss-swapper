@@ -192,6 +192,8 @@ namespace DLSS_Swapper.Data
 
             ThreadPool.QueueUserWorkItem(async (stateInfo) =>
             {
+                var coverImageTask = UpdateCacheImageAsync();
+
                 var enumerationOptions = new EnumerationOptions();
                 enumerationOptions.RecurseSubdirectories = true;
                 enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
@@ -346,7 +348,7 @@ namespace DLSS_Swapper.Data
                     }
                 }
 
-
+                await coverImageTask;
 
                 // Now update all the data on the UI therad.
                 App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>

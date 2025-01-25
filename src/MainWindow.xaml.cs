@@ -281,7 +281,7 @@ DLSS Swapper will close now.",
             {
                 if (gitHubUpdater.HasPromptedBefore(newUpdateTask.Result) == false)
                 {
-                    await gitHubUpdater.DisplayNewUpdateDialog(newUpdateTask.Result, MainNavigationView);
+                    await gitHubUpdater.DisplayNewUpdateDialog(newUpdateTask.Result, MainNavigationView.XamlRoot);
                 }
             }       
         }

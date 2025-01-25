@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
 using CommunityToolkit.WinUI;
 using DLSS_Swapper.UserControls;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Windows.System;
@@ -96,7 +97,7 @@ namespace DLSS_Swapper.Data.GitHub
             return true;
         }
 
-        internal async Task DisplayNewUpdateDialog(GitHubRelease gitHubRelease, Control rootElement)
+        internal async Task DisplayNewUpdateDialog(GitHubRelease gitHubRelease, XamlRoot xamlRoot)
         {
             // Update settings so we won't auto prompt for this version (or lower) ever again.
             var versionNumber = gitHubRelease.GetVersionNumber();
@@ -120,7 +121,7 @@ namespace DLSS_Swapper.Data.GitHub
             var dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
             await dispatcherQueue.EnqueueAsync(async () =>
             {
-                var dialog = new EasyContentDialog(rootElement.XamlRoot)
+                var dialog = new EasyContentDialog(xamlRoot)
                 {
                     Title = $"Update Available - {gitHubRelease.Name}",
                     PrimaryButtonText = "Update",
@@ -138,9 +139,9 @@ namespace DLSS_Swapper.Data.GitHub
                     await Launcher.LaunchUriAsync(new Uri(gitHubRelease.HtmlUrl));
                 }
             });
-
         }
-        internal async Task DisplayWhatsNewDialog(GitHubRelease gitHubRelease, Control rootElement)
+
+        internal async Task DisplayWhatsNewDialog(GitHubRelease gitHubRelease, XamlRoot xamlRoot)
         {
             var contentUpdate = new MarkdownTextBlock()
             {
@@ -149,7 +150,7 @@ namespace DLSS_Swapper.Data.GitHub
                 Config = new MarkdownConfig(),
             };
 
-            var dialog = new EasyContentDialog(rootElement.XamlRoot)
+            var dialog = new EasyContentDialog(xamlRoot)
             {
                 Title = $"DLSS Swapper just updated - {gitHubRelease.Name}",
                 CloseButtonText = "Cancel",

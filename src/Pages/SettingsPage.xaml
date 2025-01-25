@@ -9,10 +9,13 @@
     xmlns:usercontrols="using:DLSS_Swapper.UserControls"
     xmlns:system="using:System"
     xmlns:local="using:DLSS_Swapper"
+    xmlns:ct_winui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
     <Page.Resources>
-        <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <ct_converters:BoolToVisibilityConverter x:Key="BoolToNegationVisibilityConverter"  TrueValue="Collapsed" FalseValue="Visible" />
+        <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter" />
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -27,7 +30,7 @@
 
         <Grid Grid.Row="0" Padding="16,0,16,0">
             <TextBlock Margin="16,0,0,0" Text="Settings" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
-            
+
             <!-- Needed to achieve parity in the looking with other sites -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <AppBarButton Label="" IsEnabled="False"/>
@@ -50,9 +53,9 @@
                     Margin="0,40,0,0"
                     Text="Theme Mode" />
                 <StackPanel x:Name="ThemePanel" Margin="0,10,0,0">
-                    <RadioButton x:Name="LightThemeRadioButton" GroupName="ThemeGroup" Tag="Light" Checked="ThemeRadioButton_Checked" Content="Light" />
-                    <RadioButton x:Name="DarkThemeRadioButton" GroupName="ThemeGroup" Tag="Dark" Checked="ThemeRadioButton_Checked" Content="Dark" />
-                    <RadioButton x:Name="DefaultThemeRadioButton" GroupName="ThemeGroup" Tag="Default" Checked="ThemeRadioButton_Checked" Content="Use system setting" />
+                    <RadioButton x:Name="LightThemeRadioButton" GroupName="ThemeGroup" Tag="Light" IsChecked="{x:Bind ViewModel.LightThemeSelected, Mode=TwoWay}" Content="Light" />
+                    <RadioButton x:Name="DarkThemeRadioButton" GroupName="ThemeGroup" Tag="Dark" IsChecked="{x:Bind ViewModel.DarkThemeSelected, Mode=TwoWay}" Content="Dark" />
+                    <RadioButton x:Name="DefaultThemeRadioButton" GroupName="ThemeGroup" Tag="Default" IsChecked="{x:Bind ViewModel.DefaultThemeSelected, Mode=TwoWay}" Content="Use system setting" />
                 </StackPanel>
 
 
@@ -63,23 +66,6 @@
                 <StackPanel Margin="0,10,0,0">
                     <usercontrols:GameLibrarySelectorControl SavesWhenToggled="true" />
                 </StackPanel>
-                
-                <!--
-                <TextBlock
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    Margin="0,40,0,0"
-                    Text="Custom Directories" />
-                <Button Content="＋ Add Directory" Margin="0,12,0,0" Command="{Binding AddCustomDirectoryCommand}" />
-                <ListView x:Name="CustomDirectoryView" Margin="0,9,0,0" SelectionMode="None" ItemTemplate="{StaticResource CustomDirectoryTemplate}" ItemsSource="{Binding CustomDirectories}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="Padding" Value="0"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Margin" Value="0, 3"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
-                -->
 
 
                 <TextBlock
@@ -87,20 +73,21 @@
                     Margin="0,40,0,0"
                     Text="DLSS Developer Options" />
                 <StackPanel Margin="0,10,0,0">
-                    <CheckBox Content="Show on-screen indicator" Checked="DLSSShowIndicator_Checked"  Margin="0,0,0,4"/>
-                    <CheckBox Content="Enable logging to file" Checked="DLSSEnableLogging_Checked" Margin="0,0,0,4"/>
-                    <CheckBox Content="Verbose logging" Checked="DLSSVerboseLogging_Checked" Margin="0,0,0,4"/>
-                    <CheckBox Content="Enable logging to console window" Checked="DLSSLoggingToWindow_Checked"  Margin="0,0,0,4"/>
+                    <CheckBox Content="Show on-screen indicator" IsChecked="{x:Bind ViewModel.DlssShowIndicator, Mode=TwoWay}"  Margin="0,0,0,4"/>
+                    <CheckBox Content="Enable logging to file" IsChecked="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
+                    <CheckBox Content="Verbose logging" IsChecked="{x:Bind ViewModel.DlssVerboseLogging, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
+                    <CheckBox Content="Enable logging to console window" IsChecked="{x:Bind ViewModel.DlssLoggingToWindow, Mode=TwoWay}"  Margin="0,0,0,4"/>
                 </StackPanel>
+
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="Allow Untrusted" />
                 <StackPanel Margin="0,10,0,0">
-                    <ToggleSwitch x:Name="AllowUntrustedToggleSwitch" Toggled="AllowUntrusted_Toggled" OffContent="No" OnContent="Yes" Margin="0,0,0,4"/>
+                    <ToggleSwitch IsOn="{x:Bind ViewModel.AllowUntrusted, Mode=TwoWay}" OffContent="No" OnContent="Yes" Margin="0,0,0,4"/>
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
-                        DLSS dlls are checked if they are trusted in Windows by validating the signature before being swapped into a game folder. If a dll fails signature validation then it will not be used. It is recommended to keep this off as the only known DLSS dlls to fail signature validation are 1.0.11 and 1.0.13.
+                        DLLs are checked if they are trusted in Windows by validating the signature before being swapped into a game folder. If a DLL fails signature validation then it will not be used. It is recommended to keep this off.
                     </TextBlock>
                 </StackPanel>
 
@@ -110,7 +97,7 @@
                     Margin="0,40,0,0"
                     Text="Allow Debug DLLs" />
                 <StackPanel Margin="0,10,0,0">
-                    <ToggleSwitch x:Name="AllowDebugDllsToggleSwitch" Toggled="AllowDebugDlls_Toggled" OffContent="No" OnContent="Yes" Margin="0,0,0,4"/>
+                    <ToggleSwitch IsOn="{x:Bind ViewModel.AllowDebugDlls, Mode=TwoWay}" OffContent="No" OnContent="Yes" Margin="0,0,0,4"/>
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
                         SDKs sometimes release debug DLLs which allow additional on-screen information to be displayed.
                     </TextBlock>
@@ -122,9 +109,9 @@
                     Margin="0,40,0,0"
                     Text="Logging" />
                 <StackPanel Margin="0,10,0,0">
-                    <ComboBox x:Name="LoggingComboBox" ItemsSource="{x:Bind LoggingLevels}" SelectionChanged="LoggingComboBox_SelectionChanged" />
+                    <ComboBox x:Name="LoggingComboBox" ItemsSource="{x:Bind ViewModel.LoggingLevels}" SelectedItem="{x:Bind ViewModel.LoggingLevel, Mode=TwoWay}" />
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
-                        This will write a log to your temp folder which should help diagnose issues. Your current log file is <Hyperlink Click="LogFile_Click"><Run Text="{x:Bind CurrentLogPath}" /></Hyperlink>.
+                        This will write a log to your temp folder which should help diagnose issues. Your current log file is <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenLogFileCommand}"><Run Text="{x:Bind ViewModel.CurrentLogPath}" /></Hyperlink>.
                     </TextBlock>
                 </StackPanel>
 
@@ -136,10 +123,13 @@
 
                 <TextBlock Margin="0,12,0,0">
                     Version: 
-                    <Run Text="{x:Bind Version}" />
+                    <Run Text="{x:Bind ViewModel.AppVersion}" />
                 </TextBlock>
-                <Button Content="Check for updates" Margin="0,12,0,0" Command="{Binding CheckForUpdatesCommand}" />
-
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,12,0,0" Spacing="16" >
+                    <Button Content="Check for updates" Command="{x:Bind ViewModel.CheckForUpdatesCommand}" />
+                    <ProgressRing Width="25" Height="25" IsIndeterminate="True" IsActive="{x:Bind ViewModel.IsCheckingForUpdates, Mode=OneWay}" />
+                </StackPanel>
+                                
                 <RichTextBlock Margin="0,24,0,0">
                     <Paragraph Margin="0,12,0,0">
                         Github:
@@ -154,10 +144,10 @@
                         <Hyperlink NavigateUri="https://www.reddit.com/r/DLSS_Swapper/">r/DLSS_Swapper</Hyperlink>
                     </Paragraph>
                     <Paragraph Margin="0,12,0,0">
-                        <Hyperlink Click="Acknowledgements_Click">Acknowledgements</Hyperlink>                        
+                        <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenAcknowledgementsCommand}">Acknowledgements</Hyperlink>
                     </Paragraph>
                 </RichTextBlock>
-                
+
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
@@ -165,7 +155,7 @@
                 <RichTextBlock Margin="0,12,0,0">
                     <Paragraph>
                         You can suggest a feature or report a problem or on the DLSS Swapper
-                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub repository</Hyperlink>.
+                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub repository</Hyperlink> .
                     </Paragraph>
                 </RichTextBlock>
 

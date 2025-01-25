@@ -104,12 +104,13 @@ namespace DLSS_Swapper.Data
         {
             get
             {
+                var devString = IsDevFile ? " (Debug)" : string.Empty;
                 if (string.IsNullOrEmpty(AdditionalLabel))
                 {
-                    return $"v{DisplayVersion}";
+                    return $"v{DisplayVersion}{devString}";
                 }
 
-                return $"v{DisplayVersion} ({AdditionalLabel})";
+                return $"v{DisplayVersion}{devString} ({AdditionalLabel})";
             }
         }
 

@@ -25,6 +25,7 @@
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
         <converters:DLSSStateVisibilityConverter x:Key="IsNotFoundConverter" DesierdState="NotFound" />
         <converters:DLSSStateVisibilityConverter x:Key="IsImportedConverter" DesierdState="Imported" />
+        <converters:BitmapImageUriConverter x:Key="BitmapImageUriConverter" />
 
         <ControlTemplate x:Key="LeftButtonsControlTemplate" TargetType="ContentControl">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" XYFocusKeyboardNavigation="Enabled" Padding="{ThemeResource ContentDialogPadding}" Background="{TemplateBinding Background}" Spacing="8">
@@ -89,7 +90,7 @@
                         <Border.Background>
                             <ImageBrush Stretch="UniformToFill">
                                 <ImageBrush.ImageSource>
-                                    <BitmapImage CreateOptions="IgnoreImageCache" UriSource="{x:Bind ViewModel.Game.CoverImage, Mode=OneWay}"/>
+                                    <BitmapImage CreateOptions="IgnoreImageCache" UriSource="{x:Bind ViewModel.Game.CoverImage, Mode=OneWay, Converter={StaticResource BitmapImageUriConverter}}"/>
                                 </ImageBrush.ImageSource>
                             </ImageBrush>
                         </Border.Background>

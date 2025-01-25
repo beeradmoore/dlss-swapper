@@ -57,7 +57,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{x:Bind FullName}" />
+                        <TextBlock Grid.Column="0" Text="{x:Bind DisplayName}" />
 
                         <ProgressRing Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsDownloadingConverter}, Mode=OneWay}" ToolTipService.ToolTip="Downloading" Minimum="0" Maximum="100" IsIndeterminate="false" Value="{x:Bind LocalRecord.DownloadProgress, Mode=OneWay}" HorizontalAlignment="Right" Width="20" Height="20"  />
 

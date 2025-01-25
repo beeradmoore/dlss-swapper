@@ -72,6 +72,11 @@ public partial class DLLPickerControlModel : ObservableObject
             _ => new List<DLLRecord>(),
         };
 
+        if (Settings.Instance.AllowDebugDlls == false)
+        {
+            DLLRecords.RemoveAll(x => x.IsDevFile == true);
+        }
+
         // Prevent DLSS 1.0 showing up with DLSS 2/3 and vice versa
         if (GameAssetType == GameAssetType.DLSS)
         {

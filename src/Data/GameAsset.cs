@@ -48,6 +48,46 @@ public class GameAsset : IEquatable<GameAsset>
     [property: Column("version")]
     public string Version { get; set; } = string.Empty;
 
+    string _displayVersion = string.Empty;
+
+    [property: Ignore]
+    public string DisplayVersion
+    {
+        get
+        {
+            // return cached version.
+            if (_displayVersion != string.Empty)
+            {
+                return _displayVersion;
+            }
+
+            var version = Version.AsSpan();
+
+            // Remove all the .0's, such that 2.5.0.0 becomes 2.5
+            while (version.EndsWith(".0"))
+            {
+                version = version.Slice(0, version.Length - 2);
+            }
+
+            _displayVersion = version.ToString();
+
+            // If the value is a single value, eg 1, make it 1.0
+            if (_displayVersion.Length == 1)
+            {
+                _displayVersion = $"{_displayVersion}.0";
+            }
+
+            return _displayVersion;
+        }
+    }
+
+    [property: Ignore]
+    public string DisplayName
+    {
+        // TODO: Improve to show relevant name
+        get { return DisplayVersion; }
+    }
+
     [property: Column("Hash")]
     public string Hash { get; set; } = string.Empty;
 

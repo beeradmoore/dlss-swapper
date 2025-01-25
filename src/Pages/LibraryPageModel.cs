@@ -13,6 +13,7 @@ using AsyncAwaitBestPractices.MVVM;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.WinUI;
+using CommunityToolkit.WinUI.Collections;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
@@ -48,7 +49,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         {
             IsSourceGrouped = true,
             Source = dllRecordGroups,
-            ItemsPath = new PropertyPath("DLLRecords"),
+            ItemsPath = new PropertyPath("AdvancedDLLRecordsCollectionView"),
         };
     }
 

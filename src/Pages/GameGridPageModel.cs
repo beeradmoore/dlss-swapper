@@ -47,23 +47,6 @@ internal partial class GameGridPageModel : ObservableObject
     {
         this.gameGridPage = gameGridPage;
 
-        /* 
-        CurrentCollectionViewSource = null; new CollectionViewSource()
-        {
-            IsSourceGrouped = true,
-            ItemsPath = new PropertyPath("Games"),
-            Source = new ObservableCollection<GameGroup>() { 
-                new GameGroup("TEST", 
-                    new System.Collections.ObjectModel.ObservableCollection<Data.Game>()
-                    {
-                        new SteamGame(),
-                    })
-            },
-        };
-        */
-
-
-
         ApplyGameGroupFilter();
      }
 

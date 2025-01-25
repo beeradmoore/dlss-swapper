@@ -114,8 +114,18 @@ namespace DLSS_Swapper.Data
             }
         }
 
+        LocalRecord? _localRecord = null;
+
         [JsonIgnore]
-        public LocalRecord? LocalRecord { get; set; } = null;
+        public LocalRecord? LocalRecord
+        {
+            get => _localRecord;
+            set
+            {
+                _localRecord = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         [JsonIgnore]
         public GameAssetType AssetType { get; set; } = GameAssetType.Unknown;

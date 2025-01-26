@@ -61,7 +61,7 @@
                  Message="This app is running with administrative privileges."
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
-        <GridView Grid.Row="2" x:Name="MainGridView" ItemsSource="{x:Bind ViewModel.LibraryCollectionViewSource.View}" SizeChanged="MainGridView_SizeChanged" SelectionChanged="MainGridView_SelectionChanged" SelectionMode="Single" IsSynchronizedWithCurrentItem="False" Margin="16">
+        <GridView Grid.Row="2" x:Name="MainGridView" ItemsSource="{x:Bind ViewModel.LibraryCollectionViewSource.View, Mode=OneWay}" SizeChanged="MainGridView_SizeChanged" SelectionChanged="MainGridView_SelectionChanged" SelectionMode="Single" IsSynchronizedWithCurrentItem="False" Margin="16">
 
             <GridView.GroupStyle>
                 <GroupStyle HidesIfEmpty="False">

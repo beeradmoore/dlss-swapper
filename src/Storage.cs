@@ -27,10 +27,15 @@ namespace DLSS_Swapper
             TypeInfoResolver = SourceGenerationContext.Default,
         };
 
-#if PORTABLE
-        static string storagePath => Path.Combine(AppContext.BaseDirectory, "StoredData");
-#else
-        static string storagePath => Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "DLSS Swapper");
+        static string? _storagePath;
+#if   PORTABLE == true  && DEBUG == true
+        public static string StoragePath => _storagePath ??= Path.Combine(AppContext.BaseDirectory, "StoredData", "DEBUG", Guid.NewGuid().ToString());
+#elif PORTABLE == true  && DEBUG == false
+        public static string StoragePath => _storagePath ??= Path.Combine(AppContext.BaseDirectory, "StoredData");
+#elif PORTABLE == false && DEBUG == true
+        public static string StoragePath => _storagePath ??= Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "DLSS Swapper", "DEBUG", Guid.NewGuid().ToString());
+#elif PORTABLE == false && DEBUG == false
+        public static string StoragePath => _storagePath  ??= Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "DLSS Swapper");
 #endif
 
 
@@ -58,22 +63,23 @@ namespace DLSS_Swapper
 
         public static string GetStorageFolder()
         {
-            return storagePath;
+            return StoragePath;
         }
 
         static string GetDynamicJsonFolder()
         {
-            return Path.Combine(storagePath, "json");
+            return Path.Combine(StoragePath, "json");
         }
 
         public static string GetDBPath()
         {
-            return Path.Combine(storagePath, "dlss_swapper.db");
+            CreateDirectoryIfNotExists(StoragePath);
+            return Path.Combine(StoragePath, "dlss_swapper.db");
         }
 
         public static string GetImageCachePath()
         {
-            return Path.Combine(storagePath, "image_cache");
+            return Path.Combine(StoragePath, "image_cache");
         }
 
         /// <summary>

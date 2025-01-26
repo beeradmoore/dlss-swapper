@@ -1,4 +1,10 @@
 ﻿using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.EpicGamesStore;
+using DLSS_Swapper.Data.GOG;
+using DLSS_Swapper.Data.Steam;
+using DLSS_Swapper.Data.UbisoftConnect;
+using DLSS_Swapper.Data.Xbox;
+using DLSS_Swapper.Interfaces;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -8,6 +14,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using MvvmHelpers;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,17 +41,16 @@ namespace DLSS_Swapper
     {
         public ElementTheme GlobalElementTheme { get; set; }
 
-        MainWindow _window;
-        public MainWindow MainWindow => _window;
+        MainWindow? _window;
+        public MainWindow MainWindow => _window ??= new MainWindow();
 
         public static App CurrentApp => (App)Application.Current;
 
-        internal DLSSRecords DLSSRecords { get; } = new DLSSRecords();
-        internal List<DLSSRecord> ImportedDLSSRecords { get; } = new List<DLSSRecord>();
+        //internal Manifest Manifest { get; } = new Manifest();
+        internal Manifest ImportedManifest { get; } = new Manifest();
 
         internal HttpClient _httpClient = new HttpClient();
         public HttpClient HttpClient => _httpClient;
-        //public ObservableRangeCollection<DLSSRecord> CurrentDLSSRecords { get; } = new ObservableRangeCollection<DLSSRecord>();
 
 
         /// <summary>
@@ -56,7 +62,7 @@ namespace DLSS_Swapper
             Logger.Init();
 
             var version = GetVersion();
-            var versionString = String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+            var versionString = string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
 
 
             Logger.Info($"App launch - v{versionString}", null);
@@ -64,6 +70,8 @@ namespace DLSS_Swapper
             _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper v{versionString}");
 
             GlobalElementTheme = Settings.Instance.AppTheme;
+
+            Database.Instance.Init();
 
             this.InitializeComponent();
         }
@@ -73,10 +81,9 @@ namespace DLSS_Swapper
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            _window = new MainWindow();
-            _window.Activate();
+            MainWindow.Activate();
 
             // No need to calculate this for portable app.
 #if !PORTABLE
@@ -95,8 +102,8 @@ namespace DLSS_Swapper
 
                 using (var dlssSwapperRegistryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\DLSS Swapper", true))
                 {
-                    var installLocation = dlssSwapperRegistryKey?.GetValue("InstallLocation") as String;
-                    if (String.IsNullOrEmpty(installLocation) == false && Directory.Exists(installLocation) == true)
+                    var installLocation = dlssSwapperRegistryKey?.GetValue("InstallLocation") as string;
+                    if (string.IsNullOrEmpty(installLocation) == false && Directory.Exists(installLocation) == true)
                     {
                         installSize += CalculateDirectorySize(installLocation);
                     }
@@ -131,37 +138,6 @@ namespace DLSS_Swapper
         }
 #endif
 
-
-        internal void LoadLocalRecordFromDLSSRecord(DLSSRecord dlssRecord, bool isImportedRecord = false)
-        {
-#if PORTABLE
-            var dllsPath = Path.Combine("StoredData", (isImportedRecord ? "imported_dlss_zip" : "dlss_zip"));
-#else
-            var dllsPath = Path.Combine(Storage.GetStorageFolder(), (isImportedRecord ? "imported_dlss_zip" : "dlss_zip"));
-#endif
-
-            var expectedPath = Path.Combine(dllsPath, $"{dlssRecord.Version}_{dlssRecord.MD5Hash}.zip");
-            
-            // Load record.
-            var localRecord = LocalRecord.FromExpectedPath(expectedPath, isImportedRecord);
-
-            if (isImportedRecord)
-            {
-                localRecord.IsImported = true;
-                localRecord.IsDownloaded = true;
-            }
-
-            // If the record exists we will update existing properties, if not we add it as new property.
-            if (dlssRecord.LocalRecord == null)
-            {
-                dlssRecord.LocalRecord = localRecord;
-            }
-            else
-            {
-                dlssRecord.LocalRecord.UpdateFromNewLocalRecord(localRecord);
-            }
-        }
-
         /*
         // Disabled because the non-async method seems faster.
         internal async Task LoadLocalRecordFromDLSSRecordAsync(DLSSRecord dlssRecord)
@@ -173,7 +149,7 @@ namespace DLSS_Swapper
 
             // If the record exists we will update existing properties, if not we add it as new property.
             var existingLocalRecord = LocalRecords.FirstOrDefault(x => x.Equals(localRecord));
-            if (existingLocalRecord == null)
+            if (existingLocalRecord is null)
             {
                 dlssRecord.LocalRecord = localRecord;
                 LocalRecords.Add(localRecord);
@@ -188,22 +164,6 @@ namespace DLSS_Swapper
         }
         */
 
-        internal void LoadLocalRecords()
-        {
-            // We attempt to load all local records, even if experemental is not enabled.
-            foreach (var dlssRecord in DLSSRecords.Stable)
-            {
-                LoadLocalRecordFromDLSSRecord(dlssRecord);
-            }
-            foreach (var dlssRecord in DLSSRecords.Experimental)
-            {
-                LoadLocalRecordFromDLSSRecord(dlssRecord);
-            }
-            foreach (var dlssRecord in ImportedDLSSRecords)
-            {
-                LoadLocalRecordFromDLSSRecord(dlssRecord, true);
-            }
-        }
 
         /*
         // Disabled because the non-async method seems faster. 
@@ -284,7 +244,7 @@ namespace DLSS_Swapper
 
         public Version GetVersion()
         {
-            return Assembly.GetExecutingAssembly().GetName().Version;
+            return Assembly.GetExecutingAssembly().GetName().Version ?? new Version();
         }
 
         public string GetVersionString()

@@ -120,7 +120,7 @@ namespace DLSS_Swapper
         [DllImport("CRYPT32.DLL", EntryPoint = "CryptQueryObject", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern Boolean CryptQueryObject(
             Int32 dwObjectType,
-            [MarshalAs(UnmanagedType.LPWStr)] String pvObject,
+            [MarshalAs(UnmanagedType.LPWStr)] string pvObject,
             uint dwExpectedContentTypeFlags,
             uint dwExpectedFormatTypeFlags,
             uint dwFlags,

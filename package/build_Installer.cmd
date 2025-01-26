@@ -1,7 +1,11 @@
 @echo off
 
-set app_version=1.0.5.0
+set app_version=1.1.0.0
 set initial_directory=%cd%
+
+REM Delete bin and obj directory
+rmdir /s /q ..\src\bin\
+rmdir /s /q ..\src\obj\
 
 REM create the output folder if it doesn't already exist.
 mkdir Output > NUL 2>&1
@@ -17,10 +21,6 @@ dotnet publish "..\src\DLSS Swapper.csproj" ^
     -r win-x64 ^
     --self-contained true ^
     -p:Platform=x64 ^
-    -p:PublishReadyToRun=true ^
-    -p:WindowsAppSDKSelfContained=true ^
-    -p:WindowsPackageType=None ^
-    -p:PublishTrimmed=false ^
     -p:PublishDir=bin\publish\unpackaged\ || goto :error
 
 echo.
@@ -33,7 +33,7 @@ echo.
 DEL NSIS\installer.exe > NUL 2>&1
 DEL NSIS\FileList.nsh > NUL 2>&1
 
-powershell Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; ./NSIS/create_nsh_file_list.ps1 || goto :error
+pwsh.exe .\NSIS\create_nsh_file_list.ps1 || goto :error
 
 makensis.exe NSIS\Installer.nsi || goto :error
  

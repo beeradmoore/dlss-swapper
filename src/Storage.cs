@@ -40,6 +40,7 @@ namespace DLSS_Swapper
             //CreateDirectoryIfNotExists(GetTemp());
             CreateDirectoryIfNotExists(GetStorageFolder());
             CreateDirectoryIfNotExists(GetDynamicJsonFolder());
+            CreateDirectoryIfNotExists(GetImageCachePath());
         }
 
 
@@ -74,6 +75,16 @@ namespace DLSS_Swapper
             return Path.Combine(storagePath, "json");
         }
 
+        public static string GetDBPath()
+        {
+            return Path.Combine(storagePath, "dlss_swapper.db");
+        }
+
+        public static string GetImageCachePath()
+        {
+            return Path.Combine(storagePath, "image_cache");
+        }
+
         /// <summary>
         /// When given a file path it will make the directory structure so that file is ready to be created in. A directory should not be passed to this. Use CreateDirectoryIfNotExists instead for that.
         /// </summary>
@@ -87,6 +98,11 @@ namespace DLSS_Swapper
                 return false;
             }
             var directory = Path.GetDirectoryName(path);
+            if (string.IsNullOrEmpty(directory))
+            {
+                Logger.Error("A directory should not be empty in CreateDirectoryForFileIfNotExists");
+                return false;
+            }
             return CreateDirectoryIfNotExists(directory);
         }
 
@@ -137,7 +153,7 @@ namespace DLSS_Swapper
         /// Loads settings from settings.json in the apps dynamic json folder.
         /// </summary>
         /// <returns>Settings object, or null if it could not be loaded</returns>
-        internal static async Task<Settings> LoadSettingsJsonAsync()
+        internal static async Task<Settings?> LoadSettingsJsonAsync()
         {
             var settingsFile = Path.Combine(GetDynamicJsonFolder(), "settings.json");
 
@@ -162,18 +178,19 @@ namespace DLSS_Swapper
         }
 
         /// <summary>
-        /// Saves DLSSRecords object to the known position for a dynamic dlss_records.json file.
+        /// Saves Manifest object to the known position for a dynamic manifest.json file.
         /// </summary>
-        /// <param name="items">DLSSRecords object to be saved</param>
+        /// <param name="manifest">Manifest object to be saved</param>
         /// <returns>true if the object was saved</returns>
-        internal static async Task<bool> SaveDLSSRecordsJsonAsync(DLSSRecords items)
+        // Previously: SaveDLSSRecordsJsonAsync
+        internal static async Task<bool> SaveManifestJsonAsync(Manifest manifest)
         {
-            var dlssRecordsFile = Path.Combine(GetDynamicJsonFolder(), "dlss_records.json");
+            var dlssRecordsFile = Path.Combine(GetDynamicJsonFolder(), "manifest.json");
             try
             {
                 using (var stream = File.Open(dlssRecordsFile, FileMode.Create))
                 {
-                    await JsonSerializer.SerializeAsync(stream, items, SourceGenerationContext.Default.DLSSRecords);
+                    await JsonSerializer.SerializeAsync(stream, manifest, SourceGenerationContext.Default.Manifest);
                 }
                 return true;
             }
@@ -186,82 +203,83 @@ namespace DLSS_Swapper
 
 
         /// <summary>
-        /// Loads dlss_records.json file. Will attempt to load dynamic file first and then static if dyanmic does not exist.
+        /// Loads manifest.json file. Will attempt to load dynamic file first and then static if dyanmic does not exist.
         /// </summary>
-        /// <returns>DLSSRecords object. This object could be null if we failed to load DLSS records</returns>
-        internal static async Task<DLSSRecords> LoadDLSSRecordsJsonAsync()
+        /// <returns>Manifest object. This could be a blank object if we failed to load DLL records</returns>
+        internal static async Task<Manifest> LoadManifestJsonAsync()
         {  
-            var dlssRecordsFile = Path.Combine(GetDynamicJsonFolder(), "dlss_records.json");
+            var manifestFile = Path.Combine(GetDynamicJsonFolder(), "manifest.json");
 
-            if (File.Exists(dlssRecordsFile))
+            if (File.Exists(manifestFile))
             {
                 try
                 {
-                    using (var stream = File.Open(dlssRecordsFile, FileMode.Open))
+                    using (var stream = File.Open(manifestFile, FileMode.Open))
                     {
-                        var dlssRecords = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.DLSSRecords);
-                        if (dlssRecords != null)
+                        var manifest = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.Manifest);
+                        if (manifest is not null)
                         {
-                            return dlssRecords;
+                            return manifest;
                         } 
                     }
                 }
                 catch (Exception err)
                 {
                     Logger.Error(err.Message);
-                    return new DLSSRecords();
+                    return new Manifest();
                 }
             }
 
-            // If we got to here there is no dynamic dlss_records.json file to load, so load static one instead.
-            dlssRecordsFile = Path.Combine(GetStaticJsonFolder(), "dlss_records.json");
-            if (File.Exists(dlssRecordsFile))
+            // If we got to here there is no dynamic manifest.json file to load, so load static one instead.
+            manifestFile = Path.Combine(GetStaticJsonFolder(), "manifest.json");
+            if (File.Exists(manifestFile))
             {
                 try
                 {
-                    using (var stream = File.Open(dlssRecordsFile, FileMode.Open))
+                    using (var stream = File.Open(manifestFile, FileMode.Open))
                     {
-                        var dlssRecords = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.DLSSRecords);
-                        if (dlssRecords != null)
+                        var manifest = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.Manifest);
+                        if (manifest is not null)
                         {
-                            return dlssRecords;
+                            return manifest;
                         }
                     }
                 }
                 catch (Exception err)
                 {
                     Logger.Error(err.Message);
-                    return new DLSSRecords();
+                    return new Manifest();
                 }
             }
             else
             {
-                Logger.Error("There was no static dlss_records.json file to load.");
-                return new DLSSRecords();
+                Logger.Error("There was no static manifest.json file to load.");
+                return new Manifest();
             }
 
-            // If we got here it means we failed to deserialize the dlss_records.json
-            Logger.Error("There an issue attempting to load dlss_records.json.");
-            return new DLSSRecords();
+            // If we got here it means we failed to deserialize the manifest.json
+            Logger.Error("There an issue attempting to load manifest.json.");
+            return new Manifest();
         }
 
         /// <summary>
-        /// Loads a list of imported DLSS records.
+        /// Loads an imported manifest file of all imported DLL records.
         /// </summary>
-        /// <returns>List of imported DLSS records. This list will be empty if no imported recrods were found.</returns>
-        internal static async Task<List<DLSSRecord>> LoadImportedDLSSRecordsJsonAsync()
+        /// <returns>Manifest object of imported DLL records. This will contain empty lists if no imported recrods were found.</returns>
+        // Previously: LoadImportedDLSSRecordsJsonAsync
+        internal static async Task<Manifest> LoadImportedManifestJsonAsync()
         {
-            var importedDLSSRecordsFile = Path.Combine(GetDynamicJsonFolder(), "imported_dlss_records.json");
+            var importedDLSSRecordsFile = Path.Combine(GetDynamicJsonFolder(), "imported_manifest.json");
             if (File.Exists(importedDLSSRecordsFile) == true)
             {
                 try
                 {
                     using (var stream = File.Open(importedDLSSRecordsFile, FileMode.Open))
                     {
-                        var importedDLSSRecords = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.ListDLSSRecord);
-                        if (importedDLSSRecords != null)
+                        var importedManifest = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.Manifest);
+                        if (importedManifest is not null)
                         {
-                            return importedDLSSRecords;
+                            return importedManifest;
                         }
                     }
                 }
@@ -271,23 +289,24 @@ namespace DLSS_Swapper
                 }
             }
 
-            // If we failed to load we return a blank list.
-            return new List<DLSSRecord>();
+            // If we failed to load we return a blank manifest.
+            return new Manifest();
         }
 
         /// <summary>
-        /// Saves the imported DLSS records to imported_dlss_records.json
+        /// Saves the imported DLSS records to imported_manifest.json
         /// </summary>
         /// <returns></returns>
-        internal static async Task<bool> SaveImportedDLSSRecordsJsonAsync()
+        // Previously: SaveImportedDLSSRecordsJsonAsync
+        internal static async Task<bool> SaveImportedManifestJsonAsync()
         {
-            var importedDLSSRecordsFile = Path.Combine(GetDynamicJsonFolder(), "imported_dlss_records.json");
-            CreateDirectoryForFileIfNotExists(importedDLSSRecordsFile);
+            var importedManifestFile = Path.Combine(GetDynamicJsonFolder(), "imported_manifest.json");
+            CreateDirectoryForFileIfNotExists(importedManifestFile);
             try
             {
-                using (var stream = File.Open(importedDLSSRecordsFile, FileMode.Create))
+                using (var stream = File.Open(importedManifestFile, FileMode.Create))
                 {
-                    await JsonSerializer.SerializeAsync(stream, App.CurrentApp.ImportedDLSSRecords, SourceGenerationContext.Default.ListDLSSRecord);
+                    await JsonSerializer.SerializeAsync(stream, App.CurrentApp.ImportedManifest, SourceGenerationContext.Default.Manifest);
                 }
                 return true;
             }

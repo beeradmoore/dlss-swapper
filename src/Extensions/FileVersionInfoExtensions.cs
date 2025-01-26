@@ -14,7 +14,7 @@ namespace DLSS_Swapper.Extensions
         {
             try
             {
-                using (var fileStream = new FileStream(fileVersionInfo.FileName, FileMode.Open))
+                using (var fileStream = File.OpenRead(fileVersionInfo.FileName))
                 {
                     return fileStream.GetMD5Hash();
                 }
@@ -22,9 +22,10 @@ namespace DLSS_Swapper.Extensions
             catch (Exception err)
             {
                 Logger.Error($"{fileVersionInfo.FileName}, {err.Message}");
+                Debugger.Break();
             }
 
-            return String.Empty;
+            return string.Empty;
         }
 
         internal static string GetFormattedFileVersion(this FileVersionInfo fileVersionInfo)

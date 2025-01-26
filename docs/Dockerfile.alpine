@@ -1,0 +1,12 @@
+FROM ruby:3.3.4-alpine
+
+RUN apk update && apk add --no-cache make build-base git
+
+COPY Gemfile .
+
+RUN gem update bundler
+RUN bundle install
+
+WORKDIR /src/site
+
+CMD ["jekyll", "serve", "--watch", "--force_polling", "--host", "0.0.0.0", "-P", "4000"]

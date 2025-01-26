@@ -4,9 +4,10 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
 using CommunityToolkit.WinUI;
-using CommunityToolkit.WinUI.UI.Controls;
 using DLSS_Swapper.UserControls;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Windows.System;
@@ -22,7 +23,7 @@ namespace DLSS_Swapper.Data.GitHub
         /// Queries GitHub and returns the latest GitHubRelease object, or null if the request failed.
         /// </summary>
         /// <returns>Latest GitHubRelease object, or null if the request failed</returns>
-        internal async Task<GitHubRelease> FetchLatestRelease()
+        internal async Task<GitHubRelease?> FetchLatestRelease()
         {
             try
             {
@@ -36,7 +37,7 @@ namespace DLSS_Swapper.Data.GitHub
             }
         }
 
-        internal async Task<GitHubRelease> GetReleaseFromTag(string tag)
+        internal async Task<GitHubRelease?> GetReleaseFromTag(string tag)
         {
             try
             {
@@ -54,10 +55,10 @@ namespace DLSS_Swapper.Data.GitHub
         /// Queries GitHub and returns a GitHubRelease only if a newer version was detected, otherwise null
         /// </summary>
         /// <returns>GitHubRelease object if an update is available, otherwise null.</returns>
-        internal async Task<GitHubRelease> CheckForNewGitHubRelease()
+        internal async Task<GitHubRelease?> CheckForNewGitHubRelease()
         {
             var latestRelease = await FetchLatestRelease().ConfigureAwait(false);
-            if (latestRelease == null)
+            if (latestRelease is null)
             {
                 return null;
             }
@@ -96,7 +97,7 @@ namespace DLSS_Swapper.Data.GitHub
             return true;
         }
 
-        internal async Task DisplayNewUpdateDialog(GitHubRelease gitHubRelease, Control rootElement)
+        internal async Task DisplayNewUpdateDialog(GitHubRelease gitHubRelease, XamlRoot xamlRoot)
         {
             // Update settings so we won't auto prompt for this version (or lower) ever again.
             var versionNumber = gitHubRelease.GetVersionNumber();
@@ -113,13 +114,14 @@ namespace DLSS_Swapper.Data.GitHub
             {
                 Text = yourVersion + gitHubRelease.Body,
                 Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
+                Config = new MarkdownConfig(),
             };
 
 
             var dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
             await dispatcherQueue.EnqueueAsync(async () =>
             {
-                var dialog = new EasyContentDialog(rootElement.XamlRoot)
+                var dialog = new EasyContentDialog(xamlRoot)
                 {
                     Title = $"Update Available - {gitHubRelease.Name}",
                     PrimaryButtonText = "Update",
@@ -137,17 +139,18 @@ namespace DLSS_Swapper.Data.GitHub
                     await Launcher.LaunchUriAsync(new Uri(gitHubRelease.HtmlUrl));
                 }
             });
-
         }
-        internal async Task DisplayWhatsNewDialog(GitHubRelease gitHubRelease, Control rootElement)
+
+        internal async Task DisplayWhatsNewDialog(GitHubRelease gitHubRelease, XamlRoot xamlRoot)
         {
             var contentUpdate = new MarkdownTextBlock()
             {
                 Text = gitHubRelease.Body,
                 Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
+                Config = new MarkdownConfig(),
             };
 
-            var dialog = new EasyContentDialog(rootElement.XamlRoot)
+            var dialog = new EasyContentDialog(xamlRoot)
             {
                 Title = $"DLSS Swapper just updated - {gitHubRelease.Name}",
                 CloseButtonText = "Cancel",

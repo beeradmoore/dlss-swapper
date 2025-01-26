@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
 using YamlDotNet.Serialization;
@@ -25,37 +26,41 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         private record UbisoftGameRegistryRecord
         {
             internal int InstallId { get; init; } = 0;
-            internal string InstallPath { get; init; } = String.Empty;
+            internal string InstallPath { get; init; } = string.Empty;
         }
 
 
         public GameLibrary GameLibrary => GameLibrary.UbisoftConnect;
         public string Name => "Ubisoft Connect";
 
-        List<Game> _loadedGames = new List<Game>();
-        public List<Game> LoadedGames { get { return _loadedGames; } }
+        public Type GameType => typeof(UbisoftConnectGame);
 
-        List<Game> _loadedDLSSGames = new List<Game>();
-        public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
+        static UbisoftConnectLibrary? instance = null;
+        public static UbisoftConnectLibrary Instance => instance ??= new UbisoftConnectLibrary();
 
-        string _installPath = String.Empty;
+        private UbisoftConnectLibrary()
+        {
+
+        }
+
+        string _installPath = string.Empty;
 
         public bool IsInstalled()
         {
-            return String.IsNullOrEmpty(GetInstallPath()) == false;
+            return string.IsNullOrEmpty(GetInstallPath()) == false;
         }
 
 
-        public async Task<List<Game>> ListGamesAsync()
+        public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
         {
-            _loadedGames.Clear();
-            _loadedDLSSGames.Clear();
             var games = new List<Game>();
 
             if (IsInstalled() == false)
             {
                 return games;
             }
+
+            var cachedGames = GameManager.Instance.GetGames<UbisoftConnectGame>();
 
             // Gat a list of installed games.
             // NOTE: Some games are installed from Ubisoft Connect via Steam (eg. Far Cry: Blood Dragon)
@@ -69,7 +74,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                     using (var ubisoftConnectInstallsKey = hklm.OpenSubKey(@"SOFTWARE\Ubisoft\Launcher\Installs"))
                     {
                         // if ubisoftConnectRegistryKey is null then Ubisoft is not installed .
-                        if (ubisoftConnectInstallsKey == null)
+                        if (ubisoftConnectInstallsKey is null)
                         {
                             throw new Exception("Could not detect ubisoftConnectInstallsKey");
                         }
@@ -82,18 +87,18 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                             {
                                 using (var ubisoftConnectInstallDirKey = ubisoftConnectInstallsKey.OpenSubKey(subKeyName))
                                 {
-                                    if (ubisoftConnectInstallDirKey == null)
+                                    if (ubisoftConnectInstallDirKey is null)
                                     {
                                         break;
                                     }
 
-                                    var gameInstallDir = ubisoftConnectInstallDirKey.GetValue("InstallDir") as String;
-                                    if (String.IsNullOrEmpty(gameInstallDir) == false)
+                                    var gameInstallDir = ubisoftConnectInstallDirKey.GetValue("InstallDir") as string;
+                                    if (string.IsNullOrEmpty(gameInstallDir) == false)
                                     {
                                         installedTitles[installId] = new UbisoftGameRegistryRecord()
                                         {
                                             InstallId = installId,
-                                            InstallPath = gameInstallDir,
+                                            InstallPath = PathHelpers.NormalizePath(gameInstallDir),
                                         };
                                     }
                                 }
@@ -152,7 +157,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                 var ubisoftConnectConfigurationItem = yamlDeserializer.Deserialize<UbisoftConnectConfigurationItem>(reader);
 
                                 // This is less than ideal. This usually happens with DLC or pre-orders. 
-                                if (ubisoftConnectConfigurationItem == null || ubisoftConnectConfigurationItem.Root == null)
+                                if (ubisoftConnectConfigurationItem is null || ubisoftConnectConfigurationItem.Root is null)
                                 {
                                     Logger.Info("Could not load Ubisoft Connect item. This is sometimes expected for certain titles.");
                                     continue;
@@ -169,22 +174,22 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                 */
 
                                 // This can be expected. If there is no installer item there is no game to install.
-                                if (ubisoftConnectConfigurationItem.Root.Installer == null)
+                                if (ubisoftConnectConfigurationItem.Root.Installer is null)
                                 {
                                     continue;
                                 }
 
                                 // This is not expected. 
-                                if (ubisoftConnectConfigurationItem.Root.StartGame == null)
+                                if (ubisoftConnectConfigurationItem.Root.StartGame is null)
                                 {
                                     Logger.Info($"StartGameNode is null for {ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier}. This is likely a region specific installer.");
                                     continue;
                                 }
 
 
-                                var localImage = String.Empty;
-                                var remoteImage = String.Empty;
-                                if (ubisoftConnectConfigurationItem.Root.LogoImage != null)
+                                var localImage = string.Empty;
+                                var remoteImage = string.Empty;
+                                if (ubisoftConnectConfigurationItem.Root.LogoImage is not null)
                                 {
                                     if (ubisoftConnectConfigurationItem.Root.ThumbImage.EndsWith(".jpg", StringComparison.InvariantCultureIgnoreCase) || ubisoftConnectConfigurationItem.Root.ThumbImage.EndsWith(".png", StringComparison.InvariantCultureIgnoreCase))
                                     {
@@ -206,12 +211,26 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                     }
                                 }
 
-                                var game = new UbisoftConnectGame(localImage, remoteImage)
+                                var gameFromCache = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString());
+                                var game = gameFromCache ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString());
+                                game.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;
+                                game.InstallPath = PathHelpers.NormalizePath(installedTitles[configurationRecord.InstallId].InstallPath);
+                                game.LocalHeaderImage = localImage;
+                                game.RemoteHeaderImage = remoteImage;
+                                await game.SaveToDatabaseAsync();
+
+                                // If the game does not need a reload, check if we loaded from cache.
+                                // If we didn't load it from cache we will later need to call ProcessGame.
+                                if (game.NeedsReload == false && gameFromCache is null)
                                 {
-                                    Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier,
-                                    InstallPath = installedTitles[configurationRecord.InstallId].InstallPath,
-                                };
-                                game.DetectDLSS();
+                                    game.NeedsReload = true;
+                                }
+
+                                if (game.NeedsReload == true || forceLoadAll == true)
+                                {
+                                    game.ProcessGame();
+                                }
+
                                 games.Add(game);
                             }
                             catch (Exception err)
@@ -225,15 +244,22 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
             games.Sort();
 
-            _loadedGames.AddRange(games);
-            _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));
+            // Delete games that are no longer loaded, they are likely uninstalled
+            foreach (var cachedGame in cachedGames)
+            {
+                // Game is to be deleted.
+                if (games.Contains(cachedGame) == false)
+                {
+                    await cachedGame.DeleteAsync();
+                }
+            }
 
             return games;
         }
 
         string GetInstallPath()
         {
-            if (String.IsNullOrEmpty(_installPath) == false)
+            if (string.IsNullOrEmpty(_installPath) == false)
             {
                 return _installPath;
             }
@@ -244,26 +270,27 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 {
                     using (var ubisoftConnectRegistryKey = hklm.OpenSubKey(@"SOFTWARE\Ubisoft\Launcher"))
                     {
-                        if (ubisoftConnectRegistryKey == null)
+                        // if ubisoftConnectRegistryKey is null then Ubisoft Connect is not installed.
+                        if (ubisoftConnectRegistryKey is null)
                         {
-                            return String.Empty;
+                            return string.Empty;
                         }
-                        // if ubisoftConnectRegistryKey is null then steam is not installed.
-                        var installPath = ubisoftConnectRegistryKey?.GetValue("InstallDir") as String;
-                        if (String.IsNullOrEmpty(installPath) == false)
+
+                        var installPath = ubisoftConnectRegistryKey.GetValue("InstallDir") as string;
+                        if (string.IsNullOrEmpty(installPath) == false)
                         {
                             _installPath = installPath;
                         }
 
-                        return _installPath ?? String.Empty;
+                        return _installPath;
                     }
                 }
             }
             catch (Exception err)
             {
-                _installPath = String.Empty;
+                _installPath = string.Empty;
                 Logger.Error(err.Message);
-                return String.Empty;
+                return string.Empty;
             }
         }
 
@@ -428,6 +455,27 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 }
             }
             return data;
+        }
+
+        public async Task LoadGamesFromCacheAsync()
+        {
+            try
+            {
+                UbisoftConnectGame[] games;
+                using (await Database.Instance.Mutex.LockAsync())
+                {
+                    games = await Database.Instance.Connection.Table<UbisoftConnectGame>().ToArrayAsync().ConfigureAwait(false);
+                }
+                foreach (var game in games)
+                {
+                    await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
+                    GameManager.Instance.AddGame(game);
+                }
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err.Message);
+            }
         }
     }
 }

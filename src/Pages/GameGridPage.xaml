@@ -4,17 +4,25 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ct_converters="using:CommunityToolkit.WinUI.UI.Converters"
+    xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
+    xmlns:converters="using:DLSS_Swapper.Converters"
     xmlns:data="using:DLSS_Swapper.Data"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:system="using:System"
+    xmlns:pages="using:DLSS_Swapper.Pages"
     mc:Ignorable="d"
+    d:DataContext="pages:GameGridPageModel"
     Loaded="Page_Loaded"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     NavigationCacheMode="Required">
-
     <Page.Resources>
-        <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-    </Page.Resources>
+        <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter" />
+        <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+        <converters:BitmapImageUriConverter x:Key="BitmapImageUriConverter" />
 
+
+        
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -22,40 +30,68 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Padding="16,0,16,0">
-            <TextBlock Text="Games" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="16">
+                <TextBlock Text="Games" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+                <muxc:ProgressRing IsActive="True" VerticalAlignment="Center" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"  />
+            </StackPanel>
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <AppBarButton Label="Refresh" Click="RefreshButton_Click">
+                <AppBarButton Label="New DLLs" Command="{Binding UnknownAssetsFoundButtonCommand}" Visibility="{x:Bind data:GameManager.Instance.UnknownAssetsFound, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{Binding IsGameListLoading, Converter={StaticResource BoolNegationConverter}}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE946;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+                <AppBarButton Label="Add Game" Command="{Binding AddManualGameButtonCommand}" IsEnabled="{Binding IsGameListLoading, Converter={StaticResource BoolNegationConverter}}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE710;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+                <AppBarButton Label="Refresh" Command="{Binding RefreshGamesButtonCommand}" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE72C;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Icon="Filter" Label="Filter" Click="FilterButton_Click">
+                <AppBarButton Icon="Filter" Label="Filter" Command="{Binding FilterGamesButtonCommand}" IsEnabled="{Binding IsGameListLoading, Converter={StaticResource BoolNegationConverter}}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE71C;" />
                     </AppBarButton.Content>
                 </AppBarButton>
             </StackPanel>
+
+            <InfoBar x:Name="AdminInfoBar"
+                 Grid.Row="1"
+                 IsOpen="True"
+                 Severity="Warning"
+                 IsClosable="False"
+                 Title="Warning"
+                 Message="This app is running with administrative privileges."
+                 Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
         </Grid>
 
-        <InfoBar x:Name="AdminInfoBar"
-             Grid.Row="1"
-             IsOpen="True"
-             Severity="Warning"
-             IsClosable="False"
-             Title="Warning"
-             Message="This app is running with administrative privileges."
-             Visibility="{Binding RunsAsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" />
+        <GridView Grid.Row="1" x:Name="MainGridView" ItemsSource="{Binding CurrentCollectionView, Mode=OneWay}" IsSynchronizedWithCurrentItem="False" SelectionMode="Single" Padding="20" SelectionChanged="MainGridView_SelectionChanged">
 
-        <GridView Grid.Row="2" x:Name="MainGridView" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20">
+            <!--SelectionChanged="MainGridView_SelectionChanged"-->
+            <!--
+            <Interactivity:Interaction.Behaviors> 
+                <Core:EventTriggerBehavior EventName="SelectionChanged">
+                    <Core:InvokeCommandAction Command="{x:Bind ViewModel.GetSelectedItem}" CommandParameter="{x:Bind MyListView.SelectedItems,Mode=OneWay}"/>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+            -->
             <GridView.GroupStyle>
                 <GroupStyle HidesIfEmpty="True">
                     <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="data:GameGroup">
                             <Grid Margin="0">
                                 <TextBlock Text="{Binding Name}" Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
                             </Grid>
@@ -63,7 +99,7 @@
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
             </GridView.GroupStyle>
-
+            
             <GridView.ItemContainerStyle>
                 <Style TargetType="GridViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -89,7 +125,11 @@
                         <!-- Weird, but allows image to strecth centered rather than left align -->
                         <Border BorderThickness="0" Width="200" Height="300">
                             <Border.Background>
-                                <ImageBrush ImageSource="{Binding HeaderImage}" Stretch="UniformToFill"/>
+                                <ImageBrush Stretch="UniformToFill">
+                                    <ImageBrush.ImageSource>
+                                        <BitmapImage CreateOptions="IgnoreImageCache" UriSource="{Binding CoverImage, Mode=OneWay, Converter={StaticResource BitmapImageUriConverter}}"/>
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
                             </Border.Background>
                         </Border>
                         
@@ -105,18 +145,14 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Column="0" FontWeight="Bold" Text="DLSS" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" />
-                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSSVersion}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" />
+                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSS.Version, FallbackValue='N/A'}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Visibility="{Binding Processing, Converter={StaticResource InverseBoolToVisibilityConverter}}" />
+                            <ProgressRing Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Width="16" Height="16" Visibility="{Binding Processing, Converter={StaticResource BoolToVisibilityConverter}}" />
                         </Grid>
                     </Grid>
                 </DataTemplate>
 
             </GridView.ItemTemplate>
         </GridView>
-
-        <Grid x:Name="LoadingStackPanel" Grid.Row="2" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <!--SystemControlAcrylicElementBrush-->
-            <muxc:ProgressRing IsActive="True" Width="60" Height="60" />
-        </Grid>
 
     </Grid>
 

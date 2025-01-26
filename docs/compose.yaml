@@ -1,0 +1,8 @@
+services:
+  gh-pages:
+    build:
+      dockerfile: Dockerfile.alpine
+    ports:
+      - "4000:4000"
+    volumes:
+      - "./:/src/site"

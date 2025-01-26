@@ -57,10 +57,11 @@ Function OnInstFilesPre
 FunctionEnd
 
 
+; This is disabled until I can figure out how to make it launch as admin
 ; Used to launch DLSS Swapper after install is complete.
-Function LaunchLink
-  ExecShell "" "$SMPROGRAMS\DLSS Swapper.lnk"
-FunctionEnd
+;Function LaunchLink
+;  ExecShell "" "$SMPROGRAMS\DLSS Swapper.lnk"
+;FunctionEnd
 
 
 ; For removing Start Menu shortcut in Windows 7
@@ -71,14 +72,13 @@ RequestExecutionLevel highest
 ; App version information
 Name "DLSS Swapper"
 !define MUI_ICON "..\..\src\Assets\icon.ico"
-!define MUI_VERSION "1.0.5.0"
+!define MUI_VERSION "1.1.0.0"
 !define MUI_PRODUCT "DLSS Swapper"
-VIProductVersion "1.0.5.0"
+VIProductVersion "1.1.0.0"
 VIAddVersionKey "ProductName" "DLSS Swapper"
-VIAddVersionKey "ProductVersion" "1.0.5.0"
+VIAddVersionKey "ProductVersion" "1.1.0.0"
 VIAddVersionKey "FileDescription" "DLSS Swapper installer"
-VIAddVersionKey "FileVersion" "1.0.5.0"
-
+VIAddVersionKey "FileVersion" "1.1.0.0"
 
 ; Pages
 !insertmacro MUI_PAGE_WELCOME
@@ -89,10 +89,10 @@ VIAddVersionKey "FileVersion" "1.0.5.0"
 
 ; These indented statements modify settings for MUI_PAGE_FINISH
 !define MUI_FINISHPAGE_NOAUTOCLOSE
-!define MUI_FINISHPAGE_RUN
-!define MUI_FINISHPAGE_RUN_CHECKED
-!define MUI_FINISHPAGE_RUN_TEXT "Launch now"
-!define MUI_FINISHPAGE_RUN_FUNCTION "LaunchLink"
+;!define MUI_FINISHPAGE_RUN
+;!define MUI_FINISHPAGE_RUN_CHECKED
+;!define MUI_FINISHPAGE_RUN_TEXT "Launch now"
+;!define MUI_FINISHPAGE_RUN_FUNCTION "LaunchLink"
 !insertmacro MUI_PAGE_FINISH
 
 
@@ -149,7 +149,7 @@ Section
   CreateShortcut "$SMPROGRAMS\DLSS Swapper.lnk" "$INSTDIR\DLSS Swapper.exe"
 
   WriteRegStr SHCTX "${UNINST_KEY}" "DisplayName" "DLSS Swapper"
-  WriteRegStr SHCTX "${UNINST_KEY}" "DisplayVersion" "1.0.5.0"
+  WriteRegStr SHCTX "${UNINST_KEY}" "DisplayVersion" "1.1.0.0"
   WriteRegStr SHCTX "${UNINST_KEY}" "Publisher" "beeradmoore"
   WriteRegStr SHCTX "${UNINST_KEY}" "DisplayIcon" "$\"$INSTDIR\DLSS Swapper.exe$\""
   WriteRegStr SHCTX "${UNINST_KEY}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""

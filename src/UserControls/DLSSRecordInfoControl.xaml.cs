@@ -1,4 +1,4 @@
-using DLSS_Swapper.Data;
+﻿using DLSS_Swapper.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -21,11 +21,12 @@ namespace DLSS_Swapper.UserControls
 {
     public sealed partial class DLSSRecordInfoControl : UserControl
     {
-        public DLSSRecordInfoControl(DLSSRecord dlssRecord)
+        public DLLRecord DLLRecord { get; private set; }
+
+        public DLSSRecordInfoControl(DLLRecord dllRecord)
         {
             this.InitializeComponent();
-
-            DataContext = dlssRecord;
+            this.DLLRecord = dllRecord;
         }
     }
 }

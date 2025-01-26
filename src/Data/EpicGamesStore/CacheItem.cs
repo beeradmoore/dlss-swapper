@@ -13,7 +13,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         public string Id { get; set; } = string.Empty;
 
         [JsonPropertyName("title")]
-        public string Title { get; set; } = String.Empty;
+        public string Title { get; set; } = string.Empty;
 
         [JsonPropertyName("keyImages")]
         public CacheItemKeyImage[] KeyImages { get; set; } = new CacheItemKeyImage[0];
@@ -22,10 +22,10 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         internal class CacheItemKeyImage
         {
             [JsonPropertyName("type")]
-            public string Type { get; set; } = String.Empty;
+            public string Type { get; set; } = string.Empty;
 
             [JsonPropertyName("url")]
-            public string Url { get; set; } = String.Empty;
+            public string Url { get; set; } = string.Empty;
 
             [JsonPropertyName("width")]
             public int Width { get; set; }
@@ -37,10 +37,10 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             public int Size { get; set; }
 
             [JsonPropertyName("uploadedDate")]
-            public string UploadedDate { get; set; } = String.Empty;
+            public string UploadedDate { get; set; } = string.Empty;
 
             [JsonPropertyName("md5")]
-            public string MD5 { get; set; } = String.Empty;
+            public string MD5 { get; set; } = string.Empty;
         }
     }
 }

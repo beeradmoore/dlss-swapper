@@ -2,8 +2,7 @@
     x:Class="DLSS_Swapper.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DLSS_Swapper"
-    xmlns:ui="using:Windows.UI">
+    xmlns:local="using:DLSS_Swapper">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,7 +13,7 @@
                 <ResourceDictionary>
                     <ResourceDictionary.ThemeDictionaries>
                         <ResourceDictionary x:Key="Dark">
-                            <ui:Color x:Key="WindowCaptionBackground">Transparent</ui:Color>
+                            <Color x:Key="WindowCaptionBackground">Transparent</Color>
                             <Color x:Key="WindowCaptionBackgroundDisabled">Transparent</Color>
                             <Color x:Key="WindowCaptionForeground">#FFFFFF</Color>
                             <Color x:Key="WindowCaptionForegroundDisabled">#666666</Color>

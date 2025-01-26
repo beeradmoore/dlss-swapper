@@ -31,17 +31,16 @@ internal partial class GameGridPageModel : ObservableObject
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLoading))]
-    bool isGameListLoading = true;
+    public partial bool IsGameListLoading { get; set; } = true;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLoading))]
-    bool isDLSSLoading = true;
+    public partial bool IsDLSSLoading { get; set; } = true;
 
     public bool IsLoading => (IsGameListLoading || IsDLSSLoading);
 
     [ObservableProperty]
-    ICollectionView? currentCollectionView = null;
-
+    public partial ICollectionView? CurrentCollectionView { get; set; } = null;
 
     public GameGridPageModel(GameGridPage gameGridPage)
     {

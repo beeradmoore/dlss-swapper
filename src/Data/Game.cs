@@ -35,15 +35,15 @@ namespace DLSS_Swapper.Data
         public string PlatformId { get; set; } = string.Empty;
 
         [ObservableProperty]
-        [property: Column("title")]
-        string title = string.Empty;
+        [Column("title")]
+        public partial string Title { get; set; } = string.Empty;
 
         [Column("install_path")]
         public string InstallPath { get; set; } = string.Empty;
 
         [ObservableProperty]
-        [property: Column("cover_image")]
-        string? coverImage = null;
+        [Column("cover_image")]
+        public partial string? CoverImage { get; set; } = null;
 
         /*
         [ObservableProperty]
@@ -68,21 +68,21 @@ namespace DLSS_Swapper.Data
         */
 
         [ObservableProperty]
-        [property: Column("has_swappable_items")]
-        bool hasSwappableItems = false;
+        [Column("has_swappable_items")]
+        public partial bool HasSwappableItems { get; set; } = false;
 
         [ObservableProperty]
-        [property: Column("notes")]
-        string notes = string.Empty;
+        [Column("notes")]
+        public partial string Notes { get; set; } = string.Empty;
 
         [ObservableProperty]
-        [property: Column("is_favourite")]
-        bool isFavourite = false;
+        [Column("is_favourite")]
+        public partial bool IsFavourite { get; set; } = false;
 
         [ObservableProperty]
-        [property: Ignore]
-        bool processing = false;
-
+        [Ignore]
+        public partial bool Processing { get; set; } = false;
+        
         [Ignore]
         public abstract GameLibrary GameLibrary { get; }
 
@@ -107,37 +107,36 @@ namespace DLSS_Swapper.Data
         bool _isLoadingCoverImage = false;
 
         [ObservableProperty]
-        [property:Ignore]
-        GameAsset? currentDLSS = null;
+        [Ignore]
+        public partial GameAsset? CurrentDLSS { get; set; } = null;
 
         [ObservableProperty]
-        [property: Ignore]
-        GameAsset? currentDLSS_G = null;
+        [Ignore]
+        public partial GameAsset? CurrentDLSS_G { get; set; } = null;
 
         [ObservableProperty]
-        [property: Ignore]
-        GameAsset? currentDLSS_D = null;
+        [Ignore]
+        public partial GameAsset? CurrentDLSS_D { get; set; } = null;
 
         [ObservableProperty]
-        [property: Ignore]
-        GameAsset? currentFSR_31_DX12 = null;
+        [Ignore]
+        public partial GameAsset? CurrentFSR_31_DX12 { get; set; } = null;
 
         [ObservableProperty]
-        [property: Ignore]
-        GameAsset? currentFSR_31_VK = null;
+        [Ignore]
+        public partial GameAsset? CurrentFSR_31_VK { get; set; } = null;
 
         [ObservableProperty]
-        [property: Ignore]
-        GameAsset? currentXeSS = null;
+        [Ignore]
+        public partial GameAsset? CurrentXeSS { get; set; } = null;
 
         [ObservableProperty]
-        [property: Ignore]
-        GameAsset? currentXeLL = null;
+        [Ignore]
+        public partial GameAsset? CurrentXeLL { get; set; } = null;
 
         [ObservableProperty]
-        [property: Ignore]
-        GameAsset? currentXeSS_FG = null;
-                
+        [Ignore]
+        public partial GameAsset? CurrentXeSS_FG { get; set; } = null;
 
         protected void SetID()
         {

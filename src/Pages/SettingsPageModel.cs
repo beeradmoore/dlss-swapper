@@ -23,72 +23,76 @@ internal partial class SettingsPageModel : ObservableObject
     public string AppVersion => App.CurrentApp.GetVersionString();
 
     [ObservableProperty]
-    bool _lightThemeSelected = false;
+    public partial bool LightThemeSelected { get; set; } = false;
 
     [ObservableProperty]
-    bool _darkThemeSelected = false;
+    public partial bool DarkThemeSelected { get; set; } = false;
 
     [ObservableProperty]
-    bool _defaultThemeSelected = false;
+    public partial bool DefaultThemeSelected { get; set; } = false;
 
     [ObservableProperty]
-    bool _dlssShowIndicator = false;
-
-    [ObservableProperty]
-    bool _dlssEnableLogging = false;
+    public partial bool DlssShowIndicator { get; set; } = false;
     
     [ObservableProperty]
-    bool _dlssVerboseLogging = false;
+    public partial bool DlssEnableLogging { get; set; } = false;
     
     [ObservableProperty]
-    bool _dlssLoggingToWindow = false;
+    public partial bool DlssVerboseLogging { get; set; } = false;
+    
+    [ObservableProperty]
+    public partial bool DlssLoggingToWindow { get; set; } = false;
 
     [ObservableProperty]
-    bool _allowUntrusted = false;
+    public partial bool AllowUntrusted { get; set; } = false;
+    
+    [ObservableProperty]
+    public partial bool AllowDebugDlls { get; set; } = false;
+    
+    [ObservableProperty]
+    public partial LoggingLevel LoggingLevel { get; set; } = LoggingLevel.Error;
 
     [ObservableProperty]
-    bool _allowDebugDlls = false;
+    public partial bool IsCheckingForUpdates { get; set; } = false;
 
-    [ObservableProperty]
-    LoggingLevel _loggingLevel = LoggingLevel.Error;
-
-    [ObservableProperty]
-    bool _isCheckingForUpdates = false;
+    bool _hasSetDefaults = false;
 
     public SettingsPageModel(SettingsPage page)
     {
         _weakPage = new WeakReference<SettingsPage>(page);
 
         _dlssSettingsManager = new DLSSSettingsManager();
-
-        _lightThemeSelected = Settings.Instance.AppTheme == ElementTheme.Light;
-        _darkThemeSelected = Settings.Instance.AppTheme == ElementTheme.Dark;
-        _defaultThemeSelected = Settings.Instance.AppTheme == ElementTheme.Default;
-
-        // Load DLSS Developer Settings from registry.
-        _dlssShowIndicator = _dlssSettingsManager.GetShowDlssIndicator();
+        LightThemeSelected = Settings.Instance.AppTheme == ElementTheme.Light;
+        DarkThemeSelected = Settings.Instance.AppTheme == ElementTheme.Dark;
+        DefaultThemeSelected = Settings.Instance.AppTheme == ElementTheme.Default;
+        DlssShowIndicator = _dlssSettingsManager.GetShowDlssIndicator();
         var logLevel = _dlssSettingsManager.GetLogLevel();
         if (logLevel == 1)
         {
-            _dlssEnableLogging = true;
+            DlssEnableLogging = true;
         }
         else if (logLevel == 2)
         {
-            _dlssEnableLogging = true;
-            _dlssVerboseLogging = true;
+            DlssEnableLogging = true;
+            DlssVerboseLogging = true;
         }
-        _dlssLoggingToWindow = _dlssSettingsManager.GetLoggingWindow();
 
+        DlssLoggingToWindow = _dlssSettingsManager.GetLoggingWindow();
+        AllowUntrusted = Settings.Instance.AllowUntrusted;
+        AllowDebugDlls = Settings.Instance.AllowDebugDlls;
+        LoggingLevel = Settings.Instance.LoggingLevel;
 
-        _allowUntrusted = Settings.Instance.AllowUntrusted;
-        _allowDebugDlls = Settings.Instance.AllowDebugDlls;
-        _loggingLevel = Settings.Instance.LoggingLevel;
+        _hasSetDefaults = true;
     }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
 
+        if (_hasSetDefaults == false)
+        {
+            return;
+        }
 
         if (e.PropertyName == nameof(LightThemeSelected))
         {

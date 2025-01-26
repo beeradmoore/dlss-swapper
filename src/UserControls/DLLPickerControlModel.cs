@@ -25,15 +25,13 @@ public partial class DLLPickerControlModel : ObservableObject
     public List<DLLRecord> DLLRecords { get; private set;  }
 
     [ObservableProperty]
-    DLLRecord? selectedDLLRecord = null;
-    
-    [ObservableProperty]
-    bool canReset = false;
-
+    public partial DLLRecord? SelectedDLLRecord { get; set; } = null;
 
     [ObservableProperty]
-    bool canSwap = false;
+    public partial bool CanReset { get; set; } = false;
 
+    [ObservableProperty]
+    public partial bool CanSwap { get; set; } = false;
 
     public bool CanCloseParentDialog { get; set; } = false;
 

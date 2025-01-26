@@ -18,7 +18,8 @@
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <Version>1.0.6.0</Version>
     <UseRidGraph>true</UseRidGraph>
-    <Nullable>enable</Nullable>     
+    <Nullable>enable</Nullable>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">

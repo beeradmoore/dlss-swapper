@@ -1,5 +1,4 @@
 ﻿using DLSS_Swapper.Data;
-using DLSS_Swapper.Data.CustomDirectory;
 using DLSS_Swapper.Data.EpicGamesStore;
 using DLSS_Swapper.Data.GOG;
 using DLSS_Swapper.Data.Steam;

@@ -313,8 +313,6 @@ internal partial class GameManager : ObservableObject
         return null;
     }
 
-
-
     public List<TGame> GetGames<TGame>() where TGame : Game
     {
         lock (gameLock)
@@ -329,5 +327,21 @@ internal partial class GameManager : ObservableObject
             }
             return games;           
         }
+    }
+
+
+    public bool CheckIfGameIsAdded(string installPath)
+    {
+        lock (gameLock)
+        {
+            foreach (var game in AllGames)
+            {
+                if (game.InstallPath?.Equals(installPath, StringComparison.OrdinalIgnoreCase) == true)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

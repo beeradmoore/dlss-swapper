@@ -5,16 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 
-namespace DLSS_Swapper.Data.CustomDirectory;
+namespace DLSS_Swapper.Data.ManuallyAdded;
 
 public class ManuallyAddedLibrary : IGameLibrary
 {
     public GameLibrary GameLibrary => GameLibrary.ManuallyAdded;
     public string Name => "Manually Added";
-
-    public List<Game> LoadedGames { get; } = new List<Game>();
-
-    public List<Game> LoadedDLSSGames { get; } = new List<Game>();
 
     public Type GameType => typeof(ManuallyAddedGame);
 
@@ -29,9 +25,6 @@ public class ManuallyAddedLibrary : IGameLibrary
 
     public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
     {
-        LoadedGames.Clear();
-        LoadedDLSSGames.Clear();
-
         // Not monitoring for cachedGames like in other libraries, as every game is from cache anyway.
 
         var games = new List<Game>();
@@ -42,16 +35,13 @@ public class ManuallyAddedLibrary : IGameLibrary
         }
         foreach (var dbGame in dbGames)
         {
-
             // TODO: Handle process game
             dbGame.ProcessGame();
             games.Add(dbGame);
         }
 
         games.Sort();
-        LoadedGames.AddRange(games);
-        LoadedDLSSGames.AddRange(games.Where(g => g.HasSwappableItems));
-        
+
         return games;
     }
 

@@ -210,17 +210,8 @@ If you have checked these and your game is still not showing up there may be a b
                 return;
             }
 
-            /*
-            var manualGameLibrary = GameLibraries.Single(x => x.GameLibrary == GameLibrary.ManuallyAdded);
 
-            // This will allow adding existing game manually, EG. Steam game can be added manually. There will be some bad things
-            // in the UI where a user may update DLSS in the Steam copy but does not show up as changed in the manually added version.
-            // The workaround to this would be to check all games here but it will have the flaw of missing a game (eg. if Steam is disabled,
-            // install game on Steam, manually add game to DLSS Swapper, then enable Steam. We can check every library when adding their games
-            // that they don't exist in ManuallyAdded list, but then its a real pain to have to answer the questions of "Why doesn't game X show
-            // in the Steam section".
-            // Keeping this like this allows users to disable Steam but add the one specific Steam game they want to be able to swap DLSS in.
-            var gameFolderAlreadyExists = manualGameLibrary.LoadedGames.Any(x => x.InstallPath == installPath);
+            var gameFolderAlreadyExists = GameManager.Instance.CheckIfGameIsAdded(installPath);
             if (gameFolderAlreadyExists == true)
             {
                 var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
@@ -252,9 +243,7 @@ If you have checked these and your game is still not showing up there may be a b
                     var game = manuallyAddGameModel.Game;
                     await game.SaveToDatabaseAsync();
                     game.ProcessGame();
-
-                    await manualGameLibrary.ListGamesAsync();
-                    FilterGames();
+                    GameManager.Instance.AddGame(game);
                 }
                 else
                 {
@@ -262,7 +251,6 @@ If you have checked these and your game is still not showing up there may be a b
                     await manuallyAddGameModel.Game.DeleteAsync();
                 }
             }
-            */
         }
         catch (Exception err)
         {

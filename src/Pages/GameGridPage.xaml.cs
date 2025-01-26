@@ -31,7 +31,6 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Pickers;
 using Windows.System;
-using DLSS_Swapper.Data.CustomDirectory;
 using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.CodeDom;

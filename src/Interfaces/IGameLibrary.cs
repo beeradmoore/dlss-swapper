@@ -4,7 +4,7 @@ using DLSS_Swapper.Data.GOG;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;
-using DLSS_Swapper.Data.CustomDirectory;
+using DLSS_Swapper.Data.ManuallyAdded;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -30,8 +30,6 @@ namespace DLSS_Swapper.Interfaces
     {
         GameLibrary GameLibrary { get; }
         string Name { get; }
-        List<Game> LoadedGames { get; }
-        List<Game> LoadedDLSSGames { get; }
         Type GameType { get; }
 
         Task<List<Game>> ListGamesAsync(bool forceLoadAll);

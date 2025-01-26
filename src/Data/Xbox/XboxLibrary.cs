@@ -23,12 +23,6 @@ namespace DLSS_Swapper.Data.Xbox
         public GameLibrary GameLibrary => GameLibrary.XboxApp;
         public string Name => "Xbox App";
 
-        List<Game> _loadedGames = new List<Game>();
-        public List<Game> LoadedGames { get { return _loadedGames; } }
-
-        List<Game> _loadedDLSSGames = new List<Game>();
-        public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
-
         public Type GameType => typeof(XboxGame);
 
         static XboxLibrary? instance = null;
@@ -49,9 +43,6 @@ namespace DLSS_Swapper.Data.Xbox
 
         public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
         {
-            _loadedGames.Clear();
-            _loadedDLSSGames.Clear();
-
             var games = new List<Game>();
 
             if (IsInstalled() == false)
@@ -251,9 +242,6 @@ namespace DLSS_Swapper.Data.Xbox
                     await cachedGame.DeleteAsync();
                 }
             }
-
-            _loadedGames.AddRange(games);
-            _loadedDLSSGames.AddRange(games.Where(g => g.HasSwappableItems == true));
 
             // Dumb workaround for async Task method. 
             await Task.Delay(10);

@@ -8,12 +8,12 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using DLSS_Swapper.Data;
-using DLSS_Swapper.Data.CustomDirectory;
 using DLSS_Swapper.Data.EpicGamesStore;
 using DLSS_Swapper.Data.GOG;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;
+using DLSS_Swapper.Data.ManuallyAdded;
 using Nito.AsyncEx;
 using SQLite;
 

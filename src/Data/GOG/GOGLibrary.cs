@@ -21,12 +21,6 @@ namespace DLSS_Swapper.Data.GOG
         public GameLibrary GameLibrary => GameLibrary.GOG;
         public string Name => "GOG";
 
-        List<Game> _loadedGames = new List<Game>();
-        public List<Game> LoadedGames { get { return _loadedGames; } }
-
-        List<Game> _loadedDLSSGames = new List<Game>();
-        public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
-
         public Type GameType => typeof(GOGGame);
 
         static GOGLibrary? instance = null;
@@ -57,10 +51,6 @@ namespace DLSS_Swapper.Data.GOG
 
         public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
         {
-            IsInstalled();
-            _loadedGames.Clear();
-            _loadedDLSSGames.Clear();
-
             if (IsInstalled() == false)
             {
                 return new List<Game>();
@@ -308,9 +298,6 @@ namespace DLSS_Swapper.Data.GOG
                     await cachedGame.DeleteAsync();                    
                 }
             }
-
-            _loadedGames.AddRange(gogGames);
-            _loadedDLSSGames.AddRange(gogGames.Where(g => g.HasSwappableItems == true));
 
             return new List<Game>(gogGames);
         }

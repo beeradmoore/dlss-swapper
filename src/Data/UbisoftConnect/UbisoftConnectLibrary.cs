@@ -33,12 +33,6 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         public GameLibrary GameLibrary => GameLibrary.UbisoftConnect;
         public string Name => "Ubisoft Connect";
 
-        List<Game> _loadedGames = new List<Game>();
-        public List<Game> LoadedGames { get { return _loadedGames; } }
-
-        List<Game> _loadedDLSSGames = new List<Game>();
-        public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
-
         public Type GameType => typeof(UbisoftConnectGame);
 
         static UbisoftConnectLibrary? instance = null;
@@ -59,8 +53,6 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
         {
-            _loadedGames.Clear();
-            _loadedDLSSGames.Clear();
             var games = new List<Game>();
 
             if (IsInstalled() == false)
@@ -261,9 +253,6 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                     await cachedGame.DeleteAsync();
                 }
             }
-
-            _loadedGames.AddRange(games);
-            _loadedDLSSGames.AddRange(games.Where(g => g.HasSwappableItems == true));
 
             return games;
         }

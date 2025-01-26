@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 using SQLite;
 
-namespace DLSS_Swapper.Data.CustomDirectory;
+namespace DLSS_Swapper.Data.ManuallyAdded;
 
 [Table("ManuallyAddedGame")]
 public class ManuallyAddedGame : Game
@@ -31,7 +31,7 @@ public class ManuallyAddedGame : Game
     protected override Task UpdateCacheImageAsync()
     {
         // NOOP, the image is manually managed by the user.
-        CoverImage = string.Empty;
+        CoverImage = null;
         return Task.CompletedTask;
     }
 
@@ -39,11 +39,9 @@ public class ManuallyAddedGame : Game
     {
         var didChange = ParentUpdateFromGame(game);
 
-        //Debugger.Break();
-
         if (game is ManuallyAddedGame manuallyAddedGame)
         {
-            //_localHeaderImages = xboxGame._localHeaderImages;
+
         }
 
         return didChange;

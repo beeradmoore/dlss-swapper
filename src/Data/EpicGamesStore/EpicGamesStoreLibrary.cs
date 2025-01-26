@@ -19,12 +19,6 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         public GameLibrary GameLibrary => GameLibrary.EpicGamesStore;
         public string Name => "Epic Games Store";
 
-        List<Game> _loadedGames = new List<Game>();
-        public List<Game> LoadedGames { get { return _loadedGames; } }
-
-        List<Game> _loadedDLSSGames = new List<Game>();
-        public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
-
         public Type GameType => typeof(EpicGamesStoreGame);
 
         static EpicGamesStoreLibrary? instance = null;
@@ -42,9 +36,6 @@ namespace DLSS_Swapper.Data.EpicGamesStore
 
         public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
         {
-            _loadedGames.Clear();
-            _loadedDLSSGames.Clear();
-
             var games = new List<Game>();
             var epicRootDirectory = GetEpicRootDirectory();
 
@@ -189,9 +180,6 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                     await cachedGame.DeleteAsync();
                 }
             }
-
-            _loadedGames.AddRange(games);
-            _loadedDLSSGames.AddRange(games.Where(g => g.HasSwappableItems == true));
 
             return games;
         }

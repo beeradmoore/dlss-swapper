@@ -17,12 +17,6 @@ namespace DLSS_Swapper.Data.Steam
         public GameLibrary GameLibrary => GameLibrary.Steam;
         public string Name => "Steam";
 
-        List<Game> _loadedGames = new List<Game>();
-        public List<Game> LoadedGames { get { return _loadedGames; } }
-
-        List<Game> _loadedDLSSGames = new List<Game>();
-        public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
-
         public Type GameType => typeof(SteamGame);
 
         static SteamLibrary? instance = null;
@@ -42,9 +36,6 @@ namespace DLSS_Swapper.Data.Steam
 
         public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
         {
-            _loadedGames.Clear();
-            _loadedDLSSGames.Clear();
-
             // If we don't detect a steam install patg return an empty list.
             if (IsInstalled() == false)
             {
@@ -140,9 +131,6 @@ namespace DLSS_Swapper.Data.Steam
                     await cachedGame.DeleteAsync();
                 }
             }
-
-            _loadedGames.AddRange(games);
-            _loadedDLSSGames.AddRange(games.Where(g => g.HasSwappableItems == true));
 
             return games;
         }

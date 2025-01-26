@@ -155,8 +155,8 @@ public partial class GameControlModel : ObservableObject
             if (result == ContentDialogResult.Primary)
             {
                 await Game.DeleteAsync();
+                GameManager.Instance.RemoveGame(Game);
                 gameControl.Hide();
-                // TODO: Refresh game lists.
             }
         }
     }

@@ -3,6 +3,10 @@
 set app_version=1.0.6.0
 set initial_directory=%cd%
 
+REM Delete bin and obj directory
+rmdir /s /q ..\src\bin\
+rmdir /s /q ..\src\obj\
+
 REM create the output folder if it doesn't already exist.
 mkdir Output > NUL 2>&1
 

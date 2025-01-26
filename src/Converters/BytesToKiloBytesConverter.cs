@@ -1,5 +1,5 @@
 ﻿using System;
-using Humanizer;
+using ByteSizeLib;
 using Microsoft.UI.Xaml.Data;
 
 namespace DLSS_Swapper.Converters;
@@ -11,8 +11,8 @@ internal class BytesToKiloBytesConverter : IValueConverter
 
         if (value is long bytes)
         {
-            var hBytes = bytes.Bytes();
-            return Math.Ceiling(hBytes.Kilobytes).ToString("n0") + " KB";
+            var hBytes = ByteSize.FromBytes(bytes);
+            return Math.Ceiling(hBytes.KiloBytes).ToString("n0") + " KB";
         }
 
         return string.Empty;

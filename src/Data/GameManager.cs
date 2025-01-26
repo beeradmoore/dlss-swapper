@@ -26,8 +26,13 @@ internal partial class GameManager : ObservableObject
     public CollectionViewSource GroupedGameCollectionViewSource { get; init; }
     public CollectionViewSource UngroupedGameCollectionViewSource { get; init; }
 
+    [ObservableProperty]
+    public partial bool UnknownAssetsFound { get; set; } = false;
+
+    List<UnknownGameAsset> _unknownGameAssets { get; } = new List<UnknownGameAsset>();
 
     object gameLock = new object();
+    object unknownGameAsseetLock = new object();
 
     GameGroup allGamesGroup;
     GameGroup favouriteGamesGroup;
@@ -105,7 +110,7 @@ internal partial class GameManager : ObservableObject
     private GameManager()
     {
         //AllGames.CollectionChanged += AllGames_CollectionChanged;
-        
+
         FavouriteGamesView = new AdvancedCollectionView(AllGames, true);
         FavouriteGamesView.Filter = GetPredicateForFavouriteGames(Settings.Instance.HideNonDLSSGames);
         FavouriteGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
@@ -115,7 +120,7 @@ internal partial class GameManager : ObservableObject
         AllGamesView.Filter = GetPredicateForAllGames(Settings.Instance.HideNonDLSSGames);
         //AllGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
         AllGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
-        
+
 
         allGamesGroup = new GameGroup(string.Empty, AllGamesView);
         favouriteGamesGroup = new GameGroup("Favourites", FavouriteGamesView);
@@ -144,7 +149,7 @@ internal partial class GameManager : ObservableObject
 
             var gameGroup = new GameGroup(gameLibrary.Name, gameView);
             groupedList.Add(gameGroup);
-            libraryGameGroups[gameLibraryEnum] = new GameGroup(gameLibrary.Name, gameView);            
+            libraryGameGroups[gameLibraryEnum] = new GameGroup(gameLibrary.Name, gameView);
         }
 
 
@@ -185,6 +190,9 @@ internal partial class GameManager : ObservableObject
 
     public async Task LoadGamesFromCacheAsync()
     {
+        UnknownAssetsFound = false;
+        _unknownGameAssets.Clear();
+
         var tasks = new Dictionary<GameLibrary, Task>();
         foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
         {
@@ -292,7 +300,7 @@ internal partial class GameManager : ObservableObject
         }
     }
 
-    
+
     public TGame? GetGame<TGame>(string platformId) where TGame : Game
     {
         lock (gameLock)
@@ -306,7 +314,7 @@ internal partial class GameManager : ObservableObject
                     {
                         return platformGame;
                     }
-                }                
+                }
             }
         }
 
@@ -325,7 +333,7 @@ internal partial class GameManager : ObservableObject
                     games.Add(tGame);
                 }
             }
-            return games;           
+            return games;
         }
     }
 
@@ -343,5 +351,37 @@ internal partial class GameManager : ObservableObject
             }
         }
         return false;
+    }
+
+
+    public void AddUnknownGameAssets(GameLibrary gameLibrary, string gameTitle, List<GameAsset> gameAssets)
+    {
+        lock (unknownGameAsseetLock)
+        {
+            if (UnknownAssetsFound == false)
+            {
+                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    UnknownAssetsFound = true;
+                });
+            }
+
+            foreach (var gameAsset in gameAssets)
+            {
+                _unknownGameAssets.Add(new UnknownGameAsset(gameLibrary, gameTitle, gameAsset));
+            }
+        }
+    }
+
+    public List<UnknownGameAsset> GetUnknownGameAssets()
+    {
+        var unknownGameAssets = new List<UnknownGameAsset>();
+
+        lock (unknownGameAsseetLock)
+        {
+            unknownGameAssets.AddRange(_unknownGameAssets);
+        }
+
+        return unknownGameAssets;
     }
 }

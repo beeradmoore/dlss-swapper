@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="DLSS_Swapper.UserControls.NewDLLsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DLSS_Swapper.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel Orientation="Vertical" Spacing="12">
+            <TextBlock TextWrapping="Wrap">
+                While loading your games some new DLLs have been discovered which are not in the DLSS Swapper manifest.
+                You can help us add these files by submitting a GitHub issue.</TextBlock>
+
+            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Step 1: Create new issue" />
+            <StackPanel Orientation="Horizontal" Spacing="12">
+                <Button Command="{x:Bind ViewModel.OpenGitHubIssueCommand}">Create new GitHub issue</Button>
+                <TextBlock Text="(GitHub account required)" VerticalAlignment="Center" />
+            </StackPanel>
+            
+            <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="Wrap">
+                If the button does not work try here,
+                <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper-manifest-builder/issues/">https://github.com/beeradmoore/dlss-swapper-manifest-builder/issues/</Hyperlink>
+            </TextBlock>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Step 2: Copy title" />                
+                <Button Command="{x:Bind ViewModel.CopyTitleCommand}" ToolTipService.ToolTip="Copy" Style="{StaticResource TextBlockButtonStyle}">
+                    <FontIcon Glyph="&#xE8C8;" />
+                </Button>
+            </StackPanel>
+            <TextBox Text="{x:Bind ViewModel.Title}" IsReadOnly="True" />
+
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Step 3: Copy body" />
+                <Button Command="{x:Bind ViewModel.CopyBodyCommand}" ToolTipService.ToolTip="Copy" Style="{StaticResource TextBlockButtonStyle}">
+                    <FontIcon Glyph="&#xE8C8;" />
+                </Button>
+            </StackPanel>
+            <TextBox Text="{x:Bind ViewModel.Body}" AcceptsReturn="True" TextWrapping="Wrap" Height="200" IsReadOnly="True" />
+
+            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Step 4: Submit your issue" />
+            <TextBlock TextWrapping="Wrap">You do not have to submit the DLLs. We will track them down based on the information provided.</TextBlock>
+
+            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" HorizontalAlignment="Center">Thanks for helping!</TextBlock>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

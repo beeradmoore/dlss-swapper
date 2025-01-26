@@ -312,4 +312,20 @@ If you have checked these and your game is still not showing up there may be a b
         CurrentCollectionView = GameManager.Instance.GetGameCollection();
     }
 
+    [RelayCommand]
+    async Task UnknownAssetsFoundButtonAsync()
+    {
+        var newDllsControl = new NewDLLsControl();
+
+        var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
+        {
+            Title = "New DLLs Found",
+            CloseButtonText = "Close",
+            Content = newDllsControl,
+        };
+        dialog.Resources["ContentDialogMinWidth"] = 700;
+        dialog.Resources["ContentDialogMaxWidth"] = 700;
+        await dialog.ShowAsync();
+    }
+
 }

@@ -44,8 +44,13 @@
                 <TextBlock Text="Games" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
                 <muxc:ProgressRing IsActive="True" VerticalAlignment="Center" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"  />
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <AppBarButton Label="New DLLs" Command="{Binding UnknownAssetsFoundButtonCommand}" Visibility="{x:Bind data:GameManager.Instance.UnknownAssetsFound, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{Binding IsGameListLoading, Converter={StaticResource BoolNegationConverter}}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE946;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
                 <AppBarButton Label="Add Game" Command="{Binding AddManualGameButtonCommand}" IsEnabled="{Binding IsGameListLoading, Converter={StaticResource BoolNegationConverter}}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE710;" />

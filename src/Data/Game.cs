@@ -214,6 +214,8 @@ namespace DLSS_Swapper.Data
                 var xessDllPaths = Directory.GetFiles(InstallPath, "libxess.dll", enumerationOptions);
                 */
 
+                var unknownGameAssets = new List<GameAsset>();
+
                 foreach (var dllPath in dllPaths)
                 {
                     var dllName = Path.GetFileName(dllPath);
@@ -230,6 +232,11 @@ namespace DLSS_Swapper.Data
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
 
+                        if (gameAsset.IsInKnownRecords() == false)
+                        {
+                            unknownGameAssets.Add(gameAsset);
+                        }
+
                         LoadBackupForGameAsset(gameAsset);
                     }
                     else if (dllName == "nvngx_dlssg.dll")
@@ -242,6 +249,11 @@ namespace DLSS_Swapper.Data
                         };
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
+
+                        if (gameAsset.IsInKnownRecords() == false)
+                        {
+                            unknownGameAssets.Add(gameAsset);
+                        }
 
                         LoadBackupForGameAsset(gameAsset);
                     }
@@ -256,6 +268,11 @@ namespace DLSS_Swapper.Data
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
 
+                        if (gameAsset.IsInKnownRecords() == false)
+                        {
+                            unknownGameAssets.Add(gameAsset);
+                        }
+
                         LoadBackupForGameAsset(gameAsset);
                     }
                     else if (dllName == "amd_fidelityfx_dx12.dll")
@@ -268,6 +285,11 @@ namespace DLSS_Swapper.Data
                         };
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
+
+                        if (gameAsset.IsInKnownRecords() == false)
+                        {
+                            unknownGameAssets.Add(gameAsset);
+                        }
 
                         LoadBackupForGameAsset(gameAsset);
                     }
@@ -282,6 +304,11 @@ namespace DLSS_Swapper.Data
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
 
+                        if (gameAsset.IsInKnownRecords() == false)
+                        {
+                            unknownGameAssets.Add(gameAsset);
+                        }
+
                         LoadBackupForGameAsset(gameAsset);
                     }
                     else if (dllName == "libxess.dll")
@@ -294,6 +321,11 @@ namespace DLSS_Swapper.Data
                         };
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
+
+                        if (gameAsset.IsInKnownRecords() == false)
+                        {
+                            unknownGameAssets.Add(gameAsset);
+                        }
 
                         LoadBackupForGameAsset(gameAsset);
                     }
@@ -308,6 +340,11 @@ namespace DLSS_Swapper.Data
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
 
+                        if (gameAsset.IsInKnownRecords() == false)
+                        {
+                            unknownGameAssets.Add(gameAsset);
+                        }
+
                         LoadBackupForGameAsset(gameAsset);
                     }
                     else if (dllName == "libxess_fg.dll")
@@ -320,6 +357,11 @@ namespace DLSS_Swapper.Data
                         };
                         gameAsset.LoadVersionAndHash();
                         GameAssets.Add(gameAsset);
+
+                        if (gameAsset.IsInKnownRecords() == false)
+                        {
+                            unknownGameAssets.Add(gameAsset);
+                        }
 
                         LoadBackupForGameAsset(gameAsset);
                     }
@@ -348,6 +390,11 @@ namespace DLSS_Swapper.Data
                     using (await Database.Instance.Mutex.LockAsync())
                     {
                         await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
+                    }
+
+                    if (unknownGameAssets.Any())
+                    {
+                        GameManager.Instance.AddUnknownGameAssets(GameLibrary, Title, unknownGameAssets);
                     }
                 }
 
@@ -1232,11 +1279,26 @@ namespace DLSS_Swapper.Data
                         NeedsReload = true;
                         Processing = true;
                         break;
-                    }                     
+                    }
                 }
 
                 if (NeedsReload == false)
                 {
+                    var unknownGameAssets = new List<GameAsset>();
+                    foreach (var gameAsset in gameAssets)
+                    {
+                        if (gameAsset.IsInKnownRecords() == false)
+                        {
+                            unknownGameAssets.Add(gameAsset);
+                        }
+                    }
+
+                    if (unknownGameAssets.Any())
+                    {
+                        GameManager.Instance.AddUnknownGameAssets(GameLibrary, Title, unknownGameAssets);
+                    }
+
+
                     var firstDlssVersion = gameAssets.FirstOrDefault(x => x.AssetType == GameAssetType.DLSS);
                     if (firstDlssVersion is null)
                     {
@@ -1262,8 +1324,8 @@ namespace DLSS_Swapper.Data
                             Processing = false;
                         }
                         */
-        }
-    }
+                    }
+                }
             }
             else
             {

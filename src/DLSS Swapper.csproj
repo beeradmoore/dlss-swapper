@@ -98,6 +98,7 @@
     <None Remove="UserControls\DLLPickerControl.xaml" />
     <None Remove="UserControls\GameControl.xaml" />
     <None Remove="UserControls\ManuallyAddGameControl.xaml" />
+    <None Remove="UserControls\NewDLLsControl.xaml" />
   </ItemGroup>
 
 
@@ -284,6 +285,9 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Page Update="UserControls\NewDLLsControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
         <Page Update="UserControls\DLLPickerControl.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>

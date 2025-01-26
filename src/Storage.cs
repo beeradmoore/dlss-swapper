@@ -61,15 +61,6 @@ namespace DLSS_Swapper
             return storagePath;
         }
 
-        static string GetStaticJsonFolder()
-        {
-#if PORTABLE
-            return Path.Combine(AppContext.BaseDirectory, "StoredData", "static_json");
-#else
-            return Path.Combine(AppContext.BaseDirectory, "StoredData", "static_json"); ;
-#endif
-        }
-
         static string GetDynamicJsonFolder()
         {
             return Path.Combine(storagePath, "json");
@@ -231,29 +222,24 @@ namespace DLSS_Swapper
             }
 
             // If we got to here there is no dynamic manifest.json file to load, so load static one instead.
-            manifestFile = Path.Combine(GetStaticJsonFolder(), "manifest.json");
-            if (File.Exists(manifestFile))
+            try
             {
-                try
+                using (var staticManifestStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DLSS_Swapper.Assets.static_manifest.json"))
                 {
-                    using (var stream = File.Open(manifestFile, FileMode.Open))
+                    if (staticManifestStream is not null)
                     {
-                        var manifest = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.Manifest);
+                        var manifest = await JsonSerializer.DeserializeAsync(staticManifestStream, SourceGenerationContext.Default.Manifest);
                         if (manifest is not null)
                         {
+                            Logger.Info("Loaded static manifest");
                             return manifest;
                         }
                     }
                 }
-                catch (Exception err)
-                {
-                    Logger.Error(err.Message);
-                    return new Manifest();
-                }
             }
-            else
+            catch (Exception err)
             {
-                Logger.Error("There was no static manifest.json file to load.");
+                Logger.Error(err.Message);
                 return new Manifest();
             }
 

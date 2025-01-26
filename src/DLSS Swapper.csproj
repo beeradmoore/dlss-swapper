@@ -26,14 +26,8 @@
     <Optimize>True</Optimize>
   </PropertyGroup>
 
- 
-
-    <ItemGroup>
-      <None Remove="StoredData\dlss_zip\**" />
-      <None Remove="StoredData\dlss_zip\**" />
-      <None Update="StoredData\static_json\**">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+     <ItemGroup>
+      <Content Remove="Assets\static_manifest.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -99,6 +93,12 @@
     <None Remove="UserControls\GameControl.xaml" />
     <None Remove="UserControls\ManuallyAddGameControl.xaml" />
     <None Remove="UserControls\NewDLLsControl.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\static_manifest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
 

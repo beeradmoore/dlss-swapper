@@ -24,6 +24,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Windows.Foundation;
@@ -338,7 +339,7 @@ DLSS Swapper will close now.",
                 var manifest = await Storage.LoadManifestJsonAsync();
                
                 // If manifest could not be loaded then we should attempt to upload dlss_records from the dlss-archive.
-                if (manifest is null)
+                if (manifest is null || manifest.DLSS?.Any() == false)
                 {
                     return await UpdateManifestAsync();
                 }

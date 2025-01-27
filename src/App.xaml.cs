@@ -63,6 +63,8 @@ namespace DLSS_Swapper
         {
             Logger.Init();
 
+            UnhandledException += App_UnhandledException;
+
             var version = GetVersion();
             var versionString = string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
 
@@ -76,6 +78,12 @@ namespace DLSS_Swapper
             Database.Instance.Init();
 
             this.InitializeComponent();
+        }
+
+        private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            Serilog.Log.Error(e.Exception, "UnhandledException");
+            Serilog.Log.CloseAndFlush();
         }
 
         /// <summary>

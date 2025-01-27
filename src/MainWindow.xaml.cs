@@ -456,91 +456,96 @@ DLSS Swapper will close now.",
 
         void UpdateColorsLight()
         {
-            RootGrid.RequestedTheme = ElementTheme.Light;
+            App.CurrentApp.RunOnUIThread(() => {
+                RootGrid.RequestedTheme = ElementTheme.Light;
 
 
-            var app = ((App)Application.Current);
-            var theme = app.Resources.MergedDictionaries[1].ThemeDictionaries["Light"] as ResourceDictionary;
+                var app = ((App)Application.Current);
+                var theme = app.Resources.MergedDictionaries[1].ThemeDictionaries["Light"] as ResourceDictionary;
 
-            if (theme is null)
-            {
-                return;
-            }
+                if (theme is null)
+                {
+                    return;
+                }
 
-            if (_isCustomizationSupported)
-            {
-                var appWindow = GetAppWindowForCurrentWindow();
-                var appWindowTitleBar = appWindow.TitleBar;
-
-
-                appWindowTitleBar.ButtonBackgroundColor = (Color)theme["ButtonBackgroundColor"];
-                appWindowTitleBar.ButtonForegroundColor = (Color)theme["ButtonForegroundColor"];
-                appWindowTitleBar.ButtonHoverBackgroundColor = (Color)theme["ButtonHoverBackgroundColor"];
-                appWindowTitleBar.ButtonHoverForegroundColor = (Color)theme["ButtonHoverForegroundColor"];
-                appWindowTitleBar.ButtonInactiveBackgroundColor = (Color)theme["ButtonInactiveBackgroundColor"];
-                appWindowTitleBar.ButtonInactiveForegroundColor = (Color)theme["ButtonInactiveForegroundColor"];
-                appWindowTitleBar.ButtonPressedBackgroundColor = (Color)theme["ButtonPressedBackgroundColor"];
-                appWindowTitleBar.ButtonPressedForegroundColor = (Color)theme["ButtonPressedForegroundColor"];
-
-            }
-            else
-            {
-                var appResources = Application.Current.Resources;
-                // Removes the tint on title bar
-                appResources["WindowCaptionBackground"] = theme["WindowCaptionBackground"];
-                appResources["WindowCaptionBackgroundDisabled"] = theme["WindowCaptionBackgroundDisabled"];
-                // Sets the tint of the forground of the buttons
-                appResources["WindowCaptionForeground"] = theme["WindowCaptionForeground"];
-                appResources["WindowCaptionForegroundDisabled"] = theme["WindowCaptionForegroundDisabled"];
-
-                appResources["WindowCaptionButtonBackgroundPointerOver"] = theme["WindowCaptionButtonBackgroundPointerOver"];
+                if (_isCustomizationSupported)
+                {
+                    var appWindow = GetAppWindowForCurrentWindow();
+                    var appWindowTitleBar = appWindow.TitleBar;
 
 
-                RepaintCurrentWindow();
-            }
+                    appWindowTitleBar.ButtonBackgroundColor = (Color)theme["ButtonBackgroundColor"];
+                    appWindowTitleBar.ButtonForegroundColor = (Color)theme["ButtonForegroundColor"];
+                    appWindowTitleBar.ButtonHoverBackgroundColor = (Color)theme["ButtonHoverBackgroundColor"];
+                    appWindowTitleBar.ButtonHoverForegroundColor = (Color)theme["ButtonHoverForegroundColor"];
+                    appWindowTitleBar.ButtonInactiveBackgroundColor = (Color)theme["ButtonInactiveBackgroundColor"];
+                    appWindowTitleBar.ButtonInactiveForegroundColor = (Color)theme["ButtonInactiveForegroundColor"];
+                    appWindowTitleBar.ButtonPressedBackgroundColor = (Color)theme["ButtonPressedBackgroundColor"];
+                    appWindowTitleBar.ButtonPressedForegroundColor = (Color)theme["ButtonPressedForegroundColor"];
+
+                }
+                else
+                {
+                    var appResources = Application.Current.Resources;
+                    // Removes the tint on title bar
+                    appResources["WindowCaptionBackground"] = theme["WindowCaptionBackground"];
+                    appResources["WindowCaptionBackgroundDisabled"] = theme["WindowCaptionBackgroundDisabled"];
+                    // Sets the tint of the forground of the buttons
+                    appResources["WindowCaptionForeground"] = theme["WindowCaptionForeground"];
+                    appResources["WindowCaptionForegroundDisabled"] = theme["WindowCaptionForegroundDisabled"];
+
+                    appResources["WindowCaptionButtonBackgroundPointerOver"] = theme["WindowCaptionButtonBackgroundPointerOver"];
+
+
+                    RepaintCurrentWindow();
+                }
+            });
         }
 
         void UpdateColorsDark()
         {
-            RootGrid.RequestedTheme = ElementTheme.Dark;
-
-            var app = ((App)Application.Current);
-            var theme = app.Resources.MergedDictionaries[1].ThemeDictionaries["Dark"] as ResourceDictionary;
-
-            if (theme is null)
+            App.CurrentApp.RunOnUIThread(() =>
             {
-                return;
-            }
+                RootGrid.RequestedTheme = ElementTheme.Dark;
 
-            if (_isCustomizationSupported)
-            {
-                var appWindow = GetAppWindowForCurrentWindow();
-                var appWindowTitleBar = appWindow.TitleBar;
+                var app = ((App)Application.Current);
+                var theme = app.Resources.MergedDictionaries[1].ThemeDictionaries["Dark"] as ResourceDictionary;
 
-                appWindowTitleBar.ButtonBackgroundColor = (Color)theme["ButtonBackgroundColor"];
-                appWindowTitleBar.ButtonForegroundColor = (Color)theme["ButtonForegroundColor"];
-                appWindowTitleBar.ButtonHoverBackgroundColor = (Color)theme["ButtonHoverBackgroundColor"];
-                appWindowTitleBar.ButtonHoverForegroundColor = (Color)theme["ButtonHoverForegroundColor"];
-                appWindowTitleBar.ButtonInactiveBackgroundColor = (Color)theme["ButtonInactiveBackgroundColor"];
-                appWindowTitleBar.ButtonInactiveForegroundColor = (Color)theme["ButtonInactiveForegroundColor"];
-                appWindowTitleBar.ButtonPressedBackgroundColor = (Color)theme["ButtonPressedBackgroundColor"];
-                appWindowTitleBar.ButtonPressedForegroundColor = (Color)theme["ButtonPressedForegroundColor"];
-            }
-            else
-            {
-                var appResources = Application.Current.Resources;
+                if (theme is null)
+                {
+                    return;
+                }
 
-                // Removes the tint on title bar
-                appResources["WindowCaptionBackground"] = theme["WindowCaptionBackground"];
-                appResources["WindowCaptionBackgroundDisabled"] = theme["WindowCaptionBackgroundDisabled"];
-                // Sets the tint of the forground of the buttons
-                appResources["WindowCaptionForeground"] = theme["WindowCaptionForeground"];
-                appResources["WindowCaptionForegroundDisabled"] = theme["WindowCaptionForegroundDisabled"];
+                if (_isCustomizationSupported)
+                {
+                    var appWindow = GetAppWindowForCurrentWindow();
+                    var appWindowTitleBar = appWindow.TitleBar;
 
-                appResources["WindowCaptionButtonBackgroundPointerOver"] = theme["WindowCaptionButtonBackgroundPointerOver"];
+                    appWindowTitleBar.ButtonBackgroundColor = (Color)theme["ButtonBackgroundColor"];
+                    appWindowTitleBar.ButtonForegroundColor = (Color)theme["ButtonForegroundColor"];
+                    appWindowTitleBar.ButtonHoverBackgroundColor = (Color)theme["ButtonHoverBackgroundColor"];
+                    appWindowTitleBar.ButtonHoverForegroundColor = (Color)theme["ButtonHoverForegroundColor"];
+                    appWindowTitleBar.ButtonInactiveBackgroundColor = (Color)theme["ButtonInactiveBackgroundColor"];
+                    appWindowTitleBar.ButtonInactiveForegroundColor = (Color)theme["ButtonInactiveForegroundColor"];
+                    appWindowTitleBar.ButtonPressedBackgroundColor = (Color)theme["ButtonPressedBackgroundColor"];
+                    appWindowTitleBar.ButtonPressedForegroundColor = (Color)theme["ButtonPressedForegroundColor"];
+                }
+                else
+                {
+                    var appResources = Application.Current.Resources;
 
-                RepaintCurrentWindow();
-            }
+                    // Removes the tint on title bar
+                    appResources["WindowCaptionBackground"] = theme["WindowCaptionBackground"];
+                    appResources["WindowCaptionBackgroundDisabled"] = theme["WindowCaptionBackgroundDisabled"];
+                    // Sets the tint of the forground of the buttons
+                    appResources["WindowCaptionForeground"] = theme["WindowCaptionForeground"];
+                    appResources["WindowCaptionForegroundDisabled"] = theme["WindowCaptionForegroundDisabled"];
+
+                    appResources["WindowCaptionButtonBackgroundPointerOver"] = theme["WindowCaptionButtonBackgroundPointerOver"];
+
+                    RepaintCurrentWindow();
+                }
+            });
         }
 
         AppWindow GetAppWindowForCurrentWindow()
@@ -576,16 +581,14 @@ DLSS Swapper will close now.",
             {
                 var osApplicationTheme = _themeWatcher.GetWindowsApplicationTheme();
 
-                DispatcherQueue?.TryEnqueue(() => {
-                     if (osApplicationTheme == ApplicationTheme.Light)
-                    {
-                        UpdateColorsLight();
-                    }
-                    else if (osApplicationTheme == ApplicationTheme.Dark)
-                    {
-                        UpdateColorsDark();
-                    }
-                });
+                if (osApplicationTheme == ApplicationTheme.Light)
+                {
+                    UpdateColorsLight();
+                }
+                else if (osApplicationTheme == ApplicationTheme.Dark)
+                {
+                    UpdateColorsDark();
+                }
             }
         }
     }

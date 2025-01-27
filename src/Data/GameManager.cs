@@ -273,9 +273,12 @@ internal partial class GameManager : ObservableObject
                 // This probably checks the game collection twice looking for the game.
                 // We could do away with this, but in theory this if is never hit
                 var oldGame = AllGames.First(x => x.Equals(game));
-                oldGame.UpdateFromGame(game);
 
-                //Debugger.Break();
+                App.CurrentApp.RunOnUIThread(() =>
+                {
+                    oldGame.UpdateFromGame(game);
+                });
+
                 return oldGame;
             }
             else
@@ -360,7 +363,7 @@ internal partial class GameManager : ObservableObject
         {
             if (UnknownAssetsFound == false)
             {
-                App.CurrentApp?.MainWindow?.DispatcherQueue?.TryEnqueue(() =>
+                App.CurrentApp.RunOnUIThread(() =>
                 {
                     UnknownAssetsFound = true;
                 });

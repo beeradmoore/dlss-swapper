@@ -169,7 +169,7 @@ namespace DLSS_Swapper.Pages
 
             Settings.Instance.WasLoadingGames = false;
 
-            DispatcherQueue.TryEnqueue(() =>
+            DispatcherQueue?.TryEnqueue(() =>
             {
                 FilterGames();
             });
@@ -264,7 +264,7 @@ namespace DLSS_Swapper.Pages
             await Task.WhenAll(tasks);
             
             */
-            DispatcherQueue.TryEnqueue(() =>
+            DispatcherQueue?.TryEnqueue(() =>
             {
                 //LoadingStackPanel.Visibility = Visibility.Collapsed;
                 _loadingGamesAndDlls = false;

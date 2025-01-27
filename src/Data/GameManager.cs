@@ -360,7 +360,7 @@ internal partial class GameManager : ObservableObject
         {
             if (UnknownAssetsFound == false)
             {
-                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp?.MainWindow?.DispatcherQueue?.TryEnqueue(() =>
                 {
                     UnknownAssetsFound = true;
                 });

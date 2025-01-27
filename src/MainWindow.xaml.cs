@@ -576,7 +576,7 @@ DLSS Swapper will close now.",
             {
                 var osApplicationTheme = _themeWatcher.GetWindowsApplicationTheme();
 
-                DispatcherQueue.TryEnqueue(() => {
+                DispatcherQueue?.TryEnqueue(() => {
                      if (osApplicationTheme == ApplicationTheme.Light)
                     {
                         UpdateColorsLight();

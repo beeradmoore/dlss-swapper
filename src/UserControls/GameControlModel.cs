@@ -20,12 +20,35 @@ public partial class GameControlModel : ObservableObject
 
     public Game Game { get; init; }
 
-    public bool CanRemove => Game.GameLibrary == Interfaces.GameLibrary.ManuallyAdded;
+    public bool IsManuallyAdded => Game.GameLibrary == Interfaces.GameLibrary.ManuallyAdded;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(GameTitleHasChanged))]
+    public partial string GameTitle { get; set; }
+
+    public bool GameTitleHasChanged
+    {
+        get
+        {
+            if (IsManuallyAdded == false)
+            {
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(GameTitle))
+            {
+                return false;
+            }
+
+            return GameTitle.Equals(Game.Title) == false;
+        }
+    }
 
     public GameControlModel(GameControl gameControl, Game game)
     {
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
+        GameTitle = game.Title;
     }
 
 
@@ -127,7 +150,7 @@ public partial class GameControlModel : ObservableObject
         if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
         {
             // This should never happen
-            if (CanRemove == false)
+            if (IsManuallyAdded == false)
             {
                 var cantDeleteDialog = new EasyContentDialog(gameControl.XamlRoot)
                 {
@@ -186,5 +209,13 @@ public partial class GameControlModel : ObservableObject
             dialog.Content = dllPickerControl;
             await dialog.ShowAsync();
         }
+    }
+
+    [RelayCommand]
+    async Task SaveTitleAsync()
+    {
+        Game.Title = GameTitle;
+        await Game.SaveToDatabaseAsync();
+        OnPropertyChanged(nameof(GameTitleHasChanged));
     }
 }

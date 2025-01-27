@@ -170,8 +170,6 @@ namespace DLSS_Swapper.Data
 
         internal async Task<(bool Success, string Message, bool Cancelled)> DownloadAsync(Action<int>? ProgressCallback = null)
         {
-            var dispatcherQueue = App.CurrentApp.MainWindow.DispatcherQueue;
-            var threadId =  Thread.CurrentThread.ManagedThreadId;
             if (string.IsNullOrEmpty(DownloadUrl))
             {
                 return (false, "Invalid download URL.", false);
@@ -210,7 +208,7 @@ namespace DLSS_Swapper.Data
             
             if (response.StatusCode is not System.Net.HttpStatusCode.OK)
             {
-                dispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.RunOnUIThread(() =>
                 {
                     LocalRecord.IsDownloading = false;
                     LocalRecord.DownloadProgress = 0;
@@ -261,7 +259,7 @@ namespace DLSS_Swapper.Data
                                 lastUpdated = DateTimeOffset.Now;
                                 if (totalDownloadSize > 0)
                                 {
-                                    dispatcherQueue.TryEnqueue(() =>
+                                    App.CurrentApp.RunOnUIThread(() =>
                                     {
                                         var percent = (int)Math.Ceiling((totalBytesRead / (double)totalDownloadSize) * 100L);
                                         ProgressCallback?.Invoke(percent);
@@ -281,7 +279,7 @@ namespace DLSS_Swapper.Data
                     }
                 }
 
-                dispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.RunOnUIThread(() =>
                 {
                     LocalRecord.DownloadProgress = 100;
                     NotifyPropertyChanged("LocalRecord");
@@ -289,7 +287,7 @@ namespace DLSS_Swapper.Data
 
                 File.Move(tempZipFile, Path.Combine(targetZipDirectory, $"{Version}_{MD5Hash}.zip"), true);
 
-                dispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.RunOnUIThread(() =>
                 {
                     LocalRecord.IsDownloaded = true;
                     LocalRecord.IsDownloading = false;
@@ -301,7 +299,7 @@ namespace DLSS_Swapper.Data
             }
             catch (TaskCanceledException)
             {
-                dispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.RunOnUIThread(() =>
                 {
                     LocalRecord.IsDownloading = false;
                     LocalRecord.DownloadProgress = 0;
@@ -315,7 +313,7 @@ namespace DLSS_Swapper.Data
             {
                 Logger.Error(err.Message);
 
-                dispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.RunOnUIThread(() =>
                 {
                     LocalRecord.IsDownloading = false;
                     LocalRecord.DownloadProgress = 0;

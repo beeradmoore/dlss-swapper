@@ -209,6 +209,13 @@ internal partial class GameManager : ObservableObject
     public async Task LoadGamesAsync(bool forceLoadAll = false)
     {
         var tasks = new List<Task<List<Game>>>();
+        if (forceLoadAll == true)
+        {
+            lock (unknownGameAsseetLock)
+            {
+                _unknownGameAssets.Clear();
+            }
+        }
         foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
@@ -273,9 +280,12 @@ internal partial class GameManager : ObservableObject
                 // This probably checks the game collection twice looking for the game.
                 // We could do away with this, but in theory this if is never hit
                 var oldGame = AllGames.First(x => x.Equals(game));
-                oldGame.UpdateFromGame(game);
 
-                //Debugger.Break();
+                App.CurrentApp.RunOnUIThread(() =>
+                {
+                    oldGame.UpdateFromGame(game);
+                });
+
                 return oldGame;
             }
             else
@@ -360,7 +370,7 @@ internal partial class GameManager : ObservableObject
         {
             if (UnknownAssetsFound == false)
             {
-                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.RunOnUIThread(() =>
                 {
                     UnknownAssetsFound = true;
                 });

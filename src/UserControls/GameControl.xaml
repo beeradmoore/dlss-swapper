@@ -17,6 +17,7 @@
     <usercontrols:FakeContentDialog.Resources>
 
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
+        <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter"  />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteTextConverter" TrueValue="Favourited" FalseValue="Click to favourite" />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteGlyphConverter" TrueValue="&#xE735;" FalseValue="&#xE734;" />
         <ct_converters:EmptyObjectToObjectConverter x:Key="NullObjectToBoolConverter" NotEmptyValue="True" EmptyValue="False" />
@@ -62,7 +63,7 @@
         <ControlTemplate x:Key="RightButtonsControlTemplate" TargetType="ContentControl">
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" XYFocusKeyboardNavigation="Enabled" Padding="{ThemeResource ContentDialogPadding}" Background="{TemplateBinding Background}" Spacing="8">
-                <Button Content="Remove" Visibility="{Binding CanRemove, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding RemoveCommand}" />
+                <Button Content="Remove" Visibility="{Binding IsManuallyAdded, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding RemoveCommand}" />
                 <Button x:Name="CloseButton" IsTabStop="False" Content="Close" Style="{ThemeResource DefaultButtonStyle}" ElementSoundMode="FocusOnly" Command="{Binding CloseCommand}" KeyboardAcceleratorPlacementMode="Hidden">
                     <Button.KeyboardAccelerators>
                         <KeyboardAccelerator Key="Escape" Modifiers="None" />
@@ -104,7 +105,18 @@
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Spacing="4">
                     <TextBlock Text="Name" FontWeight="Bold" />
-                    <TextBox Text="{x:Bind ViewModel.Game.Title, Mode=OneWay}" IsReadOnly="True" />
+                    <Grid HorizontalAlignment="Stretch" ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" VerticalAlignment="Stretch" Text="{x:Bind ViewModel.GameTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{x:Bind ViewModel.IsManuallyAdded, Converter={StaticResource BoolNegationConverter}}" />
+                        <Button Grid.Column="1" VerticalAlignment="Stretch" ToolTipService.ToolTip="Save" Visibility="{x:Bind ViewModel.IsManuallyAdded, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{x:Bind ViewModel.GameTitleHasChanged, Mode=OneWay}" Command="{x:Bind ViewModel.SaveTitleCommand}">
+                            <Button.Content>
+                                <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE74E;"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
 
                     <TextBlock Text="Install path" FontWeight="Bold" Padding="0,8,0,0" />
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="8">
@@ -112,9 +124,8 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBox  Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.Game.InstallPath}" VerticalAlignment="Center" />
-
-                        <Button Grid.Column="1" ToolTipService.ToolTip="Open folder" VerticalAlignment="Center" Command="{x:Bind ViewModel.OpenInstallPathCommand}">
+                        <TextBox Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.Game.InstallPath}" VerticalAlignment="Stretch" />
+                        <Button Grid.Column="1" ToolTipService.ToolTip="Open folder" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenInstallPathCommand}">
                             <Button.Content>
                                 <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE8A7;"/>
                             </Button.Content>

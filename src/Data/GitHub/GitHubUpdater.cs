@@ -117,9 +117,7 @@ namespace DLSS_Swapper.Data.GitHub
                 Config = new MarkdownConfig(),
             };
 
-
-            var dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
-            await dispatcherQueue.EnqueueAsync(async () =>
+            await App.CurrentApp.RunOnUIThreadAsync(async () =>
             {
                 var dialog = new EasyContentDialog(xamlRoot)
                 {

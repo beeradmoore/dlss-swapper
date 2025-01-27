@@ -169,14 +169,14 @@ namespace DLSS_Swapper.Pages
 
             Settings.Instance.WasLoadingGames = false;
 
-            DispatcherQueue.TryEnqueue(() =>
+            App.CurrentApp.RunOnUIThread(() =>
             {
                 FilterGames();
             });
             */
         }
 
-       
+
 
         bool hasFirstLoaded = false;
         void Page_Loaded(object sender, RoutedEventArgs e)
@@ -264,7 +264,7 @@ namespace DLSS_Swapper.Pages
             await Task.WhenAll(tasks);
             
             */
-            DispatcherQueue.TryEnqueue(() =>
+            App.CurrentApp.RunOnUIThread(() =>
             {
                 //LoadingStackPanel.Visibility = Visibility.Collapsed;
                 _loadingGamesAndDlls = false;

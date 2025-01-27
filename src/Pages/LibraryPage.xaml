@@ -61,7 +61,7 @@
                  Message="This app is running with administrative privileges."
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
-        <GridView Grid.Row="2" x:Name="MainGridView" ItemsSource="{x:Bind ViewModel.LibraryCollectionViewSource.View}" SizeChanged="MainGridView_SizeChanged" SelectionChanged="MainGridView_SelectionChanged" SelectionMode="Single" IsSynchronizedWithCurrentItem="False" Margin="16">
+        <GridView Grid.Row="2" x:Name="MainGridView" ItemsSource="{x:Bind ViewModel.LibraryCollectionViewSource.View, Mode=OneWay}" SizeChanged="MainGridView_SizeChanged" SelectionChanged="MainGridView_SelectionChanged" SelectionMode="Single" IsSynchronizedWithCurrentItem="False" Margin="16">
 
             <GridView.GroupStyle>
                 <GroupStyle HidesIfEmpty="False">
@@ -117,7 +117,7 @@
                         <!-- Not downloaded -->
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsNotFoundConverter}, Mode=OneWay}">
 
-                            <Button ToolTipService.ToolTip="Download Error" Visibility="{x:Bind LocalRecord.HasDownloadError, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding ElementName=thisPage, Path=ViewModel.ShowDownloadErrorCommand}" CommandParameter="{x:Bind }">
+                            <Button ToolTipService.ToolTip="Download Error" Visibility="{x:Bind LocalRecord.HasDownloadError, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.ShowDownloadErrorCommand}" CommandParameter="{x:Bind }">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE783;"/>
                                 </Button.Content>

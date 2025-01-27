@@ -27,22 +27,8 @@ internal class Database
     internal AsyncLock Mutex { get; init; }
     internal SQLiteAsyncConnection Connection { get; init; }
 
-    bool _hasInit = false;
-
     public Database()
     {
-        Mutex = new AsyncLock();
-        Connection = new SQLiteAsyncConnection(Storage.GetDBPath());
-    }
-
-    public void Init()
-    {
-        if (_hasInit)
-        {
-            return;
-        }
-        _hasInit = true;
-
         // Use a single syncronous connection to make tables
         using (var syncConnection = new SQLiteConnection(Storage.GetDBPath()))
         {
@@ -116,6 +102,15 @@ internal class Database
 
             syncConnection.Close();
         }
+
+        Mutex = new AsyncLock();
+        Connection = new SQLiteAsyncConnection(Storage.GetDBPath());
+    }
+
+    public void Init()
+    {
+        // If we didn't get this the database was not created as the above threw an exception
+        Logger.Verbose("Database Init");
     }
     
 }

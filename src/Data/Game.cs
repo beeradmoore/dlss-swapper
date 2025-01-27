@@ -169,7 +169,7 @@ namespace DLSS_Swapper.Data
         /// </summary>
         public void ProcessGame(bool autoSave = true)
         {
-            App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            App.CurrentApp.RunOnUIThread(() =>
             {
                 NeedsReload = false;
             });
@@ -184,7 +184,7 @@ namespace DLSS_Swapper.Data
                 return;
             }
 
-            App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            App.CurrentApp.RunOnUIThread(() =>
             {
                 Processing = true;
                 HasSwappableItems = false;
@@ -377,7 +377,7 @@ namespace DLSS_Swapper.Data
 
 
                 var newHasSwappableItems = false;
-                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.RunOnUIThread(() =>
                 {
                     UpdateCurrentDLLsFromGameAssets();
                 });
@@ -401,7 +401,7 @@ namespace DLSS_Swapper.Data
                 await coverImageTask;
 
                 // Now update all the data on the UI therad.
-                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+                await App.CurrentApp.RunOnUIThreadAsync(async () =>
                 {
                     HasSwappableItems = newHasSwappableItems;
 
@@ -446,7 +446,7 @@ namespace DLSS_Swapper.Data
             if (File.Exists(ExpectedCustomCoverImage))
             {
                 // If a custom cover exists use it.
-                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.RunOnUIThread(() =>
                 {
                     CoverImage = ExpectedCustomCoverImage;
                 });
@@ -454,7 +454,7 @@ namespace DLSS_Swapper.Data
             else if (File.Exists(ExpectedCoverImage))
             {
                 // If a standard cover exists use it.
-                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.RunOnUIThread(() =>
                 {
                     CoverImage = ExpectedCoverImage;
                 });
@@ -750,7 +750,7 @@ namespace DLSS_Swapper.Data
 
         void UpdateCurrentAsset(GameAsset newGameAsset, GameAssetType gameAssetType)
         {
-            App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            App.CurrentApp.RunOnUIThread(() =>
             {
                 if (gameAssetType == GameAssetType.DLSS)
                 {
@@ -846,7 +846,7 @@ namespace DLSS_Swapper.Data
                     //image.SaveAsJpeg(ExpectedCoverImage);
                 }
 
-                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.RunOnUIThread(() =>
                 {
                     CoverImage = null;
                     CoverImage = ExpectedCoverImage;
@@ -891,7 +891,7 @@ namespace DLSS_Swapper.Data
                     //image.SaveAsJpeg(ExpectedCustomCoverImage);
                 }
 
-                App.CurrentApp.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                App.CurrentApp.RunOnUIThread(() =>
                 {
                     CoverImage = ExpectedCustomCoverImage;
                 });
@@ -904,6 +904,20 @@ namespace DLSS_Swapper.Data
 
         protected async Task DownloadCoverAsync(string url)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                Logger.Error($"Tried to download cover image but url was null or empty. Game: {Title}, Library: {GameLibrary}");
+                return;
+            }
+
+            if (url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) == false &&
+                url.StartsWith("https://", StringComparison.OrdinalIgnoreCase) == false)
+            {
+                Logger.Error($"Tried to download cover image but url was not valid. Game: {Title}, Library: {GameLibrary}, Url: {url}");
+                return;
+            }
+
+
             var extension = Path.GetExtension(url);
 
             // Path.GetExtension retains query arguments, so ths will remove them if they exist.
@@ -937,7 +951,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error($"{err.Message}, url: {url}");
                 Debugger.Break();
             }
             finally

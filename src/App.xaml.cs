@@ -1,10 +1,12 @@
-﻿using DLSS_Swapper.Data;
+﻿using CommunityToolkit.WinUI;
+using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.EpicGamesStore;
 using DLSS_Swapper.Data.GOG;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;
 using DLSS_Swapper.Interfaces;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -61,6 +63,8 @@ namespace DLSS_Swapper
         {
             Logger.Init();
 
+            UnhandledException += App_UnhandledException;
+
             var version = GetVersion();
             var versionString = string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
 
@@ -74,6 +78,12 @@ namespace DLSS_Swapper
             Database.Instance.Init();
 
             this.InitializeComponent();
+        }
+
+        private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            Serilog.Log.Error(e.Exception, "UnhandledException");
+            Serilog.Log.CloseAndFlush();
         }
 
         /// <summary>
@@ -260,5 +270,45 @@ namespace DLSS_Swapper
             }
             return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
         }
+
+        public bool RunOnUIThread(Action action)
+        {
+            if (Thread.CurrentThread.ManagedThreadId == 1)
+            {
+                action();
+                return true;
+            }
+
+            if (MainWindow?.DispatcherQueue is not null)
+            {
+                var didEnqueue = MainWindow.DispatcherQueue.TryEnqueue(new DispatcherQueueHandler(action));
+
+                if (didEnqueue == false)
+                {
+                    Logger.Error("TryEnqueue failed.");
+                }
+
+                return didEnqueue;
+            }
+
+            return false;
+        }
+
+
+        public Task RunOnUIThreadAsync(Func<Task> function)
+        {
+            if (Thread.CurrentThread.ManagedThreadId == 1)
+            {
+                return function();
+            }
+
+            if (MainWindow?.DispatcherQueue is not null)
+            {
+                return MainWindow.DispatcherQueue.EnqueueAsync(function);
+            }
+
+            return Task.CompletedTask;
+        }
+
     }
 }

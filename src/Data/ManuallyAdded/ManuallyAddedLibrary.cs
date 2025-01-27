@@ -35,8 +35,10 @@ public class ManuallyAddedLibrary : IGameLibrary
         }
         foreach (var dbGame in dbGames)
         {
-            // TODO: Handle process game
-            dbGame.ProcessGame();
+            if (dbGame.NeedsReload == true || forceLoadAll == true)
+            {
+                dbGame.ProcessGame();
+            }
             games.Add(dbGame);
         }
 

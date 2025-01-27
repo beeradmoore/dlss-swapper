@@ -172,7 +172,7 @@ public partial class GameControlModel : ObservableObject
                 PrimaryButtonText = "Remove",
                 CloseButtonText = "Cancel",
                 DefaultButton = ContentDialogButton.Primary,
-                Content = "Are you sure you want to remove \"{Game.Title}\" from DLSS Swapper? This will not make any changes to DLSS files that have already been swapped.",
+                Content = $"Are you sure you want to remove \"{Game.Title}\" from DLSS Swapper? This will not make any changes to DLSS files that have already been swapped.",
             };
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)

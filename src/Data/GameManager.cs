@@ -209,6 +209,13 @@ internal partial class GameManager : ObservableObject
     public async Task LoadGamesAsync(bool forceLoadAll = false)
     {
         var tasks = new List<Task<List<Game>>>();
+        if (forceLoadAll == true)
+        {
+            lock (unknownGameAsseetLock)
+            {
+                _unknownGameAssets.Clear();
+            }
+        }
         foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);

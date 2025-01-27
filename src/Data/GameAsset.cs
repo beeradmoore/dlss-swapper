@@ -105,6 +105,19 @@ public class GameAsset : IEquatable<GameAsset>
 
     public bool IsInKnownRecords()
     {
+        // If it is any of our backups assume yes so these are not logged
+        if (AssetType == GameAssetType.DLSS_BACKUP ||
+            AssetType == GameAssetType.DLSS_D_BACKUP ||
+            AssetType == GameAssetType.DLSS_G_BACKUP ||
+            AssetType == GameAssetType.FSR_31_DX12_BACKUP ||
+            AssetType == GameAssetType.FSR_31_VK_BACKUP ||
+            AssetType == GameAssetType.XeSS ||
+            AssetType == GameAssetType.XeSS_FG ||
+            AssetType == GameAssetType.XeLL)
+        {
+            return true;
+        }
+        
         if (AssetType == GameAssetType.DLSS)
         {
             return DLLManager.Instance.DLSSRecords.Any(x => x.MD5Hash == Hash);

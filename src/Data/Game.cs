@@ -904,6 +904,20 @@ namespace DLSS_Swapper.Data
 
         protected async Task DownloadCoverAsync(string url)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                Logger.Error($"Tried to download cover image but url was null or empty. Game: {Title}, Library: {GameLibrary}");
+                return;
+            }
+
+            if (url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) == false &&
+                url.StartsWith("https://", StringComparison.OrdinalIgnoreCase) == false)
+            {
+                Logger.Error($"Tried to download cover image but url was not valid. Game: {Title}, Library: {GameLibrary}, Url: {url}");
+                return;
+            }
+
+
             var extension = Path.GetExtension(url);
 
             // Path.GetExtension retains query arguments, so ths will remove them if they exist.

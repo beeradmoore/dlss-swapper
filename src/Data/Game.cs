@@ -937,7 +937,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error($"{err.Message}, url: {url}");
                 Debugger.Break();
             }
             finally

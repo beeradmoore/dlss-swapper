@@ -115,6 +115,7 @@ internal partial class GameManager : ObservableObject
         FavouriteGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
         FavouriteGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
+        AllGamesView = new AdvancedCollectionView(_allGames, true);
         AllGamesView.Filter = GetPredicateForAllGames(Settings.Instance.HideNonDLSSGames);
         //AllGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
         AllGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));

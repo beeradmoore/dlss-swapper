@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MvvmHelpers;
 
 namespace DLSS_Swapper.Data;
 
@@ -13,14 +12,14 @@ internal class DLLManager
 {
     public static DLLManager Instance { get; private set; } = new DLLManager();
 
-    public ObservableRangeCollection<DLLRecord> DLSSRecords { get; } = new ObservableRangeCollection<DLLRecord>();
-    public ObservableRangeCollection<DLLRecord> DLSSGRecords { get; } = new ObservableRangeCollection<DLLRecord>();
-    public ObservableRangeCollection<DLLRecord> DLSSDRecords { get; } = new ObservableRangeCollection<DLLRecord>();
-    public ObservableRangeCollection<DLLRecord> FSR31DX12Records { get; } = new ObservableRangeCollection<DLLRecord>();
-    public ObservableRangeCollection<DLLRecord> FSR31VKRecords { get; } = new ObservableRangeCollection<DLLRecord>();
-    public ObservableRangeCollection<DLLRecord> XeSSRecords { get; } = new ObservableRangeCollection<DLLRecord>();
-    public ObservableRangeCollection<DLLRecord> XeLLRecords { get; } = new ObservableRangeCollection<DLLRecord>();
-    public ObservableRangeCollection<DLLRecord> XeSSFGRecords { get; } = new ObservableRangeCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> DLSSRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> DLSSGRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> DLSSDRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> FSR31DX12Records { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> FSR31VKRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> XeSSRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> XeLLRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> XeSSFGRecords { get; } = new ObservableCollection<DLLRecord>();
 
     internal void LoadFromManifest()
     {
@@ -34,76 +33,75 @@ internal class DLLManager
         // TODO: Only change changed items
 
         manifest.DLSS.Sort();
+        DLSSRecords.Clear();
         foreach (var dllRecord in manifest.DLSS)
         {
             dllRecord.AssetType = GameAssetType.DLSS;
+            DLSSRecords.Add(dllRecord);
         }
-        DLSSRecords.Clear();
-        DLSSRecords.AddRange(manifest.DLSS);
 
 
 
         manifest.DLSS_G.Sort();
+        DLSSGRecords.Clear();
         foreach (var dllRecord in manifest.DLSS_G)
         {
             dllRecord.AssetType = GameAssetType.DLSS_G;
+            DLSSGRecords.Add(dllRecord);
         }
-        DLSSGRecords.Clear();
-        DLSSGRecords.AddRange(manifest.DLSS_G);
 
 
         manifest.DLSS_D.Sort();
+        DLSSDRecords.Clear();
         foreach (var dllRecord in manifest.DLSS_D)
         {
             dllRecord.AssetType = GameAssetType.DLSS_D;
+            DLSSDRecords.Add(dllRecord);
         }
-        DLSSDRecords.Clear();
-        DLSSDRecords.AddRange(manifest.DLSS_D);
 
 
         manifest.FSR_31_DX12.Sort();
+        FSR31DX12Records.Clear();
         foreach (var dllRecord in manifest.FSR_31_DX12)
         {
             dllRecord.AssetType = GameAssetType.FSR_31_DX12;
+            FSR31DX12Records.Add(dllRecord);
         }
-        FSR31DX12Records.Clear();
-        FSR31DX12Records.AddRange(manifest.FSR_31_DX12);
 
 
         manifest.FSR_31_VK.Sort();
+        FSR31VKRecords.Clear();
         foreach (var dllRecord in manifest.FSR_31_VK)
         {
             dllRecord.AssetType = GameAssetType.FSR_31_VK;
+            FSR31VKRecords.Add(dllRecord);
         }
-        FSR31VKRecords.Clear();
-        FSR31VKRecords.AddRange(manifest.FSR_31_VK);
 
 
         manifest.XeSS.Sort();
+        XeSSRecords.Clear();
         foreach (var dllRecord in manifest.XeSS)
         {
             dllRecord.AssetType = GameAssetType.XeSS;
+            XeSSRecords.Add(dllRecord);
         }
-        XeSSRecords.Clear();
-        XeSSRecords.AddRange(manifest.XeSS);
-
 
         manifest.XeLL.Sort();
+        XeLLRecords.Clear();
         foreach (var dllRecord in manifest.XeLL)
         {
             dllRecord.AssetType = GameAssetType.XeLL;
+            XeLLRecords.Add(dllRecord);
         }
-        XeLLRecords.Clear();
-        XeLLRecords.AddRange(manifest.XeLL);
 
 
         manifest.XeSS_FG.Sort();
+        XeSSFGRecords.Clear();
         foreach (var dllRecord in manifest.XeSS_FG)
         {
             dllRecord.AssetType = GameAssetType.XeSS_FG;
-        }
-        XeSSFGRecords.Clear();
-        XeSSFGRecords.AddRange(manifest.XeSS_FG);
+            XeSSFGRecords.Add(dllRecord);
+        };
     }
 
     internal void LoadLocalRecords()

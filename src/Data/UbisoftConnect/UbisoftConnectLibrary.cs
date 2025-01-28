@@ -475,6 +475,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             catch (Exception err)
             {
                 Logger.Error(err.Message);
+                Debugger.Break();
             }
         }
     }

@@ -250,6 +250,7 @@ namespace DLSS_Swapper.Data.Steam
             catch (Exception err)
             {
                 Logger.Error(err.Message);
+                Debugger.Break();
             }
         }
     }

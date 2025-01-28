@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management;
@@ -213,6 +214,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             catch (Exception err)
             {
                 Logger.Error(err.Message);
+                Debugger.Break();
             }
         }
     }

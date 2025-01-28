@@ -267,6 +267,7 @@ namespace DLSS_Swapper.Data.Xbox
             catch (Exception err)
             {
                 Logger.Error(err.Message);
+                Debugger.Break();
             }
         }
     }

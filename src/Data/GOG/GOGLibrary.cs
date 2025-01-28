@@ -343,6 +343,7 @@ namespace DLSS_Swapper.Data.GOG
             catch (Exception err)
             {
                 Logger.Error(err.Message);
+                Debugger.Break();
             }
         }
     }

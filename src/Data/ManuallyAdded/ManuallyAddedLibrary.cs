@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -71,6 +72,7 @@ public class ManuallyAddedLibrary : IGameLibrary
         catch (Exception err)
         {
             Logger.Error(err.Message);
+            Debugger.Break();
         }
     }
 }

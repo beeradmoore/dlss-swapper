@@ -329,14 +329,7 @@ namespace DLSS_Swapper.Data.GOG
                 }
                 foreach (var game in games)
                 {
-                    game.Processing = true;
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
-
-                    // If we won't be reloading the game we can mark it as finished processing.
-                    if (game.NeedsReload == false)
-                    {
-                        game.Processing = false;
-                    }
                     GameManager.Instance.AddGame(game);
                 }
             }

@@ -41,7 +41,7 @@ namespace DLSS_Swapper.Data.Xbox
         }
 
 
-        public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
+        public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
             var games = new List<Game>();
 
@@ -204,7 +204,7 @@ namespace DLSS_Swapper.Data.Xbox
                     try
                     {
                         var gameFromCache = GameManager.Instance.GetGame<XboxGame>(familyName);
-                        var game = gameFromCache  ?? new XboxGame(familyName);
+                        var game = gameFromCache ?? new XboxGame(familyName);
                         game.Title = package.DisplayName;
                         game.InstallPath = PathHelpers.NormalizePath(package.InstalledPath);
                         game.SetLocalHeaderImagesAsync(gameNamesToFindPackages[packageName]);
@@ -213,12 +213,12 @@ namespace DLSS_Swapper.Data.Xbox
 
                         // If the game does not need a reload, check if we loaded from cache.
                         // If we didn't load it from cache we will later need to call ProcessGame.
-                        if (game.NeedsReload == false && gameFromCache is null)
+                        if (game.NeedsProcessing == false && gameFromCache is null)
                         {
-                            game.NeedsReload = true;
+                            game.NeedsProcessing = true;
                         }
 
-                        if (game.NeedsReload == true || forceLoadAll == true)
+                        if (game.NeedsProcessing == true || forceNeedsProcessing == true)
                         {
                             game.ProcessGame();
                         }

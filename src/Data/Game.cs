@@ -102,7 +102,7 @@ namespace DLSS_Swapper.Data
         public List<GameAsset> GameAssets { get; } = new List<GameAsset>();
 
         [Ignore]
-        public bool NeedsReload { get; set; } = false;
+        public bool NeedsProcessing { get; set; } = false;
 
         bool _isLoadingCoverImage = false;
 
@@ -177,7 +177,7 @@ namespace DLSS_Swapper.Data
 
             App.CurrentApp.RunOnUIThread(() =>
             {
-                NeedsReload = false;
+                NeedsProcessing = false;
             });
 
             if (string.IsNullOrEmpty(InstallPath))
@@ -1300,12 +1300,12 @@ namespace DLSS_Swapper.Data
                     // Check that each of the game assets exist, after we will check if they are what we expect them to be
                     if (File.Exists(gameAsset.Path) == false)
                     {
-                        NeedsReload = true;
+                        NeedsProcessing = true;
                         break;
                     }
                 }
 
-                if (NeedsReload == false)
+                if (NeedsProcessing == false)
                 {
                     var unknownGameAssets = new List<GameAsset>();
                     foreach (var gameAsset in GameAssets)
@@ -1327,7 +1327,7 @@ namespace DLSS_Swapper.Data
 
                         if (gameAsset.Version != freshVersion)
                         {
-                            NeedsReload = true;
+                            NeedsProcessing = true;
                             break;
                         }
                     }
@@ -1337,7 +1337,7 @@ namespace DLSS_Swapper.Data
             {
                 // If there is no known current DLLs then we likely want to do a full reload incase the game got updated.
                 // TODO: Also add a time last reloaded here.
-                NeedsReload = true;
+                NeedsProcessing = true;
                 return;
             }
         }

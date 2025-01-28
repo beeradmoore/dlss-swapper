@@ -49,7 +49,7 @@ namespace DLSS_Swapper.Data.GOG
             return false;
         }
 
-        public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
+        public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
             if (IsInstalled() == false)
             {
@@ -120,9 +120,9 @@ namespace DLSS_Swapper.Data.GOG
 
                             // If the game does not need a reload, check if we loaded from cache.
                             // If we didn't load it from cache we will later need to call ProcessGame.
-                            if (game.NeedsReload == false && gameFromCache is null)
+                            if (game.NeedsProcessing == false && gameFromCache is null)
                             {
-                                game.NeedsReload = true;
+                                game.NeedsProcessing = true;
                             }
 
                             gogGames.Add(game);
@@ -283,7 +283,7 @@ namespace DLSS_Swapper.Data.GOG
 
                 await gogGame.SaveToDatabaseAsync();
 
-                if (gogGame.NeedsReload == true || forceLoadAll == true)
+                if (gogGame.NeedsProcessing == true || forceNeedsProcessing == true)
                 {
                     gogGame.ProcessGame();
                 }

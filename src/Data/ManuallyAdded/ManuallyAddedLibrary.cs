@@ -24,7 +24,7 @@ public class ManuallyAddedLibrary : IGameLibrary
 
     }
 
-    public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
+    public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
     {
         List<Game> games = new List<Game>();
         List<ManuallyAddedGame> dbGames;
@@ -40,10 +40,10 @@ public class ManuallyAddedLibrary : IGameLibrary
             // If the game is not from cache, force re-processing
             if (cachedGame is not null)
             {
-                activeGame.NeedsReload = true;
+                activeGame.NeedsProcessing = true;
             }
 
-            if (activeGame.NeedsReload == true || forceLoadAll == true)
+            if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
             {
                 activeGame.ProcessGame();
             }

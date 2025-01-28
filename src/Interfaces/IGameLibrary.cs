@@ -32,7 +32,7 @@ namespace DLSS_Swapper.Interfaces
         string Name { get; }
         Type GameType { get; }
 
-        Task<List<Game>> ListGamesAsync(bool forceLoadAll);
+        Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing);
         Task LoadGamesFromCacheAsync();
         bool IsInstalled();
 

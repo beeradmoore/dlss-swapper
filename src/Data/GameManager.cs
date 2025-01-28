@@ -183,10 +183,10 @@ internal partial class GameManager : ObservableObject
         }
     }
 
-    public async Task LoadGamesAsync(bool forceLoadAll = false)
+    public async Task LoadGamesAsync(bool forceNeedsProcessing = false)
     {
         var tasks = new List<Task<List<Game>>>();
-        if (forceLoadAll == true)
+        if (forceNeedsProcessing == true)
         {
             lock (unknownGameAsseetLock)
             {
@@ -198,7 +198,7 @@ internal partial class GameManager : ObservableObject
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
             if (gameLibrary.IsEnabled)
             {
-                tasks.Add(gameLibrary.ListGamesAsync(forceLoadAll));
+                tasks.Add(gameLibrary.ListGamesAsync(forceNeedsProcessing));
             }
         }
 

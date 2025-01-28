@@ -34,7 +34,7 @@ namespace DLSS_Swapper.Data.Steam
             return string.IsNullOrEmpty(GetInstallPath()) == false;
         }
 
-        public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
+        public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
             // If we don't detect a steam install patg return an empty list.
             if (IsInstalled() == false)
@@ -110,12 +110,15 @@ namespace DLSS_Swapper.Data.Steam
                         var game = GetGameFromAppManifest(appManifest);
                         if (game is not null)
                         {
-                            await game.SaveToDatabaseAsync();
-                            if (game.NeedsReload == true || forceLoadAll == true)
+                            var remoteGame = GameManager.Instance.GetGame<SteamGame>(game.PlatformId);
+                            var loadedGame = remoteGame ?? game;
+
+                            await loadedGame.SaveToDatabaseAsync();
+                            if (loadedGame.NeedsProcessing == true || forceNeedsProcessing == true)
                             {
-                                game.ProcessGame();
+                                loadedGame.ProcessGame();
                             }
-                            games.Add(game);
+                            games.Add(loadedGame);
                         }
                     }
                 }
@@ -218,9 +221,9 @@ namespace DLSS_Swapper.Data.Steam
 
                 // If the game does not need a reload, check if we loaded from cache.
                 // If we didn't load it from cache we will later need to call ProcessGame.
-                if (game.NeedsReload == false && gameFromCache is null)
+                if (game.NeedsProcessing == false && gameFromCache is null)
                 {
-                    game.NeedsReload = true;
+                    game.NeedsProcessing = true;
                 }
 
                 return game;

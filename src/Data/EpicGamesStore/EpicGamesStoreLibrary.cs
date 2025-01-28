@@ -35,7 +35,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             return string.IsNullOrEmpty(GetEpicRootDirectory()) == false;
         }
 
-        public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
+        public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
             var games = new List<Game>();
             var epicRootDirectory = GetEpicRootDirectory();
@@ -154,12 +154,12 @@ namespace DLSS_Swapper.Data.EpicGamesStore
 
                     // If the game does not need a reload, check if we loaded from cache.
                     // If we didn't load it from cache we will later need to call ProcessGame.
-                    if (game.NeedsReload == false && gameFromCache is null)
+                    if (game.NeedsProcessing == false && gameFromCache is null)
                     {
-                        game.NeedsReload = true;
+                        game.NeedsProcessing = true;
                     }
 
-                    if (game.NeedsReload == true || forceLoadAll == true)
+                    if (game.NeedsProcessing == true || forceNeedsProcessing == true)
                     {
                         game.ProcessGame();
                     }

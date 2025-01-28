@@ -63,10 +63,13 @@ namespace DLSS_Swapper.Pages
         
         bool _loadingGamesAndDlls = false;
 
+        public GameGridPageModel ViewModel { get; private set; }
+
         public GameGridPage()
         {
             this.InitializeComponent();
-            DataContext = new GameGridPageModel(this);
+            ViewModel = new GameGridPageModel(this);
+            DataContext = ViewModel;
         }
 
 

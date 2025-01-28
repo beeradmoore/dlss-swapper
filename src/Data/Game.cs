@@ -169,6 +169,12 @@ namespace DLSS_Swapper.Data
         /// </summary>
         public void ProcessGame(bool autoSave = true)
         {
+            // If we are alreayd procssing we don't need to process again
+            if (Processing == true)
+            {
+                return;
+            }
+
             App.CurrentApp.RunOnUIThread(() =>
             {
                 NeedsReload = false;

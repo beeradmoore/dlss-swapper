@@ -203,26 +203,25 @@ namespace DLSS_Swapper.Data.Xbox
 
                     try
                     {
-                        var gameFromCache = GameManager.Instance.GetGame<XboxGame>(familyName);
-                        var game = gameFromCache ?? new XboxGame(familyName);
-                        game.Title = package.DisplayName;
-                        game.InstallPath = PathHelpers.NormalizePath(package.InstalledPath);
-                        game.SetLocalHeaderImagesAsync(gameNamesToFindPackages[packageName]);
+                        var cachedGame = GameManager.Instance.GetGame<XboxGame>(familyName);
+                        var activeGame = cachedGame ?? new XboxGame(familyName);
+                        activeGame.Title = package.DisplayName;  // TODO: Will this be a problem if the game is already loaded
+                        activeGame.InstallPath = PathHelpers.NormalizePath(package.InstalledPath);
+                        activeGame.SetLocalHeaderImagesAsync(gameNamesToFindPackages[packageName]);
                         //await game.UpdateCacheImageAsync();
-                        await game.SaveToDatabaseAsync();
+                        await activeGame.SaveToDatabaseAsync();
 
-                        // If the game does not need a reload, check if we loaded from cache.
-                        // If we didn't load it from cache we will later need to call ProcessGame.
-                        if (game.NeedsProcessing == false && gameFromCache is null)
+                        // If the game is not from cache, force processing
+                        if (cachedGame is null)
                         {
-                            game.NeedsProcessing = true;
+                            activeGame.NeedsProcessing = true;
                         }
 
-                        if (game.NeedsProcessing == true || forceNeedsProcessing == true)
+                        if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
                         {
-                            game.ProcessGame();
+                            activeGame.ProcessGame();
                         }
-                        games.Add(game);
+                        games.Add(activeGame);
                     }
                     catch (Exception err)
                     {
@@ -242,9 +241,6 @@ namespace DLSS_Swapper.Data.Xbox
                     await cachedGame.DeleteAsync();
                 }
             }
-
-            // Dumb workaround for async Task method. 
-            await Task.Delay(10);
 
             return games;
         }

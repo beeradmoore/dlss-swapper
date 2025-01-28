@@ -113,19 +113,18 @@ namespace DLSS_Swapper.Data.GOG
                                 continue;
                             }
 
-                            var gameFromCache = GameManager.Instance.GetGame<GOGGame>(gameId);
-                            var game = gameFromCache ?? new GOGGame(gameId);
-                            game.Title = gameName;
-                            game.InstallPath = PathHelpers.NormalizePath(gamePath);
+                            var cachedGame = GameManager.Instance.GetGame<GOGGame>(gameId);
+                            var activeGame = cachedGame ?? new GOGGame(gameId);
+                            activeGame.Title = gameName;  // TODO: Will this be a problem if the game is already loaded
+                            activeGame.InstallPath = PathHelpers.NormalizePath(gamePath);
 
-                            // If the game does not need a reload, check if we loaded from cache.
-                            // If we didn't load it from cache we will later need to call ProcessGame.
-                            if (game.NeedsProcessing == false && gameFromCache is null)
+                            // If the game is not from cache, force processing
+                            if (cachedGame is null)
                             {
-                                game.NeedsProcessing = true;
+                                activeGame.NeedsProcessing = true;
                             }
 
-                            gogGames.Add(game);
+                            gogGames.Add(activeGame);
                         }
                     }
                 }

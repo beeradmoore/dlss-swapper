@@ -48,7 +48,6 @@ namespace DLSS_Swapper.Data.EpicGamesStore
 
             var cachedGames = GameManager.Instance.GetGames<EpicGamesStoreGame>();
 
-
             // Appears we may not need data from LauncherInstalled.dat if we just parse files in EpicGamesLauncher\Data\Manifests instead
             /*
             // Check the launcher installed file exists.
@@ -144,27 +143,27 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         }
                     }
 
-                    var gameFromCache = GameManager.Instance.GetGame<EpicGamesStoreGame>(manifest.CatalogItemId);
-                    var game = gameFromCache ?? new EpicGamesStoreGame(manifest.CatalogItemId);
-                    game.RemoteHeaderImage = remoteHeaderUrl;
-                    game.Title = manifest.DisplayName;
-                    game.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
+
+                    var cachedGame = GameManager.Instance.GetGame<EpicGamesStoreGame>(manifest.CatalogItemId);
+                    var activeGame = cachedGame ?? new EpicGamesStoreGame(manifest.CatalogItemId);
+                    activeGame.RemoteHeaderImage = remoteHeaderUrl;
+                    activeGame.Title = manifest.DisplayName; // TODO: Will this be a problem if the game is already loaded
+                    activeGame.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
                     
-                    await game.SaveToDatabaseAsync();
+                    await activeGame.SaveToDatabaseAsync();
 
-                    // If the game does not need a reload, check if we loaded from cache.
-                    // If we didn't load it from cache we will later need to call ProcessGame.
-                    if (game.NeedsProcessing == false && gameFromCache is null)
+                    // If the game is not from cache, force processing
+                    if (cachedGame is null)
                     {
-                        game.NeedsProcessing = true;
+                        activeGame.NeedsProcessing = true;
                     }
 
-                    if (game.NeedsProcessing == true || forceNeedsProcessing == true)
+                    if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
                     {
-                        game.ProcessGame();
+                        activeGame.ProcessGame();
                     }
 
-                    games.Add(game);
+                    games.Add(activeGame);
                 }
                 catch (Exception err)
                 {

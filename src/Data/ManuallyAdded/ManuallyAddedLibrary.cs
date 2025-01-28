@@ -38,7 +38,7 @@ public class ManuallyAddedLibrary : IGameLibrary
             var activeGame = cachedGame ?? dbGame;
 
             // If the game is not from cache, force re-processing
-            if (cachedGame is not null)
+            if (cachedGame is null)
             {
                 activeGame.NeedsProcessing = true;
             }

@@ -98,27 +98,87 @@ namespace DLSS_Swapper.Data.Steam
             {
                 if (Directory.Exists(libraryFolder))
                 {
-                    var appManifests = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
-                    foreach (var appManifest in appManifests)
+                    var appManifestPaths = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
+                    foreach (var appManifestPath in appManifestPaths)
                     {
                         // Don't bother adding Steamworks Common Redistributables.
-                        if (appManifest.EndsWith("appmanifest_228980.acf") == true)
+                        if (appManifestPath.EndsWith("appmanifest_228980.acf") == true)
                         {
                             continue;
                         }
 
-                        var game = GetGameFromAppManifest(appManifest);
+                        SteamGame? game = null;
+
+
+                        try
+                        {
+                            var appManifest = File.ReadAllText(appManifestPath);
+
+                            var regex = new Regex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline);
+                            var matches = regex.Matches(appManifest);
+                            if (matches.Count == 0)
+                            {
+                                continue;
+                            }
+
+                            var steamGameAppId = matches[0].Groups["appid"].Value;
+
+                            game = new SteamGame(steamGameAppId);
+
+                            regex = new Regex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline);
+                            matches = regex.Matches(appManifest);
+                            if (matches.Count == 0)
+                            {
+                                continue;
+                            }
+
+                            game.Title = matches[0].Groups["name"].ToString();
+
+                            regex = new Regex(@"^([ \t]*)""installdir""([ \t]*)""(?<installdir>.*)""$", RegexOptions.Multiline);
+                            matches = regex.Matches(appManifest);
+                            if (matches.Count == 0)
+                            {
+                                continue;
+                            }
+
+                            var installDir = matches[0].Groups["installdir"].ToString();
+
+                            var baseDir = Path.GetDirectoryName(appManifestPath);
+                            if (string.IsNullOrEmpty(baseDir))
+                            {
+                                continue;
+                            }
+
+                            game.InstallPath = PathHelpers.NormalizePath(Path.Combine(baseDir, "common", installDir));
+                        }
+                        catch (Exception err)
+                        {
+                            Logger.Error(err.Message);
+                            continue;
+                        }
+
+
                         if (game is not null)
                         {
-                            var remoteGame = GameManager.Instance.GetGame<SteamGame>(game.PlatformId);
-                            var loadedGame = remoteGame ?? game;
+                            var cachedGame = GameManager.Instance.GetGame<SteamGame>(game.PlatformId);
+                            var activeGame = cachedGame ?? game;
+                            activeGame.Title = game.Title;  // TODO: Will this be a problem if the game is already loaded
+                            activeGame.InstallPath = game.InstallPath;
 
-                            await loadedGame.SaveToDatabaseAsync();
-                            if (loadedGame.NeedsProcessing == true || forceNeedsProcessing == true)
+                            await activeGame.SaveToDatabaseAsync();
+
+                            // If the game is not from cache, force processing
+                            if (cachedGame is null)
                             {
-                                loadedGame.ProcessGame();
+                                activeGame.NeedsProcessing = true;
                             }
-                            games.Add(loadedGame);
+
+                            if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+                            {
+                                activeGame.ProcessGame();
+                            }
+
+                            games.Add(activeGame);
                         }
                     }
                 }
@@ -172,66 +232,6 @@ namespace DLSS_Swapper.Data.Steam
                 _installPath = string.Empty;
                 Logger.Error(err.Message);
                 return string.Empty;
-            }
-        }
-
-        internal Game? GetGameFromAppManifest(string appManifestPath)
-        {
-            try
-            {
-                var appManifest = File.ReadAllText(appManifestPath);
-
-                var regex = new Regex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline);
-                var matches = regex.Matches(appManifest);
-                if (matches.Count == 0)
-                {
-                    return null;
-                }
-
-                var steamGameAppId = matches[0].Groups["appid"].Value;
-
-                var gameFromCache = GameManager.Instance.GetGame<SteamGame>(steamGameAppId);
-                var game = gameFromCache ?? new SteamGame(steamGameAppId);
-
-                regex = new Regex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline);
-                matches = regex.Matches(appManifest);
-                if (matches.Count == 0)
-                {
-                    return null;
-                }
-
-                game.Title = matches[0].Groups["name"].ToString();
-
-                regex = new Regex(@"^([ \t]*)""installdir""([ \t]*)""(?<installdir>.*)""$", RegexOptions.Multiline);
-                matches = regex.Matches(appManifest);
-                if (matches.Count == 0)
-                {
-                    return null;
-                }
-
-                var installDir = matches[0].Groups["installdir"].ToString();
-
-                var baseDir = Path.GetDirectoryName(appManifestPath);
-                if (string.IsNullOrEmpty(baseDir))
-                {
-                    return null;
-                }
-
-                game.InstallPath = PathHelpers.NormalizePath(Path.Combine(baseDir, "common", installDir));
-
-                // If the game does not need a reload, check if we loaded from cache.
-                // If we didn't load it from cache we will later need to call ProcessGame.
-                if (game.NeedsProcessing == false && gameFromCache is null)
-                {
-                    game.NeedsProcessing = true;
-                }
-
-                return game;
-            }
-            catch (Exception err)
-            {
-                Logger.Error(err.Message);
-                return null;
             }
         }
 

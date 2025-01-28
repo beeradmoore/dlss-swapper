@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,11 +24,9 @@ public class ManuallyAddedLibrary : IGameLibrary
 
     }
 
-    public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
+    public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
     {
-        // Not monitoring for cachedGames like in other libraries, as every game is from cache anyway.
-
-        var games = new List<Game>();
+        List<Game> games = new List<Game>();
         List<ManuallyAddedGame> dbGames;
         using (await Database.Instance.Mutex.LockAsync())
         {
@@ -35,11 +34,21 @@ public class ManuallyAddedLibrary : IGameLibrary
         }
         foreach (var dbGame in dbGames)
         {
-            if (dbGame.NeedsReload == true || forceLoadAll == true)
+            var cachedGame = GameManager.Instance.GetGame<ManuallyAddedGame>(dbGame.PlatformId);
+            var activeGame = cachedGame ?? dbGame;
+
+            // If the game is not from cache, force re-processing
+            if (cachedGame is null)
             {
-                dbGame.ProcessGame();
+                activeGame.NeedsProcessing = true;
             }
-            games.Add(dbGame);
+
+            if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+            {
+                activeGame.ProcessGame();
+            }
+
+            games.Add(activeGame);
         }
 
         games.Sort();
@@ -63,7 +72,6 @@ public class ManuallyAddedLibrary : IGameLibrary
             }
             foreach (var game in games)
             {
-                // TODO: Handle process game
                 await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                 GameManager.Instance.AddGame(game);
             }
@@ -71,6 +79,7 @@ public class ManuallyAddedLibrary : IGameLibrary
         catch (Exception err)
         {
             Logger.Error(err.Message);
+            Debugger.Break();
         }
     }
 }

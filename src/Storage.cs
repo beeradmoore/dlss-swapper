@@ -48,11 +48,10 @@ namespace DLSS_Swapper
             CreateDirectoryIfNotExists(GetImageCachePath());
         }
 
-
         public static string GetTemp()
         {
 #if PORTABLE
-            var path = Path.Combine(storagePath, "temp");
+            var path = Path.Combine(StoragePath, "temp");
             CreateDirectoryIfNotExists(path);
 #else
             var path = Path.Combine(Path.GetTempPath(), "DLSS Swapper");

@@ -42,26 +42,26 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="16">
                 <TextBlock Text="Games" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
-                <muxc:ProgressRing IsActive="True" VerticalAlignment="Center" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"  />
+                <muxc:ProgressRing IsActive="True" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.IsLoading, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"  />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <AppBarButton Label="New DLLs" Command="{Binding UnknownAssetsFoundButtonCommand}" Visibility="{x:Bind data:GameManager.Instance.UnknownAssetsFound, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{Binding IsGameListLoading, Converter={StaticResource BoolNegationConverter}}">
+                <AppBarButton Label="New DLLs" Command="{x:Bind ViewModel.UnknownAssetsFoundButtonCommand}" Visibility="{x:Bind data:GameManager.Instance.UnknownAssetsFound, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE946;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Label="Add Game" Command="{Binding AddManualGameButtonCommand}" IsEnabled="{Binding IsGameListLoading, Converter={StaticResource BoolNegationConverter}}">
+                <AppBarButton Label="Add Game" Command="{x:Bind ViewModel.AddManualGameButtonCommand}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE710;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Label="Refresh" Command="{Binding RefreshGamesButtonCommand}" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}">
+                <AppBarButton Label="Refresh" Command="{x:Bind ViewModel.RefreshGamesButtonCommand}" IsEnabled="{x:Bind ViewModel.IsLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE72C;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Icon="Filter" Label="Filter" Command="{Binding FilterGamesButtonCommand}" IsEnabled="{Binding IsGameListLoading, Converter={StaticResource BoolNegationConverter}}">
+                <AppBarButton Icon="Filter" Label="Filter" Command="{x:Bind ViewModel.FilterGamesButtonCommand}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE71C;" />
                     </AppBarButton.Content>
@@ -78,7 +78,7 @@
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
         </Grid>
 
-        <GridView Grid.Row="1" x:Name="MainGridView" ItemsSource="{Binding CurrentCollectionView, Mode=OneWay}" IsSynchronizedWithCurrentItem="False" SelectionMode="Single" Padding="20" SelectionChanged="MainGridView_SelectionChanged">
+        <GridView Grid.Row="1" x:Name="MainGridView" ItemsSource="{x:Bind ViewModel.CurrentCollectionView, Mode=OneWay}" IsSynchronizedWithCurrentItem="False" SelectionMode="Single" Padding="20" SelectionChanged="MainGridView_SelectionChanged">
 
             <!--SelectionChanged="MainGridView_SelectionChanged"-->
             <!--
@@ -93,7 +93,7 @@
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate x:DataType="data:GameGroup">
                             <Grid Margin="0">
-                                <TextBlock Text="{Binding Name}" Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
+                                <TextBlock Text="{x:Bind Name}" Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
                             </Grid>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
@@ -120,14 +120,14 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="{Binding Title}" Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{ThemeResource ButtonForegroundColor}" />
+                        <TextBlock Text="{x:Bind Title}" Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{ThemeResource ButtonForegroundColor}" />
 
                         <!-- Weird, but allows image to strecth centered rather than left align -->
                         <Border BorderThickness="0" Width="200" Height="300">
                             <Border.Background>
                                 <ImageBrush Stretch="UniformToFill">
                                     <ImageBrush.ImageSource>
-                                        <BitmapImage CreateOptions="IgnoreImageCache" UriSource="{Binding CoverImage, Mode=OneWay, Converter={StaticResource BitmapImageUriConverter}}"/>
+                                        <BitmapImage CreateOptions="IgnoreImageCache" UriSource="{x:Bind CoverImage, Mode=OneWay, Converter={StaticResource BitmapImageUriConverter}}"/>
                                     </ImageBrush.ImageSource>
                                 </ImageBrush>
                             </Border.Background>
@@ -145,8 +145,8 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Column="0" FontWeight="Bold" Text="DLSS" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" />
-                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSS.Version, FallbackValue='N/A'}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Visibility="{Binding Processing, Converter={StaticResource InverseBoolToVisibilityConverter}}" />
-                            <ProgressRing Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Width="16" Height="16" Visibility="{Binding Processing, Converter={StaticResource BoolToVisibilityConverter}}" />
+                            <TextBlock Grid.Column="1" Text="{x:Bind CurrentDLSS.Version, FallbackValue='N/A', Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Visibility="{x:Bind Processing, Converter={StaticResource InverseBoolToVisibilityConverter}, Mode=OneWay}" />
+                            <ProgressRing Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Width="16" Height="16" Visibility="{x:Bind Processing, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" />
                         </Grid>
                     </Grid>
                 </DataTemplate>

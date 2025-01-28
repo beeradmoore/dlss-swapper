@@ -49,7 +49,7 @@ namespace DLSS_Swapper.Data.GOG
             return false;
         }
 
-        public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
+        public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
             if (IsInstalled() == false)
             {
@@ -113,19 +113,18 @@ namespace DLSS_Swapper.Data.GOG
                                 continue;
                             }
 
-                            var gameFromCache = GameManager.Instance.GetGame<GOGGame>(gameId);
-                            var game = gameFromCache ?? new GOGGame(gameId);
-                            game.Title = gameName;
-                            game.InstallPath = PathHelpers.NormalizePath(gamePath);
+                            var cachedGame = GameManager.Instance.GetGame<GOGGame>(gameId);
+                            var activeGame = cachedGame ?? new GOGGame(gameId);
+                            activeGame.Title = gameName;  // TODO: Will this be a problem if the game is already loaded
+                            activeGame.InstallPath = PathHelpers.NormalizePath(gamePath);
 
-                            // If the game does not need a reload, check if we loaded from cache.
-                            // If we didn't load it from cache we will later need to call ProcessGame.
-                            if (game.NeedsReload == false && gameFromCache is null)
+                            // If the game is not from cache, force processing
+                            if (cachedGame is null)
                             {
-                                game.NeedsReload = true;
+                                activeGame.NeedsProcessing = true;
                             }
 
-                            gogGames.Add(game);
+                            gogGames.Add(activeGame);
                         }
                     }
                 }
@@ -283,7 +282,7 @@ namespace DLSS_Swapper.Data.GOG
 
                 await gogGame.SaveToDatabaseAsync();
 
-                if (gogGame.NeedsReload == true || forceLoadAll == true)
+                if (gogGame.NeedsProcessing == true || forceNeedsProcessing == true)
                 {
                     gogGame.ProcessGame();
                 }
@@ -329,20 +328,14 @@ namespace DLSS_Swapper.Data.GOG
                 }
                 foreach (var game in games)
                 {
-                    game.Processing = true;
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
-
-                    // If we won't be reloading the game we can mark it as finished processing.
-                    if (game.NeedsReload == false)
-                    {
-                        game.Processing = false;
-                    }
                     GameManager.Instance.AddGame(game);
                 }
             }
             catch (Exception err)
             {
                 Logger.Error(err.Message);
+                Debugger.Break();
             }
         }
     }

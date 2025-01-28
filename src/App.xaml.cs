@@ -15,7 +15,6 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
-using MvvmHelpers;
 using SQLite;
 using System;
 using System.Collections.Generic;

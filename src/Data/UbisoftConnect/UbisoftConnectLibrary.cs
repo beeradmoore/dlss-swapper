@@ -51,7 +51,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         }
 
 
-        public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
+        public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
             var games = new List<Game>();
 
@@ -211,27 +211,27 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                     }
                                 }
 
-                                var gameFromCache = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString());
-                                var game = gameFromCache ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString());
-                                game.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;
-                                game.InstallPath = PathHelpers.NormalizePath(installedTitles[configurationRecord.InstallId].InstallPath);
-                                game.LocalHeaderImage = localImage;
-                                game.RemoteHeaderImage = remoteImage;
-                                await game.SaveToDatabaseAsync();
+                                var cachedGame = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString());
+                                var activeGame = cachedGame ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString());
+                                activeGame.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;  // TODO: Will this be a problem if the game is already loaded
+                                activeGame.InstallPath = PathHelpers.NormalizePath(installedTitles[configurationRecord.InstallId].InstallPath);
+                                activeGame.LocalHeaderImage = localImage;
+                                activeGame.RemoteHeaderImage = remoteImage;
 
-                                // If the game does not need a reload, check if we loaded from cache.
-                                // If we didn't load it from cache we will later need to call ProcessGame.
-                                if (game.NeedsReload == false && gameFromCache is null)
+                                await activeGame.SaveToDatabaseAsync();
+
+                                // If the game is not from cache, force processing
+                                if (cachedGame is null)
                                 {
-                                    game.NeedsReload = true;
+                                    activeGame.NeedsProcessing = true;
                                 }
 
-                                if (game.NeedsReload == true || forceLoadAll == true)
+                                if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
                                 {
-                                    game.ProcessGame();
+                                    activeGame.ProcessGame();
                                 }
 
-                                games.Add(game);
+                                games.Add(activeGame);
                             }
                             catch (Exception err)
                             {
@@ -475,6 +475,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             catch (Exception err)
             {
                 Logger.Error(err.Message);
+                Debugger.Break();
             }
         }
     }

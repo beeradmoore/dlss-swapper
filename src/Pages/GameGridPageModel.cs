@@ -25,7 +25,7 @@ using Windows.UI.Text;
 
 namespace DLSS_Swapper.Pages;
 
-internal partial class GameGridPageModel : ObservableObject
+public partial class GameGridPageModel : ObservableObject
 {
     GameGridPage gameGridPage;
 
@@ -49,7 +49,7 @@ internal partial class GameGridPageModel : ObservableObject
         ApplyGameGroupFilter();
      }
 
-    public async Task InitialLoadAsync(bool forceLoadAll = false)
+    public async Task InitialLoadAsync()
     {
         IsGameListLoading = true;
         IsDLSSLoading = true;
@@ -58,7 +58,7 @@ internal partial class GameGridPageModel : ObservableObject
         
         IsGameListLoading = false;
           
-        await GameManager.Instance.LoadGamesAsync(forceLoadAll);
+        await GameManager.Instance.LoadGamesAsync(false);
 
         IsDLSSLoading = false;
     }
@@ -275,7 +275,11 @@ If you have checked these and your game is still not showing up there may be a b
     [RelayCommand]
     async Task RefreshGamesButtonAsync()
     {
-        await InitialLoadAsync(true);
+        IsDLSSLoading = true;
+
+        await GameManager.Instance.LoadGamesAsync(true);
+
+        IsDLSSLoading = false;
     }
 
     [RelayCommand]

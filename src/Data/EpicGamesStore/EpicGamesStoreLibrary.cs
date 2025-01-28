@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management;
@@ -34,7 +35,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             return string.IsNullOrEmpty(GetEpicRootDirectory()) == false;
         }
 
-        public async Task<List<Game>> ListGamesAsync(bool forceLoadAll = false)
+        public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
             var games = new List<Game>();
             var epicRootDirectory = GetEpicRootDirectory();
@@ -46,7 +47,6 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             }
 
             var cachedGames = GameManager.Instance.GetGames<EpicGamesStoreGame>();
-
 
             // Appears we may not need data from LauncherInstalled.dat if we just parse files in EpicGamesLauncher\Data\Manifests instead
             /*
@@ -143,27 +143,27 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         }
                     }
 
-                    var gameFromCache = GameManager.Instance.GetGame<EpicGamesStoreGame>(manifest.CatalogItemId);
-                    var game = gameFromCache ?? new EpicGamesStoreGame(manifest.CatalogItemId);
-                    game.RemoteHeaderImage = remoteHeaderUrl;
-                    game.Title = manifest.DisplayName;
-                    game.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
+
+                    var cachedGame = GameManager.Instance.GetGame<EpicGamesStoreGame>(manifest.CatalogItemId);
+                    var activeGame = cachedGame ?? new EpicGamesStoreGame(manifest.CatalogItemId);
+                    activeGame.RemoteHeaderImage = remoteHeaderUrl;
+                    activeGame.Title = manifest.DisplayName; // TODO: Will this be a problem if the game is already loaded
+                    activeGame.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
                     
-                    await game.SaveToDatabaseAsync();
+                    await activeGame.SaveToDatabaseAsync();
 
-                    // If the game does not need a reload, check if we loaded from cache.
-                    // If we didn't load it from cache we will later need to call ProcessGame.
-                    if (game.NeedsReload == false && gameFromCache is null)
+                    // If the game is not from cache, force processing
+                    if (cachedGame is null)
                     {
-                        game.NeedsReload = true;
+                        activeGame.NeedsProcessing = true;
                     }
 
-                    if (game.NeedsReload == true || forceLoadAll == true)
+                    if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
                     {
-                        game.ProcessGame();
+                        activeGame.ProcessGame();
                     }
 
-                    games.Add(game);
+                    games.Add(activeGame);
                 }
                 catch (Exception err)
                 {
@@ -213,6 +213,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             catch (Exception err)
             {
                 Logger.Error(err.Message);
+                Debugger.Break();
             }
         }
     }

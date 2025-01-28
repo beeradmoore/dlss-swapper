@@ -102,7 +102,7 @@ namespace DLSS_Swapper.Data
         public List<GameAsset> GameAssets { get; } = new List<GameAsset>();
 
         [Ignore]
-        public bool NeedsReload { get; set; } = false;
+        public bool NeedsProcessing { get; set; } = false;
 
         bool _isLoadingCoverImage = false;
 
@@ -169,9 +169,15 @@ namespace DLSS_Swapper.Data
         /// </summary>
         public void ProcessGame(bool autoSave = true)
         {
+            // If we are alreayd procssing we don't need to process again
+            if (Processing == true)
+            {
+                return;
+            }
+
             App.CurrentApp.RunOnUIThread(() =>
             {
-                NeedsReload = false;
+                NeedsProcessing = false;
             });
 
             if (string.IsNullOrEmpty(InstallPath))
@@ -1274,77 +1280,64 @@ namespace DLSS_Swapper.Data
             await LoadCoverImageAsync();
 
             GameAssets.Clear();
-            List<GameAsset> gameAssets;
             using (await Database.Instance.Mutex.LockAsync())
             {
-                gameAssets = await Database.Instance.Connection.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync();
+                var gameAssets = await Database.Instance.Connection.Table<GameAsset>().Where(ga => ga.Id == ID).ToListAsync().ConfigureAwait(false);
+                if (gameAssets?.Any() == true)
+                {
+                    GameAssets.AddRange(gameAssets);
+                }
             }
-            GameAssets.AddRange(gameAssets);
 
             UpdateCurrentDLLsFromGameAssets();
 
-            if (gameAssets.Any())
+            // TODO: Add auto reload by storing last full reload time on game
+
+            if (GameAssets.Any())
             {
-                foreach (var gameAsset in gameAssets)
+                foreach (var gameAsset in GameAssets)
                 {
                     // Check that each of the game assets exist, after we will check if they are what we expect them to be
                     if (File.Exists(gameAsset.Path) == false)
                     {
-                        NeedsReload = true;
-                        Processing = true;
+                        NeedsProcessing = true;
                         break;
                     }
                 }
 
-                if (NeedsReload == false)
+                if (NeedsProcessing == false)
                 {
                     var unknownGameAssets = new List<GameAsset>();
-                    foreach (var gameAsset in gameAssets)
+                    foreach (var gameAsset in GameAssets)
                     {
                         if (gameAsset.IsInKnownRecords() == false)
                         {
                             unknownGameAssets.Add(gameAsset);
                         }
                     }
-
                     if (unknownGameAssets.Any())
                     {
                         GameManager.Instance.AddUnknownGameAssets(GameLibrary, Title, unknownGameAssets);
                     }
 
-
-                    var firstDlssVersion = gameAssets.FirstOrDefault(x => x.AssetType == GameAssetType.DLSS);
-                    if (firstDlssVersion is null)
+                    foreach (var gameAsset in GameAssets)
                     {
-                        NeedsReload = true;
-                        Processing = true;
-                    }
-                    else
-                    {
-                        var fileVersionInfo = FileVersionInfo.GetVersionInfo(firstDlssVersion.Path);
+                        var fileVersionInfo = FileVersionInfo.GetVersionInfo(gameAsset.Path);
                         var freshVersion = fileVersionInfo.GetFormattedFileVersion();
 
-                        // TODO: FIX
-                        /*
-                        if (CurrentDLSSVersion != freshVersion)
+                        if (gameAsset.Version != freshVersion)
                         {
-                            NeedsReload = true;
-                            Processing = true;
+                            NeedsProcessing = true;
+                            break;
                         }
-                        else
-                        {
-                            // NO-OP, last used DLSS is the same version that we last saw, it is also still on the disk as we expected.
-                            NeedsReload = false;
-                            Processing = false;
-                        }
-                        */
                     }
                 }
             }
             else
             {
-                // If there is no known current DLSS version we want to do a full reload incase the game got updated.
-                NeedsReload = true;
+                // If there is no known current DLLs then we likely want to do a full reload incase the game got updated.
+                // TODO: Also add a time last reloaded here.
+                NeedsProcessing = true;
                 return;
             }
         }

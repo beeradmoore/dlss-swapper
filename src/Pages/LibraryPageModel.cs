@@ -19,7 +19,6 @@ using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
-using MvvmHelpers;
 
 namespace DLSS_Swapper.Pages;
 

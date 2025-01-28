@@ -18,10 +18,11 @@ internal partial class GameManager : ObservableObject
 {
     public static GameManager Instance { get; private set; } = new GameManager();
 
-    //public ObservableCollection<Game> FavouriteGames { get; } = new ObservableCollection<Game>();
-    public ObservableCollection<Game> AllGames { get; } = new ObservableCollection<Game>();
-
-    //ConcurrentDictionary<GameLibrary, ConcurrentBag<Game>> GamesByLibrary { get; } = new ConcurrentDictionary<GameLibrary, ConcurrentBag<Game>>();
+    // Because access to _allGames should be done on the UI thread we have _synchronisedAllGames which
+    // will be used for adding/removing/fetching games. _allGames gets updated which will then be reflected
+    // to the user.
+    List<Game> _synchronisedAllGames = new List<Game>();
+    ObservableCollection<Game> _allGames { get; } = new ObservableCollection<Game>();
 
     public CollectionViewSource GroupedGameCollectionViewSource { get; init; }
     public CollectionViewSource UngroupedGameCollectionViewSource { get; init; }
@@ -109,14 +110,12 @@ internal partial class GameManager : ObservableObject
 
     private GameManager()
     {
-        //AllGames.CollectionChanged += AllGames_CollectionChanged;
-
-        FavouriteGamesView = new AdvancedCollectionView(AllGames, true);
+        FavouriteGamesView = new AdvancedCollectionView(_allGames, true);
         FavouriteGamesView.Filter = GetPredicateForFavouriteGames(Settings.Instance.HideNonDLSSGames);
         FavouriteGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
         FavouriteGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
-        AllGamesView = new AdvancedCollectionView(AllGames, true);
+        AllGamesView = new AdvancedCollectionView(_allGames, true);
         AllGamesView.Filter = GetPredicateForAllGames(Settings.Instance.HideNonDLSSGames);
         //AllGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
         AllGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
@@ -141,7 +140,7 @@ internal partial class GameManager : ObservableObject
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
 
-            var gameView = new AdvancedCollectionView(AllGames, true);
+            var gameView = new AdvancedCollectionView(_allGames, true);
             gameView.Filter = GetPredicateForLibraryGames(gameLibraryEnum, Settings.Instance.HideNonDLSSGames);
             gameView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
@@ -169,47 +168,25 @@ internal partial class GameManager : ObservableObject
 
     }
 
-    /*
-    private void AllGames_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-    {
-        if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
-        {
-            foreach (Game game in e.NewItems)
-            {
-                GamesByLibrary.AddOrUpdate(game.GameLibrary,
-                    (key) => new ConcurrentBag<Game>() { game }, 
-                    (key, bag) => { bag.Add(game); return bag; });
-            }
-        }
-        else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
-        {
-
-        }
-    }
-    */
-
     public async Task LoadGamesFromCacheAsync()
     {
         UnknownAssetsFound = false;
         _unknownGameAssets.Clear();
 
-        var tasks = new Dictionary<GameLibrary, Task>();
         foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
             if (gameLibrary.IsEnabled)
             {
-                tasks[gameLibraryEnum] = gameLibrary.LoadGamesFromCacheAsync();
+                await gameLibrary.LoadGamesFromCacheAsync().ConfigureAwait(false);
             }
         }
-
-        await Task.WhenAll(tasks.Values);
     }
 
-    public async Task LoadGamesAsync(bool forceLoadAll = false)
+    public async Task LoadGamesAsync(bool forceNeedsProcessing = false)
     {
         var tasks = new List<Task<List<Game>>>();
-        if (forceLoadAll == true)
+        if (forceNeedsProcessing == true)
         {
             lock (unknownGameAsseetLock)
             {
@@ -221,7 +198,7 @@ internal partial class GameManager : ObservableObject
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
             if (gameLibrary.IsEnabled)
             {
-                tasks.Add(gameLibrary.ListGamesAsync(forceLoadAll));
+                tasks.Add(gameLibrary.ListGamesAsync(forceNeedsProcessing));
             }
         }
 
@@ -271,26 +248,36 @@ internal partial class GameManager : ObservableObject
         }
     }
 
+
     public Game AddGame(Game game)
     {
         lock (gameLock)
         {
-            if (AllGames.Contains(game) == true)
+            if (_synchronisedAllGames.Contains(game) == true)
             {
                 // This probably checks the game collection twice looking for the game.
                 // We could do away with this, but in theory this if is never hit
-                var oldGame = AllGames.First(x => x.Equals(game));
+                var oldGame = _synchronisedAllGames.First(x => x.Equals(game));
 
                 App.CurrentApp.RunOnUIThread(() =>
                 {
                     oldGame.UpdateFromGame(game);
                 });
 
+                Debug.WriteLine($"Reusing old game: {game.Title}");
                 return oldGame;
             }
             else
             {
-                AllGames.Add(game);
+                Debug.WriteLine($"Adding new game: {game.Title}");
+
+                _synchronisedAllGames.Add(game);
+
+                App.CurrentApp.RunOnUIThread(() =>
+                {
+                    _allGames.Add(game);
+                });
+
                 return game;
             }
         }
@@ -300,13 +287,12 @@ internal partial class GameManager : ObservableObject
     {
         lock (gameLock)
         {
-            if (game.IsFavourite)
-            {
-                //FavouriteGames.Remove(game);
-            }
+            _synchronisedAllGames.Remove(game);
 
-            AllGames.Remove(game);
-            //GamesByLibrary[game.GameLibrary].Remove(game);
+            App.CurrentApp.RunOnUIThread(() =>
+            {
+                _allGames.Remove(game);
+            });
         }
     }
 
@@ -315,8 +301,7 @@ internal partial class GameManager : ObservableObject
     {
         lock (gameLock)
         {
-            // TODO: Is there a better way to do this list?
-            foreach (var game in AllGames)
+            foreach (var game in _synchronisedAllGames)
             {
                 if (game is TGame platformGame)
                 {
@@ -336,7 +321,7 @@ internal partial class GameManager : ObservableObject
         lock (gameLock)
         {
             var games = new List<TGame>();
-            foreach (var game in AllGames)
+            foreach (var game in _synchronisedAllGames)
             {
                 if (game is TGame tGame)
                 {
@@ -352,7 +337,7 @@ internal partial class GameManager : ObservableObject
     {
         lock (gameLock)
         {
-            foreach (var game in AllGames)
+            foreach (var game in _synchronisedAllGames)
             {
                 if (game.InstallPath?.Equals(installPath, StringComparison.OrdinalIgnoreCase) == true)
                 {

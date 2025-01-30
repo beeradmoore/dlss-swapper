@@ -1,6 +1,6 @@
 @echo off
 
-set app_version=1.1.3.0
+set app_version=1.1.3.1
 set initial_directory=%cd%
 
 REM Delete bin and obj directory

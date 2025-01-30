@@ -218,7 +218,18 @@ namespace DLSS_Swapper.Pages
                 if (sender is GridView gridView)
                 {
                     gridView.SelectedItem = null;
+                }
 
+                if (game.Processing)
+                {
+                    var dialog = new EasyContentDialog(this.XamlRoot)
+                    {
+                        Title = "Game Currently Processing",
+                        CloseButtonText = "Okay",
+                        Content = $"{game.Title} is still processing. Please wait for the loading indicator to complete before opening.",
+                    };
+                    await dialog.ShowAsync();
+                    return;
                 }
 
                 var gameControl = new GameControl(game);

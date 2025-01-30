@@ -381,7 +381,7 @@ DLSS Swapper will close now.",
         /// <returns>True if the dlss recrods manifest was downloaded and saved successfully</returns>
         internal async Task<bool> UpdateManifestAsync()
         {
-            var url = "https://downloads.dlss-swapper.beeradmoore.com/manifest.json";
+            var url = "https://dlss-swapper-downloads.beeradmoore.com/manifest.json";
 
             try
             {

@@ -18,10 +18,8 @@
         <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter" />
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
         <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+        <ct_converters:StringVisibilityConverter x:Key="StringVisibilityConverter" EmptyValue="Collapsed" NotEmptyValue="Visible" />
         <converters:BitmapImageUriConverter x:Key="BitmapImageUriConverter" />
-
-
-        
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -92,8 +90,8 @@
                 <GroupStyle HidesIfEmpty="True">
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate x:DataType="data:GameGroup">
-                            <Grid Margin="0">
-                                <TextBlock Text="{x:Bind Name}" Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
+                            <Grid Margin="0" Visibility="{x:Bind Name, Converter={StaticResource StringVisibilityConverter}}">
+                                <TextBlock Text="{x:Bind Name}"  Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
                             </Grid>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>

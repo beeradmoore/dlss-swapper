@@ -147,15 +147,45 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="DLSS" FontWeight="Bold" />
-                        <Button Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        
+                        <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="0">
+                            <TextBlock Text="DLSS" FontWeight="Bold" VerticalAlignment="Center" Margin="0" Padding="0" />
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
+                                <Button.Content>
+                                    <FontIcon Glyph="&#xE7BA;" FontSize="16" Foreground="DarkOrange" VerticalAlignment="Center" />
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
 
-                        <TextBlock Grid.Column="1" Grid.Row="0" Text="DLSS Frame Generation" FontWeight="Bold" />
-                        <Button Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_G.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <StackPanel Orientation="Horizontal" Background="Red" HorizontalAlignment="Stretch" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="1" >
+                            <Button IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        </StackPanel>
 
-                        <TextBlock Grid.Column="0" Grid.Row="3" Text="DLSS Ray Reconstruction" FontWeight="Bold" />
-                        <Button Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_D.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="1" Grid.Row="0" >
+                            <TextBlock Text="DLSS Frame Generation" FontWeight="Bold" />
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSGFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
+                                <Button.Content>
+                                    <FontIcon Glyph="&#xE7BA;" FontSize="16" Foreground="DarkOrange" VerticalAlignment="Center" />
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
 
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch"  Padding="0" Spacing="6" Grid.Column="1" Grid.Row="1" >
+                            <Button IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_G.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="3">
+                            <TextBlock Text="DLSS Ray Reconstruction" FontWeight="Bold" />
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
+                                <Button.Content>
+                                    <FontIcon Glyph="&#xE7BA;" FontSize="16" Foreground="DarkOrange" VerticalAlignment="Center" />
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="4" >
+                            <Button IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_D.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        </StackPanel>
                     </Grid>
 
 

@@ -112,7 +112,15 @@ namespace DLSS_Swapper.Data
 
         [ObservableProperty]
         [Ignore]
+        public partial bool MultipleDLSSFound { get; set; } = false;
+
+        [ObservableProperty]
+        [Ignore]
         public partial GameAsset? CurrentDLSS_G { get; set; } = null;
+
+        [ObservableProperty]
+        [Ignore]
+        public partial bool MultipleDLSSGFound { get; set; } = false;
 
         [ObservableProperty]
         [Ignore]
@@ -120,7 +128,15 @@ namespace DLSS_Swapper.Data
 
         [ObservableProperty]
         [Ignore]
+        public partial bool MultipleDLSSDFound { get; set; } = false;
+
+        [ObservableProperty]
+        [Ignore]
         public partial GameAsset? CurrentFSR_31_DX12 { get; set; } = null;
+
+        [ObservableProperty]
+        [Ignore]
+        public partial bool MultipleFSR31DX12Found { get; set; } = false;
 
         [ObservableProperty]
         [Ignore]
@@ -128,7 +144,15 @@ namespace DLSS_Swapper.Data
 
         [ObservableProperty]
         [Ignore]
+        public partial bool MultipleFSR31VKFound { get; set; } = false;
+
+        [ObservableProperty]
+        [Ignore]
         public partial GameAsset? CurrentXeSS { get; set; } = null;
+
+        [ObservableProperty]
+        [Ignore]
+        public partial bool MultipleXeSSFound { get; set; } = false;
 
         [ObservableProperty]
         [Ignore]
@@ -136,7 +160,15 @@ namespace DLSS_Swapper.Data
 
         [ObservableProperty]
         [Ignore]
+        public partial bool MultipleXeLLFound { get; set; } = false;
+
+        [ObservableProperty]
+        [Ignore]
         public partial GameAsset? CurrentXeSS_FG { get; set; } = null;
+
+        [ObservableProperty]
+        [Ignore]
+        public partial bool MultipleXeSSFGFound { get; set; } = false;
 
         protected void SetID()
         {
@@ -1256,6 +1288,15 @@ namespace DLSS_Swapper.Data
             CurrentXeSS = null;
             CurrentXeLL = null;
             CurrentXeSS_FG = null;
+
+            MultipleDLSSFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS) > 1;
+            MultipleDLSSGFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS_G) > 1;
+            MultipleDLSSDFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS_D) > 1;
+            MultipleFSR31DX12Found = GameAssets.Count(x => x.AssetType == GameAssetType.FSR_31_DX12) > 1;
+            MultipleFSR31VKFound = GameAssets.Count(x => x.AssetType == GameAssetType.FSR_31_VK) > 1;
+            MultipleXeSSFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS) > 1;
+            MultipleXeLLFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeLL) > 1;
+            MultipleXeSSFGFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS_FG) > 1;
 
             foreach (var gameAsset in GameAssets)
             {

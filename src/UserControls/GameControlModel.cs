@@ -218,4 +218,21 @@ public partial class GameControlModel : ObservableObject
         await Game.SaveToDatabaseAsync();
         OnPropertyChanged(nameof(GameTitleHasChanged));
     }
+
+    [RelayCommand]
+    async Task MultipleDLLsFoundAsync(GameAssetType gameAssetType)
+    {
+        if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+        {
+           
+            var dialog = new EasyContentDialog(gameControl.XamlRoot)
+            {
+                Title = $"Multiple {DLLManager.Instance.GetAssetTypeName(gameAssetType)} DLLs found",
+                PrimaryButtonText = "Okay",
+                DefaultButton = ContentDialogButton.Primary,
+            };
+
+            await dialog.ShowAsync();
+        }
+    }
 }

@@ -73,7 +73,7 @@
                     Margin="0,40,0,0"
                     Text="DLSS Developer Options" />
                 <StackPanel Margin="0,10,0,0">
-                    <CheckBox Content="Show on-screen indicator" IsChecked="{x:Bind ViewModel.DlssShowIndicator, Mode=TwoWay}"  Margin="0,0,0,4"/>
+                    <ComboBox Header="Show on-screen indocator" ItemsSource="{Binding DLSSOnScreenIndicatorOptions, Mode=OneTime}" SelectedItem="{Binding SelectedDlssOnScreenIndicator, Mode=TwoWay}" Margin="0,0,0,8" />
                     <CheckBox Content="Enable logging to file" IsChecked="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
                     <CheckBox Content="Verbose logging" IsChecked="{x:Bind ViewModel.DlssVerboseLogging, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
                     <CheckBox Content="Enable logging to console window" IsChecked="{x:Bind ViewModel.DlssLoggingToWindow, Mode=TwoWay}"  Margin="0,0,0,4"/>

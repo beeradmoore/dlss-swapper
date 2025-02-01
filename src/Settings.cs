@@ -1,7 +1,9 @@
-﻿using Microsoft.UI.Xaml;
+﻿using DLSS_Swapper.Data;
+using Microsoft.UI.Xaml;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Windows.Graphics;
 
 namespace DLSS_Swapper
 {
@@ -260,8 +262,24 @@ namespace DLSS_Swapper
             }
         }
 
+        WindowPositionRect _lastWindowSizeAndPosition = new WindowPositionRect();
+        public WindowPositionRect LastWindowSizeAndPosition
+        {
+            get { return _lastWindowSizeAndPosition; }
+            set
+            {
+                if (_lastWindowSizeAndPosition != value)
+                {
+                    _lastWindowSizeAndPosition = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
 
-        
+
 
 
 

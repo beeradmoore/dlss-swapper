@@ -198,226 +198,238 @@ namespace DLSS_Swapper.Data
 
             ThreadPool.QueueUserWorkItem(async (stateInfo) =>
             {
-                var coverImageTask = UpdateCacheImageAsync();
-
-                var enumerationOptions = new EnumerationOptions();
-                enumerationOptions.RecurseSubdirectories = true;
-                enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
-
-                var oldGameAssets = GameAssets.ToList();
-                GameAssets.Clear();
-                using (await Database.Instance.Mutex.LockAsync())
-                {
-                    await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
-                }
-                // TODO: See if changing these to filter specific files, or getting very *.dll and looking for our specific ones is faster
-                var dllPaths = Directory.GetFiles(InstallPath, "*.dll", enumerationOptions);
-
-                /*
-                var dlssDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
-                var dlssgDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlssg.dll", enumerationOptions);
-                var dlssdDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlssd.dll", enumerationOptions);
-                var xessDllPaths = Directory.GetFiles(InstallPath, "libxess.dll", enumerationOptions);
-                */
-
-                var unknownGameAssets = new List<GameAsset>();
-
-                foreach (var dllPath in dllPaths)
-                {
-                    var dllName = Path.GetFileName(dllPath);
-
-                    // The case of these files should never change, right?
-                    if (dllName == "nvngx_dlss.dll")
-                    {
-                        var gameAsset = new GameAsset()
-                        {
-                            Id = ID,
-                            AssetType = GameAssetType.DLSS,
-                            Path = dllPath,
-                        };
-                        gameAsset.LoadVersionAndHash();
-                        GameAssets.Add(gameAsset);
-
-                        if (gameAsset.IsInKnownRecords() == false)
-                        {
-                            unknownGameAssets.Add(gameAsset);
-                        }
-
-                        LoadBackupForGameAsset(gameAsset);
-                    }
-                    else if (dllName == "nvngx_dlssg.dll")
-                    {
-                        var gameAsset = new GameAsset()
-                        {
-                            Id = ID,
-                            AssetType = GameAssetType.DLSS_G,
-                            Path = dllPath,
-                        };
-                        gameAsset.LoadVersionAndHash();
-                        GameAssets.Add(gameAsset);
-
-                        if (gameAsset.IsInKnownRecords() == false)
-                        {
-                            unknownGameAssets.Add(gameAsset);
-                        }
-
-                        LoadBackupForGameAsset(gameAsset);
-                    }
-                    else if (dllName == "nvngx_dlssd.dll")
-                    {
-                        var gameAsset = new GameAsset()
-                        {
-                            Id = ID,
-                            AssetType = GameAssetType.DLSS_D,
-                            Path = dllPath,
-                        };
-                        gameAsset.LoadVersionAndHash();
-                        GameAssets.Add(gameAsset);
-
-                        if (gameAsset.IsInKnownRecords() == false)
-                        {
-                            unknownGameAssets.Add(gameAsset);
-                        }
-
-                        LoadBackupForGameAsset(gameAsset);
-                    }
-                    else if (dllName == "amd_fidelityfx_dx12.dll")
-                    {
-                        var gameAsset = new GameAsset()
-                        {
-                            Id = ID,
-                            AssetType = GameAssetType.FSR_31_DX12,
-                            Path = dllPath,
-                        };
-                        gameAsset.LoadVersionAndHash();
-                        GameAssets.Add(gameAsset);
-
-                        if (gameAsset.IsInKnownRecords() == false)
-                        {
-                            unknownGameAssets.Add(gameAsset);
-                        }
-
-                        LoadBackupForGameAsset(gameAsset);
-                    }
-                    else if (dllName == "amd_fidelityfx_vk.dll")
-                    {
-                        var gameAsset = new GameAsset()
-                        {
-                            Id = ID,
-                            AssetType = GameAssetType.FSR_31_VK,
-                            Path = dllPath,
-                        };
-                        gameAsset.LoadVersionAndHash();
-                        GameAssets.Add(gameAsset);
-
-                        if (gameAsset.IsInKnownRecords() == false)
-                        {
-                            unknownGameAssets.Add(gameAsset);
-                        }
-
-                        LoadBackupForGameAsset(gameAsset);
-                    }
-                    else if (dllName == "libxess.dll")
-                    {
-                        var gameAsset = new GameAsset()
-                        {
-                            Id = ID,
-                            AssetType = GameAssetType.XeSS,
-                            Path = dllPath,
-                        };
-                        gameAsset.LoadVersionAndHash();
-                        GameAssets.Add(gameAsset);
-
-                        if (gameAsset.IsInKnownRecords() == false)
-                        {
-                            unknownGameAssets.Add(gameAsset);
-                        }
-
-                        LoadBackupForGameAsset(gameAsset);
-                    }
-                    else if (dllName == "libxell.dll")
-                    {
-                        var gameAsset = new GameAsset()
-                        {
-                            Id = ID,
-                            AssetType = GameAssetType.XeLL,
-                            Path = dllPath,
-                        };
-                        gameAsset.LoadVersionAndHash();
-                        GameAssets.Add(gameAsset);
-
-                        if (gameAsset.IsInKnownRecords() == false)
-                        {
-                            unknownGameAssets.Add(gameAsset);
-                        }
-
-                        LoadBackupForGameAsset(gameAsset);
-                    }
-                    else if (dllName == "libxess_fg.dll")
-                    {
-                        var gameAsset = new GameAsset()
-                        {
-                            Id = ID,
-                            AssetType = GameAssetType.XeSS_FG,
-                            Path = dllPath,
-                        };
-                        gameAsset.LoadVersionAndHash();
-                        GameAssets.Add(gameAsset);
-
-                        if (gameAsset.IsInKnownRecords() == false)
-                        {
-                            unknownGameAssets.Add(gameAsset);
-                        }
-
-                        LoadBackupForGameAsset(gameAsset);
-                    }
-
-                    /*
-                    var backupGameAsset = gameAsset.GetBackup();
-                    if (backupGameAsset is not null)
-                    {
-                        GameAssets.Add(backupGameAsset);
-                    }
-                    */
-                }
-
-
                 var newHasSwappableItems = false;
-                App.CurrentApp.RunOnUIThread(() =>
-                {
-                    UpdateCurrentDLLsFromGameAssets();
-                });
-                if (GameAssets.Any())
-                {
-                    newHasSwappableItems = true;
 
-                    //App.CurrentApp.Database.ExecuteAsync
-                    //savePoint is not valid, and should be the result of a call to SaveTransactionPoint.
+                try
+                {
+                    var coverImageTask = UpdateCacheImageAsync();
+
+                    var enumerationOptions = new EnumerationOptions();
+                    enumerationOptions.RecurseSubdirectories = true;
+                    enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
+
+                    var oldGameAssets = GameAssets.ToList();
+                    GameAssets.Clear();
                     using (await Database.Instance.Mutex.LockAsync())
                     {
-                        await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
+                        await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+                    }
+                    // TODO: See if changing these to filter specific files, or getting very *.dll and looking for our specific ones is faster
+                    var dllPaths = Directory.GetFiles(InstallPath, "*.dll", enumerationOptions);
+
+                    /*
+                    var dlssDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlss.dll", enumerationOptions);
+                    var dlssgDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlssg.dll", enumerationOptions);
+                    var dlssdDllPaths = Directory.GetFiles(InstallPath, "nvngx_dlssd.dll", enumerationOptions);
+                    var xessDllPaths = Directory.GetFiles(InstallPath, "libxess.dll", enumerationOptions);
+                    */
+
+                    var unknownGameAssets = new List<GameAsset>();
+
+                    foreach (var dllPath in dllPaths)
+                    {
+                        var dllName = Path.GetFileName(dllPath);
+
+                        // The case of these files should never change, right?
+                        if (dllName == "nvngx_dlss.dll")
+                        {
+                            var gameAsset = new GameAsset()
+                            {
+                                Id = ID,
+                                AssetType = GameAssetType.DLSS,
+                                Path = dllPath,
+                            };
+                            gameAsset.LoadVersionAndHash();
+                            GameAssets.Add(gameAsset);
+
+                            if (gameAsset.IsInKnownRecords() == false)
+                            {
+                                unknownGameAssets.Add(gameAsset);
+                            }
+
+                            LoadBackupForGameAsset(gameAsset);
+                        }
+                        else if (dllName == "nvngx_dlssg.dll")
+                        {
+                            var gameAsset = new GameAsset()
+                            {
+                                Id = ID,
+                                AssetType = GameAssetType.DLSS_G,
+                                Path = dllPath,
+                            };
+                            gameAsset.LoadVersionAndHash();
+                            GameAssets.Add(gameAsset);
+
+                            if (gameAsset.IsInKnownRecords() == false)
+                            {
+                                unknownGameAssets.Add(gameAsset);
+                            }
+
+                            LoadBackupForGameAsset(gameAsset);
+                        }
+                        else if (dllName == "nvngx_dlssd.dll")
+                        {
+                            var gameAsset = new GameAsset()
+                            {
+                                Id = ID,
+                                AssetType = GameAssetType.DLSS_D,
+                                Path = dllPath,
+                            };
+                            gameAsset.LoadVersionAndHash();
+                            GameAssets.Add(gameAsset);
+
+                            if (gameAsset.IsInKnownRecords() == false)
+                            {
+                                unknownGameAssets.Add(gameAsset);
+                            }
+
+                            LoadBackupForGameAsset(gameAsset);
+                        }
+                        else if (dllName == "amd_fidelityfx_dx12.dll")
+                        {
+                            var gameAsset = new GameAsset()
+                            {
+                                Id = ID,
+                                AssetType = GameAssetType.FSR_31_DX12,
+                                Path = dllPath,
+                            };
+                            gameAsset.LoadVersionAndHash();
+                            GameAssets.Add(gameAsset);
+
+                            if (gameAsset.IsInKnownRecords() == false)
+                            {
+                                unknownGameAssets.Add(gameAsset);
+                            }
+
+                            LoadBackupForGameAsset(gameAsset);
+                        }
+                        else if (dllName == "amd_fidelityfx_vk.dll")
+                        {
+                            var gameAsset = new GameAsset()
+                            {
+                                Id = ID,
+                                AssetType = GameAssetType.FSR_31_VK,
+                                Path = dllPath,
+                            };
+                            gameAsset.LoadVersionAndHash();
+                            GameAssets.Add(gameAsset);
+
+                            if (gameAsset.IsInKnownRecords() == false)
+                            {
+                                unknownGameAssets.Add(gameAsset);
+                            }
+
+                            LoadBackupForGameAsset(gameAsset);
+                        }
+                        else if (dllName == "libxess.dll")
+                        {
+                            var gameAsset = new GameAsset()
+                            {
+                                Id = ID,
+                                AssetType = GameAssetType.XeSS,
+                                Path = dllPath,
+                            };
+                            gameAsset.LoadVersionAndHash();
+                            GameAssets.Add(gameAsset);
+
+                            if (gameAsset.IsInKnownRecords() == false)
+                            {
+                                unknownGameAssets.Add(gameAsset);
+                            }
+
+                            LoadBackupForGameAsset(gameAsset);
+                        }
+                        else if (dllName == "libxell.dll")
+                        {
+                            var gameAsset = new GameAsset()
+                            {
+                                Id = ID,
+                                AssetType = GameAssetType.XeLL,
+                                Path = dllPath,
+                            };
+                            gameAsset.LoadVersionAndHash();
+                            GameAssets.Add(gameAsset);
+
+                            if (gameAsset.IsInKnownRecords() == false)
+                            {
+                                unknownGameAssets.Add(gameAsset);
+                            }
+
+                            LoadBackupForGameAsset(gameAsset);
+                        }
+                        else if (dllName == "libxess_fg.dll")
+                        {
+                            var gameAsset = new GameAsset()
+                            {
+                                Id = ID,
+                                AssetType = GameAssetType.XeSS_FG,
+                                Path = dllPath,
+                            };
+                            gameAsset.LoadVersionAndHash();
+                            GameAssets.Add(gameAsset);
+
+                            if (gameAsset.IsInKnownRecords() == false)
+                            {
+                                unknownGameAssets.Add(gameAsset);
+                            }
+
+                            LoadBackupForGameAsset(gameAsset);
+                        }
+
+                        /*
+                        var backupGameAsset = gameAsset.GetBackup();
+                        if (backupGameAsset is not null)
+                        {
+                            GameAssets.Add(backupGameAsset);
+                        }
+                        */
                     }
 
-                    if (unknownGameAssets.Any())
+
+                    App.CurrentApp.RunOnUIThread(() =>
                     {
-                        GameManager.Instance.AddUnknownGameAssets(GameLibrary, Title, unknownGameAssets);
+                        UpdateCurrentDLLsFromGameAssets();
+                    });
+                    if (GameAssets.Any())
+                    {
+                        newHasSwappableItems = true;
+
+                        //App.CurrentApp.Database.ExecuteAsync
+                        //savePoint is not valid, and should be the result of a call to SaveTransactionPoint.
+                        using (await Database.Instance.Mutex.LockAsync())
+                        {
+                            await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
+                        }
+
+                        if (unknownGameAssets.Any())
+                        {
+                            GameManager.Instance.AddUnknownGameAssets(GameLibrary, Title, unknownGameAssets);
+                        }
                     }
+
+                    await coverImageTask;
+
                 }
-
-                await coverImageTask;
-
-                // Now update all the data on the UI therad.
-                await App.CurrentApp.RunOnUIThreadAsync(async () =>
+                catch (Exception err)
                 {
-                    HasSwappableItems = newHasSwappableItems;
-
-                    if (autoSave)
+                    Logger.Error(err.Message);
+                    Debugger.Break();
+                }
+                finally
+                {
+                    // Now update all the data on the UI therad.
+                    await App.CurrentApp.RunOnUIThreadAsync(async () =>
                     {
-                        await SaveToDatabaseAsync();
-                    }
+                        HasSwappableItems = newHasSwappableItems;
 
-                    Processing = false;
-                });
+                        if (autoSave)
+                        {
+                            await SaveToDatabaseAsync();
+                        }
+
+                        Processing = false;
+                    });
+                }
             });
         }
 
@@ -835,7 +847,7 @@ namespace DLSS_Swapper.Data
             // - load image based on scale
             try
             {
-                using (var image = await SixLabors.ImageSharp.Image.LoadAsync(imageSource))
+                using (var image = await SixLabors.ImageSharp.Image.LoadAsync(imageSource).ConfigureAwait(false))
                 {
                     // If images are really big we resize to at least 2x the 200x300 we display as.
                     // In future this should be updated to resize to display scale.
@@ -1081,9 +1093,16 @@ namespace DLSS_Swapper.Data
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
+                CoverImage = null;
+
                 if (File.Exists(ExpectedCustomCoverImage))
                 {
                     File.Delete(ExpectedCustomCoverImage);
+                }
+
+                if (this.GameLibrary == GameLibrary.ManuallyAdded)
+                {
+                    await SaveToDatabaseAsync();
                 }
 
                 // Will load default or attempt to fetch fresh.

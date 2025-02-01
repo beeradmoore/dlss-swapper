@@ -244,7 +244,7 @@ If you have checked these and your game is still not showing up there may be a b
                     var game = manuallyAddGameModel.Game;
                     await game.SaveToDatabaseAsync();
                     game.ProcessGame();
-                    GameManager.Instance.AddGame(game);
+                    GameManager.Instance.AddGame(game, true);
                 }
                 else
                 {

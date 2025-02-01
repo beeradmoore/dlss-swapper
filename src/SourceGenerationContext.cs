@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Microsoft.UI.Windowing;
 
 namespace DLSS_Swapper;
 
@@ -11,6 +12,8 @@ namespace DLSS_Swapper;
 [JsonSerializable(typeof(Data.Manifest))]
 [JsonSerializable(typeof(Data.DLLRecord))]
 [JsonSerializable(typeof(Settings))]
+[JsonSerializable(typeof(Data.WindowPositionRect))]
+[JsonSerializable(typeof(OverlappedPresenterState))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
@@ -21,6 +23,11 @@ internal partial class SettingsPageModel : ObservableObject
     public IEnumerable<LoggingLevel> LoggingLevels => Enum.GetValues<LoggingLevel>();
     public string CurrentLogPath => Logger.GetCurrentLogPath();
     public string AppVersion => App.CurrentApp.GetVersionString();
+    public List<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; } = new List<DLSSOnScreenIndicatorSetting>(){
+        new DLSSOnScreenIndicatorSetting() { Label = "None", Value = 0 },
+        new DLSSOnScreenIndicatorSetting() { Label = "Enabled for debug DLSS DLLs only", Value = 1 },
+        new DLSSOnScreenIndicatorSetting() { Label = "Enabled for all DLSS DLLs", Value = 1024 }
+    };
 
     [ObservableProperty]
     public partial bool LightThemeSelected { get; set; } = false;
@@ -32,8 +39,8 @@ internal partial class SettingsPageModel : ObservableObject
     public partial bool DefaultThemeSelected { get; set; } = false;
 
     [ObservableProperty]
-    public partial bool DlssShowIndicator { get; set; } = false;
-    
+    public partial DLSSOnScreenIndicatorSetting SelectedDlssOnScreenIndicator { get; set; }
+
     [ObservableProperty]
     public partial bool DlssEnableLogging { get; set; } = false;
     
@@ -65,7 +72,10 @@ internal partial class SettingsPageModel : ObservableObject
         LightThemeSelected = Settings.Instance.AppTheme == ElementTheme.Light;
         DarkThemeSelected = Settings.Instance.AppTheme == ElementTheme.Dark;
         DefaultThemeSelected = Settings.Instance.AppTheme == ElementTheme.Default;
-        DlssShowIndicator = _dlssSettingsManager.GetShowDlssIndicator();
+
+        var dlssShowOnScreenIndicatorIndicator = _dlssSettingsManager.GetShowDlssIndicator();
+        SelectedDlssOnScreenIndicator = DLSSOnScreenIndicatorOptions.FirstOrDefault(x => x.Value == dlssShowOnScreenIndicatorIndicator);
+
         var logLevel = _dlssSettingsManager.GetLogLevel();
         if (logLevel == 1)
         {
@@ -118,9 +128,9 @@ internal partial class SettingsPageModel : ObservableObject
                 ((App)Application.Current).MainWindow.UpdateColors(ElementTheme.Default);
             }
         }
-        else if (e.PropertyName == nameof(DlssShowIndicator))
+        else if (e.PropertyName == nameof(SelectedDlssOnScreenIndicator))
         {
-            _dlssSettingsManager.SetShowDlssIndicator(DlssShowIndicator);
+            _dlssSettingsManager.SetShowDlssIndicator(SelectedDlssOnScreenIndicator.Value);
         }
         else if (e.PropertyName == nameof(DlssEnableLogging) || e.PropertyName == nameof(DlssVerboseLogging))
         {

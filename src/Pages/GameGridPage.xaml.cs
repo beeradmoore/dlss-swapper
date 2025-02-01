@@ -36,6 +36,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.CodeDom;
 using System.Collections.Concurrent;
 using AsyncAwaitBestPractices;
+using CommunityToolkit.WinUI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -283,6 +284,14 @@ namespace DLSS_Swapper.Pages
                 //LoadingStackPanel.Visibility = Visibility.Collapsed;
                 _loadingGamesAndDlls = false;
             });
+        }
+
+        internal void ScrollToGame(Game game)
+        {
+            App.CurrentApp.RunOnUIThreadAsync(async () =>
+            {
+                await MainGridView.SmoothScrollIntoViewWithItemAsync(game);
+            }).SafeFireAndForget();
         }
     }
 

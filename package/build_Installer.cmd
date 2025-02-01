@@ -1,6 +1,6 @@
 @echo off
 
-set app_version=1.1.3.0
+set app_version=1.1.4.0
 set initial_directory=%cd%
 
 REM Delete bin and obj directory
@@ -17,10 +17,6 @@ echo ################################
 echo.
 
 dotnet publish "..\src\DLSS Swapper.csproj" ^
-    -c Release ^
-    -r win-x64 ^
-    --self-contained true ^
-    -p:Platform=x64 ^
     -p:PublishDir=bin\publish\unpackaged\ || goto :error
 
 echo.

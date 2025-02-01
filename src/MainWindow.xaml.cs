@@ -56,9 +56,34 @@ namespace DLSS_Swapper
             Title = "DLSS Swapper";
             this.InitializeComponent();
 
-            // Release the icon.
+            if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
+            {
+                var lastWindowSizeAndPosition = Settings.Instance.LastWindowSizeAndPosition;
+                if (lastWindowSizeAndPosition.Width > 512 && lastWindowSizeAndPosition.Height > 512)
+                {
+                    AppWindow.MoveAndResize(lastWindowSizeAndPosition.GetRectInt32());
+                }
+                if (lastWindowSizeAndPosition.State == OverlappedPresenterState.Maximized)
+                {
+                    overlappedPresenter.Maximize();
+                }
+            }
+
+        
+
             Closed += (object sender, WindowEventArgs args) =>
             {
+                if (AppWindow?.Size is not null && AppWindow?.Position is not null && AppWindow.Presenter is OverlappedPresenter overlappedPresenter)
+                {
+                    var windowPositionRect = new WindowPositionRect(AppWindow.Position.X, AppWindow.Position.Y, AppWindow.Size.Width, AppWindow.Size.Height);
+                    if (overlappedPresenter.State == OverlappedPresenterState.Maximized)
+                    {
+                        windowPositionRect.State = OverlappedPresenterState.Maximized;
+                    }
+                    Settings.Instance.LastWindowSizeAndPosition = windowPositionRect;
+                }
+
+                // Release the icon.
                 if (_windowIcon != IntPtr.Zero)
                 {
                     DestroyIcon(_windowIcon);
@@ -94,6 +119,7 @@ namespace DLSS_Swapper
             
             SetIcon();
         }
+
 
 
         /// <summary>
@@ -145,6 +171,8 @@ namespace DLSS_Swapper
         GameGridPage? gameGridPage = null;
         LibraryPage? libraryPage = null;
         SettingsPage? settingsPage = null;
+
+        public GameGridPage? GameGridPage => gameGridPage;
 
         void GoToPage(string page)
         {

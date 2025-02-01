@@ -56,26 +56,19 @@ internal class DLSSSettingsManager
         return false;
     }
 
-    public bool SetShowDlssIndicator(bool enabled)
+    public bool SetShowDlssIndicator(int value)
     {
-        if (enabled)
-        {
-            return RunRegAdd(NGXCORE_REG_KEY, "ShowDlssIndicator", "REG_DWORD", "1");
-        }
-        else
-        {
-            return RunRegAdd(NGXCORE_REG_KEY, "ShowDlssIndicator", "REG_DWORD", "0");
-        }
+        return RunRegAdd(NGXCORE_REG_KEY, "ShowDlssIndicator", "REG_DWORD", value.ToString());
     }
 
-    public bool GetShowDlssIndicator()
+    public int GetShowDlssIndicator()
     {
         if (Registry.GetValue(NGXCORE_REG_KEY, "ShowDlssIndicator", 0) is int existingValue)
         {
-            return (existingValue == 1);
+            return existingValue;
         }
 
-        return false;
+        return 0;
     }
 
 

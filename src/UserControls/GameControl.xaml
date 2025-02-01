@@ -99,6 +99,7 @@
 
                     <Button HorizontalAlignment="Stretch" Background="Transparent" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.AddCoverImageCommand}" AllowDrop="True" DragEnter="CoverButton_DragEnter" DragOver="CoverButton_DragOver" Drop="CoverButton_Drop" />
                 </Grid>
+                <Button Content="Add Custom Cover" HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.AddCoverImageCommand}" />
             </StackPanel>
 
             <Grid Grid.Column="1" >

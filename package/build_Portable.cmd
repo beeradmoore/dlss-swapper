@@ -17,9 +17,6 @@ echo ################################
 echo.
 
 dotnet publish "..\src\DLSS Swapper.csproj" ^
-    -c Release ^
-    -r win-x64 ^
-    --self-contained true ^
     -p:DefineConstants="PORTABLE" ^
     -p:PublishDir=bin\publish\portable\ || goto :error
 

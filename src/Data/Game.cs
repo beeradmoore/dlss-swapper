@@ -1093,9 +1093,16 @@ namespace DLSS_Swapper.Data
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
+                CoverImage = null;
+
                 if (File.Exists(ExpectedCustomCoverImage))
                 {
                     File.Delete(ExpectedCustomCoverImage);
+                }
+
+                if (this.GameLibrary == GameLibrary.ManuallyAdded)
+                {
+                    await SaveToDatabaseAsync();
                 }
 
                 // Will load default or attempt to fetch fresh.

@@ -847,7 +847,7 @@ namespace DLSS_Swapper.Data
             // - load image based on scale
             try
             {
-                using (var image = await SixLabors.ImageSharp.Image.LoadAsync(imageSource))
+                using (var image = await SixLabors.ImageSharp.Image.LoadAsync(imageSource).ConfigureAwait(false))
                 {
                     // If images are really big we resize to at least 2x the 200x300 we display as.
                     // In future this should be updated to resize to display scale.

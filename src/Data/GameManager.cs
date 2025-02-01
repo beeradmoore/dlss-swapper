@@ -249,7 +249,7 @@ internal partial class GameManager : ObservableObject
     }
 
 
-    public Game AddGame(Game game)
+    public Game AddGame(Game game, bool scrollIntoView = false)
     {
         lock (gameLock)
         {
@@ -276,6 +276,11 @@ internal partial class GameManager : ObservableObject
                 App.CurrentApp.RunOnUIThread(() =>
                 {
                     _allGames.Add(game);
+
+                    if (scrollIntoView)
+                    {
+                        App.CurrentApp.MainWindow.GameGridPage?.ScrollToGame(game);
+                    }
                 });
 
                 return game;

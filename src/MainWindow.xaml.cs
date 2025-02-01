@@ -146,6 +146,8 @@ namespace DLSS_Swapper
         LibraryPage? libraryPage = null;
         SettingsPage? settingsPage = null;
 
+        public GameGridPage? GameGridPage => gameGridPage;
+
         void GoToPage(string page)
         {
             if (page == "Games")

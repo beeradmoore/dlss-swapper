@@ -11,6 +11,7 @@ OutFile "installer.exe"
 !define UninstLog "uninstall.log"
 Var UninstLog
 
+Var DEFAULT_INSTALL_PATH
 
 Function .onInit
   ; Set defualt install location

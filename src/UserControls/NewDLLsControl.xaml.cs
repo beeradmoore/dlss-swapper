@@ -11,7 +11,7 @@ public sealed partial class NewDLLsControl : UserControl
 
     public NewDLLsControl()
     {
-        this.InitializeComponent();
+        InitializeComponent();
         ViewModel = new NewDLLsControlModel();
         DataContext = ViewModel;
     }

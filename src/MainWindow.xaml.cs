@@ -37,7 +37,7 @@ namespace DLSS_Swapper
         public MainWindow()
         {
             Title = "DLSS Swapper";
-            this.InitializeComponent();
+            InitializeComponent();
 
             if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
             {

@@ -151,7 +151,7 @@ public partial class DLLPickerControlModel : ObservableObject
         // Allow the dialog to close
         CanCloseParentDialog = true;
 
-        if (this.parentDialogWeakReference.TryGetTarget(out EasyContentDialog? dialog))
+        if (parentDialogWeakReference.TryGetTarget(out EasyContentDialog? dialog))
         {
             // Is the dialog already closing when we call this?
             dialog.Hide();

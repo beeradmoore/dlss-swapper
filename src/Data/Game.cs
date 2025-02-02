@@ -516,7 +516,7 @@ namespace DLSS_Swapper.Data
         internal async Task<(bool Success, string Message, bool PromptToRelaunchAsAdmin)> ResetDllAsync(GameAssetType gameAssetType)
         {
             var backupRecordType = DLLManager.Instance.GetAssetBackupType(gameAssetType);
-            var existingBackupRecords = this.GameAssets.Where(x => x.AssetType == backupRecordType).ToList();
+            var existingBackupRecords = GameAssets.Where(x => x.AssetType == backupRecordType).ToList();
 
             if (existingBackupRecords.Count == 0)
             {
@@ -528,7 +528,7 @@ namespace DLSS_Swapper.Data
                 foreach (var existingBackupRecord in existingBackupRecords)
                 {
                     var primaryRecordName = existingBackupRecord.Path.Replace(".dlsss", string.Empty);
-                    var existingRecords = this.GameAssets.Where(x => x.AssetType == gameAssetType && x.Path.Equals(primaryRecordName)).ToList();
+                    var existingRecords = GameAssets.Where(x => x.AssetType == gameAssetType && x.Path.Equals(primaryRecordName)).ToList();
 
                     if (existingRecords.Count != 1)
                     {
@@ -611,14 +611,14 @@ namespace DLSS_Swapper.Data
                 return (false, "Downloaded zip not found.", false);
             }
 
-            var existingRecords = this.GameAssets.Where(x => x.AssetType == dllRecord.AssetType).ToList();
+            var existingRecords = GameAssets.Where(x => x.AssetType == dllRecord.AssetType).ToList();
             if (existingRecords.Count == 0)
             {
                 return (false, "Unable to swap dll as there were no dll records to update.", false);
             }
 
             var backupRecordType = DLLManager.Instance.GetAssetBackupType(dllRecord.AssetType);
-            var existingBackupRecords = this.GameAssets.Where(x => x.AssetType == backupRecordType).ToList();
+            var existingBackupRecords = GameAssets.Where(x => x.AssetType == backupRecordType).ToList();
             
             // TODO: Handle more than the first record.
             var currentRecord = existingRecords[0];
@@ -1123,7 +1123,7 @@ namespace DLSS_Swapper.Data
                     File.Delete(ExpectedCustomCoverImage);
                 }
 
-                if (this.GameLibrary == GameLibrary.ManuallyAdded)
+                if (GameLibrary == GameLibrary.ManuallyAdded)
                 {
                     await SaveToDatabaseAsync();
                 }

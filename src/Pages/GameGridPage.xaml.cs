@@ -37,7 +37,7 @@ namespace DLSS_Swapper.Pages
 
         public GameGridPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             ViewModel = new GameGridPageModel(this);
             DataContext = ViewModel;
         }
@@ -192,7 +192,7 @@ namespace DLSS_Swapper.Pages
 
                 if (game.Processing)
                 {
-                    var dialog = new EasyContentDialog(this.XamlRoot)
+                    var dialog = new EasyContentDialog(XamlRoot)
                     {
                         Title = "Game Currently Processing",
                         CloseButtonText = "Okay",

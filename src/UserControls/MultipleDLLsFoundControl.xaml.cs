@@ -12,7 +12,7 @@ public sealed partial class MultipleDLLsFoundControl : UserControl
 
     public MultipleDLLsFoundControl(Game game, GameAssetType gameAssetType)
     {
-        this.InitializeComponent();
+        InitializeComponent();
         ViewModel = new MultipleDLLsFoundControlModel(game, gameAssetType);
         DataContext = ViewModel;
     }

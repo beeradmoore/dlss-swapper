@@ -15,11 +15,10 @@ namespace DLSS_Swapper.UserControls
     {
         public ManuallyAddGameControl(string gamePath)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             DataContext = new ManuallyAddGameModel(this, gamePath);
         }
-
 
         string[] customCoverValidFileTypes =
         [

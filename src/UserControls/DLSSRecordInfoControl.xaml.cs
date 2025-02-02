@@ -12,8 +12,8 @@ namespace DLSS_Swapper.UserControls
 
         public DLSSRecordInfoControl(DLLRecord dllRecord)
         {
-            this.InitializeComponent();
-            this.DLLRecord = dllRecord;
+            InitializeComponent();
+            DLLRecord = dllRecord;
         }
     }
 }

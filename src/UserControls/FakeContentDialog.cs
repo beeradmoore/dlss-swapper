@@ -273,8 +273,8 @@ public class FakeContentDialog : Control
 
     public FakeContentDialog()
     {
-        this.DefaultStyleKey = typeof(FakeContentDialog);
-        this.Style = App.Current.Resources["DefaultFakeContentDialogStyle"] as Style;
+        DefaultStyleKey = typeof(FakeContentDialog);
+        Style = App.Current.Resources["DefaultFakeContentDialogStyle"] as Style;
     }
 
 

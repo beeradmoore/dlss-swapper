@@ -12,7 +12,7 @@ namespace DLSS_Swapper.Pages
     {
         public InitialLoadingPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

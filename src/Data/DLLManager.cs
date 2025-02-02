@@ -19,9 +19,7 @@ internal class DLLManager
 
     internal void LoadFromManifest()
     {
-
     }
-
 
     // Previously: UpdateDLSSRecordsList
     internal void UpdateDLLRecordLists(Manifest manifest)
@@ -36,8 +34,6 @@ internal class DLLManager
             DLSSRecords.Add(dllRecord);
         }
 
-
-
         manifest.DLSS_G.Sort();
         DLSSGRecords.Clear();
         foreach (var dllRecord in manifest.DLSS_G)
@@ -45,7 +41,6 @@ internal class DLLManager
             dllRecord.AssetType = GameAssetType.DLSS_G;
             DLSSGRecords.Add(dllRecord);
         }
-
 
         manifest.DLSS_D.Sort();
         DLSSDRecords.Clear();
@@ -55,7 +50,6 @@ internal class DLLManager
             DLSSDRecords.Add(dllRecord);
         }
 
-
         manifest.FSR_31_DX12.Sort();
         FSR31DX12Records.Clear();
         foreach (var dllRecord in manifest.FSR_31_DX12)
@@ -64,7 +58,6 @@ internal class DLLManager
             FSR31DX12Records.Add(dllRecord);
         }
 
-
         manifest.FSR_31_VK.Sort();
         FSR31VKRecords.Clear();
         foreach (var dllRecord in manifest.FSR_31_VK)
@@ -72,7 +65,6 @@ internal class DLLManager
             dllRecord.AssetType = GameAssetType.FSR_31_VK;
             FSR31VKRecords.Add(dllRecord);
         }
-
 
         manifest.XeSS.Sort();
         XeSSRecords.Clear();
@@ -89,7 +81,6 @@ internal class DLLManager
             dllRecord.AssetType = GameAssetType.XeLL;
             XeLLRecords.Add(dllRecord);
         }
-
 
         manifest.XeSS_FG.Sort();
         XeSSFGRecords.Clear();
@@ -166,6 +157,7 @@ internal class DLLManager
         {
             return string.Empty;
         }
+
         return Path.Combine(zipPath, $"{dllRecord.Version}_{dllRecord.MD5Hash}.zip");
     }
 

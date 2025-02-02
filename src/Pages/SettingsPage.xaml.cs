@@ -11,7 +11,7 @@ public sealed partial class SettingsPage : Page
 
     public SettingsPage()
     {
-        this.InitializeComponent();
+        InitializeComponent();
         ViewModel = new SettingsPageModel(this);
         DataContext = ViewModel;
     }   

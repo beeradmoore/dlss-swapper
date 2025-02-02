@@ -20,7 +20,7 @@ namespace DLSS_Swapper.UserControls
 
         public GameControl(Game game)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             // This only works if the grid background has focus.
             /*
@@ -45,7 +45,7 @@ namespace DLSS_Swapper.UserControls
         {
             base.OnApplyTemplate();
 
-            var dialogSpace = this.GetTemplateChild("DialogSpace") as Grid;
+            var dialogSpace = GetTemplateChild("DialogSpace") as Grid;
 
             if (dialogSpace is not null)
             {

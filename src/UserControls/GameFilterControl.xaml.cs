@@ -47,7 +47,7 @@ namespace DLSS_Swapper.UserControls
 
         public GameFilterControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             //HideNonDLSSGames = Settings.Instance.HideNonDLSSGames;
             //GroupGameLibrariesTogether = Settings.Instance.GroupGameLibrariesTogether;

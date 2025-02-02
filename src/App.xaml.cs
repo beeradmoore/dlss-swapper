@@ -59,7 +59,7 @@ namespace DLSS_Swapper
 
             Database.Instance.Init();
 
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)

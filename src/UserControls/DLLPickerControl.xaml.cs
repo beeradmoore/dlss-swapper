@@ -12,7 +12,7 @@ public sealed partial class DLLPickerControl : UserControl
 
     public DLLPickerControl(EasyContentDialog parentDialog, Game game, GameAssetType gameAssetType)
     {
-        this.InitializeComponent();
+        InitializeComponent();
 
         ViewModel = new DLLPickerControlModel(parentDialog, this, game, gameAssetType);
         DataContext = ViewModel;

@@ -18,7 +18,7 @@ namespace DLSS_Swapper.Pages
 
         public LibraryPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             ViewModel = new LibraryPageModel(this);
         }
 

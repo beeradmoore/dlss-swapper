@@ -322,7 +322,7 @@ public class FakeContentDialog : Control
     {
         base.OnApplyTemplate();
 
-        if (hasSetTemplate == true)
+        if (hasSetTemplate)
         {
             return;
         }
@@ -430,7 +430,7 @@ public class FakeContentDialog : Control
         var hasSecondary = string.IsNullOrEmpty(SecondaryButtonText) == false;
         var hasClose = string.IsNullOrEmpty(CloseButtonText) == false;
 
-        if (hasPrimary == true && hasSecondary == true && hasClose == true)
+        if (hasPrimary && hasSecondary && hasClose)
         {
             if (VisualStateManager.GoToState(this, "AllVisible", true) == false)
             {
@@ -442,37 +442,37 @@ public class FakeContentDialog : Control
             {
             }
         }
-        else if (hasPrimary == true && hasSecondary == false && hasClose == false)
+        else if (hasPrimary && hasSecondary == false && hasClose == false)
         {
             if (VisualStateManager.GoToState(this, "PrimaryVisible", true) == false)
             {
             }
         }
-        else if (hasPrimary == false && hasSecondary == true && hasClose == false)
+        else if (hasPrimary == false && hasSecondary && hasClose == false)
         {
             if (VisualStateManager.GoToState(this, "SecondaryVisible", true) == false)
             {
             }
         }
-        else if (hasPrimary == false && hasSecondary == false && hasClose == true)
+        else if (hasPrimary == false && hasSecondary == false && hasClose)
         {
             if (VisualStateManager.GoToState(this, "CloseVisible", true) == false)
             {
             }
         }
-        else if (hasPrimary == true && hasSecondary == true && hasClose == false)
+        else if (hasPrimary && hasSecondary && hasClose == false)
         {
             if (VisualStateManager.GoToState(this, "PrimaryAndSecondaryVisible", true) == false)
             {
             }
         }
-        else if (hasPrimary == true && hasSecondary == false && hasClose == true)
+        else if (hasPrimary && hasSecondary == false && hasClose)
         {
             if (VisualStateManager.GoToState(this, "PrimaryAndCloseVisible", true) == false)
             {
             }
         }
-        else if (hasPrimary == false && hasSecondary == true && hasClose == true)
+        else if (hasPrimary == false && hasSecondary && hasClose)
         {
             if (VisualStateManager.GoToState(this, "SecondaryAndCloseVisible", true) == false)
             {

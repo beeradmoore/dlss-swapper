@@ -11,7 +11,7 @@ namespace DLSS_Swapper
     // TODO: Clean portable temp path on launch
 
     /*
-     * For notes on where data is stored please see https://github.com/beeradmoore/dlss-swapper/wiki/Local-Data-Structure 
+     * For notes on where data is stored please see https://github.com/beeradmoore/dlss-swapper/wiki/Local-Data-Structure
      */
     static class Storage
     {
@@ -90,12 +90,14 @@ namespace DLSS_Swapper
                 Logger.Error("A directory should not be passed to CreateDirectoryForFileIfNotExists");
                 return false;
             }
+
             var directory = Path.GetDirectoryName(path);
             if (string.IsNullOrEmpty(directory))
             {
                 Logger.Error("A directory should not be empty in CreateDirectoryForFileIfNotExists");
                 return false;
             }
+
             return CreateDirectoryIfNotExists(directory);
         }
 
@@ -112,6 +114,7 @@ namespace DLSS_Swapper
                 {
                     Directory.CreateDirectory(directory);
                 }
+
                 return true;
             }
             catch (Exception err)
@@ -185,6 +188,7 @@ namespace DLSS_Swapper
                 {
                     await JsonSerializer.SerializeAsync(stream, manifest, SourceGenerationContext.Default.Manifest);
                 }
+
                 return true;
             }
             catch (Exception err)
@@ -194,13 +198,12 @@ namespace DLSS_Swapper
             }
         }
 
-
         /// <summary>
         /// Loads manifest.json file. Will attempt to load dynamic file first and then static if dyanmic does not exist.
         /// </summary>
         /// <returns>Manifest object. This could be a blank object if we failed to load DLL records</returns>
         internal static async Task<Manifest> LoadManifestJsonAsync()
-        {  
+        {
             var manifestFile = Path.Combine(GetDynamicJsonFolder(), "manifest.json");
 
             if (File.Exists(manifestFile))
@@ -213,7 +216,7 @@ namespace DLSS_Swapper
                         if (manifest is not null)
                         {
                             return manifest;
-                        } 
+                        }
                     }
                 }
                 catch (Exception err)
@@ -258,7 +261,7 @@ namespace DLSS_Swapper
         internal static async Task<Manifest> LoadImportedManifestJsonAsync()
         {
             var importedDLSSRecordsFile = Path.Combine(GetDynamicJsonFolder(), "imported_manifest.json");
-            if (File.Exists(importedDLSSRecordsFile) == true)
+            if (File.Exists(importedDLSSRecordsFile))
             {
                 try
                 {
@@ -296,6 +299,7 @@ namespace DLSS_Swapper
                 {
                     await JsonSerializer.SerializeAsync(stream, App.CurrentApp.ImportedManifest, SourceGenerationContext.Default.Manifest);
                 }
+
                 return true;
             }
             catch (Exception err)

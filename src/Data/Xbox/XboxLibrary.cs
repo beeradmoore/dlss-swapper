@@ -116,7 +116,7 @@ namespace DLSS_Swapper.Data.Xbox
                                     }
 
                                     var identityNodeName = identityNode.Attributes?["Name"]?.Value ?? string.Empty;
-                                    if (string.IsNullOrEmpty(identityNodeName) == true)
+                                    if (string.IsNullOrEmpty(identityNodeName))
                                     {
                                         continue;
                                     }
@@ -212,7 +212,7 @@ namespace DLSS_Swapper.Data.Xbox
                             activeGame.NeedsProcessing = true;
                         }
 
-                        if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+                        if (activeGame.NeedsProcessing || forceNeedsProcessing)
                         {
                             activeGame.ProcessGame();
                         }

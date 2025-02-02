@@ -184,7 +184,7 @@ internal partial class GameManager : ObservableObject
     public async Task LoadGamesAsync(bool forceNeedsProcessing = false)
     {
         var tasks = new List<Task<List<Game>>>();
-        if (forceNeedsProcessing == true)
+        if (forceNeedsProcessing)
         {
             lock (unknownGameAsseetLock)
             {
@@ -251,7 +251,7 @@ internal partial class GameManager : ObservableObject
     {
         lock (gameLock)
         {
-            if (_synchronisedAllGames.Contains(game) == true)
+            if (_synchronisedAllGames.Contains(game))
             {
                 // This probably checks the game collection twice looking for the game.
                 // We could do away with this, but in theory this if is never hit

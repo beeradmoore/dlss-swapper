@@ -41,7 +41,7 @@ public class ManuallyAddedLibrary : IGameLibrary
                 activeGame.NeedsProcessing = true;
             }
 
-            if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+            if (activeGame.NeedsProcessing || forceNeedsProcessing)
             {
                 activeGame.ProcessGame();
             }

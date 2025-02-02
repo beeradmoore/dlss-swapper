@@ -101,7 +101,7 @@ namespace DLSS_Swapper.Data.Steam
                     foreach (var appManifestPath in appManifestPaths)
                     {
                         // Don't bother adding Steamworks Common Redistributables.
-                        if (appManifestPath.EndsWith("appmanifest_228980.acf") == true)
+                        if (appManifestPath.EndsWith("appmanifest_228980.acf"))
                         {
                             continue;
                         }
@@ -172,7 +172,7 @@ namespace DLSS_Swapper.Data.Steam
                                 activeGame.NeedsProcessing = true;
                             }
 
-                            if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+                            if (activeGame.NeedsProcessing || forceNeedsProcessing)
                             {
                                 activeGame.ProcessGame();
                             }

@@ -9,7 +9,7 @@ namespace DLSS_Swapper
         static Settings? _instance = null;
 
         public static Settings Instance => _instance ??= Settings.FromJson();
-        
+
         // We default this to false to prevent saves firing when loading from json.
         bool _autoSave = false;
 
@@ -276,10 +276,6 @@ namespace DLSS_Swapper
             }
         }
 
-
-
-
-
         /*
         public List<string> Directories { get; set; } = new List<string>();
 
@@ -289,28 +285,25 @@ namespace DLSS_Swapper
             {
                 return;
             }
-            
+
             Directories.Add(directory);
-            
+
             if (_autoSave)
             {
                 SaveJson();
             }
         }
-        
+
         public void RemoveDirectory(string directory)
         {
             Directories.Remove(directory);
-            
+
             if (_autoSave)
             {
                 SaveJson();
             }
         }
         */
-
-
-
 
         void SaveJson()
         {
@@ -329,7 +322,7 @@ namespace DLSS_Swapper
                 settings.SaveJson();
             }
             else
-            { 
+            {
                 settings = settingsFromJson;
             }
 

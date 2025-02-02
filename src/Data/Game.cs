@@ -196,7 +196,7 @@ namespace DLSS_Swapper.Data
         public void ProcessGame(bool autoSave = true)
         {
             // If we are alreayd procssing we don't need to process again
-            if (Processing == true)
+            if (Processing)
             {
                 return;
             }
@@ -478,7 +478,7 @@ namespace DLSS_Swapper.Data
 
         public async Task LoadCoverImageAsync()
         {
-            if (_isLoadingCoverImage == true)
+            if (_isLoadingCoverImage)
             {
                 return;
             }

@@ -95,7 +95,7 @@ namespace DLSS_Swapper
                 using (var dlssSwapperRegistryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\DLSS Swapper", true))
                 {
                     var installLocation = dlssSwapperRegistryKey?.GetValue("InstallLocation") as string;
-                    if (string.IsNullOrEmpty(installLocation) == false && Directory.Exists(installLocation) == true)
+                    if (string.IsNullOrEmpty(installLocation) == false && Directory.Exists(installLocation))
                     {
                         installSize += CalculateDirectorySize(installLocation);
                     }

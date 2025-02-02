@@ -154,7 +154,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         activeGame.NeedsProcessing = true;
                     }
 
-                    if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+                    if (activeGame.NeedsProcessing || forceNeedsProcessing)
                     {
                         activeGame.ProcessGame();
                     }

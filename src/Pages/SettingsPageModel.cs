@@ -106,7 +106,7 @@ internal partial class SettingsPageModel : ObservableObject
 
         if (e.PropertyName == nameof(LightThemeSelected))
         {
-            if (LightThemeSelected == true)
+            if (LightThemeSelected)
             {
                 Settings.Instance.AppTheme = ElementTheme.Light;
                 ((App)Application.Current).MainWindow.UpdateColors(ElementTheme.Light);
@@ -114,7 +114,7 @@ internal partial class SettingsPageModel : ObservableObject
         }
         else if (e.PropertyName == nameof(DarkThemeSelected))
         {
-            if (DarkThemeSelected == true)
+            if (DarkThemeSelected)
             {
                 Settings.Instance.AppTheme = ElementTheme.Dark;
                 ((App)Application.Current).MainWindow.UpdateColors(ElementTheme.Dark);
@@ -122,7 +122,7 @@ internal partial class SettingsPageModel : ObservableObject
         }
         else if (e.PropertyName == nameof(DefaultThemeSelected))
         {
-            if (DefaultThemeSelected == true)
+            if (DefaultThemeSelected)
             {
                 Settings.Instance.AppTheme = ElementTheme.Default;
                 ((App)Application.Current).MainWindow.UpdateColors(ElementTheme.Default);
@@ -134,9 +134,9 @@ internal partial class SettingsPageModel : ObservableObject
         }
         else if (e.PropertyName == nameof(DlssEnableLogging) || e.PropertyName == nameof(DlssVerboseLogging))
         {
-            if (DlssEnableLogging == true)
+            if (DlssEnableLogging)
             {
-                if (DlssVerboseLogging == true)
+                if (DlssVerboseLogging)
                 {
                     _dlssSettingsManager.SetLogLevel(2);
                 }

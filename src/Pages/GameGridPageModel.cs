@@ -204,7 +204,7 @@ If you have checked these and your game is still not showing up there may be a b
 
 
             var gameFolderAlreadyExists = GameManager.Instance.CheckIfGameIsAdded(installPath);
-            if (gameFolderAlreadyExists == true)
+            if (gameFolderAlreadyExists)
             {
                 var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
                 {

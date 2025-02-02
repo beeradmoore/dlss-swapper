@@ -47,14 +47,12 @@ public partial class DLLPickerControlModel : ObservableObject
             }
         };
 
-
         dllPickerControlWeakReference = new WeakReference<DLLPickerControl>(dllPickerControl);
         Game = game;
         GameAssetType = gameAssetType;
         parentDialog.PrimaryButtonCommand = SwapDllCommand;
         parentDialog.SecondaryButtonCommand = ResetDllCommand;
 
-       
         DLLRecords = GameAssetType switch
         {
             GameAssetType.DLSS => new List<DLLRecord>(DLLManager.Instance.DLSSRecords),
@@ -70,7 +68,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
         if (Settings.Instance.AllowDebugDlls == false)
         {
-            DLLRecords.RemoveAll(x => x.IsDevFile == true);
+            DLLRecords.RemoveAll(x => x.IsDevFile);
         }
 
         // Prevent DLSS 1.0 showing up with DLSS 2/3 and vice versa
@@ -85,7 +83,7 @@ public partial class DLLPickerControlModel : ObservableObject
                 }
                 else
                 {
-                    DLLRecords.RemoveAll(x => x.Version.StartsWith("1.") == true);
+                    DLLRecords.RemoveAll(x => x.Version.StartsWith("1."));
                 }
             }
         }
@@ -118,7 +116,7 @@ public partial class DLLPickerControlModel : ObservableObject
             if (parentDialogWeakReference.TryGetTarget(out EasyContentDialog? dialog))
             {
                 dialog.IsPrimaryButtonEnabled = CanSwap;
-            }                
+            }
         }
     }
 
@@ -153,7 +151,7 @@ public partial class DLLPickerControlModel : ObservableObject
         // Allow the dialog to close
         CanCloseParentDialog = true;
 
-        if (this.parentDialogWeakReference.TryGetTarget(out EasyContentDialog? dialog) == true)
+        if (this.parentDialogWeakReference.TryGetTarget(out EasyContentDialog? dialog))
         {
             // Is the dialog already closing when we call this?
             dialog.Hide();
@@ -162,7 +160,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
     void ShowTempInfoBar(string title, string message, double duration = 3.0, InfoBarSeverity severity = InfoBarSeverity.Informational)
     {
-        if (dllPickerControlWeakReference.TryGetTarget(out DLLPickerControl? dllPickerControl) == true)
+        if (dllPickerControlWeakReference.TryGetTarget(out DLLPickerControl? dllPickerControl))
         {
             if (dllPickerControl.Content is Grid grid)
             {
@@ -202,12 +200,12 @@ public partial class DLLPickerControlModel : ObservableObject
     {
         var didReset = await Game.ResetDllAsync(GameAssetType);
 
-        if (didReset.Success == true)
+        if (didReset.Success)
         {
             ResetSelection();
         }
         else
-        { 
+        {
             ShowTempInfoBar("Error", didReset.Message, severity: InfoBarSeverity.Error);
         }
     }

@@ -224,7 +224,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                     activeGame.NeedsProcessing = true;
                                 }
 
-                                if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+                                if (activeGame.NeedsProcessing || forceNeedsProcessing)
                                 {
                                     activeGame.ProcessGame();
                                 }

@@ -105,7 +105,7 @@ namespace DLSS_Swapper.UserControls
                     coverDragDropAcceptedOperation = DataPackageOperation.None;
                     coverDragDropDragUIOverrideCaption = "storageFile is null";
                 }
-                else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
+                else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()))
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.Copy;
                     coverDragDropDragUIOverrideCaption = "Add custom cover";
@@ -141,7 +141,7 @@ namespace DLSS_Swapper.UserControls
                 {
                     Logger.Error("storageFile is null");
                 }
-                else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
+                else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()))
                 {
                     using (var stream = await storageFile.OpenStreamForReadAsync())
                     {

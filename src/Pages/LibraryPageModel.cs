@@ -146,7 +146,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                        }
 
                         var internalZipDir = DLLManager.Instance.GetAssetTypeName(dllRecord.AssetType);
-                       if (dllRecord.LocalRecord.IsImported == true)
+                       if (dllRecord.LocalRecord.IsImported)
                        {
                            internalZipDir = Path.Combine("Imported", internalZipDir);
                        }

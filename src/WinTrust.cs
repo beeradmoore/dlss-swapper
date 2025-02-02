@@ -88,9 +88,6 @@ namespace DLSS_Swapper
             [In] WinTrustData pWVTData
         );
 
-
-
-
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct WinTrustFileInfo
         {
@@ -233,7 +230,6 @@ namespace DLSS_Swapper
             }
         }
 
-
         public static bool VerifyEmbeddedSignature(string fileName)
         {
             WinVerifyTrustResult lStatus;
@@ -252,25 +248,24 @@ namespace DLSS_Swapper
                 WVTPolicyGUID specifies the policy to apply on the file
                 WINTRUST_ACTION_GENERIC_VERIFY_V2 policy checks:
 
-                1) The certificate used to sign the file chains up to a root 
-                certificate located in the trusted root certificate store. This 
-                implies that the identity of the publisher has been verified by 
+                1) The certificate used to sign the file chains up to a root
+                certificate located in the trusted root certificate store. This
+                implies that the identity of the publisher has been verified by
                 a certification authority.
 
                 2) In cases where user interface is displayed (which this example
-                does not do), WinVerifyTrust will check for whether the  
-                end entity certificate is stored in the trusted publisher store,  
+                does not do), WinVerifyTrust will check for whether the
+                end entity certificate is stored in the trusted publisher store,
                 implying that the user trusts content from this publisher.
 
-                3) The end entity certificate has sufficient permission to sign 
-                code, as indicated by the presence of a code signing EKU or no 
+                3) The end entity certificate has sufficient permission to sign
+                code, as indicated by the presence of a code signing EKU or no
                 EKU.
                 */
 
                 var WVTPolicyGUID = new Guid(WINTRUST_ACTION_GENERIC_VERIFY_V2);
 
                 // Initialize the WinVerifyTrust input data structure.
-
 
                 // Default all fields to 0.
                 ///memset(&WinTrustData, 0, sizeof(WinTrustData));
@@ -302,8 +297,8 @@ namespace DLSS_Swapper
                     // Not used.
                     pwszURLReference = null,
 
-                    // This is not applicable if there is no UI because it changes 
-                    // the UI to accommodate running applications instead of 
+                    // This is not applicable if there is no UI because it changes
+                    // the UI to accommodate running applications instead of
                     // installing applications.
                     dwUIContext = 0,
 
@@ -311,12 +306,9 @@ namespace DLSS_Swapper
                     //pFile = &fileData; // done in the constructor
                 };
 
-
-
-                // WinVerifyTrust verifies signatures as specified by the GUID 
+                // WinVerifyTrust verifies signatures as specified by the GUID
                 // and Wintrust_Data.
                 lStatus = WinVerifyTrust(IntPtr.Zero, WVTPolicyGUID, WinTrustData);
-
 
                 switch (lStatus)
                 {
@@ -327,11 +319,11 @@ namespace DLSS_Swapper
 
                             - Trusted publisher without any verification errors.
 
-                            - UI was disabled in dwUIChoice. No publisher or 
+                            - UI was disabled in dwUIChoice. No publisher or
                                 time stamp chain errors.
 
-                            - UI was enabled in dwUIChoice and the user clicked 
-                                "Yes" when asked to install and run the signed 
+                            - UI was enabled in dwUIChoice and the user clicked
+                                "Yes" when asked to install and run the signed
                                 subject.
                         */
                         validSignature = true;
@@ -339,7 +331,7 @@ namespace DLSS_Swapper
                         break;
 
                     case WinVerifyTrustResult.TRUST_E_NOSIGNATURE:
-                        // The file was not signed or had a signature 
+                        // The file was not signed or had a signature
                         // that was not valid.
 
                         // Get the reason for no signature.
@@ -353,7 +345,7 @@ namespace DLSS_Swapper
                         }
                         else
                         {
-                            // The signature was not valid or there was an error 
+                            // The signature was not valid or there was an error
                             // opening the file.
                             Logger.Error($"An unknown error occurred trying to verify the signature of the \"{fileName}\" file.");
                         }
@@ -361,7 +353,7 @@ namespace DLSS_Swapper
                         break;
 
                     case WinVerifyTrustResult.TRUST_E_EXPLICIT_DISTRUST:
-                        // The hash that represents the subject or the publisher 
+                        // The hash that represents the subject or the publisher
                         // is not allowed by the admin or user.
                         Logger.Warning("The signature is present, but specifically disallowed.");
                         break;
@@ -373,9 +365,9 @@ namespace DLSS_Swapper
 
                     case WinVerifyTrustResult.CRYPT_E_SECURITY_SETTINGS:
                         /*
-                        The hash that represents the subject or the publisher 
-                        was not explicitly trusted by the admin and the 
-                        admin policy has disabled user trust. No signature, 
+                        The hash that represents the subject or the publisher
+                        was not explicitly trusted by the admin and the
+                        admin policy has disabled user trust. No signature,
                         publisher or time stamp errors.
                         */
                         Logger.Error("CRYPT_E_SECURITY_SETTINGS - The hash representing the subject or the publisher wasn't explicitly trusted by the admin and admin policy has disabled user trust. No signature, publisher or timestamp errors.");
@@ -387,8 +379,8 @@ namespace DLSS_Swapper
                         break;
 
                     default:
-                        // The UI was disabled in dwUIChoice or the admin policy 
-                        // has disabled user trust. lStatus contains the 
+                        // The UI was disabled in dwUIChoice or the admin policy
+                        // has disabled user trust. lStatus contains the
                         // publisher or time stamp chain error.
                         Logger.Error($"Error is: 0x{lStatus}.");
                         break;
@@ -425,7 +417,6 @@ namespace DLSS_Swapper
 
             return validSignature;
         }
-
 
         /*
         internal static bool VerifyEmbeddedSignature_Original(string fileName)

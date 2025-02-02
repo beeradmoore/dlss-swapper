@@ -33,13 +33,10 @@ namespace DLSS_Swapper
         public event EventHandler<ApplicationTheme>? ThemeChanged = null;
         public event EventHandler<bool>? ContrastChanged = null;
 
-
-
         public bool IsWatchingTheme { get; private set; } = false;
         public bool IsWatchingContrast { get; private set; } = false;
 
         public bool HighContrast { get { return _accessibilitySettings.HighContrast; } }
-
 
         public ThemeWatcher(ApplicationTheme defaultApplicationTheme = ApplicationTheme.Dark)
         {
@@ -51,7 +48,6 @@ namespace DLSS_Swapper
         {
             // Cleanup incase start is called twice.
             Stop();
-
 
             var currentUser = WindowsIdentity.GetCurrent();
 
@@ -68,7 +64,6 @@ namespace DLSS_Swapper
                currentUser.User?.Value ?? string.Empty,
                RegistryContrastKeyPath.Replace(@"\", @"\\"),
                RegistryContrastValueName);
-
 
             try
             {
@@ -95,7 +90,6 @@ namespace DLSS_Swapper
             }
 
             Logger.Info($"{GetWindowsTheme()}, {HighContrast}");
-
         }
 
         public void Stop()
@@ -163,7 +157,6 @@ namespace DLSS_Swapper
                     if (key?.GetValue(RegistryThemeValueName) is int registryValue)
                     {
                         theme = registryValue > 0 ? WindowsTheme.Light : WindowsTheme.Dark;
-
                         return theme;
                     }
                 }

@@ -52,7 +52,7 @@ namespace DLSS_Swapper
     {
         _tprintf(_T("CryptMsgGetParam failed with %x\n"), GetLastError());
         __leave;
-    }         
+    }
     */
     internal static class Crypt32
     {

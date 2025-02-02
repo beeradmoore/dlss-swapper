@@ -140,7 +140,7 @@ namespace DLSS_Swapper.Data.GOG
 
             // If GOG Galaxy is installed we can get images from it.
             var storageFileLocation = GetStorageFileLocation();
-            if (string.IsNullOrWhiteSpace(storageFileLocation) == false && File.Exists(storageFileLocation) == true)
+            if (string.IsNullOrWhiteSpace(storageFileLocation) == false && File.Exists(storageFileLocation))
             {
                 //await Task.Delay(1);
                 var db = new SQLiteAsyncConnection(storageFileLocation, SQLiteOpenFlags.ReadOnly);
@@ -279,7 +279,7 @@ namespace DLSS_Swapper.Data.GOG
 
                 await gogGame.SaveToDatabaseAsync();
 
-                if (gogGame.NeedsProcessing == true || forceNeedsProcessing == true)
+                if (gogGame.NeedsProcessing || forceNeedsProcessing)
                 {
                     gogGame.ProcessGame();
                 }

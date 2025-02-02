@@ -31,9 +31,9 @@ namespace DLSS_Swapper
         public static App CurrentApp => (App)Application.Current;
 
         //internal Manifest Manifest { get; } = new Manifest();
-        internal Manifest ImportedManifest { get; } = new Manifest();
+        internal Manifest ImportedManifest { get; } = new();
 
-        internal HttpClient _httpClient = new HttpClient();
+        internal HttpClient _httpClient = new();
         public HttpClient HttpClient => _httpClient;
 
 

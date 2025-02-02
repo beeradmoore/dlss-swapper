@@ -8,7 +8,7 @@ namespace DLSS_Swapper
     // via https://github.com/aspnet/AspNetIdentity/blob/main/src/Microsoft.AspNet.Identity.Core/AsyncHelper.cs
     internal static class AsyncHelper
     {
-        private static readonly TaskFactory _myTaskFactory = new TaskFactory(CancellationToken.None,
+        private static readonly TaskFactory _myTaskFactory = new(CancellationToken.None,
             TaskCreationOptions.None, TaskContinuationOptions.None, TaskScheduler.Default);
 
         public static TResult RunSync<TResult>(Func<Task<TResult>> func)

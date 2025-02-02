@@ -259,7 +259,7 @@ namespace DLSS_Swapper
             }
         }
 
-        WindowPositionRect _lastWindowSizeAndPosition = new WindowPositionRect();
+        WindowPositionRect _lastWindowSizeAndPosition = new();
         public WindowPositionRect LastWindowSizeAndPosition
         {
             get { return _lastWindowSizeAndPosition; }

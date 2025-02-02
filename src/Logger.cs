@@ -21,7 +21,7 @@ namespace DLSS_Swapper
     {
         public static string LogDirectory => Path.Combine(Storage.GetTemp(), "logs");
         static string loggingFile => Path.Combine(LogDirectory, "dlss_swapper_.log");
-        static LoggingLevelSwitch levelSwitch = new LoggingLevelSwitch(LogEventLevel.Fatal);
+        static LoggingLevelSwitch levelSwitch = new(LogEventLevel.Fatal);
 
         internal static void Init()
         {

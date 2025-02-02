@@ -16,7 +16,7 @@ namespace DLSS_Swapper
     static class Storage
     {
 
-        static JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions()
+        static JsonSerializerOptions jsonSerializerOptions = new()
         {
             WriteIndented = true,
             TypeInfoResolver = SourceGenerationContext.Default,

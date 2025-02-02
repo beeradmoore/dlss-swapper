@@ -21,7 +21,7 @@ internal class Database
 
     public Database()
     {
-        // Use a single syncronous connection to make tables
+        // Use a single synchronous connection to make tables
         using (var syncConnection = new SQLiteConnection(Storage.GetDBPath()))
         {
             try
@@ -33,7 +33,6 @@ internal class Database
                 Logger.Error(err.Message);
             }
 
-
             try
             {
                 syncConnection.CreateTable<GOGGame>();
@@ -42,7 +41,6 @@ internal class Database
             {
                 Logger.Error(err.Message);
             }
-
 
             try
             {
@@ -53,7 +51,6 @@ internal class Database
                 Logger.Error(err.Message);
             }
 
-
             try
             {
                 syncConnection.CreateTable<UbisoftConnectGame>();
@@ -63,7 +60,6 @@ internal class Database
                 Logger.Error(err.Message);
             }
 
-
             try
             {
                 syncConnection.CreateTable<XboxGame>();
@@ -72,7 +68,6 @@ internal class Database
             {
                 Logger.Error(err.Message);
             }
-
 
             try
             {
@@ -104,5 +99,4 @@ internal class Database
         // If we didn't get this the database was not created as the above threw an exception
         Logger.Verbose("Database Init");
     }
-
 }

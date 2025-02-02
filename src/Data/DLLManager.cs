@@ -6,16 +6,16 @@ namespace DLSS_Swapper.Data;
 
 internal class DLLManager
 {
-    public static DLLManager Instance { get; private set; } = new DLLManager();
+    public static DLLManager Instance { get; private set; } = new();
 
-    public ObservableCollection<DLLRecord> DLSSRecords { get; } = new ObservableCollection<DLLRecord>();
-    public ObservableCollection<DLLRecord> DLSSGRecords { get; } = new ObservableCollection<DLLRecord>();
-    public ObservableCollection<DLLRecord> DLSSDRecords { get; } = new ObservableCollection<DLLRecord>();
-    public ObservableCollection<DLLRecord> FSR31DX12Records { get; } = new ObservableCollection<DLLRecord>();
-    public ObservableCollection<DLLRecord> FSR31VKRecords { get; } = new ObservableCollection<DLLRecord>();
-    public ObservableCollection<DLLRecord> XeSSRecords { get; } = new ObservableCollection<DLLRecord>();
-    public ObservableCollection<DLLRecord> XeLLRecords { get; } = new ObservableCollection<DLLRecord>();
-    public ObservableCollection<DLLRecord> XeSSFGRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> DLSSRecords { get; } = new();
+    public ObservableCollection<DLLRecord> DLSSGRecords { get; } = new();
+    public ObservableCollection<DLLRecord> DLSSDRecords { get; } = new();
+    public ObservableCollection<DLLRecord> FSR31DX12Records { get; } = new();
+    public ObservableCollection<DLLRecord> FSR31VKRecords { get; } = new();
+    public ObservableCollection<DLLRecord> XeSSRecords { get; } = new();
+    public ObservableCollection<DLLRecord> XeLLRecords { get; } = new();
+    public ObservableCollection<DLLRecord> XeSSFGRecords { get; } = new();
 
     internal void LoadFromManifest()
     {

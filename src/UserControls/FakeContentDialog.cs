@@ -269,7 +269,7 @@ public class FakeContentDialog : Control
 
 
 
-    TaskCompletionSource<ContentDialogResult> taskCompletionSource = new TaskCompletionSource<ContentDialogResult>();
+    TaskCompletionSource<ContentDialogResult> taskCompletionSource = new();
 
     public FakeContentDialog()
     {

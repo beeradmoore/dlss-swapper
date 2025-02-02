@@ -14,13 +14,13 @@ namespace DLSS_Swapper.Data;
 
 internal partial class GameManager : ObservableObject
 {
-    public static GameManager Instance { get; private set; } = new GameManager();
+    public static GameManager Instance { get; private set; } = new();
 
     // Because access to _allGames should be done on the UI thread we have _synchronisedAllGames which
     // will be used for adding/removing/fetching games. _allGames gets updated which will then be reflected
     // to the user.
-    List<Game> _synchronisedAllGames = new List<Game>();
-    ObservableCollection<Game> _allGames { get; } = new ObservableCollection<Game>();
+    List<Game> _synchronisedAllGames = new();
+    ObservableCollection<Game> _allGames { get; } = new();
 
     public CollectionViewSource GroupedGameCollectionViewSource { get; init; }
     public CollectionViewSource UngroupedGameCollectionViewSource { get; init; }
@@ -28,10 +28,10 @@ internal partial class GameManager : ObservableObject
     [ObservableProperty]
     public partial bool UnknownAssetsFound { get; set; } = false;
 
-    List<UnknownGameAsset> _unknownGameAssets { get; } = new List<UnknownGameAsset>();
+    List<UnknownGameAsset> _unknownGameAssets { get; } = new();
 
-    object gameLock = new object();
-    object unknownGameAsseetLock = new object();
+    object gameLock = new();
+    object unknownGameAsseetLock = new();
 
     GameGroup allGamesGroup;
     GameGroup favouriteGamesGroup;
@@ -50,8 +50,8 @@ internal partial class GameManager : ObservableObject
         return ((Game)obj).IsFavourite;
     }
 
-    Dictionary<GameLibrary, GameGroup> libraryGameGroups = new Dictionary<GameLibrary, GameGroup>();
-    Dictionary<GameLibrary, AdvancedCollectionView> libraryGamesView = new Dictionary<GameLibrary, AdvancedCollectionView>();
+    Dictionary<GameLibrary, GameGroup> libraryGameGroups = new();
+    Dictionary<GameLibrary, AdvancedCollectionView> libraryGamesView = new();
 
 
     Predicate<object> GetPredicateForAllGames(bool hideNonDLSSGames)

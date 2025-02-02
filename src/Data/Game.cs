@@ -523,68 +523,64 @@ namespace DLSS_Swapper.Data
                 Logger.Info("No backup records found.");
                 return (false, "Unable to reset to default. Please repair your game manually.", false);
             }
-            else
+
+            foreach (var existingBackupRecord in existingBackupRecords)
             {
-                foreach (var existingBackupRecord in existingBackupRecords)
+                var primaryRecordName = existingBackupRecord.Path.Replace(".dlsss", string.Empty);
+                var existingRecords = GameAssets.Where(x => x.AssetType == gameAssetType && x.Path.Equals(primaryRecordName)).ToList();
+
+                if (existingRecords.Count != 1)
                 {
-                    var primaryRecordName = existingBackupRecord.Path.Replace(".dlsss", string.Empty);
-                    var existingRecords = GameAssets.Where(x => x.AssetType == gameAssetType && x.Path.Equals(primaryRecordName)).ToList();
-
-                    if (existingRecords.Count != 1)
-                    {
-                        Logger.Info("Backup record was found, existing records were not.");
-                        return (false, "Unable to reset to default. Please repair your game manually.", false);
-                    }
-
-                    var existingRecord = existingRecords[0];
-
-                    try
-                    {
-                        File.Move(existingBackupRecord.Path, existingRecord.Path, true);
-                    }
-                    catch (UnauthorizedAccessException err)
-                    {
-                        Logger.Error($"UnauthorizedAccessException: {err.Message}");
-                        if (App.CurrentApp.IsAdminUser() is false)
-                        {
-                            return (false, "Unable to reset to default. Running DLSS Swapper as administrator may fix this.", true);
-                        }
-                        else
-                        {
-                            return (false, "Unable to reset to default. Please repair your game manually.", false);
-                        }
-                    }
-                    catch (Exception err)
-                    {
-                        Logger.Error(err.Message);
-                        return (false, "Unable to reset to default. Please repair your game manually.", false);
-                    }
-
-                    var newGameAsset = new GameAsset
-                    {
-                        Id = ID,
-                        AssetType = gameAssetType,
-                        Path = existingRecord.Path,
-                        Version = existingBackupRecord.Version,
-                        Hash = existingBackupRecord.Hash,
-                    };
-
-                    UpdateCurrentAsset(newGameAsset, gameAssetType);
-
-                    GameAssets.Remove(existingRecord);
-                    GameAssets.Remove(existingBackupRecord);
-                    GameAssets.Add(newGameAsset);
+                    Logger.Info("Backup record was found, existing records were not.");
+                    return (false, "Unable to reset to default. Please repair your game manually.", false);
                 }
 
-                // Update game assets list by deleting and re-adding.
-                using (await Database.Instance.Mutex.LockAsync())
+                var existingRecord = existingRecords[0];
+
+                try
                 {
-                    await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
-                    await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
+                    File.Move(existingBackupRecord.Path, existingRecord.Path, true);
+                }
+                catch (UnauthorizedAccessException err)
+                {
+                    Logger.Error($"UnauthorizedAccessException: {err.Message}");
+                    if (App.IsAdminUser() is false)
+                    {
+                        return (false, "Unable to reset to default. Running DLSS Swapper as administrator may fix this.", true);
+                    }
+
+                    return (false, "Unable to reset to default. Please repair your game manually.", false);
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err.Message);
+                    return (false, "Unable to reset to default. Please repair your game manually.", false);
                 }
 
-                return (true, string.Empty, false);
+                var newGameAsset = new GameAsset
+                {
+                    Id = ID,
+                    AssetType = gameAssetType,
+                    Path = existingRecord.Path,
+                    Version = existingBackupRecord.Version,
+                    Hash = existingBackupRecord.Hash,
+                };
+
+                UpdateCurrentAsset(newGameAsset, gameAssetType);
+
+                GameAssets.Remove(existingRecord);
+                GameAssets.Remove(existingBackupRecord);
+                GameAssets.Add(newGameAsset);
             }
+
+            // Update game assets list by deleting and re-adding.
+            using (await Database.Instance.Mutex.LockAsync())
+            {
+                await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+                await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
+            }
+
+            return (true, string.Empty, false);
 
             return (false, "Unable to reset to default. Please repair your game manually.", false);
         }
@@ -638,7 +634,8 @@ namespace DLSS_Swapper.Data
                 {
                     throw new Exception("Dll zip was invalid (no dll found).");
                 }
-                else if (zippedDlls.Length > 1)
+
+                if (zippedDlls.Length > 1)
                 {
                     throw new Exception("Dll zip was invalid (more than one dll found).");
                 }
@@ -700,15 +697,13 @@ namespace DLSS_Swapper.Data
                         catch (UnauthorizedAccessException err)
                         {
                             Logger.Error($"UnauthorizedAccessException: {err.Message}");
-                            if (App.CurrentApp.IsAdminUser() is false)
+                            if (App.IsAdminUser() is false)
                             {
                                 return (false, "Unable to swap dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
 
                             }
-                            else
-                            {
-                                return (false, "Unable to swap dll as we are unable to write to the target directory.", false);
-                            }
+
+                            return (false, "Unable to swap dll as we are unable to write to the target directory.", false);
                         }
                         catch (Exception err)
                         {
@@ -739,14 +734,12 @@ namespace DLSS_Swapper.Data
                 catch (UnauthorizedAccessException err)
                 {
                     Logger.Error($"UnauthorizedAccessException: {err.Message}");
-                    if (App.CurrentApp.IsAdminUser() is false)
+                    if (App.IsAdminUser() is false)
                     {
                         return (false, "Unable to swap dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
                     }
-                    else
-                    {
-                        return (false, "Unable to DLSS dll as we are unable to write to the target directory.", false);
-                    }
+
+                    return (false, "Unable to DLSS dll as we are unable to write to the target directory.", false);
                 }
                 catch (Exception err)
                 {

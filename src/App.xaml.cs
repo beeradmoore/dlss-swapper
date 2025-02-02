@@ -113,7 +113,7 @@ namespace DLSS_Swapper
             }
         }
 
-        long CalculateDirectorySize(string path)
+        static long CalculateDirectorySize(string path)
         {
             var directorySize = 0L;
             var fileCount = 0;
@@ -158,7 +158,7 @@ namespace DLSS_Swapper
 
 
         /*
-        // Disabled because the non-async method seems faster. 
+        // Disabled because the non-async method seems faster.
         internal async Task LoadLocalRecordsAsync()
         {
             var tasks = new List<Task>();
@@ -176,7 +176,7 @@ namespace DLSS_Swapper
         }
         */
 
-        public bool IsAdminUser()
+        public static bool IsAdminUser()
         {
             using WindowsIdentity identity = WindowsIdentity.GetCurrent();
             WindowsPrincipal principal = new WindowsPrincipal(identity);
@@ -184,7 +184,7 @@ namespace DLSS_Swapper
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
-        public void RestartAsAdmin()
+        public static void RestartAsAdmin()
         {
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
@@ -216,9 +216,9 @@ namespace DLSS_Swapper
 
             //var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
             //executingAssembly.FullName;
-            
+
             // So this does prompt UAC, this was temporarily used to copy files in UpdateDll and ResetDll
-            // but it would prompt for every action. 
+            // but it would prompt for every action.
             //var startInfo = new ProcessStartInfo()
             //{
             //    WindowStyle = ProcessWindowStyle.Hidden,
@@ -234,22 +234,24 @@ namespace DLSS_Swapper
         }
         */
 
-        public Version GetVersion()
+        public static Version GetVersion()
         {
             return Assembly.GetExecutingAssembly().GetName().Version ?? new Version();
         }
 
-        public string GetVersionString()
+        public static string GetVersionString()
         {
             var version = GetVersion();
             if (version.Build == 0 && version.Revision == 0)
             {
                 return $"{version.Major}.{version.Minor}";
             }
-            else if (version.Revision == 0)
+
+            if (version.Revision == 0)
             {
                 return $"{version.Major}.{version.Minor}.{version.Build}";
             }
+
             return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
         }
 

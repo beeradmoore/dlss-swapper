@@ -92,11 +92,9 @@ namespace DLSS_Swapper.Data.GitHub
 
                 return version;
             }
-            else
-            {
-                // This shouldn't be able to happen, but if our list was 0 items this will be hit.
-                return 0;
-            }
+
+            // This shouldn't be able to happen, but if our list was 0 items this will be hit.
+            return 0;
         }
     }
 }

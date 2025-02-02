@@ -134,7 +134,8 @@ public partial class DLLPickerControlModel : ObservableObject
             SelectedDLLRecord.DownloadAsync().SafeFireAndForget();
             return;
         }
-        else if (SelectedDLLRecord.LocalRecord.IsDownloading)
+
+        if (SelectedDLLRecord.LocalRecord.IsDownloading)
         {
             ShowTempInfoBar(string.Empty, "Please wait for download to complete");
             return;

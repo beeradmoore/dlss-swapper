@@ -134,9 +134,7 @@ namespace DLSS_Swapper.Data.GOG
                 return [];
             }
 
-
             // Now that we have games we attempt to load covers for them.
-
 
             // If GOG Galaxy is installed we can get images from it.
             var storageFileLocation = GetStorageFileLocation();
@@ -144,7 +142,7 @@ namespace DLSS_Swapper.Data.GOG
             {
                 //await Task.Delay(1);
                 var db = new SQLiteAsyncConnection(storageFileLocation, SQLiteOpenFlags.ReadOnly);
-                
+
                 // Default resource type for verticalCover images is 3. We default to this, but we also add try load it incase it changes.
                 var webCacheResourceTypeId = 3;
                 var webCacheResourceType = (await db.QueryAsync<WebCacheResourceType>("SELECT * FROM WebCacheResourceTypes WHERE type=?", "verticalCover").ConfigureAwait(false)).FirstOrDefault();
@@ -268,7 +266,6 @@ namespace DLSS_Swapper.Data.GOG
                                     gogGame.FallbackHeaderUrl = url;
                                 }
                             }
-
                         }
                     }
                     else
@@ -291,7 +288,7 @@ namespace DLSS_Swapper.Data.GOG
                 // Game is to be deleted.
                 if (gogGames.Contains(cachedGame) == false)
                 {
-                    await cachedGame.DeleteAsync();                    
+                    await cachedGame.DeleteAsync();
                 }
             }
 
@@ -302,7 +299,7 @@ namespace DLSS_Swapper.Data.GOG
         /// This file only exists if GOG Galaxy is installed.
         /// </summary>
         /// <returns>galaxy-2.0.db location, or empty string if not found.</returns>
-        string GetStorageFileLocation()
+        static string GetStorageFileLocation()
         {
             var programDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             var storageFileLocation = Path.Combine(programDataDirectory, "GOG.com", "Galaxy", "storage", "galaxy-2.0.db");

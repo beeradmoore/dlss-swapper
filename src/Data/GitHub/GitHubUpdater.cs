@@ -60,7 +60,7 @@ namespace DLSS_Swapper.Data.GitHub
             }
 
             var latestVersion = latestRelease.GetVersionNumber();
-            var version = App.CurrentApp.GetVersion();
+            var version = App.GetVersion();
             var currentVersion = ((ulong)version.Major << 48) +
                 ((ulong)version.Minor << 32) +
                 ((ulong)version.Build << 16) +
@@ -85,7 +85,8 @@ namespace DLSS_Swapper.Data.GitHub
             {
                 return false;
             }
-            else if (thisVersion < lastVersionPromptedFor)
+
+            if (thisVersion < lastVersionPromptedFor)
             {
                 return false;
             }
@@ -103,7 +104,7 @@ namespace DLSS_Swapper.Data.GitHub
             }
 
 
-            var currentVerion = App.CurrentApp.GetVersionString();
+            var currentVerion = App.GetVersionString();
 
             var yourVersion = $"You currently have {currentVerion} installed.\n\n";
             var contentUpdate = new MarkdownTextBlock

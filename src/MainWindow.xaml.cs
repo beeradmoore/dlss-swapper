@@ -353,10 +353,8 @@ DLSS Swapper will close now.",
                 {
                     return await UpdateManifestAsync();
                 }
-                else
-                {
-                    DLLManager.Instance.UpdateDLLRecordLists(manifest);
-                }
+
+                DLLManager.Instance.UpdateDLLRecordLists(manifest);
                 return true;
             }
             catch (Exception err)

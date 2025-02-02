@@ -7,7 +7,6 @@ namespace DLSS_Swapper
     public class Settings
     {
         static Settings? _instance;
-
         public static Settings Instance => _instance ??= Settings.FromJson();
 
         // We default this to false to prevent saves firing when loading from json.
@@ -116,8 +115,6 @@ namespace DLSS_Swapper
             }
         }
 
-
-
         bool _allowUntrusted;
         public bool AllowUntrusted
         {
@@ -152,7 +149,6 @@ namespace DLSS_Swapper
             }
         }
 
-
         ulong _lastPromptWasForVersion;
         public ulong LastPromptWasForVersion
         {
@@ -169,7 +165,6 @@ namespace DLSS_Swapper
                 }
             }
         }
-
 
         // Don't forget to change this back to off.
         LoggingLevel _loggingLevel = LoggingLevel.Error;
@@ -205,7 +200,6 @@ namespace DLSS_Swapper
                 }
             }
         }
-
 
         bool _wasLoadingGames;
         public bool WasLoadingGames
@@ -314,7 +308,7 @@ namespace DLSS_Swapper
         {
             Settings? settings = null;
 
-            var settingsFromJson = AsyncHelper.RunSync(() => Storage.LoadSettingsJsonAsync());
+            var settingsFromJson = AsyncHelper.RunSync(Storage.LoadSettingsJsonAsync);
             // If we couldn't load settings then save the defaults.
             if (settingsFromJson is null)
             {

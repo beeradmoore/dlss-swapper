@@ -241,10 +241,8 @@ internal partial class GameManager : ObservableObject
 
             return GroupedGameCollectionViewSource.View;
         }
-        else
-        {
-            return UngroupedGameCollectionViewSource.View;
-        }
+
+        return UngroupedGameCollectionViewSource.View;
     }
 
 
@@ -266,24 +264,22 @@ internal partial class GameManager : ObservableObject
                 Debug.WriteLine($"Reusing old game: {game.Title}");
                 return oldGame;
             }
-            else
+
+            Debug.WriteLine($"Adding new game: {game.Title}");
+
+            _synchronisedAllGames.Add(game);
+
+            App.CurrentApp.RunOnUIThread(() =>
             {
-                Debug.WriteLine($"Adding new game: {game.Title}");
+                _allGames.Add(game);
 
-                _synchronisedAllGames.Add(game);
-
-                App.CurrentApp.RunOnUIThread(() =>
+                if (scrollIntoView)
                 {
-                    _allGames.Add(game);
+                    App.CurrentApp.MainWindow.GameGridPage?.ScrollToGame(game);
+                }
+            });
 
-                    if (scrollIntoView)
-                    {
-                        App.CurrentApp.MainWindow.GameGridPage?.ScrollToGame(game);
-                    }
-                });
-
-                return game;
-            }
+            return game;
         }
     }
 

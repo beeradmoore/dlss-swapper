@@ -95,10 +95,8 @@ internal class DLSSSettingsManager
         {
             return RunRegAdd(NGXCORE_REG_KEY, "EnableConsoleLogging", "REG_DWORD", "1");
         }
-        else
-        {
-            return RunRegAdd(NGXCORE_REG_KEY, "EnableConsoleLogging", "REG_DWORD", "0");
-        }
+
+        return RunRegAdd(NGXCORE_REG_KEY, "EnableConsoleLogging", "REG_DWORD", "0");
     }
 
     public bool GetLoggingWindow()

@@ -33,11 +33,13 @@ namespace DLSS_Swapper.Converters
                 {
                     return localRecord.IsDownloading ? Visibility.Visible : Visibility.Collapsed;
                 }
-                else if (DesierdState == "Downloaded")
+
+                if (DesierdState == "Downloaded")
                 {
                     return localRecord.IsDownloaded ? Visibility.Visible : Visibility.Collapsed;
                 }
-                else if (DesierdState == "NotFound")
+
+                if (DesierdState == "NotFound")
                 {
                     if (localRecord.IsDownloading)
                     {
@@ -51,7 +53,8 @@ namespace DLSS_Swapper.Converters
 
                     return Visibility.Visible;
                 }
-                else if (DesierdState == "Imported")
+
+                if (DesierdState == "Imported")
                 {
                     return localRecord.IsImported ? Visibility.Visible : Visibility.Collapsed;
                 }

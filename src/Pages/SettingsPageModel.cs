@@ -22,7 +22,7 @@ internal partial class SettingsPageModel : ObservableObject
 
     public IEnumerable<LoggingLevel> LoggingLevels => Enum.GetValues<LoggingLevel>();
     public string CurrentLogPath => Logger.GetCurrentLogPath();
-    public string AppVersion => App.CurrentApp.GetVersionString();
+    public string AppVersion => App.GetVersionString();
     public List<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; } =
         [
             new()

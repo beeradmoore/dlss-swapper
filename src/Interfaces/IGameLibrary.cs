@@ -5,12 +5,8 @@ using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;
 using DLSS_Swapper.Data.ManuallyAdded;
-using Serilog;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Interfaces

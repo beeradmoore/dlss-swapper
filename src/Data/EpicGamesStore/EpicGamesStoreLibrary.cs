@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Management;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
-using Microsoft.UI.Xaml.Controls;
-using Windows.Foundation.Metadata;
-using Windows.Security.Authentication.OnlineId;
 
 namespace DLSS_Swapper.Data.EpicGamesStore
 {

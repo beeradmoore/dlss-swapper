@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics.Contracts;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 using SQLite;
 

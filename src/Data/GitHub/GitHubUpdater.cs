@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
-using CommunityToolkit.WinUI;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;

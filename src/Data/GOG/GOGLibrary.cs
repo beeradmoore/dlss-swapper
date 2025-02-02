@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
-using Serilog;
 using SQLite;
 
 namespace DLSS_Swapper.Data.GOG

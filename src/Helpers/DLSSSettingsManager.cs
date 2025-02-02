@@ -9,14 +9,14 @@ namespace DLSS_Swapper.Helpers;
 
 internal class DLSSSettingsManager
 {
-    const string NGXCORE_REG_KEY = @"HKEY_LOCAL_MACHINE\SOFTWARE\NVIDIA Corporation\Global\NGXCore";
+    private const string NGXCORE_REG_KEY = @"HKEY_LOCAL_MACHINE\SOFTWARE\NVIDIA Corporation\Global\NGXCore";
 
     public DLSSSettingsManager()
     {
 
     }
 
-    bool RunRegAdd(string key, string name, string type, string value)
+    private bool RunRegAdd(string key, string name, string type, string value)
     {
         var processInfo = new ProcessStartInfo
         {

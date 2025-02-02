@@ -20,7 +20,7 @@ namespace DLSS_Swapper.Data.Xbox
 
         public Type GameType => typeof(XboxGame);
 
-        static XboxLibrary? instance;
+        private static XboxLibrary? instance;
         public static XboxLibrary Instance => instance ??= new XboxLibrary();
 
         private XboxLibrary()

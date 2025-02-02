@@ -20,7 +20,7 @@ namespace DLSS_Swapper.Data.GOG
 
         public Type GameType => typeof(GOGGame);
 
-        static GOGLibrary? instance;
+        private static GOGLibrary? instance;
         public static GOGLibrary Instance => instance ??= new GOGLibrary();
 
         private GOGLibrary()
@@ -299,7 +299,7 @@ namespace DLSS_Swapper.Data.GOG
         /// This file only exists if GOG Galaxy is installed.
         /// </summary>
         /// <returns>galaxy-2.0.db location, or empty string if not found.</returns>
-        static string GetStorageFileLocation()
+        private static string GetStorageFileLocation()
         {
             var programDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             var storageFileLocation = Path.Combine(programDataDirectory, "GOG.com", "Galaxy", "storage", "galaxy-2.0.db");

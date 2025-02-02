@@ -10,10 +10,10 @@ namespace DLSS_Swapper.UserControls
 {
     internal partial class ManuallyAddGameModel : ObservableObject
     {
-        ManuallyAddedGame game;
+        private readonly ManuallyAddedGame game;
         public ManuallyAddedGame Game => game;
 
-        WeakReference<ManuallyAddGameControl> manuallyAddGameControlWeakReference;
+        private WeakReference<ManuallyAddGameControl> manuallyAddGameControlWeakReference;
 
         public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath)
         {
@@ -27,7 +27,7 @@ namespace DLSS_Swapper.UserControls
         }
 
         [RelayCommand]
-        async Task AddCoverImageAsync()
+        private async Task AddCoverImageAsync()
         {
             if (game.CoverImage == game.ExpectedCustomCoverImage)
             {

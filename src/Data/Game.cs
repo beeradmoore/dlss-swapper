@@ -98,7 +98,7 @@ namespace DLSS_Swapper.Data
         [Ignore]
         public bool NeedsProcessing { get; set; }
 
-        bool _isLoadingCoverImage;
+        private bool _isLoadingCoverImage;
 
         [ObservableProperty]
         [Ignore]
@@ -458,7 +458,7 @@ namespace DLSS_Swapper.Data
             });
         }
 
-        void LoadBackupForGameAsset(GameAsset gameAsset)
+        private void LoadBackupForGameAsset(GameAsset gameAsset)
         {
             var backupPath = $"{gameAsset.Path}.dlsss";
             if (File.Exists(backupPath))
@@ -782,7 +782,7 @@ namespace DLSS_Swapper.Data
             return (true, string.Empty, false);
         }
 
-        void UpdateCurrentAsset(GameAsset newGameAsset, GameAssetType gameAssetType)
+        private void UpdateCurrentAsset(GameAsset newGameAsset, GameAssetType gameAssetType)
         {
             App.CurrentApp.RunOnUIThread(() =>
             {
@@ -1262,7 +1262,7 @@ namespace DLSS_Swapper.Data
 
         public abstract bool UpdateFromGame(Game game);
 
-        void UpdateCurrentDLLsFromGameAssets()
+        private void UpdateCurrentDLLsFromGameAssets()
         {
             CurrentDLSS = null;
             CurrentDLSS_G = null;

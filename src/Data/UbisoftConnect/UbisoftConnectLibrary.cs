@@ -32,14 +32,14 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         public Type GameType => typeof(UbisoftConnectGame);
 
-        static UbisoftConnectLibrary? instance;
+        private static UbisoftConnectLibrary? instance;
         public static UbisoftConnectLibrary Instance => instance ??= new UbisoftConnectLibrary();
 
         private UbisoftConnectLibrary()
         {
         }
 
-        string _installPath = string.Empty;
+        private string _installPath = string.Empty;
 
         public bool IsInstalled()
         {
@@ -251,7 +251,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             return games;
         }
 
-        string GetInstallPath()
+        private string GetInstallPath()
         {
             if (string.IsNullOrEmpty(_installPath) == false)
             {
@@ -290,7 +290,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         // Based on the methods from
         // https://github.com/lutris/lutris/blob/d908066d97e61b2f33715fe9bdff6c02cc7fbc80/lutris/util/ubisoft/parser.py
-        List<UbisoftRecord> ParseConfiguration(byte[] configurationFileData)
+        private List<UbisoftRecord> ParseConfiguration(byte[] configurationFileData)
         {
             var configurationContent = new ReadOnlySpan<byte>(configurationFileData);
 
@@ -345,7 +345,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         // Based on the methods from
         // https://github.com/lutris/lutris/blob/d908066d97e61b2f33715fe9bdff6c02cc7fbc80/lutris/util/ubisoft/parser.py
-        (int objectSize, int installId, int launchId, int headerSize) ParseConfigurationHeader(ReadOnlySpan<byte> header, bool secondEight = false)
+        private (int objectSize, int installId, int launchId, int headerSize) ParseConfigurationHeader(ReadOnlySpan<byte> header, bool secondEight = false)
         {
 
             try
@@ -431,7 +431,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         // Based on the methods from
         // https://github.com/lutris/lutris/blob/d908066d97e61b2f33715fe9bdff6c02cc7fbc80/lutris/util/ubisoft/parser.py
-        int ConvertData(int data)
+        private int ConvertData(int data)
         {
             //calculate object size (konrad's formula)
             if (data > 256 * 256)

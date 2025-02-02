@@ -16,11 +16,10 @@ namespace DLSS_Swapper
         private const string RegistryThemeValueName = "AppsUseLightTheme";
         private const string RegistryContrastKeyPath = @"Control Panel\Accessibility\HighContrast";
         private const string RegistryContrastValueName = "LastUpdatedThemeId";
-
-        ManagementEventWatcher? _themeWatcher;
-        ManagementEventWatcher? _contrastWatcher;
-        AccessibilitySettings _accessibilitySettings;
-        ApplicationTheme _defaultApplicationTheme;
+        private ManagementEventWatcher? _themeWatcher;
+        private ManagementEventWatcher? _contrastWatcher;
+        private readonly AccessibilitySettings _accessibilitySettings;
+        private readonly ApplicationTheme _defaultApplicationTheme;
 
         public enum WindowsTheme
         {

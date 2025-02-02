@@ -5,7 +5,7 @@ using System;
 
 namespace DLSS_Swapper.Converters
 {
-    class DLSSStateVisibilityConverter : DependencyObject, IValueConverter
+    internal class DLSSStateVisibilityConverter : DependencyObject, IValueConverter
     {
         public static readonly DependencyProperty DesierdStateProperty = DependencyProperty.Register(nameof(DesierdState), typeof(string), typeof(DLSSStateVisibilityConverter), new PropertyMetadata(null));
         public string DesierdState

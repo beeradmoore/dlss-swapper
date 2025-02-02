@@ -9,7 +9,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
 {
     public string ExpectedPath { get; private set; } = string.Empty;
 
-    bool _isDownloaded;
+    private bool _isDownloaded;
     public bool IsDownloaded
     {
         get { return _isDownloaded; }
@@ -23,7 +23,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
         }
     }
 
-    bool _isDownloading;
+    private bool _isDownloading;
     public bool IsDownloading
     {
         get { return _isDownloading; }
@@ -37,8 +37,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
         }
     }
 
-
-    int _downloadProgress;
+    private int _downloadProgress;
     public int DownloadProgress
     {
         get { return _downloadProgress; }
@@ -52,7 +51,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
         }
     }
 
-    bool _hasDownloadError;
+    private bool _hasDownloadError;
     public bool HasDownloadError
     {
         get { return _hasDownloadError; }
@@ -66,7 +65,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
         }
     }
 
-    string _downloadErrorMessage = string.Empty;
+    private string _downloadErrorMessage = string.Empty;
     public string DownloadErrorMessage
     {
         get { return _downloadErrorMessage; }
@@ -80,7 +79,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
         }
     }
 
-    bool _isImported;
+    private bool _isImported;
     public bool IsImported
     {
         get { return _isImported; }
@@ -146,7 +145,8 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
 
     #region INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
-    void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

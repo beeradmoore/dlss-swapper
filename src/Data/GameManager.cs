@@ -19,8 +19,9 @@ internal partial class GameManager : ObservableObject
     // Because access to _allGames should be done on the UI thread we have _synchronisedAllGames which
     // will be used for adding/removing/fetching games. _allGames gets updated which will then be reflected
     // to the user.
-    List<Game> _synchronisedAllGames = [];
-    ObservableCollection<Game> _allGames { get; } = [];
+    private readonly List<Game> _synchronisedAllGames = [];
+
+    private ObservableCollection<Game> _allGames { get; } = [];
 
     public CollectionViewSource GroupedGameCollectionViewSource { get; init; }
     public CollectionViewSource UngroupedGameCollectionViewSource { get; init; }
@@ -28,31 +29,30 @@ internal partial class GameManager : ObservableObject
     [ObservableProperty]
     public partial bool UnknownAssetsFound { get; set; } = false;
 
-    List<UnknownGameAsset> _unknownGameAssets { get; } = [];
+    private List<UnknownGameAsset> _unknownGameAssets { get; } = [];
 
-    object gameLock = new();
-    object unknownGameAsseetLock = new();
-
-    GameGroup allGamesGroup;
-    GameGroup favouriteGamesGroup;
+    private readonly object gameLock = new();
+    private readonly object unknownGameAsseetLock = new();
+    private readonly GameGroup allGamesGroup;
+    private readonly GameGroup favouriteGamesGroup;
 
     public AdvancedCollectionView AllGamesView { get; init; }
     public AdvancedCollectionView FavouriteGamesView { get; init; }
 
-    bool Filter_Favourite_WithDLSS(object obj)
+    private bool Filter_Favourite_WithDLSS(object obj)
     {
         return ((Game)obj).IsFavourite;
     }
 
-    bool Filter_Favourite_Any(object obj)
+    private bool Filter_Favourite_Any(object obj)
     {
         return ((Game)obj).IsFavourite;
     }
 
-    Dictionary<GameLibrary, GameGroup> libraryGameGroups = new();
-    Dictionary<GameLibrary, AdvancedCollectionView> libraryGamesView = new();
+    private readonly Dictionary<GameLibrary, GameGroup> libraryGameGroups = new();
+    private readonly Dictionary<GameLibrary, AdvancedCollectionView> libraryGamesView = new();
 
-    Predicate<object> GetPredicateForAllGames(bool hideNonDLSSGames)
+    private Predicate<object> GetPredicateForAllGames(bool hideNonDLSSGames)
     {
         if (hideNonDLSSGames)
         {
@@ -69,7 +69,7 @@ internal partial class GameManager : ObservableObject
         };
     }
 
-    Predicate<object> GetPredicateForFavouriteGames(bool hideNonDLSSGames)
+    private Predicate<object> GetPredicateForFavouriteGames(bool hideNonDLSSGames)
     {
         if (hideNonDLSSGames)
         {
@@ -86,8 +86,7 @@ internal partial class GameManager : ObservableObject
         };
     }
 
-
-    Predicate<object> GetPredicateForLibraryGames(GameLibrary library, bool hideNonDLSSGames)
+    private Predicate<object> GetPredicateForLibraryGames(GameLibrary library, bool hideNonDLSSGames)
     {
         if (hideNonDLSSGames)
         {

@@ -61,7 +61,7 @@ namespace DLSS_Swapper.Data.GOG
         [Column("ProductDetailsResponseId")]
         public int ProductDetailsResponseId { get; set; }
 
-        LimitedDetailImages? _imagesData;
+        private LimitedDetailImages? _imagesData;
         [SQLite.Ignore]
         public LimitedDetailImages? ImagesData
         {

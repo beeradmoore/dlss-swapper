@@ -30,8 +30,8 @@ namespace DLSS_Swapper.Pages
         ObservableCollection<Game> FavouriteGames = new ObservableCollection<Game>();
         ObservableCollection<Game> AllGames = new ObservableCollection<Game>();
         */
-        
-        bool _loadingGamesAndDlls;
+
+        private bool _loadingGamesAndDlls;
 
         public GameGridPageModel ViewModel { get; private set; }
 
@@ -42,8 +42,7 @@ namespace DLSS_Swapper.Pages
             DataContext = ViewModel;
         }
 
-
-        async Task LoadGamesAsync()
+        private async Task LoadGamesAsync()
         {
             // TODO: REMOVE
             await Task.Delay(1);
@@ -149,10 +148,9 @@ namespace DLSS_Swapper.Pages
             */
         }
 
+        private bool hasFirstLoaded;
 
-
-        bool hasFirstLoaded;
-        void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             if (hasFirstLoaded)
             {
@@ -174,7 +172,7 @@ namespace DLSS_Swapper.Pages
             //await LoadGames();
         }
 
-        async void MainGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void MainGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             if (e.AddedItems.Count == 0)
@@ -208,9 +206,7 @@ namespace DLSS_Swapper.Pages
             }
         }
 
-     
-
-        void UpdateGameLibraries()
+        private void UpdateGameLibraries()
         {
             /*
             GameLibraries.Clear();
@@ -226,8 +222,7 @@ namespace DLSS_Swapper.Pages
             */
         }
 
-
-        async Task LoadGamesAndDlls()
+        private async Task LoadGamesAndDlls()
         {
             // TODO: REMOVE
             await Task.Delay(1);

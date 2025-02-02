@@ -45,7 +45,7 @@ public class GameAsset : IEquatable<GameAsset>
     [property: Column("version")]
     public string Version { get; set; } = string.Empty;
 
-    string _displayVersion = string.Empty;
+    private string _displayVersion = string.Empty;
 
     [property: Ignore]
     public string DisplayVersion

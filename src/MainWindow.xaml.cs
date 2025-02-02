@@ -24,15 +24,15 @@ namespace DLSS_Swapper
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        bool _isCustomizationSupported;
-        ThemeWatcher _themeWatcher;
-        IntPtr _windowIcon;
+        private readonly bool _isCustomizationSupported;
+        private readonly ThemeWatcher _themeWatcher;
+        private IntPtr _windowIcon;
 
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
-        static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, string iconPath, ref IntPtr index);
+        private static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, string iconPath, ref IntPtr index);
 
         [DllImport("user32.dll", SetLastError = true)]
-        static extern int DestroyIcon(IntPtr hIcon);
+        private static extern int DestroyIcon(IntPtr hIcon);
 
         public MainWindow()
         {
@@ -111,7 +111,7 @@ namespace DLSS_Swapper
         /// The Icon can be overriden by callers by calling SetIcon themselves.
         /// </summary>
         /// via this MAUI PR https://github.com/dotnet/maui/pull/6900
-        void SetIcon()
+        private void SetIcon()
         {
             var processPath = Environment.ProcessPath;
             if (!string.IsNullOrEmpty(processPath))
@@ -132,9 +132,7 @@ namespace DLSS_Swapper
             }
         }
 
-    
-
-        void MainNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        private void MainNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             if (args.IsSettingsInvoked)
             {
@@ -150,14 +148,13 @@ namespace DLSS_Swapper
             }
         }
 
-
-        GameGridPage? gameGridPage;
-        LibraryPage? libraryPage;
-        SettingsPage? settingsPage;
+        private GameGridPage? gameGridPage;
+        private LibraryPage? libraryPage;
+        private SettingsPage? settingsPage;
 
         public GameGridPage? GameGridPage => gameGridPage;
 
-        void GoToPage(string page)
+        private void GoToPage(string page)
         {
             if (page == "Games")
             {
@@ -200,7 +197,7 @@ namespace DLSS_Swapper
             }
         }
 
-        async void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
+        private async void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
         {
             // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
             /*
@@ -329,7 +326,7 @@ DLSS Swapper will close now.",
         /// </summary>
         /// <returns>True if we expect there are now valid DLSS records loaded into memory.</returns>
         // Previously LoadDLSSRecordsAsync
-        async Task<bool> LoadDLLRecordsAsync()
+        private async Task<bool> LoadDLLRecordsAsync()
         {
             // Only auto check for updates once every 12 hours.
             var timeSinceLastUpdate = DateTimeOffset.Now - Settings.Instance.LastRecordsRefresh;
@@ -462,7 +459,7 @@ DLSS Swapper will close now.",
             }
         }
 
-        void UpdateColorsLight()
+        private void UpdateColorsLight()
         {
             App.CurrentApp.RunOnUIThread(() => {
                 RootGrid.RequestedTheme = ElementTheme.Light;
@@ -510,7 +507,7 @@ DLSS Swapper will close now.",
             });
         }
 
-        void UpdateColorsDark()
+        private void UpdateColorsDark()
         {
             App.CurrentApp.RunOnUIThread(() =>
             {
@@ -556,7 +553,7 @@ DLSS Swapper will close now.",
             });
         }
 
-        AppWindow GetAppWindowForCurrentWindow()
+        private AppWindow GetAppWindowForCurrentWindow()
         {
             var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
             var myWndId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
@@ -564,7 +561,7 @@ DLSS Swapper will close now.",
         }
 
         // to trigger repaint tracking task id 38044406
-        void RepaintCurrentWindow()
+        private void RepaintCurrentWindow()
         {
             var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
 
@@ -581,7 +578,7 @@ DLSS Swapper will close now.",
             }
         }
 
-        void ThemeWatcher_ThemeChanged(object? sender, ApplicationTheme e)
+        private void ThemeWatcher_ThemeChanged(object? sender, ApplicationTheme e)
         {
             var globalTheme = ((App)Application.Current).GlobalElementTheme;
 

@@ -17,8 +17,8 @@ namespace DLSS_Swapper.Pages;
 
 internal partial class SettingsPageModel : ObservableObject
 {
-    readonly WeakReference<SettingsPage> _weakPage;
-    readonly DLSSSettingsManager _dlssSettingsManager;
+    private readonly WeakReference<SettingsPage> _weakPage;
+    private readonly DLSSSettingsManager _dlssSettingsManager;
 
     public IEnumerable<LoggingLevel> LoggingLevels => Enum.GetValues<LoggingLevel>();
     public string CurrentLogPath => Logger.GetCurrentLogPath();
@@ -75,7 +75,7 @@ internal partial class SettingsPageModel : ObservableObject
     [ObservableProperty]
     public partial bool IsCheckingForUpdates { get; set; } = false;
 
-    bool _hasSetDefaults;
+    private readonly bool _hasSetDefaults;
 
     public SettingsPageModel(SettingsPage page)
     {
@@ -185,7 +185,7 @@ internal partial class SettingsPageModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task CheckForUpdatesAsync()
+    private async Task CheckForUpdatesAsync()
     {
         IsCheckingForUpdates = true;
 
@@ -218,7 +218,7 @@ internal partial class SettingsPageModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task OpenLogFileAsync()
+    private async Task OpenLogFileAsync()
     {
         try
         {
@@ -251,7 +251,7 @@ internal partial class SettingsPageModel : ObservableObject
     }
 
     [RelayCommand]
-    void OpenAcknowledgements()
+    private void OpenAcknowledgements()
     {
         // TODO:
     }

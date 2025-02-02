@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Data.Steam
 {
-    class SteamLibrary : IGameLibrary
+    internal class SteamLibrary : IGameLibrary
     {
         public GameLibrary GameLibrary => GameLibrary.Steam;
         public string Name => "Steam";
 
         public Type GameType => typeof(SteamGame);
 
-        static SteamLibrary? instance;
+        private static SteamLibrary? instance;
         public static SteamLibrary Instance => instance ??= new SteamLibrary();
 
-        static string _installPath = string.Empty;
+        private static string _installPath = string.Empty;
 
         private SteamLibrary()
         {

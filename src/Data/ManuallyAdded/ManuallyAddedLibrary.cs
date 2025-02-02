@@ -13,7 +13,7 @@ public class ManuallyAddedLibrary : IGameLibrary
 
     public Type GameType => typeof(ManuallyAddedGame);
 
-    static ManuallyAddedLibrary? instance;
+    private static ManuallyAddedLibrary? instance;
     public static ManuallyAddedLibrary Instance => instance ??= new ManuallyAddedLibrary();
 
     private ManuallyAddedLibrary()

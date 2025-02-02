@@ -20,8 +20,10 @@ namespace DLSS_Swapper
     internal static class Logger
     {
         public static string LogDirectory => Path.Combine(Storage.GetTemp(), "logs");
-        static string loggingFile => Path.Combine(LogDirectory, "dlss_swapper_.log");
-        static LoggingLevelSwitch levelSwitch = new(LogEventLevel.Fatal);
+
+        private static string loggingFile => Path.Combine(LogDirectory, "dlss_swapper_.log");
+
+        private static readonly LoggingLevelSwitch levelSwitch = new(LogEventLevel.Fatal);
 
         internal static void Init()
         {
@@ -88,7 +90,7 @@ namespace DLSS_Swapper
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static string FormatLine(string message, string? memberName, string? sourceFilePath, int sourceLineNumber)
+        private static string FormatLine(string message, string? memberName, string? sourceFilePath, int sourceLineNumber)
         {
             if (memberName is null || sourceFilePath is null || sourceLineNumber == 0)
             {

@@ -15,11 +15,11 @@ namespace DLSS_Swapper.Pages;
 
 public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.ObservableObject
 {
-    LibraryPage libraryPage;
+    private readonly LibraryPage libraryPage;
 
     public CollectionViewSource LibraryCollectionViewSource { get; init; }
 
-    List<DLLRecordGroup> dllRecordGroups;
+    private readonly List<DLLRecordGroup> dllRecordGroups;
 
     public LibraryPageModel(LibraryPage libraryPage)
     {
@@ -46,7 +46,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
     }
 
     [RelayCommand]
-    async Task RefreshAsync()
+    private async Task RefreshAsync()
     {
         var didUpdate = await App.CurrentApp.MainWindow.UpdateManifestAsync();
         if (didUpdate)
@@ -68,7 +68,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
     }
 
     [RelayCommand]
-    async Task ExportAllAsync()
+    private async Task ExportAllAsync()
     {
         // Check that there are records to export first.
         var allDllRecords = new List<DLLRecord>();
@@ -253,8 +253,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         }
     }
 
-
-    void ImportDLL(string filename)
+    private void ImportDLL(string filename)
     {
         // TODO: Reimplement
         /*
@@ -368,7 +367,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
     }
 
     [RelayCommand]
-    async Task ImportAsync()
+    private async Task ImportAsync()
     {
         if (Settings.Instance.HasShownWarning == false)
         {
@@ -543,7 +542,7 @@ Only import dlls from sources you trust.",
     }
 
     [RelayCommand]
-    async Task DeleteRecordAsync(DLLRecord record)
+    private async Task DeleteRecordAsync(DLLRecord record)
     {
         if (record.LocalRecord is null)
         {
@@ -593,7 +592,7 @@ Only import dlls from sources you trust.",
     }
 
     [RelayCommand(AllowConcurrentExecutions = true)]
-    async Task DownloadRecordAsync(DLLRecord record)
+    private async Task DownloadRecordAsync(DLLRecord record)
     {
         var result = await record.DownloadAsync();
         if (result.Success is false && result.Cancelled is false)
@@ -611,14 +610,14 @@ Only import dlls from sources you trust.",
     }
 
     [RelayCommand]
-    async Task CancelDownloadRecordAsync(DLLRecord record)
+    private async Task CancelDownloadRecordAsync(DLLRecord record)
     {
         record?.CancelDownload();
         await Task.Delay(10);
     }
 
     [RelayCommand]
-    async Task ExportRecordAsync(DLLRecord record)
+    private async Task ExportRecordAsync(DLLRecord record)
     {
         if (record.LocalRecord is null)
         {
@@ -687,7 +686,7 @@ Only import dlls from sources you trust.",
     }
 
     [RelayCommand]
-    async Task ShowDownloadErrorAsync(DLLRecord record)
+    private async Task ShowDownloadErrorAsync(DLLRecord record)
     {
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {

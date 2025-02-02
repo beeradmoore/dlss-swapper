@@ -20,9 +20,7 @@ internal class DLLRecordGroup
         };
     }
 
-
-
-    Predicate<object> PredicateForDebugDlls()
+    private Predicate<object> PredicateForDebugDlls()
     {
         if (Settings.Instance.AllowDebugDlls == false)
         {

@@ -25,7 +25,7 @@ namespace DLSS_Swapper
     {
         public ElementTheme GlobalElementTheme { get; set; }
 
-        MainWindow? _window;
+        private MainWindow? _window;
         public MainWindow MainWindow => _window ??= new MainWindow();
 
         public static App CurrentApp => (App)Application.Current;
@@ -85,7 +85,7 @@ namespace DLSS_Swapper
         }
 
 #if !PORTABLE
-        void CalculateInstallSize()
+        private void CalculateInstallSize()
         {
             try
             {
@@ -113,7 +113,7 @@ namespace DLSS_Swapper
             }
         }
 
-        static long CalculateDirectorySize(string path)
+        private static long CalculateDirectorySize(string path)
         {
             var directorySize = 0L;
             var fileCount = 0;
@@ -278,7 +278,6 @@ namespace DLSS_Swapper
             return false;
         }
 
-
         public Task RunOnUIThreadAsync(Func<Task> function)
         {
             if (Thread.CurrentThread.ManagedThreadId == 1)
@@ -293,6 +292,5 @@ namespace DLSS_Swapper
 
             return Task.CompletedTask;
         }
-
     }
 }

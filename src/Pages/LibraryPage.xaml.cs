@@ -22,15 +22,14 @@ namespace DLSS_Swapper.Pages
             ViewModel = new LibraryPageModel(this);
         }
 
-        
-        void MainGridView_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void MainGridView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             // via: https://stackoverflow.com/a/41141249
             var columns = Math.Ceiling(MainGridView.ActualWidth / 400);
             ((ItemsWrapGrid)MainGridView.ItemsPanelRoot).ItemWidth = e.NewSize.Width / columns;
         }
 
-        async void MainGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void MainGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count == 0)
             {

@@ -6,13 +6,12 @@ namespace DLSS_Swapper
 {
     public class Settings
     {
-        static Settings? _instance;
+        private static Settings? _instance;
         public static Settings Instance => _instance ??= Settings.FromJson();
 
         // We default this to false to prevent saves firing when loading from json.
-        bool _autoSave;
-
-        bool _hasShownWarning;
+        private bool _autoSave;
+        private bool _hasShownWarning;
         public bool HasShownWarning
         {
             get { return _hasShownWarning; }
@@ -29,7 +28,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _hasShownMultiplayerWarning;
+        private bool _hasShownMultiplayerWarning;
         public bool HasShownMultiplayerWarning
         {
             get { return _hasShownMultiplayerWarning; }
@@ -46,7 +45,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _hideNonDLSSGames;
+        private bool _hideNonDLSSGames;
         public bool HideNonDLSSGames
         {
             get { return _hideNonDLSSGames; }
@@ -63,8 +62,7 @@ namespace DLSS_Swapper
             }
         }
 
-
-        bool _groupGameLibrariesTogether = true;
+        private bool _groupGameLibrariesTogether = true;
         public bool GroupGameLibrariesTogether
         {
             get { return _groupGameLibrariesTogether; }
@@ -81,7 +79,7 @@ namespace DLSS_Swapper
             }
         }
 
-        ElementTheme _appTheme = ElementTheme.Default;
+        private ElementTheme _appTheme = ElementTheme.Default;
         public ElementTheme AppTheme
         {
             get { return _appTheme; }
@@ -98,7 +96,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _allowDebugDlls;
+        private bool _allowDebugDlls;
         public bool AllowDebugDlls
         {
             get { return _allowDebugDlls; }
@@ -115,7 +113,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _allowUntrusted;
+        private bool _allowUntrusted;
         public bool AllowUntrusted
         {
             get { return _allowUntrusted; }
@@ -132,7 +130,7 @@ namespace DLSS_Swapper
             }
         }
 
-        DateTimeOffset _lastRecordsRefresh = DateTimeOffset.MinValue;
+        private DateTimeOffset _lastRecordsRefresh = DateTimeOffset.MinValue;
         public DateTimeOffset LastRecordsRefresh
         {
             get { return _lastRecordsRefresh; }
@@ -149,7 +147,7 @@ namespace DLSS_Swapper
             }
         }
 
-        ulong _lastPromptWasForVersion;
+        private ulong _lastPromptWasForVersion;
         public ulong LastPromptWasForVersion
         {
             get { return _lastPromptWasForVersion; }
@@ -167,7 +165,7 @@ namespace DLSS_Swapper
         }
 
         // Don't forget to change this back to off.
-        LoggingLevel _loggingLevel = LoggingLevel.Error;
+        private LoggingLevel _loggingLevel = LoggingLevel.Error;
         public LoggingLevel LoggingLevel
         {
             get { return _loggingLevel; }
@@ -184,7 +182,7 @@ namespace DLSS_Swapper
             }
         }
 
-        uint _enabledGameLibraries = uint.MaxValue;
+        private uint _enabledGameLibraries = uint.MaxValue;
         public uint EnabledGameLibraries
         {
             get { return _enabledGameLibraries; }
@@ -201,7 +199,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _wasLoadingGames;
+        private bool _wasLoadingGames;
         public bool WasLoadingGames
         {
             get { return _wasLoadingGames; }
@@ -218,8 +216,7 @@ namespace DLSS_Swapper
             }
         }
 
-
-        bool _dontShowManuallyAddingGamesNotice;
+        private bool _dontShowManuallyAddingGamesNotice;
         public bool DontShowManuallyAddingGamesNotice
         {
             get { return _dontShowManuallyAddingGamesNotice; }
@@ -236,7 +233,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _hasShownAddGameFolderMessage;
+        private bool _hasShownAddGameFolderMessage;
         public bool HasShownAddGameFolderMessage
         {
             get { return _hasShownAddGameFolderMessage; }
@@ -253,7 +250,7 @@ namespace DLSS_Swapper
             }
         }
 
-        WindowPositionRect _lastWindowSizeAndPosition = new();
+        private WindowPositionRect _lastWindowSizeAndPosition = new();
         public WindowPositionRect LastWindowSizeAndPosition
         {
             get { return _lastWindowSizeAndPosition; }
@@ -299,12 +296,12 @@ namespace DLSS_Swapper
         }
         */
 
-        void SaveJson()
+        private void SaveJson()
         {
             AsyncHelper.RunSync(() => Storage.SaveSettingsJsonAsync(this));
         }
 
-        static Settings FromJson()
+        private static Settings FromJson()
         {
             Settings? settings = null;
 

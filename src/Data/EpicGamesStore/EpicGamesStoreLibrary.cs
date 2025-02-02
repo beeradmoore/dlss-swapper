@@ -18,7 +18,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
 
         public Type GameType => typeof(EpicGamesStoreGame);
 
-        static EpicGamesStoreLibrary? instance;
+        private static EpicGamesStoreLibrary? instance;
         public static EpicGamesStoreLibrary Instance => instance ??= new EpicGamesStoreLibrary();
 
         private EpicGamesStoreLibrary()
@@ -176,7 +176,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             return games;
         }
 
-        string GetEpicRootDirectory()
+        private string GetEpicRootDirectory()
         {
             var epicRootDirectory = Path.Combine(Environment.ExpandEnvironmentVariables("%ProgramData%"), "Epic");
             if (Directory.Exists(epicRootDirectory))

@@ -63,7 +63,7 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        string _displayVersion = string.Empty;
+        private string _displayVersion = string.Empty;
         [JsonIgnore]
         public string DisplayVersion
         {
@@ -114,7 +114,7 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        LocalRecord? _localRecord;
+        private LocalRecord? _localRecord;
 
         [JsonIgnore]
         public LocalRecord? LocalRecord

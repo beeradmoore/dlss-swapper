@@ -13,16 +13,14 @@ namespace DLSS_Swapper
     /*
      * For notes on where data is stored please see https://github.com/beeradmoore/dlss-swapper/wiki/Local-Data-Structure
      */
-    static class Storage
+    internal static class Storage
     {
-
-        static JsonSerializerOptions jsonSerializerOptions = new()
+        private static JsonSerializerOptions jsonSerializerOptions = new()
         {
             WriteIndented = true,
             TypeInfoResolver = SourceGenerationContext.Default,
         };
-
-        static string? _storagePath;
+        private static string? _storagePath;
 #if   PORTABLE == true  && DEBUG == true
         //public static string StoragePath => _storagePath ??= Path.Combine(AppContext.BaseDirectory, "StoredData", "DEBUG", Guid.NewGuid().ToString());
         public static string StoragePath => _storagePath ??= Path.Combine(AppContext.BaseDirectory, "StoredData", "DEBUG");
@@ -62,7 +60,7 @@ namespace DLSS_Swapper
             return StoragePath;
         }
 
-        static string GetDynamicJsonFolder()
+        private static string GetDynamicJsonFolder()
         {
             return Path.Combine(StoragePath, "json");
         }

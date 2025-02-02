@@ -138,7 +138,7 @@ namespace DLSS_Swapper
         );
 
         [DllImport("crypt32.dll", SetLastError = true)]
-        static extern IntPtr CertFindCertificateInStore(
+        private static extern IntPtr CertFindCertificateInStore(
             IntPtr hCertStore,
             uint dwCertEncodingType,
             uint dwFindFlags,

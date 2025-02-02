@@ -18,7 +18,7 @@ namespace DLSS_Swapper.Pages;
 
 public partial class GameGridPageModel : ObservableObject
 {
-    GameGridPage gameGridPage;
+    private readonly GameGridPage gameGridPage;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLoading))]
@@ -55,7 +55,7 @@ public partial class GameGridPageModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task AddManualGameButtonAsync()
+    private async Task AddManualGameButtonAsync()
     {
         if (Settings.Instance.DontShowManuallyAddingGamesNotice == false)
         {
@@ -122,7 +122,7 @@ If you have checked these and your game is still not showing up there may be a b
         }
     }
 
-    async Task AddGameManually()
+    private async Task AddGameManually()
     {
         if (Settings.Instance.HasShownAddGameFolderMessage == false)
         {
@@ -266,7 +266,7 @@ If you have checked these and your game is still not showing up there may be a b
     }
 
     [RelayCommand]
-    async Task RefreshGamesButtonAsync()
+    private async Task RefreshGamesButtonAsync()
     {
         IsDLSSLoading = true;
 
@@ -276,7 +276,7 @@ If you have checked these and your game is still not showing up there may be a b
     }
 
     [RelayCommand]
-    async Task FilterGamesButtonAsync()
+    private async Task FilterGamesButtonAsync()
     {
         var gameFilterControl = new GameFilterControl();
 
@@ -300,7 +300,7 @@ If you have checked these and your game is still not showing up there may be a b
 
     }
 
-    void ApplyGameGroupFilter()
+    private void ApplyGameGroupFilter()
     {
         // TODO: Remove weird hack which otherwise causes MainGridView_SelectionChanged to fire when changing MainGridView.ItemsSource.
         //gameGridPage.MainGridView.SelectionChanged -= MainGridView_SelectionChanged;
@@ -311,7 +311,7 @@ If you have checked these and your game is still not showing up there may be a b
     }
 
     [RelayCommand]
-    async Task UnknownAssetsFoundButtonAsync()
+    private async Task UnknownAssetsFoundButtonAsync()
     {
         var newDllsControl = new NewDLLsControl();
 

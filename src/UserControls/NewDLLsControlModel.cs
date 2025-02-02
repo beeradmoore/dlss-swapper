@@ -58,14 +58,14 @@ public partial class NewDLLsControlModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task OpenGitHubIssueAsync()
+    private async Task OpenGitHubIssueAsync()
     {
         var url = "https://github.com/beeradmoore/dlss-swapper-manifest-builder/issues/new?template=new-dlls-discovered.md";
         await Launcher.LaunchUriAsync(new Uri(url));
     }
 
     [RelayCommand]
-    void CopyTitle()
+    private void CopyTitle()
     {
         var package = new DataPackage();
         package.SetText(Title);
@@ -73,7 +73,7 @@ public partial class NewDLLsControlModel : ObservableObject
     }
 
     [RelayCommand]
-    void CopyBody()
+    private void CopyBody()
     {
         var package = new DataPackage();
         package.SetText(Body);

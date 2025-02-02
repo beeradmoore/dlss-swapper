@@ -267,9 +267,7 @@ public class FakeContentDialog : Control
         set => SetValue(TitleTemplateProperty, value);
     }
 
-
-
-    TaskCompletionSource<ContentDialogResult> taskCompletionSource = new();
+    private readonly TaskCompletionSource<ContentDialogResult> taskCompletionSource = new();
 
     public FakeContentDialog()
     {
@@ -304,7 +302,7 @@ public class FakeContentDialog : Control
         HideImplementation(ContentDialogResult.None);
     }
 
-    void HideImplementation(ContentDialogResult contentDialogResult)
+    private void HideImplementation(ContentDialogResult contentDialogResult)
     {
         if (VisualStateManager.GoToState(this, "DialogHidden", true) == false)
         {
@@ -317,7 +315,7 @@ public class FakeContentDialog : Control
         }
     }
 
-    bool hasSetTemplate;
+    private bool hasSetTemplate;
     protected override void OnApplyTemplate()
     {
         base.OnApplyTemplate();

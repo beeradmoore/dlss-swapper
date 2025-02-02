@@ -4,7 +4,7 @@ using System;
 
 namespace DLSS_Swapper.Converters
 {
-    class BytesToMegaBytesConverter : IValueConverter
+    internal class BytesToMegaBytesConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

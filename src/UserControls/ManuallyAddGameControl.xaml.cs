@@ -20,7 +20,7 @@ namespace DLSS_Swapper.UserControls
             DataContext = new ManuallyAddGameModel(this, gamePath);
         }
 
-        string[] customCoverValidFileTypes =
+        private readonly string[] customCoverValidFileTypes =
         [
             ".png",
             ".jpg",
@@ -28,10 +28,10 @@ namespace DLSS_Swapper.UserControls
             ".webp",
             ".bmp",
         ];
-        DataPackageOperation coverDragDropAcceptedOperation = DataPackageOperation.None;
-        string coverDragDropDragUIOverrideCaption = string.Empty;
+        private DataPackageOperation coverDragDropAcceptedOperation = DataPackageOperation.None;
+        private string coverDragDropDragUIOverrideCaption = string.Empty;
 
-        async void CoverButton_DragEnter(object sender, DragEventArgs e)
+        private async void CoverButton_DragEnter(object sender, DragEventArgs e)
         {
             // This thing likes to break, so I took the advice from this thread https://github.com/microsoft/microsoft-ui-xaml/issues/8108
 
@@ -72,13 +72,13 @@ namespace DLSS_Swapper.UserControls
             }
         }
 
-        void CoverButton_DragOver(object sender, DragEventArgs e)
+        private void CoverButton_DragOver(object sender, DragEventArgs e)
         {
             e.AcceptedOperation = coverDragDropAcceptedOperation;
             e.DragUIOverride.Caption = coverDragDropDragUIOverrideCaption;
         }
 
-        async void CoverButton_Drop(object sender, DragEventArgs e)
+        private async void CoverButton_Drop(object sender, DragEventArgs e)
         {
             var items = await e.DataView.GetStorageItemsAsync();
             if (items.Count == 1)

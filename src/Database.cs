@@ -13,7 +13,7 @@ namespace DLSS_Swapper;
 
 internal class Database
 {
-    static Database? _instance;
+    private static Database? _instance;
     internal static Database Instance => _instance ??= new Database();
 
     internal AsyncLock Mutex { get; init; }

@@ -12,7 +12,7 @@ namespace DLSS_Swapper.UserControls;
 
 public partial class GameControlModel : ObservableObject
 {
-    WeakReference<GameControl> gameControlWeakReference;
+    private readonly WeakReference<GameControl> gameControlWeakReference;
 
     public Game Game { get; init; }
 
@@ -49,7 +49,7 @@ public partial class GameControlModel : ObservableObject
 
 
     [RelayCommand]
-    async Task OpenInstallPathAsync()
+    private async Task OpenInstallPathAsync()
     {
         try
         {
@@ -80,7 +80,7 @@ public partial class GameControlModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task EditNotesAsync()
+    private async Task EditNotesAsync()
     {
         if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
         {
@@ -112,7 +112,7 @@ public partial class GameControlModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task ViewHistoryAsync()
+    private async Task ViewHistoryAsync()
     {
         //ViewHistoryCommand
         // TODO: implement
@@ -120,7 +120,7 @@ public partial class GameControlModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task AddCoverImageAsync()
+    private async Task AddCoverImageAsync()
     {
         if (Game.CoverImage == Game.ExpectedCustomCoverImage)
         {
@@ -132,7 +132,7 @@ public partial class GameControlModel : ObservableObject
     }
 
     [RelayCommand]
-    void Close()
+    private void Close()
     {
         if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
         {
@@ -141,7 +141,7 @@ public partial class GameControlModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task RemoveAsync()
+    private async Task RemoveAsync()
     {
         if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
         {
@@ -181,14 +181,14 @@ public partial class GameControlModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task FavouriteAsync()
+    private async Task FavouriteAsync()
     {
         Game.IsFavourite = !Game.IsFavourite;
         await Game.SaveToDatabaseAsync();
     }
 
     [RelayCommand]
-    async Task ChangeRecordAsync(GameAssetType gameAssetType)
+    private async Task ChangeRecordAsync(GameAssetType gameAssetType)
     {
         if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
         {
@@ -208,7 +208,7 @@ public partial class GameControlModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task SaveTitleAsync()
+    private async Task SaveTitleAsync()
     {
         Game.Title = GameTitle;
         await Game.SaveToDatabaseAsync();
@@ -216,7 +216,7 @@ public partial class GameControlModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task MultipleDLLsFoundAsync(GameAssetType gameAssetType)
+    private async Task MultipleDLLsFoundAsync(GameAssetType gameAssetType)
     {
         if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
         {

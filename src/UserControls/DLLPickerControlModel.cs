@@ -14,8 +14,8 @@ namespace DLSS_Swapper.UserControls;
 
 public partial class DLLPickerControlModel : ObservableObject
 {
-    WeakReference<DLLPickerControl> dllPickerControlWeakReference;
-    WeakReference<EasyContentDialog> parentDialogWeakReference;
+    private readonly WeakReference<DLLPickerControl> dllPickerControlWeakReference;
+    private readonly WeakReference<EasyContentDialog> parentDialogWeakReference;
 
     public Game Game { get; private set; }
     public GameAssetType GameAssetType { get; private set; }
@@ -121,7 +121,7 @@ public partial class DLLPickerControlModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task SwapDllAsync()
+    private async Task SwapDllAsync()
     {
         if (SelectedDLLRecord?.LocalRecord is null)
         {
@@ -159,7 +159,7 @@ public partial class DLLPickerControlModel : ObservableObject
         }
     }
 
-    void ShowTempInfoBar(string title, string message, double duration = 3.0, InfoBarSeverity severity = InfoBarSeverity.Informational)
+    private void ShowTempInfoBar(string title, string message, double duration = 3.0, InfoBarSeverity severity = InfoBarSeverity.Informational)
     {
         if (dllPickerControlWeakReference.TryGetTarget(out DLLPickerControl? dllPickerControl))
         {
@@ -198,7 +198,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
 
     [RelayCommand]
-    async Task ResetDllAsync()
+    private async Task ResetDllAsync()
     {
         var didReset = await Game.ResetDllAsync(GameAssetType);
 
@@ -212,7 +212,7 @@ public partial class DLLPickerControlModel : ObservableObject
         }
     }
 
-    void ResetSelection()
+    private void ResetSelection()
     {
         // If there are backup records it means we can reset.
         var backupRecordType = DLLManager.Instance.GetAssetBackupType(GameAssetType);

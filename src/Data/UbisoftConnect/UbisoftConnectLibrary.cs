@@ -27,7 +27,6 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             internal string InstallPath { get; init; } = string.Empty;
         }
 
-
         public GameLibrary GameLibrary => GameLibrary.UbisoftConnect;
         public string Name => "Ubisoft Connect";
 
@@ -38,7 +37,6 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         private UbisoftConnectLibrary()
         {
-
         }
 
         string _installPath = string.Empty;
@@ -47,7 +45,6 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         {
             return string.IsNullOrEmpty(GetInstallPath()) == false;
         }
-
 
         public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
@@ -132,14 +129,14 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             // Not sure what happens if you are on a shared PC.
             var configurationFileData = await File.ReadAllBytesAsync(configurationPath).ConfigureAwait(false);
 
-            // This file contains multiple game records seperated by some custom header. 
+            // This file contains multiple game records seperated by some custom header.
             // We split this apart base on the methods from https://github.com/lutris/lutris/blob/d908066d97e61b2f33715fe9bdff6c02cc7fbc80/lutris/util/ubisoft/parser.py
             // and then return it as a list of games which we then check to see if it is in the installed list above.
             var configurationRecords = ParseConfiguration(configurationFileData);
             foreach (var configurationRecord in configurationRecords)
             {
                 // TODO: Remove htis true.
-                // Only bother trying to read the game data if the install list 
+                // Only bother trying to read the game data if the install list
                 if (installedTitles.ContainsKey(configurationRecord.InstallId))
                 {
                     // Copy the yaml out for the game into a memory stream to load.
@@ -154,14 +151,14 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                             {
                                 var ubisoftConnectConfigurationItem = yamlDeserializer.Deserialize<UbisoftConnectConfigurationItem>(reader);
 
-                                // This is less than ideal. This usually happens with DLC or pre-orders. 
+                                // This is less than ideal. This usually happens with DLC or pre-orders.
                                 if (ubisoftConnectConfigurationItem is null || ubisoftConnectConfigurationItem.Root is null)
                                 {
                                     Logger.Info("Could not load Ubisoft Connect item. This is sometimes expected for certain titles.");
                                     continue;
                                 }
 
-                                // Unsure if we care about version at the moment. 
+                                // Unsure if we care about version at the moment.
                                 /*
                                 if (ubisoftConnectConfigurationItem.Version != "2.0")
                                 {
@@ -177,13 +174,12 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                     continue;
                                 }
 
-                                // This is not expected. 
+                                // This is not expected.
                                 if (ubisoftConnectConfigurationItem.Root.StartGame is null)
                                 {
                                     Logger.Info($"StartGameNode is null for {ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier}. This is likely a region specific installer.");
                                     continue;
                                 }
-
 
                                 var localImage = string.Empty;
                                 var remoteImage = string.Empty;
@@ -328,8 +324,6 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
                     var global_offset_tmp = globalOffset;
                     globalOffset += objectSize + headerSize;
-
-
 
                     if (globalOffset < configurationContent.Length && configurationContent[globalOffset] != 0x0A)
                     {

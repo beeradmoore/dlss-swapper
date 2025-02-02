@@ -164,11 +164,12 @@ public partial class DLLPickerControlModel : ObservableObject
         {
             if (dllPickerControl.Content is Grid grid)
             {
-                var infoBar = new InfoBar();
-                infoBar.Message = message;
-                infoBar.Severity = severity;
-                infoBar.IsOpen = true;
-                infoBar.IsClosable = false;
+                var infoBar = new InfoBar {
+                    Message = message,
+                    Severity = severity,
+                    IsOpen = true,
+                    IsClosable = false,
+                };
                 Grid.SetRow(infoBar, 2);
                 grid.Children.Add(infoBar);
 

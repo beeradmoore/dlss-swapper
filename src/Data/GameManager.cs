@@ -39,7 +39,6 @@ internal partial class GameManager : ObservableObject
     public AdvancedCollectionView AllGamesView { get; init; }
     public AdvancedCollectionView FavouriteGamesView { get; init; }
 
-
     bool Filter_Favourite_WithDLSS(object obj)
     {
         return ((Game)obj).IsFavourite;
@@ -52,7 +51,6 @@ internal partial class GameManager : ObservableObject
 
     Dictionary<GameLibrary, GameGroup> libraryGameGroups = new();
     Dictionary<GameLibrary, AdvancedCollectionView> libraryGamesView = new();
-
 
     Predicate<object> GetPredicateForAllGames(bool hideNonDLSSGames)
     {
@@ -108,16 +106,19 @@ internal partial class GameManager : ObservableObject
 
     private GameManager()
     {
-        FavouriteGamesView = new AdvancedCollectionView(_allGames, true);
-        FavouriteGamesView.Filter = GetPredicateForFavouriteGames(Settings.Instance.HideNonDLSSGames);
+        FavouriteGamesView = new AdvancedCollectionView(_allGames, true)
+        {
+            Filter = GetPredicateForFavouriteGames(Settings.Instance.HideNonDLSSGames)
+        };
         FavouriteGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
         FavouriteGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
-        AllGamesView = new AdvancedCollectionView(_allGames, true);
-        AllGamesView.Filter = GetPredicateForAllGames(Settings.Instance.HideNonDLSSGames);
+        AllGamesView = new AdvancedCollectionView(_allGames, true)
+        {
+            Filter = GetPredicateForAllGames(Settings.Instance.HideNonDLSSGames)
+        };
         //AllGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
         AllGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
-
 
         allGamesGroup = new GameGroup(string.Empty, AllGamesView);
         favouriteGamesGroup = new GameGroup("Favourites", FavouriteGamesView);
@@ -133,13 +134,14 @@ internal partial class GameManager : ObservableObject
             allGamesGroup,
         };
 
-
         foreach (var gameLibraryEnum in Enum.GetValues<GameLibrary>())
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
 
-            var gameView = new AdvancedCollectionView(_allGames, true);
-            gameView.Filter = GetPredicateForLibraryGames(gameLibraryEnum, Settings.Instance.HideNonDLSSGames);
+            var gameView = new AdvancedCollectionView(_allGames, true)
+            {
+                Filter = GetPredicateForLibraryGames(gameLibraryEnum, Settings.Instance.HideNonDLSSGames)
+            };
             gameView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
             libraryGamesView[gameLibraryEnum] = gameView;
@@ -148,7 +150,6 @@ internal partial class GameManager : ObservableObject
             groupedList.Add(gameGroup);
             libraryGameGroups[gameLibraryEnum] = new GameGroup(gameLibrary.Name, gameView);
         }
-
 
         GroupedGameCollectionViewSource = new CollectionViewSource()
         {

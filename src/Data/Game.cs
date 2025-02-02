@@ -230,8 +230,7 @@ namespace DLSS_Swapper.Data
                 {
                     var coverImageTask = UpdateCacheImageAsync();
 
-                    var enumerationOptions = new EnumerationOptions();
-                    enumerationOptions.RecurseSubdirectories = true;
+                    var enumerationOptions = new EnumerationOptions { RecurseSubdirectories = true };
                     enumerationOptions.AttributesToSkip |= FileAttributes.ReparsePoint;
 
                     var oldGameAssets = GameAssets.ToList();

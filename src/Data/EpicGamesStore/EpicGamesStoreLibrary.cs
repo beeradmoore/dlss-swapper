@@ -67,7 +67,6 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                 return games;
             }
 
-
             var cacheItemsDictionary = new Dictionary<string, CacheItem>();
             var catalogCacheFile = Path.Combine(epicRootDirectory, "EpicGamesLauncher", "Data", "Catalog", "catcache.bin");
             if (File.Exists(catalogCacheFile))
@@ -80,7 +79,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         await fileStream.CopyToAsync(memoryStream).ConfigureAwait(false);
                         var catalogCacheBase64 = Encoding.UTF8.GetString(memoryStream.ToArray());
                         var catalogCacheJson = Convert.FromBase64String(catalogCacheBase64);
-                        cacheItemsArray = JsonSerializer.Deserialize(catalogCacheJson, SourceGenerationContext.Default.CacheItemArray);                       
+                        cacheItemsArray = JsonSerializer.Deserialize(catalogCacheJson, SourceGenerationContext.Default.CacheItemArray);
                     }
                 }
 
@@ -92,8 +91,6 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                     }
                 }
             }
-
-
 
             var foundManifestFiles = Directory.GetFiles(manifestsDirectory, "*.item");
             foreach (var manifestFile in foundManifestFiles)
@@ -139,13 +136,12 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         }
                     }
 
-
                     var cachedGame = GameManager.Instance.GetGame<EpicGamesStoreGame>(manifest.CatalogItemId);
                     var activeGame = cachedGame ?? new EpicGamesStoreGame(manifest.CatalogItemId);
                     activeGame.RemoteHeaderImage = remoteHeaderUrl;
                     activeGame.Title = manifest.DisplayName; // TODO: Will this be a problem if the game is already loaded
                     activeGame.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
-                    
+
                     await activeGame.SaveToDatabaseAsync();
 
                     // If the game is not from cache, force processing

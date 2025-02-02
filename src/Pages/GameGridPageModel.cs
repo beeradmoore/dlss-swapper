@@ -46,9 +46,9 @@ public partial class GameGridPageModel : ObservableObject
         IsDLSSLoading = true;
 
         await GameManager.Instance.LoadGamesFromCacheAsync();
-        
+
         IsGameListLoading = false;
-          
+
         await GameManager.Instance.LoadGamesAsync(false);
 
         IsDLSSLoading = false;
@@ -91,7 +91,7 @@ If you have checked these and your game is still not showing up there may be a b
                     },
                     Orientation = Orientation.Vertical,
                     Spacing = 16,
-                },                    
+                },
             };
 
             var result = await dialog.ShowAsync();
@@ -223,9 +223,11 @@ If you have checked these and your game is still not showing up there may be a b
                 PrimaryButtonText = "Add Game",
                 DefaultButton = ContentDialogButton.Primary,
                 Content = manuallyAddGameControl,
+                Resources = {
+                    ["ContentDialogMinWidth"] = 700,
+                    ["ContentDialogMaxWidth"] = 700,
+                },
             };
-            addGameDialog.Resources["ContentDialogMinWidth"] = 700;
-            addGameDialog.Resources["ContentDialogMaxWidth"] = 700;
 
             var addGameResult = await addGameDialog.ShowAsync();
             if (manuallyAddGameControl.DataContext is ManuallyAddGameModel manuallyAddGameModel)
@@ -318,9 +320,11 @@ If you have checked these and your game is still not showing up there may be a b
             Title = "New DLLs Found",
             CloseButtonText = "Close",
             Content = newDllsControl,
+            Resources = {
+                ["ContentDialogMinWidth"] = 700,
+                ["ContentDialogMaxWidth"] = 700,
+            },
         };
-        dialog.Resources["ContentDialogMinWidth"] = 700;
-        dialog.Resources["ContentDialogMaxWidth"] = 700;
         await dialog.ShowAsync();
     }
 

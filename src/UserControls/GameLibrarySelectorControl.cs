@@ -19,12 +19,10 @@ namespace DLSS_Swapper.UserControls
             get { return (bool)GetValue(SavesWhenToggledProperty); }
             set { SetValue(SavesWhenToggledProperty, value); }
         }
-        
 
         public GameLibrarySelectorControl()
         {
             var grid = new Grid();
-
 
             var gameLibraryEnumList = new List<GameLibrary>();
             foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
@@ -38,11 +36,12 @@ namespace DLSS_Swapper.UserControls
             foreach (var gameLibraryEnum in gameLibraryEnumList)
             {
                 var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
-                var toggleSwitch = new ToggleSwitch();
-                toggleSwitch.IsOn = gameLibrary.IsEnabled;
-                toggleSwitch.OffContent = $"{gameLibrary.Name} disabled";
-                toggleSwitch.OnContent = $"{gameLibrary.Name} enabled";
-                toggleSwitch.Tag = gameLibraryEnum;
+                var toggleSwitch = new ToggleSwitch {
+                    IsOn = gameLibrary.IsEnabled,
+                    OffContent = $"{gameLibrary.Name} disabled",
+                    OnContent = $"{gameLibrary.Name} enabled",
+                    Tag = gameLibraryEnum,
+                };
                 toggleSwitch.Toggled += (sender, e) =>
                 {
                     if (SavesWhenToggled)
@@ -56,7 +55,7 @@ namespace DLSS_Swapper.UserControls
 
                 ++currentRow;
             }
-            
+
             Content = grid;
         }
 

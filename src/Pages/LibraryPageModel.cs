@@ -110,8 +110,10 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         try
         {
            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
-           var savePicker = new Windows.Storage.Pickers.FileSavePicker();
-           savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+           var savePicker = new Windows.Storage.Pickers.FileSavePicker
+           {
+               SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary
+           };
            savePicker.FileTypeChoices.Add("Zip archive", new List<string>() { ".zip" });
            savePicker.SuggestedFileName = $"dlss_swapper_export.zip";
            WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
@@ -145,16 +147,16 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                            continue;
                        }
 
-                        var internalZipDir = DLLManager.Instance.GetAssetTypeName(dllRecord.AssetType);
+                       var internalZipDir = DLLManager.Instance.GetAssetTypeName(dllRecord.AssetType);
                        if (dllRecord.LocalRecord.IsImported)
                        {
                            internalZipDir = Path.Combine("Imported", internalZipDir);
                        }
 
-                        internalZipDir = Path.Combine(internalZipDir, dllRecord.DisplayName);
+                       internalZipDir = Path.Combine(internalZipDir, dllRecord.DisplayName);
 
-                        using (var dlssFileStream = File.OpenRead(dllRecord.LocalRecord.ExpectedPath))
-                        {
+                       using (var dlssFileStream = File.OpenRead(dllRecord.LocalRecord.ExpectedPath))
+                       {
                            using (var dlssZip = new ZipArchive(dlssFileStream, ZipArchiveMode.Read))
                            {
                                var zippedDlls = dlssZip.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
@@ -182,7 +184,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                                    // NOOP
                                }
                            }
-                       }                                
+                       }
 
                        ++exportCount;
                    }
@@ -385,8 +387,10 @@ Only import dlls from sources you trust.",
         }
 
         var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
-        var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
-        openPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+        var openPicker = new Windows.Storage.Pickers.FileOpenPicker
+        {
+            SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary
+        };
         openPicker.FileTypeFilter.Add(".dll");
         openPicker.FileTypeFilter.Add(".zip");
         WinRT.Interop.InitializeWithWindow.Initialize(openPicker, hwnd);
@@ -632,8 +636,10 @@ Only import dlls from sources you trust.",
         try
         {
             var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
-            var savePicker = new Windows.Storage.Pickers.FileSavePicker();
-            savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            var savePicker = new Windows.Storage.Pickers.FileSavePicker
+            {
+                SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary
+            };
             savePicker.FileTypeChoices.Add("Zip archive", new List<string>() { ".zip" });
             savePicker.SuggestedFileName = $"dlss_swapper_export_{record.DisplayName.Replace(" ", "_")}.zip";
             WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);

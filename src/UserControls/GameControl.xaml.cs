@@ -49,20 +49,20 @@ namespace DLSS_Swapper.UserControls
 
             if (dialogSpace is not null)
             {
-                var leftButtons = new ContentControl()
+                var leftButtons = new ContentControl
                 {
                     Template = Resources["LeftButtonsControlTemplate"] as ControlTemplate,
+                    DataContext = DataContext,
                 };
-                leftButtons.DataContext = DataContext;
                 Grid.SetRow(leftButtons, 1);
                 dialogSpace.Children.Add(leftButtons);
 
 
-                var rightButtons = new ContentControl()
+                var rightButtons = new ContentControl
                 {
                     Template = Resources["RightButtonsControlTemplate"] as ControlTemplate,
+                    DataContext = DataContext,
                 };
-                rightButtons.DataContext = DataContext;
                 Grid.SetRow(rightButtons, 1);
                 dialogSpace.Children.Add(rightButtons);
             }

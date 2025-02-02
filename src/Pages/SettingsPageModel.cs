@@ -43,19 +43,19 @@ internal partial class SettingsPageModel : ObservableObject
 
     [ObservableProperty]
     public partial bool DlssEnableLogging { get; set; } = false;
-    
+
     [ObservableProperty]
     public partial bool DlssVerboseLogging { get; set; } = false;
-    
+
     [ObservableProperty]
     public partial bool DlssLoggingToWindow { get; set; } = false;
 
     [ObservableProperty]
     public partial bool AllowUntrusted { get; set; } = false;
-    
+
     [ObservableProperty]
     public partial bool AllowDebugDlls { get; set; } = false;
-    
+
     [ObservableProperty]
     public partial LoggingLevel LoggingLevel { get; set; } = LoggingLevel.Error;
 
@@ -200,7 +200,7 @@ internal partial class SettingsPageModel : ObservableObject
                 return;
             }
         }
-        
+
         IsCheckingForUpdates = false;
     }
 
@@ -240,7 +240,7 @@ internal partial class SettingsPageModel : ObservableObject
     [RelayCommand]
     void OpenAcknowledgements()
     {
-        // TODO: 
+        // TODO:
     }
 
 

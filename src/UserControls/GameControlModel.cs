@@ -84,14 +84,14 @@ public partial class GameControlModel : ObservableObject
     {
         if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
         {
-            var textBox = new TextBox()
+            var textBox = new TextBox
             {
                 MinHeight = 400,
                 TextWrapping = TextWrapping.Wrap,
                 AcceptsReturn = true,
+                // This needs to be set after AcceptsReturn otherwise it will strip out the \r
+                Text = Game.Notes,
             };
-            // This needs to be set after AcceptsReturn otherwise it will strip out the \r
-            textBox.Text = Game.Notes;
 
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
@@ -100,8 +100,8 @@ public partial class GameControlModel : ObservableObject
                 CloseButtonText = "Cancel",
                 DefaultButton = ContentDialogButton.Primary,
                 Content = textBox,
+                Resources = { ["ContentDialogMinWidth"] = 700 },
             };
-            dialog.Resources["ContentDialogMinWidth"] = 700;
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
@@ -128,7 +128,7 @@ public partial class GameControlModel : ObservableObject
             return;
         }
 
-        await Game.PromptToBrowseCustomCover();        
+        await Game.PromptToBrowseCustomCover();
     }
 
     [RelayCommand]
@@ -160,7 +160,7 @@ public partial class GameControlModel : ObservableObject
             }
 
 
-        
+
             // This needs to be set after AcceptsReturn otherwise it will strip out the \r
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {

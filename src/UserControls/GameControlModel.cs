@@ -224,12 +224,12 @@ public partial class GameControlModel : ObservableObject
     {
         if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
         {
-           
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = $"Multiple {DLLManager.Instance.GetAssetTypeName(gameAssetType)} DLLs found",
+                Title = $"Multiple {DLLManager.Instance.GetAssetTypeName(gameAssetType)} DLLs Found",
                 PrimaryButtonText = "Okay",
                 DefaultButton = ContentDialogButton.Primary,
+                Content = new MultipleDLLsFoundControl(Game, gameAssetType),
             };
 
             await dialog.ShowAsync();

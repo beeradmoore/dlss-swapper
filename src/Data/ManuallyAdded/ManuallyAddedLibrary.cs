@@ -24,7 +24,7 @@ public class ManuallyAddedLibrary : IGameLibrary
 
     public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
     {
-        List<Game> games = new List<Game>();
+        List<Game> games = [];
         List<ManuallyAddedGame> dbGames;
         using (await Database.Instance.Mutex.LockAsync())
         {

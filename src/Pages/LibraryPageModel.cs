@@ -25,15 +25,17 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
     {
         this.libraryPage = libraryPage;
 
-        dllRecordGroups = new List<DLLRecordGroup>();
-        dllRecordGroups.Add(new DLLRecordGroup("DLSS", DLLManager.Instance.DLSSRecords ));
-        dllRecordGroups.Add(new DLLRecordGroup("DLSS Frame Generation", DLLManager.Instance.DLSSGRecords ));
-        dllRecordGroups.Add(new DLLRecordGroup("DLSS Ray Reconstruction", DLLManager.Instance.DLSSDRecords ));
-        dllRecordGroups.Add(new DLLRecordGroup("FSR 3.1 (DirectX 12)", DLLManager.Instance.FSR31DX12Records ));
-        dllRecordGroups.Add(new DLLRecordGroup("FSR 3.1 (Vulkan)", DLLManager.Instance.FSR31VKRecords));
-        dllRecordGroups.Add(new DLLRecordGroup("XeSS", DLLManager.Instance.XeSSRecords));
-        dllRecordGroups.Add(new DLLRecordGroup("XeLL", DLLManager.Instance.XeLLRecords));
-        dllRecordGroups.Add(new DLLRecordGroup("XeSS Frame Generation", DLLManager.Instance.XeSSFGRecords));
+        dllRecordGroups =
+        [
+            new DLLRecordGroup("DLSS", DLLManager.Instance.DLSSRecords),
+            new DLLRecordGroup("DLSS Frame Generation", DLLManager.Instance.DLSSGRecords),
+            new DLLRecordGroup("DLSS Ray Reconstruction", DLLManager.Instance.DLSSDRecords),
+            new DLLRecordGroup("FSR 3.1 (DirectX 12)", DLLManager.Instance.FSR31DX12Records),
+            new DLLRecordGroup("FSR 3.1 (Vulkan)", DLLManager.Instance.FSR31VKRecords),
+            new DLLRecordGroup("XeSS", DLLManager.Instance.XeSSRecords),
+            new DLLRecordGroup("XeLL", DLLManager.Instance.XeLLRecords),
+            new DLLRecordGroup("XeSS Frame Generation", DLLManager.Instance.XeSSFGRecords),
+        ];
 
         LibraryCollectionViewSource = new CollectionViewSource()
         {

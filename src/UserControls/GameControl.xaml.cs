@@ -69,14 +69,14 @@ namespace DLSS_Swapper.UserControls
         }
 
 
-        string[] customCoverValidFileTypes = new string[]
-        {
-                ".png",
-                ".jpg",
-                ".jpeg",
-                ".webp",
-                ".bmp",
-        };
+        string[] customCoverValidFileTypes =
+        [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".webp",
+            ".bmp",
+        ];
 
         DataPackageOperation coverDragDropAcceptedOperation = DataPackageOperation.None;
         string coverDragDropDragUIOverrideCaption = string.Empty;

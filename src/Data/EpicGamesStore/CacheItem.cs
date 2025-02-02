@@ -11,7 +11,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         public string Title { get; set; } = string.Empty;
 
         [JsonPropertyName("keyImages")]
-        public CacheItemKeyImage[] KeyImages { get; set; } = new CacheItemKeyImage[0];
+        public CacheItemKeyImage[] KeyImages { get; set; } = [];
 
 
         internal class CacheItemKeyImage

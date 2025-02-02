@@ -93,7 +93,7 @@ namespace DLSS_Swapper.Data
         //public string ExpectedCustomCoverImage => Path.Combine(Storage.GetImageCachePath(), $"{ID}_custom_600_900.webp");
 
         [Ignore]
-        public List<GameAsset> GameAssets { get; } = new();
+        public List<GameAsset> GameAssets { get; } = [];
 
         [Ignore]
         public bool NeedsProcessing { get; set; } = false;

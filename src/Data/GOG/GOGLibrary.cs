@@ -50,7 +50,7 @@ namespace DLSS_Swapper.Data.GOG
         {
             if (IsInstalled() == false)
             {
-                return new List<Game>();
+                return [];
             }
 
             var cachedGames = GameManager.Instance.GetGames<GOGGame>();
@@ -65,7 +65,7 @@ namespace DLSS_Swapper.Data.GOG
                     {
                         // Something bad happened.
                         // TODO: Clear cache?
-                        return new List<Game>();
+                        return [];
                     }
 
                     // For each of the installed games, setup an initial GOG
@@ -131,7 +131,7 @@ namespace DLSS_Swapper.Data.GOG
             if (gogGames.Count == 0)
             {
                 // TODO: Flush cache?
-                return new List<Game>();
+                return [];
             }
 
 
@@ -295,7 +295,7 @@ namespace DLSS_Swapper.Data.GOG
                 }
             }
 
-            return new List<Game>(gogGames);
+            return [..gogGames];
         }
 
         /// <summary>

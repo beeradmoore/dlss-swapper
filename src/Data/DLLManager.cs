@@ -8,14 +8,14 @@ internal class DLLManager
 {
     public static DLLManager Instance { get; private set; } = new();
 
-    public ObservableCollection<DLLRecord> DLSSRecords { get; } = new();
-    public ObservableCollection<DLLRecord> DLSSGRecords { get; } = new();
-    public ObservableCollection<DLLRecord> DLSSDRecords { get; } = new();
-    public ObservableCollection<DLLRecord> FSR31DX12Records { get; } = new();
-    public ObservableCollection<DLLRecord> FSR31VKRecords { get; } = new();
-    public ObservableCollection<DLLRecord> XeSSRecords { get; } = new();
-    public ObservableCollection<DLLRecord> XeLLRecords { get; } = new();
-    public ObservableCollection<DLLRecord> XeSSFGRecords { get; } = new();
+    public ObservableCollection<DLLRecord> DLSSRecords { get; } = [];
+    public ObservableCollection<DLLRecord> DLSSGRecords { get; } = [];
+    public ObservableCollection<DLLRecord> DLSSDRecords { get; } = [];
+    public ObservableCollection<DLLRecord> FSR31DX12Records { get; } = [];
+    public ObservableCollection<DLLRecord> FSR31VKRecords { get; } = [];
+    public ObservableCollection<DLLRecord> XeSSRecords { get; } = [];
+    public ObservableCollection<DLLRecord> XeLLRecords { get; } = [];
+    public ObservableCollection<DLLRecord> XeSSFGRecords { get; } = [];
 
     internal void LoadFromManifest()
     {

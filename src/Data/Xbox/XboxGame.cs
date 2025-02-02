@@ -11,7 +11,7 @@ namespace DLSS_Swapper.Data.Xbox
     {
         public override GameLibrary GameLibrary => GameLibrary.XboxApp;
 
-        List<string> _localHeaderImages = new();
+        List<string> _localHeaderImages = [];
 
         public XboxGame()
         {

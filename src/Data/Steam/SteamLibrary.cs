@@ -38,7 +38,7 @@ namespace DLSS_Swapper.Data.Steam
             // If we don't detect a steam install patg return an empty list.
             if (IsInstalled() == false)
             {
-                return new List<Game>();
+                return [];
             }
 
             var cachedGames = GameManager.Instance.GetGames<SteamGame>();

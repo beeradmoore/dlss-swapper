@@ -55,15 +55,15 @@ public partial class DLLPickerControlModel : ObservableObject
 
         DLLRecords = GameAssetType switch
         {
-            GameAssetType.DLSS => new List<DLLRecord>(DLLManager.Instance.DLSSRecords),
-            GameAssetType.DLSS_G => new List<DLLRecord>(DLLManager.Instance.DLSSGRecords),
-            GameAssetType.DLSS_D => new List<DLLRecord>(DLLManager.Instance.DLSSDRecords),
-            GameAssetType.FSR_31_DX12 => new List<DLLRecord>(DLLManager.Instance.FSR31DX12Records),
-            GameAssetType.FSR_31_VK => new List<DLLRecord>(DLLManager.Instance.FSR31VKRecords),
-            GameAssetType.XeSS => new List<DLLRecord>(DLLManager.Instance.XeSSRecords),
-            GameAssetType.XeLL => new List<DLLRecord>(DLLManager.Instance.XeLLRecords),
-            GameAssetType.XeSS_FG => new List<DLLRecord>(DLLManager.Instance.XeSSFGRecords),
-            _ => new List<DLLRecord>(),
+            GameAssetType.DLSS => [..DLLManager.Instance.DLSSRecords],
+            GameAssetType.DLSS_G => [..DLLManager.Instance.DLSSGRecords],
+            GameAssetType.DLSS_D => [..DLLManager.Instance.DLSSDRecords],
+            GameAssetType.FSR_31_DX12 => [..DLLManager.Instance.FSR31DX12Records],
+            GameAssetType.FSR_31_VK => [..DLLManager.Instance.FSR31VKRecords],
+            GameAssetType.XeSS => [..DLLManager.Instance.XeSSRecords],
+            GameAssetType.XeLL => [..DLLManager.Instance.XeLLRecords],
+            GameAssetType.XeSS_FG => [..DLLManager.Instance.XeSSFGRecords],
+            _ => [],
         };
 
         if (Settings.Instance.AllowDebugDlls == false)

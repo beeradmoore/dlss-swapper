@@ -37,7 +37,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
             new DLLRecordGroup("XeSS Frame Generation", DLLManager.Instance.XeSSFGRecords),
         ];
 
-        LibraryCollectionViewSource = new CollectionViewSource()
+        LibraryCollectionViewSource = new CollectionViewSource
         {
             IsSourceGrouped = true,
             Source = dllRecordGroups,
@@ -101,7 +101,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         var exportingDialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
             Title = "Exporting",
-            Content = new ProgressRing()
+            Content = new ProgressRing
             {
                 IsIndeterminate = true,
             },
@@ -116,7 +116,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
            {
                SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary
            };
-           savePicker.FileTypeChoices.Add("Zip archive", new List<string>() { ".zip" });
+           savePicker.FileTypeChoices.Add("Zip archive", new List<string> { ".zip" });
            savePicker.SuggestedFileName = $"dlss_swapper_export.zip";
            WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
            var saveFile = await savePicker.PickSaveFileAsync();
@@ -425,7 +425,7 @@ Only import dlls from sources you trust.",
             {
                 Title = "Importing",
                 // I would like this to be a progress ring but for some reason the ring will not show.
-                Content = new ProgressBar()
+                Content = new ProgressBar
                 {
                     IsIndeterminate = true,
                 },
@@ -629,7 +629,7 @@ Only import dlls from sources you trust.",
         {
             Title = "Exporting",
             // I would like this to be a progress ring but for some reason the ring will not show.
-            Content = new ProgressRing()
+            Content = new ProgressRing
             {
                 IsIndeterminate = true,
             },
@@ -642,7 +642,7 @@ Only import dlls from sources you trust.",
             {
                 SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary
             };
-            savePicker.FileTypeChoices.Add("Zip archive", new List<string>() { ".zip" });
+            savePicker.FileTypeChoices.Add("Zip archive", new List<string> { ".zip" });
             savePicker.SuggestedFileName = $"dlss_swapper_export_{record.DisplayName.Replace(" ", "_")}.zip";
             WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
             var saveFile = await savePicker.PickSaveFileAsync();

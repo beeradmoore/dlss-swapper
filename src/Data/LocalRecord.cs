@@ -101,7 +101,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
 
     public static LocalRecord FromExpectedPath(string expectedPath, bool imported = false)
     {
-        var localRecord = new LocalRecord()
+        var localRecord = new LocalRecord
         {
             ExpectedPath = expectedPath,
         };

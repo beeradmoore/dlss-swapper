@@ -76,7 +76,7 @@ namespace DLSS_Swapper.Data
         [ObservableProperty]
         [Ignore]
         public partial bool Processing { get; set; } = false;
-        
+
         [Ignore]
         public abstract GameLibrary GameLibrary { get; }
 
@@ -167,7 +167,7 @@ namespace DLSS_Swapper.Data
         protected void SetID()
         {
             // Seeing as we use ID, it sure would be a shame if a PlatformId was set to "C:\Program Files\"
-            // So try to remove all funky characters before 
+            // So try to remove all funky characters before
 
             var platformId = PlatformId;
             foreach (var invalidPathChar in PathHelpers.InvalidFileNamePathChars)
@@ -258,7 +258,7 @@ namespace DLSS_Swapper.Data
                         // The case of these files should never change, right?
                         if (dllName == "nvngx_dlss.dll")
                         {
-                            var gameAsset = new GameAsset()
+                            var gameAsset = new GameAsset
                             {
                                 Id = ID,
                                 AssetType = GameAssetType.DLSS,
@@ -276,7 +276,7 @@ namespace DLSS_Swapper.Data
                         }
                         else if (dllName == "nvngx_dlssg.dll")
                         {
-                            var gameAsset = new GameAsset()
+                            var gameAsset = new GameAsset
                             {
                                 Id = ID,
                                 AssetType = GameAssetType.DLSS_G,
@@ -294,7 +294,7 @@ namespace DLSS_Swapper.Data
                         }
                         else if (dllName == "nvngx_dlssd.dll")
                         {
-                            var gameAsset = new GameAsset()
+                            var gameAsset = new GameAsset
                             {
                                 Id = ID,
                                 AssetType = GameAssetType.DLSS_D,
@@ -312,7 +312,7 @@ namespace DLSS_Swapper.Data
                         }
                         else if (dllName == "amd_fidelityfx_dx12.dll")
                         {
-                            var gameAsset = new GameAsset()
+                            var gameAsset = new GameAsset
                             {
                                 Id = ID,
                                 AssetType = GameAssetType.FSR_31_DX12,
@@ -330,7 +330,7 @@ namespace DLSS_Swapper.Data
                         }
                         else if (dllName == "amd_fidelityfx_vk.dll")
                         {
-                            var gameAsset = new GameAsset()
+                            var gameAsset = new GameAsset
                             {
                                 Id = ID,
                                 AssetType = GameAssetType.FSR_31_VK,
@@ -348,7 +348,7 @@ namespace DLSS_Swapper.Data
                         }
                         else if (dllName == "libxess.dll")
                         {
-                            var gameAsset = new GameAsset()
+                            var gameAsset = new GameAsset
                             {
                                 Id = ID,
                                 AssetType = GameAssetType.XeSS,
@@ -366,7 +366,7 @@ namespace DLSS_Swapper.Data
                         }
                         else if (dllName == "libxell.dll")
                         {
-                            var gameAsset = new GameAsset()
+                            var gameAsset = new GameAsset
                             {
                                 Id = ID,
                                 AssetType = GameAssetType.XeLL,
@@ -384,7 +384,7 @@ namespace DLSS_Swapper.Data
                         }
                         else if (dllName == "libxess_fg.dll")
                         {
-                            var gameAsset = new GameAsset()
+                            var gameAsset = new GameAsset
                             {
                                 Id = ID,
                                 AssetType = GameAssetType.XeSS_FG,
@@ -463,7 +463,7 @@ namespace DLSS_Swapper.Data
             var backupPath = $"{gameAsset.Path}.dlsss";
             if (File.Exists(backupPath))
             {
-                var gameAssetBackup = new GameAsset()
+                var gameAssetBackup = new GameAsset
                 {
                     Id = ID,
                     AssetType = DLLManager.Instance.GetAssetBackupType(gameAsset.AssetType),
@@ -560,7 +560,7 @@ namespace DLSS_Swapper.Data
                         return (false, "Unable to reset to default. Please repair your game manually.", false);
                     }
 
-                    var newGameAsset = new GameAsset()
+                    var newGameAsset = new GameAsset
                     {
                         Id = ID,
                         AssetType = gameAssetType,
@@ -619,7 +619,7 @@ namespace DLSS_Swapper.Data
 
             var backupRecordType = DLLManager.Instance.GetAssetBackupType(dllRecord.AssetType);
             var existingBackupRecords = GameAssets.Where(x => x.AssetType == backupRecordType).ToList();
-            
+
             // TODO: Handle more than the first record.
             var currentRecord = existingRecords[0];
 
@@ -687,7 +687,7 @@ namespace DLSS_Swapper.Data
                             var defaultVersionInfo = FileVersionInfo.GetVersionInfo(existingRecord.Path);
                             File.Copy(existingRecord.Path, backupDllPath);
 
-                            var backupGameAsset = new GameAsset()
+                            var backupGameAsset = new GameAsset
                             {
                                 Id = ID,
                                 AssetType = backupRecordType,
@@ -724,8 +724,8 @@ namespace DLSS_Swapper.Data
                 try
                 {
                     File.Copy(tempDllFile, existingRecord.Path, true);
-                    
-                    var newGameAsset = new GameAsset()
+
+                    var newGameAsset = new GameAsset
                     {
                         Id = ID,
                         AssetType = dllRecord.AssetType,
@@ -865,7 +865,7 @@ namespace DLSS_Swapper.Data
 
         protected async Task ResizeCoverAsync(string imageSource)
         {
-            // TODO: 
+            // TODO:
             // - find optimal format (eg, is displaying 100 webp images more intense than 100 png images)
             // - load image based on scale
             try
@@ -875,7 +875,7 @@ namespace DLSS_Swapper.Data
                     // If images are really big we resize to at least 2x the 200x300 we display as.
                     // In future this should be updated to resize to display scale.
                     // If the image is smaller than this we are just saving as png.
-                    var resizeOptions = new ResizeOptions()
+                    var resizeOptions = new ResizeOptions
                     {
                         Size = new Size(200 * 2, 300 * 2),
                         Sampler = KnownResamplers.Lanczos5,
@@ -910,7 +910,7 @@ namespace DLSS_Swapper.Data
 
         public void AddCustomCover(Stream stream)
         {
-            // TODO: 
+            // TODO:
             // - find optimal format (eg, is displaying 100 webp images more intense than 100 png images)
             // - load image based on scale
             try
@@ -920,7 +920,7 @@ namespace DLSS_Swapper.Data
                     // If images are really big we resize to at least 3x the 200x300 we display as.
                     // In future this should be updated to resize to display scale.
                     // If the image is smaller than this we are just saving as png.
-                    var resizeOptions = new ResizeOptions()
+                    var resizeOptions = new ResizeOptions
                     {
                         Size = new Size(200 * 3, 300 * 3),
                         Sampler = KnownResamplers.Lanczos5,
@@ -987,7 +987,7 @@ namespace DLSS_Swapper.Data
                     }
                 }
 
-                // Now if the image is downloaded lets resize it, 
+                // Now if the image is downloaded lets resize it,
                 await ResizeCoverAsync(tempFile).ConfigureAwait(false);
             }
             catch (Exception err)
@@ -1072,7 +1072,7 @@ namespace DLSS_Swapper.Data
                 {
                     await Database.Instance.Connection.Table<GameAsset>().DeleteAsync(ga => ga.Id == ID).ConfigureAwait(false);
                 }
-               
+
                 // Delete the thumbnails.
                 var thumbnailImages = Directory.GetFiles(Storage.GetImageCachePath(), $"{ID}_*", SearchOption.AllDirectories);
                 foreach (var thumbnailImage in thumbnailImages)
@@ -1138,7 +1138,7 @@ namespace DLSS_Swapper.Data
             try
             {
                 var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
-                var fileOpenPicker = new FileOpenPicker()
+                var fileOpenPicker = new FileOpenPicker
                 {
                     SuggestedStartLocation = PickerLocationId.PicturesLibrary,
                     ViewMode = PickerViewMode.Thumbnail,

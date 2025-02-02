@@ -177,7 +177,7 @@ public class GameAsset : IEquatable<GameAsset>
             return null;
         }
 
-        var backupGameAsset = new GameAsset()
+        var backupGameAsset = new GameAsset
         {
             Id = Id,
             AssetType = backypType,

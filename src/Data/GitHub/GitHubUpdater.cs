@@ -106,7 +106,7 @@ namespace DLSS_Swapper.Data.GitHub
             var currentVerion = App.CurrentApp.GetVersionString();
 
             var yourVersion = $"You currently have {currentVerion} installed.\n\n";
-            var contentUpdate = new MarkdownTextBlock()
+            var contentUpdate = new MarkdownTextBlock
             {
                 Text = yourVersion + gitHubRelease.Body,
                 Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
@@ -121,7 +121,7 @@ namespace DLSS_Swapper.Data.GitHub
                     PrimaryButtonText = "Update",
                     CloseButtonText = "Cancel",
                     DefaultButton = ContentDialogButton.Primary,
-                    Content = new ScrollViewer()
+                    Content = new ScrollViewer
                     {
                         Content = contentUpdate,
                     },
@@ -137,7 +137,7 @@ namespace DLSS_Swapper.Data.GitHub
 
         internal async Task DisplayWhatsNewDialog(GitHubRelease gitHubRelease, XamlRoot xamlRoot)
         {
-            var contentUpdate = new MarkdownTextBlock()
+            var contentUpdate = new MarkdownTextBlock
             {
                 Text = gitHubRelease.Body,
                 Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
@@ -149,7 +149,7 @@ namespace DLSS_Swapper.Data.GitHub
                 Title = $"DLSS Swapper just updated - {gitHubRelease.Name}",
                 CloseButtonText = "Cancel",
                 DefaultButton = ContentDialogButton.Close,
-                Content = new ScrollViewer()
+                Content = new ScrollViewer
                 {
                     Content = contentUpdate,
                 },

@@ -25,17 +25,17 @@ internal partial class SettingsPageModel : ObservableObject
     public string AppVersion => App.CurrentApp.GetVersionString();
     public List<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; } =
         [
-            new DLSSOnScreenIndicatorSetting()
+            new()
             {
                 Label = "None",
                 Value = 0
             },
-            new DLSSOnScreenIndicatorSetting()
+            new()
             {
                 Label = "Enabled for debug DLSS DLLs only",
                 Value = 1
             },
-            new DLSSOnScreenIndicatorSetting()
+            new()
             {
                 Label = "Enabled for all DLSS DLLs",
                 Value = 1024

@@ -59,9 +59,9 @@ public partial class GameGridPageModel : ObservableObject
     {
         if (Settings.Instance.DontShowManuallyAddingGamesNotice == false)
         {
-            var dontShowAgainCheckbox = new CheckBox()
+            var dontShowAgainCheckbox = new CheckBox
             {
-                Content = new TextBlock()
+                Content = new TextBlock
                 {
                     Text = "Don't show again",
                 },
@@ -74,10 +74,10 @@ public partial class GameGridPageModel : ObservableObject
                 SecondaryButtonText = "Report Issue",
                 CloseButtonText = "Cancel",
                 DefaultButton = ContentDialogButton.Primary,
-                Content = new StackPanel()
+                Content = new StackPanel
                 {
                     Children = {
-                        new TextBlock()
+                        new TextBlock
                         {
                             TextWrapping = TextWrapping.Wrap,
                             Text = @"DLSS Swapper should find games from your installed game libraries automatically. If your game is not listed there may be a few settings preventing it. Please check:
@@ -132,25 +132,25 @@ If you have checked these and your game is still not showing up there may be a b
                 PrimaryButtonText = "Add Game",
                 CloseButtonText = "Cancel",
                 DefaultButton = ContentDialogButton.Primary,
-                Content = new TextBlock()
+                Content = new TextBlock
                 {
                     TextWrapping = TextWrapping.Wrap,
                     Inlines =
                     {
-                        new Run() { Text = "You must select your " },
-                        new Run() { Text = "game", FontStyle = FontStyle.Italic },
-                        new Run() { Text = " directory, not your " },
-                        new Run() { Text = "games", FontStyle = FontStyle.Italic },
-                        new Run() { Text = " directory." },
-                        new Run() { Text = "\n\n" },
-                        new Run() { Text = "For example, iff you have a game at:\n" },
-                        new Run() { Text = "C:\\Program Files\\MyGamesFolder\\MyFavouriteGame\\" },
-                        new Run() { Text = "\n\n" },
-                        new Run() { Text = "You would select the " },
-                        new Run() { Text = "MyFavouriteGame", FontWeight = FontWeights.Bold },
-                        new Run() { Text = " directory and not the " },
-                        new Run() { Text = "MyGamesFolder", FontWeight = FontWeights.Bold },
-                        new Run() { Text = " directory." },
+                        new Run { Text = "You must select your " },
+                        new Run { Text = "game", FontStyle = FontStyle.Italic },
+                        new Run { Text = " directory, not your " },
+                        new Run { Text = "games", FontStyle = FontStyle.Italic },
+                        new Run { Text = " directory." },
+                        new Run { Text = "\n\n" },
+                        new Run { Text = "For example, iff you have a game at:\n" },
+                        new Run { Text = "C:\\Program Files\\MyGamesFolder\\MyFavouriteGame\\" },
+                        new Run { Text = "\n\n" },
+                        new Run { Text = "You would select the " },
+                        new Run { Text = "MyFavouriteGame", FontWeight = FontWeights.Bold },
+                        new Run { Text = " directory and not the " },
+                        new Run { Text = "MyGamesFolder", FontWeight = FontWeights.Bold },
+                        new Run { Text = " directory." },
                     },
                 },
             };
@@ -165,7 +165,7 @@ If you have checked these and your game is still not showing up there may be a b
         }
 
 
-        var folderPicker = new FolderPicker()
+        var folderPicker = new FolderPicker
         {
             SuggestedStartLocation = PickerLocationId.ComputerFolder,
             CommitButtonText = "Select Game Folder",

@@ -90,7 +90,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                     var gameInstallDir = ubisoftConnectInstallDirKey.GetValue("InstallDir") as string;
                                     if (string.IsNullOrEmpty(gameInstallDir) == false)
                                     {
-                                        installedTitles[installId] = new UbisoftGameRegistryRecord()
+                                        installedTitles[installId] = new UbisoftGameRegistryRecord
                                         {
                                             InstallId = installId,
                                             InstallPath = PathHelpers.NormalizePath(gameInstallDir),
@@ -313,7 +313,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
                     if (objectSize > 500)
                     {
-                        records.Add(new UbisoftRecord()
+                        records.Add(new UbisoftRecord
                         {
                             Size = objectSize,
                             Offset = globalOffset + headerSize,

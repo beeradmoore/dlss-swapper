@@ -123,12 +123,12 @@ internal partial class GameManager : ObservableObject
         allGamesGroup = new GameGroup(string.Empty, AllGamesView);
         favouriteGamesGroup = new GameGroup("Favourites", FavouriteGamesView);
 
-        var groupedList = new List<GameGroup>()
+        var groupedList = new List<GameGroup>
         {
             favouriteGamesGroup,
         };
 
-        var ungroupedList = new List<GameGroup>()
+        var ungroupedList = new List<GameGroup>
         {
             favouriteGamesGroup,
             allGamesGroup,
@@ -151,14 +151,14 @@ internal partial class GameManager : ObservableObject
             libraryGameGroups[gameLibraryEnum] = new GameGroup(gameLibrary.Name, gameView);
         }
 
-        GroupedGameCollectionViewSource = new CollectionViewSource()
+        GroupedGameCollectionViewSource = new CollectionViewSource
         {
             IsSourceGrouped = true,
             Source = groupedList,
             ItemsPath = new PropertyPath("Games"),
         };
 
-        UngroupedGameCollectionViewSource = new CollectionViewSource()
+        UngroupedGameCollectionViewSource = new CollectionViewSource
         {
             IsSourceGrouped = true,
             Source = ungroupedList,

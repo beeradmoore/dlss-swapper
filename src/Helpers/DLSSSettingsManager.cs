@@ -18,7 +18,7 @@ internal class DLSSSettingsManager
 
     bool RunRegAdd(string key, string name, string type, string value)
     {
-        var processInfo = new ProcessStartInfo()
+        var processInfo = new ProcessStartInfo
         {
             FileName = "reg",
             Arguments = $"add \"{key}\" /f /v {name} /t {type} /d {value}",

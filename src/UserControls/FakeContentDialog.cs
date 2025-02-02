@@ -390,7 +390,7 @@ public class FakeContentDialog : Control
 
 
             // But this works, just don't try get the Title after displaying the FakeContentDialog I guess 
-            var titleTextBlock = new TextBlock() { Text = title };
+            var titleTextBlock = new TextBlock { Text = title };
             Title = titleTextBlock;
         }
 

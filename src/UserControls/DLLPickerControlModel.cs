@@ -31,7 +31,7 @@ public partial class DLLPickerControlModel : ObservableObject
     [ObservableProperty]
     public partial bool CanSwap { get; set; } = false;
 
-    public bool CanCloseParentDialog { get; set; } = false;
+    public bool CanCloseParentDialog { get; set; }
 
     public DLLPickerControlModel(EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType)
     {

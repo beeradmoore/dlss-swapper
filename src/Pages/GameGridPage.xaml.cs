@@ -31,7 +31,7 @@ namespace DLSS_Swapper.Pages
         ObservableCollection<Game> AllGames = new ObservableCollection<Game>();
         */
         
-        bool _loadingGamesAndDlls = false;
+        bool _loadingGamesAndDlls;
 
         public GameGridPageModel ViewModel { get; private set; }
 
@@ -151,7 +151,7 @@ namespace DLSS_Swapper.Pages
 
 
 
-        bool hasFirstLoaded = false;
+        bool hasFirstLoaded;
         void Page_Loaded(object sender, RoutedEventArgs e)
         {
             if (hasFirstLoaded)

@@ -30,11 +30,11 @@ namespace DLSS_Swapper
             HighContrast = 3
         }
 
-        public event EventHandler<ApplicationTheme>? ThemeChanged = null;
-        public event EventHandler<bool>? ContrastChanged = null;
+        public event EventHandler<ApplicationTheme>? ThemeChanged;
+        public event EventHandler<bool>? ContrastChanged;
 
-        public bool IsWatchingTheme { get; private set; } = false;
-        public bool IsWatchingContrast { get; private set; } = false;
+        public bool IsWatchingTheme { get; private set; }
+        public bool IsWatchingContrast { get; private set; }
 
         public bool HighContrast { get { return _accessibilitySettings.HighContrast; } }
 

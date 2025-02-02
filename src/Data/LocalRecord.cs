@@ -9,7 +9,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
 {
     public string ExpectedPath { get; private set; } = string.Empty;
 
-    bool _isDownloaded = false;
+    bool _isDownloaded;
     public bool IsDownloaded
     {
         get { return _isDownloaded; }
@@ -23,7 +23,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
         }
     }
 
-    bool _isDownloading = false;
+    bool _isDownloading;
     public bool IsDownloading
     {
         get { return _isDownloading; }
@@ -38,7 +38,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
     }
 
 
-    int _downloadProgress = 0;
+    int _downloadProgress;
     public int DownloadProgress
     {
         get { return _downloadProgress; }
@@ -52,7 +52,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
         }
     }
 
-    bool _hasDownloadError = false;
+    bool _hasDownloadError;
     public bool HasDownloadError
     {
         get { return _hasDownloadError; }
@@ -80,7 +80,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
         }
     }
 
-    bool _isImported = false;
+    bool _isImported;
     public bool IsImported
     {
         get { return _isImported; }
@@ -145,7 +145,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
     */
 
     #region INotifyPropertyChanged
-    public event PropertyChangedEventHandler? PropertyChanged = null;
+    public event PropertyChangedEventHandler? PropertyChanged;
     void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

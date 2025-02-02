@@ -15,15 +15,15 @@ namespace DLSS_Swapper.Data.UbisoftConnect
     {
         private record UbisoftRecord
         {
-            internal int Size { get; init; } = 0;
-            internal int Offset { get; init; } = 0;
-            internal int InstallId { get; init; } = 0;
-            internal int LaunchId { get; init; } = 0;
+            internal int Size { get; init; }
+            internal int Offset { get; init; }
+            internal int InstallId { get; init; }
+            internal int LaunchId { get; init; }
         }
 
         private record UbisoftGameRegistryRecord
         {
-            internal int InstallId { get; init; } = 0;
+            internal int InstallId { get; init; }
             internal string InstallPath { get; init; } = string.Empty;
         }
 
@@ -32,7 +32,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         public Type GameType => typeof(UbisoftConnectGame);
 
-        static UbisoftConnectLibrary? instance = null;
+        static UbisoftConnectLibrary? instance;
         public static UbisoftConnectLibrary Instance => instance ??= new UbisoftConnectLibrary();
 
         private UbisoftConnectLibrary()

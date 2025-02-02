@@ -114,7 +114,7 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        LocalRecord? _localRecord = null;
+        LocalRecord? _localRecord;
 
         [JsonIgnore]
         public LocalRecord? LocalRecord
@@ -152,7 +152,7 @@ namespace DLSS_Swapper.Data
 
         #region INotifyPropertyChanged
 
-        public event PropertyChangedEventHandler? PropertyChanged = null;
+        public event PropertyChangedEventHandler? PropertyChanged;
         internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

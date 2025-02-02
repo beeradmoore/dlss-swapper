@@ -20,7 +20,7 @@ namespace DLSS_Swapper.Data.GOG
 
         public Type GameType => typeof(GOGGame);
 
-        static GOGLibrary? instance = null;
+        static GOGLibrary? instance;
         public static GOGLibrary Instance => instance ??= new GOGLibrary();
 
         private GOGLibrary()

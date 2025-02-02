@@ -151,9 +151,9 @@ namespace DLSS_Swapper
         }
 
 
-        GameGridPage? gameGridPage = null;
-        LibraryPage? libraryPage = null;
-        SettingsPage? settingsPage = null;
+        GameGridPage? gameGridPage;
+        LibraryPage? libraryPage;
+        SettingsPage? settingsPage;
 
         public GameGridPage? GameGridPage => gameGridPage;
 

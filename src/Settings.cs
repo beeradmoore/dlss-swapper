@@ -6,14 +6,14 @@ namespace DLSS_Swapper
 {
     public class Settings
     {
-        static Settings? _instance = null;
+        static Settings? _instance;
 
         public static Settings Instance => _instance ??= Settings.FromJson();
 
         // We default this to false to prevent saves firing when loading from json.
-        bool _autoSave = false;
+        bool _autoSave;
 
-        bool _hasShownWarning = false;
+        bool _hasShownWarning;
         public bool HasShownWarning
         {
             get { return _hasShownWarning; }
@@ -30,7 +30,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _hasShownMultiplayerWarning = false;
+        bool _hasShownMultiplayerWarning;
         public bool HasShownMultiplayerWarning
         {
             get { return _hasShownMultiplayerWarning; }
@@ -47,7 +47,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _hideNonDLSSGames = false;
+        bool _hideNonDLSSGames;
         public bool HideNonDLSSGames
         {
             get { return _hideNonDLSSGames; }
@@ -99,7 +99,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _allowDebugDlls = false;
+        bool _allowDebugDlls;
         public bool AllowDebugDlls
         {
             get { return _allowDebugDlls; }
@@ -118,7 +118,7 @@ namespace DLSS_Swapper
 
 
 
-        bool _allowUntrusted = false;
+        bool _allowUntrusted;
         public bool AllowUntrusted
         {
             get { return _allowUntrusted; }
@@ -153,7 +153,7 @@ namespace DLSS_Swapper
         }
 
 
-        ulong _lastPromptWasForVersion = 0L;
+        ulong _lastPromptWasForVersion;
         public ulong LastPromptWasForVersion
         {
             get { return _lastPromptWasForVersion; }
@@ -207,7 +207,7 @@ namespace DLSS_Swapper
         }
 
 
-        bool _wasLoadingGames = false;
+        bool _wasLoadingGames;
         public bool WasLoadingGames
         {
             get { return _wasLoadingGames; }
@@ -225,7 +225,7 @@ namespace DLSS_Swapper
         }
 
 
-        bool _dontShowManuallyAddingGamesNotice = false;
+        bool _dontShowManuallyAddingGamesNotice;
         public bool DontShowManuallyAddingGamesNotice
         {
             get { return _dontShowManuallyAddingGamesNotice; }
@@ -242,7 +242,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _hasShownAddGameFolderMessage = false;
+        bool _hasShownAddGameFolderMessage;
         public bool HasShownAddGameFolderMessage
         {
             get { return _hasShownAddGameFolderMessage; }

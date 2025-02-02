@@ -96,9 +96,9 @@ namespace DLSS_Swapper.Data
         public List<GameAsset> GameAssets { get; } = [];
 
         [Ignore]
-        public bool NeedsProcessing { get; set; } = false;
+        public bool NeedsProcessing { get; set; }
 
-        bool _isLoadingCoverImage = false;
+        bool _isLoadingCoverImage;
 
         [ObservableProperty]
         [Ignore]

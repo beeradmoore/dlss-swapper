@@ -13,13 +13,11 @@ public class ManuallyAddedLibrary : IGameLibrary
 
     public Type GameType => typeof(ManuallyAddedGame);
 
-
-    static ManuallyAddedLibrary? instance = null;
+    static ManuallyAddedLibrary? instance;
     public static ManuallyAddedLibrary Instance => instance ??= new ManuallyAddedLibrary();
 
     private ManuallyAddedLibrary()
     {
-
     }
 
     public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
@@ -30,6 +28,7 @@ public class ManuallyAddedLibrary : IGameLibrary
         {
             dbGames = await Database.Instance.Connection.Table<ManuallyAddedGame>().ToListAsync().ConfigureAwait(false);
         }
+
         foreach (var dbGame in dbGames)
         {
             var cachedGame = GameManager.Instance.GetGame<ManuallyAddedGame>(dbGame.PlatformId);
@@ -68,6 +67,7 @@ public class ManuallyAddedLibrary : IGameLibrary
             {
                 games = await Database.Instance.Connection.Table<ManuallyAddedGame>().ToArrayAsync().ConfigureAwait(false);
             }
+
             foreach (var game in games)
             {
                 await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);

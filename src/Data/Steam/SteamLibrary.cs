@@ -18,7 +18,7 @@ namespace DLSS_Swapper.Data.Steam
 
         public Type GameType => typeof(SteamGame);
 
-        static SteamLibrary? instance = null;
+        static SteamLibrary? instance;
         public static SteamLibrary Instance => instance ??= new SteamLibrary();
 
         static string _installPath = string.Empty;

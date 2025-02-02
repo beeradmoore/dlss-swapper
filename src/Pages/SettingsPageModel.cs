@@ -75,7 +75,7 @@ internal partial class SettingsPageModel : ObservableObject
     [ObservableProperty]
     public partial bool IsCheckingForUpdates { get; set; } = false;
 
-    bool _hasSetDefaults = false;
+    bool _hasSetDefaults;
 
     public SettingsPageModel(SettingsPage page)
     {

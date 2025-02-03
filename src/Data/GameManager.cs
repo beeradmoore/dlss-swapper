@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.WinUI.Collections;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
@@ -248,7 +249,6 @@ internal partial class GameManager : ObservableObject
         }
     }
 
-
     public Game AddGame(Game game, bool scrollIntoView = false)
     {
         lock (gameLock)
@@ -258,6 +258,7 @@ internal partial class GameManager : ObservableObject
                 // This probably checks the game collection twice looking for the game.
                 // We could do away with this, but in theory this if is never hit
                 var oldGame = _synchronisedAllGames.First(x => x.Equals(game));
+                oldGame.DlssPreset = NVAPIHelper.Instance.GetGameDLSSPreset(oldGame.Title);
 
                 App.CurrentApp.RunOnUIThread(() =>
                 {
@@ -270,6 +271,7 @@ internal partial class GameManager : ObservableObject
             else
             {
                 Debug.WriteLine($"Adding new game: {game.Title}");
+                game.DlssPreset = NVAPIHelper.Instance.GetGameDLSSPreset(game.Title);
 
                 _synchronisedAllGames.Add(game);
 

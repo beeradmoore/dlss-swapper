@@ -103,6 +103,30 @@
                     </TextBlock>
                 </StackPanel>
 
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Hide not downloaded versions" />
+                <StackPanel Margin="0,10,0,0">
+                    <DropDownButton Content="Choose DLLs to hide">
+                        <DropDownButton.Flyout>
+                            <MenuFlyout Placement="Bottom" ShowMode="Standard">
+                                <ToggleMenuFlyoutItem x:Name="HideDlss" Text="DLSS" IsChecked="{x:Bind ViewModel.HideNonDownloadedDlssDlls, Mode=TwoWay}" />
+                                <ToggleMenuFlyoutItem x:Name="HideDlssFg" Text="DLSS FG" IsChecked="{x:Bind ViewModel.HideNonDownloadedDlssFgDlls, Mode=TwoWay}" />
+                                <ToggleMenuFlyoutItem x:Name="HideDlssRr" Text="DLSS RR" IsChecked="{x:Bind ViewModel.HideNonDownloadedDlssRrDlss, Mode=TwoWay}" />
+                                <ToggleMenuFlyoutItem x:Name="HideFsrDx12" Text="FSR DirectX 12" IsChecked="{x:Bind ViewModel.HideNonDownloadedFsrDx12Dlls, Mode=TwoWay}" />
+                                <ToggleMenuFlyoutItem x:Name="HideFsrVulkan" Text="FSR Vulkan" IsChecked="{x:Bind ViewModel.HideNonDownloadedFsrVulkanDlls, Mode=TwoWay}" />
+                                <ToggleMenuFlyoutItem x:Name="HideXess" Text="XeSS" IsChecked="{x:Bind ViewModel.HideNonDownloadedXessDlls, Mode=TwoWay}" />
+                                <ToggleMenuFlyoutItem x:Name="HideXell" Text="XeLL" IsChecked="{x:Bind ViewModel.HideNonDownloadedXellDlls, Mode=TwoWay}" />
+                                <ToggleMenuFlyoutItem x:Name="HideXessFg" Text="XeSS FG" IsChecked="{x:Bind ViewModel.HideNonDownloadedXessFgDlls, Mode=TwoWay}" />
+                            </MenuFlyout>
+                        </DropDownButton.Flyout>
+                    </DropDownButton>
+                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
+                        This will hide versions of DLLs in the selector that are not yet downloaded.
+                    </TextBlock>
+                </StackPanel>
+
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"

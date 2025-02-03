@@ -106,9 +106,9 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Hide not downloaded versions" />
+                    Text="Hide Not Downloaded DLL Versions" />
                 <StackPanel Margin="0,10,0,0">
-                    <DropDownButton Content="Choose DLLs to hide">
+                    <DropDownButton Content="Choose DLLs To Hide">
                         <DropDownButton.Flyout>
                             <MenuFlyout Placement="Bottom" ShowMode="Standard">
                                 <ToggleMenuFlyoutItem x:Name="HideDlss" Text="DLSS" IsChecked="{x:Bind ViewModel.HideNonDownloadedDlssDlls, Mode=TwoWay}" />

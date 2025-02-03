@@ -592,8 +592,6 @@ namespace DLSS_Swapper.Data
 
                 return (true, string.Empty, false);
             }
-
-            return (false, "Unable to reset to default. Please repair your game manually.", false);
         }
 
         /// <summary>

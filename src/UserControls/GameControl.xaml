@@ -15,13 +15,14 @@
     VerticalAlignment="Stretch">
 
     <usercontrols:FakeContentDialog.Resources>
-
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
-        <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter"  />
+        <ct_converters:BoolToVisibilityConverter x:Key="BoolToInvisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+        <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter" />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteTextConverter" TrueValue="Favourited" FalseValue="Click to favourite" />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteGlyphConverter" TrueValue="&#xE735;" FalseValue="&#xE734;" />
         <ct_converters:EmptyObjectToObjectConverter x:Key="NullObjectToBoolConverter" NotEmptyValue="True" EmptyValue="False" />
-
+        <ct_converters:EmptyCollectionToObjectConverter  x:Key="EmptyCollectionToObjectConverter" NotEmptyValue="True" EmptyValue="False" />
+        
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadingConverter" DesierdState="Downloading" />
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
         <converters:DLSSStateVisibilityConverter x:Key="IsNotFoundConverter" DesierdState="NotFound" />
@@ -156,6 +157,17 @@
                         <TextBlock Grid.Column="0" Grid.Row="3" Text="DLSS Ray Reconstruction" FontWeight="Bold" />
                         <Button Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_D.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
+                        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+                            <TextBlock Text="DLSS Preset" FontWeight="Bold"/>
+                            <FontIcon Glyph="&#xE73E;" Visibility="{x:Bind ViewModel.IsDlssPresetSaved, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter }}" Margin="5,0,0,0"/>
+                            <ProgressRing Visibility="{x:Bind ViewModel.IsDlssPresetSaved, Mode=OneWay, Converter={StaticResource BoolToInvisibilityConverter }}" Width="16" Height="16" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" Grid.Row="4"
+                            ItemsSource="{x:Bind ViewModel.DlssPresetOptions}"
+                            SelectedItem="{x:Bind ViewModel.SelectedDlssPreset, Mode=TwoWay}"
+                            DisplayMemberPath="Label"
+                            IsEnabled="{x:Bind ViewModel.DlssPresetOptions, Mode=OneWay, Converter={StaticResource EmptyCollectionToObjectConverter}}"
+                        />
                     </Grid>
 
 

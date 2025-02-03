@@ -55,7 +55,31 @@ internal partial class SettingsPageModel : ObservableObject
     
     [ObservableProperty]
     public partial bool AllowDebugDlls { get; set; } = false;
-    
+
+    [ObservableProperty]
+    public partial bool HideNonDownloadedDlssDlls { get; set; } = false;
+
+    [ObservableProperty]
+    public partial bool HideNonDownloadedDlssFgDlls { get; set; } = false;
+
+    [ObservableProperty]
+    public partial bool HideNonDownloadedDlssRrDlss { get; set; } = false;
+
+    [ObservableProperty]
+    public partial bool HideNonDownloadedFsrDx12Dlls { get; set; } = false;
+
+    [ObservableProperty]
+    public partial bool HideNonDownloadedFsrVulkanDlls { get; set; } = false;
+
+    [ObservableProperty]
+    public partial bool HideNonDownloadedXessDlls { get; set; } = false;
+
+    [ObservableProperty]
+    public partial bool HideNonDownloadedXellDlls { get; set; } = false;
+
+    [ObservableProperty]
+    public partial bool HideNonDownloadedXessFgDlls { get; set; } = false;
+
     [ObservableProperty]
     public partial LoggingLevel LoggingLevel { get; set; } = LoggingLevel.Error;
 
@@ -90,6 +114,16 @@ internal partial class SettingsPageModel : ObservableObject
         DlssLoggingToWindow = _dlssSettingsManager.GetLoggingWindow();
         AllowUntrusted = Settings.Instance.AllowUntrusted;
         AllowDebugDlls = Settings.Instance.AllowDebugDlls;
+
+        HideNonDownloadedDlssDlls = Settings.Instance.HideNotDownloadedDlssVersions;
+        HideNonDownloadedDlssFgDlls = Settings.Instance.HideNotDownloadedDlssFgVersions;
+        HideNonDownloadedDlssRrDlss = Settings.Instance.HideNotDownloadedDlssRrVersions;
+        HideNonDownloadedFsrDx12Dlls = Settings.Instance.HideNotDownloadedFsrDx12Versions;
+        HideNonDownloadedFsrVulkanDlls = Settings.Instance.HideNotDownloadedFsrVulkanVersions;
+        HideNonDownloadedXessDlls = Settings.Instance.HideNotDownloadedXessVersions;
+        HideNonDownloadedXellDlls = Settings.Instance.HideNotDownloadedXellVersions;
+        HideNonDownloadedXessFgDlls = Settings.Instance.HideNotDownloadedXessFgVersions;
+
         LoggingLevel = Settings.Instance.LoggingLevel;
 
         _hasSetDefaults = true;
@@ -164,7 +198,39 @@ internal partial class SettingsPageModel : ObservableObject
             Settings.Instance.AllowDebugDlls = AllowDebugDlls;
             App.CurrentApp.MainWindow.FilterDLLRecords();
         }
-        else if (e.PropertyName == nameof(LoggingLevel))
+        else if (e.PropertyName == nameof(HideNonDownloadedDlssDlls))
+        {
+            Settings.Instance.HideNotDownloadedDlssVersions = HideNonDownloadedDlssDlls;
+        }
+        else if (e.PropertyName == nameof(HideNonDownloadedDlssFgDlls))
+        {
+            Settings.Instance.HideNotDownloadedDlssFgVersions = HideNonDownloadedDlssFgDlls;
+        }
+        else if (e.PropertyName == nameof(HideNonDownloadedDlssRrDlss))
+        {
+            Settings.Instance.HideNotDownloadedDlssRrVersions = HideNonDownloadedDlssRrDlss;
+        }
+        else if (e.PropertyName == nameof(HideNonDownloadedFsrDx12Dlls))
+        {
+            Settings.Instance.HideNotDownloadedFsrDx12Versions = HideNonDownloadedFsrDx12Dlls;
+        }
+        else if (e.PropertyName == nameof(HideNonDownloadedFsrVulkanDlls))
+        {
+            Settings.Instance.HideNotDownloadedFsrVulkanVersions = HideNonDownloadedFsrVulkanDlls;
+        }
+        else if (e.PropertyName == nameof(HideNonDownloadedXessDlls))
+        {
+            Settings.Instance.HideNotDownloadedXessVersions = HideNonDownloadedXessDlls;
+        }
+        else if (e.PropertyName == nameof(HideNonDownloadedXellDlls))
+        {
+            Settings.Instance.HideNotDownloadedXellVersions = HideNonDownloadedXellDlls;
+        }
+        else if (e.PropertyName == nameof(HideNonDownloadedXessFgDlls))
+        {
+            Settings.Instance.HideNotDownloadedXessFgVersions = HideNonDownloadedXessFgDlls;
+        }
+        else if (e.PropertyName == nameof(LoggingLevel)) 
         {
             Settings.Instance.LoggingLevel = LoggingLevel;
             Logger.ChangeLoggingLevel(LoggingLevel);

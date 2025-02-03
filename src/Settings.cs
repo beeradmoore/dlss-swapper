@@ -279,6 +279,141 @@ namespace DLSS_Swapper
             }
         }
 
+        bool _hideNotDownloadedDlssVersions = false;
+        public bool HideNotDownloadedDlssVersions
+        {
+            get { return _hideNotDownloadedDlssVersions; }
+            set
+            {
+                if (_hideNotDownloadedDlssVersions != value)
+                {
+                    _hideNotDownloadedDlssVersions = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        bool _hideNotDownloadedDlssFgVersions = false;
+        public bool HideNotDownloadedDlssFgVersions
+        {
+            get { return _hideNotDownloadedDlssFgVersions; }
+            set
+            {
+                if (_hideNotDownloadedDlssFgVersions != value)
+                {
+                    _hideNotDownloadedDlssFgVersions = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        bool _hideNotDownloadedDlssRrVersions = false;
+        public bool HideNotDownloadedDlssRrVersions
+        {
+            get { return _hideNotDownloadedDlssRrVersions; }
+            set
+            {
+                if (_hideNotDownloadedDlssRrVersions != value)
+                {
+                    _hideNotDownloadedDlssRrVersions = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        bool _hideNotDownloadedFsrDx12Versions = false;
+        public bool HideNotDownloadedFsrDx12Versions
+        {
+            get { return _hideNotDownloadedFsrDx12Versions; }
+            set
+            {
+                if (_hideNotDownloadedFsrDx12Versions != value)
+                {
+                    _hideNotDownloadedFsrDx12Versions = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        bool _hideNotDownloadedFsrVulkanVersions = false;
+        public bool HideNotDownloadedFsrVulkanVersions
+        {
+            get { return _hideNotDownloadedFsrVulkanVersions; }
+            set
+            {
+                if (_hideNotDownloadedFsrVulkanVersions != value)
+                {
+                    _hideNotDownloadedFsrVulkanVersions = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        bool _hideNotDownloadedXessVersions = false;
+        public bool HideNotDownloadedXessVersions
+        {
+            get { return _hideNotDownloadedXessVersions; }
+            set
+            {
+                if (_hideNotDownloadedXessVersions != value)
+                {
+                    _hideNotDownloadedXessVersions = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        bool _hideNotDownloadedXellVersions = false;
+        public bool HideNotDownloadedXellVersions
+        {
+            get { return _hideNotDownloadedXellVersions; }
+            set
+            {
+                if (_hideNotDownloadedXellVersions != value)
+                {
+                    _hideNotDownloadedXellVersions = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        bool _hideNotDownloadedXessFgVersions = false;
+        public bool HideNotDownloadedXessFgVersions
+        {
+            get { return _hideNotDownloadedXessFgVersions; }
+            set
+            {
+                if (_hideNotDownloadedXessFgVersions != value)
+                {
+                    _hideNotDownloadedXessFgVersions = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
 
 
 

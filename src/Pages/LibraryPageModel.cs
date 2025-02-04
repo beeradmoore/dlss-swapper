@@ -375,6 +375,16 @@ Only import dlls from sources you trust.",
             Settings.Instance.HasShownWarning = true;
         }
 
+        var sorryDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        {
+            Title = "Sorry",
+            CloseButtonText = "Okay",
+            DefaultButton = ContentDialogButton.Close,
+            Content = @"Import system is currently broken, but it is on the roadmap to be fixed.",
+        };
+        await sorryDialog.ShowAsync();
+        return;
+
         var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
         var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
         openPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;

@@ -1,4 +1,5 @@
 ﻿using DLSS_Swapper.Data;
+using DLSS_Swapper.Pages;
 using Microsoft.UI.Xaml;
 using System;
 using System.Collections;
@@ -271,6 +272,41 @@ namespace DLSS_Swapper
                 if (_lastWindowSizeAndPosition != value)
                 {
                     _lastWindowSizeAndPosition = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        GameGridViewType _gameGridViewType = GameGridViewType.GridView;
+        public GameGridViewType GameGridViewType
+        {
+            get { return _gameGridViewType; }
+            set
+            {
+                if (_gameGridViewType != value)
+                {
+                    _gameGridViewType = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+
+        int _gridViewItemWidth = 200;
+        public int GridViewItemWidth
+        {
+            get { return _gridViewItemWidth; }
+            set
+            {
+                if (_gridViewItemWidth != value)
+                {
+                    _gridViewItemWidth = value;
                     if (_autoSave)
                     {
                         SaveJson();

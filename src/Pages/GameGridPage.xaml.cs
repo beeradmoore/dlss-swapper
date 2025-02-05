@@ -37,6 +37,7 @@ using System.CodeDom;
 using System.Collections.Concurrent;
 using AsyncAwaitBestPractices;
 using CommunityToolkit.WinUI;
+using System.Threading;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -63,6 +64,7 @@ namespace DLSS_Swapper.Pages
         */
         
         bool _loadingGamesAndDlls = false;
+        Timer? _saveScrollSizeTimer = null;
 
         public GameGridPageModel ViewModel { get; private set; }
 
@@ -288,11 +290,81 @@ namespace DLSS_Swapper.Pages
 
         internal void ScrollToGame(Game game)
         {
-            App.CurrentApp.RunOnUIThreadAsync(async () =>
+            if (MainContentControl.ContentTemplateRoot is GridView mainGridView)
             {
-                await MainGridView.SmoothScrollIntoViewWithItemAsync(game);
-            }).SafeFireAndForget();
+                App.CurrentApp.RunOnUIThreadAsync(async () =>
+                {
+                    await mainGridView.SmoothScrollIntoViewWithItemAsync(game, ScrollItemPlacement.Center);
+                }).SafeFireAndForget();
+            }
+            else if (MainContentControl.ContentTemplateRoot is ListView mainListView)
+            {
+                App.CurrentApp.RunOnUIThreadAsync(async () =>
+                {
+                    await mainListView.SmoothScrollIntoViewWithItemAsync(game, ScrollItemPlacement.Center);
+                }).SafeFireAndForget();
+            }           
+        }
+
+        internal void ReloadMainContentControl()
+        {
+            MainContentControl.Content = null;
+            MainContentControl.Content = ViewModel;
+        }
+
+        // This fires for both the GridView and the ListView
+        void GridAndListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is Game selectedGame)
+            {
+                if (selectedGame.Processing)
+                {
+                    var dialog = new EasyContentDialog(XamlRoot)
+                    {
+                        Title = "Game Currently Processing",
+                        CloseButtonText = "Okay",
+                        Content = $"{selectedGame.Title} is still processing. Please wait for the loading indicator to complete before opening.",
+                    };
+                    _ = dialog.ShowAsync();
+                    return;
+                }
+
+                var gameControl = new GameControl(selectedGame);
+                _ = gameControl.ShowAsync();
+            }
+        }
+
+
+        void MainGridView_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
+        {
+            if (e.KeyModifiers.HasFlag(VirtualKeyModifiers.Control))
+            {
+                var delta = e.GetCurrentPoint((UIElement)sender).Properties.MouseWheelDelta;
+
+                if (sender is GridView gridView)
+                {
+                    double scaleAmount = delta > 0 ? 1.05 : 0.95;
+                    var newWidth = (int)(ViewModel.GridViewItemWidth * scaleAmount);
+
+                    if (newWidth > 60 && newWidth < 600)
+                    {
+                        ViewModel.GridViewItemWidth = newWidth;
+
+                        if (_saveScrollSizeTimer is not null)
+                        {
+                            _saveScrollSizeTimer.Dispose();
+                            _saveScrollSizeTimer = null;
+                        }
+                        
+                        _saveScrollSizeTimer = new Timer((state) =>
+                        {
+                            Settings.Instance.GridViewItemWidth = ViewModel.GridViewItemWidth;
+                        }, null, 500, Timeout.Infinite);                        
+                    }
+                }
+
+                e.Handled = true;
+            }
         }
     }
-
 }

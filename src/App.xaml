@@ -52,9 +52,6 @@
                             <Color x:Key="ButtonPressedBackgroundColor">#EDEDED</Color>
                             <Color x:Key="ButtonPressedForegroundColor">#5F5F5F</Color>
                         </ResourceDictionary>
-                        <ResourceDictionary x:Key="HighContrast">
-
-                        </ResourceDictionary>
                     </ResourceDictionary.ThemeDictionaries>
                 </ResourceDictionary>
 

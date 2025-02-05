@@ -1,0 +1,81 @@
+name: 🐞 Bug report
+description: Create a report to help us improve
+title: "[BUG] "
+labels: ["bug"]
+
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thank you for reporting a bug! Please fill out the form below with as much detail as possible.
+
+- type: textarea
+  id: bug_description
+  attributes:
+    label: Describe the bug
+    description: A clear and concise description of what the bug is.
+    placeholder: Describe the bug...
+  validations:
+    required: true
+
+- type: textarea
+  id: to_reproduce
+  attributes:
+    label: Steps To Reproduce
+    description: Steps to reproduce the behavior
+    placeholder: |
+      1. Go to '...'
+      2. Click on '...'
+      3. Scroll down to '...'
+      4. See error
+  validations:
+    required: true
+
+- type: textarea
+  id: expected_behavior
+  attributes:
+    label: Expected behavior
+    description: A clear and concise description of what you expected to happen.
+    placeholder: Describe expected behavior...
+  validations:
+    required: true
+
+- type: textarea
+  id: logs
+  attributes:
+    label: Logs
+    description: If relevant please attach your log file. See the Settings screen in DLSS Swapper for the location of your current log file.
+    placeholder: Attach logs here...
+
+- type: textarea
+  id: screenshots
+  attributes:
+    label: Screenshots
+    description: If applicable, add screenshots to help explain your problem.
+    placeholder: Paste screenshots here...
+
+- type: textarea
+  id: additional_context
+  attributes:
+    label: Additional context
+    description: Add any other context about the problem here.
+    placeholder: Provide additional context...
+
+- type: input
+  id: dlss_swapper_version
+  attributes:
+    label: DLSS Swapper version
+    placeholder: e.g. 1.2.3
+  validations:
+    required: true
+
+- type: input
+  id: windows_version
+  attributes:
+    label: "Windows version"
+    description: |
+      Please provide the full Windows version you are using.
+      To get that, press `Win` + `R` on your keyboard to open the Run prompt, then type `winver`.
+    placeholder: "e.g. Version 24H2 (OS Build 26100.3037)"
+  validations:
+    required: true

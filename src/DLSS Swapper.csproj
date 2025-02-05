@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
+    <AssemblyName>DLSS Swapper</AssemblyName>
     <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <RootNamespace>DLSS_Swapper</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x64</Platforms>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
-    <PublishProfile>win-x64.pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsPackageType>None</WindowsPackageType>
@@ -16,9 +16,12 @@
     <PackageIcon>Asssets\icon_256.png</PackageIcon>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <Version>1.1.4.0</Version>
+    <Version>1.1.5.0</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
+    <PublishSingleFile>false</PublishSingleFile>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -91,6 +94,7 @@
     <None Remove="UserControls\DLLPickerControl.xaml" />
     <None Remove="UserControls\GameControl.xaml" />
     <None Remove="UserControls\ManuallyAddGameControl.xaml" />
+    <None Remove="UserControls\MultipleDLLsFoundControl.xaml" />
     <None Remove="UserControls\NewDLLsControl.xaml" />
   </ItemGroup>
 
@@ -284,6 +288,9 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Page Update="UserControls\MultipleDLLsFoundControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
         <Page Update="UserControls\NewDLLsControl.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>

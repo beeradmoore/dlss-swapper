@@ -38,19 +38,20 @@ namespace DLSS_Swapper.Pages
         {
             // via: https://stackoverflow.com/a/41141249
             var columns = Math.Ceiling(MainGridView.ActualWidth / 400);
-            ((ItemsWrapGrid)MainGridView.ItemsPanelRoot).ItemWidth = e.NewSize.Width / columns;
+            ((ItemsWrapGrid)MainGridView.ItemsPanelRoot).ItemWidth = (e.NewSize.Width / columns) - 1;
         }
 
-        async void MainGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SelectorBar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
         {
-            if (e.AddedItems.Count == 0)
+            if (sender.SelectedItem.Tag is GameAssetType gameAssetType)
             {
-                return;
+                ViewModel.SelectLibrary(gameAssetType);
             }
+        }
 
-            MainGridView.SelectedIndex = -1;
-
-            if (e.AddedItems[0] is DLLRecord dllRecord)
+        private void MainGridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is DLLRecord dllRecord)
             {
                 var dialog = new EasyContentDialog(XamlRoot)
                 {
@@ -59,7 +60,7 @@ namespace DLSS_Swapper.Pages
                     DefaultButton = ContentDialogButton.Close,
                     Content = new DLSSRecordInfoControl(dllRecord),
                 };
-                await dialog.ShowAsync();
+                _ = dialog.ShowAsync();
             }
         }
     }

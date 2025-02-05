@@ -112,7 +112,15 @@ namespace DLSS_Swapper.Data
 
         [ObservableProperty]
         [Ignore]
+        public partial bool MultipleDLSSFound { get; set; } = false;
+
+        [ObservableProperty]
+        [Ignore]
         public partial GameAsset? CurrentDLSS_G { get; set; } = null;
+
+        [ObservableProperty]
+        [Ignore]
+        public partial bool MultipleDLSSGFound { get; set; } = false;
 
         [ObservableProperty]
         [Ignore]
@@ -120,7 +128,15 @@ namespace DLSS_Swapper.Data
 
         [ObservableProperty]
         [Ignore]
+        public partial bool MultipleDLSSDFound { get; set; } = false;
+
+        [ObservableProperty]
+        [Ignore]
         public partial GameAsset? CurrentFSR_31_DX12 { get; set; } = null;
+
+        [ObservableProperty]
+        [Ignore]
+        public partial bool MultipleFSR31DX12Found { get; set; } = false;
 
         [ObservableProperty]
         [Ignore]
@@ -128,7 +144,15 @@ namespace DLSS_Swapper.Data
 
         [ObservableProperty]
         [Ignore]
+        public partial bool MultipleFSR31VKFound { get; set; } = false;
+
+        [ObservableProperty]
+        [Ignore]
         public partial GameAsset? CurrentXeSS { get; set; } = null;
+
+        [ObservableProperty]
+        [Ignore]
+        public partial bool MultipleXeSSFound { get; set; } = false;
 
         [ObservableProperty]
         [Ignore]
@@ -136,7 +160,15 @@ namespace DLSS_Swapper.Data
 
         [ObservableProperty]
         [Ignore]
+        public partial bool MultipleXeLLFound { get; set; } = false;
+
+        [ObservableProperty]
+        [Ignore]
         public partial GameAsset? CurrentXeSS_FG { get; set; } = null;
+
+        [ObservableProperty]
+        [Ignore]
+        public partial bool MultipleXeSSFGFound { get; set; } = false;
 
         protected void SetID()
         {
@@ -498,57 +530,58 @@ namespace DLSS_Swapper.Data
                 Logger.Info("No backup records found.");
                 return (false, "Unable to reset to default. Please repair your game manually.", false);
             }
-            else if (existingBackupRecords.Count == 1)
+            else
             {
-                var existingBackupRecord = existingBackupRecords[0];
-
-                var primaryRecordName = existingBackupRecord.Path.Replace(".dlsss", string.Empty);
-                var existingRecords = this.GameAssets.Where(x => x.AssetType == gameAssetType && x.Path.Equals(primaryRecordName)).ToList();
-
-                if (existingRecords.Count != 1)
+                foreach (var existingBackupRecord in existingBackupRecords)
                 {
-                    Logger.Info("Backup record was found, existing records were not.");
-                    return (false, "Unable to reset to default. Please repair your game manually.", false);
-                }
+                    var primaryRecordName = existingBackupRecord.Path.Replace(".dlsss", string.Empty);
+                    var existingRecords = this.GameAssets.Where(x => x.AssetType == gameAssetType && x.Path.Equals(primaryRecordName)).ToList();
 
-                var existingRecord = existingRecords[0];
-
-                try
-                {
-                    File.Move(existingBackupRecord.Path, existingRecord.Path, true);
-                }
-                catch (UnauthorizedAccessException err)
-                {
-                    Logger.Error($"UnauthorizedAccessException: {err.Message}");
-                    if (App.CurrentApp.IsAdminUser() is false)
+                    if (existingRecords.Count != 1)
                     {
-                        return (false, "Unable to reset to default. Running DLSS Swapper as administrator may fix this.", true);
-                    }
-                    else
-                    {
+                        Logger.Info("Backup record was found, existing records were not.");
                         return (false, "Unable to reset to default. Please repair your game manually.", false);
                     }
+
+                    var existingRecord = existingRecords[0];
+
+                    try
+                    {
+                        File.Move(existingBackupRecord.Path, existingRecord.Path, true);
+                    }
+                    catch (UnauthorizedAccessException err)
+                    {
+                        Logger.Error($"UnauthorizedAccessException: {err.Message}");
+                        if (App.CurrentApp.IsAdminUser() is false)
+                        {
+                            return (false, "Unable to reset to default. Running DLSS Swapper as administrator may fix this.", true);
+                        }
+                        else
+                        {
+                            return (false, "Unable to reset to default. Please repair your game manually.", false);
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        Logger.Error(err.Message);
+                        return (false, "Unable to reset to default. Please repair your game manually.", false);
+                    }
+
+                    var newGameAsset = new GameAsset()
+                    {
+                        Id = ID,
+                        AssetType = gameAssetType,
+                        Path = existingRecord.Path,
+                        Version = existingBackupRecord.Version,
+                        Hash = existingBackupRecord.Hash,
+                    };
+
+                    UpdateCurrentAsset(newGameAsset, gameAssetType);
+
+                    GameAssets.Remove(existingRecord);
+                    GameAssets.Remove(existingBackupRecord);
+                    GameAssets.Add(newGameAsset);
                 }
-                catch (Exception err)
-                {
-                    Logger.Error(err.Message);
-                    return (false, "Unable to reset to default. Please repair your game manually.", false);
-                }
-
-                var newGameAsset = new GameAsset()
-                {
-                    Id = ID,
-                    AssetType = gameAssetType,
-                    Path = existingRecord.Path,
-                    Version = existingBackupRecord.Version,
-                    Hash = existingBackupRecord.Hash,
-                };
-
-                UpdateCurrentAsset(newGameAsset, gameAssetType);
-
-                GameAssets.Remove(existingRecord);
-                GameAssets.Remove(existingBackupRecord);
-                GameAssets.Add(newGameAsset);
 
                 // Update game assets list by deleting and re-adding.
                 using (await Database.Instance.Mutex.LockAsync())
@@ -558,11 +591,6 @@ namespace DLSS_Swapper.Data
                 }
 
                 return (true, string.Empty, false);
-            }
-            else
-            {
-                Logger.Error("Expected 1 backup records. Founds more.");
-                return (false, "Unable to reset to default. Please repair your game manually.", false);
             }
         }
 
@@ -1256,6 +1284,15 @@ namespace DLSS_Swapper.Data
             CurrentXeSS = null;
             CurrentXeLL = null;
             CurrentXeSS_FG = null;
+
+            MultipleDLSSFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS) > 1;
+            MultipleDLSSGFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS_G) > 1;
+            MultipleDLSSDFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS_D) > 1;
+            MultipleFSR31DX12Found = GameAssets.Count(x => x.AssetType == GameAssetType.FSR_31_DX12) > 1;
+            MultipleFSR31VKFound = GameAssets.Count(x => x.AssetType == GameAssetType.FSR_31_VK) > 1;
+            MultipleXeSSFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS) > 1;
+            MultipleXeLLFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeLL) > 1;
+            MultipleXeSSFGFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS_FG) > 1;
 
             foreach (var gameAsset in GameAssets)
             {

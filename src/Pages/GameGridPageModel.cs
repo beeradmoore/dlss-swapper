@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -25,9 +26,18 @@ using Windows.UI.Text;
 
 namespace DLSS_Swapper.Pages;
 
+public enum GameGridViewType
+{
+    GridView,
+    ListView,
+}
+
 public partial class GameGridPageModel : ObservableObject
 {
     GameGridPage gameGridPage;
+
+    [ObservableProperty]
+    public partial Game? SelectedGame { get; set; } = null;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLoading))]
@@ -41,6 +51,27 @@ public partial class GameGridPageModel : ObservableObject
 
     [ObservableProperty]
     public partial ICollectionView? CurrentCollectionView { get; set; } = null;
+
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(GridViewItemHeight))]
+    public partial int GridViewItemWidth { get; set; } = Settings.Instance.GridViewItemWidth;
+
+    public int GridViewItemHeight => (int)(GridViewItemWidth * 1.5);
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(GameGridViewIcon))]
+    public partial GameGridViewType GameGridViewType { get; set; } = Settings.Instance.GameGridViewType;
+
+    public FontIcon GameGridViewIcon => GameGridViewType switch
+    {
+        GameGridViewType.GridView => new FontIcon() { Glyph = "\xF0E2" },
+        GameGridViewType.ListView => new FontIcon() { Glyph = "\xE8FD" },
+        _ => new FontIcon() { },
+    }; 
+
+
+
 
     public GameGridPageModel(GameGridPage gameGridPage)
     {
@@ -331,6 +362,19 @@ If you have checked these and your game is still not showing up there may be a b
         dialog.Resources["ContentDialogMinWidth"] = 700;
         dialog.Resources["ContentDialogMaxWidth"] = 700;
         await dialog.ShowAsync();
+    }
+
+    [RelayCommand]
+    void ChangeGameGridView(GameGridViewType gameGridView)
+    {
+        if (gameGridView == this.GameGridViewType)
+        {
+            return;
+        }
+
+        GameGridViewType = gameGridView;
+        gameGridPage.ReloadMainContentControl();
+        Settings.Instance.GameGridViewType = gameGridView;
     }
 
 }

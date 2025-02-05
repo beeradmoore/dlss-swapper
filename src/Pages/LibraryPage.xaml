@@ -28,6 +28,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -61,20 +62,22 @@
                  Message="This app is running with administrative privileges."
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
-        <GridView Grid.Row="2" x:Name="MainGridView" ItemsSource="{x:Bind ViewModel.LibraryCollectionViewSource.View, Mode=OneWay}" SizeChanged="MainGridView_SizeChanged" SelectionChanged="MainGridView_SelectionChanged" SelectionMode="Single" IsSynchronizedWithCurrentItem="False" Margin="16">
 
-            <GridView.GroupStyle>
-                <GroupStyle HidesIfEmpty="False">
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate x:DataType="data:DLLRecordGroup">
-                            <Grid Margin="0">
-                                <TextBlock Text="{x:Bind Name}" Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                </GroupStyle>
-            </GridView.GroupStyle>
-            
+        <ScrollViewer Grid.Row="2" HorizontalScrollMode="Enabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <SelectorBar SelectionChanged="SelectorBar_SelectionChanged">
+                <SelectorBarItem x:Name="DLSS" Text="DLSS" IsSelected="True" Tag="{x:Bind data:GameAssetType.DLSS}" />
+                <SelectorBarItem x:Name="DLSS_FG" Text="DLSS Frame Generation" Tag="{x:Bind data:GameAssetType.DLSS_G}" />
+                <SelectorBarItem x:Name="DLSS_RR" Text="DLSS Ray Reconstruction" Tag="{x:Bind data:GameAssetType.DLSS_D}" />
+                <SelectorBarItem x:Name="FSR_31_DX12" Text="FSR 3.1 (DirectX 12)" Tag="{x:Bind data:GameAssetType.FSR_31_DX12}" />
+                <SelectorBarItem x:Name="FSR_31_VK" Text="FSR 3.1 (Vulkan)" Tag="{x:Bind data:GameAssetType.FSR_31_VK}"/>
+                <SelectorBarItem x:Name="XeSS" Text="XeSS" Tag="{x:Bind data:GameAssetType.XeSS}" />
+                <SelectorBarItem x:Name="XeSS_FG" Text="XeSS Frame Generation" Tag="{x:Bind data:GameAssetType.XeSS_FG}" />
+                <SelectorBarItem x:Name="XeLL" Text="XeLL" Tag="{x:Bind data:GameAssetType.XeLL}" />
+            </SelectorBar>
+        </ScrollViewer>
+
+        <GridView Grid.Row="3" x:Name="MainGridView" Margin="16" SizeChanged="MainGridView_SizeChanged" ItemsSource="{x:Bind ViewModel.SelectedLibraryList, Mode=OneWay}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="MainGridView_ItemClick">
+          
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <ItemsWrapGrid Orientation="Horizontal"/>

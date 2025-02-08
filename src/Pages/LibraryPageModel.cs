@@ -383,8 +383,7 @@ Only import dlls from sources you trust.",
             Content = @"Import system is currently broken, but it is on the roadmap to be fixed.",
         };
         await sorryDialog.ShowAsync();
-        return;
-
+        /*
         var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
         var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
         openPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
@@ -535,6 +534,7 @@ Only import dlls from sources you trust.",
                 await dialog.ShowAsync();
             }
         }
+        */
     }
 
     [RelayCommand]

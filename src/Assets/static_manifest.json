@@ -1315,6 +1315,20 @@
       "file_size": 44609064,
       "zip_file_size": 32363161,
       "dll_source": "Cyberpunk 2077 2.21"
+    },
+    {
+      "version": "310.2.1.0",
+      "version_number": 87257251370303488,
+      "additional_label": "",
+      "md5_hash": "3A875F45C315D09E5F4548CC9288F178",
+      "zip_md5_hash": "0C1C5ABDE6D2DC309844DEBB38843CAF",
+      "download_url": "https://downloads.dlss-swapper.beeradmoore.com/dlss/nvngx_dlss_v310.2.1.0.zip",
+      "file_description": "NVIDIA DLSS - DVS PRODUCTION",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 48971832,
+      "zip_file_size": 35563423,
+      "dll_source": "NVIDIA Driver"
     }
   ],
   "dlss_d": [
@@ -1429,6 +1443,20 @@
       "file_size": 65630248,
       "zip_file_size": 32844236,
       "dll_source": "Cyberpunk 2077 2.21"
+    },
+    {
+      "version": "310.2.0.0",
+      "version_number": 87257251370237952,
+      "additional_label": "",
+      "md5_hash": "E6081B848EA68880DB8ADC83CDFB15DC",
+      "zip_md5_hash": "6F1A582CB26B6AF01759B19AEEB6B760",
+      "download_url": "https://downloads.dlss-swapper.beeradmoore.com/dlss_d/nvngx_dlssd_v310.2.0.0.zip",
+      "file_description": "NVIDIA DLSS - DVS PRODUCTION",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 72957992,
+      "zip_file_size": 36030730,
+      "dll_source": "NVIDIA Driver"
     }
   ],
   "dlss_g": [
@@ -1725,6 +1753,20 @@
       "file_size": 7607336,
       "zip_file_size": 3798898,
       "dll_source": "Cyberpunk 2077 2.21"
+    },
+    {
+      "version": "310.2.0.0",
+      "version_number": 87257251370237952,
+      "additional_label": "",
+      "md5_hash": "26C2EAFE046CDD403A1850F71186595C",
+      "zip_md5_hash": "9CF95F0692EC3E447AE28F61F2B79E23",
+      "download_url": "https://downloads.dlss-swapper.beeradmoore.com/dlss_g/nvngx_dlssg_v310.2.0.0.zip",
+      "file_description": "NVIDIA DLSS-G MFGLW - DVS PRODUCTION",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 7595560,
+      "zip_file_size": 3791822,
+      "dll_source": "NVIDIA Driver"
     }
   ],
   "fsr_31_dx12": [

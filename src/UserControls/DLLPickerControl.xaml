@@ -8,6 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:DLSS_Swapper.Converters"
+    xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
     d:DataContext="{d:DesignInstance Type=usercontrols:DLLPickerControlModel, IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
 
@@ -16,6 +17,8 @@
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
         <converters:DLSSStateVisibilityConverter x:Key="IsNotFoundConverter" DesierdState="NotFound" />
         <converters:DLSSStateVisibilityConverter x:Key="IsImportedConverter" DesierdState="Imported" />
+        <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
     </UserControl.Resources>
     
     <Grid>
@@ -48,7 +51,17 @@
             </InfoBar.ActionButton>
         </InfoBar>
 
-        <ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.DLLRecords}" SelectedItem="{x:Bind ViewModel.SelectedDLLRecord, Mode=TwoWay}" MaxHeight="400">
+
+        <InfoBar Grid.Row="1"
+              Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+              Severity="Informational"
+              IsOpen="True"
+              IsClosable="False"        
+              Title="No DLLs Found"                 
+              Message="Please go to the libary page to download new DLLs.">
+        </InfoBar>
+
+        <ListView Grid.Row="1" Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" ItemsSource="{x:Bind ViewModel.DLLRecords}" SelectedItem="{x:Bind ViewModel.SelectedDLLRecord, Mode=TwoWay}" MaxHeight="400">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:DLLRecord">
                     <Grid HorizontalAlignment="Stretch">

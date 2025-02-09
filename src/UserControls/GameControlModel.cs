@@ -205,7 +205,7 @@ public partial class GameControlModel : ObservableObject
                 DefaultButton = ContentDialogButton.Primary,
             };
 
-            var dllPickerControl = new DLLPickerControl(dialog, Game, gameAssetType);
+            var dllPickerControl = new DLLPickerControl(gameControlWeakReference, dialog, Game, gameAssetType);
             dialog.Content = dllPickerControl;
             await dialog.ShowAsync();
         }

@@ -18,6 +18,7 @@ public partial class DLLPickerControlModel : ObservableObject
 {
     WeakReference<DLLPickerControl> dllPickerControlWeakReference;
     WeakReference<EasyContentDialog> parentDialogWeakReference;
+    WeakReference<GameControl> _gameControlWeakReference;
 
     public Game Game { get; private set; }
     public GameAssetType GameAssetType { get; private set; }
@@ -33,10 +34,15 @@ public partial class DLLPickerControlModel : ObservableObject
     [ObservableProperty]
     public partial bool CanSwap { get; set; } = false;
 
+    [ObservableProperty]
+    public partial bool AnyDLLsVisible { get; set; } = false;
+
     public bool CanCloseParentDialog { get; set; } = false;
 
-    public DLLPickerControlModel(EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType)
+    public DLLPickerControlModel(WeakReference<GameControl> gameControlWeakReference, EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType)
     {
+        _gameControlWeakReference = gameControlWeakReference;
+
         parentDialogWeakReference = new WeakReference<EasyContentDialog>(parentDialog);
         parentDialog.Closing += (ContentDialog sender, ContentDialogClosingEventArgs args) =>
         {
@@ -131,6 +137,8 @@ public partial class DLLPickerControlModel : ObservableObject
                 }
             }
         }
+
+        AnyDLLsVisible = DLLRecords.Count > 0;
 
         ResetSelection();
     }

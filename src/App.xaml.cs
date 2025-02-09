@@ -64,17 +64,7 @@ namespace DLSS_Swapper
 
             UnhandledException += App_UnhandledException;
 
-            var version = GetVersion();
-            var versionString = string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
-
-
-            Logger.Info($"App launch - v{versionString}", null);
-
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper v{versionString}");
-
             GlobalElementTheme = Settings.Instance.AppTheme;
-
-            Database.Instance.Init();
 
             this.InitializeComponent();
         }
@@ -90,9 +80,45 @@ namespace DLSS_Swapper
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
+            var version = GetVersion();
+            var versionString = string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper v{versionString}");
+            _httpClient.Timeout = TimeSpan.FromSeconds(15);
+
+            // If this is the first instance launched, then register it as the "main" instance.
+            // If this isn't the first instance launched, then "main" will already be registered,
+            // so retrieve it.
+            var mainInstance = Microsoft.Windows.AppLifecycle.AppInstance.FindOrRegisterForKey("main");
+
+            // If the instance that's executing the OnLaunched handler right now
+            // isn't the "main" instance.
+            if (mainInstance.IsCurrent == false)
+            {
+                // Redirect the activation (and args) to the "main" instance, and exit.
+                var activatedEventArgs = Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
+                await mainInstance.RedirectActivationToAsync(activatedEventArgs);
+                Process.GetCurrentProcess().Kill();
+                return;
+            }
+
+            if (true || Environment.SystemDirectory.Equals(Storage.StoragePath, StringComparison.InvariantCultureIgnoreCase))
+            {
+                var failToLaunchWindow = new FailToLaunchWindow();
+                failToLaunchWindow.Activate();
+                return;
+            }
+
+            Logger.Info($"App launch - v{versionString}", null);
+
+            Logger.Error($"Storage: {Storage.StoragePath}");
+
+            Database.Instance.Init();
+
             MainWindow.Activate();
+
 
             // No need to calculate this for portable app.
 #if !PORTABLE

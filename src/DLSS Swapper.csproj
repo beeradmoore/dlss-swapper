@@ -89,6 +89,7 @@
     <None Remove="Assets\Wide310x150Logo.scale-200.png" />
     <None Remove="Assets\Wide310x150Logo.scale-400.png" />
     <None Remove="DLSS Swapper_TemporaryKey.pfx" />
+    <None Remove="FailToLaunchWindow.xaml" />
     <None Remove="global.json" />
     <None Remove="Themes\FakeContentDialogStyle.xaml" />
     <None Remove="UserControls\DLLPickerControl.xaml" />
@@ -288,6 +289,9 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Page Update="FailToLaunchWindow.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
         <Page Update="UserControls\MultipleDLLsFoundControl.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>

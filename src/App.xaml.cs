@@ -50,8 +50,32 @@ namespace DLSS_Swapper
         //internal Manifest Manifest { get; } = new Manifest();
         internal Manifest ImportedManifest { get; } = new Manifest();
 
-        internal HttpClient _httpClient = new HttpClient();
-        public HttpClient HttpClient => _httpClient;
+        internal HttpClient? _httpClient;
+        public HttpClient HttpClient
+        {
+            get
+            {
+                if (_httpClient is null)
+                {
+                    var version = GetVersion();
+                    var versionString = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+
+                    var httpClientHandler = new HttpClientHandler()
+                    {
+                        AutomaticDecompression = System.Net.DecompressionMethods.All,
+                        UseCookies = true,
+                        CookieContainer = new System.Net.CookieContainer(),
+                        AllowAutoRedirect = true,
+                    };
+
+                    _httpClient = new HttpClient(httpClientHandler);
+                    _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper/{versionString}");
+                    _httpClient.Timeout = TimeSpan.FromSeconds(20);
+                }
+
+                return _httpClient;
+            }
+        }
 
 
         /// <summary>
@@ -82,12 +106,7 @@ namespace DLSS_Swapper
         /// <param name="args">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
-            var version = GetVersion();
-            var versionString = string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
-
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper v{versionString}");
-            _httpClient.Timeout = TimeSpan.FromSeconds(15);
-
+                        
             // If this is the first instance launched, then register it as the "main" instance.
             // If this isn't the first instance launched, then "main" will already be registered,
             // so retrieve it.
@@ -111,6 +130,8 @@ namespace DLSS_Swapper
                 return;
             }
 
+            var version = GetVersion();
+            var versionString = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
             Logger.Info($"App launch - v{versionString}", null);
 
             Logger.Error($"Storage: {Storage.StoragePath}");

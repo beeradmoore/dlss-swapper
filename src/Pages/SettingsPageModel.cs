@@ -57,7 +57,7 @@ internal partial class SettingsPageModel : ObservableObject
     public partial bool AllowDebugDlls { get; set; } = false;
 
     [ObservableProperty]
-    public partial bool HideNonDownloadedDlls { get; set; } = false;
+    public partial bool OnlyShowDownloadedDlls { get; set; } = false;
 
     [ObservableProperty]
     public partial LoggingLevel LoggingLevel { get; set; } = LoggingLevel.Error;
@@ -93,7 +93,7 @@ internal partial class SettingsPageModel : ObservableObject
         DlssLoggingToWindow = _dlssSettingsManager.GetLoggingWindow();
         AllowUntrusted = Settings.Instance.AllowUntrusted;
         AllowDebugDlls = Settings.Instance.AllowDebugDlls;
-        HideNonDownloadedDlls = Settings.Instance.HideNotDownloadedVersions;
+        OnlyShowDownloadedDlls = Settings.Instance.OnlyShowDownloadedDlls;
         LoggingLevel = Settings.Instance.LoggingLevel;
 
         _hasSetDefaults = true;
@@ -168,9 +168,9 @@ internal partial class SettingsPageModel : ObservableObject
             Settings.Instance.AllowDebugDlls = AllowDebugDlls;
             App.CurrentApp.MainWindow.FilterDLLRecords();
         }
-        else if (e.PropertyName == nameof(HideNonDownloadedDlls))
+        else if (e.PropertyName == nameof(OnlyShowDownloadedDlls))
         {
-            Settings.Instance.HideNotDownloadedVersions = HideNonDownloadedDlls;
+            Settings.Instance.OnlyShowDownloadedDlls = OnlyShowDownloadedDlls;
         }
         else if (e.PropertyName == nameof(LoggingLevel)) 
         {

@@ -315,15 +315,15 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _hideNotDownloadedVersions = false;
-        public bool HideNotDownloadedVersions
+        bool _onlyShowDownloadedDlls = false;
+        public bool OnlyShowDownloadedDlls
         {
-            get { return _hideNotDownloadedVersions; }
+            get { return _onlyShowDownloadedDlls; }
             set
             {
-                if (_hideNotDownloadedVersions != value)
+                if (_onlyShowDownloadedDlls != value)
                 {
-                    _hideNotDownloadedVersions = value;
+                    _onlyShowDownloadedDlls = value;
                     if (_autoSave)
                     {
                         SaveJson();

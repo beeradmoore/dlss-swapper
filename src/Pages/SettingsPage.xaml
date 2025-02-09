@@ -107,11 +107,11 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Hide Not Downloaded DLL Versions" />
+                    Text="Only Show Downloaded DLLs" />
                 <StackPanel Margin="0,10,0,0">
-                    <ToggleSwitch IsOn="{x:Bind ViewModel.HideNonDownloadedDlls, Mode=TwoWay}" OffContent="No" OnContent="Yes" Margin="0,0,0,4" />
+                    <ToggleSwitch IsOn="{x:Bind ViewModel.OnlyShowDownloadedDlls, Mode=TwoWay}" OffContent="No" OnContent="Yes" Margin="0,0,0,4" />
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
-                        This will hide versions of DLLs in the selector screen on the game page that are not yet downloaded.
+                        This only applies to the DLL picker, not the library page.
                     </TextBlock>
                 </StackPanel>
 

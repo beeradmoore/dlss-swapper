@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="DLSS_Swapper.NetworkTesterWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DLSS_Swapper"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
+    mc:Ignorable="d"
+    Title="DLSS Swapper - Network Tester">
+    
+    
+    
+    <Grid Margin="16" ColumnSpacing="12" RowSpacing="12" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.Resources>
+
+            <Style x:Key="TestNumberTextBlock" TargetType="TextBlock">
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="Grid.Column" Value="0" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="TestNameTextBlock" TargetType="TextBlock">
+                <Setter Property="Grid.Column" Value="1" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="TextWrapping" Value="Wrap" />                
+            </Style>
+
+            <Style x:Key="TestButton" BasedOn="{StaticResource DefaultButtonStyle}" TargetType="Button">
+                <Setter Property="Grid.Column" Value="2" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="TestResultsTextBlock" TargetType="TextBlock">
+                <Setter Property="Grid.Column" Value="3" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="TestingProgressRing" TargetType="ProgressRing">
+                <Setter Property="Grid.Column" Value="3" />
+                <Setter Property="IsIndeterminate" Value="True" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock    Grid.Row="0" Style="{StaticResource TestNumberTextBlock}">Test 1:</TextBlock>
+        <TextBlock    Grid.Row="0" Style="{StaticResource TestNameTextBlock}">Accessing google.com from within DLSS Swapper (tests general internet connectivity)</TextBlock>
+        <Button       Grid.Row="0" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest1Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+        <TextBlock    Grid.Row="0" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test1Result, Mode=OneWay}" />
+        <ProgressRing Grid.Row="0" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest1, Mode=OneWay}" />
+
+
+        <TextBlock Grid.Row="1" Style="{StaticResource TestNumberTextBlock}">Test 2:</TextBlock>
+        <TextBlock Grid.Row="1" Style="{StaticResource TestNameTextBlock}">Accessing bing.com from within DLSS Swapper (tests general internet connectivity)</TextBlock>
+        <Button    Grid.Row="1" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest2Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+        <TextBlock Grid.Row="1" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test2Result, Mode=OneWay}" />
+
+
+        <TextBlock Grid.Row="2" Style="{StaticResource TestNumberTextBlock}">Test 3:</TextBlock>
+        <TextBlock Grid.Row="2" Style="{StaticResource TestNameTextBlock}">Downloading DLSS Swapper DLL within DLSS Swapper</TextBlock>
+        <Button    Grid.Row="2" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest3Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+        <TextBlock Grid.Row="2" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test3Result, Mode=OneWay}" />
+
+
+        <TextBlock Grid.Row="3" Style="{StaticResource TestNumberTextBlock}">Test 4:</TextBlock>
+        <TextBlock Grid.Row="3" Style="{StaticResource TestNameTextBlock}">Downlodaing DLSS Swapper DLL from browser</TextBlock>
+        <Button    Grid.Row="3" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest4Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+        <TextBlock Grid.Row="3" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test4Result, Mode=OneWay}" />
+
+
+
+
+        <TextBox Grid.Row="4" Grid.ColumnSpan="4" Header="Results" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Text="{x:Bind ViewModel.TestResults, Mode=OneWay}" />
+
+        <StackPanel Orientation="Horizontal" Spacing="12" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
+            <Button Content="Copy test results" Command="{x:Bind ViewModel.CopyTestResultsCommand}" />
+            <Button Content="Create bug report" Command="{x:Bind ViewModel.CreateBugReportCommand}" />
+        </StackPanel>
+
+    </Grid>
+</Window>

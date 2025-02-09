@@ -171,6 +171,23 @@
                     </Paragraph>
                 </RichTextBlock>
 
+
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Troubleshooting" />
+                <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+                    <RichTextBlock>
+                        <Paragraph Margin="0,12,0,0">
+                            <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting">General troubleshooting guide</Hyperlink>
+                        </Paragraph>
+                        <Paragraph Margin="0,12,0,0">
+                            <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenNetworkTesterCommand}">Network tester</Hyperlink>
+                        </Paragraph>
+                    </RichTextBlock>
+                </StackPanel>
+
             </StackPanel>
         </ScrollViewer>
     </Grid>

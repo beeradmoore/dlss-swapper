@@ -91,6 +91,7 @@
     <None Remove="DLSS Swapper_TemporaryKey.pfx" />
     <None Remove="FailToLaunchWindow.xaml" />
     <None Remove="global.json" />
+    <None Remove="Pages\NetworkTesterWindow.xaml" />
     <None Remove="Themes\FakeContentDialogStyle.xaml" />
     <None Remove="UserControls\DLLPickerControl.xaml" />
     <None Remove="UserControls\GameControl.xaml" />
@@ -289,6 +290,9 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Page Update="Pages\NetworkTesterWindow.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
         <Page Update="FailToLaunchWindow.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>

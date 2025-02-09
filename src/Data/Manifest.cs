@@ -32,4 +32,11 @@ internal class Manifest
     
     [JsonPropertyName("xess_fg")]
     public List<DLLRecord> XeSS_FG { get; set; } = new List<DLLRecord>();
+
+    /// <summary>
+    /// List of known DLLs, not necessarily all those available in DLSS Swapper
+    /// </summary>
+    [JsonPropertyName("known_dlls")]
+    public Dictionary<string, List<CompactKnownDLL>> KnownDLLs { get; set; } = new Dictionary<string, List<CompactKnownDLL>>();
+
 }

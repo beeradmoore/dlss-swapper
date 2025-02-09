@@ -123,7 +123,7 @@ namespace DLSS_Swapper
                 return;
             }
 
-            if (true || Environment.SystemDirectory.Equals(Storage.StoragePath, StringComparison.InvariantCultureIgnoreCase))
+            if (Environment.SystemDirectory.Equals(Storage.StoragePath, StringComparison.InvariantCultureIgnoreCase))
             {
                 var failToLaunchWindow = new FailToLaunchWindow();
                 failToLaunchWindow.Activate();

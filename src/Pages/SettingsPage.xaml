@@ -103,6 +103,18 @@
                     </TextBlock>
                 </StackPanel>
 
+                
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Hide Not Downloaded DLL Versions" />
+                <StackPanel Margin="0,10,0,0">
+                    <ToggleSwitch IsOn="{x:Bind ViewModel.HideNonDownloadedDlls, Mode=TwoWay}" OffContent="No" OnContent="Yes" Margin="0,0,0,4" />
+                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
+                        This will hide versions of DLLs in the selector screen on the game page that are not yet downloaded.
+                    </TextBlock>
+                </StackPanel>
+
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
@@ -120,7 +132,6 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="About" />
-
                 <TextBlock Margin="0,12,0,0">
                     Version: 
                     <Run Text="{x:Bind ViewModel.AppVersion}" />
@@ -148,6 +159,7 @@
                     </Paragraph>
                 </RichTextBlock>
 
+                
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"

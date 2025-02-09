@@ -315,10 +315,22 @@ namespace DLSS_Swapper
             }
         }
 
-
-        
-
-
+        bool _hideNotDownloadedVersions = false;
+        public bool HideNotDownloadedVersions
+        {
+            get { return _hideNotDownloadedVersions; }
+            set
+            {
+                if (_hideNotDownloadedVersions != value)
+                {
+                    _hideNotDownloadedVersions = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
 
         /*
         public List<string> Directories { get; set; } = new List<string>();
@@ -348,9 +360,6 @@ namespace DLSS_Swapper
             }
         }
         */
-
-
-
 
         void SaveJson()
         {

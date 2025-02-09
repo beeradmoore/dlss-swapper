@@ -350,7 +350,7 @@ DLSS Swapper will close now.",
         {
             // Only auto check for updates once every 12 hours.
             var timeSinceLastUpdate = DateTimeOffset.Now - Settings.Instance.LastRecordsRefresh;
-            if (timeSinceLastUpdate.TotalHours > 12)
+            if (timeSinceLastUpdate.TotalMinutes > 5)
             {
                 var didUpdate = await UpdateManifestAsync();
                 if (didUpdate)

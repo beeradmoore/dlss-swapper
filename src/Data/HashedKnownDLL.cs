@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Data;
 
-internal class CompactKnownDLL
+public class HashedKnownDLL
 {
     [JsonPropertyName("hash")]
     public string Hash { get; set; } = string.Empty;
 
+    [JsonPropertyName("version")]
+    public string Version { get; set; } = string.Empty;
+
     [JsonPropertyName("sources")]
-    public List<string> Sources { get; set; } = new List<string>();
+    public Dictionary<string, List<string>> Sources { get; set; } = new Dictionary<string, List<string>>();
 }

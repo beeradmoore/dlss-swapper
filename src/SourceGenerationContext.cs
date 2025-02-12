@@ -14,7 +14,7 @@ namespace DLSS_Swapper;
 [JsonSerializable(typeof(Settings))]
 [JsonSerializable(typeof(Data.WindowPositionRect))]
 [JsonSerializable(typeof(OverlappedPresenterState))]
-[JsonSerializable(typeof(Data.CompactKnownDLL))]
+[JsonSerializable(typeof(Data.HashedKnownDLL))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 

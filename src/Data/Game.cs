@@ -38,6 +38,11 @@ namespace DLSS_Swapper.Data
         [Column("title")]
         public partial string Title { get; set; } = string.Empty;
 
+        // Used to cache the title as a base64 string
+        string? _titleBase64 = null;
+        [Ignore]
+        public string TitleBase64 => _titleBase64 ??= Convert.ToBase64String(Encoding.UTF8.GetBytes(Title));
+
         [Column("install_path")]
         public string InstallPath { get; set; } = string.Empty;
 
@@ -274,7 +279,7 @@ namespace DLSS_Swapper.Data
                             gameAsset.LoadVersionAndHash();
                             GameAssets.Add(gameAsset);
 
-                            if (gameAsset.IsInKnownRecords() == false)
+                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
                             {
                                 unknownGameAssets.Add(gameAsset);
                             }
@@ -292,7 +297,7 @@ namespace DLSS_Swapper.Data
                             gameAsset.LoadVersionAndHash();
                             GameAssets.Add(gameAsset);
 
-                            if (gameAsset.IsInKnownRecords() == false)
+                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
                             {
                                 unknownGameAssets.Add(gameAsset);
                             }
@@ -310,7 +315,7 @@ namespace DLSS_Swapper.Data
                             gameAsset.LoadVersionAndHash();
                             GameAssets.Add(gameAsset);
 
-                            if (gameAsset.IsInKnownRecords() == false)
+                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
                             {
                                 unknownGameAssets.Add(gameAsset);
                             }
@@ -328,7 +333,7 @@ namespace DLSS_Swapper.Data
                             gameAsset.LoadVersionAndHash();
                             GameAssets.Add(gameAsset);
 
-                            if (gameAsset.IsInKnownRecords() == false)
+                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
                             {
                                 unknownGameAssets.Add(gameAsset);
                             }
@@ -346,7 +351,7 @@ namespace DLSS_Swapper.Data
                             gameAsset.LoadVersionAndHash();
                             GameAssets.Add(gameAsset);
 
-                            if (gameAsset.IsInKnownRecords() == false)
+                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
                             {
                                 unknownGameAssets.Add(gameAsset);
                             }
@@ -364,7 +369,7 @@ namespace DLSS_Swapper.Data
                             gameAsset.LoadVersionAndHash();
                             GameAssets.Add(gameAsset);
 
-                            if (gameAsset.IsInKnownRecords() == false)
+                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
                             {
                                 unknownGameAssets.Add(gameAsset);
                             }
@@ -382,7 +387,7 @@ namespace DLSS_Swapper.Data
                             gameAsset.LoadVersionAndHash();
                             GameAssets.Add(gameAsset);
 
-                            if (gameAsset.IsInKnownRecords() == false)
+                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
                             {
                                 unknownGameAssets.Add(gameAsset);
                             }
@@ -400,7 +405,7 @@ namespace DLSS_Swapper.Data
                             gameAsset.LoadVersionAndHash();
                             GameAssets.Add(gameAsset);
 
-                            if (gameAsset.IsInKnownRecords() == false)
+                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
                             {
                                 unknownGameAssets.Add(gameAsset);
                             }
@@ -1366,7 +1371,7 @@ namespace DLSS_Swapper.Data
                     var unknownGameAssets = new List<GameAsset>();
                     foreach (var gameAsset in GameAssets)
                     {
-                        if (gameAsset.IsInKnownRecords() == false)
+                        if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
                         {
                             unknownGameAssets.Add(gameAsset);
                         }

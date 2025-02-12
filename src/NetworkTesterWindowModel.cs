@@ -17,6 +17,11 @@ public partial class NetworkTesterWindowModel : ObservableObject
 {
     WeakReference<NetworkTesterWindow> _weakWindow;
     readonly string _dlssSwapperDownloadTestLink = "https://dlss-swapper-downloads.beeradmoore.com/dlss/nvngx_dlss_v1.0.0.0.zip";
+    readonly string _dlssSwapperCoverImageTestLink = "https://dlss-swapper-downloads.beeradmoore.com/test/library_600x900_2x.jpg";
+    readonly string _dlssSwapperAlternativeCoverImageTestLink = "https://files.beeradmoore.com/dlss-swapper/test/library_600x900_2x.jpg";
+    readonly string _steamCoverImageTestLink = "https://steamcdn-a.akamaihd.net/steam/apps/870780/library_600x900_2x.jpg";
+    readonly string _egsCoverImageTestLink = "https://cdn1.epicgames.com/item/calluna/Control_Portrait_Storefront_1200X1600_1200x1600-456c920cae7a0aa9b36670cd5e1237a1?w=600&h=900&resize=1";
+
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsRunningTest))]
@@ -32,13 +37,33 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(IsRunningTest))]
     [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
     public partial bool RunningTest3 { get; set; } = false;
-    
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsRunningTest))]
     [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
     public partial bool RunningTest4 { get; set; } = false;
 
-    public bool IsRunningTest => RunningTest1 || RunningTest2 || RunningTest3 || RunningTest4;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsRunningTest))]
+    [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
+    public partial bool RunningTest5 { get; set; } = false;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsRunningTest))]
+    [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
+    public partial bool RunningTest6 { get; set; } = false;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsRunningTest))]
+    [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
+    public partial bool RunningTest7 { get; set; } = false;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsRunningTest))]
+    [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
+    public partial bool RunningTest8 { get; set; } = false;
+
+    public bool IsRunningTest => RunningTest1 || RunningTest2 || RunningTest3 || RunningTest4 || RunningTest5 || RunningTest6 || RunningTest7 || RunningTest8;
     public bool IsNotRunningTest => IsRunningTest == false;
 
     [ObservableProperty]
@@ -55,6 +80,18 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
     [ObservableProperty]
     public partial string Test4Result { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string Test5Result { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string Test6Result { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string Test7Result { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string Test8Result { get; set; } = string.Empty;
 
     public NetworkTesterWindowModel(NetworkTesterWindow window)
     {
@@ -147,7 +184,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         RunningTest3 = true;
         Test3Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"Test 3: Downloading from DLSS Swapper DLL file server\n";
+        TestResults += $"Test 3: Downloading from DLSS Swapper DLL file server ({_dlssSwapperDownloadTestLink})\n";
 
         try
         {
@@ -184,7 +221,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
     async Task RunTest4Async()
     {
         Test4Result = string.Empty;
-        TestResults += $"Test 4: Downloading from DLSS Swapper DLL file server in a web browser\n";
+        TestResults += $"Test 4: Downloading from DLSS Swapper DLL file server in a web browser ({_dlssSwapperDownloadTestLink})\n";
 
         if (_weakWindow.TryGetTarget(out NetworkTesterWindow? networkTesterWindow) == true)
         {
@@ -264,6 +301,162 @@ public partial class NetworkTesterWindowModel : ObservableObject
             {
                 TestResults += $"Test 4: User cancelled the test\n\n";
             }
+        }
+    }
+
+    [RelayCommand]
+    async Task RunTest5Async()
+    {
+        RunningTest5 = true;
+        Test5Result = string.Empty;
+        var testStart = DateTime.Now;
+        TestResults += $"Test 5: Downloading game cover from Steam ({_steamCoverImageTestLink})\n";
+
+        try
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var response = await App.CurrentApp.HttpClient.GetAsync(_steamCoverImageTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                {
+                    TestResults += $"Test 5: Status code - {response.StatusCode}\n";
+
+                    response.EnsureSuccessStatusCode();
+
+                    await response.Content.CopyToAsync(memoryStream);
+                }
+
+                TestResults += $"Test 5: Downloaded {memoryStream.Length} bytes\n";
+            }
+            Test5Result = "✅";
+        }
+        catch (Exception err)
+        {
+            Test5Result = "❌";
+            TestResults += $"Test 5 failed: {err.Message}\n";
+            RunningTest5 = false;
+        }
+        finally
+        {
+            var duration = (DateTime.Now - testStart).TotalSeconds;
+            TestResults += $"Test 5: Duration {duration:0.00} seconds\n\n";
+            RunningTest5 = false;
+        }
+    }
+
+    [RelayCommand]
+    async Task RunTest6Async()
+    {
+        RunningTest6 = true;
+        Test6Result = string.Empty;
+        var testStart = DateTime.Now;
+        TestResults += $"Test 6: Downloading game cover from Epic Game Store ({_egsCoverImageTestLink})\n";
+
+        try
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var response = await App.CurrentApp.HttpClient.GetAsync(_egsCoverImageTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                {
+                    TestResults += $"Test 6: Status code - {response.StatusCode}\n";
+
+                    response.EnsureSuccessStatusCode();
+
+                    await response.Content.CopyToAsync(memoryStream);
+                }
+
+                TestResults += $"Test 6: Downloaded {memoryStream.Length} bytes\n";
+            }
+            Test6Result = "✅";
+        }
+        catch (Exception err)
+        {
+            Test6Result = "❌";
+            TestResults += $"Test 6 failed: {err.Message}\n";
+            RunningTest6 = false;
+        }
+        finally
+        {
+            var duration = (DateTime.Now - testStart).TotalSeconds;
+            TestResults += $"Test 6: Duration {duration:0.00} seconds\n\n";
+            RunningTest6 = false;
+        }
+    }
+
+    [RelayCommand]
+    async Task RunTest7Async()
+    {
+        RunningTest7 = true;
+        Test7Result = string.Empty;
+        var testStart = DateTime.Now;
+        TestResults += $"Test 7: Downloading game cover from DLSS Swapper file server ({_dlssSwapperCoverImageTestLink})\n";
+
+        try
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var response = await App.CurrentApp.HttpClient.GetAsync(_dlssSwapperCoverImageTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                {
+                    TestResults += $"Test 7: Status code - {response.StatusCode}\n";
+
+                    response.EnsureSuccessStatusCode();
+
+                    await response.Content.CopyToAsync(memoryStream);
+                }
+
+                TestResults += $"Test 7: Downloaded {memoryStream.Length} bytes\n";
+            }
+            Test7Result = "✅";
+        }
+        catch (Exception err)
+        {
+            Test7Result = "❌";
+            TestResults += $"Test 7 failed: {err.Message}\n";
+            RunningTest7 = false;
+        }
+        finally
+        {
+            var duration = (DateTime.Now - testStart).TotalSeconds;
+            TestResults += $"Test 7: Duration {duration:0.00} seconds\n\n";
+            RunningTest7 = false;
+        }
+    }
+
+    [RelayCommand]
+    async Task RunTest8Async()
+    {
+        RunningTest8 = true;
+        Test8Result = string.Empty;
+        var testStart = DateTime.Now;
+        TestResults += $"Test 8: Downloading game cover from alternative DLSS Swapper file server ({_dlssSwapperAlternativeCoverImageTestLink})\n";
+
+        try
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var response = await App.CurrentApp.HttpClient.GetAsync(_dlssSwapperAlternativeCoverImageTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                {
+                    TestResults += $"Test 8: Status code - {response.StatusCode}\n";
+
+                    response.EnsureSuccessStatusCode();
+
+                    await response.Content.CopyToAsync(memoryStream);
+                }
+
+                TestResults += $"Test 8: Downloaded {memoryStream.Length} bytes\n";
+            }
+            Test8Result = "✅";
+        }
+        catch (Exception err)
+        {
+            Test8Result = "❌";
+            TestResults += $"Test 8 failed: {err.Message}\n";
+            RunningTest8 = false;
+        }
+        finally
+        {
+            var duration = (DateTime.Now - testStart).TotalSeconds;
+            TestResults += $"Test 8: Duration {duration:0.00} seconds\n\n";
+            RunningTest8 = false;
         }
     }
 

@@ -239,7 +239,49 @@ namespace DLSS_Swapper.Data
 
                 try
                 {
-                    var coverImageTask = UpdateCacheImageAsync();
+                    var shouldUpdatedCover = true;
+                    // This shouldn't crash, bit if it does lets not take down the entire processing.
+                    try
+                    {
+                        FileInfo? fileInfo = null;
+                        if (File.Exists(ExpectedCustomCoverImage))
+                        {
+                            fileInfo = new FileInfo(ExpectedCustomCoverImage);
+                        }
+                        else if (File.Exists(ExpectedCoverImage))
+                        {
+                            fileInfo = new FileInfo(ExpectedCoverImage);
+                        }
+
+                        if (fileInfo is not null)
+                        {
+                            var daysSinceLastModified = (DateTime.Now - fileInfo.LastWriteTime).TotalDays;
+
+                            // Add +/- 2 days so not all will process at the same time.
+                            daysSinceLastModified += ((new Random()).NextDouble() - 0.5) * 4.0;
+
+                            // If its less than 7 days lets not try refresh.
+                            if (daysSinceLastModified < 7)
+                            {
+                                shouldUpdatedCover = false;
+                            }
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        Logger.Error(err.Message);
+                        Debugger.Break();
+                    }
+
+                    Task? coverImageTask = null;
+                    if (shouldUpdatedCover)
+                    {
+                        coverImageTask = UpdateCacheImageAsync();
+                    }
+                    else
+                    {
+                        Logger.Verbose($"Skipping updating cover for {Title}");
+                    }
 
                     var enumerationOptions = new EnumerationOptions();
                     enumerationOptions.RecurseSubdirectories = true;
@@ -444,8 +486,10 @@ namespace DLSS_Swapper.Data
                         }
                     }
 
-                    await coverImageTask;
-
+                    if (coverImageTask is not null)
+                    {
+                        await coverImageTask;
+                    }
                 }
                 catch (Exception err)
                 {

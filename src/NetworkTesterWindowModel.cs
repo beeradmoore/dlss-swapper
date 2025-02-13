@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -16,6 +17,7 @@ namespace DLSS_Swapper;
 public partial class NetworkTesterWindowModel : ObservableObject
 {
     WeakReference<NetworkTesterWindow> _weakWindow;
+    readonly string _dlssSwapperDomainTestLink = "dlss-swapper-downloads.beeradmoore.com";
     readonly string _dlssSwapperDownloadTestLink = "https://dlss-swapper-downloads.beeradmoore.com/dlss/nvngx_dlss_v1.0.0.0.zip";
     readonly string _dlssSwapperCoverImageTestLink = "https://dlss-swapper-downloads.beeradmoore.com/test/library_600x900_2x.jpg";
     readonly string _dlssSwapperAlternativeCoverImageTestLink = "https://files.beeradmoore.com/dlss-swapper/test/library_600x900_2x.jpg";
@@ -63,7 +65,12 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
     public partial bool RunningTest8 { get; set; } = false;
 
-    public bool IsRunningTest => RunningTest1 || RunningTest2 || RunningTest3 || RunningTest4 || RunningTest5 || RunningTest6 || RunningTest7 || RunningTest8;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsRunningTest))]
+    [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
+    public partial bool RunningTest9 { get; set; } = false;
+
+    public bool IsRunningTest => RunningTest1 || RunningTest2 || RunningTest3 || RunningTest4 || RunningTest5 || RunningTest6 || RunningTest7 || RunningTest8 || RunningTest9;
     public bool IsNotRunningTest => IsRunningTest == false;
 
     [ObservableProperty]
@@ -92,6 +99,9 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
     [ObservableProperty]
     public partial string Test8Result { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string Test9Result { get; set; } = string.Empty;
 
     public NetworkTesterWindowModel(NetworkTesterWindow window)
     {
@@ -457,6 +467,39 @@ public partial class NetworkTesterWindowModel : ObservableObject
             var duration = (DateTime.Now - testStart).TotalSeconds;
             TestResults += $"Test 8: Duration {duration:0.00} seconds\n\n";
             RunningTest8 = false;
+        }
+    }
+
+    [RelayCommand]
+    async Task RunTest9Async()
+    {
+        RunningTest9 = true;
+        Test9Result = string.Empty;
+        var testStart = DateTime.Now;
+        TestResults += $"Test 9: DNS lookup of DLSS Swapper file server ({_dlssSwapperDomainTestLink})\n";
+
+        try
+        {
+            var addresses = Dns.GetHostAddresses(_dlssSwapperDomainTestLink);
+
+            foreach (var address in addresses)
+            {
+                TestResults += $"Test 9: Found IP address {address.ToString()}\n";
+            }
+
+            Test9Result = "✅";
+        }
+        catch (Exception err)
+        {
+            Test9Result = "❌";
+            TestResults += $"Test 9 failed: {err.Message}\n";
+            RunningTest9 = false;
+        }
+        finally
+        {
+            var duration = (DateTime.Now - testStart).TotalSeconds;
+            TestResults += $"Test 9: Duration {duration:0.00} seconds\n\n";
+            RunningTest9 = false;
         }
     }
 

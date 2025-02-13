@@ -53,6 +53,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -110,14 +111,20 @@
         <TextBlock Grid.Row="7" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test8Result, Mode=OneWay}" />
         <ProgressRing Grid.Row="7" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest8, Mode=OneWay}" />
 
+        <TextBlock Grid.Row="8" Style="{StaticResource TestNumberTextBlock}">Test 9:</TextBlock>
+        <TextBlock Grid.Row="8" Style="{StaticResource TestNameTextBlock}">DNS lookup of DLSS Swapper file server</TextBlock>
+        <Button    Grid.Row="8" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest9Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+        <TextBlock Grid.Row="8" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test9Result, Mode=OneWay}" />
+        <ProgressRing Grid.Row="8" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest9, Mode=OneWay}" />
 
 
-        <StackPanel Orientation="Horizontal" Spacing="12" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
+
+        <StackPanel Orientation="Horizontal" Spacing="12" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
             <Button Content="Copy test results" Command="{x:Bind ViewModel.CopyTestResultsCommand}" />
             <Button Content="Create bug report" Command="{x:Bind ViewModel.CreateBugReportCommand}" />
         </StackPanel>
 
-        <TextBox Grid.Row="9" Grid.ColumnSpan="4" Header="Results" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Text="{x:Bind ViewModel.TestResults, Mode=OneWay}" />
+        <TextBox Grid.Row="10" Grid.ColumnSpan="4" Header="Results" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Text="{x:Bind ViewModel.TestResults, Mode=OneWay}" />
 
 
     </Grid>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="DLSS_Swapper.FailToLaunchWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DLSS_Swapper"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="DLSS Swapper - Failed to Launch">
+
+    <Grid Margin="16" RowSpacing="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Style="{ThemeResource TitleTextBlockStyle}" Text="DLSS Swapper has failed to launch" />
+        <TextBlock Grid.Row="1" TextWrapping="Wrap">
+            <Run>Please open a </Run>
+            <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">new issue</Hyperlink>
+            <Run> on the DLSS Swapper GitHub repository and provide the following information in the additional context section.</Run>
+        </TextBlock>
+        <Button Grid.Row="2" Content="Click to copy below details" Command="{x:Bind ViewModel.CopyTextCommand}" />
+        <TextBox Grid.Row="3" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Text="{x:Bind ViewModel.SystemData}"></TextBox>
+    </Grid>
+</Window>

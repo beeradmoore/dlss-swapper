@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DLSS_Swapper.Extensions;
+using DLSS_Swapper.Interfaces;
 using SQLite;
 
 namespace DLSS_Swapper.Data;
@@ -103,56 +104,6 @@ public class GameAsset : IEquatable<GameAsset>
         Hash = fileVersionInfo.GetMD5Hash();
     }
 
-    public bool IsInKnownRecords()
-    {
-        // If it is any of our backups assume yes so these are not logged
-        if (AssetType == GameAssetType.DLSS_BACKUP ||
-            AssetType == GameAssetType.DLSS_D_BACKUP ||
-            AssetType == GameAssetType.DLSS_G_BACKUP ||
-            AssetType == GameAssetType.FSR_31_DX12_BACKUP ||
-            AssetType == GameAssetType.FSR_31_VK_BACKUP ||
-            AssetType == GameAssetType.XeSS ||
-            AssetType == GameAssetType.XeSS_FG ||
-            AssetType == GameAssetType.XeLL)
-        {
-            return true;
-        }
-        
-        if (AssetType == GameAssetType.DLSS)
-        {
-            return DLLManager.Instance.DLSSRecords.Any(x => x.MD5Hash == Hash);
-        }
-        else if (AssetType == GameAssetType.DLSS_D)
-        {
-            return DLLManager.Instance.DLSSDRecords.Any(x => x.MD5Hash == Hash);
-        }
-        else if (AssetType == GameAssetType.DLSS_G)
-        {
-            return DLLManager.Instance.DLSSGRecords.Any(x => x.MD5Hash == Hash);
-        }
-        else if (AssetType == GameAssetType.FSR_31_DX12)
-        {
-            return DLLManager.Instance.FSR31DX12Records.Any(x => x.MD5Hash == Hash);
-        }
-        else if (AssetType == GameAssetType.FSR_31_VK)
-        {
-            return DLLManager.Instance.FSR31VKRecords.Any(x => x.MD5Hash == Hash);
-        }
-        else if (AssetType == GameAssetType.XeSS)
-        {
-            return DLLManager.Instance.XeSSRecords.Any(x => x.MD5Hash == Hash);
-        }
-        else if (AssetType == GameAssetType.XeLL)
-        {
-            return DLLManager.Instance.XeLLRecords.Any(x => x.MD5Hash == Hash);
-        }
-        else if (AssetType == GameAssetType.XeSS_FG)
-        {
-            return DLLManager.Instance.XeSSFGRecords.Any(x => x.MD5Hash == Hash);
-        }
-
-        return false;
-    }
 
     public GameAsset? GetBackup()
     {

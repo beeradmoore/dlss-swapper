@@ -350,7 +350,7 @@ DLSS Swapper will close now.",
         {
             // Only auto check for updates once every 12 hours.
             var timeSinceLastUpdate = DateTimeOffset.Now - Settings.Instance.LastRecordsRefresh;
-            if (timeSinceLastUpdate.TotalHours > 12)
+            if (timeSinceLastUpdate.TotalMinutes > 5)
             {
                 var didUpdate = await UpdateManifestAsync();
                 if (didUpdate)
@@ -417,11 +417,17 @@ DLSS Swapper will close now.",
                 {
                     // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider 
                     // adding a "fast UpdateManifest" which will quit early if we were unable to load in 10sec 
-                    // which would then fall back to loading local.                    
-                    using (var stream = await App.CurrentApp.HttpClient.GetStreamAsync(url))
+                    // which would then fall back to loading local.
+                    using (var response = await App.CurrentApp.HttpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
                     {
-                        await stream.CopyToAsync(memoryStream);
+                        response.EnsureSuccessStatusCode();
+
+                        using (var stream = await response.Content.ReadAsStreamAsync())
+                        {
+                            await stream.CopyToAsync(memoryStream);
+                        }
                     }
+
                     memoryStream.Position = 0;
 
                     var manifest = await JsonSerializer.DeserializeAsync(memoryStream, SourceGenerationContext.Default.Manifest);

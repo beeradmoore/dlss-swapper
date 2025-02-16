@@ -296,7 +296,7 @@ namespace DLSS_Swapper
                 }
             }
         }
-
+        
 
         int _gridViewItemWidth = 200;
         public int GridViewItemWidth
@@ -315,10 +315,22 @@ namespace DLSS_Swapper
             }
         }
 
-
-        
-
-
+        bool _onlyShowDownloadedDlls = false;
+        public bool OnlyShowDownloadedDlls
+        {
+            get { return _onlyShowDownloadedDlls; }
+            set
+            {
+                if (_onlyShowDownloadedDlls != value)
+                {
+                    _onlyShowDownloadedDlls = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
 
         /*
         public List<string> Directories { get; set; } = new List<string>();
@@ -348,9 +360,6 @@ namespace DLSS_Swapper
             }
         }
         */
-
-
-
 
         void SaveJson()
         {

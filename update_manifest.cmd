@@ -1,0 +1,1 @@
+curl.exe --output src\Assets\static_manifest.json --url https://dlss-swapper-downloads.beeradmoore.com/manifest.json

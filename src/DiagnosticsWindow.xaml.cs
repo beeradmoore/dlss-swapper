@@ -12,25 +12,22 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using DLSS_Swapper.Data;
-using CommunityToolkit.Mvvm.Input;
-using System.Threading.Tasks;
-using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace DLSS_Swapper.UserControls;
+namespace DLSS_Swapper;
 
-public sealed partial class DLLPickerControl : UserControl
+/// <summary>
+/// An empty window that can be used on its own or navigated to within a Frame.
+/// </summary>
+public sealed partial class DiagnosticsWindow : Window
 {
-    public DLLPickerControlModel ViewModel { get; private set; }
+    public DiagnosticsWindowModel ViewModel { get; private set; }
 
-    public DLLPickerControl(WeakReference<GameControl> gameControlWeakReference, EasyContentDialog parentDialog, Game game, GameAssetType gameAssetType)
+    public DiagnosticsWindow()
     {
         this.InitializeComponent();
-
-        ViewModel = new DLLPickerControlModel(gameControlWeakReference, parentDialog, this, game, gameAssetType);
-        DataContext = ViewModel;
+        ViewModel = new DiagnosticsWindowModel();
     }
 }

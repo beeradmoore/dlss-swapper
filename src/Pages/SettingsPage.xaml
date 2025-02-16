@@ -103,6 +103,18 @@
                     </TextBlock>
                 </StackPanel>
 
+                
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Only Show Downloaded DLLs" />
+                <StackPanel Margin="0,10,0,0">
+                    <ToggleSwitch IsOn="{x:Bind ViewModel.OnlyShowDownloadedDlls, Mode=TwoWay}" OffContent="No" OnContent="Yes" Margin="0,0,0,4" />
+                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
+                        This only applies to the DLL picker, not the library page.
+                    </TextBlock>
+                </StackPanel>
+
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
@@ -111,7 +123,7 @@
                 <StackPanel Margin="0,10,0,0">
                     <ComboBox x:Name="LoggingComboBox" ItemsSource="{x:Bind ViewModel.LoggingLevels}" SelectedItem="{x:Bind ViewModel.LoggingLevel, Mode=TwoWay}" />
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
-                        This will write a log to your temp folder which should help diagnose issues. Your current log file is <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenLogFileCommand}"><Run Text="{x:Bind ViewModel.CurrentLogPath}" /></Hyperlink>.
+                        Your current log file is <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenLogFileCommand}"><Run Text="{x:Bind ViewModel.CurrentLogPath}" /></Hyperlink>.
                     </TextBlock>
                 </StackPanel>
 
@@ -120,7 +132,6 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="About" />
-
                 <TextBlock Margin="0,12,0,0">
                     Version: 
                     <Run Text="{x:Bind ViewModel.AppVersion}" />
@@ -148,6 +159,7 @@
                     </Paragraph>
                 </RichTextBlock>
 
+                
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
@@ -158,6 +170,26 @@
                         <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub repository</Hyperlink> .
                     </Paragraph>
                 </RichTextBlock>
+
+
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Troubleshooting" />
+                <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+                    <RichTextBlock>
+                        <Paragraph Margin="0,12,0,0">
+                            <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting">General troubleshooting guide</Hyperlink>
+                        </Paragraph>
+                        <Paragraph Margin="0,12,0,0">
+                            <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenNetworkTesterCommand}">Network tester</Hyperlink>
+                        </Paragraph>
+                        <Paragraph Margin="0,12,0,0">
+                            <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenDiagnosticsCommand}">Diagnostics</Hyperlink>
+                        </Paragraph>
+                    </RichTextBlock>
+                </StackPanel>
 
             </StackPanel>
         </ScrollViewer>

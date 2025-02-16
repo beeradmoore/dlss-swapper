@@ -28,9 +28,10 @@ public class ManuallyAddedGame : Game
         await ResizeCoverAsync(imagePath).ConfigureAwait(false);
     }
 
-    protected override async Task UpdateCacheImageAsync()
+    protected override Task UpdateCacheImageAsync()
     {
         // NOOP, the image is manually managed by the user.
+        return Task.CompletedTask;
     }
 
     public override bool UpdateFromGame(Game game)

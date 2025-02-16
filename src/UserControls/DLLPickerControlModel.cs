@@ -18,6 +18,7 @@ public partial class DLLPickerControlModel : ObservableObject
 {
     WeakReference<DLLPickerControl> dllPickerControlWeakReference;
     WeakReference<EasyContentDialog> parentDialogWeakReference;
+    WeakReference<GameControl> _gameControlWeakReference;
 
     public Game Game { get; private set; }
     public GameAssetType GameAssetType { get; private set; }
@@ -33,10 +34,15 @@ public partial class DLLPickerControlModel : ObservableObject
     [ObservableProperty]
     public partial bool CanSwap { get; set; } = false;
 
+    [ObservableProperty]
+    public partial bool AnyDLLsVisible { get; set; } = false;
+
     public bool CanCloseParentDialog { get; set; } = false;
 
-    public DLLPickerControlModel(EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType)
+    public DLLPickerControlModel(WeakReference<GameControl> gameControlWeakReference, EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType)
     {
+        _gameControlWeakReference = gameControlWeakReference;
+
         parentDialogWeakReference = new WeakReference<EasyContentDialog>(parentDialog);
         parentDialog.Closing += (ContentDialog sender, ContentDialogClosingEventArgs args) =>
         {
@@ -49,26 +55,82 @@ public partial class DLLPickerControlModel : ObservableObject
             }
         };
 
-
         dllPickerControlWeakReference = new WeakReference<DLLPickerControl>(dllPickerControl);
         Game = game;
         GameAssetType = gameAssetType;
         parentDialog.PrimaryButtonCommand = SwapDllCommand;
         parentDialog.SecondaryButtonCommand = ResetDllCommand;
 
-       
-        DLLRecords = GameAssetType switch
+        switch (GameAssetType)
         {
-            GameAssetType.DLSS => new List<DLLRecord>(DLLManager.Instance.DLSSRecords),
-            GameAssetType.DLSS_G => new List<DLLRecord>(DLLManager.Instance.DLSSGRecords),
-            GameAssetType.DLSS_D => new List<DLLRecord>(DLLManager.Instance.DLSSDRecords),
-            GameAssetType.FSR_31_DX12 => new List<DLLRecord>(DLLManager.Instance.FSR31DX12Records),
-            GameAssetType.FSR_31_VK => new List<DLLRecord>(DLLManager.Instance.FSR31VKRecords),
-            GameAssetType.XeSS => new List<DLLRecord>(DLLManager.Instance.XeSSRecords),
-            GameAssetType.XeLL => new List<DLLRecord>(DLLManager.Instance.XeLLRecords),
-            GameAssetType.XeSS_FG => new List<DLLRecord>(DLLManager.Instance.XeSSFGRecords),
-            _ => new List<DLLRecord>(),
-        };
+            case GameAssetType.DLSS:
+                DLLRecords = [.. DLLManager.Instance.DLSSRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDLSS?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.DLSS_G:
+                DLLRecords = [.. DLLManager.Instance.DLSSGRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDLSS_G?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.DLSS_D:
+                DLLRecords = [.. DLLManager.Instance.DLSSDRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDLSS_D?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.FSR_31_DX12:
+                DLLRecords = [.. DLLManager.Instance.FSR31DX12Records];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentFSR_31_DX12?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.FSR_31_VK:
+                DLLRecords = [.. DLLManager.Instance.FSR31VKRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentFSR_31_VK?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.XeSS:
+                DLLRecords = [.. DLLManager.Instance.XeSSRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeSS?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.XeLL:
+                DLLRecords = [.. DLLManager.Instance.XeLLRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeLL?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.XeSS_FG:
+                DLLRecords = [.. DLLManager.Instance.XeSSFGRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeSS_FG?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            default:
+                DLLRecords = [];
+                break;
+        }
 
         if (Settings.Instance.AllowDebugDlls == false)
         {
@@ -91,6 +153,8 @@ public partial class DLLPickerControlModel : ObservableObject
                 }
             }
         }
+
+        AnyDLLsVisible = DLLRecords.Count > 0;
 
         ResetSelection();
     }

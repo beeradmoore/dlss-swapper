@@ -296,7 +296,7 @@ namespace DLSS_Swapper
                 }
             }
         }
-
+        
 
         int _gridViewItemWidth = 200;
         public int GridViewItemWidth

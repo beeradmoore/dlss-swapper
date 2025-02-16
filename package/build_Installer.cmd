@@ -16,7 +16,7 @@ if "%1"=="" (
         set output_installer=Output\DLSS.Swapper-%app_version%-installer-net8.exe
     ) else (
         echo Other argument given, only expecting "net8"
-        goto :EOF
+        goto :error
     )
 )
 
@@ -69,7 +69,7 @@ REM Move the installer to the output folder.
 move NSIS\installer.exe "%output_installer%" || goto :error
 
 REM Everything is fine, go to the end of the file.
-goto :EOF
+goto :end
 
 REM If there was an error output this error message and navigate back to the initial directory 
 :error
@@ -78,3 +78,6 @@ echo.
 echo ERROR: Failed with error code %errorlevel%.
 cd %initial_directory% > NUL 2>&1
 exit /b %errorlevel%
+
+:end
+exit /b 0

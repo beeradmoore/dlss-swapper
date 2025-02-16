@@ -471,7 +471,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task RunTest9Async()
+    void RunTest9()
     {
         RunningTest9 = true;
         Test9Result = string.Empty;

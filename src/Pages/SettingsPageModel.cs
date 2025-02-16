@@ -257,4 +257,11 @@ internal partial class SettingsPageModel : ObservableObject
         var networkTesterWindow = new NetworkTesterWindow();
         networkTesterWindow.Activate();
     }
+
+    [RelayCommand]
+    void OpenDiagnostics()
+    {
+        var diagnosticsWindow = new DiagnosticsWindow();
+        diagnosticsWindow.Activate();
+    }
 }

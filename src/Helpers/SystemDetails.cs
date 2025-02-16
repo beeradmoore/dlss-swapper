@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using DLSS_Swapper.Data;
+using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Helpers;
 
@@ -13,13 +15,12 @@ internal class SystemDetails
 {
     public string GetSystemData()
     {
+        var stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine("```");
         try
         {
             var currentAssembly = Assembly.GetExecutingAssembly();
 
-            var stringBuilder = new StringBuilder();
-
-            stringBuilder.AppendLine("```");
 
             stringBuilder.AppendLine($"DLSS Swapper: {App.CurrentApp.GetVersionString()}");
 #if PORTABLE
@@ -71,14 +72,48 @@ internal class SystemDetails
             stringBuilder.AppendLine($"Assembly Location: {currentAssembly.Location}");
             stringBuilder.AppendLine($"ProcessPath: {Environment.ProcessPath ?? string.Empty}");
 
-
-            stringBuilder.AppendLine("```");
-
-            return stringBuilder.ToString();
         }
         catch (Exception err)
         {
-            return $"Error: {err.Message}";
+            stringBuilder.AppendLine($"ERROR: {err.Message}");
         }
+        finally
+        {
+            stringBuilder.AppendLine("```");
+        }
+
+        return stringBuilder.ToString();
+    }
+
+    public string GetLibraryData()
+    {
+        var gameList = GameManager.Instance.GetSynchronisedGamesListCopy();
+        var stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine("```");
+
+        try
+        {
+            foreach (var gameLibraryEnum in Enum.GetValues<GameLibrary>())
+            {
+                var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
+                stringBuilder.AppendLine(gameLibrary.Name);
+                stringBuilder.AppendLine($"Status: {(gameLibrary.IsEnabled ? "Enabled" : "Disabled")}");
+                if (gameLibrary.IsEnabled)
+                {
+                    stringBuilder.AppendLine($"Games: {gameList.Count(x => x.GameLibrary == gameLibrary.GameLibrary)}");
+                }
+                stringBuilder.AppendLine();
+            }
+        }
+        catch (Exception err)
+        {
+            stringBuilder.AppendLine($"ERROR: {err.Message}");
+        }
+        finally
+        {
+            stringBuilder.AppendLine("```");
+        }
+
+        return stringBuilder.ToString();
     }
 }

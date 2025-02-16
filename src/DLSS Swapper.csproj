@@ -88,6 +88,7 @@
     <None Remove="Assets\Wide310x150Logo.scale-150.png" />
     <None Remove="Assets\Wide310x150Logo.scale-200.png" />
     <None Remove="Assets\Wide310x150Logo.scale-400.png" />
+    <None Remove="DiagnosticsWindow.xaml" />
     <None Remove="DLSS Swapper_TemporaryKey.pfx" />
     <None Remove="FailToLaunchWindow.xaml" />
     <None Remove="global.json" />
@@ -290,6 +291,9 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Page Update="DiagnosticsWindow.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
         <Page Update="Pages\NetworkTesterWindow.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>

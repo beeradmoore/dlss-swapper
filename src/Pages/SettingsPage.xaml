@@ -185,6 +185,9 @@
                         <Paragraph Margin="0,12,0,0">
                             <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenNetworkTesterCommand}">Network tester</Hyperlink>
                         </Paragraph>
+                        <Paragraph Margin="0,12,0,0">
+                            <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenDiagnosticsCommand}">Diagnostics</Hyperlink>
+                        </Paragraph>
                     </RichTextBlock>
                 </StackPanel>
 

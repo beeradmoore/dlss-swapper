@@ -248,6 +248,16 @@ internal partial class GameManager : ObservableObject
         }
     }
 
+    public List<Game> GetSynchronisedGamesListCopy()
+    {
+        lock (gameLock)
+        {
+            var list = new List<Game>(_synchronisedAllGames);
+            return list;
+        }
+    }
+    
+       
 
     public Game AddGame(Game game, bool scrollIntoView = false)
     {

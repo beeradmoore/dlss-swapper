@@ -28,15 +28,15 @@ namespace DLSS_Swapper
         };
 
         static string? _storagePath;
-#if   (PORTABLE == false  || PORTABLE_DEV == true) && DEBUG == true
+#if   PORTABLE_DEV
         //public static string StoragePath => _storagePath ??= Path.Combine(AppContext.BaseDirectory, "StoredData", "DEBUG", Guid.NewGuid().ToString());
         public static string StoragePath => _storagePath ??= Path.Combine(AppContext.BaseDirectory, "StoredData", "DEBUG");
-#elif (PORTABLE == true  || PORTABLE_DEV == true)  && DEBUG == false
+#elif PORTABLE
         public static string StoragePath => _storagePath ??= Path.Combine(AppContext.BaseDirectory, "StoredData");
-#elif (PORTABLE == false || PORTABLE_DEV == false) && DEBUG == true
+#elif DEBUG
         //public static string StoragePath => _storagePath ??= Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "DLSS Swapper", "DEBUG", Guid.NewGuid().ToString());
         public static string StoragePath => _storagePath ??= Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "DLSS Swapper", "DEBUG");
-#elif (PORTABLE == false || PORTABLE_DEV == false) && DEBUG == false
+#elif RELEASE
         public static string StoragePath => _storagePath  ??= Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "DLSS Swapper");
 #endif
 

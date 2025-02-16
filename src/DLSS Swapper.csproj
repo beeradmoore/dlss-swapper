@@ -7,12 +7,12 @@
     <RootNamespace>DLSS_Swapper</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x64</Platforms>
-    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsPackageType>None</WindowsPackageType>
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
-    <Configurations>Debug;Release</Configurations>
+    <Configurations>Debug;Release;Portable</Configurations>
     <PackageIcon>Asssets\icon_256.png</PackageIcon>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
@@ -24,7 +24,7 @@
     <PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+  <PropertyGroup Condition="'$(Configuration)'=='Release' OR '$(Configuration)'=='Portable'">
     <Optimize>True</Optimize>
   </PropertyGroup>
 

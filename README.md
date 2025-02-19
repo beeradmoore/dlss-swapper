@@ -66,7 +66,7 @@ You can get the latest builds from our [GitHub releases](https://github.com/beer
 
 ## It would be cool if DLSS Swapper could...
 
-Create a [feature request](https://github.com/beeradmoore/dlss-swapper/issues).
+Create a [feature request](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md).
 
 ## How can I contribute?
 

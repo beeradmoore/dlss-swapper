@@ -66,7 +66,7 @@ Você pode obter as últimas compilações em nossas paginas de [lançamentos do
 
 ## Seria legal se o DLSS Swapper podesse...
 
-Criar uma [solicitação de recurso](https://github.com/beeradmoore/dlss-swapper/issues).
+Criar uma [solicitação de recurso](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md).
 
 ## Como eu posso contribuir?
 

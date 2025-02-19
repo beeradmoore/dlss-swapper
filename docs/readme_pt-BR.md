@@ -24,7 +24,7 @@
 <p align="center">
     <a href="https://github.com/beeradmoore/dlss-swapper">English</a>
     ·
-    <a href="https://github.com/beeradmoore/dlss-swapper/blob/main/docs/readme_pt-BR.md">Português BR</a>
+    <a href="./readme_pt-BR.md">Português BR</a>
     
 </p>
 

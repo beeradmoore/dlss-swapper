@@ -74,5 +74,7 @@ Mais informações sobre isso em breve.
 
 ## Requisitos Mínimos do Sistema
 
-Windows 10 64-bit (20H1, build 19041),
-Embora uma GPU nVidia não seja um requisito para executar o DLSS Swapper, é um requisito para usar o DLSS.
+| Requisito | Descrição                             |
+| --------- | ------------------------------------- |
+| SO        | Windows 10 64-bit (20H1, build 19041) |
+| GPU       | Qualquer modelo compatível            |

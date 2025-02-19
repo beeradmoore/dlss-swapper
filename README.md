@@ -18,16 +18,18 @@
     <a href="https://github.com/beeradmoore/dlss-swapper/pulls">
       <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/beeradmoore/dlss-swapper?color=0088ff" />
     </a>
-  </p>
+</p>
 
 <p align="center">
     <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=bug_report.yml">Report Bug</a>
     ·
     <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md">Request Feature</a>
     
-  </p>
+</p>
 
-<img src="https://beeradmoore.github.io/dlss-swapper/images/usage/usage_2.gif" />
+<p align="center">
+    <img src="./docs/images/usage/usage_3.gif" />
+</p>
 
 ## Why would you want to change the DLSS dlls in your game?
 

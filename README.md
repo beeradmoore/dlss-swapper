@@ -6,18 +6,10 @@
 </p>
 
 <p align="center">
-    <a href="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper">
-      <img alt="OpenSSF Scorecard" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" />
-    </a>
-    <a href="https://github.com/beeradmoore/dlss-swapper/graphs/contributors">
+    <img alt="OpenSSF Scorecard" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" />
       <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/beeradmoore/dlss-swapper" />
-    </a>
-    <a href="https://github.com/beeradmoore/dlss-swapper/issues">
       <img alt="Issues" src="https://img.shields.io/github/issues/beeradmoore/dlss-swapper?color=0088ff" />
-    </a>
-    <a href="https://github.com/beeradmoore/dlss-swapper/pulls">
       <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/beeradmoore/dlss-swapper?color=0088ff" />
-    </a>
 </p>
 
 <p align="center">

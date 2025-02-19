@@ -13,6 +13,8 @@
 </p>
 
 <p align="center">
+    <a href="https://github.com/beeradmoore/dlss-swapper/releases">Versões</a>
+    ·
     <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=bug_report.yml">Reportar Bug</a>
     ·
     <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md">Requisitar Recurso</a>

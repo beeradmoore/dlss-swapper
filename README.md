@@ -2,9 +2,30 @@
  <img width="100px" src="./docs/apple-touch-icon.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">DLSS Swapper
 </h2>
- <p align="center">Get dynamically generated GitHub stats on your READMEs!</p>
+ <p align="center">DLSS Swapper is a tool that allows you to conveniently download, manage, and swap DLSS, FSR and XeSS dlls allowing you to upgrade or downgrade DLSS, FSR and XeSS version in a game without the game needing an update.</p>
 </p>
-DLSS Swapper is a tool that allows you to conveniently download, manage, and swap DLSS dlls allowing you to upgrade or downgrade DLSS version in a game without the game needing an update.
+
+<p align="center">
+    <a href="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper">
+      <img alt="OpenSSF Scorecard" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" />
+    </a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/graphs/contributors">
+      <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/beeradmoore/dlss-swapper" />
+    </a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/issues">
+      <img alt="Issues" src="https://img.shields.io/github/issues/beeradmoore/dlss-swapper?color=0088ff" />
+    </a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/pulls">
+      <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/beeradmoore/dlss-swapper?color=0088ff" />
+    </a>
+  </p>
+
+<p align="center">
+    <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=bug_report.yml">Report Bug</a>
+    ·
+    <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md">Request Feature</a>
+    
+  </p>
 
 <img src="https://beeradmoore.github.io/dlss-swapper/images/usage/usage_2.gif" />
 

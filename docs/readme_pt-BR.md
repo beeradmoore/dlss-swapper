@@ -71,4 +71,4 @@ Mais informações sobre isso em breve.
 | Requisito | Descrição                             |
 | --------- | ------------------------------------- |
 | SO        | Windows 10 64-bit (20H1, build 19041) |
-| GPU       | Qualquer modelo compatível            |
+| GPU       | Qualquer modelo                       |

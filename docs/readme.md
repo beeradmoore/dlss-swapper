@@ -29,7 +29,7 @@
 </p>
 
 <p align="center">
-    <img src="./images/usage/usage_3.gif" />
+    <img src="./images/usage/usage_4.gif" />
 </p>
 
 ## What game libraries are supported?

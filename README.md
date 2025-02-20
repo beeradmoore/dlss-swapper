@@ -32,6 +32,15 @@
     <img src="./docs/images/usage/usage_3.gif" />
 </p>
 
+## What game libraries are supported?
+
+- [Steam](https://store.steampowered.com/)
+- [GOG](https://www.gog.com/en/)
+- [Epic Games](https://store.epicgames.com/)
+- [Ubisoft Connect](https://www.ubisoft.com/)
+- [Xbox App](https://www.xbox.com/)
+- Manually added via the `Add Game` button.
+
 ## Why would you want to change the DLSS dlls in your game?
 
 See [this](https://youtube.com/clip/UgzYyeox3s7jFJZAvYF4AaABCQ) clip, or better yet just watch the entire video ([Lego Builder's Journey Ray Tracing Showcase + DLSS 2.2 Upgrades Analysis](https://www.youtube.com/watch?v=dtbqJXb1UDw)) from Digital Foundry. DLSS 2.2 discussions start at 11:40.

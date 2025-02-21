@@ -171,7 +171,7 @@ internal class DLLManager
             return string.Empty;
         }
 
-#if PORTABLE
+#if PORTABLE || PORTABLE_DEV
         var zipPath = Path.Combine("StoredData", (isImportedRecord ? $"imported_{recordType}_zip" : $"{recordType}_zip"));
 #else
         var zipPath = Path.Combine(Storage.GetStorageFolder(), (isImportedRecord ? $"imported_{recordType}_zip" : $"{recordType}_zip"));

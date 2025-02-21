@@ -28,15 +28,15 @@ namespace DLSS_Swapper
         };
 
         static string? _storagePath;
-#if   PORTABLE == true  && DEBUG == true
+#if   PORTABLE_DEV
         //public static string StoragePath => _storagePath ??= Path.Combine(AppContext.BaseDirectory, "StoredData", "DEBUG", Guid.NewGuid().ToString());
         public static string StoragePath => _storagePath ??= Path.Combine(AppContext.BaseDirectory, "StoredData", "DEBUG");
-#elif PORTABLE == true  && DEBUG == false
+#elif PORTABLE
         public static string StoragePath => _storagePath ??= Path.Combine(AppContext.BaseDirectory, "StoredData");
-#elif PORTABLE == false && DEBUG == true
+#elif DEBUG
         //public static string StoragePath => _storagePath ??= Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "DLSS Swapper", "DEBUG", Guid.NewGuid().ToString());
         public static string StoragePath => _storagePath ??= Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "DLSS Swapper", "DEBUG");
-#elif PORTABLE == false && DEBUG == false
+#elif RELEASE
         public static string StoragePath => _storagePath  ??= Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "DLSS Swapper");
 #endif
 
@@ -52,7 +52,7 @@ namespace DLSS_Swapper
 
         public static string GetTemp()
         {
-#if PORTABLE
+#if PORTABLE || PORTABLE_DEV
             var path = Path.Combine(StoragePath, "temp");
             CreateDirectoryIfNotExists(path);
 #else

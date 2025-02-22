@@ -1,0 +1,35 @@
+name: 💡 Feature request
+description: Suggest an idea for this project
+title: "[Feature request] "
+labels: ["feature request"]
+
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thank you for requesting a new feature! Please fill out the form below with as much detail as possible.
+
+- type: textarea
+  id: feature_issue_description
+  attributes:
+    label: Describe what this adds or solves
+    description: Is your feature request related to a problem, or asking for something new? Please describe it
+    placeholder: Describe what this adds or solves...
+  validations:
+    required: true
+
+- type: textarea
+  id: feature_solution_description
+  attributes:
+    label: Describe the solution you'd like
+    description: A clear and concise description of what you want to happen.
+    placeholder: Describe the solution you'd like...
+  validations:
+    required: true
+
+- type: textarea
+  id: additional_context
+  attributes:
+    label: Additional context
+    description: Add any other context or screenshots about the feature request here.
+    placeholder: Additional context...

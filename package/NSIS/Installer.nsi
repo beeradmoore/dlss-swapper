@@ -25,12 +25,25 @@ Function .onInit
   ${Else}
     StrCpy $INSTDIR "$0\"
   ${EndIf}
+
+  FindWindow $0 "" "DLSS Swapper"
+  StrCmp $0 0 NotRunning
+    MessageBox MB_OK|MB_ICONEXCLAMATION "DLSS Swapper is currently running. Please close it before continuing with installation." /SD IDOK
+  NotRunning:
 FunctionEnd
 
 ; On uninstall, confirm you want to remove downloaded/imported DLSS files.
 Function un.onInit
+  
+  FindWindow $0 "" "DLSS Swapper"
+  StrCmp $0 0 NotRunning
+    MessageBox MB_OK|MB_ICONSTOP "DLSS Swapper is currently running. Please close it before attempting to uninstall." /SD IDOK
+    SetErrorLevel 2
+    Quit
+  NotRunning:
+
   MessageBox MB_YESNO "Are you sure you want to uninstall $(^Name)?$\r$\n$\r$\nThis will also remove downloaded and imported files. Changes to your games will remain as they are." /SD IDYES IDYES NoAbort
-  Abort
+    Abort
   NoAbort:
 FunctionEnd
 
@@ -134,6 +147,13 @@ SectionEnd
  
 ; start default section
 Section
+
+  FindWindow $0 "" "DLSS Swapper"
+  StrCmp $0 0 NotRunning
+    MessageBox MB_OK|MB_ICONSTOP "DLSS Swapper is currently running. Please close it and run the installer again." /SD IDOK
+    SetErrorLevel 2
+    Quit
+  NotRunning:
 
   ; set the installation directory as the destination for the following actions
   SetOutPath $INSTDIR

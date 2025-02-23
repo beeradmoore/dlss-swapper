@@ -8,19 +8,19 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
-		Portable_Dev|x64 = Portable_Dev|x64
-		Portable|x64 = Portable|x64
+		Debug_Portable|x64 = Debug_Portable|x64
 		Release|x64 = Release|x64
+		Release_Portable|x64 = Release_Portable|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug|x64.ActiveCfg = Debug|x64
 		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug|x64.Build.0 = Debug|x64
-		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Portable_Dev|x64.ActiveCfg = Portable-Dev|x64
-		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Portable_Dev|x64.Build.0 = Portable-Dev|x64
-		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Portable|x64.ActiveCfg = Portable|x64
-		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Portable|x64.Build.0 = Portable|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug_Portable|x64.ActiveCfg = Debug_Portable|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Debug_Portable|x64.Build.0 = Debug_Portable|x64
 		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release|x64.ActiveCfg = Release|x64
 		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release|x64.Build.0 = Release|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release_Portable|x64.ActiveCfg = Release_Portable|x64
+		{63586228-FDDE-4E35-9138-7FF35ED61EC1}.Release_Portable|x64.Build.0 = Release_Portable|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

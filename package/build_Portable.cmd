@@ -49,7 +49,7 @@ Set-Content -Path '%csproj_file%' -Value $content; ^
 dotnet publish "%csproj_file%" ^
 	--runtime win-x64 ^
     --self-contained ^
-    --configuration PORTABLE ^
+    --configuration Release_Portable ^
     -p:PublishDir=bin\publish\portable\ || goto :error
 
 

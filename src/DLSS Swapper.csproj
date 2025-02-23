@@ -29,11 +29,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug_Portable'">
-    <DefineConstants>$(DefineConstants);Debug;Portable</DefineConstants>
+    <DefineConstants>$(DefineConstants);DEBUG;PORTABLE</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release_Portable'">
-    <DefineConstants>$(DefineConstants);Release;Portable</DefineConstants>
+    <DefineConstants>$(DefineConstants);RELEASE;PORTABLE</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

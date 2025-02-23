@@ -23,7 +23,7 @@ internal class SystemDetails
 
 
             stringBuilder.AppendLine($"DLSS Swapper: {App.CurrentApp.GetVersionString()}");
-#if PORTABLE || PORTABLE_DEV
+#if PORTABLE
             stringBuilder.AppendLine("Portable: true");
 #else
             stringBuilder.AppendLine("Portable: false");

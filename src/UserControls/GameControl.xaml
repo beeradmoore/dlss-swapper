@@ -119,6 +119,31 @@
                         </Button>
                     </Grid>
 
+                    <TextBlock Text="DLL Path" FontWeight="Bold" Padding="0,8,0,0" />
+                    <Grid HorizontalAlignment="Stretch" ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0" x:Name="DllPathPickerBox" SelectedValue="{x:Bind ViewModel.SelectedDllPath, Mode=TwoWay}" SelectedValuePath="Content">
+                            <ComboBoxItem>DLSS</ComboBoxItem>
+                            <ComboBoxItem>DLSS G</ComboBoxItem>
+                            <ComboBoxItem>DLSS D</ComboBoxItem>
+                            <ComboBoxItem>FSR DX12</ComboBoxItem>
+                            <ComboBoxItem>FSR VK</ComboBoxItem>
+                            <ComboBoxItem>XeSS</ComboBoxItem>
+                            <ComboBoxItem>XeSS FG</ComboBoxItem>
+                            <ComboBoxItem>XeLL</ComboBoxItem>
+                        </ComboBox>
+                        <TextBox Grid.Column="1" IsReadOnly="True" Text="{x:Bind ViewModel.DllPathTextBox, Mode=TwoWay}" VerticalAlignment="Stretch" />
+                        <Button Grid.Column="2" ToolTipService.ToolTip="Open folder" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenDllPathCommand}">
+                            <Button.Content>
+                                <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE8A7;"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+
                     <TextBlock Text="Install path" FontWeight="Bold" Padding="0,8,0,0" />
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="8">
                         <Grid.ColumnDefinitions>

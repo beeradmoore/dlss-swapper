@@ -22,6 +22,9 @@ public partial class GameControlModel : ObservableObject
 
     public bool IsManuallyAdded => Game.GameLibrary == Interfaces.GameLibrary.ManuallyAdded;
 
+    private string _selectedDllPath;
+    private string _textBoxText;
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(GameTitleHasChanged))]
     public partial string GameTitle { get; set; }
@@ -49,8 +52,91 @@ public partial class GameControlModel : ObservableObject
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
         GameTitle = game.Title;
+        SelectedDllPath = string.Empty;
     }
 
+    public string SelectedDllPath
+    {
+        get => _selectedDllPath;
+        set
+        {
+            if (_selectedDllPath != value)
+            {
+                _selectedDllPath = value;
+                OnPropertyChanged(nameof(SelectedDllPath));
+                UpdateTextBoxText();
+            }
+        }
+    }
+
+    public string DllPathTextBox
+    {
+        get => _textBoxText;
+        set
+        {
+            if (_textBoxText != value)
+            {
+                _textBoxText = value;
+                OnPropertyChanged(nameof(DllPathTextBox));
+            }
+        }
+    }
+
+    private void UpdateTextBoxText()
+    {
+        try
+        {
+            DllPathTextBox = SelectedDllPath switch
+            {
+                "DLSS" => Game.CurrentDLSS?.Path ?? "Not found",
+                "DLSS G" => Game.CurrentDLSS_G?.Path ?? "Not found",
+                "DLSS D" => Game.CurrentDLSS_D?.Path ?? "Not found",
+                "FSR DX12" => Game.CurrentFSR_31_DX12?.Path ?? "Not found",
+                "FSR VK" => Game.CurrentFSR_31_VK?.Path ?? "Not found",
+                "XeSS" => Game.CurrentXeSS?.Path ?? "Not found",
+                "XeSS FG" => Game.CurrentXeSS_FG?.Path ?? "Not found",
+                "XeLL" => Game.CurrentXeLL?.Path ?? "Not found",
+                _ => "Select a DLL type"
+            };
+        }
+        catch (Exception)
+        {
+            DllPathTextBox = "Path not available";
+        }
+    }
+
+    [RelayCommand]
+    async Task OpenDllPathAsync()
+    {
+        string? directory = Path.GetDirectoryName(DllPathTextBox);
+
+        try
+        {
+            if (Directory.Exists(directory))
+            {
+                Process.Start("explorer.exe", directory);
+            }
+            else
+            {
+                throw new Exception($"Could not find path \"{directory}\".");
+            }
+        }
+        catch (Exception err)
+        {
+            Logger.Error(err.Message);
+
+            if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+            {
+                var dialog = new EasyContentDialog(gameControl.XamlRoot)
+                {
+                    Title = $"Error",
+                    CloseButtonText = "Okay",
+                    Content = err.Message,
+                };
+                await dialog.ShowAsync();
+            }
+        }
+    }
 
     [RelayCommand]
     async Task OpenInstallPathAsync()

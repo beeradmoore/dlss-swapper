@@ -20,6 +20,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
     WeakReference<NetworkTesterWindow> _weakWindow;
     readonly string _dlssSwapperDomainTestLink = "dlss-swapper-downloads.beeradmoore.com";
     readonly string _dlssSwapperDownloadTestLink = "https://dlss-swapper-downloads.beeradmoore.com/dlss/nvngx_dlss_v1.0.0.0.zip";
+    readonly string _uploadThingDownloadTestLink = "https://hb4kzlkh4u.ufs.sh/f/isdnLt22yljeRWLOje0oeKXyth5OC7M6sI02T3YfL8GPbvpd";    
     readonly string _dlssSwapperCoverImageTestLink = "https://dlss-swapper-downloads.beeradmoore.com/test/library_600x900_2x.jpg";
     readonly string _dlssSwapperAlternativeCoverImageTestLink = "https://files.beeradmoore.com/dlss-swapper/test/library_600x900_2x.jpg";
     readonly string _steamCoverImageTestLink = "https://steamcdn-a.akamaihd.net/steam/apps/870780/library_600x900_2x.jpg";

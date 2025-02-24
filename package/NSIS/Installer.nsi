@@ -25,12 +25,25 @@ Function .onInit
   ${Else}
     StrCpy $INSTDIR "$0\"
   ${EndIf}
+
+  FindWindow $0 "" "DLSS Swapper"
+  StrCmp $0 0 NotRunning
+    MessageBox MB_OK|MB_ICONEXCLAMATION "DLSS Swapper is currently running. Please close it before continuing with installation." /SD IDOK
+  NotRunning:
 FunctionEnd
 
 ; On uninstall, confirm you want to remove downloaded/imported DLSS files.
 Function un.onInit
+  
+  FindWindow $0 "" "DLSS Swapper"
+  StrCmp $0 0 NotRunning
+    MessageBox MB_OK|MB_ICONSTOP "DLSS Swapper is currently running. Please close it before attempting to uninstall." /SD IDOK
+    SetErrorLevel 2
+    Quit
+  NotRunning:
+
   MessageBox MB_YESNO "Are you sure you want to uninstall $(^Name)?$\r$\n$\r$\nThis will also remove downloaded and imported files. Changes to your games will remain as they are." /SD IDYES IDYES NoAbort
-  Abort
+    Abort
   NoAbort:
 FunctionEnd
 
@@ -76,13 +89,13 @@ RequestExecutionLevel highest
 ; App version information
 Name "DLSS Swapper"
 !define MUI_ICON "..\..\src\Assets\icon.ico"
-!define MUI_VERSION "1.1.6.1"
+!define MUI_VERSION "1.1.6.2"
 !define MUI_PRODUCT "DLSS Swapper"
-VIProductVersion "1.1.6.1"
+VIProductVersion "1.1.6.2"
 VIAddVersionKey "ProductName" "DLSS Swapper"
-VIAddVersionKey "ProductVersion" "1.1.6.1"
+VIAddVersionKey "ProductVersion" "1.1.6.2"
 VIAddVersionKey "FileDescription" "DLSS Swapper installer"
-VIAddVersionKey "FileVersion" "1.1.6.1"
+VIAddVersionKey "FileVersion" "1.1.6.2"
 
 ; Pages
 !insertmacro MUI_PAGE_WELCOME
@@ -135,6 +148,13 @@ SectionEnd
 ; start default section
 Section
 
+  FindWindow $0 "" "DLSS Swapper"
+  StrCmp $0 0 NotRunning
+    MessageBox MB_OK|MB_ICONSTOP "DLSS Swapper is currently running. Please close it and run the installer again." /SD IDOK
+    SetErrorLevel 2
+    Quit
+  NotRunning:
+
   ; set the installation directory as the destination for the following actions
   SetOutPath $INSTDIR
   
@@ -176,7 +196,7 @@ Section
   CreateShortcut "$SMPROGRAMS\DLSS Swapper.lnk" "$INSTDIR\DLSS Swapper.exe"
 
   WriteRegStr SHCTX "${UNINST_KEY}" "DisplayName" "DLSS Swapper"
-  WriteRegStr SHCTX "${UNINST_KEY}" "DisplayVersion" "1.1.6.1"
+  WriteRegStr SHCTX "${UNINST_KEY}" "DisplayVersion" "1.1.6.2"
   WriteRegStr SHCTX "${UNINST_KEY}" "Publisher" "beeradmoore"
   WriteRegStr SHCTX "${UNINST_KEY}" "DisplayIcon" "$\"$INSTDIR\DLSS Swapper.exe$\""
   WriteRegStr SHCTX "${UNINST_KEY}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""

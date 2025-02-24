@@ -20,6 +20,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
     WeakReference<NetworkTesterWindow> _weakWindow;
     readonly string _dlssSwapperDomainTestLink = "dlss-swapper-downloads.beeradmoore.com";
     readonly string _dlssSwapperDownloadTestLink = "https://dlss-swapper-downloads.beeradmoore.com/dlss/nvngx_dlss_v1.0.0.0.zip";
+    readonly string _uploadThingDownloadTestLink = "https://hb4kzlkh4u.ufs.sh/f/isdnLt22yljeRWLOje0oeKXyth5OC7M6sI02T3YfL8GPbvpd";    
     readonly string _dlssSwapperCoverImageTestLink = "https://dlss-swapper-downloads.beeradmoore.com/test/library_600x900_2x.jpg";
     readonly string _dlssSwapperAlternativeCoverImageTestLink = "https://files.beeradmoore.com/dlss-swapper/test/library_600x900_2x.jpg";
     readonly string _steamCoverImageTestLink = "https://steamcdn-a.akamaihd.net/steam/apps/870780/library_600x900_2x.jpg";
@@ -76,7 +77,12 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
     public partial bool RunningTest10 { get; set; } = false;
 
-    public bool IsRunningTest => RunningTest1 || RunningTest2 || RunningTest3 || RunningTest4 || RunningTest5 || RunningTest6 || RunningTest7 || RunningTest8 || RunningTest9 || RunningTest10;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsRunningTest))]
+    [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
+    public partial bool RunningTest11 { get; set; } = false;
+
+    public bool IsRunningTest => RunningTest1 || RunningTest2 || RunningTest3 || RunningTest4 || RunningTest5 || RunningTest6 || RunningTest7 || RunningTest8 || RunningTest9 || RunningTest10 || RunningTest11;
     public bool IsNotRunningTest => IsRunningTest == false;
 
     [ObservableProperty]
@@ -111,6 +117,9 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
     [ObservableProperty]
     public partial string Test10Result { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string Test11Result { get; set; } = string.Empty;
 
     public NetworkTesterWindowModel(NetworkTesterWindow window)
     {
@@ -613,6 +622,45 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 RunningTest10 = false;
             }
         }       
+    }
+
+    [RelayCommand]
+    async Task RunTest11Async()
+    {
+        RunningTest11 = true;
+        Test11Result = string.Empty;
+        var testStart = DateTime.Now;
+        TestResults += $"Test 11: Downloading from UploadThing file server ({_uploadThingDownloadTestLink})\n";
+
+        try
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var response = await App.CurrentApp.HttpClient.GetAsync(_uploadThingDownloadTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                {
+                    TestResults += $"Test 11: Status code - {response.StatusCode}\n";
+
+                    response.EnsureSuccessStatusCode();
+
+                    await response.Content.CopyToAsync(memoryStream);
+                }
+
+                TestResults += $"Test 11: Downloaded {memoryStream.Length} bytes\n";
+            }
+            Test11Result = "✅";
+        }
+        catch (Exception err)
+        {
+            Test11Result = "❌";
+            TestResults += $"Test 11: Failed, {err.Message}\n";
+            RunningTest11 = false;
+        }
+        finally
+        {
+            var duration = (DateTime.Now - testStart).TotalSeconds;
+            TestResults += $"Test 11: Duration {duration:0.00} seconds\n\n";
+            RunningTest11 = false;
+        }
     }
 
     [RelayCommand]

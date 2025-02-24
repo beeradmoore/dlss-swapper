@@ -63,7 +63,6 @@ public partial class GameControlModel : ObservableObject
             if (_selectedDllPath != value)
             {
                 _selectedDllPath = value;
-                OnPropertyChanged(nameof(SelectedDllPath));
                 UpdateTextBoxText();
             }
         }

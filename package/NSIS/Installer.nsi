@@ -89,13 +89,13 @@ RequestExecutionLevel highest
 ; App version information
 Name "DLSS Swapper"
 !define MUI_ICON "..\..\src\Assets\icon.ico"
-!define MUI_VERSION "1.1.6.1"
+!define MUI_VERSION "1.1.6.2"
 !define MUI_PRODUCT "DLSS Swapper"
-VIProductVersion "1.1.6.1"
+VIProductVersion "1.1.6.2"
 VIAddVersionKey "ProductName" "DLSS Swapper"
-VIAddVersionKey "ProductVersion" "1.1.6.1"
+VIAddVersionKey "ProductVersion" "1.1.6.2"
 VIAddVersionKey "FileDescription" "DLSS Swapper installer"
-VIAddVersionKey "FileVersion" "1.1.6.1"
+VIAddVersionKey "FileVersion" "1.1.6.2"
 
 ; Pages
 !insertmacro MUI_PAGE_WELCOME
@@ -196,7 +196,7 @@ Section
   CreateShortcut "$SMPROGRAMS\DLSS Swapper.lnk" "$INSTDIR\DLSS Swapper.exe"
 
   WriteRegStr SHCTX "${UNINST_KEY}" "DisplayName" "DLSS Swapper"
-  WriteRegStr SHCTX "${UNINST_KEY}" "DisplayVersion" "1.1.6.1"
+  WriteRegStr SHCTX "${UNINST_KEY}" "DisplayVersion" "1.1.6.2"
   WriteRegStr SHCTX "${UNINST_KEY}" "Publisher" "beeradmoore"
   WriteRegStr SHCTX "${UNINST_KEY}" "DisplayIcon" "$\"$INSTDIR\DLSS Swapper.exe$\""
   WriteRegStr SHCTX "${UNINST_KEY}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""

@@ -88,14 +88,14 @@ public partial class GameControlModel : ObservableObject
         {
             DllPathTextBox = SelectedDllPath switch
             {
-                "DLSS" => Game.CurrentDLSS?.Path ?? "Not found",
-                "DLSS G" => Game.CurrentDLSS_G?.Path ?? "Not found",
-                "DLSS D" => Game.CurrentDLSS_D?.Path ?? "Not found",
-                "FSR DX12" => Game.CurrentFSR_31_DX12?.Path ?? "Not found",
-                "FSR VK" => Game.CurrentFSR_31_VK?.Path ?? "Not found",
-                "XeSS" => Game.CurrentXeSS?.Path ?? "Not found",
-                "XeSS FG" => Game.CurrentXeSS_FG?.Path ?? "Not found",
-                "XeLL" => Game.CurrentXeLL?.Path ?? "Not found",
+                "DLSS" => Path.GetDirectoryName(Game.CurrentDLSS?.Path) ?? "Not found",
+                "DLSS G" => Path.GetDirectoryName(Game.CurrentDLSS_G?.Path) ?? "Not found",
+                "DLSS D" => Path.GetDirectoryName(Game.CurrentDLSS_D?.Path) ?? "Not found",
+                "FSR DX12" => Path.GetDirectoryName(Game.CurrentFSR_31_DX12?.Path) ?? "Not found",
+                "FSR VK" => Path.GetDirectoryName(Game.CurrentFSR_31_VK?.Path) ?? "Not found",
+                "XeSS" => Path.GetDirectoryName(Game.CurrentXeSS?.Path) ?? "Not found",
+                "XeSS FG" => Path.GetDirectoryName(Game.CurrentXeSS_FG?.Path) ?? "Not found",
+                "XeLL" => Path.GetDirectoryName(Game.CurrentXeLL?.Path) ?? "Not found",
                 _ => "Select a DLL type"
             };
         }
@@ -108,17 +108,15 @@ public partial class GameControlModel : ObservableObject
     [RelayCommand]
     async Task OpenDllPathAsync()
     {
-        string? directory = Path.GetDirectoryName(DllPathTextBox);
-
         try
         {
-            if (Directory.Exists(directory))
+            if (Directory.Exists(DllPathTextBox))
             {
-                Process.Start("explorer.exe", directory);
+                Process.Start("explorer.exe", DllPathTextBox);
             }
             else
             {
-                throw new Exception($"Could not find path \"{directory}\".");
+                throw new Exception($"Could not find path \"{DllPathTextBox}\".");
             }
         }
         catch (Exception err)

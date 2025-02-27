@@ -121,7 +121,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return false;
             }
         }
@@ -143,7 +143,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
         }
 
@@ -170,7 +170,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return null;
             }
         }
@@ -194,7 +194,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return false;
             }
         }
@@ -223,7 +223,7 @@ namespace DLSS_Swapper
                 }
                 catch (Exception err)
                 {
-                    Logger.Error(err.Message);
+                    Logger.Error(err);
                     return new Manifest();
                 }
             }
@@ -246,7 +246,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return new Manifest();
             }
 
@@ -278,7 +278,7 @@ namespace DLSS_Swapper
                 }
                 catch (Exception err)
                 {
-                    Logger.Error(err.Message);
+                    Logger.Error(err);
                 }
             }
 
@@ -305,7 +305,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return false;
             }
         }

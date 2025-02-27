@@ -228,7 +228,7 @@ internal partial class SettingsPageModel : ObservableObject
         }
         catch (Exception err)
         {
-            Logger.Error(err.Message);
+            Logger.Error(err);
 
             if (_weakPage.TryGetTarget(out SettingsPage? settingsPage))
             {

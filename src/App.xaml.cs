@@ -133,8 +133,7 @@ namespace DLSS_Swapper
             var version = GetVersion();
             var versionString = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
             Logger.Info($"App launch - v{versionString}", null);
-
-            Logger.Error($"Storage: {Storage.StoragePath}");
+            Logger.Info($"StoragePath: {Storage.StoragePath}");
 
             Database.Instance.Init();
 
@@ -172,7 +171,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
         }
 
@@ -330,7 +329,15 @@ namespace DLSS_Swapper
 
                 if (didEnqueue == false)
                 {
-                    Logger.Error("TryEnqueue failed.");
+                    try
+                    {
+                        // I am sure there is a better way to fill out a stacktrace than throwing an exception
+                        throw new Exception("TryEnqueue failed.");
+                    }
+                    catch (Exception err)
+                    {
+                        Logger.Error(err);
+                    }
                 }
 
                 return didEnqueue;

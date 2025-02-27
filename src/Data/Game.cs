@@ -269,7 +269,7 @@ namespace DLSS_Swapper.Data
                     }
                     catch (Exception err)
                     {
-                        Logger.Error(err.Message);
+                        Logger.Error(err);
                         Debugger.Break();
                     }
 
@@ -493,7 +493,7 @@ namespace DLSS_Swapper.Data
                 }
                 catch (Exception err)
                 {
-                    Logger.Error(err.Message);
+                    Logger.Error(err);
                     Debugger.Break();
                 }
                 finally
@@ -600,7 +600,7 @@ namespace DLSS_Swapper.Data
                     }
                     catch (UnauthorizedAccessException err)
                     {
-                        Logger.Error($"UnauthorizedAccessException: {err.Message}");
+                        Logger.Error(err);
                         if (App.CurrentApp.IsAdminUser() is false)
                         {
                             return (false, "Unable to reset to default. Running DLSS Swapper as administrator may fix this.", true);
@@ -612,7 +612,7 @@ namespace DLSS_Swapper.Data
                     }
                     catch (Exception err)
                     {
-                        Logger.Error(err.Message);
+                        Logger.Error(err);
                         return (false, "Unable to reset to default. Please repair your game manually.", false);
                     }
 
@@ -753,7 +753,7 @@ namespace DLSS_Swapper.Data
                         }
                         catch (UnauthorizedAccessException err)
                         {
-                            Logger.Error($"UnauthorizedAccessException: {err.Message}");
+                            Logger.Error(err);
                             if (App.CurrentApp.IsAdminUser() is false)
                             {
                                 return (false, "Unable to swap dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
@@ -766,7 +766,7 @@ namespace DLSS_Swapper.Data
                         }
                         catch (Exception err)
                         {
-                            Logger.Error(err.Message);
+                            Logger.Error(err);
                             return (false, "Unable to swap dll. Please check your error log for more information.", false);
                         }
                     }
@@ -792,7 +792,7 @@ namespace DLSS_Swapper.Data
                 }
                 catch (UnauthorizedAccessException err)
                 {
-                    Logger.Error($"UnauthorizedAccessException: {err.Message}");
+                    Logger.Error(err);
                     if (App.CurrentApp.IsAdminUser() is false)
                     {
                         return (false, "Unable to swap dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
@@ -804,7 +804,7 @@ namespace DLSS_Swapper.Data
                 }
                 catch (Exception err)
                 {
-                    Logger.Error(err.Message);
+                    Logger.Error(err);
                     return (false, "Unable to swap dll. Please check your error log for more information.", false);
                 }
             }
@@ -837,7 +837,7 @@ namespace DLSS_Swapper.Data
             catch (Exception err)
             {
                 // NOOP
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
             return (true, string.Empty, false);
@@ -949,7 +949,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
         }
 
@@ -993,7 +993,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
         }
 
@@ -1046,7 +1046,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error($"{err.Message}, url: {url}");
+                Logger.Error(err, $"For url: {url}");
                 Debugger.Break();
             }
             finally
@@ -1079,7 +1079,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 Debugger.Break();
             }
         }
@@ -1117,7 +1117,7 @@ namespace DLSS_Swapper.Data
                             }
                             catch (Exception err)
                             {
-                                Logger.Error($"Could not delete {cachedGameAsset.Path}, {err.Message}");
+                                Logger.Error(err, $"Could not delete {cachedGameAsset.Path}");
                             }
                         }
                     }
@@ -1138,7 +1138,7 @@ namespace DLSS_Swapper.Data
                     }
                     catch (Exception err)
                     {
-                        Logger.Error($"Could not delete {thumbnailImage}, {err.Message}");
+                        Logger.Error(err, $"Could not delete {thumbnailImage}");
                     }
                 }
 
@@ -1153,7 +1153,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
         }
 
@@ -1214,7 +1214,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
         }
 

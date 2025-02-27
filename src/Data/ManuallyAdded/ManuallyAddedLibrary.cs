@@ -78,7 +78,7 @@ public class ManuallyAddedLibrary : IGameLibrary
         }
         catch (Exception err)
         {
-            Logger.Error(err.Message);
+            Logger.Error(err);
             Debugger.Break();
         }
     }

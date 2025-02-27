@@ -78,9 +78,9 @@ namespace DLSS_Swapper.Data.GOG
                     {
                         _imagesData = JsonSerializer.Deserialize(Images, SourceGenerationContext.Default.LimitedDetailImages);
                     }
-                    catch (Exception)
+                    catch (Exception err)
                     {
-                        Logger.Error($"Error deserialzing GOG images data for {Title}");
+                        Logger.Error(err, $"Error deserialzing GOG images data for {Title}");
                     }
                 }
 

@@ -91,6 +91,18 @@ namespace DLSS_Swapper
             Log.Error(FormatLine(message, memberName, sourceFilePath, sourceLineNumber));
         }
 
+        public static void Error(Exception exception, string? message = null, [CallerMemberName] string? memberName = null, [CallerFilePath] string? sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
+        {
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                Log.Error(FormatLine($"{exception}\n{exception.StackTrace}", memberName, sourceFilePath, sourceLineNumber));
+            }
+            else
+            {
+                Log.Error(FormatLine($"{message}\n{exception}\n{exception.StackTrace}", memberName, sourceFilePath, sourceLineNumber));
+            }
+        }
+
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static string FormatLine(string message, string? memberName, string? sourceFilePath, int sourceLineNumber)

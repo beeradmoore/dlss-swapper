@@ -406,7 +406,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
             finally
             {
@@ -448,7 +448,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return false;
             }
             finally

@@ -92,7 +92,7 @@ public partial class  LocalRecord : IEquatable<LocalRecord>, INotifyPropertyChan
         get { return _isImported; }
         set
         {
-            if (_isDownloading != value)
+            if (_isImported != value)
             {
                 _isImported = value;
                 NotifyPropertyChanged();

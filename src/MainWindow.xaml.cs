@@ -1,6 +1,7 @@
 ﻿using AsyncAwaitBestPractices;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Extensions;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Pages;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI;
@@ -404,7 +405,7 @@ DLSS Swapper will close now.",
         }
 
         /// <summary>
-        /// Attempts to load manifest.json from dlss-swapper-manifest-builder.
+        /// Attempts to load manifest.json from dlss-swapper-manifest-builder repository.
         /// </summary>
         /// <returns>True if the dlss recrods manifest was downloaded and saved successfully</returns>
         internal async Task<bool> UpdateManifestAsync()
@@ -446,6 +447,7 @@ DLSS Swapper will close now.",
             catch (Exception err)
             {
                 Logger.Error(err);
+                Debugger.Break();
             }
 
             return false;

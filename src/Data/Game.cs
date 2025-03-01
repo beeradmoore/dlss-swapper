@@ -917,14 +917,14 @@ namespace DLSS_Swapper.Data
         */
 
 
-        protected async Task ResizeCoverAsync(string imageSource)
+        protected async Task ResizeCoverAsync(Stream imageStream)
         {
             // TODO: 
             // - find optimal format (eg, is displaying 100 webp images more intense than 100 png images)
             // - load image based on scale
             try
             {
-                using (var image = await SixLabors.ImageSharp.Image.LoadAsync(imageSource).ConfigureAwait(false))
+                using (var image = await SixLabors.ImageSharp.Image.LoadAsync(imageStream).ConfigureAwait(false))
                 {
                     // If images are really big we resize to at least 2x the 200x300 we display as.
                     // In future this should be updated to resize to display scale.
@@ -1025,24 +1025,15 @@ namespace DLSS_Swapper.Data
 
             try
             {
-                using (var fileStream = new FileStream(tempFile, FileMode.Create))
+                using (var memoryStream = new MemoryStream())
                 {
-                    var httpResponseMessage = await App.CurrentApp.HttpClient.GetAsync(url, System.Net.Http.HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-                    if (httpResponseMessage.IsSuccessStatusCode == false)
-                    {
-                        return;
-                    }
+                    var fileDownloader = new FileDownloader(url, 0);
+                    await fileDownloader.DownloadFileToStreamAsync(memoryStream).ConfigureAwait(false);
+                    memoryStream.Position = 0;
 
-                    // This could be optimised by loading stream directly to ImageSharp and skip
-                    // the save/load to disk.
-                    using (var stream = httpResponseMessage.Content.ReadAsStream())
-                    {
-                        await stream.CopyToAsync(fileStream).ConfigureAwait(false);
-                    }
+                    // Now if the image is downloaded lets resize it, 
+                    await ResizeCoverAsync(memoryStream).ConfigureAwait(false);
                 }
-
-                // Now if the image is downloaded lets resize it, 
-                await ResizeCoverAsync(tempFile).ConfigureAwait(false);
             }
             catch (Exception err)
             {

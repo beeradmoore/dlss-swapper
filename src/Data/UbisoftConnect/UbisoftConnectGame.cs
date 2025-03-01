@@ -35,7 +35,10 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         {
             if (File.Exists(LocalHeaderImage))
             {
-                await ResizeCoverAsync(LocalHeaderImage).ConfigureAwait(false);
+                using (var fileStream = File.Open(LocalHeaderImage, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    await ResizeCoverAsync(fileStream).ConfigureAwait(false);
+                }
                 return;
             }
 

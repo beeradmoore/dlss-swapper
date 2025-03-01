@@ -32,7 +32,10 @@ namespace DLSS_Swapper.Data.GOG
             {
                 if (File.Exists(potentialLocalHeader))
                 {
-                    await ResizeCoverAsync(potentialLocalHeader).ConfigureAwait(false);
+                    using (var fileStream = File.Open(potentialLocalHeader, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        await ResizeCoverAsync(fileStream).ConfigureAwait(false);
+                    }
                     return;
                 }
             }

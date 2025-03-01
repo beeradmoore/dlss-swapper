@@ -46,12 +46,16 @@ public partial class FileDownloader : ObservableObject
 
     string _url;
 
-    public FileDownloader(string url)
+    public string LogPrefix { get; set; } = string.Empty;
+
+    int _timerInterval = 0;
+    public FileDownloader(string url, int timerInterval = 100)
     {
         _url = url;
+        _timerInterval = timerInterval;
     }
 
-    public async Task<bool> DownloadFileToStreamAsync(Stream outputStream, CancellationToken cancellationToken = default(CancellationToken), bool withTimer = true)
+    public async Task<bool> DownloadFileToStreamAsync(Stream outputStream, CancellationToken cancellationToken = default(CancellationToken), Action<HttpStatusCode>? statusCodeCallback = null, Action<long, long, double>? progressCallback = null)
     {
         var totalBytesRead = 0L;
         var lastReportedPercent = 0.0;
@@ -59,11 +63,15 @@ public partial class FileDownloader : ObservableObject
         var contentLength = -1L;
 
         System.Timers.Timer? uiUpdateTimer = null;
-        var requestId = Guid.ToString("D");
 
-        if (withTimer == true)
+        if (string.IsNullOrWhiteSpace(LogPrefix))
         {
-            uiUpdateTimer = new System.Timers.Timer(100)
+            LogPrefix = $"{Guid.ToString("D")} - ";
+        }
+
+        if (_timerInterval > 0)
+        {
+            uiUpdateTimer = new System.Timers.Timer(_timerInterval)
             {
                 AutoReset = true,
             };
@@ -96,6 +104,8 @@ public partial class FileDownloader : ObservableObject
                     {
                         DownloadedBytes = totalBytesRead;
                         Percent = newPercent;
+
+                        progressCallback?.Invoke(DownloadedBytes, TotalBytesToDownload, Percent);
                     });
                 }
             };
@@ -105,20 +115,23 @@ public partial class FileDownloader : ObservableObject
         var buffer = ArrayPool<byte>.Shared.Rent(BufferSize);
         try
         {
-            Logger.Verbose($"{requestId} - Starting download of {_url}");
+            Logger.Verbose($"{LogPrefix}Starting download of {_url}");
 
             using (var response = await App.CurrentApp.HttpClient.GetAsync(_url, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
             {
+                Logger.Verbose($"{LogPrefix}Status Code: {response.StatusCode}");
+                statusCodeCallback?.Invoke(response.StatusCode);
+
                 response.EnsureSuccessStatusCode();
 
                 if (Settings.Instance.LoggingLevel == LoggingLevel.Verbose)
                 {
-                    Logger.Verbose($"{requestId} - HTTP Version: {response.Version}");
+                    Logger.Verbose($"{LogPrefix}HTTP Version: {response.Version}");
                     if (response.RequestMessage?.Headers is not null)
                     {
                         foreach (var header in response.RequestMessage.Headers)
                         {
-                            Logger.Verbose($"{requestId} - Request Header {header.Key}: {string.Join(", ", header.Value)}");
+                            Logger.Verbose($"{LogPrefix}Request Header {header.Key}: {string.Join(", ", header.Value)}");
                         }
                     }
 
@@ -126,7 +139,7 @@ public partial class FileDownloader : ObservableObject
                     {
                         foreach (var header in response.Headers)
                         {
-                            Logger.Verbose($"{requestId} - Response Header {header.Key}: {string.Join(", ", header.Value)}");
+                            Logger.Verbose($"{LogPrefix}Response Header {header.Key}: {string.Join(", ", header.Value)}");
                         }
                     }
 
@@ -134,7 +147,7 @@ public partial class FileDownloader : ObservableObject
                     {
                         foreach (var header in response.Content.Headers)
                         {
-                            Logger.Verbose($"{requestId} - Content Header {header.Key}: {string.Join(", ", header.Value)}");
+                            Logger.Verbose($"{LogPrefix}Content Header {header.Key}: {string.Join(", ", header.Value)}");
                         }
                     }
                 }
@@ -161,8 +174,7 @@ public partial class FileDownloader : ObservableObject
                         totalBytesRead += bytesRead;
                     }
                 }
-            }
-            
+            }            
 
             App.CurrentApp.RunOnUIThread(() =>
             {
@@ -171,15 +183,19 @@ public partial class FileDownloader : ObservableObject
 
             return true;
         }
+        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested == false)
+        {
+            throw;
+        }
+        catch (Exception err)
+        {
+            Logger.Error(err, $"{LogPrefix} could not download {_url}");
+            throw;
+        }
         finally
         {
             ArrayPool<byte>.Shared.Return(buffer);
             uiUpdateTimer?.Stop();
         }
-    }
-
-    private void UiUpdateTimer_Elapsed(object? sender, ElapsedEventArgs e)
-    {
-        throw new NotImplementedException();
     }
 }

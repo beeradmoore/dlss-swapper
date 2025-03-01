@@ -40,7 +40,7 @@ public partial class FileDownloader : ObservableObject
     [ObservableProperty]
     public partial long TotalBytesToDownload { get; set; } = 0L;
 
-    public Guid Guid { get; } = Guid.CreateVersion7();
+    public Guid Guid { get; } = Guid.NewGuid();
 
     public const int BufferSize = 65536;
 

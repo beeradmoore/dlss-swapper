@@ -409,8 +409,6 @@ DLSS Swapper will close now.",
         /// <returns>True if the dlss recrods manifest was downloaded and saved successfully</returns>
         internal async Task<bool> UpdateManifestAsync()
         {
-            var url = "https://dlss-swapper-downloads.beeradmoore.com/manifest.json";
-
             try
             {
                 using (var memoryStream = new MemoryStream())
@@ -418,15 +416,8 @@ DLSS Swapper will close now.",
                     // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider 
                     // adding a "fast UpdateManifest" which will quit early if we were unable to load in 10sec 
                     // which would then fall back to loading local.
-                    using (var response = await App.CurrentApp.HttpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
-                    {
-                        response.EnsureSuccessStatusCode();
-
-                        using (var stream = await response.Content.ReadAsStreamAsync())
-                        {
-                            await stream.CopyToAsync(memoryStream);
-                        }
-                    }
+                    var fileDownloader = new FileDownloader("https://raw.githubusercontent.com/beeradmoore/dlss-swapper-manifest-builder/refs/heads/main/manifest.json", 0);
+                    await fileDownloader.DownloadFileToStreamAsync(memoryStream);
 
                     memoryStream.Position = 0;
 

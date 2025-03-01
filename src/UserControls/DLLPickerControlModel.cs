@@ -196,15 +196,15 @@ public partial class DLLPickerControlModel : ObservableObject
             return;
         }
 
-        if (SelectedDLLRecord.LocalRecord.IsDownloaded == false)
+        if (SelectedDLLRecord.LocalRecord.FileDownloader is not null)
+        {
+            ShowTempInfoBar(string.Empty, "Please wait for download to complete");
+            return;
+        }
+        else if (SelectedDLLRecord.LocalRecord.IsDownloaded == false)
         {
             ShowTempInfoBar(string.Empty, "Starting download");
             SelectedDLLRecord.DownloadAsync().SafeFireAndForget();
-            return;
-        }
-        else if (SelectedDLLRecord.LocalRecord.IsDownloading)
-        {
-            ShowTempInfoBar(string.Empty, "Please wait for download to complete");
             return;
         }
 

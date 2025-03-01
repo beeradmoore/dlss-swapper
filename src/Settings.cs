@@ -176,7 +176,11 @@ namespace DLSS_Swapper
 
 
         // Don't forget to change this back to off.
+#if DEBUG
+        LoggingLevel _loggingLevel = LoggingLevel.Verbose;
+#else
         LoggingLevel _loggingLevel = LoggingLevel.Error;
+#endif
         public LoggingLevel LoggingLevel
         {
             get { return _loggingLevel; }

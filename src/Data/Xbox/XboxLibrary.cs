@@ -207,7 +207,7 @@ namespace DLSS_Swapper.Data.Xbox
                         var activeGame = cachedGame ?? new XboxGame(familyName);
                         activeGame.Title = package.DisplayName;  // TODO: Will this be a problem if the game is already loaded
                         activeGame.InstallPath = PathHelpers.NormalizePath(package.InstalledPath);
-                        activeGame.SetLocalHeaderImagesAsync(gameNamesToFindPackages[packageName]);
+                        await activeGame.SetLocalHeaderImagesAsync(gameNamesToFindPackages[packageName]);
                         //await game.UpdateCacheImageAsync();
                         await activeGame.SaveToDatabaseAsync();
 

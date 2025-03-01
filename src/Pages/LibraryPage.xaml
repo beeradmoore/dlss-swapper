@@ -18,6 +18,8 @@
         <converters:DLSSStateVisibilityConverter x:Key="IsNotFoundConverter" DesierdState="NotFound" />
         <converters:DLSSStateVisibilityConverter x:Key="IsLocalConverter" DesierdState="Imported" />
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <converters:BytesToMegaBytesConverter x:Key="BytesToMegaBytesConverter" />
+        <converters:TotalBytesVisbilityConverter x:Key="TotalBytesVisbilityConverter" />
     </Page.Resources>
     
     <Grid>
@@ -140,8 +142,33 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <ProgressBar Grid.Column="0" Minimum="0" Maximum="100" Value="{x:Bind LocalRecord.DownloadProgress, Mode=OneWay}" VerticalAlignment="Center" />
-                            <Button Grid.Column="1" ToolTipService.ToolTip="Cancel" Command="{Binding ElementName=thisPage, Path=ViewModel.CancelDownloadRecordCommand}" CommandParameter="{x:Bind }">
+                            <Grid  Grid.Column="0" VerticalAlignment="Center" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                
+                                <ProgressBar Grid.Row="0" Grid.ColumnSpan="3" Minimum="0" Maximum="100" IsIndeterminate="{x:Bind LocalRecord.FileDownloader.IsIndeterminate, Mode=OneWay}" Value="{x:Bind LocalRecord.FileDownloader.Percent, Mode=OneWay}" VerticalAlignment="Top" />
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Visibility="{x:Bind LocalRecord.FileDownloader.TotalBytesToDownload, Mode=OneWay, Converter={StaticResource TotalBytesVisbilityConverter}}" Text="{x:Bind system:String.Format('{0:0.0}%', LocalRecord.FileDownloader.Percent), Mode=OneWay}" />
+
+                                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">
+                                    <Run Text="{x:Bind LocalRecord.FileDownloader.DownloadedBytes, Mode=OneWay, Converter={StaticResource BytesToMegaBytesConverter}}" />
+                                </TextBlock>
+                                
+                                <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Visibility="{x:Bind LocalRecord.FileDownloader.TotalBytesToDownload, Mode=OneWay, Converter={StaticResource TotalBytesVisbilityConverter}}">
+                                    <Run Text=" / " />
+                                    <Run Text="{x:Bind LocalRecord.FileDownloader.TotalBytesToDownload, Mode=OneWay, Converter={StaticResource BytesToMegaBytesConverter}}" />
+                                </TextBlock>
+                                
+                            </Grid>
+
+                            <Button Grid.Column="1" ToolTipService.ToolTip="Cancel" Command="{Binding ElementName=thisPage, Path=ViewModel.CancelDownloadRecordCommand}" CommandParameter="{x:Bind }" VerticalAlignment="Center">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE711;"/>
                                 </Button.Content>

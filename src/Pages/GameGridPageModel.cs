@@ -94,6 +94,21 @@ public partial class GameGridPageModel : ObservableObject
         IsDLSSLoading = false;
     }
 
+    public void SearchForGameEvent(object sender, TextChangedEventArgs e)
+    {
+        if (sender is not TextBox textBox)
+        {
+            throw new ArgumentException("Sender must be a TextBox");
+        }
+
+        if(string.IsNullOrEmpty(textBox.Text))
+        {
+            CurrentCollectionView = GameManager.Instance.GetGameCollection();
+            return;
+        }
+        CurrentCollectionView = GameManager.Instance.GetGameCollection(textBox.Text);
+    }
+
     [RelayCommand]
     async Task AddManualGameButtonAsync()
     {

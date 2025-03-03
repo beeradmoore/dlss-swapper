@@ -25,7 +25,8 @@
     <a href="https://github.com/beeradmoore/dlss-swapper">English</a>
     ·
     <a href="./docs/readme_pt-BR.md">Português BR</a>
-    
+    ·
+    <a href="./docs/readme_ja-JP.md">日本語</a>
 </p>
 
 <p align="center">

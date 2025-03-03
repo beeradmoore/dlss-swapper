@@ -291,7 +291,7 @@
                     Margin="10,0,0,0"
                     AcceptsReturn="True"
                     IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}"
-                    PlaceholderText="Search for Game"
+                    PlaceholderText="Search"
                     TextChanged="{x:Bind ViewModel.SearchForGameEvent}" />
             </StackPanel>
 

@@ -56,55 +56,34 @@ internal partial class GameManager : ObservableObject
     Dictionary<GameLibrary, AdvancedCollectionView> libraryGamesView = new Dictionary<GameLibrary, AdvancedCollectionView>();
 
 
-    Predicate<object> GetPredicateForAllGames(bool hideNonDLSSGames)
+    private Predicate<object> GetPredicateForAllGames(bool hideNonDLSSGames, string? filterText = null)
     {
-        if (hideNonDLSSGames)
-        {
-            return (obj) =>
-            {
-                var game = (Game)obj;
-                return game.HasSwappableItems;
-            };
-        }
-
         return (obj) =>
         {
-            return true;
+            var game = (Game)obj;
+            bool matchesText = string.IsNullOrEmpty(filterText) || game.Title.Contains(filterText, StringComparison.OrdinalIgnoreCase);
+            return (!hideNonDLSSGames || game.HasSwappableItems) && matchesText;
         };
     }
 
-    Predicate<object> GetPredicateForFavouriteGames(bool hideNonDLSSGames)
+    private Predicate<object> GetPredicateForFavouriteGames(bool hideNonDLSSGames, string? filterText = null)
     {
-        if (hideNonDLSSGames)
-        {
-            return (obj) =>
-            {
-                var game = (Game)obj;
-                return game.IsFavourite && game.HasSwappableItems;
-            };
-        }
-
         return (obj) =>
         {
-            return ((Game)obj).IsFavourite;
+            var game = (Game)obj;
+            bool matchesText = string.IsNullOrEmpty(filterText) || game.Title.Contains(filterText, StringComparison.OrdinalIgnoreCase);
+            return game.IsFavourite && (!hideNonDLSSGames || game.HasSwappableItems) && matchesText;
         };
     }
 
 
-    Predicate<object> GetPredicateForLibraryGames(GameLibrary library, bool hideNonDLSSGames)
+    private Predicate<object> GetPredicateForLibraryGames(GameLibrary library, bool hideNonDLSSGames, string? filterText = null)
     {
-        if (hideNonDLSSGames)
-        {
-            return (obj) =>
-            {
-                var game = (Game)obj;
-                return game.GameLibrary == library && game.HasSwappableItems;
-            };
-        }
-
         return (obj) =>
         {
-            return ((Game)obj).GameLibrary == library;
+            var game = (Game)obj;
+            bool matchesText = string.IsNullOrEmpty(filterText) || game.Title.Contains(filterText, StringComparison.OrdinalIgnoreCase);
+            return game.GameLibrary == library && (!hideNonDLSSGames || game.HasSwappableItems) && matchesText;
         };
     }
 
@@ -215,28 +194,27 @@ internal partial class GameManager : ObservableObject
         }
     }
 
-    public ICollectionView GetGameCollection()
+    public ICollectionView GetGameCollection(string? filterText = null)
     {
         // Refresh all filters.
         using (FavouriteGamesView.DeferRefresh())
         {
-            FavouriteGamesView.Filter = GetPredicateForFavouriteGames(Settings.Instance.HideNonDLSSGames);
+            FavouriteGamesView.Filter = GetPredicateForFavouriteGames(Settings.Instance.HideNonDLSSGames, filterText);
         }
 
         using (AllGamesView.DeferRefresh())
         {
-            AllGamesView.Filter = GetPredicateForAllGames(Settings.Instance.HideNonDLSSGames);
+            AllGamesView.Filter = GetPredicateForAllGames(Settings.Instance.HideNonDLSSGames, filterText);
         }
-
 
         if (Settings.Instance.GroupGameLibrariesTogether)
         {
-            // Only refresh librarys when we are going to the grouped view.
+            // Only refresh libraries when we are going to the grouped view.
             foreach (var keyValuePair in libraryGamesView)
             {
                 using (keyValuePair.Value.DeferRefresh())
                 {
-                    keyValuePair.Value.Filter = GetPredicateForLibraryGames(keyValuePair.Key, Settings.Instance.HideNonDLSSGames);
+                    keyValuePair.Value.Filter = GetPredicateForLibraryGames(keyValuePair.Key, Settings.Instance.HideNonDLSSGames, filterText);
                 }
             }
 

@@ -62,7 +62,7 @@ public partial class NewDLLsControlModel : ObservableObject
     [RelayCommand]
     async Task OpenGitHubIssueAsync()
     {
-        var url = "https://github.com/beeradmoore/dlss-swapper-manifest-builder/issues/new?template=new-dlls-discovered.md";
+        var url = "https://github.com/beeradmoore/dlss-swapper-manifest-builder/issues/new?template=new_dlls_discovered.yml";
         await Launcher.LaunchUriAsync(new Uri(url));
     }
 

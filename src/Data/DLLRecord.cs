@@ -196,7 +196,7 @@ namespace DLSS_Swapper.Data
             }
             catch (HttpRequestException ex)
             {
-                Logger.Error(ex.Message);
+                Logger.Error(ex);
 
                 LocalRecord.IsDownloading = false;
                 LocalRecord.HasDownloadError = true;
@@ -311,7 +311,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
 
                 App.CurrentApp.RunOnUIThread(() =>
                 {

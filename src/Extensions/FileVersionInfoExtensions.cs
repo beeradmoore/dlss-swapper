@@ -21,7 +21,7 @@ namespace DLSS_Swapper.Extensions
             }
             catch (Exception err)
             {
-                Logger.Error($"{fileVersionInfo.FileName}, {err.Message}");
+                Logger.Error(err, $"{fileVersionInfo.FileName}");
                 Debugger.Break();
             }
 

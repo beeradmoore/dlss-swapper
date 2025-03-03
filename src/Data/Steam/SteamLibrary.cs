@@ -87,7 +87,7 @@ namespace DLSS_Swapper.Data.Steam
                 catch (Exception err)
                 {
                     // TODO: Report
-                    Logger.Error($"Unable to parse libraryfolders.vdf, {err.Message}");
+                    Logger.Error(err, $"Unable to parse libraryfolders.vdf");
                 }
             }
 
@@ -153,7 +153,7 @@ namespace DLSS_Swapper.Data.Steam
                         }
                         catch (Exception err)
                         {
-                            Logger.Error(err.Message);
+                            Logger.Error(err);
                             continue;
                         }
 
@@ -230,7 +230,7 @@ namespace DLSS_Swapper.Data.Steam
             catch (Exception err)
             {
                 _installPath = string.Empty;
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return string.Empty;
             }
         }
@@ -252,7 +252,7 @@ namespace DLSS_Swapper.Data.Steam
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 Debugger.Break();
             }
         }

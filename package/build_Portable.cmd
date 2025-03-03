@@ -1,6 +1,6 @@
 @echo off
 
-set app_version=1.1.6.0
+set app_version=1.1.6.2
 set initial_directory=%cd%
 
 set build_mode=net9
@@ -49,7 +49,7 @@ Set-Content -Path '%csproj_file%' -Value $content; ^
 dotnet publish "%csproj_file%" ^
 	--runtime win-x64 ^
     --self-contained ^
-    -p:DefineConstants="PORTABLE" ^
+    --configuration Release_Portable ^
     -p:PublishDir=bin\publish\portable\ || goto :error
 
 

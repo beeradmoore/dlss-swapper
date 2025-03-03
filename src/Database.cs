@@ -38,7 +38,7 @@ internal class Database
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
 
@@ -48,7 +48,7 @@ internal class Database
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
 
@@ -58,7 +58,7 @@ internal class Database
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
 
@@ -68,7 +68,7 @@ internal class Database
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
 
@@ -78,7 +78,7 @@ internal class Database
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
 
@@ -88,7 +88,7 @@ internal class Database
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
             try
@@ -97,7 +97,7 @@ internal class Database
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
             syncConnection.Close();

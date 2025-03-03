@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -19,6 +20,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
     WeakReference<NetworkTesterWindow> _weakWindow;
     readonly string _dlssSwapperDomainTestLink = "dlss-swapper-downloads.beeradmoore.com";
     readonly string _dlssSwapperDownloadTestLink = "https://dlss-swapper-downloads.beeradmoore.com/dlss/nvngx_dlss_v1.0.0.0.zip";
+    readonly string _uploadThingDownloadTestLink = "https://hb4kzlkh4u.ufs.sh/f/isdnLt22yljeRWLOje0oeKXyth5OC7M6sI02T3YfL8GPbvpd";    
     readonly string _dlssSwapperCoverImageTestLink = "https://dlss-swapper-downloads.beeradmoore.com/test/library_600x900_2x.jpg";
     readonly string _dlssSwapperAlternativeCoverImageTestLink = "https://files.beeradmoore.com/dlss-swapper/test/library_600x900_2x.jpg";
     readonly string _steamCoverImageTestLink = "https://steamcdn-a.akamaihd.net/steam/apps/870780/library_600x900_2x.jpg";
@@ -70,7 +72,17 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
     public partial bool RunningTest9 { get; set; } = false;
 
-    public bool IsRunningTest => RunningTest1 || RunningTest2 || RunningTest3 || RunningTest4 || RunningTest5 || RunningTest6 || RunningTest7 || RunningTest8 || RunningTest9;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsRunningTest))]
+    [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
+    public partial bool RunningTest10 { get; set; } = false;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsRunningTest))]
+    [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
+    public partial bool RunningTest11 { get; set; } = false;
+
+    public bool IsRunningTest => RunningTest1 || RunningTest2 || RunningTest3 || RunningTest4 || RunningTest5 || RunningTest6 || RunningTest7 || RunningTest8 || RunningTest9 || RunningTest10 || RunningTest11;
     public bool IsNotRunningTest => IsRunningTest == false;
 
     [ObservableProperty]
@@ -102,6 +114,12 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
     [ObservableProperty]
     public partial string Test9Result { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string Test10Result { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string Test11Result { get; set; } = string.Empty;
 
     public NetworkTesterWindowModel(NetworkTesterWindow window)
     {
@@ -138,7 +156,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         catch (Exception err)
         {
             Test1Result = "❌";
-            TestResults += $"Test 1 failed: {err.Message}\n";
+            TestResults += $"Test 1: Failed, {err.Message}\n";
             RunningTest1 = false;
         }
         finally
@@ -177,7 +195,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         catch (Exception err)
         {
             Test2Result = "❌";
-            TestResults += $"Test 2 failed: {err.Message}\n";
+            TestResults += $"Test 2: Failed, {err.Message}\n";
             RunningTest2 = false;
         }
         finally
@@ -216,7 +234,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         catch (Exception err)
         {
             Test3Result = "❌";
-            TestResults += $"Test 3 failed: {err.Message}\n";
+            TestResults += $"Test 3: Failed, {err.Message}\n";
             RunningTest3 = false;
         }
         finally
@@ -342,7 +360,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         catch (Exception err)
         {
             Test5Result = "❌";
-            TestResults += $"Test 5 failed: {err.Message}\n";
+            TestResults += $"Test 5: Failed, {err.Message}\n";
             RunningTest5 = false;
         }
         finally
@@ -381,7 +399,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         catch (Exception err)
         {
             Test6Result = "❌";
-            TestResults += $"Test 6 failed: {err.Message}\n";
+            TestResults += $"Test 6: Failed, {err.Message}\n";
             RunningTest6 = false;
         }
         finally
@@ -420,7 +438,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         catch (Exception err)
         {
             Test7Result = "❌";
-            TestResults += $"Test 7 failed: {err.Message}\n";
+            TestResults += $"Test 7: Failed, {err.Message}\n";
             RunningTest7 = false;
         }
         finally
@@ -459,7 +477,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         catch (Exception err)
         {
             Test8Result = "❌";
-            TestResults += $"Test 8 failed: {err.Message}\n";
+            TestResults += $"Test 8: Failed, {err.Message}\n";
             RunningTest8 = false;
         }
         finally
@@ -492,7 +510,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         catch (Exception err)
         {
             Test9Result = "❌";
-            TestResults += $"Test 9 failed: {err.Message}\n";
+            TestResults += $"Test 9: Failed, {err.Message}\n";
             RunningTest9 = false;
         }
         finally
@@ -500,6 +518,148 @@ public partial class NetworkTesterWindowModel : ObservableObject
             var duration = (DateTime.Now - testStart).TotalSeconds;
             TestResults += $"Test 9: Duration {duration:0.00} seconds\n\n";
             RunningTest9 = false;
+        }
+    }
+
+    [RelayCommand]
+    async Task RunTest10Async()
+    {
+        RunningTest10 = true;
+        Test10Result = string.Empty;
+        TestResults += $"Test 10: Downloading from DLSS Swapper DLL file server with custom user agent ({_dlssSwapperDownloadTestLink})\n";
+
+        if (_weakWindow.TryGetTarget(out NetworkTesterWindow? networkTesterWindow) == true)
+        {
+            var stackPanel = new StackPanel()
+            {
+                Orientation = Orientation.Vertical,
+                Spacing = 12,
+            };
+            stackPanel.Children.Add(new TextBlock()
+            {
+                Text = "Use the provided user agent or enter a custom one of your choice.",
+                TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
+            });
+           
+            var userAgentTextBox = new TextBox()
+            {
+                Text = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0",
+            };
+            stackPanel.Children.Add(userAgentTextBox);
+
+            var dialog = new EasyContentDialog(networkTesterWindow.Content.XamlRoot)
+            {
+                Title = $"Custom user agent test",
+                PrimaryButtonText = "Run Test",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Close,
+                Content = stackPanel,
+            };
+            var testStart = DateTime.Now;
+            var oldUserAgent = App.CurrentApp.HttpClient.DefaultRequestHeaders.UserAgent.FirstOrDefault();
+            try
+            {
+                var result = await dialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    // Reset test start 
+                    testStart = DateTime.Now;
+
+                    TestResults += $"Test 10: Testing with User-Agent \"{userAgentTextBox.Text}\"\n";
+
+                    App.CurrentApp.HttpClient.DefaultRequestHeaders.UserAgent.Clear();
+                    App.CurrentApp.HttpClient.DefaultRequestHeaders.Add("User-Agent", userAgentTextBox.Text);
+
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+
+                        using (var response = await App.CurrentApp.HttpClient.GetAsync(_dlssSwapperDownloadTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                        {
+                            TestResults += $"Test 10: Status code - {response.StatusCode}\n";
+
+                            response.EnsureSuccessStatusCode();
+
+                            await response.Content.CopyToAsync(memoryStream);
+                        }
+
+                        TestResults += $"Test 10: Downloaded {memoryStream.Length} bytes\n";
+                    }
+                    Test10Result = "✅";
+
+                }
+                else
+                {
+                    Test10Result = string.Empty;
+                    TestResults += $"Test 10: Aborted\n";
+                    RunningTest10 = false;
+                }
+            }
+            catch (Exception err)
+            {
+                Test10Result = "❌";
+                TestResults += $"Test 10: Failed, {err.Message}\n";
+                RunningTest10 = false;
+            }
+            finally
+            {
+                var duration = (DateTime.Now - testStart).TotalSeconds;
+                TestResults += $"Test 10: Duration {duration:0.00} seconds\n\n";
+
+                if (oldUserAgent?.Product is not null)
+                {
+                    try
+                    {
+                        App.CurrentApp.HttpClient.DefaultRequestHeaders.UserAgent.Clear();
+                        App.CurrentApp.HttpClient.DefaultRequestHeaders.Add("User-Agent", oldUserAgent.Product.ToString());
+                    }
+                    catch (Exception err)
+                    {
+                        TestResults += $"Test 10: Could not reset user agent, {err.Message}\n";
+                    }
+                }
+
+                RunningTest10 = false;
+            }
+        }       
+    }
+
+    [RelayCommand]
+    async Task RunTest11Async()
+    {
+        RunningTest11 = true;
+        Test11Result = string.Empty;
+        var testStart = DateTime.Now;
+        TestResults += $"Test 11: Downloading from UploadThing file server ({_uploadThingDownloadTestLink})\n";
+
+        try
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var response = await App.CurrentApp.HttpClient.GetAsync(_uploadThingDownloadTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                {
+                    TestResults += $"Test 11: Status code - {response.StatusCode}\n";
+
+                    response.EnsureSuccessStatusCode();
+
+                    await response.Content.CopyToAsync(memoryStream);
+                }
+
+                TestResults += $"Test 11: Downloaded {memoryStream.Length} bytes\n";
+            }
+            Test11Result = "✅";
+        }
+        catch (Exception err)
+        {
+            Test11Result = "❌";
+            TestResults += $"Test 11: Failed, {err.Message}\n";
+            RunningTest11 = false;
+        }
+        finally
+        {
+            var duration = (DateTime.Now - testStart).TotalSeconds;
+            TestResults += $"Test 11: Duration {duration:0.00} seconds\n\n";
+            RunningTest11 = false;
         }
     }
 

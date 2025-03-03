@@ -378,7 +378,7 @@ DLSS Swapper will close now.",
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return false;
             }
         }
@@ -448,13 +448,13 @@ DLSS Swapper will close now.",
                     }
                     catch (Exception err)
                     {
-                        Logger.Error(err.Message);
+                        Logger.Error(err);
                     }
                 }
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
             return false;

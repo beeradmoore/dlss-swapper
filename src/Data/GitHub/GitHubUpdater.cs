@@ -32,7 +32,7 @@ namespace DLSS_Swapper.Data.GitHub
             catch (Exception err)
             {
                 // NOOP
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return null;
             }
         }
@@ -46,7 +46,7 @@ namespace DLSS_Swapper.Data.GitHub
             catch (Exception err)
             {
                 // NOOP
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return null;
             }
         }

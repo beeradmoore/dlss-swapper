@@ -31,7 +31,10 @@ namespace DLSS_Swapper.Data.Steam
             var localHeaderImagePath = Path.Combine(SteamLibrary.GetInstallPath(), "appcache", "librarycache", $"{PlatformId}_library_600x900.jpg");
             if (File.Exists(localHeaderImagePath))
             {
-                await ResizeCoverAsync(localHeaderImagePath).ConfigureAwait(false);
+                using (var fileStream = File.Open(localHeaderImagePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    await ResizeCoverAsync(fileStream).ConfigureAwait(false);
+                }
                 return;
             }
 

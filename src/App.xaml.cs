@@ -67,10 +67,11 @@ namespace DLSS_Swapper
                         CookieContainer = new System.Net.CookieContainer(),
                         AllowAutoRedirect = true,
                     };
-
                     _httpClient = new HttpClient(httpClientHandler);
                     _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper/{versionString}");
-                    _httpClient.Timeout = TimeSpan.FromSeconds(20);
+                    _httpClient.Timeout = TimeSpan.FromMinutes(30);
+                    _httpClient.DefaultRequestVersion = new Version(2, 0);
+                    _httpClient.DefaultRequestHeaders.ConnectionClose = true;
                 }
 
                 return _httpClient;

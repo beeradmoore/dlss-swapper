@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using DLSS_Swapper.Extensions;
+using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.Data
 {
@@ -168,7 +169,7 @@ namespace DLSS_Swapper.Data
             _cancellationTokenSource = null;
         }
 
-        internal async Task<(bool Success, string Message, bool Cancelled)> DownloadAsync(Action<int>? ProgressCallback = null)
+        internal async Task<(bool Success, string Message, bool Cancelled)> DownloadAsync()
         {
             if (string.IsNullOrEmpty(DownloadUrl))
             {
@@ -185,92 +186,23 @@ namespace DLSS_Swapper.Data
             _cancellationTokenSource = new CancellationTokenSource();
             var cancellationToken = _cancellationTokenSource.Token;
 
-            HttpResponseMessage response;
-            try
-            {
-                response = await App.CurrentApp.HttpClient.GetAsync(DownloadUrl, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
-
-                LocalRecord.IsDownloading = true;
-                LocalRecord.DownloadProgress = 0;
-                NotifyPropertyChanged("LocalRecord");
-            }
-            catch (HttpRequestException ex)
-            {
-                Logger.Error(ex);
-
-                LocalRecord.IsDownloading = false;
-                LocalRecord.HasDownloadError = true;
-                LocalRecord.DownloadErrorMessage = "Could not download DLSS. Please check your internet connection!";
-                NotifyPropertyChanged("LocalRecord");
-
-                return (false, "Could not download DLSS. Please check your internet connection!", false);
-            }
-            
-            if (response.StatusCode is not System.Net.HttpStatusCode.OK)
-            {
-                App.CurrentApp.RunOnUIThread(() =>
-                {
-                    LocalRecord.IsDownloading = false;
-                    LocalRecord.DownloadProgress = 0;
-                    LocalRecord.HasDownloadError = true;
-                    LocalRecord.DownloadErrorMessage = "Could not download DLSS.";
-                    NotifyPropertyChanged("LocalRecord");
-                });
-
-                return (false, "Could not download DLSS.", false);
-            }
-
-            var totalDownloadSize = response.Content.Headers.ContentLength ?? 0L;
-            var totalBytesRead = 0L;
-            var buffer = new byte[1024 * 8];
-            var isMoreToRead = true;
-
-            var guid = Guid.NewGuid().ToString().ToUpper();
-
+            var fileDownloader = new FileDownloader(DownloadUrl);
             var tempPath = Storage.GetTemp();
-            var tempZipFile = Path.Combine(tempPath, $"{guid}.zip");
-
-            var targetZipDirectory = DLLManager.Instance.GetExpectedZipPath(this, false);
-            Storage.CreateDirectoryIfNotExists(targetZipDirectory);
+            var tempZipFile = Path.Combine(tempPath, $"{fileDownloader.Guid.ToString("D").ToUpper()}.zip");
 
             try
             {
-                using (var fileStream = new FileStream(tempZipFile, FileMode.Create, FileAccess.ReadWrite, FileShare.None, buffer.Length, true))
+                LocalRecord.FileDownloader = fileDownloader;
+                NotifyPropertyChanged(nameof(LocalRecord));
+
+
+                using (var fileStream = new FileStream(tempZipFile, FileMode.Create, FileAccess.ReadWrite, FileShare.None, FileDownloader.BufferSize, true))
                 {
-                    using (var contentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    var didDownload = await LocalRecord.FileDownloader.DownloadFileToStreamAsync(fileStream, cancellationToken).ConfigureAwait(false);
+                    
+                    if (didDownload == false)
                     {
-                        var lastUpdated = DateTimeOffset.Now;
-                        do
-                        {
-                            var bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken).ConfigureAwait(false);
-
-                            if (bytesRead is 0)
-                            {
-                                isMoreToRead = false;
-                                continue;
-                            }
-
-                            await fileStream.WriteAsync(buffer, 0, bytesRead, cancellationToken).ConfigureAwait(false);
-
-                            totalBytesRead += bytesRead;
-
-                            if ((DateTimeOffset.Now - lastUpdated).TotalMilliseconds > 100)
-                            {
-                                lastUpdated = DateTimeOffset.Now;
-                                if (totalDownloadSize > 0)
-                                {
-                                    App.CurrentApp.RunOnUIThread(() =>
-                                    {
-                                        var percent = (int)Math.Ceiling((totalBytesRead / (double)totalDownloadSize) * 100L);
-                                        ProgressCallback?.Invoke(percent);
-                                        LocalRecord.DownloadProgress = percent;
-                                        Debug.WriteLine($"Precent: {percent}");
-                                        NotifyPropertyChanged("LocalRecord");
-                                    });
-                                }
-                            }
-                        }
-                        while (isMoreToRead);
+                        throw new Exception("Could not download file.");
                     }
 
                     if (ZipMD5Hash != fileStream.GetMD5Hash())
@@ -279,32 +211,24 @@ namespace DLSS_Swapper.Data
                     }
                 }
 
-                App.CurrentApp.RunOnUIThread(() =>
-                {
-                    LocalRecord.DownloadProgress = 100;
-                    NotifyPropertyChanged("LocalRecord");
-                });
-
+                var targetZipDirectory = DLLManager.Instance.GetExpectedZipPath(this, false);
+                Storage.CreateDirectoryIfNotExists(targetZipDirectory);
                 File.Move(tempZipFile, Path.Combine(targetZipDirectory, $"{Version}_{MD5Hash}.zip"), true);
 
                 App.CurrentApp.RunOnUIThread(() =>
                 {
                     LocalRecord.IsDownloaded = true;
-                    LocalRecord.IsDownloading = false;
-                    LocalRecord.DownloadProgress = 0;
-                    NotifyPropertyChanged("LocalRecord");
+                    NotifyPropertyChanged(nameof(LocalRecord));
                 });
 
                 return (true, string.Empty, false);
             }
-            catch (TaskCanceledException)
+            catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
             {
                 App.CurrentApp.RunOnUIThread(() =>
                 {
-                    LocalRecord.IsDownloading = false;
-                    LocalRecord.DownloadProgress = 0;
                     LocalRecord.IsDownloaded = false;
-                    NotifyPropertyChanged("LocalRecord");
+                    NotifyPropertyChanged(nameof(LocalRecord));
                 });
 
                 return (false, string.Empty, true);
@@ -313,20 +237,25 @@ namespace DLSS_Swapper.Data
             {
                 Logger.Error(err);
 
+                Debugger.Break();
                 App.CurrentApp.RunOnUIThread(() =>
                 {
-                    LocalRecord.IsDownloading = false;
-                    LocalRecord.DownloadProgress = 0;
                     LocalRecord.IsDownloaded = false;
                     LocalRecord.HasDownloadError = true;
-                    LocalRecord.DownloadErrorMessage = "Could not download DLSS.";
-                    NotifyPropertyChanged("LocalRecord");
+                    LocalRecord.DownloadErrorMessage = $"Could not download {DLLManager.Instance.GetAssetTypeName(AssetType)} DLL, please try again later or check your logs to see why the download failed.";
+                    NotifyPropertyChanged(nameof(LocalRecord));
                 });
 
                 return (false, err.Message, false);
             }
             finally
             {
+                App.CurrentApp.RunOnUIThread(() =>
+                {
+                    LocalRecord.FileDownloader = null;
+                    NotifyPropertyChanged(nameof(LocalRecord));
+                });
+
                 // Remove temp file.
                 try
                 {

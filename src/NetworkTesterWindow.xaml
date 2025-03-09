@@ -134,6 +134,7 @@
             <StackPanel Orientation="Horizontal" Spacing="12" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
                 <Button Content="Copy test results" Command="{x:Bind ViewModel.CopyTestResultsCommand}" />
                 <Button Content="Create bug report" Command="{x:Bind ViewModel.CreateBugReportCommand}" />
+                <Button Content="Cancel current test" Command="{x:Bind ViewModel.CancelCurrentTestCommand}" />
             </StackPanel>
 
             <TextBox Grid.Row="12" Grid.ColumnSpan="4" MinHeight="400" Header="Results" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Text="{x:Bind ViewModel.TestResults, Mode=OneWay}" />

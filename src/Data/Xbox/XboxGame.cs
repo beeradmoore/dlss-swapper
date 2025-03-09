@@ -26,7 +26,7 @@ namespace DLSS_Swapper.Data.Xbox
             SetID();
         }
 
-        internal async void SetLocalHeaderImagesAsync(List<string> localHeaderImages)
+        internal async Task SetLocalHeaderImagesAsync(List<string> localHeaderImages)
         {
             _localHeaderImages = localHeaderImages;
             await LoadCoverImageAsync();
@@ -39,7 +39,10 @@ namespace DLSS_Swapper.Data.Xbox
                 var headerImage = Path.Combine(InstallPath, localHeaderImage);
                 if (File.Exists(headerImage))
                 {
-                    await ResizeCoverAsync(headerImage).ConfigureAwait(false);
+                    using (var fileStream = File.Open(headerImage, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        await ResizeCoverAsync(fileStream).ConfigureAwait(false);
+                    }
                     return;
                 }
             }

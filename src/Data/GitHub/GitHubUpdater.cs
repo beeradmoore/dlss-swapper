@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
 using CommunityToolkit.WinUI;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -27,12 +31,25 @@ namespace DLSS_Swapper.Data.GitHub
         {
             try
             {
-                return await App.CurrentApp.HttpClient.GetFromJsonAsync("https://api.github.com/repos/beeradmoore/dlss-swapper/releases/latest", SourceGenerationContext.Default.GitHubRelease).ConfigureAwait(false);
+                using (var memoryStream = new MemoryStream())
+                {
+                    var fileDownloader = new FileDownloader("https://api.github.com/repos/beeradmoore/dlss-swapper/releases/latest", 0);
+                    await fileDownloader.DownloadFileToStreamAsync(memoryStream).ConfigureAwait(false);
+                    memoryStream.Position = 0;
+                    var githubRelease = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GitHubRelease);
+                    if (githubRelease is null)
+                    {
+                        throw new Exception("Could not load GitHub release data.");
+                    }
+
+                    return githubRelease;
+                }
             }
             catch (Exception err)
             {
                 // NOOP
                 Logger.Error(err);
+                Debugger.Break();
                 return null;
             }
         }
@@ -41,12 +58,25 @@ namespace DLSS_Swapper.Data.GitHub
         {
             try
             {
-                return await App.CurrentApp.HttpClient.GetFromJsonAsync($"https://api.github.com/repos/beeradmoore/dlss-swapper/releases/tags/{tag}", SourceGenerationContext.Default.GitHubRelease).ConfigureAwait(false);
+                using (var memoryStream = new MemoryStream())
+                {
+                    var fileDownloader = new FileDownloader($"https://api.github.com/repos/beeradmoore/dlss-swapper/releases/tags/{tag}", 0);
+                    await fileDownloader.DownloadFileToStreamAsync(memoryStream).ConfigureAwait(false);
+                    memoryStream.Position = 0;
+                    var githubRelease = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GitHubRelease);
+                    if (githubRelease is null)
+                    {
+                        throw new Exception("Could not load GitHub release data.");
+                    }
+
+                    return githubRelease;
+                }
             }
             catch (Exception err)
             {
                 // NOOP
                 Logger.Error(err);
+                Debugger.Break();
                 return null;
             }
         }

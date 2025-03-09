@@ -5,9 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -121,6 +123,8 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [ObservableProperty]
     public partial string Test11Result { get; set; } = string.Empty;
 
+    CancellationTokenSource? _cancellationTokenSource = null;
+
     public NetworkTesterWindowModel(NetworkTesterWindow window)
     {
         _weakWindow = new WeakReference<NetworkTesterWindow>(window);
@@ -131,38 +135,56 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [RelayCommand]
     async Task RunTest1Async()
     {
+        CancelCurrentTest();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var cancellationToken = _cancellationTokenSource.Token;
+
+        var testName = "Test 1";
         RunningTest1 = true;
         Test1Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"Test 1: Accessing google.com\n";
+        TestResults += $"{testName}: Accessing google.com\n";
 
         try
         {
             using (var memoryStream = new MemoryStream())
             {
-                using (var response = await App.CurrentApp.HttpClient.GetAsync("https://google.com", System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                var fileDownloader = new FileDownloader("https://google.com", 1000)
                 {
-                    TestResults += $"Test 1: Status code - {response.StatusCode}\n";
-
-                    response.EnsureSuccessStatusCode();
-
-                    await response.Content.CopyToAsync(memoryStream);
-                }
-
-                TestResults += $"Test 1: Downloaded {memoryStream.Length} bytes\n";
+                    LogPrefix = $"{testName}: ",
+                };
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
+                    });
+                },
+                progressCallback: (downloadedBytes, totalBytes, percent) =>
+                {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
+                    });
+                });
+                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
             }
             Test1Result = "✅";
+        }
+        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            TestResults += $"{testName}: Cancelled\n";
+            RunningTest1 = false;
         }
         catch (Exception err)
         {
             Test1Result = "❌";
-            TestResults += $"Test 1: Failed, {err.Message}\n";
+            TestResults += $"{testName}: Failed, {err.Message}\n";
             RunningTest1 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"Test 1: Duration {duration:0.00} seconds\n\n";
+            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
             RunningTest1 = false;
         }
     }
@@ -170,38 +192,56 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [RelayCommand]
     async Task RunTest2Async()
     {
+        CancelCurrentTest();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var cancellationToken = _cancellationTokenSource.Token;
+
+        var testName = "Test 2";
         RunningTest2 = true;
         Test2Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"Test 2: Accessing bing.com\n";
+        TestResults += $"{testName}: Accessing bing.com\n";
 
         try
         {
             using (var memoryStream = new MemoryStream())
             {
-                using (var response = await App.CurrentApp.HttpClient.GetAsync("https://bing.com", System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                var fileDownloader = new FileDownloader("https://bing.com", 1000)
                 {
-                    TestResults += $"Test 2: Status code - {response.StatusCode}\n";
-
-                    response.EnsureSuccessStatusCode();
-
-                    await response.Content.CopyToAsync(memoryStream);
-                }
-
-                TestResults += $"Test 2: Downloaded {memoryStream.Length} bytes\n";
+                    LogPrefix = $"{testName}: ",
+                };
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
+                    });
+                },
+                progressCallback: (downloadedBytes, totalBytes, percent) =>
+                {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
+                    });
+                });
+                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
             }
             Test2Result = "✅";
+        }
+        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            TestResults += $"{testName}: Cancelled\n";
+            RunningTest2 = false;
         }
         catch (Exception err)
         {
             Test2Result = "❌";
-            TestResults += $"Test 2: Failed, {err.Message}\n";
+            TestResults += $"{testName}: Failed, {err.Message}\n";
             RunningTest2 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"Test 2: Duration {duration:0.00} seconds\n\n";
+            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
             RunningTest2 = false;
         }
     }
@@ -209,38 +249,56 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [RelayCommand]
     async Task RunTest3Async()
     {
+        CancelCurrentTest();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var cancellationToken = _cancellationTokenSource.Token;
+
+        var testName = "Test 3";
         RunningTest3 = true;
         Test3Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"Test 3: Downloading from DLSS Swapper DLL file server ({_dlssSwapperDownloadTestLink})\n";
+        TestResults += $"{testName}: Downloading from DLSS Swapper DLL file server ({_dlssSwapperDownloadTestLink})\n";
 
         try
         {
             using (var memoryStream = new MemoryStream())
             {
-                using (var response = await App.CurrentApp.HttpClient.GetAsync(_dlssSwapperDownloadTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                var fileDownloader = new FileDownloader(_dlssSwapperDownloadTestLink, 1000)
                 {
-                    TestResults += $"Test 3: Status code - {response.StatusCode}\n";
-
-                    response.EnsureSuccessStatusCode();
-
-                    await response.Content.CopyToAsync(memoryStream);
-                }
-
-                TestResults += $"Test 3: Downloaded {memoryStream.Length} bytes\n";
+                    LogPrefix = $"{testName}: ",
+                };
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
+                    });
+                },
+                progressCallback: (downloadedBytes, totalBytes, percent) =>
+                {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
+                    });
+                });
+                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
             }
             Test3Result = "✅";
+        }
+        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            TestResults += $"{testName}: Cancelled\n";
+            RunningTest3 = false;
         }
         catch (Exception err)
         {
             Test3Result = "❌";
-            TestResults += $"Test 3: Failed, {err.Message}\n";
+            TestResults += $"{testName}: Failed, {err.Message}\n";
             RunningTest3 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"Test 3: Duration {duration:0.00} seconds\n\n";
+            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
             RunningTest3 = false;
         }
     }
@@ -248,8 +306,9 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [RelayCommand]
     async Task RunTest4Async()
     {
+        var testName = "Test 4";
         Test4Result = string.Empty;
-        TestResults += $"Test 4: Downloading from DLSS Swapper DLL file server in a web browser ({_dlssSwapperDownloadTestLink})\n";
+        TestResults += $"{testName}: Downloading from DLSS Swapper DLL file server in a web browser ({_dlssSwapperDownloadTestLink})\n";
 
         if (_weakWindow.TryGetTarget(out NetworkTesterWindow? networkTesterWindow) == true)
         {
@@ -318,16 +377,16 @@ public partial class NetworkTesterWindowModel : ObservableObject
             if (result == ContentDialogResult.Primary)
             {
                 Test4Result = "✅";
-                TestResults += $"Test 4: User reported it downloaded correctly\n\n";
+                TestResults += $"{testName}: User reported it downloaded correctly\n\n";
             }
             else if (result == ContentDialogResult.Secondary)
             {
                 Test4Result = "❌";
-                TestResults += $"Test 4: User reported it failed to download in their web browser\n\n";
+                TestResults += $"{testName}: User reported it failed to download in their web browser\n\n";
             }
             else
             {
-                TestResults += $"Test 4: User cancelled the test\n\n";
+                TestResults += $"{testName}: User cancelled the test\n\n";
             }
         }
     }
@@ -335,38 +394,56 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [RelayCommand]
     async Task RunTest5Async()
     {
+        CancelCurrentTest();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var cancellationToken = _cancellationTokenSource.Token;
+
+        var testName = "Test 5";
         RunningTest5 = true;
         Test5Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"Test 5: Downloading game cover from Steam ({_steamCoverImageTestLink})\n";
+        TestResults += $"{testName}: Downloading game cover from Steam ({_steamCoverImageTestLink})\n";
 
         try
         {
             using (var memoryStream = new MemoryStream())
             {
-                using (var response = await App.CurrentApp.HttpClient.GetAsync(_steamCoverImageTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                var fileDownloader = new FileDownloader(_steamCoverImageTestLink, 1000)
                 {
-                    TestResults += $"Test 5: Status code - {response.StatusCode}\n";
-
-                    response.EnsureSuccessStatusCode();
-
-                    await response.Content.CopyToAsync(memoryStream);
-                }
-
-                TestResults += $"Test 5: Downloaded {memoryStream.Length} bytes\n";
+                    LogPrefix = $"{testName}: ",
+                };
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
+                    });
+                },
+                progressCallback: (downloadedBytes, totalBytes, percent) =>
+                {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
+                    });
+                });
+                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
             }
             Test5Result = "✅";
+        }
+        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            TestResults += $"{testName}: Cancelled\n";
+            RunningTest5 = false;
         }
         catch (Exception err)
         {
             Test5Result = "❌";
-            TestResults += $"Test 5: Failed, {err.Message}\n";
+            TestResults += $"{testName}: Failed, {err.Message}\n";
             RunningTest5 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"Test 5: Duration {duration:0.00} seconds\n\n";
+            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
             RunningTest5 = false;
         }
     }
@@ -374,38 +451,56 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [RelayCommand]
     async Task RunTest6Async()
     {
+        CancelCurrentTest();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var cancellationToken = _cancellationTokenSource.Token;
+
+        var testName = "Test 6";
         RunningTest6 = true;
         Test6Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"Test 6: Downloading game cover from Epic Game Store ({_egsCoverImageTestLink})\n";
+        TestResults += $"{testName}: Downloading game cover from Epic Game Store ({_egsCoverImageTestLink})\n";
 
         try
         {
             using (var memoryStream = new MemoryStream())
             {
-                using (var response = await App.CurrentApp.HttpClient.GetAsync(_egsCoverImageTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                var fileDownloader = new FileDownloader(_egsCoverImageTestLink, 1000)
                 {
-                    TestResults += $"Test 6: Status code - {response.StatusCode}\n";
-
-                    response.EnsureSuccessStatusCode();
-
-                    await response.Content.CopyToAsync(memoryStream);
-                }
-
-                TestResults += $"Test 6: Downloaded {memoryStream.Length} bytes\n";
+                    LogPrefix = $"{testName}: ",
+                };
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
+                    });
+                },
+                progressCallback: (downloadedBytes, totalBytes, percent) =>
+                {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
+                    });
+                });
+                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
             }
             Test6Result = "✅";
+        }
+        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            TestResults += $"{testName}: Cancelled\n";
+            RunningTest6 = false;
         }
         catch (Exception err)
         {
             Test6Result = "❌";
-            TestResults += $"Test 6: Failed, {err.Message}\n";
+            TestResults += $"{testName}: Failed, {err.Message}\n";
             RunningTest6 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"Test 6: Duration {duration:0.00} seconds\n\n";
+            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
             RunningTest6 = false;
         }
     }
@@ -413,38 +508,56 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [RelayCommand]
     async Task RunTest7Async()
     {
+        CancelCurrentTest();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var cancellationToken = _cancellationTokenSource.Token;
+
+        var testName = "Test 7";
         RunningTest7 = true;
         Test7Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"Test 7: Downloading game cover from DLSS Swapper file server ({_dlssSwapperCoverImageTestLink})\n";
+        TestResults += $"{testName}: Downloading game cover from DLSS Swapper file server ({_dlssSwapperCoverImageTestLink})\n";
 
         try
         {
             using (var memoryStream = new MemoryStream())
             {
-                using (var response = await App.CurrentApp.HttpClient.GetAsync(_dlssSwapperCoverImageTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                var fileDownloader = new FileDownloader(_dlssSwapperCoverImageTestLink, 1000)
                 {
-                    TestResults += $"Test 7: Status code - {response.StatusCode}\n";
-
-                    response.EnsureSuccessStatusCode();
-
-                    await response.Content.CopyToAsync(memoryStream);
-                }
-
-                TestResults += $"Test 7: Downloaded {memoryStream.Length} bytes\n";
+                    LogPrefix = $"{testName}: ",
+                };
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
+                    });
+                },
+                progressCallback: (downloadedBytes, totalBytes, percent) =>
+                {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
+                    });
+                });
+                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
             }
             Test7Result = "✅";
+        }
+        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            TestResults += $"{testName}: Cancelled\n";
+            RunningTest7 = false;
         }
         catch (Exception err)
         {
             Test7Result = "❌";
-            TestResults += $"Test 7: Failed, {err.Message}\n";
+            TestResults += $"{testName}: Failed, {err.Message}\n";
             RunningTest7 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"Test 7: Duration {duration:0.00} seconds\n\n";
+            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
             RunningTest7 = false;
         }
     }
@@ -452,38 +565,56 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [RelayCommand]
     async Task RunTest8Async()
     {
+        CancelCurrentTest();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var cancellationToken = _cancellationTokenSource.Token;
+
+        var testName = "Test 8";
         RunningTest8 = true;
         Test8Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"Test 8: Downloading game cover from alternative DLSS Swapper file server ({_dlssSwapperAlternativeCoverImageTestLink})\n";
+        TestResults += $"{testName}: Downloading game cover from alternative DLSS Swapper file server ({_dlssSwapperAlternativeCoverImageTestLink})\n";
 
         try
         {
             using (var memoryStream = new MemoryStream())
             {
-                using (var response = await App.CurrentApp.HttpClient.GetAsync(_dlssSwapperAlternativeCoverImageTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                var fileDownloader = new FileDownloader(_dlssSwapperAlternativeCoverImageTestLink, 1000)
                 {
-                    TestResults += $"Test 8: Status code - {response.StatusCode}\n";
-
-                    response.EnsureSuccessStatusCode();
-
-                    await response.Content.CopyToAsync(memoryStream);
-                }
-
-                TestResults += $"Test 8: Downloaded {memoryStream.Length} bytes\n";
+                    LogPrefix = $"{testName}: ",
+                };
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
+                    });
+                },
+                progressCallback: (downloadedBytes, totalBytes, percent) =>
+                {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
+                    });
+                });
+                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
             }
             Test8Result = "✅";
+        }
+        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            TestResults += $"{testName}: Cancelled\n";
+            RunningTest8 = false;
         }
         catch (Exception err)
         {
             Test8Result = "❌";
-            TestResults += $"Test 8: Failed, {err.Message}\n";
+            TestResults += $"{testName}: Failed, {err.Message}\n";
             RunningTest8 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"Test 8: Duration {duration:0.00} seconds\n\n";
+            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
             RunningTest8 = false;
         }
     }
@@ -491,10 +622,11 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [RelayCommand]
     void RunTest9()
     {
+        var testName = "Test 9";
         RunningTest9 = true;
         Test9Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"Test 9: DNS lookup of DLSS Swapper file server ({_dlssSwapperDomainTestLink})\n";
+        TestResults += $"{testName}: DNS lookup of DLSS Swapper file server ({_dlssSwapperDomainTestLink})\n";
 
         try
         {
@@ -502,7 +634,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
             foreach (var address in addresses)
             {
-                TestResults += $"Test 9: Found IP address {address.ToString()}\n";
+                TestResults += $"{testName}: Found IP address {address.ToString()}\n";
             }
 
             Test9Result = "✅";
@@ -510,13 +642,13 @@ public partial class NetworkTesterWindowModel : ObservableObject
         catch (Exception err)
         {
             Test9Result = "❌";
-            TestResults += $"Test 9: Failed, {err.Message}\n";
+            TestResults += $"{testName}: Failed, {err.Message}\n";
             RunningTest9 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"Test 9: Duration {duration:0.00} seconds\n\n";
+            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
             RunningTest9 = false;
         }
     }
@@ -524,9 +656,14 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [RelayCommand]
     async Task RunTest10Async()
     {
+        CancelCurrentTest();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var cancellationToken = _cancellationTokenSource.Token;
+
+        var testName = "Test 10";
         RunningTest10 = true;
         Test10Result = string.Empty;
-        TestResults += $"Test 10: Downloading from DLSS Swapper DLL file server with custom user agent ({_dlssSwapperDownloadTestLink})\n";
+        TestResults += $"{testName}: Downloading from DLSS Swapper DLL file server with custom user agent ({_dlssSwapperDownloadTestLink})\n";
 
         if (_weakWindow.TryGetTarget(out NetworkTesterWindow? networkTesterWindow) == true)
         {
@@ -538,7 +675,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
             stackPanel.Children.Add(new TextBlock()
             {
                 Text = "Use the provided user agent or enter a custom one of your choice.",
-                TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
+                TextWrapping = TextWrapping.Wrap,
             });
            
             var userAgentTextBox = new TextBox()
@@ -565,7 +702,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
                     // Reset test start 
                     testStart = DateTime.Now;
 
-                    TestResults += $"Test 10: Testing with User-Agent \"{userAgentTextBox.Text}\"\n";
+                    TestResults += $"{testName}: Testing with User-Agent \"{userAgentTextBox.Text}\"\n";
 
                     App.CurrentApp.HttpClient.DefaultRequestHeaders.UserAgent.Clear();
                     App.CurrentApp.HttpClient.DefaultRequestHeaders.Add("User-Agent", userAgentTextBox.Text);
@@ -573,17 +710,24 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
                     using (var memoryStream = new MemoryStream())
                     {
-
-                        using (var response = await App.CurrentApp.HttpClient.GetAsync(_dlssSwapperDownloadTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                        var fileDownloader = new FileDownloader(_dlssSwapperDownloadTestLink, 1000)
                         {
-                            TestResults += $"Test 10: Status code - {response.StatusCode}\n";
-
-                            response.EnsureSuccessStatusCode();
-
-                            await response.Content.CopyToAsync(memoryStream);
-                        }
-
-                        TestResults += $"Test 10: Downloaded {memoryStream.Length} bytes\n";
+                            LogPrefix = $"{testName}: ",
+                        };
+                        await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
+                            App.CurrentApp.RunOnUIThread(() =>
+                            {
+                                TestResults += $"{testName}: StatusCode: {statusCode}\n";
+                            });
+                        },
+                        progressCallback: (downloadedBytes, totalBytes, percent) =>
+                        {
+                            App.CurrentApp.RunOnUIThread(() =>
+                            {
+                                TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
+                            });
+                        });
+                        TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
                     }
                     Test10Result = "✅";
 
@@ -591,20 +735,25 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 else
                 {
                     Test10Result = string.Empty;
-                    TestResults += $"Test 10: Aborted\n";
+                    TestResults += $"{testName}: Aborted\n";
                     RunningTest10 = false;
                 }
+            }
+            catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
+            {
+                TestResults += $"{testName}: Cancelled\n";
+                RunningTest10 = false;
             }
             catch (Exception err)
             {
                 Test10Result = "❌";
-                TestResults += $"Test 10: Failed, {err.Message}\n";
+                TestResults += $"{testName}: Failed, {err.Message}\n";
                 RunningTest10 = false;
             }
             finally
             {
                 var duration = (DateTime.Now - testStart).TotalSeconds;
-                TestResults += $"Test 10: Duration {duration:0.00} seconds\n\n";
+                TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
 
                 if (oldUserAgent?.Product is not null)
                 {
@@ -615,7 +764,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
                     }
                     catch (Exception err)
                     {
-                        TestResults += $"Test 10: Could not reset user agent, {err.Message}\n";
+                        TestResults += $"{testName}: Could not reset user agent, {err.Message}\n";
                     }
                 }
 
@@ -627,38 +776,57 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [RelayCommand]
     async Task RunTest11Async()
     {
+        CancelCurrentTest();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var cancellationToken = _cancellationTokenSource.Token;
+
+        var testName = "Test 11";
         RunningTest11 = true;
         Test11Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"Test 11: Downloading from UploadThing file server ({_uploadThingDownloadTestLink})\n";
+        TestResults += $"{testName}: Downloading from UploadThing file server ({_uploadThingDownloadTestLink})\n";
 
         try
         {
             using (var memoryStream = new MemoryStream())
             {
-                using (var response = await App.CurrentApp.HttpClient.GetAsync(_uploadThingDownloadTestLink, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                var fileDownloader = new FileDownloader(_uploadThingDownloadTestLink, 1000)
                 {
-                    TestResults += $"Test 11: Status code - {response.StatusCode}\n";
-
-                    response.EnsureSuccessStatusCode();
-
-                    await response.Content.CopyToAsync(memoryStream);
-                }
-
-                TestResults += $"Test 11: Downloaded {memoryStream.Length} bytes\n";
+                    LogPrefix = $"{testName}: ",
+                };
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
+                    });
+                },
+                progressCallback: (downloadedBytes, totalBytes, percent) =>
+                {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
+                    });
+                });
+                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
             }
             Test11Result = "✅";
         }
+        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            TestResults += $"{testName}: Cancelled\n";
+            RunningTest11 = false;
+        }
         catch (Exception err)
         {
+            Logger.Error(err, $"{testName} failed");
             Test11Result = "❌";
-            TestResults += $"Test 11: Failed, {err.Message}\n";
+            TestResults += $"{testName}: Failed, {err.Message}\n";
             RunningTest11 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"Test 11: Duration {duration:0.00} seconds\n\n";
+            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
             RunningTest11 = false;
         }
     }
@@ -675,5 +843,14 @@ public partial class NetworkTesterWindowModel : ObservableObject
     async Task CreateBugReportAsync()
     {
         await Windows.System.Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/issues/new?template=bug_report.yml"));
+    }
+
+    [RelayCommand]
+    void CancelCurrentTest()
+    {
+        if (_cancellationTokenSource?.IsCancellationRequested == false)
+        {
+            _cancellationTokenSource.Cancel();
+        }
     }
 }

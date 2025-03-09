@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/beeradmoore/dlss-swapper">英文</a>
+    <a href="https://github.com/beeradmoore/dlss-swapper">English</a>
     ·
     <a href="./readme_pt-BR.md">Português BR</a>
     ·

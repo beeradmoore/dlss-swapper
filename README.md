@@ -2,7 +2,7 @@
  <img width="100px" src="./docs/apple-touch-icon.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">DLSS Swapper
 </h2>
- <p align="center">DLSS Swapper is a tool that allows you to conveniently download, manage, and swap <strong>DLSS</strong>, <strong>FSR</strong> and <strong>XeSS</strong> dlls allowing you to upgrade or downgrade DLSS, FSR and XeSS version in a game without the game needing an update.</p>
+ <p align="center">DLSS Swapper is a tool that allows you to conveniently download, manage, 和 swap <strong>DLSS</strong>， <strong>FSR</strong> 和 <strong>XeSS</strong> dlls allowing you to upgrade or downgrade DLSS, FSR and XeSS version in a game without the game needing an update.</p>
 </p>
 
 <p align="center">
@@ -22,11 +22,13 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/beeradmoore/dlss-swapper">English</a>
+    <a href="https://github.com/beeradmoore/dlss-swapper">英文</a>
     ·
     <a href="./docs/readme_pt-BR.md">Português BR</a>
     ·
     <a href="./docs/readme_ja-JP.md">日本語</a>
+    ·
+    <a href="./readme_zh-TW.md">繁體中文</a>
 </p>
 
 <p align="center">

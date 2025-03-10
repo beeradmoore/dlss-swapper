@@ -21,13 +21,16 @@
     
 </p>
 
-<p align="center">
-    <a href="https://github.com/beeradmoore/dlss-swapper">English</a>
+<div align="center">
+    <p>English
     ·
-    <a href="./docs/readme_pt-BR.md">Português BR</a>
+    <a href="./docs/readmes/readme_pt-BR.md">Português BR</a>
     ·
-    <a href="./docs/readme_ja-JP.md">日本語</a>
-</p>
+    <a href="./docs/readmes/readme_es.md">Español</a>
+    ·
+    <a href="./docs/readmes/readme_ja-JP.md">日本語</a>
+    </p>
+</div>
 
 <p align="center">
     <img src="./docs/images/usage/usage_4.gif" />

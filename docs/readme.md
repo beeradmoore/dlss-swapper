@@ -1,5 +1,5 @@
 <p align="center">
- <img width="100px" src="./docs/apple-touch-icon.png" align="center" alt="GitHub Readme Stats" />
+ <img width="100px" src="./apple-touch-icon.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">DLSS Swapper
 </h2>
  <p align="center">DLSS Swapper is a tool that allows you to conveniently download, manage, and swap <strong>DLSS</strong>, <strong>FSR</strong> and <strong>XeSS</strong> dlls allowing you to upgrade or downgrade DLSS, FSR and XeSS version in a game without the game needing an update.</p>
@@ -24,16 +24,16 @@
 <div align="center">
     <p>English
     ·
-    <a href="./docs/readmes/readme_pt-BR.md">Português BR</a>
+    <a href="./readmes/readme_pt-BR.md">Português BR</a>
     ·
-    <a href="./docs/readmes/readme_es.md">Español</a>
+    <a href="./readmes/readme_es.md">Español</a>
     ·
-    <a href="./docs/readmes/readme_ja-JP.md">日本語</a>
+    <a href="./readmes/readme_ja-JP.md">日本語</a>
     </p>
 </div>
 
 <p align="center">
-    <img src="./docs/images/usage/usage_4.gif" />
+    <img src="./images/usage/usage_4.gif" />
 </p>
 
 ## What game libraries are supported?

@@ -29,6 +29,8 @@
     <a href="./readmes/readme_es.md">Español</a>
     ·
     <a href="./readmes/readme_ja-JP.md">日本語</a>
+    ·
+    <a href="./readmes/readme_zh-TW.md">繁體中文</a>
     </p>
 </div>
 

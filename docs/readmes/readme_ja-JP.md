@@ -20,6 +20,8 @@
     <a href="./readme_es.md">Español</a>
     ·
     日本語
+    ·
+    <a href="./readme_zh-TW.md">繁體中文</a>
 </div>
 
 <p align="center">

@@ -1,5 +1,5 @@
 <p align="center">
- <img width="100px" src="./apple-touch-icon.png" align="center" alt="GitHub Readme Stats" />
+ <img width="100px" src="../apple-touch-icon.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">DLSS Swapper
 </h2>
  <p align="center">DLSS Swapperは、<strong>DLSS</strong>、<strong>FSR</strong>、<strong>XeSS</strong>のdllを便利にダウンロード、管理、交換できるツールで、ゲームのアップデートを必要とせずにDLSS、FSR、XeSSのバージョンをアップグレードまたはダウングレードすることができます。</p>
@@ -12,25 +12,18 @@
     <a href="https://img.shields.io/github/issues-pr/beeradmoore/dlss-swapper?color=0088ff"><img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/beeradmoore/dlss-swapper?color=0088ff" /></a>
 </p>
 
-<p align="center">
-    <a href="https://github.com/beeradmoore/dlss-swapper/releases">リリース</a>
+<div align="center">
+    <a href="../../README.md">English</a>
     ·
-    <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=bug_report.yml">バグ報告</a>
+    <a href="./readme_pt-BR.md">Português BR</a></a>
     ·
-    <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md">機能リクエスト</a>
-    
-</p>
+    <a href="./readme_es.md">Español</a>
+    ·
+    日本語
+</div>
 
 <p align="center">
-    <a href="https://github.com/beeradmoore/dlss-swapper">English</a>
-    ·
-    <a href="./readme_pt-BR.md">Português BR</a>
-    ·
-    <a href="./readme_ja-JP.md">日本語</a>
-</p>
-
-<p align="center">
-    <img src="./images/usage/usage_4.gif" />
+    <img src="../images/usage/usage_4.gif" />
 </p>
 
 ## サポートされているゲームライブラリは何ですか？
@@ -42,33 +35,33 @@
 - [Xbox App](https://www.xbox.com/)
 - `Add Game`ボタンを使用して手動で追加
 
-## なぜゲーム内のDLSS dllを変更したいのですか？
+## なぜゲーム内の DLSS dll を変更したいのですか？
 
-この[クリップ](https://youtube.com/clip/UgzYyeox3s7jFJZAvYF4AaABCQ)を参照してください。または、Digital Foundryのビデオ全体を視聴してください（[Lego Builder's Journey Ray Tracing Showcase + DLSS 2.2 Upgrades Analysis](https://www.youtube.com/watch?v=dtbqJXb1UDw)）。DLSS 2.2の議論は11:40から始まります。
+この[クリップ](https://youtube.com/clip/UgzYyeox3s7jFJZAvYF4AaABCQ)を参照してください。または、Digital Foundry のビデオ全体を視聴してください（[Lego Builder's Journey Ray Tracing Showcase + DLSS 2.2 Upgrades Analysis](https://www.youtube.com/watch?v=dtbqJXb1UDw)）。DLSS 2.2 の議論は 11:40 から始まります。
 
 ## 注意事項
 
-このツールは、DLSSをサポートしていないゲームにDLSSを追加することは**できません**。
+このツールは、DLSS をサポートしていないゲームに DLSS を追加することは**できません**。
 
-このツールは、DLSS dllを交換することで以下を保証するものでは**ありません**：
+このツールは、DLSS dll を交換することで以下を保証するものでは**ありません**：
 
-- DLSSのパフォーマンスが向上する。
-- DLSSのアーティファクトが減少する。
+- DLSS のパフォーマンスが向上する。
+- DLSS のアーティファクトが減少する。
 - クラッシュのない体験を提供する。
 
-多くの場合、いくつかの問題を修正することができますが、他の場合ではゲームの起動を妨げることがあります（元のdllをツールで復元するまで）。
+多くの場合、いくつかの問題を修正することができますが、他の場合ではゲームの起動を妨げることがあります（元の dll をツールで復元するまで）。
 
 実験を楽しんでください。私の大学教授がかつて言ったように、
 
 > コンピュータ[サイエンス]の良いところは、「もしも...？」と考えながら死ぬことがないことです。
 
-DLSSの経験を[r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/)で共有してください。
+DLSS の経験を[r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/)で共有してください。
 
 ## どうやって入手できますか？
 
-最新のビルドは[GitHubリリース](https://github.com/beeradmoore/dlss-swapper/releases)ページから入手できます。
+最新のビルドは[GitHub リリース](https://github.com/beeradmoore/dlss-swapper/releases)ページから入手できます。
 
-## DLSS Swapperができたらいいなと思うこと...
+## DLSS Swapper ができたらいいなと思うこと...
 
 [機能リクエスト](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md)を作成してください。
 
@@ -78,7 +71,7 @@ DLSSの経験を[r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/)で共�
 
 ## 最低システム要件
 
-| 要件       | 説明                                   |
-| ---------- | -------------------------------------- |
-| OS         | Windows 10 64-bit (20H1, build 19041)  |
-| GPU        | 任意                                   |
+| 要件 | 説明                                  |
+| ---- | ------------------------------------- |
+| OS   | Windows 10 64-bit (20H1, build 19041) |
+| GPU  | 任意                                  |

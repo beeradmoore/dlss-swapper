@@ -1,5 +1,5 @@
 <p align="center">
- <img width="100px" src="./apple-touch-icon.png" align="center" alt="GitHub Readme Stats" />
+ <img width="100px" src="../apple-touch-icon.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">DLSS Swapper
 </h2>
  <p align="center">DLSS Swapper es una herramienta del programa que te permite descargar convenientemente, administrar, y cambiar <strong>DLSS</strong>, <strong>FSR</strong> y <strong>XeSS</strong> dlls permitiéndote poder actualizar y desgradar el DLSS, FSR y Xess dlls y, un juego sin precisar actualizar en él.</p>
@@ -21,18 +21,18 @@
     
 </p>
 
-<p align="center">
-    <a href="https://github.com/beeradmoore/dlss-swapper">English</a>
+<div align="center">
+    <a href="../../README.md">English</a>
     ·
     <a href="./readme_pt-BR.md">Português BR</a>
     ·
-    <a href="./readme_pt-BR.md">Español</a>
+    Español
     ·
     <a href="./readme_ja-JP.md">日本語</a>
-</p>
+</div>
 
 <p align="center">
-    <img src="./images/usage/usage_4.gif" />
+    <img src="../images/usage/usage_4.gif" />
 </p>
 
 ## ¿Qué bibliotecas de juegos son compatibles?

@@ -24,7 +24,7 @@
 <div align="center">
     <a href="../../README.md">English</a>
     ·
-    <a hrf="./readme_pt-BR.md">Português BR</a></a>
+    <a href="./readme_pt-BR.md">Português BR</a>
     ·
     <a href="./readme_es.md">Español</a>
     ·

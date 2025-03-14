@@ -6,10 +6,10 @@
 </p>
 
 <p align="center">
-    <a href="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>
-    <a href="https://img.shields.io/github/contributors/beeradmoore/dlss-swapper"><img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/beeradmoore/dlss-swapper" /></a>
-    <a href="https://img.shields.io/github/issues/beeradmoore/dlss-swapper?color=0088ff"><img alt="Github Issues" src="https://img.shields.io/github/issues/beeradmoore/dlss-swapper?color=0088ff" /></a>
-    <a href="https://img.shields.io/github/issues-pr/beeradmoore/dlss-swapper?color=0088ff"><img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/beeradmoore/dlss-swapper?color=0088ff" /></a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/releases"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/graphs/contributors"><img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/beeradmoore/dlss-swapper" /></a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/issues"><img alt="Github Issues" src="https://img.shields.io/github/issues/beeradmoore/dlss-swapper?color=0088ff" /></a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/pulls"><img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/beeradmoore/dlss-swapper?color=0088ff" /></a>
 </p>
 
 <p align="center">

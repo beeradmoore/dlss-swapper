@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.IO;
 using System.ComponentModel;
 using Windows.System;
+using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -26,6 +27,34 @@ public partial class GameControlModel : ObservableObject
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(GameTitleHasChanged))]
     public partial string GameTitle { get; set; }
+
+    public List<DlssPresetOption> DlssPresetOptions;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(DlssPresetHasChanged))]
+    public partial string DlssPreset { get; set; }
+
+    [ObservableProperty]
+    private DlssPresetOption selectedDlssPreset;
+
+    [ObservableProperty]
+    private bool canSelectDlssPreset = false;
+
+    [ObservableProperty]
+    private bool isDlssPresetSaved = true;
+
+    // Declare and implement the partial method
+    partial void OnSelectedDlssPresetChanged(DlssPresetOption value)
+    {
+        // This code executes whenever SelectedDlssPreset changes.
+        // Automatically trigger the save command:
+        if(Game.DlssPreset != value.Value)
+        {
+            IsDlssPresetSaved = false;
+            DlssPreset = value.Value;
+            SaveDlssPresetCommand.Execute(null);
+        }
+    }
 
     public bool GameTitleHasChanged
     {
@@ -45,11 +74,31 @@ public partial class GameControlModel : ObservableObject
         }
     }
 
+    public bool DlssPresetHasChanged
+    {
+        get
+        {
+
+            if (string.IsNullOrEmpty(DlssPreset))
+            {
+                return false;
+            }
+
+            return DlssPreset.Equals(Game.DlssPreset) == false;
+        }
+    }
+
     public GameControlModel(GameControl gameControl, Game game)
     {
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
         GameTitle = game.Title;
+        DlssPresetOptions = NVAPIHelper.Instance.DlssPresetOptions;
+        SelectedDlssPreset = DlssPresetOptions.FirstOrDefault(o => o.Value.Equals(game.DlssPreset, StringComparison.OrdinalIgnoreCase));
+        if (game.CurrentDLSS is null)
+        {
+            NVAPIHelper.Instance.DlssPresetOptions.Clear();
+        }
     }
 
     [RelayCommand]
@@ -132,7 +181,7 @@ public partial class GameControlModel : ObservableObject
             return;
         }
 
-        await Game.PromptToBrowseCustomCover();        
+        await Game.PromptToBrowseCustomCover();
     }
 
     [RelayCommand]
@@ -164,7 +213,7 @@ public partial class GameControlModel : ObservableObject
             }
 
 
-        
+
             // This needs to be set after AcceptsReturn otherwise it will strip out the \r
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
@@ -240,5 +289,18 @@ public partial class GameControlModel : ObservableObject
     async Task ReadyToPlayStateMoreInformationAsync()
     {
         await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting#game-is-not-in-a-ready-to-play-state"));
+    }
+
+    [RelayCommand]
+    async Task SaveDlssPresetAsync()
+    {
+        if(DlssPreset is not null)
+        {
+            Game.DlssPreset = DlssPreset;
+            NVAPIHelper.Instance.SetGameDLSSPreset(Game);
+            await Game.SaveToDatabaseAsync();
+            OnPropertyChanged(nameof(DlssPresetHasChanged));
+            IsDlssPresetSaved = true;
+        }
     }
 }

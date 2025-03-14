@@ -45,6 +45,10 @@ namespace DLSS_Swapper.Data
         [Column("cover_image")]
         public partial string? CoverImage { get; set; } = null;
 
+        [ObservableProperty]
+        [Column("dlss_preset")]
+        public partial string? DlssPreset { get; set; } = "0x00000000";
+
         /*
         [ObservableProperty]
         [property: Column("base_dlss_version")]
@@ -1263,6 +1267,12 @@ namespace DLSS_Swapper.Data
             if (CurrentDLSS != game.CurrentDLSS)
             {
                 CurrentDLSS = game.CurrentDLSS;
+                didChange = true;
+            }
+
+            if (DlssPreset != game.DlssPreset)
+            {
+                DlssPreset = game.DlssPreset;
                 didChange = true;
             }
 

@@ -327,7 +327,7 @@
           <Generator>MSBuild:Compile</Generator>
         </Page>
     </ItemGroup>
-    
+
   <ItemGroup>
     <PackageReference Include="AsyncAwaitBestPractices" Version="9.0.0" />
     <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="9.0.0" />
@@ -344,6 +344,7 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
     <PackageReference Include="Nito.AsyncEx" Version="5.1.2" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.7" />
+    <PackageReference Include="NvAPIWrapper.Net" Version="0.8.1.101" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
     <PackageReference Include="Serilog" Version="4.2.0" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
@@ -357,7 +358,7 @@
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
-  <!-- 
+  <!--
   Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
   Tools extension to be activated for this project even if the Windows App SDK Nuget
   package has not yet been restored.
@@ -366,9 +367,9 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
 
-  <!-- 
-  Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution 
-  Explorer "Package and Publish" context menu entry to be enabled for this project even if 
+  <!--
+  Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution
+  Explorer "Package and Publish" context menu entry to be enabled for this project even if
   the Windows App SDK Nuget package has not yet been restored.
   -->
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

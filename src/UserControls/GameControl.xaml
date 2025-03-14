@@ -15,13 +15,15 @@
     VerticalAlignment="Stretch">
 
     <usercontrols:FakeContentDialog.Resources>
-
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
         <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
         <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter"  />
+        <ct_converters:BoolToVisibilityConverter x:Key="BoolToInvisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+        <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter" />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteTextConverter" TrueValue="Favourited" FalseValue="Click to favourite" />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteGlyphConverter" TrueValue="&#xE735;" FalseValue="&#xE734;" />
         <ct_converters:EmptyObjectToObjectConverter x:Key="NullObjectToBoolConverter" NotEmptyValue="True" EmptyValue="False" />
+        <ct_converters:EmptyCollectionToObjectConverter  x:Key="EmptyCollectionToObjectConverter" NotEmptyValue="True" EmptyValue="False" />
 
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadingConverter" DesierdState="Downloading" />
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
@@ -50,7 +52,7 @@
                     </Button.Content>
                 </Button>
                 -->
-                
+
                 <Button Command="{Binding FavouriteCommand}" ToolTipService.ToolTip="{Binding  Game.IsFavourite, Converter={StaticResource FavouriteTextConverter}}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="{Binding Game.IsFavourite, Converter={StaticResource FavouriteGlyphConverter}}"/>
@@ -79,7 +81,7 @@
             <Setter Property="Foreground" Value="{ThemeResource InformationalIconColor}" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
-        
+
     </usercontrols:FakeContentDialog.Resources>
 
     <usercontrols:FakeContentDialog.Content>
@@ -114,7 +116,7 @@
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Spacing="4">
 
-                    <InfoBar 
+                    <InfoBar
                         Visibility="{x:Bind ViewModel.Game.IsReadyToPlay, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}"
                         Severity="Warning"
                         IsOpen="True"
@@ -152,7 +154,7 @@
                             </Button.Content>
                         </Button>
                     </Grid>
-                    
+
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="16" RowSpacing="4" Padding="0,8,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -167,7 +169,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        
+
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="0">
                             <TextBlock Text="DLSS" FontWeight="Bold" VerticalAlignment="Center" Margin="0" Padding="0" />
                             <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
@@ -200,6 +202,17 @@
                         </StackPanel>
 
                         <Button Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_D.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+                            <TextBlock Text="DLSS Preset" FontWeight="Bold"/>
+                            <FontIcon Glyph="&#xE73E;" Visibility="{x:Bind ViewModel.IsDlssPresetSaved, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter }}" Margin="5,0,0,0"/>
+                            <ProgressRing Visibility="{x:Bind ViewModel.IsDlssPresetSaved, Mode=OneWay, Converter={StaticResource BoolToInvisibilityConverter }}" Width="16" Height="16" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" Grid.Row="4"
+                            ItemsSource="{x:Bind ViewModel.DlssPresetOptions}"
+                            SelectedItem="{x:Bind ViewModel.SelectedDlssPreset, Mode=TwoWay}"
+                            DisplayMemberPath="Label"
+                            IsEnabled="{x:Bind ViewModel.DlssPresetOptions, Mode=OneWay, Converter={StaticResource EmptyCollectionToObjectConverter}}"
+                        />
                     </Grid>
 
 
@@ -222,7 +235,7 @@
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                        
+
                         <Button Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentFSR_31_DX12, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentFSR_31_DX12.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.FSR_31_DX12}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
 
@@ -234,12 +247,12 @@
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                        
+
                         <Button Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentFSR_31_VK, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentFSR_31_VK.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.FSR_31_VK}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
                     </Grid>
 
-                    
+
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="16" RowSpacing="4" Padding="0,20,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -262,7 +275,7 @@
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                        
+
                         <Button Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentXeSS, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentXeSS.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeSS}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
 
@@ -274,7 +287,7 @@
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                        
+
                         <Button Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentXeSS_FG, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentXeSS_FG.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeSS_FG}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
 

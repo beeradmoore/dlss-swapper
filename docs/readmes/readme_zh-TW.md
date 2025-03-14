@@ -17,7 +17,7 @@
     ·
     <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=bug_report.yml">Bug 回報</a>
     ·
-    <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md">功能請求</a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml">功能請求</a>
     
 </p>
 
@@ -74,7 +74,7 @@
 
 ## 如果 DLSS Swapper 可以做到...那就太ㄅㄧㄤ ˋ 了...
 
-建立一個[功能請求](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md)。
+建立一個[功能請求](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml)。
 
 ## 我能做出哪些貢獻？
 

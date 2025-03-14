@@ -65,7 +65,7 @@ DLSS の経験を[r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/)で共�
 
 ## DLSS Swapper ができたらいいなと思うこと...
 
-[機能リクエスト](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md)を作成してください。
+[機能リクエスト](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml)を作成してください。
 
 ## どうやって貢献できますか？
 

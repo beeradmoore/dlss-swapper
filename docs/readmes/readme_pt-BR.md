@@ -17,7 +17,7 @@
     ·
     <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=bug_report.yml">Reportar Bug</a>
     ·
-    <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md">Requisitar Recurso</a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml">Requisitar Recurso</a>
     
 </p>
 
@@ -74,7 +74,7 @@ Você pode obter as últimas compilações em nossas paginas de [lançamentos do
 
 ## Seria legal se o DLSS Swapper podesse...
 
-Criar uma [solicitação de recurso](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md).
+Criar uma [solicitação de recurso](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml).
 
 ## Como eu posso contribuir?
 

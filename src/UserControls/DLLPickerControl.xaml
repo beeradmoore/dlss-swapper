@@ -22,7 +22,7 @@
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
         <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
     </UserControl.Resources>
-    
+
     <Grid RowSpacing="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -30,7 +30,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        
+
         <!-- Reserved for: https://github.com/beeradmoore/dlss-swapper/issues/227 -->
         <!-- <InfoBar
               IsOpen="True"
@@ -78,7 +78,7 @@
                 </Button.Content>
             </Button>
         </Grid>
-        
+
 
         <!--
         <Grid Grid.Row="1" ColumnSpacing="6" RowSpacing="4" Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
@@ -112,7 +112,7 @@
                         <TextBlock Grid.Column="0" Text="{x:Bind DisplayName}" />
 
                         <ProgressRing Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsDownloadingConverter}, Mode=OneWay}" ToolTipService.ToolTip="Downloading" Minimum="0" Maximum="100" IsIndeterminate="{x:Bind LocalRecord.FileDownloader.IsIndeterminate, Mode=OneWay}" Value="{x:Bind LocalRecord.FileDownloader.Percent, Mode=OneWay}" HorizontalAlignment="Right" Width="20" Height="20"  />
-                        
+
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsNotFoundConverter}, Mode=OneWay}" ToolTipService.ToolTip="Requires download" HorizontalAlignment="Right" Glyph="&#xE896;" Width="20" Height="20" />
 
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsImportedConverter}, Mode=OneWay}" ToolTipService.ToolTip="Imported" HorizontalAlignment="Right" Glyph="&#xE7B8;" Width="20" Height="20" />
@@ -132,8 +132,8 @@
               Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}"
               Severity="Warning"
               IsOpen="True"
-              IsClosable="False"        
-              Title="No DLLs Found"                 
+              IsClosable="False"
+              Title="No DLLs Found"
               Message="Please go to the libary page to download new DLLs.">
         </InfoBar>
 

@@ -38,7 +38,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(IsRunningTest))]
     [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
     public partial bool RunningTest2 { get; set; } = false;
-    
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsRunningTest))]
     [NotifyPropertyChangedFor(nameof(IsNotRunningTest))]
@@ -683,7 +683,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 Text = "Use the provided user agent or enter a custom one of your choice.",
                 TextWrapping = TextWrapping.Wrap,
             });
-           
+
             var userAgentTextBox = new TextBox()
             {
                 Text = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0",
@@ -705,7 +705,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 var result = await dialog.ShowAsync();
                 if (result == ContentDialogResult.Primary)
                 {
-                    // Reset test start 
+                    // Reset test start
                     testStart = DateTime.Now;
 
                     AppendTestResults(testName, $"Testing with User-Agent \"{userAgentTextBox.Text}\"");
@@ -779,7 +779,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
                 RunningTest10 = false;
             }
-        }       
+        }
     }
 
     [RelayCommand]
@@ -849,7 +849,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
     {
         await Windows.System.Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/issues/new?template=bug_report.yml"));
     }
-    
+
     [RelayCommand]
     void CancelCurrentTest()
     {

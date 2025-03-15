@@ -268,7 +268,7 @@ public partial class DLLPickerControlModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task OpenDllPathAsync()
+    void OpenDllPath()
     {
         if (CurrentGameAsset is null)
         {
@@ -297,17 +297,7 @@ public partial class DLLPickerControlModel : ObservableObject
         catch (Exception err)
         {
             Logger.Error(err);
-
-            if (_gameControlWeakReference.TryGetTarget(out var gameControl))
-            {
-                var dialog = new EasyContentDialog(gameControl.XamlRoot)
-                {
-                    Title = $"Error",
-                    CloseButtonText = "Okay",
-                    Content = err.Message,
-                };
-                await dialog.ShowAsync();
-            }
+            ShowTempInfoBar("Error", err.Message, severity: InfoBarSeverity.Error);
         }
     }
 

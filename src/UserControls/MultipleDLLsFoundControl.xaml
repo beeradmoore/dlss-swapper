@@ -7,23 +7,34 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="using:DLSS_Swapper.Data"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    x:Name="RootView">
 
-    <StackPanel Orientation="Vertical">
-        <TextBlock Text="Shown below are the multiple DLLs found. DLSS Swapper will be able to swap and revert all DLLs at once, however the original DLL version displayed may not be correct to what is used in game." TextWrapping="Wrap" />
+    <StackPanel Orientation="Vertical" Spacing="12">
+        <TextBlock Text="Shown below are the multiple DLLs found. You will still be able to swap and restore DLLs as usual as we will do these actions to all DLLs at once. However because we don't know what one of these DLLs is used by the game the DLL version shown is of the first DLL detected." TextWrapping="Wrap" />
         <ListView ItemsSource="{x:Bind ViewModel.DLLsList}" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:GameAsset">
-                    <StackPanel Orientation="Vertical" Margin="0,6">
-                        <TextBlock>
-                            <Run Text="Version: " FontWeight="Bold" />
-                            <Run Text="{x:Bind DisplayVersion}" />
-                        </TextBlock>
-                        <TextBlock IsTextSelectionEnabled="True" TextWrapping="Wrap">
-                            <Run Text="Path: " FontWeight="Bold" />
-                            <Run Text="{x:Bind Path}" />
-                        </TextBlock>
-                    </StackPanel>
+                    <Grid Margin="0,6" RowSpacing="4" ColumnSpacing="8">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Row="0" Grid.Column="0" Text="{x:Bind DisplayVersion}" IsReadOnly="True" />
+
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{x:Bind Path}" IsReadOnly="True" />
+                        <Button Grid.Row="0" Grid.Column="2" ToolTipService.ToolTip="Open DLL location" VerticalAlignment="Stretch" Command="{Binding ViewModel.OpenDLLPathCommand, ElementName=RootView}" CommandParameter="{x:Bind }">
+                            <Button.Content>
+                                <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE8A7;"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

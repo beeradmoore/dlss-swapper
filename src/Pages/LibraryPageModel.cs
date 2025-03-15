@@ -136,11 +136,12 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                            continue;
                        }
 
+                       // TODO: When fixing imported system, make sure to update this to use full path
                         var internalZipDir = DLLManager.Instance.GetAssetTypeName(dllRecord.AssetType);
-                       if (dllRecord.LocalRecord.IsImported == true)
-                       {
-                           internalZipDir = Path.Combine("Imported", internalZipDir);
-                       }
+                        if (dllRecord.LocalRecord.IsImported == true)
+                        {
+                            internalZipDir = Path.Combine("Imported", internalZipDir);
+                        }
 
                         internalZipDir = Path.Combine(internalZipDir, dllRecord.DisplayName);
 

@@ -12,7 +12,7 @@
     <a href="https://github.com/beeradmoore/dlss-swapper/pulls"><img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/beeradmoore/dlss-swapper?color=0088ff" /></a>
 </p>
 
-<div align="center">
+<p align="center">
     <a href="../../README.md">English</a>
     ·
     <a href="./readme_pt-BR.md">Português BR</a>
@@ -22,7 +22,7 @@
     日本語
     ·
     <a href="./readme_zh-TW.md">繁體中文</a>
-</div>
+</p>
 
 <p align="center">
     <img src="../images/usage/usage_4.gif" />

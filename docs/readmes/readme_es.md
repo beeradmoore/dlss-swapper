@@ -18,10 +18,9 @@
     <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=bug_report.yml">Informar los Bugs</a>
     ·
     <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml">Pedir recurso</a>
-    
 </p>
 
-<div align="center">
+<p align="center">
     <a href="../../README.md">English</a>
     ·
     <a href="./readme_pt-BR.md">Português BR</a>
@@ -31,7 +30,7 @@
     <a href="./readme_ja-JP.md">日本語</a>
     ·
     <a href="./readme_zh-TW.md">繁體中文</a>
-</div>
+</p>
 
 <p align="center">
     <img src="../images/usage/usage_4.gif" />

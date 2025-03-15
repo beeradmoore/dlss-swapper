@@ -802,6 +802,11 @@ namespace DLSS_Swapper.Data
                         return (false, "Unable to DLSS dll as we are unable to write to the target directory.", false);
                     }
                 }
+                catch (IOException err) when (err.HResult == -2147024864)
+                {
+                    Logger.Error(err);
+                    return (false, "Unable to swap dll. It appears to be in use by another program. Is your game currently running?", false);
+                }
                 catch (Exception err)
                 {
                     Logger.Error(err);

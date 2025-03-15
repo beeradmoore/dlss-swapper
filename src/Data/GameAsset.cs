@@ -34,7 +34,7 @@ public class GameAsset : IEquatable<GameAsset>
         get
         {
             // return cached version.
-            if (_displayVersion != string.Empty)
+            if (string.IsNullOrWhiteSpace(_displayVersion) == false)
             {
                 return _displayVersion;
             }
@@ -55,7 +55,9 @@ public class GameAsset : IEquatable<GameAsset>
                 _displayVersion = $"{_displayVersion}.0";
             }
 
-            return _displayVersion;
+            _displayVersion = $"v{_displayVersion}";
+
+            return  _displayVersion;
         }
     }
 

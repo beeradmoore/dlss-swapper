@@ -1,15 +1,15 @@
 <p align="center">
- <img width="100px" src="./docs/apple-touch-icon.png" align="center" alt="GitHub Readme Stats" />
+ <img width="150px" src="./docs/logo_250.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">DLSS Swapper
 </h2>
  <p align="center">DLSS Swapper is a tool that allows you to conveniently download, manage, and swap <strong>DLSS</strong>, <strong>FSR</strong> and <strong>XeSS</strong> dlls allowing you to upgrade or downgrade DLSS, FSR and XeSS version in a game without the game needing an update.</p>
 </p>
 
 <p align="center">
-    <a href="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>
-    <a href="https://img.shields.io/github/contributors/beeradmoore/dlss-swapper"><img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/beeradmoore/dlss-swapper" /></a>
-    <a href="https://img.shields.io/github/issues/beeradmoore/dlss-swapper?color=0088ff"><img alt="Github Issues" src="https://img.shields.io/github/issues/beeradmoore/dlss-swapper?color=0088ff" /></a>
-    <a href="https://img.shields.io/github/issues-pr/beeradmoore/dlss-swapper?color=0088ff"><img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/beeradmoore/dlss-swapper?color=0088ff" /></a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/releases"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/graphs/contributors"><img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/beeradmoore/dlss-swapper" /></a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/issues"><img alt="Github Issues" src="https://img.shields.io/github/issues/beeradmoore/dlss-swapper?color=0088ff" /></a>
+    <a href="https://github.com/beeradmoore/dlss-swapper/pulls"><img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/beeradmoore/dlss-swapper?color=0088ff" /></a>
 </p>
 
 <p align="center">
@@ -17,16 +17,19 @@
     ·
     <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=bug_report.yml">Report Bug</a>
     ·
-    <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md">Request Feature</a>
-    
+    <a href="https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml">Request Feature</a>
 </p>
 
 <p align="center">
-    <a href="https://github.com/beeradmoore/dlss-swapper">English</a>
+    English
     ·
-    <a href="./docs/readme_pt-BR.md">Português BR</a>
+    <a href="./docs/readmes/readme_pt-BR.md">Português BR</a>
     ·
-    <a href="./docs/readme_ja-JP.md">日本語</a>
+    <a href="./docs/readmes/readme_es.md">Español</a>
+    ·
+    <a href="./docs/readmes/readme_ja-JP.md">日本語</a>
+    ·
+    <a href="./docs/readmes/readme_zh-TW.md">繁體中文</a>
 </p>
 
 <p align="center">
@@ -70,7 +73,7 @@ You can get the latest builds from our [GitHub releases](https://github.com/beer
 
 ## It would be cool if DLSS Swapper could...
 
-Create a [feature request](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature-request.md).
+Create a [feature request](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml).
 
 ## How can I contribute?
 

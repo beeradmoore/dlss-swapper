@@ -20,6 +20,9 @@ namespace DLSS_Swapper.Data
         [JsonPropertyName("version_number")]
         public ulong VersionNumber { get; set; }
 
+        [JsonPropertyName("internal_name")]
+        public string InternalName { get; set; } = string.Empty;
+
         [JsonPropertyName("additional_label")]
         public string AdditionalLabel { get; set; } = string.Empty;
 

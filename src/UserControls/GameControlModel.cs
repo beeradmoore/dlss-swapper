@@ -120,7 +120,7 @@ public partial class GameControlModel : ObservableObject
         }
         catch (Exception err)
         {
-            Logger.Error(err);
+            Logger.Error(err.Message);
 
             if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
             {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +41,10 @@ public partial class DLLPickerControlModel : ObservableObject
 
     public bool CanCloseParentDialog { get; set; } = false;
 
+    public string DllPath { get; set; } = string.Empty;
+
+    WeakReference<GameControl> gameControlWeakReference;
+
     public DLLPickerControlModel(WeakReference<GameControl> gameControlWeakReference, EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType)
     {
         _gameControlWeakReference = gameControlWeakReference;
@@ -65,6 +71,7 @@ public partial class DLLPickerControlModel : ObservableObject
         {
             case GameAssetType.DLSS:
                 DLLRecords = [.. DLLManager.Instance.DLSSRecords];
+                DllPath = Path.GetDirectoryName(Game.CurrentDLSS.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDLSS?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -73,6 +80,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.DLSS_G:
                 DLLRecords = [.. DLLManager.Instance.DLSSGRecords];
+                DllPath = Path.GetDirectoryName(Game.CurrentDLSS_G.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDLSS_G?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -81,6 +89,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.DLSS_D:
                 DLLRecords = [.. DLLManager.Instance.DLSSDRecords];
+                DllPath = Path.GetDirectoryName(Game.CurrentDLSS_D.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDLSS_D?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -89,6 +98,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.FSR_31_DX12:
                 DLLRecords = [.. DLLManager.Instance.FSR31DX12Records];
+                DllPath = Path.GetDirectoryName(Game.CurrentFSR_31_DX12.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentFSR_31_DX12?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -97,6 +107,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.FSR_31_VK:
                 DLLRecords = [.. DLLManager.Instance.FSR31VKRecords];
+                DllPath = Path.GetDirectoryName(Game.CurrentFSR_31_VK.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentFSR_31_VK?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -105,6 +116,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.XeSS:
                 DLLRecords = [.. DLLManager.Instance.XeSSRecords];
+                DllPath = Path.GetDirectoryName(Game.CurrentXeSS.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeSS?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -113,6 +125,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.XeLL:
                 DLLRecords = [.. DLLManager.Instance.XeLLRecords];
+                DllPath = Path.GetDirectoryName(Game.CurrentXeLL.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeLL?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -121,6 +134,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.XeSS_FG:
                 DLLRecords = [.. DLLManager.Instance.XeSSFGRecords];
+                DllPath = Path.GetDirectoryName(Game.CurrentXeSS_FG.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeSS_FG?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -262,6 +276,36 @@ public partial class DLLPickerControlModel : ObservableObject
 
     }
 
+    [RelayCommand]
+    async Task OpenDllPathAsync()
+    {
+        try
+        {
+            if (Directory.Exists(DllPath))
+            {
+                Process.Start("explorer.exe", DllPath);
+            }
+            else
+            {
+                throw new Exception($"Could not find path \"{DllPath}\".");
+            }
+        }
+        catch (Exception err)
+        {
+            Logger.Error(err.Message);
+
+            if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+            {
+                var dialog = new EasyContentDialog(gameControl.XamlRoot)
+                {
+                    Title = $"Error",
+                    CloseButtonText = "Okay",
+                    Content = err.Message,
+                };
+                await dialog.ShowAsync();
+            }
+        }
+    }
 
     [RelayCommand]
     async Task ResetDllAsync()

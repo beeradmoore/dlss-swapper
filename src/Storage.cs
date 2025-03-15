@@ -111,6 +111,11 @@ namespace DLSS_Swapper
         /// <returns>True if the directory could be created</returns>
         public static bool CreateDirectoryIfNotExists(string directory)
         {
+            if (string.IsNullOrWhiteSpace(directory))
+            {
+                return false;
+            }
+
             try
             {
                 if (Directory.Exists(directory) == false)

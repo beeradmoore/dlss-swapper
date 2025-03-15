@@ -50,7 +50,7 @@ public class GameAsset : IEquatable<GameAsset>
             _displayVersion = version.ToString();
 
             // If the value is a single value, eg 1, make it 1.0
-            if (_displayVersion.Length == 1)
+            if (_displayVersion.Contains(".") == false)
             {
                 _displayVersion = $"{_displayVersion}.0";
             }

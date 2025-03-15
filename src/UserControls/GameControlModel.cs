@@ -52,20 +52,6 @@ public partial class GameControlModel : ObservableObject
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
         GameTitle = game.Title;
-        SelectedDllPath = string.Empty;
-    }
-
-    public string SelectedDllPath
-    {
-        get => _selectedDllPath;
-        set
-        {
-            if (_selectedDllPath != value)
-            {
-                _selectedDllPath = value;
-                UpdateTextBoxText();
-            }
-        }
     }
 
     public string DllPathTextBox
@@ -77,60 +63,6 @@ public partial class GameControlModel : ObservableObject
             {
                 _textBoxText = value;
                 OnPropertyChanged(nameof(DllPathTextBox));
-            }
-        }
-    }
-
-    private void UpdateTextBoxText()
-    {
-        try
-        {
-            DllPathTextBox = SelectedDllPath switch
-            {
-                "DLSS" => Path.GetDirectoryName(Game.CurrentDLSS?.Path) ?? "Not found",
-                "DLSS G" => Path.GetDirectoryName(Game.CurrentDLSS_G?.Path) ?? "Not found",
-                "DLSS D" => Path.GetDirectoryName(Game.CurrentDLSS_D?.Path) ?? "Not found",
-                "FSR DX12" => Path.GetDirectoryName(Game.CurrentFSR_31_DX12?.Path) ?? "Not found",
-                "FSR VK" => Path.GetDirectoryName(Game.CurrentFSR_31_VK?.Path) ?? "Not found",
-                "XeSS" => Path.GetDirectoryName(Game.CurrentXeSS?.Path) ?? "Not found",
-                "XeSS FG" => Path.GetDirectoryName(Game.CurrentXeSS_FG?.Path) ?? "Not found",
-                "XeLL" => Path.GetDirectoryName(Game.CurrentXeLL?.Path) ?? "Not found",
-                _ => "Select a DLL type"
-            };
-        }
-        catch (Exception)
-        {
-            DllPathTextBox = "Path not available";
-        }
-    }
-
-    [RelayCommand]
-    async Task OpenDllPathAsync()
-    {
-        try
-        {
-            if (Directory.Exists(DllPathTextBox))
-            {
-                Process.Start("explorer.exe", DllPathTextBox);
-            }
-            else
-            {
-                throw new Exception($"Could not find path \"{DllPathTextBox}\".");
-            }
-        }
-        catch (Exception err)
-        {
-            Logger.Error(err.Message);
-
-            if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
-            {
-                var dialog = new EasyContentDialog(gameControl.XamlRoot)
-                {
-                    Title = $"Error",
-                    CloseButtonText = "Okay",
-                    Content = err.Message,
-                };
-                await dialog.ShowAsync();
             }
         }
     }

@@ -22,6 +22,9 @@ public partial class GameControlModel : ObservableObject
 
     public bool IsManuallyAdded => Game.GameLibrary == Interfaces.GameLibrary.ManuallyAdded;
 
+    private string _selectedDllPath;
+    private string _textBoxText;
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(GameTitleHasChanged))]
     public partial string GameTitle { get; set; }
@@ -51,6 +54,18 @@ public partial class GameControlModel : ObservableObject
         GameTitle = game.Title;
     }
 
+    public string DllPathTextBox
+    {
+        get => _textBoxText;
+        set
+        {
+            if (_textBoxText != value)
+            {
+                _textBoxText = value;
+                OnPropertyChanged(nameof(DllPathTextBox));
+            }
+        }
+    }
 
     [RelayCommand]
     async Task OpenInstallPathAsync()

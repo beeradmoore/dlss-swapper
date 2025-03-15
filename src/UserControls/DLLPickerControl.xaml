@@ -52,7 +52,7 @@
         </InfoBar>
 
 
-        <InfoBar Grid.Row="1"
+        <InfoBar Grid.Row="2"
               Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}"
               Severity="Informational"
               IsOpen="True"
@@ -61,7 +61,20 @@
               Message="Please go to the libary page to download new DLLs.">
         </InfoBar>
 
-        <ListView Grid.Row="1" Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" ItemsSource="{x:Bind ViewModel.DLLRecords}" SelectedItem="{x:Bind ViewModel.SelectedDLLRecord, Mode=TwoWay}" MaxHeight="400">
+        <Grid HorizontalAlignment="Stretch" ColumnSpacing="8" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.DllPath, Mode=TwoWay}" VerticalAlignment="Stretch"/>
+            <Button Grid.Column="1" ToolTipService.ToolTip="Open folder" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenDllPathCommand}">
+            <Button.Content>
+                <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE8A7;"/>
+            </Button.Content>
+            </Button>
+        </Grid>
+
+        <ListView Grid.Row="2" Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" ItemsSource="{x:Bind ViewModel.DLLRecords}" SelectedItem="{x:Bind ViewModel.SelectedDLLRecord, Mode=TwoWay}" MaxHeight="400">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:DLLRecord">
                     <Grid HorizontalAlignment="Stretch">

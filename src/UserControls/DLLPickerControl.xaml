@@ -10,22 +10,24 @@
     xmlns:converters="using:DLSS_Swapper.Converters"
     xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
     d:DataContext="{d:DesignInstance Type=usercontrols:DLLPickerControlModel, IsDesignTimeCreatable=True}"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    MinWidth="400">
 
     <UserControl.Resources>
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadingConverter" DesierdState="Downloading" />
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
         <converters:DLSSStateVisibilityConverter x:Key="IsNotFoundConverter" DesierdState="NotFound" />
         <converters:DLSSStateVisibilityConverter x:Key="IsImportedConverter" DesierdState="Imported" />
+        <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
         <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
     </UserControl.Resources>
     
-    <Grid>
+    <Grid RowSpacing="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         
@@ -41,38 +43,62 @@
                 </InfoBar.ActionButton>
         </InfoBar>-->
 
-        <InfoBar Grid.Row="0"
-              IsOpen="{x:Bind ViewModel.CanReset, Mode=OneWay}"
-              Severity="Warning"
-              IsClosable="False"            
-              Message="Reset your DLL to its original?">
-            <InfoBar.ActionButton>
-                <Button Content="Reset" Command="{x:Bind ViewModel.ResetDllCommand}" />
-            </InfoBar.ActionButton>
-        </InfoBar>
-
-
-        <InfoBar Grid.Row="2"
-              Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}"
-              Severity="Informational"
-              IsOpen="True"
-              IsClosable="False"        
-              Title="No DLLs Found"                 
-              Message="Please go to the libary page to download new DLLs.">
-        </InfoBar>
-
-        <Grid HorizontalAlignment="Stretch" ColumnSpacing="8" Grid.Row="1">
+        <Grid Grid.Row="0" ColumnSpacing="6" RowSpacing="4" Visibility="{x:Bind ViewModel.BackupGameAsset, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.DllPath, Mode=TwoWay}" VerticalAlignment="Stretch"/>
-            <Button Grid.Column="1" ToolTipService.ToolTip="Open folder" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenDllPathCommand}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Original DLL" FontWeight="Bold"/>
+            <TextBox Grid.Row="1" Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.BackupGameAsset.DisplayVersion, Mode=OneWay}" VerticalAlignment="Stretch"/>
+            <Button Grid.Row="1" Grid.Column="1" ToolTipService.ToolTip="Restore original DLL" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.ResetDllCommand}">
+                <Button.Content>
+                    <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE72C;"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" ColumnSpacing="6" RowSpacing="4" Visibility="{x:Bind ViewModel.CurrentGameAsset, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Current DLL" FontWeight="Bold"/>
+            <TextBox Grid.Row="1" Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.CurrentGameAsset.DisplayVersion, Mode=OneWay}" VerticalAlignment="Stretch"/>
+            <Button Grid.Row="1" Grid.Column="1" ToolTipService.ToolTip="Open DLL location" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenDllPathCommand}">
+                <Button.Content>
+                    <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE8A7;"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+        
+
+        <!--
+
+        <Grid Grid.Row="1" ColumnSpacing="6" RowSpacing="4" Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="DLL Path" FontWeight="Bold"/>
+            <TextBox Grid.Row="1" Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.DllPath, Mode=OneWay}" VerticalAlignment="Stretch"/>
+            <Button Grid.Row="1" Grid.Column="1" ToolTipService.ToolTip="Open folder" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenDllPathCommand}">
             <Button.Content>
                 <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE8A7;"/>
             </Button.Content>
             </Button>
-        </Grid>
+        </Grid>-->
 
         <ListView Grid.Row="2" Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" ItemsSource="{x:Bind ViewModel.DLLRecords}" SelectedItem="{x:Bind ViewModel.SelectedDLLRecord, Mode=TwoWay}" MaxHeight="400">
             <ListView.ItemTemplate>
@@ -101,6 +127,15 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
+
+        <InfoBar Grid.Row="2"
+              Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+              Severity="Warning"
+              IsOpen="True"
+              IsClosable="False"        
+              Title="No DLLs Found"                 
+              Message="Please go to the libary page to download new DLLs.">
+        </InfoBar>
 
     </Grid>
 </UserControl>

@@ -22,9 +22,6 @@ public partial class GameControlModel : ObservableObject
 
     public bool IsManuallyAdded => Game.GameLibrary == Interfaces.GameLibrary.ManuallyAdded;
 
-    private string _selectedDllPath;
-    private string _textBoxText;
-
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(GameTitleHasChanged))]
     public partial string GameTitle { get; set; }
@@ -52,19 +49,6 @@ public partial class GameControlModel : ObservableObject
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
         GameTitle = game.Title;
-    }
-
-    public string DllPathTextBox
-    {
-        get => _textBoxText;
-        set
-        {
-            if (_textBoxText != value)
-            {
-                _textBoxText = value;
-                OnPropertyChanged(nameof(DllPathTextBox));
-            }
-        }
     }
 
     [RelayCommand]
@@ -220,7 +204,7 @@ public partial class GameControlModel : ObservableObject
                 DefaultButton = ContentDialogButton.Primary,
             };
 
-            var dllPickerControl = new DLLPickerControl(gameControlWeakReference, dialog, Game, gameAssetType);
+            var dllPickerControl = new DLLPickerControl(gameControl, dialog, Game, gameAssetType);
             dialog.Content = dllPickerControl;
             await dialog.ShowAsync();
         }

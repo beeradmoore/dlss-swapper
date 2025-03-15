@@ -18,9 +18,9 @@ namespace DLSS_Swapper.UserControls;
 
 public partial class DLLPickerControlModel : ObservableObject
 {
-    WeakReference<DLLPickerControl> dllPickerControlWeakReference;
-    WeakReference<EasyContentDialog> parentDialogWeakReference;
     WeakReference<GameControl> _gameControlWeakReference;
+    WeakReference<EasyContentDialog> _parentDialogWeakReference;
+    WeakReference<DLLPickerControl> _dllPickerControlWeakReference;
 
     public Game Game { get; private set; }
     public GameAssetType GameAssetType { get; private set; }
@@ -31,25 +31,25 @@ public partial class DLLPickerControlModel : ObservableObject
     public partial DLLRecord? SelectedDLLRecord { get; set; } = null;
 
     [ObservableProperty]
-    public partial bool CanReset { get; set; } = false;
-
-    [ObservableProperty]
     public partial bool CanSwap { get; set; } = false;
 
     [ObservableProperty]
     public partial bool AnyDLLsVisible { get; set; } = false;
 
+    [ObservableProperty]
+    public partial GameAsset? CurrentGameAsset { get; set; } = null;
+
+    [ObservableProperty]
+    public partial GameAsset? BackupGameAsset { get; set; } = null;
+
     public bool CanCloseParentDialog { get; set; } = false;
 
-    public string DllPath { get; set; } = string.Empty;
-
-    WeakReference<GameControl> gameControlWeakReference;
-
-    public DLLPickerControlModel(WeakReference<GameControl> gameControlWeakReference, EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType)
+    public DLLPickerControlModel(GameControl gameControl, EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType)
     {
-        _gameControlWeakReference = gameControlWeakReference;
+        _gameControlWeakReference = new WeakReference<GameControl>(gameControl);
+        _parentDialogWeakReference = new WeakReference<EasyContentDialog>(parentDialog);
+        _dllPickerControlWeakReference = new WeakReference<DLLPickerControl>(dllPickerControl);
 
-        parentDialogWeakReference = new WeakReference<EasyContentDialog>(parentDialog);
         parentDialog.Closing += (ContentDialog sender, ContentDialogClosingEventArgs args) =>
         {
             if (args.Result == ContentDialogResult.Primary)
@@ -61,7 +61,6 @@ public partial class DLLPickerControlModel : ObservableObject
             }
         };
 
-        dllPickerControlWeakReference = new WeakReference<DLLPickerControl>(dllPickerControl);
         Game = game;
         GameAssetType = gameAssetType;
         parentDialog.PrimaryButtonCommand = SwapDllCommand;
@@ -71,7 +70,6 @@ public partial class DLLPickerControlModel : ObservableObject
         {
             case GameAssetType.DLSS:
                 DLLRecords = [.. DLLManager.Instance.DLSSRecords];
-                DllPath = Path.GetDirectoryName(Game.CurrentDLSS.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDLSS?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -80,7 +78,6 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.DLSS_G:
                 DLLRecords = [.. DLLManager.Instance.DLSSGRecords];
-                DllPath = Path.GetDirectoryName(Game.CurrentDLSS_G.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDLSS_G?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -89,7 +86,6 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.DLSS_D:
                 DLLRecords = [.. DLLManager.Instance.DLSSDRecords];
-                DllPath = Path.GetDirectoryName(Game.CurrentDLSS_D.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDLSS_D?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -98,7 +94,6 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.FSR_31_DX12:
                 DLLRecords = [.. DLLManager.Instance.FSR31DX12Records];
-                DllPath = Path.GetDirectoryName(Game.CurrentFSR_31_DX12.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentFSR_31_DX12?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -107,7 +102,6 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.FSR_31_VK:
                 DLLRecords = [.. DLLManager.Instance.FSR31VKRecords];
-                DllPath = Path.GetDirectoryName(Game.CurrentFSR_31_VK.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentFSR_31_VK?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -116,7 +110,6 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.XeSS:
                 DLLRecords = [.. DLLManager.Instance.XeSSRecords];
-                DllPath = Path.GetDirectoryName(Game.CurrentXeSS.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeSS?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -125,7 +118,6 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.XeLL:
                 DLLRecords = [.. DLLManager.Instance.XeLLRecords];
-                DllPath = Path.GetDirectoryName(Game.CurrentXeLL.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeLL?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -134,7 +126,6 @@ public partial class DLLPickerControlModel : ObservableObject
 
             case GameAssetType.XeSS_FG:
                 DLLRecords = [.. DLLManager.Instance.XeSSFGRecords];
-                DllPath = Path.GetDirectoryName(Game.CurrentXeSS_FG.Path);
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeSS_FG?.Hash && x.LocalRecord?.IsDownloaded is false);
@@ -195,7 +186,7 @@ public partial class DLLPickerControlModel : ObservableObject
         }
         else if (e.PropertyName == nameof(CanSwap))
         {
-            if (parentDialogWeakReference.TryGetTarget(out EasyContentDialog? dialog))
+            if (_parentDialogWeakReference.TryGetTarget(out var dialog))
             {
                 dialog.IsPrimaryButtonEnabled = CanSwap;
             }                
@@ -212,7 +203,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
         if (SelectedDLLRecord.LocalRecord.FileDownloader is not null)
         {
-            ShowTempInfoBar(string.Empty, "Please wait for download to complete");
+            ShowTempInfoBar(string.Empty, "Please wait for download to complete before swapping");
             return;
         }
         else if (SelectedDLLRecord.LocalRecord.IsDownloaded == false)
@@ -233,16 +224,16 @@ public partial class DLLPickerControlModel : ObservableObject
         // Allow the dialog to close
         CanCloseParentDialog = true;
 
-        if (this.parentDialogWeakReference.TryGetTarget(out EasyContentDialog? dialog) == true)
+        if (_parentDialogWeakReference.TryGetTarget(out var dialog) == true)
         {
             // Is the dialog already closing when we call this?
             dialog.Hide();
         }
     }
 
-    void ShowTempInfoBar(string title, string message, double duration = 3.0, InfoBarSeverity severity = InfoBarSeverity.Informational)
+    void ShowTempInfoBar(string title, string message, double duration = 5.0, InfoBarSeverity severity = InfoBarSeverity.Informational, int gridIndex = 2)
     {
-        if (dllPickerControlWeakReference.TryGetTarget(out DLLPickerControl? dllPickerControl) == true)
+        if (_dllPickerControlWeakReference.TryGetTarget(out var dllPickerControl) == true)
         {
             if (dllPickerControl.Content is Grid grid)
             {
@@ -250,8 +241,8 @@ public partial class DLLPickerControlModel : ObservableObject
                 infoBar.Message = message;
                 infoBar.Severity = severity;
                 infoBar.IsOpen = true;
-                infoBar.IsClosable = false;
-                Grid.SetRow(infoBar, 2);
+                infoBar.IsClosable = true;
+                Grid.SetRow(infoBar, gridIndex);
                 grid.Children.Add(infoBar);
 
                 var dispatcherTimer = new DispatcherTimer();
@@ -279,22 +270,35 @@ public partial class DLLPickerControlModel : ObservableObject
     [RelayCommand]
     async Task OpenDllPathAsync()
     {
+        if (CurrentGameAsset is null)
+        {
+            return;
+        }
+
         try
         {
-            if (Directory.Exists(DllPath))
+            if (File.Exists(CurrentGameAsset.Path))
             {
-                Process.Start("explorer.exe", DllPath);
+                Process.Start("explorer.exe", $"/select,{CurrentGameAsset.Path}");
             }
             else
             {
-                throw new Exception($"Could not find path \"{DllPath}\".");
+                var dllPath = Path.GetDirectoryName(CurrentGameAsset.Path) ?? string.Empty;
+                if (Directory.Exists(dllPath))
+                {
+                    Process.Start("explorer.exe", dllPath);
+                }
+                else
+                {
+                    throw new Exception($"Could not find file \"{CurrentGameAsset.Path}\".");
+                }
             }
         }
         catch (Exception err)
         {
-            Logger.Error(err.Message);
+            Logger.Error(err);
 
-            if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+            if (_gameControlWeakReference.TryGetTarget(out var gameControl))
             {
                 var dialog = new EasyContentDialog(gameControl.XamlRoot)
                 {
@@ -315,10 +319,11 @@ public partial class DLLPickerControlModel : ObservableObject
         if (didReset.Success == true)
         {
             ResetSelection();
+            ShowTempInfoBar("Success", $"DLL has been reset to {CurrentGameAsset?.DisplayVersion}.", severity: InfoBarSeverity.Success, gridIndex: 0);
         }
         else
         { 
-            ShowTempInfoBar("Error", didReset.Message, severity: InfoBarSeverity.Error);
+            ShowTempInfoBar("Error", didReset.Message, severity: InfoBarSeverity.Error, gridIndex: 0);
         }
     }
 
@@ -327,14 +332,15 @@ public partial class DLLPickerControlModel : ObservableObject
         // If there are backup records it means we can reset.
         var backupRecordType = DLLManager.Instance.GetAssetBackupType(GameAssetType);
         var existingBackupRecords = Game.GameAssets.Where(x => x.AssetType == backupRecordType).ToList();
-        CanReset = existingBackupRecords.Count > 0;
+        BackupGameAsset = existingBackupRecords.FirstOrDefault();
 
         // Select the default record
         var existingRecords = Game.GameAssets.Where(x => x.AssetType == GameAssetType).ToList();
-        if (existingRecords.Count == 1)
+        CurrentGameAsset = existingRecords.FirstOrDefault();
+
+        if (CurrentGameAsset is not null)
         {
-            var existingRecord = existingRecords[0];
-            SelectedDLLRecord = DLLRecords.FirstOrDefault(x => x.MD5Hash == existingRecord.Hash);
+            SelectedDLLRecord = DLLRecords.FirstOrDefault(x => x.MD5Hash == CurrentGameAsset.Hash);
         }
     }
 }

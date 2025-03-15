@@ -1,5 +1,5 @@
 <p align="center">
- <img width="100px" src="../apple-touch-icon.png" align="center" alt="GitHub Readme Stats" />
+ <img width="150px" src="../logo_250.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">DLSS Swapper
 </h2>
  <p align="center">DLSS Swapperは、<strong>DLSS</strong>、<strong>FSR</strong>、<strong>XeSS</strong>のdllを便利にダウンロード、管理、交換できるツールで、ゲームのアップデートを必要とせずにDLSS、FSR、XeSSのバージョンをアップグレードまたはダウングレードすることができます。</p>

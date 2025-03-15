@@ -1,5 +1,5 @@
 <p align="center">
- <img width="100px" src="../apple-touch-icon.png" align="center" alt="GitHub Readme Stats" />
+ <img width="150px" src="../logo_250.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">DLSS Swapper
 </h2>
  <p align="center">DLSS Swapper 是一款實用的小工具，能夠讓你方便地下載、管理與切換 <strong>DLSS</strong>、<strong>FSR</strong> 和 <strong>XeSS</strong> 的 DLL 檔案，使你能夠在不更新遊戲的情況下更新或是回退 DLSS、FSR 和 XeSS 的版本。</p>

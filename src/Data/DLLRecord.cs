@@ -214,6 +214,8 @@ namespace DLSS_Swapper.Data
                     }
                 }
 
+                var directory = Path.GetDirectoryName(LocalRecord.ExpectedPath) ?? string.Empty;
+                Storage.CreateDirectoryIfNotExists(directory);
                 File.Move(tempZipFile, LocalRecord.ExpectedPath, true);
 
                 App.CurrentApp.RunOnUIThread(() =>

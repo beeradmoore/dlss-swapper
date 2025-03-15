@@ -214,9 +214,7 @@ namespace DLSS_Swapper.Data
                     }
                 }
 
-                var targetZipDirectory = DLLManager.Instance.GetExpectedZipPath(this, false);
-                Storage.CreateDirectoryIfNotExists(targetZipDirectory);
-                File.Move(tempZipFile, Path.Combine(targetZipDirectory, $"{Version}_{MD5Hash}.zip"), true);
+                File.Move(tempZipFile, LocalRecord.ExpectedPath, true);
 
                 App.CurrentApp.RunOnUIThread(() =>
                 {
@@ -301,6 +299,23 @@ namespace DLSS_Swapper.Data
         }
         */
 
-       
+
+
+        internal string GetRecordSimpleType()
+        {
+            return AssetType switch
+            {
+                GameAssetType.DLSS => "dlss",
+                GameAssetType.DLSS_G => "dlss_g",
+                GameAssetType.DLSS_D => "dlss_d",
+                GameAssetType.FSR_31_DX12 => "fsr_31_dx12",
+                GameAssetType.FSR_31_VK => "fsr_31_vk",
+                GameAssetType.XeSS => "xess",
+                GameAssetType.XeLL => "xell",
+                GameAssetType.XeSS_FG => "xess_fg",
+                _ => string.Empty,
+            };
+        }
+
     }
 }

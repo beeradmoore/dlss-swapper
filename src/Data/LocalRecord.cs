@@ -57,31 +57,6 @@ public partial class LocalRecord : ObservableObject, IEquatable<LocalRecord>
         return localRecord;
     }
 
-    /*
-    // Disabled because the non-async method seems faster. 
-    public static async Task<LocalRecord> FromExpectedPathAsync(string expectedPath)
-    {
-        var localRecord = new LocalRecord()
-        {
-            ExpectedPath = expectedPath,
-        };
-
-        var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-        Logger.Info($"StorageFolder: {storageFolder.Path}");
-        try
-        {
-            var dlssFile = await storageFolder.GetFileAsync(expectedPath);
-            localRecord.IsDownloaded = true;
-        }
-        catch (Exception)
-        {
-            // If we couldn't load the file we assume it doesn't exist locally
-            localRecord.IsDownloaded = false;
-        }
-
-        return localRecord;
-    }
-    */
 
     internal bool Delete()
     {

@@ -193,52 +193,6 @@ namespace DLSS_Swapper
         }
 #endif
 
-        /*
-        // Disabled because the non-async method seems faster.
-        internal async Task LoadLocalRecordFromDLSSRecordAsync(DLSSRecord dlssRecord)
-        {
-            var expectedPath = Path.Combine("dlls", $"{dlssRecord.Version}_{dlssRecord.MD5Hash}", "nvngx_dlss.dll");
-            Logger.Debug($"ExpectedPath: {expectedPath}");
-            // Load record.
-            var localRecord = await LocalRecord.FromExpectedPathAsync(expectedPath);
-
-            // If the record exists we will update existing properties, if not we add it as new property.
-            var existingLocalRecord = LocalRecords.FirstOrDefault(x => x.Equals(localRecord));
-            if (existingLocalRecord is null)
-            {
-                dlssRecord.LocalRecord = localRecord;
-                LocalRecords.Add(localRecord);
-            }
-            else
-            {
-                existingLocalRecord.UpdateFromNewLocalRecord(localRecord);
-
-                // Probably don't need to set this again.
-                dlssRecord.LocalRecord = existingLocalRecord;
-            }
-        }
-        */
-
-
-        /*
-        // Disabled because the non-async method seems faster. 
-        internal async Task LoadLocalRecordsAsync()
-        {
-            var tasks = new List<Task>();
-
-            // We attempt to load all local records, even if experemental is not enabled.
-            foreach (var dlssRecord in DLSSRecords.Stable)
-            {
-                tasks.Add(LoadLocalRecordFromDLSSRecordAsync(dlssRecord));
-            }
-            foreach (var dlssRecord in DLSSRecords.Experimental)
-            {
-                tasks.Add(LoadLocalRecordFromDLSSRecordAsync(dlssRecord));
-            }
-            await Task.WhenAll(tasks);
-        }
-        */
-
         public bool IsAdminUser()
         {
             using WindowsIdentity identity = WindowsIdentity.GetCurrent();

@@ -153,18 +153,7 @@ internal class DLLManager
 
     internal string GetExpectedZipPath(DLLRecord dllRecord, bool isImportedRecord = false)
     {
-        var recordType = dllRecord.AssetType switch
-        {
-            GameAssetType.DLSS => "dlss",
-            GameAssetType.DLSS_G => "dlss_g",
-            GameAssetType.DLSS_D => "dlss_d",
-            GameAssetType.FSR_31_DX12 => "fsr_31_dx12",
-            GameAssetType.FSR_31_VK => "fsr_31_vk",
-            GameAssetType.XeSS => "xess",
-            GameAssetType.XeLL => "xell",
-            GameAssetType.XeSS_FG => "xess_fg",
-            _ => string.Empty,
-        };
+        var recordType = dllRecord.GetRecordSimpleType();
 
         if (recordType == string.Empty)
         {
@@ -176,19 +165,22 @@ internal class DLLManager
         return zipPath;
     }
 
-    internal string GetExpectedPath(DLLRecord dllRecord, bool isImportedRecord = false)
+    internal void LoadLocalRecordFromDLSSRecord(DLLRecord dllRecord, bool isImportedRecord = false)
     {
         var zipPath = GetExpectedZipPath(dllRecord, isImportedRecord);
         if (string.IsNullOrEmpty(zipPath))
         {
-            return string.Empty;
+            return;
         }
-        return Path.Combine(zipPath, $"{dllRecord.Version}_{dllRecord.MD5Hash}.zip");
-    }
 
-    internal void LoadLocalRecordFromDLSSRecord(DLLRecord dllRecord, bool isImportedRecord = false)
-    {
-        var expectedPath = GetExpectedPath(dllRecord, isImportedRecord);
+        var expectedPath = Path.Combine(zipPath, $"{dllRecord.GetRecordSimpleType()}_v{dllRecord.Version}_{dllRecord.MD5Hash}.zip");
+
+        // Expected path was moved in v1.1.7. This is to migrate the zips from old to new path.
+        var legacyExpectedPath = Path.Combine(zipPath, $"{dllRecord.Version}_{dllRecord.MD5Hash}.zip");
+        if (File.Exists(legacyExpectedPath) == true && File.Exists(expectedPath) == false)
+        {
+            File.Move(legacyExpectedPath, expectedPath);
+        }
 
         // Load record.
         var localRecord = LocalRecord.FromExpectedPath(expectedPath, isImportedRecord);

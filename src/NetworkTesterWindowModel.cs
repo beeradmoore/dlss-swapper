@@ -129,7 +129,15 @@ public partial class NetworkTesterWindowModel : ObservableObject
     {
         _weakWindow = new WeakReference<NetworkTesterWindow>(window);
 
-        TestResults += $"DLSS Swapper version: v{App.CurrentApp.GetVersionString()}\n\n";
+        AppendTestResults("Init", $"DLSS Swapper version: v{App.CurrentApp.GetVersionString()}");
+    }
+
+    void AppendTestResults(string testName, string message)
+    {
+        App.CurrentApp.RunOnUIThread(() =>
+        {
+            TestResults += $"{DateTime.Now.ToString("O")} {testName}: {message}\n";
+        });
     }
 
     [RelayCommand]
@@ -143,7 +151,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         RunningTest1 = true;
         Test1Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"{testName}: Accessing google.com\n";
+        AppendTestResults(testName, $"Accessing google.com");
 
         try
         {
@@ -153,38 +161,37 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 {
                     LogPrefix = $"{testName}: ",
                 };
-                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
-                    });
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) =>
+                {
+                    AppendTestResults(testName, $"StatusCode: {statusCode}");
                 },
                 progressCallback: (downloadedBytes, totalBytes, percent) =>
                 {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
-                    });
+                    AppendTestResults(testName, $"{downloadedBytes} / {totalBytes} ({percent:0.0}%)");
                 });
-                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
+                AppendTestResults(testName, $"Downloaded {memoryStream.Length} bytes");
             }
             Test1Result = "✅";
         }
         catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
         {
-            TestResults += $"{testName}: Cancelled\n";
+            AppendTestResults(testName, $"Cancelled");
             RunningTest1 = false;
         }
         catch (Exception err)
         {
             Test1Result = "❌";
-            TestResults += $"{testName}: Failed, {err.Message}\n";
+            AppendTestResults(testName, $"Failed, {err.Message}");
+            if (string.IsNullOrWhiteSpace(err.InnerException?.Message) == false)
+            {
+                AppendTestResults(testName, $"Inner Exception: {err.InnerException.Message}");
+            }
             RunningTest1 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
+            AppendTestResults(testName, $"Duration {duration:0.00} seconds\n");
             RunningTest1 = false;
         }
     }
@@ -200,7 +207,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         RunningTest2 = true;
         Test2Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"{testName}: Accessing bing.com\n";
+        AppendTestResults(testName, $"Accessing bing.com");
 
         try
         {
@@ -210,38 +217,37 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 {
                     LogPrefix = $"{testName}: ",
                 };
-                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
-                    });
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) =>
+                {
+                    AppendTestResults(testName, $"StatusCode: {statusCode}");
                 },
                 progressCallback: (downloadedBytes, totalBytes, percent) =>
                 {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
-                    });
+                    AppendTestResults(testName, $"{downloadedBytes} / {totalBytes} ({percent:0.0}%)");
                 });
-                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
+                AppendTestResults(testName, $"Downloaded {memoryStream.Length} bytes");
             }
             Test2Result = "✅";
         }
         catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
         {
-            TestResults += $"{testName}: Cancelled\n";
+            AppendTestResults(testName, $"Cancelled");
             RunningTest2 = false;
         }
         catch (Exception err)
         {
             Test2Result = "❌";
-            TestResults += $"{testName}: Failed, {err.Message}\n";
+            AppendTestResults(testName, $"Failed, {err.Message}");
+            if (string.IsNullOrWhiteSpace(err.InnerException?.Message) == false)
+            {
+                AppendTestResults(testName, $"Inner Exception: {err.InnerException.Message}");
+            }
             RunningTest2 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
+            AppendTestResults(testName, $"Duration {duration:0.00} seconds\n");
             RunningTest2 = false;
         }
     }
@@ -257,7 +263,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         RunningTest3 = true;
         Test3Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"{testName}: Downloading from DLSS Swapper DLL file server ({_dlssSwapperDownloadTestLink})\n";
+        AppendTestResults(testName, $"Downloading from DLSS Swapper DLL file server ({_dlssSwapperDownloadTestLink})");
 
         try
         {
@@ -267,38 +273,37 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 {
                     LogPrefix = $"{testName}: ",
                 };
-                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
-                    });
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) =>
+                {
+                    AppendTestResults(testName, $"StatusCode: {statusCode}");
                 },
                 progressCallback: (downloadedBytes, totalBytes, percent) =>
                 {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
-                    });
+                    AppendTestResults(testName, $"{downloadedBytes} / {totalBytes} ({percent:0.0}%)");
                 });
-                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
+                AppendTestResults(testName, $"Downloaded {memoryStream.Length} bytes");
             }
             Test3Result = "✅";
         }
         catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
         {
-            TestResults += $"{testName}: Cancelled\n";
+            AppendTestResults(testName, $"Cancelled");
             RunningTest3 = false;
         }
         catch (Exception err)
         {
             Test3Result = "❌";
-            TestResults += $"{testName}: Failed, {err.Message}\n";
+            AppendTestResults(testName, $"Failed, {err.Message}");
+            if (string.IsNullOrWhiteSpace(err.InnerException?.Message) == false)
+            {
+                AppendTestResults(testName, $"Inner Exception: {err.InnerException.Message}");
+            }
             RunningTest3 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
+            AppendTestResults(testName, $"Duration {duration:0.00} seconds\n");
             RunningTest3 = false;
         }
     }
@@ -308,7 +313,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
     {
         var testName = "Test 4";
         Test4Result = string.Empty;
-        TestResults += $"{testName}: Downloading from DLSS Swapper DLL file server in a web browser ({_dlssSwapperDownloadTestLink})\n";
+        AppendTestResults(testName, $"Downloading from DLSS Swapper DLL file server in a web browser ({_dlssSwapperDownloadTestLink})");
 
         if (_weakWindow.TryGetTarget(out NetworkTesterWindow? networkTesterWindow) == true)
         {
@@ -377,16 +382,16 @@ public partial class NetworkTesterWindowModel : ObservableObject
             if (result == ContentDialogResult.Primary)
             {
                 Test4Result = "✅";
-                TestResults += $"{testName}: User reported it downloaded correctly\n\n";
+                AppendTestResults(testName, $"User reported it downloaded correctly\n");
             }
             else if (result == ContentDialogResult.Secondary)
             {
                 Test4Result = "❌";
-                TestResults += $"{testName}: User reported it failed to download in their web browser\n\n";
+                AppendTestResults(testName, $"User reported it failed to download in their web browser\n");
             }
             else
             {
-                TestResults += $"{testName}: User cancelled the test\n\n";
+                AppendTestResults(testName, $"User cancelled the test\n");
             }
         }
     }
@@ -402,7 +407,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         RunningTest5 = true;
         Test5Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"{testName}: Downloading game cover from Steam ({_steamCoverImageTestLink})\n";
+        AppendTestResults(testName, $"Downloading game cover from Steam ({_steamCoverImageTestLink})");
 
         try
         {
@@ -412,38 +417,37 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 {
                     LogPrefix = $"{testName}: ",
                 };
-                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
-                    });
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) =>
+                {
+                    AppendTestResults(testName, $"StatusCode: {statusCode}");
                 },
                 progressCallback: (downloadedBytes, totalBytes, percent) =>
                 {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
-                    });
+                    AppendTestResults(testName, $"{downloadedBytes} / {totalBytes} ({percent:0.0}%)");
                 });
-                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
+                AppendTestResults(testName, $"Downloaded {memoryStream.Length} bytes");
             }
             Test5Result = "✅";
         }
         catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
         {
-            TestResults += $"{testName}: Cancelled\n";
+            AppendTestResults(testName, $"Cancelled");
             RunningTest5 = false;
         }
         catch (Exception err)
         {
             Test5Result = "❌";
-            TestResults += $"{testName}: Failed, {err.Message}\n";
+            AppendTestResults(testName, $"Failed, {err.Message}");
+            if (string.IsNullOrWhiteSpace(err.InnerException?.Message) == false)
+            {
+                AppendTestResults(testName, $"Inner Exception: {err.InnerException.Message}");
+            }
             RunningTest5 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
+            AppendTestResults(testName, $"Duration {duration:0.00} seconds\n");
             RunningTest5 = false;
         }
     }
@@ -459,7 +463,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         RunningTest6 = true;
         Test6Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"{testName}: Downloading game cover from Epic Game Store ({_egsCoverImageTestLink})\n";
+        AppendTestResults(testName, $"Downloading game cover from Epic Game Store ({_egsCoverImageTestLink})");
 
         try
         {
@@ -469,38 +473,37 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 {
                     LogPrefix = $"{testName}: ",
                 };
-                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
-                    });
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) =>
+                {
+                    AppendTestResults(testName, $"StatusCode: {statusCode}");
                 },
                 progressCallback: (downloadedBytes, totalBytes, percent) =>
                 {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
-                    });
+                    AppendTestResults(testName, $"{downloadedBytes} / {totalBytes} ({percent:0.0}%)");
                 });
-                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
+                AppendTestResults(testName, $"Downloaded {memoryStream.Length} bytes");
             }
             Test6Result = "✅";
         }
         catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
         {
-            TestResults += $"{testName}: Cancelled\n";
+            AppendTestResults(testName, $"Cancelled");
             RunningTest6 = false;
         }
         catch (Exception err)
         {
             Test6Result = "❌";
-            TestResults += $"{testName}: Failed, {err.Message}\n";
+            AppendTestResults(testName, $"Failed, {err.Message}");
+            if (string.IsNullOrWhiteSpace(err.InnerException?.Message) == false)
+            {
+                AppendTestResults(testName, $"Inner Exception: {err.InnerException.Message}");
+            }
             RunningTest6 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
+            AppendTestResults(testName, $"Duration {duration:0.00} seconds\n");
             RunningTest6 = false;
         }
     }
@@ -516,7 +519,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         RunningTest7 = true;
         Test7Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"{testName}: Downloading game cover from DLSS Swapper file server ({_dlssSwapperCoverImageTestLink})\n";
+        AppendTestResults(testName, $"Downloading game cover from DLSS Swapper file server ({_dlssSwapperCoverImageTestLink})");
 
         try
         {
@@ -526,38 +529,37 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 {
                     LogPrefix = $"{testName}: ",
                 };
-                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
-                    });
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) =>
+                {
+                    AppendTestResults(testName, $"StatusCode: {statusCode}");
                 },
                 progressCallback: (downloadedBytes, totalBytes, percent) =>
                 {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
-                    });
+                    AppendTestResults(testName, $"{downloadedBytes} / {totalBytes} ({percent:0.0}%)");
                 });
-                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
+                AppendTestResults(testName, $"Downloaded {memoryStream.Length} bytes");
             }
             Test7Result = "✅";
         }
         catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
         {
-            TestResults += $"{testName}: Cancelled\n";
+            AppendTestResults(testName, $"Cancelled");
             RunningTest7 = false;
         }
         catch (Exception err)
         {
             Test7Result = "❌";
-            TestResults += $"{testName}: Failed, {err.Message}\n";
+            AppendTestResults(testName, $"Failed, {err.Message}");
+            if (string.IsNullOrWhiteSpace(err.InnerException?.Message) == false)
+            {
+                AppendTestResults(testName, $"Inner Exception: {err.InnerException.Message}");
+            }
             RunningTest7 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
+            AppendTestResults(testName, $"Duration {duration:0.00} seconds\n");
             RunningTest7 = false;
         }
     }
@@ -573,7 +575,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         RunningTest8 = true;
         Test8Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"{testName}: Downloading game cover from alternative DLSS Swapper file server ({_dlssSwapperAlternativeCoverImageTestLink})\n";
+        AppendTestResults(testName, $"Downloading game cover from alternative DLSS Swapper file server ({_dlssSwapperAlternativeCoverImageTestLink})");
 
         try
         {
@@ -583,38 +585,37 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 {
                     LogPrefix = $"{testName}: ",
                 };
-                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
-                    });
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) =>
+                {
+                    AppendTestResults(testName, $"StatusCode: {statusCode}");
                 },
                 progressCallback: (downloadedBytes, totalBytes, percent) =>
                 {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
-                    });
+                    AppendTestResults(testName, $"{downloadedBytes} / {totalBytes} ({percent:0.0}%)");
                 });
-                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
+                AppendTestResults(testName, $"Downloaded {memoryStream.Length} bytes");
             }
             Test8Result = "✅";
         }
         catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
         {
-            TestResults += $"{testName}: Cancelled\n";
+            AppendTestResults(testName, $"Cancelled");
             RunningTest8 = false;
         }
         catch (Exception err)
         {
             Test8Result = "❌";
-            TestResults += $"{testName}: Failed, {err.Message}\n";
+            AppendTestResults(testName, $"Failed, {err.Message}");
+            if (string.IsNullOrWhiteSpace(err.InnerException?.Message) == false)
+            {
+                AppendTestResults(testName, $"Inner Exception: {err.InnerException.Message}");
+            }
             RunningTest8 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
+            AppendTestResults(testName, $"Duration {duration:0.00} seconds\n");
             RunningTest8 = false;
         }
     }
@@ -626,7 +627,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         RunningTest9 = true;
         Test9Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"{testName}: DNS lookup of DLSS Swapper file server ({_dlssSwapperDomainTestLink})\n";
+        AppendTestResults(testName, $"DNS lookup of DLSS Swapper file server ({_dlssSwapperDomainTestLink})");
 
         try
         {
@@ -634,7 +635,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
             foreach (var address in addresses)
             {
-                TestResults += $"{testName}: Found IP address {address.ToString()}\n";
+                AppendTestResults(testName, $"Found IP address {address.ToString()}");
             }
 
             Test9Result = "✅";
@@ -642,13 +643,17 @@ public partial class NetworkTesterWindowModel : ObservableObject
         catch (Exception err)
         {
             Test9Result = "❌";
-            TestResults += $"{testName}: Failed, {err.Message}\n";
+            AppendTestResults(testName, $"Failed, {err.Message}");
+            if (string.IsNullOrWhiteSpace(err.InnerException?.Message) == false)
+            {
+                AppendTestResults(testName, $"Inner Exception: {err.InnerException.Message}");
+            }
             RunningTest9 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
+            AppendTestResults(testName, $"Duration {duration:0.00} seconds\n");
             RunningTest9 = false;
         }
     }
@@ -663,7 +668,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         var testName = "Test 10";
         RunningTest10 = true;
         Test10Result = string.Empty;
-        TestResults += $"{testName}: Downloading from DLSS Swapper DLL file server with custom user agent ({_dlssSwapperDownloadTestLink})\n";
+        AppendTestResults(testName, $"Downloading from DLSS Swapper DLL file server with custom user agent ({_dlssSwapperDownloadTestLink})");
 
         if (_weakWindow.TryGetTarget(out NetworkTesterWindow? networkTesterWindow) == true)
         {
@@ -702,7 +707,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
                     // Reset test start 
                     testStart = DateTime.Now;
 
-                    TestResults += $"{testName}: Testing with User-Agent \"{userAgentTextBox.Text}\"\n";
+                    AppendTestResults(testName, $"Testing with User-Agent \"{userAgentTextBox.Text}\"");
 
                     App.CurrentApp.HttpClient.DefaultRequestHeaders.UserAgent.Clear();
                     App.CurrentApp.HttpClient.DefaultRequestHeaders.Add("User-Agent", userAgentTextBox.Text);
@@ -714,20 +719,15 @@ public partial class NetworkTesterWindowModel : ObservableObject
                         {
                             LogPrefix = $"{testName}: ",
                         };
-                        await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
-                            App.CurrentApp.RunOnUIThread(() =>
-                            {
-                                TestResults += $"{testName}: StatusCode: {statusCode}\n";
-                            });
+                        await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) =>
+                        {
+                            AppendTestResults(testName, $"StatusCode: {statusCode}");
                         },
                         progressCallback: (downloadedBytes, totalBytes, percent) =>
                         {
-                            App.CurrentApp.RunOnUIThread(() =>
-                            {
-                                TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
-                            });
+                            AppendTestResults(testName, $"{downloadedBytes} / {totalBytes} ({percent:0.0}%)");
                         });
-                        TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
+                        AppendTestResults(testName, $"Downloaded {memoryStream.Length} bytes");
                     }
                     Test10Result = "✅";
 
@@ -735,25 +735,29 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 else
                 {
                     Test10Result = string.Empty;
-                    TestResults += $"{testName}: Aborted\n";
+                    AppendTestResults(testName, $"Aborted");
                     RunningTest10 = false;
                 }
             }
             catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
             {
-                TestResults += $"{testName}: Cancelled\n";
+                AppendTestResults(testName, $"Cancelled");
                 RunningTest10 = false;
             }
             catch (Exception err)
             {
                 Test10Result = "❌";
-                TestResults += $"{testName}: Failed, {err.Message}\n";
+                AppendTestResults(testName, $"Failed, {err.Message}");
+                if (string.IsNullOrWhiteSpace(err.InnerException?.Message) == false)
+                {
+                    AppendTestResults(testName, $"Inner Exception: {err.InnerException.Message}");
+                }
                 RunningTest10 = false;
             }
             finally
             {
                 var duration = (DateTime.Now - testStart).TotalSeconds;
-                TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
+                AppendTestResults(testName, $"Duration {duration:0.00} seconds\n");
 
                 if (oldUserAgent?.Product is not null)
                 {
@@ -764,7 +768,11 @@ public partial class NetworkTesterWindowModel : ObservableObject
                     }
                     catch (Exception err)
                     {
-                        TestResults += $"{testName}: Could not reset user agent, {err.Message}\n";
+                        AppendTestResults(testName, $"Could not reset user agent, {err.Message}");
+                        if (string.IsNullOrWhiteSpace(err.InnerException?.Message) == false)
+                        {
+                            AppendTestResults(testName, $"Inner Exception: {err.InnerException.Message}");
+                        }
                     }
                 }
 
@@ -784,49 +792,45 @@ public partial class NetworkTesterWindowModel : ObservableObject
         RunningTest11 = true;
         Test11Result = string.Empty;
         var testStart = DateTime.Now;
-        TestResults += $"{testName}: Downloading from UploadThing file server ({_uploadThingDownloadTestLink})\n";
+        AppendTestResults(testName, $"Downloading from UploadThing file server ({_uploadThingDownloadTestLink})");
 
         try
         {
             using (var memoryStream = new MemoryStream())
             {
-                var fileDownloader = new FileDownloader(_uploadThingDownloadTestLink, 1000)
+                var fileDownloader = new FileDownloader(_uploadThingDownloadTestLink, 1000);
+                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) =>
                 {
-                    LogPrefix = $"{testName}: ",
-                };
-                await fileDownloader.DownloadFileToStreamAsync(memoryStream, cancellationToken, statusCodeCallback: (statusCode) => {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: StatusCode: {statusCode}\n";
-                    });
+                    AppendTestResults(testName, $"StatusCode: {statusCode}");
                 },
                 progressCallback: (downloadedBytes, totalBytes, percent) =>
                 {
-                    App.CurrentApp.RunOnUIThread(() =>
-                    {
-                        TestResults += $"{testName}: {downloadedBytes} / {totalBytes} ({percent:0.0}%)\n";
-                    });
+                    AppendTestResults(testName, $"{downloadedBytes} / {totalBytes} ({percent:0.0}%)");
                 });
-                TestResults += $"{testName}: Downloaded {memoryStream.Length} bytes\n";
+                AppendTestResults(testName, $"Downloaded {memoryStream.Length} bytes");
             }
             Test11Result = "✅";
         }
         catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
         {
-            TestResults += $"{testName}: Cancelled\n";
+            AppendTestResults(testName, $"Cancelled");
             RunningTest11 = false;
         }
         catch (Exception err)
         {
             Logger.Error(err, $"{testName} failed");
             Test11Result = "❌";
-            TestResults += $"{testName}: Failed, {err.Message}\n";
+            AppendTestResults(testName, $"Failed, {err.Message}");
+            if (string.IsNullOrWhiteSpace(err.InnerException?.Message) == false)
+            {
+                AppendTestResults(testName, $"Inner Exception: {err.InnerException.Message}");
+            }
             RunningTest11 = false;
         }
         finally
         {
             var duration = (DateTime.Now - testStart).TotalSeconds;
-            TestResults += $"{testName}: Duration {duration:0.00} seconds\n\n";
+            AppendTestResults(testName, $"Duration {duration:0.00} seconds\n");
             RunningTest11 = false;
         }
     }

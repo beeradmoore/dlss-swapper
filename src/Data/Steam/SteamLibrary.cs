@@ -1,4 +1,5 @@
-﻿using DLSS_Swapper.Helpers;
+﻿using DLSS_Swapper.Data.Steam.Models;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
 using System;
@@ -109,10 +110,25 @@ namespace DLSS_Swapper.Data.Steam
 
                         SteamGame? game = null;
 
-
                         try
                         {
                             var appManifest = File.ReadAllText(appManifestPath);
+
+                            var stateFlagsRegex = new Regex(@"^\s*""StateFlags""\s*""(?<stateFlags>\d+)""\s*$", RegexOptions.Multiline);
+                            var stateFlagsMatch = stateFlagsRegex.Match(appManifest);
+                            if (!stateFlagsMatch.Success || !int.TryParse(stateFlagsMatch.Groups["stateFlags"].Value, out int stateFlagsValue))
+                            {
+                                // The AppState couldn't be parsed from the appmanifest_*.acf
+                                continue;
+                            }
+
+                            var stateFlags = (SteamAppState)stateFlagsValue;
+                            if (!stateFlags.IsReadyToPlay())
+                            {
+                                // The game is not in an acceptable state, e.g. has a pending update, is being verified etc.
+                                continue;
+                            }
+
 
                             var regex = new Regex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline);
                             var matches = regex.Matches(appManifest);

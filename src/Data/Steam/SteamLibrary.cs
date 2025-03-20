@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Data.Steam
 {
-    class SteamLibrary : IGameLibrary
+    internal partial class SteamLibrary : IGameLibrary
     {
         public GameLibrary GameLibrary => GameLibrary.Steam;
         public string Name => "Steam";
@@ -24,6 +24,21 @@ namespace DLSS_Swapper.Data.Steam
         public static SteamLibrary Instance => instance ??= new SteamLibrary();
 
         static string _installPath = string.Empty;
+
+        [GeneratedRegex(@"^([ \t]*)""(.*)""([ \t]*)""(?<path>.*)""$", RegexOptions.Multiline)]
+        private static partial Regex LibraryFoldersRegex();
+
+        [GeneratedRegex(@"^\s*""StateFlags""\s*""(?<stateFlags>\d+)""\s*$", RegexOptions.Multiline)]
+        private static partial Regex StateFlagsRegex();
+
+        [GeneratedRegex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline)]
+        private static partial Regex AppIdRegex();
+
+        [GeneratedRegex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline)]
+        private static partial Regex NameRegex();
+
+        [GeneratedRegex(@"^([ \t]*)""installdir""([ \t]*)""(?<installdir>.*)""$", RegexOptions.Multiline)]
+        private static partial Regex InstallDirRegex();
 
         private SteamLibrary()
         {
@@ -68,10 +83,9 @@ namespace DLSS_Swapper.Data.Steam
             {
                 try
                 {
-                    var libraryFoldersFileText = File.ReadAllText(libraryFoldersFile);
+                    var libraryFoldersFileText = await File.ReadAllTextAsync(libraryFoldersFile);
 
-                    var regex = new Regex(@"^([ \t]*)""(.*)""([ \t]*)""(?<path>.*)""$", RegexOptions.Multiline);
-                    var matches = regex.Matches(libraryFoldersFileText);
+                    var matches = LibraryFoldersRegex().Matches(libraryFoldersFileText);
                     if (matches.Count > 0)
                     {
                         foreach (Match match in matches)
@@ -112,10 +126,9 @@ namespace DLSS_Swapper.Data.Steam
 
                         try
                         {
-                            var appManifest = File.ReadAllText(appManifestPath);
+                            var appManifest = await File.ReadAllTextAsync(appManifestPath);
 
-                            var stateFlagsRegex = new Regex(@"^\s*""StateFlags""\s*""(?<stateFlags>\d+)""\s*$", RegexOptions.Multiline);
-                            var stateFlagsMatch = stateFlagsRegex.Match(appManifest);
+                            var stateFlagsMatch = StateFlagsRegex().Match(appManifest);
                             if (!stateFlagsMatch.Success || !int.TryParse(stateFlagsMatch.Groups["stateFlags"].Value, out int stateFlagsValue))
                             {
                                 // The AppState couldn't be parsed from the appmanifest_*.acf
@@ -130,8 +143,7 @@ namespace DLSS_Swapper.Data.Steam
                             }
 
 
-                            var regex = new Regex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline);
-                            var matches = regex.Matches(appManifest);
+                            var matches = AppIdRegex().Matches(appManifest);
                             if (matches.Count == 0)
                             {
                                 continue;
@@ -141,8 +153,7 @@ namespace DLSS_Swapper.Data.Steam
 
                             game = new SteamGame(steamGameAppId);
 
-                            regex = new Regex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline);
-                            matches = regex.Matches(appManifest);
+                            matches = NameRegex().Matches(appManifest);
                             if (matches.Count == 0)
                             {
                                 continue;
@@ -150,8 +161,7 @@ namespace DLSS_Swapper.Data.Steam
 
                             game.Title = matches[0].Groups["name"].ToString();
 
-                            regex = new Regex(@"^([ \t]*)""installdir""([ \t]*)""(?<installdir>.*)""$", RegexOptions.Multiline);
-                            matches = regex.Matches(appManifest);
+                            matches = InstallDirRegex().Matches(appManifest);
                             if (matches.Count == 0)
                             {
                                 continue;
@@ -173,29 +183,25 @@ namespace DLSS_Swapper.Data.Steam
                             continue;
                         }
 
+                        var cachedGame = GameManager.Instance.GetGame<SteamGame>(game.PlatformId);
+                        var activeGame = cachedGame ?? game;
+                        activeGame.Title = game.Title;  // TODO: Will this be a problem if the game is already loaded
+                        activeGame.InstallPath = game.InstallPath;
 
-                        if (game is not null)
+                        await activeGame.SaveToDatabaseAsync();
+
+                        // If the game is not from cache, force processing
+                        if (cachedGame is null)
                         {
-                            var cachedGame = GameManager.Instance.GetGame<SteamGame>(game.PlatformId);
-                            var activeGame = cachedGame ?? game;
-                            activeGame.Title = game.Title;  // TODO: Will this be a problem if the game is already loaded
-                            activeGame.InstallPath = game.InstallPath;
-
-                            await activeGame.SaveToDatabaseAsync();
-
-                            // If the game is not from cache, force processing
-                            if (cachedGame is null)
-                            {
-                                activeGame.NeedsProcessing = true;
-                            }
-
-                            if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
-                            {
-                                activeGame.ProcessGame();
-                            }
-
-                            games.Add(activeGame);
+                            activeGame.NeedsProcessing = true;
                         }
+
+                        if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+                        {
+                            activeGame.ProcessGame();
+                        }
+
+                        games.Add(activeGame);
                     }
                 }
             }

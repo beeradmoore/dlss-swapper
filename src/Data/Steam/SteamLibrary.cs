@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -127,21 +126,6 @@ namespace DLSS_Swapper.Data.Steam
                         {
                             var appManifest = await File.ReadAllTextAsync(appManifestPath);
 
-                            var stateFlagsMatch = StateFlagsRegex().Match(appManifest);
-                            if (!stateFlagsMatch.Success || !int.TryParse(stateFlagsMatch.Groups["StateFlags"].Value, out int stateFlagsValue))
-                            {
-                                // The AppState couldn't be parsed from the appmanifest_*.acf
-                                continue;
-                            }
-
-                            var stateFlags = (SteamAppState)stateFlagsValue;
-                            if (!stateFlags.IsReadyToPlay())
-                            {
-                                // The game is not in an acceptable state, e.g. has a pending update, is being verified etc.
-                                continue;
-                            }
-
-
                             var matches = AppIdRegex().Matches(appManifest);
                             if (matches.Count == 0)
                             {
@@ -150,7 +134,14 @@ namespace DLSS_Swapper.Data.Steam
 
                             var steamGameAppId = matches[0].Groups["appid"].Value;
 
-                            game = new SteamGame(steamGameAppId);
+                            var stateFlagsMatch = StateFlagsRegex().Match(appManifest);
+                            if (!stateFlagsMatch.Success || !Enum.TryParse(stateFlagsMatch.Groups["StateFlags"].Value, out SteamAppState stateFlags))
+                            {
+                                // The AppState couldn't be parsed from the appmanifest_*.acf
+                                continue;
+                            }
+
+                            game = new SteamGame(steamGameAppId, stateFlags);
 
                             matches = NameRegex().Matches(appManifest);
                             if (matches.Count == 0)
@@ -186,6 +177,7 @@ namespace DLSS_Swapper.Data.Steam
                         var activeGame = cachedGame ?? game;
                         activeGame.Title = game.Title;  // TODO: Will this be a problem if the game is already loaded
                         activeGame.InstallPath = game.InstallPath;
+                        activeGame.AppState = game.AppState;
 
                         await activeGame.SaveToDatabaseAsync();
 

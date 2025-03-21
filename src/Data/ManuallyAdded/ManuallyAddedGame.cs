@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics.Contracts;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 using SQLite;
@@ -49,4 +47,6 @@ public class ManuallyAddedGame : Game
 
         return didChange;
     }
+
+    public override bool IsReadyToPlay() => true;
 }

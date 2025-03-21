@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 using SQLite;
 
@@ -55,5 +51,6 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             return didChange;
         }
 
+        public override bool IsReadyToPlay() => true;
     }
 }

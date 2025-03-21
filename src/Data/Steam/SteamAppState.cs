@@ -28,20 +28,3 @@ internal enum SteamAppState: uint
     StateCommitting = 1 << 22,         // 4194304
     StateUpdateStopping = 1 << 23      // 8388608
 }
-
-internal static class SteamAppStateExtensions
-{
-    /// <summary>
-    /// Determines whether the specified <see cref="SteamAppState"/> means the game is ready to play.
-    /// </summary>
-    /// <param name="state">The state to check.</param>
-    /// <returns>
-    ///   <c>true</c> if the specified state means the game is ready to play; otherwise, <c>false</c>.
-    /// </returns>
-    public static bool IsReadyToPlay(this SteamAppState state)
-    {
-        const SteamAppState allowedFlags = SteamAppState.StateFullyInstalled | SteamAppState.StateAppRunning;
-        return state != 0 && (state & ~allowedFlags) == 0;
-    }
-}
-

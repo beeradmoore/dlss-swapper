@@ -17,6 +17,7 @@
     <usercontrols:FakeContentDialog.Resources>
 
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
+        <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
         <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter"  />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteTextConverter" TrueValue="Favourited" FalseValue="Click to favourite" />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteGlyphConverter" TrueValue="&#xE735;" FalseValue="&#xE734;" />
@@ -112,6 +113,20 @@
             <Grid Grid.Column="1" >
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Spacing="4">
+                    <StackPanel Orientation="Horizontal"
+                                Padding="10, 6, 6, 6"
+                                CornerRadius="4"
+                                Margin="0, 0, 6, 2"
+                                BorderBrush="DarkOrange"
+                                BorderThickness="1"
+                                Visibility="{x:Bind ViewModel.IsReadyToPlay, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+                                VerticalAlignment="Center">
+                        <FontIcon Glyph="&#xE7BA;" FontSize="24" Foreground="DarkOrange" VerticalAlignment="Center"/>
+                        <TextBlock Text="This game is not in a ready to play state."
+                                   Margin="10,0,0,1"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+
                     <TextBlock Text="Name" FontWeight="Bold" />
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="8">
                         <Grid.ColumnDefinitions>

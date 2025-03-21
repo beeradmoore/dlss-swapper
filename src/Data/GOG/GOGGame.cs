@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 
@@ -54,5 +51,7 @@ namespace DLSS_Swapper.Data.GOG
 
             return didChange;
         }
+
+        public override bool IsReadyToPlay() => true;
     }
 }

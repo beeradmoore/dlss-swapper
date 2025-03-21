@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 using SQLite;
@@ -19,11 +15,15 @@ namespace DLSS_Swapper.Data.Steam
 
         }
 
-        public SteamGame(string appId)
+        public SteamGame(string appId, SteamAppState appState)
         {
             PlatformId = appId;
             SetID();
+            AppState = appState;
         }
+
+        [Ignore]
+        public SteamAppState AppState { get; set; }
 
         protected override async Task UpdateCacheImageAsync()
         {
@@ -47,6 +47,12 @@ namespace DLSS_Swapper.Data.Steam
             var didChange = ParentUpdateFromGame(game);
 
             return didChange;
+        }
+
+        public override bool IsReadyToPlay()
+        {
+            const SteamAppState allowedFlags = SteamAppState.StateFullyInstalled | SteamAppState.StateAppRunning;
+            return AppState != 0 && (AppState & ~allowedFlags) == 0;
         }
     }
 }

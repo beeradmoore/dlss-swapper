@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace DLSS_Swapper.Data.Steam.Models;
+namespace DLSS_Swapper.Data.Steam;
 
 [Flags]
-internal enum SteamAppState
+internal enum SteamAppState: uint
 {
     StateInvalid = 0,                  // 0
     StateUninstalled = 1 << 0,         // 1

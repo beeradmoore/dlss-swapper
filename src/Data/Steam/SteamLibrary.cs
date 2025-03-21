@@ -1,5 +1,4 @@
-﻿using DLSS_Swapper.Data.Steam.Models;
-using DLSS_Swapper.Helpers;
+﻿using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
 using System;
@@ -28,7 +27,7 @@ namespace DLSS_Swapper.Data.Steam
         [GeneratedRegex(@"^([ \t]*)""(.*)""([ \t]*)""(?<path>.*)""$", RegexOptions.Multiline)]
         private static partial Regex LibraryFoldersRegex();
 
-        [GeneratedRegex(@"^\s*""StateFlags""\s*""(?<stateFlags>\d+)""\s*$", RegexOptions.Multiline)]
+        [GeneratedRegex(@"^([ \t]*)""StateFlags""([ \t]*)""(?<StateFlags>\d+)""([ \t]*)$", RegexOptions.Multiline)]
         private static partial Regex StateFlagsRegex();
 
         [GeneratedRegex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline)]
@@ -129,7 +128,7 @@ namespace DLSS_Swapper.Data.Steam
                             var appManifest = await File.ReadAllTextAsync(appManifestPath);
 
                             var stateFlagsMatch = StateFlagsRegex().Match(appManifest);
-                            if (!stateFlagsMatch.Success || !int.TryParse(stateFlagsMatch.Groups["stateFlags"].Value, out int stateFlagsValue))
+                            if (!stateFlagsMatch.Success || !int.TryParse(stateFlagsMatch.Groups["StateFlags"].Value, out int stateFlagsValue))
                             {
                                 // The AppState couldn't be parsed from the appmanifest_*.acf
                                 continue;

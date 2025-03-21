@@ -9,6 +9,8 @@ namespace DLSS_Swapper.Data.GOG
     {
         public override GameLibrary GameLibrary => GameLibrary.GOG;
 
+        public override bool IsReadyToPlay => true;
+
         public List<string> PotentialLocalHeaders { get; } = new List<string>();
         public string FallbackHeaderUrl { get; set; } = string.Empty;
 
@@ -51,7 +53,5 @@ namespace DLSS_Swapper.Data.GOG
 
             return didChange;
         }
-
-        public override bool IsReadyToPlay() => true;
     }
 }

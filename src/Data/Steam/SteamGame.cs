@@ -1,29 +1,40 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 using DLSS_Swapper.Interfaces;
 using SQLite;
 
 namespace DLSS_Swapper.Data.Steam
 {
     [Table("SteamGame")]
-    internal class SteamGame : Game
+    internal partial class SteamGame : Game
     {
         public override GameLibrary GameLibrary => GameLibrary.Steam;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsReadyToPlay))]
+        [Column("app_state")]
+        public partial SteamAppState AppState { get; set; }
+
+        public override bool IsReadyToPlay
+        {
+            get
+            {
+                const SteamAppState allowedFlags = SteamAppState.StateFullyInstalled | SteamAppState.StateAppRunning;
+                return AppState != 0 && (AppState & ~allowedFlags) == 0;
+            }
+        }
 
         public SteamGame()
         {
 
         }
 
-        public SteamGame(string appId, SteamAppState appState)
+        public SteamGame(string appId)
         {
             PlatformId = appId;
             SetID();
-            AppState = appState;
         }
-
-        [Ignore]
-        public SteamAppState AppState { get; set; }
 
         protected override async Task UpdateCacheImageAsync()
         {
@@ -47,12 +58,6 @@ namespace DLSS_Swapper.Data.Steam
             var didChange = ParentUpdateFromGame(game);
 
             return didChange;
-        }
-
-        public override bool IsReadyToPlay()
-        {
-            const SteamAppState allowedFlags = SteamAppState.StateFullyInstalled | SteamAppState.StateAppRunning;
-            return AppState != 0 && (AppState & ~allowedFlags) == 0;
         }
     }
 }

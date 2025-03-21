@@ -133,6 +133,7 @@ namespace DLSS_Swapper.Data.Steam
                             }
 
                             var steamGameAppId = matches[0].Groups["appid"].Value;
+                            game = new SteamGame(steamGameAppId);
 
                             var stateFlagsMatch = StateFlagsRegex().Match(appManifest);
                             if (!stateFlagsMatch.Success || !Enum.TryParse(stateFlagsMatch.Groups["StateFlags"].Value, out SteamAppState stateFlags))
@@ -141,7 +142,7 @@ namespace DLSS_Swapper.Data.Steam
                                 continue;
                             }
 
-                            game = new SteamGame(steamGameAppId, stateFlags);
+                            game.AppState = stateFlags;
 
                             matches = NameRegex().Matches(appManifest);
                             if (matches.Count == 0)

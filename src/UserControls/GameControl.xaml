@@ -115,7 +115,7 @@
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Spacing="4">
 
                     <InfoBar 
-                        Visibility="{x:Bind ViewModel.IsReadyToPlay, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+                        Visibility="{x:Bind ViewModel.Game.IsReadyToPlay, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}"
                         Severity="Warning"
                         IsOpen="True"
                         IsClosable="False"

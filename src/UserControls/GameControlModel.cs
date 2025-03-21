@@ -45,8 +45,6 @@ public partial class GameControlModel : ObservableObject
         }
     }
 
-    public bool IsReadyToPlay => Game.IsReadyToPlay();
-
     public GameControlModel(GameControl gameControl, Game game)
     {
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);

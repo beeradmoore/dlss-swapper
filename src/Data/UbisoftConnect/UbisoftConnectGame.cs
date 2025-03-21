@@ -10,6 +10,8 @@ namespace DLSS_Swapper.Data.UbisoftConnect
     {
         public override GameLibrary GameLibrary => GameLibrary.UbisoftConnect;
 
+        public override bool IsReadyToPlay => true;
+
         [Column("local_header_image")]
         public string LocalHeaderImage { get; set; } = string.Empty;
 
@@ -52,7 +54,5 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
             return didChange;
         }
-
-        public override bool IsReadyToPlay() => true;
     }
 }

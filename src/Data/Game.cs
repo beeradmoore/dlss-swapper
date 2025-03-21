@@ -170,6 +170,9 @@ namespace DLSS_Swapper.Data
         [Ignore]
         public partial bool MultipleXeSSFGFound { get; set; } = false;
 
+        [Ignore]
+        public abstract bool IsReadyToPlay { get; }
+
         protected void SetID()
         {
             // Seeing as we use ID, it sure would be a shame if a PlatformId was set to "C:\Program Files\"
@@ -1313,8 +1316,6 @@ namespace DLSS_Swapper.Data
         }
 
         public abstract bool UpdateFromGame(Game game);
-
-        public abstract bool IsReadyToPlay();
 
         void UpdateCurrentDLLsFromGameAssets()
         {

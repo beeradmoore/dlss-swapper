@@ -9,6 +9,8 @@ namespace DLSS_Swapper.Data.EpicGamesStore
     {
         public override GameLibrary GameLibrary => GameLibrary.EpicGamesStore;
 
+        public override bool IsReadyToPlay => true;
+
         [Column("remote_header_image")]
         public string RemoteHeaderImage { get; set;  } = string.Empty;
 
@@ -50,7 +52,5 @@ namespace DLSS_Swapper.Data.EpicGamesStore
 
             return didChange;
         }
-
-        public override bool IsReadyToPlay() => true;
     }
 }

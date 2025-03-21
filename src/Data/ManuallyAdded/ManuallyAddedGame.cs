@@ -10,7 +10,9 @@ public class ManuallyAddedGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.ManuallyAdded;
 
-//    public override string HeaderImage => string.Empty;
+    public override bool IsReadyToPlay => true;
+
+    //    public override string HeaderImage => string.Empty;
 
     public ManuallyAddedGame()
     {
@@ -47,6 +49,4 @@ public class ManuallyAddedGame : Game
 
         return didChange;
     }
-
-    public override bool IsReadyToPlay() => true;
 }

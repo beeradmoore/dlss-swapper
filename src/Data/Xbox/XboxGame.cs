@@ -11,6 +11,8 @@ namespace DLSS_Swapper.Data.Xbox
     {
         public override GameLibrary GameLibrary => GameLibrary.XboxApp;
 
+        public override bool IsReadyToPlay => true;
+
         List<string> _localHeaderImages = new List<string>();
 
         public XboxGame()
@@ -52,7 +54,5 @@ namespace DLSS_Swapper.Data.Xbox
 
             return didChange;
         }
-
-        public override bool IsReadyToPlay() => true;
     }
 }

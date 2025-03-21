@@ -113,19 +113,17 @@
             <Grid Grid.Column="1" >
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Spacing="4">
-                    <StackPanel Orientation="Horizontal"
-                                Padding="10, 6, 6, 6"
-                                CornerRadius="4"
-                                Margin="0, 0, 6, 2"
-                                BorderBrush="DarkOrange"
-                                BorderThickness="1"
-                                Visibility="{x:Bind ViewModel.IsReadyToPlay, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}"
-                                VerticalAlignment="Center">
-                        <FontIcon Glyph="&#xE7BA;" FontSize="24" Foreground="DarkOrange" VerticalAlignment="Center"/>
-                        <TextBlock Text="This game is not in a ready to play state."
-                                   Margin="10,0,0,1"
-                                   VerticalAlignment="Center" />
-                    </StackPanel>
+
+                    <InfoBar 
+                        Visibility="{x:Bind ViewModel.IsReadyToPlay, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+                        Severity="Warning"
+                        IsOpen="True"
+                        IsClosable="False"
+                        Message="This game is not in a ready to play state.">
+                        <InfoBar.ActionButton>
+                            <Button Content="Help" Command="{x:Bind ViewModel.ReadyToPlayStateMoreInformationCommand}" HorizontalAlignment="Right" />
+                        </InfoBar.ActionButton>
+                    </InfoBar>
 
                     <TextBlock Text="Name" FontWeight="Bold" />
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="8">

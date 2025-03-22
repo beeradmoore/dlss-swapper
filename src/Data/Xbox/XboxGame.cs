@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
@@ -12,6 +10,8 @@ namespace DLSS_Swapper.Data.Xbox
     public class XboxGame : Game
     {
         public override GameLibrary GameLibrary => GameLibrary.XboxApp;
+
+        public override bool IsReadyToPlay => true;
 
         List<string> _localHeaderImages = new List<string>();
 

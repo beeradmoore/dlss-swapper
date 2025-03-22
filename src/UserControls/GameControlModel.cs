@@ -11,6 +11,7 @@ using Microsoft.UI.Xaml;
 using System.Diagnostics;
 using System.IO;
 using System.ComponentModel;
+using Windows.System;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -233,5 +234,11 @@ public partial class GameControlModel : ObservableObject
 
             await dialog.ShowAsync();
         }
+    }
+
+    [RelayCommand]
+    async Task ReadyToPlayStateMoreInformationAsync()
+    {
+        await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting#game-is-not-in-a-ready-to-play-state"));
     }
 }

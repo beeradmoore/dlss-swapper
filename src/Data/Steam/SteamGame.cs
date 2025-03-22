@@ -1,18 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 using DLSS_Swapper.Interfaces;
 using SQLite;
 
 namespace DLSS_Swapper.Data.Steam
 {
     [Table("SteamGame")]
-    internal class SteamGame : Game
+    internal partial class SteamGame : Game
     {
         public override GameLibrary GameLibrary => GameLibrary.Steam;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsReadyToPlay))]
+        [Column("state_flags")]
+        public partial SteamStateFlag StateFlags { get; set; }
+
+        public override bool IsReadyToPlay
+        {
+            get
+            {
+                const SteamStateFlag allowedFlags = SteamStateFlag.StateFullyInstalled | SteamStateFlag.StateAppRunning;
+                return StateFlags != 0 && (StateFlags & ~allowedFlags) == 0;
+            }
+        }
 
         public SteamGame()
         {
@@ -45,6 +56,15 @@ namespace DLSS_Swapper.Data.Steam
         public override bool UpdateFromGame(Game game)
         {
             var didChange = ParentUpdateFromGame(game);
+
+            if (game is SteamGame steamGame)
+            {
+                if (StateFlags != steamGame.StateFlags)
+                {
+                    StateFlags = steamGame.StateFlags;
+                    didChange = true;
+                }
+            }
 
             return didChange;
         }

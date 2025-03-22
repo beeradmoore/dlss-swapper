@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics.Contracts;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 using SQLite;
@@ -12,7 +10,9 @@ public class ManuallyAddedGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.ManuallyAdded;
 
-//    public override string HeaderImage => string.Empty;
+    public override bool IsReadyToPlay => true;
+
+    //    public override string HeaderImage => string.Empty;
 
     public ManuallyAddedGame()
     {

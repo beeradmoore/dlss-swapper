@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 using SQLite;
@@ -13,6 +9,8 @@ namespace DLSS_Swapper.Data.UbisoftConnect
     internal class UbisoftConnectGame : Game
     {
         public override GameLibrary GameLibrary => GameLibrary.UbisoftConnect;
+
+        public override bool IsReadyToPlay => true;
 
         [Column("local_header_image")]
         public string LocalHeaderImage { get; set; } = string.Empty;

@@ -19,7 +19,6 @@
         <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
         <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter"  />
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToInvisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
-        <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter" />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteTextConverter" TrueValue="Favourited" FalseValue="Click to favourite" />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteGlyphConverter" TrueValue="&#xE735;" FalseValue="&#xE734;" />
         <ct_converters:EmptyObjectToObjectConverter x:Key="NullObjectToBoolConverter" NotEmptyValue="True" EmptyValue="False" />

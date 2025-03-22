@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -301,23 +301,6 @@ public partial class GameControlModel : ObservableObject
             await Game.SaveToDatabaseAsync();
             OnPropertyChanged(nameof(DlssPresetHasChanged));
             IsDlssPresetSaved = true;
-        }
-    }
-
-    [RelayCommand]
-    async Task MultipleDLLsFoundAsync(GameAssetType gameAssetType)
-    {
-        if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
-        {
-            var dialog = new EasyContentDialog(gameControl.XamlRoot)
-            {
-                Title = $"Multiple {DLLManager.Instance.GetAssetTypeName(gameAssetType)} DLLs Found",
-                PrimaryButtonText = "Okay",
-                DefaultButton = ContentDialogButton.Primary,
-                Content = new MultipleDLLsFoundControl(Game, gameAssetType),
-            };
-
-            await dialog.ShowAsync();
         }
     }
 }

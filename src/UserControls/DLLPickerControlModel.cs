@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -41,9 +41,6 @@ public partial class DLLPickerControlModel : ObservableObject
 
     [ObservableProperty]
     public partial GameAsset? BackupGameAsset { get; set; } = null;
-
-    [ObservableProperty]
-    public partial bool AnyDLLsVisible { get; set; } = false;
 
     public bool CanCloseParentDialog { get; set; } = false;
 

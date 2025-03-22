@@ -238,9 +238,10 @@ namespace DLSS_Swapper
             var newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease();
 
 
+            await DLLManager.Instance.LoadImportedManifestAsync();
+
             // Load from cache, or download if not found.
             var loadDlssRecrodsTask = LoadDLLRecordsAsync();
-            var loadImportedDlssRecordsTask = LoadImportedManifestAsync();
 
 
             if (Settings.Instance.HasShownMultiplayerWarning == false)
@@ -282,7 +283,17 @@ DLSS Swapper will close now.",
                 Close();
             }
 
-            await loadImportedDlssRecordsTask;
+            if (DLLManager.Instance.ImportedManifest is null)
+            {
+                var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
+                {
+                    Title = "Could not load imported DLLs",
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = new ImportSystemDisabledView(),
+                    CloseButtonText = "Close",
+                };
+                await dialog.ShowAsync();
+            }
 
             FilterDLLRecords();
             //await App.CurrentApp.LoadLocalRecordsAsync();
@@ -384,25 +395,6 @@ DLSS Swapper will close now.",
             }
         }
 
-        // Previously: LoadImportedDLSSRecordsAsync
-        internal async Task LoadImportedManifestAsync()
-        {
-            var manifest = await Storage.LoadImportedManifestJsonAsync();
-            if (manifest is not null)
-            {
-                UpdateImportedManifestList(manifest);
-            }
-        }
-
-        // Previously: UpdateImportedDLSSRecordsList
-        internal void UpdateImportedManifestList(Manifest importedManifest)
-        {
-            // TODO: Reimplement
-            /*
-            App.CurrentApp.ImportedDLSSRecords.Clear();
-            App.CurrentApp.ImportedDLSSRecords.AddRange(localDlssRecords);
-            */
-        }
 
         /// <summary>
         /// Attempts to load manifest.json from dlss-swapper-manifest-builder repository.

@@ -29,6 +29,13 @@ namespace DLSS_Swapper.Data
         [JsonPropertyName("md5_hash")]
         public string MD5Hash { get; set; } = string.Empty;
 
+        /// <summary>
+        /// This hash is not guaranteed to be the same as the hash on the zip on the disk.
+        /// It is used during download to validate a successful download. However if you
+        /// import a DLL that exists in the manifest we will then create the zip for that
+        /// file. Doing so will cause the new generateed zip hash and this entry in the 
+        /// manifest to differ.
+        /// </summary>
         [JsonPropertyName("zip_md5_hash")]
         public string ZipMD5Hash { get; set; } = string.Empty;
 
@@ -271,6 +278,10 @@ namespace DLSS_Swapper.Data
             }
         }
 
+        internal string GetExpectedZipName()
+        {
+            return $"{GetRecordSimpleType()}_v{Version}_{MD5Hash}.zip";
+        }
 
         /*
         internal static DLSSRecord FromImportedFile(string fileName)

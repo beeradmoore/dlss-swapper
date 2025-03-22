@@ -83,6 +83,11 @@ namespace DLSS_Swapper
             return Path.Combine(StoragePath, "image_cache");
         }
 
+        public static string GetImportedManifestPath()
+        {
+            return Path.Combine(GetDynamicJsonFolder(), "imported_manifest.json");
+        }
+
         /// <summary>
         /// When given a file path it will make the directory structure so that file is ready to be created in. A directory should not be passed to this. Use CreateDirectoryIfNotExists instead for that.
         /// </summary>
@@ -261,58 +266,10 @@ namespace DLSS_Swapper
         }
 
         /// <summary>
-        /// Loads an imported manifest file of all imported DLL records.
-        /// </summary>
-        /// <returns>Manifest object of imported DLL records. This will contain empty lists if no imported recrods were found.</returns>
-        // Previously: LoadImportedDLSSRecordsJsonAsync
-        internal static async Task<Manifest> LoadImportedManifestJsonAsync()
-        {
-            var importedDLSSRecordsFile = Path.Combine(GetDynamicJsonFolder(), "imported_manifest.json");
-            if (File.Exists(importedDLSSRecordsFile) == true)
-            {
-                try
-                {
-                    using (var stream = File.Open(importedDLSSRecordsFile, FileMode.Open))
-                    {
-                        var importedManifest = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.Manifest);
-                        if (importedManifest is not null)
-                        {
-                            return importedManifest;
-                        }
-                    }
-                }
-                catch (Exception err)
-                {
-                    Logger.Error(err);
-                }
-            }
-
-            // If we failed to load we return a blank manifest.
-            return new Manifest();
-        }
-
-        /// <summary>
         /// Saves the imported DLSS records to imported_manifest.json
         /// </summary>
         /// <returns></returns>
         // Previously: SaveImportedDLSSRecordsJsonAsync
-        internal static async Task<bool> SaveImportedManifestJsonAsync()
-        {
-            var importedManifestFile = Path.Combine(GetDynamicJsonFolder(), "imported_manifest.json");
-            CreateDirectoryForFileIfNotExists(importedManifestFile);
-            try
-            {
-                using (var stream = File.Open(importedManifestFile, FileMode.Create))
-                {
-                    await JsonSerializer.SerializeAsync(stream, App.CurrentApp.ImportedManifest, SourceGenerationContext.Default.Manifest);
-                }
-                return true;
-            }
-            catch (Exception err)
-            {
-                Logger.Error(err);
-                return false;
-            }
-        }
+    
     }
 }

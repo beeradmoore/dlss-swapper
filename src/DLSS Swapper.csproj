@@ -104,6 +104,8 @@
     <None Remove="Themes\FakeContentDialogStyle.xaml" />
     <None Remove="UserControls\DLLPickerControl.xaml" />
     <None Remove="UserControls\GameControl.xaml" />
+    <None Remove="UserControls\ImportDLLSummaryControl.xaml" />
+    <None Remove="UserControls\ImportSystemDisabledView.xaml" />
     <None Remove="UserControls\ManuallyAddGameControl.xaml" />
     <None Remove="UserControls\MultipleDLLsFoundControl.xaml" />
     <None Remove="UserControls\NewDLLsControl.xaml" />
@@ -299,6 +301,12 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Page Update="UserControls\ImportDLLSummaryControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Update="UserControls\ImportSystemDisabledView.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
         <Page Update="DiagnosticsWindow.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>

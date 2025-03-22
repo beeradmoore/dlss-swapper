@@ -140,6 +140,7 @@ namespace DLSS_Swapper
 
             MainWindow.Activate();
 
+            // No need to calculate this for portable app.
 #if !PORTABLE
             // No need to calculate this for portable app.
             var calculateInstallSizeThread = new Thread(CalculateInstallSize);

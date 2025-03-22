@@ -42,6 +42,9 @@ public partial class DLLPickerControlModel : ObservableObject
     [ObservableProperty]
     public partial GameAsset? BackupGameAsset { get; set; } = null;
 
+    [ObservableProperty]
+    public partial bool AnyDLLsVisible { get; set; } = false;
+
     public bool CanCloseParentDialog { get; set; } = false;
 
     public DLLPickerControlModel(GameControl gameControl, EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType)
@@ -60,7 +63,7 @@ public partial class DLLPickerControlModel : ObservableObject
                 }
             }
         };
-
+        
         Game = game;
         GameAssetType = gameAssetType;
         parentDialog.PrimaryButtonCommand = SwapDllCommand;

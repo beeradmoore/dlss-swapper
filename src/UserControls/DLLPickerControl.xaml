@@ -81,7 +81,6 @@
         
 
         <!--
-
         <Grid Grid.Row="1" ColumnSpacing="6" RowSpacing="4" Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -101,6 +100,7 @@
         </Grid>-->
 
         <ListView Grid.Row="2" Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" ItemsSource="{x:Bind ViewModel.DLLRecords}" SelectedItem="{x:Bind ViewModel.SelectedDLLRecord, Mode=TwoWay}" MaxHeight="400">
+
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:DLLRecord">
                     <Grid HorizontalAlignment="Stretch">

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ByteSizeLib;
 using Microsoft.UI.Xaml.Data;
 

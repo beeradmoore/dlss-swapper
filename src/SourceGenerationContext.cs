@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Microsoft.UI.Windowing;
 
 namespace DLSS_Swapper;

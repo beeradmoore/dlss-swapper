@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -210,7 +210,7 @@ namespace DLSS_Swapper
         /// </summary>
         /// <returns>Manifest object. This could be a blank object if we failed to load DLL records</returns>
         internal static async Task<Manifest> LoadManifestJsonAsync()
-        {  
+        {
             var manifestFile = Path.Combine(GetDynamicJsonFolder(), "manifest.json");
 
             if (File.Exists(manifestFile))
@@ -223,7 +223,7 @@ namespace DLSS_Swapper
                         if (manifest is not null)
                         {
                             return manifest;
-                        } 
+                        }
                     }
                 }
                 catch (Exception err)

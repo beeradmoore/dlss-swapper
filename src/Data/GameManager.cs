@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -234,8 +234,8 @@ internal partial class GameManager : ObservableObject
             return list;
         }
     }
-    
-       
+
+
 
     public Game AddGame(Game game, bool scrollIntoView = false)
     {

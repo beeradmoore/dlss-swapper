@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -38,7 +38,7 @@ internal class DLSSSettingsManager
                 if (process is not null)
                 {
                     process.WaitForExit();
-                    
+
                     if (process.ExitCode == 0)
                     {
                         return true;
@@ -115,5 +115,5 @@ internal class DLSSSettingsManager
         return false;
     }
 
-    
+
 }

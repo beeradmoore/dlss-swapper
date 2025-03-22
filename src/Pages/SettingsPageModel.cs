@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -43,16 +43,16 @@ internal partial class SettingsPageModel : ObservableObject
 
     [ObservableProperty]
     public partial bool DlssEnableLogging { get; set; } = false;
-    
+
     [ObservableProperty]
     public partial bool DlssVerboseLogging { get; set; } = false;
-    
+
     [ObservableProperty]
     public partial bool DlssLoggingToWindow { get; set; } = false;
 
     [ObservableProperty]
     public partial bool AllowUntrusted { get; set; } = false;
-    
+
     [ObservableProperty]
     public partial bool AllowDebugDlls { get; set; } = false;
 
@@ -172,7 +172,7 @@ internal partial class SettingsPageModel : ObservableObject
         {
             Settings.Instance.OnlyShowDownloadedDlls = OnlyShowDownloadedDlls;
         }
-        else if (e.PropertyName == nameof(LoggingLevel)) 
+        else if (e.PropertyName == nameof(LoggingLevel))
         {
             Settings.Instance.LoggingLevel = LoggingLevel;
             Logger.ChangeLoggingLevel(LoggingLevel);
@@ -208,7 +208,7 @@ internal partial class SettingsPageModel : ObservableObject
                 return;
             }
         }
-        
+
         IsCheckingForUpdates = false;
     }
 

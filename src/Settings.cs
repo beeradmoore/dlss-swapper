@@ -1,4 +1,4 @@
-﻿using DLSS_Swapper.Data;
+using DLSS_Swapper.Data;
 using DLSS_Swapper.Pages;
 using Microsoft.UI.Xaml;
 using System;
@@ -13,7 +13,7 @@ namespace DLSS_Swapper
         static Settings? _instance = null;
 
         public static Settings Instance => _instance ??= Settings.FromJson();
-        
+
         // We default this to false to prevent saves firing when loading from json.
         bool _autoSave = false;
 
@@ -300,7 +300,7 @@ namespace DLSS_Swapper
                 }
             }
         }
-        
+
 
         int _gridViewItemWidth = 200;
         public int GridViewItemWidth
@@ -382,7 +382,7 @@ namespace DLSS_Swapper
                 settings.SaveJson();
             }
             else
-            { 
+            {
                 settings = settingsFromJson;
             }
 

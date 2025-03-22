@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -112,5 +112,5 @@ internal class Database
         // If we didn't get this the database was not created as the above threw an exception
         Logger.Verbose("Database Init");
     }
-    
+
 }

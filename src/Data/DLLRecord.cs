@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -147,7 +147,7 @@ namespace DLSS_Swapper.Data
                 {
                     return other.AdditionalLabel.CompareTo(AdditionalLabel);
                 }
-                
+
                 return other.IsDevFile.CompareTo(IsDevFile);
             }
 
@@ -161,7 +161,7 @@ namespace DLSS_Swapper.Data
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        
+
         #endregion
 
         private CancellationTokenSource? _cancellationTokenSource;
@@ -202,7 +202,7 @@ namespace DLSS_Swapper.Data
                 using (var fileStream = new FileStream(tempZipFile, FileMode.Create, FileAccess.ReadWrite, FileShare.None, FileDownloader.BufferSize, true))
                 {
                     var didDownload = await LocalRecord.FileDownloader.DownloadFileToStreamAsync(fileStream, cancellationToken).ConfigureAwait(false);
-                    
+
                     if (didDownload == false)
                     {
                         throw new Exception("Could not download file.");

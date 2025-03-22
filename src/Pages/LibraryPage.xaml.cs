@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -33,7 +33,7 @@ namespace DLSS_Swapper.Pages
             ViewModel = new LibraryPageModel(this);
         }
 
-        
+
         void MainGridView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             // via: https://stackoverflow.com/a/41141249

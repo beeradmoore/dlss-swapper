@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -293,9 +293,9 @@ public class FakeContentDialog : Control
 
             Grid.SetColumnSpan(this, rootGrid.ColumnDefinitions.Count);
             Grid.SetRowSpan(this, rootGrid.RowDefinitions.Count);
-           
+
             XamlRoot = rootGrid.XamlRoot;
-            
+
             rootGrid.Children.Add(this);
             Focus(FocusState.Programmatic);
         }

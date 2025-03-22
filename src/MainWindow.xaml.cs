@@ -1,4 +1,4 @@
-﻿using AsyncAwaitBestPractices;
+using AsyncAwaitBestPractices;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
@@ -70,7 +70,7 @@ namespace DLSS_Swapper
                 }
             }
 
-        
+
 
             Closed += (object sender, WindowEventArgs args) =>
             {
@@ -93,7 +93,7 @@ namespace DLSS_Swapper
             };
 
             _isCustomizationSupported = AppWindowTitleBar.IsCustomizationSupported();
-            
+
             _themeWatcher = new ThemeWatcher();
             _themeWatcher.ThemeChanged += ThemeWatcher_ThemeChanged;
             _themeWatcher.Start();
@@ -103,7 +103,7 @@ namespace DLSS_Swapper
             {
                 var appWindow = GetAppWindowForCurrentWindow();
                 var appWindowTitleBar = appWindow.TitleBar;
-                appWindowTitleBar.ExtendsContentIntoTitleBar = true;                
+                appWindowTitleBar.ExtendsContentIntoTitleBar = true;
                 RootGrid.RowDefinitions[0].Height = new GridLength(32);
             }
             else
@@ -113,11 +113,11 @@ namespace DLSS_Swapper
                 SetTitleBar(AppTitleBar);
             }
 
-            
+
             UpdateColors(Settings.Instance.AppTheme);
 
             //MainNavigationView.RequestedTheme = (ElementTheme)Settings.Instance.AppTheme;
-            
+
             SetIcon();
         }
 
@@ -150,7 +150,7 @@ namespace DLSS_Swapper
             }
         }
 
-    
+
 
         void MainNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
@@ -242,7 +242,7 @@ namespace DLSS_Swapper
             var loadDlssRecrodsTask = LoadDLLRecordsAsync();
             var loadImportedDlssRecordsTask = LoadImportedManifestAsync();
 
-    
+
             if (Settings.Instance.HasShownMultiplayerWarning == false)
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
@@ -312,7 +312,7 @@ DLSS Swapper will close now.",
                 {
                     await gitHubUpdater.DisplayNewUpdateDialog(newUpdateTask.Result, MainNavigationView.XamlRoot);
                 }
-            }       
+            }
         }
 
         /// <summary>
@@ -365,7 +365,7 @@ DLSS Swapper will close now.",
             {
                 // If we were unable to auto-load lets try load cached.
                 var manifest = await Storage.LoadManifestJsonAsync();
-               
+
                 // If manifest could not be loaded then we should attempt to upload dlss_records from the dlss-archive.
                 if (manifest is null || manifest.DLSS?.Any() == false)
                 {
@@ -452,7 +452,7 @@ DLSS Swapper will close now.",
 
             return false;
         }
-        
+
 
         internal void UpdateColors(ElementTheme theme)
         {
@@ -482,7 +482,8 @@ DLSS Swapper will close now.",
 
         void UpdateColorsLight()
         {
-            App.CurrentApp.RunOnUIThread(() => {
+            App.CurrentApp.RunOnUIThread(() =>
+            {
                 RootGrid.RequestedTheme = ElementTheme.Light;
 
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +29,7 @@ internal class Manifest
 
     [JsonPropertyName("xell")]
     public List<DLLRecord> XeLL { get; set; } = new List<DLLRecord>();
-    
+
     [JsonPropertyName("xess_fg")]
     public List<DLLRecord> XeSS_FG { get; set; } = new List<DLLRecord>();
 

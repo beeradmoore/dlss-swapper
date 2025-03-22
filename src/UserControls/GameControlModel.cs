@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -132,7 +132,7 @@ public partial class GameControlModel : ObservableObject
             return;
         }
 
-        await Game.PromptToBrowseCustomCover();        
+        await Game.PromptToBrowseCustomCover();
     }
 
     [RelayCommand]
@@ -164,7 +164,7 @@ public partial class GameControlModel : ObservableObject
             }
 
 
-        
+
             // This needs to be set after AcceptsReturn otherwise it will strip out the \r
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {

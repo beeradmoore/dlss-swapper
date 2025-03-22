@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
@@ -82,7 +82,7 @@ namespace DLSS_Swapper.Data
         [ObservableProperty]
         [Ignore]
         public partial bool Processing { get; set; } = false;
-        
+
         [Ignore]
         public abstract GameLibrary GameLibrary { get; }
 
@@ -671,7 +671,7 @@ namespace DLSS_Swapper.Data
 
             var backupRecordType = DLLManager.Instance.GetAssetBackupType(dllRecord.AssetType);
             var existingBackupRecords = this.GameAssets.Where(x => x.AssetType == backupRecordType).ToList();
-            
+
             // TODO: Handle more than the first record.
             var currentRecord = existingRecords[0];
 
@@ -776,7 +776,7 @@ namespace DLSS_Swapper.Data
                 try
                 {
                     File.Copy(tempDllFile, existingRecord.Path, true);
-                    
+
                     var newGameAsset = new GameAsset()
                     {
                         Id = ID,
@@ -885,7 +885,7 @@ namespace DLSS_Swapper.Data
                     CurrentXeLL = null;
                     CurrentXeLL = newGameAsset;
                 }
-                else if (gameAssetType  == GameAssetType.XeSS_FG)
+                else if (gameAssetType == GameAssetType.XeSS_FG)
                 {
                     CurrentXeSS_FG = null;
                     CurrentXeSS_FG = newGameAsset;
@@ -1120,7 +1120,7 @@ namespace DLSS_Swapper.Data
                 {
                     await Database.Instance.Connection.Table<GameAsset>().DeleteAsync(ga => ga.Id == ID).ConfigureAwait(false);
                 }
-               
+
                 // Delete the thumbnails.
                 var thumbnailImages = Directory.GetFiles(Storage.GetImageCachePath(), $"{ID}_*", SearchOption.AllDirectories);
                 foreach (var thumbnailImage in thumbnailImages)

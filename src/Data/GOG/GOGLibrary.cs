@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
@@ -147,7 +147,7 @@ namespace DLSS_Swapper.Data.GOG
             {
                 //await Task.Delay(1);
                 var db = new SQLiteAsyncConnection(storageFileLocation, SQLiteOpenFlags.ReadOnly);
-                
+
                 // Default resource type for verticalCover images is 3. We default to this, but we also add try load it incase it changes.
                 var webCacheResourceTypeId = 3;
                 var webCacheResourceType = (await db.QueryAsync<WebCacheResourceType>("SELECT * FROM WebCacheResourceTypes WHERE type=?", "verticalCover").ConfigureAwait(false)).FirstOrDefault();
@@ -294,7 +294,7 @@ namespace DLSS_Swapper.Data.GOG
                 // Game is to be deleted.
                 if (gogGames.Contains(cachedGame) == false)
                 {
-                    await cachedGame.DeleteAsync();                    
+                    await cachedGame.DeleteAsync();
                 }
             }
 

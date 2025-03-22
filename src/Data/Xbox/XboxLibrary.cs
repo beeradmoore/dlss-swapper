@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -91,7 +91,7 @@ namespace DLSS_Swapper.Data.Xbox
                             {
                                 var configFile = Path.Combine(gameDirectory, "Content", "MicrosoftGame.config");
                                 if (File.Exists(configFile))
-                                {   
+                                {
                                     var xmlDocument = new XmlDocument();
                                     xmlDocument.Load(configFile);
 
@@ -258,7 +258,7 @@ namespace DLSS_Swapper.Data.Xbox
                 {
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
-                }                
+                }
             }
             catch (Exception err)
             {

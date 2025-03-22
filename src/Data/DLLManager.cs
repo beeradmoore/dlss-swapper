@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -117,7 +117,8 @@ internal class DLLManager
         {
             dllRecord.AssetType = GameAssetType.XeSS_FG;
             XeSSFGRecords.Add(dllRecord);
-        };
+        }
+        ;
     }
 
     internal void LoadLocalRecords()
@@ -276,7 +277,7 @@ internal class DLLManager
                 }
             }
 
-            return false; 
+            return false;
         }
         else if (gameAsset.AssetType == GameAssetType.DLSS_D || gameAsset.AssetType == GameAssetType.DLSS_D_BACKUP)
         {
@@ -504,7 +505,7 @@ internal class DLLManager
 
             return false;
         }
-        
+
         return false;
     }
 }

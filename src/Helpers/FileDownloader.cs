@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -94,7 +94,7 @@ public partial class FileDownloader : ObservableObject
                     if (lastReportedPercent != newPercent)
                     {
                         lastReportedPercent = newPercent;
-                        shouldUpdate = true;                       
+                        shouldUpdate = true;
                     }
                 }
 
@@ -174,7 +174,7 @@ public partial class FileDownloader : ObservableObject
                         totalBytesRead += bytesRead;
                     }
                 }
-            }            
+            }
 
             App.CurrentApp.RunOnUIThread(() =>
             {

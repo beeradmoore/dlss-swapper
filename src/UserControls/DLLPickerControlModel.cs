@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -25,7 +25,7 @@ public partial class DLLPickerControlModel : ObservableObject
     public Game Game { get; private set; }
     public GameAssetType GameAssetType { get; private set; }
 
-    public List<DLLRecord> DLLRecords { get; private set;  }
+    public List<DLLRecord> DLLRecords { get; private set; }
 
     [ObservableProperty]
     public partial DLLRecord? SelectedDLLRecord { get; set; } = null;
@@ -60,7 +60,7 @@ public partial class DLLPickerControlModel : ObservableObject
                 }
             }
         };
-        
+
         Game = game;
         GameAssetType = gameAssetType;
         parentDialog.PrimaryButtonCommand = SwapDllCommand;
@@ -189,7 +189,7 @@ public partial class DLLPickerControlModel : ObservableObject
             if (_parentDialogWeakReference.TryGetTarget(out var dialog))
             {
                 dialog.IsPrimaryButtonEnabled = CanSwap;
-            }                
+            }
         }
     }
 
@@ -312,7 +312,7 @@ public partial class DLLPickerControlModel : ObservableObject
             ShowTempInfoBar("Success", $"DLL has been reset to {CurrentGameAsset?.DisplayVersion}.", severity: InfoBarSeverity.Success, gridIndex: 0);
         }
         else
-        { 
+        {
             ShowTempInfoBar("Error", didReset.Message, severity: InfoBarSeverity.Error, gridIndex: 0);
         }
     }

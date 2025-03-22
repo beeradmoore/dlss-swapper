@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -84,7 +84,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         await fileStream.CopyToAsync(memoryStream).ConfigureAwait(false);
                         var catalogCacheBase64 = Encoding.UTF8.GetString(memoryStream.ToArray());
                         var catalogCacheJson = Convert.FromBase64String(catalogCacheBase64);
-                        cacheItemsArray = JsonSerializer.Deserialize(catalogCacheJson, SourceGenerationContext.Default.CacheItemArray);                       
+                        cacheItemsArray = JsonSerializer.Deserialize(catalogCacheJson, SourceGenerationContext.Default.CacheItemArray);
                     }
                 }
 
@@ -149,7 +149,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                     activeGame.RemoteHeaderImage = remoteHeaderUrl;
                     activeGame.Title = manifest.DisplayName; // TODO: Will this be a problem if the game is already loaded
                     activeGame.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
-                    
+
                     await activeGame.SaveToDatabaseAsync();
 
                     // If the game is not from cache, force processing

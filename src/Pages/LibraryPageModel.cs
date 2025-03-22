@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -100,43 +100,43 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         var finalExportZip = string.Empty;
         try
         {
-           var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
-           var savePicker = new Windows.Storage.Pickers.FileSavePicker();
-           savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-           savePicker.FileTypeChoices.Add("Zip archive", new List<string>() { ".zip" });
-           savePicker.SuggestedFileName = $"dlss_swapper_export.zip";
-           WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
-           var saveFile = await savePicker.PickSaveFileAsync();
+            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
+            var savePicker = new Windows.Storage.Pickers.FileSavePicker();
+            savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            savePicker.FileTypeChoices.Add("Zip archive", new List<string>() { ".zip" });
+            savePicker.SuggestedFileName = $"dlss_swapper_export.zip";
+            WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
+            var saveFile = await savePicker.PickSaveFileAsync();
 
-           // User cancelled.
-           if (saveFile is null)
-           {
-               return;
-           }
+            // User cancelled.
+            if (saveFile is null)
+            {
+                return;
+            }
 
-           finalExportZip = saveFile.Path;
+            finalExportZip = saveFile.Path;
 
-           Storage.CreateDirectoryIfNotExists(tempExportPath);
+            Storage.CreateDirectoryIfNotExists(tempExportPath);
 
-           _ = exportingDialog.ShowAsync();
+            _ = exportingDialog.ShowAsync();
 
-           // Give UI time to update and show import screen.
-           await Task.Delay(50);
+            // Give UI time to update and show import screen.
+            await Task.Delay(50);
 
-           var exportCount = 0;
+            var exportCount = 0;
 
-           using (var fileStream = File.Create(finalExportZip))
-           {
-               using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create))
-               {
-                   foreach (var dllRecord in allDllRecords)
-                   {
-                       if (dllRecord.LocalRecord is null)
-                       {
-                           continue;
-                       }
+            using (var fileStream = File.Create(finalExportZip))
+            {
+                using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create))
+                {
+                    foreach (var dllRecord in allDllRecords)
+                    {
+                        if (dllRecord.LocalRecord is null)
+                        {
+                            continue;
+                        }
 
-                       // TODO: When fixing imported system, make sure to update this to use full path
+                        // TODO: When fixing imported system, make sure to update this to use full path
                         var internalZipDir = DLLManager.Instance.GetAssetTypeName(dllRecord.AssetType);
                         if (dllRecord.LocalRecord.IsImported == true)
                         {
@@ -147,82 +147,82 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
 
                         using (var dlssFileStream = File.OpenRead(dllRecord.LocalRecord.ExpectedPath))
                         {
-                           using (var dlssZip = new ZipArchive(dlssFileStream, ZipArchiveMode.Read))
-                           {
-                               var zippedDlls = dlssZip.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
+                            using (var dlssZip = new ZipArchive(dlssFileStream, ZipArchiveMode.Read))
+                            {
+                                var zippedDlls = dlssZip.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
 
-                               // If there is more than one dll something has gone wrong.
-                               if (zippedDlls.Length != 1)
-                               {
-                                   throw new Exception($"Could not export due to \"{dllRecord.LocalRecord.ExpectedPath}\" having {zippedDlls.Length} dlls instead of 1.");
-                               }
+                                // If there is more than one dll something has gone wrong.
+                                if (zippedDlls.Length != 1)
+                                {
+                                    throw new Exception($"Could not export due to \"{dllRecord.LocalRecord.ExpectedPath}\" having {zippedDlls.Length} dlls instead of 1.");
+                                }
 
-                               var tempFileExportPath = Path.Combine(tempExportPath, Guid.NewGuid().ToString("D"));
-                               Storage.CreateDirectoryIfNotExists(tempFileExportPath);
+                                var tempFileExportPath = Path.Combine(tempExportPath, Guid.NewGuid().ToString("D"));
+                                Storage.CreateDirectoryIfNotExists(tempFileExportPath);
 
-                               var tempFile = Path.Combine(tempFileExportPath, Path.GetFileName(zippedDlls[0].Name));
-                               zippedDlls[0].ExtractToFile(tempFile);
-                               zipArchive.CreateEntryFromFile(tempFile, Path.Combine(internalZipDir, Path.GetFileName(tempFile)));
+                                var tempFile = Path.Combine(tempFileExportPath, Path.GetFileName(zippedDlls[0].Name));
+                                zippedDlls[0].ExtractToFile(tempFile);
+                                zipArchive.CreateEntryFromFile(tempFile, Path.Combine(internalZipDir, Path.GetFileName(tempFile)));
 
-                               // Try clean up as we go.
-                               try
-                               {
-                                   Directory.Delete(tempFileExportPath, true);
-                               }
-                               catch
-                               {
-                                   // NOOP
-                               }
-                           }
-                       }                                
+                                // Try clean up as we go.
+                                try
+                                {
+                                    Directory.Delete(tempFileExportPath, true);
+                                }
+                                catch
+                                {
+                                    // NOOP
+                                }
+                            }
+                        }
 
-                       ++exportCount;
-                   }
-               }
-           }
+                        ++exportCount;
+                    }
+                }
+            }
 
-           exportingDialog.Hide();
+            exportingDialog.Hide();
 
-           var dialog = new EasyContentDialog(libraryPage.XamlRoot)
-           {
-               CloseButtonText = "Okay",
-               DefaultButton = ContentDialogButton.Close,
-               Title = "Success",
-               Content = $"Exported {exportCount} DLSS dll{(exportCount == 1 ? string.Empty : "s")}.",
-           };
-           await dialog.ShowAsync();
+            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                CloseButtonText = "Okay",
+                DefaultButton = ContentDialogButton.Close,
+                Title = "Success",
+                Content = $"Exported {exportCount} DLSS dll{(exportCount == 1 ? string.Empty : "s")}.",
+            };
+            await dialog.ShowAsync();
         }
         catch (Exception err)
         {
-           // If we failed to export lets delete teh temp zip file that was create.
-           if (string.IsNullOrEmpty(finalExportZip) == false && File.Exists(finalExportZip))
-           {
-               try
-               {
-                   if (File.Exists(finalExportZip))
-                   {
-                       File.Delete(finalExportZip);
-                   }
-               }
-               catch (Exception err2)
-               {
-                   Logger.Error(err2);
-               }
-           }
+            // If we failed to export lets delete teh temp zip file that was create.
+            if (string.IsNullOrEmpty(finalExportZip) == false && File.Exists(finalExportZip))
+            {
+                try
+                {
+                    if (File.Exists(finalExportZip))
+                    {
+                        File.Delete(finalExportZip);
+                    }
+                }
+                catch (Exception err2)
+                {
+                    Logger.Error(err2);
+                }
+            }
 
-           exportingDialog.Hide();
+            exportingDialog.Hide();
 
-           Logger.Error(err);
+            Logger.Error(err);
 
-           // If the fullExpectedPath does not exist, or there was an error writing it.
-           var dialog = new EasyContentDialog(libraryPage.XamlRoot)
-           {
-               Title = "Error",
-               CloseButtonText = "Okay",
-               DefaultButton = ContentDialogButton.Close,
-               Content = "Could not export DLSS dll.",
-           };
-           await dialog.ShowAsync();
+            // If the fullExpectedPath does not exist, or there was an error writing it.
+            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = "Error",
+                CloseButtonText = "Okay",
+                DefaultButton = ContentDialogButton.Close,
+                Content = "Could not export DLSS dll.",
+            };
+            await dialog.ShowAsync();
         }
         finally
         {
@@ -384,7 +384,7 @@ Only import dlls from sources you trust.",
             Content = @"Import system is currently broken, but it is on the roadmap to be fixed.",
         };
         await sorryDialog.ShowAsync();
-        
+
         /*
         var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
         var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
@@ -695,7 +695,7 @@ Only import dlls from sources you trust.",
 
     internal void SelectLibrary(GameAssetType gameAssetType)
     {
-        
+
         var newList = gameAssetType switch
         {
             GameAssetType.DLSS => DLLManager.Instance.DLSSRecords,

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +24,7 @@ namespace DLSS_Swapper.UserControls
             get { return (bool)GetValue(SavesWhenToggledProperty); }
             set { SetValue(SavesWhenToggledProperty, value); }
         }
-        
+
 
         public GameLibrarySelectorControl()
         {
@@ -61,7 +61,7 @@ namespace DLSS_Swapper.UserControls
 
                 ++currentRow;
             }
-            
+
             Content = grid;
         }
 

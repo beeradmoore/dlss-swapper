@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -57,7 +57,7 @@ public class GameAsset : IEquatable<GameAsset>
 
             _displayVersion = $"v{_displayVersion}";
 
-            return  _displayVersion;
+            return _displayVersion;
         }
     }
 

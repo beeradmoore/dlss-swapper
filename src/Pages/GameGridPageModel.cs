@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -68,7 +68,7 @@ public partial class GameGridPageModel : ObservableObject
         GameGridViewType.GridView => new FontIcon() { Glyph = "\xF0E2" },
         GameGridViewType.ListView => new FontIcon() { Glyph = "\xE8FD" },
         _ => new FontIcon() { },
-    }; 
+    };
 
 
 
@@ -78,7 +78,7 @@ public partial class GameGridPageModel : ObservableObject
         this.gameGridPage = gameGridPage;
 
         ApplyGameGroupFilter();
-     }
+    }
 
     public async Task InitialLoadAsync()
     {
@@ -86,9 +86,9 @@ public partial class GameGridPageModel : ObservableObject
         IsDLSSLoading = true;
 
         await GameManager.Instance.LoadGamesFromCacheAsync();
-        
+
         IsGameListLoading = false;
-          
+
         await GameManager.Instance.LoadGamesAsync(false);
 
         IsDLSSLoading = false;
@@ -101,7 +101,7 @@ public partial class GameGridPageModel : ObservableObject
             throw new ArgumentException("Sender must be a TextBox");
         }
 
-        if(string.IsNullOrEmpty(textBox.Text))
+        if (string.IsNullOrEmpty(textBox.Text))
         {
             CurrentCollectionView = GameManager.Instance.GetGameCollection();
             return;
@@ -146,7 +146,7 @@ If you have checked these and your game is still not showing up there may be a b
                     },
                     Orientation = Orientation.Vertical,
                     Spacing = 16,
-                },                    
+                },
             };
 
             var result = await dialog.ShowAsync();

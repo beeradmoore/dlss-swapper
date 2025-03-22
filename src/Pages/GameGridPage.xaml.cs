@@ -1,4 +1,4 @@
-﻿using DLSS_Swapper.Data;
+using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.EpicGamesStore;
 using DLSS_Swapper.Data.GOG;
 using DLSS_Swapper.Data.GitHub;
@@ -62,7 +62,7 @@ namespace DLSS_Swapper.Pages
         ObservableCollection<Game> FavouriteGames = new ObservableCollection<Game>();
         ObservableCollection<Game> AllGames = new ObservableCollection<Game>();
         */
-        
+
         bool _loadingGamesAndDlls = false;
         Timer? _saveScrollSizeTimer = null;
 
@@ -241,7 +241,7 @@ namespace DLSS_Swapper.Pages
             }
         }
 
-     
+
 
         void UpdateGameLibraries()
         {
@@ -303,7 +303,7 @@ namespace DLSS_Swapper.Pages
                 {
                     await mainListView.SmoothScrollIntoViewWithItemAsync(game, ScrollItemPlacement.Center);
                 }).SafeFireAndForget();
-            }           
+            }
         }
 
         internal void ReloadMainContentControl()
@@ -355,11 +355,11 @@ namespace DLSS_Swapper.Pages
                             _saveScrollSizeTimer.Dispose();
                             _saveScrollSizeTimer = null;
                         }
-                        
+
                         _saveScrollSizeTimer = new Timer((state) =>
                         {
                             Settings.Instance.GridViewItemWidth = ViewModel.GridViewItemWidth;
-                        }, null, 500, Timeout.Infinite);                        
+                        }, null, 500, Timeout.Infinite);
                     }
                 }
 

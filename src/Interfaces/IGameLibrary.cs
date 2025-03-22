@@ -1,4 +1,4 @@
-﻿using DLSS_Swapper.Data;
+using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.EpicGamesStore;
 using DLSS_Swapper.Data.GOG;
 using DLSS_Swapper.Data.Steam;
@@ -38,7 +38,8 @@ namespace DLSS_Swapper.Interfaces
 
         static IGameLibrary GetGameLibrary(GameLibrary gameLibrary)
         {
-            return gameLibrary switch { 
+            return gameLibrary switch
+            {
                 GameLibrary.Steam => SteamLibrary.Instance,
                 GameLibrary.GOG => GOGLibrary.Instance,
                 GameLibrary.EpicGamesStore => EpicGamesStoreLibrary.Instance,

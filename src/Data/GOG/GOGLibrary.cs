@@ -229,7 +229,7 @@ namespace DLSS_Swapper.Data.GOG
                     }
                     catch (Exception err)
                     {
-                        Logger.Error($"Could not load {gogGame.PlatformId} - {err.Message}");
+                        Logger.Error(err, $"Could not load {gogGame.PlatformId}");
                     }
                 }
 
@@ -334,7 +334,7 @@ namespace DLSS_Swapper.Data.GOG
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 Debugger.Break();
             }
         }

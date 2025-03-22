@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 
@@ -11,6 +8,8 @@ namespace DLSS_Swapper.Data.GOG
     internal class GOGGame : Game
     {
         public override GameLibrary GameLibrary => GameLibrary.GOG;
+
+        public override bool IsReadyToPlay => true;
 
         public List<string> PotentialLocalHeaders { get; } = new List<string>();
         public string FallbackHeaderUrl { get; set; } = string.Empty;
@@ -32,7 +31,10 @@ namespace DLSS_Swapper.Data.GOG
             {
                 if (File.Exists(potentialLocalHeader))
                 {
-                    await ResizeCoverAsync(potentialLocalHeader).ConfigureAwait(false);
+                    using (var fileStream = File.Open(potentialLocalHeader, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        await ResizeCoverAsync(fileStream).ConfigureAwait(false);
+                    }
                     return;
                 }
             }

@@ -94,6 +94,21 @@ public partial class GameGridPageModel : ObservableObject
         IsDLSSLoading = false;
     }
 
+    public void SearchForGameEvent(object sender, TextChangedEventArgs e)
+    {
+        if (sender is not TextBox textBox)
+        {
+            throw new ArgumentException("Sender must be a TextBox");
+        }
+
+        if(string.IsNullOrEmpty(textBox.Text))
+        {
+            CurrentCollectionView = GameManager.Instance.GetGameCollection();
+            return;
+        }
+        CurrentCollectionView = GameManager.Instance.GetGameCollection(textBox.Text);
+    }
+
     [RelayCommand]
     async Task AddManualGameButtonAsync()
     {
@@ -286,7 +301,7 @@ If you have checked these and your game is still not showing up there may be a b
         }
         catch (Exception err)
         {
-            Logger.Error($"Attempted to manually add game from path {installPath} but got an error. ({err.Message})");
+            Logger.Error(err, $"Attempted to manually add game from path \"{installPath}\" but got an error.");
             var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
             {
                 Title = "Error adding your game",

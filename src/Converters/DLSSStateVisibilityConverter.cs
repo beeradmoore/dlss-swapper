@@ -36,7 +36,12 @@ namespace DLSS_Swapper.Converters
             {
                 if (DesierdState == "Downloading")
                 {
-                    return localRecord.IsDownloading ? Visibility.Visible : Visibility.Collapsed;
+                    if (localRecord.FileDownloader is null)
+                    {
+                        return Visibility.Collapsed;
+                    }
+
+                    return Visibility.Visible;
                 }
                 else if (DesierdState == "Downloaded")
                 {
@@ -44,7 +49,7 @@ namespace DLSS_Swapper.Converters
                 }
                 else if (DesierdState == "NotFound")
                 {
-                    if (localRecord.IsDownloading)
+                    if (localRecord.FileDownloader is not null)
                     {
                         return Visibility.Collapsed;
                     }

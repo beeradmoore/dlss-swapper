@@ -11,6 +11,7 @@ using Microsoft.UI.Xaml;
 using System.Diagnostics;
 using System.IO;
 using System.ComponentModel;
+using Windows.System;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -51,7 +52,6 @@ public partial class GameControlModel : ObservableObject
         GameTitle = game.Title;
     }
 
-
     [RelayCommand]
     async Task OpenInstallPathAsync()
     {
@@ -68,7 +68,7 @@ public partial class GameControlModel : ObservableObject
         }
         catch (Exception err)
         {
-            Logger.Error(err.Message);
+            Logger.Error(err);
 
             if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
             {
@@ -205,7 +205,7 @@ public partial class GameControlModel : ObservableObject
                 DefaultButton = ContentDialogButton.Primary,
             };
 
-            var dllPickerControl = new DLLPickerControl(gameControlWeakReference, dialog, Game, gameAssetType);
+            var dllPickerControl = new DLLPickerControl(gameControl, dialog, Game, gameAssetType);
             dialog.Content = dllPickerControl;
             await dialog.ShowAsync();
         }
@@ -234,5 +234,11 @@ public partial class GameControlModel : ObservableObject
 
             await dialog.ShowAsync();
         }
+    }
+
+    [RelayCommand]
+    async Task ReadyToPlayStateMoreInformationAsync()
+    {
+        await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting#game-is-not-in-a-ready-to-play-state"));
     }
 }

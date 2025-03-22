@@ -1,23 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.WinUI;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using SQLite;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -175,6 +170,9 @@ namespace DLSS_Swapper.Data
         [Ignore]
         public partial bool MultipleXeSSFGFound { get; set; } = false;
 
+        [Ignore]
+        public abstract bool IsReadyToPlay { get; }
+
         protected void SetID()
         {
             // Seeing as we use ID, it sure would be a shame if a PlatformId was set to "C:\Program Files\"
@@ -269,7 +267,7 @@ namespace DLSS_Swapper.Data
                     }
                     catch (Exception err)
                     {
-                        Logger.Error(err.Message);
+                        Logger.Error(err);
                         Debugger.Break();
                     }
 
@@ -493,7 +491,7 @@ namespace DLSS_Swapper.Data
                 }
                 catch (Exception err)
                 {
-                    Logger.Error(err.Message);
+                    Logger.Error(err);
                     Debugger.Break();
                 }
                 finally
@@ -600,7 +598,7 @@ namespace DLSS_Swapper.Data
                     }
                     catch (UnauthorizedAccessException err)
                     {
-                        Logger.Error($"UnauthorizedAccessException: {err.Message}");
+                        Logger.Error(err);
                         if (App.CurrentApp.IsAdminUser() is false)
                         {
                             return (false, "Unable to reset to default. Running DLSS Swapper as administrator may fix this.", true);
@@ -612,7 +610,7 @@ namespace DLSS_Swapper.Data
                     }
                     catch (Exception err)
                     {
-                        Logger.Error(err.Message);
+                        Logger.Error(err);
                         return (false, "Unable to reset to default. Please repair your game manually.", false);
                     }
 
@@ -753,7 +751,7 @@ namespace DLSS_Swapper.Data
                         }
                         catch (UnauthorizedAccessException err)
                         {
-                            Logger.Error($"UnauthorizedAccessException: {err.Message}");
+                            Logger.Error(err);
                             if (App.CurrentApp.IsAdminUser() is false)
                             {
                                 return (false, "Unable to swap dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
@@ -766,7 +764,7 @@ namespace DLSS_Swapper.Data
                         }
                         catch (Exception err)
                         {
-                            Logger.Error(err.Message);
+                            Logger.Error(err);
                             return (false, "Unable to swap dll. Please check your error log for more information.", false);
                         }
                     }
@@ -792,7 +790,7 @@ namespace DLSS_Swapper.Data
                 }
                 catch (UnauthorizedAccessException err)
                 {
-                    Logger.Error($"UnauthorizedAccessException: {err.Message}");
+                    Logger.Error(err);
                     if (App.CurrentApp.IsAdminUser() is false)
                     {
                         return (false, "Unable to swap dll as we are unable to write to the target directory. Running DLSS Swapper as administrator may fix this.", true);
@@ -802,9 +800,14 @@ namespace DLSS_Swapper.Data
                         return (false, "Unable to DLSS dll as we are unable to write to the target directory.", false);
                     }
                 }
+                catch (IOException err) when (err.HResult == -2147024864)
+                {
+                    Logger.Error(err);
+                    return (false, "Unable to swap dll. It appears to be in use by another program. Is your game currently running?", false);
+                }
                 catch (Exception err)
                 {
-                    Logger.Error(err.Message);
+                    Logger.Error(err);
                     return (false, "Unable to swap dll. Please check your error log for more information.", false);
                 }
             }
@@ -837,7 +840,7 @@ namespace DLSS_Swapper.Data
             catch (Exception err)
             {
                 // NOOP
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
             return (true, string.Empty, false);
@@ -917,14 +920,14 @@ namespace DLSS_Swapper.Data
         */
 
 
-        protected async Task ResizeCoverAsync(string imageSource)
+        protected async Task ResizeCoverAsync(Stream imageStream)
         {
             // TODO: 
             // - find optimal format (eg, is displaying 100 webp images more intense than 100 png images)
             // - load image based on scale
             try
             {
-                using (var image = await SixLabors.ImageSharp.Image.LoadAsync(imageSource).ConfigureAwait(false))
+                using (var image = await SixLabors.ImageSharp.Image.LoadAsync(imageStream).ConfigureAwait(false))
                 {
                     // If images are really big we resize to at least 2x the 200x300 we display as.
                     // In future this should be updated to resize to display scale.
@@ -949,7 +952,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
         }
 
@@ -993,7 +996,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
         }
 
@@ -1025,28 +1028,19 @@ namespace DLSS_Swapper.Data
 
             try
             {
-                using (var fileStream = new FileStream(tempFile, FileMode.Create))
+                using (var memoryStream = new MemoryStream())
                 {
-                    var httpResponseMessage = await App.CurrentApp.HttpClient.GetAsync(url, System.Net.Http.HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-                    if (httpResponseMessage.IsSuccessStatusCode == false)
-                    {
-                        return;
-                    }
+                    var fileDownloader = new FileDownloader(url, 0);
+                    await fileDownloader.DownloadFileToStreamAsync(memoryStream).ConfigureAwait(false);
+                    memoryStream.Position = 0;
 
-                    // This could be optimised by loading stream directly to ImageSharp and skip
-                    // the save/load to disk.
-                    using (var stream = httpResponseMessage.Content.ReadAsStream())
-                    {
-                        await stream.CopyToAsync(fileStream).ConfigureAwait(false);
-                    }
+                    // Now if the image is downloaded lets resize it, 
+                    await ResizeCoverAsync(memoryStream).ConfigureAwait(false);
                 }
-
-                // Now if the image is downloaded lets resize it, 
-                await ResizeCoverAsync(tempFile).ConfigureAwait(false);
             }
             catch (Exception err)
             {
-                Logger.Error($"{err.Message}, url: {url}");
+                Logger.Error(err, $"For url: {url}");
                 Debugger.Break();
             }
             finally
@@ -1079,7 +1073,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 Debugger.Break();
             }
         }
@@ -1117,7 +1111,7 @@ namespace DLSS_Swapper.Data
                             }
                             catch (Exception err)
                             {
-                                Logger.Error($"Could not delete {cachedGameAsset.Path}, {err.Message}");
+                                Logger.Error(err, $"Could not delete {cachedGameAsset.Path}");
                             }
                         }
                     }
@@ -1138,7 +1132,7 @@ namespace DLSS_Swapper.Data
                     }
                     catch (Exception err)
                     {
-                        Logger.Error($"Could not delete {thumbnailImage}, {err.Message}");
+                        Logger.Error(err, $"Could not delete {thumbnailImage}");
                     }
                 }
 
@@ -1153,7 +1147,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
         }
 
@@ -1214,7 +1208,7 @@ namespace DLSS_Swapper.Data
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
         }
 

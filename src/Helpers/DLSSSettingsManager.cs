@@ -50,7 +50,7 @@ internal class DLSSSettingsManager
         }
         catch (Exception err)
         {
-            Logger.Error($"Could not command \"{processInfo.FileName} {processInfo.Arguments}. {err.Message}");
+            Logger.Error(err, $"Could not command \"{processInfo.FileName} {processInfo.Arguments}");
         }
 
         return false;

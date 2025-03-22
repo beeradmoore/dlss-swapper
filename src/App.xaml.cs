@@ -67,10 +67,11 @@ namespace DLSS_Swapper
                         CookieContainer = new System.Net.CookieContainer(),
                         AllowAutoRedirect = true,
                     };
-
                     _httpClient = new HttpClient(httpClientHandler);
                     _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper/{versionString}");
-                    _httpClient.Timeout = TimeSpan.FromSeconds(20);
+                    _httpClient.Timeout = TimeSpan.FromMinutes(30);
+                    _httpClient.DefaultRequestVersion = new Version(2, 0);
+                    _httpClient.DefaultRequestHeaders.ConnectionClose = true;
                 }
 
                 return _httpClient;
@@ -133,16 +134,15 @@ namespace DLSS_Swapper
             var version = GetVersion();
             var versionString = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
             Logger.Info($"App launch - v{versionString}", null);
-
-            Logger.Error($"Storage: {Storage.StoragePath}");
+            Logger.Info($"StoragePath: {Storage.StoragePath}");
 
             Database.Instance.Init();
 
             MainWindow.Activate();
 
-
             // No need to calculate this for portable app.
 #if !PORTABLE
+            // No need to calculate this for portable app.
             var calculateInstallSizeThread = new Thread(CalculateInstallSize);
             calculateInstallSizeThread.Start();
 #endif
@@ -173,7 +173,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
         }
 
@@ -193,52 +193,6 @@ namespace DLSS_Swapper
             return directorySize;
         }
 #endif
-
-        /*
-        // Disabled because the non-async method seems faster.
-        internal async Task LoadLocalRecordFromDLSSRecordAsync(DLSSRecord dlssRecord)
-        {
-            var expectedPath = Path.Combine("dlls", $"{dlssRecord.Version}_{dlssRecord.MD5Hash}", "nvngx_dlss.dll");
-            Logger.Debug($"ExpectedPath: {expectedPath}");
-            // Load record.
-            var localRecord = await LocalRecord.FromExpectedPathAsync(expectedPath);
-
-            // If the record exists we will update existing properties, if not we add it as new property.
-            var existingLocalRecord = LocalRecords.FirstOrDefault(x => x.Equals(localRecord));
-            if (existingLocalRecord is null)
-            {
-                dlssRecord.LocalRecord = localRecord;
-                LocalRecords.Add(localRecord);
-            }
-            else
-            {
-                existingLocalRecord.UpdateFromNewLocalRecord(localRecord);
-
-                // Probably don't need to set this again.
-                dlssRecord.LocalRecord = existingLocalRecord;
-            }
-        }
-        */
-
-
-        /*
-        // Disabled because the non-async method seems faster. 
-        internal async Task LoadLocalRecordsAsync()
-        {
-            var tasks = new List<Task>();
-
-            // We attempt to load all local records, even if experemental is not enabled.
-            foreach (var dlssRecord in DLSSRecords.Stable)
-            {
-                tasks.Add(LoadLocalRecordFromDLSSRecordAsync(dlssRecord));
-            }
-            foreach (var dlssRecord in DLSSRecords.Experimental)
-            {
-                tasks.Add(LoadLocalRecordFromDLSSRecordAsync(dlssRecord));
-            }
-            await Task.WhenAll(tasks);
-        }
-        */
 
         public bool IsAdminUser()
         {
@@ -331,7 +285,15 @@ namespace DLSS_Swapper
 
                 if (didEnqueue == false)
                 {
-                    Logger.Error("TryEnqueue failed.");
+                    try
+                    {
+                        // I am sure there is a better way to fill out a stacktrace than throwing an exception
+                        throw new Exception("TryEnqueue failed.");
+                    }
+                    catch (Exception err)
+                    {
+                        Logger.Error(err);
+                    }
                 }
 
                 return didEnqueue;

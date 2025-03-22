@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 using SQLite;
 
@@ -12,6 +8,8 @@ namespace DLSS_Swapper.Data.EpicGamesStore
     internal class EpicGamesStoreGame : Game
     {
         public override GameLibrary GameLibrary => GameLibrary.EpicGamesStore;
+
+        public override bool IsReadyToPlay => true;
 
         [Column("remote_header_image")]
         public string RemoteHeaderImage { get; set;  } = string.Empty;
@@ -54,6 +52,5 @@ namespace DLSS_Swapper.Data.EpicGamesStore
 
             return didChange;
         }
-
     }
 }

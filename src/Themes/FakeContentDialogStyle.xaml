@@ -210,7 +210,7 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <ScrollViewer x:Name="ContentScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" ZoomMode="Disabled" IsTabStop="False">
+                                    <ScrollViewer x:Name="ContentScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" ZoomMode="Disabled" IsTabStop="False">
                                         <Grid Background="{ThemeResource ContentDialogTopOverlay}" Padding="{ThemeResource ContentDialogPadding}" BorderThickness="{ThemeResource ContentDialogSeparatorThickness}" BorderBrush="{ThemeResource ContentDialogSeparatorBorderBrush}">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto" />

@@ -109,7 +109,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             }
             catch (Exception err)
             {
-                Logger.Error($"Error getting list of installs: {err.Message}");
+                Logger.Error(err, $"Error getting list of installs");
                 return games;
             }
 
@@ -235,7 +235,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                             }
                             catch (Exception err)
                             {
-                                Logger.Error($"Error loading UbisoftConnectConfigurationItem: {err.Message}");
+                                Logger.Error(err, "Error loading UbisoftConnectConfigurationItem");
                             }
                         }
                     }
@@ -289,7 +289,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             catch (Exception err)
             {
                 _installPath = string.Empty;
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return string.Empty;
             }
         }
@@ -474,7 +474,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 Debugger.Break();
             }
         }

@@ -28,7 +28,7 @@
 
         <DataTemplate x:Key="ListViewTemplate" x:DataType="pages:GameGridPageModel">
             <ListView ItemsSource="{x:Bind CurrentCollectionView, Mode=OneWay}" ItemClick="GridAndListView_ItemClick" HorizontalAlignment="Stretch" SelectionMode="None" IsItemClickEnabled="True" Padding="20">
-                
+
                 <!--
                 <ListView.ItemContainerStyle>
                     <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
@@ -37,7 +37,7 @@
                     </Style>
                 </ListView.ItemContainerStyle>
                 -->
-                
+
                 <ListView.GroupStyle>
                     <GroupStyle HidesIfEmpty="True">
                         <GroupStyle.HeaderTemplate>
@@ -85,7 +85,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+
         </DataTemplate>
 
         <DataTemplate x:Key="GridVeiwTemplate" x:DataType="pages:GameGridPageModel">
@@ -169,7 +169,7 @@
                                   GridVeiwTemplate="{StaticResource GridVeiwTemplate}"/>
 
 
-    
+
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -193,8 +193,19 @@
                 <muxc:ProgressRing IsActive="True" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.IsLoading, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"  />
             </StackPanel>
 
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBox
+                    Width="300"
+                    Height="20"
+                    Margin="10,0,0,0"
+                    AcceptsReturn="True"
+                    IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}"
+                    PlaceholderText="Search"
+                    TextChanged="{x:Bind ViewModel.SearchForGameEvent}" />
+            </StackPanel>
+            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                
+
                 <AppBarButton Label="New DLLs" Command="{x:Bind ViewModel.UnknownAssetsFoundButtonCommand}" Visibility="{x:Bind data:GameManager.Instance.UnknownAssetsFound, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE946;" />

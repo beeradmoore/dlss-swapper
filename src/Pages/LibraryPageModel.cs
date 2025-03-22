@@ -136,11 +136,12 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                            continue;
                        }
 
+                       // TODO: When fixing imported system, make sure to update this to use full path
                         var internalZipDir = DLLManager.Instance.GetAssetTypeName(dllRecord.AssetType);
-                       if (dllRecord.LocalRecord.IsImported == true)
-                       {
-                           internalZipDir = Path.Combine("Imported", internalZipDir);
-                       }
+                        if (dllRecord.LocalRecord.IsImported == true)
+                        {
+                            internalZipDir = Path.Combine("Imported", internalZipDir);
+                        }
 
                         internalZipDir = Path.Combine(internalZipDir, dllRecord.DisplayName);
 
@@ -205,13 +206,13 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                }
                catch (Exception err2)
                {
-                   Logger.Error(err2.Message);
+                   Logger.Error(err2);
                }
            }
 
            exportingDialog.Hide();
 
-           Logger.Error(err.Message);
+           Logger.Error(err);
 
            // If the fullExpectedPath does not exist, or there was an error writing it.
            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
@@ -235,7 +236,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
         }
     }
@@ -517,11 +518,11 @@ Only import dlls from sources you trust.",
                     }
                     catch (Exception err2)
                     {
-                        Logger.Error(err2.Message);
+                        Logger.Error(err2);
                     }
                 }
 
-                Logger.Error(err.Message);
+                Logger.Error(err);
 
 
                 // TODO: Button to open error log
@@ -666,7 +667,7 @@ Only import dlls from sources you trust.",
         catch (Exception err)
         {
             exportingDialog.Hide();
-            Logger.Error(err.Message);
+            Logger.Error(err);
 
             // If the fullExpectedPath does not exist, or there was an error writing it.
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)

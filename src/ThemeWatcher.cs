@@ -83,7 +83,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
             try
@@ -95,7 +95,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
             Logger.Info($"{GetWindowsTheme()}, {HighContrast}");
@@ -149,7 +149,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
             return _defaultApplicationTheme;
@@ -176,7 +176,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return theme;
             }
         }

@@ -11,29 +11,6 @@ using SQLite;
 
 namespace DLSS_Swapper.Data;
 
-public enum GameAssetType
-{
-    Unknown,
-
-    DLSS,
-    DLSS_G,
-    DLSS_D,
-    FSR_31_DX12,
-    FSR_31_VK,
-    XeSS,
-    XeLL,
-    XeSS_FG,
-
-    DLSS_BACKUP,
-    DLSS_G_BACKUP,
-    DLSS_D_BACKUP,
-    FSR_31_DX12_BACKUP,
-    FSR_31_VK_BACKUP,
-    XeSS_BACKUP,
-    XeLL_BACKUP,
-    XeSS_FG_BACKUP,
-}
-
 public class GameAsset : IEquatable<GameAsset>
 {
     [Indexed]
@@ -57,7 +34,7 @@ public class GameAsset : IEquatable<GameAsset>
         get
         {
             // return cached version.
-            if (_displayVersion != string.Empty)
+            if (string.IsNullOrWhiteSpace(_displayVersion) == false)
             {
                 return _displayVersion;
             }
@@ -73,12 +50,14 @@ public class GameAsset : IEquatable<GameAsset>
             _displayVersion = version.ToString();
 
             // If the value is a single value, eg 1, make it 1.0
-            if (_displayVersion.Length == 1)
+            if (_displayVersion.Contains(".") == false)
             {
                 _displayVersion = $"{_displayVersion}.0";
             }
 
-            return _displayVersion;
+            _displayVersion = $"v{_displayVersion}";
+
+            return  _displayVersion;
         }
     }
 

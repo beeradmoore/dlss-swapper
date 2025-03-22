@@ -197,7 +197,7 @@ namespace DLSS_Swapper.Pages
             {
                 gameGridPageModel.InitialLoadAsync().SafeFireAndForget((err) =>
                 {
-                    Logger.Error($"Unable to perform initial load - {err.Message}");
+                    Logger.Error(err, $"Unable to perform initial load");
                 });
             }
 

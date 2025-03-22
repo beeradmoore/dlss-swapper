@@ -3,7 +3,7 @@
 namespace DLSS_Swapper.Data.Steam;
 
 [Flags]
-internal enum SteamAppState: uint
+internal enum SteamStateFlag : uint
 {
     StateInvalid = 0,                  // 0
     StateUninstalled = 1 << 0,         // 1

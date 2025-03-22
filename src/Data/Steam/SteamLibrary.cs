@@ -81,14 +81,14 @@ namespace DLSS_Swapper.Data.Steam
             {
                 try
                 {
-                    var libraryFoldersFileText = await File.ReadAllTextAsync(libraryFoldersFile);
+                    var libraryFoldersFileText = await File.ReadAllTextAsync(libraryFoldersFile).ConfigureAwait(false);
 
                     var matches = LibraryFoldersRegex().Matches(libraryFoldersFileText);
                     if (matches.Count > 0)
                     {
                         foreach (Match match in matches)
                         {
-                            // This is weird, but for some reason some libraryfolders.vdf are formatted very differnetly than others.
+                            // This is weird, but for some reason some libraryfolders.vdf are formatted very differently than others.
                             var path = match.Groups["path"].ToString();
                             if (Directory.Exists(path))
                             {
@@ -124,7 +124,7 @@ namespace DLSS_Swapper.Data.Steam
 
                         try
                         {
-                            var appManifest = await File.ReadAllTextAsync(appManifestPath);
+                            var appManifest = await File.ReadAllTextAsync(appManifestPath).ConfigureAwait(false);
 
                             var matches = AppIdRegex().Matches(appManifest);
                             if (matches.Count == 0)
@@ -136,13 +136,13 @@ namespace DLSS_Swapper.Data.Steam
                             game = new SteamGame(steamGameAppId);
 
                             var stateFlagsMatch = StateFlagsRegex().Match(appManifest);
-                            if (!stateFlagsMatch.Success || !Enum.TryParse(stateFlagsMatch.Groups["StateFlags"].Value, out SteamAppState stateFlags))
+                            if (!stateFlagsMatch.Success || !Enum.TryParse(stateFlagsMatch.Groups["StateFlags"].Value, out SteamStateFlag stateFlags))
                             {
                                 // The AppState couldn't be parsed from the appmanifest_*.acf
                                 continue;
                             }
 
-                            game.AppState = stateFlags;
+                            game.StateFlags = stateFlags;
 
                             matches = NameRegex().Matches(appManifest);
                             if (matches.Count == 0)
@@ -178,9 +178,9 @@ namespace DLSS_Swapper.Data.Steam
                         var activeGame = cachedGame ?? game;
                         activeGame.Title = game.Title;  // TODO: Will this be a problem if the game is already loaded
                         activeGame.InstallPath = game.InstallPath;
-                        activeGame.AppState = game.AppState;
+                        activeGame.StateFlags = game.StateFlags;
 
-                        await activeGame.SaveToDatabaseAsync();
+                        await activeGame.SaveToDatabaseAsync().ConfigureAwait(false);
 
                         // If the game is not from cache, force processing
                         if (cachedGame is null)
@@ -205,7 +205,7 @@ namespace DLSS_Swapper.Data.Steam
                 // Game is to be deleted.
                 if (games.Contains(cachedGame) == false)
                 {
-                    await cachedGame.DeleteAsync();
+                    await cachedGame.DeleteAsync().ConfigureAwait(false);
                 }
             }
 

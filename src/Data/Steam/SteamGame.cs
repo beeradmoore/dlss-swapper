@@ -13,15 +13,15 @@ namespace DLSS_Swapper.Data.Steam
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsReadyToPlay))]
-        [Column("app_state")]
-        public partial SteamAppState AppState { get; set; }
+        [Column("state_flags")]
+        public partial SteamStateFlag StateFlags { get; set; }
 
         public override bool IsReadyToPlay
         {
             get
             {
-                const SteamAppState allowedFlags = SteamAppState.StateFullyInstalled | SteamAppState.StateAppRunning;
-                return AppState != 0 && (AppState & ~allowedFlags) == 0;
+                const SteamStateFlag allowedFlags = SteamStateFlag.StateFullyInstalled | SteamStateFlag.StateAppRunning;
+                return StateFlags != 0 && (StateFlags & ~allowedFlags) == 0;
             }
         }
 
@@ -56,6 +56,15 @@ namespace DLSS_Swapper.Data.Steam
         public override bool UpdateFromGame(Game game)
         {
             var didChange = ParentUpdateFromGame(game);
+
+            if (game is SteamGame steamGame)
+            {
+                if (StateFlags != steamGame.StateFlags)
+                {
+                    StateFlags = steamGame.StateFlags;
+                    didChange = true;
+                }
+            }
 
             return didChange;
         }

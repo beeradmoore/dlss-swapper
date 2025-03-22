@@ -1,0 +1,49 @@
+<UserControl
+    x:Class="DLSS_Swapper.UserControls.DLSSRecordInfoControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DLSS_Swapper.UserControls"
+    xmlns:data="using:DLSS_Swapper.Data"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:DLSS_Swapper.Converters"
+    xmlns:usercontrols="using:DLSS_Swapper.UserControls"
+    xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:BytesToKiloBytesConverter x:Key="BytesToKiloBytesConverter" />
+        <ct_converters:StringVisibilityConverter x:Key="StringVisibilityConverter" />
+    </UserControl.Resources>
+
+    <StackPanel Orientation="Vertical">
+        <TextBlock IsTextSelectionEnabled="True">
+            <Run FontWeight="Bold">Version: </Run>
+            <Run Text="{x:Bind DLLRecord.Version}"/>
+        </TextBlock>
+        <TextBlock IsTextSelectionEnabled="True" Visibility="{x:Bind DLLRecord.AdditionalLabel, Converter={StaticResource StringVisibilityConverter}}">
+            <Run FontWeight="Bold">Label: </Run>
+            <Run Text="{x:Bind DLLRecord.AdditionalLabel}"/>
+        </TextBlock>
+        <TextBlock IsTextSelectionEnabled="True">
+            <Run FontWeight="Bold">File size: </Run>
+            <Run Text="{x:Bind DLLRecord.FileSize, Converter={StaticResource BytesToKiloBytesConverter}}"/>
+        </TextBlock>
+        <TextBlock IsTextSelectionEnabled="True">
+            <Run FontWeight="Bold">Download file size: </Run>
+            <Run Text="{x:Bind DLLRecord.ZipFileSize, Converter={StaticResource BytesToKiloBytesConverter}}"/>
+        </TextBlock>
+        <TextBlock IsTextSelectionEnabled="True">
+            <Run FontWeight="Bold">File description: </Run>
+            <Run Text="{x:Bind DLLRecord.FileDescription}"/>
+        </TextBlock>
+        <TextBlock IsTextSelectionEnabled="True">
+            <Run FontWeight="Bold">MD5 hash: </Run>
+            <Run Text="{x:Bind DLLRecord.MD5Hash}"/>
+        </TextBlock>
+        <TextBlock IsTextSelectionEnabled="True">
+            <Run FontWeight="Bold">Zip MD5 hash: </Run>
+            <Run Text="{x:Bind DLLRecord.ZipMD5Hash}"/>
+        </TextBlock>
+
+    </StackPanel>
+</UserControl>

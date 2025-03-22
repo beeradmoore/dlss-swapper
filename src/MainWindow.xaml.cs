@@ -1,7 +1,7 @@
 ﻿using AsyncAwaitBestPractices;
-using CommunityToolkit.WinUI.UI.Controls;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Extensions;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Pages;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI;
@@ -14,7 +14,6 @@ using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using MvvmHelpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,8 +21,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Windows.Foundation;
@@ -45,11 +46,6 @@ namespace DLSS_Swapper
         ThemeWatcher _themeWatcher;
         IntPtr _windowIcon;
 
-        public static NavigationView NavigationView;
-
-        public ObservableRangeCollection<DLSSRecord> CurrentDLSSRecords { get; } = new ObservableRangeCollection<DLSSRecord>();
-
-
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, string iconPath, ref IntPtr index);
 
@@ -61,9 +57,34 @@ namespace DLSS_Swapper
             Title = "DLSS Swapper";
             this.InitializeComponent();
 
-            // Release the icon.
+            if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
+            {
+                var lastWindowSizeAndPosition = Settings.Instance.LastWindowSizeAndPosition;
+                if (lastWindowSizeAndPosition.Width > 512 && lastWindowSizeAndPosition.Height > 512)
+                {
+                    AppWindow.MoveAndResize(lastWindowSizeAndPosition.GetRectInt32());
+                }
+                if (lastWindowSizeAndPosition.State == OverlappedPresenterState.Maximized)
+                {
+                    overlappedPresenter.Maximize();
+                }
+            }
+
+        
+
             Closed += (object sender, WindowEventArgs args) =>
             {
+                if (AppWindow?.Size is not null && AppWindow?.Position is not null && AppWindow.Presenter is OverlappedPresenter overlappedPresenter)
+                {
+                    var windowPositionRect = new WindowPositionRect(AppWindow.Position.X, AppWindow.Position.Y, AppWindow.Size.Width, AppWindow.Size.Height);
+                    if (overlappedPresenter.State == OverlappedPresenterState.Maximized)
+                    {
+                        windowPositionRect.State = OverlappedPresenterState.Maximized;
+                    }
+                    Settings.Instance.LastWindowSizeAndPosition = windowPositionRect;
+                }
+
+                // Release the icon.
                 if (_windowIcon != IntPtr.Zero)
                 {
                     DestroyIcon(_windowIcon);
@@ -76,8 +97,6 @@ namespace DLSS_Swapper
             _themeWatcher = new ThemeWatcher();
             _themeWatcher.ThemeChanged += ThemeWatcher_ThemeChanged;
             _themeWatcher.Start();
-
-            NavigationView = MainNavigationView;
 
 
             if (_isCustomizationSupported)
@@ -101,6 +120,7 @@ namespace DLSS_Swapper
             
             SetIcon();
         }
+
 
 
         /// <summary>
@@ -134,54 +154,72 @@ namespace DLSS_Swapper
 
         void MainNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            //FrameNavigationOptions navOptions = new FrameNavigationOptions();
-            //navOptions.TransitionInfoOverride = args.RecommendedNavigationTransitionInfo;
-
-            if (args.InvokedItem is String invokedItem)
+            if (args.IsSettingsInvoked)
+            {
+                GoToPage("Settings");
+            }
+            else if (args.InvokedItemContainer.Tag is string invokedItem)
             {
                 GoToPage(invokedItem);
             }
+            else
+            {
+                Logger.Error($"MainNavigationView_ItemInvoked for a page that was not found. ({args.InvokedItemContainer?.Tag}, {args.InvokedItem})");
+            }
         }
+
+
+        GameGridPage? gameGridPage = null;
+        LibraryPage? libraryPage = null;
+        SettingsPage? settingsPage = null;
+
+        public GameGridPage? GameGridPage => gameGridPage;
 
         void GoToPage(string page)
         {
-            Type pageType = null;
-
             if (page == "Games")
             {
-                pageType = typeof(GameGridPage);
+                if (ContentFrame.Content is null || ContentFrame.Content as Page != gameGridPage)
+                {
+                    ContentFrame.Content = gameGridPage ??= new GameGridPage();
+                }
             }
             else if (page == "Library")
             {
-                pageType = typeof(LibraryPage);
+                if (ContentFrame.Content is null || ContentFrame.Content as Page != libraryPage)
+                {
+                    ContentFrame.Content = libraryPage ??= new LibraryPage();
+                }
             }
             else if (page == "Settings")
             {
-                pageType = typeof(SettingsPage);
-            }
-            else if (page == "InitialLoading")
-            {
-                pageType = typeof(InitialLoadingPage);
-            }
-
-            foreach (NavigationViewItem navigationViewItem in MainNavigationView.MenuItems)
-            {
-                if (navigationViewItem.Tag.ToString() == page)
+                if (ContentFrame.Content is null || ContentFrame.Content as Page != settingsPage)
                 {
-                    MainNavigationView.SelectedItem = navigationViewItem;
-                    break;
+                    ContentFrame.Content = settingsPage ??= new SettingsPage();
                 }
             }
-
-            if (pageType != null)
+            else
             {
-                ContentFrame.Navigate(pageType);
+                Logger.Error($"Attempting to navigate to a page that was not found, {page}");
+                return;
+            }
+
+            // Only try manually set selected item if is not already selected. 
+            if (MainNavigationView.SelectedItem is null || (MainNavigationView.SelectedItem is string selectedItem && selectedItem != page))
+            {
+                foreach (NavigationViewItem navigationViewItem in MainNavigationView.MenuItems)
+                {
+                    if (navigationViewItem.Tag.ToString() == page)
+                    {
+                        MainNavigationView.SelectedItem = navigationViewItem;
+                        break;
+                    }
+                }
             }
         }
 
         async void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
         {
-
             // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
             /*
             // If this is a new build, fetch updates to display to the user.
@@ -193,18 +231,16 @@ namespace DLSS_Swapper
             }
             */
 
-#if !MICROSOFT_STORE
             var gitHubUpdater = new Data.GitHub.GitHubUpdater();
 
             // If this is a GitHub build check if there is a new version.
             // Lazy blocks to allow mul
-            Task<Data.GitHub.GitHubRelease> newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease();
-#endif
+            var newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease();
 
 
             // Load from cache, or download if not found.
-            var loadDlssRecrodsTask = LoadDLSSRecordsAsync();
-            var loadImportedDlssRecordsTask = LoadImportedDLSSRecordsAsync();
+            var loadDlssRecrodsTask = LoadDLLRecordsAsync();
+            var loadImportedDlssRecordsTask = LoadImportedManifestAsync();
 
     
             if (Settings.Instance.HasShownMultiplayerWarning == false)
@@ -231,7 +267,7 @@ namespace DLSS_Swapper
                     CloseButtonText = "Close",
                     PrimaryButtonText = "Github Issues",
                     DefaultButton = ContentDialogButton.Primary,
-                    Content = @"We were unable to load dlss_records.json from your computer or from the internet. 
+                    Content = @"We were unable to load manifest.json from your computer or from the internet. 
 
 If this keeps happening please file an report in our issue tracker on Github.
 
@@ -248,9 +284,9 @@ DLSS Swapper will close now.",
 
             await loadImportedDlssRecordsTask;
 
-            FilterDLSSRecords();
+            FilterDLLRecords();
             //await App.CurrentApp.LoadLocalRecordsAsync();
-            App.CurrentApp.LoadLocalRecords();
+            DLLManager.Instance.LoadLocalRecords();
 
             // We are now ready to show the games list.
             LoadingStackPanel.Visibility = Visibility.Collapsed;
@@ -259,183 +295,164 @@ DLSS Swapper will close now.",
 
             // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
             /*
-            if (releaseNotesTask != null)
+            if (releaseNotesTask is not null)
             {
                 await releaseNotesTask;
-                if (releaseNotesTask.Result != null)
+                if (releaseNotesTask.Result is not null)
                 {
                     gitHubUpdater?.DisplayWhatsNewDialog(releaseNotesTask.Result, MainNavigationView);
                 }
             }
             */
 
-#if !MICROSOFT_STORE
             await newUpdateTask;
-            if (newUpdateTask.Result != null)
+            if (newUpdateTask.Result is not null)
             {
                 if (gitHubUpdater.HasPromptedBefore(newUpdateTask.Result) == false)
                 {
-                    await gitHubUpdater.DisplayNewUpdateDialog(newUpdateTask.Result, MainNavigationView);
+                    await gitHubUpdater.DisplayNewUpdateDialog(newUpdateTask.Result, MainNavigationView.XamlRoot);
                 }
             }       
-#endif
         }
 
         /// <summary>
         /// 
         /// </summary>
-        internal void FilterDLSSRecords()
+        // Previously: FilterDLSSRecords
+        internal void FilterDLLRecords()
         {
-            var newDlssRecordsList = new List<DLSSRecord>();
+            // TODO: Reimplement
+            /*
+            var newDlssRecordsList = new List<DLLRecord>();
             if (Settings.Instance.AllowUntrusted)
             {
-                newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Stable);
-                newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords);
+                newDlssRecordsList.AddRange(App.CurrentApp.Manifest.DLSS);
+                newDlssRecordsList.AddRange(App.CurrentApp.ImportedManifest.DLSS);
             }
             else
             {
-                newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Stable.Where(x => x.IsSignatureValid == true));
-                newDlssRecordsList.AddRange(App.CurrentApp.ImportedDLSSRecords.Where(x => x.IsSignatureValid == true));
+                newDlssRecordsList.AddRange(App.CurrentApp.Manifest.DLSS.Where(x => x.IsSignatureValid == true));
+                newDlssRecordsList.AddRange(App.CurrentApp.ImportedManifest.DLSS.Where(x => x.IsSignatureValid == true));
             }
-
-            if (Settings.Instance.AllowExperimental)
-            {
-                if (Settings.Instance.AllowUntrusted)
-                {
-                    newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Experimental);
-                }
-                else
-                {
-                    newDlssRecordsList.AddRange(App.CurrentApp.DLSSRecords?.Experimental.Where(x => x.IsSignatureValid == true));
-                }
-            }
-
 
             newDlssRecordsList.Sort();
             CurrentDLSSRecords.Clear();
             CurrentDLSSRecords.AddRange(newDlssRecordsList);
+            */
+
         }
 
         /// <summary>
         /// Attempts to load DLSS records from disk or from the web depending what happened.
         /// </summary>
         /// <returns>True if we expect there are now valid DLSS records loaded into memory.</returns>
-        async Task<bool> LoadDLSSRecordsAsync()
+        // Previously LoadDLSSRecordsAsync
+        async Task<bool> LoadDLLRecordsAsync()
         {
-#if !MICROSOFT_STORE
             // Only auto check for updates once every 12 hours.
             var timeSinceLastUpdate = DateTimeOffset.Now - Settings.Instance.LastRecordsRefresh;
-            if (timeSinceLastUpdate.TotalHours > 12)
+            if (timeSinceLastUpdate.TotalMinutes > 5)
             {
-                var didUpdate = await UpdateDLSSRecordsAsync();
+                var didUpdate = await UpdateManifestAsync();
                 if (didUpdate)
                 {
                     // If we did upda
                     return true;
                 }
             }
-#endif
 
             try
             {
                 // If we were unable to auto-load lets try load cached.
-                var items = await Storage.LoadDLSSRecordsJsonAsync();
+                var manifest = await Storage.LoadManifestJsonAsync();
                
-                // If items could not be loaded then we should attempt to upload dlss_records from the dlss-archive.
-                if (items == null)
+                // If manifest could not be loaded then we should attempt to upload dlss_records from the dlss-archive.
+                if (manifest is null || manifest.DLSS?.Any() == false)
                 {
-#if MICROSOFT_STORE
-                    return false;
-#else
-                    return await UpdateDLSSRecordsAsync();
-#endif
+                    return await UpdateManifestAsync();
                 }
                 else
                 {
-                    UpdateDLSSRecordsList(items);
+                    DLLManager.Instance.UpdateDLLRecordLists(manifest);
                 }
                 return true;
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return false;
             }
         }
 
-        internal async Task LoadImportedDLSSRecordsAsync()
+        // Previously: LoadImportedDLSSRecordsAsync
+        internal async Task LoadImportedManifestAsync()
         {
-            var items = await Storage.LoadImportedDLSSRecordsJsonAsync();
-            if (items != null)
+            var manifest = await Storage.LoadImportedManifestJsonAsync();
+            if (manifest is not null)
             {
-                UpdateImportedDLSSRecordsList(items);
+                UpdateImportedManifestList(manifest);
             }
         }
 
-        internal void UpdateDLSSRecordsList(DLSSRecords dlssRecords)
+        // Previously: UpdateImportedDLSSRecordsList
+        internal void UpdateImportedManifestList(Manifest importedManifest)
         {
-            App.CurrentApp.DLSSRecords.Stable.Clear();
-            App.CurrentApp.DLSSRecords.Stable.AddRange(dlssRecords.Stable);
-
-            App.CurrentApp.DLSSRecords.Experimental.Clear();
-            App.CurrentApp.DLSSRecords.Experimental.AddRange(dlssRecords.Experimental);
-        }
-
-        internal void UpdateImportedDLSSRecordsList(List<DLSSRecord> localDlssRecords)
-        {
+            // TODO: Reimplement
+            /*
             App.CurrentApp.ImportedDLSSRecords.Clear();
             App.CurrentApp.ImportedDLSSRecords.AddRange(localDlssRecords);
+            */
         }
 
-#if !MICROSOFT_STORE
         /// <summary>
-        /// Attempts to load dlss_records.json from dlss-archive.
+        /// Attempts to load manifest.json from dlss-swapper-manifest-builder repository.
         /// </summary>
         /// <returns>True if the dlss recrods manifest was downloaded and saved successfully</returns>
-        internal async Task<bool> UpdateDLSSRecordsAsync()
+        internal async Task<bool> UpdateManifestAsync()
         {
-            var url = "https://raw.githubusercontent.com/beeradmoore/dlss-archive/main/dlss_records.json";
-
             try
             {
                 using (var memoryStream = new MemoryStream())
                 {
                     // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider 
-                    // adding a "fast UpdateDLSSRecords" which will quit early if we were unable to load in 10sec 
-                    // which would then fall back to loading local.                    
-                    using (var stream = await App.CurrentApp.HttpClient.GetStreamAsync(url))
-                    {
-                        await stream.CopyToAsync(memoryStream);
-                    }
+                    // adding a "fast UpdateManifest" which will quit early if we were unable to load in 10sec 
+                    // which would then fall back to loading local.
+                    var fileDownloader = new FileDownloader("https://raw.githubusercontent.com/beeradmoore/dlss-swapper-manifest-builder/refs/heads/main/manifest.json", 0);
+                    await fileDownloader.DownloadFileToStreamAsync(memoryStream);
+
                     memoryStream.Position = 0;
 
-                    var items = await JsonSerializer.DeserializeAsync<DLSSRecords>(memoryStream);
-
-                    UpdateDLSSRecordsList(items);
+                    var manifest = await JsonSerializer.DeserializeAsync(memoryStream, SourceGenerationContext.Default.Manifest);
+                    if (manifest is null)
+                    {
+                        throw new Exception("Could not deserialize manifest.json.");
+                    }
+                    DLLManager.Instance.UpdateDLLRecordLists(manifest);
                     //await UpdateDLSSRecordsListAsync(items);
 
                     memoryStream.Position = 0;
                     try
                     {
-                        await Storage.SaveDLSSRecordsJsonAsync(items);
+                        await Storage.SaveManifestJsonAsync(manifest);
                         // Update settings for auto refresh.
                         Settings.Instance.LastRecordsRefresh = DateTime.Now;
                         return true;
                     }
                     catch (Exception err)
                     {
-                        Logger.Error(err.Message);
+                        Logger.Error(err);
                     }
                 }
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
+                Debugger.Break();
             }
 
             return false;
         }
-#endif
+        
 
         internal void UpdateColors(ElementTheme theme)
         {
@@ -465,83 +482,96 @@ DLSS Swapper will close now.",
 
         void UpdateColorsLight()
         {
-            RootGrid.RequestedTheme = ElementTheme.Light;
+            App.CurrentApp.RunOnUIThread(() => {
+                RootGrid.RequestedTheme = ElementTheme.Light;
 
 
-            var app = ((App)Application.Current);
-            var theme = app.Resources.MergedDictionaries[1].ThemeDictionaries["Light"] as ResourceDictionary;
+                var app = ((App)Application.Current);
+                var theme = app.Resources.MergedDictionaries[1].ThemeDictionaries["Light"] as ResourceDictionary;
+
+                if (theme is null)
+                {
+                    return;
+                }
+
+                if (_isCustomizationSupported)
+                {
+                    var appWindow = GetAppWindowForCurrentWindow();
+                    var appWindowTitleBar = appWindow.TitleBar;
 
 
-            if (_isCustomizationSupported)
-            {
-                var appWindow = GetAppWindowForCurrentWindow();
-                var appWindowTitleBar = appWindow.TitleBar;
+                    appWindowTitleBar.ButtonBackgroundColor = (Color)theme["ButtonBackgroundColor"];
+                    appWindowTitleBar.ButtonForegroundColor = (Color)theme["ButtonForegroundColor"];
+                    appWindowTitleBar.ButtonHoverBackgroundColor = (Color)theme["ButtonHoverBackgroundColor"];
+                    appWindowTitleBar.ButtonHoverForegroundColor = (Color)theme["ButtonHoverForegroundColor"];
+                    appWindowTitleBar.ButtonInactiveBackgroundColor = (Color)theme["ButtonInactiveBackgroundColor"];
+                    appWindowTitleBar.ButtonInactiveForegroundColor = (Color)theme["ButtonInactiveForegroundColor"];
+                    appWindowTitleBar.ButtonPressedBackgroundColor = (Color)theme["ButtonPressedBackgroundColor"];
+                    appWindowTitleBar.ButtonPressedForegroundColor = (Color)theme["ButtonPressedForegroundColor"];
+
+                }
+                else
+                {
+                    var appResources = Application.Current.Resources;
+                    // Removes the tint on title bar
+                    appResources["WindowCaptionBackground"] = theme["WindowCaptionBackground"];
+                    appResources["WindowCaptionBackgroundDisabled"] = theme["WindowCaptionBackgroundDisabled"];
+                    // Sets the tint of the forground of the buttons
+                    appResources["WindowCaptionForeground"] = theme["WindowCaptionForeground"];
+                    appResources["WindowCaptionForegroundDisabled"] = theme["WindowCaptionForegroundDisabled"];
+
+                    appResources["WindowCaptionButtonBackgroundPointerOver"] = theme["WindowCaptionButtonBackgroundPointerOver"];
 
 
-                appWindowTitleBar.ButtonBackgroundColor = (Color)theme["ButtonBackgroundColor"];
-                appWindowTitleBar.ButtonForegroundColor = (Color)theme["ButtonForegroundColor"];
-                appWindowTitleBar.ButtonHoverBackgroundColor = (Color)theme["ButtonHoverBackgroundColor"];
-                appWindowTitleBar.ButtonHoverForegroundColor = (Color)theme["ButtonHoverForegroundColor"];
-                appWindowTitleBar.ButtonInactiveBackgroundColor = (Color)theme["ButtonInactiveBackgroundColor"];
-                appWindowTitleBar.ButtonInactiveForegroundColor = (Color)theme["ButtonInactiveForegroundColor"];
-                appWindowTitleBar.ButtonPressedBackgroundColor = (Color)theme["ButtonPressedBackgroundColor"];
-                appWindowTitleBar.ButtonPressedForegroundColor = (Color)theme["ButtonPressedForegroundColor"];
-
-            }
-            else
-            {
-                var appResources = Application.Current.Resources;
-                // Removes the tint on title bar
-                appResources["WindowCaptionBackground"] = theme["WindowCaptionBackground"];
-                appResources["WindowCaptionBackgroundDisabled"] = theme["WindowCaptionBackgroundDisabled"];
-                // Sets the tint of the forground of the buttons
-                appResources["WindowCaptionForeground"] = theme["WindowCaptionForeground"];
-                appResources["WindowCaptionForegroundDisabled"] = theme["WindowCaptionForegroundDisabled"];
-
-                appResources["WindowCaptionButtonBackgroundPointerOver"] = theme["WindowCaptionButtonBackgroundPointerOver"];
-
-
-                RepaintCurrentWindow();
-            }
+                    RepaintCurrentWindow();
+                }
+            });
         }
 
         void UpdateColorsDark()
         {
-            RootGrid.RequestedTheme = ElementTheme.Dark;
-
-            var app = ((App)Application.Current);
-            var theme = app.Resources.MergedDictionaries[1].ThemeDictionaries["Dark"] as ResourceDictionary;
-
-
-            if (_isCustomizationSupported)
+            App.CurrentApp.RunOnUIThread(() =>
             {
-                var appWindow = GetAppWindowForCurrentWindow();
-                var appWindowTitleBar = appWindow.TitleBar;
+                RootGrid.RequestedTheme = ElementTheme.Dark;
 
-                appWindowTitleBar.ButtonBackgroundColor = (Color)theme["ButtonBackgroundColor"];
-                appWindowTitleBar.ButtonForegroundColor = (Color)theme["ButtonForegroundColor"];
-                appWindowTitleBar.ButtonHoverBackgroundColor = (Color)theme["ButtonHoverBackgroundColor"];
-                appWindowTitleBar.ButtonHoverForegroundColor = (Color)theme["ButtonHoverForegroundColor"];
-                appWindowTitleBar.ButtonInactiveBackgroundColor = (Color)theme["ButtonInactiveBackgroundColor"];
-                appWindowTitleBar.ButtonInactiveForegroundColor = (Color)theme["ButtonInactiveForegroundColor"];
-                appWindowTitleBar.ButtonPressedBackgroundColor = (Color)theme["ButtonPressedBackgroundColor"];
-                appWindowTitleBar.ButtonPressedForegroundColor = (Color)theme["ButtonPressedForegroundColor"];
-            }
-            else
-            {
-                var appResources = Application.Current.Resources;
+                var app = ((App)Application.Current);
+                var theme = app.Resources.MergedDictionaries[1].ThemeDictionaries["Dark"] as ResourceDictionary;
 
-                // Removes the tint on title bar
-                appResources["WindowCaptionBackground"] = theme["WindowCaptionBackground"];
-                appResources["WindowCaptionBackgroundDisabled"] = theme["WindowCaptionBackgroundDisabled"];
-                // Sets the tint of the forground of the buttons
-                appResources["WindowCaptionForeground"] = theme["WindowCaptionForeground"];
-                appResources["WindowCaptionForegroundDisabled"] = theme["WindowCaptionForegroundDisabled"];
+                if (theme is null)
+                {
+                    return;
+                }
 
-                appResources["WindowCaptionButtonBackgroundPointerOver"] = theme["WindowCaptionButtonBackgroundPointerOver"];
+                if (_isCustomizationSupported)
+                {
+                    var appWindow = GetAppWindowForCurrentWindow();
+                    var appWindowTitleBar = appWindow.TitleBar;
 
-                RepaintCurrentWindow();
-            }
+                    appWindowTitleBar.ButtonBackgroundColor = (Color)theme["ButtonBackgroundColor"];
+                    appWindowTitleBar.ButtonForegroundColor = (Color)theme["ButtonForegroundColor"];
+                    appWindowTitleBar.ButtonHoverBackgroundColor = (Color)theme["ButtonHoverBackgroundColor"];
+                    appWindowTitleBar.ButtonHoverForegroundColor = (Color)theme["ButtonHoverForegroundColor"];
+                    appWindowTitleBar.ButtonInactiveBackgroundColor = (Color)theme["ButtonInactiveBackgroundColor"];
+                    appWindowTitleBar.ButtonInactiveForegroundColor = (Color)theme["ButtonInactiveForegroundColor"];
+                    appWindowTitleBar.ButtonPressedBackgroundColor = (Color)theme["ButtonPressedBackgroundColor"];
+                    appWindowTitleBar.ButtonPressedForegroundColor = (Color)theme["ButtonPressedForegroundColor"];
+                }
+                else
+                {
+                    var appResources = Application.Current.Resources;
+
+                    // Removes the tint on title bar
+                    appResources["WindowCaptionBackground"] = theme["WindowCaptionBackground"];
+                    appResources["WindowCaptionBackgroundDisabled"] = theme["WindowCaptionBackgroundDisabled"];
+                    // Sets the tint of the forground of the buttons
+                    appResources["WindowCaptionForeground"] = theme["WindowCaptionForeground"];
+                    appResources["WindowCaptionForegroundDisabled"] = theme["WindowCaptionForegroundDisabled"];
+
+                    appResources["WindowCaptionButtonBackgroundPointerOver"] = theme["WindowCaptionButtonBackgroundPointerOver"];
+
+                    RepaintCurrentWindow();
+                }
+            });
         }
 
         AppWindow GetAppWindowForCurrentWindow()
@@ -569,7 +599,7 @@ DLSS Swapper will close now.",
             }
         }
 
-        void ThemeWatcher_ThemeChanged(object sender, ApplicationTheme e)
+        void ThemeWatcher_ThemeChanged(object? sender, ApplicationTheme e)
         {
             var globalTheme = ((App)Application.Current).GlobalElementTheme;
 
@@ -577,16 +607,14 @@ DLSS Swapper will close now.",
             {
                 var osApplicationTheme = _themeWatcher.GetWindowsApplicationTheme();
 
-                DispatcherQueue.TryEnqueue(() => {
-                     if (osApplicationTheme == ApplicationTheme.Light)
-                    {
-                        UpdateColorsLight();
-                    }
-                    else if (osApplicationTheme == ApplicationTheme.Dark)
-                    {
-                        UpdateColorsDark();
-                    }
-                });
+                if (osApplicationTheme == ApplicationTheme.Light)
+                {
+                    UpdateColorsLight();
+                }
+                else if (osApplicationTheme == ApplicationTheme.Dark)
+                {
+                    UpdateColorsDark();
+                }
             }
         }
     }

@@ -24,10 +24,21 @@ namespace DLSS_Swapper
 
     internal static class Logger
     {
-        static string loggingFile => Path.Combine(Path.GetTempPath(), "dlss_swapper_.log");
-        static LoggingLevelSwitch levelSwitch = new LoggingLevelSwitch(Serilog.Events.LogEventLevel.Fatal);
+        public static string LogDirectory => Path.Combine(Storage.GetTemp(), "logs");
+        static string loggingFile => Path.Combine(LogDirectory, "dlss_swapper_.log");
+#if DEBUG
+        static LoggingLevelSwitch levelSwitch = new LoggingLevelSwitch(LogEventLevel.Verbose);
+#else
+        static LoggingLevelSwitch levelSwitch = new LoggingLevelSwitch(LogEventLevel.Fatal);
+#endif
+
         internal static void Init()
         {
+            if (Directory.Exists(LogDirectory) == false)
+            {
+                Directory.CreateDirectory(LogDirectory);
+            }
+            
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.ControlledBy(levelSwitch)
                 .WriteTo.Debug()
@@ -39,11 +50,9 @@ namespace DLSS_Swapper
 
         public static string GetCurrentLogPath()
         {
-            var directory = Path.GetDirectoryName(loggingFile);
             var withoutExtension = Path.GetFileNameWithoutExtension(loggingFile);
             var justExtension = Path.GetExtension(loggingFile);
-
-            return Path.Combine(directory, $"{withoutExtension}{DateTime.Now.ToString("yyyyMMdd")}{justExtension}");
+            return Path.Combine(LogDirectory, $"{withoutExtension}{DateTime.Now.ToString("yyyyMMdd")}{justExtension}");
         }
 
         public static void ChangeLoggingLevel(LoggingLevel loggingLevel)
@@ -61,34 +70,46 @@ namespace DLSS_Swapper
         }
 
 
-        public static void Verbose(string message, [CallerMemberName] string memberName = null, [CallerFilePath] string sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
+        public static void Verbose(string message, [CallerMemberName] string? memberName = null, [CallerFilePath] string? sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
         {
             Log.Verbose(FormatLine(message, memberName, sourceFilePath, sourceLineNumber));
         }
 
-        public static void Debug(string message, [CallerMemberName] string memberName = null, [CallerFilePath] string sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
+        public static void Debug(string message, [CallerMemberName] string? memberName = null, [CallerFilePath] string? sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
         {
             Log.Debug(FormatLine(message, memberName, sourceFilePath, sourceLineNumber));
         }
 
-        public static void Info(string message, [CallerMemberName] string memberName = null, [CallerFilePath] string sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
+        public static void Info(string message, [CallerMemberName] string? memberName = null, [CallerFilePath] string? sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
         {
             Log.Information(FormatLine(message, memberName, sourceFilePath, sourceLineNumber));
         }
 
-        public static void Warning(string message, [CallerMemberName] string memberName = null, [CallerFilePath] string sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
+        public static void Warning(string message, [CallerMemberName] string? memberName = null, [CallerFilePath] string? sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
         {
             Log.Warning(FormatLine(message, memberName, sourceFilePath, sourceLineNumber));
         }
 
-        public static void Error(string message, [CallerMemberName] string memberName = null, [CallerFilePath] string sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
+        public static void Error(string message, [CallerMemberName] string? memberName = null, [CallerFilePath] string? sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
         {
             Log.Error(FormatLine(message, memberName, sourceFilePath, sourceLineNumber));
         }
 
+        public static void Error(Exception exception, string? message = null, [CallerMemberName] string? memberName = null, [CallerFilePath] string? sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = 0)
+        {
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                Log.Error(FormatLine($"{exception}\n{exception.StackTrace}", memberName, sourceFilePath, sourceLineNumber));
+            }
+            else
+            {
+                Log.Error(FormatLine($"{message}\n{exception}\n{exception.StackTrace}", memberName, sourceFilePath, sourceLineNumber));
+            }
+        }
+
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static string FormatLine(string message, string memberName, string sourceFilePath, int sourceLineNumber)
+        static string FormatLine(string message, string? memberName, string? sourceFilePath, int sourceLineNumber)
         {
             if (memberName is null || sourceFilePath is null || sourceLineNumber == 0)
             {

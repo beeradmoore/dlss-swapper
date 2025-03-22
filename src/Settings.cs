@@ -1,15 +1,16 @@
-﻿using Microsoft.UI.Xaml;
+﻿using DLSS_Swapper.Data;
+using DLSS_Swapper.Pages;
+using Microsoft.UI.Xaml;
 using System;
-
-#if MICROSOFT_STORE
-using Windows.Storage;
-#endif
+using System.Collections;
+using System.Collections.Generic;
+using Windows.Graphics;
 
 namespace DLSS_Swapper
 {
     public class Settings
     {
-        static Settings _instance = null;
+        static Settings? _instance = null;
 
         public static Settings Instance => _instance ??= Settings.FromJson();
         
@@ -50,7 +51,7 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _hideNonDLSSGames = true;
+        bool _hideNonDLSSGames = false;
         public bool HideNonDLSSGames
         {
             get { return _hideNonDLSSGames; }
@@ -68,7 +69,7 @@ namespace DLSS_Swapper
         }
 
 
-        bool _groupGameLibrariesTogether = false;
+        bool _groupGameLibrariesTogether = true;
         public bool GroupGameLibrariesTogether
         {
             get { return _groupGameLibrariesTogether; }
@@ -102,15 +103,15 @@ namespace DLSS_Swapper
             }
         }
 
-        bool _allowExperimental = false;
-        public bool AllowExperimental
+        bool _allowDebugDlls = false;
+        public bool AllowDebugDlls
         {
-            get { return _allowExperimental; }
+            get { return _allowDebugDlls; }
             set
             {
-                if (_allowExperimental != value)
+                if (_allowDebugDlls != value)
                 {
-                    _allowExperimental = value;
+                    _allowDebugDlls = value;
                     if (_autoSave)
                     {
                         SaveJson();
@@ -118,6 +119,7 @@ namespace DLSS_Swapper
                 }
             }
         }
+
 
 
         bool _allowUntrusted = false;
@@ -174,7 +176,11 @@ namespace DLSS_Swapper
 
 
         // Don't forget to change this back to off.
+#if DEBUG
+        LoggingLevel _loggingLevel = LoggingLevel.Verbose;
+#else
         LoggingLevel _loggingLevel = LoggingLevel.Error;
+#endif
         public LoggingLevel LoggingLevel
         {
             get { return _loggingLevel; }
@@ -227,119 +233,137 @@ namespace DLSS_Swapper
         }
 
 
-#if MICROSOFT_STORE
-        static Settings FromLocalSettings()
+        bool _dontShowManuallyAddingGamesNotice = false;
+        public bool DontShowManuallyAddingGamesNotice
         {
-            var settings = new Settings();
-
-            var localSettings = ApplicationData.Current.LocalSettings;
-
-            if (localSettings.Values.TryGetValue("HasShownWarning", out object tempHasShownWarning))
+            get { return _dontShowManuallyAddingGamesNotice; }
+            set
             {
-                if (tempHasShownWarning is bool hasShownWarning)
+                if (_dontShowManuallyAddingGamesNotice != value)
                 {
-                    settings._hasShownWarning = hasShownWarning;
+                    _dontShowManuallyAddingGamesNotice = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
                 }
             }
-
-
-            if (localSettings.Values.TryGetValue("HasShownMultiplayerWarning", out object tempHasShownMultiplayerWarning))
-            {
-                if (tempHasShownMultiplayerWarning is bool hasShownMultiplayerWarning)
-                {
-                    settings._hasShownMultiplayerWarning = hasShownMultiplayerWarning;
-                }
-            }
-                        
-
-            if (localSettings.Values.TryGetValue("HideNonDLSSGames", out object tempHideNonDLSSGames))
-            {
-                if (tempHideNonDLSSGames is bool hideNonDLSSGames)
-                {
-                    settings._hideNonDLSSGames = hideNonDLSSGames;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("GroupGameLibrariesTogether", out object tempGroupGameLibrariesTogether))
-            {
-                if (tempGroupGameLibrariesTogether is bool groupGameLibrariesTogether)
-                {
-                    settings._groupGameLibrariesTogether = groupGameLibrariesTogether;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("AppTheme", out object tempAppTheme))
-            {
-                if (tempAppTheme is int appTheme)
-                {
-                    settings._appTheme = (ElementTheme)appTheme;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("AllowExperimental", out object tempAllowExperimental))
-            {
-                if (tempAllowExperimental is bool allowExperimental)
-                {
-                    settings._allowExperimental = allowExperimental;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("AllowUntrusted", out object tempAllowUntrusted))
-            {
-                if (tempAllowUntrusted is bool allowUntrusted)
-                {
-                    settings._allowUntrusted = allowUntrusted;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("LastRecordsRefresh", out object tempLastRecordsRefresh))
-            {
-                if (tempLastRecordsRefresh is DateTimeOffset lastRecordsRefresh)
-                {
-                    settings._lastRecordsRefresh = lastRecordsRefresh;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("LastPromptWasForVersion", out object tempLastPromptWasForVersion))
-            {
-                if (tempLastPromptWasForVersion is ulong lastPromptWasForVersion)
-                {
-                    settings._lastPromptWasForVersion = lastPromptWasForVersion;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("LoggingLevel", out object tempLoggingLevel))
-            {
-                if (tempLoggingLevel is int loggingLevel)
-                {
-                    settings._loggingLevel = (LoggingLevel)loggingLevel;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("EnabledGameLibraries", out object tempEnabledGameLibraries))
-            {
-                if (tempEnabledGameLibraries is uint enabledGameLibraries)
-                {
-                    settings._enabledGameLibraries = enabledGameLibraries;
-                }
-            }
-
-            if (localSettings.Values.TryGetValue("WasLoadingGames", out object tempWasLoadingGames))
-            {
-                if (tempWasLoadingGames is bool wasLoadingGames)
-                {
-                    settings._wasLoadingGames = wasLoadingGames;
-                }
-            }
-
-            // We only care about loading from here once. 
-            // After we have got the values we will attempt to save as json.
-            // It we fail to save as json these settings will be lost.
-            localSettings.Values.Clear();
-
-            return settings;
         }
-#endif
+
+        bool _hasShownAddGameFolderMessage = false;
+        public bool HasShownAddGameFolderMessage
+        {
+            get { return _hasShownAddGameFolderMessage; }
+            set
+            {
+                if (_hasShownAddGameFolderMessage != value)
+                {
+                    _hasShownAddGameFolderMessage = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        WindowPositionRect _lastWindowSizeAndPosition = new WindowPositionRect();
+        public WindowPositionRect LastWindowSizeAndPosition
+        {
+            get { return _lastWindowSizeAndPosition; }
+            set
+            {
+                if (_lastWindowSizeAndPosition != value)
+                {
+                    _lastWindowSizeAndPosition = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        GameGridViewType _gameGridViewType = GameGridViewType.GridView;
+        public GameGridViewType GameGridViewType
+        {
+            get { return _gameGridViewType; }
+            set
+            {
+                if (_gameGridViewType != value)
+                {
+                    _gameGridViewType = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+        
+
+        int _gridViewItemWidth = 200;
+        public int GridViewItemWidth
+        {
+            get { return _gridViewItemWidth; }
+            set
+            {
+                if (_gridViewItemWidth != value)
+                {
+                    _gridViewItemWidth = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        bool _onlyShowDownloadedDlls = false;
+        public bool OnlyShowDownloadedDlls
+        {
+            get { return _onlyShowDownloadedDlls; }
+            set
+            {
+                if (_onlyShowDownloadedDlls != value)
+                {
+                    _onlyShowDownloadedDlls = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        /*
+        public List<string> Directories { get; set; } = new List<string>();
+
+        public void AddDirectory(string directory)
+        {
+            if (Directories.Contains(directory))
+            {
+                return;
+            }
+            
+            Directories.Add(directory);
+            
+            if (_autoSave)
+            {
+                SaveJson();
+            }
+        }
+        
+        public void RemoveDirectory(string directory)
+        {
+            Directories.Remove(directory);
+            
+            if (_autoSave)
+            {
+                SaveJson();
+            }
+        }
+        */
 
         void SaveJson()
         {
@@ -348,18 +372,13 @@ namespace DLSS_Swapper
 
         static Settings FromJson()
         {
-            Settings settings = null;
+            Settings? settings = null;
 
             var settingsFromJson = AsyncHelper.RunSync(() => Storage.LoadSettingsJsonAsync());
             // If we couldn't load settings then save the defaults.
-            if (settingsFromJson == null)
+            if (settingsFromJson is null)
             {
-#if MICROSOFT_STORE
-                // If we are loading from an existing Microsoft Store build we want to copy over existing settings and then save as a json.
-                settings = FromLocalSettings();
-#else
                 settings = new Settings();
-#endif
                 settings.SaveJson();
             }
             else

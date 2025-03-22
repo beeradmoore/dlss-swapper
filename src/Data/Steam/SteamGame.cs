@@ -1,49 +1,72 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
+using DLSS_Swapper.Interfaces;
+using SQLite;
 
 namespace DLSS_Swapper.Data.Steam
 {
-    internal class SteamGame : Game
+    [Table("SteamGame")]
+    internal partial class SteamGame : Game
     {
-        string _steamInstallPath = String.Empty;
+        public override GameLibrary GameLibrary => GameLibrary.Steam;
 
-        string _lastHeaderImage = String.Empty;
-        public override string HeaderImage
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsReadyToPlay))]
+        [Column("state_flags")]
+        public partial SteamStateFlag StateFlags { get; set; }
+
+        public override bool IsReadyToPlay
         {
             get
             {
-                // If we have detected this, return it other wise we figure it out.
-                if (String.IsNullOrEmpty(_lastHeaderImage) == false)
-                {
-                    return _lastHeaderImage;
-                }
-
-
-
-                var localHeaderImagePath = Path.Combine(_steamInstallPath, "appcache", "librarycache", $"{AppId}_library_600x900.jpg");
-                if (File.Exists(localHeaderImagePath))
-                {
-                    _lastHeaderImage = localHeaderImagePath;
-                    return _lastHeaderImage;
-                }
-
-
-                // Fall back to web image.
-                _lastHeaderImage = $"https://steamcdn-a.akamaihd.net/steam/apps/{AppId}/library_600x900_2x.jpg"; // header.jpg";
-
-                return _lastHeaderImage;
+                const SteamStateFlag allowedFlags = SteamStateFlag.StateFullyInstalled | SteamStateFlag.StateAppRunning;
+                return StateFlags != 0 && (StateFlags & ~allowedFlags) == 0;
             }
         }
 
-        public string AppId { get; set; } = String.Empty;
-
-        public SteamGame(string steamInstallPath)
+        public SteamGame()
         {
-            _steamInstallPath = steamInstallPath;
+
+        }
+
+        public SteamGame(string appId)
+        {
+            PlatformId = appId;
+            SetID();
+        }
+
+        protected override async Task UpdateCacheImageAsync()
+        {
+            // Try get image from the local disk first.
+            var localHeaderImagePath = Path.Combine(SteamLibrary.GetInstallPath(), "appcache", "librarycache", $"{PlatformId}_library_600x900.jpg");
+            if (File.Exists(localHeaderImagePath))
+            {
+                using (var fileStream = File.Open(localHeaderImagePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    await ResizeCoverAsync(fileStream).ConfigureAwait(false);
+                }
+                return;
+            }
+
+            // If it doesn't exist, load from web.
+            await DownloadCoverAsync($"https://steamcdn-a.akamaihd.net/steam/apps/{PlatformId}/library_600x900_2x.jpg").ConfigureAwait(false);
+        }
+
+        public override bool UpdateFromGame(Game game)
+        {
+            var didChange = ParentUpdateFromGame(game);
+
+            if (game is SteamGame steamGame)
+            {
+                if (StateFlags != steamGame.StateFlags)
+                {
+                    StateFlags = steamGame.StateFlags;
+                    didChange = true;
+                }
+            }
+
+            return didChange;
         }
     }
 }

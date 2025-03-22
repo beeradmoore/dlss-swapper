@@ -9,7 +9,7 @@
 
     <StackPanel>
         <TextBlock Text="Options:" Style="{ThemeResource BaseTextBlockStyle}" />
-        <CheckBox x:Name="HideNonDLSSGamesCheckBox" Content="Hide non-DLSS games"  IsChecked="{Binding HideNonDLSSGames}" x:DefaultBindMode="TwoWay" />
+        <CheckBox x:Name="HideNonDLSSGamesCheckBox" Content="Hide games with no swappable items"  IsChecked="{Binding HideNonDLSSGames}" x:DefaultBindMode="TwoWay" />
 
         <TextBlock Text="Grouping:" Style="{ThemeResource BaseTextBlockStyle}"  Margin="0,10,0,0" />
         <CheckBox x:Name="GroupGameLibrariesTogetherCheckBox" Content="Group games from the same library together" />

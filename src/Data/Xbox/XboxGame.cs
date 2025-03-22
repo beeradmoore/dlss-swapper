@@ -1,40 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using DLSS_Swapper.Interfaces;
+using SQLite;
 
 namespace DLSS_Swapper.Data.Xbox
 {
+    [Table("XboxGame")]
     public class XboxGame : Game
     {
-        string _lastHeaderImage = String.Empty;
-        public override string HeaderImage
-        {
-            get
-            {
-                // If we have detected this, return it other wise we figure it out.
-                if (String.IsNullOrEmpty(_lastHeaderImage) == false)
-                {
-                    return _lastHeaderImage;
-                }
+        public override GameLibrary GameLibrary => GameLibrary.XboxApp;
 
-                foreach (var localHeaderImage in _localHeaderImages)
-                {
-                    var headerImage = System.IO.Path.Combine(InstallPath, localHeaderImage);
-                    if (System.IO.File.Exists(headerImage))
-                    {
-                        _lastHeaderImage = headerImage;
-                        return headerImage;
-                    }
-                }
-
-                return _lastHeaderImage;
-            }
-        }
+        public override bool IsReadyToPlay => true;
 
         List<string> _localHeaderImages = new List<string>();
 
-        public XboxGame(List<string> localHeaderImages)
+        public XboxGame()
+        {
+
+        }
+
+        public XboxGame(string familyName)
+        {
+            PlatformId = familyName;
+            SetID();
+        }
+
+        internal async Task SetLocalHeaderImagesAsync(List<string> localHeaderImages)
         {
             _localHeaderImages = localHeaderImages;
+            await LoadCoverImageAsync();
+        }
+
+        protected override async Task UpdateCacheImageAsync()
+        {
+            foreach (var localHeaderImage in _localHeaderImages)
+            {
+                var headerImage = Path.Combine(InstallPath, localHeaderImage);
+                if (File.Exists(headerImage))
+                {
+                    using (var fileStream = File.Open(headerImage, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        await ResizeCoverAsync(fileStream).ConfigureAwait(false);
+                    }
+                    return;
+                }
+            }
+        }
+
+        public override bool UpdateFromGame(Game game)
+        {
+            var didChange = ParentUpdateFromGame(game);
+
+            return didChange;
         }
     }
 }

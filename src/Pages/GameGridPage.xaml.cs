@@ -1,6 +1,7 @@
 ﻿using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.EpicGamesStore;
-using DLSS_Swapper.Data.GOGGalaxy;
+using DLSS_Swapper.Data.GOG;
+using DLSS_Swapper.Data.GitHub;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;
@@ -28,31 +29,58 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Pickers;
+using Windows.System;
+using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.CodeDom;
+using System.Collections.Concurrent;
+using AsyncAwaitBestPractices;
+using CommunityToolkit.WinUI;
+using System.Threading;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace DLSS_Swapper.Pages
 {
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class GameGridPage : Page
     {
+        /*
         public List<IGameLibrary> GameLibraries { get; } = new List<IGameLibrary>();
 
+        Dictionary<GameLibrary, ObservableCollection<Game>> allGames = new Dictionary<GameLibrary, ObservableCollection<Game>>();
+
+
+        public List<GameGroup> GroupedGameGroups { get; } = new List<GameGroup>();
+        public List<GameGroup> UngroupedGameGroups { get; } = new List<GameGroup>();
+        
+        ObservableCollection<Game> FavouriteGames = new ObservableCollection<Game>();
+        ObservableCollection<Game> AllGames = new ObservableCollection<Game>();
+        */
+        
         bool _loadingGamesAndDlls = false;
+        Timer? _saveScrollSizeTimer = null;
+
+        public GameGridPageModel ViewModel { get; private set; }
 
         public GameGridPage()
         {
             this.InitializeComponent();
-            DataContext = this;
-
+            ViewModel = new GameGridPageModel(this);
+            DataContext = ViewModel;
         }
 
 
         async Task LoadGamesAsync()
         {
+            // TODO: REMOVE
+            await Task.Delay(1);
+            /*
             // Added this check so if we get to here and this is true we probably crashed loading games last time and we should prompt for that.
             if (Settings.Instance.WasLoadingGames)
             {
@@ -129,11 +157,10 @@ namespace DLSS_Swapper.Pages
 
             GameLibraries.Clear();
 
-
             // Auto game library loading.
             // Simply adding IGameLibrary interface means we will load the games.
             var loadGameTasks = new List<Task>(); 
-            foreach (GameLibrary gameLibraryEnum in Enum.GetValues(typeof(GameLibrary)))
+            foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
             {
                 var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
                 if (gameLibrary.IsEnabled())
@@ -148,245 +175,195 @@ namespace DLSS_Swapper.Pages
 
             Settings.Instance.WasLoadingGames = false;
 
-            DispatcherQueue.TryEnqueue(() =>
+            App.CurrentApp.RunOnUIThread(() =>
             {
                 FilterGames();
             });
-        }
-
-        void FilterGames()
-        {
-            // TODO: Remove weird hack which otherwise causes MainGridView_SelectionChanged to fire when changing MainGridView.ItemsSource.
-            MainGridView.SelectionChanged -= MainGridView_SelectionChanged;
-
-            //MainGridView.ItemsSource = null;
-
-            if (Settings.Instance.GroupGameLibrariesTogether)
-            {
-
-                var collectionViewSource = new CollectionViewSource()
-                {
-                    IsSourceGrouped = true,
-                    Source = GameLibraries,
-                };
-
-                if (Settings.Instance.HideNonDLSSGames)
-                {
-                    collectionViewSource.ItemsPath = new PropertyPath("LoadedDLSSGames");
-                }
-                else
-                {
-                    collectionViewSource.ItemsPath = new PropertyPath("LoadedGames");
-                }
-
-                MainGridView.ItemsSource = collectionViewSource.View;
-            }
-            else
-            {
-                var games = new List<Game>();
-
-                if (Settings.Instance.HideNonDLSSGames)
-                {
-                    foreach (var gameLibrary in GameLibraries)
-                    {
-                        games.AddRange(gameLibrary.LoadedGames.Where(g => g.HasDLSS == true));
-                    }
-                }
-                else
-                {
-                    foreach (var gameLibrary in GameLibraries)
-                    {
-                        games.AddRange(gameLibrary.LoadedGames);
-                    }
-                }
-
-                games.Sort();
-
-                MainGridView.ItemsSource = games;
-            }
-
-            // TODO: Remove weird hack which otherwise causes MainGridView_SelectionChanged to fire when changing MainGridView.ItemsSource.
-            MainGridView.SelectedIndex = -1;
-            MainGridView.SelectionChanged += MainGridView_SelectionChanged;
+            */
         }
 
 
-        async void Page_Loaded(object sender, RoutedEventArgs e)
+
+        bool hasFirstLoaded = false;
+        void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            await LoadGamesAndDlls();
+            if (hasFirstLoaded)
+            {
+                return;
+            }
+            hasFirstLoaded = true;
+
+            if (DataContext is GameGridPageModel gameGridPageModel)
+            {
+                gameGridPageModel.InitialLoadAsync().SafeFireAndForget((err) =>
+                {
+                    Logger.Error(err, $"Unable to perform initial load");
+                });
+            }
+
+            //await LoadGamesAndDlls();
+            //await LoadGamesFromCacheAsync();
+            //UpdateGameLibraries();
+            //await LoadGames();
         }
 
         async void MainGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             if (e.AddedItems.Count == 0)
             {
                 return;
             }
 
-            MainGridView.SelectedIndex = -1;
             if (e.AddedItems[0] is Game game)
             {
-                EasyContentDialog dialog;
-
-                if (game.HasDLSS == false)
+                // Deselect currently selected item.
+                if (sender is GridView gridView)
                 {
-                    dialog = new EasyContentDialog(XamlRoot)
+                    gridView.SelectedItem = null;
+                }
+
+                if (game.Processing)
+                {
+                    var dialog = new EasyContentDialog(this.XamlRoot)
                     {
-                        //dialog.Title = "Error";
-                        PrimaryButtonText = "Okay",
-                        DefaultButton = ContentDialogButton.Primary,
-                        Content = $"DLSS was not detected in {game.Title}.",
+                        Title = "Game Currently Processing",
+                        CloseButtonText = "Okay",
+                        Content = $"{game.Title} is still processing. Please wait for the loading indicator to complete before opening.",
                     };
                     await dialog.ShowAsync();
                     return;
                 }
 
-                var dlssPickerControl = new DLSSPickerControl(game);
-                dialog = new EasyContentDialog(XamlRoot)
-                { 
-                    Title = "Select DLSS Version",
-                    PrimaryButtonText = "Swap",
-                    CloseButtonText = "Cancel",
-                    DefaultButton = ContentDialogButton.Primary,
-                    Content = dlssPickerControl,
-                };
+                var gameControl = new GameControl(game);
+                await gameControl.ShowAsync();
 
-                if (String.IsNullOrEmpty(game.BaseDLSSVersion) == false)
-                {
-                    dialog.SecondaryButtonText = "Reset";
-                }
-
-                var result = await dialog.ShowAsync();
-
-
-                if (result == ContentDialogResult.Primary)
-                {
-                    var selectedDLSSRecord = dlssPickerControl.GetSelectedDLSSRecord();
-
-                    if (selectedDLSSRecord.LocalRecord.IsDownloading == true || selectedDLSSRecord.LocalRecord.IsDownloaded == false)
-                    {
-                        // TODO: Initiate download here.
-                        dialog = new EasyContentDialog(XamlRoot)
-                        {
-                            Title = "Error",
-                            CloseButtonText = "Okay",
-                            DefaultButton = ContentDialogButton.Close,
-                            Content = "Please download the DLSS record from the downloads page first.",
-                        };
-                        await dialog.ShowAsync();
-                        return;
-                    }
-
-                    var didUpdate = game.UpdateDll(selectedDLSSRecord);
-
-                    if (didUpdate.Success == false)
-                    {
-                        dialog = new EasyContentDialog(XamlRoot)
-                        {
-                            Title = "Error",
-                            PrimaryButtonText = "Okay",
-                            DefaultButton = ContentDialogButton.Primary,
-                            Content = didUpdate.Message,
-                        };
-                        /*
-                        // Disabled as I am unsure how to prompt to run as admin.
-                        if (didUpdate.PromptToRelaunchAsAdmin == true)
-                        {
-                            dialog.SecondaryButtonText = "Relaunch as Administrator";
-                        }
-                        */
-                        var dialogResult = await dialog.ShowAsync();
-                        /*
-                        // Disabled as I am unsure how to prompt to run as admin.
-                        if (didUpdate.PromptToRelaunchAsAdmin == true && dialogResult == ContentDialogResult.Secondary)
-                        {
-                            App.CurrentApp.RelaunchAsAdministrator();
-                        }
-                        */
-                    }
-                }
-                else if (result == ContentDialogResult.Secondary)
-                {
-                    var didReset = game.ResetDll();
-
-                    if (didReset.Success == false)
-                    {
-                        dialog = new EasyContentDialog(XamlRoot)
-                        {
-                            Title = "Error",
-                            PrimaryButtonText = "Okay",
-                            DefaultButton = ContentDialogButton.Primary,
-                            Content = didReset.Message,
-                        };
-                        /*
-                        // Disabled as I am unsure how to prompt to run as admin.
-                        if (didReset.PromptToRelaunchAsAdmin == true)
-                        {
-                            dialog.SecondaryButtonText = "Relaunch as Administrator";
-                        }
-                        */
-                        var dialogResult = await dialog.ShowAsync();/*
-                        // Disabled as I am unsure how to prompt to run as admin.
-                        if (didReset.PromptToRelaunchAsAdmin == true && dialogResult == ContentDialogResult.Secondary)
-                        {
-                            App.CurrentApp.RelaunchAsAdministrator();
-                        }
-                        */
-                    }
-                }
             }
         }
 
+     
+
+        void UpdateGameLibraries()
+        {
+            /*
+            GameLibraries.Clear();
+
+            foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
+            {
+                var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
+                if (gameLibrary.IsEnabled() == true)
+                {
+                    GameLibraries.Add(gameLibrary);
+                }
+            }
+            */
+        }
 
 
         async Task LoadGamesAndDlls()
         {
+            // TODO: REMOVE
+            await Task.Delay(1);
+
             if (_loadingGamesAndDlls)
                 return;
 
             _loadingGamesAndDlls = true;
 
             // TODO: Fade?
-            LoadingStackPanel.Visibility = Visibility.Visible;
+            //LoadingStackPanel.Visibility = Visibility.Visible;
 
+            /*
             var tasks = new List<Task>();
             tasks.Add(LoadGamesAsync());
 
 
             await Task.WhenAll(tasks);
-
-            DispatcherQueue.TryEnqueue(() =>
+            
+            */
+            App.CurrentApp.RunOnUIThread(() =>
             {
-                LoadingStackPanel.Visibility = Visibility.Collapsed;
+                //LoadingStackPanel.Visibility = Visibility.Collapsed;
                 _loadingGamesAndDlls = false;
             });
         }
 
-        async void RefreshButton_Click(object sender, RoutedEventArgs e)
+        internal void ScrollToGame(Game game)
         {
-            await LoadGamesAndDlls();
+            if (MainContentControl.ContentTemplateRoot is GridView mainGridView)
+            {
+                App.CurrentApp.RunOnUIThreadAsync(async () =>
+                {
+                    await mainGridView.SmoothScrollIntoViewWithItemAsync(game, ScrollItemPlacement.Center);
+                }).SafeFireAndForget();
+            }
+            else if (MainContentControl.ContentTemplateRoot is ListView mainListView)
+            {
+                App.CurrentApp.RunOnUIThreadAsync(async () =>
+                {
+                    await mainListView.SmoothScrollIntoViewWithItemAsync(game, ScrollItemPlacement.Center);
+                }).SafeFireAndForget();
+            }           
         }
 
-        async void FilterButton_Click(object sender, RoutedEventArgs e)
+        internal void ReloadMainContentControl()
         {
-            var gameFilterControl = new GameFilterControl();
+            MainContentControl.Content = null;
+            MainContentControl.Content = ViewModel;
+        }
 
-            var dialog = new EasyContentDialog(XamlRoot)
+        // This fires for both the GridView and the ListView
+        void GridAndListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is Game selectedGame)
             {
-                Title = "Filter",
-                PrimaryButtonText = "Apply",
-                CloseButtonText = "Cancel",
-                DefaultButton = ContentDialogButton.Primary,
-                Content = gameFilterControl,
-            };
-            var result = await dialog.ShowAsync();
+                if (selectedGame.Processing)
+                {
+                    var dialog = new EasyContentDialog(XamlRoot)
+                    {
+                        Title = "Game Currently Processing",
+                        CloseButtonText = "Okay",
+                        Content = $"{selectedGame.Title} is still processing. Please wait for the loading indicator to complete before opening.",
+                    };
+                    _ = dialog.ShowAsync();
+                    return;
+                }
 
-            if (result == ContentDialogResult.Primary)
+                var gameControl = new GameControl(selectedGame);
+                _ = gameControl.ShowAsync();
+            }
+        }
+
+
+        void MainGridView_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
+        {
+            if (e.KeyModifiers.HasFlag(VirtualKeyModifiers.Control))
             {
-                Settings.Instance.HideNonDLSSGames = gameFilterControl.IsHideNonDLSSGamesChecked();
-                Settings.Instance.GroupGameLibrariesTogether = gameFilterControl.IsGroupGameLibrariesTogetherChecked();
+                var delta = e.GetCurrentPoint((UIElement)sender).Properties.MouseWheelDelta;
 
-                FilterGames();
+                if (sender is GridView gridView)
+                {
+                    double scaleAmount = delta > 0 ? 1.05 : 0.95;
+                    var newWidth = (int)(ViewModel.GridViewItemWidth * scaleAmount);
+
+                    if (newWidth > 60 && newWidth < 600)
+                    {
+                        ViewModel.GridViewItemWidth = newWidth;
+
+                        if (_saveScrollSizeTimer is not null)
+                        {
+                            _saveScrollSizeTimer.Dispose();
+                            _saveScrollSizeTimer = null;
+                        }
+                        
+                        _saveScrollSizeTimer = new Timer((state) =>
+                        {
+                            Settings.Instance.GridViewItemWidth = ViewModel.GridViewItemWidth;
+                        }, null, 500, Timeout.Infinite);                        
+                    }
+                }
+
+                e.Handled = true;
             }
         }
     }

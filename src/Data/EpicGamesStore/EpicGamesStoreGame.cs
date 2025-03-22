@@ -1,48 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using DLSS_Swapper.Interfaces;
+using SQLite;
 
 namespace DLSS_Swapper.Data.EpicGamesStore
 {
+    [Table("EpicGamesStoreGame")]
     internal class EpicGamesStoreGame : Game
     {
-        string _id = String.Empty;
-        string _remoteHeaderImage = String.Empty;
+        public override GameLibrary GameLibrary => GameLibrary.EpicGamesStore;
 
-        string _lastHeaderImage = String.Empty;
-        public override string HeaderImage
+        public override bool IsReadyToPlay => true;
+
+        [Column("remote_header_image")]
+        public string RemoteHeaderImage { get; set;  } = string.Empty;
+
+        public EpicGamesStoreGame()
         {
-            get
-            {
-                // If we have detected this, return it other wise we figure it out.
-                if (String.IsNullOrEmpty(_lastHeaderImage) == false)
-                {
-                    return _lastHeaderImage;
-                }
 
-                if (String.IsNullOrEmpty(_remoteHeaderImage))
-                {
-                    return String.Empty;
-                }
-
-                // TODO: Add remote image to queue to download for next time.
-
-                // If the remote image doens't already have query arguments lets add some to load a smaller image.
-                if (_remoteHeaderImage.Contains("?"))
-                {
-                    return _remoteHeaderImage;
-                }
-                return _remoteHeaderImage + "?h=300&resize=1&w=200";
-            }
         }
 
-
-        public EpicGamesStoreGame(string id, string remoteHeaderImage)
+        public EpicGamesStoreGame(string catalogItemId)
         {
-            _id = id;
-            _remoteHeaderImage = remoteHeaderImage;
+            PlatformId = catalogItemId;
+            SetID();
+        }
+
+        protected override async Task UpdateCacheImageAsync()
+        {
+            if (string.IsNullOrEmpty(RemoteHeaderImage))
+            {
+                return;
+            }
+            
+            // If the remote image doens't already have query arguments lets add some to load a smaller image.
+            if (RemoteHeaderImage.Contains("?") == false)
+            {
+                RemoteHeaderImage = RemoteHeaderImage + "?w=600&h=900&resize=1";
+            }
+
+            await DownloadCoverAsync(RemoteHeaderImage).ConfigureAwait(false);
+        }
+
+        public override bool UpdateFromGame(Game game)
+        {
+            var didChange = ParentUpdateFromGame(game);
+
+            if (game is EpicGamesStoreGame epicGamesStoreGame)
+            {
+                //_localHeaderImages = xboxGame._localHeaderImages;
+            }
+
+            return didChange;
         }
     }
 }

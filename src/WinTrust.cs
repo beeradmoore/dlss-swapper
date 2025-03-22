@@ -106,7 +106,7 @@ namespace DLSS_Swapper
 
             public WinTrustFileInfo(string filePath)
             {
-                cbStruct = (UInt32)Marshal.SizeOf(typeof(WinTrustFileInfo));
+                cbStruct = (UInt32)Marshal.SizeOf<WinTrustFileInfo>();
                 pcwszFilePath = Marshal.StringToCoTaskMemAuto(filePath);
                 hFile = IntPtr.Zero;
                 pgKnownSubject = IntPtr.Zero;
@@ -195,14 +195,14 @@ namespace DLSS_Swapper
             // but what about pCatalog, pBlob, pSgnr, pCert?
             public WinTrustDataStateAction dwStateAction { get; set; }                  // optional (Catalog File Processing)
             public IntPtr hWVTStateData { get; set; }                                   // optional (Catalog File Processing)
-            public string pwszURLReference { get; set; }                                // optional: (future) used to determine zone.
+            public string? pwszURLReference { get; set; }                               // optional: (future) used to determine zone.
             public WinTrustDataProvFlags dwProvFlags { get; set; }
             public WinTrustDataUIContext dwUIContext { get; set; }
 
             // constructor for silent WinTrustDataChoice.File check
             public WinTrustData(WinTrustFileInfo fileInfo)
             {
-                cbStruct = (UInt32)Marshal.SizeOf(typeof(WinTrustData));
+                cbStruct = (UInt32)Marshal.SizeOf<WinTrustData>();
                 pPolicyCallbackData = IntPtr.Zero;
                 pSIPClientData = IntPtr.Zero;
                 dwUIChoice = WinTrustDataUIChoice.None;
@@ -218,13 +218,13 @@ namespace DLSS_Swapper
                 // On Win7SP1+, don't allow MD2 or MD4 signatures
                 if ((Environment.OSVersion.Version.Major > 6) ||
                     ((Environment.OSVersion.Version.Major == 6) && (Environment.OSVersion.Version.Minor > 1)) ||
-                    ((Environment.OSVersion.Version.Major == 6) && (Environment.OSVersion.Version.Minor == 1) && !String.IsNullOrEmpty(Environment.OSVersion.ServicePack)))
+                    ((Environment.OSVersion.Version.Major == 6) && (Environment.OSVersion.Version.Minor == 1) && !string.IsNullOrEmpty(Environment.OSVersion.ServicePack)))
                 {
                     dwProvFlags |= WinTrustDataProvFlags.DisableMD2andMD4;
                 }
 
                 WinTrustFileInfo wtfiData = fileInfo;
-                pFile = Marshal.AllocCoTaskMem(Marshal.SizeOf(typeof(WinTrustFileInfo)));
+                pFile = Marshal.AllocCoTaskMem(Marshal.SizeOf<WinTrustFileInfo>());
                 Marshal.StructureToPtr(wtfiData, pFile, false);
             }
 
@@ -281,7 +281,7 @@ namespace DLSS_Swapper
                 ///memset(&WinTrustData, 0, sizeof(WinTrustData));
                 WinTrustData = new WinTrustData(FileData)
                 {
-                    cbStruct = (UInt32)Marshal.SizeOf(typeof(WinTrustData)),
+                    cbStruct = (UInt32)Marshal.SizeOf<WinTrustData>(),
 
                     // Use default code signing EKU.
                     pPolicyCallbackData = IntPtr.Zero,
@@ -406,7 +406,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
             finally
             {
@@ -414,13 +414,13 @@ namespace DLSS_Swapper
                 //WinTrustData.Dispose();
 
                 /*
-                if (FileData != null)
+                if (FileData is not null)
                 {
                     FileData.Dispose();
                     //winTrustFileInfo = null;
                 }
 
-                if (WinTrustData != null)
+                if (WinTrustData is not null)
                 {
                     WinTrustData.Dispose();
                     //WinTrustData = null;
@@ -448,18 +448,18 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return false;
             }
             finally
             {
-                if (winTrustFileInfo != null)
+                if (winTrustFileInfo is not null)
                 {
                     winTrustFileInfo.Dispose();
                     winTrustFileInfo = null;
                 }
 
-                if (winTrustData != null)
+                if (winTrustData is not null)
                 {
                     winTrustData.Dispose();
                     winTrustData = null;

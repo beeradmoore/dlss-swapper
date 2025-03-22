@@ -1,16 +1,176 @@
 ﻿<Page
     x:Class="DLSS_Swapper.Pages.GameGridPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DLSS_Swapper.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
+    xmlns:converters="using:DLSS_Swapper.Converters"
     xmlns:data="using:DLSS_Swapper.Data"
+    xmlns:system="using:System"
+    xmlns:pages="using:DLSS_Swapper.Pages"
+    xmlns:usercontrols="using:DLSS_Swapper.UserControls"
     mc:Ignorable="d"
+    d:DataContext="pages:GameGridPageModel"
     Loaded="Page_Loaded"
-    NavigationCacheMode="Required">
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    NavigationCacheMode="Required"
+    x:Name="RootGameGridPage">
+    <Page.Resources>
+        <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter" />
+        <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+        <ct_converters:StringVisibilityConverter x:Key="StringVisibilityConverter" EmptyValue="Collapsed" NotEmptyValue="Visible" />
+        <converters:BitmapImageUriConverter x:Key="BitmapImageUriConverter" />
 
+
+
+
+        <DataTemplate x:Key="ListViewTemplate" x:DataType="pages:GameGridPageModel">
+            <ListView ItemsSource="{x:Bind CurrentCollectionView, Mode=OneWay}" ItemClick="GridAndListView_ItemClick" HorizontalAlignment="Stretch" SelectionMode="None" IsItemClickEnabled="True" Padding="20">
+
+                <!--
+                <ListView.ItemContainerStyle>
+                    <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
+                        <Setter Property="MinWidth" Value="0" />
+                        <Setter Property="Padding" Value="12,0,0,0" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                -->
+
+                <ListView.GroupStyle>
+                    <GroupStyle HidesIfEmpty="True">
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate x:DataType="data:GameGroup">
+                                <Grid Margin="0" Visibility="{x:Bind Name, Converter={StaticResource StringVisibilityConverter}}">
+                                    <TextBlock Text="{x:Bind Name}"  Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="data:Game">
+                        <Grid ColumnSpacing="12">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Row="0" BorderThickness="0" CornerRadius="4" Width="40" Height="60">
+                                <Border.Background>
+                                    <ImageBrush Stretch="UniformToFill">
+                                        <ImageBrush.ImageSource>
+                                            <BitmapImage CreateOptions="IgnoreImageCache" UriSource="{x:Bind CoverImage, Mode=OneWay, Converter={StaticResource BitmapImageUriConverter}}"/>
+                                        </ImageBrush.ImageSource>
+                                    </ImageBrush>
+                                </Border.Background>
+                            </Border>
+
+                            <TextBlock Grid.Column="1" Text="{x:Bind Title}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                            <ProgressRing Grid.Column="2" VerticalAlignment="Center" Width="16" Height="16" Visibility="{x:Bind Processing, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" />
+                            <TextBlock Grid.Column="3" VerticalAlignment="Center">
+                                <Run Text="DLSS: " />
+                                <Run Text="{x:Bind CurrentDLSS.Version, FallbackValue='N/A', Mode=OneWay}" />
+                            </TextBlock>
+
+                        </Grid>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="GridVeiwTemplate" x:DataType="pages:GameGridPageModel">
+
+            <GridView PointerWheelChanged="MainGridView_PointerWheelChanged" ManipulationMode="None" x:Name="MainGridView" ItemsSource="{x:Bind CurrentCollectionView, Mode=OneWay}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="GridAndListView_ItemClick" Padding="20"  >
+
+                <GridView.GroupStyle>
+                    <GroupStyle HidesIfEmpty="True">
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate x:DataType="data:GameGroup">
+                                <Grid Margin="0" Visibility="{x:Bind Name, Converter={StaticResource StringVisibilityConverter}}">
+                                    <TextBlock Text="{x:Bind Name}"  Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </GridView.GroupStyle>
+
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Margin" Value="8"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="data:Game">
+                        <Grid 
+                            Width="{Binding ElementName=RootGameGridPage, Path=ViewModel.GridViewItemWidth, Mode=OneWay}"
+                            Height="{Binding ElementName=RootGameGridPage, Path=ViewModel.GridViewItemHeight, Mode=OneWay}"
+                            CornerRadius="8" BorderThickness="1" ColumnSpacing="0" RowSpacing="0" Margin="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{x:Bind Title}" Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{ThemeResource ButtonForegroundColor}" />
+
+                            <!-- Weird, but allows image to strecth centered rather than left align -->
+                            <Border BorderThickness="0">
+                                <Border.Background>
+                                    <ImageBrush Stretch="UniformToFill">
+                                        <ImageBrush.ImageSource>
+                                            <BitmapImage CreateOptions="IgnoreImageCache" UriSource="{x:Bind CoverImage, Mode=OneWay, Converter={StaticResource BitmapImageUriConverter}}"/>
+                                        </ImageBrush.ImageSource>
+                                    </ImageBrush>
+                                </Border.Background>
+                            </Border>
+
+                            <Grid VerticalAlignment="Bottom"  Background="#88000000" Padding="8" ColumnSpacing="8">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Column="0" FontWeight="Bold" Text="DLSS" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" />
+                                <TextBlock Grid.Column="1" Text="{x:Bind CurrentDLSS.Version, FallbackValue='N/A', Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Visibility="{x:Bind Processing, Converter={StaticResource InverseBoolToVisibilityConverter}, Mode=OneWay}" />
+                                <ProgressRing Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Width="16" Height="16" Visibility="{x:Bind Processing, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" />
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+
+                </GridView.ItemTemplate>
+            </GridView>
+
+        </DataTemplate>
+
+
+        <usercontrols:ListGridViewTemplateSelector x:Key="TemplateSelector"
+                                  ListViewTemplate="{StaticResource ListViewTemplate}"
+                                  GridVeiwTemplate="{StaticResource GridVeiwTemplate}"/>
+
+
+
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -21,90 +181,72 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-
         <Grid Grid.Row="0" Padding="16,0,16,0">
-            <TextBlock Text="Games" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="16">
+                <TextBlock Text="Games" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+                <muxc:ProgressRing IsActive="True" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.IsLoading, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"  />
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBox
+                    Width="300"
+                    Height="20"
+                    Margin="10,0,0,0"
+                    AcceptsReturn="True"
+                    IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}"
+                    PlaceholderText="Search"
+                    TextChanged="{x:Bind ViewModel.SearchForGameEvent}" />
+            </StackPanel>
+            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <AppBarButton Label="Refresh" Click="RefreshButton_Click">
-                <AppBarButton.Content>
-                    <FontIcon Glyph="&#xE72C;" />
-                </AppBarButton.Content>
-            </AppBarButton>
-            <AppBarButton Icon="Filter" Label="Filter" Click="FilterButton_Click">
-                <AppBarButton.Content>
-                    <FontIcon Glyph="&#xE71C;" />
-                </AppBarButton.Content>
-            </AppBarButton>
-        </StackPanel>
+
+                <AppBarButton Label="New DLLs" Command="{x:Bind ViewModel.UnknownAssetsFoundButtonCommand}" Visibility="{x:Bind data:GameManager.Instance.UnknownAssetsFound, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE946;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+                <AppBarButton Label="Add Game" Command="{x:Bind ViewModel.AddManualGameButtonCommand}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE710;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+                <AppBarButton Label="Refresh" Command="{x:Bind ViewModel.RefreshGamesButtonCommand}" IsEnabled="{x:Bind ViewModel.IsLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE72C;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+                <AppBarButton Icon="Filter" Label="Filter" Command="{x:Bind ViewModel.FilterGamesButtonCommand}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE71C;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+                <AppBarButton Label="View Type" Content="{x:Bind ViewModel.GameGridViewIcon, Mode=OneWay}">
+                    <AppBarButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="Grid view" Command="{x:Bind ViewModel.ChangeGameGridViewCommand}" CommandParameter="{x:Bind pages:GameGridViewType.GridView}" />
+                            <MenuFlyoutItem Text="List view" Command="{x:Bind ViewModel.ChangeGameGridViewCommand}" CommandParameter="{x:Bind pages:GameGridViewType.ListView}" />
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </StackPanel>
+
+            <InfoBar x:Name="AdminInfoBar"
+                 Grid.Row="1"
+                 IsOpen="True"
+                 Severity="Warning"
+                 IsClosable="False"
+                 Title="Warning"
+                 Message="This app is running with administrative privileges."
+                 Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
         </Grid>
 
-        <GridView Grid.Row="1" x:Name="MainGridView" SelectionMode="Single" SelectionChanged="MainGridView_SelectionChanged" Padding="20"  >
-            <GridView.GroupStyle>
-                <GroupStyle HidesIfEmpty="True">
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
-                            <Grid Margin="0">
-                                <TextBlock Text="{Binding Name}" Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                </GroupStyle>
-            </GridView.GroupStyle>
-
-            <GridView.ItemContainerStyle>
-                <Style TargetType="GridViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                    <Setter Property="Margin" Value="8"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                </Style>
-            </GridView.ItemContainerStyle>
-
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="data:Game">
-                    <Grid Width="200" Height="300" CornerRadius="8" BorderThickness="1" ColumnSpacing="0" RowSpacing="0" Margin="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Text="{Binding Title}" Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
-
-                        <!-- Weird, but allows image to strecth centered rather than left align -->
-                        <Border BorderThickness="0" Width="200" Height="300">
-                            <Border.Background>
-                                <ImageBrush ImageSource="{Binding HeaderImage}" Stretch="UniformToFill"/>
-                            </Border.Background>
-                        </Border>
-                        
-                        <Grid VerticalAlignment="Bottom"  Background="#88000000" Padding="8" ColumnSpacing="8">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Column="0" FontWeight="Bold" Text="DLSS" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" />
-                            <TextBlock Grid.Column="1" Text="{Binding CurrentDLSSVersion}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" />
-                        </Grid>
-                    </Grid>
-                </DataTemplate>
-
-            </GridView.ItemTemplate>
-        </GridView>
-
-        <Grid x:Name="LoadingStackPanel" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <!--SystemControlAcrylicElementBrush-->
-            <muxc:ProgressRing IsActive="True" Width="60" Height="60" />
-        </Grid>
+        <ContentControl x:Name="MainContentControl" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" Content="{x:Bind ViewModel, Mode=OneWay}" ContentTemplateSelector="{StaticResource TemplateSelector}" />
 
     </Grid>
 

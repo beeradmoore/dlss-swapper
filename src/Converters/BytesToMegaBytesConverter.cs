@@ -1,4 +1,4 @@
-using Humanizer;
+﻿using ByteSizeLib;
 using Microsoft.UI.Xaml.Data;
 using System;
 using System.Collections.Generic;
@@ -15,10 +15,10 @@ namespace DLSS_Swapper.Converters
 
             if (value is long bytes)
             {
-                return bytes.Bytes().Humanize("mb");
+                return ByteSize.FromBytes(bytes).ToString("MB");
             }
 
-            return String.Empty;
+            return string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

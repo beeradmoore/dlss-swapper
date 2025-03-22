@@ -1,4 +1,12 @@
-﻿using DLSS_Swapper.Data;
+﻿using CommunityToolkit.WinUI;
+using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.EpicGamesStore;
+using DLSS_Swapper.Data.GOG;
+using DLSS_Swapper.Data.Steam;
+using DLSS_Swapper.Data.UbisoftConnect;
+using DLSS_Swapper.Data.Xbox;
+using DLSS_Swapper.Interfaces;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -6,9 +14,11 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using MvvmHelpers;
+using Microsoft.Win32;
+using SQLite;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -17,6 +27,7 @@ using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Principal;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -27,28 +38,45 @@ namespace DLSS_Swapper
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public partial class App : Application
+    public sealed partial class App : Application
     {
         public ElementTheme GlobalElementTheme { get; set; }
 
-        MainWindow _window;
-        public MainWindow MainWindow => _window;
+        MainWindow? _window;
+        public MainWindow MainWindow => _window ??= new MainWindow();
 
         public static App CurrentApp => (App)Application.Current;
 
+        //internal Manifest Manifest { get; } = new Manifest();
+        internal Manifest ImportedManifest { get; } = new Manifest();
 
-#if MICROSOFT_STORE
-        public const bool IsMicrosoftStoreBuild = true;
-#else
-        public const bool IsMicrosoftStoreBuild = false;
-#endif
+        internal HttpClient? _httpClient;
+        public HttpClient HttpClient
+        {
+            get
+            {
+                if (_httpClient is null)
+                {
+                    var version = GetVersion();
+                    var versionString = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
 
-        internal DLSSRecords DLSSRecords { get; } = new DLSSRecords();
-        internal List<DLSSRecord> ImportedDLSSRecords { get; } = new List<DLSSRecord>();
+                    var httpClientHandler = new HttpClientHandler()
+                    {
+                        AutomaticDecompression = System.Net.DecompressionMethods.All,
+                        UseCookies = true,
+                        CookieContainer = new System.Net.CookieContainer(),
+                        AllowAutoRedirect = true,
+                    };
+                    _httpClient = new HttpClient(httpClientHandler);
+                    _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper/{versionString}");
+                    _httpClient.Timeout = TimeSpan.FromMinutes(30);
+                    _httpClient.DefaultRequestVersion = new Version(2, 0);
+                    _httpClient.DefaultRequestHeaders.ConnectionClose = true;
+                }
 
-        internal HttpClient _httpClient = new HttpClient();
-        public HttpClient HttpClient => _httpClient;
-        //public ObservableRangeCollection<DLSSRecord> CurrentDLSSRecords { get; } = new ObservableRangeCollection<DLSSRecord>();
+                return _httpClient;
+            }
+        }
 
 
         /// <summary>
@@ -59,17 +87,17 @@ namespace DLSS_Swapper
         {
             Logger.Init();
 
-            var version = GetVersion();
-            var versionString = String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
-
-
-            Logger.Info($"App launch - v{versionString}", null);
-
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper v{versionString}");
+            UnhandledException += App_UnhandledException;
 
             GlobalElementTheme = Settings.Instance.AppTheme;
 
             this.InitializeComponent();
+        }
+
+        private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            Serilog.Log.Error(e.Exception, "UnhandledException");
+            Serilog.Log.CloseAndFlush();
         }
 
         /// <summary>
@@ -77,118 +105,125 @@ namespace DLSS_Swapper
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
-            _window = new MainWindow();
-            _window.Activate();
+                        
+            // If this is the first instance launched, then register it as the "main" instance.
+            // If this isn't the first instance launched, then "main" will already be registered,
+            // so retrieve it.
+            var mainInstance = Microsoft.Windows.AppLifecycle.AppInstance.FindOrRegisterForKey("main");
+
+            // If the instance that's executing the OnLaunched handler right now
+            // isn't the "main" instance.
+            if (mainInstance.IsCurrent == false)
+            {
+                // Redirect the activation (and args) to the "main" instance, and exit.
+                var activatedEventArgs = Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
+                await mainInstance.RedirectActivationToAsync(activatedEventArgs);
+                Process.GetCurrentProcess().Kill();
+                return;
+            }
+
+            if (Storage.StoragePath.Trim(Path.DirectorySeparatorChar).Contains(Environment.SystemDirectory, StringComparison.InvariantCultureIgnoreCase))
+            {
+                var failToLaunchWindow = new FailToLaunchWindow();
+                failToLaunchWindow.Activate();
+                return;
+            }
+
+            var version = GetVersion();
+            var versionString = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+            Logger.Info($"App launch - v{versionString}", null);
+            Logger.Info($"StoragePath: {Storage.StoragePath}");
+
+            Database.Instance.Init();
+
+            MainWindow.Activate();
+
+            // No need to calculate this for portable app.
+#if !PORTABLE
+            // No need to calculate this for portable app.
+            var calculateInstallSizeThread = new Thread(CalculateInstallSize);
+            calculateInstallSizeThread.Start();
+#endif
         }
 
-
-        internal void LoadLocalRecordFromDLSSRecord(DLSSRecord dlssRecord, bool isImportedRecord = false)
+#if !PORTABLE
+        void CalculateInstallSize()
         {
-#if MICROSOFT_STORE
-            var dllsPath = Path.Combine(AppContext.BaseDirectory, "StoredData", "dlss_zip");
-            if (isImportedRecord)
+            try
             {
-                dllsPath = Path.Combine(Storage.GetStorageFolder(), "imported_dlss_zip");
+                long installSize = 0;
+                installSize += CalculateDirectorySize(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DLSS Swapper"));
+
+                using (var dlssSwapperRegistryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\DLSS Swapper", true))
+                {
+                    var installLocation = dlssSwapperRegistryKey?.GetValue("InstallLocation") as string;
+                    if (string.IsNullOrEmpty(installLocation) == false && Directory.Exists(installLocation) == true)
+                    {
+                        installSize += CalculateDirectorySize(installLocation);
+                    }
+
+                    if (installSize > 0)
+                    {
+                        var installSizeKB = (int)(installSize / 1000);
+                        dlssSwapperRegistryKey?.SetValue("EstimatedSize", installSizeKB, Microsoft.Win32.RegistryValueKind.DWord);
+                    }
+                }
             }
-#elif PORTABLE
-            var dllsPath = Path.Combine("StoredData", (isImportedRecord ? "imported_dlss_zip" : "dlss_zip"));
-#else
-            var dllsPath = Path.Combine(Storage.GetStorageFolder(), (isImportedRecord ? "imported_dlss_zip" : "dlss_zip"));
+            catch (Exception err)
+            {
+                Logger.Error(err);
+            }
+        }
+
+        long CalculateDirectorySize(string path)
+        {
+            var directorySize = 0L;
+            var fileCount = 0;
+            var directoryInfo = new DirectoryInfo(path);
+            foreach (var fileInfo in directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories))
+            {
+                directorySize += fileInfo.Length;
+                ++fileCount;
+            }
+
+            //Logger.Debug($"{path} has {fileCount} files for a total size of {directorySize} bytes");
+
+            return directorySize;
+        }
 #endif
 
-            var expectedPath = Path.Combine(dllsPath, $"{dlssRecord.Version}_{dlssRecord.MD5Hash}.zip");
-            
-            // Load record.
-            var localRecord = LocalRecord.FromExpectedPath(expectedPath, isImportedRecord);
-
-            if (isImportedRecord)
-            {
-                localRecord.IsImported = true;
-                localRecord.IsDownloaded = true;
-            }
-
-            // If the record exists we will update existing properties, if not we add it as new property.
-            if (dlssRecord.LocalRecord == null)
-            {
-                dlssRecord.LocalRecord = localRecord;
-            }
-            else
-            {
-                dlssRecord.LocalRecord.UpdateFromNewLocalRecord(localRecord);
-            }
-        }
-
-        /*
-        // Disabled because the non-async method seems faster.
-        internal async Task LoadLocalRecordFromDLSSRecordAsync(DLSSRecord dlssRecord)
+        public bool IsAdminUser()
         {
-            var expectedPath = Path.Combine("dlls", $"{dlssRecord.Version}_{dlssRecord.MD5Hash}", "nvngx_dlss.dll");
-            Logger.Debug($"ExpectedPath: {expectedPath}");
-            // Load record.
-            var localRecord = await LocalRecord.FromExpectedPathAsync(expectedPath);
+            using WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
 
-            // If the record exists we will update existing properties, if not we add it as new property.
-            var existingLocalRecord = LocalRecords.FirstOrDefault(x => x.Equals(localRecord));
-            if (existingLocalRecord == null)
-            {
-                dlssRecord.LocalRecord = localRecord;
-                LocalRecords.Add(localRecord);
-            }
-            else
-            {
-                existingLocalRecord.UpdateFromNewLocalRecord(localRecord);
-
-                // Probably don't need to set this again.
-                dlssRecord.LocalRecord = existingLocalRecord;
-            }
-        }
-        */
-
-        internal void LoadLocalRecords()
-        {
-            // We attempt to load all local records, even if experemental is not enabled.
-            foreach (var dlssRecord in DLSSRecords.Stable)
-            {
-                LoadLocalRecordFromDLSSRecord(dlssRecord);
-            }
-            foreach (var dlssRecord in DLSSRecords.Experimental)
-            {
-                LoadLocalRecordFromDLSSRecord(dlssRecord);
-            }
-            foreach (var dlssRecord in ImportedDLSSRecords)
-            {
-                LoadLocalRecordFromDLSSRecord(dlssRecord, true);
-            }
-        }
-
-
-        /*
-        // Disabled because the non-async method seems faster. 
-        internal async Task LoadLocalRecordsAsync()
-        {
-            var tasks = new List<Task>();
-
-            // We attempt to load all local records, even if experemental is not enabled.
-            foreach (var dlssRecord in DLSSRecords.Stable)
-            {
-                tasks.Add(LoadLocalRecordFromDLSSRecordAsync(dlssRecord));
-            }
-            foreach (var dlssRecord in DLSSRecords.Experimental)
-            {
-                tasks.Add(LoadLocalRecordFromDLSSRecordAsync(dlssRecord));
-            }
-            await Task.WhenAll(tasks);
-        }
-        */
-
-
-
-        internal bool IsRunningAsAdministrator()
-        {
-            var principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
+        public void RestartAsAdmin()
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                UseShellExecute = true,
+                WorkingDirectory = Environment.CurrentDirectory,
+                FileName = Assembly.GetExecutingAssembly().GetName().Name,
+                Verb = "runas"
+            };
+
+            try
+            {
+                Process.Start(startInfo);
+                Logger.Info("Restarting as admin.");
+            }
+            catch (Win32Exception)
+            {
+                Logger.Warning("User refused the elevation.");
+                return;
+            }
+
+            App.CurrentApp.Exit();
         }
 
         /*
@@ -217,16 +252,71 @@ namespace DLSS_Swapper
         }
         */
 
-
-
         public Version GetVersion()
         {
-#if MICROSOFT_STORE
-            var packageVersion = Windows.ApplicationModel.Package.Current.Id.Version;
-            return new Version(packageVersion.Major, packageVersion.Minor, packageVersion.Build, packageVersion.Revision);
-#else
-            return Assembly.GetExecutingAssembly().GetName().Version;
-#endif
+            return Assembly.GetExecutingAssembly().GetName().Version ?? new Version();
         }
+
+        public string GetVersionString()
+        {
+            var version = GetVersion();
+            if (version.Build == 0 && version.Revision == 0)
+            {
+                return $"{version.Major}.{version.Minor}";
+            }
+            else if (version.Revision == 0)
+            {
+                return $"{version.Major}.{version.Minor}.{version.Build}";
+            }
+            return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+        }
+
+        public bool RunOnUIThread(Action action)
+        {
+            if (Thread.CurrentThread.ManagedThreadId == 1)
+            {
+                action();
+                return true;
+            }
+
+            if (MainWindow?.DispatcherQueue is not null)
+            {
+                var didEnqueue = MainWindow.DispatcherQueue.TryEnqueue(new DispatcherQueueHandler(action));
+
+                if (didEnqueue == false)
+                {
+                    try
+                    {
+                        // I am sure there is a better way to fill out a stacktrace than throwing an exception
+                        throw new Exception("TryEnqueue failed.");
+                    }
+                    catch (Exception err)
+                    {
+                        Logger.Error(err);
+                    }
+                }
+
+                return didEnqueue;
+            }
+
+            return false;
+        }
+
+
+        public Task RunOnUIThreadAsync(Func<Task> function)
+        {
+            if (Thread.CurrentThread.ManagedThreadId == 1)
+            {
+                return function();
+            }
+
+            if (MainWindow?.DispatcherQueue is not null)
+            {
+                return MainWindow.DispatcherQueue.EnqueueAsync(function);
+            }
+
+            return Task.CompletedTask;
+        }
+
     }
 }

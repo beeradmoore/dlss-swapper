@@ -1,190 +1,273 @@
-﻿using DLSS_Swapper.Interfaces;
+﻿using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Interfaces;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Data.Steam
 {
-    class SteamLibrary : IGameLibrary
+    internal partial class SteamLibrary : IGameLibrary
     {
         public GameLibrary GameLibrary => GameLibrary.Steam;
         public string Name => "Steam";
 
-        List<Game> _loadedGames = new List<Game>();
-        public List<Game> LoadedGames { get { return _loadedGames; } }
+        public Type GameType => typeof(SteamGame);
 
-        List<Game> _loadedDLSSGames = new List<Game>();
-        public List<Game> LoadedDLSSGames { get { return _loadedDLSSGames; } }
+        static SteamLibrary? instance = null;
+        public static SteamLibrary Instance => instance ??= new SteamLibrary();
 
-        string _installPath = String.Empty;
+        static string _installPath = string.Empty;
+
+        [GeneratedRegex(@"^([ \t]*)""(.*)""([ \t]*)""(?<path>.*)""$", RegexOptions.Multiline)]
+        private static partial Regex LibraryFoldersRegex();
+
+        [GeneratedRegex(@"^([ \t]*)""StateFlags""([ \t]*)""(?<StateFlags>\d+)""([ \t]*)$", RegexOptions.Multiline)]
+        private static partial Regex StateFlagsRegex();
+
+        [GeneratedRegex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline)]
+        private static partial Regex AppIdRegex();
+
+        [GeneratedRegex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline)]
+        private static partial Regex NameRegex();
+
+        [GeneratedRegex(@"^([ \t]*)""installdir""([ \t]*)""(?<installdir>.*)""$", RegexOptions.Multiline)]
+        private static partial Regex InstallDirRegex();
+
+        private SteamLibrary()
+        {
+
+        }
 
         public bool IsInstalled()
         {
-            return String.IsNullOrEmpty(GetInstallPath()) == false;
+            return string.IsNullOrEmpty(GetInstallPath()) == false;
         }
 
-        public async Task<List<Game>> ListGamesAsync()
+        public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
-            _loadedGames.Clear();
-            _loadedDLSSGames.Clear();
-
             // If we don't detect a steam install patg return an empty list.
-            var installPath = GetInstallPath();
-            if (String.IsNullOrEmpty(installPath))
+            if (IsInstalled() == false)
             {
                 return new List<Game>();
             }
 
+            var cachedGames = GameManager.Instance.GetGames<SteamGame>();
+
+            var installPath = GetInstallPath();
+
+
             // I hope this runs on a background thread. 
             // Tasks are whack.
-            return await Task.Run(() =>
+
+            var games = new List<Game>();
+
+            // Base steamapps folder contains libraryfolders.vdf which has references to other steamapps folders.
+            // All of these folders contain appmanifest_[some_id].acf which contains information about the game.
+            // We parse all of these files with jank regex, rather than building a parser.
+            // If we ever need to this page probably contains info on how to do that, https://developer.valvesoftware.com/wiki/KeyValues
+
+            var baseSteamAppsFolder = Path.Combine(installPath, "steamapps");
+
+            var libraryFolders = new List<string>();
+            libraryFolders.Add(Helpers.PathHelpers.NormalizePath(baseSteamAppsFolder));
+
+            var libraryFoldersFile = Path.Combine(baseSteamAppsFolder, "libraryfolders.vdf");
+            if (File.Exists(libraryFoldersFile))
             {
-                var games = new List<Game>();
-
-                // Base steamapps folder contains libraryfolders.vdf which has references to other steamapps folders.
-                // All of these folders contain appmanifest_[some_id].acf which contains information about the game.
-                // We parse all of these files with jank regex, rather than building a parser.
-                // If we ever need to this page probably contains info on how to do that, https://developer.valvesoftware.com/wiki/KeyValues
-
-                var baseSteamAppsFolder = Path.Combine(installPath, "steamapps");
-
-                var libraryFolders = new List<string>();
-                libraryFolders.Add(Helpers.PathHelpers.NormalizePath(baseSteamAppsFolder));
-
-                var libraryFoldersFile = Path.Combine(baseSteamAppsFolder, "libraryfolders.vdf");
-                if (File.Exists(libraryFoldersFile))
+                try
                 {
-                    try
-                    {
-                        var libraryFoldersFileText = File.ReadAllText(libraryFoldersFile);
+                    var libraryFoldersFileText = await File.ReadAllTextAsync(libraryFoldersFile).ConfigureAwait(false);
 
-                        var regex = new Regex(@"^([ \t]*)""(.*)""([ \t]*)""(?<path>.*)""$", RegexOptions.Multiline);
-                        var matches = regex.Matches(libraryFoldersFileText);
-                        if (matches.Count > 0)
+                    var matches = LibraryFoldersRegex().Matches(libraryFoldersFileText);
+                    if (matches.Count > 0)
+                    {
+                        foreach (Match match in matches)
                         {
-                            foreach (Match match in matches)
+                            // This is weird, but for some reason some libraryfolders.vdf are formatted very differently than others.
+                            var path = match.Groups["path"].ToString();
+                            if (Directory.Exists(path))
                             {
-                                // This is weird, but for some reason some libraryfolders.vdf are formatted very differnetly than others.
-                                var path = match.Groups["path"].ToString();
-                                if (Directory.Exists(path))
-                                {
-                                    libraryFolders.Add(Helpers.PathHelpers.NormalizePath(Path.Combine(path, "steamapps")));
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception err)
-                    {
-                        // TODO: Report
-                        Logger.Error($"Unable to parse libraryfolders.vdf, {err.Message}");
-                    }
-                }
-
-                // Makes sure all library folders are unique.
-                libraryFolders = libraryFolders.Distinct().ToList();
-
-                foreach (var libraryFolder in libraryFolders)
-                {
-                    if (Directory.Exists(libraryFolder))
-                    {
-                        var appManifests = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
-                        foreach (var appManifest in appManifests)
-                        {
-                            var game = GetGameFromAppManifest(appManifest);
-                            if (game != null)
-                            {
-                                games.Add(game);
+                                libraryFolders.Add(Helpers.PathHelpers.NormalizePath(Path.Combine(path, "steamapps")));
                             }
                         }
                     }
                 }
-                games.Sort();
-                _loadedGames.AddRange(games);
-                _loadedDLSSGames.AddRange(games.Where(g => g.HasDLSS == true));
+                catch (Exception err)
+                {
+                    // TODO: Report
+                    Logger.Error(err, $"Unable to parse libraryfolders.vdf");
+                }
+            }
 
-                return games;
-            });
+            // Makes sure all library folders are unique.
+            libraryFolders = libraryFolders.Distinct().ToList();
+
+            foreach (var libraryFolder in libraryFolders)
+            {
+                if (Directory.Exists(libraryFolder))
+                {
+                    var appManifestPaths = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
+                    foreach (var appManifestPath in appManifestPaths)
+                    {
+                        // Don't bother adding Steamworks Common Redistributables.
+                        if (appManifestPath.EndsWith("appmanifest_228980.acf") == true)
+                        {
+                            continue;
+                        }
+
+                        SteamGame? game = null;
+
+                        try
+                        {
+                            var appManifest = await File.ReadAllTextAsync(appManifestPath).ConfigureAwait(false);
+
+                            var matches = AppIdRegex().Matches(appManifest);
+                            if (matches.Count == 0)
+                            {
+                                continue;
+                            }
+
+                            var steamGameAppId = matches[0].Groups["appid"].Value;
+                            game = new SteamGame(steamGameAppId);
+
+                            var stateFlagsMatch = StateFlagsRegex().Match(appManifest);
+                            if (!stateFlagsMatch.Success || !Enum.TryParse(stateFlagsMatch.Groups["StateFlags"].Value, out SteamStateFlag stateFlags))
+                            {
+                                // The AppState couldn't be parsed from the appmanifest_*.acf
+                                continue;
+                            }
+
+                            game.StateFlags = stateFlags;
+
+                            matches = NameRegex().Matches(appManifest);
+                            if (matches.Count == 0)
+                            {
+                                continue;
+                            }
+
+                            game.Title = matches[0].Groups["name"].ToString();
+
+                            matches = InstallDirRegex().Matches(appManifest);
+                            if (matches.Count == 0)
+                            {
+                                continue;
+                            }
+
+                            var installDir = matches[0].Groups["installdir"].ToString();
+
+                            var baseDir = Path.GetDirectoryName(appManifestPath);
+                            if (string.IsNullOrEmpty(baseDir))
+                            {
+                                continue;
+                            }
+
+                            game.InstallPath = PathHelpers.NormalizePath(Path.Combine(baseDir, "common", installDir));
+                        }
+                        catch (Exception err)
+                        {
+                            Logger.Error(err);
+                            continue;
+                        }
+
+                        var cachedGame = GameManager.Instance.GetGame<SteamGame>(game.PlatformId);
+                        var activeGame = cachedGame ?? game;
+                        activeGame.Title = game.Title;  // TODO: Will this be a problem if the game is already loaded
+                        activeGame.InstallPath = game.InstallPath;
+                        activeGame.StateFlags = game.StateFlags;
+
+                        await activeGame.SaveToDatabaseAsync().ConfigureAwait(false);
+
+                        // If the game is not from cache, force processing
+                        if (cachedGame is null)
+                        {
+                            activeGame.NeedsProcessing = true;
+                        }
+
+                        if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+                        {
+                            activeGame.ProcessGame();
+                        }
+
+                        games.Add(activeGame);
+                    }
+                }
+            }
+            games.Sort();
+
+            // Delete games that are no longer loaded, they are likely uninstalled
+            foreach (var cachedGame in cachedGames)
+            {
+                // Game is to be deleted.
+                if (games.Contains(cachedGame) == false)
+                {
+                    await cachedGame.DeleteAsync().ConfigureAwait(false);
+                }
+            }
+
+            return games;
         }
 
-        string GetInstallPath()
+        public static string GetInstallPath()
         {
-            if (String.IsNullOrEmpty(_installPath) == false)
+            if (string.IsNullOrEmpty(_installPath) == false)
             {
                 return _installPath;
             }
 
             try
             {
-                // Only focused on x64 machines.
-                using (var steamRegistryKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Valve\Steam"))
+                using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
                 {
-                    // if steamRegistryKey is null then steam is not installed.
-                    var installPath = steamRegistryKey?.GetValue("InstallPath") as String;
-                    if (String.IsNullOrEmpty(installPath))
+                    using (var steamRegistryKey = hklm.OpenSubKey(@"SOFTWARE\Valve\Steam"))
                     {
-                        _installPath = installPath;
-                    }
+                        // if steamRegistryKey is null then Steam is not installed.
+                        if (steamRegistryKey is null)
+                        {
+                            return string.Empty;
+                        }
 
-                    return installPath ?? String.Empty;
+                        var installPath = steamRegistryKey.GetValue("InstallPath") as string ?? string.Empty;
+                        if (string.IsNullOrEmpty(installPath) == false && Directory.Exists(installPath))
+                        {
+                            _installPath = installPath;
+                        }
+
+                        return _installPath;
+                    }
                 }
             }
             catch (Exception err)
             {
-                _installPath = String.Empty;
-                Logger.Error(err.Message);
-                return String.Empty;
+                _installPath = string.Empty;
+                Logger.Error(err);
+                return string.Empty;
             }
         }
 
-        internal Game GetGameFromAppManifest(string appManifestPath)
+        public async Task LoadGamesFromCacheAsync()
         {
             try
             {
-                var appManifest = File.ReadAllText(appManifestPath);
-                var game = new SteamGame(GetInstallPath());
-
-                var regex = new Regex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline);
-                var matches = regex.Matches(appManifest);
-                if (matches.Count == 0)
+                SteamGame[] games;
+                using (await Database.Instance.Mutex.LockAsync())
                 {
-                    return null;
+                    games = await Database.Instance.Connection.Table<SteamGame>().ToArrayAsync().ConfigureAwait(false);
                 }
-
-                game.Title = matches[0].Groups["name"].ToString();
-
-                regex = new Regex(@"^([ \t]*)""installdir""([ \t]*)""(?<installdir>.*)""$", RegexOptions.Multiline);
-                matches = regex.Matches(appManifest);
-                if (matches.Count == 0)
+                foreach (var game in games)
                 {
-                    return null;
+                    await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
+                    GameManager.Instance.AddGame(game);
                 }
-
-                var installDir = matches[0].Groups["installdir"].ToString();
-
-                var baseDir = Path.GetDirectoryName(appManifestPath);
-
-                game.InstallPath = Path.Combine(baseDir, "common", installDir);
-
-
-                regex = new Regex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline);
-                matches = regex.Matches(appManifest);
-                if (matches.Count == 0)
-                {
-                    return null;
-                }
-                game.AppId = matches[0].Groups["appid"].Value;
-
-                game.DetectDLSS();
-                return game;
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
-                return null;
+                Logger.Error(err);
+                Debugger.Break();
             }
         }
     }

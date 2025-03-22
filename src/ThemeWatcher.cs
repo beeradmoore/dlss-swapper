@@ -21,8 +21,8 @@ namespace DLSS_Swapper
         private const string RegistryContrastKeyPath = @"Control Panel\Accessibility\HighContrast";
         private const string RegistryContrastValueName = "LastUpdatedThemeId";
 
-        ManagementEventWatcher _themeWatcher;
-        ManagementEventWatcher _contrastWatcher;
+        ManagementEventWatcher? _themeWatcher;
+        ManagementEventWatcher? _contrastWatcher;
         AccessibilitySettings _accessibilitySettings;
         ApplicationTheme _defaultApplicationTheme;
 
@@ -34,8 +34,8 @@ namespace DLSS_Swapper
             HighContrast = 3
         }
 
-        public event EventHandler<ApplicationTheme> ThemeChanged;
-        public event EventHandler<bool> ContrastChanged;
+        public event EventHandler<ApplicationTheme>? ThemeChanged = null;
+        public event EventHandler<bool>? ContrastChanged = null;
 
 
 
@@ -59,17 +59,17 @@ namespace DLSS_Swapper
 
             var currentUser = WindowsIdentity.GetCurrent();
 
-            var themeQuery = String.Format(
+            var themeQuery = string.Format(
                 CultureInfo.InvariantCulture,
                 @"SELECT * FROM RegistryValueChangeEvent WHERE Hive = 'HKEY_USERS' AND KeyPath = '{0}\\{1}' AND ValueName = '{2}'",
-                currentUser.User.Value,
+                currentUser.User?.Value ?? string.Empty,
                 RegistryThemeKeyPath.Replace(@"\", @"\\"),
                 RegistryThemeValueName);
 
-            var contrastQuery = String.Format(
+            var contrastQuery = string.Format(
                CultureInfo.InvariantCulture,
                @"SELECT * FROM RegistryValueChangeEvent WHERE Hive = 'HKEY_USERS' AND KeyPath = '{0}\\{1}' AND ValueName = '{2}'",
-               currentUser.User.Value,
+               currentUser.User?.Value ?? string.Empty,
                RegistryContrastKeyPath.Replace(@"\", @"\\"),
                RegistryContrastValueName);
 
@@ -83,7 +83,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
             try
@@ -95,7 +95,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
             Logger.Info($"{GetWindowsTheme()}, {HighContrast}");
@@ -104,7 +104,7 @@ namespace DLSS_Swapper
 
         public void Stop()
         {
-            if (_themeWatcher != null)
+            if (_themeWatcher is not null)
             {
                 _themeWatcher.EventArrived -= ContrastWatcher_EventArrived;
                 _themeWatcher.Stop();
@@ -112,7 +112,7 @@ namespace DLSS_Swapper
                 IsWatchingTheme = false;
             }
 
-            if (_contrastWatcher != null)
+            if (_contrastWatcher is not null)
             {
                 _contrastWatcher.EventArrived -= ContrastWatcher_EventArrived;
                 _contrastWatcher.Stop();
@@ -121,14 +121,14 @@ namespace DLSS_Swapper
             }
         }
 
-        private void ContrastWatcher_EventArrived(object sender, EventArrivedEventArgs e)
+        private void ContrastWatcher_EventArrived(object? sender, EventArrivedEventArgs e)
         {
             Logger.Info($"{GetWindowsTheme()}, {HighContrast}");
 
             ContrastChanged?.Invoke(this, HighContrast);
         }
 
-        private void ThemeWatcher_EventArrived(object sender, EventArrivedEventArgs e)
+        private void ThemeWatcher_EventArrived(object? sender, EventArrivedEventArgs e)
         {
             Logger.Info($"{GetWindowsTheme()}, {HighContrast}");
 
@@ -149,7 +149,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
             }
 
             return _defaultApplicationTheme;
@@ -176,7 +176,7 @@ namespace DLSS_Swapper
             }
             catch (Exception err)
             {
-                Logger.Error(err.Message);
+                Logger.Error(err);
                 return theme;
             }
         }

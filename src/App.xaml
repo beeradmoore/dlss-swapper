@@ -31,6 +31,7 @@
                             <Color x:Key="ButtonInactiveForegroundColor">#737373</Color>
                             <Color x:Key="ButtonPressedBackgroundColor">#292929</Color>
                             <Color x:Key="ButtonPressedForegroundColor">#A7A7A7</Color>
+                            <Color x:Key="InformationalIconColor">LightBlue</Color>
                         </ResourceDictionary>
                         <ResourceDictionary x:Key="Light">
                             <Color x:Key="WindowCaptionBackground">Transparent</Color>
@@ -51,12 +52,14 @@
                             <Color x:Key="ButtonInactiveForegroundColor">#9B9B9B</Color>
                             <Color x:Key="ButtonPressedBackgroundColor">#EDEDED</Color>
                             <Color x:Key="ButtonPressedForegroundColor">#5F5F5F</Color>
-                        </ResourceDictionary>
-                        <ResourceDictionary x:Key="HighContrast">
-
+                            <Color x:Key="InformationalIconColor">DarkBlue</Color>
                         </ResourceDictionary>
                     </ResourceDictionary.ThemeDictionaries>
                 </ResourceDictionary>
+
+
+                <ResourceDictionary Source="Themes/FakeContentDialogStyle.xaml" />
+                
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
 

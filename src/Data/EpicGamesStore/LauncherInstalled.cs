@@ -18,22 +18,22 @@ namespace DLSS_Swapper.Data.EpicGamesStore
     internal class LancherInstalledItem
     {
         [JsonPropertyName("InstallLocation")]
-        public string InstallLocation { get; set; } = String.Empty;
+        public string InstallLocation { get; set; } = string.Empty;
 
         [JsonPropertyName("NamespaceId")]
-        public string NamespaceId { get; set; } = String.Empty;
+        public string NamespaceId { get; set; } = string.Empty;
 
         [JsonPropertyName("ItemId")]
-        public string ItemId { get; set; } = String.Empty;
+        public string ItemId { get; set; } = string.Empty;
 
         [JsonPropertyName("ArtifactId")]
-        public string ArtifactId { get; set; } = String.Empty;
+        public string ArtifactId { get; set; } = string.Empty;
 
         [JsonPropertyName("AppVersion")]
-        public string AppVersion { get; set; } = String.Empty;
+        public string AppVersion { get; set; } = string.Empty;
 
         [JsonPropertyName("AppName")]
-        public string AppName { get; set; } = String.Empty;
+        public string AppName { get; set; } = string.Empty;
     }
     */
 }

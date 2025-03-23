@@ -759,4 +759,61 @@ internal class DLLManager
             return DLLImportResult.FromFail(zippedDllFullName ?? filePath, err.Message);
         }
     }
+
+    internal void DeleteImportedDllRecord(DLLRecord dllRecord)
+    {
+        ObservableCollection<DLLRecord>? recordList = null;
+        List<DLLRecord>? importedRecordList = null;
+
+        if (dllRecord.AssetType == GameAssetType.DLSS)
+        {
+            recordList = DLSSRecords;
+            importedRecordList = ImportedManifest?.DLSS;
+        }
+        else if (dllRecord.AssetType == GameAssetType.DLSS_G)
+        {
+            recordList = DLSSGRecords;
+            importedRecordList = ImportedManifest?.DLSS_G;
+        }
+        else if (dllRecord.AssetType == GameAssetType.DLSS_D)
+        {
+            recordList = DLSSDRecords;
+            importedRecordList = ImportedManifest?.DLSS_D;
+        }
+        else if (dllRecord.AssetType == GameAssetType.FSR_31_DX12)
+        {
+            recordList = FSR31DX12Records;
+            importedRecordList = ImportedManifest?.FSR_31_DX12;
+        }
+        else if (dllRecord.AssetType == GameAssetType.FSR_31_VK)
+        {
+            recordList = FSR31VKRecords;
+            importedRecordList = ImportedManifest?.FSR_31_VK;
+        }
+        else if (dllRecord.AssetType == GameAssetType.XeSS)
+        {
+            recordList = XeSSRecords;
+            importedRecordList = ImportedManifest?.XeSS;
+        }
+        else if (dllRecord.AssetType == GameAssetType.XeLL)
+        {
+            recordList = XeLLRecords;
+            importedRecordList = ImportedManifest?.XeLL;
+        }
+        else if (dllRecord.AssetType == GameAssetType.XeSS_FG)
+        {
+            recordList = XeSSFGRecords;
+            importedRecordList = ImportedManifest?.XeSS_FG;
+        }
+
+        if (recordList is null)
+        {
+            // For some reason we couldn't get the recordList, is this a new DLL type?
+            Debugger.Break();
+            return;
+        }
+
+        recordList.Remove(dllRecord);
+        importedRecordList?.Remove(dllRecord);
+    }
 }

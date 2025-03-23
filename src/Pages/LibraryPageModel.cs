@@ -669,9 +669,8 @@ Only import dlls from sources you trust.",
                 if (record.LocalRecord.IsImported)
                 {
                     // TODO: What to do here?
-                    //DLLManager.Instance.DeleteImportedDllRecord(record)
-                    //App.CurrentApp.ImportedDLSSRecords.Remove(record);
-                    await DLLManager.SaveImportedManifestJsonAsync();
+                    DLLManager.Instance.DeleteImportedDllRecord(record);
+                    await DLLManager.Instance.SaveImportedManifestJsonAsync();
                     App.CurrentApp.MainWindow.FilterDLLRecords();
                 }
                 else

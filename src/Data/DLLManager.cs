@@ -33,8 +33,195 @@ internal class DLLManager
 
     internal Manifest? ImportedManifest { get; private set; } = null;
 
+
+    void LoadLocalRecord(DLLRecord dllRecord, bool isImported)
+    {
+        // If we are loading a new LocalRecord we should cancel existing download.
+        dllRecord.CancelDownload();
+
+        // Null out the existing record so we can tell if loading failed.
+        dllRecord.LocalRecord = null;
+
+        var zipPath = GetExpectedZipPath(dllRecord, isImported);
+        if (string.IsNullOrEmpty(zipPath))
+        {
+            return;
+        }
+
+        var expectedPath = Path.Combine(zipPath, dllRecord.GetExpectedZipName());
+
+        // Expected path was moved in v1.1.7. This is to migrate the zips from old to new path.
+        var legacyExpectedPath = Path.Combine(zipPath, $"{dllRecord.Version}_{dllRecord.MD5Hash}.zip");
+        if (File.Exists(legacyExpectedPath) == true && File.Exists(expectedPath) == false)
+        {
+            File.Move(legacyExpectedPath, expectedPath);
+        }
+
+        dllRecord.LocalRecord = LocalRecord.FromExpectedPath(expectedPath, isImported);
+    }
+
+    /// <summary>
+    /// Reloads loaded records collection based on new manifestRecords. Also will move records from being imported
+    /// records if they are now in the recordsManifest
+    /// </summary>
+    /// <param name="gameAssetType"></param>
+    /// <param name="records"></param>
+    /// <param name="manifestRecords"></param>
+    /// <param name="importedRecords"></param>
+    /// <returns>Returns true if importedRecords was changed and requires saving</returns>
+
+    bool ReloadRecordsForGameAssetType(GameAssetType gameAssetType, ObservableCollection<DLLRecord> records, List<DLLRecord> manifestRecords, List<DLLRecord>? importedRecords)
+    {
+        manifestRecords.Sort();
+        importedRecords?.Sort();
+
+        var importedRecordsChanged = false;
+
+        // TODO: Only change changed items
+        // TODO: Remove old records?
+
+        // importedRecords are always fully loaded here, unless import system is disabled in which
+        // case it will be null to prevent us doing anything.
+        if (importedRecords?.Any() == true)
+        {
+            var importedRecordsToDelete = new List<DLLRecord>();
+
+            // Check if imported DLLs are in the new manifest. If they are we want to
+            // move them and pretend they were imported.
+            foreach (var importedRecord in importedRecords)
+            {
+                var manifestRecord = manifestRecords.FirstOrDefault(x => x.MD5Hash == importedRecord.MD5Hash);
+                if (manifestRecord is not null)
+                {
+                    try
+                    {
+                        var oldZipPath = importedRecord.LocalRecord?.ExpectedPath ?? string.Empty;
+                        if (File.Exists(oldZipPath) == false)
+                        {
+                            // This should never happen.
+                            Logger.Error($"oldZipPath ({oldZipPath}) does not exist.");
+                            continue;
+                        }
+
+                        var newZipPath = GetExpectedZipPath(manifestRecord, false);
+                        if (string.IsNullOrEmpty(newZipPath))
+                        {
+                            continue;
+                        }
+
+                        var newExpectedPath = Path.Combine(newZipPath, manifestRecord.GetExpectedZipName());
+                        File.Move(oldZipPath, newExpectedPath);
+
+                        // No need to update anything as the DLL will get loaded in the next loop. 
+                    }
+                    catch (Exception err)
+                    {
+                        Logger.Error(err);
+                        Debugger.Break();
+                    }
+                }
+            }
+
+            if (importedRecordsToDelete.Count > 0)
+            {
+                foreach (var dllRecord in importedRecordsToDelete)
+                {
+                    importedRecords.Remove(dllRecord);
+                }
+
+                importedRecordsChanged = true;
+            }
+        }
+
+        var tempRecords = new List<DLLRecord>(records);
+
+        foreach (var dllRecord in manifestRecords)
+        {
+            dllRecord.AssetType = gameAssetType;
+            LoadLocalRecord(dllRecord, false);
+
+            var insertIndex = tempRecords.BinarySearch(dllRecord);
+            if (insertIndex < 0) // InsertObject
+            {
+                insertIndex = ~insertIndex;
+
+                records.Insert(insertIndex, dllRecord);
+                tempRecords.Insert(insertIndex, dllRecord);
+            }
+            else // Update object
+            {
+                records[insertIndex] = dllRecord;
+                tempRecords[insertIndex] = dllRecord;
+            }
+        }
+
+        // Now that we have loaded DLL records we want to add the importedRecords back into that list. 
+        if (importedRecords?.Any() == true)
+        {
+            foreach (var importedRecord in importedRecords)
+            {
+                var insertIndex = tempRecords.BinarySearch(importedRecord);
+                if (insertIndex < 0) 
+                {
+                    insertIndex = ~insertIndex;
+
+                    tempRecords.Insert(insertIndex, importedRecord);
+                    records.Insert(insertIndex, importedRecord);
+                }
+                else
+                {
+                    // This should never happen as an imported record should never be already in the manifest records.
+                    Debugger.Break();
+                }
+            }
+        }
+
+        return importedRecordsChanged;
+    }
+
+    /// <summary>
+    /// Loads LocalRecords for DLLRecords in the imported manifest.
+    /// </summary>
+    /// <param name="gameAssetType"></param>
+    /// <param name="importedRecords"></param>
+    /// <returns>Returns true if the imported manifest list was changed and needs saving.</returns>
+    bool LoadLocalRecordsForImportedDlls(GameAssetType gameAssetType, List<DLLRecord> importedRecords)
+    {
+        if (importedRecords.Count == 0)
+        {
+            return false;
+        }
+
+        var importedRecordsToDelete = new List<DLLRecord>();
+
+        foreach (var dllRecord in importedRecords)
+        {
+            dllRecord.AssetType = gameAssetType;
+            LoadLocalRecord(dllRecord, true);
+
+            // If we could not load the LocalRecord the zip is likely moved/deleted
+            // so lets delete the DLLRecord
+            if (dllRecord.LocalRecord is null)
+            {
+                importedRecordsToDelete.Add(dllRecord);
+            }
+        }
+
+        if (importedRecordsToDelete.Count > 0)
+        {
+            foreach (var dllRecord in importedRecordsToDelete)
+            {
+                importedRecords.Remove(dllRecord);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
     // Previously: UpdateDLSSRecordsList
-    internal void UpdateDLLRecordLists(Manifest manifest)
+    internal async Task UpdateDLLRecordListsAsync(Manifest manifest)
     {
         _knownDLLsReadWriterLock.EnterWriteLock();
         try
@@ -46,78 +233,20 @@ internal class DLLManager
             _knownDLLsReadWriterLock.ExitWriteLock();
         }
 
+        var importedManifestChanged = false;
 
-        // TODO: Only change changed items
+        importedManifestChanged |= ReloadRecordsForGameAssetType(GameAssetType.DLSS, DLSSRecords, manifest.DLSS, ImportedManifest?.DLSS);
+        importedManifestChanged |= ReloadRecordsForGameAssetType(GameAssetType.DLSS_G, DLSSGRecords, manifest.DLSS_G, ImportedManifest?.DLSS_G);
+        importedManifestChanged |= ReloadRecordsForGameAssetType(GameAssetType.DLSS_D, DLSSDRecords, manifest.DLSS_D, ImportedManifest?.DLSS_D);
+        importedManifestChanged |= ReloadRecordsForGameAssetType(GameAssetType.FSR_31_DX12, FSR31DX12Records, manifest.FSR_31_DX12, ImportedManifest?.FSR_31_DX12);
+        importedManifestChanged |= ReloadRecordsForGameAssetType(GameAssetType.FSR_31_VK, FSR31VKRecords, manifest.FSR_31_VK, ImportedManifest?.FSR_31_VK);
+        importedManifestChanged |= ReloadRecordsForGameAssetType(GameAssetType.XeSS, XeSSRecords, manifest.XeSS, ImportedManifest?.XeSS);
+        importedManifestChanged |= ReloadRecordsForGameAssetType(GameAssetType.XeLL, XeLLRecords, manifest.XeLL, ImportedManifest?.XeLL);
+        importedManifestChanged |= ReloadRecordsForGameAssetType(GameAssetType.XeSS_FG, XeSSFGRecords, manifest.XeSS_FG, ImportedManifest?.XeSS_FG);
 
-        manifest.DLSS.Sort();
-        DLSSRecords.Clear();
-        foreach (var dllRecord in manifest.DLSS)
+        if (importedManifestChanged)
         {
-            dllRecord.AssetType = GameAssetType.DLSS;
-            DLSSRecords.Add(dllRecord);
-        }
-
-
-
-        manifest.DLSS_G.Sort();
-        DLSSGRecords.Clear();
-        foreach (var dllRecord in manifest.DLSS_G)
-        {
-            dllRecord.AssetType = GameAssetType.DLSS_G;
-            DLSSGRecords.Add(dllRecord);
-        }
-
-
-        manifest.DLSS_D.Sort();
-        DLSSDRecords.Clear();
-        foreach (var dllRecord in manifest.DLSS_D)
-        {
-            dllRecord.AssetType = GameAssetType.DLSS_D;
-            DLSSDRecords.Add(dllRecord);
-        }
-
-
-        manifest.FSR_31_DX12.Sort();
-        FSR31DX12Records.Clear();
-        foreach (var dllRecord in manifest.FSR_31_DX12)
-        {
-            dllRecord.AssetType = GameAssetType.FSR_31_DX12;
-            FSR31DX12Records.Add(dllRecord);
-        }
-
-
-        manifest.FSR_31_VK.Sort();
-        FSR31VKRecords.Clear();
-        foreach (var dllRecord in manifest.FSR_31_VK)
-        {
-            dllRecord.AssetType = GameAssetType.FSR_31_VK;
-            FSR31VKRecords.Add(dllRecord);
-        }
-
-
-        manifest.XeSS.Sort();
-        XeSSRecords.Clear();
-        foreach (var dllRecord in manifest.XeSS)
-        {
-            dllRecord.AssetType = GameAssetType.XeSS;
-            XeSSRecords.Add(dllRecord);
-        }
-
-        manifest.XeLL.Sort();
-        XeLLRecords.Clear();
-        foreach (var dllRecord in manifest.XeLL)
-        {
-            dllRecord.AssetType = GameAssetType.XeLL;
-            XeLLRecords.Add(dllRecord);
-        }
-
-
-        manifest.XeSS_FG.Sort();
-        XeSSFGRecords.Clear();
-        foreach (var dllRecord in manifest.XeSS_FG)
-        {
-            dllRecord.AssetType = GameAssetType.XeSS_FG;
-            XeSSFGRecords.Add(dllRecord);
+            await SaveImportedManifestJsonAsync().ConfigureAwait(false);
         }
     }
 
@@ -141,13 +270,28 @@ internal class DLLManager
         {
             try
             {
-                using (var stream = File.Open(importedDLSSRecordsFile, FileMode.Open))
+                var manifestWasUpdated = false;
+
+                using (var stream = File.OpenRead(importedDLSSRecordsFile))
                 {
                     importedManifest = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.Manifest).ConfigureAwait(false);
                     if (importedManifest is not null)
                     {
+                        manifestWasUpdated |= LoadLocalRecordsForImportedDlls(GameAssetType.DLSS, importedManifest.DLSS);
+                        manifestWasUpdated |= LoadLocalRecordsForImportedDlls(GameAssetType.DLSS_G, importedManifest.DLSS_G);
+                        manifestWasUpdated |= LoadLocalRecordsForImportedDlls(GameAssetType.DLSS_D, importedManifest.DLSS_D);
+                        manifestWasUpdated |= LoadLocalRecordsForImportedDlls(GameAssetType.FSR_31_DX12, importedManifest.FSR_31_DX12);
+                        manifestWasUpdated |= LoadLocalRecordsForImportedDlls(GameAssetType.FSR_31_VK, importedManifest.FSR_31_VK);
+                        manifestWasUpdated |= LoadLocalRecordsForImportedDlls(GameAssetType.XeSS, importedManifest.XeSS);
+                        manifestWasUpdated |= LoadLocalRecordsForImportedDlls(GameAssetType.XeLL, importedManifest.XeLL);
+                        manifestWasUpdated |= LoadLocalRecordsForImportedDlls(GameAssetType.XeSS_FG, importedManifest.XeSS_FG);
                         ImportedManifest = importedManifest;
                     }
+                }
+
+                if (manifestWasUpdated)
+                {
+                    await SaveImportedManifestJsonAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception err)
@@ -162,14 +306,20 @@ internal class DLLManager
         }
     }
 
-    internal static async Task<bool> SaveImportedManifestJsonAsync()
+    internal async Task<bool> SaveImportedManifestJsonAsync()
     {
+        if (ImportedManifest is null)
+        {
+            Logger.Error("Could not save imported manifest as importing system is disabled.");
+            return false;
+        }
+
         var importedManifestFile = Storage.GetImportedManifestPath();
         try
         {
             using (var stream = File.Open(importedManifestFile, FileMode.Create))
             {
-                await JsonSerializer.SerializeAsync(stream, DLLManager.Instance.ImportedManifest, SourceGenerationContext.Default.Manifest);
+                await JsonSerializer.SerializeAsync(stream, ImportedManifest, SourceGenerationContext.Default.Manifest);
             }
             return true;
         }
@@ -178,37 +328,6 @@ internal class DLLManager
             Logger.Error(err);
             return false;
         }
-    }
-
-    internal void LoadLocalRecords()
-    {
-        var allLocalRecords = new ObservableCollection<DLLRecord>[]
-        {
-            DLSSRecords,
-            DLSSDRecords,
-            DLSSGRecords,
-            FSR31DX12Records,
-            FSR31VKRecords,
-            XeSSRecords,
-            XeLLRecords,
-            XeSSFGRecords
-        };
-
-        foreach (var recordList in allLocalRecords)
-        {
-            foreach (var dllRecord in recordList)
-            {
-                LoadLocalRecordFromDLSSRecord(dllRecord);
-            }
-        }
-
-        // TODO: Handle imported records
-        /*
-        foreach (var dlssRecord in ImportedDLSSRecords)
-        {
-            LoadLocalRecordFromDLSSRecord(dlssRecord, true);
-        }
-        */
     }
 
     internal string GetExpectedZipPath(DLLRecord dllRecord, bool isImportedRecord = false)
@@ -223,43 +342,6 @@ internal class DLLManager
         var zipPath = Path.Combine(Storage.GetStorageFolder(), (isImportedRecord ? $"imported_{recordType}_zip" : $"{recordType}_zip"));
 
         return zipPath;
-    }
-
-    internal void LoadLocalRecordFromDLSSRecord(DLLRecord dllRecord, bool isImportedRecord = false)
-    {
-        var zipPath = GetExpectedZipPath(dllRecord, isImportedRecord);
-        if (string.IsNullOrEmpty(zipPath))
-        {
-            return;
-        }
-
-        var expectedPath = Path.Combine(zipPath, dllRecord.GetExpectedZipName());
-
-        // Expected path was moved in v1.1.7. This is to migrate the zips from old to new path.
-        var legacyExpectedPath = Path.Combine(zipPath, $"{dllRecord.Version}_{dllRecord.MD5Hash}.zip");
-        if (File.Exists(legacyExpectedPath) == true && File.Exists(expectedPath) == false)
-        {
-            File.Move(legacyExpectedPath, expectedPath);
-        }
-
-        // Load record.
-        var localRecord = LocalRecord.FromExpectedPath(expectedPath, isImportedRecord);
-
-        if (isImportedRecord)
-        {
-            localRecord.IsImported = true;
-            localRecord.IsDownloaded = true;
-        }
-
-        // If the record exists we will update existing properties, if not we add it as new property.
-        if (dllRecord.LocalRecord is null)
-        {
-            dllRecord.LocalRecord = localRecord;
-        }
-        else
-        {
-            dllRecord.LocalRecord.UpdateFromNewLocalRecord(localRecord);
-        }
     }
 
     public string GetAssetTypeName(GameAssetType assetType)
@@ -743,12 +825,12 @@ internal class DLLManager
                 });
 
                 // Insert into the list used for local manifest
-                insertIndex = importedRecordList.BinarySearch(dllRecord);
-                if (insertIndex < 0)
+                var importedInsertIndex = importedRecordList.BinarySearch(dllRecord);
+                if (importedInsertIndex < 0)
                 {
-                    insertIndex = ~insertIndex;
+                    importedInsertIndex = ~importedInsertIndex;
                 }
-                importedRecordList.Insert(insertIndex, dllRecord);
+                importedRecordList.Insert(importedInsertIndex, dllRecord);
             }
 
             return DLLImportResult.FromSucces(zippedDllFullName ?? filePath, fileName, importingAsDownloadedDll);

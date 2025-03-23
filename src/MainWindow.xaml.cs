@@ -296,8 +296,6 @@ DLSS Swapper will close now.",
             }
 
             FilterDLLRecords();
-            //await App.CurrentApp.LoadLocalRecordsAsync();
-            DLLManager.Instance.LoadLocalRecords();
 
             // We are now ready to show the games list.
             LoadingStackPanel.Visibility = Visibility.Collapsed;
@@ -384,7 +382,7 @@ DLSS Swapper will close now.",
                 }
                 else
                 {
-                    DLLManager.Instance.UpdateDLLRecordLists(manifest);
+                    await DLLManager.Instance.UpdateDLLRecordListsAsync(manifest);
                 }
                 return true;
             }
@@ -419,10 +417,8 @@ DLSS Swapper will close now.",
                     {
                         throw new Exception("Could not deserialize manifest.json.");
                     }
-                    DLLManager.Instance.UpdateDLLRecordLists(manifest);
-                    //await UpdateDLSSRecordsListAsync(items);
+                    await DLLManager.Instance.UpdateDLLRecordListsAsync(manifest);
 
-                    memoryStream.Position = 0;
                     try
                     {
                         await Storage.SaveManifestJsonAsync(manifest);

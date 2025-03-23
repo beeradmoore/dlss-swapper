@@ -148,6 +148,11 @@ namespace DLSS_Swapper.Data
                 return -1;
             }
 
+            if (string.IsNullOrWhiteSpace(MD5Hash) == false && MD5Hash == other.MD5Hash)
+            {
+                return 0;
+            }
+
             if (VersionNumber == other.VersionNumber)
             {
                 if (IsDevFile == other.IsDevFile)
@@ -329,6 +334,5 @@ namespace DLSS_Swapper.Data
                 _ => string.Empty,
             };
         }
-
     }
 }

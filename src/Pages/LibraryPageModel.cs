@@ -44,7 +44,6 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         if (didUpdate)
         {
             App.CurrentApp.MainWindow.FilterDLLRecords();
-            DLLManager.Instance.LoadLocalRecords();
         }
         else
         {
@@ -626,7 +625,7 @@ Only import dlls from sources you trust.",
 
         if (importResults.Any(x => x.Success == true))
         {
-            await DLLManager.SaveImportedManifestJsonAsync();
+            await DLLManager.Instance.SaveImportedManifestJsonAsync();
             App.CurrentApp.MainWindow.FilterDLLRecords();
         }
 

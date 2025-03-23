@@ -1,5 +1,5 @@
 <p align="center">
- <img width="150px" src="../logo_250.png" align="center" alt="GitHub Readme Stats" />
+ <img width="150px" src="https://beeradmoore.github.io/dlss-swapper/logo_250.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">DLSS Swapper
 </h2>
  <p align="center">DLSS Swapperは、<strong>DLSS</strong>、<strong>FSR</strong>、<strong>XeSS</strong>のdllを便利にダウンロード、管理、交換できるツールで、ゲームのアップデートを必要とせずにDLSS、FSR、XeSSのバージョンをアップグレードまたはダウングレードすることができます。</p>
@@ -25,7 +25,7 @@
 </p>
 
 <p align="center">
-    <img src="../images/usage/usage_4.gif" />
+    <img src="https://beeradmoore.github.io/dlss-swapper/images/usage/usage_4.gif" />
 </p>
 
 ## サポートされているゲームライブラリは何ですか？

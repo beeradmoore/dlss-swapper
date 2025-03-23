@@ -1,5 +1,5 @@
 <p align="center">
- <img width="150px" src="../logo_250.png" align="center" alt="GitHub Readme Stats" />
+ <img width="150px" src="https://beeradmoore.github.io/dlss-swapper/logo_250.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">DLSS Swapper
 </h2>
  <p align="center">DLSS Swapper 是一款實用的小工具，能夠讓你方便地下載、管理與切換 <strong>DLSS</strong>、<strong>FSR</strong> 和 <strong>XeSS</strong> 的 DLL 檔案，使你能夠在不更新遊戲的情況下更新或是回退 DLSS、FSR 和 XeSS 的版本。</p>
@@ -33,7 +33,7 @@
 </p>
 
 <p align="center">
-    <img src="../images/usage/usage_4.gif" />
+    <img src="https://beeradmoore.github.io/dlss-swapper/images/usage/usage_4.gif" />
 </p>
 
 ## 它支援哪些遊戲庫？

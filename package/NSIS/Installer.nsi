@@ -1,4 +1,5 @@
-﻿!addplugindir /x86-ansi "plugins\x86-ansi"
+﻿; DLL compiled from https://github.com/aranor01/FindProcDLL
+!addplugindir /x86-ansi "plugins\x86-ansi"
 !addplugindir /x86-unicode "plugins\x86-unicode"
 
 !include "MUI2.nsh"

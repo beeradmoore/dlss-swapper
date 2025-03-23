@@ -654,10 +654,11 @@ Only import dlls from sources you trust.",
         var assetTypeName = DLLManager.Instance.GetAssetTypeName(record.AssetType);
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
+            Title = "Delete DLL",
+            Content = $"Are you sure you want to delete {assetTypeName} v{record.Version}?",
             PrimaryButtonText = "Delete",
             CloseButtonText = "Cancel",
             DefaultButton = ContentDialogButton.Primary,
-            Content = $"Delete {assetTypeName} v{record.Version}?",
         };
         var response = await dialog.ShowAsync();
         if (response == ContentDialogResult.Primary)

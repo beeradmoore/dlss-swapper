@@ -1,4 +1,7 @@
-﻿!include "MUI2.nsh"
+﻿!addplugindir /x86-ansi "plugins\x86-ansi"
+!addplugindir /x86-unicode "plugins\x86-unicode"
+
+!include "MUI2.nsh"
 !include "LogicLib.nsh"
 !include "StrContains.nsh"
 !include "FileFunc.nsh"
@@ -14,7 +17,7 @@ Var UninstLog
 Var DEFAULT_INSTALL_PATH
 
 Function .onInit
-  ; Set defualt install location
+  ; Set default install location
   StrCpy $INSTDIR "$PROGRAMFILES64\DLSS Swapper\"
   ; The missing \ is intentional
   StrCpy $DEFAULT_INSTALL_PATH "$PROGRAMFILES64\DLSS Swapper"
@@ -26,8 +29,9 @@ Function .onInit
     StrCpy $INSTDIR "$0\"
   ${EndIf}
 
-  FindWindow $0 "" "DLSS Swapper"
-  StrCmp $0 0 NotRunning
+  FindProcDLL::FindProc "DLSS Swapper.exe"
+
+  StrCmp $R0 0 NotRunning
     MessageBox MB_OK|MB_ICONEXCLAMATION "DLSS Swapper is currently running. Please close it before continuing with installation." /SD IDOK
   NotRunning:
 FunctionEnd
@@ -35,8 +39,8 @@ FunctionEnd
 ; On uninstall, confirm you want to remove downloaded/imported DLSS files.
 Function un.onInit
   
-  FindWindow $0 "" "DLSS Swapper"
-  StrCmp $0 0 NotRunning
+  FindProcDLL::FindProc "DLSS Swapper.exe"
+  StrCmp $R0 0 NotRunning
     MessageBox MB_OK|MB_ICONSTOP "DLSS Swapper is currently running. Please close it before attempting to uninstall." /SD IDOK
     SetErrorLevel 2
     Quit
@@ -48,7 +52,7 @@ Function un.onInit
 FunctionEnd
 
 ; Install directory should have "dlss" in it, if not we should add it. 
-; See issue #169 for what the consiquenses are if a user selects a directory
+; See issue #169 for what the consequences are if a user selects a directory
 ; to install to which already contains other files.
 Function .onVerifyInstDir
   ${StrContains} $0 "dlss" $INSTDIR
@@ -148,8 +152,8 @@ SectionEnd
 ; start default section
 Section
 
-  FindWindow $0 "" "DLSS Swapper"
-  StrCmp $0 0 NotRunning
+  FindProcDLL::FindProc "DLSS Swapper.exe"
+  StrCmp $R0 0 NotRunning
     MessageBox MB_OK|MB_ICONSTOP "DLSS Swapper is currently running. Please close it and run the installer again." /SD IDOK
     SetErrorLevel 2
     Quit
@@ -164,14 +168,14 @@ Section
 
   InstallProbablyExists:
 
-    ; If installdir is the default, don't bother promting to make the upgrade experience easier for existing users. We will just delete it.
+    ; If INSTDIR is the default, don't bother promoting to make the upgrade experience easier for existing users. We will just delete it.
     ; This is to fix issues with users using non-default locations and somehow
     ; set their install to C:\Windows\ or something
     StrCmp $INSTDIR $DEFAULT_INSTALL_PATH DeleteOldInstallFiles PromptToDeleteOldInstallFiles
     
     PromptToDeleteOldInstallFiles:
       ; Prompt if it is ok to delete existing directory. This is true by default on silent installs
-      MessageBox MB_YESNO|MB_ICONEXCLAMATION 'The directory "$INSTDIR" already exists. Existing app will be uninstalled but your downloaded and imported DLLs will remain. Do you want to continue?' /SD IDYES IDYES DeleteOldInstallFiles
+      MessageBox MB_YESNO|MB_ICONEXCLAMATION 'The directory "$INSTDIR" already exists. Existing app will be uninstalled. Your existing imported and downloaded DLLs will remain. Do you want to continue?' /SD IDYES IDYES DeleteOldInstallFiles
       Quit
 
     ; Delete the existing install directory

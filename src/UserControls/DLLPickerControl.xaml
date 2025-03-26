@@ -52,9 +52,9 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Original DLL" FontWeight="Bold"/>
+            <TextBlock Grid.Row="0" Text="{x:Bind ViewModel.OriginalDllText}" FontWeight="Bold"/>
             <TextBox Grid.Row="1" Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.BackupGameAsset.DisplayVersion, Mode=OneWay}" VerticalAlignment="Stretch"/>
-            <Button Grid.Row="1" Grid.Column="1" ToolTipService.ToolTip="Restore original DLL" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.ResetDllCommand}">
+            <Button Grid.Row="1" Grid.Column="1" ToolTipService.ToolTip="{x:Bind ViewModel.OriginalDllRestoreText}" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.ResetDllCommand}">
                 <Button.Content>
                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE72C;"/>
                 </Button.Content>
@@ -70,9 +70,9 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Current DLL" FontWeight="Bold"/>
+            <TextBlock Grid.Row="0" Text="{x:Bind ViewModel.CurrentDllText}" FontWeight="Bold"/>
             <TextBox Grid.Row="1" Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.CurrentGameAsset.DisplayVersion, Mode=OneWay}" VerticalAlignment="Stretch"/>
-            <Button Grid.Row="1" Grid.Column="1" ToolTipService.ToolTip="Open DLL location" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenDllPathCommand}">
+            <Button Grid.Row="1" Grid.Column="1" ToolTipService.ToolTip="{x:Bind ViewModel.OpenDllLocationText}" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenDllPathCommand}">
                 <Button.Content>
                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE8A7;"/>
                 </Button.Content>
@@ -133,8 +133,8 @@
               Severity="Warning"
               IsOpen="True"
               IsClosable="False"        
-              Title="No DLLs Found"                 
-              Message="Please go to the libary page to download new DLLs.">
+              Title="{x:Bind ViewModel.NoDllsFoundText}"                 
+              Message="{x:Bind ViewModel.PleaseNavigateLibraryToDownloadDllsText}">
         </InfoBar>
 
     </Grid>

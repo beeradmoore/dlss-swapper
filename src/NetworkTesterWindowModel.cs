@@ -858,4 +858,6 @@ public partial class NetworkTesterWindowModel : ObservableObject
             _cancellationTokenSource.Cancel();
         }
     }
+
+    public string NetworkTesterWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("NetworkTester");
 }

@@ -10,6 +10,7 @@ using AsyncAwaitBestPractices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.Foundation.Metadata;
@@ -203,12 +204,12 @@ public partial class DLLPickerControlModel : ObservableObject
 
         if (SelectedDLLRecord.LocalRecord.FileDownloader is not null)
         {
-            ShowTempInfoBar(string.Empty, "Please wait for download to complete before swapping");
+            ShowTempInfoBar(string.Empty, ResourceHelper.GetString("WaitToDownloadCompleteBeforeSwapping"));
             return;
         }
         else if (SelectedDLLRecord.LocalRecord.IsDownloaded == false)
         {
-            ShowTempInfoBar(string.Empty, "Starting download");
+            ShowTempInfoBar(string.Empty, ResourceHelper.GetString("StartingDownload"));
             SelectedDLLRecord.DownloadAsync().SafeFireAndForget();
             return;
         }
@@ -217,7 +218,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
         if (didUpdate.Success == false)
         {
-            ShowTempInfoBar("Error", didUpdate.Message, severity: InfoBarSeverity.Error);
+            ShowTempInfoBar(ResourceHelper.GetString("Error"), didUpdate.Message, severity: InfoBarSeverity.Error);
             return;
         }
 
@@ -290,14 +291,14 @@ public partial class DLLPickerControlModel : ObservableObject
                 }
                 else
                 {
-                    throw new Exception($"Could not find file \"{CurrentGameAsset.Path}\".");
+                    throw new Exception(ResourceHelper.FormattedResourceTemplate("CouldNotFindFileTemplate", CurrentGameAsset.Path));
                 }
             }
         }
         catch (Exception err)
         {
             Logger.Error(err);
-            ShowTempInfoBar("Error", err.Message, severity: InfoBarSeverity.Error);
+            ShowTempInfoBar(ResourceHelper.GetString("Error"), err.Message, severity: InfoBarSeverity.Error);
         }
     }
 
@@ -309,11 +310,11 @@ public partial class DLLPickerControlModel : ObservableObject
         if (didReset.Success == true)
         {
             ResetSelection();
-            ShowTempInfoBar("Success", $"DLL has been reset to {CurrentGameAsset?.DisplayVersion}.", severity: InfoBarSeverity.Success, gridIndex: 0);
+            ShowTempInfoBar(ResourceHelper.GetString("Success"), ResourceHelper.FormattedResourceTemplate("ResetDllToVersionTemplate", CurrentGameAsset?.DisplayVersion), severity: InfoBarSeverity.Success, gridIndex: 0);
         }
         else
         {
-            ShowTempInfoBar("Error", didReset.Message, severity: InfoBarSeverity.Error, gridIndex: 0);
+            ShowTempInfoBar(ResourceHelper.GetString("Error"), didReset.Message, severity: InfoBarSeverity.Error, gridIndex: 0);
         }
     }
 
@@ -333,4 +334,13 @@ public partial class DLLPickerControlModel : ObservableObject
             SelectedDLLRecord = DLLRecords.FirstOrDefault(x => x.MD5Hash == CurrentGameAsset.Hash);
         }
     }
+
+    #region LanguageProperties
+    public string NoDllsFoundText => ResourceHelper.GetString("NoDllsFoundText");
+    public string PleaseNavigateLibraryToDownloadDllsText => ResourceHelper.GetString("PleaseNavigateLibraryToDownloadDllsText");
+    public string OpenDllLocationText => ResourceHelper.GetString("OpenDllLocation");
+    public string CurrentDllText => ResourceHelper.GetString("CurrentDll");
+    public string OriginalDllRestoreText => ResourceHelper.GetString("OriginalDllRestore");
+    public string OriginalDllText => ResourceHelper.GetString("OriginalDllText");
+    #endregion
 }

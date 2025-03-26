@@ -32,4 +32,13 @@ public partial class FailToLaunchWindowModel : ObservableObject
         package.SetText(SystemData);
         Clipboard.SetContent(package);
     }
+
+    #region TranslationProperties
+    public string ApplicationFailToLaunchWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("FailedToLaunch");
+    public string PleaseOpenIssuePartial1Text => ResourceHelper.GetString("PleaseOpenIssuePartial1");
+    public string PleaseOpenIssuePartial2Text => ResourceHelper.GetString("PleaseOpenIssuePartial2");
+    public string PleaseOpenIssuePartial3Text => ResourceHelper.GetString("PleaseOpenIssuePartial3");
+    public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
+    public string DlssSwapperFailedToLaunchText => ResourceHelper.GetString("DlssSwapperFailedToLaunch");
+    #endregion
 }

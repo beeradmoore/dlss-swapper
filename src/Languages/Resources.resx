@@ -378,4 +378,58 @@ Only import dlls from sources you trust.</value>
   <data name="EnabledForAllDlssDlls" xml:space="preserve">
     <value>Enabled for all DLSS DLLs</value>
   </data>
+  <data name="ClickToCopyDetails" xml:space="preserve">
+    <value>Click to copy below details</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>Diagnostics</value>
+  </data>
+  <data name="FailedToLaunch" xml:space="preserve">
+    <value>Failed to Launch</value>
+  </data>
+  <data name="PleaseOpenIssuePartial1" xml:space="preserve">
+    <value>Please open a </value>
+  </data>
+  <data name="PleaseOpenIssuePartial2" xml:space="preserve">
+    <value>new issue</value>
+  </data>
+  <data name="PleaseOpenIssuePartial3" xml:space="preserve">
+    <value> on the DLSS Swapper GitHub repository and provide the following information in the additional context section.</value>
+  </data>
+  <data name="DlssSwapperFailedToLaunch" xml:space="preserve">
+    <value>DLSS Swapper has failed to launch</value>
+  </data>
+  <data name="NetworkTester" xml:space="preserve">
+    <value>Network Tester</value>
+  </data>
+  <data name="OriginalDll" xml:space="preserve">
+    <value>Original DLL</value>
+  </data>
+  <data name="OriginalDllRestore" xml:space="preserve">
+    <value>Restore original DLL</value>
+  </data>
+  <data name="CurrentDll" xml:space="preserve">
+    <value>Current DLL</value>
+  </data>
+  <data name="OpenDllLocation" xml:space="preserve">
+    <value>Open DLL location</value>
+  </data>
+  <data name="NoDllsFound" xml:space="preserve">
+    <value>No DLLs Found</value>
+  </data>
+  <data name="PleaseNavigateLibraryToDownloadDlls" xml:space="preserve">
+    <value>Please go to the libary page to download new DLLs.</value>
+  </data>
+  <data name="WaitToDownloadCompleteBeforeSwapping" xml:space="preserve">
+    <value>Please wait for download to complete before swapping</value>
+  </data>
+  <data name="StartingDownload" xml:space="preserve">
+    <value>Starting download</value>
+  </data>
+  <data name="CouldNotFindFileTemplate" xml:space="preserve">
+    <value>Could not find file "{0}".</value>
+  </data>
+  <data name="ResetDllToVersionTemplate" xml:space="preserve">
+    <value>DLL has been reset to {0}.</value>
+  </data>
 </root>

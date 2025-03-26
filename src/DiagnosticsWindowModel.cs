@@ -27,4 +27,9 @@ public partial class DiagnosticsWindowModel : ObservableObject
         package.SetText(DiagnosticsLog);
         Clipboard.SetContent(package);
     }
+
+    #region TranslationProperties
+    public string ApplicationTilteDiagnosticsWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("Diagnostics");
+    public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
+    #endregion
 }

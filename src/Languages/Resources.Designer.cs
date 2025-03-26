@@ -165,11 +165,29 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Click to copy below details.
+        /// </summary>
+        public static string ClickToCopyDetails {
+            get {
+                return ResourceManager.GetString("ClickToCopyDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Close.
         /// </summary>
         public static string Close {
             get {
                 return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not find file &quot;{0}&quot;..
+        /// </summary>
+        public static string CouldNotFindFileTemplate {
+            get {
+                return ResourceManager.GetString("CouldNotFindFileTemplate", resourceCulture);
             }
         }
         
@@ -201,6 +219,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Current DLL.
+        /// </summary>
+        public static string CurrentDll {
+            get {
+                return ResourceManager.GetString("CurrentDll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Delete.
         /// </summary>
         public static string Delete {
@@ -215,6 +242,24 @@ namespace DLSS_Swapper.Languages {
         public static string DeleteDllVersionTemplate {
             get {
                 return ResourceManager.GetString("DeleteDllVersionTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Diagnostics.
+        /// </summary>
+        public static string Diagnostics {
+            get {
+                return ResourceManager.GetString("Diagnostics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu DLSS Swapper has failed to launch.
+        /// </summary>
+        public static string DlssSwapperFailedToLaunch {
+            get {
+                return ResourceManager.GetString("DlssSwapperFailedToLaunch", resourceCulture);
             }
         }
         
@@ -336,6 +381,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Failed to Launch.
+        /// </summary>
+        public static string FailedToLaunch {
+            get {
+                return ResourceManager.GetString("FailedToLaunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Filter.
         /// </summary>
         public static string Filter {
@@ -430,6 +484,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Network Tester.
+        /// </summary>
+        public static string NetworkTester {
+            get {
+                return ResourceManager.GetString("NetworkTester", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu New DLLs.
         /// </summary>
         public static string NewDlls {
@@ -444,6 +507,15 @@ namespace DLSS_Swapper.Languages {
         public static string NewDllsFound {
             get {
                 return ResourceManager.GetString("NewDllsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu No DLLs Found.
+        /// </summary>
+        public static string NoDllsFound {
+            get {
+                return ResourceManager.GetString("NoDllsFound", resourceCulture);
             }
         }
         
@@ -493,6 +565,69 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Open DLL location.
+        /// </summary>
+        public static string OpenDllLocation {
+            get {
+                return ResourceManager.GetString("OpenDllLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Original DLL.
+        /// </summary>
+        public static string OriginalDll {
+            get {
+                return ResourceManager.GetString("OriginalDll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Restore original DLL.
+        /// </summary>
+        public static string OriginalDllRestore {
+            get {
+                return ResourceManager.GetString("OriginalDllRestore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Please go to the libary page to download new DLLs..
+        /// </summary>
+        public static string PleaseNavigateLibraryToDownloadDlls {
+            get {
+                return ResourceManager.GetString("PleaseNavigateLibraryToDownloadDlls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Please open a .
+        /// </summary>
+        public static string PleaseOpenIssuePartial1 {
+            get {
+                return ResourceManager.GetString("PleaseOpenIssuePartial1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu new issue.
+        /// </summary>
+        public static string PleaseOpenIssuePartial2 {
+            get {
+                return ResourceManager.GetString("PleaseOpenIssuePartial2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu  on the DLSS Swapper GitHub repository and provide the following information in the additional context section..
+        /// </summary>
+        public static string PleaseOpenIssuePartial3 {
+            get {
+                return ResourceManager.GetString("PleaseOpenIssuePartial3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Refresh.
         /// </summary>
         public static string Refresh {
@@ -507,6 +642,15 @@ namespace DLSS_Swapper.Languages {
         public static string ReportIssue {
             get {
                 return ResourceManager.GetString("ReportIssue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu DLL has been reset to {0}..
+        /// </summary>
+        public static string ResetDllToVersionTemplate {
+            get {
+                return ResourceManager.GetString("ResetDllToVersionTemplate", resourceCulture);
             }
         }
         
@@ -763,6 +907,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Starting download.
+        /// </summary>
+        public static string StartingDownload {
+            get {
+                return ResourceManager.GetString("StartingDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Success.
         /// </summary>
         public static string Success {
@@ -804,6 +957,15 @@ namespace DLSS_Swapper.Languages {
         public static string ViewType {
             get {
                 return ResourceManager.GetString("ViewType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Please wait for download to complete before swapping.
+        /// </summary>
+        public static string WaitToDownloadCompleteBeforeSwapping {
+            get {
+                return ResourceManager.GetString("WaitToDownloadCompleteBeforeSwapping", resourceCulture);
             }
         }
         

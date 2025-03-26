@@ -53,15 +53,6 @@ namespace DLSS_Swapper
         [DllImport("user32.dll", SetLastError = true)]
         static extern int DestroyIcon(IntPtr hIcon);
 
-        private void LoadTranslation()
-        {
-            Title = ResourceHelper.GetString("ApplicationTitle");
-            AppTitle.Text = ResourceHelper.GetString("ApplicationTitle");
-            NavigationViewItemGames.Content = ResourceHelper.GetString("Games");
-            NavigationViewItemLibrary.Content = ResourceHelper.GetString("Library");
-            LoadingProgressText.Text = ResourceHelper.GetString("Loading");
-        }
-
         public MainWindow()
         {
             this.InitializeComponent();
@@ -627,6 +618,15 @@ DLSS Swapper will close now.",
                     UpdateColorsDark();
                 }
             }
+        }
+
+        private void LoadTranslation()
+        {
+            Title = ResourceHelper.GetString("ApplicationTitle");
+            AppTitle.Text = ResourceHelper.GetString("ApplicationTitle");
+            NavigationViewItemGames.Content = ResourceHelper.GetString("Games");
+            NavigationViewItemLibrary.Content = ResourceHelper.GetString("Library");
+            LoadingProgressText.Text = ResourceHelper.GetString("Loading");
         }
     }
 }

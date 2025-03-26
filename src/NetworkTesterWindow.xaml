@@ -8,8 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
     mc:Ignorable="d"
-    Title="DLSS Swapper - Network Tester">
-
+    Title="{x:Bind ViewModel.NetworkTesterWindowText}">
     <ScrollView>
         <Grid Margin="16" ColumnSpacing="12" RowSpacing="12" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.Resources>

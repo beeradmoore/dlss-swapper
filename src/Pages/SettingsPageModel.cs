@@ -24,9 +24,9 @@ internal partial class SettingsPageModel : ObservableObject
     public string CurrentLogPath => Logger.GetCurrentLogPath();
     public string AppVersion => App.CurrentApp.GetVersionString();
     public List<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; } = new List<DLSSOnScreenIndicatorSetting>(){
-        new DLSSOnScreenIndicatorSetting() { Label = "None", Value = 0 },
-        new DLSSOnScreenIndicatorSetting() { Label = "Enabled for debug DLSS DLLs only", Value = 1 },
-        new DLSSOnScreenIndicatorSetting() { Label = "Enabled for all DLSS DLLs", Value = 1024 }
+        new DLSSOnScreenIndicatorSetting() { Label = ResourceHelper.GetString("None"), Value = 0 },
+        new DLSSOnScreenIndicatorSetting() { Label = ResourceHelper.GetString("EnabledForDebugDlssDllOnly"), Value = 1 },
+        new DLSSOnScreenIndicatorSetting() { Label = ResourceHelper.GetString("EnabledForAllDlssDlls"), Value = 1024 }
     };
 
     [ObservableProperty]
@@ -198,9 +198,9 @@ internal partial class SettingsPageModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    CloseButtonText = "Okay",
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = "No new updates are available.",
+                    Content = ResourceHelper.GetString("NoNewUpdatesAvailable"),
                 };
                 await dialog.ShowAsync();
 
@@ -234,10 +234,10 @@ internal partial class SettingsPageModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    Title = "Oops",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("Oops"),
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = "Could not open your log file directly from DLSS Swapper. Please try open it manually.",
+                    Content = ResourceHelper.GetString("CouldNotOpenLogFileTryManual"),
                 };
 
                 await dialog.ShowAsync();
@@ -264,4 +264,36 @@ internal partial class SettingsPageModel : ObservableObject
         var diagnosticsWindow = new DiagnosticsWindow();
         diagnosticsWindow.Activate();
     }
+
+    #region TranslationProperties
+    public string VersionText => ResourceHelper.GetString("SettingsVersion") + ":";
+    public string GiveFeedbackInfo => ResourceHelper.GetString("SettingsGiveFeedbackInfo");
+    public string NetworkTesterText => ResourceHelper.GetString("SettingsNetworkTester");
+    public string GeneralTroubleshootingGuideText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");
+    public string DiagnosticsText => ResourceHelper.GetString("SettingsDiagnostics");
+    public string AcknowledgementsText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");
+    public string AllowDebugDllsInfo => ResourceHelper.GetString("SettingsAllowDebugDllsInfo");
+    public string AllowUntrustedInfo => ResourceHelper.GetString("SettingsAllowUntrustedInfo");
+    public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
+    public string WarningText => ResourceHelper.GetString("Warning");
+    public string YourCurrentLogfileText => ResourceHelper.GetString("SettingsYourCurrentLogfile");
+    public string ThemeLightText => ResourceHelper.GetString("SettingsThemeLight");
+    public string ThemeDarkText => ResourceHelper.GetString("SettingsThemeDark");
+    public string ThemeSystemSettingDefaultText => ResourceHelper.GetString("SettingsThemeSystemSettingDefault");
+    public string ThemeModeText => ResourceHelper.GetString("SettingsThemeMode");
+    public string GameLibrariesText => ResourceHelper.GetString("SettingsGameLibraries");
+    public string DllsDeveloperOptionsText => ResourceHelper.GetString("SettingsDllsDeveloperOptions");
+    public string ShowOnScreenIndicatorText => ResourceHelper.GetString("SettingsShowOnScreenIndicator");
+    public string VerboseLoggingText => ResourceHelper.GetString("SettingsVerboseLogging");
+    public string EnableLoggingToFileText => ResourceHelper.GetString("SettingsEnableLoggingToFile");
+    public string EnableLoggingToConsoleWindowText => ResourceHelper.GetString("SettingsEnableLoggingToConsoleWindow");
+    public string AllowUntrustedText => ResourceHelper.GetString("SettingsAllowUntrusted");
+    public string AllowDebugDllsText => ResourceHelper.GetString("SettingsAllowDebugDlls");
+    public string ShowOnlyDownloadedDllsText => ResourceHelper.GetString("SettingsShowOnlyDownloadedDlls");
+    public string ApliesOnlyToDllPickerNotLibraryText => ResourceHelper.GetString("SettingsApliesOnlyToDllPickerNotLibrary");
+    public string CheckForUpdatesText => ResourceHelper.GetString("SettingsCheckForUpdates");
+    public string GiveFeedbackText => ResourceHelper.GetString("SettingsGiveFeedback");
+    public string TroubleshootingText => ResourceHelper.GetString("SettingsTroubleshooting");
+    public string SettingsText => ResourceHelper.GetString("Settings");
+    #endregion
 }

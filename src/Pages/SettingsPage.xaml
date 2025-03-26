@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="DLSS_Swapper.Pages.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -29,7 +29,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Padding="16,0,16,0">
-            <TextBlock Margin="16,0,0,0" Text="Settings" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock Margin="16,0,0,0" Text="{x:Bind ViewModel.SettingsText}" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
 
             <!-- Needed to achieve parity in the looking with other sites -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -42,8 +42,8 @@
                  IsOpen="True"
                  Severity="Warning"
                  IsClosable="False"
-                 Title="Warning"
-                 Message="This app is running with administrative privileges."
+                 Title="{x:Bind ViewModel.WarningText}"
+                 Message="{x:Bind ViewModel.ApplicationRunsInAdministrativeModeInfo}"
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
         <ScrollViewer Grid.Row="2">
@@ -51,18 +51,18 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Theme Mode" />
+                    Text="{x:Bind ViewModel.ThemeModeText}" />
                 <StackPanel x:Name="ThemePanel" Margin="0,10,0,0">
-                    <RadioButton x:Name="LightThemeRadioButton" GroupName="ThemeGroup" Tag="Light" IsChecked="{x:Bind ViewModel.LightThemeSelected, Mode=TwoWay}" Content="Light" />
-                    <RadioButton x:Name="DarkThemeRadioButton" GroupName="ThemeGroup" Tag="Dark" IsChecked="{x:Bind ViewModel.DarkThemeSelected, Mode=TwoWay}" Content="Dark" />
-                    <RadioButton x:Name="DefaultThemeRadioButton" GroupName="ThemeGroup" Tag="Default" IsChecked="{x:Bind ViewModel.DefaultThemeSelected, Mode=TwoWay}" Content="Use system setting" />
+                    <RadioButton x:Name="LightThemeRadioButton" GroupName="ThemeGroup" Tag="Light" IsChecked="{x:Bind ViewModel.LightThemeSelected, Mode=TwoWay}" Content="{x:Bind ViewModel.ThemeLightText}" />
+                    <RadioButton x:Name="DarkThemeRadioButton" GroupName="ThemeGroup" Tag="Dark" IsChecked="{x:Bind ViewModel.DarkThemeSelected, Mode=TwoWay}" Content="{x:Bind ViewModel.ThemeDarkText}" />
+                    <RadioButton x:Name="DefaultThemeRadioButton" GroupName="ThemeGroup" Tag="Default" IsChecked="{x:Bind ViewModel.DefaultThemeSelected, Mode=TwoWay}" Content="{x:Bind ViewModel.ThemeSystemSettingDefaultText}" />
                 </StackPanel>
 
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Game Libraries" />
+                    Text="{x:Bind ViewModel.GameLibrariesText}" />
                 <StackPanel Margin="0,10,0,0">
                     <usercontrols:GameLibrarySelectorControl SavesWhenToggled="true" />
                 </StackPanel>
@@ -71,48 +71,42 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="DLSS Developer Options" />
+                    Text="{x:Bind ViewModel.DllsDeveloperOptionsText}" />
                 <StackPanel Margin="0,10,0,0">
-                    <ComboBox Header="Show on-screen indicator" ItemsSource="{Binding DLSSOnScreenIndicatorOptions, Mode=OneTime}" SelectedItem="{Binding SelectedDlssOnScreenIndicator, Mode=TwoWay}" Margin="0,0,0,8" />
-                    <CheckBox Content="Enable logging to file" IsChecked="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
-                    <CheckBox Content="Verbose logging" IsChecked="{x:Bind ViewModel.DlssVerboseLogging, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
-                    <CheckBox Content="Enable logging to console window" IsChecked="{x:Bind ViewModel.DlssLoggingToWindow, Mode=TwoWay}"  Margin="0,0,0,4"/>
+                    <ComboBox Header="{x:Bind ViewModel.ShowOnScreenIndicatorText}" ItemsSource="{Binding DLSSOnScreenIndicatorOptions, Mode=OneTime}" SelectedItem="{Binding SelectedDlssOnScreenIndicator, Mode=TwoWay}" Margin="0,0,0,8" />
+                    <CheckBox Content="{x:Bind ViewModel.EnableLoggingToFileText}" IsChecked="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
+                    <CheckBox Content="{x:Bind ViewModel.VerboseLoggingText}" IsChecked="{x:Bind ViewModel.DlssVerboseLogging, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
+                    <CheckBox Content="{x:Bind ViewModel.EnableLoggingToConsoleWindowText}" IsChecked="{x:Bind ViewModel.DlssLoggingToWindow, Mode=TwoWay}"  Margin="0,0,0,4"/>
                 </StackPanel>
 
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Allow Untrusted" />
+                    Text="{x:Bind ViewModel.AllowUntrustedText}" />
                 <StackPanel Margin="0,10,0,0">
                     <ToggleSwitch IsOn="{x:Bind ViewModel.AllowUntrusted, Mode=TwoWay}" OffContent="No" OnContent="Yes" Margin="0,0,0,4"/>
-                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
-                        DLLs are checked if they are trusted in Windows by validating the signature before being swapped into a game folder. If a DLL fails signature validation then it will not be used. It is recommended to keep this off.
-                    </TextBlock>
+                    <TextBlock Text="{x:Bind ViewModel.AllowUntrustedInfo}" Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0" />
                 </StackPanel>
 
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Allow Debug DLLs" />
+                    Text="{x:Bind ViewModel.AllowDebugDllsText}" />
                 <StackPanel Margin="0,10,0,0">
                     <ToggleSwitch IsOn="{x:Bind ViewModel.AllowDebugDlls, Mode=TwoWay}" OffContent="No" OnContent="Yes" Margin="0,0,0,4"/>
-                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
-                        SDKs sometimes release debug DLLs which allow additional on-screen information to be displayed.
-                    </TextBlock>
+                    <TextBlock Text="{x:Bind ViewModel.AllowDebugDllsInfo}" Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0" />
                 </StackPanel>
 
                 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Only Show Downloaded DLLs" />
+                    Text="{x:Bind ViewModel.ShowOnlyDownloadedDllsText}" />
                 <StackPanel Margin="0,10,0,0">
                     <ToggleSwitch IsOn="{x:Bind ViewModel.OnlyShowDownloadedDlls, Mode=TwoWay}" OffContent="No" OnContent="Yes" Margin="0,0,0,4" />
-                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
-                        This only applies to the DLL picker, not the library page.
-                    </TextBlock>
+                    <TextBlock Text="{x:Bind ViewModel.ApliesOnlyToDllPickerNotLibraryText}" Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0" />
                 </StackPanel>
 
 
@@ -123,7 +117,7 @@
                 <StackPanel Margin="0,10,0,0">
                     <ComboBox x:Name="LoggingComboBox" ItemsSource="{x:Bind ViewModel.LoggingLevels}" SelectedItem="{x:Bind ViewModel.LoggingLevel, Mode=TwoWay}" />
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
-                        Your current log file is <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenLogFileCommand}"><Run Text="{x:Bind ViewModel.CurrentLogPath}" /></Hyperlink>.
+                        <Run Text="{x:Bind ViewModel.YourCurrentLogfileText}" /><Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenLogFileCommand}"><Run Text="{x:Bind ViewModel.CurrentLogPath}" /></Hyperlink>.
                     </TextBlock>
                 </StackPanel>
 
@@ -133,11 +127,11 @@
                     Margin="0,40,0,0"
                     Text="About" />
                 <TextBlock Margin="0,12,0,0">
-                    Version: 
+                    <Run Text="{x:Bind ViewModel.VersionText}" />
                     <Run Text="{x:Bind ViewModel.AppVersion}" />
                 </TextBlock>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,12,0,0" Spacing="16" >
-                    <Button Content="Check for updates" Command="{x:Bind ViewModel.CheckForUpdatesCommand}" />
+                    <Button Content="{x:Bind ViewModel.CheckForUpdatesText}" Command="{x:Bind ViewModel.CheckForUpdatesCommand}" />
                     <ProgressRing Width="25" Height="25" IsIndeterminate="True" IsActive="{x:Bind ViewModel.IsCheckingForUpdates, Mode=OneWay}" />
                 </StackPanel>
                                 
@@ -155,38 +149,43 @@
                         <Hyperlink NavigateUri="https://www.reddit.com/r/DLSS_Swapper/">r/DLSS_Swapper</Hyperlink>
                     </Paragraph>
                     <Paragraph Margin="0,12,0,0">
-                        <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenAcknowledgementsCommand}">Acknowledgements</Hyperlink>
+                        <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenAcknowledgementsCommand}">
+                            <Run Text="{x:Bind ViewModel.AcknowledgementsText}" />
+                        </Hyperlink>
                     </Paragraph>
                 </RichTextBlock>
 
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="{x:Bind ViewModel.GiveFeedbackText}" />
+                <RichTextBlock Margin="0,12,0,0">
+                    <Paragraph>
+                        <Run Text="{x:Bind ViewModel.GiveFeedbackInfo}" />
+                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub repository</Hyperlink> .
+                    </Paragraph>
+                </RichTextBlock>
                 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Give Feedback" />
-                <RichTextBlock Margin="0,12,0,0">
-                    <Paragraph>
-                        You can suggest a feature or report a problem or on the DLSS Swapper
-                        <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub repository</Hyperlink> .
-                    </Paragraph>
-                </RichTextBlock>
-
-
-
-                <TextBlock
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    Margin="0,40,0,0"
-                    Text="Troubleshooting" />
+                    Text="{x:Bind ViewModel.TroubleshootingText}" />
                 <StackPanel Margin="0,10,0,0" Orientation="Vertical">
                     <RichTextBlock>
                         <Paragraph Margin="0,12,0,0">
-                            <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting">General troubleshooting guide</Hyperlink>
+                            <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting">
+                                <Run Text="{x:Bind ViewModel.GeneralTroubleshootingGuideText}" />
+                            </Hyperlink>
                         </Paragraph>
                         <Paragraph Margin="0,12,0,0">
-                            <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenNetworkTesterCommand}">Network tester</Hyperlink>
+                            <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenNetworkTesterCommand}">
+                                <Run Text="{x:Bind ViewModel.NetworkTesterText}" />
+                            </Hyperlink>
                         </Paragraph>
                         <Paragraph Margin="0,12,0,0">
-                            <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenDiagnosticsCommand}">Diagnostics</Hyperlink>
+                            <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenDiagnosticsCommand}">
+                                <Run Text="{x:Bind ViewModel.DiagnosticsText}" />
+                            </Hyperlink>
                         </Paragraph>
                     </RichTextBlock>
                 </StackPanel>

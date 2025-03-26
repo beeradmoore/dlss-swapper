@@ -319,5 +319,11 @@ namespace DLSS_Swapper.Data
             };
         }
 
+        #region TranslationProperties
+        public string ExportText => ResourceHelper.GetString("Export");
+        public string DeleteText => ResourceHelper.GetString("Delete");
+        public string DownloadText => ResourceHelper.GetString("Download");
+        public string DownloadErrorText => ResourceHelper.GetString("DownloadError");
+        #endregion
     }
 }

@@ -14,6 +14,7 @@ using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.Windows.ApplicationModel.Resources;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -52,10 +53,19 @@ namespace DLSS_Swapper
         [DllImport("user32.dll", SetLastError = true)]
         static extern int DestroyIcon(IntPtr hIcon);
 
+        private void LoadTranslation()
+        {
+            Title = ResourceHelper.GetString("ApplicationTitle");
+            AppTitle.Text = ResourceHelper.GetString("ApplicationTitle");
+            NavigationViewItemGames.Content = ResourceHelper.GetString("Games");
+            NavigationViewItemLibrary.Content = ResourceHelper.GetString("Library");
+            LoadingProgressText.Text = ResourceHelper.GetString("Loading");
+        }
+
         public MainWindow()
         {
-            Title = "DLSS Swapper";
             this.InitializeComponent();
+            LoadTranslation();
 
             if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
             {

@@ -393,6 +393,7 @@ public partial class GameGridPageModel : ObservableObject
     public string AddGameText => ResourceHelper.GetString("AddGame");
     public string RefreshText => ResourceHelper.GetString("Refresh");
     public string FilterText => ResourceHelper.GetString("Filter");
+    public string SearchText => ResourceHelper.GetString("Search");
     public string ViewTypeText => ResourceHelper.GetString("ViewType");
     public string GridViewText => ResourceHelper.GetString("GridView");
     public string ListViewText => ResourceHelper.GetString("ListView");

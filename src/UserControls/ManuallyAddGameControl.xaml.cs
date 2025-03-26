@@ -16,6 +16,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Gaming.Input;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 
@@ -26,11 +27,13 @@ namespace DLSS_Swapper.UserControls
 {
     public partial class ManuallyAddGameControl : UserControl
     {
+        internal ManuallyAddGameModel ViewModel { get; private set; }
+
         public ManuallyAddGameControl(string gamePath)
         {
             this.InitializeComponent();
-
-            DataContext = new ManuallyAddGameModel(this, gamePath);
+            ViewModel = new ManuallyAddGameModel(this, gamePath);
+            DataContext = ViewModel;
         }
 
 

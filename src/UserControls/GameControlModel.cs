@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.IO;
 using System.ComponentModel;
 using Windows.System;
+using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -63,7 +64,7 @@ public partial class GameControlModel : ObservableObject
             }
             else
             {
-                throw new Exception($"Could not find path \"{Game.InstallPath}\".");
+                throw new Exception(ResourceHelper.FormattedResourceTemplate("CouldNotFindGameInstallPathTemplate", Game.InstallPath));
             }
         }
         catch (Exception err)
@@ -74,8 +75,8 @@ public partial class GameControlModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(gameControl.XamlRoot)
                 {
-                    Title = $"Error",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("Error"),
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     Content = err.Message,
                 };
                 await dialog.ShowAsync();
@@ -99,9 +100,9 @@ public partial class GameControlModel : ObservableObject
 
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = $"Notes - {Game.Title}",
-                PrimaryButtonText = "Save",
-                CloseButtonText = "Cancel",
+                Title = $"{ResourceHelper.GetString("Notes")} - {Game.Title}",
+                PrimaryButtonText = ResourceHelper.GetString("Save"),
+                CloseButtonText = ResourceHelper.GetString("Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = textBox,
             };
@@ -154,10 +155,10 @@ public partial class GameControlModel : ObservableObject
             {
                 var cantDeleteDialog = new EasyContentDialog(gameControl.XamlRoot)
                 {
-                    Title = "Error",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("Error"),
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = "This title is not manually added and can't be removed.",
+                    Content = ResourceHelper.GetString("TitleNotManuallyAddedCantBeRemoved"),
                 };
                 await cantDeleteDialog.ShowAsync();
                 return;
@@ -168,11 +169,11 @@ public partial class GameControlModel : ObservableObject
             // This needs to be set after AcceptsReturn otherwise it will strip out the \r
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = $"Remove {Game.Title}?",
-                PrimaryButtonText = "Remove",
-                CloseButtonText = "Cancel",
+                Title = $"{ResourceHelper.GetString("Remove")} {Game.Title}?",
+                PrimaryButtonText = ResourceHelper.GetString("Remove"),
+                CloseButtonText = ResourceHelper.GetString("Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = $"Are you sure you want to remove \"{Game.Title}\" from DLSS Swapper? This will not make any changes to DLSS files that have already been swapped.",
+                Content = ResourceHelper.FormattedResourceTemplate("RemoveDlssSwapperGameTemplate", Game.Title),
             };
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
@@ -198,10 +199,10 @@ public partial class GameControlModel : ObservableObject
         {
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = $"Select {DLLManager.Instance.GetAssetTypeName(gameAssetType)} version",
-                PrimaryButtonText = "Swap",
+                Title = ResourceHelper.FormattedResourceTemplate("SelectVersionTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
+                PrimaryButtonText = ResourceHelper.GetString("Swap"),
                 IsPrimaryButtonEnabled = false,
-                CloseButtonText = "Cancel",
+                CloseButtonText = ResourceHelper.GetString("Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
             };
 
@@ -226,8 +227,8 @@ public partial class GameControlModel : ObservableObject
         {
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = $"Multiple {DLLManager.Instance.GetAssetTypeName(gameAssetType)} DLLs Found",
-                PrimaryButtonText = "Okay",
+                Title = ResourceHelper.FormattedResourceTemplate("MultipleDllsFoundTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
+                PrimaryButtonText = ResourceHelper.GetString("Okay"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = new MultipleDLLsFoundControl(Game, gameAssetType),
             };
@@ -241,4 +242,13 @@ public partial class GameControlModel : ObservableObject
     {
         await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting#game-is-not-in-a-ready-to-play-state"));
     }
+
+    public string RemoveText => ResourceHelper.GetString("Remove");
+    public string AddCustomCoverText => ResourceHelper.GetString("AddCustomCover");
+    public string GameNotReadyToPlayStateText => ResourceHelper.GetString("GameNotReadyToPlayStateText");
+    public string HelpText => ResourceHelper.GetString("Help");
+    public string NameText => ResourceHelper.GetString("Name");
+    public string SaveText => ResourceHelper.GetString("Save");
+    public string InstallPathText => ResourceHelper.GetString("InstallPath");
+    public string OpenFolderText => ResourceHelper.GetString("OpenFolderText");
 }

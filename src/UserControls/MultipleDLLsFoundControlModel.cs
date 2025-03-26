@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -38,7 +39,7 @@ public partial class MultipleDLLsFoundControlModel : ObservableObject
                 }
                 else
                 {
-                    throw new Exception($"Could not find file \"{gameAsset.Path}\".");
+                    throw new Exception(ResourceHelper.FormattedResourceTemplate("CouldNotFindGameInstallPathTemplate", gameAsset.Path));
                 }
             }
         }
@@ -47,4 +48,8 @@ public partial class MultipleDLLsFoundControlModel : ObservableObject
             Logger.Error(err);
         }
     }
+
+    #region LanguageProperties
+    public string BelowMultipleDllFoundYouWillBeAbleToSwapInfo => ResourceHelper.GetString("BelowMultipleDllFoundYouWillBeAbleToSwapInfo");
+    #endregion
 }

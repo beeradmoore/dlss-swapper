@@ -31,6 +31,9 @@
 
         <ControlTemplate x:Key="LeftButtonsControlTemplate" TargetType="ContentControl">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" XYFocusKeyboardNavigation="Enabled" Padding="{ThemeResource ContentDialogPadding}" Background="{TemplateBinding Background}" Spacing="8">
+                <StackPanel.DataContext>
+                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="DataContext"/>
+                </StackPanel.DataContext>
                 <Button ToolTipService.ToolTip="Notes" Command="{Binding EditNotesCommand}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE70B;"/>
@@ -62,8 +65,10 @@
 
 
         <ControlTemplate x:Key="RightButtonsControlTemplate" TargetType="ContentControl">
-
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" XYFocusKeyboardNavigation="Enabled" Padding="{ThemeResource ContentDialogPadding}" Background="{TemplateBinding Background}" Spacing="8">
+                <StackPanel.DataContext>
+                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="DataContext"/>
+                </StackPanel.DataContext>
                 <Button Content="Remove" Visibility="{Binding IsManuallyAdded, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding RemoveCommand}" />
                 <Button x:Name="CloseButton" IsTabStop="False" Content="Close" Style="{ThemeResource DefaultButtonStyle}" ElementSoundMode="FocusOnly" Command="{Binding CloseCommand}" KeyboardAcceleratorPlacementMode="Hidden">
                     <Button.KeyboardAccelerators>
@@ -107,7 +112,7 @@
 
                     <Button HorizontalAlignment="Stretch" Background="Transparent" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.AddCoverImageCommand}" AllowDrop="True" DragEnter="CoverButton_DragEnter" DragOver="CoverButton_DragOver" Drop="CoverButton_Drop" />
                 </Grid>
-                <Button Content="Add Custom Cover" HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.AddCoverImageCommand}" />
+                <Button Content="{x:Bind ViewModel.AddCustomCoverText}" HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.AddCoverImageCommand}" />
             </StackPanel>
 
             <Grid Grid.Column="1" >
@@ -119,34 +124,34 @@
                         Severity="Warning"
                         IsOpen="True"
                         IsClosable="False"
-                        Message="This game is not in a ready to play state.">
+                        Message="{x:Bind ViewModel.GameNotReadyToPlayStateText}">
                         <InfoBar.ActionButton>
-                            <Button Content="Help" Command="{x:Bind ViewModel.ReadyToPlayStateMoreInformationCommand}" HorizontalAlignment="Right" />
+                            <Button Content="{x:Bind ViewModel.HelpText}" Command="{x:Bind ViewModel.ReadyToPlayStateMoreInformationCommand}" HorizontalAlignment="Right" />
                         </InfoBar.ActionButton>
                     </InfoBar>
 
-                    <TextBlock Text="Name" FontWeight="Bold" />
+                    <TextBlock Text="{x:Bind ViewModel.NameText}" FontWeight="Bold" />
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0" VerticalAlignment="Stretch" Text="{x:Bind ViewModel.GameTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{x:Bind ViewModel.IsManuallyAdded, Converter={StaticResource BoolNegationConverter}}" />
-                        <Button Grid.Column="1" VerticalAlignment="Stretch" ToolTipService.ToolTip="Save" Visibility="{x:Bind ViewModel.IsManuallyAdded, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{x:Bind ViewModel.GameTitleHasChanged, Mode=OneWay}" Command="{x:Bind ViewModel.SaveTitleCommand}">
+                        <Button Grid.Column="1" VerticalAlignment="Stretch" ToolTipService.ToolTip="{x:Bind ViewModel.SaveText}" Visibility="{x:Bind ViewModel.IsManuallyAdded, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{x:Bind ViewModel.GameTitleHasChanged, Mode=OneWay}" Command="{x:Bind ViewModel.SaveTitleCommand}">
                             <Button.Content>
                                 <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE74E;"/>
                             </Button.Content>
                         </Button>
                     </Grid>
 
-                    <TextBlock Text="Install path" FontWeight="Bold" Padding="0,8,0,0" />
+                    <TextBlock Text="{x:Bind ViewModel.InstallPathText}" FontWeight="Bold" Padding="0,8,0,0" />
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.Game.InstallPath}" VerticalAlignment="Stretch" />
-                        <Button Grid.Column="1" ToolTipService.ToolTip="Open folder" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenInstallPathCommand}">
+                        <Button Grid.Column="1" ToolTipService.ToolTip="{x:Bind ViewModel.OpenFolderText}" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenInstallPathCommand}">
                             <Button.Content>
                                 <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE8A7;"/>
                             </Button.Content>

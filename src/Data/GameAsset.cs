@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DLSS_Swapper.Extensions;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using SQLite;
 
@@ -139,4 +140,8 @@ public class GameAsset : IEquatable<GameAsset>
             Version.Equals(other.Version) &&
             Hash.Equals(other.Hash);
     }
+
+    #region LanguageProperties
+    public string OpenDllLocationText => ResourceHelper.GetString("OpenDllLocation");
+    #endregion
 }

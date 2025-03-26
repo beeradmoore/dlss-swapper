@@ -45,5 +45,12 @@ namespace DLSS_Swapper.UserControls
 
             await game.PromptToBrowseCustomCover();
         }
+
+        #region LanguageProperties
+        public string AddCoverText => ResourceHelper.GetString("AddCover");
+        public string OptionalText => ResourceHelper.GetString("Optional");
+        public string NameText => ResourceHelper.GetString("Name");
+        public string InstallPathText => ResourceHelper.GetString("InstallPath");
+        #endregion
     }
 }

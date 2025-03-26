@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
@@ -45,8 +46,8 @@ namespace DLSS_Swapper.UserControls
                 var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
                 var toggleSwitch = new ToggleSwitch();
                 toggleSwitch.IsOn = gameLibrary.IsEnabled;
-                toggleSwitch.OffContent = $"{gameLibrary.Name} disabled";
-                toggleSwitch.OnContent = $"{gameLibrary.Name} enabled";
+                toggleSwitch.OffContent = $"{gameLibrary.Name} {ResourceHelper.GetString("Disabled")}";
+                toggleSwitch.OnContent = $"{gameLibrary.Name} {ResourceHelper.GetString("Enabled")}";
                 toggleSwitch.Tag = gameLibraryEnum;
                 toggleSwitch.Toggled += (sender, e) =>
                 {

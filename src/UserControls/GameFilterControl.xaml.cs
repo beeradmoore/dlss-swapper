@@ -1,3 +1,4 @@
+using DLSS_Swapper.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -92,5 +93,12 @@ namespace DLSS_Swapper.UserControls
         }
         #endregion
         */
+
+        #region LanguageProperties
+        public string OptionsText => ResourceHelper.GetString("Options") + ":";
+        public string GroupingText => ResourceHelper.GetString("Grouping") + ":";
+        public string HideGamesWithNoSwappableItemsText => ResourceHelper.GetString("HideGamesWithNoSwappableItems");
+        public string GroupGamesFromTheSameLibraryTogetherText => ResourceHelper.GetString("GroupGamesFromTheSameLibraryTogether");
+        #endregion
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.System;
@@ -16,7 +17,7 @@ namespace DLSS_Swapper.UserControls;
 
 public partial class NewDLLsControlModel : ObservableObject
 {
-    public string Title => $"[NEW DLLs] Found on {DateTime.Now.ToString("yyyy-MM-dd")}";
+    public string Title => $"{ResourceHelper.GetString("NewDllFoundOn")} {DateTime.Now.ToString("yyyy-MM-dd")}";
 
     public string Body { get; init; }
 
@@ -42,15 +43,15 @@ public partial class NewDLLsControlModel : ObservableObject
         var stringBuilder = new StringBuilder();
         foreach (var gameLibrayKeyPair in gameAssetsLibraryGroup)
         {
-            stringBuilder.AppendLine($"Library: {gameLibrayKeyPair.Key}");
+            stringBuilder.AppendLine($"{ResourceHelper.GetString("Library")}: {gameLibrayKeyPair.Key}");
 
             var libraryDicionary = gameLibrayKeyPair.Value as Dictionary<string, List<UnknownGameAsset>>;
             foreach (var gameAssetsDictionary in libraryDicionary)
             {
-                stringBuilder.AppendLine($"- Game: {gameAssetsDictionary.Key}");
+                stringBuilder.AppendLine($"- {ResourceHelper.GetString("Game")}: {gameAssetsDictionary.Key}");
                 foreach (var unknownGameAsset in gameAssetsDictionary.Value)
                 {
-                    stringBuilder.AppendLine($"-- {Path.GetFileName(unknownGameAsset.GameAsset.Path)}, Version: {unknownGameAsset.GameAsset.Version}, Hash: {unknownGameAsset.GameAsset.Hash}");
+                    stringBuilder.AppendLine($"-- {Path.GetFileName(unknownGameAsset.GameAsset.Path)}, {ResourceHelper.GetString("Version")}: {unknownGameAsset.GameAsset.Version}, {ResourceHelper.GetString("Hash")}: {unknownGameAsset.GameAsset.Hash}");
                 }
                 stringBuilder.AppendLine();
             }
@@ -81,4 +82,18 @@ public partial class NewDLLsControlModel : ObservableObject
         package.SetText(Body);
         Clipboard.SetContent(package);
     }
+
+    #region LanguageProperties
+    public string WhileLoadingYourGameNewDllsDiscoveredHelpUsText => ResourceHelper.GetString("WhileLoadingYourGameNewDllsDiscoveredHelpUs");
+    public string StepOneCreateNewIssueText => ResourceHelper.GetString("StepOneCreateNewIssue");
+    public string CreateNewGithubIssueText => ResourceHelper.GetString("CreateNewGithubIssue");
+    public string GithubAccountRequiredText => ResourceHelper.GetString("GithubAccountRequired");
+    public string IfButtonDoesntWorkTryHereText => ResourceHelper.GetString("IfButtonDoesntWorkTryHere");
+    public string StepTwoCopyTitleText => ResourceHelper.GetString("StepTwoCopyTitle");
+    public string CopyText => ResourceHelper.GetString("Copy");
+    public string StepThreeCopyBodyText => ResourceHelper.GetString("StepThreeCopyBody");
+    public string StepFourSubmitYourIssueText => ResourceHelper.GetString("StepFourSubmitYourIssue");
+    public string YouDoNotHaveToSubmitDllAutoTrackText => ResourceHelper.GetString("YouDoNotHaveToSubmitDllAutoTrack");
+    public string ThanksForHelpingText => ResourceHelper.GetString("ThanksForHelping");
+    #endregion
 }

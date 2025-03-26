@@ -432,4 +432,125 @@ Only import dlls from sources you trust.</value>
   <data name="ResetDllToVersionTemplate" xml:space="preserve">
     <value>DLL has been reset to {0}.</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+    <comment>in context of Notes - {GameTitle}</comment>
+  </data>
+  <data name="TitleNotManuallyAddedCantBeRemoved" xml:space="preserve">
+    <value>This title is not manually added and can't be removed.</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Swap" xml:space="preserve">
+    <value>Swap</value>
+  </data>
+  <data name="SelectVersionTemplate" xml:space="preserve">
+    <value>Select {0} version</value>
+  </data>
+  <data name="RemoveDlssSwapperGameTemplate" xml:space="preserve">
+    <value>Are you sure you want to remove "{0}" from DLSS Swapper? This will not make any changes to DLSS files that have already been swapped.</value>
+    <comment>0 - game title</comment>
+  </data>
+  <data name="MultipleDllsFoundTemplate" xml:space="preserve">
+    <value>Multiple {0} DLLs Found</value>
+  </data>
+  <data name="CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+    <value>Could not find path "{0}".</value>
+    <comment>0 - Game.InstallPath</comment>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>enabled</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>disabled</value>
+  </data>
+  <data name="InstallPath" xml:space="preserve">
+    <value>Install path</value>
+  </data>
+  <data name="Optional" xml:space="preserve">
+    <value>(optional)</value>
+  </data>
+  <data name="AddCover" xml:space="preserve">
+    <value>Add Cover</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="BelowMultipleDllFoundYouWillBeAbleToSwapInfo" xml:space="preserve">
+    <value>Shown below are the multiple DLLs found. You will still be able to swap and restore DLLs as usual as we will do these actions to all DLLs at once. However because we don't know what one of these DLLs is used by the game the DLL version shown is of the first DLL detected.</value>
+  </data>
+  <data name="WhileLoadingYourGameNewDllsDiscoveredHelpUs" xml:space="preserve">
+    <value>While loading your games some new DLLs have been discovered which are not in the DLSS Swapper manifest.</value>
+  </data>
+  <data name="StepOneCreateNewIssue" xml:space="preserve">
+    <value>Step 1: Create new issue</value>
+  </data>
+  <data name="CreateNewGithubIssue" xml:space="preserve">
+    <value>Create new GitHub issue</value>
+  </data>
+  <data name="GithubAccountRequired" xml:space="preserve">
+    <value>(GitHub account required)</value>
+  </data>
+  <data name="StepTwoCopyTitle" xml:space="preserve">
+    <value>Step 2: Copy title</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="StepThreeCopyBody" xml:space="preserve">
+    <value>Step 3: Copy body</value>
+  </data>
+  <data name="StepFourSubmitYourIssue" xml:space="preserve">
+    <value>Step 4: Submit your issue</value>
+  </data>
+  <data name="YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+    <value>You do not have to submit the DLLs. We will track them down based on the information provided.</value>
+  </data>
+  <data name="ThanksForHelping" xml:space="preserve">
+    <value>Thanks for helping!</value>
+  </data>
+  <data name="IfButtonDoesntWorkTryHere" xml:space="preserve">
+    <value>If the button does not work try here,</value>
+  </data>
+  <data name="Game" xml:space="preserve">
+    <value>Game</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Hash" xml:space="preserve">
+    <value>Hash</value>
+  </data>
+  <data name="NewDllFoundOn" xml:space="preserve">
+    <value>[NEW DLLs] Found on</value>
+    <comment>[NEW DLLs] Found on (context)TIME</comment>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Open folder</value>
+  </data>
+  <data name="GameNotReadyToPlayState" xml:space="preserve">
+    <value>This game is not in a ready to play state.</value>
+  </data>
+  <data name="AddCustomCover" xml:space="preserve">
+    <value>Add Custom Cover</value>
+  </data>
+  <data name="Grouping" xml:space="preserve">
+    <value>Grouping</value>
+  </data>
+  <data name="HideGamesWithNoSwappableItems" xml:space="preserve">
+    <value>Hide games with no swappable items</value>
+  </data>
+  <data name="GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+    <value>Group games from the same library together</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>

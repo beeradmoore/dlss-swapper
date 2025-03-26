@@ -70,6 +70,24 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add Cover.
+        /// </summary>
+        public static string AddCover {
+            get {
+                return ResourceManager.GetString("AddCover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add Custom Cover.
+        /// </summary>
+        public static string AddCustomCover {
+            get {
+                return ResourceManager.GetString("AddCustomCover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add Game.
         /// </summary>
         public static string AddGame {
@@ -156,6 +174,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Shown below are the multiple DLLs found. You will still be able to swap and restore DLLs as usual as we will do these actions to all DLLs at once. However because we don&apos;t know what one of these DLLs is used by the game the DLL version shown is of the first DLL detected..
+        /// </summary>
+        public static string BelowMultipleDllFoundYouWillBeAbleToSwapInfo {
+            get {
+                return ResourceManager.GetString("BelowMultipleDllFoundYouWillBeAbleToSwapInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Cancel.
         /// </summary>
         public static string Cancel {
@@ -183,11 +210,29 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Copy.
+        /// </summary>
+        public static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not find file &quot;{0}&quot;..
         /// </summary>
         public static string CouldNotFindFileTemplate {
             get {
                 return ResourceManager.GetString("CouldNotFindFileTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not find path &quot;{0}&quot;..
+        /// </summary>
+        public static string CouldNotFindGameInstallPathTemplate {
+            get {
+                return ResourceManager.GetString("CouldNotFindGameInstallPathTemplate", resourceCulture);
             }
         }
         
@@ -215,6 +260,15 @@ namespace DLSS_Swapper.Languages {
         public static string CouldntExportDlssDll {
             get {
                 return ResourceManager.GetString("CouldntExportDlssDll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Create new GitHub issue.
+        /// </summary>
+        public static string CreateNewGithubIssue {
+            get {
+                return ResourceManager.GetString("CreateNewGithubIssue", resourceCulture);
             }
         }
         
@@ -255,6 +309,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu disabled.
+        /// </summary>
+        public static string Disabled {
+            get {
+                return ResourceManager.GetString("Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu DLSS Swapper has failed to launch.
         /// </summary>
         public static string DlssSwapperFailedToLaunch {
@@ -287,6 +350,15 @@ namespace DLSS_Swapper.Languages {
         public static string DownloadError {
             get {
                 return ResourceManager.GetString("DownloadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu enabled.
+        /// </summary>
+        public static string Enabled {
+            get {
+                return ResourceManager.GetString("Enabled", resourceCulture);
             }
         }
         
@@ -399,6 +471,24 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Game.
+        /// </summary>
+        public static string Game {
+            get {
+                return ResourceManager.GetString("Game", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu This game is not in a ready to play state..
+        /// </summary>
+        public static string GameNotReadyToPlayState {
+            get {
+                return ResourceManager.GetString("GameNotReadyToPlayState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Games.
         /// </summary>
         public static string Games {
@@ -408,11 +498,65 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu (GitHub account required).
+        /// </summary>
+        public static string GithubAccountRequired {
+            get {
+                return ResourceManager.GetString("GithubAccountRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Grid View.
         /// </summary>
         public static string GridView {
             get {
                 return ResourceManager.GetString("GridView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Group games from the same library together.
+        /// </summary>
+        public static string GroupGamesFromTheSameLibraryTogether {
+            get {
+                return ResourceManager.GetString("GroupGamesFromTheSameLibraryTogether", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Grouping.
+        /// </summary>
+        public static string Grouping {
+            get {
+                return ResourceManager.GetString("Grouping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Hash.
+        /// </summary>
+        public static string Hash {
+            get {
+                return ResourceManager.GetString("Hash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Hide games with no swappable items.
+        /// </summary>
+        public static string HideGamesWithNoSwappableItems {
+            get {
+                return ResourceManager.GetString("HideGamesWithNoSwappableItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu If the button does not work try here,.
+        /// </summary>
+        public static string IfButtonDoesntWorkTryHere {
+            get {
+                return ResourceManager.GetString("IfButtonDoesntWorkTryHere", resourceCulture);
             }
         }
         
@@ -431,6 +575,15 @@ namespace DLSS_Swapper.Languages {
         public static string ImportSystemCurrentlyBroken {
             get {
                 return ResourceManager.GetString("ImportSystemCurrentlyBroken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Install path.
+        /// </summary>
+        public static string InstallPath {
+            get {
+                return ResourceManager.GetString("InstallPath", resourceCulture);
             }
         }
         
@@ -484,11 +637,38 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Multiple {0} DLLs Found.
+        /// </summary>
+        public static string MultipleDllsFoundTemplate {
+            get {
+                return ResourceManager.GetString("MultipleDllsFoundTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Network Tester.
         /// </summary>
         public static string NetworkTester {
             get {
                 return ResourceManager.GetString("NetworkTester", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu [NEW DLLs] Found on.
+        /// </summary>
+        public static string NewDllFoundOn {
+            get {
+                return ResourceManager.GetString("NewDllFoundOn", resourceCulture);
             }
         }
         
@@ -547,6 +727,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Notes.
+        /// </summary>
+        public static string Notes {
+            get {
+                return ResourceManager.GetString("Notes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Okay.
         /// </summary>
         public static string Okay {
@@ -570,6 +759,33 @@ namespace DLSS_Swapper.Languages {
         public static string OpenDllLocation {
             get {
                 return ResourceManager.GetString("OpenDllLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Open folder.
+        /// </summary>
+        public static string OpenFolder {
+            get {
+                return ResourceManager.GetString("OpenFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu (optional).
+        /// </summary>
+        public static string Optional {
+            get {
+                return ResourceManager.GetString("Optional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Options.
+        /// </summary>
+        public static string Options {
+            get {
+                return ResourceManager.GetString("Options", resourceCulture);
             }
         }
         
@@ -637,6 +853,24 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Remove.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Are you sure you want to remove &quot;{0}&quot; from DLSS Swapper? This will not make any changes to DLSS files that have already been swapped..
+        /// </summary>
+        public static string RemoveDlssSwapperGameTemplate {
+            get {
+                return ResourceManager.GetString("RemoveDlssSwapperGameTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Report issue.
         /// </summary>
         public static string ReportIssue {
@@ -655,11 +889,38 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Select Game Folder.
         /// </summary>
         public static string SelectGameFolder {
             get {
                 return ResourceManager.GetString("SelectGameFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Select {0} version.
+        /// </summary>
+        public static string SelectVersionTemplate {
+            get {
+                return ResourceManager.GetString("SelectVersionTemplate", resourceCulture);
             }
         }
         
@@ -916,11 +1177,74 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Step 4: Submit your issue.
+        /// </summary>
+        public static string StepFourSubmitYourIssue {
+            get {
+                return ResourceManager.GetString("StepFourSubmitYourIssue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Step 1: Create new issue.
+        /// </summary>
+        public static string StepOneCreateNewIssue {
+            get {
+                return ResourceManager.GetString("StepOneCreateNewIssue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Step 3: Copy body.
+        /// </summary>
+        public static string StepThreeCopyBody {
+            get {
+                return ResourceManager.GetString("StepThreeCopyBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Step 2: Copy title.
+        /// </summary>
+        public static string StepTwoCopyTitle {
+            get {
+                return ResourceManager.GetString("StepTwoCopyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Success.
         /// </summary>
         public static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Swap.
+        /// </summary>
+        public static string Swap {
+            get {
+                return ResourceManager.GetString("Swap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Thanks for helping!.
+        /// </summary>
+        public static string ThanksForHelping {
+            get {
+                return ResourceManager.GetString("ThanksForHelping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu This title is not manually added and can&apos;t be removed..
+        /// </summary>
+        public static string TitleNotManuallyAddedCantBeRemoved {
+            get {
+                return ResourceManager.GetString("TitleNotManuallyAddedCantBeRemoved", resourceCulture);
             }
         }
         
@@ -952,6 +1276,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Version.
+        /// </summary>
+        public static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu View Type.
         /// </summary>
         public static string ViewType {
@@ -975,6 +1308,24 @@ namespace DLSS_Swapper.Languages {
         public static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu While loading your games some new DLLs have been discovered which are not in the DLSS Swapper manifest..
+        /// </summary>
+        public static string WhileLoadingYourGameNewDllsDiscoveredHelpUs {
+            get {
+                return ResourceManager.GetString("WhileLoadingYourGameNewDllsDiscoveredHelpUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu You do not have to submit the DLLs. We will track them down based on the information provided..
+        /// </summary>
+        public static string YouDoNotHaveToSubmitDllAutoTrack {
+            get {
+                return ResourceManager.GetString("YouDoNotHaveToSubmitDllAutoTrack", resourceCulture);
             }
         }
     }

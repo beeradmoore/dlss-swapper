@@ -242,7 +242,7 @@
                  Severity="Warning"
                  IsClosable="False"
                  Title="Warning"
-                 Message="This app is running with administrative privileges."
+                 Message="{x:Bind ViewModel.ApplicationRunsInAdministrativeModeInfo}"
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
         </Grid>
 

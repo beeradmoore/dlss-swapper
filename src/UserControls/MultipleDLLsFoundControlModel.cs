@@ -39,7 +39,7 @@ public partial class MultipleDLLsFoundControlModel : ObservableObject
                 }
                 else
                 {
-                    throw new Exception(ResourceHelper.FormattedResourceTemplate("CouldNotFindGameInstallPathTemplate", gameAsset.Path));
+                    throw new Exception(ResourceHelper.GetFormattedResourceTemplate("CouldNotFindGameInstallPathTemplate", gameAsset.Path));
                 }
             }
         }

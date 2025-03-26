@@ -426,20 +426,20 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Exported DLL {0}..
-        /// </summary>
-        public static string ExportedDll {
-            get {
-                return ResourceManager.GetString("ExportedDll", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Exported {0} DLSS dll{1}..
         /// </summary>
         public static string ExportedDllsTemplate {
             get {
                 return ResourceManager.GetString("ExportedDllsTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Exported DLL {0}..
+        /// </summary>
+        public static string ExportedDllTemplate {
+            get {
+                return ResourceManager.GetString("ExportedDllTemplate", resourceCulture);
             }
         }
         
@@ -590,9 +590,9 @@ namespace DLSS_Swapper.Languages {
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu The install path &quot;{0}&quot; already exists and can&apos;t be added again..
         /// </summary>
-        public static string InstallPathAlreadyExists {
+        public static string InstallPathAlreadyExistsTemplate {
             get {
-                return ResourceManager.GetString("InstallPathAlreadyExists", resourceCulture);
+                return ResourceManager.GetString("InstallPathAlreadyExistsTemplate", resourceCulture);
             }
         }
         

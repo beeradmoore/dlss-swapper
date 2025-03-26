@@ -64,7 +64,7 @@ public partial class GameControlModel : ObservableObject
             }
             else
             {
-                throw new Exception(ResourceHelper.FormattedResourceTemplate("CouldNotFindGameInstallPathTemplate", Game.InstallPath));
+                throw new Exception(ResourceHelper.GetFormattedResourceTemplate("CouldNotFindGameInstallPathTemplate", Game.InstallPath));
             }
         }
         catch (Exception err)
@@ -173,7 +173,7 @@ public partial class GameControlModel : ObservableObject
                 PrimaryButtonText = ResourceHelper.GetString("Remove"),
                 CloseButtonText = ResourceHelper.GetString("Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = ResourceHelper.FormattedResourceTemplate("RemoveDlssSwapperGameTemplate", Game.Title),
+                Content = ResourceHelper.GetFormattedResourceTemplate("RemoveDlssSwapperGameTemplate", Game.Title),
             };
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
@@ -199,7 +199,7 @@ public partial class GameControlModel : ObservableObject
         {
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = ResourceHelper.FormattedResourceTemplate("SelectVersionTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
+                Title = ResourceHelper.GetFormattedResourceTemplate("SelectVersionTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
                 PrimaryButtonText = ResourceHelper.GetString("Swap"),
                 IsPrimaryButtonEnabled = false,
                 CloseButtonText = ResourceHelper.GetString("Cancel"),
@@ -227,7 +227,7 @@ public partial class GameControlModel : ObservableObject
         {
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = ResourceHelper.FormattedResourceTemplate("MultipleDllsFoundTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
+                Title = ResourceHelper.GetFormattedResourceTemplate("MultipleDllsFoundTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
                 PrimaryButtonText = ResourceHelper.GetString("Okay"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = new MultipleDLLsFoundControl(Game, gameAssetType),

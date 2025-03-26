@@ -200,7 +200,7 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="ExportAll" xml:space="preserve">
     <value>Export All</value>
   </data>
-  <data name="ExportedDll" xml:space="preserve">
+  <data name="ExportedDllTemplate" xml:space="preserve">
     <value>Exported DLL {0}.</value>
     <comment>Leave 0 as it is and use safe string format</comment>
   </data>
@@ -225,7 +225,7 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="ImportSystemCurrentlyBroken" xml:space="preserve">
     <value>Import system is currently broken, but it is on the roadmap to be fixed.</value>
   </data>
-  <data name="InstallPathAlreadyExists" xml:space="preserve">
+  <data name="InstallPathAlreadyExistsTemplate" xml:space="preserve">
     <value>The install path "{0}" already exists and can't be added again.</value>
     <comment>Leave 0 as it is and use safe string format</comment>
   </data>

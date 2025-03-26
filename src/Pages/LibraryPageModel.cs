@@ -155,7 +155,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                                 // If there is more than one dll something has gone wrong.
                                 if (zippedDlls.Length != 1)
                                 {
-                                    throw new Exception(ResourceHelper.FormattedResourceTemplate("ExportErrorDueToDllsCountTemplate", dllRecord.LocalRecord.ExpectedPath, zippedDlls.Length));
+                                    throw new Exception(ResourceHelper.GetFormattedResourceTemplate("ExportErrorDueToDllsCountTemplate", dllRecord.LocalRecord.ExpectedPath, zippedDlls.Length));
                                 }
 
                                 var tempFileExportPath = Path.Combine(tempExportPath, Guid.NewGuid().ToString("D"));
@@ -189,7 +189,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                 CloseButtonText = ResourceHelper.GetString("Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Title = ResourceHelper.GetString("Success"),
-                Content = ResourceHelper.FormattedResourceTemplate("ExportedDllsTemplate", exportCount, exportCount == 1 ? string.Empty : "s"),
+                Content = ResourceHelper.GetFormattedResourceTemplate("ExportedDllsTemplate", exportCount, exportCount == 1 ? string.Empty : "s"),
             };
             await dialog.ShowAsync();
         }
@@ -551,7 +551,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
             PrimaryButtonText = ResourceHelper.GetString("Delete"),
             CloseButtonText = ResourceHelper.GetString("Cancel"),
             DefaultButton = ContentDialogButton.Primary,
-            Content = ResourceHelper.FormattedResourceTemplate("DeleteDllVersionTemplate", assetTypeName, record.Version),
+            Content = ResourceHelper.GetFormattedResourceTemplate("DeleteDllVersionTemplate", assetTypeName, record.Version),
         };
         var response = await dialog.ShowAsync();
         if (response == ContentDialogResult.Primary)
@@ -579,7 +579,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                     Title = ResourceHelper.GetString("Error"),
                     CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = ResourceHelper.FormattedResourceTemplate("UnableToDeleteRecord", assetTypeName),
+                    Content = ResourceHelper.GetFormattedResourceTemplate("UnableToDeleteRecord", assetTypeName),
                 };
                 await errorDialog.ShowAsync();
             }
@@ -656,7 +656,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                     Title = ResourceHelper.GetString("Success"),
                     CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = ResourceHelper.FormattedResourceTemplate("ExportedDll", record.DisplayName),
+                    Content = ResourceHelper.GetFormattedResourceTemplate("ExportedDllTemplate", record.DisplayName),
                 };
                 await dialog.ShowAsync();
             }

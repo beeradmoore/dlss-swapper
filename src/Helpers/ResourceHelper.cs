@@ -18,7 +18,7 @@ public class ResourceHelper
     }
 
     //Ommit exceptions and
-    public static string FormattedResourceTemplate(string templateResourceName, params object[] args)
+    public static string GetFormattedResourceTemplate(string templateResourceName, params object[] args)
     {
         try
         {

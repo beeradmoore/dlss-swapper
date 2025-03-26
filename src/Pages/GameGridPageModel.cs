@@ -261,7 +261,7 @@ public partial class GameGridPageModel : ObservableObject
                 {
                     Title = ResourceHelper.GetString("AddingGameError"),
                     CloseButtonText = ResourceHelper.GetString("Close"),
-                    Content = ResourceHelper.FormattedResourceTemplate("InstallPathAlreadyExists", installPath),
+                    Content = ResourceHelper.GetFormattedResourceTemplate("InstallPathAlreadyExistsTemplate", installPath),
                 };
                 await dialog.ShowAsync();
                 return;
@@ -397,5 +397,6 @@ public partial class GameGridPageModel : ObservableObject
     public string ViewTypeText => ResourceHelper.GetString("ViewType");
     public string GridViewText => ResourceHelper.GetString("GridView");
     public string ListViewText => ResourceHelper.GetString("ListView");
+    public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
     #endregion
 }

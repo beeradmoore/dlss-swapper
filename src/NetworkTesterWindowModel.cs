@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -9,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -16,7 +16,7 @@ using Windows.ApplicationModel.DataTransfer;
 
 namespace DLSS_Swapper;
 
-public partial class NetworkTesterWindowModel : ObservableObject, IDisposable
+public partial class NetworkTesterWindowModel : LocalizedViewModelBase
 {
     WeakReference<NetworkTesterWindow> _weakWindow;
     readonly string _dlssSwapperDomainTestLink = "dlss-swapper-downloads.beeradmoore.com";
@@ -125,11 +125,9 @@ public partial class NetworkTesterWindowModel : ObservableObject, IDisposable
 
     CancellationTokenSource? _cancellationTokenSource = null;
 
-    public NetworkTesterWindowModel(NetworkTesterWindow window)
+    public NetworkTesterWindowModel(NetworkTesterWindow window) : base()
     {
         _weakWindow = new WeakReference<NetworkTesterWindow>(window);
-        _languageManager = LanguageManager.Instance;
-        _languageManager.OnLanguageChanged += OnLanguageChanged;
 
         AppendTestResults("Init", $"DLSS Swapper version: v{App.CurrentApp.GetVersionString()}");
     }
@@ -875,26 +873,4 @@ public partial class NetworkTesterWindowModel : ObservableObject, IDisposable
     [LanguageProperty] public string Test11TitleText => ResourceHelper.GetString("DiagnosticsTest11Title");
     [LanguageProperty] public string RunTestText => ResourceHelper.GetString("RunTestText");
     #endregion
-
-    private void OnLanguageChanged()
-    {
-        Type currentClassType = GetType();
-        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
-        foreach (string propertyName in languageProperties)
-        {
-            OnPropertyChanged(propertyName);
-        }
-    }
-
-    public void Dispose()
-    {
-        _languageManager.OnLanguageChanged -= OnLanguageChanged;
-    }
-
-    ~NetworkTesterWindowModel()
-    {
-        Dispose();
-    }
-
-    private readonly LanguageManager _languageManager;
 }

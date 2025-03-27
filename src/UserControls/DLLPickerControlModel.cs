@@ -11,12 +11,13 @@ using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Interfaces;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 namespace DLSS_Swapper.UserControls;
 
-public partial class DLLPickerControlModel : ObservableObject, IDisposable
+public partial class DLLPickerControlModel : LocalizedViewModelBase
 {
     WeakReference<GameControl> _gameControlWeakReference;
     WeakReference<EasyContentDialog> _parentDialogWeakReference;
@@ -44,13 +45,11 @@ public partial class DLLPickerControlModel : ObservableObject, IDisposable
 
     public bool CanCloseParentDialog { get; set; } = false;
 
-    public DLLPickerControlModel(GameControl gameControl, EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType)
+    public DLLPickerControlModel(GameControl gameControl, EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType) : base()
     {
         _gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         _parentDialogWeakReference = new WeakReference<EasyContentDialog>(parentDialog);
         _dllPickerControlWeakReference = new WeakReference<DLLPickerControl>(dllPickerControl);
-        _languageManager = LanguageManager.Instance;
-        _languageManager.OnLanguageChanged += OnLanguageChanged;
 
         parentDialog.Closing += (ContentDialog sender, ContentDialogClosingEventArgs args) =>
         {
@@ -344,26 +343,4 @@ public partial class DLLPickerControlModel : ObservableObject, IDisposable
     [LanguageProperty] public string OriginalDllRestoreText => ResourceHelper.GetString("OriginalDllRestore");
     [LanguageProperty] public string OriginalDllText => ResourceHelper.GetString("OriginalDllText");
     #endregion
-
-    private void OnLanguageChanged()
-    {
-        Type currentClassType = GetType();
-        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
-        foreach (string propertyName in languageProperties)
-        {
-            OnPropertyChanged(propertyName);
-        }
-    }
-
-    public void Dispose()
-    {
-        _languageManager.OnLanguageChanged -= OnLanguageChanged;
-    }
-
-    ~DLLPickerControlModel()
-    {
-        Dispose();
-    }
-
-    private readonly LanguageManager _languageManager;
 }

@@ -5,27 +5,25 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
 
 namespace DLSS_Swapper.Pages;
 
-public partial class LibraryPageModel : ObservableObject, IDisposable
+public partial class LibraryPageModel : LocalizedViewModelBase
 {
     LibraryPage libraryPage;
 
     internal ObservableCollection<DLLRecord>? SelectedLibraryList { get; private set; } = null;
 
-    public LibraryPageModel(LibraryPage libraryPage)
+    public LibraryPageModel(LibraryPage libraryPage) : base()
     {
         this.libraryPage = libraryPage;
-        _languageManager = LanguageManager.Instance;
-        _languageManager.OnLanguageChanged += OnLanguageChanged;
     }
 
     [RelayCommand]
@@ -712,26 +710,4 @@ public partial class LibraryPageModel : ObservableObject, IDisposable
     [LanguageProperty] public string CancelText => ResourceHelper.GetString("Cancel");
     [LanguageProperty] public string LibraryText => ResourceHelper.GetString("Library");
     #endregion
-
-    private void OnLanguageChanged()
-    {
-        Type currentClassType = GetType();
-        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
-        foreach (string propertyName in languageProperties)
-        {
-            OnPropertyChanged(propertyName);
-        }
-    }
-
-    public void Dispose()
-    {
-        _languageManager.OnLanguageChanged += OnLanguageChanged;
-    }
-
-    ~LibraryPageModel()
-    {
-        Dispose();
-    }
-
-    private readonly LanguageManager _languageManager;
 }

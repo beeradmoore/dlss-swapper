@@ -9,17 +9,15 @@ using System.Diagnostics;
 using System.IO;
 using Windows.System;
 using DLSS_Swapper.Helpers;
-using System.Collections.Generic;
 using DLSS_Swapper.Attributes;
+using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.UserControls;
 
-public partial class GameControlModel : ObservableObject, IDisposable
+public partial class GameControlModel : LocalizedViewModelBase
 {
-    public GameControlModel(GameControl gameControl, Game game)
+    public GameControlModel(GameControl gameControl, Game game) : base()
     {
-        _languageManager = LanguageManager.Instance;
-        _languageManager.OnLanguageChanged += OnLanugageChanged;
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
         GameTitle = game.Title;
@@ -258,26 +256,4 @@ public partial class GameControlModel : ObservableObject, IDisposable
     [LanguageProperty] public string CloseText => ResourceHelper.GetString("Close");
     [LanguageProperty] public string MultipleDllsFoundText => ResourceHelper.GetString("MultipleDllsFound");
     #endregion
-
-    private void OnLanugageChanged()
-    {
-        Type currentClassType = GetType();
-        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
-        foreach (string propertyName in languageProperties)
-        {
-            OnPropertyChanged(propertyName);
-        }
-    }
-
-    public void Dispose()
-    {
-        _languageManager.OnLanguageChanged -= OnLanugageChanged;
-    }
-
-    ~GameControlModel()
-    {
-        Dispose();
-    }
-
-    private readonly LanguageManager _languageManager;
 }

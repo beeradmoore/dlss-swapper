@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Interfaces;
 using Windows.ApplicationModel.DataTransfer;
 
 namespace DLSS_Swapper;
 
-public partial class FailToLaunchWindowModel : ObservableObject, IDisposable
+public partial class FailToLaunchWindowModel : LocalizedViewModelBase
 {
-    public FailToLaunchWindowModel()
+    public FailToLaunchWindowModel() : base()
     {
         var systemDetails = new SystemDetails();
         SystemData = systemDetails.GetSystemData();
-        _languageManager = LanguageManager.Instance;
-        _languageManager.OnLanguageChanged += OnLanguagechanged;
     }
 
     public string SystemData { get; set; } = string.Empty;
@@ -36,26 +32,4 @@ public partial class FailToLaunchWindowModel : ObservableObject, IDisposable
     [LanguageProperty] public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
     [LanguageProperty] public string DlssSwapperFailedToLaunchText => ResourceHelper.GetString("DlssSwapperFailedToLaunch");
     #endregion
-
-    private void OnLanguagechanged()
-    {
-        Type currentClassType = GetType();
-        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
-        foreach (string propertyName in languageProperties)
-        {
-            OnPropertyChanged(propertyName);
-        }
-    }
-
-    public void Dispose()
-    {
-        _languageManager.OnLanguageChanged -= OnLanguagechanged;
-    }
-
-    ~FailToLaunchWindowModel()
-    {
-        Dispose();
-    }
-
-    private readonly LanguageManager _languageManager;
 }

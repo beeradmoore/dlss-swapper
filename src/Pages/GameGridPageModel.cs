@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -8,6 +7,7 @@ using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Builders;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -23,12 +23,10 @@ public enum GameGridViewType
     ListView,
 }
 
-public partial class GameGridPageModel : ObservableObject, IDisposable
+public partial class GameGridPageModel : LocalizedViewModelBase
 {
-    public GameGridPageModel(GameGridPage gameGridPage)
+    public GameGridPageModel(GameGridPage gameGridPage) : base()
     {
-        _languageManager = LanguageManager.Instance;
-        _languageManager.OnLanguageChanged += OnLanguageChanged;
         this.gameGridPage = gameGridPage;
         ApplyGameGroupFilter();
     }
@@ -371,26 +369,4 @@ public partial class GameGridPageModel : ObservableObject, IDisposable
     [LanguageProperty] public string GamesText => ResourceHelper.GetString("Games");
     [LanguageProperty] public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
     #endregion
-
-    private void OnLanguageChanged()
-    {
-        Type currentClassType = GetType();
-        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
-        foreach (string propertyName in languageProperties)
-        {
-            OnPropertyChanged(propertyName);
-        }
-    }
-
-    public void Dispose()
-    {
-        _languageManager.OnLanguageChanged -= OnLanguageChanged;
-    }
-
-    ~GameGridPageModel()
-    {
-        Dispose();
-    }
-
-    private readonly LanguageManager _languageManager;
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
@@ -14,12 +13,10 @@ using Windows.System;
 
 namespace DLSS_Swapper.UserControls;
 
-public partial class NewDLLsControlModel : ObservableObject, IDisposable
+public partial class NewDLLsControlModel : LocalizedViewModelBase
 {
-    public NewDLLsControlModel()
+    public NewDLLsControlModel() : base()
     {
-        _languageManager = LanguageManager.Instance;
-        _languageManager.OnLanguageChanged += OnLanguageChanged;
         var unknownGameAssets = GameManager.Instance.GetUnknownGameAssets();
         var gameAssetsLibraryGroup = new Dictionary<GameLibrary, Dictionary<string, List<UnknownGameAsset>>>();
         foreach (var unknownGameAsset in unknownGameAssets)
@@ -96,26 +93,4 @@ public partial class NewDLLsControlModel : ObservableObject, IDisposable
     [LanguageProperty] public string YouDoNotHaveToSubmitDllAutoTrackText => ResourceHelper.GetString("YouDoNotHaveToSubmitDllAutoTrack");
     [LanguageProperty] public string ThanksForHelpingText => ResourceHelper.GetString("ThanksForHelping");
     #endregion
-
-    private void OnLanguageChanged()
-    {
-        Type currentClassType = GetType();
-        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
-        foreach (string propertyName in languageProperties)
-        {
-            OnPropertyChanged(propertyName);
-        }
-    }
-
-    public void Dispose()
-    {
-        _languageManager.OnLanguageChanged -= OnLanguageChanged;
-    }
-
-    ~NewDLLsControlModel()
-    {
-        Dispose();
-    }
-
-    private readonly LanguageManager _languageManager;
 }

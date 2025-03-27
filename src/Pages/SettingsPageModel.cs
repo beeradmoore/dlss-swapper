@@ -17,10 +17,11 @@ using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Pages;
 
-internal partial class SettingsPageModel : ObservableObject, IDisposable
+internal partial class SettingsPageModel : LocalizedViewModelBase
 {
     readonly WeakReference<SettingsPage> _weakPage;
     readonly DLSSSettingsManager _dlssSettingsManager;
@@ -78,10 +79,8 @@ internal partial class SettingsPageModel : ObservableObject, IDisposable
 
     bool _hasSetDefaults = false;
 
-    public SettingsPageModel(SettingsPage page)
+    public SettingsPageModel(SettingsPage page) : base()
     {
-        _languageManager = LanguageManager.Instance;
-        _languageManager.OnLanguageChanged += OnLanguageChanged;
         _weakPage = new WeakReference<SettingsPage>(page);
         Languages = new ObservableCollection<KeyValuePair<string, string>>
         {
@@ -328,26 +327,9 @@ internal partial class SettingsPageModel : ObservableObject, IDisposable
     [LanguageProperty] public string LanguageText => ResourceHelper.GetString("SettingsLanguage");
     #endregion
 
-    private void OnLanguageChanged()
+    protected override void OnLanguageChanged()
     {
-        Type currentClassType = GetType();
-        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
-        foreach (string propertyName in languageProperties)
-        {
-            OnPropertyChanged(propertyName);
-        }
+        base.OnLanguageChanged();
         DLSSOnScreenIndicatorOptions.RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
     }
-
-    public void Dispose()
-    {
-        _languageManager.OnLanguageChanged -= OnLanguageChanged;
-    }
-
-    ~SettingsPageModel()
-    {
-        Dispose();
-    }
-
-    private readonly LanguageManager _languageManager;
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AsyncAwaitBestPractices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using Microsoft.UI.Xaml;
@@ -336,22 +337,22 @@ public partial class DLLPickerControlModel : ObservableObject, IDisposable
     }
 
     #region LanguageProperties
-    public string NoDllsFoundText => ResourceHelper.GetString("NoDllsFoundText");
-    public string PleaseNavigateLibraryToDownloadDllsText => ResourceHelper.GetString("PleaseNavigateLibraryToDownloadDllsText");
-    public string OpenDllLocationText => ResourceHelper.GetString("OpenDllLocation");
-    public string CurrentDllText => ResourceHelper.GetString("CurrentDll");
-    public string OriginalDllRestoreText => ResourceHelper.GetString("OriginalDllRestore");
-    public string OriginalDllText => ResourceHelper.GetString("OriginalDllText");
+    [LanguageProperty] public string NoDllsFoundText => ResourceHelper.GetString("NoDllsFoundText");
+    [LanguageProperty] public string PleaseNavigateLibraryToDownloadDllsText => ResourceHelper.GetString("PleaseNavigateLibraryToDownloadDllsText");
+    [LanguageProperty] public string OpenDllLocationText => ResourceHelper.GetString("OpenDllLocation");
+    [LanguageProperty] public string CurrentDllText => ResourceHelper.GetString("CurrentDll");
+    [LanguageProperty] public string OriginalDllRestoreText => ResourceHelper.GetString("OriginalDllRestore");
+    [LanguageProperty] public string OriginalDllText => ResourceHelper.GetString("OriginalDllText");
     #endregion
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(nameof(NoDllsFoundText));
-        OnPropertyChanged(nameof(PleaseNavigateLibraryToDownloadDllsText));
-        OnPropertyChanged(nameof(OpenDllLocationText));
-        OnPropertyChanged(nameof(CurrentDllText));
-        OnPropertyChanged(nameof(OriginalDllRestoreText));
-        OnPropertyChanged(nameof(OriginalDllText));
+        Type currentClassType = GetType();
+        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
+        foreach (string propertyName in languageProperties)
+        {
+            OnPropertyChanged(propertyName);
+        }
     }
 
     public void Dispose()

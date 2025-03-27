@@ -7,9 +7,12 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Datatypes;
 using DLSS_Swapper.Helpers;
@@ -291,78 +294,50 @@ internal partial class SettingsPageModel : ObservableObject, IDisposable
     }
 
     #region TranslationProperties
-    public string VersionText => ResourceHelper.GetString("SettingsVersion") + ":";
-    public string GiveFeedbackInfo => ResourceHelper.GetString("SettingsGiveFeedbackInfo");
-    public string NetworkTesterText => ResourceHelper.GetString("SettingsNetworkTester");
-    public string GeneralTroubleshootingGuideText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");
-    public string DiagnosticsText => ResourceHelper.GetString("SettingsDiagnostics");
-    public string AcknowledgementsText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");
-    public string AllowDebugDllsInfo => ResourceHelper.GetString("SettingsAllowDebugDllsInfo");
-    public string AllowUntrustedInfo => ResourceHelper.GetString("SettingsAllowUntrustedInfo");
-    public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
-    public string WarningText => ResourceHelper.GetString("Warning");
-    public string YourCurrentLogfileText => ResourceHelper.GetString("SettingsYourCurrentLogfile");
-    public string ThemeLightText => ResourceHelper.GetString("SettingsThemeLight");
-    public string ThemeDarkText => ResourceHelper.GetString("SettingsThemeDark");
-    public string ThemeSystemSettingDefaultText => ResourceHelper.GetString("SettingsThemeSystemSettingDefault");
-    public string ThemeModeText => ResourceHelper.GetString("SettingsThemeMode");
-    public string GameLibrariesText => ResourceHelper.GetString("SettingsGameLibraries");
-    public string DllsDeveloperOptionsText => ResourceHelper.GetString("SettingsDllsDeveloperOptions");
-    public string ShowOnScreenIndicatorText => ResourceHelper.GetString("SettingsShowOnScreenIndicator");
-    public string VerboseLoggingText => ResourceHelper.GetString("SettingsVerboseLogging");
-    public string EnableLoggingToFileText => ResourceHelper.GetString("SettingsEnableLoggingToFile");
-    public string EnableLoggingToConsoleWindowText => ResourceHelper.GetString("SettingsEnableLoggingToConsoleWindow");
-    public string AllowUntrustedText => ResourceHelper.GetString("SettingsAllowUntrusted");
-    public string AllowDebugDllsText => ResourceHelper.GetString("SettingsAllowDebugDlls");
-    public string ShowOnlyDownloadedDllsText => ResourceHelper.GetString("SettingsShowOnlyDownloadedDlls");
-    public string ApliesOnlyToDllPickerNotLibraryText => ResourceHelper.GetString("SettingsApliesOnlyToDllPickerNotLibrary");
-    public string CheckForUpdatesText => ResourceHelper.GetString("SettingsCheckForUpdates");
-    public string GiveFeedbackText => ResourceHelper.GetString("SettingsGiveFeedback");
-    public string TroubleshootingText => ResourceHelper.GetString("SettingsTroubleshooting");
-    public string SettingsText => ResourceHelper.GetString("Settings");
-    public string LoggingText => ResourceHelper.GetString("SettingsLogging");
-    public string AboutText => ResourceHelper.GetString("SettingsAbout");
-    public string YesText => ResourceHelper.GetString("SettingsYes");
-    public string NoText => ResourceHelper.GetString("SettingsNo");
-    public string LanguageText => ResourceHelper.GetString("SettingsLanguage");
+    [LanguageProperty] public string VersionText => ResourceHelper.GetString("SettingsVersion") + ":";
+    [LanguageProperty] public string GiveFeedbackInfo => ResourceHelper.GetString("SettingsGiveFeedbackInfo");
+    [LanguageProperty] public string NetworkTesterText => ResourceHelper.GetString("SettingsNetworkTester");
+    [LanguageProperty] public string GeneralTroubleshootingGuideText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");
+    [LanguageProperty] public string DiagnosticsText => ResourceHelper.GetString("SettingsDiagnostics");
+    [LanguageProperty] public string AcknowledgementsText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");
+    [LanguageProperty] public string AllowDebugDllsInfo => ResourceHelper.GetString("SettingsAllowDebugDllsInfo");
+    [LanguageProperty] public string AllowUntrustedInfo => ResourceHelper.GetString("SettingsAllowUntrustedInfo");
+    [LanguageProperty] public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
+    [LanguageProperty] public string WarningText => ResourceHelper.GetString("Warning");
+    [LanguageProperty] public string YourCurrentLogfileText => ResourceHelper.GetString("SettingsYourCurrentLogfile");
+    [LanguageProperty] public string ThemeLightText => ResourceHelper.GetString("SettingsThemeLight");
+    [LanguageProperty] public string ThemeDarkText => ResourceHelper.GetString("SettingsThemeDark");
+    [LanguageProperty] public string ThemeSystemSettingDefaultText => ResourceHelper.GetString("SettingsThemeSystemSettingDefault");
+    [LanguageProperty] public string ThemeModeText => ResourceHelper.GetString("SettingsThemeMode");
+    [LanguageProperty] public string GameLibrariesText => ResourceHelper.GetString("SettingsGameLibraries");
+    [LanguageProperty] public string DllsDeveloperOptionsText => ResourceHelper.GetString("SettingsDllsDeveloperOptions");
+    [LanguageProperty] public string ShowOnScreenIndicatorText => ResourceHelper.GetString("SettingsShowOnScreenIndicator");
+    [LanguageProperty] public string VerboseLoggingText => ResourceHelper.GetString("SettingsVerboseLogging");
+    [LanguageProperty] public string EnableLoggingToFileText => ResourceHelper.GetString("SettingsEnableLoggingToFile");
+    [LanguageProperty] public string EnableLoggingToConsoleWindowText => ResourceHelper.GetString("SettingsEnableLoggingToConsoleWindow");
+    [LanguageProperty] public string AllowUntrustedText => ResourceHelper.GetString("SettingsAllowUntrusted");
+    [LanguageProperty] public string AllowDebugDllsText => ResourceHelper.GetString("SettingsAllowDebugDlls");
+    [LanguageProperty] public string ShowOnlyDownloadedDllsText => ResourceHelper.GetString("SettingsShowOnlyDownloadedDlls");
+    [LanguageProperty] public string ApliesOnlyToDllPickerNotLibraryText => ResourceHelper.GetString("SettingsApliesOnlyToDllPickerNotLibrary");
+    [LanguageProperty] public string CheckForUpdatesText => ResourceHelper.GetString("SettingsCheckForUpdates");
+    [LanguageProperty] public string GiveFeedbackText => ResourceHelper.GetString("SettingsGiveFeedback");
+    [LanguageProperty] public string TroubleshootingText => ResourceHelper.GetString("SettingsTroubleshooting");
+    [LanguageProperty] public string SettingsText => ResourceHelper.GetString("Settings");
+    [LanguageProperty] public string LoggingText => ResourceHelper.GetString("SettingsLogging");
+    [LanguageProperty] public string AboutText => ResourceHelper.GetString("SettingsAbout");
+    [LanguageProperty] public string YesText => ResourceHelper.GetString("SettingsYes");
+    [LanguageProperty] public string NoText => ResourceHelper.GetString("SettingsNo");
+    [LanguageProperty] public string LanguageText => ResourceHelper.GetString("SettingsLanguage");
     #endregion
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(nameof(VersionText));
-        OnPropertyChanged(nameof(GiveFeedbackInfo));
-        OnPropertyChanged(nameof(NetworkTesterText));
-        OnPropertyChanged(nameof(GeneralTroubleshootingGuideText));
-        OnPropertyChanged(nameof(DiagnosticsText));
-        OnPropertyChanged(nameof(AcknowledgementsText));
-        OnPropertyChanged(nameof(AllowDebugDllsInfo));
-        OnPropertyChanged(nameof(AllowUntrustedInfo));
-        OnPropertyChanged(nameof(ApplicationRunsInAdministrativeModeInfo));
-        OnPropertyChanged(nameof(WarningText));
-        OnPropertyChanged(nameof(YourCurrentLogfileText));
-        OnPropertyChanged(nameof(ThemeLightText));
-        OnPropertyChanged(nameof(ThemeDarkText));
-        OnPropertyChanged(nameof(ThemeSystemSettingDefaultText));
-        OnPropertyChanged(nameof(ThemeModeText));
-        OnPropertyChanged(nameof(GameLibrariesText));
-        OnPropertyChanged(nameof(DllsDeveloperOptionsText));
-        OnPropertyChanged(nameof(ShowOnScreenIndicatorText));
-        OnPropertyChanged(nameof(VerboseLoggingText));
-        OnPropertyChanged(nameof(EnableLoggingToFileText));
-        OnPropertyChanged(nameof(EnableLoggingToConsoleWindowText));
-        OnPropertyChanged(nameof(AllowUntrustedText));
-        OnPropertyChanged(nameof(AllowDebugDllsText));
-        OnPropertyChanged(nameof(ShowOnlyDownloadedDllsText));
-        OnPropertyChanged(nameof(ApliesOnlyToDllPickerNotLibraryText));
-        OnPropertyChanged(nameof(CheckForUpdatesText));
-        OnPropertyChanged(nameof(GiveFeedbackText));
-        OnPropertyChanged(nameof(TroubleshootingText));
-        OnPropertyChanged(nameof(SettingsText));
-        OnPropertyChanged(nameof(LoggingText));
-        OnPropertyChanged(nameof(AboutText));
-        OnPropertyChanged(nameof(YesText));
-        OnPropertyChanged(nameof(NoText));
-        OnPropertyChanged(nameof(LanguageText));
+        Type currentClassType = GetType();
+        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
+        foreach (string propertyName in languageProperties)
+        {
+            OnPropertyChanged(propertyName);
+        }
         DLSSOnScreenIndicatorOptions.RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
     }
 

@@ -5,6 +5,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Data.ManuallyAdded;
+using System.Collections.Generic;
+using DLSS_Swapper.Attributes;
 
 namespace DLSS_Swapper.UserControls
 {
@@ -41,18 +43,20 @@ namespace DLSS_Swapper.UserControls
         }
 
         #region LanguageProperties
-        public string AddCoverText => ResourceHelper.GetString("AddCover");
-        public string OptionalText => ResourceHelper.GetString("Optional");
-        public string NameText => ResourceHelper.GetString("Name");
-        public string InstallPathText => ResourceHelper.GetString("InstallPath");
+        [LanguageProperty] public string AddCoverText => ResourceHelper.GetString("AddCover");
+        [LanguageProperty] public string OptionalText => ResourceHelper.GetString("Optional");
+        [LanguageProperty] public string NameText => ResourceHelper.GetString("Name");
+        [LanguageProperty] public string InstallPathText => ResourceHelper.GetString("InstallPath");
         #endregion
 
         private void OnLanguageChanged()
         {
-            OnPropertyChanged(nameof(AddCoverText));
-            OnPropertyChanged(nameof(OptionalText));
-            OnPropertyChanged(nameof(NameText));
-            OnPropertyChanged(nameof(InstallPathText));
+            Type currentClassType = GetType();
+            IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
+            foreach (string propertyName in languageProperties)
+            {
+                OnPropertyChanged(propertyName);
+            }
         }
 
         public void Dispose()

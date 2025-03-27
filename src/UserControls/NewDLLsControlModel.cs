@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
@@ -82,34 +83,28 @@ public partial class NewDLLsControlModel : ObservableObject, IDisposable
     }
 
     #region LanguageProperties
-    public string Title => $"{ResourceHelper.GetString("NewDllFoundOn")} {DateTime.Now.ToString("yyyy-MM-dd")}";
-    public string WhileLoadingYourGameNewDllsDiscoveredHelpUsText => ResourceHelper.GetString("WhileLoadingYourGameNewDllsDiscoveredHelpUs");
-    public string StepOneCreateNewIssueText => ResourceHelper.GetString("StepOneCreateNewIssue");
-    public string CreateNewGithubIssueText => ResourceHelper.GetString("CreateNewGithubIssue");
-    public string GithubAccountRequiredText => ResourceHelper.GetString("GithubAccountRequired");
-    public string IfButtonDoesntWorkTryHereText => ResourceHelper.GetString("IfButtonDoesntWorkTryHere");
-    public string StepTwoCopyTitleText => ResourceHelper.GetString("StepTwoCopyTitle");
-    public string CopyText => ResourceHelper.GetString("Copy");
-    public string StepThreeCopyBodyText => ResourceHelper.GetString("StepThreeCopyBody");
-    public string StepFourSubmitYourIssueText => ResourceHelper.GetString("StepFourSubmitYourIssue");
-    public string YouDoNotHaveToSubmitDllAutoTrackText => ResourceHelper.GetString("YouDoNotHaveToSubmitDllAutoTrack");
-    public string ThanksForHelpingText => ResourceHelper.GetString("ThanksForHelping");
+    [LanguageProperty] public string Title => $"{ResourceHelper.GetString("NewDllFoundOn")} {DateTime.Now.ToString("yyyy-MM-dd")}";
+    [LanguageProperty] public string WhileLoadingYourGameNewDllsDiscoveredHelpUsText => ResourceHelper.GetString("WhileLoadingYourGameNewDllsDiscoveredHelpUs");
+    [LanguageProperty] public string StepOneCreateNewIssueText => ResourceHelper.GetString("StepOneCreateNewIssue");
+    [LanguageProperty] public string CreateNewGithubIssueText => ResourceHelper.GetString("CreateNewGithubIssue");
+    [LanguageProperty] public string GithubAccountRequiredText => ResourceHelper.GetString("GithubAccountRequired");
+    [LanguageProperty] public string IfButtonDoesntWorkTryHereText => ResourceHelper.GetString("IfButtonDoesntWorkTryHere");
+    [LanguageProperty] public string StepTwoCopyTitleText => ResourceHelper.GetString("StepTwoCopyTitle");
+    [LanguageProperty] public string CopyText => ResourceHelper.GetString("Copy");
+    [LanguageProperty] public string StepThreeCopyBodyText => ResourceHelper.GetString("StepThreeCopyBody");
+    [LanguageProperty] public string StepFourSubmitYourIssueText => ResourceHelper.GetString("StepFourSubmitYourIssue");
+    [LanguageProperty] public string YouDoNotHaveToSubmitDllAutoTrackText => ResourceHelper.GetString("YouDoNotHaveToSubmitDllAutoTrack");
+    [LanguageProperty] public string ThanksForHelpingText => ResourceHelper.GetString("ThanksForHelping");
     #endregion
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(nameof(Title));
-        OnPropertyChanged(nameof(WhileLoadingYourGameNewDllsDiscoveredHelpUsText));
-        OnPropertyChanged(nameof(StepOneCreateNewIssueText));
-        OnPropertyChanged(nameof(CreateNewGithubIssueText));
-        OnPropertyChanged(nameof(GithubAccountRequiredText));
-        OnPropertyChanged(nameof(IfButtonDoesntWorkTryHereText));
-        OnPropertyChanged(nameof(StepTwoCopyTitleText));
-        OnPropertyChanged(nameof(CopyText));
-        OnPropertyChanged(nameof(StepThreeCopyBodyText));
-        OnPropertyChanged(nameof(StepFourSubmitYourIssueText));
-        OnPropertyChanged(nameof(YouDoNotHaveToSubmitDllAutoTrackText));
-        OnPropertyChanged(nameof(ThanksForHelpingText));
+        Type currentClassType = GetType();
+        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
+        foreach (string propertyName in languageProperties)
+        {
+            OnPropertyChanged(propertyName);
+        }
     }
 
     public void Dispose()

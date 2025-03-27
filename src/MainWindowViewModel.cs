@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
+using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper;
@@ -11,19 +13,20 @@ public class MainWindowViewModel : ObservableObject, IDisposable
         _languageManager.OnLanguageChanged += OnLanguageChanged;
     }
 
-    public string Title => ResourceHelper.GetString("ApplicationTitle");
-    public string AppTitleText => ResourceHelper.GetString("ApplicationTitle");
-    public string NavigationViewItemGamesText => ResourceHelper.GetString("Games");
-    public string NavigationViewItemLibraryText => ResourceHelper.GetString("Library");
-    public string LoadingProgressText => ResourceHelper.GetString("Loading");
+    [LanguageProperty] public string Title => ResourceHelper.GetString("ApplicationTitle");
+    [LanguageProperty] public string AppTitleText => ResourceHelper.GetString("ApplicationTitle");
+    [LanguageProperty] public string NavigationViewItemGamesText => ResourceHelper.GetString("Games");
+    [LanguageProperty] public string NavigationViewItemLibraryText => ResourceHelper.GetString("Library");
+    [LanguageProperty] public string LoadingProgressText => ResourceHelper.GetString("Loading");
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(nameof(Title));
-        OnPropertyChanged(nameof(AppTitleText));
-        OnPropertyChanged(nameof(NavigationViewItemGamesText));
-        OnPropertyChanged(nameof(NavigationViewItemLibraryText));
-        OnPropertyChanged(nameof(LoadingProgressText));
+        Type currentClassType = GetType();
+        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
+        foreach (string propertyName in languageProperties)
+        {
+            OnPropertyChanged(propertyName);
+        }
     }
 
     public void Dispose()

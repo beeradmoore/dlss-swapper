@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
@@ -377,30 +379,26 @@ public partial class GameGridPageModel : ObservableObject, IDisposable
     }
 
     #region TranslationProperties
-    public string NewDllsText => ResourceHelper.GetString("NewDlls");
-    public string AddGameText => ResourceHelper.GetString("AddGame");
-    public string RefreshText => ResourceHelper.GetString("Refresh");
-    public string FilterText => ResourceHelper.GetString("Filter");
-    public string SearchText => ResourceHelper.GetString("Search");
-    public string ViewTypeText => ResourceHelper.GetString("ViewType");
-    public string GridViewText => ResourceHelper.GetString("GridView");
-    public string ListViewText => ResourceHelper.GetString("ListView");
-    public string GamesText => ResourceHelper.GetString("Games");
-    public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
+    [LanguageProperty] public string NewDllsText => ResourceHelper.GetString("NewDlls");
+    [LanguageProperty] public string AddGameText => ResourceHelper.GetString("AddGame");
+    [LanguageProperty] public string RefreshText => ResourceHelper.GetString("Refresh");
+    [LanguageProperty] public string FilterText => ResourceHelper.GetString("Filter");
+    [LanguageProperty] public string SearchText => ResourceHelper.GetString("Search");
+    [LanguageProperty] public string ViewTypeText => ResourceHelper.GetString("ViewType");
+    [LanguageProperty] public string GridViewText => ResourceHelper.GetString("GridView");
+    [LanguageProperty] public string ListViewText => ResourceHelper.GetString("ListView");
+    [LanguageProperty] public string GamesText => ResourceHelper.GetString("Games");
+    [LanguageProperty] public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
     #endregion
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(nameof(NewDllsText));
-        OnPropertyChanged(nameof(AddGameText));
-        OnPropertyChanged(nameof(RefreshText));
-        OnPropertyChanged(nameof(FilterText));
-        OnPropertyChanged(nameof(SearchText));
-        OnPropertyChanged(nameof(ViewTypeText));
-        OnPropertyChanged(nameof(GridViewText));
-        OnPropertyChanged(nameof(ListViewText));
-        OnPropertyChanged(nameof(GamesText));
-        OnPropertyChanged(nameof(ApplicationRunsInAdministrativeModeInfo));
+        Type currentClassType = GetType();
+        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
+        foreach (string propertyName in languageProperties)
+        {
+            OnPropertyChanged(propertyName);
+        }
     }
 
     public void Dispose()

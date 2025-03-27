@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
@@ -703,25 +704,23 @@ public partial class LibraryPageModel : ObservableObject, IDisposable
     }
 
     #region TranslationProperties
-    public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
-    public string ImportText => ResourceHelper.GetString("Import");
-    public string ExportAllText => ResourceHelper.GetString("ExportAll");
-    public string RefreshText => ResourceHelper.GetString("Refresh");
-    public string WarningText => ResourceHelper.GetString("Warning");
-    public string CancelText => ResourceHelper.GetString("Cancel");
-    public string LibraryText => ResourceHelper.GetString("Library");
+    [LanguageProperty] public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
+    [LanguageProperty] public string ImportText => ResourceHelper.GetString("Import");
+    [LanguageProperty] public string ExportAllText => ResourceHelper.GetString("ExportAll");
+    [LanguageProperty] public string RefreshText => ResourceHelper.GetString("Refresh");
+    [LanguageProperty] public string WarningText => ResourceHelper.GetString("Warning");
+    [LanguageProperty] public string CancelText => ResourceHelper.GetString("Cancel");
+    [LanguageProperty] public string LibraryText => ResourceHelper.GetString("Library");
     #endregion
 
     private void OnLanguageChanged()
     {
-
-        OnPropertyChanged(nameof(ApplicationRunsInAdministrativeModeInfo));
-        OnPropertyChanged(nameof(ImportText));
-        OnPropertyChanged(nameof(ExportAllText));
-        OnPropertyChanged(nameof(RefreshText));
-        OnPropertyChanged(nameof(WarningText));
-        OnPropertyChanged(nameof(CancelText));
-        OnPropertyChanged(nameof(LibraryText));
+        Type currentClassType = GetType();
+        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
+        foreach (string propertyName in languageProperties)
+        {
+            OnPropertyChanged(propertyName);
+        }
     }
 
     public void Dispose()

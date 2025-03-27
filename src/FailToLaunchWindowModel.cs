@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
 using Windows.ApplicationModel.DataTransfer;
 
@@ -27,22 +29,22 @@ public partial class FailToLaunchWindowModel : ObservableObject, IDisposable
     }
 
     #region TranslationProperties
-    public string ApplicationFailToLaunchWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("FailedToLaunch");
-    public string PleaseOpenIssuePartial1Text => ResourceHelper.GetString("PleaseOpenIssuePartial1");
-    public string PleaseOpenIssuePartial2Text => ResourceHelper.GetString("PleaseOpenIssuePartial2");
-    public string PleaseOpenIssuePartial3Text => ResourceHelper.GetString("PleaseOpenIssuePartial3");
-    public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
-    public string DlssSwapperFailedToLaunchText => ResourceHelper.GetString("DlssSwapperFailedToLaunch");
+    [LanguageProperty] public string ApplicationFailToLaunchWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("FailedToLaunch");
+    [LanguageProperty] public string PleaseOpenIssuePartial1Text => ResourceHelper.GetString("PleaseOpenIssuePartial1");
+    [LanguageProperty] public string PleaseOpenIssuePartial2Text => ResourceHelper.GetString("PleaseOpenIssuePartial2");
+    [LanguageProperty] public string PleaseOpenIssuePartial3Text => ResourceHelper.GetString("PleaseOpenIssuePartial3");
+    [LanguageProperty] public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
+    [LanguageProperty] public string DlssSwapperFailedToLaunchText => ResourceHelper.GetString("DlssSwapperFailedToLaunch");
     #endregion
 
     private void OnLanguagechanged()
     {
-        OnPropertyChanged(ApplicationFailToLaunchWindowText);
-        OnPropertyChanged(PleaseOpenIssuePartial1Text);
-        OnPropertyChanged(PleaseOpenIssuePartial2Text);
-        OnPropertyChanged(PleaseOpenIssuePartial3Text);
-        OnPropertyChanged(ClickToCopyDetailsText);
-        OnPropertyChanged(DlssSwapperFailedToLaunchText);
+        Type currentClassType = GetType();
+        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
+        foreach (string propertyName in languageProperties)
+        {
+            OnPropertyChanged(propertyName);
+        }
     }
 
     public void Dispose()

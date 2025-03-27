@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -6,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
@@ -859,36 +861,29 @@ public partial class NetworkTesterWindowModel : ObservableObject, IDisposable
     }
 
     #region LanguageProperties
-    public string NetworkTesterWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("NetworkTester");
-    public string Test1TitleText => ResourceHelper.GetString("DiagnosticsTest1Title");
-    public string Test2TitleText => ResourceHelper.GetString("DiagnosticsTest2Title");
-    public string Test3TitleText => ResourceHelper.GetString("DiagnosticsTest3Title");
-    public string Test4TitleText => ResourceHelper.GetString("DiagnosticsTest4Title");
-    public string Test5TitleText => ResourceHelper.GetString("DiagnosticsTest5Title");
-    public string Test6TitleText => ResourceHelper.GetString("DiagnosticsTest6Title");
-    public string Test7TitleText => ResourceHelper.GetString("DiagnosticsTest7Title");
-    public string Test8TitleText => ResourceHelper.GetString("DiagnosticsTest8Title");
-    public string Test9TitleText => ResourceHelper.GetString("DiagnosticsTest9Title");
-    public string Test10TitleText => ResourceHelper.GetString("DiagnosticsTest10Title");
-    public string Test11TitleText => ResourceHelper.GetString("DiagnosticsTest11Title");
-    public string RunTestText => ResourceHelper.GetString("RunTestText");
+    [LanguageProperty] public string NetworkTesterWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("NetworkTester");
+    [LanguageProperty] public string Test1TitleText => ResourceHelper.GetString("DiagnosticsTest1Title");
+    [LanguageProperty] public string Test2TitleText => ResourceHelper.GetString("DiagnosticsTest2Title");
+    [LanguageProperty] public string Test3TitleText => ResourceHelper.GetString("DiagnosticsTest3Title");
+    [LanguageProperty] public string Test4TitleText => ResourceHelper.GetString("DiagnosticsTest4Title");
+    [LanguageProperty] public string Test5TitleText => ResourceHelper.GetString("DiagnosticsTest5Title");
+    [LanguageProperty] public string Test6TitleText => ResourceHelper.GetString("DiagnosticsTest6Title");
+    [LanguageProperty] public string Test7TitleText => ResourceHelper.GetString("DiagnosticsTest7Title");
+    [LanguageProperty] public string Test8TitleText => ResourceHelper.GetString("DiagnosticsTest8Title");
+    [LanguageProperty] public string Test9TitleText => ResourceHelper.GetString("DiagnosticsTest9Title");
+    [LanguageProperty] public string Test10TitleText => ResourceHelper.GetString("DiagnosticsTest10Title");
+    [LanguageProperty] public string Test11TitleText => ResourceHelper.GetString("DiagnosticsTest11Title");
+    [LanguageProperty] public string RunTestText => ResourceHelper.GetString("RunTestText");
     #endregion
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(nameof(NetworkTesterWindowText));
-        OnPropertyChanged(nameof(Test1TitleText));
-        OnPropertyChanged(nameof(Test2TitleText));
-        OnPropertyChanged(nameof(Test3TitleText));
-        OnPropertyChanged(nameof(Test4TitleText));
-        OnPropertyChanged(nameof(Test5TitleText));
-        OnPropertyChanged(nameof(Test6TitleText));
-        OnPropertyChanged(nameof(Test7TitleText));
-        OnPropertyChanged(nameof(Test8TitleText));
-        OnPropertyChanged(nameof(Test9TitleText));
-        OnPropertyChanged(nameof(Test10TitleText));
-        OnPropertyChanged(nameof(Test11TitleText));
-        OnPropertyChanged(nameof(RunTestText));
+        Type currentClassType = GetType();
+        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
+        foreach (string propertyName in languageProperties)
+        {
+            OnPropertyChanged(propertyName);
+        }
     }
 
     public void Dispose()

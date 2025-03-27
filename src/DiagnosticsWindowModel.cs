@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
 using Windows.ApplicationModel.DataTransfer;
 
@@ -27,14 +29,18 @@ public partial class DiagnosticsWindowModel : ObservableObject, IDisposable
     }
 
     #region TranslationProperties
-    public string ApplicationTilteDiagnosticsWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("Diagnostics");
-    public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
+    [LanguageProperty] public string ApplicationTilteDiagnosticsWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("Diagnostics");
+    [LanguageProperty] public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
     #endregion
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(ApplicationTilteDiagnosticsWindowText);
-        OnPropertyChanged(ClickToCopyDetailsText);
+        Type currentClassType = GetType();
+        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
+        foreach (string propertyName in languageProperties)
+        {
+            OnPropertyChanged(propertyName);
+        }
     }
 
     public void Dispose()

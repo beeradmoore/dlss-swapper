@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
+using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.Data;
@@ -15,14 +17,19 @@ public class DLSSOnScreenIndicatorSetting : ObservableObject, IDisposable
     }
 
     public string LabelLanguageProperty { get; init; } = "None";
-    public string Label => ResourceHelper.GetString(LabelLanguageProperty);
+    [LanguageProperty] public string Label => ResourceHelper.GetString(LabelLanguageProperty);
     public int Value { get; init; }
 
     public override string ToString() => Label;
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(nameof(Label));
+        Type currentClassType = GetType();
+        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
+        foreach (string propertyName in languageProperties)
+        {
+            OnPropertyChanged(propertyName);
+        }
     }
 
     public void Dispose()

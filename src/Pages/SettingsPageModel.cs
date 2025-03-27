@@ -14,7 +14,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
-using DLSS_Swapper.Datatypes;
+using DLSS_Swapper.Collections;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;

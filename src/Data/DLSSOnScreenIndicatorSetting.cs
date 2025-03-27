@@ -1,25 +1,39 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
+using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.Data;
 
-internal struct DLSSOnScreenIndicatorSetting
+public class DLSSOnScreenIndicatorSetting : ObservableObject, IDisposable
 {
-    public string Label { get; init; } = string.Empty;
-    public int Value { get; init; } = 0;
-
-    public DLSSOnScreenIndicatorSetting(string label, int value)
+    public DLSSOnScreenIndicatorSetting(string labelLanguageProperty, int value)
     {
-        Label = label;
+        _languageManager = LanguageManager.Instance;
+        _languageManager.OnLanguageChanged += OnLanguageChanged;
+        LabelLanguageProperty = labelLanguageProperty;
         Value = value;
     }
 
-    public override string ToString()
+    public string LabelLanguageProperty { get; init; } = "None";
+    public string Label => ResourceHelper.GetString(LabelLanguageProperty);
+    public int Value { get; init; }
+
+    public override string ToString() => Label;
+
+    private void OnLanguageChanged()
     {
-        return Label;
+        OnPropertyChanged(nameof(Label));
     }
+
+    public void Dispose()
+    {
+        _languageManager.OnLanguageChanged -= OnLanguageChanged;
+    }
+
+    ~DLSSOnScreenIndicatorSetting()
+    {
+        Dispose();
+    }
+
+    private readonly LanguageManager _languageManager;
 }

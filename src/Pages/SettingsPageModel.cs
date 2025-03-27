@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Datatypes;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
@@ -25,10 +27,11 @@ internal partial class SettingsPageModel : ObservableObject, IDisposable
     public IEnumerable<LoggingLevel> LoggingLevels => Enum.GetValues<LoggingLevel>();
     public string CurrentLogPath => Logger.GetCurrentLogPath();
     public string AppVersion => App.CurrentApp.GetVersionString();
-    public List<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; } = new List<DLSSOnScreenIndicatorSetting>(){
-        new DLSSOnScreenIndicatorSetting() { Label = ResourceHelper.GetString("None"), Value = 0 },
-        new DLSSOnScreenIndicatorSetting() { Label = ResourceHelper.GetString("EnabledForDebugDlssDllOnly"), Value = 1 },
-        new DLSSOnScreenIndicatorSetting() { Label = ResourceHelper.GetString("EnabledForAllDlssDlls"), Value = 1024 }
+
+    public RefreshableObservableCollection<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; } = new RefreshableObservableCollection<DLSSOnScreenIndicatorSetting>(){
+        new DLSSOnScreenIndicatorSetting("None", 0),
+        new DLSSOnScreenIndicatorSetting("EnabledForDebugDlssDllOnly", 1),
+        new DLSSOnScreenIndicatorSetting("EnabledForAllDlssDlls", 1024)
     };
 
     public ObservableCollection<KeyValuePair<string, string>> Languages { get; set; }
@@ -127,6 +130,7 @@ internal partial class SettingsPageModel : ObservableObject, IDisposable
 
         if (e.PropertyName == nameof(SelectedLanguage))
         {
+            Settings.Instance.Language = SelectedLanguage.Key;
             _languageManager.ChangeLanguage(SelectedLanguage.Key);
         }
         else if (e.PropertyName == nameof(LightThemeSelected))
@@ -359,6 +363,7 @@ internal partial class SettingsPageModel : ObservableObject, IDisposable
         OnPropertyChanged(nameof(YesText));
         OnPropertyChanged(nameof(NoText));
         OnPropertyChanged(nameof(LanguageText));
+        DLSSOnScreenIndicatorOptions.RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
     }
 
     public void Dispose()

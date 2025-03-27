@@ -6,6 +6,7 @@ using Microsoft.Win32;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
@@ -66,6 +67,10 @@ namespace DLSS_Swapper
         public App()
         {
             Logger.Init();
+
+            string language = Settings.Instance.Language;
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(language);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
 
             UnhandledException += App_UnhandledException;
 

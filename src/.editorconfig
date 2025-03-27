@@ -53,15 +53,15 @@ csharp_new_line_before_members_in_object_initializers = true
 csharp_new_line_before_members_in_anonymous_types = true
 
 # Namespace settings
-csharp_style_namespace_declarations = file_scoped:silent
+csharp_style_namespace_declarations = file_scoped
 
 # Brace settings
-csharp_prefer_braces = true:silent# Prefer curly braces even for one line of code
+csharp_prefer_braces = true # Prefer curly braces even for one line of code
 
 # name all constant fields using PascalCase
 dotnet_naming_rule.constant_fields_should_be_pascal_case.severity = suggestion
 dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols  = constant_fields
-dotnet_naming_rule.constant_fields_should_be_pascal_case.style = pascal_case_style
+dotnet_naming_rule.constant_fields_should_be_pascal_case.style    = pascal_case_style
 dotnet_naming_symbols.constant_fields.applicable_kinds   = field
 dotnet_naming_symbols.constant_fields.required_modifiers = const
 dotnet_naming_style.pascal_case_style.capitalization = pascal_case
@@ -69,22 +69,11 @@ dotnet_naming_style.pascal_case_style.capitalization = pascal_case
 # internal and private fields should be _camelCase
 dotnet_naming_rule.camel_case_for_private_internal_fields.severity = suggestion
 dotnet_naming_rule.camel_case_for_private_internal_fields.symbols  = private_internal_fields
-dotnet_naming_rule.camel_case_for_private_internal_fields.style = camel_case_underscore_style
+dotnet_naming_rule.camel_case_for_private_internal_fields.style    = camel_case_underscore_style
 dotnet_naming_symbols.private_internal_fields.applicable_kinds = field
 dotnet_naming_symbols.private_internal_fields.applicable_accessibilities = private, internal
 dotnet_naming_style.camel_case_underscore_style.required_prefix = _
 dotnet_naming_style.camel_case_underscore_style.capitalization = camel_case
-csharp_prefer_simple_using_statement = true:suggestion
-csharp_style_prefer_method_group_conversion = true:silent
-csharp_style_prefer_top_level_statements = true:silent
-csharp_style_prefer_primary_constructors = true:suggestion
-csharp_prefer_system_threading_lock = true:suggestion
-csharp_style_prefer_switch_expression = true:suggestion
-csharp_style_prefer_pattern_matching = true:silent
-csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
-csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
-csharp_style_prefer_not_pattern = true:suggestion
-csharp_style_prefer_extended_property_pattern = true:suggestion
 
 [*.{xml,config,*proj,nuspec,props,resx,targets,yml,tasks}]
 indent_size = 2
@@ -352,8 +341,6 @@ dotnet_diagnostic.IDE0200.severity = warning
 # IDE2000: Disallow multiple blank lines
 dotnet_style_allow_multiple_blank_lines_experimental = false
 dotnet_diagnostic.IDE2000.severity = warning
-dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity:silent
-dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:silent
 
 # Verify settings
 [*.{received,verified}.{txt,xml,json}]

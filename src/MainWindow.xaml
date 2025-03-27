@@ -2,13 +2,12 @@
     x:Class="DLSS_Swapper.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DLSS_Swapper"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    mc:Ignorable="d"
-    >
-
+    Title="{x:Bind ViewModel.Title}"
+    mc:Ignorable="d">
+    
     <Grid x:Name="RootGrid" MinWidth="400">
 
         <Grid.RowDefinitions>
@@ -34,7 +33,7 @@
                 Grid.Column="0"
                 Source="Assets/icon_256.png" />
             <TextBlock
-                x:Name="AppTitle"
+                Text="{x:Bind ViewModel.AppTitleText}"
                 Grid.Column="1"
                 Margin="20,0,0,0"
                 VerticalAlignment="Center"
@@ -49,12 +48,12 @@
                              Loaded="MainNavigationView_Loaded"
                              Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <muxc:NavigationView.MenuItems>
-                <muxc:NavigationViewItem x:Name="NavigationViewItemGames" Tag="Games">
+                <muxc:NavigationViewItem Content="{x:Bind ViewModel.NavigationViewItemGamesText}" Tag="Games">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE7FC;"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem x:Name="NavigationViewItemLibrary"  Icon="Library" Tag="Library" />
+                <muxc:NavigationViewItem Content="{x:Bind ViewModel.NavigationViewItemLibraryText}"  Icon="Library" Tag="Library" />
             </muxc:NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" />
         </muxc:NavigationView>
@@ -67,7 +66,7 @@
             </Grid.RowDefinitions>
 
             <muxc:ProgressRing Grid.Row="0" x:Name="LoadingProgressRing" IsActive="True" Width="60" Height="60" IsIndeterminate="true" VerticalAlignment="Bottom" />
-            <TextBlock Grid.Row="1" x:Name="LoadingProgressText" VerticalAlignment="Top" HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock Grid.Row="1" Text="{x:Bind ViewModel.LoadingProgressText}" VerticalAlignment="Top" HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" />
 
         </Grid>
     </Grid>

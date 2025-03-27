@@ -1,14 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 
 namespace DLSS_Swapper.UserControls
 {
@@ -25,7 +20,6 @@ namespace DLSS_Swapper.UserControls
             get { return (bool)GetValue(SavesWhenToggledProperty); }
             set { SetValue(SavesWhenToggledProperty, value); }
         }
-
 
         public GameLibrarySelectorControl()
         {

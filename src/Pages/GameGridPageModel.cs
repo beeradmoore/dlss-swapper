@@ -1,18 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Transactions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
-using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Text;
@@ -20,7 +11,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Documents;
-using Microsoft.UI.Xaml.Media;
 using Windows.Storage.Pickers;
 using Windows.System;
 using Windows.UI.Text;
@@ -33,8 +23,16 @@ public enum GameGridViewType
     ListView,
 }
 
-public partial class GameGridPageModel : ObservableObject
+public partial class GameGridPageModel : ObservableObject, IDisposable
 {
+    public GameGridPageModel(GameGridPage gameGridPage)
+    {
+        _languageManager = LanguageManager.Instance;
+        _languageManager.OnLanguageChanged += OnLanguageChanged;
+        this.gameGridPage = gameGridPage;
+        ApplyGameGroupFilter();
+    }
+
     GameGridPage gameGridPage;
 
     [ObservableProperty]
@@ -71,15 +69,6 @@ public partial class GameGridPageModel : ObservableObject
         _ => new FontIcon() { },
     };
 
-
-
-
-    public GameGridPageModel(GameGridPage gameGridPage)
-    {
-        this.gameGridPage = gameGridPage;
-
-        ApplyGameGroupFilter();
-    }
 
     public async Task InitialLoadAsync()
     {
@@ -194,7 +183,7 @@ public partial class GameGridPageModel : ObservableObject
                         new Run() { Text = "games", FontStyle = FontStyle.Italic },
                         new Run() { Text = " directory." },
                         new Run() { Text = "\n\n" },
-                        new Run() { Text = "For example, iff you have a game at:\n" },
+                        new Run() { Text = "For example, if you have a game at:\n" },
                         new Run() { Text = "C:\\Program Files\\MyGamesFolder\\MyFavouriteGame\\" },
                         new Run() { Text = "\n\n" },
                         new Run() { Text = "You would select the " },
@@ -203,7 +192,7 @@ public partial class GameGridPageModel : ObservableObject
                         new Run() { Text = "MyGamesFolder", FontWeight = FontWeights.Bold },
                         new Run() { Text = " directory." },
                     },
-                },
+                }
             };
 
             var result = await dialog.ShowAsync();
@@ -397,6 +386,33 @@ public partial class GameGridPageModel : ObservableObject
     public string ViewTypeText => ResourceHelper.GetString("ViewType");
     public string GridViewText => ResourceHelper.GetString("GridView");
     public string ListViewText => ResourceHelper.GetString("ListView");
+    public string GamesText => ResourceHelper.GetString("Games");
     public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
     #endregion
+
+    private void OnLanguageChanged()
+    {
+        OnPropertyChanged(NewDllsText);
+        OnPropertyChanged(AddGameText);
+        OnPropertyChanged(RefreshText);
+        OnPropertyChanged(FilterText);
+        OnPropertyChanged(SearchText);
+        OnPropertyChanged(ViewTypeText);
+        OnPropertyChanged(GridViewText);
+        OnPropertyChanged(ListViewText);
+        OnPropertyChanged(GamesText);
+        OnPropertyChanged(ApplicationRunsInAdministrativeModeInfo);
+    }
+
+    public void Dispose()
+    {
+        _languageManager.OnLanguageChanged -= OnLanguageChanged;
+    }
+
+    ~GameGridPageModel()
+    {
+        Dispose();
+    }
+
+    private readonly LanguageManager _languageManager;
 }

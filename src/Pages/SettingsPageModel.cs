@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +17,7 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace DLSS_Swapper.Pages;
 
-internal partial class SettingsPageModel : ObservableObject
+internal partial class SettingsPageModel : ObservableObject, IDisposable
 {
     readonly WeakReference<SettingsPage> _weakPage;
     readonly DLSSSettingsManager _dlssSettingsManager;
@@ -28,6 +30,11 @@ internal partial class SettingsPageModel : ObservableObject
         new DLSSOnScreenIndicatorSetting() { Label = ResourceHelper.GetString("EnabledForDebugDlssDllOnly"), Value = 1 },
         new DLSSOnScreenIndicatorSetting() { Label = ResourceHelper.GetString("EnabledForAllDlssDlls"), Value = 1024 }
     };
+
+    public ObservableCollection<KeyValuePair<string, string>> Languages { get; set; }
+
+    [ObservableProperty]
+    public partial KeyValuePair<string, string> SelectedLanguage { get; set; }
 
     [ObservableProperty]
     public partial bool LightThemeSelected { get; set; } = false;
@@ -69,7 +76,17 @@ internal partial class SettingsPageModel : ObservableObject
 
     public SettingsPageModel(SettingsPage page)
     {
+        _languageManager = LanguageManager.Instance;
+        _languageManager.OnLanguageChanged += OnLanguageChanged;
         _weakPage = new WeakReference<SettingsPage>(page);
+        Languages = new ObservableCollection<KeyValuePair<string, string>>
+        {
+            KeyValuePair.Create("en-US", "English"),
+            KeyValuePair.Create("pl-PL", "Polish")
+        };
+
+        //work with selected language state
+        SelectedLanguage = Languages.FirstOrDefault(x => x.Key == CultureInfo.CurrentCulture.Name);
 
         _dlssSettingsManager = new DLSSSettingsManager();
         LightThemeSelected = Settings.Instance.AppTheme == ElementTheme.Light;
@@ -108,7 +125,11 @@ internal partial class SettingsPageModel : ObservableObject
             return;
         }
 
-        if (e.PropertyName == nameof(LightThemeSelected))
+        if (e.PropertyName == nameof(SelectedLanguage))
+        {
+            _languageManager.ChangeLanguage(SelectedLanguage.Key);
+        }
+        else if (e.PropertyName == nameof(LightThemeSelected))
         {
             if (LightThemeSelected == true)
             {
@@ -295,5 +316,60 @@ internal partial class SettingsPageModel : ObservableObject
     public string GiveFeedbackText => ResourceHelper.GetString("SettingsGiveFeedback");
     public string TroubleshootingText => ResourceHelper.GetString("SettingsTroubleshooting");
     public string SettingsText => ResourceHelper.GetString("Settings");
+    public string LoggingText => ResourceHelper.GetString("SettingsLogging");
+    public string AboutText => ResourceHelper.GetString("SettingsAbout");
+    public string YesText => ResourceHelper.GetString("SettingsYes");
+    public string NoText => ResourceHelper.GetString("SettingsNo");
+    public string LanguageText => ResourceHelper.GetString("SettingsLanguage");
     #endregion
+
+    private void OnLanguageChanged()
+    {
+        OnPropertyChanged(nameof(VersionText));
+        OnPropertyChanged(nameof(GiveFeedbackInfo));
+        OnPropertyChanged(nameof(NetworkTesterText));
+        OnPropertyChanged(nameof(GeneralTroubleshootingGuideText));
+        OnPropertyChanged(nameof(DiagnosticsText));
+        OnPropertyChanged(nameof(AcknowledgementsText));
+        OnPropertyChanged(nameof(AllowDebugDllsInfo));
+        OnPropertyChanged(nameof(AllowUntrustedInfo));
+        OnPropertyChanged(nameof(ApplicationRunsInAdministrativeModeInfo));
+        OnPropertyChanged(nameof(WarningText));
+        OnPropertyChanged(nameof(YourCurrentLogfileText));
+        OnPropertyChanged(nameof(ThemeLightText));
+        OnPropertyChanged(nameof(ThemeDarkText));
+        OnPropertyChanged(nameof(ThemeSystemSettingDefaultText));
+        OnPropertyChanged(nameof(ThemeModeText));
+        OnPropertyChanged(nameof(GameLibrariesText));
+        OnPropertyChanged(nameof(DllsDeveloperOptionsText));
+        OnPropertyChanged(nameof(ShowOnScreenIndicatorText));
+        OnPropertyChanged(nameof(VerboseLoggingText));
+        OnPropertyChanged(nameof(EnableLoggingToFileText));
+        OnPropertyChanged(nameof(EnableLoggingToConsoleWindowText));
+        OnPropertyChanged(nameof(AllowUntrustedText));
+        OnPropertyChanged(nameof(AllowDebugDllsText));
+        OnPropertyChanged(nameof(ShowOnlyDownloadedDllsText));
+        OnPropertyChanged(nameof(ApliesOnlyToDllPickerNotLibraryText));
+        OnPropertyChanged(nameof(CheckForUpdatesText));
+        OnPropertyChanged(nameof(GiveFeedbackText));
+        OnPropertyChanged(nameof(TroubleshootingText));
+        OnPropertyChanged(nameof(SettingsText));
+        OnPropertyChanged(nameof(LoggingText));
+        OnPropertyChanged(nameof(AboutText));
+        OnPropertyChanged(nameof(YesText));
+        OnPropertyChanged(nameof(NoText));
+        OnPropertyChanged(nameof(LanguageText));
+    }
+
+    public void Dispose()
+    {
+        _languageManager.OnLanguageChanged -= OnLanguageChanged;
+    }
+
+    ~SettingsPageModel()
+    {
+        Dispose();
+    }
+
+    private readonly LanguageManager _languageManager;
 }

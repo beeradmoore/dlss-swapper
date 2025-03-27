@@ -124,6 +124,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu You must select your &lt;i&gt;game&lt;/i&gt; directory, not your &lt;i&gt;games&lt;/i&gt; directory.&lt;br/&gt;&lt;br/&gt;For example, if you have a game at:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavouriteGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;You would select the &lt;b&gt;MyFavouriteGame&lt;/b&gt; directory and not the &lt;b&gt;MyGamesFolder&lt;/b&gt; directory. Need Fix.
+        /// </summary>
+        public static string AddingGamesManuallyInfoHtml {
+            get {
+                return ResourceManager.GetString("AddingGamesManuallyInfoHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu DLSS Swapper should find games from your installed game libraries automatically. If your game is not listed there may be a few settings preventing it. Please check:
         ///
         ///- Games list filter is not set to &quot;Hide games with no swappable items&quot;
@@ -934,6 +943,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu About.
+        /// </summary>
+        public static string SettingsAbout {
+            get {
+                return ResourceManager.GetString("SettingsAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Allow Debug DLLs.
         /// </summary>
         public static string SettingsAllowDebugDlls {
@@ -1060,11 +1078,38 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Language.
+        /// </summary>
+        public static string SettingsLanguage {
+            get {
+                return ResourceManager.GetString("SettingsLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Logging.
+        /// </summary>
+        public static string SettingsLogging {
+            get {
+                return ResourceManager.GetString("SettingsLogging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Network Tester.
         /// </summary>
         public static string SettingsNetworkTester {
             get {
                 return ResourceManager.GetString("SettingsNetworkTester", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu No.
+        /// </summary>
+        public static string SettingsNo {
+            get {
+                return ResourceManager.GetString("SettingsNo", resourceCulture);
             }
         }
         
@@ -1146,6 +1191,15 @@ namespace DLSS_Swapper.Languages {
         public static string SettingsVersion {
             get {
                 return ResourceManager.GetString("SettingsVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Yes.
+        /// </summary>
+        public static string SettingsYes {
+            get {
+                return ResourceManager.GetString("SettingsYes", resourceCulture);
             }
         }
         

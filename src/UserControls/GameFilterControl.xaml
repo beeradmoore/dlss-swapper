@@ -8,10 +8,10 @@
     mc:Ignorable="d">
 
     <StackPanel>
-        <TextBlock x:Name="OptionsTextBlock" Text="{x:Bind OptionsText}" Style="{ThemeResource BaseTextBlockStyle}" />
-        <CheckBox x:Name="HideNonDLSSGamesCheckBox" Content="{x:Bind HideGamesWithNoSwappableItemsText}"  IsChecked="{Binding HideNonDLSSGames}" />
+        <TextBlock x:Name="OptionsTextBlock" Text="{x:Bind ViewModel.OptionsText}" Style="{ThemeResource BaseTextBlockStyle}" />
+        <CheckBox x:Name="HideNonDLSSGamesCheckBox" Content="{x:Bind ViewModel.HideGamesWithNoSwappableItemsText}"  IsChecked="{Binding HideNonDLSSGames}" />
 
-        <TextBlock x:Name="GroupingTextBlock"  Text="{x:Bind GroupingText}" Style="{ThemeResource BaseTextBlockStyle}"  Margin="0,10,0,0" />
-        <CheckBox x:Name="GroupGameLibrariesTogetherCheckBox" Content="{x:Bind GroupGamesFromTheSameLibraryTogetherText}" />
+        <TextBlock x:Name="GroupingTextBlock"  Text="{x:Bind ViewModel.GroupingText}" Style="{ThemeResource BaseTextBlockStyle}"  Margin="0,10,0,0" />
+        <CheckBox x:Name="GroupGameLibrariesTogetherCheckBox" Content="{x:Bind ViewModel.GroupGamesFromTheSameLibraryTogetherText}" />
     </StackPanel>
 </UserControl>

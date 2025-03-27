@@ -1,28 +1,24 @@
 using DLSS_Swapper.Helpers;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace DLSS_Swapper.UserControls
 {
     public sealed partial class GameFilterControl : UserControl //, INotifyPropertyChanged
     {
+        private GameFilterControlViewModel ViewModel { get; }
+        public GameFilterControl()
+        {
+            this.InitializeComponent();
+            ViewModel = new GameFilterControlViewModel();
+            //HideNonDLSSGames = Settings.Instance.HideNonDLSSGames;
+            //GroupGameLibrariesTogether = Settings.Instance.GroupGameLibrariesTogether;
+            //this.DataContext = this;
+
+            HideNonDLSSGamesCheckBox.IsChecked = Settings.Instance.HideNonDLSSGames;
+            GroupGameLibrariesTogetherCheckBox.IsChecked = Settings.Instance.GroupGameLibrariesTogether;
+
+        }
+
         // So this was confusing. I don't know why the binding does not work.
         /*        
         bool _hideNonDLSSGames;
@@ -60,20 +56,6 @@ namespace DLSS_Swapper.UserControls
             }
         }
         */
-
-        public GameFilterControl()
-        {
-            this.InitializeComponent();
-
-            //HideNonDLSSGames = Settings.Instance.HideNonDLSSGames;
-            //GroupGameLibrariesTogether = Settings.Instance.GroupGameLibrariesTogether;
-            //this.DataContext = this;
-
-            HideNonDLSSGamesCheckBox.IsChecked = Settings.Instance.HideNonDLSSGames;
-            GroupGameLibrariesTogetherCheckBox.IsChecked = Settings.Instance.GroupGameLibrariesTogether;
-
-        }
-
         public bool IsHideNonDLSSGamesChecked()
         {
             return HideNonDLSSGamesCheckBox.IsChecked ?? false;
@@ -93,12 +75,5 @@ namespace DLSS_Swapper.UserControls
         }
         #endregion
         */
-
-        #region LanguageProperties
-        public string OptionsText => ResourceHelper.GetString("Options") + ":";
-        public string GroupingText => ResourceHelper.GetString("Grouping") + ":";
-        public string HideGamesWithNoSwappableItemsText => ResourceHelper.GetString("HideGamesWithNoSwappableItems");
-        public string GroupGamesFromTheSameLibraryTogetherText => ResourceHelper.GetString("GroupGamesFromTheSameLibraryTogether");
-        #endregion
     }
 }

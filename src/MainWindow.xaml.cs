@@ -1,6 +1,4 @@
-using AsyncAwaitBestPractices;
 using DLSS_Swapper.Data;
-using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Pages;
 using DLSS_Swapper.UserControls;
@@ -8,33 +6,15 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Documents;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.Windows.ApplicationModel.Resources;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.System;
 using Windows.UI;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace DLSS_Swapper
 {
@@ -47,6 +27,8 @@ namespace DLSS_Swapper
         ThemeWatcher _themeWatcher;
         IntPtr _windowIcon;
 
+        private readonly MainWindowViewModel ViewModel;
+
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, string iconPath, ref IntPtr index);
 
@@ -56,7 +38,7 @@ namespace DLSS_Swapper
         public MainWindow()
         {
             this.InitializeComponent();
-            LoadTranslation();
+            ViewModel = new MainWindowViewModel();
 
             if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
             {
@@ -70,8 +52,6 @@ namespace DLSS_Swapper
                     overlappedPresenter.Maximize();
                 }
             }
-
-
 
             Closed += (object sender, WindowEventArgs args) =>
             {
@@ -618,15 +598,6 @@ DLSS Swapper will close now.",
                     UpdateColorsDark();
                 }
             }
-        }
-
-        private void LoadTranslation()
-        {
-            Title = ResourceHelper.GetString("ApplicationTitle");
-            AppTitle.Text = ResourceHelper.GetString("ApplicationTitle");
-            NavigationViewItemGames.Content = ResourceHelper.GetString("Games");
-            NavigationViewItemLibrary.Content = ResourceHelper.GetString("Library");
-            LoadingProgressText.Text = ResourceHelper.GetString("Loading");
         }
     }
 }

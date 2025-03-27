@@ -31,9 +31,6 @@
 
         <ControlTemplate x:Key="LeftButtonsControlTemplate" TargetType="ContentControl">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" XYFocusKeyboardNavigation="Enabled" Padding="{ThemeResource ContentDialogPadding}" Background="{TemplateBinding Background}" Spacing="8">
-                <StackPanel.DataContext>
-                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="DataContext"/>
-                </StackPanel.DataContext>
                 <Button ToolTipService.ToolTip="Notes" Command="{Binding EditNotesCommand}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE70B;"/>
@@ -54,7 +51,7 @@
                 </Button>
                 -->
                 
-                <Button Command="{Binding FavouriteCommand}" ToolTipService.ToolTip="{Binding  Game.IsFavourite, Converter={StaticResource FavouriteTextConverter}}">
+                <Button Command="{Binding FavouriteCommand}" ToolTipService.ToolTip="{Binding Game.IsFavourite, Converter={StaticResource FavouriteTextConverter}}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="{Binding Game.IsFavourite, Converter={StaticResource FavouriteGlyphConverter}}"/>
                     </Button.Content>
@@ -157,7 +154,7 @@
                             </Button.Content>
                         </Button>
                     </Grid>
-                    
+
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="16" RowSpacing="4" Padding="0,8,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -172,7 +169,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        
+
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="0">
                             <TextBlock Text="DLSS" FontWeight="Bold" VerticalAlignment="Center" Margin="0" Padding="0" />
                             <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
@@ -227,7 +224,7 @@
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                        
+
                         <Button Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentFSR_31_DX12, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentFSR_31_DX12.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.FSR_31_DX12}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
 
@@ -239,12 +236,12 @@
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                        
+
                         <Button Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentFSR_31_VK, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentFSR_31_VK.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.FSR_31_VK}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
                     </Grid>
 
-                    
+
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="16" RowSpacing="4" Padding="0,20,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -267,7 +264,7 @@
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                        
+
                         <Button Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentXeSS, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentXeSS.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeSS}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
 
@@ -279,7 +276,7 @@
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                        
+
                         <Button Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentXeSS_FG, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentXeSS_FG.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeSS_FG}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
 
@@ -292,17 +289,9 @@
                             </Button>
                         </StackPanel>
                         <Button Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentXeLL, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentXeLL.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeLL}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
-
                     </Grid>
-
                 </StackPanel>
             </Grid>
-
-
-
         </Grid>
-
-
-
     </usercontrols:FakeContentDialog.Content>
 </usercontrols:FakeContentDialog>

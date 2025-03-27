@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AsyncAwaitBestPractices;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -13,11 +12,10 @@ using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Windows.Foundation.Metadata;
 
 namespace DLSS_Swapper.UserControls;
 
-public partial class DLLPickerControlModel : ObservableObject
+public partial class DLLPickerControlModel : ObservableObject, IDisposable
 {
     WeakReference<GameControl> _gameControlWeakReference;
     WeakReference<EasyContentDialog> _parentDialogWeakReference;
@@ -50,6 +48,8 @@ public partial class DLLPickerControlModel : ObservableObject
         _gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         _parentDialogWeakReference = new WeakReference<EasyContentDialog>(parentDialog);
         _dllPickerControlWeakReference = new WeakReference<DLLPickerControl>(dllPickerControl);
+        _languageManager = LanguageManager.Instance;
+        _languageManager.OnLanguageChanged += OnLanguageChanged;
 
         parentDialog.Closing += (ContentDialog sender, ContentDialogClosingEventArgs args) =>
         {
@@ -343,4 +343,26 @@ public partial class DLLPickerControlModel : ObservableObject
     public string OriginalDllRestoreText => ResourceHelper.GetString("OriginalDllRestore");
     public string OriginalDllText => ResourceHelper.GetString("OriginalDllText");
     #endregion
+
+    private void OnLanguageChanged()
+    {
+        OnPropertyChanged(NoDllsFoundText);
+        OnPropertyChanged(PleaseNavigateLibraryToDownloadDllsText);
+        OnPropertyChanged(OpenDllLocationText);
+        OnPropertyChanged(CurrentDllText);
+        OnPropertyChanged(OriginalDllRestoreText);
+        OnPropertyChanged(OriginalDllText);
+    }
+
+    public void Dispose()
+    {
+        _languageManager.OnLanguageChanged -= OnLanguageChanged;
+    }
+
+    ~DLLPickerControlModel()
+    {
+        Dispose();
+    }
+
+    private readonly LanguageManager _languageManager;
 }

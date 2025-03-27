@@ -1,30 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using AsyncAwaitBestPractices.MVVM;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.WinUI;
-using CommunityToolkit.WinUI.Collections;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Data;
 
 namespace DLSS_Swapper.Pages;
 
-public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.ObservableObject
+public partial class LibraryPageModel : ObservableObject, IDisposable
 {
     LibraryPage libraryPage;
 
@@ -33,6 +23,8 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
     public LibraryPageModel(LibraryPage libraryPage)
     {
         this.libraryPage = libraryPage;
+        _languageManager = LanguageManager.Instance;
+        _languageManager.OnLanguageChanged += OnLanguageChanged;
     }
 
     [RelayCommand]
@@ -719,4 +711,28 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
     public string CancelText => ResourceHelper.GetString("Cancel");
     public string LibraryText => ResourceHelper.GetString("Library");
     #endregion
+
+    private void OnLanguageChanged()
+    {
+
+        OnPropertyChanged(ApplicationRunsInAdministrativeModeInfo);
+        OnPropertyChanged(ImportText);
+        OnPropertyChanged(ExportAllText);
+        OnPropertyChanged(RefreshText);
+        OnPropertyChanged(WarningText);
+        OnPropertyChanged(CancelText);
+        OnPropertyChanged(LibraryText);
+    }
+
+    public void Dispose()
+    {
+        _languageManager.OnLanguageChanged += OnLanguageChanged;
+    }
+
+    ~LibraryPageModel()
+    {
+        Dispose();
+    }
+
+    private readonly LanguageManager _languageManager;
 }

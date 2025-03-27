@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
@@ -12,14 +10,16 @@ using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.UserControls;
 
-public partial class MultipleDLLsFoundControlModel : ObservableObject
+public partial class MultipleDLLsFoundControlModel : ObservableObject, IDisposable
 {
-    public List<GameAsset> DLLsList { get; init; }
-
     public MultipleDLLsFoundControlModel(Game game, GameAssetType gameAssetType)
     {
+        _languageManager = LanguageManager.Instance;
+        _languageManager.OnLanguageChanged += OnLanguageChanged;
         DLLsList = game.GameAssets.Where(x => x.AssetType == gameAssetType).ToList();
     }
+
+    public List<GameAsset> DLLsList { get; init; }
 
     [RelayCommand]
     void OpenDLLPath(GameAsset gameAsset)
@@ -49,7 +49,23 @@ public partial class MultipleDLLsFoundControlModel : ObservableObject
         }
     }
 
+
     #region LanguageProperties
     public string BelowMultipleDllFoundYouWillBeAbleToSwapInfo => ResourceHelper.GetString("BelowMultipleDllFoundYouWillBeAbleToSwapInfo");
     #endregion
+
+    private void OnLanguageChanged()
+    {
+        OnPropertyChanged(BelowMultipleDllFoundYouWillBeAbleToSwapInfo);
+    }
+    public void Dispose()
+    {
+        _languageManager.OnLanguageChanged -= OnLanguageChanged;
+    }
+    ~MultipleDLLsFoundControlModel()
+    {
+        Dispose();
+    }
+
+    private readonly LanguageManager _languageManager;
 }

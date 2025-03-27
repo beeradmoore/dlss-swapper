@@ -1,30 +1,19 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml;
-using Windows.Gaming.Input;
-using Windows.Storage.Pickers;
-using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Data.ManuallyAdded;
 
 namespace DLSS_Swapper.UserControls
 {
-    internal partial class ManuallyAddGameModel : ObservableObject
+    internal partial class ManuallyAddGameModel : ObservableObject, IDisposable
     {
-        ManuallyAddedGame game;
-        public ManuallyAddedGame Game => game;
-
-        WeakReference<ManuallyAddGameControl> manuallyAddGameControlWeakReference;
-
         public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath)
         {
+            _languageManager = LanguageManager.Instance;
+            _languageManager.OnLanguageChanged += OnLanguageChanged;
             manuallyAddGameControlWeakReference = new WeakReference<ManuallyAddGameControl>(manuallyAddGameControl);
 
             game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
@@ -33,6 +22,11 @@ namespace DLSS_Swapper.UserControls
                 InstallPath = PathHelpers.NormalizePath(installPath),
             };
         }
+
+        ManuallyAddedGame game;
+        public ManuallyAddedGame Game => game;
+
+        WeakReference<ManuallyAddGameControl> manuallyAddGameControlWeakReference;
 
         [RelayCommand]
         async Task AddCoverImageAsync()
@@ -52,5 +46,25 @@ namespace DLSS_Swapper.UserControls
         public string NameText => ResourceHelper.GetString("Name");
         public string InstallPathText => ResourceHelper.GetString("InstallPath");
         #endregion
+
+        private void OnLanguageChanged()
+        {
+            OnPropertyChanged(AddCoverText);
+            OnPropertyChanged(OptionalText);
+            OnPropertyChanged(NameText);
+            OnPropertyChanged(InstallPathText);
+        }
+
+        public void Dispose()
+        {
+            _languageManager.OnLanguageChanged -= OnLanguageChanged;
+        }
+
+        ~ManuallyAddGameModel()
+        {
+            Dispose();
+        }
+
+        private readonly LanguageManager _languageManager;
     }
 }

@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Helpers;
@@ -10,15 +6,17 @@ using Windows.ApplicationModel.DataTransfer;
 
 namespace DLSS_Swapper;
 
-public partial class DiagnosticsWindowModel : ObservableObject
+public partial class DiagnosticsWindowModel : ObservableObject, IDisposable
 {
-    public string DiagnosticsLog { get; set; } = string.Empty;
-
     public DiagnosticsWindowModel()
     {
         var systemDetails = new SystemDetails();
         DiagnosticsLog = $"{systemDetails.GetSystemData()}\n\n{systemDetails.GetLibraryData()}\n";
+        _languageManager = LanguageManager.Instance;
+        _languageManager.OnLanguageChanged += OnLanguageChanged;
     }
+
+    public string DiagnosticsLog { get; set; } = string.Empty;
 
     [RelayCommand]
     void CopyText()
@@ -32,4 +30,22 @@ public partial class DiagnosticsWindowModel : ObservableObject
     public string ApplicationTilteDiagnosticsWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("Diagnostics");
     public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
     #endregion
+
+    private void OnLanguageChanged()
+    {
+        OnPropertyChanged(ApplicationTilteDiagnosticsWindowText);
+        OnPropertyChanged(ClickToCopyDetailsText);
+    }
+
+    public void Dispose()
+    {
+        _languageManager.OnLanguageChanged -= OnLanguageChanged;
+    }
+
+    ~DiagnosticsWindowModel()
+    {
+        Dispose();
+    }
+
+    private readonly LanguageManager _languageManager;
 }

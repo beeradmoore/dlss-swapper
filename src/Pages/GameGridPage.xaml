@@ -189,7 +189,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="16">
-                <TextBlock Text="Games" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+                <TextBlock Text="{x:Bind ViewModel.GamesText}" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
                 <muxc:ProgressRing IsActive="True" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.IsLoading, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"  />
             </StackPanel>
 
@@ -200,7 +200,7 @@
                     Margin="10,0,0,0"
                     AcceptsReturn="True"
                     IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}"
-                    PlaceholderText="{x:Bind SearchText}"
+                    PlaceholderText="{x:Bind ViewModel.SearchText}"
                     TextChanged="{x:Bind ViewModel.SearchForGameEvent}" />
             </StackPanel>
 

@@ -1,29 +1,22 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Helpers;
-using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.DataTransfer;
 
 namespace DLSS_Swapper;
 
-public partial class FailToLaunchWindowModel : ObservableObject
+public partial class FailToLaunchWindowModel : ObservableObject, IDisposable
 {
-    public string SystemData { get; set; } = string.Empty;
-
     public FailToLaunchWindowModel()
     {
         var systemDetails = new SystemDetails();
         SystemData = systemDetails.GetSystemData();
+        _languageManager = LanguageManager.Instance;
+        _languageManager.OnLanguageChanged += OnLanguagechanged;
     }
+
+    public string SystemData { get; set; } = string.Empty;
 
     [RelayCommand]
     void CopyText()
@@ -41,4 +34,26 @@ public partial class FailToLaunchWindowModel : ObservableObject
     public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
     public string DlssSwapperFailedToLaunchText => ResourceHelper.GetString("DlssSwapperFailedToLaunch");
     #endregion
+
+    private void OnLanguagechanged()
+    {
+        OnPropertyChanged(ApplicationFailToLaunchWindowText);
+        OnPropertyChanged(PleaseOpenIssuePartial1Text);
+        OnPropertyChanged(PleaseOpenIssuePartial2Text);
+        OnPropertyChanged(PleaseOpenIssuePartial3Text);
+        OnPropertyChanged(ClickToCopyDetailsText);
+        OnPropertyChanged(DlssSwapperFailedToLaunchText);
+    }
+
+    public void Dispose()
+    {
+        _languageManager.OnLanguageChanged -= OnLanguagechanged;
+    }
+
+    ~FailToLaunchWindowModel()
+    {
+        Dispose();
+    }
+
+    private readonly LanguageManager _languageManager;
 }

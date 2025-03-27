@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -10,14 +7,22 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using System.Diagnostics;
 using System.IO;
-using System.ComponentModel;
 using Windows.System;
 using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.UserControls;
 
-public partial class GameControlModel : ObservableObject
+public partial class GameControlModel : ObservableObject, IDisposable
 {
+    public GameControlModel(GameControl gameControl, Game game)
+    {
+        _languageManager = LanguageManager.Instance;
+        _languageManager.OnLanguageChanged += OnLanugageChanged;
+        gameControlWeakReference = new WeakReference<GameControl>(gameControl);
+        Game = game;
+        GameTitle = game.Title;
+    }
+
     WeakReference<GameControl> gameControlWeakReference;
 
     public Game Game { get; init; }
@@ -44,13 +49,6 @@ public partial class GameControlModel : ObservableObject
 
             return GameTitle.Equals(Game.Title) == false;
         }
-    }
-
-    public GameControlModel(GameControl gameControl, Game game)
-    {
-        gameControlWeakReference = new WeakReference<GameControl>(gameControl);
-        Game = game;
-        GameTitle = game.Title;
     }
 
     [RelayCommand]
@@ -243,6 +241,7 @@ public partial class GameControlModel : ObservableObject
         await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting#game-is-not-in-a-ready-to-play-state"));
     }
 
+    #region LanguageProperties
     public string RemoveText => ResourceHelper.GetString("Remove");
     public string AddCustomCoverText => ResourceHelper.GetString("AddCustomCover");
     public string GameNotReadyToPlayStateText => ResourceHelper.GetString("GameNotReadyToPlayStateText");
@@ -251,4 +250,29 @@ public partial class GameControlModel : ObservableObject
     public string SaveText => ResourceHelper.GetString("Save");
     public string InstallPathText => ResourceHelper.GetString("InstallPath");
     public string OpenFolderText => ResourceHelper.GetString("OpenFolderText");
+    #endregion
+
+    private void OnLanugageChanged()
+    {
+        OnPropertyChanged(RemoveText);
+        OnPropertyChanged(AddCustomCoverText);
+        OnPropertyChanged(GameNotReadyToPlayStateText);
+        OnPropertyChanged(HelpText);
+        OnPropertyChanged(NameText);
+        OnPropertyChanged(SaveText);
+        OnPropertyChanged(InstallPathText);
+        OnPropertyChanged(OpenFolderText);
+    }
+
+    public void Dispose()
+    {
+        _languageManager.OnLanguageChanged -= OnLanugageChanged;
+    }
+
+    ~GameControlModel()
+    {
+        Dispose();
+    }
+
+    private readonly LanguageManager _languageManager;
 }

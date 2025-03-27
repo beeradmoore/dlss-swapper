@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -15,14 +13,12 @@ using Windows.System;
 
 namespace DLSS_Swapper.UserControls;
 
-public partial class NewDLLsControlModel : ObservableObject
+public partial class NewDLLsControlModel : ObservableObject, IDisposable
 {
-    public string Title => $"{ResourceHelper.GetString("NewDllFoundOn")} {DateTime.Now.ToString("yyyy-MM-dd")}";
-
-    public string Body { get; init; }
-
     public NewDLLsControlModel()
     {
+        _languageManager = LanguageManager.Instance;
+        _languageManager.OnLanguageChanged += OnLanguageChanged;
         var unknownGameAssets = GameManager.Instance.GetUnknownGameAssets();
         var gameAssetsLibraryGroup = new Dictionary<GameLibrary, Dictionary<string, List<UnknownGameAsset>>>();
         foreach (var unknownGameAsset in unknownGameAssets)
@@ -60,6 +56,8 @@ public partial class NewDLLsControlModel : ObservableObject
         Body = stringBuilder.ToString();
     }
 
+    public string Body { get; init; }
+
     [RelayCommand]
     async Task OpenGitHubIssueAsync()
     {
@@ -84,6 +82,7 @@ public partial class NewDLLsControlModel : ObservableObject
     }
 
     #region LanguageProperties
+    public string Title => $"{ResourceHelper.GetString("NewDllFoundOn")} {DateTime.Now.ToString("yyyy-MM-dd")}";
     public string WhileLoadingYourGameNewDllsDiscoveredHelpUsText => ResourceHelper.GetString("WhileLoadingYourGameNewDllsDiscoveredHelpUs");
     public string StepOneCreateNewIssueText => ResourceHelper.GetString("StepOneCreateNewIssue");
     public string CreateNewGithubIssueText => ResourceHelper.GetString("CreateNewGithubIssue");
@@ -96,4 +95,32 @@ public partial class NewDLLsControlModel : ObservableObject
     public string YouDoNotHaveToSubmitDllAutoTrackText => ResourceHelper.GetString("YouDoNotHaveToSubmitDllAutoTrack");
     public string ThanksForHelpingText => ResourceHelper.GetString("ThanksForHelping");
     #endregion
+
+    private void OnLanguageChanged()
+    {
+        OnPropertyChanged(Title);
+        OnPropertyChanged(WhileLoadingYourGameNewDllsDiscoveredHelpUsText);
+        OnPropertyChanged(StepOneCreateNewIssueText);
+        OnPropertyChanged(CreateNewGithubIssueText);
+        OnPropertyChanged(GithubAccountRequiredText);
+        OnPropertyChanged(IfButtonDoesntWorkTryHereText);
+        OnPropertyChanged(StepTwoCopyTitleText);
+        OnPropertyChanged(CopyText);
+        OnPropertyChanged(StepThreeCopyBodyText);
+        OnPropertyChanged(StepFourSubmitYourIssueText);
+        OnPropertyChanged(YouDoNotHaveToSubmitDllAutoTrackText);
+        OnPropertyChanged(ThanksForHelpingText);
+    }
+
+    public void Dispose()
+    {
+        _languageManager.OnLanguageChanged -= OnLanguageChanged;
+    }
+
+    ~NewDLLsControlModel()
+    {
+        Dispose();
+    }
+
+    private readonly LanguageManager _languageManager;
 }

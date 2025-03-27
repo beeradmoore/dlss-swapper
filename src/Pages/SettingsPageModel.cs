@@ -292,7 +292,7 @@ internal partial class SettingsPageModel : ObservableObject, IDisposable
     }
 
     #region TranslationProperties
-    [LanguageProperty] public string VersionText => ResourceHelper.GetString("SettingsVersion") + ":";
+    [LanguageProperty] public string VersionText => $"{ResourceHelper.GetString("SettingsVersion")}:";
     [LanguageProperty] public string GiveFeedbackInfo => ResourceHelper.GetString("SettingsGiveFeedbackInfo");
     [LanguageProperty] public string NetworkTesterText => ResourceHelper.GetString("SettingsNetworkTester");
     [LanguageProperty] public string GeneralTroubleshootingGuideText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");

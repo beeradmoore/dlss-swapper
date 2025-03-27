@@ -861,7 +861,7 @@ public partial class NetworkTesterWindowModel : ObservableObject, IDisposable
     }
 
     #region LanguageProperties
-    [LanguageProperty] public string NetworkTesterWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("NetworkTester");
+    [LanguageProperty] public string NetworkTesterWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("NetworkTester")}";
     [LanguageProperty] public string Test1TitleText => ResourceHelper.GetString("DiagnosticsTest1Title");
     [LanguageProperty] public string Test2TitleText => ResourceHelper.GetString("DiagnosticsTest2Title");
     [LanguageProperty] public string Test3TitleText => ResourceHelper.GetString("DiagnosticsTest3Title");

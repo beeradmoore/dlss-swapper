@@ -14,8 +14,8 @@ public class GameFilterControlViewModel : ObservableObject, IDisposable
     }
 
     #region LanguageProperties
-    [LanguageProperty] public string OptionsText => ResourceHelper.GetString("Options") + ":";
-    [LanguageProperty] public string GroupingText => ResourceHelper.GetString("Grouping") + ":";
+    [LanguageProperty] public string OptionsText => $"{ResourceHelper.GetString("Options")}:";
+    [LanguageProperty] public string GroupingText => $"{ResourceHelper.GetString("Grouping")}:";
     [LanguageProperty] public string HideGamesWithNoSwappableItemsText => ResourceHelper.GetString("HideGamesWithNoSwappableItems");
     [LanguageProperty] public string GroupGamesFromTheSameLibraryTogetherText => ResourceHelper.GetString("GroupGamesFromTheSameLibraryTogether");
     #endregion

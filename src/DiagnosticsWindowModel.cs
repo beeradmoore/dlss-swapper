@@ -29,7 +29,7 @@ public partial class DiagnosticsWindowModel : ObservableObject, IDisposable
     }
 
     #region TranslationProperties
-    [LanguageProperty] public string ApplicationTilteDiagnosticsWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("Diagnostics");
+    [LanguageProperty] public string ApplicationTilteDiagnosticsWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("Diagnostics")}";
     [LanguageProperty] public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
     #endregion
 

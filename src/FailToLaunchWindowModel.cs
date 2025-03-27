@@ -29,7 +29,7 @@ public partial class FailToLaunchWindowModel : ObservableObject, IDisposable
     }
 
     #region TranslationProperties
-    [LanguageProperty] public string ApplicationFailToLaunchWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("FailedToLaunch");
+    [LanguageProperty] public string ApplicationFailToLaunchWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("FailedToLaunch")}";
     [LanguageProperty] public string PleaseOpenIssuePartial1Text => ResourceHelper.GetString("PleaseOpenIssuePartial1");
     [LanguageProperty] public string PleaseOpenIssuePartial2Text => ResourceHelper.GetString("PleaseOpenIssuePartial2");
     [LanguageProperty] public string PleaseOpenIssuePartial3Text => ResourceHelper.GetString("PleaseOpenIssuePartial3");

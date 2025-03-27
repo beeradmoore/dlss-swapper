@@ -471,6 +471,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Downloading.
+        /// </summary>
+        public static string Downloading {
+            get {
+                return ResourceManager.GetString("Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu enabled.
         /// </summary>
         public static string Enabled {
@@ -705,6 +714,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Imported.
+        /// </summary>
+        public static string Imported {
+            get {
+                return ResourceManager.GetString("Imported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Import system is currently broken, but it is on the roadmap to be fixed..
         /// </summary>
         public static string ImportSystemCurrentlyBroken {
@@ -768,6 +786,15 @@ namespace DLSS_Swapper.Languages {
         public static string MalliciousDllsInfo {
             get {
                 return ResourceManager.GetString("MalliciousDllsInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Multiple DLLs found.
+        /// </summary>
+        public static string MultipleDllsFound {
+            get {
+                return ResourceManager.GetString("MultipleDllsFound", resourceCulture);
             }
         }
         
@@ -1011,6 +1038,15 @@ namespace DLSS_Swapper.Languages {
         public static string ReportIssue {
             get {
                 return ResourceManager.GetString("ReportIssue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Requires download.
+        /// </summary>
+        public static string RequiresDownload {
+            get {
+                return ResourceManager.GetString("RequiresDownload", resourceCulture);
             }
         }
         

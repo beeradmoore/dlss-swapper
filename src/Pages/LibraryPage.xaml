@@ -116,7 +116,7 @@
 
                         <!-- Imported -->
                         <StackPanel Grid.Row="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsLocalConverter}, Mode=OneWay}" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Left">
-                            <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE7B8;" ToolTipService.ToolTip="Imported" />
+                            <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE7B8;" ToolTipService.ToolTip="{x:Bind ImportedText, Mode=OneWay}" />
                         </StackPanel>
 
                         <!-- Not downloaded -->

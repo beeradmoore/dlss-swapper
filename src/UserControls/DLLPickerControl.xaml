@@ -111,11 +111,11 @@
 
                         <TextBlock Grid.Column="0" Text="{x:Bind DisplayName}" />
 
-                        <ProgressRing Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsDownloadingConverter}, Mode=OneWay}" ToolTipService.ToolTip="Downloading" Minimum="0" Maximum="100" IsIndeterminate="{x:Bind LocalRecord.FileDownloader.IsIndeterminate, Mode=OneWay}" Value="{x:Bind LocalRecord.FileDownloader.Percent, Mode=OneWay}" HorizontalAlignment="Right" Width="20" Height="20"  />
+                        <ProgressRing Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsDownloadingConverter}, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind DownloadingText, Mode=OneWay}" Minimum="0" Maximum="100" IsIndeterminate="{x:Bind LocalRecord.FileDownloader.IsIndeterminate, Mode=OneWay}" Value="{x:Bind LocalRecord.FileDownloader.Percent, Mode=OneWay}" HorizontalAlignment="Right" Width="20" Height="20"  />
                         
-                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsNotFoundConverter}, Mode=OneWay}" ToolTipService.ToolTip="Requires download" HorizontalAlignment="Right" Glyph="&#xE896;" Width="20" Height="20" />
+                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsNotFoundConverter}, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind RequiresDownloadText, Mode=OneWay}" HorizontalAlignment="Right" Glyph="&#xE896;" Width="20" Height="20" />
 
-                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsImportedConverter}, Mode=OneWay}" ToolTipService.ToolTip="Imported" HorizontalAlignment="Right" Glyph="&#xE7B8;" Width="20" Height="20" />
+                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsImportedConverter}, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind ImportedText, Mode=OneWay}" HorizontalAlignment="Right" Glyph="&#xE7B8;" Width="20" Height="20" />
 
                     </Grid>
                 </DataTemplate>

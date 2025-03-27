@@ -609,4 +609,16 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="Favourited" xml:space="preserve">
     <value>Ulubiony</value>
   </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Pobieranie</value>
+  </data>
+  <data name="RequiresDownload" xml:space="preserve">
+    <value>Wymaga pobrania</value>
+  </data>
+  <data name="Imported" xml:space="preserve">
+    <value>Zaimportowano</value>
+  </data>
+  <data name="MultipleDllsFound" xml:space="preserve">
+    <value>Znaleziono wiele bibliotek DLL</value>
+  </data>
 </root>

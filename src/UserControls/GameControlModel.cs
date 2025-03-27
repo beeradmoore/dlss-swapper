@@ -254,6 +254,7 @@ public partial class GameControlModel : ObservableObject, IDisposable
     public string ClickToFavouriteText => ResourceHelper.GetString("ClickToFavourite");
     public string NotesText => ResourceHelper.GetString("Notes");
     public string CloseText => ResourceHelper.GetString("Close");
+    public string MultipleDllsFoundText => ResourceHelper.GetString("MultipleDllsFound");
     #endregion
 
     private void OnLanugageChanged()
@@ -270,6 +271,7 @@ public partial class GameControlModel : ObservableObject, IDisposable
         OnPropertyChanged(nameof(ClickToFavouriteText));
         OnPropertyChanged(nameof(NotesText));
         OnPropertyChanged(nameof(CloseText));
+        OnPropertyChanged(nameof(MultipleDllsFoundText));
     }
 
     public void Dispose()

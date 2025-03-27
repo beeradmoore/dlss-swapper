@@ -616,4 +616,16 @@ Only import dlls from sources you trust.</value>
   <data name="ClickToFavourite" xml:space="preserve">
     <value>Click to favourite</value>
   </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Downloading</value>
+  </data>
+  <data name="RequiresDownload" xml:space="preserve">
+    <value>Requires download</value>
+  </data>
+  <data name="Imported" xml:space="preserve">
+    <value>Imported</value>
+  </data>
+  <data name="MultipleDllsFound" xml:space="preserve">
+    <value>Multiple DLLs found</value>
+  </data>
 </root>

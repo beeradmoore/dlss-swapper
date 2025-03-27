@@ -20,10 +20,10 @@ public class GameFilterControlViewModel : ObservableObject, IDisposable
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(OptionsText);
-        OnPropertyChanged(GroupingText);
-        OnPropertyChanged(HideGamesWithNoSwappableItemsText);
-        OnPropertyChanged(GroupGamesFromTheSameLibraryTogetherText);
+        OnPropertyChanged(nameof(OptionsText));
+        OnPropertyChanged(nameof(GroupingText));
+        OnPropertyChanged(nameof(HideGamesWithNoSwappableItemsText));
+        OnPropertyChanged(nameof(GroupGamesFromTheSameLibraryTogetherText));
     }
 
     public void Dispose()

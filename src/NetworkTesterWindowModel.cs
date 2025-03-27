@@ -14,7 +14,7 @@ using Windows.ApplicationModel.DataTransfer;
 
 namespace DLSS_Swapper;
 
-public partial class NetworkTesterWindowModel : ObservableObject
+public partial class NetworkTesterWindowModel : ObservableObject, IDisposable
 {
     WeakReference<NetworkTesterWindow> _weakWindow;
     readonly string _dlssSwapperDomainTestLink = "dlss-swapper-downloads.beeradmoore.com";
@@ -126,6 +126,8 @@ public partial class NetworkTesterWindowModel : ObservableObject
     public NetworkTesterWindowModel(NetworkTesterWindow window)
     {
         _weakWindow = new WeakReference<NetworkTesterWindow>(window);
+        _languageManager = LanguageManager.Instance;
+        _languageManager.OnLanguageChanged += OnLanguageChanged;
 
         AppendTestResults("Init", $"DLSS Swapper version: v{App.CurrentApp.GetVersionString()}");
     }
@@ -856,5 +858,48 @@ public partial class NetworkTesterWindowModel : ObservableObject
         }
     }
 
+    #region LanguageProperties
     public string NetworkTesterWindowText => ResourceHelper.GetString("ApplicationTitle") + " - " + ResourceHelper.GetString("NetworkTester");
+    public string Test1TitleText => ResourceHelper.GetString("DiagnosticsTest1Title");
+    public string Test2TitleText => ResourceHelper.GetString("DiagnosticsTest2Title");
+    public string Test3TitleText => ResourceHelper.GetString("DiagnosticsTest3Title");
+    public string Test4TitleText => ResourceHelper.GetString("DiagnosticsTest4Title");
+    public string Test5TitleText => ResourceHelper.GetString("DiagnosticsTest5Title");
+    public string Test6TitleText => ResourceHelper.GetString("DiagnosticsTest6Title");
+    public string Test7TitleText => ResourceHelper.GetString("DiagnosticsTest7Title");
+    public string Test8TitleText => ResourceHelper.GetString("DiagnosticsTest8Title");
+    public string Test9TitleText => ResourceHelper.GetString("DiagnosticsTest9Title");
+    public string Test10TitleText => ResourceHelper.GetString("DiagnosticsTest10Title");
+    public string Test11TitleText => ResourceHelper.GetString("DiagnosticsTest11Title");
+    public string RunTestText => ResourceHelper.GetString("RunTestText");
+    #endregion
+
+    private void OnLanguageChanged()
+    {
+        OnPropertyChanged(nameof(NetworkTesterWindowText));
+        OnPropertyChanged(nameof(Test1TitleText));
+        OnPropertyChanged(nameof(Test2TitleText));
+        OnPropertyChanged(nameof(Test3TitleText));
+        OnPropertyChanged(nameof(Test4TitleText));
+        OnPropertyChanged(nameof(Test5TitleText));
+        OnPropertyChanged(nameof(Test6TitleText));
+        OnPropertyChanged(nameof(Test7TitleText));
+        OnPropertyChanged(nameof(Test8TitleText));
+        OnPropertyChanged(nameof(Test9TitleText));
+        OnPropertyChanged(nameof(Test10TitleText));
+        OnPropertyChanged(nameof(Test11TitleText));
+        OnPropertyChanged(nameof(RunTestText));
+    }
+
+    public void Dispose()
+    {
+        _languageManager.OnLanguageChanged -= OnLanguageChanged;
+    }
+
+    ~NetworkTesterWindowModel()
+    {
+        Dispose();
+    }
+
+    private readonly LanguageManager _languageManager;
 }

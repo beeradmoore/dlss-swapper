@@ -433,7 +433,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
     <value>Zapisz</value>
   </data>
   <data name="Notes" xml:space="preserve">
-    <value>Uwagi</value>
+    <value>Notatki</value>
   </data>
   <data name="TitleNotManuallyAddedCantBeRemoved" xml:space="preserve">
     <value>Ten tytuł nie został dodany ręcznie i nie można go usunąć.</value>
@@ -563,5 +563,50 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   </data>
   <data name="SettingsLanguage" xml:space="preserve">
     <value>Język</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Pomoc</value>
+  </data>
+  <data name="DiagnosticsTest1Title" xml:space="preserve">
+    <value>Dostęp do google.com z poziomu DLSS Swapper (test ogólnej łączności z Internetem)</value>
+  </data>
+  <data name="DiagnosticsTest2Title" xml:space="preserve">
+    <value>Dostęp do bing.com z poziomu DLSS Swapper (testogólnej łączności z Internetem)</value>
+  </data>
+  <data name="DiagnosticsTest3Title" xml:space="preserve">
+    <value>Pobieranie DLSS Swapper DLL z poziomu DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsTest4Title" xml:space="preserve">
+    <value>Pobieranie DLSS Swapper DLL przez przeglądarkę</value>
+  </data>
+  <data name="DiagnosticsTest5Title" xml:space="preserve">
+    <value>Pobieranie okładki gry ze Steam</value>
+  </data>
+  <data name="DiagnosticsTest6Title" xml:space="preserve">
+    <value>Pobieranie okładki gry z Epic Game Store</value>
+  </data>
+  <data name="DiagnosticsTest7Title" xml:space="preserve">
+    <value>Pobieranie okładki gry z serwera plików DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsTest8Title" xml:space="preserve">
+    <value>Pobieranie okładki gry z alternatywnego serwera plików DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsTest9Title" xml:space="preserve">
+    <value>Wyszukiwanie DNS serwera plików DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsTest10Title" xml:space="preserve">
+    <value>Pobieranie DLSS Swapper DLL w DLSS Swapper z niestandardowym agentem użytkownika</value>
+  </data>
+  <data name="DiagnosticsTest11Title" xml:space="preserve">
+    <value>Pobieranie DLSS DLL z lustrzanego serwera UploadThing</value>
+  </data>
+  <data name="RunTestText" xml:space="preserve">
+    <value>Uruchom test</value>
+  </data>
+  <data name="ClickToFavourite" xml:space="preserve">
+    <value>Dodaj do ulubionych</value>
+  </data>
+  <data name="Favourited" xml:space="preserve">
+    <value>Ulubiony</value>
   </data>
 </root>

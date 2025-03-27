@@ -244,24 +244,32 @@ public partial class GameControlModel : ObservableObject, IDisposable
     #region LanguageProperties
     public string RemoveText => ResourceHelper.GetString("Remove");
     public string AddCustomCoverText => ResourceHelper.GetString("AddCustomCover");
-    public string GameNotReadyToPlayStateText => ResourceHelper.GetString("GameNotReadyToPlayStateText");
+    public string GameNotReadyToPlayStateText => ResourceHelper.GetString("GameNotReadyToPlayState");
     public string HelpText => ResourceHelper.GetString("Help");
     public string NameText => ResourceHelper.GetString("Name");
     public string SaveText => ResourceHelper.GetString("Save");
     public string InstallPathText => ResourceHelper.GetString("InstallPath");
-    public string OpenFolderText => ResourceHelper.GetString("OpenFolderText");
+    public string OpenFolderText => ResourceHelper.GetString("OpenFolder");
+    public string FavouritedText => ResourceHelper.GetString("Favourited");
+    public string ClickToFavouriteText => ResourceHelper.GetString("ClickToFavourite");
+    public string NotesText => ResourceHelper.GetString("Notes");
+    public string CloseText => ResourceHelper.GetString("Close");
     #endregion
 
     private void OnLanugageChanged()
     {
-        OnPropertyChanged(RemoveText);
-        OnPropertyChanged(AddCustomCoverText);
-        OnPropertyChanged(GameNotReadyToPlayStateText);
-        OnPropertyChanged(HelpText);
-        OnPropertyChanged(NameText);
-        OnPropertyChanged(SaveText);
-        OnPropertyChanged(InstallPathText);
-        OnPropertyChanged(OpenFolderText);
+        OnPropertyChanged(nameof(RemoveText));
+        OnPropertyChanged(nameof(AddCustomCoverText));
+        OnPropertyChanged(nameof(GameNotReadyToPlayStateText));
+        OnPropertyChanged(nameof(HelpText));
+        OnPropertyChanged(nameof(NameText));
+        OnPropertyChanged(nameof(SaveText));
+        OnPropertyChanged(nameof(InstallPathText));
+        OnPropertyChanged(nameof(OpenFolderText));
+        OnPropertyChanged(nameof(FavouritedText));
+        OnPropertyChanged(nameof(ClickToFavouriteText));
+        OnPropertyChanged(nameof(NotesText));
+        OnPropertyChanged(nameof(CloseText));
     }
 
     public void Dispose()

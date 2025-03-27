@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    Title="{x:Bind ViewModel.Title}"
+    Title="{x:Bind ViewModel.Title, Mode=OneWay}"
     mc:Ignorable="d">
     
     <Grid x:Name="RootGrid" MinWidth="400">
@@ -33,7 +33,7 @@
                 Grid.Column="0"
                 Source="Assets/icon_256.png" />
             <TextBlock
-                Text="{x:Bind ViewModel.AppTitleText}"
+                Text="{x:Bind ViewModel.AppTitleText, Mode=OneWay}"
                 Grid.Column="1"
                 Margin="20,0,0,0"
                 VerticalAlignment="Center"
@@ -48,12 +48,12 @@
                              Loaded="MainNavigationView_Loaded"
                              Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <muxc:NavigationView.MenuItems>
-                <muxc:NavigationViewItem Content="{x:Bind ViewModel.NavigationViewItemGamesText}" Tag="Games">
+                <muxc:NavigationViewItem Content="{x:Bind ViewModel.NavigationViewItemGamesText, Mode=OneWay}" Tag="Games">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE7FC;"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Content="{x:Bind ViewModel.NavigationViewItemLibraryText}"  Icon="Library" Tag="Library" />
+                <muxc:NavigationViewItem Content="{x:Bind ViewModel.NavigationViewItemLibraryText, Mode=OneWay}"  Icon="Library" Tag="Library" />
             </muxc:NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" />
         </muxc:NavigationView>
@@ -66,7 +66,7 @@
             </Grid.RowDefinitions>
 
             <muxc:ProgressRing Grid.Row="0" x:Name="LoadingProgressRing" IsActive="True" Width="60" Height="60" IsIndeterminate="true" VerticalAlignment="Bottom" />
-            <TextBlock Grid.Row="1" Text="{x:Bind ViewModel.LoadingProgressText}" VerticalAlignment="Top" HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock Grid.Row="1" Text="{x:Bind ViewModel.LoadingProgressText, Mode=OneWay}" VerticalAlignment="Top" HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" />
 
         </Grid>
     </Grid>

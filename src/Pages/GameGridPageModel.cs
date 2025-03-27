@@ -69,7 +69,6 @@ public partial class GameGridPageModel : ObservableObject, IDisposable
         _ => new FontIcon() { },
     };
 
-
     public async Task InitialLoadAsync()
     {
         IsGameListLoading = true;
@@ -378,7 +377,7 @@ public partial class GameGridPageModel : ObservableObject, IDisposable
     }
 
     #region TranslationProperties
-    public string NewDllsText => ResourceHelper.GetString("NewDLLs");
+    public string NewDllsText => ResourceHelper.GetString("NewDlls");
     public string AddGameText => ResourceHelper.GetString("AddGame");
     public string RefreshText => ResourceHelper.GetString("Refresh");
     public string FilterText => ResourceHelper.GetString("Filter");
@@ -392,16 +391,16 @@ public partial class GameGridPageModel : ObservableObject, IDisposable
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(NewDllsText);
-        OnPropertyChanged(AddGameText);
-        OnPropertyChanged(RefreshText);
-        OnPropertyChanged(FilterText);
-        OnPropertyChanged(SearchText);
-        OnPropertyChanged(ViewTypeText);
-        OnPropertyChanged(GridViewText);
-        OnPropertyChanged(ListViewText);
-        OnPropertyChanged(GamesText);
-        OnPropertyChanged(ApplicationRunsInAdministrativeModeInfo);
+        OnPropertyChanged(nameof(NewDllsText));
+        OnPropertyChanged(nameof(AddGameText));
+        OnPropertyChanged(nameof(RefreshText));
+        OnPropertyChanged(nameof(FilterText));
+        OnPropertyChanged(nameof(SearchText));
+        OnPropertyChanged(nameof(ViewTypeText));
+        OnPropertyChanged(nameof(GridViewText));
+        OnPropertyChanged(nameof(ListViewText));
+        OnPropertyChanged(nameof(GamesText));
+        OnPropertyChanged(nameof(ApplicationRunsInAdministrativeModeInfo));
     }
 
     public void Dispose()

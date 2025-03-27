@@ -346,12 +346,12 @@ public partial class DLLPickerControlModel : ObservableObject, IDisposable
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(NoDllsFoundText);
-        OnPropertyChanged(PleaseNavigateLibraryToDownloadDllsText);
-        OnPropertyChanged(OpenDllLocationText);
-        OnPropertyChanged(CurrentDllText);
-        OnPropertyChanged(OriginalDllRestoreText);
-        OnPropertyChanged(OriginalDllText);
+        OnPropertyChanged(nameof(NoDllsFoundText));
+        OnPropertyChanged(nameof(PleaseNavigateLibraryToDownloadDllsText));
+        OnPropertyChanged(nameof(OpenDllLocationText));
+        OnPropertyChanged(nameof(CurrentDllText));
+        OnPropertyChanged(nameof(OriginalDllRestoreText));
+        OnPropertyChanged(nameof(OriginalDllText));
     }
 
     public void Dispose()

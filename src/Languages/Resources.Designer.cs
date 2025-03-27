@@ -210,6 +210,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Click to favourite.
+        /// </summary>
+        public static string ClickToFavourite {
+            get {
+                return ResourceManager.GetString("ClickToFavourite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Close.
         /// </summary>
         public static string Close {
@@ -314,6 +323,105 @@ namespace DLSS_Swapper.Languages {
         public static string Diagnostics {
             get {
                 return ResourceManager.GetString("Diagnostics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Downloading DLSS Swapper DLL within DLSS Swapper with custom user agent.
+        /// </summary>
+        public static string DiagnosticsTest10Title {
+            get {
+                return ResourceManager.GetString("DiagnosticsTest10Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Downloading DLSS DLL from UploadThing mirror.
+        /// </summary>
+        public static string DiagnosticsTest11Title {
+            get {
+                return ResourceManager.GetString("DiagnosticsTest11Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Accessing google.com from within DLSS Swapper (tests general internet connectivity).
+        /// </summary>
+        public static string DiagnosticsTest1Title {
+            get {
+                return ResourceManager.GetString("DiagnosticsTest1Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Accessing bing.com from within DLSS Swapper (tests general internet connectivity).
+        /// </summary>
+        public static string DiagnosticsTest2Title {
+            get {
+                return ResourceManager.GetString("DiagnosticsTest2Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Downloading DLSS Swapper DLL within DLSS Swapper.
+        /// </summary>
+        public static string DiagnosticsTest3Title {
+            get {
+                return ResourceManager.GetString("DiagnosticsTest3Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Downlodaing DLSS Swapper DLL from browser.
+        /// </summary>
+        public static string DiagnosticsTest4Title {
+            get {
+                return ResourceManager.GetString("DiagnosticsTest4Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Downloading game cover from Steam.
+        /// </summary>
+        public static string DiagnosticsTest5Title {
+            get {
+                return ResourceManager.GetString("DiagnosticsTest5Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Downloading game cover from Epic Game Store.
+        /// </summary>
+        public static string DiagnosticsTest6Title {
+            get {
+                return ResourceManager.GetString("DiagnosticsTest6Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Downloading game cover from DLSS Swapper file server.
+        /// </summary>
+        public static string DiagnosticsTest7Title {
+            get {
+                return ResourceManager.GetString("DiagnosticsTest7Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Downloading game cover from alternative DLSS Swapper file server.
+        /// </summary>
+        public static string DiagnosticsTest8Title {
+            get {
+                return ResourceManager.GetString("DiagnosticsTest8Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu DNS lookup of DLSS Swapper file server.
+        /// </summary>
+        public static string DiagnosticsTest9Title {
+            get {
+                return ResourceManager.GetString("DiagnosticsTest9Title", resourceCulture);
             }
         }
         
@@ -471,6 +579,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Favourited.
+        /// </summary>
+        public static string Favourited {
+            get {
+                return ResourceManager.GetString("Favourited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Filter.
         /// </summary>
         public static string Filter {
@@ -548,6 +665,15 @@ namespace DLSS_Swapper.Languages {
         public static string Hash {
             get {
                 return ResourceManager.GetString("Hash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Help.
+        /// </summary>
+        public static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
             }
         }
         
@@ -894,6 +1020,15 @@ namespace DLSS_Swapper.Languages {
         public static string ResetDllToVersionTemplate {
             get {
                 return ResourceManager.GetString("ResetDllToVersionTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Run test.
+        /// </summary>
+        public static string RunTestText {
+            get {
+                return ResourceManager.GetString("RunTestText", resourceCulture);
             }
         }
         

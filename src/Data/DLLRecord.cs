@@ -324,6 +324,7 @@ namespace DLSS_Swapper.Data
         public string DeleteText => ResourceHelper.GetString("Delete");
         public string DownloadText => ResourceHelper.GetString("Download");
         public string DownloadErrorText => ResourceHelper.GetString("DownloadError");
+        public string CancelText => ResourceHelper.GetString("Cancel");
         #endregion
     }
 }

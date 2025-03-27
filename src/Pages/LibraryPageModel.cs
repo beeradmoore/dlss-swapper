@@ -715,13 +715,13 @@ public partial class LibraryPageModel : ObservableObject, IDisposable
     private void OnLanguageChanged()
     {
 
-        OnPropertyChanged(ApplicationRunsInAdministrativeModeInfo);
-        OnPropertyChanged(ImportText);
-        OnPropertyChanged(ExportAllText);
-        OnPropertyChanged(RefreshText);
-        OnPropertyChanged(WarningText);
-        OnPropertyChanged(CancelText);
-        OnPropertyChanged(LibraryText);
+        OnPropertyChanged(nameof(ApplicationRunsInAdministrativeModeInfo));
+        OnPropertyChanged(nameof(ImportText));
+        OnPropertyChanged(nameof(ExportAllText));
+        OnPropertyChanged(nameof(RefreshText));
+        OnPropertyChanged(nameof(WarningText));
+        OnPropertyChanged(nameof(CancelText));
+        OnPropertyChanged(nameof(LibraryText));
     }
 
     public void Dispose()

@@ -98,18 +98,18 @@ public partial class NewDLLsControlModel : ObservableObject, IDisposable
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(Title);
-        OnPropertyChanged(WhileLoadingYourGameNewDllsDiscoveredHelpUsText);
-        OnPropertyChanged(StepOneCreateNewIssueText);
-        OnPropertyChanged(CreateNewGithubIssueText);
-        OnPropertyChanged(GithubAccountRequiredText);
-        OnPropertyChanged(IfButtonDoesntWorkTryHereText);
-        OnPropertyChanged(StepTwoCopyTitleText);
-        OnPropertyChanged(CopyText);
-        OnPropertyChanged(StepThreeCopyBodyText);
-        OnPropertyChanged(StepFourSubmitYourIssueText);
-        OnPropertyChanged(YouDoNotHaveToSubmitDllAutoTrackText);
-        OnPropertyChanged(ThanksForHelpingText);
+        OnPropertyChanged(nameof(Title));
+        OnPropertyChanged(nameof(WhileLoadingYourGameNewDllsDiscoveredHelpUsText));
+        OnPropertyChanged(nameof(StepOneCreateNewIssueText));
+        OnPropertyChanged(nameof(CreateNewGithubIssueText));
+        OnPropertyChanged(nameof(GithubAccountRequiredText));
+        OnPropertyChanged(nameof(IfButtonDoesntWorkTryHereText));
+        OnPropertyChanged(nameof(StepTwoCopyTitleText));
+        OnPropertyChanged(nameof(CopyText));
+        OnPropertyChanged(nameof(StepThreeCopyBodyText));
+        OnPropertyChanged(nameof(StepFourSubmitYourIssueText));
+        OnPropertyChanged(nameof(YouDoNotHaveToSubmitDllAutoTrackText));
+        OnPropertyChanged(nameof(ThanksForHelpingText));
     }
 
     public void Dispose()

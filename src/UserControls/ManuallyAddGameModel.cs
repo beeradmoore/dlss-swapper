@@ -49,10 +49,10 @@ namespace DLSS_Swapper.UserControls
 
         private void OnLanguageChanged()
         {
-            OnPropertyChanged(AddCoverText);
-            OnPropertyChanged(OptionalText);
-            OnPropertyChanged(NameText);
-            OnPropertyChanged(InstallPathText);
+            OnPropertyChanged(nameof(AddCoverText));
+            OnPropertyChanged(nameof(OptionalText));
+            OnPropertyChanged(nameof(NameText));
+            OnPropertyChanged(nameof(InstallPathText));
         }
 
         public void Dispose()

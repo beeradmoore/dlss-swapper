@@ -19,11 +19,11 @@ public class MainWindowViewModel : ObservableObject, IDisposable
 
     private void OnLanguageChanged()
     {
-        OnPropertyChanged(Title);
-        OnPropertyChanged(AppTitleText);
-        OnPropertyChanged(NavigationViewItemGamesText);
-        OnPropertyChanged(NavigationViewItemLibraryText);
-        OnPropertyChanged(LoadingProgressText);
+        OnPropertyChanged(nameof(Title));
+        OnPropertyChanged(nameof(AppTitleText));
+        OnPropertyChanged(nameof(NavigationViewItemGamesText));
+        OnPropertyChanged(nameof(NavigationViewItemLibraryText));
+        OnPropertyChanged(nameof(LoadingProgressText));
     }
 
     public void Dispose()

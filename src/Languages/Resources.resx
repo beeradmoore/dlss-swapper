@@ -571,4 +571,49 @@ Only import dlls from sources you trust.</value>
   <data name="SettingsLanguage" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="DiagnosticsTest1Title" xml:space="preserve">
+    <value>Accessing google.com from within DLSS Swapper (tests general internet connectivity)</value>
+  </data>
+  <data name="DiagnosticsTest2Title" xml:space="preserve">
+    <value>Accessing bing.com from within DLSS Swapper (tests general internet connectivity)</value>
+  </data>
+  <data name="DiagnosticsTest3Title" xml:space="preserve">
+    <value>Downloading DLSS Swapper DLL within DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsTest4Title" xml:space="preserve">
+    <value>Downlodaing DLSS Swapper DLL from browser</value>
+  </data>
+  <data name="DiagnosticsTest5Title" xml:space="preserve">
+    <value>Downloading game cover from Steam</value>
+  </data>
+  <data name="DiagnosticsTest6Title" xml:space="preserve">
+    <value>Downloading game cover from Epic Game Store</value>
+  </data>
+  <data name="DiagnosticsTest7Title" xml:space="preserve">
+    <value>Downloading game cover from DLSS Swapper file server</value>
+  </data>
+  <data name="DiagnosticsTest8Title" xml:space="preserve">
+    <value>Downloading game cover from alternative DLSS Swapper file server</value>
+  </data>
+  <data name="DiagnosticsTest9Title" xml:space="preserve">
+    <value>DNS lookup of DLSS Swapper file server</value>
+  </data>
+  <data name="DiagnosticsTest10Title" xml:space="preserve">
+    <value>Downloading DLSS Swapper DLL within DLSS Swapper with custom user agent</value>
+  </data>
+  <data name="DiagnosticsTest11Title" xml:space="preserve">
+    <value>Downloading DLSS DLL from UploadThing mirror</value>
+  </data>
+  <data name="RunTestText" xml:space="preserve">
+    <value>Run test</value>
+  </data>
+  <data name="Favourited" xml:space="preserve">
+    <value>Favourited</value>
+  </data>
+  <data name="ClickToFavourite" xml:space="preserve">
+    <value>Click to favourite</value>
+  </data>
 </root>

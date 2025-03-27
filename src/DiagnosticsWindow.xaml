@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="{x:Bind ViewModel.ApplicationTilteDiagnosticsWindowText}">
+    Title="{x:Bind ViewModel.ApplicationTilteDiagnosticsWindowText, Mode=OneWay}">
 
     <Grid Margin="16" RowSpacing="16">
         <Grid.RowDefinitions>
@@ -15,8 +15,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Content="{x:Bind ViewModel.ClickToCopyDetailsText}" Command="{x:Bind ViewModel.CopyTextCommand}" />
-        <TextBox Grid.Row="1" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Text="{x:Bind ViewModel.DiagnosticsLog}"></TextBox>
+        <Button Grid.Row="0" Content="{x:Bind ViewModel.ClickToCopyDetailsText, Mode=OneWay}" Command="{x:Bind ViewModel.CopyTextCommand}" />
+        <TextBox Grid.Row="1" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Text="{x:Bind ViewModel.DiagnosticsLog}" />
     </Grid>
     
 </Window>

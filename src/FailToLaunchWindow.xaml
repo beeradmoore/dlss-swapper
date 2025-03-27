@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="{x:Bind ViewModel.ApplicationFailToLaunchWindowText}">
+    Title="{x:Bind ViewModel.ApplicationFailToLaunchWindowText, Mode=OneWay}">
 
     <Grid Margin="16" RowSpacing="16">
         <Grid.RowDefinitions>
@@ -17,13 +17,13 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Style="{ThemeResource TitleTextBlockStyle}" Text="{x:Bind ViewModel.DlssSwapperFailedToLaunchText}" />
+        <TextBlock Grid.Row="0" Style="{ThemeResource TitleTextBlockStyle}" Text="{x:Bind ViewModel.DlssSwapperFailedToLaunchText, Mode=OneWay}" />
         <TextBlock Grid.Row="1" TextWrapping="Wrap">
-            <Run Text="{x:Bind ViewModel.PleaseOpenIssuePartial1Text}" />
-            <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues"><Run Text="{x:Bind ViewModel.PleaseOpenIssuePartial2Text}" /></Hyperlink>
-            <Run Text="{x:Bind ViewModel.PleaseOpenIssuePartial3Text}" />
+            <Run Text="{x:Bind ViewModel.PleaseOpenIssuePartial1Text, Mode=OneWay}" />
+            <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues"><Run Text="{x:Bind ViewModel.PleaseOpenIssuePartial2Text, Mode=OneWay}" /></Hyperlink>
+            <Run Text="{x:Bind ViewModel.PleaseOpenIssuePartial3Text, Mode=OneWay}" />
         </TextBlock>
-        <Button Grid.Row="2" Content="{x:Bind ViewModel.ClickToCopyDetailsText}" Command="{x:Bind ViewModel.CopyTextCommand}" />
+        <Button Grid.Row="2" Content="{x:Bind ViewModel.ClickToCopyDetailsText, Mode=OneWay}" Command="{x:Bind ViewModel.CopyTextCommand}" />
         <TextBox Grid.Row="3" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Text="{x:Bind ViewModel.SystemData}"></TextBox>
     </Grid>
 </Window>

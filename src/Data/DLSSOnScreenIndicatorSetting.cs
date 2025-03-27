@@ -17,7 +17,7 @@ public class DLSSOnScreenIndicatorSetting : ObservableObject, IDisposable
     }
 
     public string LabelLanguageProperty { get; init; } = "None";
-    [LanguageProperty] public string Label => ResourceHelper.GetString(LabelLanguageProperty);
+    [TranslationProperty] public string Label => ResourceHelper.GetString(LabelLanguageProperty);
     public int Value { get; init; }
 
     public override string ToString() => Label;

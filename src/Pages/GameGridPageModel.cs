@@ -358,15 +358,22 @@ public partial class GameGridPageModel : LocalizedViewModelBase
     }
 
     #region TranslationProperties
-    [LanguageProperty] public string NewDllsText => ResourceHelper.GetString("NewDlls");
-    [LanguageProperty] public string AddGameText => ResourceHelper.GetString("AddGame");
-    [LanguageProperty] public string RefreshText => ResourceHelper.GetString("Refresh");
-    [LanguageProperty] public string FilterText => ResourceHelper.GetString("Filter");
-    [LanguageProperty] public string SearchText => ResourceHelper.GetString("Search");
-    [LanguageProperty] public string ViewTypeText => ResourceHelper.GetString("ViewType");
-    [LanguageProperty] public string GridViewText => ResourceHelper.GetString("GridView");
-    [LanguageProperty] public string ListViewText => ResourceHelper.GetString("ListView");
-    [LanguageProperty] public string GamesText => ResourceHelper.GetString("Games");
-    [LanguageProperty] public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
+
+
+
+
+
+
+
+    public string NewDllsText => ResourceHelper.GetString("NewDlls");
+    [TranslationProperty] public string AddGameText => ResourceHelper.GetString("AddGame");
+    [TranslationProperty] public string RefreshText => ResourceHelper.GetString("Refresh");
+    [TranslationProperty] public string FilterText => ResourceHelper.GetString("Filter");
+    [TranslationProperty] public string SearchText => ResourceHelper.GetString("Search");
+    [TranslationProperty] public string ViewTypeText => ResourceHelper.GetString("ViewType");
+    [TranslationProperty] public string GridViewText => ResourceHelper.GetString("GridView");
+    [TranslationProperty] public string ListViewText => ResourceHelper.GetString("ListView");
+    [TranslationProperty] public string GamesText => ResourceHelper.GetString("Games");
+    [TranslationProperty] public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
     #endregion
 }

@@ -702,12 +702,12 @@ public partial class LibraryPageModel : LocalizedViewModelBase
     }
 
     #region TranslationProperties
-    [LanguageProperty] public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
-    [LanguageProperty] public string ImportText => ResourceHelper.GetString("Import");
-    [LanguageProperty] public string ExportAllText => ResourceHelper.GetString("ExportAll");
-    [LanguageProperty] public string RefreshText => ResourceHelper.GetString("Refresh");
-    [LanguageProperty] public string WarningText => ResourceHelper.GetString("Warning");
-    [LanguageProperty] public string CancelText => ResourceHelper.GetString("Cancel");
-    [LanguageProperty] public string LibraryText => ResourceHelper.GetString("Library");
+    [TranslationProperty] public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
+    [TranslationProperty] public string ImportText => ResourceHelper.GetString("Import");
+    [TranslationProperty] public string ExportAllText => ResourceHelper.GetString("ExportAll");
+    [TranslationProperty] public string RefreshText => ResourceHelper.GetString("Refresh");
+    [TranslationProperty] public string WarningText => ResourceHelper.GetString("Warning");
+    [TranslationProperty] public string CancelText => ResourceHelper.GetString("Cancel");
+    [TranslationProperty] public string LibraryText => ResourceHelper.GetString("Library");
     #endregion
 }

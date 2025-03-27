@@ -80,17 +80,17 @@ public partial class NewDLLsControlModel : LocalizedViewModelBase
     }
 
     #region LanguageProperties
-    [LanguageProperty] public string Title => $"{ResourceHelper.GetString("NewDllFoundOn")} {DateTime.Now.ToString("yyyy-MM-dd")}";
-    [LanguageProperty] public string WhileLoadingYourGameNewDllsDiscoveredHelpUsText => ResourceHelper.GetString("WhileLoadingYourGameNewDllsDiscoveredHelpUs");
-    [LanguageProperty] public string StepOneCreateNewIssueText => ResourceHelper.GetString("StepOneCreateNewIssue");
-    [LanguageProperty] public string CreateNewGithubIssueText => ResourceHelper.GetString("CreateNewGithubIssue");
-    [LanguageProperty] public string GithubAccountRequiredText => ResourceHelper.GetString("GithubAccountRequired");
-    [LanguageProperty] public string IfButtonDoesntWorkTryHereText => ResourceHelper.GetString("IfButtonDoesntWorkTryHere");
-    [LanguageProperty] public string StepTwoCopyTitleText => ResourceHelper.GetString("StepTwoCopyTitle");
-    [LanguageProperty] public string CopyText => ResourceHelper.GetString("Copy");
-    [LanguageProperty] public string StepThreeCopyBodyText => ResourceHelper.GetString("StepThreeCopyBody");
-    [LanguageProperty] public string StepFourSubmitYourIssueText => ResourceHelper.GetString("StepFourSubmitYourIssue");
-    [LanguageProperty] public string YouDoNotHaveToSubmitDllAutoTrackText => ResourceHelper.GetString("YouDoNotHaveToSubmitDllAutoTrack");
-    [LanguageProperty] public string ThanksForHelpingText => ResourceHelper.GetString("ThanksForHelping");
+    [TranslationProperty] public string Title => $"{ResourceHelper.GetString("NewDllFoundOn")} {DateTime.Now.ToString("yyyy-MM-dd")}";
+    [TranslationProperty] public string WhileLoadingYourGameNewDllsDiscoveredHelpUsText => ResourceHelper.GetString("WhileLoadingYourGameNewDllsDiscoveredHelpUs");
+    [TranslationProperty] public string StepOneCreateNewIssueText => ResourceHelper.GetString("StepOneCreateNewIssue");
+    [TranslationProperty] public string CreateNewGithubIssueText => ResourceHelper.GetString("CreateNewGithubIssue");
+    [TranslationProperty] public string GithubAccountRequiredText => ResourceHelper.GetString("GithubAccountRequired");
+    [TranslationProperty] public string IfButtonDoesntWorkTryHereText => ResourceHelper.GetString("IfButtonDoesntWorkTryHere");
+    [TranslationProperty] public string StepTwoCopyTitleText => ResourceHelper.GetString("StepTwoCopyTitle");
+    [TranslationProperty] public string CopyText => ResourceHelper.GetString("Copy");
+    [TranslationProperty] public string StepThreeCopyBodyText => ResourceHelper.GetString("StepThreeCopyBody");
+    [TranslationProperty] public string StepFourSubmitYourIssueText => ResourceHelper.GetString("StepFourSubmitYourIssue");
+    [TranslationProperty] public string YouDoNotHaveToSubmitDllAutoTrackText => ResourceHelper.GetString("YouDoNotHaveToSubmitDllAutoTrack");
+    [TranslationProperty] public string ThanksForHelpingText => ResourceHelper.GetString("ThanksForHelping");
     #endregion
 }

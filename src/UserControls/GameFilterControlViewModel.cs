@@ -8,9 +8,9 @@ public class GameFilterControlViewModel : LocalizedViewModelBase
     public GameFilterControlViewModel() : base() { }
 
     #region LanguageProperties
-    [LanguageProperty] public string OptionsText => $"{ResourceHelper.GetString("Options")}:";
-    [LanguageProperty] public string GroupingText => $"{ResourceHelper.GetString("Grouping")}:";
-    [LanguageProperty] public string HideGamesWithNoSwappableItemsText => ResourceHelper.GetString("HideGamesWithNoSwappableItems");
-    [LanguageProperty] public string GroupGamesFromTheSameLibraryTogetherText => ResourceHelper.GetString("GroupGamesFromTheSameLibraryTogether");
+    [TranslationProperty] public string OptionsText => $"{ResourceHelper.GetString("Options")}:";
+    [TranslationProperty] public string GroupingText => $"{ResourceHelper.GetString("Grouping")}:";
+    [TranslationProperty] public string HideGamesWithNoSwappableItemsText => ResourceHelper.GetString("HideGamesWithNoSwappableItems");
+    [TranslationProperty] public string GroupGamesFromTheSameLibraryTogetherText => ResourceHelper.GetString("GroupGamesFromTheSameLibraryTogether");
     #endregion
 }

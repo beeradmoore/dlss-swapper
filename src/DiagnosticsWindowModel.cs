@@ -25,7 +25,7 @@ public partial class DiagnosticsWindowModel : LocalizedViewModelBase
     }
 
     #region TranslationProperties
-    [LanguageProperty] public string ApplicationTilteDiagnosticsWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("Diagnostics")}";
-    [LanguageProperty] public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
+    [TranslationProperty] public string ApplicationTilteDiagnosticsWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("Diagnostics")}";
+    [TranslationProperty] public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
     #endregion
 }

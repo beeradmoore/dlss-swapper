@@ -40,10 +40,10 @@ namespace DLSS_Swapper.UserControls
         }
 
         #region LanguageProperties
-        [LanguageProperty] public string AddCoverText => ResourceHelper.GetString("AddCover");
-        [LanguageProperty] public string OptionalText => ResourceHelper.GetString("Optional");
-        [LanguageProperty] public string NameText => ResourceHelper.GetString("Name");
-        [LanguageProperty] public string InstallPathText => ResourceHelper.GetString("InstallPath");
+        [TranslationProperty] public string AddCoverText => ResourceHelper.GetString("AddCover");
+        [TranslationProperty] public string OptionalText => ResourceHelper.GetString("Optional");
+        [TranslationProperty] public string NameText => ResourceHelper.GetString("Name");
+        [TranslationProperty] public string InstallPathText => ResourceHelper.GetString("InstallPath");
         #endregion
     }
 }

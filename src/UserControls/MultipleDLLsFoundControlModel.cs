@@ -50,6 +50,6 @@ public partial class MultipleDLLsFoundControlModel : LocalizedViewModelBase
 
 
     #region LanguageProperties
-    [LanguageProperty] public string BelowMultipleDllFoundYouWillBeAbleToSwapInfo => ResourceHelper.GetString("BelowMultipleDllFoundYouWillBeAbleToSwapInfo");
+    [TranslationProperty] public string BelowMultipleDllFoundYouWillBeAbleToSwapInfo => ResourceHelper.GetString("BelowMultipleDllFoundYouWillBeAbleToSwapInfo");
     #endregion
 }

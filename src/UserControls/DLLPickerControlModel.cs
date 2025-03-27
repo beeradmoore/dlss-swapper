@@ -336,11 +336,11 @@ public partial class DLLPickerControlModel : LocalizedViewModelBase
     }
 
     #region LanguageProperties
-    [LanguageProperty] public string NoDllsFoundText => ResourceHelper.GetString("NoDllsFoundText");
-    [LanguageProperty] public string PleaseNavigateLibraryToDownloadDllsText => ResourceHelper.GetString("PleaseNavigateLibraryToDownloadDllsText");
-    [LanguageProperty] public string OpenDllLocationText => ResourceHelper.GetString("OpenDllLocation");
-    [LanguageProperty] public string CurrentDllText => ResourceHelper.GetString("CurrentDll");
-    [LanguageProperty] public string OriginalDllRestoreText => ResourceHelper.GetString("OriginalDllRestore");
-    [LanguageProperty] public string OriginalDllText => ResourceHelper.GetString("OriginalDllText");
+    [TranslationProperty] public string NoDllsFoundText => ResourceHelper.GetString("NoDllsFoundText");
+    [TranslationProperty] public string PleaseNavigateLibraryToDownloadDllsText => ResourceHelper.GetString("PleaseNavigateLibraryToDownloadDllsText");
+    [TranslationProperty] public string OpenDllLocationText => ResourceHelper.GetString("OpenDllLocation");
+    [TranslationProperty] public string CurrentDllText => ResourceHelper.GetString("CurrentDll");
+    [TranslationProperty] public string OriginalDllRestoreText => ResourceHelper.GetString("OriginalDllRestore");
+    [TranslationProperty] public string OriginalDllText => ResourceHelper.GetString("OriginalDllText");
     #endregion
 }

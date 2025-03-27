@@ -7,10 +7,10 @@ public class MainWindowViewModel : LocalizedViewModelBase
 {
     public MainWindowViewModel() : base() { }
 
-    [LanguageProperty] public string Title => ResourceHelper.GetString("ApplicationTitle");
-    [LanguageProperty] public string AppTitleText => ResourceHelper.GetString("ApplicationTitle");
-    [LanguageProperty] public string NavigationViewItemGamesText => ResourceHelper.GetString("Games");
-    [LanguageProperty] public string NavigationViewItemLibraryText => ResourceHelper.GetString("Library");
-    [LanguageProperty] public string LoadingProgressText => ResourceHelper.GetString("Loading");
+    [TranslationProperty] public string Title => ResourceHelper.GetString("ApplicationTitle");
+    [TranslationProperty] public string AppTitleText => ResourceHelper.GetString("ApplicationTitle");
+    [TranslationProperty] public string NavigationViewItemGamesText => ResourceHelper.GetString("Games");
+    [TranslationProperty] public string NavigationViewItemLibraryText => ResourceHelper.GetString("Library");
+    [TranslationProperty] public string LoadingProgressText => ResourceHelper.GetString("Loading");
 
 }

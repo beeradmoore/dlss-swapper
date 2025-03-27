@@ -10,7 +10,6 @@ namespace DLSS_Swapper.Helpers;
 public class LanguageManager
 {
     private LanguageManager() { }
-
     public static LanguageManager Instance => _instance.Value;
     public void ChangeLanguage(string key)
     {
@@ -21,7 +20,7 @@ public class LanguageManager
 
     public static IEnumerable<string> GetClassLanguagePropertyNames(Type classType)
     {
-        return classType.GetProperties().Where(p => p.GetCustomAttribute<LanguagePropertyAttribute>() != null).Select(p => p.Name).ToList();
+        return classType.GetProperties().Where(p => p.GetCustomAttribute<TranslationPropertyAttribute>() != null).Select(p => p.Name).ToList();
     }
 
     public event Action OnLanguageChanged;

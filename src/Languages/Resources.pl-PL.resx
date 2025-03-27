@@ -198,10 +198,10 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
     <value>Eksport wszystkich</value>
   </data>
   <data name="ExportedDllTemplate" xml:space="preserve">
-    <value>Wyeksportowano DLL {0}</value>
+    <value>Wyeksportowano DLL {0}.</value>
   </data>
   <data name="ExportedDllsTemplate" xml:space="preserve">
-    <value>Wyeksportowani {0} DLSS DLL {1}</value>
+    <value>Wyeksportowani {0} DLSS DLL {1}.</value>
   </data>
   <data name="ExportErrorDueToDllsCountTemplate" xml:space="preserve">
     <value>Nie można wyeksportować ponieważ "{0}" ma {1} dllki zamiast 1.</value>
@@ -236,7 +236,7 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="MalliciousDllsInfo" xml:space="preserve">
     <value>Podmienianie bibliotek DLL na twoim komputerze może być niebezpieczne
 
-Umieszczenie podpięcie złośliwej biblioteki DLL do gry może być tak złe jak R3M4STR DJ ROZPIERDALATOR GIGA DUDNIARZ DO SPEEDRUNOWANIA KAO2 SKIPY SAME WCHODZĄ MOVEMENT IDEALNY[e5LFnX9mq6M][youtube-online-converter.com][128kbs].mp3.exe które pobrałeś przed chwilą z jakiejś podejrzanej strony.
+Umieszczenie podpięcie złośliwej biblioteki DLL do gry może być tak złe jak uruchomienie A-Soul-as-Red-as-a-Ground-Cherry[dYvvKyYIc5s][youtube-online-converter.com][128kbs].mp3.exe które pobrałeś przed chwilą z jakiejś podejrzanej strony.
 
 Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   </data>
@@ -385,7 +385,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
     <value>Problem z uruchomieniem</value>
   </data>
   <data name="PleaseOpenIssuePartial1" xml:space="preserve">
-    <value>Proszę otwórz</value>
+    <value>Proszę otwórz </value>
   </data>
   <data name="PleaseOpenIssuePartial2" xml:space="preserve">
     <value>nowe zgłoszenie</value>
@@ -400,31 +400,31 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
     <value>Tester Sieciowy</value>
   </data>
   <data name="OriginalDll" xml:space="preserve">
-    <value>Oryginalna biblioteka DLL.</value>
+    <value>Oryginalna biblioteka DLL</value>
   </data>
   <data name="OriginalDllRestore" xml:space="preserve">
-    <value>Przywróć oryginalną bibliotekę DLL.</value>
+    <value>Przywróć oryginalną bibliotekę DLL</value>
   </data>
   <data name="CurrentDll" xml:space="preserve">
-    <value>Aktualna biblioteka DLL.</value>
+    <value>Aktualna biblioteka DLL</value>
   </data>
   <data name="OpenDllLocation" xml:space="preserve">
-    <value>Otwórz lokalizację biblioteki DLL.</value>
+    <value>Otwórz lokalizację biblioteki DLL</value>
   </data>
   <data name="NoDllsFound" xml:space="preserve">
-    <value>Nie znaleziono bibliotek DLL.</value>
+    <value>Nie znaleziono bibliotek DLL</value>
   </data>
   <data name="PleaseNavigateLibraryToDownloadDlls" xml:space="preserve">
     <value>Proszę przejść do zakładki z bibliotekami DLL aby pobrać nowe.</value>
   </data>
   <data name="WaitToDownloadCompleteBeforeSwapping" xml:space="preserve">
-    <value>Proszę zaczekać na zakończenie pobierania przed podmianą.</value>
+    <value>Proszę zaczekać na zakończenie pobierania przed podmianą</value>
   </data>
   <data name="StartingDownload" xml:space="preserve">
-    <value>Rozpoczynanie pobierania.</value>
+    <value>Rozpoczynanie pobierania</value>
   </data>
   <data name="CouldNotFindFileTemplate" xml:space="preserve">
-    <value>Nie można znaleźć pliku "{0}"</value>
+    <value>Nie można znaleźć pliku "{0}".</value>
   </data>
   <data name="ResetDllToVersionTemplate" xml:space="preserve">
     <value>Biblioteka DLL została zresetowana do {0}.</value>
@@ -454,13 +454,13 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
     <value>Znaleziono wiele plików DLL {0}</value>
   </data>
   <data name="CouldNotFindGameInstallPathTemplate" xml:space="preserve">
-    <value>Nie można znaleźć ścieżki "{0}"</value>
+    <value>Nie można znaleźć ścieżki "{0}".</value>
   </data>
   <data name="Enabled" xml:space="preserve">
-    <value> włączone</value>
+    <value>włączone</value>
   </data>
   <data name="Disabled" xml:space="preserve">
-    <value> wyłączone</value>
+    <value>wyłączone</value>
   </data>
   <data name="InstallPath" xml:space="preserve">
     <value>Ścieżka instalacji</value>
@@ -529,7 +529,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
     <value>Ta gra nie jest gotowa do gry.</value>
   </data>
   <data name="AddCustomCover" xml:space="preserve">
-    <value>Dodaj niestandardową okładkę</value>
+    <value>Dodaj własną okładkę</value>
   </data>
   <data name="Grouping" xml:space="preserve">
     <value>Grupowanie</value>
@@ -547,7 +547,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
     <value>Szukaj</value>
   </data>
   <data name="AddingGamesManuallyInfoHtml" xml:space="preserve">
-    <value>Need Fix</value>
+    <value>Pamiętaj, że musisz wybrać ścieżkę swojej &lt;i&gt;gry&lt;/i&gt;, nie ścieżkę swoich &lt;i&gt;gier&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;Dla przykładu, jeśli masz grę w katalogu:&lt;br/&gt;&lt;b&gt;C:\Program Files\MojeGry\MojaUlubionaGra\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Musisz wybrać katalog &lt;b&gt;MojaUlubionaGra&lt;/b&gt; a nie katalog &lt;b&gt;MojeGry&lt;/b&gt;.</value>
   </data>
   <data name="SettingsLogging" xml:space="preserve">
     <value>Logowanie</value>

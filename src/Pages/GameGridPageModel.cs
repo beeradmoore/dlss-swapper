@@ -5,17 +5,15 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Attributes;
+using DLSS_Swapper.Builders;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
-using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Documents;
 using Windows.Storage.Pickers;
 using Windows.System;
-using Windows.UI.Text;
 
 namespace DLSS_Swapper.Pages;
 
@@ -165,6 +163,9 @@ public partial class GameGridPageModel : ObservableObject, IDisposable
 
     async Task AddGameManually()
     {
+
+        TextBlockBuilder textBlockBuilder = new TextBlockBuilder(ResourceHelper.GetString("AddingGamesManuallyInfoHtml"));
+
         if (Settings.Instance.HasShownAddGameFolderMessage == false)
         {
             var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
@@ -173,27 +174,7 @@ public partial class GameGridPageModel : ObservableObject, IDisposable
                 PrimaryButtonText = ResourceHelper.GetString("AddGame"),
                 CloseButtonText = ResourceHelper.GetString("Close"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = new TextBlock()
-                {
-                    TextWrapping = TextWrapping.Wrap,
-                    Inlines =
-                    {
-                        new Run() { Text = "You must select your " },
-                        new Run() { Text = "game", FontStyle = FontStyle.Italic },
-                        new Run() { Text = " directory, not your " },
-                        new Run() { Text = "games", FontStyle = FontStyle.Italic },
-                        new Run() { Text = " directory." },
-                        new Run() { Text = "\n\n" },
-                        new Run() { Text = "For example, if you have a game at:\n" },
-                        new Run() { Text = "C:\\Program Files\\MyGamesFolder\\MyFavouriteGame\\" },
-                        new Run() { Text = "\n\n" },
-                        new Run() { Text = "You would select the " },
-                        new Run() { Text = "MyFavouriteGame", FontWeight = FontWeights.Bold },
-                        new Run() { Text = " directory and not the " },
-                        new Run() { Text = "MyGamesFolder", FontWeight = FontWeights.Bold },
-                        new Run() { Text = " directory." },
-                    },
-                }
+                Content = textBlockBuilder.Build()
             };
 
             var result = await dialog.ShowAsync();

@@ -321,9 +321,6 @@ Only import dlls from sources you trust.</value>
   <data name="SettingsVerboseLogging" xml:space="preserve">
     <value>Verbose logging</value>
   </data>
-  <data name="SettingsEnableLoggingToFile" xml:space="preserve">
-    <value>Enable logging to file</value>
-  </data>
   <data name="SettingsThemeLight" xml:space="preserve">
     <value>Light</value>
   </data>
@@ -348,17 +345,8 @@ Only import dlls from sources you trust.</value>
   <data name="SettingsGeneralTroubleshootingGuide" xml:space="preserve">
     <value>General troubleshooting guide</value>
   </data>
-  <data name="SettingsNetworkTester" xml:space="preserve">
-    <value>Network Tester</value>
-  </data>
-  <data name="SettingsDiagnostics" xml:space="preserve">
-    <value>Diagnostics</value>
-  </data>
   <data name="SettingsGiveFeedbackInfo" xml:space="preserve">
     <value>You can suggest a feature or report a problem or on the DLSS Swapper</value>
-  </data>
-  <data name="SettingsVersion" xml:space="preserve">
-    <value>Version</value>
   </data>
   <data name="Oops" xml:space="preserve">
     <value>Oops</value>
@@ -607,7 +595,7 @@ Only import dlls from sources you trust.</value>
   <data name="DiagnosticsTest11Title" xml:space="preserve">
     <value>Downloading DLSS DLL from UploadThing mirror</value>
   </data>
-  <data name="RunTestText" xml:space="preserve">
+  <data name="RunTest" xml:space="preserve">
     <value>Run test</value>
   </data>
   <data name="Favourited" xml:space="preserve">

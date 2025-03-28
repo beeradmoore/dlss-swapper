@@ -694,7 +694,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
             var dialog = new EasyContentDialog(networkTesterWindow.Content.XamlRoot)
             {
                 Title = ResourceHelper.GetString("CustomUserAgentTest"),
-                PrimaryButtonText = ResourceHelper.GetString("RunTestText"),
+                PrimaryButtonText = ResourceHelper.GetString("RunTest"),
                 CloseButtonText = ResourceHelper.GetString("Cancel"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = stackPanel,

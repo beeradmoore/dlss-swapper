@@ -1264,9 +1264,9 @@ namespace DLSS_Swapper.Languages {
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Run test.
         /// </summary>
-        public static string RunTestText {
+        public static string RunTest {
             get {
-                return ResourceManager.GetString("RunTestText", resourceCulture);
+                return ResourceManager.GetString("RunTest", resourceCulture);
             }
         }
         
@@ -1379,15 +1379,6 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Diagnostics.
-        /// </summary>
-        public static string SettingsDiagnostics {
-            get {
-                return ResourceManager.GetString("SettingsDiagnostics", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu DLSS Developer Options.
         /// </summary>
         public static string SettingsDllsDeveloperOptions {
@@ -1402,15 +1393,6 @@ namespace DLSS_Swapper.Languages {
         public static string SettingsEnableLoggingToConsoleWindow {
             get {
                 return ResourceManager.GetString("SettingsEnableLoggingToConsoleWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Enable logging to file.
-        /// </summary>
-        public static string SettingsEnableLoggingToFile {
-            get {
-                return ResourceManager.GetString("SettingsEnableLoggingToFile", resourceCulture);
             }
         }
         
@@ -1465,15 +1447,6 @@ namespace DLSS_Swapper.Languages {
         public static string SettingsLogging {
             get {
                 return ResourceManager.GetString("SettingsLogging", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Network Tester.
-        /// </summary>
-        public static string SettingsNetworkTester {
-            get {
-                return ResourceManager.GetString("SettingsNetworkTester", resourceCulture);
             }
         }
         
@@ -1555,15 +1528,6 @@ namespace DLSS_Swapper.Languages {
         public static string SettingsVerboseLogging {
             get {
                 return ResourceManager.GetString("SettingsVerboseLogging", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Version.
-        /// </summary>
-        public static string SettingsVersion {
-            get {
-                return ResourceManager.GetString("SettingsVersion", resourceCulture);
             }
         }
         

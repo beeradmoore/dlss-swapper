@@ -7,11 +7,11 @@ public class SettingsPageTranslationPropertiesViewModel : LocalizedViewModelBase
 {
     public SettingsPageTranslationPropertiesViewModel() : base() { }
 
-    [TranslationProperty] public string VersionText => $"{ResourceHelper.GetString("SettingsVersion")}:";
+    [TranslationProperty] public string VersionText => $"{ResourceHelper.GetString("Version")}:";
     [TranslationProperty] public string GiveFeedbackInfo => ResourceHelper.GetString("SettingsGiveFeedbackInfo");
-    [TranslationProperty] public string NetworkTesterText => ResourceHelper.GetString("SettingsNetworkTester");
+    [TranslationProperty] public string NetworkTesterText => ResourceHelper.GetString("NetworkTester");
     [TranslationProperty] public string GeneralTroubleshootingGuideText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");
-    [TranslationProperty] public string DiagnosticsText => ResourceHelper.GetString("SettingsDiagnostics");
+    [TranslationProperty] public string DiagnosticsText => ResourceHelper.GetString("Diagnostics");
     [TranslationProperty] public string AcknowledgementsText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");
     [TranslationProperty] public string AllowDebugDllsInfo => ResourceHelper.GetString("SettingsAllowDebugDllsInfo");
     [TranslationProperty] public string AllowUntrustedInfo => ResourceHelper.GetString("SettingsAllowUntrustedInfo");
@@ -26,7 +26,7 @@ public class SettingsPageTranslationPropertiesViewModel : LocalizedViewModelBase
     [TranslationProperty] public string DllsDeveloperOptionsText => ResourceHelper.GetString("SettingsDllsDeveloperOptions");
     [TranslationProperty] public string ShowOnScreenIndicatorText => ResourceHelper.GetString("SettingsShowOnScreenIndicator");
     [TranslationProperty] public string VerboseLoggingText => ResourceHelper.GetString("SettingsVerboseLogging");
-    [TranslationProperty] public string EnableLoggingToFileText => ResourceHelper.GetString("SettingsEnableLoggingToFile");
+    [TranslationProperty] public string EnableLoggingToFileText => ResourceHelper.GetString("EnableLoggingToFile");
     [TranslationProperty] public string EnableLoggingToConsoleWindowText => ResourceHelper.GetString("SettingsEnableLoggingToConsoleWindow");
     [TranslationProperty] public string AllowUntrustedText => ResourceHelper.GetString("SettingsAllowUntrusted");
     [TranslationProperty] public string AllowDebugDllsText => ResourceHelper.GetString("SettingsAllowDebugDlls");

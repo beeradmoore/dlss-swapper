@@ -138,7 +138,7 @@
 Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, może to być błąd. Będziemy wdzięczni za zgłoszenie tego problemu w naszym repozytorium GitHub, abyśmy mogli wprowadzić poprawkę i zapewnić lepsze wykrywanie gier w przyszłości.</value>
   </data>
   <data name="AddingGamesManuallyNoteTitle" xml:space="preserve">
-    <value>Informacja dotycząca ręcznego dodawania gier</value>
+    <value>Uwaga dotycząca ręcznego dodawania gier</value>
   </data>
   <data name="SettingsAllowDebugDlls" xml:space="preserve">
     <value>Zezwalaj na debugowanie bibliotek DLL</value>
@@ -318,9 +318,6 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="SettingsVerboseLogging" xml:space="preserve">
     <value>Logowanie z dużą ilością informacji</value>
   </data>
-  <data name="SettingsEnableLoggingToFile" xml:space="preserve">
-    <value>Zezwól na logowanie do pliku</value>
-  </data>
   <data name="SettingsThemeLight" xml:space="preserve">
     <value>Jasny</value>
   </data>
@@ -345,17 +342,8 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="SettingsGeneralTroubleshootingGuide" xml:space="preserve">
     <value>Ogólny przewodnik rozwiązywania problemów</value>
   </data>
-  <data name="SettingsNetworkTester" xml:space="preserve">
-    <value>Tester Sieciowy</value>
-  </data>
-  <data name="SettingsDiagnostics" xml:space="preserve">
-    <value>Diagnostyka</value>
-  </data>
   <data name="Oops" xml:space="preserve">
     <value>Upss</value>
-  </data>
-  <data name="SettingsVersion" xml:space="preserve">
-    <value>Wersja</value>
   </data>
   <data name="SettingsGiveFeedbackInfo" xml:space="preserve">
     <value>Możesz zasugerować funkcję lub zgłosić problem na DLSS Swapper</value>
@@ -600,7 +588,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="DiagnosticsTest11Title" xml:space="preserve">
     <value>Pobieranie DLSS DLL z lustrzanego serwera UploadThing</value>
   </data>
-  <data name="RunTestText" xml:space="preserve">
+  <data name="RunTest" xml:space="preserve">
     <value>Uruchom test</value>
   </data>
   <data name="ClickToFavourite" xml:space="preserve">

@@ -20,7 +20,7 @@ public class NetworkTesterWindowTranslationPropertiesViewModel : LocalizedViewMo
     [TranslationProperty] public string Test9TitleText => ResourceHelper.GetString("DiagnosticsTest9Title");
     [TranslationProperty] public string Test10TitleText => ResourceHelper.GetString("DiagnosticsTest10Title");
     [TranslationProperty] public string Test11TitleText => ResourceHelper.GetString("DiagnosticsTest11Title");
-    [TranslationProperty] public string RunTestText => ResourceHelper.GetString("RunTestText");
+    [TranslationProperty] public string RunTestText => ResourceHelper.GetString("RunTest");
     [TranslationProperty] public string CopyTestResultsText => ResourceHelper.GetString("CopyTestResults");
     [TranslationProperty] public string CreateBugReportText => ResourceHelper.GetString("CreateBugReport");
     [TranslationProperty] public string CancelCurrentTestText => ResourceHelper.GetString("CancelCurrentTest");

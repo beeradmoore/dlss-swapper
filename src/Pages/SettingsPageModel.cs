@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -10,13 +9,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
-using DLSS_Swapper.Collections;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using DLSS_Swapper.Translations.Pages;
+using DLSS_Swapper.Collections;
+using System.Collections.Specialized;
 using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Pages;
@@ -30,13 +30,21 @@ internal partial class SettingsPageModel : LocalizedViewModelBase
     public string CurrentLogPath => Logger.GetCurrentLogPath();
     public string AppVersion => App.CurrentApp.GetVersionString();
 
-    public RefreshableObservableCollection<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; } = new RefreshableObservableCollection<DLSSOnScreenIndicatorSetting>(){
+    [ObservableProperty]
+    public partial DLSSOnScreenIndicatorSetting SelectedDlssOnScreenIndicator { get; set; }
+
+    public RefreshableObservableCollection<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; init; } = new RefreshableObservableCollection<DLSSOnScreenIndicatorSetting>()
+    {
         new DLSSOnScreenIndicatorSetting("None", 0),
         new DLSSOnScreenIndicatorSetting("EnabledForDebugDlssDllOnly", 1),
         new DLSSOnScreenIndicatorSetting("EnabledForAllDlssDlls", 1024)
     };
 
-    public ObservableCollection<KeyValuePair<string, string>> Languages { get; set; }
+    public ObservableCollection<KeyValuePair<string, string>> Languages { get; init; } = new ObservableCollection<KeyValuePair<string, string>>()
+    {
+        KeyValuePair.Create("en-US", "English"),
+        KeyValuePair.Create("pl-PL", "Polish")
+    };
 
     [ObservableProperty]
     public partial KeyValuePair<string, string> SelectedLanguage { get; set; }
@@ -49,9 +57,6 @@ internal partial class SettingsPageModel : LocalizedViewModelBase
 
     [ObservableProperty]
     public partial bool DefaultThemeSelected { get; set; } = false;
-
-    [ObservableProperty]
-    public partial DLSSOnScreenIndicatorSetting SelectedDlssOnScreenIndicator { get; set; }
 
     [ObservableProperty]
     public partial bool DlssEnableLogging { get; set; } = false;
@@ -81,13 +86,9 @@ internal partial class SettingsPageModel : LocalizedViewModelBase
 
     public SettingsPageModel(SettingsPage page) : base()
     {
+        _languageManager = base._languageManager;
+        TranslationProperties = new SettingsPageTranslationPropertiesViewModel();
         _weakPage = new WeakReference<SettingsPage>(page);
-        Languages = new ObservableCollection<KeyValuePair<string, string>>
-        {
-            KeyValuePair.Create("en-US", "English"),
-            KeyValuePair.Create("pl-PL", "Polish")
-        };
-
         //work with selected language state
         SelectedLanguage = Languages.FirstOrDefault(x => x.Key == CultureInfo.CurrentCulture.Name);
 
@@ -118,6 +119,9 @@ internal partial class SettingsPageModel : LocalizedViewModelBase
 
         _hasSetDefaults = true;
     }
+
+    [ObservableProperty]
+    public partial SettingsPageTranslationPropertiesViewModel TranslationProperties { get; private set; }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
@@ -290,46 +294,10 @@ internal partial class SettingsPageModel : LocalizedViewModelBase
         diagnosticsWindow.Activate();
     }
 
-    #region TranslationProperties
-    [TranslationProperty] public string VersionText => $"{ResourceHelper.GetString("SettingsVersion")}:";
-    [TranslationProperty] public string GiveFeedbackInfo => ResourceHelper.GetString("SettingsGiveFeedbackInfo");
-    [TranslationProperty] public string NetworkTesterText => ResourceHelper.GetString("SettingsNetworkTester");
-    [TranslationProperty] public string GeneralTroubleshootingGuideText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");
-    [TranslationProperty] public string DiagnosticsText => ResourceHelper.GetString("SettingsDiagnostics");
-    [TranslationProperty] public string AcknowledgementsText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");
-    [TranslationProperty] public string AllowDebugDllsInfo => ResourceHelper.GetString("SettingsAllowDebugDllsInfo");
-    [TranslationProperty] public string AllowUntrustedInfo => ResourceHelper.GetString("SettingsAllowUntrustedInfo");
-    [TranslationProperty] public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
-    [TranslationProperty] public string WarningText => ResourceHelper.GetString("Warning");
-    [TranslationProperty] public string YourCurrentLogfileText => ResourceHelper.GetString("SettingsYourCurrentLogfile");
-    [TranslationProperty] public string ThemeLightText => ResourceHelper.GetString("SettingsThemeLight");
-    [TranslationProperty] public string ThemeDarkText => ResourceHelper.GetString("SettingsThemeDark");
-    [TranslationProperty] public string ThemeSystemSettingDefaultText => ResourceHelper.GetString("SettingsThemeSystemSettingDefault");
-    [TranslationProperty] public string ThemeModeText => ResourceHelper.GetString("SettingsThemeMode");
-    [TranslationProperty] public string GameLibrariesText => ResourceHelper.GetString("SettingsGameLibraries");
-    [TranslationProperty] public string DllsDeveloperOptionsText => ResourceHelper.GetString("SettingsDllsDeveloperOptions");
-    [TranslationProperty] public string ShowOnScreenIndicatorText => ResourceHelper.GetString("SettingsShowOnScreenIndicator");
-    [TranslationProperty] public string VerboseLoggingText => ResourceHelper.GetString("SettingsVerboseLogging");
-    [TranslationProperty] public string EnableLoggingToFileText => ResourceHelper.GetString("SettingsEnableLoggingToFile");
-    [TranslationProperty] public string EnableLoggingToConsoleWindowText => ResourceHelper.GetString("SettingsEnableLoggingToConsoleWindow");
-    [TranslationProperty] public string AllowUntrustedText => ResourceHelper.GetString("SettingsAllowUntrusted");
-    [TranslationProperty] public string AllowDebugDllsText => ResourceHelper.GetString("SettingsAllowDebugDlls");
-    [TranslationProperty] public string ShowOnlyDownloadedDllsText => ResourceHelper.GetString("SettingsShowOnlyDownloadedDlls");
-    [TranslationProperty] public string ApliesOnlyToDllPickerNotLibraryText => ResourceHelper.GetString("SettingsApliesOnlyToDllPickerNotLibrary");
-    [TranslationProperty] public string CheckForUpdatesText => ResourceHelper.GetString("SettingsCheckForUpdates");
-    [TranslationProperty] public string GiveFeedbackText => ResourceHelper.GetString("SettingsGiveFeedback");
-    [TranslationProperty] public string TroubleshootingText => ResourceHelper.GetString("SettingsTroubleshooting");
-    [TranslationProperty] public string SettingsText => ResourceHelper.GetString("Settings");
-    [TranslationProperty] public string LoggingText => ResourceHelper.GetString("SettingsLogging");
-    [TranslationProperty] public string AboutText => ResourceHelper.GetString("SettingsAbout");
-    [TranslationProperty] public string YesText => ResourceHelper.GetString("SettingsYes");
-    [TranslationProperty] public string NoText => ResourceHelper.GetString("SettingsNo");
-    [TranslationProperty] public string LanguageText => ResourceHelper.GetString("SettingsLanguage");
-    #endregion
-
     protected override void OnLanguageChanged()
     {
-        base.OnLanguageChanged();
         DLSSOnScreenIndicatorOptions.RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
     }
+
+    private readonly LanguageManager _languageManager;
 }

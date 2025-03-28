@@ -621,4 +621,16 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="MultipleDllsFound" xml:space="preserve">
     <value>Znaleziono wiele bibliotek DLL</value>
   </data>
+  <data name="FileDescription" xml:space="preserve">
+    <value>Opis pliku</value>
+  </data>
+  <data name="DownloadFileSize" xml:space="preserve">
+    <value>Rozmiar pobranego pliku</value>
+  </data>
+  <data name="Label" xml:space="preserve">
+    <value>Etykieta</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>Rozmiar pliku</value>
+  </data>
 </root>

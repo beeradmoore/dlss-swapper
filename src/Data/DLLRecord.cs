@@ -2,13 +2,13 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Translations.Models;
 
 namespace DLSS_Swapper.Data
 {
@@ -128,6 +128,18 @@ namespace DLSS_Swapper.Data
             {
                 _localRecord = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        private DLLRecordTranslationPropertiesViewModel _translationProperties;
+
+        [JsonIgnore]
+        public DLLRecordTranslationPropertiesViewModel TranslationProperties {
+            get => _translationProperties;
+            set
+            {
+                _translationProperties = value;
+                NotifyPropertyChanged(nameof(TranslationProperties));
             }
         }
 
@@ -271,7 +283,6 @@ namespace DLSS_Swapper.Data
             }
         }
 
-
         /*
         internal static DLSSRecord FromImportedFile(string fileName)
         {
@@ -301,8 +312,6 @@ namespace DLSS_Swapper.Data
         }
         */
 
-
-
         internal string GetRecordSimpleType()
         {
             return AssetType switch
@@ -318,16 +327,5 @@ namespace DLSS_Swapper.Data
                 _ => string.Empty,
             };
         }
-
-        #region TranslationProperties
-        [JsonIgnore] public string ExportText => ResourceHelper.GetString("Export");
-        [JsonIgnore] public string DeleteText => ResourceHelper.GetString("Delete");
-        [JsonIgnore] public string DownloadText => ResourceHelper.GetString("Download");
-        [JsonIgnore] public string DownloadErrorText => ResourceHelper.GetString("DownloadError");
-        [JsonIgnore] public string CancelText => ResourceHelper.GetString("Cancel");
-        [JsonIgnore] public string DownloadingText => ResourceHelper.GetString("Downloading");
-        [JsonIgnore] public string RequiresDownloadText => ResourceHelper.GetString("RequiresDownload");
-        [JsonIgnore] public string ImportedText => ResourceHelper.GetString("Imported");
-        #endregion
     }
 }

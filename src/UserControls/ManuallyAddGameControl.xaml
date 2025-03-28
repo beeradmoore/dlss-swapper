@@ -16,9 +16,9 @@
         <Grid Grid.Column="0" Width="200" Height="300" CornerRadius="8" BorderThickness="1" ColumnSpacing="0" RowSpacing="0" Margin="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
 
             <TextBlock TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{ThemeResource ButtonForegroundColor}">
-                <Run Text="{x:Bind ViewModel.AddCoverText, Mode=OneWay}" />
+                <Run Text="{x:Bind ViewModel.TranslationProperties.AddCoverText, Mode=OneWay}" />
                 <LineBreak />
-                <Run Text="{x:Bind ViewModel.OptionalText, Mode=OneWay}" />
+                <Run Text="{x:Bind ViewModel.TranslationProperties.OptionalText, Mode=OneWay}" />
             </TextBlock>
 
             <!-- Weird, but allows image to strecth centered rather than left align -->
@@ -36,9 +36,9 @@
         </Grid>
 
         <StackPanel Orientation="Vertical" Spacing="4" Grid.Column="1">
-            <TextBlock Text="{x:Bind ViewModel.NameText, Mode=OneWay}" FontWeight="Bold" />
+            <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NameText, Mode=OneWay}" FontWeight="Bold" />
             <TextBox Text="{Binding Game.Title}" />
-            <TextBlock Text="{x:Bind ViewModel.InstallPathText, Mode=OneWay}" FontWeight="Bold" Padding="0,20,0,0" />
+            <TextBlock Text="{x:Bind ViewModel.TranslationProperties.InstallPathText, Mode=OneWay}" FontWeight="Bold" Padding="0,20,0,0" />
             <TextBox IsReadOnly="True" Text="{Binding Game.InstallPath}" />
         </StackPanel>
     </Grid>

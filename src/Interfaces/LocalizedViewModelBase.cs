@@ -12,6 +12,12 @@ public abstract class LocalizedViewModelBase : ObservableObject, IDisposable
         _languageManager.OnLanguageChanged += OnLanguageChanged;
     }
 
+    public LocalizedViewModelBase(LanguageManager languageManager)
+    {
+        _languageManager = languageManager;
+        _languageManager.OnLanguageChanged += OnLanguageChanged;
+    }
+
     protected virtual void OnLanguageChanged()
     {
         Type currentClassType = GetType();

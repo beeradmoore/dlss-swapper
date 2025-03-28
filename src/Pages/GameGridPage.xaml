@@ -186,7 +186,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="16">
-                <TextBlock Text="{x:Bind ViewModel.GamesText, Mode=OneWay}" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+                <TextBlock Text="{x:Bind ViewModel.TranslationProperties.GamesText, Mode=OneWay}" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
                 <muxc:ProgressRing IsActive="True" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.IsLoading, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"  />
             </StackPanel>
 
@@ -197,37 +197,37 @@
                     Margin="10,0,0,0"
                     AcceptsReturn="True"
                     IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}"
-                    PlaceholderText="{x:Bind ViewModel.SearchText, Mode=OneWay}"
+                    PlaceholderText="{x:Bind ViewModel.TranslationProperties.SearchText, Mode=OneWay}"
                     TextChanged="{x:Bind ViewModel.SearchForGameEvent}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 
-                <AppBarButton Label="{x:Bind ViewModel.NewDllsText, Mode=OneWay}" Command="{x:Bind ViewModel.UnknownAssetsFoundButtonCommand}" Visibility="{x:Bind data:GameManager.Instance.UnknownAssetsFound, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.NewDllsText, Mode=OneWay}" Command="{x:Bind ViewModel.UnknownAssetsFoundButtonCommand}" Visibility="{x:Bind data:GameManager.Instance.UnknownAssetsFound, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE946;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Label="{x:Bind ViewModel.AddGameText, Mode=OneWay}" Command="{x:Bind ViewModel.AddManualGameButtonCommand}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.AddGameText, Mode=OneWay}" Command="{x:Bind ViewModel.AddManualGameButtonCommand}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE710;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Label="{x:Bind ViewModel.RefreshText, Mode=OneWay}" Command="{x:Bind ViewModel.RefreshGamesButtonCommand}" IsEnabled="{x:Bind ViewModel.IsLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.RefreshText, Mode=OneWay}" Command="{x:Bind ViewModel.RefreshGamesButtonCommand}" IsEnabled="{x:Bind ViewModel.IsLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE72C;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Icon="Filter" Label="{x:Bind ViewModel.FilterText, Mode=OneWay}" Command="{x:Bind ViewModel.FilterGamesButtonCommand}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
+                <AppBarButton Icon="Filter" Label="{x:Bind ViewModel.TranslationProperties.FilterText, Mode=OneWay}" Command="{x:Bind ViewModel.FilterGamesButtonCommand}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE71C;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Label="{x:Bind ViewModel.ViewTypeText, Mode=OneWay}" Content="{x:Bind ViewModel.GameGridViewIcon, Mode=OneWay}">
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.ViewTypeText, Mode=OneWay}" Content="{x:Bind ViewModel.GameGridViewIcon, Mode=OneWay}">
                     <AppBarButton.Flyout>
                         <MenuFlyout>
-                            <MenuFlyoutItem Text="{x:Bind ViewModel.GridViewText, Mode=OneWay}" Command="{x:Bind ViewModel.ChangeGameGridViewCommand}" CommandParameter="{x:Bind pages:GameGridViewType.GridView}" />
-                            <MenuFlyoutItem Text="{x:Bind ViewModel.ListViewText, Mode=OneWay}" Command="{x:Bind ViewModel.ChangeGameGridViewCommand}" CommandParameter="{x:Bind pages:GameGridViewType.ListView}" />
+                            <MenuFlyoutItem Text="{x:Bind ViewModel.TranslationProperties.GridViewText, Mode=OneWay}" Command="{x:Bind ViewModel.ChangeGameGridViewCommand}" CommandParameter="{x:Bind pages:GameGridViewType.GridView}" />
+                            <MenuFlyoutItem Text="{x:Bind ViewModel.TranslationProperties.ListViewText, Mode=OneWay}" Command="{x:Bind ViewModel.ChangeGameGridViewCommand}" CommandParameter="{x:Bind pages:GameGridViewType.ListView}" />
                         </MenuFlyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
@@ -239,7 +239,7 @@
                  Severity="Warning"
                  IsClosable="False"
                  Title="Warning"
-                 Message="{x:Bind ViewModel.ApplicationRunsInAdministrativeModeInfo, Mode=OneWay}"
+                 Message="{x:Bind ViewModel.TranslationProperties.ApplicationRunsInAdministrativeModeInfo, Mode=OneWay}"
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
         </Grid>
 

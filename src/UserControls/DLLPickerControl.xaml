@@ -52,9 +52,9 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{x:Bind ViewModel.OriginalDllText, Mode=OneWay}" FontWeight="Bold"/>
+            <TextBlock Grid.Row="0" Text="{x:Bind ViewModel.TranslationProperties.OriginalDllText, Mode=OneWay}" FontWeight="Bold"/>
             <TextBox Grid.Row="1" Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.BackupGameAsset.DisplayVersion, Mode=OneWay}" VerticalAlignment="Stretch"/>
-            <Button Grid.Row="1" Grid.Column="1" ToolTipService.ToolTip="{x:Bind ViewModel.OriginalDllRestoreText, Mode=OneWay}" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.ResetDllCommand}">
+            <Button Grid.Row="1" Grid.Column="1" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.OriginalDllRestoreText, Mode=OneWay}" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.ResetDllCommand}">
                 <Button.Content>
                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE72C;"/>
                 </Button.Content>
@@ -70,9 +70,9 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{x:Bind ViewModel.CurrentDllText, Mode=OneWay}" FontWeight="Bold"/>
+            <TextBlock Grid.Row="0" Text="{x:Bind ViewModel.TranslationProperties.CurrentDllText, Mode=OneWay}" FontWeight="Bold"/>
             <TextBox Grid.Row="1" Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.CurrentGameAsset.DisplayVersion, Mode=OneWay}" VerticalAlignment="Stretch"/>
-            <Button Grid.Row="1" Grid.Column="1" ToolTipService.ToolTip="{x:Bind ViewModel.OpenDllLocationText, Mode=OneWay}" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenDllPathCommand}">
+            <Button Grid.Row="1" Grid.Column="1" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.OpenDllLocationText, Mode=OneWay}" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenDllPathCommand}">
                 <Button.Content>
                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE8A7;"/>
                 </Button.Content>
@@ -111,11 +111,11 @@
 
                         <TextBlock Grid.Column="0" Text="{x:Bind DisplayName}" />
 
-                        <ProgressRing Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsDownloadingConverter}, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind DownloadingText, Mode=OneWay}" Minimum="0" Maximum="100" IsIndeterminate="{x:Bind LocalRecord.FileDownloader.IsIndeterminate, Mode=OneWay}" Value="{x:Bind LocalRecord.FileDownloader.Percent, Mode=OneWay}" HorizontalAlignment="Right" Width="20" Height="20"  />
-                        
-                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsNotFoundConverter}, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind RequiresDownloadText, Mode=OneWay}" HorizontalAlignment="Right" Glyph="&#xE896;" Width="20" Height="20" />
+                        <ProgressRing Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsDownloadingConverter}, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind TranslationProperties.DownloadingText, Mode=OneWay}" Minimum="0" Maximum="100" IsIndeterminate="{x:Bind LocalRecord.FileDownloader.IsIndeterminate, Mode=OneWay}" Value="{x:Bind LocalRecord.FileDownloader.Percent, Mode=OneWay}" HorizontalAlignment="Right" Width="20" Height="20"  />
 
-                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsImportedConverter}, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind ImportedText, Mode=OneWay}" HorizontalAlignment="Right" Glyph="&#xE7B8;" Width="20" Height="20" />
+                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsNotFoundConverter}, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind TranslationProperties.RequiresDownloadText, Mode=OneWay}" HorizontalAlignment="Right" Glyph="&#xE896;" Width="20" Height="20" />
+
+                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Grid.Column="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsImportedConverter}, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind TranslationProperties.ImportedText, Mode=OneWay}" HorizontalAlignment="Right" Glyph="&#xE7B8;" Width="20" Height="20" />
 
                     </Grid>
                 </DataTemplate>
@@ -133,8 +133,8 @@
               Severity="Warning"
               IsOpen="True"
               IsClosable="False"        
-              Title="{x:Bind ViewModel.NoDllsFoundText, Mode=OneWay}"                 
-              Message="{x:Bind ViewModel.PleaseNavigateLibraryToDownloadDllsText, Mode=OneWay}">
+              Title="{x:Bind ViewModel.TranslationProperties.NoDllsFoundText, Mode=OneWay}"                 
+              Message="{x:Bind ViewModel.TranslationProperties.PleaseNavigateLibraryToDownloadDllsText, Mode=OneWay}">
         </InfoBar>
 
     </Grid>

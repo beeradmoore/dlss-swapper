@@ -3,11 +3,11 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace DLSS_Swapper.UserControls
 {
-    public sealed partial class DLSSRecordInfoControl : UserControl
+    public sealed partial class DLLRecordInfoControl : UserControl
     {
         public DLLRecord DLLRecord { get; private set; }
 
-        public DLSSRecordInfoControl(DLLRecord dllRecord)
+        public DLLRecordInfoControl(DLLRecord dllRecord)
         {
             this.InitializeComponent();
             this.DLLRecord = dllRecord;

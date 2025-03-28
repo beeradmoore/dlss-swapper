@@ -9,19 +9,22 @@ using System.Diagnostics;
 using System.IO;
 using Windows.System;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Attributes;
-using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.Translations.UserControls;
 
 namespace DLSS_Swapper.UserControls;
 
-public partial class GameControlModel : LocalizedViewModelBase
+public partial class GameControlModel : ObservableObject
 {
     public GameControlModel(GameControl gameControl, Game game) : base()
     {
+        TranslationProperties = new GameTranslationPropertiesViewModel();
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
         GameTitle = game.Title;
     }
+
+    [ObservableProperty]
+    public partial GameTranslationPropertiesViewModel TranslationProperties { get; set; }
 
     WeakReference<GameControl> gameControlWeakReference;
 
@@ -240,20 +243,4 @@ public partial class GameControlModel : LocalizedViewModelBase
     {
         await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting#game-is-not-in-a-ready-to-play-state"));
     }
-
-    #region LanguageProperties
-    [TranslationProperty] public string RemoveText => ResourceHelper.GetString("Remove");
-    [TranslationProperty] public string AddCustomCoverText => ResourceHelper.GetString("AddCustomCover");
-    [TranslationProperty] public string GameNotReadyToPlayStateText => ResourceHelper.GetString("GameNotReadyToPlayState");
-    [TranslationProperty] public string HelpText => ResourceHelper.GetString("Help");
-    [TranslationProperty] public string NameText => ResourceHelper.GetString("Name");
-    [TranslationProperty] public string SaveText => ResourceHelper.GetString("Save");
-    [TranslationProperty] public string InstallPathText => ResourceHelper.GetString("InstallPath");
-    [TranslationProperty] public string OpenFolderText => ResourceHelper.GetString("OpenFolder");
-    [TranslationProperty] public string FavouritedText => ResourceHelper.GetString("Favourited");
-    [TranslationProperty] public string ClickToFavouriteText => ResourceHelper.GetString("ClickToFavourite");
-    [TranslationProperty] public string NotesText => ResourceHelper.GetString("Notes");
-    [TranslationProperty] public string CloseText => ResourceHelper.GetString("Close");
-    [TranslationProperty] public string MultipleDllsFoundText => ResourceHelper.GetString("MultipleDllsFound");
-    #endregion
 }

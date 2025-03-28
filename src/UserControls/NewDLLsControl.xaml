@@ -10,39 +10,39 @@
 
     <ScrollViewer>
         <StackPanel Orientation="Vertical" Spacing="12">
-            <TextBlock Text="{x:Bind ViewModel.WhileLoadingYourGameNewDllsDiscoveredHelpUsText, Mode=OneWay}" TextWrapping="Wrap" />
+            <TextBlock Text="{x:Bind ViewModel.TranslationProperties.WhileLoadingYourGameNewDllsDiscoveredHelpUsText, Mode=OneWay}" TextWrapping="Wrap" />
 
-            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.StepOneCreateNewIssueText, Mode=OneWay}" />
+            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TranslationProperties.StepOneCreateNewIssueText, Mode=OneWay}" />
             <StackPanel Orientation="Horizontal" Spacing="12">
-                <Button Content="{x:Bind ViewModel.CreateNewGithubIssueText, Mode=OneWay}" Command="{x:Bind ViewModel.OpenGitHubIssueCommand}" />
-                <TextBlock Text="{x:Bind ViewModel.GithubAccountRequiredText, Mode=OneWay}" VerticalAlignment="Center" />
+                <Button Content="{x:Bind ViewModel.TranslationProperties.CreateNewGithubIssueText, Mode=OneWay}" Command="{x:Bind ViewModel.OpenGitHubIssueCommand}" />
+                <TextBlock Text="{x:Bind ViewModel.TranslationProperties.GithubAccountRequiredText, Mode=OneWay}" VerticalAlignment="Center" />
             </StackPanel>
             
             <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="Wrap">
-                <Run Text="{x:Bind ViewModel.IfButtonDoesntWorkTryHereText, Mode=OneWay}"/>
+                <Run Text="{x:Bind ViewModel.TranslationProperties.IfButtonDoesntWorkTryHereText, Mode=OneWay}"/>
                 <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper-manifest-builder/issues/">https://github.com/beeradmoore/dlss-swapper-manifest-builder/issues/</Hyperlink>
             </TextBlock>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.StepTwoCopyTitleText, Mode=OneWay}" />
-                <Button Command="{x:Bind ViewModel.CopyTitleCommand}" ToolTipService.ToolTip="{x:Bind ViewModel.CopyText, Mode=OneWay}" Style="{StaticResource TextBlockButtonStyle}">
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TranslationProperties.StepTwoCopyTitleText, Mode=OneWay}" />
+                <Button Command="{x:Bind ViewModel.CopyTitleCommand}" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.CopyText, Mode=OneWay}" Style="{StaticResource TextBlockButtonStyle}">
                     <FontIcon Glyph="&#xE8C8;" />
                 </Button>
             </StackPanel>
-            <TextBox Text="{x:Bind ViewModel.Title, Mode=OneWay}" IsReadOnly="True" />
+            <TextBox Text="{x:Bind ViewModel.TranslationProperties.Title, Mode=OneWay}" IsReadOnly="True" />
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.StepThreeCopyBodyText, Mode=OneWay}" />
-                <Button Command="{x:Bind ViewModel.CopyBodyCommand}" ToolTipService.ToolTip="{x:Bind ViewModel.CopyText, Mode=OneWay}" Style="{StaticResource TextBlockButtonStyle}">
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TranslationProperties.StepThreeCopyBodyText, Mode=OneWay}" />
+                <Button Command="{x:Bind ViewModel.CopyBodyCommand}" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.CopyText, Mode=OneWay}" Style="{StaticResource TextBlockButtonStyle}">
                     <FontIcon Glyph="&#xE8C8;" />
                 </Button>
             </StackPanel>
             <TextBox Text="{x:Bind ViewModel.Body}" AcceptsReturn="True" TextWrapping="Wrap" Height="200" IsReadOnly="True" />
 
-            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.StepFourSubmitYourIssueText, Mode=OneWay}" />
-            <TextBlock Text="{x:Bind ViewModel.YouDoNotHaveToSubmitDllAutoTrackText, Mode=OneWay}"  TextWrapping="Wrap" />
+            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TranslationProperties.StepFourSubmitYourIssueText, Mode=OneWay}" />
+            <TextBlock Text="{x:Bind ViewModel.TranslationProperties.YouDoNotHaveToSubmitDllAutoTrackText, Mode=OneWay}"  TextWrapping="Wrap" />
 
-            <TextBlock Text="{x:Bind ViewModel.ThanksForHelpingText, Mode=OneWay}" Style="{StaticResource SubtitleTextBlockStyle}" HorizontalAlignment="Center" />
+            <TextBlock Text="{x:Bind ViewModel.TranslationProperties.ThanksForHelpingText, Mode=OneWay}" Style="{StaticResource SubtitleTextBlockStyle}" HorizontalAlignment="Center" />
 
         </StackPanel>
     </ScrollViewer>

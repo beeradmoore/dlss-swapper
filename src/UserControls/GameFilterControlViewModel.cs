@@ -1,16 +1,14 @@
-using DLSS_Swapper.Attributes;
-using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Interfaces;
+using CommunityToolkit.Mvvm.ComponentModel;
+using DLSS_Swapper.Translations.UserControls;
 
 namespace DLSS_Swapper.UserControls;
-public class GameFilterControlViewModel : LocalizedViewModelBase
+public partial class GameFilterControlViewModel : ObservableObject
 {
-    public GameFilterControlViewModel() : base() { }
+    public GameFilterControlViewModel()
+    {
+        TranslationProperties = new GameFilterTranslationPropertiesViewModel();
+    }
 
-    #region LanguageProperties
-    [TranslationProperty] public string OptionsText => $"{ResourceHelper.GetString("Options")}:";
-    [TranslationProperty] public string GroupingText => $"{ResourceHelper.GetString("Grouping")}:";
-    [TranslationProperty] public string HideGamesWithNoSwappableItemsText => ResourceHelper.GetString("HideGamesWithNoSwappableItems");
-    [TranslationProperty] public string GroupGamesFromTheSameLibraryTogetherText => ResourceHelper.GetString("GroupGamesFromTheSameLibraryTogether");
-    #endregion
+    [ObservableProperty]
+    public partial GameFilterTranslationPropertiesViewModel TranslationProperties { get; private set; }
 }

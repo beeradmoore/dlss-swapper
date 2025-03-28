@@ -4,15 +4,16 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Data.ManuallyAdded;
-using DLSS_Swapper.Attributes;
-using DLSS_Swapper.Interfaces;
+using CommunityToolkit.Mvvm.ComponentModel;
+using DLSS_Swapper.Translations.UserControls;
 
 namespace DLSS_Swapper.UserControls
 {
-    internal partial class ManuallyAddGameModel : LocalizedViewModelBase
+    internal partial class ManuallyAddGameModel : ObservableObject
     {
         public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath) : base()
         {
+            TranslationProperties = new ManuallyAddGameTranslationPropertiesViewModel();
             manuallyAddGameControlWeakReference = new WeakReference<ManuallyAddGameControl>(manuallyAddGameControl);
 
             game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
@@ -21,6 +22,9 @@ namespace DLSS_Swapper.UserControls
                 InstallPath = PathHelpers.NormalizePath(installPath),
             };
         }
+
+        [ObservableProperty]
+        public partial ManuallyAddGameTranslationPropertiesViewModel TranslationProperties { get; private set; }
 
         ManuallyAddedGame game;
         public ManuallyAddedGame Game => game;
@@ -38,12 +42,5 @@ namespace DLSS_Swapper.UserControls
 
             await game.PromptToBrowseCustomCover();
         }
-
-        #region LanguageProperties
-        [TranslationProperty] public string AddCoverText => ResourceHelper.GetString("AddCover");
-        [TranslationProperty] public string OptionalText => ResourceHelper.GetString("Optional");
-        [TranslationProperty] public string NameText => ResourceHelper.GetString("Name");
-        [TranslationProperty] public string InstallPathText => ResourceHelper.GetString("InstallPath");
-        #endregion
     }
 }

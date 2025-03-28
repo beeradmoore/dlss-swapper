@@ -5,17 +5,17 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.Translations.Pages;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
 
 namespace DLSS_Swapper.Pages;
 
-public partial class LibraryPageModel : LocalizedViewModelBase
+public partial class LibraryPageModel : ObservableObject
 {
     LibraryPage libraryPage;
 
@@ -23,8 +23,12 @@ public partial class LibraryPageModel : LocalizedViewModelBase
 
     public LibraryPageModel(LibraryPage libraryPage) : base()
     {
+        TranslationProperties = new LibraryPageTranslationPropertiesViewModel();
         this.libraryPage = libraryPage;
     }
+
+    [ObservableProperty]
+    public partial LibraryPageTranslationPropertiesViewModel TranslationProperties { get; private set; }
 
     [RelayCommand]
     async Task RefreshAsync()
@@ -700,14 +704,4 @@ public partial class LibraryPageModel : LocalizedViewModelBase
         SelectedLibraryList = newList;
         OnPropertyChanged(nameof(SelectedLibraryList));
     }
-
-    #region TranslationProperties
-    [TranslationProperty] public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
-    [TranslationProperty] public string ImportText => ResourceHelper.GetString("Import");
-    [TranslationProperty] public string ExportAllText => ResourceHelper.GetString("ExportAll");
-    [TranslationProperty] public string RefreshText => ResourceHelper.GetString("Refresh");
-    [TranslationProperty] public string WarningText => ResourceHelper.GetString("Warning");
-    [TranslationProperty] public string CancelText => ResourceHelper.GetString("Cancel");
-    [TranslationProperty] public string LibraryText => ResourceHelper.GetString("Library");
-    #endregion
 }

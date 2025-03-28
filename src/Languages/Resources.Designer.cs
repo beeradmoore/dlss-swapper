@@ -471,6 +471,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Download file size.
+        /// </summary>
+        public static string DownloadFileSize {
+            get {
+                return ResourceManager.GetString("DownloadFileSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Downloading.
         /// </summary>
         public static string Downloading {
@@ -593,6 +602,24 @@ namespace DLSS_Swapper.Languages {
         public static string Favourited {
             get {
                 return ResourceManager.GetString("Favourited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu File description.
+        /// </summary>
+        public static string FileDescription {
+            get {
+                return ResourceManager.GetString("FileDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu File size.
+        /// </summary>
+        public static string FileSize {
+            get {
+                return ResourceManager.GetString("FileSize", resourceCulture);
             }
         }
         
@@ -746,6 +773,15 @@ namespace DLSS_Swapper.Languages {
         public static string InstallPathAlreadyExistsTemplate {
             get {
                 return ResourceManager.GetString("InstallPathAlreadyExistsTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Label.
+        /// </summary>
+        public static string Label {
+            get {
+                return ResourceManager.GetString("Label", resourceCulture);
             }
         }
         

@@ -628,4 +628,16 @@ Only import dlls from sources you trust.</value>
   <data name="MultipleDllsFound" xml:space="preserve">
     <value>Multiple DLLs found</value>
   </data>
+  <data name="FileDescription" xml:space="preserve">
+    <value>File description</value>
+  </data>
+  <data name="DownloadFileSize" xml:space="preserve">
+    <value>Download file size</value>
+  </data>
+  <data name="Label" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>File size</value>
+  </data>
 </root>

@@ -8,16 +8,15 @@ using System.Threading.Tasks;
 using AsyncAwaitBestPractices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.Translations.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 namespace DLSS_Swapper.UserControls;
 
-public partial class DLLPickerControlModel : LocalizedViewModelBase
+public partial class DLLPickerControlModel : ObservableObject
 {
     WeakReference<GameControl> _gameControlWeakReference;
     WeakReference<EasyContentDialog> _parentDialogWeakReference;
@@ -47,6 +46,7 @@ public partial class DLLPickerControlModel : LocalizedViewModelBase
 
     public DLLPickerControlModel(GameControl gameControl, EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType) : base()
     {
+        TranslationProperties = new DLLPickerTranslationPropertiesViewModel();
         _gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         _parentDialogWeakReference = new WeakReference<EasyContentDialog>(parentDialog);
         _dllPickerControlWeakReference = new WeakReference<DLLPickerControl>(dllPickerControl);
@@ -164,6 +164,9 @@ public partial class DLLPickerControlModel : LocalizedViewModelBase
 
         ResetSelection();
     }
+
+    [ObservableProperty]
+    public partial DLLPickerTranslationPropertiesViewModel TranslationProperties { get; private set; }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
@@ -334,13 +337,4 @@ public partial class DLLPickerControlModel : LocalizedViewModelBase
             SelectedDLLRecord = DLLRecords.FirstOrDefault(x => x.MD5Hash == CurrentGameAsset.Hash);
         }
     }
-
-    #region LanguageProperties
-    [TranslationProperty] public string NoDllsFoundText => ResourceHelper.GetString("NoDllsFoundText");
-    [TranslationProperty] public string PleaseNavigateLibraryToDownloadDllsText => ResourceHelper.GetString("PleaseNavigateLibraryToDownloadDllsText");
-    [TranslationProperty] public string OpenDllLocationText => ResourceHelper.GetString("OpenDllLocation");
-    [TranslationProperty] public string CurrentDllText => ResourceHelper.GetString("CurrentDll");
-    [TranslationProperty] public string OriginalDllRestoreText => ResourceHelper.GetString("OriginalDllRestore");
-    [TranslationProperty] public string OriginalDllText => ResourceHelper.GetString("OriginalDllText");
-    #endregion
 }

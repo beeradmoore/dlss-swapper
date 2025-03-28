@@ -35,19 +35,19 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Padding="16,0,16,0">
-            <TextBlock Margin="16,0,0,0" Text="{x:Bind ViewModel.LibraryText, Mode=OneWay}" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock Margin="16,0,0,0" Text="{x:Bind ViewModel.TranslationProperties.LibraryText, Mode=OneWay}" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <AppBarButton HorizontalAlignment="Right"  Label="{x:Bind ViewModel.ImportText, Mode=OneWay}" Command="{x:Bind ViewModel.ImportCommand}">
+                <AppBarButton HorizontalAlignment="Right"  Label="{x:Bind ViewModel.TranslationProperties.ImportText, Mode=OneWay}" Command="{x:Bind ViewModel.ImportCommand}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE8B5;"  />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton HorizontalAlignment="Right" Label="{x:Bind ViewModel.ExportAllText, Mode=OneWay}" Command="{x:Bind ViewModel.ExportAllCommand}">
+                <AppBarButton HorizontalAlignment="Right" Label="{x:Bind ViewModel.TranslationProperties.ExportAllText, Mode=OneWay}" Command="{x:Bind ViewModel.ExportAllCommand}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xEDE1;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton HorizontalAlignment="Right" Label="{x:Bind ViewModel.RefreshText, Mode=OneWay}" Command="{x:Bind ViewModel.RefreshCommand}">
+                <AppBarButton HorizontalAlignment="Right" Label="{x:Bind ViewModel.TranslationProperties.RefreshText, Mode=OneWay}" Command="{x:Bind ViewModel.RefreshCommand}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE72C;"  />
                     </AppBarButton.Content>
@@ -60,8 +60,8 @@
                  IsOpen="True"
                  Severity="Warning"
                  IsClosable="False"
-                 Title="{x:Bind ViewModel.WarningText, Mode=OneWay}"
-                 Message="{x:Bind ViewModel.ApplicationRunsInAdministrativeModeInfo, Mode=OneWay}"
+                 Title="{x:Bind ViewModel.TranslationProperties.WarningText, Mode=OneWay}"
+                 Message="{x:Bind ViewModel.TranslationProperties.ApplicationRunsInAdministrativeModeInfo, Mode=OneWay}"
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
 
@@ -116,19 +116,19 @@
 
                         <!-- Imported -->
                         <StackPanel Grid.Row="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsLocalConverter}, Mode=OneWay}" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Left">
-                            <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE7B8;" ToolTipService.ToolTip="{x:Bind ImportedText, Mode=OneWay}" />
+                            <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE7B8;" ToolTipService.ToolTip="{x:Bind TranslationProperties.ImportedText, Mode=OneWay}" />
                         </StackPanel>
 
                         <!-- Not downloaded -->
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsNotFoundConverter}, Mode=OneWay}">
 
-                            <Button ToolTipService.ToolTip="{x:Bind DownloadErrorText, Mode=OneWay}" Visibility="{x:Bind LocalRecord.HasDownloadError, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.ShowDownloadErrorCommand}" CommandParameter="{x:Bind }">
+                            <Button ToolTipService.ToolTip="{x:Bind TranslationProperties.DownloadErrorText, Mode=OneWay}" Visibility="{x:Bind LocalRecord.HasDownloadError, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.ShowDownloadErrorCommand}" CommandParameter="{x:Bind }">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE783;"/>
                                 </Button.Content>
                             </Button>
 
-                            <Button ToolTipService.ToolTip="{x:Bind DownloadText, Mode=OneWay}" Command="{Binding ViewModel.DownloadRecordCommand, ElementName=thisPage}" CommandParameter="{x:Bind }">
+                            <Button ToolTipService.ToolTip="{x:Bind TranslationProperties.DownloadText, Mode=OneWay}" Command="{Binding ViewModel.DownloadRecordCommand, ElementName=thisPage}" CommandParameter="{x:Bind }">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE896;"/>
                                 </Button.Content>
@@ -168,7 +168,7 @@
                                 
                             </Grid>
 
-                            <Button Grid.Column="1" ToolTipService.ToolTip="{Binding CancelText, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.CancelDownloadRecordCommand}" CommandParameter="{x:Bind }" VerticalAlignment="Center">
+                            <Button Grid.Column="1" ToolTipService.ToolTip="{Binding TranslationProperties.CancelText, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.CancelDownloadRecordCommand}" CommandParameter="{x:Bind }" VerticalAlignment="Center">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE711;"/>
                                 </Button.Content>
@@ -177,12 +177,12 @@
 
                         <!-- Downloaded -->
                         <StackPanel Grid.Row="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsDownloadedConverter}, Mode=OneWay}" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
-                            <Button ToolTipService.ToolTip="{x:Bind ExportText, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.ExportRecordCommand}" CommandParameter="{x:Bind }">
+                            <Button ToolTipService.ToolTip="{x:Bind TranslationProperties.ExportText, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.ExportRecordCommand}" CommandParameter="{x:Bind }">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xEDE1;"/>
                                 </Button.Content>
                             </Button>
-                            <Button ToolTipService.ToolTip="{x:Bind DeleteText, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.DeleteRecordCommand}" CommandParameter="{x:Bind }">
+                            <Button ToolTipService.ToolTip="{x:Bind TranslationProperties.DeleteText, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.DeleteRecordCommand}" CommandParameter="{x:Bind }">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE74D;"/>
                                 </Button.Content>

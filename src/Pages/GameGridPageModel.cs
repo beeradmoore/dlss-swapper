@@ -3,11 +3,11 @@ using System.IO;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Builders;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.Translations.Pages;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -23,15 +23,19 @@ public enum GameGridViewType
     ListView,
 }
 
-public partial class GameGridPageModel : LocalizedViewModelBase
+public partial class GameGridPageModel : ObservableObject
 {
     public GameGridPageModel(GameGridPage gameGridPage) : base()
     {
+        TranslationProperties = new GameGridPageTranslationPropertiesViewModel();
         this.gameGridPage = gameGridPage;
         ApplyGameGroupFilter();
     }
 
     GameGridPage gameGridPage;
+
+    [ObservableProperty]
+    public partial GameGridPageTranslationPropertiesViewModel TranslationProperties { get; private set; }
 
     [ObservableProperty]
     public partial Game? SelectedGame { get; set; } = null;
@@ -356,24 +360,4 @@ public partial class GameGridPageModel : LocalizedViewModelBase
         gameGridPage.ReloadMainContentControl();
         Settings.Instance.GameGridViewType = gameGridView;
     }
-
-    #region TranslationProperties
-
-
-
-
-
-
-
-    public string NewDllsText => ResourceHelper.GetString("NewDlls");
-    [TranslationProperty] public string AddGameText => ResourceHelper.GetString("AddGame");
-    [TranslationProperty] public string RefreshText => ResourceHelper.GetString("Refresh");
-    [TranslationProperty] public string FilterText => ResourceHelper.GetString("Filter");
-    [TranslationProperty] public string SearchText => ResourceHelper.GetString("Search");
-    [TranslationProperty] public string ViewTypeText => ResourceHelper.GetString("ViewType");
-    [TranslationProperty] public string GridViewText => ResourceHelper.GetString("GridView");
-    [TranslationProperty] public string ListViewText => ResourceHelper.GetString("ListView");
-    [TranslationProperty] public string GamesText => ResourceHelper.GetString("Games");
-    [TranslationProperty] public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
-    #endregion
 }

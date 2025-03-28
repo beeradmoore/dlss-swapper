@@ -11,7 +11,7 @@
     x:Name="RootView">
 
     <StackPanel Orientation="Vertical" Spacing="12">
-        <TextBlock Text="{x:Bind ViewModel.BelowMultipleDllFoundYouWillBeAbleToSwapInfo, Mode=OneWay}" TextWrapping="Wrap" />
+        <TextBlock Text="{x:Bind ViewModel.TranslationProperties.BelowMultipleDllFoundYouWillBeAbleToSwapInfo, Mode=OneWay}" TextWrapping="Wrap" />
         <ListView ItemsSource="{x:Bind ViewModel.DLLsList}" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:GameAsset">

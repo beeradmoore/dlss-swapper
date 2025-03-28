@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.Translations.UserControls;
 
 namespace DLSS_Swapper.UserControls;
 
-public partial class MultipleDLLsFoundControlModel : LocalizedViewModelBase
+public partial class MultipleDLLsFoundControlModel : ObservableObject
 {
     public MultipleDLLsFoundControlModel(Game game, GameAssetType gameAssetType) : base()
     {
+        TranslationProperties = new MultipleDLLsFoundTranslationPropertiesViewModel();
         DLLsList = game.GameAssets.Where(x => x.AssetType == gameAssetType).ToList();
     }
+
+    [ObservableProperty]
+    public partial MultipleDLLsFoundTranslationPropertiesViewModel TranslationProperties { get; private set; }
 
     public List<GameAsset> DLLsList { get; init; }
 
@@ -47,9 +51,4 @@ public partial class MultipleDLLsFoundControlModel : LocalizedViewModelBase
             Logger.Error(err);
         }
     }
-
-
-    #region LanguageProperties
-    [TranslationProperty] public string BelowMultipleDllFoundYouWillBeAbleToSwapInfo => ResourceHelper.GetString("BelowMultipleDllFoundYouWillBeAbleToSwapInfo");
-    #endregion
 }

@@ -29,7 +29,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Padding="16,0,16,0">
-            <TextBlock Margin="16,0,0,0" Text="{x:Bind ViewModel.SettingsText, Mode=OneWay}" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock Margin="16,0,0,0" Text="{x:Bind ViewModel.TranslationProperties.SettingsText, Mode=OneWay}" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
 
             <!-- Needed to achieve parity in the looking with other sites -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -42,8 +42,8 @@
                  IsOpen="True"
                  Severity="Warning"
                  IsClosable="False"
-                 Title="{x:Bind ViewModel.WarningText, Mode=OneWay}"
-                 Message="{x:Bind ViewModel.ApplicationRunsInAdministrativeModeInfo}"
+                 Title="{x:Bind ViewModel.TranslationProperties.WarningText, Mode=OneWay}"
+                 Message="{x:Bind ViewModel.TranslationProperties.ApplicationRunsInAdministrativeModeInfo}"
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
         <ScrollViewer Grid.Row="2">
@@ -51,18 +51,18 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="{x:Bind ViewModel.ThemeModeText, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.TranslationProperties.ThemeModeText, Mode=OneWay}" />
                 <StackPanel x:Name="ThemePanel" Margin="0,10,0,0">
-                    <RadioButton x:Name="LightThemeRadioButton" GroupName="ThemeGroup" Tag="Light" IsChecked="{x:Bind ViewModel.LightThemeSelected, Mode=TwoWay}" Content="{x:Bind ViewModel.ThemeLightText, Mode=OneWay}" />
-                    <RadioButton x:Name="DarkThemeRadioButton" GroupName="ThemeGroup" Tag="Dark" IsChecked="{x:Bind ViewModel.DarkThemeSelected, Mode=TwoWay}" Content="{x:Bind ViewModel.ThemeDarkText, Mode=OneWay}" />
-                    <RadioButton x:Name="DefaultThemeRadioButton" GroupName="ThemeGroup" Tag="Default" IsChecked="{x:Bind ViewModel.DefaultThemeSelected, Mode=TwoWay}" Content="{x:Bind ViewModel.ThemeSystemSettingDefaultText, Mode=OneWay}" />
+                    <RadioButton x:Name="LightThemeRadioButton" GroupName="ThemeGroup" Tag="Light" IsChecked="{x:Bind ViewModel.LightThemeSelected, Mode=TwoWay}" Content="{x:Bind ViewModel.TranslationProperties.ThemeLightText, Mode=OneWay}" />
+                    <RadioButton x:Name="DarkThemeRadioButton" GroupName="ThemeGroup" Tag="Dark" IsChecked="{x:Bind ViewModel.DarkThemeSelected, Mode=TwoWay}" Content="{x:Bind ViewModel.TranslationProperties.ThemeDarkText, Mode=OneWay}" />
+                    <RadioButton x:Name="DefaultThemeRadioButton" GroupName="ThemeGroup" Tag="Default" IsChecked="{x:Bind ViewModel.DefaultThemeSelected, Mode=TwoWay}" Content="{x:Bind ViewModel.TranslationProperties.ThemeSystemSettingDefaultText, Mode=OneWay}" />
                 </StackPanel>
 
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="{x:Bind ViewModel.GameLibrariesText, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.TranslationProperties.GameLibrariesText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0">
                     <usercontrols:GameLibrarySelectorControl SavesWhenToggled="true" />
                 </StackPanel>
@@ -71,60 +71,60 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="{x:Bind ViewModel.DllsDeveloperOptionsText, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.TranslationProperties.DllsDeveloperOptionsText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0">
-                    <ComboBox Header="{x:Bind ViewModel.ShowOnScreenIndicatorText, Mode=OneWay}" ItemsSource="{Binding DLSSOnScreenIndicatorOptions, Mode=OneTime}" SelectedItem="{Binding SelectedDlssOnScreenIndicator, Mode=TwoWay}" Margin="0,0,0,8" />
-                    <CheckBox Content="{x:Bind ViewModel.EnableLoggingToFileText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
-                    <CheckBox Content="{x:Bind ViewModel.VerboseLoggingText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.DlssVerboseLogging, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
-                    <CheckBox Content="{x:Bind ViewModel.EnableLoggingToConsoleWindowText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.DlssLoggingToWindow, Mode=TwoWay}"  Margin="0,0,0,4"/>
+                    <ComboBox Header="{x:Bind ViewModel.TranslationProperties.ShowOnScreenIndicatorText, Mode=OneWay}" ItemsSource="{Binding DLSSOnScreenIndicatorOptions, Mode=OneTime}" SelectedItem="{Binding SelectedDlssOnScreenIndicator, Mode=TwoWay}" Margin="0,0,0,8" />
+                    <CheckBox Content="{x:Bind ViewModel.TranslationProperties.EnableLoggingToFileText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
+                    <CheckBox Content="{x:Bind ViewModel.TranslationProperties.VerboseLoggingText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.DlssVerboseLogging, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
+                    <CheckBox Content="{x:Bind ViewModel.TranslationProperties.EnableLoggingToConsoleWindowText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.DlssLoggingToWindow, Mode=TwoWay}"  Margin="0,0,0,4"/>
                 </StackPanel>
 
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="{x:Bind ViewModel.AllowUntrustedText, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.TranslationProperties.AllowUntrustedText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0">
-                    <ToggleSwitch IsOn="{x:Bind ViewModel.AllowUntrusted, Mode=TwoWay}" OffContent="{x:Bind ViewModel.NoText, Mode=OneWay}" OnContent="{x:Bind ViewModel.YesText, Mode=OneWay}" Margin="0,0,0,4"/>
-                    <TextBlock Text="{x:Bind ViewModel.AllowUntrustedInfo, Mode=OneWay}" Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0" />
+                    <ToggleSwitch IsOn="{x:Bind ViewModel.AllowUntrusted, Mode=TwoWay}" OffContent="{x:Bind ViewModel.TranslationProperties.NoText, Mode=OneWay}" OnContent="{x:Bind ViewModel.TranslationProperties.YesText, Mode=OneWay}" Margin="0,0,0,4"/>
+                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.AllowUntrustedInfo, Mode=OneWay}" Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0" />
                 </StackPanel>
 
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="{x:Bind ViewModel.AllowDebugDllsText, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.TranslationProperties.AllowDebugDllsText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0">
-                    <ToggleSwitch IsOn="{x:Bind ViewModel.AllowDebugDlls, Mode=TwoWay}" OffContent="{x:Bind ViewModel.NoText, Mode=OneWay}" OnContent="{x:Bind ViewModel.YesText, Mode=OneWay}" Margin="0,0,0,4"/>
-                    <TextBlock Text="{x:Bind ViewModel.AllowDebugDllsInfo, Mode=OneWay}" Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0" />
+                    <ToggleSwitch IsOn="{x:Bind ViewModel.AllowDebugDlls, Mode=TwoWay}" OffContent="{x:Bind ViewModel.TranslationProperties.NoText, Mode=OneWay}" OnContent="{x:Bind ViewModel.TranslationProperties.YesText, Mode=OneWay}" Margin="0,0,0,4"/>
+                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.AllowDebugDllsInfo, Mode=OneWay}" Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0" />
                 </StackPanel>
 
                 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="{x:Bind ViewModel.ShowOnlyDownloadedDllsText, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.TranslationProperties.ShowOnlyDownloadedDllsText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0">
-                    <ToggleSwitch IsOn="{x:Bind ViewModel.OnlyShowDownloadedDlls, Mode=TwoWay}" OffContent="{x:Bind ViewModel.NoText, Mode=OneWay}" OnContent="{x:Bind ViewModel.YesText, Mode=OneWay}" Margin="0,0,0,4" />
-                    <TextBlock Text="{x:Bind ViewModel.ApliesOnlyToDllPickerNotLibraryText, Mode=OneWay}" Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0" />
+                    <ToggleSwitch IsOn="{x:Bind ViewModel.OnlyShowDownloadedDlls, Mode=TwoWay}" OffContent="{x:Bind ViewModel.TranslationProperties.NoText, Mode=OneWay}" OnContent="{x:Bind ViewModel.TranslationProperties.YesText, Mode=OneWay}" Margin="0,0,0,4" />
+                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.ApliesOnlyToDllPickerNotLibraryText, Mode=OneWay}" Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0" />
                 </StackPanel>
 
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="{x:Bind ViewModel.LoggingText, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.TranslationProperties.LoggingText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0">
                     <ComboBox x:Name="LoggingComboBox" ItemsSource="{x:Bind ViewModel.LoggingLevels}" SelectedItem="{x:Bind ViewModel.LoggingLevel, Mode=TwoWay}" />
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
-                        <Run Text="{x:Bind ViewModel.YourCurrentLogfileText, Mode=OneWay}" /><Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenLogFileCommand}"><Run Text="{x:Bind ViewModel.CurrentLogPath}" /></Hyperlink>.
+                        <Run Text="{x:Bind ViewModel.TranslationProperties.YourCurrentLogfileText, Mode=OneWay}" /><Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenLogFileCommand}"><Run Text="{x:Bind ViewModel.CurrentLogPath}" /></Hyperlink>.
                     </TextBlock>
                 </StackPanel>
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="{x:Bind ViewModel.LanguageText, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.TranslationProperties.LanguageText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0">
                     <ComboBox x:Name="LanguageComboBox" ItemsSource="{x:Bind ViewModel.Languages}" DisplayMemberPath="Value" SelectedItem="{x:Bind ViewModel.SelectedLanguage, Mode=TwoWay}" />
                 </StackPanel>
@@ -132,13 +132,13 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="{x:Bind ViewModel.AboutText, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.TranslationProperties.AboutText, Mode=OneWay}" />
                 <TextBlock Margin="0,12,0,0">
-                    <Run Text="{x:Bind ViewModel.VersionText, Mode=OneWay}" />
+                    <Run Text="{x:Bind ViewModel.TranslationProperties.VersionText, Mode=OneWay}" />
                     <Run Text="{x:Bind ViewModel.AppVersion}" />
                 </TextBlock>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,12,0,0" Spacing="16" >
-                    <Button Content="{x:Bind ViewModel.CheckForUpdatesText, Mode=OneWay}" Command="{x:Bind ViewModel.CheckForUpdatesCommand}" />
+                    <Button Content="{x:Bind ViewModel.TranslationProperties.CheckForUpdatesText, Mode=OneWay}" Command="{x:Bind ViewModel.CheckForUpdatesCommand}" />
                     <ProgressRing Width="25" Height="25" IsIndeterminate="True" IsActive="{x:Bind ViewModel.IsCheckingForUpdates, Mode=OneWay}" />
                 </StackPanel>
                                 
@@ -157,7 +157,7 @@
                     </Paragraph>
                     <Paragraph Margin="0,12,0,0">
                         <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenAcknowledgementsCommand}">
-                            <Run Text="{x:Bind ViewModel.AcknowledgementsText, Mode=OneWay}" />
+                            <Run Text="{x:Bind ViewModel.TranslationProperties.AcknowledgementsText, Mode=OneWay}" />
                         </Hyperlink>
                     </Paragraph>
                 </RichTextBlock>
@@ -165,10 +165,10 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="{x:Bind ViewModel.GiveFeedbackText, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.TranslationProperties.GiveFeedbackText, Mode=OneWay}" />
                 <RichTextBlock Margin="0,12,0,0">
                     <Paragraph>
-                        <Run Text="{x:Bind ViewModel.GiveFeedbackInfo, Mode=OneWay}" />
+                        <Run Text="{x:Bind ViewModel.TranslationProperties.GiveFeedbackInfo, Mode=OneWay}" />
                         <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub repository</Hyperlink>
                     </Paragraph>
                 </RichTextBlock>
@@ -176,22 +176,22 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="{x:Bind ViewModel.TroubleshootingText, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.TranslationProperties.TroubleshootingText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0" Orientation="Vertical">
                     <RichTextBlock>
                         <Paragraph Margin="0,12,0,0">
                             <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting">
-                                <Run Text="{x:Bind ViewModel.GeneralTroubleshootingGuideText, Mode=OneWay}" />
+                                <Run Text="{x:Bind ViewModel.TranslationProperties.GeneralTroubleshootingGuideText, Mode=OneWay}" />
                             </Hyperlink>
                         </Paragraph>
                         <Paragraph Margin="0,12,0,0">
                             <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenNetworkTesterCommand}">
-                                <Run Text="{x:Bind ViewModel.NetworkTesterText, Mode=OneWay}" />
+                                <Run Text="{x:Bind ViewModel.TranslationProperties.NetworkTesterText, Mode=OneWay}" />
                             </Hyperlink>
                         </Paragraph>
                         <Paragraph Margin="0,12,0,0">
                             <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenDiagnosticsCommand}">
-                                <Run Text="{x:Bind ViewModel.DiagnosticsText, Mode=OneWay}" />
+                                <Run Text="{x:Bind ViewModel.TranslationProperties.DiagnosticsText, Mode=OneWay}" />
                             </Hyperlink>
                         </Paragraph>
                     </RichTextBlock>

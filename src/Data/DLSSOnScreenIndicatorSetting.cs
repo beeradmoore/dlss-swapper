@@ -1,25 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
+using DLSS_Swapper.Attributes;
+using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Data;
 
-internal struct DLSSOnScreenIndicatorSetting
+public class DLSSOnScreenIndicatorSetting : LocalizedViewModelBase
 {
-    public string Label { get; init; } = string.Empty;
-    public int Value { get; init; } = 0;
-
-    public DLSSOnScreenIndicatorSetting(string label, int value)
+    public DLSSOnScreenIndicatorSetting(string labelLanguageProperty, int value)
     {
-        Label = label;
+        LabelTranslationProperty = labelLanguageProperty;
         Value = value;
     }
 
-    public override string ToString()
-    {
-        return Label;
-    }
+    public string LabelTranslationProperty { get; init; } = "None";
+    [TranslationProperty] public string Label => ResourceHelper.GetString(LabelTranslationProperty);
+    public int Value { get; init; }
+
+    public override string ToString() => Label;
 }

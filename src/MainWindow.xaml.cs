@@ -1,6 +1,4 @@
-using AsyncAwaitBestPractices;
 using DLSS_Swapper.Data;
-using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Pages;
 using DLSS_Swapper.UserControls;
@@ -8,32 +6,15 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Documents;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.System;
 using Windows.UI;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace DLSS_Swapper
 {
@@ -46,6 +27,8 @@ namespace DLSS_Swapper
         ThemeWatcher _themeWatcher;
         IntPtr _windowIcon;
 
+        private readonly MainWindowViewModel ViewModel;
+
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, string iconPath, ref IntPtr index);
 
@@ -54,8 +37,8 @@ namespace DLSS_Swapper
 
         public MainWindow()
         {
-            Title = "DLSS Swapper";
             this.InitializeComponent();
+            ViewModel = new MainWindowViewModel();
 
             if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
             {
@@ -69,8 +52,6 @@ namespace DLSS_Swapper
                     overlappedPresenter.Maximize();
                 }
             }
-
-
 
             Closed += (object sender, WindowEventArgs args) =>
             {
@@ -247,10 +228,10 @@ namespace DLSS_Swapper
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
-                    Title = "Note for multiplayer games",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("NoteForMultiplayerGames"),
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = "While swapping DLSS versions should not be considered cheating, certain anti-cheat systems may not be happy with you if the files in your game directory are not what the game was distributed with.\n\nBecause of this we recommend using caution for multiplayer games.",
+                    Content = ResourceHelper.GetString("DlssSwappingConsideredCheatingInfo"),
                 };
                 var result = await dialog.ShowAsync();
 
@@ -263,15 +244,11 @@ namespace DLSS_Swapper
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
-                    Title = "Error",
-                    CloseButtonText = "Close",
-                    PrimaryButtonText = "Github Issues",
+                    Title = ResourceHelper.GetString("Error"),
+                    CloseButtonText = ResourceHelper.GetString("Close"),
+                    PrimaryButtonText = ResourceHelper.GetString("GithubIssues"),
                     DefaultButton = ContentDialogButton.Primary,
-                    Content = @"We were unable to load manifest.json from your computer or from the internet. 
-
-If this keeps happening please file an report in our issue tracker on Github.
-
-DLSS Swapper will close now.",
+                    Content = ResourceHelper.GetString("ManifestCouldNotBeLoaded"),
                 };
                 var response = await dialog.ShowAsync();
                 if (response == ContentDialogResult.Primary)
@@ -425,7 +402,7 @@ DLSS Swapper will close now.",
                     var manifest = await JsonSerializer.DeserializeAsync(memoryStream, SourceGenerationContext.Default.Manifest);
                     if (manifest is null)
                     {
-                        throw new Exception("Could not deserialize manifest.json.");
+                        throw new Exception(ResourceHelper.GetString("CouldNotDeserializeManifestException"));
                     }
                     DLLManager.Instance.UpdateDLLRecordLists(manifest);
                     //await UpdateDLSSRecordsListAsync(items);

@@ -1,17 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 
 namespace DLSS_Swapper.UserControls
 {
-    internal class GameLibrarySelectorControl : UserControl
+    internal class GameLibrarySelectorControl : UserControl, IDisposable
     {
         public static readonly DependencyProperty SavesWhenToggledProperty = DependencyProperty.Register(
             nameof(SavesWhenToggled),
@@ -25,28 +22,23 @@ namespace DLSS_Swapper.UserControls
             set { SetValue(SavesWhenToggledProperty, value); }
         }
 
-
         public GameLibrarySelectorControl()
         {
+            _languageManager = LanguageManager.Instance;
+            _languageManager.OnLanguageChanged += OnLanguageChanged;
+            _toggleSwitchHandlers = new Dictionary<ToggleSwitch, string>();
+
             var grid = new Grid();
-
-
-            var gameLibraryEnumList = new List<GameLibrary>();
-            foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
-            {
-                gameLibraryEnumList.Add(gameLibraryEnum);
-            }
-
-            gameLibraryEnumList.Sort();
+            List<GameLibrary> gameLibraryEnumList = Enum.GetValues<GameLibrary>().OrderBy(x => x).ToList();
 
             var currentRow = 0;
             foreach (var gameLibraryEnum in gameLibraryEnumList)
             {
-                var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
-                var toggleSwitch = new ToggleSwitch();
+                IGameLibrary gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
+                ToggleSwitch toggleSwitch = new ToggleSwitch();
                 toggleSwitch.IsOn = gameLibrary.IsEnabled;
-                toggleSwitch.OffContent = $"{gameLibrary.Name} disabled";
-                toggleSwitch.OnContent = $"{gameLibrary.Name} enabled";
+                toggleSwitch.OffContent = $"{gameLibrary.Name} {Disabled}";
+                toggleSwitch.OnContent = $"{gameLibrary.Name} {Enabled}";
                 toggleSwitch.Tag = gameLibraryEnum;
                 toggleSwitch.Toggled += (sender, e) =>
                 {
@@ -55,6 +47,7 @@ namespace DLSS_Swapper.UserControls
                         Save();
                     }
                 };
+                _toggleSwitchHandlers.Add(toggleSwitch, gameLibrary.Name);
                 Grid.SetRow(toggleSwitch, currentRow);
                 grid.Children.Add(toggleSwitch);
                 grid.RowDefinitions.Add(new RowDefinition());
@@ -83,5 +76,30 @@ namespace DLSS_Swapper.UserControls
 
             Settings.Instance.EnabledGameLibraries = enabledGameLibraries;
         }
+
+        public string Disabled => ResourceHelper.GetString("Disabled");
+        public string Enabled => ResourceHelper.GetString("Enabled");
+
+        public void OnLanguageChanged()
+        {
+            foreach (KeyValuePair<ToggleSwitch, string> kvp in _toggleSwitchHandlers)
+            {
+                kvp.Key.OffContent = $"{kvp.Value} {Disabled}";
+                kvp.Key.OnContent = $"{kvp.Value} {Enabled}";
+            }
+        }
+
+        public void Dispose()
+        {
+            _languageManager.OnLanguageChanged -= OnLanguageChanged;
+        }
+
+        ~GameLibrarySelectorControl()
+        {
+            Dispose();
+        }
+
+        private readonly Dictionary<ToggleSwitch, string> _toggleSwitchHandlers;
+        private readonly LanguageManager _languageManager;
     }
 }

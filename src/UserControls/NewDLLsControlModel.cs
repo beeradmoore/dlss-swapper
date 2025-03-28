@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.Translations.UserControls;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.System;
 
@@ -16,12 +16,9 @@ namespace DLSS_Swapper.UserControls;
 
 public partial class NewDLLsControlModel : ObservableObject
 {
-    public string Title => $"[NEW DLLs] Found on {DateTime.Now.ToString("yyyy-MM-dd")}";
-
-    public string Body { get; init; }
-
-    public NewDLLsControlModel()
+    public NewDLLsControlModel() : base()
     {
+        TranslationProperties = new NewDLLsTranslationPropertiesViewModel();
         var unknownGameAssets = GameManager.Instance.GetUnknownGameAssets();
         var gameAssetsLibraryGroup = new Dictionary<GameLibrary, Dictionary<string, List<UnknownGameAsset>>>();
         foreach (var unknownGameAsset in unknownGameAssets)
@@ -42,15 +39,15 @@ public partial class NewDLLsControlModel : ObservableObject
         var stringBuilder = new StringBuilder();
         foreach (var gameLibrayKeyPair in gameAssetsLibraryGroup)
         {
-            stringBuilder.AppendLine($"Library: {gameLibrayKeyPair.Key}");
+            stringBuilder.AppendLine($"{ResourceHelper.GetString("Library")}: {gameLibrayKeyPair.Key}");
 
             var libraryDicionary = gameLibrayKeyPair.Value as Dictionary<string, List<UnknownGameAsset>>;
             foreach (var gameAssetsDictionary in libraryDicionary)
             {
-                stringBuilder.AppendLine($"- Game: {gameAssetsDictionary.Key}");
+                stringBuilder.AppendLine($"- {ResourceHelper.GetString("Game")}: {gameAssetsDictionary.Key}");
                 foreach (var unknownGameAsset in gameAssetsDictionary.Value)
                 {
-                    stringBuilder.AppendLine($"-- {Path.GetFileName(unknownGameAsset.GameAsset.Path)}, Version: {unknownGameAsset.GameAsset.Version}, Hash: {unknownGameAsset.GameAsset.Hash}");
+                    stringBuilder.AppendLine($"-- {Path.GetFileName(unknownGameAsset.GameAsset.Path)}, {ResourceHelper.GetString("Version")}: {unknownGameAsset.GameAsset.Version}, {ResourceHelper.GetString("Hash")}: {unknownGameAsset.GameAsset.Hash}");
                 }
                 stringBuilder.AppendLine();
             }
@@ -58,6 +55,11 @@ public partial class NewDLLsControlModel : ObservableObject
         }
         Body = stringBuilder.ToString();
     }
+
+    [ObservableProperty]
+    public partial NewDLLsTranslationPropertiesViewModel TranslationProperties { get; private set; }
+
+    public string Body { get; init; }
 
     [RelayCommand]
     async Task OpenGitHubIssueAsync()
@@ -70,7 +72,7 @@ public partial class NewDLLsControlModel : ObservableObject
     void CopyTitle()
     {
         var package = new DataPackage();
-        package.SetText(Title);
+        package.SetText(TranslationProperties.Title);
         Clipboard.SetContent(package);
     }
 

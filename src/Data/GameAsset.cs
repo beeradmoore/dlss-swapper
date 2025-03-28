@@ -1,12 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DLSS_Swapper.Extensions;
-using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.Helpers;
 using SQLite;
 
 namespace DLSS_Swapper.Data;
@@ -139,4 +135,8 @@ public class GameAsset : IEquatable<GameAsset>
             Version.Equals(other.Version) &&
             Hash.Equals(other.Hash);
     }
+
+    #region LanguageProperties
+    public string OpenDllLocationText => ResourceHelper.GetString("OpenDllLocation");
+    #endregion
 }

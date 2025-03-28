@@ -14,6 +14,12 @@ namespace DLSS_Swapper
         {
             this.InitializeComponent();
             ViewModel = new FailToLaunchWindowModel();
+            Closed += OnCurrentWindowClosed;
+        }
+
+        private void OnCurrentWindowClosed(object sender, WindowEventArgs args)
+        {
+            ViewModel.TranslationProperties.Dispose();
         }
     }
 }

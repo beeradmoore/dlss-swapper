@@ -19,7 +19,7 @@ public partial class DiagnosticsWindowModel : ObservableObject
     public partial DiagnosticsWindowTranslationPropertiesViewModel TranslationProperties { get; private set; }
 
     public string DiagnosticsLog { get; set; } = string.Empty;
-
+   
     [RelayCommand]
     void CopyText()
     {

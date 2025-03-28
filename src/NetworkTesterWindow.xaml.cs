@@ -13,5 +13,11 @@ public sealed partial class NetworkTesterWindow : Window
     {
         ViewModel = new NetworkTesterWindowModel(this);
         this.InitializeComponent();
+        Closed += OnCurrentWindowClosed;
+    }
+
+    private void OnCurrentWindowClosed(object sender, WindowEventArgs args)
+    {
+        ViewModel.TranslationProperties.Dispose();
     }
 }

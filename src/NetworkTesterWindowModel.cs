@@ -6,9 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.Translations.Windows;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -16,7 +15,7 @@ using Windows.ApplicationModel.DataTransfer;
 
 namespace DLSS_Swapper;
 
-public partial class NetworkTesterWindowModel : LocalizedViewModelBase
+public partial class NetworkTesterWindowModel : ObservableObject
 {
     WeakReference<NetworkTesterWindow> _weakWindow;
     readonly string _dlssSwapperDomainTestLink = "dlss-swapper-downloads.beeradmoore.com";
@@ -127,10 +126,13 @@ public partial class NetworkTesterWindowModel : LocalizedViewModelBase
 
     public NetworkTesterWindowModel(NetworkTesterWindow window) : base()
     {
+        TranslationProperties = new NetworkTesterWindowTranslationPropertiesViewModel();
         _weakWindow = new WeakReference<NetworkTesterWindow>(window);
 
         AppendTestResults("Init", $"DLSS Swapper version: v{App.CurrentApp.GetVersionString()}");
     }
+
+    public NetworkTesterWindowTranslationPropertiesViewModel TranslationProperties { get; private set; }
 
     void AppendTestResults(string testName, string message)
     {
@@ -857,20 +859,4 @@ public partial class NetworkTesterWindowModel : LocalizedViewModelBase
             _cancellationTokenSource.Cancel();
         }
     }
-
-    #region LanguageProperties
-    [TranslationProperty] public string NetworkTesterWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("NetworkTester")}";
-    [TranslationProperty] public string Test1TitleText => ResourceHelper.GetString("DiagnosticsTest1Title");
-    [TranslationProperty] public string Test2TitleText => ResourceHelper.GetString("DiagnosticsTest2Title");
-    [TranslationProperty] public string Test3TitleText => ResourceHelper.GetString("DiagnosticsTest3Title");
-    [TranslationProperty] public string Test4TitleText => ResourceHelper.GetString("DiagnosticsTest4Title");
-    [TranslationProperty] public string Test5TitleText => ResourceHelper.GetString("DiagnosticsTest5Title");
-    [TranslationProperty] public string Test6TitleText => ResourceHelper.GetString("DiagnosticsTest6Title");
-    [TranslationProperty] public string Test7TitleText => ResourceHelper.GetString("DiagnosticsTest7Title");
-    [TranslationProperty] public string Test8TitleText => ResourceHelper.GetString("DiagnosticsTest8Title");
-    [TranslationProperty] public string Test9TitleText => ResourceHelper.GetString("DiagnosticsTest9Title");
-    [TranslationProperty] public string Test10TitleText => ResourceHelper.GetString("DiagnosticsTest10Title");
-    [TranslationProperty] public string Test11TitleText => ResourceHelper.GetString("DiagnosticsTest11Title");
-    [TranslationProperty] public string RunTestText => ResourceHelper.GetString("RunTestText");
-    #endregion
 }

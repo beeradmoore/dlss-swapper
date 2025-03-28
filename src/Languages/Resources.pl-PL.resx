@@ -633,4 +633,13 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="FileSize" xml:space="preserve">
     <value>Rozmiar pliku</value>
   </data>
+  <data name="CopyTestResults" xml:space="preserve">
+    <value>Skopiuj wyniki testów</value>
+  </data>
+  <data name="CreateBugReport" xml:space="preserve">
+    <value>Utwórz raport o błędzie</value>
+  </data>
+  <data name="CancelCurrentTest" xml:space="preserve">
+    <value>Anuluj bieżący test</value>
+  </data>
 </root>

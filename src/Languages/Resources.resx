@@ -640,4 +640,13 @@ Only import dlls from sources you trust.</value>
   <data name="FileSize" xml:space="preserve">
     <value>File size</value>
   </data>
+  <data name="CopyTestResults" xml:space="preserve">
+    <value>Copy test results</value>
+  </data>
+  <data name="CreateBugReport" xml:space="preserve">
+    <value>Create bug report</value>
+  </data>
+  <data name="CancelCurrentTest" xml:space="preserve">
+    <value>Cancel current test</value>
+  </data>
 </root>

@@ -13,4 +13,5 @@ public class SharedTranslationPropertiesViewModel : LocalizedViewModelBase
     [TranslationProperty] public string Sample => ResourceHelper.GetString("Sample");
 
     private static readonly Lazy<SharedTranslationPropertiesViewModel> _instance = new Lazy<SharedTranslationPropertiesViewModel>(() => new SharedTranslationPropertiesViewModel());
+
 }

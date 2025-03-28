@@ -201,6 +201,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Cancel current test.
+        /// </summary>
+        public static string CancelCurrentTest {
+            get {
+                return ResourceManager.GetString("CancelCurrentTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Click to copy below details.
         /// </summary>
         public static string ClickToCopyDetails {
@@ -233,6 +242,15 @@ namespace DLSS_Swapper.Languages {
         public static string Copy {
             get {
                 return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Copy test results.
+        /// </summary>
+        public static string CopyTestResults {
+            get {
+                return ResourceManager.GetString("CopyTestResults", resourceCulture);
             }
         }
         
@@ -278,6 +296,15 @@ namespace DLSS_Swapper.Languages {
         public static string CouldntExportDlssDll {
             get {
                 return ResourceManager.GetString("CouldntExportDlssDll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Create bug report.
+        /// </summary>
+        public static string CreateBugReport {
+            get {
+                return ResourceManager.GetString("CreateBugReport", resourceCulture);
             }
         }
         

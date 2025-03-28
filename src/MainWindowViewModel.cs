@@ -1,16 +1,14 @@
-using DLSS_Swapper.Attributes;
-using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Interfaces;
+using CommunityToolkit.Mvvm.ComponentModel;
+using DLSS_Swapper.Translations.Windows;
 
 namespace DLSS_Swapper;
-public class MainWindowViewModel : LocalizedViewModelBase
+public partial class MainWindowViewModel : ObservableObject
 {
-    public MainWindowViewModel() : base() { }
+    public MainWindowViewModel()
+    {
+        TranslationProperties = new MainWindowTranslationPropertiesViewModel();
+    }
 
-    [TranslationProperty] public string Title => ResourceHelper.GetString("ApplicationTitle");
-    [TranslationProperty] public string AppTitleText => ResourceHelper.GetString("ApplicationTitle");
-    [TranslationProperty] public string NavigationViewItemGamesText => ResourceHelper.GetString("Games");
-    [TranslationProperty] public string NavigationViewItemLibraryText => ResourceHelper.GetString("Library");
-    [TranslationProperty] public string LoadingProgressText => ResourceHelper.GetString("Loading");
-
+    [ObservableProperty]
+    public partial MainWindowTranslationPropertiesViewModel TranslationProperties { get; private set; }
 }

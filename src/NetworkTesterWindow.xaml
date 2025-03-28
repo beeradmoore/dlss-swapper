@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
     mc:Ignorable="d"
-    Title="{x:Bind ViewModel.NetworkTesterWindowText}">
+    Title="{x:Bind ViewModel.TranslationProperties.NetworkTesterWindowText}">
     <ScrollView>
         <Grid Margin="16" ColumnSpacing="12" RowSpacing="12" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.Resources>
@@ -65,75 +65,75 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock    Grid.Row="0" Style="{StaticResource TestNumberTextBlock}">Test 1:</TextBlock>
-            <TextBlock    Grid.Row="0" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.Test1TitleText, Mode=OneWay}" />
-            <Button       Grid.Row="0" Style="{StaticResource TestButton}" Content="{x:Bind ViewModel.RunTestText, Mode=OneWay}" Command="{x:Bind ViewModel.RunTest1Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+            <TextBlock    Grid.Row="0" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.TranslationProperties.Test1TitleText, Mode=OneWay}" />
+            <Button       Grid.Row="0" Style="{StaticResource TestButton}" Content="{x:Bind ViewModel.TranslationProperties.RunTestText, Mode=OneWay}" Command="{x:Bind ViewModel.RunTest1Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
             <TextBlock    Grid.Row="0" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test1Result, Mode=OneWay}" />
             <ProgressRing Grid.Row="0" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest1, Mode=OneWay}" />
 
             <TextBlock Grid.Row="1" Style="{StaticResource TestNumberTextBlock}">Test 2:</TextBlock>
-            <TextBlock Grid.Row="1" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.Test2TitleText, Mode=OneWay}" />
-            <Button    Grid.Row="1" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest2Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+            <TextBlock Grid.Row="1" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.TranslationProperties.Test2TitleText, Mode=OneWay}" />
+            <Button    Grid.Row="1" Style="{StaticResource TestButton}" Content="{x:Bind ViewModel.TranslationProperties.RunTestText, Mode=OneWay}" Command="{x:Bind ViewModel.RunTest2Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
             <TextBlock Grid.Row="1" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test2Result, Mode=OneWay}" />
             <ProgressRing Grid.Row="1" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest2, Mode=OneWay}" />
 
             <TextBlock Grid.Row="2" Style="{StaticResource TestNumberTextBlock}">Test 3:</TextBlock>
-            <TextBlock Grid.Row="2" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.Test3TitleText, Mode=OneWay}" />
-            <Button    Grid.Row="2" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest3Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+            <TextBlock Grid.Row="2" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.TranslationProperties.Test3TitleText, Mode=OneWay}" />
+            <Button    Grid.Row="2" Style="{StaticResource TestButton}" Content="{x:Bind ViewModel.TranslationProperties.RunTestText, Mode=OneWay}" Command="{x:Bind ViewModel.RunTest3Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
             <TextBlock Grid.Row="2" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test3Result, Mode=OneWay}" />
             <ProgressRing Grid.Row="2" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest3, Mode=OneWay}" />
 
             <TextBlock Grid.Row="3" Style="{StaticResource TestNumberTextBlock}">Test 4:</TextBlock>
-            <TextBlock Grid.Row="3" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.Test4TitleText, Mode=OneWay}" />
-            <Button    Grid.Row="3" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest4Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+            <TextBlock Grid.Row="3" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.TranslationProperties.Test4TitleText, Mode=OneWay}" />
+            <Button    Grid.Row="3" Style="{StaticResource TestButton}" Content="{x:Bind ViewModel.TranslationProperties.RunTestText, Mode=OneWay}" Command="{x:Bind ViewModel.RunTest4Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
             <TextBlock Grid.Row="3" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test4Result, Mode=OneWay}" />
             <ProgressRing Grid.Row="3" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest4, Mode=OneWay}" />
 
             <TextBlock Grid.Row="4" Style="{StaticResource TestNumberTextBlock}">Test 5:</TextBlock>
-            <TextBlock Grid.Row="4" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.Test5TitleText, Mode=OneWay}" />
-            <Button    Grid.Row="4" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest5Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+            <TextBlock Grid.Row="4" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.TranslationProperties.Test5TitleText, Mode=OneWay}" />
+            <Button    Grid.Row="4" Style="{StaticResource TestButton}" Content="{x:Bind ViewModel.TranslationProperties.RunTestText, Mode=OneWay}" Command="{x:Bind ViewModel.RunTest5Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
             <TextBlock Grid.Row="4" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test5Result, Mode=OneWay}" />
             <ProgressRing Grid.Row="4" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest5, Mode=OneWay}" />
 
             <TextBlock Grid.Row="5" Style="{StaticResource TestNumberTextBlock}">Test 6:</TextBlock>
-            <TextBlock Grid.Row="5" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.Test6TitleText, Mode=OneWay}" />
-            <Button    Grid.Row="5" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest6Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+            <TextBlock Grid.Row="5" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.TranslationProperties.Test6TitleText, Mode=OneWay}" />
+            <Button    Grid.Row="5" Style="{StaticResource TestButton}" Content="{x:Bind ViewModel.TranslationProperties.RunTestText, Mode=OneWay}" Command="{x:Bind ViewModel.RunTest6Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
             <TextBlock Grid.Row="5" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test6Result, Mode=OneWay}" />
             <ProgressRing Grid.Row="5" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest6, Mode=OneWay}" />
 
             <TextBlock Grid.Row="6" Style="{StaticResource TestNumberTextBlock}" >Test 7:</TextBlock>
-            <TextBlock Grid.Row="6" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.Test7TitleText, Mode=OneWay}" />
-            <Button    Grid.Row="6" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest7Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+            <TextBlock Grid.Row="6" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.TranslationProperties.Test7TitleText, Mode=OneWay}" />
+            <Button    Grid.Row="6" Style="{StaticResource TestButton}" Content="{x:Bind ViewModel.TranslationProperties.RunTestText, Mode=OneWay}" Command="{x:Bind ViewModel.RunTest7Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
             <TextBlock Grid.Row="6" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test7Result, Mode=OneWay}" />
             <ProgressRing Grid.Row="6" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest7, Mode=OneWay}" />
 
             <TextBlock Grid.Row="7" Style="{StaticResource TestNumberTextBlock}">Test 8:</TextBlock>
-            <TextBlock Grid.Row="7" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.Test8TitleText, Mode=OneWay}" />
-            <Button    Grid.Row="7" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest8Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+            <TextBlock Grid.Row="7" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.TranslationProperties.Test8TitleText, Mode=OneWay}" />
+            <Button    Grid.Row="7" Style="{StaticResource TestButton}" Content="{x:Bind ViewModel.TranslationProperties.RunTestText, Mode=OneWay}" Command="{x:Bind ViewModel.RunTest8Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
             <TextBlock Grid.Row="7" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test8Result, Mode=OneWay}" />
             <ProgressRing Grid.Row="7" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest8, Mode=OneWay}" />
 
             <TextBlock Grid.Row="8" Style="{StaticResource TestNumberTextBlock}">Test 9:</TextBlock>
-            <TextBlock Grid.Row="8" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.Test9TitleText, Mode=OneWay}" />
-            <Button    Grid.Row="8" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest9Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+            <TextBlock Grid.Row="8" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.TranslationProperties.Test9TitleText, Mode=OneWay}" />
+            <Button    Grid.Row="8" Style="{StaticResource TestButton}" Content="{x:Bind ViewModel.TranslationProperties.RunTestText, Mode=OneWay}" Command="{x:Bind ViewModel.RunTest9Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
             <TextBlock Grid.Row="8" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test9Result, Mode=OneWay}" />
             <ProgressRing Grid.Row="8" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest9, Mode=OneWay}" />
 
             <TextBlock Grid.Row="9" Style="{StaticResource TestNumberTextBlock}">Test 10:</TextBlock>
-            <TextBlock Grid.Row="9" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.Test10TitleText, Mode=OneWay}" />
-            <Button    Grid.Row="9" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest10Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+            <TextBlock Grid.Row="9" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.TranslationProperties.Test10TitleText, Mode=OneWay}" />
+            <Button    Grid.Row="9" Style="{StaticResource TestButton}" Content="{x:Bind ViewModel.TranslationProperties.RunTestText, Mode=OneWay}" Command="{x:Bind ViewModel.RunTest10Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
             <TextBlock Grid.Row="9" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test10Result, Mode=OneWay}" />
             <ProgressRing Grid.Row="9" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest10, Mode=OneWay}" />
 
             <TextBlock Grid.Row="10" Style="{StaticResource TestNumberTextBlock}">Test 11:</TextBlock>
-            <TextBlock Grid.Row="10" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.Test11TitleText, Mode=OneWay}" />
-            <Button    Grid.Row="10" Style="{StaticResource TestButton}" Content="Run test" Command="{x:Bind ViewModel.RunTest11Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
+            <TextBlock Grid.Row="10" Style="{StaticResource TestNameTextBlock}" Text="{x:Bind ViewModel.TranslationProperties.Test11TitleText, Mode=OneWay}" />
+            <Button    Grid.Row="10" Style="{StaticResource TestButton}" Content="{x:Bind ViewModel.TranslationProperties.RunTestText, Mode=OneWay}" Command="{x:Bind ViewModel.RunTest11Command}" IsEnabled="{x:Bind ViewModel.IsNotRunningTest, Mode=OneWay}" />
             <TextBlock Grid.Row="10" Style="{StaticResource TestResultsTextBlock}" Text="{x:Bind ViewModel.Test11Result, Mode=OneWay}" />
             <ProgressRing Grid.Row="10" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest11, Mode=OneWay}" />
         
             <StackPanel Orientation="Horizontal" Spacing="12" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
-                <Button Content="Copy test results" Command="{x:Bind ViewModel.CopyTestResultsCommand}" />
-                <Button Content="Create bug report" Command="{x:Bind ViewModel.CreateBugReportCommand}" />
-                <Button Content="Cancel current test" Command="{x:Bind ViewModel.CancelCurrentTestCommand}" />
+                <Button Content="{x:Bind ViewModel.TranslationProperties.CopyTestResultsText}" Command="{x:Bind ViewModel.CopyTestResultsCommand}" />
+                <Button Content="{x:Bind ViewModel.TranslationProperties.CreateBugReportText}" Command="{x:Bind ViewModel.CreateBugReportCommand}" />
+                <Button Content="{x:Bind ViewModel.TranslationProperties.CancelCurrentTestText}" Command="{x:Bind ViewModel.CancelCurrentTestCommand}" />
             </StackPanel>
 
             <TextBox Grid.Row="12" Grid.ColumnSpan="4" MinHeight="400" Header="Results" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Text="{x:Bind ViewModel.TestResults, Mode=OneWay}" />

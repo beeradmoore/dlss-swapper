@@ -1,18 +1,22 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.Translations.Windows;
 using Windows.ApplicationModel.DataTransfer;
 
 namespace DLSS_Swapper;
 
-public partial class DiagnosticsWindowModel : LocalizedViewModelBase
+public partial class DiagnosticsWindowModel : ObservableObject
 {
     public DiagnosticsWindowModel() : base()
     {
+        TranslationProperties = new DiagnosticsWindowTranslationPropertiesViewModel();
         var systemDetails = new SystemDetails();
         DiagnosticsLog = $"{systemDetails.GetSystemData()}\n\n{systemDetails.GetLibraryData()}\n";
     }
+
+    [ObservableProperty]
+    public partial DiagnosticsWindowTranslationPropertiesViewModel TranslationProperties { get; private set; }
 
     public string DiagnosticsLog { get; set; } = string.Empty;
 
@@ -24,8 +28,4 @@ public partial class DiagnosticsWindowModel : LocalizedViewModelBase
         Clipboard.SetContent(package);
     }
 
-    #region TranslationProperties
-    [TranslationProperty] public string ApplicationTilteDiagnosticsWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("Diagnostics")}";
-    [TranslationProperty] public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
-    #endregion
 }

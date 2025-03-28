@@ -217,12 +217,12 @@ namespace DLSS_Swapper.Data
 
                     if (didDownload == false)
                     {
-                        throw new Exception("Could not download file.");
+                        throw new Exception(ResourceHelper.GetString("CouldNotDownloadFile"));
                     }
 
                     if (ZipMD5Hash != fileStream.GetMD5Hash())
                     {
-                        throw new Exception("Downloaded file was invalid.");
+                        throw new Exception(ResourceHelper.GetString("DownloadFileWasInvalid"));
                     }
                 }
 
@@ -257,7 +257,7 @@ namespace DLSS_Swapper.Data
                 {
                     LocalRecord.IsDownloaded = false;
                     LocalRecord.HasDownloadError = true;
-                    LocalRecord.DownloadErrorMessage = $"Could not download {DLLManager.Instance.GetAssetTypeName(AssetType)} DLL, please try again later or check your logs to see why the download failed.";
+                    LocalRecord.DownloadErrorMessage = ResourceHelper.GetFormattedResourceTemplate("CouldNotDownloadAssetTypeTemplate", DLLManager.Instance.GetAssetTypeName(AssetType));
                     NotifyPropertyChanged(nameof(LocalRecord));
                 });
 

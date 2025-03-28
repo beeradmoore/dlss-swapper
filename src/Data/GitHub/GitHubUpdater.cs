@@ -39,7 +39,7 @@ namespace DLSS_Swapper.Data.GitHub
                     var githubRelease = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GitHubRelease);
                     if (githubRelease is null)
                     {
-                        throw new Exception("Could not load GitHub release data.");
+                        throw new Exception(ResourceHelper.GetString("CouldNotLoadGithubReleaseDataException"));
                     }
 
                     return githubRelease;
@@ -66,7 +66,7 @@ namespace DLSS_Swapper.Data.GitHub
                     var githubRelease = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GitHubRelease);
                     if (githubRelease is null)
                     {
-                        throw new Exception("Could not load GitHub release data.");
+                        throw new Exception(ResourceHelper.GetString("CouldNotLoadGithubReleaseDataException"));
                     }
 
                     return githubRelease;
@@ -139,7 +139,7 @@ namespace DLSS_Swapper.Data.GitHub
 
             var currentVerion = App.CurrentApp.GetVersionString();
 
-            var yourVersion = $"You currently have {currentVerion} installed.\n\n";
+            var yourVersion = ResourceHelper.GetFormattedResourceTemplate("CurrentVersionIsActualTemplate", currentVerion);
             var contentUpdate = new MarkdownTextBlock()
             {
                 Text = yourVersion + gitHubRelease.Body,
@@ -151,9 +151,9 @@ namespace DLSS_Swapper.Data.GitHub
             {
                 var dialog = new EasyContentDialog(xamlRoot)
                 {
-                    Title = $"Update Available - {gitHubRelease.Name}",
-                    PrimaryButtonText = "Update",
-                    CloseButtonText = "Cancel",
+                    Title = $"{ResourceHelper.GetString("UpdateAvailable")} - {gitHubRelease.Name}",
+                    PrimaryButtonText = ResourceHelper.GetString("Update"),
+                    CloseButtonText = ResourceHelper.GetString("Cancel"),
                     DefaultButton = ContentDialogButton.Primary,
                     Content = new ScrollViewer()
                     {
@@ -180,8 +180,8 @@ namespace DLSS_Swapper.Data.GitHub
 
             var dialog = new EasyContentDialog(xamlRoot)
             {
-                Title = $"DLSS Swapper just updated - {gitHubRelease.Name}",
-                CloseButtonText = "Cancel",
+                Title = $"{ResourceHelper.GetString("DlssSwapperUpdated")} - {gitHubRelease.Name}",
+                CloseButtonText = ResourceHelper.GetString("Cancel"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = new ScrollViewer()
                 {

@@ -192,6 +192,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Browser Test.
+        /// </summary>
+        public static string BrowserTest {
+            get {
+                return ResourceManager.GetString("BrowserTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Cancel.
         /// </summary>
         public static string Cancel {
@@ -255,6 +264,33 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not deserialize manifest.json..
+        /// </summary>
+        public static string CouldNotDeserializeManifestException {
+            get {
+                return ResourceManager.GetString("CouldNotDeserializeManifestException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not download {0} DLL, please try again later or check your logs to see why the download failed..
+        /// </summary>
+        public static string CouldNotDownloadAssetTypeTemplate {
+            get {
+                return ResourceManager.GetString("CouldNotDownloadAssetTypeTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not download file..
+        /// </summary>
+        public static string CouldNotDownloadFile {
+            get {
+                return ResourceManager.GetString("CouldNotDownloadFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not find file &quot;{0}&quot;..
         /// </summary>
         public static string CouldNotFindFileTemplate {
@@ -269,6 +305,15 @@ namespace DLSS_Swapper.Languages {
         public static string CouldNotFindGameInstallPathTemplate {
             get {
                 return ResourceManager.GetString("CouldNotFindGameInstallPathTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not load GitHub release data..
+        /// </summary>
+        public static string CouldNotLoadGithubReleaseDataException {
+            get {
+                return ResourceManager.GetString("CouldNotLoadGithubReleaseDataException", resourceCulture);
             }
         }
         
@@ -323,6 +368,24 @@ namespace DLSS_Swapper.Languages {
         public static string CurrentDll {
             get {
                 return ResourceManager.GetString("CurrentDll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu You currently have {0} installed.\n\n.
+        /// </summary>
+        public static string CurrentVersionIsActualTemplate {
+            get {
+                return ResourceManager.GetString("CurrentVersionIsActualTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Custom user agent test.
+        /// </summary>
+        public static string CustomUserAgentTest {
+            get {
+                return ResourceManager.GetString("CustomUserAgentTest", resourceCulture);
             }
         }
         
@@ -471,6 +534,24 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu DLSS Swapper just updated.
+        /// </summary>
+        public static string DlssSwapperUpdated {
+            get {
+                return ResourceManager.GetString("DlssSwapperUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu While swapping DLSS versions should not be considered cheating, certain anti-cheat systems may not be happy with you if the files in your game directory are not what the game was distributed with.\n\nBecause of this we recommend using caution for multiplayer games..
+        /// </summary>
+        public static string DlssSwappingConsideredCheatingInfo {
+            get {
+                return ResourceManager.GetString("DlssSwappingConsideredCheatingInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Don&apos;t show again.
         /// </summary>
         public static string DontShowAgain {
@@ -503,6 +584,15 @@ namespace DLSS_Swapper.Languages {
         public static string DownloadFileSize {
             get {
                 return ResourceManager.GetString("DownloadFileSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Downloaded file was invalid..
+        /// </summary>
+        public static string DownloadFileWasInvalid {
+            get {
+                return ResourceManager.GetString("DownloadFileWasInvalid", resourceCulture);
             }
         }
         
@@ -696,6 +786,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Github Issues.
+        /// </summary>
+        public static string GithubIssues {
+            get {
+                return ResourceManager.GetString("GithubIssues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Grid View.
         /// </summary>
         public static string GridView {
@@ -853,6 +952,19 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu We were unable to load manifest.json from your computer or from the internet. 
+        ///
+        ///If this keeps happening please file an report in our issue tracker on Github.
+        ///
+        ///DLSS Swapper will close now..
+        /// </summary>
+        public static string ManifestCouldNotBeLoaded {
+            get {
+                return ResourceManager.GetString("ManifestCouldNotBeLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Multiple DLLs found.
         /// </summary>
         public static string MultipleDllsFound {
@@ -952,6 +1064,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Note for multiplayer games.
+        /// </summary>
+        public static string NoteForMultiplayerGames {
+            get {
+                return ResourceManager.GetString("NoteForMultiplayerGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Notes.
         /// </summary>
         public static string Notes {
@@ -993,6 +1114,24 @@ namespace DLSS_Swapper.Languages {
         public static string OpenFolder {
             get {
                 return ResourceManager.GetString("OpenFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Open in browser.
+        /// </summary>
+        public static string OpenInBrowser {
+            get {
+                return ResourceManager.GetString("OpenInBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Click the open in browser button, or copy and paste following link into your browser. Does it download a file in your browser?.
+        /// </summary>
+        public static string OpenInBrowserInfo {
+            get {
+                return ResourceManager.GetString("OpenInBrowserInfo", resourceCulture);
             }
         }
         
@@ -1501,6 +1640,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Still does not work.
+        /// </summary>
+        public static string StillDoesNotWork {
+            get {
+                return ResourceManager.GetString("StillDoesNotWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Success.
         /// </summary>
         public static string Success {
@@ -1564,6 +1712,33 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Update.
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Update Available.
+        /// </summary>
+        public static string UpdateAvailable {
+            get {
+                return ResourceManager.GetString("UpdateAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Use the provided user agent or enter a custom one of your choice..
+        /// </summary>
+        public static string UseUserAgentInfo {
+            get {
+                return ResourceManager.GetString("UseUserAgentInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Version.
         /// </summary>
         public static string Version {
@@ -1605,6 +1780,15 @@ namespace DLSS_Swapper.Languages {
         public static string WhileLoadingYourGameNewDllsDiscoveredHelpUs {
             get {
                 return ResourceManager.GetString("WhileLoadingYourGameNewDllsDiscoveredHelpUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Works!.
+        /// </summary>
+        public static string Works {
+            get {
+                return ResourceManager.GetString("Works", resourceCulture);
             }
         }
         

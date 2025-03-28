@@ -228,10 +228,10 @@ namespace DLSS_Swapper
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
-                    Title = "Note for multiplayer games",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("NoteForMultiplayerGames"),
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = "While swapping DLSS versions should not be considered cheating, certain anti-cheat systems may not be happy with you if the files in your game directory are not what the game was distributed with.\n\nBecause of this we recommend using caution for multiplayer games.",
+                    Content = ResourceHelper.GetString("DlssSwappingConsideredCheatingInfo"),
                 };
                 var result = await dialog.ShowAsync();
 
@@ -244,15 +244,11 @@ namespace DLSS_Swapper
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
-                    Title = "Error",
-                    CloseButtonText = "Close",
-                    PrimaryButtonText = "Github Issues",
+                    Title = ResourceHelper.GetString("Error"),
+                    CloseButtonText = ResourceHelper.GetString("Close"),
+                    PrimaryButtonText = ResourceHelper.GetString("GithubIssues"),
                     DefaultButton = ContentDialogButton.Primary,
-                    Content = @"We were unable to load manifest.json from your computer or from the internet. 
-
-If this keeps happening please file an report in our issue tracker on Github.
-
-DLSS Swapper will close now.",
+                    Content = ResourceHelper.GetString("ManifestCouldNotBeLoaded"),
                 };
                 var response = await dialog.ShowAsync();
                 if (response == ContentDialogResult.Primary)
@@ -406,7 +402,7 @@ DLSS Swapper will close now.",
                     var manifest = await JsonSerializer.DeserializeAsync(memoryStream, SourceGenerationContext.Default.Manifest);
                     if (manifest is null)
                     {
-                        throw new Exception("Could not deserialize manifest.json.");
+                        throw new Exception(ResourceHelper.GetString("CouldNotDeserializeManifestException"));
                     }
                     DLLManager.Instance.UpdateDLLRecordLists(manifest);
                     //await UpdateDLSSRecordsListAsync(items);

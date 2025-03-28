@@ -642,4 +642,68 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="CancelCurrentTest" xml:space="preserve">
     <value>Anuluj bieżący test</value>
   </data>
+  <data name="GithubIssues" xml:space="preserve">
+    <value>Problemy z GitHubem</value>
+  </data>
+  <data name="DlssSwappingConsideredCheatingInfo" xml:space="preserve">
+    <value>Chociaż zamiana wersji DLSS nie powinna być uznawana za oszustwo, niektóre systemy anty-cheatowe mogą nie być tego zadowolone, jeśli pliki w twoim katalogu gry nie są takie, z jakimi gra była dystrybuowana.</value>
+  </data>
+  <data name="NoteForMultiplayerGames" xml:space="preserve">
+    <value>Uwaga dotycząca gier wieloosobowych</value>
+  </data>
+  <data name="ManifestCouldNotBeLoaded" xml:space="preserve">
+    <value>Nie udało się załadować pliku manifest.json z komputera lub z Internetu. 
+
+Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia błędów na Githubie.
+
+DLSS Swapper zostanie teraz zamknięty.</value>
+  </data>
+  <data name="CouldNotDeserializeManifestException" xml:space="preserve">
+    <value>Nie można deserializować pliku manifest.json.</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Aktualizuj</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Aktualizacja dostępna</value>
+  </data>
+  <data name="DlssSwapperUpdated" xml:space="preserve">
+    <value>DLSS Swapper został zaktualizowany</value>
+  </data>
+  <data name="CurrentVersionIsActualTemplate" xml:space="preserve">
+    <value>Już masz {0} zainstalowane.\n\n</value>
+  </data>
+  <data name="CouldNotLoadGithubReleaseDataException" xml:space="preserve">
+    <value>Nie można załadować danych Releasez z GitHuba.</value>
+  </data>
+  <data name="CouldNotDownloadFile" xml:space="preserve">
+    <value>Nie można pobrać pliku.</value>
+  </data>
+  <data name="DownloadFileWasInvalid" xml:space="preserve">
+    <value>Pobrany plik był nieprawidłowy.</value>
+  </data>
+  <data name="CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
+    <value>Nie można pobrać {0} DLL, proszę spróbować później lub lub sprawdzić swoje logi żeby sprawdzić czemu pobieranie się nie powiodło.</value>
+  </data>
+  <data name="OpenInBrowser" xml:space="preserve">
+    <value>Otwórz w przeglądarce</value>
+  </data>
+  <data name="BrowserTest" xml:space="preserve">
+    <value>Test przeglądarki</value>
+  </data>
+  <data name="Works" xml:space="preserve">
+    <value>Działa!</value>
+  </data>
+  <data name="StillDoesNotWork" xml:space="preserve">
+    <value>Wciąż nie działa</value>
+  </data>
+  <data name="UseUserAgentInfo" xml:space="preserve">
+    <value>Użyj dostarczonego UserAgenta lub wprowadź niestandardowego.</value>
+  </data>
+  <data name="CustomUserAgentTest" xml:space="preserve">
+    <value>Test niestandardowego UserAgenta</value>
+  </data>
+  <data name="OpenInBrowserInfo" xml:space="preserve">
+    <value>Kliknij przycisk Otwórz w przeglądarce lub skopiuj i wklej poniższy link do przeglądarki. Czy pobierany jest plik w przeglądarce?</value>
+  </data>
 </root>

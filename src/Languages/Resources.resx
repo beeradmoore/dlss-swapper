@@ -649,4 +649,70 @@ Only import dlls from sources you trust.</value>
   <data name="CancelCurrentTest" xml:space="preserve">
     <value>Cancel current test</value>
   </data>
+  <data name="NoteForMultiplayerGames" xml:space="preserve">
+    <value>Note for multiplayer games</value>
+  </data>
+  <data name="DlssSwappingConsideredCheatingInfo" xml:space="preserve">
+    <value>While swapping DLSS versions should not be considered cheating, certain anti-cheat systems may not be happy with you if the files in your game directory are not what the game was distributed with.\n\nBecause of this we recommend using caution for multiplayer games.</value>
+  </data>
+  <data name="GithubIssues" xml:space="preserve">
+    <value>Github Issues</value>
+  </data>
+  <data name="ManifestCouldNotBeLoaded" xml:space="preserve">
+    <value>We were unable to load manifest.json from your computer or from the internet. 
+
+If this keeps happening please file an report in our issue tracker on Github.
+
+DLSS Swapper will close now.</value>
+  </data>
+  <data name="CouldNotDeserializeManifestException" xml:space="preserve">
+    <value>Could not deserialize manifest.json.</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Update Available</value>
+  </data>
+  <data name="DlssSwapperUpdated" xml:space="preserve">
+    <value>DLSS Swapper just updated</value>
+  </data>
+  <data name="CurrentVersionIsActualTemplate" xml:space="preserve">
+    <value>You currently have {0} installed.\n\n</value>
+    <comment>0 = {currentVerion}</comment>
+  </data>
+  <data name="CouldNotLoadGithubReleaseDataException" xml:space="preserve">
+    <value>Could not load GitHub release data.</value>
+  </data>
+  <data name="CouldNotDownloadFile" xml:space="preserve">
+    <value>Could not download file.</value>
+  </data>
+  <data name="DownloadFileWasInvalid" xml:space="preserve">
+    <value>Downloaded file was invalid.</value>
+  </data>
+  <data name="CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
+    <value>Could not download {0} DLL, please try again later or check your logs to see why the download failed.</value>
+    <comment>0 = {{DLLManager.Instance.GetAssetTypeName(AssetType)}</comment>
+  </data>
+  <data name="OpenInBrowser" xml:space="preserve">
+    <value>Open in browser</value>
+  </data>
+  <data name="BrowserTest" xml:space="preserve">
+    <value>Browser Test</value>
+  </data>
+  <data name="Works" xml:space="preserve">
+    <value>Works!</value>
+  </data>
+  <data name="StillDoesNotWork" xml:space="preserve">
+    <value>Still does not work</value>
+  </data>
+  <data name="OpenInBrowserInfo" xml:space="preserve">
+    <value>Click the open in browser button, or copy and paste following link into your browser. Does it download a file in your browser?</value>
+  </data>
+  <data name="UseUserAgentInfo" xml:space="preserve">
+    <value>Use the provided user agent or enter a custom one of your choice.</value>
+  </data>
+  <data name="CustomUserAgentTest" xml:space="preserve">
+    <value>Custom user agent test</value>
+  </data>
 </root>

@@ -212,7 +212,7 @@ namespace DLSS_Swapper
                     if (_autoSave)
                     {
                         SaveJson();
-                        EnabledGameLibrariesChanged?.Invoke(this, new EventArgs());
+                        EnabledGameLibrariesChanged?.Invoke(this, EventArgs.Empty);
                     }
                 }
             }

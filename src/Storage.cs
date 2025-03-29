@@ -83,6 +83,11 @@ namespace DLSS_Swapper
             return Path.Combine(StoragePath, "image_cache");
         }
 
+        public static string GetReleasesPath()
+        {
+            return Path.Combine(GetDynamicJsonFolder(), "releases.json");
+        }
+
         public static string GetManifestPath()
         {
             return Path.Combine(GetDynamicJsonFolder(), "manifest.json");

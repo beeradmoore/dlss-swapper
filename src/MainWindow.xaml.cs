@@ -234,7 +234,7 @@ namespace DLSS_Swapper
             var gitHubUpdater = new Data.GitHub.GitHubUpdater();
 
             // If this is a GitHub build check if there is a new version.
-            var newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease();
+            var newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease(false);
 
             await DLLManager.Instance.LoadManifestsAsync();
 

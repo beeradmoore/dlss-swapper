@@ -644,12 +644,12 @@ Only import dlls from sources you trust.</value>
     <value>While swapping DLSS versions should not be considered cheating, certain anti-cheat systems may not be happy with you if the files in your game directory are not what the game was distributed with.\n\nBecause of this we recommend using caution for multiplayer games.</value>
   </data>
   <data name="GithubIssues" xml:space="preserve">
-    <value>Github Issues</value>
+    <value>GitHub Issues</value>
   </data>
   <data name="ManifestCouldNotBeLoaded" xml:space="preserve">
     <value>We were unable to load manifest.json from your computer or from the internet. 
 
-If this keeps happening please file an report in our issue tracker on Github.
+If this keeps happening please file an report in our issue tracker on GitHub.
 
 DLSS Swapper will close now.</value>
   </data>

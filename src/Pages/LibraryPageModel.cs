@@ -18,6 +18,10 @@ using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Documents;
+using CommunityToolkit.WinUI;
+using System.Diagnostics;
+using Microsoft.UI.Xaml;
+using System.ComponentModel;
 
 namespace DLSS_Swapper.Pages;
 

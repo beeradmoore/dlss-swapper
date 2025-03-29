@@ -144,7 +144,7 @@
                                 
                 <RichTextBlock Margin="0,24,0,0">
                     <Paragraph Margin="0,12,0,0">
-                        Github:
+                        GitHub:
                         <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper">beeradmoore/dlss-swapper</Hyperlink>
                     </Paragraph>
                     <Paragraph Margin="0,0,0,0">

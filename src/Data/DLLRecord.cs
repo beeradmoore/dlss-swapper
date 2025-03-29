@@ -29,6 +29,13 @@ namespace DLSS_Swapper.Data
         [JsonPropertyName("md5_hash")]
         public string MD5Hash { get; set; } = string.Empty;
 
+        /// <summary>
+        /// This hash is not guaranteed to be the same as the hash on the zip on the disk.
+        /// It is used during download to validate a successful download. However if you
+        /// import a DLL that exists in the manifest we will then create the zip for that
+        /// file. Doing so will cause the new generateed zip hash and this entry in the 
+        /// manifest to differ.
+        /// </summary>
         [JsonPropertyName("zip_md5_hash")]
         public string ZipMD5Hash { get; set; } = string.Empty;
 
@@ -151,6 +158,11 @@ namespace DLSS_Swapper.Data
             if (other is null)
             {
                 return -1;
+            }
+
+            if (string.IsNullOrWhiteSpace(MD5Hash) == false && MD5Hash == other.MD5Hash)
+            {
+                return 0;
             }
 
             if (VersionNumber == other.VersionNumber)
@@ -283,6 +295,11 @@ namespace DLSS_Swapper.Data
             }
         }
 
+        internal string GetExpectedZipName()
+        {
+            return $"{GetRecordSimpleType()}_v{Version}_{MD5Hash}.zip";
+        }
+        
         /*
         internal static DLSSRecord FromImportedFile(string fileName)
         {
@@ -327,5 +344,30 @@ namespace DLSS_Swapper.Data
                 _ => string.Empty,
             };
         }
+        
+        internal void CopyFrom(DLLRecord newDllRecord)
+        {
+            Version = newDllRecord.Version;
+            VersionNumber = newDllRecord.VersionNumber;
+            InternalName = newDllRecord.InternalName;
+            AdditionalLabel = newDllRecord.AdditionalLabel;
+            MD5Hash = newDllRecord.MD5Hash;
+            ZipMD5Hash = newDllRecord.ZipMD5Hash;
+            DownloadUrl = newDllRecord.DownloadUrl;
+            FileDescription = newDllRecord.FileDescription;
+            SignedDateTime = newDllRecord.SignedDateTime;
+            IsSignatureValid = newDllRecord.IsSignatureValid;
+            IsDevFile = newDllRecord.IsDevFile;
+            FileSize = newDllRecord.FileSize;
+            ZipFileSize = newDllRecord.ZipFileSize;
+            LocalRecord = newDllRecord.LocalRecord;
+            AssetType = newDllRecord.AssetType;
+
+            NotifyPropertyChanged(nameof(FullName));
+            _displayVersion = string.Empty;
+            NotifyPropertyChanged(nameof(DisplayVersion));
+            NotifyPropertyChanged(nameof(DisplayName));
+        }
     }
+
 }

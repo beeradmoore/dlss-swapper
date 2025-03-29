@@ -27,31 +27,70 @@ namespace DLSS_Swapper.Data.GitHub
         /// Queries GitHub and returns the latest GitHubRelease object, or null if the request failed.
         /// </summary>
         /// <returns>Latest GitHubRelease object, or null if the request failed</returns>
-        internal async Task<GitHubRelease?> FetchLatestRelease()
+        internal async Task<GitHubRelease?> FetchLatestRelease(bool forceCheck)
         {
-            try
+            var shouldDownload = true;
+            var releasesFile = Storage.GetReleasesPath();
+            if (File.Exists(releasesFile))
             {
-                using (var memoryStream = new MemoryStream())
+                var fileInfo = new FileInfo(releasesFile);
+                var lastModifiedTime = DateTime.Now - fileInfo.LastWriteTime;
+                if (lastModifiedTime.TotalMinutes < 30)
                 {
-                    var fileDownloader = new FileDownloader("https://api.github.com/repos/beeradmoore/dlss-swapper/releases/latest", 0);
-                    await fileDownloader.DownloadFileToStreamAsync(memoryStream).ConfigureAwait(false);
-                    memoryStream.Position = 0;
-                    var githubRelease = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GitHubRelease);
-                    if (githubRelease is null)
-                    {
-                        throw new Exception(ResourceHelper.GetString("CouldNotLoadGithubReleaseDataException"));
-                    }
+                    shouldDownload = false;
 
-                    return githubRelease;
+                    // If we are not downloading and we are not forced to check then return the existing object.
+                    if (forceCheck == false)
+                    {
+                        using (var fileStream = File.OpenRead(releasesFile))
+                        {
+                            var githubRelease = JsonSerializer.Deserialize(fileStream, SourceGenerationContext.Default.GitHubRelease);
+                            if (githubRelease is not null)
+                            {
+                                return githubRelease;
+                            }
+                        }
+                    }
                 }
             }
-            catch (Exception err)
+
+            if (shouldDownload == true || forceCheck == true)
             {
-                // NOOP
-                Logger.Error(err);
-                Debugger.Break();
-                return null;
+                try
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        var fileDownloader = new FileDownloader("https://api.github.com/repos/beeradmoore/dlss-swapper/releases/latest", 0);
+                        await fileDownloader.DownloadFileToStreamAsync(memoryStream).ConfigureAwait(false);
+
+                        memoryStream.Position = 0;
+
+                        var githubRelease = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GitHubRelease);
+                        if (githubRelease is null)
+                        {
+                            throw new Exception("Could not load GitHub release data.");
+                        }
+
+                        memoryStream.Position = 0;
+
+                        // If we did load the json, save it to disk.
+                        using (var fileStream = File.Create(releasesFile))
+                        {
+                            await memoryStream.CopyToAsync(fileStream).ConfigureAwait(false);
+                        }
+
+                        return githubRelease;
+                    }
+                }
+                catch (Exception err)
+                {
+                    // NOOP
+                    Logger.Error(err);
+                    return null;
+                }
             }
+
+            return null;
         }
 
         internal async Task<GitHubRelease?> GetReleaseFromTag(string tag)
@@ -85,9 +124,9 @@ namespace DLSS_Swapper.Data.GitHub
         /// Queries GitHub and returns a GitHubRelease only if a newer version was detected, otherwise null
         /// </summary>
         /// <returns>GitHubRelease object if an update is available, otherwise null.</returns>
-        internal async Task<GitHubRelease?> CheckForNewGitHubRelease()
+        internal async Task<GitHubRelease?> CheckForNewGitHubRelease(bool forceCheck)
         {
-            var latestRelease = await FetchLatestRelease().ConfigureAwait(false);
+            var latestRelease = await FetchLatestRelease(forceCheck).ConfigureAwait(false);
             if (latestRelease is null)
             {
                 return null;

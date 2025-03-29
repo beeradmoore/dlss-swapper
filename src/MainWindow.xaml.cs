@@ -234,13 +234,9 @@ namespace DLSS_Swapper
             var gitHubUpdater = new Data.GitHub.GitHubUpdater();
 
             // If this is a GitHub build check if there is a new version.
-            // Lazy blocks to allow mul
-            var newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease();
+            var newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease(false);
 
-
-            // Load from cache, or download if not found.
-            var loadDlssRecrodsTask = LoadDLLRecordsAsync();
-            var loadImportedDlssRecordsTask = LoadImportedManifestAsync();
+            await DLLManager.Instance.LoadManifestsAsync();
 
 
             if (Settings.Instance.HasShownMultiplayerWarning == false)
@@ -258,40 +254,86 @@ namespace DLSS_Swapper
             }
 
 
-            var didLoadDlssRecords = await loadDlssRecrodsTask;
-            if (didLoadDlssRecords == false)
+            if (DLLManager.Instance.HasLoadedManifest() == false)
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
                     Title = "Error",
                     CloseButtonText = "Close",
-                    PrimaryButtonText = "Github Issues",
+                    PrimaryButtonText = "GitHub issues",
+                    SecondaryButtonText = "Update manifest",
                     DefaultButton = ContentDialogButton.Primary,
-                    Content = @"We were unable to load manifest.json from your computer or from the internet. 
+                    Content = @"We were unable to load manifest.json from your computer.
 
-If this keeps happening please file an report in our issue tracker on Github.
-
-DLSS Swapper will close now.",
+If this keeps happening please file an report in our issue tracker on GitHub.",
                 };
+                var shouldClose = true;
+
                 var response = await dialog.ShowAsync();
                 if (response == ContentDialogResult.Primary)
                 {
                     await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/issues"));
                 }
+                else if (response is ContentDialogResult.Secondary)
+                {
+                    dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
+                    {
+                        Title = "Attempting to update",
+                        DefaultButton = ContentDialogButton.Close,
+                        Content = new ProgressRing()
+                        {
+                            IsActive = true,
+                            IsIndeterminate = true,
+                        },
+                    };
 
-                Close();
+                    var updateTask = DLLManager.Instance.UpdateManifestAsync();
+                    _ = dialog.ShowAsync();
+                    await updateTask;
+                    dialog.Hide();
+
+                    if (DLLManager.Instance.HasLoadedManifest() == true)
+                    {
+                        shouldClose = false;
+                    }
+                }
+
+                if (shouldClose)
+                {
+                    dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
+                    {
+                        Title = "DLSS Swapper must close",
+                        CloseButtonText = "Close",
+                        DefaultButton = ContentDialogButton.Close,
+                        Content = "DLSS Swapper was not able to load its manifest file. It will now close.",
+                    };
+                    await dialog.ShowAsync();
+
+                    Close();
+                }
             }
 
-            await loadImportedDlssRecordsTask;
+            if (DLLManager.Instance.ImportedManifest is null)
+            {
+                var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
+                {
+                    Title = "Could not load imported DLLs",
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = new ImportSystemDisabledView(),
+                    CloseButtonText = "Close",
+                };
+                await dialog.ShowAsync();
+            }
 
-            FilterDLLRecords();
-            //await App.CurrentApp.LoadLocalRecordsAsync();
-            DLLManager.Instance.LoadLocalRecords();
+            //FilterDLLRecords();
+
+            // Yeet this into the void and let it load in the background.
+            _ = DLLManager.Instance.UpdateManifestIfOldAsync();
 
             // We are now ready to show the games list.
             LoadingStackPanel.Visibility = Visibility.Collapsed;
-            GoToPage("Games");
 
+            GoToPage("Games");
 
             // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
             /*
@@ -305,6 +347,7 @@ DLSS Swapper will close now.",
             }
             */
 
+            // TODO: What happens if you have no internet
             await newUpdateTask;
             if (newUpdateTask.Result is not null)
             {
@@ -340,117 +383,6 @@ DLSS Swapper will close now.",
             CurrentDLSSRecords.AddRange(newDlssRecordsList);
             */
 
-        }
-
-        /// <summary>
-        /// Attempts to load DLSS records from disk or from the web depending what happened.
-        /// </summary>
-        /// <returns>True if we expect there are now valid DLSS records loaded into memory.</returns>
-        // Previously LoadDLSSRecordsAsync
-        async Task<bool> LoadDLLRecordsAsync()
-        {
-            // Only auto check for updates once every 12 hours.
-            var timeSinceLastUpdate = DateTimeOffset.Now - Settings.Instance.LastRecordsRefresh;
-            if (timeSinceLastUpdate.TotalMinutes > 5)
-            {
-                var didUpdate = await UpdateManifestAsync();
-                if (didUpdate)
-                {
-                    // If we did upda
-                    return true;
-                }
-            }
-
-            try
-            {
-                // If we were unable to auto-load lets try load cached.
-                var manifest = await Storage.LoadManifestJsonAsync();
-
-                // If manifest could not be loaded then we should attempt to upload dlss_records from the dlss-archive.
-                if (manifest is null || manifest.DLSS?.Any() == false)
-                {
-                    return await UpdateManifestAsync();
-                }
-                else
-                {
-                    DLLManager.Instance.UpdateDLLRecordLists(manifest);
-                }
-                return true;
-            }
-            catch (Exception err)
-            {
-                Logger.Error(err);
-                return false;
-            }
-        }
-
-        // Previously: LoadImportedDLSSRecordsAsync
-        internal async Task LoadImportedManifestAsync()
-        {
-            var manifest = await Storage.LoadImportedManifestJsonAsync();
-            if (manifest is not null)
-            {
-                UpdateImportedManifestList(manifest);
-            }
-        }
-
-        // Previously: UpdateImportedDLSSRecordsList
-        internal void UpdateImportedManifestList(Manifest importedManifest)
-        {
-            // TODO: Reimplement
-            /*
-            App.CurrentApp.ImportedDLSSRecords.Clear();
-            App.CurrentApp.ImportedDLSSRecords.AddRange(localDlssRecords);
-            */
-        }
-
-        /// <summary>
-        /// Attempts to load manifest.json from dlss-swapper-manifest-builder repository.
-        /// </summary>
-        /// <returns>True if the dlss recrods manifest was downloaded and saved successfully</returns>
-        internal async Task<bool> UpdateManifestAsync()
-        {
-            try
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider 
-                    // adding a "fast UpdateManifest" which will quit early if we were unable to load in 10sec 
-                    // which would then fall back to loading local.
-                    var fileDownloader = new FileDownloader("https://raw.githubusercontent.com/beeradmoore/dlss-swapper-manifest-builder/refs/heads/main/manifest.json", 0);
-                    await fileDownloader.DownloadFileToStreamAsync(memoryStream);
-
-                    memoryStream.Position = 0;
-
-                    var manifest = await JsonSerializer.DeserializeAsync(memoryStream, SourceGenerationContext.Default.Manifest);
-                    if (manifest is null)
-                    {
-                        throw new Exception("Could not deserialize manifest.json.");
-                    }
-                    DLLManager.Instance.UpdateDLLRecordLists(manifest);
-                    //await UpdateDLSSRecordsListAsync(items);
-
-                    memoryStream.Position = 0;
-                    try
-                    {
-                        await Storage.SaveManifestJsonAsync(manifest);
-                        // Update settings for auto refresh.
-                        Settings.Instance.LastRecordsRefresh = DateTime.Now;
-                        return true;
-                    }
-                    catch (Exception err)
-                    {
-                        Logger.Error(err);
-                    }
-                }
-            }
-            catch (Exception err)
-            {
-                Logger.Error(err);
-                Debugger.Break();
-            }
-
-            return false;
         }
 
 

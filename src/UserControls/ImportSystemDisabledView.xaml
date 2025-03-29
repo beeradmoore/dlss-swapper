@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <TextBlock TextWrapping="WrapWholeWords">
-        <Run> was an error loading the imported manifest file. To preserve your imported data, the importing functionality has been disabled until this is resolved. Please see </Run>
+        <Run>There was an error loading the imported manifest file. To preserve your imported data the importing functionality has been disabled until this is resolved. Please see </Run>
         <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting#imported-manifest-file-could-not-be-loaded">troubleshooting guide</Hyperlink>
         <Run> for more information.</Run>
     </TextBlock>

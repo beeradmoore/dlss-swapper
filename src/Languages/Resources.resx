@@ -647,11 +647,9 @@ Only import dlls from sources you trust.</value>
     <value>GitHub Issues</value>
   </data>
   <data name="ManifestCouldNotBeLoaded" xml:space="preserve">
-    <value>We were unable to load manifest.json from your computer or from the internet. 
+    <value>We were unable to load manifest.json from your computer or from the internet.
 
-If this keeps happening please file an report in our issue tracker on GitHub.
-
-DLSS Swapper will close now.</value>
+If this keeps happening please file an report in our issue tracker on GitHub.</value>
   </data>
   <data name="CouldNotDeserializeManifestException" xml:space="preserve">
     <value>Could not deserialize manifest.json.</value>

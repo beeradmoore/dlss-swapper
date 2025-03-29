@@ -640,11 +640,9 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
     <value>Uwaga dotycząca gier wieloosobowych</value>
   </data>
   <data name="ManifestCouldNotBeLoaded" xml:space="preserve">
-    <value>Nie udało się załadować pliku manifest.json z komputera lub z Internetu. 
+    <value>Nie udało się załadować pliku manifest.json z komputera lub z Internetu.
 
-Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia błędów na Githubie.
-
-DLSS Swapper zostanie teraz zamknięty.</value>
+Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia błędów na Githubie.</value>
   </data>
   <data name="CouldNotDeserializeManifestException" xml:space="preserve">
     <value>Nie można deserializować pliku manifest.json.</value>

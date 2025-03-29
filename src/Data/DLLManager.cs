@@ -253,8 +253,6 @@ internal class DLLManager
             _knownDLLsReadWriterLock.ExitWriteLock();
         }
 
-
-
         // Cancel downloading of all current DLL records
         CancelDownloads(DLSSRecords);
         CancelDownloads(DLSSGRecords);
@@ -265,7 +263,7 @@ internal class DLLManager
         CancelDownloads(XeSSFGRecords);
         CancelDownloads(XeLLRecords);
 
-        // Update incoming game asset types
+        // Update incoming DLL record game asset types
         SetGameAssetType(Manifest.DLSS, GameAssetType.DLSS);
         SetGameAssetType(Manifest.DLSS_D, GameAssetType.DLSS_D);
         SetGameAssetType(Manifest.DLSS_G, GameAssetType.DLSS_G);
@@ -306,26 +304,22 @@ internal class DLLManager
             LoadLocalRecords(ImportedManifest.XeSS_FG, true);
             LoadLocalRecords(ImportedManifest.XeLL, true);
         }
-
-
+               
         // See if there is any imported manifest items that are to be migrated to downloaded
         // CheckImportedManifestForCleanUp needs to be called after LoadLocalRecords
-        if (ImportedManifest is not null)
-        {
-            var didChangeImportedManifest = false;
-            didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DLSS, ImportedManifest.DLSS);
-            didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DLSS_D, ImportedManifest.DLSS_D);
-            didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DLSS_G, ImportedManifest.DLSS_G);
-            didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.FSR_31_DX12, ImportedManifest.FSR_31_DX12);
-            didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.FSR_31_VK, ImportedManifest.FSR_31_VK);
-            didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeSS, ImportedManifest.XeSS);
-            didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeSS_FG, ImportedManifest.XeSS_FG);
-            didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeLL, ImportedManifest.XeLL);
+        var didChangeImportedManifest = false;
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DLSS, ImportedManifest?.DLSS);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DLSS_D, ImportedManifest?.DLSS_D);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DLSS_G, ImportedManifest?.DLSS_G);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.FSR_31_DX12, ImportedManifest?.FSR_31_DX12);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.FSR_31_VK, ImportedManifest?.FSR_31_VK);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeSS, ImportedManifest?.XeSS);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeSS_FG, ImportedManifest?.XeSS_FG);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeLL, ImportedManifest?.XeLL);
 
-            if (didChangeImportedManifest == true)
-            {
-                await SaveImportedManifestJsonAsync().ConfigureAwait(false);
-            }
+        if (didChangeImportedManifest == true)
+        {
+            await SaveImportedManifestJsonAsync().ConfigureAwait(false);
         }
 
         App.CurrentApp.RunOnUIThread(() =>
@@ -363,6 +357,8 @@ internal class DLLManager
         }
     }
 
+
+
     /// <summary>
     /// Looks through each of the imported DLL records to see if they:
     /// - Need to be deleted because the file no longer exists
@@ -373,81 +369,113 @@ internal class DLLManager
     /// <param name="dllRecords"></param>
     /// <param name="importedDllRecords"></param>
     /// <returns></returns>
-    static bool CheckImportedManifestForCleanUp(List<DLLRecord> dllRecords, List<DLLRecord> importedDllRecords)
+    static bool CheckImportedManifestForCleanUp(List<DLLRecord> dllRecords, List<DLLRecord>? importedDllRecords)
     {
         var didChangeImportedManifestList = false;
 
-        var importedDllRecordsToDelete = new List<DLLRecord>();
-
-        foreach (var importedDllRecord in importedDllRecords)
+        if (importedDllRecords is not null)
         {
-            // If IsDownloaded is false it means the DLL does not exist on the disk
-            if (importedDllRecord.LocalRecord?.IsDownloaded == false)
+            var importedDllRecordsToDelete = new List<DLLRecord>();
+
+            // Delete imported DLLs if the file is no longer found.
+            foreach (var importedDllRecord in importedDllRecords)
             {
-                importedDllRecordsToDelete.Add(importedDllRecord);
-            }
-        }
-
-        if (importedDllRecordsToDelete.Count > 0)
-        {
-            foreach (var dllRecord in importedDllRecordsToDelete)
-            {
-                importedDllRecords.Remove(dllRecord);
-            }
-
-            didChangeImportedManifestList = true;
-        }
-
-        /*
-        // Expected path was moved in v1.1.7. This is to migrate the zips from old to new path.
-        var legacyExpectedPath = Path.Combine(zipPath, $"{dllRecord.Version}_{dllRecord.MD5Hash}.zip");
-        if (File.Exists(legacyExpectedPath) == true && File.Exists(expectedPath) == false)
-        {
-            File.Move(legacyExpectedPath, expectedPath);
-        }
-
-
-        
-        // Check if imported DLLs are in the new manifest. If they are we want to
-        // move them and pretend they were imported.
-        foreach (var importedRecord in importedManifestRecords)
-        {
-            var manifestRecord = manifestRecords.FirstOrDefault(x => x.MD5Hash == importedRecord.MD5Hash);
-            if (manifestRecord is not null)
-            {
-                try
+                // If IsDownloaded is false it means the DLL does not exist on the disk
+                if (importedDllRecord.LocalRecord?.IsDownloaded == false)
                 {
-                    var oldZipPath = importedRecord.LocalRecord?.ExpectedPath ?? string.Empty;
-                    if (File.Exists(oldZipPath) == false)
-                    {
-                        // This should never happen.
-                        Logger.Error($"oldZipPath ({oldZipPath}) does not exist.");
-                        continue;
-                    }
-
-                    var newZipPath = GetExpectedZipPath(manifestRecord, false);
-                    if (string.IsNullOrEmpty(newZipPath))
-                    {
-                        continue;
-                    }
-
-                    var newExpectedPath = Path.Combine(newZipPath, manifestRecord.GetExpectedZipName());
-                    File.Move(oldZipPath, newExpectedPath);
-
-                    // No need to update anything as the DLL will get loaded in the next loop. 
-                }
-                catch (Exception err)
-                {
-                    Logger.Error(err);
-                    Debugger.Break();
+                    Logger.Info($"Imported file not found ({importedDllRecord.LocalRecord}), deleting imported record.");
+                    importedDllRecordsToDelete.Add(importedDllRecord);
                 }
             }
+
+            // Check if imported DLLs are in the new manifest. If they are we want to
+            // move them and pretend they were imported.
+            foreach (var importedDllRecord in importedDllRecords)
+            {
+                // Skip the imported DLL if we are about to remove it.
+                if (importedDllRecordsToDelete.Contains(importedDllRecord))
+                {
+                    continue;
+                }
+
+                var manifestDllRecord = dllRecords.FirstOrDefault(x => x.MD5Hash == importedDllRecord.MD5Hash);
+
+                // Make sure both records have a local record.
+                if (manifestDllRecord?.LocalRecord is not null && importedDllRecord.LocalRecord is not null)
+                {
+                    try
+                    {
+                        // If the DLL is downloaded there is nothing else to change here. Delete the imported one.
+                        if (manifestDllRecord.LocalRecord.IsDownloaded == true)
+                        {
+                            importedDllRecordsToDelete.Add(importedDllRecord);
+                            continue;
+                        }
+
+                        var oldZipPath = importedDllRecord.LocalRecord.ExpectedPath;
+                        if (File.Exists(oldZipPath) == false)
+                        {
+                            // This should never happen.
+                            Logger.Error($"oldZipPath ({oldZipPath}) does not exist.");
+                            Debugger.Break();
+                            continue;
+                        }
+
+                        var expectedPath = Path.GetDirectoryName(manifestDllRecord.LocalRecord.ExpectedPath);
+                        if (string.IsNullOrWhiteSpace(expectedPath))
+                        {
+                            continue;
+                        }
+
+                        if (Directory.Exists(expectedPath) == false)
+                        {
+                            Directory.CreateDirectory(expectedPath);
+                        }
+
+                        File.Move(importedDllRecord.LocalRecord.ExpectedPath, manifestDllRecord.LocalRecord.ExpectedPath);
+
+                        App.CurrentApp.RunOnUIThread(() =>
+                        {
+                            manifestDllRecord.LocalRecord.IsDownloaded = true;
+                        });
+
+                        importedDllRecordsToDelete.Add(importedDllRecord);
+                        Logger.Info($"Moving imported record to be local record, {importedDllRecord.LocalRecord.ExpectedPath} -> {manifestDllRecord.LocalRecord.ExpectedPath}");
+                    }
+                    catch (Exception err)
+                    {
+                        Logger.Error(err);
+                        Debugger.Break();
+                    }
+                }
+            }
+
+
+            // If any of the imported DLLs need to be removed from the imported DLL list.
+            if (importedDllRecordsToDelete.Count > 0)
+            {
+                foreach (var dllRecord in importedDllRecordsToDelete)
+                {
+                    var dllRecordPath = dllRecord.LocalRecord?.ExpectedPath;
+                    if (string.IsNullOrWhiteSpace(dllRecordPath) == true && File.Exists(dllRecordPath))
+                    {
+                        try
+                        {
+                            File.Delete(dllRecordPath);
+                        }
+                        catch (Exception err)
+                        {
+                            Logger.Error(err, $"Could not delete {dllRecordPath}");
+                        }
+                    }
+
+                    importedDllRecords.Remove(dllRecord);
+                }
+
+                didChangeImportedManifestList = true;
+            }
         }
 
-
-        */
-
-        // TODO: 
         return didChangeImportedManifestList;
     }
 

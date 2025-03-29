@@ -332,11 +332,9 @@ If this keeps happening please file an report in our issue tracker on GitHub.",
 
             // We are now ready to show the games list.
             LoadingStackPanel.Visibility = Visibility.Collapsed;
-#if DEBUG
-            GoToPage("Library");
-#else
+
             GoToPage("Games");
-#endif
+
             // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
             /*
             if (releaseNotesTask is not null)

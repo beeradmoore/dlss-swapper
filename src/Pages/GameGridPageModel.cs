@@ -71,19 +71,9 @@ public partial class GameGridPageModel : ObservableObject
         _ => new FontIcon() { },
     };
 
-    private async void OnEnabledGameLibrariesChanged(object sender, EventArgs e)
-    {
-        IsGameListLoading = true;
-        IsDLSSLoading = true;
-        GameManager.Instance.RemoveAllGames();
-        await GameManager.Instance.LoadGamesFromCacheAsync();
-        IsGameListLoading = false;
-        IsDLSSLoading = false;
-    }
-
     public GameGridPageModel(GameGridPage gameGridPage)
     {
-        Settings.Instance.OnEnabledGameLibrariesChanged += OnEnabledGameLibrariesChanged;
+        Settings.Instance.EnabledGameLibrariesChanged += OnEnabledGameLibrariesChanged;
         this.gameGridPage = gameGridPage;
         ApplyGameGroupFilter();
     }
@@ -400,4 +390,13 @@ If you have checked these and your game is still not showing up there may be a b
         Settings.Instance.GameGridViewType = gameGridView;
     }
 
+    private async Task OnEnabledGameLibrariesChanged(object sender, EventArgs e)
+    {
+        IsGameListLoading = true;
+        IsDLSSLoading = true;
+        GameManager.Instance.RemoveAllGames();
+        await GameManager.Instance.LoadGamesFromCacheAsync();
+        IsGameListLoading = false;
+        IsDLSSLoading = false;
+    }
 }

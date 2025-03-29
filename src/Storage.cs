@@ -67,7 +67,7 @@ namespace DLSS_Swapper
             return StoragePath;
         }
 
-        static string GetDynamicJsonFolder()
+        public static string GetDynamicJsonFolder()
         {
             return Path.Combine(StoragePath, "json");
         }
@@ -81,6 +81,11 @@ namespace DLSS_Swapper
         public static string GetImageCachePath()
         {
             return Path.Combine(StoragePath, "image_cache");
+        }
+
+        public static string GetManifestPath()
+        {
+            return Path.Combine(GetDynamicJsonFolder(), "manifest.json");
         }
 
         public static string GetImportedManifestPath()
@@ -184,92 +189,5 @@ namespace DLSS_Swapper
                 return null;
             }
         }
-
-        /// <summary>
-        /// Saves Manifest object to the known position for a dynamic manifest.json file.
-        /// </summary>
-        /// <param name="manifest">Manifest object to be saved</param>
-        /// <returns>true if the object was saved</returns>
-        // Previously: SaveDLSSRecordsJsonAsync
-        internal static async Task<bool> SaveManifestJsonAsync(Manifest manifest)
-        {
-            var dlssRecordsFile = Path.Combine(GetDynamicJsonFolder(), "manifest.json");
-            try
-            {
-                using (var stream = File.Open(dlssRecordsFile, FileMode.Create))
-                {
-                    await JsonSerializer.SerializeAsync(stream, manifest, SourceGenerationContext.Default.Manifest);
-                }
-                return true;
-            }
-            catch (Exception err)
-            {
-                Logger.Error(err);
-                return false;
-            }
-        }
-
-
-        /// <summary>
-        /// Loads manifest.json file. Will attempt to load dynamic file first and then static if dyanmic does not exist.
-        /// </summary>
-        /// <returns>Manifest object. This could be a blank object if we failed to load DLL records</returns>
-        internal static async Task<Manifest> LoadManifestJsonAsync()
-        {
-            var manifestFile = Path.Combine(GetDynamicJsonFolder(), "manifest.json");
-
-            if (File.Exists(manifestFile))
-            {
-                try
-                {
-                    using (var stream = File.Open(manifestFile, FileMode.Open))
-                    {
-                        var manifest = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.Manifest);
-                        if (manifest is not null)
-                        {
-                            return manifest;
-                        }
-                    }
-                }
-                catch (Exception err)
-                {
-                    Logger.Error(err);
-                    return new Manifest();
-                }
-            }
-
-            // If we got to here there is no dynamic manifest.json file to load, so load static one instead.
-            try
-            {
-                using (var staticManifestStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DLSS_Swapper.Assets.static_manifest.json"))
-                {
-                    if (staticManifestStream is not null)
-                    {
-                        var manifest = await JsonSerializer.DeserializeAsync(staticManifestStream, SourceGenerationContext.Default.Manifest);
-                        if (manifest is not null)
-                        {
-                            Logger.Info("Loaded static manifest");
-                            return manifest;
-                        }
-                    }
-                }
-            }
-            catch (Exception err)
-            {
-                Logger.Error(err);
-                return new Manifest();
-            }
-
-            // If we got here it means we failed to deserialize the manifest.json
-            Logger.Error("There an issue attempting to load manifest.json.");
-            return new Manifest();
-        }
-
-        /// <summary>
-        /// Saves the imported DLSS records to imported_manifest.json
-        /// </summary>
-        /// <returns></returns>
-        // Previously: SaveImportedDLSSRecordsJsonAsync
-    
     }
 }

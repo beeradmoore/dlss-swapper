@@ -32,18 +32,60 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
 
     internal ObservableCollection<DLLRecord>? SelectedLibraryList { get; private set; } = null;
 
+    [ObservableProperty]
+    public partial bool IsRefreshing { get; set; }
+
+    [ObservableProperty]
+    public partial SelectorBarItem? SelectedSelectorBarItem { get; set; } = null;
+
     public LibraryPageModel(LibraryPage libraryPage)
     {
         this.libraryPage = libraryPage;
+
+        var upscalerSelectorBar = libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
+        if (upscalerSelectorBar is not null)
+        {
+            // TODO: Change order based on prefered upscaler.
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DLSS), Tag = GameAssetType.DLSS });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DLSS_G), Tag = GameAssetType.DLSS_G });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DLSS_D), Tag = GameAssetType.DLSS_D });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.FSR_31_DX12), Tag = GameAssetType.FSR_31_DX12 });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.FSR_31_VK), Tag = GameAssetType.FSR_31_VK });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.XeSS), Tag = GameAssetType.XeSS });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.XeSS_FG), Tag = GameAssetType.XeSS_FG });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.XeLL), Tag = GameAssetType.XeLL });
+
+            SelectedSelectorBarItem = upscalerSelectorBar.Items[0];
+        }
     }
 
-    [RelayCommand]
+    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+
+        if (e.PropertyName == nameof(SelectedSelectorBarItem))
+        {
+            if (SelectedSelectorBarItem?.Tag is GameAssetType gameAssetType)
+            {
+                SelectLibrary(gameAssetType);
+            }
+        }
+    } 
+
+    [RelayCommand()]
     async Task RefreshAsync()
     {
-        var didUpdate = await App.CurrentApp.MainWindow.UpdateManifestAsync();
+        IsRefreshing = true;
+
+        var didUpdate = await DLLManager.Instance.UpdateManifestAsync();
+
         if (didUpdate)
         {
-            App.CurrentApp.MainWindow.FilterDLLRecords();
+            // Reload selected library.
+            if (SelectedSelectorBarItem?.Tag is GameAssetType gameAssetType)
+            {
+                SelectLibrary(gameAssetType);
+            }
         }
         else
         {
@@ -52,10 +94,12 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                 Title = "Error",
                 CloseButtonText = "Okay",
                 DefaultButton = ContentDialogButton.Close,
-                Content = "Unable to update DLL records.",
+                Content = "Unable to update manifest of DLL records.",
             };
             await errorDialog.ShowAsync();
         }
+
+        IsRefreshing = false;
     }
 
     [RelayCommand]

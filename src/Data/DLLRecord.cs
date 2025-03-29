@@ -334,5 +334,30 @@ namespace DLSS_Swapper.Data
                 _ => string.Empty,
             };
         }
+
+        internal void CopyFrom(DLLRecord newDllRecord)
+        {
+            Version = newDllRecord.Version;
+            VersionNumber = newDllRecord.VersionNumber;
+            InternalName = newDllRecord.InternalName;
+            AdditionalLabel = newDllRecord.AdditionalLabel;
+            MD5Hash = newDllRecord.MD5Hash;
+            ZipMD5Hash = newDllRecord.ZipMD5Hash;
+            DownloadUrl = newDllRecord.DownloadUrl;
+            FileDescription = newDllRecord.FileDescription;
+            SignedDateTime = newDllRecord.SignedDateTime;
+            IsSignatureValid = newDllRecord.IsSignatureValid;
+            IsDevFile = newDllRecord.IsDevFile;
+            FileSize = newDllRecord.FileSize;
+            ZipFileSize = newDllRecord.ZipFileSize;
+            LocalRecord = newDllRecord.LocalRecord;
+            AssetType = newDllRecord.AssetType;
+
+            NotifyPropertyChanged(nameof(FullName));
+            _displayVersion = string.Empty;
+            NotifyPropertyChanged(nameof(DisplayVersion));
+            NotifyPropertyChanged(nameof(DisplayName));
+        }
     }
+
 }

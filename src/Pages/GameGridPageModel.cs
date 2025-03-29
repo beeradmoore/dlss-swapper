@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using AsyncAwaitBestPractices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
@@ -70,13 +71,20 @@ public partial class GameGridPageModel : ObservableObject
         _ => new FontIcon() { },
     };
 
-
-
+    private async void OnEnabledGameLibrariesChanged(object sender, EventArgs e)
+    {
+        IsGameListLoading = true;
+        IsDLSSLoading = true;
+        GameManager.Instance.RemoveAllGames();
+        await GameManager.Instance.LoadGamesFromCacheAsync();
+        IsGameListLoading = false;
+        IsDLSSLoading = false;
+    }
 
     public GameGridPageModel(GameGridPage gameGridPage)
     {
+        Settings.Instance.OnEnabledGameLibrariesChanged += OnEnabledGameLibrariesChanged;
         this.gameGridPage = gameGridPage;
-
         ApplyGameGroupFilter();
     }
 

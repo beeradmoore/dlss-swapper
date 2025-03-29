@@ -13,6 +13,8 @@ namespace DLSS_Swapper
         static Settings? _instance = null;
 
         public static Settings Instance => _instance ??= Settings.FromJson();
+        public event EnabledGameLibrariesChangedHandler OnEnabledGameLibrariesChanged;
+        public delegate void EnabledGameLibrariesChangedHandler(object sender, EventArgs e);
 
         // We default this to false to prevent saves firing when loading from json.
         bool _autoSave = false;
@@ -209,6 +211,7 @@ namespace DLSS_Swapper
                     if (_autoSave)
                     {
                         SaveJson();
+                        OnEnabledGameLibrariesChanged?.Invoke(this, new EventArgs());
                     }
                 }
             }

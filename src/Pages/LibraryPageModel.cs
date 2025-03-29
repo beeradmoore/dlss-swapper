@@ -113,14 +113,8 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         allDllRecords.AddRange(DLLManager.Instance.FSR31DX12Records.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.FSR31VKRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.XeSSRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
-        allDllRecords.AddRange(DLLManager.Instance.XeLLRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.XeSSFGRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
-
-        // TODO: Add local records
-        if (DLLManager.Instance.ImportedManifest is not null)
-        {
-            //allDllRecords.AddRange(DLLManager.Instance.ImportedManifest.DLSS);
-        }
+        allDllRecords.AddRange(DLLManager.Instance.XeLLRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
 
         if (allDllRecords.Count == 0)
         {

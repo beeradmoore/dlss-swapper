@@ -195,7 +195,7 @@ namespace DLSS_Swapper.Data
                 GameLibrary.UbisoftConnect => $"ubisoftconnect_{platformId}",
                 GameLibrary.XboxApp => $"xboxapp_{platformId}",
                 GameLibrary.ManuallyAdded => $"manuallyadded_{platformId}",
-                _ => throw new Exception($"Unknown GameLibrary {GameLibrary} while setting ID"),
+                _ => throw new Exception(ResourceHelper.GetFormattedResourceTemplate("UnknownGameLibraryTemplate", GameLibrary)),
             };
         }
 
@@ -688,11 +688,11 @@ namespace DLSS_Swapper.Data
                 var zippedDlls = archive.Entries.Where(x => x.Name == recordFileName).ToArray();
                 if (zippedDlls.Length == 0)
                 {
-                    throw new Exception("Dll zip was invalid (no dll found).");
+                    throw new Exception(ResourceHelper.GetString("DllZipInvalidNoDllFound"));
                 }
                 else if (zippedDlls.Length > 1)
                 {
-                    throw new Exception("Dll zip was invalid (more than one dll found).");
+                    throw new Exception(ResourceHelper.GetString("DllZipInvalidMultipleDllFound"));
                 }
 
                 zippedDlls[0].ExtractToFile(tempDllFile, true);
@@ -1155,11 +1155,11 @@ namespace DLSS_Swapper.Data
         {
             var dialog = new EasyContentDialog(App.CurrentApp.MainWindow.Content.XamlRoot)
             {
-                Title = $"Remove custom cover?",
-                PrimaryButtonText = "Remove",
-                CloseButtonText = "Cancel",
+                Title = ResourceHelper.GetString("CustomCoverRemove"),
+                PrimaryButtonText = ResourceHelper.GetString("Remove"),
+                CloseButtonText = ResourceHelper.GetString("Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = "Are you sure you want to remove the custom cover image?",
+                Content = ResourceHelper.GetString("AreYouSureRemoveCustomCover"),
             };
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)

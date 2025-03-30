@@ -214,7 +214,7 @@ internal class DLLManager
                 var manifest = await JsonSerializer.DeserializeAsync(memoryStream, SourceGenerationContext.Default.Manifest);
                 if (manifest is null)
                 {
-                    throw new Exception("Could not deserialize manifest.json.");
+                    throw new Exception(ResourceHelper.GetString("CouldNotDeserializeManifestException"));
                 }
 
                 await SaveManifestJsonAsync().ConfigureAwait(false);
@@ -940,7 +940,7 @@ internal class DLLManager
     {
         if (ImportedManifest is null)
         {
-            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, "Import feature is disabled, import manifest could not be loaded.");
+            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("ImportFeatureDisabled"));
         }
 
         var fileName = Path.GetFileName(filePath);
@@ -1000,7 +1000,7 @@ internal class DLLManager
 
         if (gameAssetType is null || recordList is null || importedRecordList is null)
         {
-            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, $"DLL not a known type.");
+            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("UnknownTypeDll"));
         }
 
         var versionInfo = FileVersionInfo.GetVersionInfo(filePath);
@@ -1009,7 +1009,7 @@ internal class DLLManager
         // Don't do anything with untrusted dlls.
         if (Settings.Instance.AllowUntrusted == false && isTrusted == false)
         {
-            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, $"DLL is not trusted by Windows.");
+            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("UntrustedDll"));
         }
 
         var dllHash = versionInfo.GetMD5Hash();
@@ -1023,7 +1023,7 @@ internal class DLLManager
             // If the DLL is already imported we can skip it.
             if (existingDll.LocalRecord?.IsDownloaded == true)
             {
-                return DLLImportResult.FromSucces(zippedDllFullName ?? filePath, $"{fileName} (already imported)", false);
+                return DLLImportResult.FromSucces(zippedDllFullName ?? filePath, $"{fileName} {ResourceHelper.GetString("AlreadyImported")}", false);
             }
             importingAsDownloadedDll = true;
         }
@@ -1051,7 +1051,7 @@ internal class DLLManager
             var finalZipOutputPath = GetExpectedZipPath(dllRecord, !importingAsDownloadedDll);
             if (string.IsNullOrWhiteSpace(finalZipOutputPath))
             {
-                return DLLImportResult.FromFail(zippedDllFullName ?? filePath, "Could not determine import path.");
+                return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("CouldNotDetermineImportPath"));
             }
             Storage.CreateDirectoryIfNotExists(finalZipOutputPath);
 

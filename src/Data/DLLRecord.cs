@@ -2,13 +2,13 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Translations.Models;
 
 namespace DLSS_Swapper.Data
 {
@@ -138,6 +138,18 @@ namespace DLSS_Swapper.Data
             }
         }
 
+        private DLLRecordTranslationPropertiesViewModel _translationProperties;
+
+        [JsonIgnore]
+        public DLLRecordTranslationPropertiesViewModel TranslationProperties {
+            get => _translationProperties;
+            set
+            {
+                _translationProperties = value;
+                NotifyPropertyChanged(nameof(TranslationProperties));
+            }
+        }
+
         [JsonIgnore]
         public GameAssetType AssetType { get; set; } = GameAssetType.Unknown;
 
@@ -217,12 +229,12 @@ namespace DLSS_Swapper.Data
 
                     if (didDownload == false)
                     {
-                        throw new Exception("Could not download file.");
+                        throw new Exception(ResourceHelper.GetString("CouldNotDownloadFile"));
                     }
 
                     if (ZipMD5Hash != fileStream.GetMD5Hash())
                     {
-                        throw new Exception("Downloaded file was invalid.");
+                        throw new Exception(ResourceHelper.GetString("DownloadFileWasInvalid"));
                     }
                 }
 
@@ -257,7 +269,7 @@ namespace DLSS_Swapper.Data
                 {
                     LocalRecord.IsDownloaded = false;
                     LocalRecord.HasDownloadError = true;
-                    LocalRecord.DownloadErrorMessage = $"Could not download {DLLManager.Instance.GetAssetTypeName(AssetType)} DLL, please try again later or check your logs to see why the download failed.";
+                    LocalRecord.DownloadErrorMessage = ResourceHelper.GetFormattedResourceTemplate("CouldNotDownloadAssetTypeTemplate", DLLManager.Instance.GetAssetTypeName(AssetType));
                     NotifyPropertyChanged(nameof(LocalRecord));
                 });
 
@@ -287,7 +299,7 @@ namespace DLSS_Swapper.Data
         {
             return $"{GetRecordSimpleType()}_v{Version}_{MD5Hash}.zip";
         }
-
+        
         /*
         internal static DLSSRecord FromImportedFile(string fileName)
         {
@@ -317,8 +329,6 @@ namespace DLSS_Swapper.Data
         }
         */
 
-
-
         internal string GetRecordSimpleType()
         {
             return AssetType switch
@@ -334,7 +344,7 @@ namespace DLSS_Swapper.Data
                 _ => string.Empty,
             };
         }
-
+        
         internal void CopyFrom(DLLRecord newDllRecord)
         {
             Version = newDllRecord.Version;

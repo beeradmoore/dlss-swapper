@@ -1,28 +1,19 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Transactions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Builders;
 using DLSS_Swapper.Data;
-using DLSS_Swapper.Data.Steam;
+using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.Translations.Pages;
 using DLSS_Swapper.UserControls;
-using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Documents;
-using Microsoft.UI.Xaml.Media;
 using Windows.Storage.Pickers;
 using Windows.System;
-using Windows.UI.Text;
 
 namespace DLSS_Swapper.Pages;
 
@@ -34,7 +25,17 @@ public enum GameGridViewType
 
 public partial class GameGridPageModel : ObservableObject
 {
+    public GameGridPageModel(GameGridPage gameGridPage) : base()
+    {
+        TranslationProperties = new GameGridPageTranslationPropertiesViewModel();
+        this.gameGridPage = gameGridPage;
+        ApplyGameGroupFilter();
+    }
+
     GameGridPage gameGridPage;
+
+    [ObservableProperty]
+    public partial GameGridPageTranslationPropertiesViewModel TranslationProperties { get; private set; }
 
     [ObservableProperty]
     public partial Game? SelectedGame { get; set; } = null;
@@ -69,16 +70,6 @@ public partial class GameGridPageModel : ObservableObject
         GameGridViewType.ListView => new FontIcon() { Glyph = "\xE8FD" },
         _ => new FontIcon() { },
     };
-
-
-
-
-    public GameGridPageModel(GameGridPage gameGridPage)
-    {
-        this.gameGridPage = gameGridPage;
-
-        ApplyGameGroupFilter();
-    }
 
     public async Task InitialLoadAsync()
     {
@@ -118,16 +109,16 @@ public partial class GameGridPageModel : ObservableObject
             {
                 Content = new TextBlock()
                 {
-                    Text = "Don't show again",
+                    Text = ResourceHelper.GetString("DontShowAgain"),
                 },
             };
 
             var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
             {
-                Title = "Note for manually adding games",
-                PrimaryButtonText = "Add Game",
-                SecondaryButtonText = "Report Issue",
-                CloseButtonText = "Cancel",
+                Title = ResourceHelper.GetString("AddingGamesManuallyNoteTitle"),
+                PrimaryButtonText = ResourceHelper.GetString("AddGame"),
+                SecondaryButtonText = ResourceHelper.GetString("ReportIssue"),
+                CloseButtonText = ResourceHelper.GetString("Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = new StackPanel()
                 {
@@ -135,12 +126,7 @@ public partial class GameGridPageModel : ObservableObject
                         new TextBlock()
                         {
                             TextWrapping = TextWrapping.Wrap,
-                            Text = @"DLSS Swapper should find games from your installed game libraries automatically. If your game is not listed there may be a few settings preventing it. Please check:
-
-- Games list filter is not set to ""Hide games with no swappable items""
-- Specific game library is enabled in settings
-
-If you have checked these and your game is still not showing up there may be a bug. We would appreciate it if you could report the issue on our GitHub repository so we can make a fix and have your games better detected in the future.",
+                            Text = ResourceHelper.GetString("AddingGamesManuallyNote"),
                         },
                         dontShowAgainCheckbox,
                     },
@@ -179,35 +165,18 @@ If you have checked these and your game is still not showing up there may be a b
 
     async Task AddGameManually()
     {
+
+        TextBlockBuilder textBlockBuilder = new TextBlockBuilder(ResourceHelper.GetString("AddingGamesManuallyInfoHtml"));
+
         if (Settings.Instance.HasShownAddGameFolderMessage == false)
         {
             var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
             {
-                Title = "Another note for manually adding games",
-                PrimaryButtonText = "Add Game",
-                CloseButtonText = "Cancel",
+                Title = ResourceHelper.GetString("AddingGamesManuallyAnotherNote"),
+                PrimaryButtonText = ResourceHelper.GetString("AddGame"),
+                CloseButtonText = ResourceHelper.GetString("Close"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = new TextBlock()
-                {
-                    TextWrapping = TextWrapping.Wrap,
-                    Inlines =
-                    {
-                        new Run() { Text = "You must select your " },
-                        new Run() { Text = "game", FontStyle = FontStyle.Italic },
-                        new Run() { Text = " directory, not your " },
-                        new Run() { Text = "games", FontStyle = FontStyle.Italic },
-                        new Run() { Text = " directory." },
-                        new Run() { Text = "\n\n" },
-                        new Run() { Text = "For example, iff you have a game at:\n" },
-                        new Run() { Text = "C:\\Program Files\\MyGamesFolder\\MyFavouriteGame\\" },
-                        new Run() { Text = "\n\n" },
-                        new Run() { Text = "You would select the " },
-                        new Run() { Text = "MyFavouriteGame", FontWeight = FontWeights.Bold },
-                        new Run() { Text = " directory and not the " },
-                        new Run() { Text = "MyGamesFolder", FontWeight = FontWeights.Bold },
-                        new Run() { Text = " directory." },
-                    },
-                },
+                Content = textBlockBuilder.Build()
             };
 
             var result = await dialog.ShowAsync();
@@ -223,7 +192,7 @@ If you have checked these and your game is still not showing up there may be a b
         var folderPicker = new FolderPicker()
         {
             SuggestedStartLocation = PickerLocationId.ComputerFolder,
-            CommitButtonText = "Select Game Folder",
+            CommitButtonText = ResourceHelper.GetString("SelectGameFolder"),
         };
         folderPicker.FileTypeFilter.Add("*");
 
@@ -248,10 +217,10 @@ If you have checked these and your game is still not showing up there may be a b
             {
                 var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
                 {
-                    CloseButtonText = "Okay",
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Title = "Error",
-                    Content = "Adding top level directory is not supported. Please add the root of your game directory.",
+                    Title = ResourceHelper.GetString("Error"),
+                    Content = ResourceHelper.GetString("TopLevelDirectoryNotSupported"),
                 };
                 await dialog.ShowAsync();
                 return;
@@ -263,9 +232,9 @@ If you have checked these and your game is still not showing up there may be a b
             {
                 var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
                 {
-                    Title = "Error adding your game",
-                    CloseButtonText = "Close",
-                    Content = $"The install path \"{installPath}\" already exists and can't be added again.",
+                    Title = ResourceHelper.GetString("AddingGameError"),
+                    CloseButtonText = ResourceHelper.GetString("Close"),
+                    Content = ResourceHelper.GetFormattedResourceTemplate("InstallPathAlreadyExistsTemplate", installPath),
                 };
                 await dialog.ShowAsync();
                 return;
@@ -274,8 +243,8 @@ If you have checked these and your game is still not showing up there may be a b
             var manuallyAddGameControl = new ManuallyAddGameControl(installPath);
             var addGameDialog = new FakeContentDialog() //XamlRoot
             {
-                CloseButtonText = "Cancel",
-                PrimaryButtonText = "Add Game",
+                CloseButtonText = ResourceHelper.GetString("Cancel"),
+                PrimaryButtonText = ResourceHelper.GetString("AddGame"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = manuallyAddGameControl,
             };
@@ -304,11 +273,11 @@ If you have checked these and your game is still not showing up there may be a b
             Logger.Error(err, $"Attempted to manually add game from path \"{installPath}\" but got an error.");
             var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
             {
-                Title = "Error adding your game",
-                CloseButtonText = "Close",
-                PrimaryButtonText = "Report issue",
+                Title = ResourceHelper.GetString("AddingGameError"),
+                CloseButtonText = ResourceHelper.GetString("Close"),
+                PrimaryButtonText = ResourceHelper.GetString("ReportIssue"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = $"There was a problem and your game could not be added at this time. Please report this issue.\n\nError message: {err.Message}",
+                Content = $"{ResourceHelper.GetString("AddingGameErrorReportIssue")}\n\n{ResourceHelper.GetString("Error message")}: {err.Message}",
             };
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
@@ -335,9 +304,9 @@ If you have checked these and your game is still not showing up there may be a b
 
         var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
         {
-            Title = "Filter",
-            PrimaryButtonText = "Apply",
-            CloseButtonText = "Cancel",
+            Title = ResourceHelper.GetString("Filter"),
+            PrimaryButtonText = ResourceHelper.GetString("Apply"),
+            CloseButtonText = ResourceHelper.GetString("Cancel"),
             DefaultButton = ContentDialogButton.Primary,
             Content = gameFilterControl,
         };
@@ -370,8 +339,8 @@ If you have checked these and your game is still not showing up there may be a b
 
         var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
         {
-            Title = "New DLLs Found",
-            CloseButtonText = "Close",
+            Title = ResourceHelper.GetString("NewDllsFound"),
+            CloseButtonText = ResourceHelper.GetString("Close"),
             Content = newDllsControl,
         };
         dialog.Resources["ContentDialogMinWidth"] = 700;
@@ -391,5 +360,4 @@ If you have checked these and your game is still not showing up there may be a b
         gameGridPage.ReloadMainContentControl();
         Settings.Instance.GameGridViewType = gameGridView;
     }
-
 }

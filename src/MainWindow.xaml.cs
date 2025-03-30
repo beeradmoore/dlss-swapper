@@ -242,7 +242,7 @@ namespace DLSS_Swapper
                     Title = ResourceHelper.GetString("Error"),
                     CloseButtonText = ResourceHelper.GetString("Close"),
                     PrimaryButtonText = ResourceHelper.GetString("GithubIssues"),
-                    SecondaryButtonText = "Update manifest",
+                    SecondaryButtonText = ResourceHelper.GetString("UpdateManifest"),
                     DefaultButton = ContentDialogButton.Primary,
                     Content = ResourceHelper.GetString("ManifestCouldNotBeLoaded"),
                 };

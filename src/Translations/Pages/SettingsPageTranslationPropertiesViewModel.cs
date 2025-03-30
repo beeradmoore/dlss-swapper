@@ -12,7 +12,7 @@ public class SettingsPageTranslationPropertiesViewModel : LocalizedViewModelBase
     [TranslationProperty] public string NetworkTesterText => ResourceHelper.GetString("NetworkTester");
     [TranslationProperty] public string GeneralTroubleshootingGuideText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");
     [TranslationProperty] public string DiagnosticsText => ResourceHelper.GetString("Diagnostics");
-    [TranslationProperty] public string AcknowledgementsText => ResourceHelper.GetString("SettingsGeneralTroubleshootingGuide");
+    [TranslationProperty] public string AcknowledgementsText => ResourceHelper.GetString("Acknowledgements");
     [TranslationProperty] public string AllowDebugDllsInfo => ResourceHelper.GetString("SettingsAllowDebugDllsInfo");
     [TranslationProperty] public string AllowUntrustedInfo => ResourceHelper.GetString("SettingsAllowUntrustedInfo");
     [TranslationProperty] public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");

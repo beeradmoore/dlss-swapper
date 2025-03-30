@@ -121,7 +121,7 @@ namespace DLSS_Swapper.Data.GOG
 
                     if (embedFilteredResponse.Products.Length == 0)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("CouldNotFindAnyGogEmbedFilteredProducts"));
+                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("CouldNotFindAnyGogEmbedFilteredProducts", url));
                     }
 
                     foreach (var product in embedFilteredResponse.Products)

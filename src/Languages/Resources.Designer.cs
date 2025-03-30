@@ -156,6 +156,24 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Already downloaded..
+        /// </summary>
+        public static string AlreadyDownloaded {
+            get {
+                return ResourceManager.GetString("AlreadyDownloaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu (already imported).
+        /// </summary>
+        public static string AlreadyImported {
+            get {
+                return ResourceManager.GetString("AlreadyImported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu This app is running with administrative privileges..
         /// </summary>
         public static string ApplicationRunsInAdministrativeModeInfo {
@@ -179,6 +197,15 @@ namespace DLSS_Swapper.Languages {
         public static string Apply {
             get {
                 return ResourceManager.GetString("Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Are you sure you want to remove the custom cover image?.
+        /// </summary>
+        public static string AreYouSureRemoveCustomCover {
+            get {
+                return ResourceManager.GetString("AreYouSureRemoveCustomCover", resourceCulture);
             }
         }
         
@@ -264,11 +291,47 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not deserialize GOGCatalogResponse for url, {0}.
+        /// </summary>
+        public static string CouldNotDeserializeGogCatalog {
+            get {
+                return ResourceManager.GetString("CouldNotDeserializeGogCatalog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not deserialize GOGEmbedFilteredResponse for url, {0}.
+        /// </summary>
+        public static string CouldNotDeserializeGogEmbedFilteredResponse {
+            get {
+                return ResourceManager.GetString("CouldNotDeserializeGogEmbedFilteredResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not deserialize manifest.json..
         /// </summary>
         public static string CouldNotDeserializeManifestException {
             get {
                 return ResourceManager.GetString("CouldNotDeserializeManifestException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not detect ubisoftConnectInstallsKey.
+        /// </summary>
+        public static string CouldNotDetectUbisoftConnectInstallKey {
+            get {
+                return ResourceManager.GetString("CouldNotDetectUbisoftConnectInstallKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not determine import path..
+        /// </summary>
+        public static string CouldNotDetermineImportPath {
+            get {
+                return ResourceManager.GetString("CouldNotDetermineImportPath", resourceCulture);
             }
         }
         
@@ -291,6 +354,24 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not find any GOGEmbedFilteredProducts for url, {0}.
+        /// </summary>
+        public static string CouldNotFindAnyGogEmbedFilteredProducts {
+            get {
+                return ResourceManager.GetString("CouldNotFindAnyGogEmbedFilteredProducts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not find any GOGCatalogProduct for url, {0}.
+        /// </summary>
+        public static string CouldNotFindAnyGogProduct {
+            get {
+                return ResourceManager.GetString("CouldNotFindAnyGogProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not find file &quot;{0}&quot;..
         /// </summary>
         public static string CouldNotFindFileTemplate {
@@ -309,11 +390,29 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not load game library {0}.
+        /// </summary>
+        public static string CouldNotLoadGameLibraryTemplate {
+            get {
+                return ResourceManager.GetString("CouldNotLoadGameLibraryTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not load GitHub release data..
         /// </summary>
         public static string CouldNotLoadGithubReleaseDataException {
             get {
                 return ResourceManager.GetString("CouldNotLoadGithubReleaseDataException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Could not load imported DLLs.
+        /// </summary>
+        public static string CouldNotLoadImportedDlls {
+            get {
+                return ResourceManager.GetString("CouldNotLoadImportedDlls", resourceCulture);
             }
         }
         
@@ -377,6 +476,15 @@ namespace DLSS_Swapper.Languages {
         public static string CurrentVersionIsActualTemplate {
             get {
                 return ResourceManager.GetString("CurrentVersionIsActualTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Remove custom cover?.
+        /// </summary>
+        public static string CustomCoverRemove {
+            get {
+                return ResourceManager.GetString("CustomCoverRemove", resourceCulture);
             }
         }
         
@@ -534,11 +642,47 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dll zip was invalid (more than one dll found)..
+        /// </summary>
+        public static string DllZipInvalidMultipleDllFound {
+            get {
+                return ResourceManager.GetString("DllZipInvalidMultipleDllFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dll zip was invalid (no dll found)..
+        /// </summary>
+        public static string DllZipInvalidNoDllFound {
+            get {
+                return ResourceManager.GetString("DllZipInvalidNoDllFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu DLSS Swapper was not able to load its manifest file. It will now close..
+        /// </summary>
+        public static string DlssSwapperCloseDueToManifest {
+            get {
+                return ResourceManager.GetString("DlssSwapperCloseDueToManifest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu DLSS Swapper has failed to launch.
         /// </summary>
         public static string DlssSwapperFailedToLaunch {
             get {
                 return ResourceManager.GetString("DlssSwapperFailedToLaunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu DLSS Swapper must close.
+        /// </summary>
+        public static string DlssSwapperMustClose {
+            get {
+                return ResourceManager.GetString("DlssSwapperMustClose", resourceCulture);
             }
         }
         
@@ -741,6 +885,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu File not found..
+        /// </summary>
+        public static string FileNotFound {
+            get {
+                return ResourceManager.GetString("FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu File size.
         /// </summary>
         public static string FileSize {
@@ -759,6 +912,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Finished.
+        /// </summary>
+        public static string Finished {
+            get {
+                return ResourceManager.GetString("Finished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Game.
         /// </summary>
         public static string Game {
@@ -768,11 +930,29 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Game Currently Processing.
+        /// </summary>
+        public static string GameCurrentlyProcessing {
+            get {
+                return ResourceManager.GetString("GameCurrentlyProcessing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu This game is not in a ready to play state..
         /// </summary>
         public static string GameNotReadyToPlayState {
             get {
                 return ResourceManager.GetString("GameNotReadyToPlayState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu {0} is still processing. Please wait for the loading indicator to complete before opening..
+        /// </summary>
+        public static string GameProcessingPleaseWaitTemplate {
+            get {
+                return ResourceManager.GetString("GameProcessingPleaseWaitTemplate", resourceCulture);
             }
         }
         
@@ -885,6 +1065,33 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Imported as existing DLL record..
+        /// </summary>
+        public static string ImportedAsExistingRecord {
+            get {
+                return ResourceManager.GetString("ImportedAsExistingRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Import feature is disabled, import manifest could not be loaded..
+        /// </summary>
+        public static string ImportFeatureDisabled {
+            get {
+                return ResourceManager.GetString("ImportFeatureDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Importing.
+        /// </summary>
+        public static string Importing {
+            get {
+                return ResourceManager.GetString("Importing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Import system is currently broken, but it is on the roadmap to be fixed..
         /// </summary>
         public static string ImportSystemCurrentlyBroken {
@@ -908,6 +1115,15 @@ namespace DLSS_Swapper.Languages {
         public static string InstallPathAlreadyExistsTemplate {
             get {
                 return ResourceManager.GetString("InstallPathAlreadyExistsTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu &quot;{0}&quot; is an invalid file type.
+        /// </summary>
+        public static string InvalidFileTypeTemplate {
+            get {
+                return ResourceManager.GetString("InvalidFileTypeTemplate", resourceCulture);
             }
         }
         
@@ -1211,6 +1427,15 @@ namespace DLSS_Swapper.Languages {
         public static string PleaseOpenIssuePartial3 {
             get {
                 return ResourceManager.GetString("PleaseOpenIssuePartial3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Processed DLLs: .
+        /// </summary>
+        public static string ProcessedDlls {
+            get {
+                return ResourceManager.GetString("ProcessedDlls", resourceCulture);
             }
         }
         
@@ -1620,6 +1845,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu storageFile is null.
+        /// </summary>
+        public static string StorageFileIsNull {
+            get {
+                return ResourceManager.GetString("StorageFileIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Success.
         /// </summary>
         public static string Success {
@@ -1683,11 +1917,47 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Unknown GameLibrary {0} while setting ID.
+        /// </summary>
+        public static string UnknownGameLibraryTemplate {
+            get {
+                return ResourceManager.GetString("UnknownGameLibraryTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu DLL not a known type..
+        /// </summary>
+        public static string UnknownTypeDll {
+            get {
+                return ResourceManager.GetString("UnknownTypeDll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu DLL is not trusted by Windows..
+        /// </summary>
+        public static string UntrustedDll {
+            get {
+                return ResourceManager.GetString("UntrustedDll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Update.
         /// </summary>
         public static string Update {
             get {
                 return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Attempting to update.
+        /// </summary>
+        public static string UpdateAttempt {
+            get {
+                return ResourceManager.GetString("UpdateAttempt", resourceCulture);
             }
         }
         
@@ -1778,6 +2048,24 @@ namespace DLSS_Swapper.Languages {
         public static string YouDoNotHaveToSubmitDllAutoTrack {
             get {
                 return ResourceManager.GetString("YouDoNotHaveToSubmitDllAutoTrack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu You may only drag over a single file for a cover.
+        /// </summary>
+        public static string YouMayOnlyDragOneFileCover {
+            get {
+                return ResourceManager.GetString("YouMayOnlyDragOneFileCover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Zip did not contain any dlls..
+        /// </summary>
+        public static string ZipDidNotContainAnyDlls {
+            get {
+                return ResourceManager.GetString("ZipDidNotContainAnyDlls", resourceCulture);
             }
         }
     }

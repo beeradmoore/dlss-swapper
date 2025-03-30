@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -103,23 +104,23 @@ namespace DLSS_Swapper.UserControls
                 if (storageFile is null)
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.None;
-                    coverDragDropDragUIOverrideCaption = "storageFile is null";
+                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("StorageFileIsNull");
                 }
                 else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.Copy;
-                    coverDragDropDragUIOverrideCaption = "Add custom cover";
+                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("AddCustomCover");
                 }
                 else
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.None;
-                    coverDragDropDragUIOverrideCaption = $"\"{storageFile.FileType}\" is an invalid file type";
+                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetFormattedResourceTemplate("InvalidFileTypeTemplate", storageFile.FileType);
                 }
             }
             else
             {
                 coverDragDropAcceptedOperation = DataPackageOperation.None;
-                coverDragDropDragUIOverrideCaption = "You may only drag over a single file for a cover";
+                coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("YouMayOnlyDragOneFileCover");
             }
         }
 

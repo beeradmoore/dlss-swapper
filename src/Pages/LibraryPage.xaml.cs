@@ -1,5 +1,6 @@
 using System;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -37,7 +38,7 @@ namespace DLSS_Swapper.Pages
                 var dialog = new EasyContentDialog(XamlRoot)
                 {
                     Title = DLLManager.Instance.GetAssetTypeName(dllRecord.AssetType),
-                    CloseButtonText = "Cancel",
+                    CloseButtonText = ResourceHelper.GetString("Cancel"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = new DLLRecordInfoControl(dllRecord),
                 };

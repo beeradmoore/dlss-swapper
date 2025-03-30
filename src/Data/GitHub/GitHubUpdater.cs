@@ -68,7 +68,7 @@ namespace DLSS_Swapper.Data.GitHub
                         var githubRelease = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GitHubRelease);
                         if (githubRelease is null)
                         {
-                            throw new Exception("Could not load GitHub release data.");
+                            throw new Exception(ResourceHelper.GetString("CouldNotLoadGithubReleaseDataException"));
                         }
 
                         memoryStream.Position = 0;

@@ -9,6 +9,7 @@ using Windows.System;
 using AsyncAwaitBestPractices;
 using CommunityToolkit.WinUI;
 using System.Threading;
+using DLSS_Swapper.Helpers;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -292,9 +293,9 @@ namespace DLSS_Swapper.Pages
                 {
                     var dialog = new EasyContentDialog(XamlRoot)
                     {
-                        Title = "Game Currently Processing",
-                        CloseButtonText = "Okay",
-                        Content = $"{selectedGame.Title} is still processing. Please wait for the loading indicator to complete before opening.",
+                        Title = ResourceHelper.GetString("GameCurrentlyProcessing"),
+                        CloseButtonText = ResourceHelper.GetString("Okay"),
+                        Content = ResourceHelper.GetFormattedResourceTemplate("GameProcessingPleaseWaitTemplate", selectedGame.Title),
                     };
                     _ = dialog.ShowAsync();
                     return;

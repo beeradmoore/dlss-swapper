@@ -296,10 +296,10 @@ public partial class LibraryPageModel : ObservableObject
         {
             var couldNotImportDialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = "Could not load imported DLLs",
+                Title = ResourceHelper.GetString("CouldNotLoadImportedDlls"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = new ImportSystemDisabledView(),
-                CloseButtonText = "Close",
+                CloseButtonText = ResourceHelper.GetString("Close"),
             };
             await couldNotImportDialog.ShowAsync();
             return;
@@ -346,7 +346,7 @@ public partial class LibraryPageModel : ObservableObject
             Text = string.Empty,
             HorizontalAlignment = HorizontalAlignment.Left,
         };
-        progressTextBlock.Inlines.Add(new Run() { Text = "Processed DLLs: " });
+        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("ProcessedDlls") });
         var progressRun = new Run() { Text = "0" };
         progressTextBlock.Inlines.Add(progressRun);
         var progressStackPanel = new StackPanel()
@@ -363,7 +363,7 @@ public partial class LibraryPageModel : ObservableObject
 
         var loadingDialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = "Importing",
+            Title = ResourceHelper.GetString("Importing"),
             // I would like this to be a progress ring but for some reason the ring will not show.
             Content = progressStackPanel,
         };
@@ -377,7 +377,7 @@ public partial class LibraryPageModel : ObservableObject
             {
                 if (File.Exists(dllRecord.LocalRecord.ExpectedPath))
                 {
-                    importResults.Add(DLLImportResult.FromSucces(dllRecord.LocalRecord.ExpectedPath, "Already downloaded.", true));
+                    importResults.Add(DLLImportResult.FromSucces(dllRecord.LocalRecord.ExpectedPath, ResourceHelper.GetString("AlreadyDownloaded"), true));
                     return true;
                 }
 
@@ -389,7 +389,7 @@ public partial class LibraryPageModel : ObservableObject
                     dllRecord.LocalRecord = null;
                     dllRecord.LocalRecord = localRecord;
                 });
-                importResults.Add(DLLImportResult.FromSucces(importedPath, "Imported as existing DLL record.", true));
+                importResults.Add(DLLImportResult.FromSucces(importedPath, ResourceHelper.GetString("ImportedAsExistingRecord"), true));
                 return true;
             }
             else
@@ -435,7 +435,7 @@ public partial class LibraryPageModel : ObservableObject
 
                 if (importFile is null || File.Exists(importFile.Path) == false)
                 {
-                    importResults.Add(DLLImportResult.FromFail(importFile?.Path ?? string.Empty, "File not found."));
+                    importResults.Add(DLLImportResult.FromFail(importFile?.Path ?? string.Empty, ResourceHelper.GetString("FileNotFound")));
                     continue;
                 }
 
@@ -573,7 +573,7 @@ public partial class LibraryPageModel : ObservableObject
                             var zippedDlls = archive.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
                             if (zippedDlls.Length == 0)
                             {
-                                throw new Exception("Zip did not contain any dlls.");
+                                throw new Exception(ResourceHelper.GetString("ZipDidNotContainAnyDlls"));
                             }
 
                             var dllsInZip = zippedDlls.Length;
@@ -670,9 +670,9 @@ public partial class LibraryPageModel : ObservableObject
   
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            CloseButtonText = "Okay",
+            CloseButtonText = ResourceHelper.GetString("Okay"),
             DefaultButton = ContentDialogButton.Close,
-            Title = "Finished",
+            Title = ResourceHelper.GetString("Finished"),
             Content = new ImportDLLSummaryControl(importResults),
         };
         await dialog.ShowAsync();

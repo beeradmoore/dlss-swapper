@@ -257,7 +257,7 @@ namespace DLSS_Swapper
                 {
                     dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                     {
-                        Title = "Attempting to update",
+                        Title = ResourceHelper.GetString("UpdateAttempt"),
                         DefaultButton = ContentDialogButton.Close,
                         Content = new ProgressRing()
                         {
@@ -281,10 +281,10 @@ namespace DLSS_Swapper
                 {
                     dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                     {
-                        Title = "DLSS Swapper must close",
-                        CloseButtonText = "Close",
+                        Title = ResourceHelper.GetString("DlssSwapperMustClose"),
+                        CloseButtonText = ResourceHelper.GetString("Close"),
                         DefaultButton = ContentDialogButton.Close,
-                        Content = "DLSS Swapper was not able to load its manifest file. It will now close.",
+                        Content = ResourceHelper.GetString("DlssSwapperCloseDueToManifest"),
                     };
                     await dialog.ShowAsync();
 
@@ -296,10 +296,10 @@ namespace DLSS_Swapper
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
-                    Title = "Could not load imported DLLs",
+                    Title = ResourceHelper.GetString("CouldNotLoadImportedDlls"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = new ImportSystemDisabledView(),
-                    CloseButtonText = "Close",
+                    CloseButtonText = ResourceHelper.GetString("Close"),
                 };
                 await dialog.ShowAsync();
             }

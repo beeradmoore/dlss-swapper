@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.Interfaces
 {
@@ -46,7 +47,7 @@ namespace DLSS_Swapper.Interfaces
                 GameLibrary.UbisoftConnect => UbisoftConnectLibrary.Instance,
                 GameLibrary.XboxApp => XboxLibrary.Instance,
                 GameLibrary.ManuallyAdded => ManuallyAddedLibrary.Instance,
-                _ => throw new Exception($"Could not load game library {gameLibrary}"),
+                _ => throw new Exception(ResourceHelper.GetFormattedResourceTemplate("CouldNotLoadGameLibraryTemplate", gameLibrary)),
             };
         }
 

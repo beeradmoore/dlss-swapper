@@ -76,7 +76,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                         // if ubisoftConnectRegistryKey is null then Ubisoft is not installed .
                         if (ubisoftConnectInstallsKey is null)
                         {
-                            throw new Exception("Could not detect ubisoftConnectInstallsKey");
+                            throw new Exception(ResourceHelper.GetString("CouldNotDetectUbisoftConnectInstallKey"));
                         }
 
                         var subKeyNames = ubisoftConnectInstallsKey.GetSubKeyNames();

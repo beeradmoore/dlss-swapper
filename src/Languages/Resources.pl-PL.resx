@@ -698,4 +698,100 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="UpdateManifest" xml:space="preserve">
     <value>Zaktualizuj manifest</value>
   </data>
+  <data name="ImportFeatureDisabled" xml:space="preserve">
+    <value>Funkcja importu jest wyłączona, nie można załadować manifestu importu.</value>
+  </data>
+  <data name="UnknownTypeDll" xml:space="preserve">
+    <value>Nieznany typ biblioteki DLL.</value>
+  </data>
+  <data name="UntrustedDll" xml:space="preserve">
+    <value>Biblioteka DLL niezaufana przez system Windows.</value>
+  </data>
+  <data name="AlreadyImported" xml:space="preserve">
+    <value>(aktualnie zaimportowana)</value>
+  </data>
+  <data name="CouldNotDetermineImportPath" xml:space="preserve">
+    <value>Nie można wyznaczyć ścieżki importu.</value>
+  </data>
+  <data name="UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Nieznana biblioteka gier {0} podczas ustawiania ID</value>
+  </data>
+  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
+    <value>Archiwum z DLL jest nieprawidłowe (nie znaleziono bibliotek DLL).</value>
+  </data>
+  <data name="DllZipInvalidMultipleDllFound" xml:space="preserve">
+    <value>Archiwum z DLL jest nieprawidłowe (znaleziono więcej niż jedną bibliotekę).</value>
+  </data>
+  <data name="CustomCoverRemove" xml:space="preserve">
+    <value>Usunąć własną okładkę?</value>
+  </data>
+  <data name="AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Czy jesteś pewien, że chcesz usunąć własną okładkę?</value>
+  </data>
+  <data name="GameCurrentlyProcessing" xml:space="preserve">
+    <value>Gra aktualnie się przetwarza</value>
+  </data>
+  <data name="GameProcessingPleaseWaitTemplate" xml:space="preserve">
+    <value>{0} wciąż się przetwarza. Prosimy poczekać aż ładowanie się zakończy zanim uruchomisz grę.</value>
+  </data>
+  <data name="CouldNotLoadImportedDlls" xml:space="preserve">
+    <value>Nie można załadować zaimportowanych bibliotek DLL</value>
+  </data>
+  <data name="ProcessedDlls" xml:space="preserve">
+    <value>Przetworzone biblioteki DLL: </value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Importowanie</value>
+  </data>
+  <data name="AlreadyDownloaded" xml:space="preserve">
+    <value>Aktualnie pobrana.</value>
+  </data>
+  <data name="ImportedAsExistingRecord" xml:space="preserve">
+    <value>Importowanie jako istniejąca biblioteka DLL.</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>Nie znaleziono pliku.</value>
+  </data>
+  <data name="ZipDidNotContainAnyDlls" xml:space="preserve">
+    <value>Archiwum nie posiada żadnych bibliotek DLL.</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Zakończono</value>
+  </data>
+  <data name="CouldNotDetectUbisoftConnectInstallKey" xml:space="preserve">
+    <value>Nie można wykryć ubisoftConnectInstallsKey</value>
+  </data>
+  <data name="CouldNotLoadGameLibraryTemplate" xml:space="preserve">
+    <value>Nie można wczytać biblioteki gry {0}</value>
+  </data>
+  <data name="CouldNotDeserializeGogCatalog" xml:space="preserve">
+    <value>Nie można zdeserializować GOGCatalogResponse dla url, {0}</value>
+  </data>
+  <data name="CouldNotFindAnyGogProduct" xml:space="preserve">
+    <value>Nie można znaleźć żadnego GOGCatalogProduct dla url, {0}</value>
+  </data>
+  <data name="CouldNotDeserializeGogEmbedFilteredResponse" xml:space="preserve">
+    <value>Nie można zdeserializować GOGEmbedFilteredResponse dla url, {0}</value>
+  </data>
+  <data name="CouldNotFindAnyGogEmbedFilteredProducts" xml:space="preserve">
+    <value>Nie można znaleźć żadnego GOGEmbedFilteredProducts dla url, {0}</value>
+  </data>
+  <data name="UpdateAttempt" xml:space="preserve">
+    <value>Próba aktualizacji</value>
+  </data>
+  <data name="DlssSwapperMustClose" xml:space="preserve">
+    <value>DLSS Swapper musi zostać zamknięty</value>
+  </data>
+  <data name="DlssSwapperCloseDueToManifest" xml:space="preserve">
+    <value>DLSS Swapper nie był w stanie wczytać pliku manifestu. teraz zostanie zamknięty.</value>
+  </data>
+  <data name="YouMayOnlyDragOneFileCover" xml:space="preserve">
+    <value>Możesz przeciągnąć tylko jeden plik jako okładkę</value>
+  </data>
+  <data name="StorageFileIsNull" xml:space="preserve">
+    <value>storageFile jest nullem</value>
+  </data>
+  <data name="InvalidFileTypeTemplate" xml:space="preserve">
+    <value>"{0}" nie jest właściwym typem pliku</value>
+  </data>
 </root>

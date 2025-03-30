@@ -707,4 +707,105 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="UpdateManifest" xml:space="preserve">
     <value>Update manifest</value>
   </data>
+  <data name="ImportFeatureDisabled" xml:space="preserve">
+    <value>Import feature is disabled, import manifest could not be loaded.</value>
+  </data>
+  <data name="UnknownTypeDll" xml:space="preserve">
+    <value>DLL not a known type.</value>
+  </data>
+  <data name="UntrustedDll" xml:space="preserve">
+    <value>DLL is not trusted by Windows.</value>
+  </data>
+  <data name="AlreadyImported" xml:space="preserve">
+    <value>(already imported)</value>
+  </data>
+  <data name="CouldNotDetermineImportPath" xml:space="preserve">
+    <value>Could not determine import path.</value>
+  </data>
+  <data name="UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Unknown GameLibrary {0} while setting ID</value>
+  </data>
+  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
+    <value>Dll zip was invalid (no dll found).</value>
+  </data>
+  <data name="DllZipInvalidMultipleDllFound" xml:space="preserve">
+    <value>Dll zip was invalid (more than one dll found).</value>
+  </data>
+  <data name="CustomCoverRemove" xml:space="preserve">
+    <value>Remove custom cover?</value>
+  </data>
+  <data name="AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Are you sure you want to remove the custom cover image?</value>
+  </data>
+  <data name="GameCurrentlyProcessing" xml:space="preserve">
+    <value>Game Currently Processing</value>
+  </data>
+  <data name="GameProcessingPleaseWaitTemplate" xml:space="preserve">
+    <value>{0} is still processing. Please wait for the loading indicator to complete before opening.</value>
+    <comment>0 = {selectedGame.Title}</comment>
+  </data>
+  <data name="CouldNotLoadImportedDlls" xml:space="preserve">
+    <value>Could not load imported DLLs</value>
+  </data>
+  <data name="ProcessedDlls" xml:space="preserve">
+    <value>Processed DLLs: </value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Importing</value>
+  </data>
+  <data name="AlreadyDownloaded" xml:space="preserve">
+    <value>Already downloaded.</value>
+  </data>
+  <data name="ImportedAsExistingRecord" xml:space="preserve">
+    <value>Imported as existing DLL record.</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>File not found.</value>
+  </data>
+  <data name="ZipDidNotContainAnyDlls" xml:space="preserve">
+    <value>Zip did not contain any dlls.</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="CouldNotDetectUbisoftConnectInstallKey" xml:space="preserve">
+    <value>Could not detect ubisoftConnectInstallsKey</value>
+  </data>
+  <data name="CouldNotLoadGameLibraryTemplate" xml:space="preserve">
+    <value>Could not load game library {0}</value>
+  </data>
+  <data name="CouldNotDeserializeGogCatalog" xml:space="preserve">
+    <value>Could not deserialize GOGCatalogResponse for url, {0}</value>
+    <comment>0 = url</comment>
+  </data>
+  <data name="CouldNotFindAnyGogProduct" xml:space="preserve">
+    <value>Could not find any GOGCatalogProduct for url, {0}</value>
+    <comment>0 = url</comment>
+  </data>
+  <data name="CouldNotDeserializeGogEmbedFilteredResponse" xml:space="preserve">
+    <value>Could not deserialize GOGEmbedFilteredResponse for url, {0}</value>
+    <comment>0 = url</comment>
+  </data>
+  <data name="CouldNotFindAnyGogEmbedFilteredProducts" xml:space="preserve">
+    <value>Could not find any GOGEmbedFilteredProducts for url, {0}</value>
+    <comment>0 = url</comment>
+  </data>
+  <data name="UpdateAttempt" xml:space="preserve">
+    <value>Attempting to update</value>
+  </data>
+  <data name="DlssSwapperMustClose" xml:space="preserve">
+    <value>DLSS Swapper must close</value>
+  </data>
+  <data name="DlssSwapperCloseDueToManifest" xml:space="preserve">
+    <value>DLSS Swapper was not able to load its manifest file. It will now close.</value>
+  </data>
+  <data name="StorageFileIsNull" xml:space="preserve">
+    <value>storageFile is null</value>
+  </data>
+  <data name="YouMayOnlyDragOneFileCover" xml:space="preserve">
+    <value>You may only drag over a single file for a cover</value>
+  </data>
+  <data name="InvalidFileTypeTemplate" xml:space="preserve">
+    <value>"{0}" is an invalid file type</value>
+  </data>
 </root>

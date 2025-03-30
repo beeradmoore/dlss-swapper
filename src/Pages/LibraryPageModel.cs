@@ -690,7 +690,7 @@ public partial class LibraryPageModel : ObservableObject
         var assetTypeName = DLLManager.Instance.GetAssetTypeName(record.AssetType);
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = "Delete DLL",
+            Title = ResourceHelper.GetString("DeleteDll"),
             PrimaryButtonText = ResourceHelper.GetString("Delete"),
             CloseButtonText = ResourceHelper.GetString("Cancel"),
             DefaultButton = ContentDialogButton.Primary,

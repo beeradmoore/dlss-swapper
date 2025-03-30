@@ -642,7 +642,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="ManifestCouldNotBeLoaded" xml:space="preserve">
     <value>Nie udało się załadować pliku manifest.json z komputera lub z Internetu.
 
-Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia błędów na Githubie.</value>
+Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia błędów na GitHubie.</value>
   </data>
   <data name="CouldNotDeserializeManifestException" xml:space="preserve">
     <value>Nie można deserializować pliku manifest.json.</value>
@@ -691,5 +691,11 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   </data>
   <data name="OpenInBrowserInfo" xml:space="preserve">
     <value>Kliknij przycisk Otwórz w przeglądarce lub skopiuj i wklej poniższy link do przeglądarki. Czy pobierany jest plik w przeglądarce?</value>
+  </data>
+  <data name="DeleteDll" xml:space="preserve">
+    <value>Usuń bibliotekę DLL</value>
+  </data>
+  <data name="UpdateManifest" xml:space="preserve">
+    <value>Zaktualizuj manifest</value>
   </data>
 </root>

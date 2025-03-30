@@ -1,8 +1,9 @@
 using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Translations.Pages;
-public class LibraryPageTranslationPropertiesViewModel
+public class LibraryPageTranslationPropertiesViewModel : LocalizedViewModelBase
 {
     public LibraryPageTranslationPropertiesViewModel() : base() { }
 

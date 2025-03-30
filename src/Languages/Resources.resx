@@ -701,4 +701,10 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="CustomUserAgentTest" xml:space="preserve">
     <value>Custom user agent test</value>
   </data>
+  <data name="DeleteDll" xml:space="preserve">
+    <value>Delete DLL</value>
+  </data>
+  <data name="UpdateManifest" xml:space="preserve">
+    <value>Update manifest</value>
+  </data>
 </root>

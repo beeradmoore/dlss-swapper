@@ -399,6 +399,15 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Delete DLL.
+        /// </summary>
+        public static string DeleteDll {
+            get {
+                return ResourceManager.GetString("DeleteDll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Delete {0} v{1}?.
         /// </summary>
         public static string DeleteDllVersionTemplate {
@@ -786,7 +795,7 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Github Issues.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu GitHub Issues.
         /// </summary>
         public static string GithubIssues {
             get {
@@ -952,11 +961,9 @@ namespace DLSS_Swapper.Languages {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu We were unable to load manifest.json from your computer or from the internet. 
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu We were unable to load manifest.json from your computer or from the internet.
         ///
-        ///If this keeps happening please file an report in our issue tracker on Github.
-        ///
-        ///DLSS Swapper will close now..
+        ///If this keeps happening please file an report in our issue tracker on GitHub..
         /// </summary>
         public static string ManifestCouldNotBeLoaded {
             get {
@@ -1690,6 +1697,15 @@ namespace DLSS_Swapper.Languages {
         public static string UpdateAvailable {
             get {
                 return ResourceManager.GetString("UpdateAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Update manifest.
+        /// </summary>
+        public static string UpdateManifest {
+            get {
+                return ResourceManager.GetString("UpdateManifest", resourceCulture);
             }
         }
         

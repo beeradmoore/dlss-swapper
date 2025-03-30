@@ -1,8 +1,9 @@
 using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Translations.UserControls;
-public class GameFilterTranslationPropertiesViewModel
+public class GameFilterTranslationPropertiesViewModel : LocalizedViewModelBase
 {
     public GameFilterTranslationPropertiesViewModel() : base() { }
 

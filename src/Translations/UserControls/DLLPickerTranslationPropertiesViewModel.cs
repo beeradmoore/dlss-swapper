@@ -1,8 +1,9 @@
 using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Translations.UserControls;
-public class DLLPickerTranslationPropertiesViewModel
+public class DLLPickerTranslationPropertiesViewModel : LocalizedViewModelBase
 {
     public DLLPickerTranslationPropertiesViewModel() : base() { }
 

@@ -170,12 +170,22 @@ internal partial class GameManager : ObservableObject
             }
         }
 
+        List<Task<List<Game>>> tasks = new();
+
         foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
             if (gameLibrary.IsEnabled)
             {
-                await gameLibrary.ListGamesAsync(drives, forceNeedsProcessing);
+                tasks.Add(gameLibrary.ListGamesAsync(drives, forceNeedsProcessing));
+            }
+        }
+
+        await foreach (var task in Task.WhenEach(tasks))
+        {
+            foreach(Game game in await task)
+            {
+                AddGame(game);
             }
         }
     }

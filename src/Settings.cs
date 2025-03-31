@@ -336,23 +336,6 @@ namespace DLSS_Swapper
             }
         }
 
-        string _language = "en-US";
-        public string Language
-        {
-            get { return _language; }
-            set
-            {
-                if (_language != value)
-                {
-                    _language = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
-                }
-            }
-        }
-
         IEnumerable<LogicalDriveState> _logicalDriveStates = DriveInfo.GetDrives().Select(d => new LogicalDriveState { DriveLetter = d.Name, IsEnabled = true });
         public IEnumerable<LogicalDriveState> LogicalDriveStates
         {

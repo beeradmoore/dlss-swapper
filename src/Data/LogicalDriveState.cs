@@ -1,4 +1,4 @@
-namespace DLSS_Swapper.Interfaces;
+namespace DLSS_Swapper.Data;
 public class LogicalDriveState
 {
     public required string DriveLetter { get; init; }

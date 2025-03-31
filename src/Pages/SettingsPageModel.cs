@@ -12,8 +12,8 @@ using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using DLSS_Swapper.Interfaces;
 using System.Collections.ObjectModel;
+using DLSS_Swapper.ViewModels;
 
 namespace DLSS_Swapper.Pages;
 

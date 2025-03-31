@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace DLSS_Swapper.Interfaces;
+namespace DLSS_Swapper.ViewModels;
 public partial class LogicalDriveStateViewModel : ObservableObject
 {
     [ObservableProperty]

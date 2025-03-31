@@ -1,5 +1,4 @@
 using DLSS_Swapper.Data;
-using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.Pages;
 using Microsoft.UI.Xaml;
 using System;

@@ -1,10 +1,9 @@
-
-using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
 using static DLSS_Swapper.Data.UbisoftConnect.UbisoftConnectLibrary;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using DLSS_Swapper.Data;
 
 namespace DLSS_Swapper.Helpers.Utils;
 public static class UbisoftConnectUtils

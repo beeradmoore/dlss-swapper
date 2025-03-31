@@ -187,19 +187,7 @@ namespace DLSS_Swapper.Pages
         bool hasFirstLoaded = false;
         void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (hasFirstLoaded)
-            {
-                return;
-            }
-            hasFirstLoaded = true;
 
-            if (DataContext is GameGridPageModel gameGridPageModel)
-            {
-                gameGridPageModel.InitialLoadAsync().SafeFireAndForget((err) =>
-                {
-                    Logger.Error(err, $"Unable to perform initial load");
-                });
-            }
 
             //await LoadGamesAndDlls();
             //await LoadGamesFromCacheAsync();

@@ -9,9 +9,13 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using System.Windows.Input;
+using AsyncAwaitBestPractices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.Messages;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Text;
@@ -34,6 +38,7 @@ public enum GameGridViewType
 
 public partial class GameGridPageModel : ObservableObject
 {
+
     GameGridPage gameGridPage;
 
     [ObservableProperty]
@@ -84,7 +89,6 @@ public partial class GameGridPageModel : ObservableObject
     {
         IsGameListLoading = true;
         IsDLSSLoading = true;
-
         await GameManager.Instance.LoadGamesFromCacheAsync();
         IsGameListLoading = false;
         await GameManager.Instance.LoadGamesAsync(Settings.Instance.LogicalDriveStates, false);
@@ -387,4 +391,35 @@ If you have checked these and your game is still not showing up there may be a b
         Settings.Instance.GameGridViewType = gameGridView;
     }
 
+    [RelayCommand]
+    public async Task Loaded()
+    {
+        if (hasFirstLoaded)
+        {
+            return;
+        }
+        hasFirstLoaded = true;
+
+        InitialLoadAsync().SafeFireAndForget((err) =>
+        {
+            Logger.Error(err, $"Unable to perform initial load");
+        });
+
+        WeakReferenceMessenger.Default.Register<SelectedLogicDriveStatesChangedMessage>(this, async (r, m) =>
+        {
+            await SelectedLogicDriveStatesChanged();
+        });
+    }
+
+    private async Task SelectedLogicDriveStatesChanged()
+    {
+        IsGameListLoading = true;
+        IsDLSSLoading = true;
+        GameManager.Instance.RemoveAllGames();
+        await GameManager.Instance.LoadGamesFromCacheAsync();
+        IsGameListLoading = false;
+        IsDLSSLoading = false;
+    }
+
+    private bool hasFirstLoaded;
 }

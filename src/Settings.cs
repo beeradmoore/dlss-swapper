@@ -1,4 +1,6 @@
+using CommunityToolkit.Mvvm.Messaging;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.Messages;
 using DLSS_Swapper.Pages;
 using Microsoft.UI.Xaml;
 using System;
@@ -348,6 +350,7 @@ namespace DLSS_Swapper
                     if (_autoSave)
                     {
                         SaveJson();
+                        WeakReferenceMessenger.Default.Send(new SelectedLogicDriveStatesChangedMessage(_logicalDriveStates));
                     }
                 }
             }

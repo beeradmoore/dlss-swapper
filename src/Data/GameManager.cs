@@ -368,4 +368,14 @@ internal partial class GameManager : ObservableObject
 
         return unknownGameAssets;
     }
+
+    public void RemoveAllGames()
+    {
+        lock (gameLock)
+        {
+            _synchronisedAllGames.Clear();
+
+            App.CurrentApp.RunOnUIThread(_allGames.Clear);
+        }
+    }
 }

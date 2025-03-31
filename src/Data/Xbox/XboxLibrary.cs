@@ -1,24 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Management;
-using System.Reflection;
 using System.Security.Principal;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
+using Windows.ApplicationModel;
 using Windows.Management.Deployment;
-using Windows.UI.StartScreen;
-using Windows.UI.Text.Core;
 
 namespace DLSS_Swapper.Data.Xbox
 {
-    internal class XboxLibrary : IGameLibrary
+    internal class XboxLibrary : GameLibraryBase<XboxGame>, IGameLibrary
     {
         public GameLibrary GameLibrary => GameLibrary.XboxApp;
         public string Name => "Xbox App";
@@ -40,8 +35,9 @@ namespace DLSS_Swapper.Data.Xbox
             return packages.Any();
         }
 
+        public async Task LoadGamesFromCacheAsync(IEnumerable<LogicalDriveState> drives) => await base.LoadGamesFromCacheAsync(drives);
 
-        public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
+        public async Task<List<Game>> ListGamesAsync(IEnumerable<LogicalDriveState> logicalDrives, bool forceNeedsProcessing = false)
         {
             var games = new List<Game>();
 
@@ -186,42 +182,31 @@ namespace DLSS_Swapper.Data.Xbox
                     continue;
                 }
 
-                var packageName = package.Id?.Name ?? string.Empty;
+                string? packageName = package.Id?.Name ?? string.Empty;
 
                 if (gameNamesToFindPackages.ContainsKey(packageName))
                 {
-                    if (Directory.Exists(package.InstalledPath) == false)
-                    {
-                        continue;
-                    }
-
-                    var familyName = package.Id?.FamilyName ?? string.Empty;
-                    if (string.IsNullOrEmpty(familyName))
-                    {
-                        continue;
-                    }
-
                     try
                     {
-                        var cachedGame = GameManager.Instance.GetGame<XboxGame>(familyName);
-                        var activeGame = cachedGame ?? new XboxGame(familyName);
-                        activeGame.Title = package.DisplayName;  // TODO: Will this be a problem if the game is already loaded
-                        activeGame.InstallPath = PathHelpers.NormalizePath(package.InstalledPath);
-                        await activeGame.SetLocalHeaderImagesAsync(gameNamesToFindPackages[packageName]);
+                        XboxGame? extractedGame = ExtractGame(logicalDrives, package);
+
+                        if (extractedGame is null)
+                        {
+                            continue;
+                        }
+
+                        await extractedGame.SetLocalHeaderImagesAsync(gameNamesToFindPackages[packageName]);
                         //await game.UpdateCacheImageAsync();
-                        await activeGame.SaveToDatabaseAsync();
+                        await extractedGame.SaveToDatabaseAsync();
 
                         // If the game is not from cache, force processing
-                        if (cachedGame is null)
-                        {
-                            activeGame.NeedsProcessing = true;
-                        }
 
-                        if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+
+                        if (extractedGame.NeedsProcessing || forceNeedsProcessing)
                         {
-                            activeGame.ProcessGame();
+                            extractedGame.ProcessGame();
                         }
-                        games.Add(activeGame);
+                        games.Add(extractedGame);
                     }
                     catch (Exception err)
                     {
@@ -245,26 +230,31 @@ namespace DLSS_Swapper.Data.Xbox
             return games;
         }
 
-        public async Task LoadGamesFromCacheAsync()
+        private XboxGame? ExtractGame(IEnumerable<LogicalDriveState> drives, Package? package)
         {
-            try
+            if (Directory.Exists(package.InstalledPath) == false)
             {
-                XboxGame[] games;
-                using (await Database.Instance.Mutex.LockAsync())
-                {
-                    games = await Database.Instance.Connection.Table<XboxGame>().ToArrayAsync().ConfigureAwait(false);
-                }
-                foreach (var game in games)
-                {
-                    await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
-                    GameManager.Instance.AddGame(game);
-                }
+                return null;
             }
-            catch (Exception err)
+
+            if (drives.Any(d => !d.IsEnabled && package.InstalledPath.ToLower().StartsWith(d.DriveLetter.ToLower())))
             {
-                Logger.Error(err);
-                Debugger.Break();
+                return null;
             }
+
+            var familyName = package.Id?.FamilyName ?? string.Empty;
+            if (string.IsNullOrEmpty(familyName))
+            {
+                return null;
+            }
+
+
+            var cachedGame = GameManager.Instance.GetGame<XboxGame>(familyName);
+            var activeGame = cachedGame ?? new XboxGame(familyName);
+            activeGame.Title = package.DisplayName;  // TODO: Will this be a problem if the game is already loaded
+            activeGame.InstallPath = PathHelpers.NormalizePath(package.InstalledPath);
+            activeGame.NeedsProcessing = cachedGame is null;
+            return activeGame;
         }
     }
 }

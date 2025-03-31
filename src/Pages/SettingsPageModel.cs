@@ -12,6 +12,8 @@ using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using DLSS_Swapper.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace DLSS_Swapper.Pages;
 
@@ -28,6 +30,8 @@ internal partial class SettingsPageModel : ObservableObject
         new DLSSOnScreenIndicatorSetting() { Label = "Enabled for debug DLSS DLLs only", Value = 1 },
         new DLSSOnScreenIndicatorSetting() { Label = "Enabled for all DLSS DLLs", Value = 1024 }
     };
+
+    public ObservableCollection<LogicalDriveStateViewModel> EnabledDrives { get; set; }
 
     [ObservableProperty]
     public partial bool LightThemeSelected { get; set; } = false;
@@ -72,6 +76,19 @@ internal partial class SettingsPageModel : ObservableObject
         _weakPage = new WeakReference<SettingsPage>(page);
 
         _dlssSettingsManager = new DLSSSettingsManager();
+        EnabledDrives = new ObservableCollection<LogicalDriveStateViewModel>(
+            Settings.Instance.LogicalDriveStates.Select(x => new LogicalDriveStateViewModel
+            {
+                DriveLetter = x.DriveLetter,
+                IsEnabled = x.IsEnabled
+            })
+        );
+
+        foreach (var drive in EnabledDrives)
+        {
+            drive.PropertyChanged += Drive_PropertyChanged;
+        }
+
         LightThemeSelected = Settings.Instance.AppTheme == ElementTheme.Light;
         DarkThemeSelected = Settings.Instance.AppTheme == ElementTheme.Dark;
         DefaultThemeSelected = Settings.Instance.AppTheme == ElementTheme.Default;
@@ -97,6 +114,11 @@ internal partial class SettingsPageModel : ObservableObject
         LoggingLevel = Settings.Instance.LoggingLevel;
 
         _hasSetDefaults = true;
+    }
+
+    private void Drive_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        Settings.Instance.LogicalDriveStates = EnabledDrives.Select(d => new LogicalDriveState { DriveLetter = d.DriveLetter, IsEnabled = d.IsEnabled });
     }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)

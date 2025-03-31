@@ -86,11 +86,8 @@ public partial class GameGridPageModel : ObservableObject
         IsDLSSLoading = true;
 
         await GameManager.Instance.LoadGamesFromCacheAsync();
-
         IsGameListLoading = false;
-
-        await GameManager.Instance.LoadGamesAsync(false);
-
+        await GameManager.Instance.LoadGamesAsync(Settings.Instance.LogicalDriveStates, false);
         IsDLSSLoading = false;
     }
 
@@ -322,9 +319,7 @@ If you have checked these and your game is still not showing up there may be a b
     async Task RefreshGamesButtonAsync()
     {
         IsDLSSLoading = true;
-
-        await GameManager.Instance.LoadGamesAsync(true);
-
+        await GameManager.Instance.LoadGamesAsync(Settings.Instance.LogicalDriveStates, true);
         IsDLSSLoading = false;
     }
 

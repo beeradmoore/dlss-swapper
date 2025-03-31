@@ -1,22 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
-using Serilog;
 using SQLite;
+using Windows.UI.StartScreen;
 
 namespace DLSS_Swapper.Data.GOG
 {
-    internal class GOGLibrary : IGameLibrary
+    internal class GOGLibrary : GameLibraryBase<GOGGame>, IGameLibrary
     {
         public GameLibrary GameLibrary => GameLibrary.GOG;
         public string Name => "GOG";
@@ -49,7 +46,9 @@ namespace DLSS_Swapper.Data.GOG
             return false;
         }
 
-        public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
+        public async Task LoadGamesFromCacheAsync(IEnumerable<LogicalDriveState> drives) => await base.LoadGamesFromCacheAsync(drives);
+
+        public async Task<List<Game>> ListGamesAsync(IEnumerable<LogicalDriveState> drives, bool forceNeedsProcessing = false)
         {
             if (IsInstalled() == false)
             {
@@ -72,59 +71,16 @@ namespace DLSS_Swapper.Data.GOG
                     }
 
                     // For each of the installed games, setup an initial GOG
-                    foreach (var subkey in registryKey.GetSubKeyNames())
+                    foreach (string subkey in registryKey.GetSubKeyNames())
                     {
-                        using (var gameKey = registryKey.OpenSubKey(subkey))
+                        using (RegistryKey? gameKey = registryKey.OpenSubKey(subkey))
                         {
-                            if (gameKey is null)
-                            {
+                            GOGGame? extractedGame = ExtractGame(drives, gameKey);
+
+                            if (extractedGame is null)
                                 continue;
-                            }
 
-                            var gameId = gameKey.GetValue("gameID") as string;
-                            var gameName = gameKey.GetValue("gameName") as string;
-                            var gamePath = gameKey.GetValue("path") as string;
-
-                            if (string.IsNullOrEmpty(gameId))
-                            {
-                                Logger.Error("Issue loading GOG Game, no gameId found.");
-                                continue;
-                            }
-
-
-                            if (string.IsNullOrEmpty(gameName))
-                            {
-                                Logger.Error("Issue loading GOG Game, no gameName found.");
-                                continue;
-                            }
-
-
-                            if (string.IsNullOrEmpty(gamePath))
-                            {
-                                Logger.Error("Issue loading GOG Game, no gamePath found.");
-                                continue;
-                            }
-
-
-                            // If the entry is DLC we don't need to show it as an individual item.
-                            var dependsOn = gameKey.GetValue("dependsOn") as string;
-                            if (string.IsNullOrEmpty(dependsOn) == false)
-                            {
-                                continue;
-                            }
-
-                            var cachedGame = GameManager.Instance.GetGame<GOGGame>(gameId);
-                            var activeGame = cachedGame ?? new GOGGame(gameId);
-                            activeGame.Title = gameName;  // TODO: Will this be a problem if the game is already loaded
-                            activeGame.InstallPath = PathHelpers.NormalizePath(gamePath);
-
-                            // If the game is not from cache, force processing
-                            if (cachedGame is null)
-                            {
-                                activeGame.NeedsProcessing = true;
-                            }
-
-                            gogGames.Add(activeGame);
+                            gogGames.Add(extractedGame);
                         }
                     }
                 }
@@ -317,26 +273,56 @@ namespace DLSS_Swapper.Data.GOG
             return string.Empty;
         }
 
-        public async Task LoadGamesFromCacheAsync()
+        private GOGGame? ExtractGame(IEnumerable<LogicalDriveState> drives, RegistryKey? gameKey)
         {
-            try
+            if (gameKey is null)
             {
-                GOGGame[] games;
-                using (await Database.Instance.Mutex.LockAsync())
-                {
-                    games = await Database.Instance.Connection.Table<GOGGame>().ToArrayAsync().ConfigureAwait(false);
-                }
-                foreach (var game in games)
-                {
-                    await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
-                    GameManager.Instance.AddGame(game);
-                }
+                return null;
             }
-            catch (Exception err)
+
+            var gamePath = gameKey.GetValue("path") as string;
+
+            if (drives.Any(d => !d.IsEnabled && gamePath.ToLower().StartsWith(d.DriveLetter.ToLower())))
             {
-                Logger.Error(err);
-                Debugger.Break();
+                return null;
             }
+
+            var gameId = gameKey.GetValue("gameID") as string;
+            var gameName = gameKey.GetValue("gameName") as string;
+
+            if (string.IsNullOrEmpty(gameId))
+            {
+                Logger.Error("Issue loading GOG Game, no gameId found.");
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(gameName))
+            {
+                Logger.Error("Issue loading GOG Game, no gameName found.");
+                return null;
+            }
+
+
+            if (string.IsNullOrEmpty(gamePath))
+            {
+                Logger.Error("Issue loading GOG Game, no gamePath found.");
+                return null;
+            }
+
+            // If the entry is DLC we don't need to show it as an individual item.
+            var dependsOn = gameKey.GetValue("dependsOn") as string;
+            if (string.IsNullOrEmpty(dependsOn) == false)
+            {
+                return null;
+            }
+
+            var cachedGame = GameManager.Instance.GetGame<GOGGame>(gameId);
+            var activeGame = cachedGame ?? new GOGGame(gameId);
+            activeGame.Title = gameName;  // TODO: Will this be a problem if the game is already loaded
+            activeGame.InstallPath = PathHelpers.NormalizePath(gamePath);
+            activeGame.NeedsProcessing = cachedGame is null;
+            return activeGame;
         }
+
     }
 }

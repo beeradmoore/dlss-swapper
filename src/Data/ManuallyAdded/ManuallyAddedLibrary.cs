@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Data.ManuallyAdded;
 
-public class ManuallyAddedLibrary : IGameLibrary
+public class ManuallyAddedLibrary : GameLibraryBase<ManuallyAddedGame>, IGameLibrary
 {
     public GameLibrary GameLibrary => GameLibrary.ManuallyAdded;
     public string Name => "Manually Added";
@@ -24,7 +21,7 @@ public class ManuallyAddedLibrary : IGameLibrary
 
     }
 
-    public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
+    public async Task<List<Game>> ListGamesAsync(IEnumerable<LogicalDriveState> drives, bool forceNeedsProcessing = false)
     {
         List<Game> games = new List<Game>();
         List<ManuallyAddedGame> dbGames;
@@ -61,25 +58,5 @@ public class ManuallyAddedLibrary : IGameLibrary
         return true;
     }
 
-    public async Task LoadGamesFromCacheAsync()
-    {
-        try
-        {
-            ManuallyAddedGame[] games;
-            using (await Database.Instance.Mutex.LockAsync())
-            {
-                games = await Database.Instance.Connection.Table<ManuallyAddedGame>().ToArrayAsync().ConfigureAwait(false);
-            }
-            foreach (var game in games)
-            {
-                await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
-                GameManager.Instance.AddGame(game);
-            }
-        }
-        catch (Exception err)
-        {
-            Logger.Error(err);
-            Debugger.Break();
-        }
-    }
+    public async Task LoadGamesFromCacheAsync(IEnumerable<LogicalDriveState> drives) => await base.LoadGamesFromCacheAsync(drives);
 }

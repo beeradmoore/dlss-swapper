@@ -1,10 +1,11 @@
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.Pages;
 using Microsoft.UI.Xaml;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Windows.Graphics;
+using System.IO;
+using System.Linq;
 
 namespace DLSS_Swapper
 {
@@ -328,6 +329,40 @@ namespace DLSS_Swapper
                 if (_onlyShowDownloadedDlls != value)
                 {
                     _onlyShowDownloadedDlls = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        string _language = "en-US";
+        public string Language
+        {
+            get { return _language; }
+            set
+            {
+                if (_language != value)
+                {
+                    _language = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
+        IEnumerable<LogicalDriveState> _logicalDriveStates = DriveInfo.GetDrives().Select(d => new LogicalDriveState { DriveLetter = d.Name, IsEnabled = true });
+        public IEnumerable<LogicalDriveState> LogicalDriveStates
+        {
+            get { return _logicalDriveStates; }
+            set
+            {
+                if (_logicalDriveStates != value)
+                {
+                    _logicalDriveStates = value;
                     if (_autoSave)
                     {
                         SaveJson();

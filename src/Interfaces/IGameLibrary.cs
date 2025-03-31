@@ -5,12 +5,8 @@ using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;
 using DLSS_Swapper.Data.ManuallyAdded;
-using Serilog;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Interfaces
@@ -32,8 +28,8 @@ namespace DLSS_Swapper.Interfaces
         string Name { get; }
         Type GameType { get; }
 
-        Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing);
-        Task LoadGamesFromCacheAsync();
+        Task<List<Game>> ListGamesAsync(IEnumerable<LogicalDriveState> drives, bool forceNeedsProcessing);
+        Task LoadGamesFromCacheAsync(IEnumerable<LogicalDriveState> drives);
         bool IsInstalled();
 
         static IGameLibrary GetGameLibrary(GameLibrary gameLibrary)

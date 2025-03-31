@@ -3,7 +3,6 @@ using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Data.Steam
 {
-    internal partial class SteamLibrary : IGameLibrary
+    internal partial class SteamLibrary : GameLibraryBase<SteamGame>, IGameLibrary
     {
         public GameLibrary GameLibrary => GameLibrary.Steam;
         public string Name => "Steam";
@@ -48,7 +47,9 @@ namespace DLSS_Swapper.Data.Steam
             return string.IsNullOrEmpty(GetInstallPath()) == false;
         }
 
-        public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
+        public async Task LoadGamesFromCacheAsync(IEnumerable<LogicalDriveState> drives) => await base.LoadGamesFromCacheAsync(drives);
+
+        public async Task<List<Game>> ListGamesAsync(IEnumerable<LogicalDriveState> drives, bool forceNeedsProcessing = false)
         {
             // If we don't detect a steam install patg return an empty list.
             if (IsInstalled() == false)
@@ -90,6 +91,7 @@ namespace DLSS_Swapper.Data.Steam
                         {
                             // This is weird, but for some reason some libraryfolders.vdf are formatted very differently than others.
                             var path = match.Groups["path"].ToString();
+
                             if (Directory.Exists(path))
                             {
                                 libraryFolders.Add(Helpers.PathHelpers.NormalizePath(Path.Combine(path, "steamapps")));
@@ -107,11 +109,11 @@ namespace DLSS_Swapper.Data.Steam
             // Makes sure all library folders are unique.
             libraryFolders = libraryFolders.Distinct().ToList();
 
-            foreach (var libraryFolder in libraryFolders)
+            foreach (string? libraryFolder in libraryFolders)
             {
                 if (Directory.Exists(libraryFolder))
                 {
-                    var appManifestPaths = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
+                    string[] appManifestPaths = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
                     foreach (var appManifestPath in appManifestPaths)
                     {
                         // Don't bother adding Steamworks Common Redistributables.
@@ -120,80 +122,27 @@ namespace DLSS_Swapper.Data.Steam
                             continue;
                         }
 
-                        SteamGame? game = null;
-
                         try
                         {
-                            var appManifest = await File.ReadAllTextAsync(appManifestPath).ConfigureAwait(false);
+                            SteamGame? extractedGame = await ExtractGame(drives, appManifestPath);
 
-                            var matches = AppIdRegex().Matches(appManifest);
-                            if (matches.Count == 0)
-                            {
+                            if (extractedGame is null)
                                 continue;
+
+                            await extractedGame.SaveToDatabaseAsync().ConfigureAwait(false);
+
+                            if (extractedGame.NeedsProcessing || forceNeedsProcessing)
+                            {
+                                extractedGame.ProcessGame();
                             }
 
-                            var steamGameAppId = matches[0].Groups["appid"].Value;
-                            game = new SteamGame(steamGameAppId);
-
-                            var stateFlagsMatch = StateFlagsRegex().Match(appManifest);
-                            if (!stateFlagsMatch.Success || !Enum.TryParse(stateFlagsMatch.Groups["StateFlags"].Value, out SteamStateFlag stateFlags))
-                            {
-                                // The AppState couldn't be parsed from the appmanifest_*.acf
-                                continue;
-                            }
-
-                            game.StateFlags = stateFlags;
-
-                            matches = NameRegex().Matches(appManifest);
-                            if (matches.Count == 0)
-                            {
-                                continue;
-                            }
-
-                            game.Title = matches[0].Groups["name"].ToString();
-
-                            matches = InstallDirRegex().Matches(appManifest);
-                            if (matches.Count == 0)
-                            {
-                                continue;
-                            }
-
-                            var installDir = matches[0].Groups["installdir"].ToString();
-
-                            var baseDir = Path.GetDirectoryName(appManifestPath);
-                            if (string.IsNullOrEmpty(baseDir))
-                            {
-                                continue;
-                            }
-
-                            game.InstallPath = PathHelpers.NormalizePath(Path.Combine(baseDir, "common", installDir));
+                            games.Add(extractedGame);
                         }
                         catch (Exception err)
                         {
                             Logger.Error(err);
                             continue;
                         }
-
-                        var cachedGame = GameManager.Instance.GetGame<SteamGame>(game.PlatformId);
-                        var activeGame = cachedGame ?? game;
-                        activeGame.Title = game.Title;  // TODO: Will this be a problem if the game is already loaded
-                        activeGame.InstallPath = game.InstallPath;
-                        activeGame.StateFlags = game.StateFlags;
-
-                        await activeGame.SaveToDatabaseAsync().ConfigureAwait(false);
-
-                        // If the game is not from cache, force processing
-                        if (cachedGame is null)
-                        {
-                            activeGame.NeedsProcessing = true;
-                        }
-
-                        if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
-                        {
-                            activeGame.ProcessGame();
-                        }
-
-                        games.Add(activeGame);
                     }
                 }
             }
@@ -249,26 +198,65 @@ namespace DLSS_Swapper.Data.Steam
             }
         }
 
-        public async Task LoadGamesFromCacheAsync()
+        private async Task<SteamGame?> ExtractGame(IEnumerable<LogicalDriveState> drives, string appManifestPath)
         {
-            try
+            string appManifest = await File.ReadAllTextAsync(appManifestPath).ConfigureAwait(false);
+
+            MatchCollection? matches = AppIdRegex().Matches(appManifest);
+            if (matches.Count == 0)
             {
-                SteamGame[] games;
-                using (await Database.Instance.Mutex.LockAsync())
-                {
-                    games = await Database.Instance.Connection.Table<SteamGame>().ToArrayAsync().ConfigureAwait(false);
-                }
-                foreach (var game in games)
-                {
-                    await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
-                    GameManager.Instance.AddGame(game);
-                }
+                return null;
             }
-            catch (Exception err)
+
+            string steamGameAppId = matches[0].Groups["appid"].Value;
+            SteamGame? game = new SteamGame(steamGameAppId);
+
+            Match? stateFlagsMatch = StateFlagsRegex().Match(appManifest);
+            if (!stateFlagsMatch.Success || !Enum.TryParse(stateFlagsMatch.Groups["StateFlags"].Value, out SteamStateFlag stateFlags))
             {
-                Logger.Error(err);
-                Debugger.Break();
+                // The AppState couldn't be parsed from the appmanifest_*.acf
+                return null;
             }
+
+            game.StateFlags = stateFlags;
+
+            matches = NameRegex().Matches(appManifest);
+            if (matches.Count == 0)
+            {
+                return null;
+            }
+
+            game.Title = matches[0].Groups["name"].ToString();
+
+            matches = InstallDirRegex().Matches(appManifest);
+            if (matches.Count == 0)
+            {
+                return null;
+            }
+
+
+            string? baseDir = Path.GetDirectoryName(appManifestPath);
+            if (drives.Any(d => !d.IsEnabled && baseDir.ToLower().StartsWith(d.DriveLetter.ToLower())))
+            {
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(baseDir))
+            {
+                return null;
+            }
+
+            string installDir = matches[0].Groups["installdir"].ToString();
+            game.InstallPath = PathHelpers.NormalizePath(Path.Combine(baseDir, "common", installDir));
+
+
+            SteamGame? cachedGame = GameManager.Instance.GetGame<SteamGame>(game.PlatformId);
+            SteamGame? activeGame = cachedGame ?? game;
+            activeGame.Title = game.Title;  // TODO: Will this be a problem if the game is already loaded
+            activeGame.InstallPath = game.InstallPath;
+            activeGame.StateFlags = game.StateFlags;
+            activeGame.NeedsProcessing = cachedGame is null;
+            return activeGame;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="DLSS_Swapper.Pages.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -71,6 +71,21 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
+                    Text="Enabled disk drives to scan for games" />
+                <ListView ItemsSource="{x:Bind ViewModel.EnabledDrives}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Content="{Binding DriveLetter}" IsChecked="{Binding IsEnabled, Mode=TwoWay}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
                     Text="DLSS Developer Options" />
                 <StackPanel Margin="0,10,0,0">
                     <ComboBox Header="Show on-screen indicator" ItemsSource="{Binding DLSSOnScreenIndicatorOptions, Mode=OneTime}" SelectedItem="{Binding SelectedDlssOnScreenIndicator, Mode=TwoWay}" Margin="0,0,0,8" />
@@ -115,7 +130,7 @@
                     </TextBlock>
                 </StackPanel>
 
-
+                
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
@@ -171,8 +186,7 @@
                     </Paragraph>
                 </RichTextBlock>
 
-
-
+                
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"

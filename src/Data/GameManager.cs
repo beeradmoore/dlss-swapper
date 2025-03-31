@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.WinUI.Collections;
@@ -157,14 +155,13 @@ internal partial class GameManager : ObservableObject
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
             if (gameLibrary.IsEnabled)
             {
-                await gameLibrary.LoadGamesFromCacheAsync().ConfigureAwait(false);
+                await gameLibrary.LoadGamesFromCacheAsync(Settings.Instance.LogicalDriveStates).ConfigureAwait(false);
             }
         }
     }
 
-    public async Task LoadGamesAsync(bool forceNeedsProcessing = false)
+    public async Task LoadGamesAsync(IEnumerable<LogicalDriveState> drives, bool forceNeedsProcessing = false)
     {
-        var tasks = new List<Task<List<Game>>>();
         if (forceNeedsProcessing == true)
         {
             lock (unknownGameAsseetLock)
@@ -172,24 +169,13 @@ internal partial class GameManager : ObservableObject
                 _unknownGameAssets.Clear();
             }
         }
+
         foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
             if (gameLibrary.IsEnabled)
             {
-                tasks.Add(gameLibrary.ListGamesAsync(forceNeedsProcessing));
-            }
-        }
-
-        // Add games to the game library when the tasks is completed.
-        while (tasks.Any())
-        {
-            var completedTask = await Task.WhenAny(tasks);
-            tasks.Remove(completedTask);
-
-            foreach (var game in completedTask.Result)
-            {
-                AddGame(game);
+                await gameLibrary.ListGamesAsync(drives, forceNeedsProcessing);
             }
         }
     }

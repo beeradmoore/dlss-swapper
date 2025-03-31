@@ -1,21 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Management;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
-using Microsoft.UI.Xaml.Controls;
-using Windows.Foundation.Metadata;
-using Windows.Security.Authentication.OnlineId;
 
 namespace DLSS_Swapper.Data.EpicGamesStore
 {
-    internal class EpicGamesStoreLibrary : IGameLibrary
+    internal class EpicGamesStoreLibrary : GameLibraryBase<EpicGamesStoreGame>, IGameLibrary
     {
         public GameLibrary GameLibrary => GameLibrary.EpicGamesStore;
         public string Name => "Epic Games Store";
@@ -35,44 +30,10 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             return string.IsNullOrEmpty(GetEpicRootDirectory()) == false;
         }
 
-        public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
+        private async Task<Dictionary<string, CacheItem>> GetCachedDictionaryAsync(string epicRootDirectory)
         {
-            var games = new List<Game>();
-            var epicRootDirectory = GetEpicRootDirectory();
-
-            // EGS can be installed and pass this check even if there are no games installed.
-            if (string.IsNullOrWhiteSpace(epicRootDirectory) || Directory.Exists(epicRootDirectory) == false)
-            {
-                return games;
-            }
-
-            var cachedGames = GameManager.Instance.GetGames<EpicGamesStoreGame>();
-
-            // Appears we may not need data from LauncherInstalled.dat if we just parse files in EpicGamesLauncher\Data\Manifests instead
-            /*
-            // Check the launcher installed file exists.
-            var launcherInstalledFile = Path.Combine(epicRootDirectory, "UnrealEngineLauncher", "LauncherInstalled.dat");
-            if (File.Exists(launcherInstalledFile) == false)
-            {
-                return games;
-            }
-
-            var launcherInstalledJsonData = await File.ReadAllTextAsync(launcherInstalledFile).ConfigureAwait(false);
-            var launcherInstalledData = JsonSerializer.Deserialize<LauncherInstalled>(launcherInstalledJsonData);
-            if (launcherInstalledData?.InstallationList?.Any() != true)
-            {
-                return games;
-            }
-            */
-
-            var manifestsDirectory = Path.Combine(epicRootDirectory, "EpicGamesLauncher", "Data", "Manifests");
-            if (Directory.Exists(manifestsDirectory) == false)
-            {
-                return games;
-            }
-
-
             var cacheItemsDictionary = new Dictionary<string, CacheItem>();
+
             var catalogCacheFile = Path.Combine(epicRootDirectory, "EpicGamesLauncher", "Data", "Catalog", "catcache.bin");
             if (File.Exists(catalogCacheFile))
             {
@@ -96,74 +57,53 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                     }
                 }
             }
+            return cacheItemsDictionary;
+        }
 
+        public async Task LoadGamesFromCacheAsync(IEnumerable<LogicalDriveState> drives) => await base.LoadGamesFromCacheAsync(drives);
 
+        public async Task<List<Game>> ListGamesAsync(IEnumerable<LogicalDriveState> drives, bool forceNeedsProcessing = false)
+        {
+            var games = new List<Game>();
+            var epicRootDirectory = GetEpicRootDirectory();
 
-            var foundManifestFiles = Directory.GetFiles(manifestsDirectory, "*.item");
+            // EGS can be installed and pass this check even if there are no games installed.
+            if (string.IsNullOrWhiteSpace(epicRootDirectory) || Directory.Exists(epicRootDirectory) == false)
+            {
+                return games;
+            }
+
+            var cachedGames = GameManager.Instance.GetGames<EpicGamesStoreGame>();
+            //cachedGames = cachedGames.Where(cg => !drives.Any(d => !d.IsEnabled && cg.InstallPath.ToLower().StartsWith(d.DriveLetter.ToLower()))).ToList();
+
+            var manifestsDirectory = Path.Combine(epicRootDirectory, "EpicGamesLauncher", "Data", "Manifests");
+            if (Directory.Exists(manifestsDirectory) == false)
+            {
+                return games;
+            }
+
+            Dictionary<string, CacheItem> cacheItemsDictionary = await GetCachedDictionaryAsync(epicRootDirectory).ConfigureAwait(false);
+
+            string[] foundManifestFiles = Directory.GetFiles(manifestsDirectory, "*.item");
             foreach (var manifestFile in foundManifestFiles)
             {
                 try
                 {
-                    var manifestJsonData = await File.ReadAllTextAsync(manifestFile).ConfigureAwait(false);
-                    var manifest = JsonSerializer.Deserialize(manifestJsonData, SourceGenerationContext.Default.ManifestFile);
+                    EpicGamesStoreGame? extractedGame = await ExtractGame(drives, manifestFile, cacheItemsDictionary).ConfigureAwait(false);
 
-                    // Check that it is a game.
-                    if (manifest?.AppCategories.Contains("games") != true)
+                    if (extractedGame is null)
                     {
                         continue;
                     }
 
-                    // Check that is is the base game
-                    if (manifest.AppName != manifest.MainGameAppName)
+                    await extractedGame.SaveToDatabaseAsync();
+
+                    if (extractedGame.NeedsProcessing || forceNeedsProcessing)
                     {
-                        continue;
+                        extractedGame.ProcessGame();
                     }
 
-                    var remoteHeaderUrl = string.Empty;
-                    if (cacheItemsDictionary.ContainsKey(manifest.CatalogItemId))
-                    {
-                        var cacheItem = cacheItemsDictionary[manifest.CatalogItemId];
-                        if (cacheItem.KeyImages?.Any() == true)
-                        {
-                            // Try get desired image.
-                            var dieselGameBoxTall = cacheItem.KeyImages.FirstOrDefault(x => x.Type == "DieselGameBoxTall");
-                            if (dieselGameBoxTall is not null && string.IsNullOrEmpty(dieselGameBoxTall.Url) == false)
-                            {
-                                remoteHeaderUrl = dieselGameBoxTall.Url;
-                            }
-                            else
-                            {
-                                // Then fallback image.
-                                var dieselGameBox = cacheItem.KeyImages.FirstOrDefault(x => x.Type == "DieselGameBox");
-                                if (dieselGameBox is not null && string.IsNullOrEmpty(dieselGameBox.Url) == false)
-                                {
-                                    remoteHeaderUrl = dieselGameBox.Url;
-                                }
-                            }
-                        }
-                    }
-
-
-                    var cachedGame = GameManager.Instance.GetGame<EpicGamesStoreGame>(manifest.CatalogItemId);
-                    var activeGame = cachedGame ?? new EpicGamesStoreGame(manifest.CatalogItemId);
-                    activeGame.RemoteHeaderImage = remoteHeaderUrl;
-                    activeGame.Title = manifest.DisplayName; // TODO: Will this be a problem if the game is already loaded
-                    activeGame.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
-
-                    await activeGame.SaveToDatabaseAsync();
-
-                    // If the game is not from cache, force processing
-                    if (cachedGame is null)
-                    {
-                        activeGame.NeedsProcessing = true;
-                    }
-
-                    if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
-                    {
-                        activeGame.ProcessGame();
-                    }
-
-                    games.Add(activeGame);
+                    games.Add(extractedGame);
                 }
                 catch (Exception err)
                 {
@@ -195,26 +135,65 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             return string.Empty;
         }
 
-        public async Task LoadGamesFromCacheAsync()
+        private async Task<EpicGamesStoreGame?> ExtractGame(IEnumerable<LogicalDriveState> drives, string manifestFile, Dictionary<string, CacheItem> cacheItemsDictionary)
         {
-            try
+            var manifestJsonData = await File.ReadAllTextAsync(manifestFile).ConfigureAwait(false);
+            var manifest = JsonSerializer.Deserialize(manifestJsonData, SourceGenerationContext.Default.ManifestFile);
+
+            if (manifest is null)
             {
-                EpicGamesStoreGame[] games;
-                using (await Database.Instance.Mutex.LockAsync())
+                return null;
+            }
+
+            // Check that it is a game.
+            if (manifest?.AppCategories.Contains("games") != true)
+            {
+                return null;
+            }
+
+            //Checks if game location on allowed drive
+            if (drives.Any(d => !d.IsEnabled && manifest.InstallLocation.ToLower().StartsWith(d.DriveLetter.ToLower())))
+            {
+                return null;
+            }
+
+            // Check that is is the base game
+            if (manifest.AppName != manifest.MainGameAppName)
+            {
+                return null;
+            }
+
+            var remoteHeaderUrl = string.Empty;
+            if (cacheItemsDictionary.ContainsKey(manifest.CatalogItemId))
+            {
+                var cacheItem = cacheItemsDictionary[manifest.CatalogItemId];
+                if (cacheItem.KeyImages?.Any() == true)
                 {
-                    games = await Database.Instance.Connection.Table<EpicGamesStoreGame>().ToArrayAsync().ConfigureAwait(false);
-                }
-                foreach (var game in games)
-                {
-                    await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
-                    GameManager.Instance.AddGame(game);
+                    // Try get desired image.
+                    var dieselGameBoxTall = cacheItem.KeyImages.FirstOrDefault(x => x.Type == "DieselGameBoxTall");
+                    if (dieselGameBoxTall is not null && string.IsNullOrEmpty(dieselGameBoxTall.Url) == false)
+                    {
+                        remoteHeaderUrl = dieselGameBoxTall.Url;
+                    }
+                    else
+                    {
+                        // Then fallback image.
+                        var dieselGameBox = cacheItem.KeyImages.FirstOrDefault(x => x.Type == "DieselGameBox");
+                        if (dieselGameBox is not null && string.IsNullOrEmpty(dieselGameBox.Url) == false)
+                        {
+                            remoteHeaderUrl = dieselGameBox.Url;
+                        }
+                    }
                 }
             }
-            catch (Exception err)
-            {
-                Logger.Error(err);
-                Debugger.Break();
-            }
+
+            var cachedGame = GameManager.Instance.GetGame<EpicGamesStoreGame>(manifest.CatalogItemId);
+            var activeGame = cachedGame ?? new EpicGamesStoreGame(manifest.CatalogItemId);
+            activeGame.RemoteHeaderImage = remoteHeaderUrl;
+            activeGame.Title = manifest.DisplayName; // TODO: Will this be a problem if the game is already loaded
+            activeGame.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
+            activeGame.NeedsProcessing = cachedGame is null;
+            return activeGame;
         }
     }
 }

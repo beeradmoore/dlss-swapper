@@ -71,7 +71,7 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Enabled disk drives to scan for games" />
+                    Text="Scan Drives" />
                 <ListView ItemsSource="{x:Bind ViewModel.EnabledDrives}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="x:String">

@@ -163,7 +163,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
 
             _ = exportingDialog.ShowAsync();
 
-            // Give UI time to update and show import screen.
+            // Give UI time to update and show export loading wheel.
             await Task.Delay(50);
 
             var exportCount = 0;
@@ -174,7 +174,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                 {
                     foreach (var dllRecord in allDllRecords)
                     {
-                        if (dllRecord.LocalRecord is null)
+                        if (dllRecord.LocalRecord is null || dllRecord.LocalRecord.IsDownloaded == true)
                         {
                             continue;
                         }

@@ -231,7 +231,7 @@ namespace DLSS_Swapper.Data
                     using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Read, true))
                     {
                         var dllName = DLLManager.DllNameForGameAssetType(AssetType);
-                        var entry = zipArchive.Entries.FirstOrDefault(x => x.FullName.Equals(dllName, StringComparison.OrdinalIgnoreCase));
+                        var entry = zipArchive.Entries.Single(x => x.Name.Equals(dllName, StringComparison.OrdinalIgnoreCase));
                         if (entry is null)
                         {
                             throw new Exception("Could not find dll in downloaded zip.");

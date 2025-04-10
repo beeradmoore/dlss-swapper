@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.Graphics;
 
 namespace DLSS_Swapper
@@ -13,6 +14,8 @@ namespace DLSS_Swapper
         static Settings? _instance = null;
 
         public static Settings Instance => _instance ??= Settings.FromJson();
+        public event EnabledGameLibrariesChangedHandler EnabledGameLibrariesChanged;
+        public delegate Task EnabledGameLibrariesChangedHandler(object sender, EventArgs e);
 
         // We default this to false to prevent saves firing when loading from json.
         bool _autoSave = false;
@@ -192,6 +195,7 @@ namespace DLSS_Swapper
                     if (_autoSave)
                     {
                         SaveJson();
+                        EnabledGameLibrariesChanged?.Invoke(this, EventArgs.Empty);
                     }
                 }
             }

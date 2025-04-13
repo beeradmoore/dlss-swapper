@@ -791,6 +791,7 @@ namespace DLSS_Swapper.Data
             GameAssets.AddRange(newGameAssets);
 
             // This should never be null.
+            // Using FirstOrDefault as there may be multiple, but we only care about using the information of the first.
             var firstNewGameAsset = newGameAssets.FirstOrDefault(x => x.AssetType == dllRecord.AssetType);
             if (firstNewGameAsset is not null)
             {

@@ -12,7 +12,9 @@ using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Windows.Foundation.Metadata;
+using Windows.UI;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -242,6 +244,15 @@ public partial class DLLPickerControlModel : ObservableObject
                 infoBar.Severity = severity;
                 infoBar.IsOpen = true;
                 infoBar.IsClosable = true;
+
+                // Temp workaround until InfoBar has a solid color by default.
+                // https://github.com/microsoft/microsoft-ui-xaml/issues/5741
+                if (App.Current.Resources.TryGetValue("InfoBarInformationalSeverityBackgroundBrush", out var infoBarInformationalSeverityBackground) && infoBarInformationalSeverityBackground is SolidColorBrush infoBarInformationalSeverityBackgroundBrush)
+                {
+                    infoBarInformationalSeverityBackgroundBrush.Color = Color.FromArgb(255, infoBarInformationalSeverityBackgroundBrush.Color.R, infoBarInformationalSeverityBackgroundBrush.Color.G, infoBarInformationalSeverityBackgroundBrush.Color.B);
+                    infoBar.Background = infoBarInformationalSeverityBackgroundBrush;
+                }
+                  
                 Grid.SetRow(infoBar, gridIndex);
                 grid.Children.Add(infoBar);
 

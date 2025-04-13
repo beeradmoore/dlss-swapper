@@ -660,7 +660,7 @@ namespace DLSS_Swapper.Data
 
             if (File.Exists(dllRecord.LocalRecord.ExpectedPath) == false)
             {
-                return (false, "Downloaded zip not found.", false);
+                return (false, "Downloaded dll not found.", false);
             }
 
             var existingRecords = this.GameAssets.Where(x => x.AssetType == dllRecord.AssetType).ToList();
@@ -672,44 +672,19 @@ namespace DLSS_Swapper.Data
             var backupRecordType = DLLManager.Instance.GetAssetBackupType(dllRecord.AssetType);
             var existingBackupRecords = this.GameAssets.Where(x => x.AssetType == backupRecordType).ToList();
 
-            // TODO: Handle more than the first record.
-            var currentRecord = existingRecords[0];
-
-            var recordFileName = Path.GetFileName(currentRecord.Path);
-            var recordFileNameWithoutExtension = Path.GetFileNameWithoutExtension(currentRecord.Path);
-
-            var tempPath = Storage.GetTemp();
-            var tempDllFile = Path.Combine(tempPath, $"{recordFileNameWithoutExtension}_{dllRecord.MD5Hash}", recordFileName);
-            Storage.CreateDirectoryForFileIfNotExists(tempDllFile);
-
-
-            using (var archive = ZipFile.OpenRead(dllRecord.LocalRecord.ExpectedPath))
-            {
-                var zippedDlls = archive.Entries.Where(x => x.Name == recordFileName).ToArray();
-                if (zippedDlls.Length == 0)
-                {
-                    throw new Exception("Dll zip was invalid (no dll found).");
-                }
-                else if (zippedDlls.Length > 1)
-                {
-                    throw new Exception("Dll zip was invalid (more than one dll found).");
-                }
-
-                zippedDlls[0].ExtractToFile(tempDllFile, true);
-            }
-
-            var versionInfo = FileVersionInfo.GetVersionInfo(tempDllFile);
+            var versionInfo = FileVersionInfo.GetVersionInfo(dllRecord.LocalRecord.ExpectedPath);
             var dllVersion = versionInfo.GetFormattedFileVersion();
-            if (dllRecord.MD5Hash != versionInfo.GetMD5Hash())
+            var md5Hash = versionInfo.GetMD5Hash();
+            if (dllRecord.MD5Hash != md5Hash)
             {
-                return (false, "Unable to swap dll as zip was invalid (dll hash was invalid).", false);
+                return (false, "Unable to swap dll because dll hash was invalid.", false);
             }
 
 
             // Validate new DLL
             if (Settings.Instance.AllowUntrusted == false)
             {
-                var isTrusted = WinTrust.VerifyEmbeddedSignature(tempDllFile);
+                var isTrusted = WinTrust.VerifyEmbeddedSignature(dllRecord.LocalRecord.ExpectedPath);
                 if (isTrusted == false)
                 {
                     return (false, "Unable to swap dll as we are unable to verify the signature of the version you are trying to use.\nIf you wish to override this decision please enable 'Allow Untrusted' in settings.", false);
@@ -731,12 +706,11 @@ namespace DLSS_Swapper.Data
                     }
 
                     // Ensure we don't do anything if the target exists.
-                    var backupDllPath = Path.Combine(dllPath, $"{recordFileName}.dlsss");
+                    var backupDllPath = $"{existingRecord.Path}.dlsss";
                     if (File.Exists(backupDllPath) == false)
                     {
                         try
                         {
-                            var defaultVersionInfo = FileVersionInfo.GetVersionInfo(existingRecord.Path);
                             File.Copy(existingRecord.Path, backupDllPath);
 
                             var backupGameAsset = new GameAsset()
@@ -775,8 +749,6 @@ namespace DLSS_Swapper.Data
             {
                 try
                 {
-                    File.Copy(tempDllFile, existingRecord.Path, true);
-
                     var newGameAsset = new GameAsset()
                     {
                         Id = ID,
@@ -814,7 +786,7 @@ namespace DLSS_Swapper.Data
 
             foreach (var existingRecrod in existingRecords)
             {
-                var didRemove = GameAssets.Remove(existingRecrod);
+                GameAssets.Remove(existingRecrod);
             }
             GameAssets.AddRange(newGameAssets);
 
@@ -830,17 +802,6 @@ namespace DLSS_Swapper.Data
             {
                 await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
                 await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
-            }
-
-
-            try
-            {
-                File.Delete(tempDllFile);
-            }
-            catch (Exception err)
-            {
-                // NOOP
-                Logger.Error(err);
             }
 
             return (true, string.Empty, false);

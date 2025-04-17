@@ -284,7 +284,8 @@ internal class DLLManager
 
         // Test comment
         // Migrate records from zip to raw dlls (test comment changed)
-        CheckDllRecordsForMigration_117(Manifest.DLSS, ImportedManifest?.DLSS);
+        CheckDllRecordsForMigration_117(Manifest.DLSS_D, ImportedManifest?.DLSS_D);
+        // change that back
         CheckDllRecordsForMigration_117(Manifest.DLSS_D, ImportedManifest?.DLSS_D);
         CheckDllRecordsForMigration_117(Manifest.DLSS_G, ImportedManifest?.DLSS_G);
         CheckDllRecordsForMigration_117(Manifest.FSR_31_DX12, ImportedManifest?.FSR_31_DX12);

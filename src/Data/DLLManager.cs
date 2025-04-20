@@ -199,6 +199,17 @@ internal class DLLManager
     {
         try
         {
+            var oldManifestHash = string.Empty;
+
+            var manifestPath = Storage.GetManifestPath();
+            if (File.Exists(manifestPath))
+            {
+                using (var fileStream = File.OpenRead(manifestPath))
+                {
+                    oldManifestHash = fileStream.GetMD5Hash();
+                }
+            }
+
             using (var memoryStream = new MemoryStream())
             {
                 // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider 
@@ -206,6 +217,16 @@ internal class DLLManager
                 // which would then fall back to loading local.
                 var fileDownloader = new FileDownloader("https://raw.githubusercontent.com/beeradmoore/dlss-swapper-manifest-builder/refs/heads/main/manifest.json", 0);
                 await fileDownloader.DownloadFileToStreamAsync(memoryStream);
+
+                memoryStream.Position = 0;
+
+                var newManifestHash = memoryStream.GetMD5Hash();
+
+                // If the old manifest on disk is the same as the new one there is no need to do anything as it will already be loaded.
+                if (oldManifestHash == newManifestHash)
+                {
+                    return true;
+                }
 
                 memoryStream.Position = 0;
 

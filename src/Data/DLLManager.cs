@@ -215,6 +215,8 @@ internal class DLLManager
                     throw new Exception("Could not deserialize manifest.json.");
                 }
 
+                Manifest = manifest;
+
                 await SaveManifestJsonAsync().ConfigureAwait(false);
                 await ProcessManifestsAsync().ConfigureAwait(false);
 

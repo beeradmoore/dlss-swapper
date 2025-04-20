@@ -269,7 +269,7 @@ internal class DLLManager
         SetGameAssetType(Manifest.DLSS_G, GameAssetType.DLSS_G);
         SetGameAssetType(Manifest.FSR_31_DX12, GameAssetType.FSR_31_DX12);
         SetGameAssetType(Manifest.FSR_31_VK, GameAssetType.FSR_31_VK);
-        SetGameAssetType(Manifest.XeSS, GameAssetType.DLSS_D);
+        SetGameAssetType(Manifest.XeSS, GameAssetType.XeSS);
         SetGameAssetType(Manifest.XeSS_FG, GameAssetType.XeSS_FG);
         SetGameAssetType(Manifest.XeLL, GameAssetType.XeLL);
         if (ImportedManifest is not null)
@@ -279,7 +279,7 @@ internal class DLLManager
             SetGameAssetType(ImportedManifest.DLSS_G, GameAssetType.DLSS_G);
             SetGameAssetType(ImportedManifest.FSR_31_DX12, GameAssetType.FSR_31_DX12);
             SetGameAssetType(ImportedManifest.FSR_31_VK, GameAssetType.FSR_31_VK);
-            SetGameAssetType(ImportedManifest.XeSS, GameAssetType.DLSS_D);
+            SetGameAssetType(ImportedManifest.XeSS, GameAssetType.XeSS);
             SetGameAssetType(ImportedManifest.XeSS_FG, GameAssetType.XeSS_FG);
             SetGameAssetType(ImportedManifest.XeLL, GameAssetType.XeLL);
         }

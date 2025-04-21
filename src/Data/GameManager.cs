@@ -289,6 +289,18 @@ internal partial class GameManager : ObservableObject
         }
     }
 
+    public void RemoveAllGames()
+    {
+        lock (gameLock)
+        {
+            // TODO: Cancel loading of games here
+            _synchronisedAllGames.Clear();
+
+            App.CurrentApp.RunOnUIThread(() => {
+                _allGames.Clear();
+            });
+        }
+    }
 
     public TGame? GetGame<TGame>(string platformId) where TGame : Game
     {

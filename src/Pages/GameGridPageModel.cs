@@ -9,10 +9,13 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using AsyncAwaitBestPractices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.Steam;
+using DLSS_Swapper.Messages;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -70,13 +73,15 @@ public partial class GameGridPageModel : ObservableObject
         _ => new FontIcon() { },
     };
 
-
-
-
     public GameGridPageModel(GameGridPage gameGridPage)
     {
-        this.gameGridPage = gameGridPage;
+        WeakReferenceMessenger.Default.Register<GameLibrariesChangedMessage>(this, async (r, m) =>
+        {
+            GameManager.Instance.RemoveAllGames();
+            await InitialLoadAsync();
+        });
 
+        this.gameGridPage = gameGridPage;
         ApplyGameGroupFilter();
     }
 
@@ -391,5 +396,4 @@ If you have checked these and your game is still not showing up there may be a b
         gameGridPage.ReloadMainContentControl();
         Settings.Instance.GameGridViewType = gameGridView;
     }
-
 }

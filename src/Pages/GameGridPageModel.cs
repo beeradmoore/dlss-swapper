@@ -12,8 +12,10 @@ using System.Transactions;
 using AsyncAwaitBestPractices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.Steam;
+using DLSS_Swapper.Messages;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -73,7 +75,12 @@ public partial class GameGridPageModel : ObservableObject
 
     public GameGridPageModel(GameGridPage gameGridPage)
     {
-        Settings.Instance.EnabledGameLibrariesChanged += OnEnabledGameLibrariesChanged;
+        WeakReferenceMessenger.Default.Register<GameLibrariesChangedMessage>(this, async (r, m) =>
+        {
+            GameManager.Instance.RemoveAllGames();
+            await InitialLoadAsync();
+        });
+
         this.gameGridPage = gameGridPage;
         ApplyGameGroupFilter();
     }
@@ -388,15 +395,5 @@ If you have checked these and your game is still not showing up there may be a b
         GameGridViewType = gameGridView;
         gameGridPage.ReloadMainContentControl();
         Settings.Instance.GameGridViewType = gameGridView;
-    }
-
-    private async Task OnEnabledGameLibrariesChanged(object sender, EventArgs e)
-    {
-        IsGameListLoading = true;
-        IsDLSSLoading = true;
-        GameManager.Instance.RemoveAllGames();
-        await GameManager.Instance.LoadGamesFromCacheAsync();
-        IsGameListLoading = false;
-        IsDLSSLoading = false;
     }
 }

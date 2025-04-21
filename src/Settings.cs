@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.Messaging;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Pages;
 using Microsoft.UI.Xaml;
@@ -14,8 +15,8 @@ namespace DLSS_Swapper
         static Settings? _instance = null;
 
         public static Settings Instance => _instance ??= Settings.FromJson();
-        public event EnabledGameLibrariesChangedHandler EnabledGameLibrariesChanged;
-        public delegate Task EnabledGameLibrariesChangedHandler(object sender, EventArgs e);
+        //public event EnabledGameLibrariesChangedHandler EnabledGameLibrariesChanged;
+        //public delegate Task EnabledGameLibrariesChangedHandler(object sender, EventArgs e);
 
         // We default this to false to prevent saves firing when loading from json.
         bool _autoSave = false;
@@ -195,8 +196,9 @@ namespace DLSS_Swapper
                     if (_autoSave)
                     {
                         SaveJson();
-                        EnabledGameLibrariesChanged?.Invoke(this, EventArgs.Empty);
                     }
+
+                    WeakReferenceMessenger.Default.Send(new Messages.GameLibrariesChangedMessage(_enabledGameLibraries));
                 }
             }
         }

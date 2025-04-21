@@ -186,7 +186,7 @@ internal partial class SettingsPageModel : ObservableObject
 
         await Task.Delay(2500);
         var githubUpdater = new Data.GitHub.GitHubUpdater();
-        var newUpdate = await githubUpdater.CheckForNewGitHubRelease();
+        var newUpdate = await githubUpdater.CheckForNewGitHubRelease(true);
 
         if (_weakPage.TryGetTarget(out SettingsPage? settingsPage))
         {

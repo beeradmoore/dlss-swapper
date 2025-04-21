@@ -38,7 +38,7 @@ public partial class LocalRecord : ObservableObject, IEquatable<LocalRecord>
 
     }
 
-    public static LocalRecord FromExpectedPath(string expectedPath, bool imported = false)
+    public static LocalRecord FromExpectedPath(string expectedPath, bool isImported = false)
     {
         var localRecord = new LocalRecord()
         {
@@ -48,10 +48,7 @@ public partial class LocalRecord : ObservableObject, IEquatable<LocalRecord>
         if (File.Exists(expectedPath))
         {
             localRecord.IsDownloaded = true;
-            if (imported)
-            {
-                localRecord.IsImported = true;
-            }
+            localRecord.IsImported = isImported;
         }
 
         return localRecord;
@@ -62,7 +59,21 @@ public partial class LocalRecord : ObservableObject, IEquatable<LocalRecord>
     {
         try
         {
-            File.Delete(ExpectedPath);
+            if (File.Exists(ExpectedPath))
+            {
+                File.Delete(ExpectedPath);
+            }
+
+            var path = Path.GetDirectoryName(ExpectedPath) ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(path) == false)
+            {
+                if (Directory.GetFiles(path).Length == 0 && Directory.GetDirectories(path).Length == 0)
+                {
+                    Directory.Delete(path);
+                }
+            }
+
+
 
             IsDownloaded = false;
             HasDownloadError = false;

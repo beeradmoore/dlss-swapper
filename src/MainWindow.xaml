@@ -1,4 +1,4 @@
-﻿<Window
+<Window
     x:Class="DLSS_Swapper.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -68,7 +68,7 @@
             </Grid.RowDefinitions>
 
             <muxc:ProgressRing Grid.Row="0" x:Name="LoadingProgressRing" IsActive="True" Width="60" Height="60" IsIndeterminate="true" VerticalAlignment="Bottom" />
-            <TextBlock Grid.Row="1" x:Name="LoadingProgressText" VerticalAlignment="Top" Text="Loading" HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock Grid.Row="1" x:Name="LoadingProgressText" VerticalAlignment="Top" Text="{x:Bind ViewModel.LoadingMessage, Mode=OneWay}" HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" />
 
         </Grid>
     </Grid>

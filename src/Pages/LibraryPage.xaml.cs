@@ -41,14 +41,6 @@ namespace DLSS_Swapper.Pages
             ((ItemsWrapGrid)MainGridView.ItemsPanelRoot).ItemWidth = (e.NewSize.Width / columns) - 1;
         }
 
-        private void SelectorBar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
-        {
-            if (sender.SelectedItem.Tag is GameAssetType gameAssetType)
-            {
-                ViewModel.SelectLibrary(gameAssetType);
-            }
-        }
-
         private void MainGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is DLLRecord dllRecord)

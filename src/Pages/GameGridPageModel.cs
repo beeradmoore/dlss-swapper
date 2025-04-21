@@ -196,7 +196,7 @@ If you have checked these and your game is still not showing up there may be a b
                         new Run() { Text = "games", FontStyle = FontStyle.Italic },
                         new Run() { Text = " directory." },
                         new Run() { Text = "\n\n" },
-                        new Run() { Text = "For example, iff you have a game at:\n" },
+                        new Run() { Text = "For example, if you have a game at:\n" },
                         new Run() { Text = "C:\\Program Files\\MyGamesFolder\\MyFavouriteGame\\" },
                         new Run() { Text = "\n\n" },
                         new Run() { Text = "You would select the " },

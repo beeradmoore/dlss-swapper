@@ -2,6 +2,8 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
@@ -29,6 +31,13 @@ namespace DLSS_Swapper.Data
         [JsonPropertyName("md5_hash")]
         public string MD5Hash { get; set; } = string.Empty;
 
+        /// <summary>
+        /// This hash is not guaranteed to be the same as the hash on the zip on the disk.
+        /// It is used during download to validate a successful download. However if you
+        /// import a DLL that exists in the manifest we will then create the zip for that
+        /// file. Doing so will cause the new generateed zip hash and this entry in the 
+        /// manifest to differ.
+        /// </summary>
         [JsonPropertyName("zip_md5_hash")]
         public string ZipMD5Hash { get; set; } = string.Empty;
 
@@ -141,6 +150,11 @@ namespace DLSS_Swapper.Data
                 return -1;
             }
 
+            if (string.IsNullOrWhiteSpace(MD5Hash) == false && MD5Hash == other.MD5Hash)
+            {
+                return 0;
+            }
+
             if (VersionNumber == other.VersionNumber)
             {
                 if (IsDevFile == other.IsDevFile)
@@ -190,8 +204,7 @@ namespace DLSS_Swapper.Data
             var cancellationToken = _cancellationTokenSource.Token;
 
             var fileDownloader = new FileDownloader(DownloadUrl);
-            var tempPath = Storage.GetTemp();
-            var tempZipFile = Path.Combine(tempPath, $"{fileDownloader.Guid.ToString("D").ToUpper()}.zip");
+            var tempZipFile = Path.Combine(Storage.GetTemp(), $"{fileDownloader.Guid.ToString("D").ToUpper()}.zip");
 
             try
             {
@@ -212,11 +225,24 @@ namespace DLSS_Swapper.Data
                     {
                         throw new Exception("Downloaded file was invalid.");
                     }
-                }
 
-                var directory = Path.GetDirectoryName(LocalRecord.ExpectedPath) ?? string.Empty;
-                Storage.CreateDirectoryIfNotExists(directory);
-                File.Move(tempZipFile, LocalRecord.ExpectedPath, true);
+                    fileStream.Position = 0;
+
+                    using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Read, true))
+                    {
+                        var dllName = DLLManager.DllNameForGameAssetType(AssetType);
+                        var entry = zipArchive.Entries.Single(x => x.Name.Equals(dllName, StringComparison.OrdinalIgnoreCase));
+                        if (entry is null)
+                        {
+                            throw new Exception("Could not find dll in downloaded zip.");
+                        }
+                        else
+                        {
+                            Storage.CreateDirectoryForFileIfNotExists(LocalRecord.ExpectedPath);
+                            entry.ExtractToFile(LocalRecord.ExpectedPath, true);
+                        }
+                    }
+                }
 
                 App.CurrentApp.RunOnUIThread(() =>
                 {
@@ -271,38 +297,6 @@ namespace DLSS_Swapper.Data
             }
         }
 
-
-        /*
-        internal static DLSSRecord FromImportedFile(string fileName)
-        {
-            if (File.Exists(fileName) == false)
-            {
-                return null;
-            }
-
-            var versionInfo = FileVersionInfo.GetVersionInfo(fileName);
-
-            var dlssRecord = new DLSSRecord()
-            {
-                Version = versionInfo.GetFormattedFileVersion(),
-                VersionNumber = versionInfo.GetFileVersionNumber(),
-                MD5Hash = versionInfo.GetMD5Hash(),
-                FileSize = 3,
-                ZipFileSize = 0,
-                ZipMD5Hash = string.Empty,
-                IsSignatureValid = WinTrust.VerifyEmbeddedSignature(fileName),
-            };
-
-            // TODO: Maybe don't load from here.
-
-            App.CurrentApp.LoadLocalRecordFromDLSSRecord(dlssRecord, true);
-
-            return dlssRecord;
-        }
-        */
-
-
-
         internal string GetRecordSimpleType()
         {
             return AssetType switch
@@ -319,5 +313,30 @@ namespace DLSS_Swapper.Data
             };
         }
 
+        internal void CopyFrom(DLLRecord newDllRecord)
+        {
+            Version = newDllRecord.Version;
+            VersionNumber = newDllRecord.VersionNumber;
+            InternalName = newDllRecord.InternalName;
+            AdditionalLabel = newDllRecord.AdditionalLabel;
+            MD5Hash = newDllRecord.MD5Hash;
+            ZipMD5Hash = newDllRecord.ZipMD5Hash;
+            DownloadUrl = newDllRecord.DownloadUrl;
+            FileDescription = newDllRecord.FileDescription;
+            SignedDateTime = newDllRecord.SignedDateTime;
+            IsSignatureValid = newDllRecord.IsSignatureValid;
+            IsDevFile = newDllRecord.IsDevFile;
+            FileSize = newDllRecord.FileSize;
+            ZipFileSize = newDllRecord.ZipFileSize;
+            LocalRecord = newDllRecord.LocalRecord;
+            AssetType = newDllRecord.AssetType;
+
+            NotifyPropertyChanged(nameof(FullName));
+            _displayVersion = string.Empty;
+            NotifyPropertyChanged(nameof(DisplayVersion));
+            NotifyPropertyChanged(nameof(DisplayName));
+        }
+
     }
+
 }

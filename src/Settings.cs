@@ -142,23 +142,6 @@ namespace DLSS_Swapper
             }
         }
 
-        DateTimeOffset _lastRecordsRefresh = DateTimeOffset.MinValue;
-        public DateTimeOffset LastRecordsRefresh
-        {
-            get { return _lastRecordsRefresh; }
-            set
-            {
-                if (_lastRecordsRefresh != value)
-                {
-                    _lastRecordsRefresh = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
-                }
-            }
-        }
-
 
         ulong _lastPromptWasForVersion = 0L;
         public ulong LastPromptWasForVersion

@@ -306,14 +306,29 @@ internal class DLLManager
         }
 
         // Migrate records from zip to raw dlls
-        CheckDllRecordsForMigration_117(Manifest.DLSS, ImportedManifest?.DLSS);
-        CheckDllRecordsForMigration_117(Manifest.DLSS_D, ImportedManifest?.DLSS_D);
-        CheckDllRecordsForMigration_117(Manifest.DLSS_G, ImportedManifest?.DLSS_G);
-        CheckDllRecordsForMigration_117(Manifest.FSR_31_DX12, ImportedManifest?.FSR_31_DX12);
-        CheckDllRecordsForMigration_117(Manifest.FSR_31_VK, ImportedManifest?.FSR_31_VK);
-        CheckDllRecordsForMigration_117(Manifest.XeSS, ImportedManifest?.XeSS);
-        CheckDllRecordsForMigration_117(Manifest.XeSS_FG, ImportedManifest?.XeSS_FG);
-        CheckDllRecordsForMigration_117(Manifest.XeLL, ImportedManifest?.XeLL);
+        var zipDirectories = Directory.GetDirectories(Storage.GetStorageFolder(), "*_zip", SearchOption.TopDirectoryOnly);
+        if (zipDirectories.Length > 0)
+        {
+            var oldLoadingMessage = App.CurrentApp.MainWindow.ViewModel.LoadingMessage;
+            App.CurrentApp.RunOnUIThread(() =>
+            {
+                App.CurrentApp.MainWindow.ViewModel.LoadingMessage = "Migrating DLLs";
+            });
+
+            CheckDllRecordsForMigration_117(Manifest.DLSS, ImportedManifest?.DLSS);
+            CheckDllRecordsForMigration_117(Manifest.DLSS_D, ImportedManifest?.DLSS_D);
+            CheckDllRecordsForMigration_117(Manifest.DLSS_G, ImportedManifest?.DLSS_G);
+            CheckDllRecordsForMigration_117(Manifest.FSR_31_DX12, ImportedManifest?.FSR_31_DX12);
+            CheckDllRecordsForMigration_117(Manifest.FSR_31_VK, ImportedManifest?.FSR_31_VK);
+            CheckDllRecordsForMigration_117(Manifest.XeSS, ImportedManifest?.XeSS);
+            CheckDllRecordsForMigration_117(Manifest.XeSS_FG, ImportedManifest?.XeSS_FG);
+            CheckDllRecordsForMigration_117(Manifest.XeLL, ImportedManifest?.XeLL);
+
+            App.CurrentApp.RunOnUIThread(() =>
+            {
+                App.CurrentApp.MainWindow.ViewModel.LoadingMessage = oldLoadingMessage;
+            });
+        }
 
         // Load local records
         LoadLocalRecords(Manifest.DLSS);

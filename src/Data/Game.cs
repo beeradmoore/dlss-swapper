@@ -749,6 +749,9 @@ namespace DLSS_Swapper.Data
             {
                 try
                 {
+                    // Copy the DLL
+                    File.Copy(dllRecord.LocalRecord.ExpectedPath, existingRecord.Path, true);
+
                     var newGameAsset = new GameAsset()
                     {
                         Id = ID,

@@ -42,6 +42,8 @@ namespace DLSS_Swapper
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        public MainWindowModel ViewModel { get; private set; }
+
         bool _isCustomizationSupported;
         ThemeWatcher _themeWatcher;
         IntPtr _windowIcon;
@@ -56,6 +58,7 @@ namespace DLSS_Swapper
         {
             Title = "DLSS Swapper";
             this.InitializeComponent();
+            ViewModel = new MainWindowModel();
 
             if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
             {

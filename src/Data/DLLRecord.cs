@@ -2,6 +2,8 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
@@ -202,8 +204,7 @@ namespace DLSS_Swapper.Data
             var cancellationToken = _cancellationTokenSource.Token;
 
             var fileDownloader = new FileDownloader(DownloadUrl);
-            var tempPath = Storage.GetTemp();
-            var tempZipFile = Path.Combine(tempPath, $"{fileDownloader.Guid.ToString("D").ToUpper()}.zip");
+            var tempZipFile = Path.Combine(Storage.GetTemp(), $"{fileDownloader.Guid.ToString("D").ToUpper()}.zip");
 
             try
             {
@@ -224,11 +225,24 @@ namespace DLSS_Swapper.Data
                     {
                         throw new Exception("Downloaded file was invalid.");
                     }
-                }
 
-                var directory = Path.GetDirectoryName(LocalRecord.ExpectedPath) ?? string.Empty;
-                Storage.CreateDirectoryIfNotExists(directory);
-                File.Move(tempZipFile, LocalRecord.ExpectedPath, true);
+                    fileStream.Position = 0;
+
+                    using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Read, true))
+                    {
+                        var dllName = DLLManager.DllNameForGameAssetType(AssetType);
+                        var entry = zipArchive.Entries.Single(x => x.Name.Equals(dllName, StringComparison.OrdinalIgnoreCase));
+                        if (entry is null)
+                        {
+                            throw new Exception("Could not find dll in downloaded zip.");
+                        }
+                        else
+                        {
+                            Storage.CreateDirectoryForFileIfNotExists(LocalRecord.ExpectedPath);
+                            entry.ExtractToFile(LocalRecord.ExpectedPath, true);
+                        }
+                    }
+                }
 
                 App.CurrentApp.RunOnUIThread(() =>
                 {
@@ -283,42 +297,6 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        internal string GetExpectedZipName()
-        {
-            return $"{GetRecordSimpleType()}_v{Version}_{MD5Hash}.zip";
-        }
-
-        /*
-        internal static DLSSRecord FromImportedFile(string fileName)
-        {
-            if (File.Exists(fileName) == false)
-            {
-                return null;
-            }
-
-            var versionInfo = FileVersionInfo.GetVersionInfo(fileName);
-
-            var dlssRecord = new DLSSRecord()
-            {
-                Version = versionInfo.GetFormattedFileVersion(),
-                VersionNumber = versionInfo.GetFileVersionNumber(),
-                MD5Hash = versionInfo.GetMD5Hash(),
-                FileSize = 3,
-                ZipFileSize = 0,
-                ZipMD5Hash = string.Empty,
-                IsSignatureValid = WinTrust.VerifyEmbeddedSignature(fileName),
-            };
-
-            // TODO: Maybe don't load from here.
-
-            App.CurrentApp.LoadLocalRecordFromDLSSRecord(dlssRecord, true);
-
-            return dlssRecord;
-        }
-        */
-
-
-
         internal string GetRecordSimpleType()
         {
             return AssetType switch
@@ -358,6 +336,7 @@ namespace DLSS_Swapper.Data
             NotifyPropertyChanged(nameof(DisplayVersion));
             NotifyPropertyChanged(nameof(DisplayName));
         }
+
     }
 
 }

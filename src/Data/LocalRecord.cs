@@ -59,7 +59,21 @@ public partial class LocalRecord : ObservableObject, IEquatable<LocalRecord>
     {
         try
         {
-            File.Delete(ExpectedPath);
+            if (File.Exists(ExpectedPath))
+            {
+                File.Delete(ExpectedPath);
+            }
+
+            var path = Path.GetDirectoryName(ExpectedPath) ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(path) == false)
+            {
+                if (Directory.GetFiles(path).Length == 0 && Directory.GetDirectories(path).Length == 0)
+                {
+                    Directory.Delete(path);
+                }
+            }
+
+
 
             IsDownloaded = false;
             HasDownloadError = false;

@@ -34,7 +34,7 @@ public record DLLImportResult
     {
         var dllImportResult = new DLLImportResult()
         {
-            Success = true,
+            Success = false,
             FilePath = filePath,
             Message = message,
         };

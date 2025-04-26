@@ -1223,7 +1223,7 @@ internal class DLLManager
 
             // TODO: Get extra data from DLL if possible
 
-            var expectedPath = GetExpectedDllFileName(dllRecord, true);
+            var expectedPath = GetExpectedDllFileName(dllRecord, !importingAsDownloadedDll);
             if (string.IsNullOrWhiteSpace(expectedPath))
             {
                 return DLLImportResult.FromFail(zippedDllFullName ?? filePath, "Could not import DLL.");
@@ -1348,5 +1348,31 @@ internal class DLLManager
             GameAssetType.XeLL => "libxell.dll",
             _ => string.Empty,
         };
+    }
+
+    /// <summary>
+    /// This handles extracting of the DLL from both downloaded and imported zips (when imported matches the hash of one that could be downloaded)
+    /// </summary>
+    /// <param name="zipArchive"></param>
+    /// <param name="dllRecord"></param>
+    /// <exception cref="Exception"></exception>
+    internal static void HandleExtractFromZip(ZipArchive zipArchive, DLLRecord dllRecord)
+    {
+        if (dllRecord.LocalRecord is null)
+        {
+            throw new Exception("LocalRecord was null when attempting to extract dll from zip.");
+        }
+
+        var dllName = DLLManager.DllNameForGameAssetType(dllRecord.AssetType);
+        var entry = zipArchive.Entries.Single(x => x.Name.Equals(dllName, StringComparison.OrdinalIgnoreCase));
+        if (entry is null)
+        {
+            throw new Exception("Could not find dll in zip.");
+        }
+        else
+        {
+            Storage.CreateDirectoryForFileIfNotExists(dllRecord.LocalRecord.ExpectedPath);
+            entry.ExtractToFile(dllRecord.LocalRecord.ExpectedPath, true);
+        }
     }
 }

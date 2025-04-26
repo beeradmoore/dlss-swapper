@@ -230,17 +230,7 @@ namespace DLSS_Swapper.Data
 
                     using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Read, true))
                     {
-                        var dllName = DLLManager.DllNameForGameAssetType(AssetType);
-                        var entry = zipArchive.Entries.Single(x => x.Name.Equals(dllName, StringComparison.OrdinalIgnoreCase));
-                        if (entry is null)
-                        {
-                            throw new Exception("Could not find dll in downloaded zip.");
-                        }
-                        else
-                        {
-                            Storage.CreateDirectoryForFileIfNotExists(LocalRecord.ExpectedPath);
-                            entry.ExtractToFile(LocalRecord.ExpectedPath, true);
-                        }
+                        DLLManager.HandleExtractFromZip(zipArchive, this);
                     }
                 }
 

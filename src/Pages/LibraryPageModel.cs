@@ -651,7 +651,9 @@ Only import dlls from sources you trust.",
 
                             foreach (var zippedDll in zippedDlls)
                             {
-                                var tempFile = Path.Combine(tempExtractPath, zippedDll.Name);
+                                var tempFile = Path.Combine(tempExtractPath, Guid.NewGuid().ToString("D"), zippedDll.Name);
+                                Storage.CreateDirectoryForFileIfNotExists(tempFile);
+
                                 zippedDll.ExtractToFile(tempFile, true);
 
                                 ++processedDllsInZip;

@@ -1223,7 +1223,7 @@ internal class DLLManager
 
             // TODO: Get extra data from DLL if possible
 
-            var expectedPath = GetExpectedDllFileName(dllRecord, true);
+            var expectedPath = GetExpectedDllFileName(dllRecord, !importingAsDownloadedDll);
             if (string.IsNullOrWhiteSpace(expectedPath))
             {
                 return DLLImportResult.FromFail(zippedDllFullName ?? filePath, "Could not import DLL.");

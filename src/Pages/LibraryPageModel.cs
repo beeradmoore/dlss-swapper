@@ -440,11 +440,35 @@ Only import dlls from sources you trust.",
             {
                 if (File.Exists(dllRecord.LocalRecord.ExpectedPath))
                 {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        var localRecord = dllRecord.LocalRecord;
+                        localRecord.IsDownloaded = true;
+                        dllRecord.LocalRecord = null;
+                        dllRecord.LocalRecord = localRecord;
+                    });
+
                     importResults.Add(DLLImportResult.FromSucces(dllRecord.LocalRecord.ExpectedPath, "Already downloaded.", true));
                     return true;
                 }
 
-                File.Copy(importedPath, dllRecord.LocalRecord.ExpectedPath);
+                try
+                {
+                    using (var fileStream = File.OpenRead(importedPath))
+                    {
+                        using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Read, true))
+                        {
+                            DLLManager.HandleExtractFromZip(zipArchive, dllRecord);
+                        }
+                    }
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err);
+                    importResults.Add(DLLImportResult.FromFail(importedPath, "Failed to extract DLL from zip."));
+                    return false;
+                }
+
                 App.CurrentApp.RunOnUIThread(() =>
                 {
                     var localRecord = dllRecord.LocalRecord;
@@ -460,6 +484,7 @@ Only import dlls from sources you trust.",
                 // This should never happen.
                 Logger.Error("dllRecord.LocalRecord is null");
                 Debugger.Break();
+                importResults.Add(DLLImportResult.FromFail(importedPath, "dllRecord.LocalRecord is null"));
                 return false;
             }
         }

@@ -53,6 +53,11 @@
                         <FontIcon Glyph="&#xEDE1;" />
                     </AppBarButton.Content>
                 </AppBarButton>
+                <AppBarButton HorizontalAlignment="Right" Label="Download Latest" Command="{x:Bind ViewModel.DownloadLatestCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE896;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
                 <AppBarButton HorizontalAlignment="Right" Label="Refresh" Command="{x:Bind ViewModel.RefreshCommand}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE72C;" />

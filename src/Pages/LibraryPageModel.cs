@@ -961,4 +961,96 @@ Only import dlls from sources you trust.",
         SelectedLibraryList = newList;
         OnPropertyChanged(nameof(SelectedLibraryList));
     }
+
+    [RelayCommand]
+    async Task DownloadLatestAsync()
+    {
+        var startedDownloads = 0;
+        if (DownloadLatestRecord(DLLManager.Instance.DLSSRecords))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.DLSSDRecords))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.DLSSGRecords))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.FSR31DX12Records))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.FSR31VKRecords))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.XeSSRecords))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.XeSSFGRecords))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.XeLLRecords))
+        {
+            ++startedDownloads;
+        }
+
+        if (startedDownloads == 0)
+        {
+            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = "No new DLLs",
+                CloseButtonText = "Okay",
+                DefaultButton = ContentDialogButton.Close,
+                Content = "There were no new DLLs to download.",
+            };
+            await dialog.ShowAsync();
+        }
+        else
+        {
+            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = "Downloads started",
+                CloseButtonText = "Okay",
+                DefaultButton = ContentDialogButton.Close,
+                Content = $"Started {startedDownloads} new downloads.",
+            };
+            await dialog.ShowAsync();
+        }
+    }
+
+    bool DownloadLatestRecord(IReadOnlyList<DLLRecord> records)
+    {
+        var record = GetLatestRecord(records);
+        if (record?.LocalRecord?.IsDownloaded == false)
+        {
+            _ = record.DownloadAsync();
+            return true;
+        }
+
+        return false;
+    }
+
+    DLLRecord? GetLatestRecord(IReadOnlyList<DLLRecord> records)
+    {
+        if (records.Count == 0)
+        {
+            return null;
+        }
+
+        var latestRecord = records[0];
+        foreach (var record in records)
+        {
+            if (record.VersionNumber > latestRecord.VersionNumber)
+            {
+                latestRecord = record;
+            }
+        }
+
+        return latestRecord;
+    }
 }

@@ -1414,9 +1414,10 @@ namespace DLSS_Swapper.Data
                 return false;
             }
 
+            // If installed path is empty we should consider it ignored.
             if (string.IsNullOrWhiteSpace(InstallPath))
             {
-                return false;
+                return true;
             }
 
             foreach (var ignoredPath in Settings.Instance.IgnoredPaths)

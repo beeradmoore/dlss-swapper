@@ -196,9 +196,8 @@ namespace DLSS_Swapper
                     if (_autoSave)
                     {
                         SaveJson();
+                        WeakReferenceMessenger.Default.Send(new Messages.GameLibrariesChangedMessage(_enabledGameLibraries));
                     }
-
-                    WeakReferenceMessenger.Default.Send(new Messages.GameLibrariesChangedMessage(_enabledGameLibraries));
                 }
             }
         }

@@ -207,6 +207,12 @@ namespace DLSS_Swapper.Data.Xbox
                         var activeGame = cachedGame ?? new XboxGame(familyName);
                         activeGame.Title = package.DisplayName;  // TODO: Will this be a problem if the game is already loaded
                         activeGame.InstallPath = PathHelpers.NormalizePath(package.InstalledPath);
+
+                        if (activeGame.IsInIgnoredPath())
+                        {
+                            continue;
+                        }
+
                         await activeGame.SetLocalHeaderImagesAsync(gameNamesToFindPackages[packageName]);
                         //await game.UpdateCacheImageAsync();
                         await activeGame.SaveToDatabaseAsync();
@@ -256,6 +262,11 @@ namespace DLSS_Swapper.Data.Xbox
                 }
                 foreach (var game in games)
                 {
+                    if (game.IsInIgnoredPath())
+                    {
+                        continue;
+                    }
+
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }

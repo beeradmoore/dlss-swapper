@@ -218,6 +218,11 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                 activeGame.LocalHeaderImage = localImage;
                                 activeGame.RemoteHeaderImage = remoteImage;
 
+                                if (activeGame.IsInIgnoredPath())
+                                {
+                                    continue;
+                                }
+
                                 await activeGame.SaveToDatabaseAsync();
 
                                 // If the game is not from cache, force processing
@@ -468,6 +473,11 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 }
                 foreach (var game in games)
                 {
+                    if (game.IsInIgnoredPath())
+                    {
+                        continue;
+                    }
+
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }

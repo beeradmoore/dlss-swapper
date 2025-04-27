@@ -11,16 +11,14 @@
     xmlns:local="using:DLSS_Swapper"
     xmlns:ct_winui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d"
-    NavigationCacheMode="Required">
+    NavigationCacheMode="Required"
+    x:Name="RootPage">
     <Page.Resources>
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToNegationVisibilityConverter"  TrueValue="Collapsed" FalseValue="Visible" />
         <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter" />
     </Page.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -47,7 +45,7 @@
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
         <ScrollViewer Grid.Row="2">
-            <StackPanel HorizontalAlignment="Left" Padding="56,0,56,56">
+            <StackPanel Padding="56,0,56,56">
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
@@ -66,6 +64,46 @@
                 <StackPanel Margin="0,10,0,0">
                     <usercontrols:GameLibrarySelectorControl SavesWhenToggled="true" />
                 </StackPanel>
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Ignored Paths" />
+                <StackPanel Margin="0,10,0,0">
+                    <StackPanel.Resources>
+                        <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="Transparent" />
+                        <x:Double x:Key="CornerRadius">0</x:Double>
+                        <Thickness x:Key="ExpanderHeaderBorderThickness">0</Thickness>
+                        <Thickness x:Key="ExpanderHeaderPadding">0,0,0,0</Thickness>
+                    </StackPanel.Resources>
+
+                    <Button Content="Add Ignored Path" Command="{x:Bind ViewModel.AddIgnoredPathCommand}" />
+                    
+                    <ListView ItemsSource="{x:Bind ViewModel.IgnoredPaths}" SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Expander
+                                    ExpandDirection="Down"
+                                    HorizontalAlignment="Stretch"
+                                    BorderThickness="0"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    HorizontalContentAlignment="Stretch"
+                                    >
+                                    <Expander.Header>
+                                        <TextBlock Text="{x:Bind}" TextWrapping="Wrap" />
+                                    </Expander.Header>
+                                    <Expander.Content>
+                                        <Grid HorizontalAlignment="Right">
+                                            <Button Command="{Binding ElementName=RootPage, Path=ViewModel.DeleteIgnoredPathCommand}" CommandParameter="{x:Bind }">Remove</Button>
+                                        </Grid>
+                                    </Expander.Content>
+                                </Expander>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+
 
 
                 <TextBlock

@@ -1405,5 +1405,40 @@ namespace DLSS_Swapper.Data
                 return;
             }
         }
+
+        public bool IsInIgnoredPath()
+        {
+            // If there are no ignored paths we can skip this altogether.
+            if (Settings.Instance.IgnoredPaths.Length == 0)
+            {
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(InstallPath))
+            {
+                return false;
+            }
+
+            foreach (var ignoredPath in Settings.Instance.IgnoredPaths)
+            {
+                // Because we make IgnoredPaths have a / on the end it will fail the below check.
+                // In the cases where the path could be off by one we will do a manual check.
+                if (ignoredPath.Length - 1 == InstallPath.Length)
+                {
+                    var tempInstallPath = InstallPath + Path.DirectorySeparatorChar;
+                    if (tempInstallPath.Equals(ignoredPath, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return true;
+                    }
+                }
+
+
+                if (InstallPath.StartsWith(ignoredPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

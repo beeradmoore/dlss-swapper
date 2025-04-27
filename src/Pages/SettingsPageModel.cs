@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -15,7 +16,7 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace DLSS_Swapper.Pages;
 
-internal partial class SettingsPageModel : ObservableObject
+public partial class SettingsPageModel : ObservableObject
 {
     readonly WeakReference<SettingsPage> _weakPage;
     readonly DLSSSettingsManager _dlssSettingsManager;
@@ -65,6 +66,8 @@ internal partial class SettingsPageModel : ObservableObject
     [ObservableProperty]
     public partial bool IsCheckingForUpdates { get; set; } = false;
 
+    public ObservableCollection<string> IgnoredPaths { get; set; }
+
     bool _hasSetDefaults = false;
 
     public SettingsPageModel(SettingsPage page)
@@ -95,6 +98,8 @@ internal partial class SettingsPageModel : ObservableObject
         AllowDebugDlls = Settings.Instance.AllowDebugDlls;
         OnlyShowDownloadedDlls = Settings.Instance.OnlyShowDownloadedDlls;
         LoggingLevel = Settings.Instance.LoggingLevel;
+
+        IgnoredPaths = new ObservableCollection<string>(Settings.Instance.IgnoredPaths);
 
         _hasSetDefaults = true;
     }
@@ -263,5 +268,84 @@ internal partial class SettingsPageModel : ObservableObject
     {
         var diagnosticsWindow = new DiagnosticsWindow();
         diagnosticsWindow.Activate();
+    }
+
+
+    [RelayCommand]
+    async Task AddIgnoredPathAsync(string path)
+    {
+        if (_weakPage.TryGetTarget(out SettingsPage? settingsPage))
+        {
+            if (Environment.IsPrivilegedProcess)
+            {
+                var errorDialog = new EasyContentDialog(settingsPage.XamlRoot)
+                {
+                    Title = "Error",
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = "This feature is not supported if you are running the application as admin.",
+                };
+                await errorDialog.ShowAsync();
+                return;
+            }
+
+            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
+            var folderPicker = new Windows.Storage.Pickers.FolderPicker();
+            folderPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
+            var folder = await folderPicker.PickSingleFolderAsync();
+
+            // User cancelled.
+            if (folder is null)
+            {
+                return;
+            }
+
+            var folderPath = folder.Path;
+            if (folder.Path.EndsWith(Path.DirectorySeparatorChar) == false)
+            {
+                folderPath += Path.DirectorySeparatorChar;
+            }
+
+            if (IgnoredPaths.Contains(folderPath))
+            {
+                var errorDialog = new EasyContentDialog(settingsPage.XamlRoot)
+                {
+                    Title = "Error",
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = $"The path {folderPath} is already ignored.",
+                };
+                await errorDialog.ShowAsync();
+                return;
+            }
+
+            IgnoredPaths.Add(folderPath);
+            Settings.Instance.IgnoredPaths = IgnoredPaths.ToArray();
+        }
+    }
+
+    [RelayCommand]
+    async Task DeleteIgnoredPathAsync(string path)
+    {
+        if (_weakPage.TryGetTarget(out SettingsPage? settingsPage))
+        {
+            var dialog = new EasyContentDialog(settingsPage.XamlRoot)
+            {
+                Title = "Delete Ignored Path",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Close,
+                PrimaryButtonText = "Delete",
+                Content = $"Are you sure you want to delete the ignored path {path}?",
+            };
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                IgnoredPaths.Remove(path);
+                Settings.Instance.IgnoredPaths = IgnoredPaths.ToArray();
+            }
+        }
     }
 }

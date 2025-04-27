@@ -118,6 +118,11 @@ namespace DLSS_Swapper.Data.GOG
                             activeGame.Title = gameName;  // TODO: Will this be a problem if the game is already loaded
                             activeGame.InstallPath = PathHelpers.NormalizePath(gamePath);
 
+                            if (activeGame.IsInIgnoredPath())
+                            {
+                                continue;
+                            }
+
                             // If the game is not from cache, force processing
                             if (cachedGame is null)
                             {
@@ -328,6 +333,11 @@ namespace DLSS_Swapper.Data.GOG
                 }
                 foreach (var game in games)
                 {
+                    if (game.IsInIgnoredPath())
+                    {
+                        continue;
+                    }
+
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }

@@ -180,6 +180,11 @@ namespace DLSS_Swapper.Data.Steam
                         activeGame.InstallPath = game.InstallPath;
                         activeGame.StateFlags = game.StateFlags;
 
+                        if (activeGame.IsInIgnoredPath())
+                        {
+                            continue;
+                        }
+
                         await activeGame.SaveToDatabaseAsync().ConfigureAwait(false);
 
                         // If the game is not from cache, force processing
@@ -260,6 +265,11 @@ namespace DLSS_Swapper.Data.Steam
                 }
                 foreach (var game in games)
                 {
+                    if (game.IsInIgnoredPath())
+                    {
+                        continue;
+                    }
+
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }

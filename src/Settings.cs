@@ -196,9 +196,8 @@ namespace DLSS_Swapper
                     if (_autoSave)
                     {
                         SaveJson();
+                        WeakReferenceMessenger.Default.Send(new Messages.GameLibrariesChangedMessage(_enabledGameLibraries));
                     }
-
-                    WeakReferenceMessenger.Default.Send(new Messages.GameLibrariesChangedMessage(_enabledGameLibraries));
                 }
             }
         }
@@ -325,34 +324,25 @@ namespace DLSS_Swapper
             }
         }
 
-        /*
-        public List<string> Directories { get; set; } = new List<string>();
 
-        public void AddDirectory(string directory)
+
+        string[] _ignoredPaths = new string[0];
+        public string[] IgnoredPaths
         {
-            if (Directories.Contains(directory))
+            get { return _ignoredPaths; }
+            set
             {
-                return;
-            }
-            
-            Directories.Add(directory);
-            
-            if (_autoSave)
-            {
-                SaveJson();
+                if (_ignoredPaths != value)
+                {
+                    _ignoredPaths = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                        WeakReferenceMessenger.Default.Send(new Messages.GameLibrariesChangedMessage(_enabledGameLibraries));
+                    }
+                }
             }
         }
-        
-        public void RemoveDirectory(string directory)
-        {
-            Directories.Remove(directory);
-            
-            if (_autoSave)
-            {
-                SaveJson();
-            }
-        }
-        */
 
         void SaveJson()
         {

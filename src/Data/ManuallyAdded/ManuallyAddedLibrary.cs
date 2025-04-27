@@ -37,6 +37,11 @@ public class ManuallyAddedLibrary : IGameLibrary
             var cachedGame = GameManager.Instance.GetGame<ManuallyAddedGame>(dbGame.PlatformId);
             var activeGame = cachedGame ?? dbGame;
 
+            if (activeGame.IsInIgnoredPath())
+            {
+                continue;
+            }
+
             // If the game is not from cache, force re-processing
             if (cachedGame is null)
             {
@@ -72,6 +77,11 @@ public class ManuallyAddedLibrary : IGameLibrary
             }
             foreach (var game in games)
             {
+                if (game.IsInIgnoredPath())
+                {
+                    continue;
+                }
+
                 await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                 GameManager.Instance.AddGame(game);
             }

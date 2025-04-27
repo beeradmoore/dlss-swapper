@@ -150,6 +150,11 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                     activeGame.Title = manifest.DisplayName; // TODO: Will this be a problem if the game is already loaded
                     activeGame.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
 
+                    if (activeGame.IsInIgnoredPath())
+                    {
+                        continue;
+                    }
+
                     await activeGame.SaveToDatabaseAsync();
 
                     // If the game is not from cache, force processing
@@ -206,6 +211,11 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                 }
                 foreach (var game in games)
                 {
+                    if (game.IsInIgnoredPath())
+                    {
+                        continue;
+                    }
+
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }

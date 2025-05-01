@@ -1,0 +1,136 @@
+syntax = "proto3";
+option csharp_namespace = "DLSS_Swapper.Data.BattleNet.Proto";
+
+message LanguageSetting {
+  string language = 1;
+  LanguageOption option = 2;
+}
+
+message UserSettings {
+  string install_path = 1;
+  string play_region = 2;
+  ShortcutOption desktop_shortcut = 3;
+  ShortcutOption startmenu_shortcut = 4;
+  LanguageSettingType language_settings = 5;
+  string selected_text_language = 6;
+  string selected_speech_language = 7;
+  repeated LanguageSetting languages = 8;
+  string gfx_override_tags = 9;
+  string versionbranch = 10;
+}
+
+message InstallHandshake {
+  string product = 1;
+  string uid = 2;
+  UserSettings settings = 3;
+}
+
+message BuildConfig {
+  string region = 1;
+  string build_config = 2;
+}
+
+message BaseProductState {
+  bool installed = 1;
+  bool playable = 2;
+  bool update_complete = 3;
+  bool background_download_available = 4;
+  bool background_download_complete = 5;
+  string current_version = 6;
+  string current_version_str = 7;
+  repeated BuildConfig installed_build_config = 8;
+  repeated BuildConfig background_download_build_config = 9;
+  string decryption_key = 10;
+  repeated string completed_install_actions = 11;
+}
+
+message BackfillProgress {
+  double progress = 1;
+  bool backgrounddownload = 2;
+  bool paused = 3;
+  uint64 download_limit = 4;
+}
+
+message RepairProgress {
+  double progress = 1;
+}
+
+message UpdateProgress {
+  string last_disc_set_used = 1;
+  double progress = 2;
+  bool disc_ignored = 3;
+  uint64 total_to_download = 4;
+  uint64 download_remaining = 5;
+}
+
+message CachedProductState {
+  BaseProductState base_product_state = 1;
+  BackfillProgress backfill_progress = 2;
+  RepairProgress repair_progress = 3;
+  UpdateProgress update_progress = 4;
+}
+
+message ProductOperations {
+  Operation active_operation = 1;
+  uint32 priority = 2;
+}
+
+message ProductInstall {
+  string uid = 1;
+  string product_code = 2;
+  UserSettings settings = 3;
+  CachedProductState cached_product_state = 4;
+  ProductOperations product_operations = 5;
+}
+
+message ProductConfig {
+  string product_code = 1;
+  string metadata_hash = 2;
+  string timestamp = 3;
+}
+
+message ActiveProcess {
+  string process_name = 1;
+  int32 pid = 2;
+  repeated string uri = 3;
+}
+
+message DownloadSettings {
+  int32 download_limit = 1;
+  int32 backfill_limit = 2;
+}
+
+message ProductDb {
+  repeated ProductInstall product_installs = 1;
+  repeated InstallHandshake active_installs = 2;
+  repeated ActiveProcess active_processes = 3;
+  repeated ProductConfig product_configs = 4;
+  DownloadSettings download_settings = 5;
+}
+
+enum LanguageOption {
+  LANGOPTION_NONE = 0;
+  LANGOPTION_TEXT = 1;
+  LANGOPTION_SPEECH = 2;
+  LANGOPTION_TEXT_AND_SPEECH = 3;
+}
+
+enum LanguageSettingType {
+  LANGSETTING_NONE = 0;
+  LANGSETTING_SINGLE = 1;
+  LANGSETTING_SIMPLE = 2;
+  LANGSETTING_ADVANCED = 3;
+}
+
+enum ShortcutOption {
+  SHORTCUT_NONE = 0;
+  SHORTCUT_USER = 1;
+  SHORTCUT_ALL_USERS = 2;
+}
+
+enum Operation {
+  OP_UPDATE = 0;
+  OP_BACKFILL = 1;
+  OP_REPAIR = 2;
+  OP_NONE = 2147483647;
+}

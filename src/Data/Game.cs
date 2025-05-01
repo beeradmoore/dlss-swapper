@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -195,6 +194,7 @@ namespace DLSS_Swapper.Data
                 GameLibrary.UbisoftConnect => $"ubisoftconnect_{platformId}",
                 GameLibrary.XboxApp => $"xboxapp_{platformId}",
                 GameLibrary.ManuallyAdded => $"manuallyadded_{platformId}",
+                GameLibrary.BattleNet => $"battlenet_{platformId}",
                 _ => throw new Exception($"Unknown GameLibrary {GameLibrary} while setting ID"),
             };
         }

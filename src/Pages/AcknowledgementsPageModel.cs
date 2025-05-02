@@ -29,13 +29,15 @@ public partial class AcknowledgementsPageModel : ObservableObject
     {
         _weakPage = new WeakReference<AcknowledgementsPage>(page);
 
-        var order = new string[]
+        var nameOrder = new string[]
         {
             "You",
             "DLSS",
             "FidelityFX-SDK",
             "XeSS"
         };
+
+        var acknowlegements = new List<Acknowledgement>();
 
         var regex = new Regex(@"^(?<name>.*)\.(?<file>license\.txt|notes\.md)$");
         var acknowlegementResourceNames = GetType().Assembly.GetManifestResourceNames().Where(x => x.StartsWith(AcknowledgementsPrefix, StringComparison.OrdinalIgnoreCase)).ToList();
@@ -47,12 +49,22 @@ public partial class AcknowledgementsPageModel : ObservableObject
             {
 
                 var name = match.Groups["name"].Value;
+
+                if (name == "FidelityFX_SDK")
+                {
+                    name = "FidelityFX-SDK";
+                }
+                else if (name == "SQLite_net")
+                {
+                    name = "SQLite-net";
+                }
+
                 var file = match.Groups["file"].Value;
-                var acknowlegement = Acknowlegements.FirstOrDefault(x => x.Name == name);
+                var acknowlegement = acknowlegements.FirstOrDefault(x => x.Name == name);
                 if (acknowlegement is null)
                 {
                     acknowlegement = new Acknowledgement(name);
-                    Acknowlegements.Add(acknowlegement);
+                    acknowlegements.Add(acknowlegement);
                 }
 
                 if (file == "notes.md")
@@ -64,6 +76,23 @@ public partial class AcknowledgementsPageModel : ObservableObject
                     acknowlegement.LicenseResourceName = acknowlegementResourceName;
                 }
             }
+        }
+
+        acknowlegements.Sort();
+
+        foreach (var name in nameOrder)
+        {
+            var index = acknowlegements.FindIndex(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            if (index > -1)
+            {
+                Acknowlegements.Add(acknowlegements[index]);
+                acknowlegements.RemoveAt(index);
+            }
+        }
+
+        foreach (var acknowlegement in acknowlegements)
+        {
+            Acknowlegements.Add(acknowlegement);
         }
 
         SelectedItem = Acknowlegements.FirstOrDefault();

@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Grid.ColumnSpan="2" Padding="16,0,16,0">
-            <TextBlock Margin="16,0,0,0" Text="Acknowledgements" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock Margin="16,0,0,0" Text="Licences &amp; Acknowledgements" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
 
             <!-- Needed to achieve parity in the looking with other pages -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -45,6 +45,7 @@
                                                         Config="{x:Bind ViewModel.MarkdownConfig, Mode=OneWay}" />
 
                 <Grid Height="2" Margin="8,0,8,0" Background="{StaticResource AppBarSeparatorForegroundThemeBrush}"  Visibility="{x:Bind ViewModel.SelectedItem.Notes, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}"/>
+
                 <TextBlock IsTextSelectionEnabled="True" Text="{x:Bind ViewModel.SelectedItem.License, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.SelectedItem.License, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}" />
                 
             </StackPanel>

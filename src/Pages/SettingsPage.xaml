@@ -193,7 +193,7 @@
                         <Hyperlink NavigateUri="https://www.reddit.com/r/DLSS_Swapper/">r/DLSS_Swapper</Hyperlink>
                     </Paragraph>
                     <Paragraph Margin="0,12,0,0">
-                        <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenAcknowledgementsCommand}">Acknowledgements</Hyperlink>
+                        <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenAcknowledgementsCommand}">Licences &amp; Acknowledgements</Hyperlink>
                     </Paragraph>
                 </RichTextBlock>
 

@@ -8,7 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace DLSS_Swapper.Acknowledgements;
 
-public partial class Acknowledgement : ObservableObject
+public partial class Acknowledgement : ObservableObject, IComparable<Acknowledgement>
 {
     public string Name { get; init; }
 
@@ -61,5 +61,10 @@ public partial class Acknowledgement : ObservableObject
                 }
             }
         }
+    }
+
+    public int CompareTo(Acknowledgement? other)
+    {
+        return string.Compare(Name, other?.Name, StringComparison.Ordinal);
     }
 }

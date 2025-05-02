@@ -113,6 +113,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Acknowledgements\**\notes.md" />
+    <EmbeddedResource Include="Acknowledgements\**\license.txt" />
     <EmbeddedResource Include="Assets\static_manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

@@ -1,0 +1,7 @@
+ x:Name="MarkdownTextBlock1"
+                                        Grid.Column="0"
+                                        Config="{x:Bind LiveMarkdownConfig, Mode=OneTime}"
+                                        Text="{x:Bind MarkdownTextBox.Text, Mode=OneWay}" />
+            <TextBox x:Name="MarkdownTextBox"
+                     Grid.Column="1"
+                     AcceptsReturn="True" />

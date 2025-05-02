@@ -31,7 +31,10 @@ public partial class AcknowledgementsPageModel : ObservableObject
 
         var order = new string[]
         {
-            "AsyncAwaitBestPractices"
+            "You",
+            "DLSS",
+            "FidelityFX-SDK",
+            "XeSS"
         };
 
         var regex = new Regex(@"^(?<name>.*)\.(?<file>license\.txt|notes\.md)$");
@@ -42,7 +45,7 @@ public partial class AcknowledgementsPageModel : ObservableObject
             var match = regex.Match(acknowlegementName);
             if (match.Success)
             {
-                
+
                 var name = match.Groups["name"].Value;
                 var file = match.Groups["file"].Value;
                 var acknowlegement = Acknowlegements.FirstOrDefault(x => x.Name == name);

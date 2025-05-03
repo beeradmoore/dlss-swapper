@@ -253,7 +253,7 @@ public partial class SettingsPageModel : ObservableObject
     [RelayCommand]
     void OpenAcknowledgements()
     {
-        // TODO: 
+        App.CurrentApp.MainWindow.GoToAcknowledgements();
     }
 
     [RelayCommand]

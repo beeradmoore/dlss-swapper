@@ -29,7 +29,7 @@
         <Grid Grid.Row="0" Padding="16,0,16,0">
             <TextBlock Margin="16,0,0,0" Text="Settings" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
 
-            <!-- Needed to achieve parity in the looking with other sites -->
+            <!-- Needed to achieve parity in the looking with other pages -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <AppBarButton Label="" IsEnabled="False"/>
             </StackPanel>
@@ -193,7 +193,7 @@
                         <Hyperlink NavigateUri="https://www.reddit.com/r/DLSS_Swapper/">r/DLSS_Swapper</Hyperlink>
                     </Paragraph>
                     <Paragraph Margin="0,12,0,0">
-                        <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenAcknowledgementsCommand}">Acknowledgements</Hyperlink>
+                        <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenAcknowledgementsCommand}">Licences &amp; Acknowledgements</Hyperlink>
                     </Paragraph>
                 </RichTextBlock>
 

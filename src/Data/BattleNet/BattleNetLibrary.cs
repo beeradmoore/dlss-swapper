@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using DLSS_Swapper.Data.BattleNet.Proto;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
+using Microsoft.Win32;
 
 namespace DLSS_Swapper.Data.BattleNet;
 
@@ -32,8 +33,21 @@ internal partial class BattleNetLibrary : IGameLibrary
 
     public bool IsInstalled()
     {
-        var agentPath = Directory.GetParent(_productDbPath)?.FullName;
-        return Directory.Exists(agentPath) && File.Exists(_productDbPath);
+        using var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
+        using var bnet = hklm.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Battle.net");
+        if (bnet is null)
+        {
+            return false;
+        }
+
+        var installPath = bnet.GetValue("InstallLocation")?.ToString();
+        if (string.IsNullOrEmpty(installPath))
+        {
+            return false;
+        }
+
+        var clientPath = Path.Combine(installPath, "Battle.net.exe");
+        return File.Exists(clientPath) && File.Exists(_productDbPath);
     }
 
     public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing)

@@ -42,6 +42,7 @@ internal static class BattleNetGameTitles
         {
             return title;
         }
+        Logger.Warning($"Battle.Net game title not found for UID ({product.Uid}) in install path ({product.Settings.InstallPath}).");
 
         if (string.IsNullOrEmpty(product.Settings.InstallPath))
         {

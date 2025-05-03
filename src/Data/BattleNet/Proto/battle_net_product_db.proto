@@ -1,3 +1,9 @@
+/*
+ * This .proto schema is derived from Lutris, specifically the serialized_pb section of
+ * lutris/util/battlenet/product_db_pb2.py at:
+ * https://github.com/lutris/lutris/blob/d0a8062e2096a15bef7015a7107b5b083b2551cb/lutris/util/battlenet/product_db_pb2.py
+ */
+
 syntax = "proto3";
 option csharp_namespace = "DLSS_Swapper.Data.BattleNet.Proto";
 

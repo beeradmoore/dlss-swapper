@@ -115,7 +115,7 @@ internal partial class GameManager : ObservableObject
         };
 
 
-        foreach (var gameLibraryEnum in Enum.GetValues<GameLibrary>())
+        foreach (var gameLibraryEnum in GetGameLibraries(false))
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
 
@@ -152,7 +152,7 @@ internal partial class GameManager : ObservableObject
         UnknownAssetsFound = false;
         _unknownGameAssets.Clear();
 
-        foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
+        foreach (var gameLibraryEnum in GameManager.Instance.GetGameLibraries(true))
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
             if (gameLibrary.IsEnabled)
@@ -172,7 +172,7 @@ internal partial class GameManager : ObservableObject
                 _unknownGameAssets.Clear();
             }
         }
-        foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
+        foreach (var gameLibraryEnum in GameManager.Instance.GetGameLibraries(true))
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
             if (gameLibrary.IsEnabled)
@@ -383,5 +383,28 @@ internal partial class GameManager : ObservableObject
         }
 
         return unknownGameAssets;
+    }
+
+    public GameLibrarySettings? GetGameLibrarySettings(GameLibrary gameLibrary)
+    {
+        return Settings.Instance.GameLibrarySettings.FirstOrDefault(x => x.GameLibrary == gameLibrary);
+    }
+
+    public List<GameLibrary> GetGameLibraries(bool onlyEnabled)
+    {
+        var gameLibrariesToReturn = new List<GameLibrary>();
+
+        foreach (var gameLibrarySetting in Settings.Instance.GameLibrarySettings)
+        {
+            if (gameLibrarySetting.IsEnabled == false && onlyEnabled == true)
+            {
+                continue;
+            }
+
+            gameLibrariesToReturn.Add(gameLibrarySetting.GameLibrary);
+        }
+
+        return gameLibrariesToReturn;
+
     }
 }

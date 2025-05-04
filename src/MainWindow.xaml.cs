@@ -180,6 +180,8 @@ namespace DLSS_Swapper
 
         void GoToPage(string page)
         {
+            ViewModel.AcknowledgementsVisibility = Visibility.Collapsed;
+
             if (page == "Games")
             {
                 if (ContentFrame.Content is null || ContentFrame.Content as Page != gameGridPage)
@@ -201,6 +203,14 @@ namespace DLSS_Swapper
                     ContentFrame.Content = settingsPage ??= new SettingsPage();
                 }
             }
+            else if (page == "Acknowledgements")
+            {
+                if (ContentFrame.Content is null || ContentFrame.Content is not AcknowledgementsPage)
+                {
+                    ViewModel.AcknowledgementsVisibility = Visibility.Visible;
+                    ContentFrame.Content = new AcknowledgementsPage();
+                }
+            }
             else
             {
                 Logger.Error($"Attempting to navigate to a page that was not found, {page}");
@@ -208,7 +218,7 @@ namespace DLSS_Swapper
             }
 
             // Only try manually set selected item if is not already selected. 
-            if (MainNavigationView.SelectedItem is null || (MainNavigationView.SelectedItem is string selectedItem && selectedItem != page))
+            if (MainNavigationView.SelectedItem is null || (MainNavigationView.SelectedItem is NavigationViewItem selectedItem && selectedItem.Tag.ToString() != page))
             {
                 foreach (NavigationViewItem navigationViewItem in MainNavigationView.MenuItems)
                 {
@@ -219,6 +229,11 @@ namespace DLSS_Swapper
                     }
                 }
             }
+        }
+
+        internal void GoToAcknowledgements()
+        {
+            GoToPage("Acknowledgements");
         }
 
         async void MainNavigationView_Loaded(object sender, RoutedEventArgs e)

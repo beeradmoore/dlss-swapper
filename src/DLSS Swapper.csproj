@@ -100,6 +100,7 @@
     <None Remove="DLSS Swapper_TemporaryKey.pfx" />
     <None Remove="FailToLaunchWindow.xaml" />
     <None Remove="global.json" />
+    <None Remove="Pages\AcknowledgementsPage.xaml" />
     <None Remove="Pages\NetworkTesterWindow.xaml" />
     <None Remove="Themes\FakeContentDialogStyle.xaml" />
     <None Remove="UserControls\DLLPickerControl.xaml" />
@@ -112,6 +113,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Acknowledgements\**\notes.md" />
+    <EmbeddedResource Include="Acknowledgements\**\license.txt" />
     <EmbeddedResource Include="Assets\static_manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -301,6 +304,9 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Page Update="Pages\AcknowledgementsPage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
         <Page Update="UserControls\ImportDLLSummaryControl.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>

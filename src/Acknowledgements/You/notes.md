@@ -1,0 +1,1 @@
+DLSS Swapper is only possible thanks to its [contributors](https://github.com/beeradmoore/dlss-swapper/graphs/contributors) and you (the users) who have filed [feedback](https://github.com/beeradmoore/dlss-swapper/issues) to help improve the product.

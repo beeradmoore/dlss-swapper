@@ -56,6 +56,7 @@
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
                 <muxc:NavigationViewItem Icon="Library" Content="Library" Tag="Library" />
+                <muxc:NavigationViewItem Icon="Emoji" Content="Acknowledgements" Tag="Acknowledgements" Visibility="{x:Bind ViewModel.AcknowledgementsVisibility, Mode=OneWay}" />
             </muxc:NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" />
         </muxc:NavigationView>

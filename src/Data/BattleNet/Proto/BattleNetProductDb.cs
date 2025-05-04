@@ -130,9 +130,6 @@ namespace DLSS_Swapper.Data.BattleNet.Proto {
     [pbr::OriginalName("OP_UPDATE")] OpUpdate = 0,
     [pbr::OriginalName("OP_BACKFILL")] OpBackfill = 1,
     [pbr::OriginalName("OP_REPAIR")] OpRepair = 2,
-    /// <summary>
-    /// 0xFFFFFFFF in signed int32
-    /// </summary>
     [pbr::OriginalName("OP_NONE")] OpNone = 2147483647,
   }
 

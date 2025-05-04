@@ -28,6 +28,9 @@ namespace DLSS_Swapper.Data.Xbox
         static XboxLibrary? instance = null;
         public static XboxLibrary Instance => instance ??= new XboxLibrary();
 
+        GameLibrarySettings? _gameLibrarySettings;
+        public GameLibrarySettings? GameLibrarySettings => _gameLibrarySettings ??= GameManager.Instance.GetGameLibrarySettings(GameLibrary);
+
         private XboxLibrary()
         {
 

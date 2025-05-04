@@ -62,7 +62,7 @@
                     Margin="0,40,0,0"
                     Text="Game Libraries" />
                 <StackPanel Margin="0,10,0,0">
-                    <usercontrols:GameLibrarySelectorControl SavesWhenToggled="true" />
+                    <usercontrols:GameLibrarySelectorControl />
                 </StackPanel>
 
                 <TextBlock

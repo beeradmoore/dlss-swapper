@@ -26,6 +26,9 @@ namespace DLSS_Swapper.Data.GOG
         static GOGLibrary? instance = null;
         public static GOGLibrary Instance => instance ??= new GOGLibrary();
 
+        GameLibrarySettings? _gameLibrarySettings;
+        public GameLibrarySettings? GameLibrarySettings => _gameLibrarySettings ??= GameManager.Instance.GetGameLibrarySettings(GameLibrary);
+
         private GOGLibrary()
         {
 

@@ -93,7 +93,7 @@ internal class SystemDetails
 
         try
         {
-            foreach (var gameLibraryEnum in Enum.GetValues<GameLibrary>())
+            foreach (var gameLibraryEnum in GameManager.Instance.GetGameLibraries(false))
             {
                 var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
                 stringBuilder.AppendLine(gameLibrary.Name);

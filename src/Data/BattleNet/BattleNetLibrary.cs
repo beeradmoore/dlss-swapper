@@ -27,6 +27,36 @@ internal partial class BattleNetLibrary : IGameLibrary
 
     readonly string _productDbPath;
 
+    // Definitis are from Lutris https://github.com/lutris/lutris/blob/master/lutris/util/battlenet/definitions.py
+    private readonly Dictionary<string, string> _uidToTitles = new Dictionary<string, string>()
+    {
+        { "s1", "StarCraft" },
+        { "s2", "StarCraft II" },
+        { "wow", "World of Warcraft" },
+        { "wow_classic", "World of Warcraft Classic" },
+        { "pro", "Overwatch 2" },
+        { "w2bn", "Warcraft II: Battle.net Edition" },
+        { "w3", "Warcraft III" }, //
+        { "hsb", "Hearthstone" },
+        { "hero", "Heroes of the Storm" },
+        { "d3cn", "暗黑破壞神III" },
+        { "d3", "Diablo III" },
+        { "fenris", "Diablo IV" },
+        { "viper", "Call of Duty: Black Ops 4" },
+        { "odin", "Call of Duty: Modern Warfare" },
+        { "lazarus", "Call of Duty: MW2 Campaign Remastered" },
+        { "zeus", "Call of Duty: Black Ops Cold War" },
+        { "rtro", "Blizzard Arcade Collection" },
+        { "wlby", "Crash Bandicoot 4: It's About Time" },
+        { "osi", "Diablo® II: Resurrected" },
+        { "fore", "Call of Duty: Vanguard" },
+        { "d2", "Diablo® II" },
+        { "d2LOD", "Diablo® II: Lord of Destruction®" },
+        { "w3ROC", "Warcraft® III: Reign of Chaos" },
+        { "w3tft", "Warcraft® III: The Frozen Throne®" },
+        { "sca", "StarCraft® Anthology" },
+        { "anbs", "Diablo Immortal" }
+    };
 
     // Ignore the Battle.net agent installation and all World of Warcraft installations.
     // WoW DLL swaps lead to disconnects without exception, and it only supports XeLL anyway.
@@ -128,7 +158,23 @@ internal partial class BattleNetLibrary : IGameLibrary
 
                 var cachedGame = GameManager.Instance.GetGame<BattleNetGame>(gameId);
                 var activeGame = cachedGame ?? new BattleNetGame(gameId);
-                activeGame.Title = product.GetTitle();
+                if (_uidToTitles.TryGetValue(product.Uid, out var title))
+                {
+                    activeGame.Title = title;
+                }
+                else
+                {
+                    Logger.Error($"Battle.Net game title not found for UID ({product.Uid}) in install path ({product.Settings.InstallPath}).");
+
+                    if (string.IsNullOrWhiteSpace(product.Settings.InstallPath))
+                    {
+                        activeGame.Title = product.Uid;
+                    }
+
+                    var directoryInfo = new DirectoryInfo(product.Settings.InstallPath);
+                    activeGame.Title = directoryInfo.Name;
+                }
+
                 activeGame.InstallPath = PathHelpers.NormalizePath(gamePath);
                 activeGame.StatePlayable = product.CachedProductState.BaseProductState.Playable;
 

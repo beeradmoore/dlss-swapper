@@ -16,7 +16,7 @@
     <PackageIcon>Assets\icon_256.png</PackageIcon>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <Version>1.1.6.3</Version>
+    <Version>1.1.7.0</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <PublishSingleFile>false</PublishSingleFile>
@@ -341,7 +341,7 @@
           <Generator>MSBuild:Compile</Generator>
         </Page>
     </ItemGroup>
-    
+
   <ItemGroup>
     <PackageReference Include="AsyncAwaitBestPractices" Version="9.0.0" />
     <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="9.0.0" />
@@ -372,7 +372,7 @@
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
-  <!-- 
+  <!--
   Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
   Tools extension to be activated for this project even if the Windows App SDK Nuget
   package has not yet been restored.
@@ -381,9 +381,9 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
 
-  <!-- 
-  Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution 
-  Explorer "Package and Publish" context menu entry to be enabled for this project even if 
+  <!--
+  Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution
+  Explorer "Package and Publish" context menu entry to be enabled for this project even if
   the Windows App SDK Nuget package has not yet been restored.
   -->
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

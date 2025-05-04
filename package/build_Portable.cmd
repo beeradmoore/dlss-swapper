@@ -1,6 +1,6 @@
 @echo off
 
-set app_version=1.1.6.3
+set app_version=1.1.7.0
 set initial_directory=%cd%
 
 set build_mode=net9

@@ -5,12 +5,9 @@ using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;
 using DLSS_Swapper.Data.ManuallyAdded;
-using Serilog;
+using DLSS_Swapper.Data.BattleNet;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Interfaces
@@ -23,7 +20,8 @@ namespace DLSS_Swapper.Interfaces
         EpicGamesStore = 4,
         UbisoftConnect = 8,
         XboxApp = 16,
-        ManuallyAdded = 32
+        ManuallyAdded = 32,
+        BattleNet = 64,
     };
 
     public interface IGameLibrary
@@ -47,6 +45,7 @@ namespace DLSS_Swapper.Interfaces
                 GameLibrary.UbisoftConnect => UbisoftConnectLibrary.Instance,
                 GameLibrary.XboxApp => XboxLibrary.Instance,
                 GameLibrary.ManuallyAdded => ManuallyAddedLibrary.Instance,
+                GameLibrary.BattleNet => BattleNetLibrary.Instance,
                 _ => throw new Exception($"Could not load game library {gameLibrary}"),
             };
         }

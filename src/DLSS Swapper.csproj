@@ -352,6 +352,7 @@
     <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.2.250402" />
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.250402" />
     <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.250402" />
+    <PackageReference Include="Google.Protobuf" Version="3.30.2" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3179.45" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250401001" />

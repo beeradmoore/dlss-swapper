@@ -149,7 +149,7 @@ internal partial class GameManager : ObservableObject
         };
 
 
-        WeakReferenceMessenger.Default.Register<GameLibrariesOrderChangedMessage>(this, async (sender, message) =>
+        WeakReferenceMessenger.Default.Register<GameLibrariesOrderChangedMessage>(this, (sender, message) =>
         {
             var groupedGameLibraryList = groupedList.ToList();
 

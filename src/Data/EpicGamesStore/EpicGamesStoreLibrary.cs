@@ -25,6 +25,9 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         static EpicGamesStoreLibrary? instance = null;
         public static EpicGamesStoreLibrary Instance => instance ??= new EpicGamesStoreLibrary();
 
+        GameLibrarySettings? _gameLibrarySettings;
+        public GameLibrarySettings? GameLibrarySettings => _gameLibrarySettings ??= GameManager.Instance.GetGameLibrarySettings(GameLibrary);
+
         private EpicGamesStoreLibrary()
         {
 

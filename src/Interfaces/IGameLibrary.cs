@@ -29,6 +29,7 @@ namespace DLSS_Swapper.Interfaces
     public interface IGameLibrary
     {
         GameLibrary GameLibrary { get; }
+        GameLibrarySettings? GameLibrarySettings { get; }
         string Name { get; }
         Type GameType { get; }
 
@@ -54,23 +55,32 @@ namespace DLSS_Swapper.Interfaces
         {
             get
             {
-                var enabledGameLibraries = (GameLibrary)Settings.Instance.EnabledGameLibraries;
-                return enabledGameLibraries.HasFlag(GameLibrary);
+                return GameLibrarySettings?.IsEnabled ?? false;
             }
         }
 
         public void Disable()
         {
-            var enabledGameLibraries = Settings.Instance.EnabledGameLibraries;
-            enabledGameLibraries &= ~(uint)GameLibrary; // ClearFlag 
-            Settings.Instance.EnabledGameLibraries = enabledGameLibraries;
+            if (GameLibrarySettings is not null)
+            {
+                if (GameLibrarySettings.IsEnabled == true)
+                {
+                    GameLibrarySettings.IsEnabled = false;
+                    Settings.Instance.SaveJson();
+                }
+            }
         }
 
         public void Enable()
         {
-            var enabledGameLibraries = Settings.Instance.EnabledGameLibraries;
-            enabledGameLibraries |= (uint)GameLibrary; // SetFlag
-            Settings.Instance.EnabledGameLibraries = enabledGameLibraries;
+            if (GameLibrarySettings is not null)
+            {
+                if (GameLibrarySettings.IsEnabled == false)
+                {
+                    GameLibrarySettings.IsEnabled = true;
+                    Settings.Instance.SaveJson();
+                }
+            }
         }
     }
 }

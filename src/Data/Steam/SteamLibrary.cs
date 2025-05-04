@@ -21,6 +21,9 @@ namespace DLSS_Swapper.Data.Steam
         static SteamLibrary? instance = null;
         public static SteamLibrary Instance => instance ??= new SteamLibrary();
 
+        GameLibrarySettings? _gameLibrarySettings;
+        public GameLibrarySettings? GameLibrarySettings => _gameLibrarySettings ??= GameManager.Instance.GetGameLibrarySettings(GameLibrary);
+
         static string _installPath = string.Empty;
 
         [GeneratedRegex(@"^([ \t]*)""(.*)""([ \t]*)""(?<path>.*)""$", RegexOptions.Multiline)]

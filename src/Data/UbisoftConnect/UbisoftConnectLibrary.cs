@@ -38,6 +38,9 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         static UbisoftConnectLibrary? instance = null;
         public static UbisoftConnectLibrary Instance => instance ??= new UbisoftConnectLibrary();
 
+        GameLibrarySettings? _gameLibrarySettings;
+        public GameLibrarySettings? GameLibrarySettings => _gameLibrarySettings ??= GameManager.Instance.GetGameLibrarySettings(GameLibrary);
+
         private UbisoftConnectLibrary()
         {
 

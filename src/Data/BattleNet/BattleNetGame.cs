@@ -20,6 +20,9 @@ internal class BattleNetGame : Game
     {
         PlatformId = gameId;
         SetID();
+
+        // Image list is manually maintained.
+        CoverImage = $"https://dlss-swapper-downloads.beeradmoore.com/images/covers/battlenet/{PlatformId}.webp";
     }
 
     protected override Task UpdateCacheImageAsync()

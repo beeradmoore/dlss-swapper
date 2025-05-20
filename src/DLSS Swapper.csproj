@@ -22,6 +22,7 @@
     <PublishSingleFile>false</PublishSingleFile>
     <PublishReadyToRun>true</PublishReadyToRun>
     <PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>
+    <CETCompat>false</CETCompat>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release' OR '$(Configuration)'=='Release_Portable'">

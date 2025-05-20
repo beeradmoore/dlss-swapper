@@ -73,6 +73,8 @@ internal partial class BattleNetLibrary : IGameLibrary
 
     public bool IsInstalled()
     {
+        // Registry checks if Battle.net client is installed, however the games can remain installed even if the client is uninstalled.
+        /*
         using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
         {
             using (var bnet = hklm.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Battle.net"))
@@ -92,6 +94,10 @@ internal partial class BattleNetLibrary : IGameLibrary
                 return File.Exists(clientPath) && File.Exists(_productDbPath);
             }
         }
+        */
+
+        var agentPath = Directory.GetParent(_productDbPath)?.FullName;
+        return Directory.Exists(agentPath) && File.Exists(_productDbPath);
     }
 
     public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing)

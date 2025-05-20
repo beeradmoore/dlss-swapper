@@ -60,7 +60,7 @@ internal partial class BattleNetLibrary : IGameLibrary
 
     // Ignore the Battle.net agent installation and all World of Warcraft installations.
     // WoW DLL swaps lead to disconnects without exception, and it only supports XeLL anyway.
-    [GeneratedRegex(@"^(agent|battle\.net|wow.*)$", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^(agent|beta|battle\.net|wow.*)$", RegexOptions.IgnoreCase)]
     private static partial Regex IgnoredGameIdRegex();
 
 

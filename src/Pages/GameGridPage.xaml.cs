@@ -167,14 +167,22 @@ namespace DLSS_Swapper.Pages
             {
                 App.CurrentApp.RunOnUIThreadAsync(async () =>
                 {
-                    await mainGridView.SmoothScrollIntoViewWithItemAsync(game, ScrollItemPlacement.Center);
+                    var indexOfGame = mainGridView.Items.IndexOf(game);
+                    if (indexOfGame >= 0)
+                    {
+                        await mainGridView.SmoothScrollIntoViewWithItemAsync(indexOfGame);
+                    }
                 }).SafeFireAndForget();
             }
             else if (MainContentControl.ContentTemplateRoot is ListView mainListView)
             {
                 App.CurrentApp.RunOnUIThreadAsync(async () =>
                 {
-                    await mainListView.SmoothScrollIntoViewWithItemAsync(game, ScrollItemPlacement.Center);
+                    var indexOfGame = mainListView.Items.IndexOf(game);
+                    if (indexOfGame >= 0)
+                    {
+                        await mainListView.SmoothScrollIntoViewWithItemAsync(indexOfGame);
+                    }
                 }).SafeFireAndForget();
             }
         }

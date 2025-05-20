@@ -94,11 +94,12 @@ internal partial class GameManager : ObservableObject
         FavouriteGamesView = new AdvancedCollectionView(_allGames, true);
         FavouriteGamesView.Filter = GetPredicateForFavouriteGames(Settings.Instance.HideNonDLSSGames);
         FavouriteGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
+        FavouriteGamesView.ObserveFilterProperty(nameof(Game.HasSwappableItems));
         FavouriteGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
         AllGamesView = new AdvancedCollectionView(_allGames, true);
         AllGamesView.Filter = GetPredicateForAllGames(Settings.Instance.HideNonDLSSGames);
-        //AllGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
+        AllGamesView.ObserveFilterProperty(nameof(Game.HasSwappableItems));
         AllGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
 
@@ -123,6 +124,7 @@ internal partial class GameManager : ObservableObject
 
             var gameView = new AdvancedCollectionView(_allGames, true);
             gameView.Filter = GetPredicateForLibraryGames(gameLibraryEnum, Settings.Instance.HideNonDLSSGames);
+            gameView.ObserveFilterProperty(nameof(Game.HasSwappableItems));
             gameView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
             libraryGamesView[gameLibraryEnum] = gameView;

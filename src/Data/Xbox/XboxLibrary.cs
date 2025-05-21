@@ -270,6 +270,13 @@ namespace DLSS_Swapper.Data.Xbox
                         continue;
                     }
 
+                    // Check if the install path exists
+                    if (!Directory.Exists(game.InstallPath))
+                    {
+                        Logger.Error($"Game '{game.Title}' (ID: {game.PlatformId}) was loaded from cache in Xbox library, but install path '{game.InstallPath}' not found on disk.");
+                        continue;
+                    }
+
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }

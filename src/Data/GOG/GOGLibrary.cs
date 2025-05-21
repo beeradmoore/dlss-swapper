@@ -125,6 +125,13 @@ namespace DLSS_Swapper.Data.GOG
                             {
                                 continue;
                             }
+                            
+                            // Check if the install path exists
+                            if (!Directory.Exists(activeGame.InstallPath))
+                            {
+                                Logger.Error($"Game '{activeGame.Title}' (ID: {activeGame.PlatformId}) was detected in GOG library, but install path '{activeGame.InstallPath}' not found on disk.");
+                                continue;
+                            }
 
                             // If the game is not from cache, force processing
                             if (cachedGame is null)
@@ -338,6 +345,13 @@ namespace DLSS_Swapper.Data.GOG
                 {
                     if (game.IsInIgnoredPath())
                     {
+                        continue;
+                    }
+
+                    // Check if the install path exists
+                    if (!Directory.Exists(game.InstallPath))
+                    {
+                        Logger.Error($"Game '{game.Title}' (ID: {game.PlatformId}) was loaded from cache in GOG library, but install path '{game.InstallPath}' not found on disk.");
                         continue;
                     }
 

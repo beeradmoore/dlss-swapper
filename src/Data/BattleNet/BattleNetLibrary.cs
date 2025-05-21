@@ -247,6 +247,13 @@ internal partial class BattleNetLibrary : IGameLibrary
                     continue;
                 }
 
+                // Check if the install path exists
+                if (!Directory.Exists(game.InstallPath))
+                {
+                    Logger.Error($"Game '{game.Title}' (ID: {game.PlatformId}) was loaded from cache in Battle.net library, but install path '{game.InstallPath}' not found on disk.");
+                    continue;
+                }
+
                 await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                 GameManager.Instance.AddGame(game);
             }

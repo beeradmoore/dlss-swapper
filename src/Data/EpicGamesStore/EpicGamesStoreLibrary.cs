@@ -158,6 +158,13 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         continue;
                     }
 
+                    // Check if the install path exists
+                    if (!Directory.Exists(activeGame.InstallPath))
+                    {
+                        Logger.Error($"Game '{activeGame.Title}' (ID: {activeGame.PlatformId}) was detected in Epic Games Store library, but install path '{activeGame.InstallPath}' not found on disk.");
+                        continue;
+                    }
+
                     await activeGame.SaveToDatabaseAsync();
 
                     // If the game is not from cache, force processing
@@ -216,6 +223,13 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                 {
                     if (game.IsInIgnoredPath())
                     {
+                        continue;
+                    }
+
+                    // Check if the install path exists
+                    if (!Directory.Exists(game.InstallPath))
+                    {
+                        Logger.Error($"Game '{game.Title}' (ID: {game.PlatformId}) was loaded from cache in Epic Games Store library, but install path '{game.InstallPath}' not found on disk.");
                         continue;
                     }
 

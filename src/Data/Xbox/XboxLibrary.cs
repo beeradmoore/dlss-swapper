@@ -271,7 +271,7 @@ namespace DLSS_Swapper.Data.Xbox
                     }
 
                     // Check if the install path exists
-                    if (!Directory.Exists(game.InstallPath))
+                    if (Directory.Exists(game.InstallPath) == false)
                     {
                         Logger.Error($"Game '{game.Title}' (ID: {game.PlatformId}) was loaded from cache in Xbox library, but install path '{game.InstallPath}' not found on disk.");
                         continue;

@@ -227,7 +227,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                 }
 
                                 // Check if the install path exists
-                                if (!Directory.Exists(activeGame.InstallPath))
+                                if (Directory.Exists(activeGame.InstallPath) == false)
                                 {
                                     Logger.Error($"Game '{activeGame.Title}' (ID: {activeGame.PlatformId}) was detected in Ubisoft Connect library, but install path '{activeGame.InstallPath}' not found on disk.");
                                     continue;
@@ -489,7 +489,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                     }
 
                     // Check if the install path exists
-                    if (!Directory.Exists(game.InstallPath))
+                    if (Directory.Exists(game.InstallPath) == false)
                     {
                         Logger.Error($"Game '{game.Title}' (ID: {game.PlatformId}) was loaded from cache in Ubisoft Connect library, but install path '{game.InstallPath}' not found on disk.");
                         continue;

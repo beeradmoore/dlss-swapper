@@ -248,7 +248,7 @@ internal partial class BattleNetLibrary : IGameLibrary
                 }
 
                 // Check if the install path exists
-                if (!Directory.Exists(game.InstallPath))
+                if (Directory.Exists(game.InstallPath) == false)
                 {
                     Logger.Error($"Game '{game.Title}' (ID: {game.PlatformId}) was loaded from cache in Battle.net library, but install path '{game.InstallPath}' not found on disk.");
                     continue;

@@ -1,0 +1,59 @@
+name: Build DLSS Swapper
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2025
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET 9.0.300
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.300'
+
+    - name: Display .NET Info
+      run: dotnet --info
+
+    - name: Install NSIS
+      run: |
+        winget install -e --id NSIS.NSIS --version 3.11 --accept-package-agreements --accept-source-agreements
+    
+    - name: Add NSIS to PATH
+      shell: pwsh
+      run: echo "C:\Program Files (x86)\NSIS\Bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      
+    - name: Extract version from csproj
+      shell: pwsh
+      run: |
+        $ver = Select-String '<Version>(.+?)</Version>' "${{ github.workspace }}\src\DLSS Swapper.csproj" | % { $_.Matches[0].Groups[1].Value }
+        echo "VERSION=$ver" >> $env:GITHUB_ENV
+        
+    - name: Build DLSS Swapper portable
+      run: ${{ github.workspace }}\package\build_Portable.cmd
+      working-directory: ${{ github.workspace }}\package\
+
+    - name: Build DLSS Swapper installer
+      run: ${{ github.workspace }}\package\build_Installer.cmd
+      working-directory: ${{ github.workspace }}\package\
+
+    - name: Upload portable build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: DLSS.Swapper-${{ env.VERSION }}-portable
+        path: ${{ github.workspace }}\package\Output\DLSS.Swapper-${{ env.VERSION }}-portable.zip
+        compression-level: 0
+        if-no-files-found: error
+
+    - name: Upload installer build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: DLSS.Swapper-${{ env.VERSION }}-installer
+        path: ${{ github.workspace }}\package\Output\DLSS.Swapper-${{ env.VERSION }}-installer.exe
+        compression-level: 0
+        if-no-files-found: error
+      

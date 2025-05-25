@@ -1337,8 +1337,16 @@ namespace DLSS_Swapper.Data
                     CurrentXeSS_FG = gameAsset;
                 }
             }
-
         }
+
+        public async Task RemoveGameAssetsFromCacheAsync()
+        {
+            using (await Database.Instance.Mutex.LockAsync())
+            {
+                await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+            }
+        }
+
         public async Task LoadGameAssetsFromCacheAsync()
         {
             await LoadCoverImageAsync();

@@ -226,6 +226,12 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                     continue;
                                 }
 
+                                if (Directory.Exists(activeGame.InstallPath) == false)
+                                {
+                                    Logger.Error($"{Name} library could not load game {activeGame.Title} ({activeGame.PlatformId}) because install path does not exist: {activeGame.InstallPath}");
+                                    continue;
+                                }
+
                                 await activeGame.SaveToDatabaseAsync();
 
                                 // If the game is not from cache, force processing
@@ -478,6 +484,16 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 {
                     if (game.IsInIgnoredPath())
                     {
+                        continue;
+                    }
+
+                    if (Directory.Exists(game.InstallPath) == false)
+                    {
+                        Logger.Error($"{Name} library could not load game {game.Title} ({game.PlatformId}) from cache because install path does not exist: {game.InstallPath}");
+                        // We remove the list of known game assets, but not the game itself.
+                        // Removing the game will remove its history, notes, and other data.
+                        // We don't want to do this incase it is just a temporary issue.
+                        await game.RemoveGameAssetsFromCacheAsync().ConfigureAwait(false);
                         continue;
                     }
 

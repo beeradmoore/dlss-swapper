@@ -5,6 +5,9 @@
  <p align="center">DLSS Swapperは、<strong>DLSS</strong>、<strong>FSR</strong>、<strong>XeSS</strong>のdllを便利にダウンロード、管理、交換できるツールで、ゲームのアップデートを必要とせずにDLSS、FSR、XeSSのバージョンをアップグレードまたはダウングレードすることができます。</p>
 </p>
 
+> [!WARNING]
+> Please be aware of malicious sites claiming to be DLSS Swapper. This is the only place you will find official downloads. See our [official links](#official-links) for accounts/sites affiliated with DLSS Swapper.
+
 <p align="center">
     <a href="https://github.com/beeradmoore/dlss-swapper/releases"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>
     <a href="https://github.com/beeradmoore/dlss-swapper/graphs/contributors"><img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/beeradmoore/dlss-swapper" /></a>
@@ -64,6 +67,12 @@ DLSS の経験を[r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/)で共�
 
 最新のビルドは[GitHub リリース](https://github.com/beeradmoore/dlss-swapper/releases)ページから入手できます。
 
+You can also install with winget. 
+
+> winget install --id=beeradmoore.dlss-swapper -e 
+
+These are the only official places to get DLSS Swapper.
+
 ## DLSS Swapper ができたらいいなと思うこと...
 
 [機能リクエスト](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml)を作成してください。
@@ -78,3 +87,11 @@ DLSS の経験を[r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/)で共�
 | ---- | ------------------------------------- |
 | OS   | Windows 10 64-bit (20H1, build 19041) |
 | GPU  | 任意                                  |
+
+## Official links
+
+- GitHub: https://github.com/beeradmoore/dlss-swapper/
+- Twitter: https://twitter.com/dlss_swapper
+- Reddit: https://www.reddit.com/r/DLSS_Swapper/
+
+If you have found an other accounts or sites claiming to be DLSS Swapper, please ignore them (or better yet, [file an issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) and let us know) 

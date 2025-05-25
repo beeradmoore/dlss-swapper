@@ -1,0 +1,25 @@
+name: Build DLSS Swapper
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2025
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET 9.0.300
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.300'
+
+    - name: Display .NET Info
+      run: dotnet --info
+
+    - name: Install NSIS
+      run: |
+        winget install -e --id NSIS.NSIS --version 3.11
+    

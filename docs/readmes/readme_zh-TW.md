@@ -5,6 +5,9 @@
  <p align="center">DLSS Swapper 是一款實用的小工具，能夠讓你方便地下載、管理與切換 <strong>DLSS</strong>、<strong>FSR</strong> 和 <strong>XeSS</strong> 的 DLL 檔案，使你能夠在不更新遊戲的情況下更新或是回退 DLSS、FSR 和 XeSS 的版本。</p>
 </p>
 
+> [!WARNING]
+> Please be aware of malicious sites claiming to be DLSS Swapper. This is the only place you will find official downloads. See our [official links](#official-links) for accounts/sites affiliated with DLSS Swapper.
+
 <p align="center">
     <a href="https://github.com/beeradmoore/dlss-swapper/releases"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>
     <a href="https://github.com/beeradmoore/dlss-swapper/graphs/contributors"><img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/beeradmoore/dlss-swapper" /></a>
@@ -72,6 +75,12 @@
 
 你可以在我們的 [GitHub releases](https://github.com/beeradmoore/dlss-swapper/releases) 頁面取得最新版本。
 
+You can also install with winget. 
+
+> winget install --id=beeradmoore.dlss-swapper -e 
+
+These are the only official places to get DLSS Swapper.
+
 ## 如果 DLSS Swapper 可以做到...那就太ㄅㄧㄤ ˋ 了...
 
 建立一個[功能請求](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml)。
@@ -86,3 +95,11 @@
 | -------- | ---------------------------------------- |
 | 作業系統 | Windows 10 64-bit (20H1, 內部版本 19041) |
 | 顯示卡   | 不限                                     |
+
+## Official links
+
+- GitHub: https://github.com/beeradmoore/dlss-swapper/
+- Twitter: https://twitter.com/dlss_swapper
+- Reddit: https://www.reddit.com/r/DLSS_Swapper/
+
+If you have found an other accounts or sites claiming to be DLSS Swapper, please ignore them (or better yet, [file an issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) and let us know) 

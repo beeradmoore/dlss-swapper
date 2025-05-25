@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Data.EpicGamesStore
 {
-    // Did not end up using LauncherInstalled.dat but keeping this here incase we ever do wish to.
+    // Did not end up using LauncherInstalled.dat but keeping this here in case we ever do wish to.
     /*
     internal class LauncherInstalled
     {

@@ -126,6 +126,12 @@ namespace DLSS_Swapper.Data.GOG
                                 continue;
                             }
 
+                            if (Directory.Exists(activeGame.InstallPath) == false)
+                            {
+                                Logger.Warning($"{Name} library could not load game {activeGame.Title} ({activeGame.PlatformId}) because install path does not exist: {activeGame.InstallPath}");
+                                continue;
+                            }
+
                             // If the game is not from cache, force processing
                             if (cachedGame is null)
                             {
@@ -156,7 +162,7 @@ namespace DLSS_Swapper.Data.GOG
                 //await Task.Delay(1);
                 var db = new SQLiteAsyncConnection(storageFileLocation, SQLiteOpenFlags.ReadOnly);
 
-                // Default resource type for verticalCover images is 3. We default to this, but we also add try load it incase it changes.
+                // Default resource type for verticalCover images is 3. We default to this, but we also add try load it in case it changes.
                 var webCacheResourceTypeId = 3;
                 var webCacheResourceType = (await db.QueryAsync<WebCacheResourceType>("SELECT * FROM WebCacheResourceTypes WHERE type=?", "verticalCover").ConfigureAwait(false)).FirstOrDefault();
                 if (webCacheResourceType is not null)
@@ -164,7 +170,7 @@ namespace DLSS_Swapper.Data.GOG
                     webCacheResourceTypeId = webCacheResourceType.Id;
                 }
 
-                // Default resource type for originalImages is 378. We default to this, but we also add try load it incase it changes.
+                // Default resource type for originalImages is 378. We default to this, but we also add try load it in case it changes.
                 var gamePieceTypeId = 378;
                 var gamePieceType = (await db.QueryAsync<GamePieceType>("SELECT * FROM GamePieceTypes WHERE type=?", "originalImages").ConfigureAwait(false)).FirstOrDefault();
                 if (gamePieceType is not null)
@@ -338,6 +344,16 @@ namespace DLSS_Swapper.Data.GOG
                 {
                     if (game.IsInIgnoredPath())
                     {
+                        continue;
+                    }
+
+                    if (Directory.Exists(game.InstallPath) == false)
+                    {
+                        Logger.Warning($"{Name} library could not load game {game.Title} ({game.PlatformId}) from cache because install path does not exist: {game.InstallPath}");
+                        // We remove the list of known game assets, but not the game itself.
+                        // Removing the game will remove its history, notes, and other data.
+                        // We don't want to do this in case it is just a temporary issue.
+                        await game.RemoveGameAssetsFromCacheAsync().ConfigureAwait(false);
                         continue;
                     }
 

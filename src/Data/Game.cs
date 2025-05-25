@@ -1337,8 +1337,16 @@ namespace DLSS_Swapper.Data
                     CurrentXeSS_FG = gameAsset;
                 }
             }
-
         }
+
+        public async Task RemoveGameAssetsFromCacheAsync()
+        {
+            using (await Database.Instance.Mutex.LockAsync())
+            {
+                await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+            }
+        }
+
         public async Task LoadGameAssetsFromCacheAsync()
         {
             await LoadCoverImageAsync();
@@ -1399,7 +1407,7 @@ namespace DLSS_Swapper.Data
             }
             else
             {
-                // If there is no known current DLLs then we likely want to do a full reload incase the game got updated.
+                // If there is no known current DLLs then we likely want to do a full reload in case the game got updated.
                 // TODO: Also add a time last reloaded here.
                 NeedsProcessing = true;
                 return;

@@ -53,7 +53,7 @@ namespace DLSS_Swapper
 
         public void Start()
         {
-            // Cleanup incase start is called twice.
+            // Cleanup in case start is called twice.
             Stop();
 
 

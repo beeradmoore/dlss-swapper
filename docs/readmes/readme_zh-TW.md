@@ -43,6 +43,7 @@
 - [Epic Games](https://store.epicgames.com/)
 - [Ubisoft Connect](https://www.ubisoft.com/)
 - [Xbox App](https://www.xbox.com/)
+- [Battle.net](https://shop.battle.net/)
 - 透過 `Add Game` 按鈕來手動新增其他遊戲。
 
 ## 為何要更換遊戲中的 DLSS dll？

@@ -43,6 +43,7 @@
 - [Epic Games](https://store.epicgames.com/)
 - [Ubisoft Connect](https://www.ubisoft.com/)
 - [Xbox App](https://www.xbox.com/)
+- [Battle.net](https://shop.battle.net/)
 - Agregar manualmente a través del botón `Agregar Juego`.
 
 ## ¿Por qué quieres cambiar el DLSS dlls in su juego?

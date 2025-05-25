@@ -28,3 +28,6 @@ jobs:
       run: |
         winget install -e --id NSIS.NSIS --version 3.11 --accept-package-agreements --accept-source-agreements
     
+    - name: Build DLSS Swapper portable
+      run: package/build_Portable.cmd
+    

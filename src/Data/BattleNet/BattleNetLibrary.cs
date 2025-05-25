@@ -191,7 +191,7 @@ internal partial class BattleNetLibrary : IGameLibrary
 
                 if (Directory.Exists(activeGame.InstallPath) == false)
                 {
-                    Logger.Error($"{Name} library could not load game {activeGame.Title} ({activeGame.PlatformId}) because install path does not exist: {activeGame.InstallPath}");
+                    Logger.Warning($"{Name} library could not load game {activeGame.Title} ({activeGame.PlatformId}) because install path does not exist: {activeGame.InstallPath}");
                     continue;
                 }
 
@@ -255,7 +255,7 @@ internal partial class BattleNetLibrary : IGameLibrary
 
                 if (Directory.Exists(game.InstallPath) == false)
                 {
-                    Logger.Error($"{Name} library could not load game {game.Title} ({game.PlatformId}) from cache because install path does not exist: {game.InstallPath}");
+                    Logger.Warning($"{Name} library could not load game {game.Title} ({game.PlatformId}) from cache because install path does not exist: {game.InstallPath}");
                     // We remove the list of known game assets, but not the game itself.
                     // Removing the game will remove its history, notes, and other data.
                     // We don't want to do this in case it is just a temporary issue.

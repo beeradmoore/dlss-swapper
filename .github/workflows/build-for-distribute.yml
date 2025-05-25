@@ -31,6 +31,6 @@ jobs:
     - name: Build DLSS Swapper portable
       run: |
         ls ${{ github.workspace }}
-        ls ${{ github.workspace }}/package/
-        package/build_Portable.cmd
-      working-directory: ${{ github.workspace }}/package/
+        ls ${{ github.workspace }}\package\
+        package\build_Portable.cmd
+      working-directory: ${{ github.workspace }}\package\

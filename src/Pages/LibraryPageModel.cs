@@ -882,7 +882,7 @@ Only import dlls from sources you trust.",
 
             if (saveFile is not null)
             {
-                // This will likley not be seen, but keeping it here incase export is very slow (eg. copy over very slow network).
+                // This will likley not be seen, but keeping it here in case export is very slow (eg. copy over very slow network).
                 _ = exportingDialog.ShowAsync();
 
                 // Give UI time to update and show import screen.

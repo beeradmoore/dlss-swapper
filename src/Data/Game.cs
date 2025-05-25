@@ -1407,7 +1407,7 @@ namespace DLSS_Swapper.Data
             }
             else
             {
-                // If there is no known current DLLs then we likely want to do a full reload incase the game got updated.
+                // If there is no known current DLLs then we likely want to do a full reload in case the game got updated.
                 // TODO: Also add a time last reloaded here.
                 NeedsProcessing = true;
                 return;

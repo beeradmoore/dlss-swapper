@@ -258,7 +258,7 @@ internal partial class BattleNetLibrary : IGameLibrary
                     Logger.Error($"{Name} library could not load game {game.Title} ({game.PlatformId}) from cache because install path does not exist: {game.InstallPath}");
                     // We remove the list of known game assets, but not the game itself.
                     // Removing the game will remove its history, notes, and other data.
-                    // We don't want to do this incase it is just a temporary issue.
+                    // We don't want to do this in case it is just a temporary issue.
                     await game.RemoveGameAssetsFromCacheAsync().ConfigureAwait(false);
                     continue;
                 }

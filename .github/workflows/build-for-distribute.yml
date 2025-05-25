@@ -27,7 +27,12 @@ jobs:
     - name: Install NSIS
       run: |
         winget install -e --id NSIS.NSIS --version 3.11 --accept-package-agreements --accept-source-agreements
-    
+    - name: Extract version from csproj
+      shell: pwsh
+      run: |
+        $ver = Select-String '<Version>(.+?)</Version>' "${{ github.workspace }}\src\DLSS Swapper.csproj" | % { $_.Matches[0].Groups[1].Value }
+        echo "VERSION=$ver" >> $env:GITHUB_ENV
+        
     - name: Build DLSS Swapper portable
       run: ${{ github.workspace }}\package\build_Portable.cmd
       working-directory: ${{ github.workspace }}\package\
@@ -36,10 +41,19 @@ jobs:
       run: ${{ github.workspace }}\package\build_Installer.cmd
       working-directory: ${{ github.workspace }}\package\
 
-    - name: Upload build artifacts
+    - name: Upload portable build artifacts
       uses: actions/upload-artifact@v4
       with:
-        path: ${{ github.workspace }}\package\Output\*
+        name: DLSS.Swapper-${{ env.VERSION }}-portable
+        path: ${{ github.workspace }}\package\Output\DLSS.Swapper-${{ env.VERSION }}-portable.zip
+        compression-level: 0
+        if-no-files-found: error
+
+    - name: Upload installer build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: DLSS.Swapper-${{ env.VERSION }}-installer
+        path: ${{ github.workspace }}\package\Output\DLSS.Swapper-${{ env.VERSION }}-installer.exe
         compression-level: 0
         if-no-files-found: error
       

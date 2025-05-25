@@ -32,5 +32,5 @@ jobs:
       run: |
         ls ${{ github.workspace }}
         ls ${{ github.workspace }}\package\
-        package\build_Portable.cmd
+        ${{ github.workspace }}\package\build_Portable.cmd
       working-directory: ${{ github.workspace }}\package\

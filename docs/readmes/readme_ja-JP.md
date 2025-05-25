@@ -35,6 +35,7 @@
 - [Epic Games](https://store.epicgames.com/)
 - [Ubisoft Connect](https://www.ubisoft.com/)
 - [Xbox App](https://www.xbox.com/)
+- [Battle.net](https://shop.battle.net/)
 - `Add Game`ボタンを使用して手動で追加
 
 ## なぜゲーム内の DLSS dll を変更したいのですか？

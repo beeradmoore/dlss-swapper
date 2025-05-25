@@ -1,12 +1,7 @@
 name: Build DLSS Swapper
 
 on:
-  push:
-    branches:
-      - 'feature/529-github-actions-build-pipeline'
-
-#on:
-#  workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   build:

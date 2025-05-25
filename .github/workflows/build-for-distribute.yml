@@ -27,6 +27,11 @@ jobs:
     - name: Install NSIS
       run: |
         winget install -e --id NSIS.NSIS --version 3.11 --accept-package-agreements --accept-source-agreements
+    
+    - name: Add NSIS to PATH
+      shell: pwsh
+      run: echo "C:\Program Files (x86)\NSIS\Bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      
     - name: Extract version from csproj
       shell: pwsh
       run: |

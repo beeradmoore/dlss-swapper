@@ -26,5 +26,5 @@ jobs:
 
     - name: Install NSIS
       run: |
-        winget install -e --id NSIS.NSIS --version 3.11
+        winget install -e --id NSIS.NSIS --version 3.11 --accept-package-agreements --accept-source-agreements
     

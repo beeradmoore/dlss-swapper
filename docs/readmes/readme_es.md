@@ -75,11 +75,11 @@ Por favor, ven y comparte su experiencia DLSS en [r/DLSS_Swapper](https://www.re
 
 Puede obtener la última compilación en nosotros página web de [lanzamiento de el GitHub](https://github.com/beeradmoore/dlss-swapper/releases)
 
-You can also install with winget.
+También puedes instalarlo con winget.
 
 > winget install --id=beeradmoore.dlss-swapper -e
 
-These are the only official places to get DLSS Swapper.
+Estos son los únicos lugares oficiales para obtener DLSS Swapper.
 
 ## Sería genial si el DLSS Swapper pudiera…
 

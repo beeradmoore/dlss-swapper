@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -80,7 +80,7 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 return uniqueExecutables;
             }
         }
-        
+
         public class StartGameModeNode
         {
             public List<ExecutablesNode>? Executables { get; set; } = null;

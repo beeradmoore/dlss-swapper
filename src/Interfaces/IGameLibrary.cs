@@ -1,16 +1,13 @@
-﻿using DLSS_Swapper.Data;
+using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.EpicGamesStore;
 using DLSS_Swapper.Data.GOG;
 using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Data.UbisoftConnect;
 using DLSS_Swapper.Data.Xbox;
 using DLSS_Swapper.Data.ManuallyAdded;
-using Serilog;
+using DLSS_Swapper.Data.BattleNet;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Interfaces
@@ -23,12 +20,14 @@ namespace DLSS_Swapper.Interfaces
         EpicGamesStore = 4,
         UbisoftConnect = 8,
         XboxApp = 16,
-        ManuallyAdded = 32
+        ManuallyAdded = 32,
+        BattleNet = 64,
     };
 
     public interface IGameLibrary
     {
         GameLibrary GameLibrary { get; }
+        GameLibrarySettings? GameLibrarySettings { get; }
         string Name { get; }
         Type GameType { get; }
 
@@ -38,13 +37,15 @@ namespace DLSS_Swapper.Interfaces
 
         static IGameLibrary GetGameLibrary(GameLibrary gameLibrary)
         {
-            return gameLibrary switch { 
+            return gameLibrary switch
+            {
                 GameLibrary.Steam => SteamLibrary.Instance,
                 GameLibrary.GOG => GOGLibrary.Instance,
                 GameLibrary.EpicGamesStore => EpicGamesStoreLibrary.Instance,
                 GameLibrary.UbisoftConnect => UbisoftConnectLibrary.Instance,
                 GameLibrary.XboxApp => XboxLibrary.Instance,
                 GameLibrary.ManuallyAdded => ManuallyAddedLibrary.Instance,
+                GameLibrary.BattleNet => BattleNetLibrary.Instance,
                 _ => throw new Exception($"Could not load game library {gameLibrary}"),
             };
         }
@@ -53,23 +54,32 @@ namespace DLSS_Swapper.Interfaces
         {
             get
             {
-                var enabledGameLibraries = (GameLibrary)Settings.Instance.EnabledGameLibraries;
-                return enabledGameLibraries.HasFlag(GameLibrary);
+                return GameLibrarySettings?.IsEnabled ?? false;
             }
         }
 
         public void Disable()
         {
-            var enabledGameLibraries = Settings.Instance.EnabledGameLibraries;
-            enabledGameLibraries &= ~(uint)GameLibrary; // ClearFlag 
-            Settings.Instance.EnabledGameLibraries = enabledGameLibraries;
+            if (GameLibrarySettings is not null)
+            {
+                if (GameLibrarySettings.IsEnabled == true)
+                {
+                    GameLibrarySettings.IsEnabled = false;
+                    Settings.Instance.SaveJson();
+                }
+            }
         }
 
         public void Enable()
         {
-            var enabledGameLibraries = Settings.Instance.EnabledGameLibraries;
-            enabledGameLibraries |= (uint)GameLibrary; // SetFlag
-            Settings.Instance.EnabledGameLibraries = enabledGameLibraries;
+            if (GameLibrarySettings is not null)
+            {
+                if (GameLibrarySettings.IsEnabled == false)
+                {
+                    GameLibrarySettings.IsEnabled = true;
+                    Settings.Instance.SaveJson();
+                }
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,9 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.WinUI.Collections;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.Messages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 
@@ -93,18 +95,19 @@ internal partial class GameManager : ObservableObject
         FavouriteGamesView = new AdvancedCollectionView(_allGames, true);
         FavouriteGamesView.Filter = GetPredicateForFavouriteGames(Settings.Instance.HideNonDLSSGames);
         FavouriteGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
+        FavouriteGamesView.ObserveFilterProperty(nameof(Game.HasSwappableItems));
         FavouriteGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
         AllGamesView = new AdvancedCollectionView(_allGames, true);
         AllGamesView.Filter = GetPredicateForAllGames(Settings.Instance.HideNonDLSSGames);
-        //AllGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
+        AllGamesView.ObserveFilterProperty(nameof(Game.HasSwappableItems));
         AllGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
 
-        allGamesGroup = new GameGroup(string.Empty, AllGamesView);
-        favouriteGamesGroup = new GameGroup("Favourites", FavouriteGamesView);
+        allGamesGroup = new GameGroup(string.Empty, null, AllGamesView);
+        favouriteGamesGroup = new GameGroup("Favourites", null, FavouriteGamesView);
 
-        var groupedList = new List<GameGroup>()
+        var groupedList = new ObservableCollection<GameGroup>()
         {
             favouriteGamesGroup,
         };
@@ -116,19 +119,20 @@ internal partial class GameManager : ObservableObject
         };
 
 
-        foreach (var gameLibraryEnum in Enum.GetValues<GameLibrary>())
+        foreach (var gameLibraryEnum in GetGameLibraries(false))
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
 
             var gameView = new AdvancedCollectionView(_allGames, true);
             gameView.Filter = GetPredicateForLibraryGames(gameLibraryEnum, Settings.Instance.HideNonDLSSGames);
+            gameView.ObserveFilterProperty(nameof(Game.HasSwappableItems));
             gameView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
             libraryGamesView[gameLibraryEnum] = gameView;
 
-            var gameGroup = new GameGroup(gameLibrary.Name, gameView);
+            var gameGroup = new GameGroup(gameLibrary.Name, gameLibrary.GameLibrary, gameView);
             groupedList.Add(gameGroup);
-            libraryGameGroups[gameLibraryEnum] = new GameGroup(gameLibrary.Name, gameView);
+            libraryGameGroups[gameLibraryEnum] = gameGroup;
         }
 
 
@@ -138,6 +142,7 @@ internal partial class GameManager : ObservableObject
             Source = groupedList,
             ItemsPath = new PropertyPath("Games"),
         };
+        
 
         UngroupedGameCollectionViewSource = new CollectionViewSource()
         {
@@ -146,6 +151,32 @@ internal partial class GameManager : ObservableObject
             ItemsPath = new PropertyPath("Games"),
         };
 
+
+        WeakReferenceMessenger.Default.Register<GameLibrariesOrderChangedMessage>(this, (sender, message) =>
+        {
+            var groupedGameLibraryList = groupedList.ToList();
+
+            groupedList.Clear();
+
+            // Add favourites
+            groupedList.Add(groupedGameLibraryList[0]);
+            groupedGameLibraryList.RemoveAt(0);
+
+            
+            // Add each of the items in the order that is from settings.
+            foreach (var gameLibrarySetting in Settings.Instance.GameLibrarySettings)
+            {
+                var groupedItem = groupedGameLibraryList.Single(x => x.GameLibrary == gameLibrarySetting.GameLibrary);
+                groupedList.Add(groupedItem);
+                groupedGameLibraryList.Remove(groupedItem);
+            }
+
+            if (groupedGameLibraryList.Count > 0)
+            {
+                Logger.Error($"Somehow extra grouped items were left over. {string.Join(", ", groupedGameLibraryList)}");
+            }
+        });
+
     }
 
     public async Task LoadGamesFromCacheAsync()
@@ -153,7 +184,7 @@ internal partial class GameManager : ObservableObject
         UnknownAssetsFound = false;
         _unknownGameAssets.Clear();
 
-        foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
+        foreach (var gameLibraryEnum in GameManager.Instance.GetGameLibraries(true))
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
             if (gameLibrary.IsEnabled)
@@ -173,7 +204,7 @@ internal partial class GameManager : ObservableObject
                 _unknownGameAssets.Clear();
             }
         }
-        foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
+        foreach (var gameLibraryEnum in GameManager.Instance.GetGameLibraries(true))
         {
             var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
             if (gameLibrary.IsEnabled)
@@ -292,6 +323,18 @@ internal partial class GameManager : ObservableObject
         }
     }
 
+    public void RemoveAllGames()
+    {
+        lock (gameLock)
+        {
+            // TODO: Cancel loading of games here
+            _synchronisedAllGames.Clear();
+
+            App.CurrentApp.RunOnUIThread(() => {
+                _allGames.Clear();
+            });
+        }
+    }
 
     public TGame? GetGame<TGame>(string platformId) where TGame : Game
     {
@@ -374,5 +417,28 @@ internal partial class GameManager : ObservableObject
         }
 
         return unknownGameAssets;
+    }
+
+    public GameLibrarySettings? GetGameLibrarySettings(GameLibrary gameLibrary)
+    {
+        return Settings.Instance.GameLibrarySettings.FirstOrDefault(x => x.GameLibrary == gameLibrary);
+    }
+
+    public List<GameLibrary> GetGameLibraries(bool onlyEnabled)
+    {
+        var gameLibrariesToReturn = new List<GameLibrary>();
+
+        foreach (var gameLibrarySetting in Settings.Instance.GameLibrarySettings)
+        {
+            if (gameLibrarySetting.IsEnabled == false && onlyEnabled == true)
+            {
+                continue;
+            }
+
+            gameLibrariesToReturn.Add(gameLibrarySetting.GameLibrary);
+        }
+
+        return gameLibrariesToReturn;
+
     }
 }

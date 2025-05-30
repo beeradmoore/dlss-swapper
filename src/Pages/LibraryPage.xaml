@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="DLSS_Swapper.Pages.LibraryPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,11 +7,12 @@
     xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
     xmlns:converters="using:DLSS_Swapper.Converters"
     xmlns:system="using:System"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:data="using:DLSS_Swapper.Data"
     mc:Ignorable="d"    
     NavigationCacheMode="Required"
     x:Name="thisPage">
-    
+
     <Page.Resources>
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadingConverter" DesierdState="Downloading" />
         <converters:DLSSStateVisibilityConverter x:Key="IsDownloadedConverter" DesierdState="Downloaded" />
@@ -21,7 +22,8 @@
         <converters:BytesToMegaBytesConverter x:Key="BytesToMegaBytesConverter" />
         <converters:TotalBytesVisbilityConverter x:Key="TotalBytesVisbilityConverter" />
     </Page.Resources>
-    
+
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -35,7 +37,11 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Padding="16,0,16,0">
-            <TextBlock Margin="16,0,0,0" Text="Library" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="16">
+                <TextBlock Text="Library" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+                <muxc:ProgressRing IsActive="True" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.IsRefreshing, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"  />
+            </StackPanel>
+            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <AppBarButton HorizontalAlignment="Right"  Label="Import" Command="{x:Bind ViewModel.ImportCommand}">
                     <AppBarButton.Content>
@@ -47,9 +53,14 @@
                         <FontIcon Glyph="&#xEDE1;" />
                     </AppBarButton.Content>
                 </AppBarButton>
+                <AppBarButton HorizontalAlignment="Right" Label="Download Latest" Command="{x:Bind ViewModel.DownloadLatestCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE896;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
                 <AppBarButton HorizontalAlignment="Right" Label="Refresh" Command="{x:Bind ViewModel.RefreshCommand}">
                     <AppBarButton.Content>
-                        <FontIcon Glyph="&#xE72C;"  />
+                        <FontIcon Glyph="&#xE72C;" />
                     </AppBarButton.Content>
                 </AppBarButton>
             </StackPanel>
@@ -66,19 +77,10 @@
 
 
         <ScrollViewer Grid.Row="2" HorizontalScrollMode="Enabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-            <SelectorBar SelectionChanged="SelectorBar_SelectionChanged">
-                <SelectorBarItem x:Name="DLSS" Text="DLSS" IsSelected="True" Tag="{x:Bind data:GameAssetType.DLSS}" />
-                <SelectorBarItem x:Name="DLSS_FG" Text="DLSS Frame Generation" Tag="{x:Bind data:GameAssetType.DLSS_G}" />
-                <SelectorBarItem x:Name="DLSS_RR" Text="DLSS Ray Reconstruction" Tag="{x:Bind data:GameAssetType.DLSS_D}" />
-                <SelectorBarItem x:Name="FSR_31_DX12" Text="FSR 3.1 (DirectX 12)" Tag="{x:Bind data:GameAssetType.FSR_31_DX12}" />
-                <SelectorBarItem x:Name="FSR_31_VK" Text="FSR 3.1 (Vulkan)" Tag="{x:Bind data:GameAssetType.FSR_31_VK}"/>
-                <SelectorBarItem x:Name="XeSS" Text="XeSS" Tag="{x:Bind data:GameAssetType.XeSS}" />
-                <SelectorBarItem x:Name="XeSS_FG" Text="XeSS Frame Generation" Tag="{x:Bind data:GameAssetType.XeSS_FG}" />
-                <SelectorBarItem x:Name="XeLL" Text="XeLL" Tag="{x:Bind data:GameAssetType.XeLL}" />
-            </SelectorBar>
+            <SelectorBar x:Name="UpscalerSelectorBar" SelectedItem="{x:Bind ViewModel.SelectedSelectorBarItem, Mode=TwoWay}" />
         </ScrollViewer>
 
-        <GridView Grid.Row="3" x:Name="MainGridView" Margin="16" SizeChanged="MainGridView_SizeChanged" ItemsSource="{x:Bind ViewModel.SelectedLibraryList, Mode=OneWay}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="MainGridView_ItemClick">
+        <GridView Grid.Row="3" x:Name="MainGridView" Margin="16,0,16,0" SizeChanged="MainGridView_SizeChanged" ItemsSource="{x:Bind ViewModel.SelectedLibraryList, Mode=OneWay}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="MainGridView_ItemClick">
           
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>

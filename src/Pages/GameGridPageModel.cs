@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,10 +9,13 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using AsyncAwaitBestPractices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.Steam;
+using DLSS_Swapper.Messages;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -68,17 +71,19 @@ public partial class GameGridPageModel : ObservableObject
         GameGridViewType.GridView => new FontIcon() { Glyph = "\xF0E2" },
         GameGridViewType.ListView => new FontIcon() { Glyph = "\xE8FD" },
         _ => new FontIcon() { },
-    }; 
-
-
-
+    };
 
     public GameGridPageModel(GameGridPage gameGridPage)
     {
-        this.gameGridPage = gameGridPage;
+        WeakReferenceMessenger.Default.Register<GameLibrariesStateChangedMessage>(this, async (sender, message) =>
+        {
+            GameManager.Instance.RemoveAllGames();
+            await InitialLoadAsync();
+        });
 
+        this.gameGridPage = gameGridPage;
         ApplyGameGroupFilter();
-     }
+    }
 
     public async Task InitialLoadAsync()
     {
@@ -86,9 +91,9 @@ public partial class GameGridPageModel : ObservableObject
         IsDLSSLoading = true;
 
         await GameManager.Instance.LoadGamesFromCacheAsync();
-        
+
         IsGameListLoading = false;
-          
+
         await GameManager.Instance.LoadGamesAsync(false);
 
         IsDLSSLoading = false;
@@ -101,7 +106,7 @@ public partial class GameGridPageModel : ObservableObject
             throw new ArgumentException("Sender must be a TextBox");
         }
 
-        if(string.IsNullOrEmpty(textBox.Text))
+        if (string.IsNullOrEmpty(textBox.Text))
         {
             CurrentCollectionView = GameManager.Instance.GetGameCollection();
             return;
@@ -146,7 +151,7 @@ If you have checked these and your game is still not showing up there may be a b
                     },
                     Orientation = Orientation.Vertical,
                     Spacing = 16,
-                },                    
+                },
             };
 
             var result = await dialog.ShowAsync();
@@ -198,7 +203,7 @@ If you have checked these and your game is still not showing up there may be a b
                         new Run() { Text = "games", FontStyle = FontStyle.Italic },
                         new Run() { Text = " directory." },
                         new Run() { Text = "\n\n" },
-                        new Run() { Text = "For example, iff you have a game at:\n" },
+                        new Run() { Text = "For example, if you have a game at:\n" },
                         new Run() { Text = "C:\\Program Files\\MyGamesFolder\\MyFavouriteGame\\" },
                         new Run() { Text = "\n\n" },
                         new Run() { Text = "You would select the " },
@@ -391,5 +396,4 @@ If you have checked these and your game is still not showing up there may be a b
         gameGridPage.ReloadMainContentControl();
         Settings.Instance.GameGridViewType = gameGridView;
     }
-
 }

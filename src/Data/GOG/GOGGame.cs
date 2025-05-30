@@ -150,7 +150,7 @@ namespace DLSS_Swapper.Data.GOG
                 Logger.Error(err);
                 //Debugger.Break();
             }
-                        
+
 
             // If we got here then we did not find the game in search. We can load from the product endpoint
             // But doing this the cover image is likely not what we want.

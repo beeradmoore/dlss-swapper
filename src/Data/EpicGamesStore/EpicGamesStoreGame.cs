@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 using SQLite;
 
@@ -12,7 +12,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
         public override bool IsReadyToPlay => true;
 
         [Column("remote_header_image")]
-        public string RemoteHeaderImage { get; set;  } = string.Empty;
+        public string RemoteHeaderImage { get; set; } = string.Empty;
 
         public EpicGamesStoreGame()
         {
@@ -31,7 +31,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
             {
                 return;
             }
-            
+
             // If the remote image doens't already have query arguments lets add some to load a smaller image.
             if (RemoteHeaderImage.Contains("?") == false)
             {

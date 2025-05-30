@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls;
 
 namespace DLSS_Swapper.Pages;
 
@@ -7,12 +7,12 @@ namespace DLSS_Swapper.Pages;
 /// </summary>
 public sealed partial class SettingsPage : Page
 {
-    internal SettingsPageModel ViewModel { get; init; }
+    public SettingsPageModel ViewModel { get; private set; }
 
     public SettingsPage()
     {
         this.InitializeComponent();
         ViewModel = new SettingsPageModel(this);
         DataContext = ViewModel;
-    }   
+    }
 }

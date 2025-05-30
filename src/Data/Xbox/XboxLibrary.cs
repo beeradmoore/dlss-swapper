@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -27,6 +27,9 @@ namespace DLSS_Swapper.Data.Xbox
 
         static XboxLibrary? instance = null;
         public static XboxLibrary Instance => instance ??= new XboxLibrary();
+
+        GameLibrarySettings? _gameLibrarySettings;
+        public GameLibrarySettings? GameLibrarySettings => _gameLibrarySettings ??= GameManager.Instance.GetGameLibrarySettings(GameLibrary);
 
         private XboxLibrary()
         {
@@ -91,7 +94,7 @@ namespace DLSS_Swapper.Data.Xbox
                             {
                                 var configFile = Path.Combine(gameDirectory, "Content", "MicrosoftGame.config");
                                 if (File.Exists(configFile))
-                                {   
+                                {
                                     var xmlDocument = new XmlDocument();
                                     xmlDocument.Load(configFile);
 
@@ -207,6 +210,18 @@ namespace DLSS_Swapper.Data.Xbox
                         var activeGame = cachedGame ?? new XboxGame(familyName);
                         activeGame.Title = package.DisplayName;  // TODO: Will this be a problem if the game is already loaded
                         activeGame.InstallPath = PathHelpers.NormalizePath(package.InstalledPath);
+
+                        if (activeGame.IsInIgnoredPath())
+                        {
+                            continue;
+                        }
+
+                        if (Directory.Exists(activeGame.InstallPath) == false)
+                        {
+                            Logger.Warning($"{Name} library could not load game {activeGame.Title} ({activeGame.PlatformId}) because install path does not exist: {activeGame.InstallPath}");
+                            continue;
+                        }
+
                         await activeGame.SetLocalHeaderImagesAsync(gameNamesToFindPackages[packageName]);
                         //await game.UpdateCacheImageAsync();
                         await activeGame.SaveToDatabaseAsync();
@@ -256,9 +271,24 @@ namespace DLSS_Swapper.Data.Xbox
                 }
                 foreach (var game in games)
                 {
+                    if (game.IsInIgnoredPath())
+                    {
+                        continue;
+                    }
+
+                    if (Directory.Exists(game.InstallPath) == false)
+                    {
+                        Logger.Warning($"{Name} library could not load game {game.Title} ({game.PlatformId}) from cache because install path does not exist: {game.InstallPath}");
+                        // We remove the list of known game assets, but not the game itself.
+                        // Removing the game will remove its history, notes, and other data.
+                        // We don't want to do this in case it is just a temporary issue.
+                        await game.RemoveGameAssetsFromCacheAsync().ConfigureAwait(false);
+                        continue;
+                    }
+
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
-                }                
+                }
             }
             catch (Exception err)
             {

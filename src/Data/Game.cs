@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -199,6 +198,7 @@ namespace DLSS_Swapper.Data
                 GameLibrary.UbisoftConnect => $"ubisoftconnect_{platformId}",
                 GameLibrary.XboxApp => $"xboxapp_{platformId}",
                 GameLibrary.ManuallyAdded => $"manuallyadded_{platformId}",
+                GameLibrary.BattleNet => $"battlenet_{platformId}",
                 _ => throw new Exception($"Unknown GameLibrary {GameLibrary} while setting ID"),
             };
         }
@@ -664,7 +664,7 @@ namespace DLSS_Swapper.Data
 
             if (File.Exists(dllRecord.LocalRecord.ExpectedPath) == false)
             {
-                return (false, "Downloaded zip not found.", false);
+                return (false, "Downloaded dll not found.", false);
             }
 
             var existingRecords = this.GameAssets.Where(x => x.AssetType == dllRecord.AssetType).ToList();
@@ -676,44 +676,19 @@ namespace DLSS_Swapper.Data
             var backupRecordType = DLLManager.Instance.GetAssetBackupType(dllRecord.AssetType);
             var existingBackupRecords = this.GameAssets.Where(x => x.AssetType == backupRecordType).ToList();
 
-            // TODO: Handle more than the first record.
-            var currentRecord = existingRecords[0];
-
-            var recordFileName = Path.GetFileName(currentRecord.Path);
-            var recordFileNameWithoutExtension = Path.GetFileNameWithoutExtension(currentRecord.Path);
-
-            var tempPath = Storage.GetTemp();
-            var tempDllFile = Path.Combine(tempPath, $"{recordFileNameWithoutExtension}_{dllRecord.MD5Hash}", recordFileName);
-            Storage.CreateDirectoryForFileIfNotExists(tempDllFile);
-
-
-            using (var archive = ZipFile.OpenRead(dllRecord.LocalRecord.ExpectedPath))
-            {
-                var zippedDlls = archive.Entries.Where(x => x.Name == recordFileName).ToArray();
-                if (zippedDlls.Length == 0)
-                {
-                    throw new Exception("Dll zip was invalid (no dll found).");
-                }
-                else if (zippedDlls.Length > 1)
-                {
-                    throw new Exception("Dll zip was invalid (more than one dll found).");
-                }
-
-                zippedDlls[0].ExtractToFile(tempDllFile, true);
-            }
-
-            var versionInfo = FileVersionInfo.GetVersionInfo(tempDllFile);
+            var versionInfo = FileVersionInfo.GetVersionInfo(dllRecord.LocalRecord.ExpectedPath);
             var dllVersion = versionInfo.GetFormattedFileVersion();
-            if (dllRecord.MD5Hash != versionInfo.GetMD5Hash())
+            var md5Hash = versionInfo.GetMD5Hash();
+            if (dllRecord.MD5Hash != md5Hash)
             {
-                return (false, "Unable to swap dll as zip was invalid (dll hash was invalid).", false);
+                return (false, "Unable to swap dll because dll hash was invalid.", false);
             }
 
 
             // Validate new DLL
             if (Settings.Instance.AllowUntrusted == false)
             {
-                var isTrusted = WinTrust.VerifyEmbeddedSignature(tempDllFile);
+                var isTrusted = WinTrust.VerifyEmbeddedSignature(dllRecord.LocalRecord.ExpectedPath);
                 if (isTrusted == false)
                 {
                     return (false, "Unable to swap dll as we are unable to verify the signature of the version you are trying to use.\nIf you wish to override this decision please enable 'Allow Untrusted' in settings.", false);
@@ -735,12 +710,11 @@ namespace DLSS_Swapper.Data
                     }
 
                     // Ensure we don't do anything if the target exists.
-                    var backupDllPath = Path.Combine(dllPath, $"{recordFileName}.dlsss");
+                    var backupDllPath = $"{existingRecord.Path}.dlsss";
                     if (File.Exists(backupDllPath) == false)
                     {
                         try
                         {
-                            var defaultVersionInfo = FileVersionInfo.GetVersionInfo(existingRecord.Path);
                             File.Copy(existingRecord.Path, backupDllPath);
 
                             var backupGameAsset = new GameAsset()
@@ -779,7 +753,8 @@ namespace DLSS_Swapper.Data
             {
                 try
                 {
-                    File.Copy(tempDllFile, existingRecord.Path, true);
+                    // Copy the DLL
+                    File.Copy(dllRecord.LocalRecord.ExpectedPath, existingRecord.Path, true);
 
                     var newGameAsset = new GameAsset()
                     {
@@ -818,11 +793,12 @@ namespace DLSS_Swapper.Data
 
             foreach (var existingRecrod in existingRecords)
             {
-                var didRemove = GameAssets.Remove(existingRecrod);
+                GameAssets.Remove(existingRecrod);
             }
             GameAssets.AddRange(newGameAssets);
 
             // This should never be null.
+            // Using FirstOrDefault as there may be multiple, but we only care about using the information of the first.
             var firstNewGameAsset = newGameAssets.FirstOrDefault(x => x.AssetType == dllRecord.AssetType);
             if (firstNewGameAsset is not null)
             {
@@ -834,17 +810,6 @@ namespace DLSS_Swapper.Data
             {
                 await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
                 await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
-            }
-
-
-            try
-            {
-                File.Delete(tempDllFile);
-            }
-            catch (Exception err)
-            {
-                // NOOP
-                Logger.Error(err);
             }
 
             return (true, string.Empty, false);
@@ -889,7 +854,7 @@ namespace DLSS_Swapper.Data
                     CurrentXeLL = null;
                     CurrentXeLL = newGameAsset;
                 }
-                else if (gameAssetType  == GameAssetType.XeSS_FG)
+                else if (gameAssetType == GameAssetType.XeSS_FG)
                 {
                     CurrentXeSS_FG = null;
                     CurrentXeSS_FG = newGameAsset;
@@ -1382,8 +1347,16 @@ namespace DLSS_Swapper.Data
                     CurrentXeSS_FG = gameAsset;
                 }
             }
-
         }
+
+        public async Task RemoveGameAssetsFromCacheAsync()
+        {
+            using (await Database.Instance.Mutex.LockAsync())
+            {
+                await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+            }
+        }
+
         public async Task LoadGameAssetsFromCacheAsync()
         {
             await LoadCoverImageAsync();
@@ -1444,11 +1417,47 @@ namespace DLSS_Swapper.Data
             }
             else
             {
-                // If there is no known current DLLs then we likely want to do a full reload incase the game got updated.
+                // If there is no known current DLLs then we likely want to do a full reload in case the game got updated.
                 // TODO: Also add a time last reloaded here.
                 NeedsProcessing = true;
                 return;
             }
+        }
+
+        public bool IsInIgnoredPath()
+        {
+            // If there are no ignored paths we can skip this altogether.
+            if (Settings.Instance.IgnoredPaths.Length == 0)
+            {
+                return false;
+            }
+
+            // If installed path is empty we should consider it ignored.
+            if (string.IsNullOrWhiteSpace(InstallPath))
+            {
+                return true;
+            }
+
+            foreach (var ignoredPath in Settings.Instance.IgnoredPaths)
+            {
+                // Because we make IgnoredPaths have a / on the end it will fail the below check.
+                // In the cases where the path could be off by one we will do a manual check.
+                if (ignoredPath.Length - 1 == InstallPath.Length)
+                {
+                    var tempInstallPath = InstallPath + Path.DirectorySeparatorChar;
+                    if (tempInstallPath.Equals(ignoredPath, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return true;
+                    }
+                }
+
+
+                if (InstallPath.StartsWith(ignoredPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

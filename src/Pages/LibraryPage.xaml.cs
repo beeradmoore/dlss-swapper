@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -33,20 +33,12 @@ namespace DLSS_Swapper.Pages
             ViewModel = new LibraryPageModel(this);
         }
 
-        
+
         void MainGridView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             // via: https://stackoverflow.com/a/41141249
             var columns = Math.Ceiling(MainGridView.ActualWidth / 400);
             ((ItemsWrapGrid)MainGridView.ItemsPanelRoot).ItemWidth = (e.NewSize.Width / columns) - 1;
-        }
-
-        private void SelectorBar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
-        {
-            if (sender.SelectedItem.Tag is GameAssetType gameAssetType)
-            {
-                ViewModel.SelectLibrary(gameAssetType);
-            }
         }
 
         private void MainGridView_ItemClick(object sender, ItemClickEventArgs e)

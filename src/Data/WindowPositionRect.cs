@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,10 +16,10 @@ public class WindowPositionRect
 
     [JsonPropertyName("y")]
     public int Y { get; set; } = -1;
-    
+
     [JsonPropertyName("width")]
     public int Width { get; set; } = -1;
-    
+
     [JsonPropertyName("height")]
     public int Height { get; set; } = -1;
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -24,6 +24,9 @@ namespace DLSS_Swapper.Data.EpicGamesStore
 
         static EpicGamesStoreLibrary? instance = null;
         public static EpicGamesStoreLibrary Instance => instance ??= new EpicGamesStoreLibrary();
+
+        GameLibrarySettings? _gameLibrarySettings;
+        public GameLibrarySettings? GameLibrarySettings => _gameLibrarySettings ??= GameManager.Instance.GetGameLibrarySettings(GameLibrary);
 
         private EpicGamesStoreLibrary()
         {
@@ -84,7 +87,7 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                         await fileStream.CopyToAsync(memoryStream).ConfigureAwait(false);
                         var catalogCacheBase64 = Encoding.UTF8.GetString(memoryStream.ToArray());
                         var catalogCacheJson = Convert.FromBase64String(catalogCacheBase64);
-                        cacheItemsArray = JsonSerializer.Deserialize(catalogCacheJson, SourceGenerationContext.Default.CacheItemArray);                       
+                        cacheItemsArray = JsonSerializer.Deserialize(catalogCacheJson, SourceGenerationContext.Default.CacheItemArray);
                     }
                 }
 
@@ -149,7 +152,18 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                     activeGame.RemoteHeaderImage = remoteHeaderUrl;
                     activeGame.Title = manifest.DisplayName; // TODO: Will this be a problem if the game is already loaded
                     activeGame.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
-                    
+
+                    if (activeGame.IsInIgnoredPath())
+                    {
+                        continue;
+                    }
+
+                    if (Directory.Exists(activeGame.InstallPath) == false)
+                    {
+                        Logger.Warning($"{Name} library could not load game {activeGame.Title} ({activeGame.PlatformId}) because install path does not exist: {activeGame.InstallPath}");
+                        continue;
+                    }
+
                     await activeGame.SaveToDatabaseAsync();
 
                     // If the game is not from cache, force processing
@@ -206,6 +220,21 @@ namespace DLSS_Swapper.Data.EpicGamesStore
                 }
                 foreach (var game in games)
                 {
+                    if (game.IsInIgnoredPath())
+                    {
+                        continue;
+                    }
+
+                    if (Directory.Exists(game.InstallPath) == false)
+                    {
+                        Logger.Warning($"{Name} library could not load game {game.Title} ({game.PlatformId}) from cache because install path does not exist: {game.InstallPath}");
+                        // We remove the list of known game assets, but not the game itself.
+                        // Removing the game will remove its history, notes, and other data.
+                        // We don't want to do this in case it is just a temporary issue.
+                        await game.RemoveGameAssetsFromCacheAsync().ConfigureAwait(false);
+                        continue;
+                    }
+
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }

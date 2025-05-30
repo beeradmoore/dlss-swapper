@@ -1,9 +1,12 @@
 <p align="center">
- <img width="150px" src="../logo_250.png" align="center" alt="GitHub Readme Stats" />
+ <img width="150px" src="https://beeradmoore.github.io/dlss-swapper/logo_250.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">DLSS Swapper
 </h2>
  <p align="center">DLSS Swapperは、<strong>DLSS</strong>、<strong>FSR</strong>、<strong>XeSS</strong>のdllを便利にダウンロード、管理、交換できるツールで、ゲームのアップデートを必要とせずにDLSS、FSR、XeSSのバージョンをアップグレードまたはダウングレードすることができます。</p>
 </p>
+
+> [!WARNING]
+> Please be aware of malicious sites claiming to be DLSS Swapper. This is the only place you will find official downloads. See our [official links](#official-links) for accounts/sites affiliated with DLSS Swapper.
 
 <p align="center">
     <a href="https://github.com/beeradmoore/dlss-swapper/releases"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>
@@ -25,7 +28,7 @@
 </p>
 
 <p align="center">
-    <img src="../images/usage/usage_4.gif" />
+    <img src="https://beeradmoore.github.io/dlss-swapper/images/usage/usage_4.gif" />
 </p>
 
 ## サポートされているゲームライブラリは何ですか？
@@ -35,6 +38,7 @@
 - [Epic Games](https://store.epicgames.com/)
 - [Ubisoft Connect](https://www.ubisoft.com/)
 - [Xbox App](https://www.xbox.com/)
+- [Battle.net](https://shop.battle.net/)
 - `Add Game`ボタンを使用して手動で追加
 
 ## なぜゲーム内の DLSS dll を変更したいのですか？
@@ -63,6 +67,12 @@ DLSS の経験を[r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/)で共�
 
 最新のビルドは[GitHub リリース](https://github.com/beeradmoore/dlss-swapper/releases)ページから入手できます。
 
+You can also install with winget. 
+
+> winget install --id=beeradmoore.dlss-swapper -e 
+
+These are the only official places to get DLSS Swapper.
+
 ## DLSS Swapper ができたらいいなと思うこと...
 
 [機能リクエスト](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml)を作成してください。
@@ -77,3 +87,11 @@ DLSS の経験を[r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/)で共�
 | ---- | ------------------------------------- |
 | OS   | Windows 10 64-bit (20H1, build 19041) |
 | GPU  | 任意                                  |
+
+## Official links
+
+- GitHub: https://github.com/beeradmoore/dlss-swapper/
+- Twitter: https://twitter.com/dlss_swapper
+- Reddit: https://www.reddit.com/r/DLSS_Swapper/
+
+If you have found an other accounts or sites claiming to be DLSS Swapper, please ignore them (or better yet, [file an issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) and let us know) 

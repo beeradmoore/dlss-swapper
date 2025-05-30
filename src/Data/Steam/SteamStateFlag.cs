@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace DLSS_Swapper.Data.Steam;
 

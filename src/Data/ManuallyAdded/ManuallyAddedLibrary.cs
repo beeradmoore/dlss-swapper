@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -19,6 +19,9 @@ public class ManuallyAddedLibrary : IGameLibrary
     static ManuallyAddedLibrary? instance = null;
     public static ManuallyAddedLibrary Instance => instance ??= new ManuallyAddedLibrary();
 
+    GameLibrarySettings? _gameLibrarySettings;
+    public GameLibrarySettings? GameLibrarySettings => _gameLibrarySettings ??= GameManager.Instance.GetGameLibrarySettings(GameLibrary);
+
     private ManuallyAddedLibrary()
     {
 
@@ -36,6 +39,11 @@ public class ManuallyAddedLibrary : IGameLibrary
         {
             var cachedGame = GameManager.Instance.GetGame<ManuallyAddedGame>(dbGame.PlatformId);
             var activeGame = cachedGame ?? dbGame;
+
+            if (activeGame.IsInIgnoredPath())
+            {
+                continue;
+            }
 
             // If the game is not from cache, force re-processing
             if (cachedGame is null)
@@ -72,6 +80,21 @@ public class ManuallyAddedLibrary : IGameLibrary
             }
             foreach (var game in games)
             {
+                if (game.IsInIgnoredPath())
+                {
+                    continue;
+                }
+
+                if (Directory.Exists(game.InstallPath) == false)
+                {
+                    Logger.Warning($"{Name} library could not load game {game.Title} ({game.PlatformId}) from cache because install path does not exist: {game.InstallPath}");
+                    // We remove the list of known game assets, but not the game itself.
+                    // Removing the game will remove its history, notes, and other data.
+                    // We don't want to do this in case it is just a temporary issue.
+                    await game.RemoveGameAssetsFromCacheAsync().ConfigureAwait(false);
+                    continue;
+                }
+
                 await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                 GameManager.Instance.AddGame(game);
             }

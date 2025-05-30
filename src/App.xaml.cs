@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.WinUI;
+using CommunityToolkit.WinUI;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.EpicGamesStore;
 using DLSS_Swapper.Data.GOG;
@@ -46,9 +46,6 @@ namespace DLSS_Swapper
         public MainWindow MainWindow => _window ??= new MainWindow();
 
         public static App CurrentApp => (App)Application.Current;
-
-        //internal Manifest Manifest { get; } = new Manifest();
-        internal Manifest ImportedManifest { get; } = new Manifest();
 
         internal HttpClient? _httpClient;
         public HttpClient HttpClient
@@ -107,7 +104,7 @@ namespace DLSS_Swapper
         /// <param name="args">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
-                        
+
             // If this is the first instance launched, then register it as the "main" instance.
             // If this isn't the first instance launched, then "main" will already be registered,
             // so retrieve it.

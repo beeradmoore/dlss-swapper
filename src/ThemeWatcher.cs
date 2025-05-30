@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace DLSS_Swapper
 
         public void Start()
         {
-            // Cleanup incase start is called twice.
+            // Cleanup in case start is called twice.
             Stop();
 
 

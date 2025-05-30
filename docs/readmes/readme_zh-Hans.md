@@ -5,7 +5,7 @@
  <p align="center">DLSS Swapper 是一款实用的工具，能够让您方便地下载、管理与切换 <strong>DLSS</strong>、<strong>FSR</strong> 和 <strong>XeSS</strong> 的 DLL ，使您能够在不更新游戏的情況下更新或是回退 DLSS、FSR 和 XeSS 的版本。</p>
 </p>
 
-> [!注意]
+> [!WARNING]
 > 请注意自称是 DLSS Swapper 的恶意网站。本站是您唯一可以找到官方下载的地方。请参考我们的[官方链接](#official-links)来深入了解与 DLSS Swapper 相关的账号/网站。
 
 <p align="center">

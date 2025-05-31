@@ -6,15 +6,8 @@ using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Builders;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.Translations.Pages;
-using System.Transactions;
-using AsyncAwaitBestPractices;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using DLSS_Swapper.Data;
-using DLSS_Swapper.Data.Steam;
 using DLSS_Swapper.Messages;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
@@ -33,13 +26,6 @@ public enum GameGridViewType
 
 public partial class GameGridPageModel : ObservableObject
 {
-    public GameGridPageModel(GameGridPage gameGridPage) : base()
-    {
-        TranslationProperties = new GameGridPageTranslationPropertiesViewModel();
-        this.gameGridPage = gameGridPage;
-        ApplyGameGroupFilter();
-    }
-
     GameGridPage gameGridPage;
 
     [ObservableProperty]
@@ -86,6 +72,8 @@ public partial class GameGridPageModel : ObservableObject
             GameManager.Instance.RemoveAllGames();
             await InitialLoadAsync();
         });
+
+        TranslationProperties = new GameGridPageTranslationPropertiesViewModel();
 
         this.gameGridPage = gameGridPage;
         ApplyGameGroupFilter();

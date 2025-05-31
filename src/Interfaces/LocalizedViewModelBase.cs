@@ -4,8 +4,11 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.Interfaces;
+
 public abstract class LocalizedViewModelBase : ObservableObject, IDisposable
 {
+    protected readonly LanguageManager _languageManager;
+
     public LocalizedViewModelBase()
     {
         _languageManager = LanguageManager.Instance;
@@ -37,6 +40,4 @@ public abstract class LocalizedViewModelBase : ObservableObject, IDisposable
     {
         Dispose();
     }
-
-    protected readonly LanguageManager _languageManager;
 }

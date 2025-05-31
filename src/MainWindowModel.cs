@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using DLSS_Swapper.Translations.Windows;
 using Microsoft.UI.Xaml;
 
 namespace DLSS_Swapper;

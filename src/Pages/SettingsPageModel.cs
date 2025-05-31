@@ -21,7 +21,7 @@ using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Pages;
 
-internal partial class SettingsPageModel : LocalizedViewModelBase
+public partial class SettingsPageModel : LocalizedViewModelBase
 {
     readonly WeakReference<SettingsPage> _weakPage;
     readonly DLSSSettingsManager _dlssSettingsManager;
@@ -88,7 +88,6 @@ internal partial class SettingsPageModel : LocalizedViewModelBase
 
     public SettingsPageModel(SettingsPage page) : base()
     {
-        _languageManager = base._languageManager;
         TranslationProperties = new SettingsPageTranslationPropertiesViewModel();
         _weakPage = new WeakReference<SettingsPage>(page);
         //work with selected language state
@@ -100,7 +99,7 @@ internal partial class SettingsPageModel : LocalizedViewModelBase
         DefaultThemeSelected = Settings.Instance.AppTheme == ElementTheme.Default;
 
         var dlssShowOnScreenIndicatorIndicator = _dlssSettingsManager.GetShowDlssIndicator();
-        SelectedDlssOnScreenIndicator = DLSSOnScreenIndicatorOptions.FirstOrDefault(x => x.Value == dlssShowOnScreenIndicatorIndicator);
+        SelectedDlssOnScreenIndicator = DLSSOnScreenIndicatorOptions.FirstOrDefault(x => x.Value == dlssShowOnScreenIndicatorIndicator) ?? DLSSOnScreenIndicatorOptions[0];
 
         var logLevel = _dlssSettingsManager.GetLogLevel();
         if (logLevel == 1)
@@ -302,8 +301,6 @@ internal partial class SettingsPageModel : LocalizedViewModelBase
     {
         DLSSOnScreenIndicatorOptions.RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
     }
-
-    private readonly LanguageManager _languageManager;
 
     [RelayCommand]
     async Task AddIgnoredPathAsync(string path)

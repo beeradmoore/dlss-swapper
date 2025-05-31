@@ -141,7 +141,7 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        private DLLRecordTranslationPropertiesViewModel _translationProperties;
+        private DLLRecordTranslationPropertiesViewModel _translationProperties = new DLLRecordTranslationPropertiesViewModel();
 
         [JsonIgnore]
         public DLLRecordTranslationPropertiesViewModel TranslationProperties {

@@ -15,12 +15,10 @@ public partial class MultipleDLLsFoundControlModel : ObservableObject
 {
     public MultipleDLLsFoundControlModel(Game game, GameAssetType gameAssetType) : base()
     {
-        TranslationProperties = new MultipleDLLsFoundTranslationPropertiesViewModel();
         DLLsList = game.GameAssets.Where(x => x.AssetType == gameAssetType).ToList();
     }
 
-    [ObservableProperty]
-    public partial MultipleDLLsFoundTranslationPropertiesViewModel TranslationProperties { get; private set; }
+    public MultipleDLLsFoundTranslationPropertiesViewModel TranslationProperties { get; } = new MultipleDLLsFoundTranslationPropertiesViewModel();
 
     public List<GameAsset> DLLsList { get; init; }
 

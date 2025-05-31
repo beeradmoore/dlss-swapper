@@ -28,8 +28,7 @@ public partial class GameGridPageModel : ObservableObject
 {
     GameGridPage gameGridPage;
 
-    [ObservableProperty]
-    public partial GameGridPageTranslationPropertiesViewModel TranslationProperties { get; private set; }
+    public GameGridPageTranslationPropertiesViewModel TranslationProperties { get; } = new GameGridPageTranslationPropertiesViewModel();
 
     [ObservableProperty]
     public partial Game? SelectedGame { get; set; } = null;
@@ -72,8 +71,6 @@ public partial class GameGridPageModel : ObservableObject
             GameManager.Instance.RemoveAllGames();
             await InitialLoadAsync();
         });
-
-        TranslationProperties = new GameGridPageTranslationPropertiesViewModel();
 
         this.gameGridPage = gameGridPage;
         ApplyGameGroupFilter();

@@ -139,17 +139,8 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        private DLLRecordTranslationPropertiesViewModel _translationProperties = new DLLRecordTranslationPropertiesViewModel();
-
         [JsonIgnore]
-        public DLLRecordTranslationPropertiesViewModel TranslationProperties {
-            get => _translationProperties;
-            set
-            {
-                _translationProperties = value;
-                NotifyPropertyChanged(nameof(TranslationProperties));
-            }
-        }
+        public DLLRecordTranslationPropertiesViewModel TranslationProperties { get; } = new DLLRecordTranslationPropertiesViewModel();
 
         [JsonIgnore]
         public GameAssetType AssetType { get; set; } = GameAssetType.Unknown;

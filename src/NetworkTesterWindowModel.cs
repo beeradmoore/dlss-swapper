@@ -126,13 +126,12 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
     public NetworkTesterWindowModel(NetworkTesterWindow window) : base()
     {
-        TranslationProperties = new NetworkTesterWindowTranslationPropertiesViewModel();
         _weakWindow = new WeakReference<NetworkTesterWindow>(window);
 
         AppendTestResults("Init", $"DLSS Swapper version: v{App.CurrentApp.GetVersionString()}");
     }
 
-    public NetworkTesterWindowTranslationPropertiesViewModel TranslationProperties { get; private set; }
+    public NetworkTesterWindowTranslationPropertiesViewModel TranslationProperties { get; } = new NetworkTesterWindowTranslationPropertiesViewModel();
 
     void AppendTestResults(string testName, string message)
     {

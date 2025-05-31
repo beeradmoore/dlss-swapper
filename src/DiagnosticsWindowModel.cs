@@ -10,13 +10,11 @@ public partial class DiagnosticsWindowModel : ObservableObject
 {
     public DiagnosticsWindowModel() : base()
     {
-        TranslationProperties = new DiagnosticsWindowTranslationPropertiesViewModel();
         var systemDetails = new SystemDetails();
         DiagnosticsLog = $"{systemDetails.GetSystemData()}\n\n{systemDetails.GetLibraryData()}\n";
     }
 
-    [ObservableProperty]
-    public partial DiagnosticsWindowTranslationPropertiesViewModel TranslationProperties { get; private set; }
+    public DiagnosticsWindowTranslationPropertiesViewModel TranslationProperties { get; } = new DiagnosticsWindowTranslationPropertiesViewModel();
 
     public string DiagnosticsLog { get; set; } = string.Empty;
    

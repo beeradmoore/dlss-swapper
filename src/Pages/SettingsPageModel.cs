@@ -88,7 +88,6 @@ public partial class SettingsPageModel : LocalizedViewModelBase
 
     public SettingsPageModel(SettingsPage page) : base()
     {
-        TranslationProperties = new SettingsPageTranslationPropertiesViewModel();
         _weakPage = new WeakReference<SettingsPage>(page);
         //work with selected language state
         SelectedLanguage = Languages.FirstOrDefault(x => x.Key == CultureInfo.CurrentCulture.Name);
@@ -123,8 +122,7 @@ public partial class SettingsPageModel : LocalizedViewModelBase
         _hasSetDefaults = true;
     }
 
-    [ObservableProperty]
-    public partial SettingsPageTranslationPropertiesViewModel TranslationProperties { get; private set; }
+    public SettingsPageTranslationPropertiesViewModel TranslationProperties { get; } = new SettingsPageTranslationPropertiesViewModel();
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {

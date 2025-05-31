@@ -39,7 +39,6 @@ public partial class LibraryPageModel : ObservableObject
 
     public LibraryPageModel(LibraryPage libraryPage)
     {
-        TranslationProperties = new LibraryPageTranslationPropertiesViewModel();
         this.libraryPage = libraryPage;
 
         var upscalerSelectorBar = libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
@@ -59,8 +58,7 @@ public partial class LibraryPageModel : ObservableObject
         }
     }
 
-    [ObservableProperty]
-    public partial LibraryPageTranslationPropertiesViewModel TranslationProperties { get; private set; }
+    public LibraryPageTranslationPropertiesViewModel TranslationProperties { get; } = new LibraryPageTranslationPropertiesViewModel();
 
     [RelayCommand]
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)

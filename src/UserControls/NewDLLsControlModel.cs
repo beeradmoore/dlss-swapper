@@ -18,7 +18,6 @@ public partial class NewDLLsControlModel : ObservableObject
 {
     public NewDLLsControlModel() : base()
     {
-        TranslationProperties = new NewDLLsTranslationPropertiesViewModel();
         var unknownGameAssets = GameManager.Instance.GetUnknownGameAssets();
         var gameAssetsLibraryGroup = new Dictionary<GameLibrary, Dictionary<string, List<UnknownGameAsset>>>();
         foreach (var unknownGameAsset in unknownGameAssets)
@@ -56,8 +55,7 @@ public partial class NewDLLsControlModel : ObservableObject
         Body = stringBuilder.ToString();
     }
 
-    [ObservableProperty]
-    public partial NewDLLsTranslationPropertiesViewModel TranslationProperties { get; private set; }
+    public NewDLLsTranslationPropertiesViewModel TranslationProperties { get; } = new NewDLLsTranslationPropertiesViewModel();
 
     public string Body { get; init; }
 

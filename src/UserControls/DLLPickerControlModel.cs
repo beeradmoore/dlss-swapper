@@ -49,7 +49,6 @@ public partial class DLLPickerControlModel : ObservableObject
 
     public DLLPickerControlModel(GameControl gameControl, EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType) : base()
     {
-        TranslationProperties = new DLLPickerTranslationPropertiesViewModel();
         _gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         _parentDialogWeakReference = new WeakReference<EasyContentDialog>(parentDialog);
         _dllPickerControlWeakReference = new WeakReference<DLLPickerControl>(dllPickerControl);
@@ -168,8 +167,7 @@ public partial class DLLPickerControlModel : ObservableObject
         ResetSelection();
     }
 
-    [ObservableProperty]
-    public partial DLLPickerTranslationPropertiesViewModel TranslationProperties { get; private set; }
+    public DLLPickerTranslationPropertiesViewModel TranslationProperties { get; } = new DLLPickerTranslationPropertiesViewModel();
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {

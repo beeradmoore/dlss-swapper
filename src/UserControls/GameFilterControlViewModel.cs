@@ -6,9 +6,8 @@ public partial class GameFilterControlViewModel : ObservableObject
 {
     public GameFilterControlViewModel()
     {
-        TranslationProperties = new GameFilterTranslationPropertiesViewModel();
+
     }
 
-    [ObservableProperty]
-    public partial GameFilterTranslationPropertiesViewModel TranslationProperties { get; private set; }
+    public GameFilterTranslationPropertiesViewModel TranslationProperties { get; } = new GameFilterTranslationPropertiesViewModel();
 }

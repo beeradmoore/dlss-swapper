@@ -17,14 +17,12 @@ public partial class GameControlModel : ObservableObject
 {
     public GameControlModel(GameControl gameControl, Game game) : base()
     {
-        TranslationProperties = new GameTranslationPropertiesViewModel();
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
         GameTitle = game.Title;
     }
 
-    [ObservableProperty]
-    public partial GameTranslationPropertiesViewModel TranslationProperties { get; set; }
+    public GameTranslationPropertiesViewModel TranslationProperties { get; } = new GameTranslationPropertiesViewModel();
 
     WeakReference<GameControl> gameControlWeakReference;
 

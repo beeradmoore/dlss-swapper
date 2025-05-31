@@ -15,11 +15,10 @@ public partial class MainWindowModel : ObservableObject
     [ObservableProperty]
     public partial Visibility AcknowledgementsVisibility { get; set; } = Visibility.Collapsed;
 
-    [ObservableProperty]
-    public partial MainWindowTranslationPropertiesViewModel TranslationProperties { get; private set; }
+    public MainWindowTranslationPropertiesViewModel TranslationProperties { get; } = new MainWindowTranslationPropertiesViewModel();
 
     public MainWindowModel()
     {
-        TranslationProperties = new MainWindowTranslationPropertiesViewModel();
+
     }
 }

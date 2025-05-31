@@ -10,13 +10,11 @@ public partial class FailToLaunchWindowModel : ObservableObject
 {
     public FailToLaunchWindowModel() : base()
     {
-        TranslationProperties = new FailToLaunchWindowTranslationPropertiesViewModel();
         var systemDetails = new SystemDetails();
         SystemData = systemDetails.GetSystemData();
     }
 
-    [ObservableProperty]
-    public partial FailToLaunchWindowTranslationPropertiesViewModel TranslationProperties { get; private set; }
+    public FailToLaunchWindowTranslationPropertiesViewModel TranslationProperties { get; set; } = new FailToLaunchWindowTranslationPropertiesViewModel();
 
     public string SystemData { get; set; } = string.Empty;
 

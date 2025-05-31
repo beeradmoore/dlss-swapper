@@ -7,9 +7,8 @@ public partial class DLLRecordInfoViewModel : ObservableObject
 {
     public DLLRecordInfoViewModel()
     {
-        TranslationProperties = new DLLRecordInfoTranslationPropertiesViewModel();
+
     }
 
-    [ObservableProperty]
-    public partial DLLRecordInfoTranslationPropertiesViewModel TranslationProperties { get; private set; }
+    public DLLRecordInfoTranslationPropertiesViewModel TranslationProperties { get; } = new DLLRecordInfoTranslationPropertiesViewModel();
 }

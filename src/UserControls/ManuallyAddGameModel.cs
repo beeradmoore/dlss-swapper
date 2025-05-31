@@ -13,7 +13,6 @@ namespace DLSS_Swapper.UserControls
     {
         public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath) : base()
         {
-            TranslationProperties = new ManuallyAddGameTranslationPropertiesViewModel();
             manuallyAddGameControlWeakReference = new WeakReference<ManuallyAddGameControl>(manuallyAddGameControl);
 
             game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
@@ -23,8 +22,7 @@ namespace DLSS_Swapper.UserControls
             };
         }
 
-        [ObservableProperty]
-        public partial ManuallyAddGameTranslationPropertiesViewModel TranslationProperties { get; private set; }
+        public ManuallyAddGameTranslationPropertiesViewModel TranslationProperties { get; } = new ManuallyAddGameTranslationPropertiesViewModel();
 
         ManuallyAddedGame game;
         public ManuallyAddedGame Game => game;

@@ -8,4 +8,6 @@ public class MultipleDLLsFoundTranslationPropertiesViewModel : LocalizedViewMode
     public MultipleDLLsFoundTranslationPropertiesViewModel() : base() { }
 
     [TranslationProperty] public string BelowMultipleDllFoundYouWillBeAbleToSwapInfo => ResourceHelper.GetString("BelowMultipleDllFoundYouWillBeAbleToSwapInfo");
+
+    [TranslationProperty] public string OpenDllLocationText => ResourceHelper.GetString("OpenDllLocation");
 }

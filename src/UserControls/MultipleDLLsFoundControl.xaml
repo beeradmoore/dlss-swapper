@@ -29,7 +29,7 @@
                         <TextBox Grid.Row="0" Grid.Column="0" Text="{x:Bind DisplayVersion}" IsReadOnly="True" />
 
                         <TextBox Grid.Row="0" Grid.Column="1" Text="{x:Bind Path}" IsReadOnly="True" />
-                        <Button Grid.Row="0" Grid.Column="2" ToolTipService.ToolTip="{x:Bind OpenDllLocationText}" VerticalAlignment="Stretch" Command="{Binding ViewModel.OpenDLLPathCommand, ElementName=RootView}" CommandParameter="{x:Bind }">
+                        <Button Grid.Row="0" Grid.Column="2" ToolTipService.ToolTip="{Binding ViewModel.TranslationProperties.OpenDllLocationText, ElementName=RootView, Mode=OneWay}" VerticalAlignment="Stretch" Command="{Binding ViewModel.OpenDLLPathCommand, ElementName=RootView}" CommandParameter="{x:Bind }">
                             <Button.Content>
                                 <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE8A7;"/>
                             </Button.Content>

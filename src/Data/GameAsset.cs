@@ -135,8 +135,4 @@ public class GameAsset : IEquatable<GameAsset>
             Version.Equals(other.Version) &&
             Hash.Equals(other.Hash);
     }
-
-    #region LanguageProperties
-    public string OpenDllLocationText => ResourceHelper.GetString("OpenDllLocation");
-    #endregion
 }

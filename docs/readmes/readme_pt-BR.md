@@ -5,7 +5,7 @@
  <p align="center">DLSS Swapper é uma ferramenta que te permite baixar convenientemente, gerenciar, e trocar <strong>DLSS</strong>, <strong>FSR</strong> e <strong>XeSS</strong> dlls permitindo que você possa atualizar ou rebaixar o DLSS, FSR e a versão do XeSS e, um jogo sem precisar fazer atualização do mesmo.</p>
 </p>
 
-> [!AVISO]
+> [!WARNING]
 > Fique atento a sites maliciosos que afirmam ser o DLSS Swapper. Este é o **único** lugar onde você encontrará downloads oficiais. Veja nossos [links oficiais](#links-oficiais) para conhecer as contas e sites afiliados ao DLSS Swapper.
 
 <p align="center">

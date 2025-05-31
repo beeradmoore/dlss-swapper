@@ -347,7 +347,7 @@
     <PackageReference Include="AsyncAwaitBestPractices" Version="9.0.0" />
     <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="9.0.0" />
     <PackageReference Include="ByteSize" Version="2.1.2" />
-    <PackageReference Include="CommunityToolkit.Labs.WinUI.Controls.MarkdownTextBlock" Version="0.1.250319-build.2093" />
+    <PackageReference Include="CommunityToolkit.Labs.WinUI.Controls.MarkdownTextBlock" Version="0.1.250513-build.2126" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.12.0" />
     <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.2.250402" />

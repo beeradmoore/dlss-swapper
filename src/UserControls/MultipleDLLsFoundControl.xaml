@@ -11,7 +11,7 @@
     x:Name="RootView">
 
     <StackPanel Orientation="Vertical" Spacing="12">
-        <TextBlock Text="Shown below are the multiple DLLs found. You will still be able to swap and restore DLLs as usual as we will do these actions to all DLLs at once. However because we don't know what one of these DLLs is used by the game the DLL version shown is of the first DLL detected." TextWrapping="Wrap" />
+        <TextBlock Text="{x:Bind ViewModel.TranslationProperties.BelowMultipleDllFoundYouWillBeAbleToSwapInfo, Mode=OneWay}" TextWrapping="Wrap" />
         <ListView ItemsSource="{x:Bind ViewModel.DLLsList}" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:GameAsset">
@@ -29,7 +29,7 @@
                         <TextBox Grid.Row="0" Grid.Column="0" Text="{x:Bind DisplayVersion}" IsReadOnly="True" />
 
                         <TextBox Grid.Row="0" Grid.Column="1" Text="{x:Bind Path}" IsReadOnly="True" />
-                        <Button Grid.Row="0" Grid.Column="2" ToolTipService.ToolTip="Open DLL location" VerticalAlignment="Stretch" Command="{Binding ViewModel.OpenDLLPathCommand, ElementName=RootView}" CommandParameter="{x:Bind }">
+                        <Button Grid.Row="0" Grid.Column="2" ToolTipService.ToolTip="{Binding ViewModel.TranslationProperties.OpenDllLocationText, ElementName=RootView, Mode=OneWay}" VerticalAlignment="Stretch" Command="{Binding ViewModel.OpenDLLPathCommand, ElementName=RootView}" CommandParameter="{x:Bind }">
                             <Button.Content>
                                 <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE8A7;"/>
                             </Button.Content>

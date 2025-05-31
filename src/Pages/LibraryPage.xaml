@@ -9,7 +9,7 @@
     xmlns:system="using:System"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:data="using:DLSS_Swapper.Data"
-    mc:Ignorable="d"    
+    mc:Ignorable="d"
     NavigationCacheMode="Required"
     x:Name="thisPage">
 
@@ -37,18 +37,19 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Padding="16,0,16,0">
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="16">
-                <TextBlock Text="Library" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+                <TextBlock Text="{x:Bind ViewModel.TranslationProperties.LibraryText, Mode=OneWay}" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
                 <muxc:ProgressRing IsActive="True" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.IsRefreshing, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"  />
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <AppBarButton HorizontalAlignment="Right"  Label="Import" Command="{x:Bind ViewModel.ImportCommand}">
+                <AppBarButton HorizontalAlignment="Right"  Label="{x:Bind ViewModel.TranslationProperties.ImportText, Mode=OneWay}" Command="{x:Bind ViewModel.ImportCommand}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE8B5;"  />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton HorizontalAlignment="Right" Label="Export All" Command="{x:Bind ViewModel.ExportAllCommand}">
+                <AppBarButton HorizontalAlignment="Right" Label="{x:Bind ViewModel.TranslationProperties.ExportAllText, Mode=OneWay}" Command="{x:Bind ViewModel.ExportAllCommand}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xEDE1;" />
                     </AppBarButton.Content>
@@ -58,7 +59,7 @@
                         <FontIcon Glyph="&#xE896;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton HorizontalAlignment="Right" Label="Refresh" Command="{x:Bind ViewModel.RefreshCommand}">
+                <AppBarButton HorizontalAlignment="Right" Label="{x:Bind ViewModel.TranslationProperties.RefreshText, Mode=OneWay}" Command="{x:Bind ViewModel.RefreshCommand}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE72C;" />
                     </AppBarButton.Content>
@@ -71,8 +72,8 @@
                  IsOpen="True"
                  Severity="Warning"
                  IsClosable="False"
-                 Title="Warning"
-                 Message="This app is running with administrative privileges."
+                 Title="{x:Bind ViewModel.TranslationProperties.WarningText, Mode=OneWay}"
+                 Message="{x:Bind ViewModel.TranslationProperties.ApplicationRunsInAdministrativeModeInfo, Mode=OneWay}"
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
 
@@ -81,7 +82,7 @@
         </ScrollViewer>
 
         <GridView Grid.Row="3" x:Name="MainGridView" Margin="16,0,16,0" SizeChanged="MainGridView_SizeChanged" ItemsSource="{x:Bind ViewModel.SelectedLibraryList, Mode=OneWay}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="MainGridView_ItemClick">
-          
+
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <ItemsWrapGrid Orientation="Horizontal"/>
@@ -118,19 +119,19 @@
 
                         <!-- Imported -->
                         <StackPanel Grid.Row="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsLocalConverter}, Mode=OneWay}" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Left">
-                            <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE7B8;" ToolTipService.ToolTip="Imported" />
+                            <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE7B8;" ToolTipService.ToolTip="{x:Bind TranslationProperties.ImportedText, Mode=OneWay}" />
                         </StackPanel>
 
                         <!-- Not downloaded -->
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsNotFoundConverter}, Mode=OneWay}">
 
-                            <Button ToolTipService.ToolTip="Download Error" Visibility="{x:Bind LocalRecord.HasDownloadError, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.ShowDownloadErrorCommand}" CommandParameter="{x:Bind }">
+                            <Button ToolTipService.ToolTip="{x:Bind TranslationProperties.DownloadErrorText, Mode=OneWay}" Visibility="{x:Bind LocalRecord.HasDownloadError, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.ShowDownloadErrorCommand}" CommandParameter="{x:Bind }">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE783;"/>
                                 </Button.Content>
                             </Button>
 
-                            <Button ToolTipService.ToolTip="Download" Command="{Binding ViewModel.DownloadRecordCommand, ElementName=thisPage}" CommandParameter="{x:Bind }">
+                            <Button ToolTipService.ToolTip="{x:Bind TranslationProperties.DownloadText, Mode=OneWay}" Command="{Binding ViewModel.DownloadRecordCommand, ElementName=thisPage}" CommandParameter="{x:Bind }">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE896;"/>
                                 </Button.Content>
@@ -154,7 +155,7 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                
+
                                 <ProgressBar Grid.Row="0" Grid.ColumnSpan="3" Minimum="0" Maximum="100" IsIndeterminate="{x:Bind LocalRecord.FileDownloader.IsIndeterminate, Mode=OneWay}" Value="{x:Bind LocalRecord.FileDownloader.Percent, Mode=OneWay}" VerticalAlignment="Top" />
 
                                 <TextBlock Grid.Row="1" Grid.Column="0" Visibility="{x:Bind LocalRecord.FileDownloader.TotalBytesToDownload, Mode=OneWay, Converter={StaticResource TotalBytesVisbilityConverter}}" Text="{x:Bind system:String.Format('{0:0.0}%', LocalRecord.FileDownloader.Percent), Mode=OneWay}" />
@@ -162,15 +163,15 @@
                                 <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">
                                     <Run Text="{x:Bind LocalRecord.FileDownloader.DownloadedBytes, Mode=OneWay, Converter={StaticResource BytesToMegaBytesConverter}}" />
                                 </TextBlock>
-                                
+
                                 <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Visibility="{x:Bind LocalRecord.FileDownloader.TotalBytesToDownload, Mode=OneWay, Converter={StaticResource TotalBytesVisbilityConverter}}">
                                     <Run Text=" / " />
                                     <Run Text="{x:Bind LocalRecord.FileDownloader.TotalBytesToDownload, Mode=OneWay, Converter={StaticResource BytesToMegaBytesConverter}}" />
                                 </TextBlock>
-                                
+
                             </Grid>
 
-                            <Button Grid.Column="1" ToolTipService.ToolTip="Cancel" Command="{Binding ElementName=thisPage, Path=ViewModel.CancelDownloadRecordCommand}" CommandParameter="{x:Bind }" VerticalAlignment="Center">
+                            <Button Grid.Column="1" ToolTipService.ToolTip="{Binding TranslationProperties.CancelText, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.CancelDownloadRecordCommand}" CommandParameter="{x:Bind }" VerticalAlignment="Center">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE711;"/>
                                 </Button.Content>
@@ -179,12 +180,12 @@
 
                         <!-- Downloaded -->
                         <StackPanel Grid.Row="1" Visibility="{x:Bind LocalRecord, Converter={StaticResource IsDownloadedConverter}, Mode=OneWay}" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
-                            <Button ToolTipService.ToolTip="Export" Command="{Binding ElementName=thisPage, Path=ViewModel.ExportRecordCommand}" CommandParameter="{x:Bind }">
+                            <Button ToolTipService.ToolTip="{x:Bind TranslationProperties.ExportText, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.ExportRecordCommand}" CommandParameter="{x:Bind }">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xEDE1;"/>
                                 </Button.Content>
                             </Button>
-                            <Button ToolTipService.ToolTip="Delete" Command="{Binding ElementName=thisPage, Path=ViewModel.DeleteRecordCommand}" CommandParameter="{x:Bind }">
+                            <Button ToolTipService.ToolTip="{x:Bind TranslationProperties.DeleteText, Mode=OneWay}" Command="{Binding ElementName=thisPage, Path=ViewModel.DeleteRecordCommand}" CommandParameter="{x:Bind }">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE74D;"/>
                                 </Button.Content>

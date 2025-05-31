@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,10 +14,14 @@ using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using DLSS_Swapper.Translations.Pages;
+using DLSS_Swapper.Collections;
+using System.Collections.Specialized;
+using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Pages;
 
-public partial class SettingsPageModel : ObservableObject
+public partial class SettingsPageModel : LocalizedViewModelBase
 {
     readonly WeakReference<SettingsPage> _weakPage;
     readonly DLSSSettingsManager _dlssSettingsManager;
@@ -24,11 +29,21 @@ public partial class SettingsPageModel : ObservableObject
     public IEnumerable<LoggingLevel> LoggingLevels => Enum.GetValues<LoggingLevel>();
     public string CurrentLogPath => Logger.GetCurrentLogPath();
     public string AppVersion => App.CurrentApp.GetVersionString();
-    public List<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; } = new List<DLSSOnScreenIndicatorSetting>(){
-        new DLSSOnScreenIndicatorSetting() { Label = "None", Value = 0 },
-        new DLSSOnScreenIndicatorSetting() { Label = "Enabled for debug DLSS DLLs only", Value = 1 },
-        new DLSSOnScreenIndicatorSetting() { Label = "Enabled for all DLSS DLLs", Value = 1024 }
+
+    [ObservableProperty]
+    public partial DLSSOnScreenIndicatorSetting SelectedDlssOnScreenIndicator { get; set; }
+
+    public RefreshableObservableCollection<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; init; } = new RefreshableObservableCollection<DLSSOnScreenIndicatorSetting>()
+    {
+        new DLSSOnScreenIndicatorSetting("None", 0),
+        new DLSSOnScreenIndicatorSetting("EnabledForDebugDlssDllOnly", 1),
+        new DLSSOnScreenIndicatorSetting("EnabledForAllDlssDlls", 1024)
     };
+
+    public ObservableCollection<KeyValuePair<string, string>> Languages { get; init; } = new ObservableCollection<KeyValuePair<string, string>>();
+
+    [ObservableProperty]
+    public partial KeyValuePair<string, string> SelectedLanguage { get; set; }
 
     [ObservableProperty]
     public partial bool LightThemeSelected { get; set; } = false;
@@ -38,9 +53,6 @@ public partial class SettingsPageModel : ObservableObject
 
     [ObservableProperty]
     public partial bool DefaultThemeSelected { get; set; } = false;
-
-    [ObservableProperty]
-    public partial DLSSOnScreenIndicatorSetting SelectedDlssOnScreenIndicator { get; set; }
 
     [ObservableProperty]
     public partial bool DlssEnableLogging { get; set; } = false;
@@ -70,9 +82,19 @@ public partial class SettingsPageModel : ObservableObject
 
     bool _hasSetDefaults = false;
 
-    public SettingsPageModel(SettingsPage page)
+    public SettingsPageModel(SettingsPage page) : base()
     {
         _weakPage = new WeakReference<SettingsPage>(page);
+
+        var knownLanguages = LanguageManager.Instance.GetKnownLanguages();
+        foreach (var knownLanguage in knownLanguages)
+        {
+            var languageName = LanguageManager.Instance.GetLanguageName(knownLanguage);
+            Languages.Add(new KeyValuePair<string, string>(knownLanguage, languageName));
+        }
+
+        //work with selected language state
+        SelectedLanguage = Languages.FirstOrDefault(x => x.Key == CultureInfo.CurrentCulture.Name);
 
         _dlssSettingsManager = new DLSSSettingsManager();
         LightThemeSelected = Settings.Instance.AppTheme == ElementTheme.Light;
@@ -80,7 +102,7 @@ public partial class SettingsPageModel : ObservableObject
         DefaultThemeSelected = Settings.Instance.AppTheme == ElementTheme.Default;
 
         var dlssShowOnScreenIndicatorIndicator = _dlssSettingsManager.GetShowDlssIndicator();
-        SelectedDlssOnScreenIndicator = DLSSOnScreenIndicatorOptions.FirstOrDefault(x => x.Value == dlssShowOnScreenIndicatorIndicator);
+        SelectedDlssOnScreenIndicator = DLSSOnScreenIndicatorOptions.FirstOrDefault(x => x.Value == dlssShowOnScreenIndicatorIndicator) ?? DLSSOnScreenIndicatorOptions[0];
 
         var logLevel = _dlssSettingsManager.GetLogLevel();
         if (logLevel == 1)
@@ -104,6 +126,8 @@ public partial class SettingsPageModel : ObservableObject
         _hasSetDefaults = true;
     }
 
+    public SettingsPageTranslationPropertiesViewModel TranslationProperties { get; } = new SettingsPageTranslationPropertiesViewModel();
+
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
@@ -113,7 +137,12 @@ public partial class SettingsPageModel : ObservableObject
             return;
         }
 
-        if (e.PropertyName == nameof(LightThemeSelected))
+        if (e.PropertyName == nameof(SelectedLanguage))
+        {
+            Settings.Instance.Language = SelectedLanguage.Key;
+            LanguageManager.Instance.ChangeLanguage(SelectedLanguage.Key);
+        }
+        else if (e.PropertyName == nameof(LightThemeSelected))
         {
             if (LightThemeSelected == true)
             {
@@ -203,9 +232,9 @@ public partial class SettingsPageModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    CloseButtonText = "Okay",
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = "No new updates are available.",
+                    Content = ResourceHelper.GetString("NoNewUpdatesAvailable"),
                 };
                 await dialog.ShowAsync();
 
@@ -239,10 +268,10 @@ public partial class SettingsPageModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    Title = "Oops",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("Oops"),
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = "Could not open your log file directly from DLSS Swapper. Please try open it manually.",
+                    Content = ResourceHelper.GetString("CouldNotOpenLogFileTryManual"),
                 };
 
                 await dialog.ShowAsync();
@@ -270,6 +299,10 @@ public partial class SettingsPageModel : ObservableObject
         diagnosticsWindow.Activate();
     }
 
+    protected override void OnLanguageChanged()
+    {
+        DLSSOnScreenIndicatorOptions.RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+    }
 
     [RelayCommand]
     async Task AddIgnoredPathAsync(string path)

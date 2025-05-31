@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DLSS_Swapper.Pages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;

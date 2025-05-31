@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddGame" xml:space="preserve">
+    <value>Dodaj grę</value>
+  </data>
+  <data name="AddingGameError" xml:space="preserve">
+    <value>Wystąpił błąd podczas dodawania gry</value>
+  </data>
+  <data name="AddingGameErrorReportIssue" xml:space="preserve">
+    <value>Wystąpił problem, twoja gra nie może zostać dodana. Prosimy o przesłanie błędu wraz z informacjami.</value>
+  </data>
+  <data name="AddingGamesManuallyAnotherNote" xml:space="preserve">
+    <value>Kolejna informacja dotycząca ręcznego dodawania gier</value>
+  </data>
+  <data name="AddingGamesManuallyNote" xml:space="preserve">
+    <value>DLSS Swapper powinien automatycznie wyszukać zainstalowane gry z popularnych bibliotek gier. Jeśli gra nie znajduje się na liście, może to być spowodowane kilkoma ustawieniami. Sprawdź czy:
+
+- Filtr listy gier nie jest ustawiony na „Ukryj gry bez wymienialnego DLSSa”.
+- Określona biblioteka gier jest włączona w ustawieniach
+
+Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, może to być błąd. Będziemy wdzięczni za zgłoszenie tego problemu w naszym repozytorium GitHub, abyśmy mogli wprowadzić poprawkę i zapewnić lepsze wykrywanie gier w przyszłości.</value>
+  </data>
+  <data name="AddingGamesManuallyNoteTitle" xml:space="preserve">
+    <value>Uwaga dotycząca ręcznego dodawania gier</value>
+  </data>
+  <data name="SettingsAllowDebugDlls" xml:space="preserve">
+    <value>Zezwalaj na debugowanie bibliotek DLL</value>
+  </data>
+  <data name="SettingsAllowUntrusted" xml:space="preserve">
+    <value>Zezwalaj niezaufanym źródłom</value>
+  </data>
+  <data name="SettingsApliesOnlyToDllPickerNotLibrary" xml:space="preserve">
+    <value>Dotyczy to tylko selektora DLL, a nie strony biblioteki.</value>
+  </data>
+  <data name="ApplicationRunsInAdministrativeModeInfo" xml:space="preserve">
+    <value>Aplikacja uruchomiona jest z nadanymi prawami administratora.</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>DLSS Swapper</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Zamknij</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Potwierdź</value>
+  </data>
+  <data name="CouldntExportDlssDll" xml:space="preserve">
+    <value>Nie można wyexportować DLL z DLSSem.</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="DeleteDllVersionTemplate" xml:space="preserve">
+    <value>Usunąć {0} v{1}?</value>
+  </data>
+  <data name="DontShowAgain" xml:space="preserve">
+    <value>Nie pokazuj ponownie</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Pobierz</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Błąd pobierania</value>
+  </data>
+  <data name="EnableLoggingToFile" xml:space="preserve">
+    <value>Zezwól na zapisywanie logów do pliku</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Błąd</value>
+  </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Wiadomość z błędem</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Eksport</value>
+  </data>
+  <data name="ExportAll" xml:space="preserve">
+    <value>Eksport wszystkich</value>
+  </data>
+  <data name="ExportedDllTemplate" xml:space="preserve">
+    <value>Wyeksportowano DLL {0}.</value>
+  </data>
+  <data name="ExportedDllsTemplate" xml:space="preserve">
+    <value>Wyeksportowani {0} DLSS DLL {1}.</value>
+  </data>
+  <data name="ExportErrorDueToDllsCountTemplate" xml:space="preserve">
+    <value>Nie można wyeksportować ponieważ "{0}" ma {1} dllki zamiast 1.</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtr</value>
+  </data>
+  <data name="Games" xml:space="preserve">
+    <value>Gry</value>
+  </data>
+  <data name="GridView" xml:space="preserve">
+    <value>Widok siatki</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="ImportSystemCurrentlyBroken" xml:space="preserve">
+    <value>Funkcjonalność importu aktualnie nie działa, ale zostanie naprawiona.</value>
+  </data>
+  <data name="InstallPathAlreadyExistsTemplate" xml:space="preserve">
+    <value>Ścieżka instalacji "{0}" już istnieje i nie może zostać dodana ponownie.</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>Biblioteka</value>
+  </data>
+  <data name="ListView" xml:space="preserve">
+    <value>Widok listy</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Ładowanie</value>
+  </data>
+  <data name="MalliciousDllsInfo" xml:space="preserve">
+    <value>Podmienianie bibliotek DLL na twoim komputerze może być niebezpieczne
+
+Umieszczenie podpięcie złośliwej biblioteki DLL do gry może być tak złe jak uruchomienie A-Soul-as-Red-as-a-Ground-Cherry[dYvvKyYIc5s][youtube-online-converter.com][128kbs].mp3.exe które pobrałeś przed chwilą z jakiejś podejrzanej strony.
+
+Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
+  </data>
+  <data name="CouldntDownloadNow" xml:space="preserve">
+    <value>Nie udało się pobrać.</value>
+  </data>
+  <data name="NewDlls" xml:space="preserve">
+    <value>Nowe biblioteki DLL</value>
+  </data>
+  <data name="NewDllsFound" xml:space="preserve">
+    <value>Znaleziono nowe biblioteki DLL</value>
+  </data>
+  <data name="NoDllsToExport" xml:space="preserve">
+    <value>Nie masz rekordów z bibliotekami DLL do eksportu.</value>
+  </data>
+  <data name="Okay" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Odśwież</value>
+  </data>
+  <data name="ReportIssue" xml:space="preserve">
+    <value>Zgłoś błąd</value>
+  </data>
+  <data name="SelectGameFolder" xml:space="preserve">
+    <value>Wybierz folder gry</value>
+  </data>
+  <data name="SettingsCheckForUpdates" xml:space="preserve">
+    <value>Sprawdź aktualizacje</value>
+  </data>
+  <data name="SettingsGiveFeedback" xml:space="preserve">
+    <value>Zostaw informację zwrotną</value>
+  </data>
+  <data name="SettingsShowOnlyDownloadedDlls" xml:space="preserve">
+    <value>Pokaż tylko pobrane biblioteki DLL</value>
+  </data>
+  <data name="SettingsTroubleshooting" xml:space="preserve">
+    <value>Naprawa i diagnozowanie błędów</value>
+  </data>
+  <data name="SettingsShowOnScreenIndicator" xml:space="preserve">
+    <value>Pokaż indykator na ekranie</value>
+  </data>
+  <data name="Sorry" xml:space="preserve">
+    <value>Sorka</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Sukces</value>
+  </data>
+  <data name="TopLevelDirectoryNotSupported" xml:space="preserve">
+    <value>Dodawanie katalogu wyższego poziomu nie jest obsługiwane. Dodaj główny katalog swojej gry.</value>
+  </data>
+  <data name="UnableToDeleteRecord" xml:space="preserve">
+    <value>Nie można usunąć {0} rekordu.</value>
+  </data>
+  <data name="UnableToDllUpdate" xml:space="preserve">
+    <value>Nie można zaktualizować rekordów z bibliotekami DLL.</value>
+  </data>
+  <data name="ViewType" xml:space="preserve">
+    <value>Typ widoku</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Ostrzeżenie</value>
+  </data>
+  <data name="SettingsEnableLoggingToConsoleWindow" xml:space="preserve">
+    <value>Włącz logowanie do konsoli okienkowej</value>
+  </data>
+  <data name="SettingsDllsDeveloperOptions" xml:space="preserve">
+    <value>Opcje deweloperskie DLSS</value>
+  </data>
+  <data name="SettingsGameLibraries" xml:space="preserve">
+    <value>Biblioteka Gier</value>
+  </data>
+  <data name="SettingsThemeMode" xml:space="preserve">
+    <value>Wybierz motyw</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="SettingsVerboseLogging" xml:space="preserve">
+    <value>Logowanie z dużą ilością informacji</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>Jasny</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>Ciemny</value>
+  </data>
+  <data name="SettingsThemeSystemSettingDefault" xml:space="preserve">
+    <value>Zgodny z domyślnym w systemie operacyjnym</value>
+  </data>
+  <data name="SettingsYourCurrentLogfile" xml:space="preserve">
+    <value>Twój aktualny plik z logami </value>
+  </data>
+  <data name="SettingsAllowUntrustedInfo" xml:space="preserve">
+    <value>Biblioteki DLL są sprawdzane pod kątem zaufania w systemie Windows poprzez weryfikację podpisu przed umieszczeniem ich w folderze gry. Jeśli biblioteka DLL nie przejdzie weryfikacji podpisu, nie zostanie użyta. Zaleca się pozostawienie tej opcji wyłączonej.</value>
+  </data>
+  <data name="SettingsAllowDebugDllsInfo" xml:space="preserve">
+    <value>Zestawy SDK czasami udostępniają biblioteki DLL debugowania, które umożliwiają wyświetlanie dodatkowych informacji na ekranie.</value>
+  </data>
+  <data name="Acknowledgements" xml:space="preserve">
+    <value>Podziękowania</value>
+  </data>
+  <data name="SettingsGeneralTroubleshootingGuide" xml:space="preserve">
+    <value>Ogólny przewodnik rozwiązywania problemów</value>
+  </data>
+  <data name="Oops" xml:space="preserve">
+    <value>Upss</value>
+  </data>
+  <data name="SettingsGiveFeedbackInfo" xml:space="preserve">
+    <value>Możesz zasugerować funkcję lub zgłosić problem na DLSS Swapper</value>
+  </data>
+  <data name="NoNewUpdatesAvailable" xml:space="preserve">
+    <value>Nie ma nowych aktualizacji.</value>
+  </data>
+  <data name="CouldNotOpenLogFileTryManual" xml:space="preserve">
+    <value>Nie udało się otworzyć pliku z logami bezpośrednio z DLSS Swapper. Spróbuj otworzyć go ręcznie.</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Brak</value>
+  </data>
+  <data name="EnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>Włączone tylko dla debugowania bibliotek DLSS DLL</value>
+  </data>
+  <data name="EnabledForAllDlssDlls" xml:space="preserve">
+    <value>Włączone dla wszystkich bibliotek DLSS DLL</value>
+  </data>
+  <data name="ClickToCopyDetails" xml:space="preserve">
+    <value>Kliknij aby skopiować poniższe dane</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>Diagnostyka</value>
+  </data>
+  <data name="FailedToLaunch" xml:space="preserve">
+    <value>Problem z uruchomieniem</value>
+  </data>
+  <data name="PleaseOpenIssuePartial1" xml:space="preserve">
+    <value>Proszę otwórz </value>
+  </data>
+  <data name="PleaseOpenIssuePartial2" xml:space="preserve">
+    <value>nowe zgłoszenie</value>
+  </data>
+  <data name="PleaseOpenIssuePartial3" xml:space="preserve">
+    <value> w repozytorium DLSS Swapper GitHub i podaj następujące informacje w sekcji dodatkowego kontekstu.</value>
+  </data>
+  <data name="DlssSwapperFailedToLaunch" xml:space="preserve">
+    <value>Nie udało się uruchomić DLSS Swapper</value>
+  </data>
+  <data name="NetworkTester" xml:space="preserve">
+    <value>Tester Sieciowy</value>
+  </data>
+  <data name="OriginalDll" xml:space="preserve">
+    <value>Oryginalna biblioteka DLL</value>
+  </data>
+  <data name="OriginalDllRestore" xml:space="preserve">
+    <value>Przywróć oryginalną bibliotekę DLL</value>
+  </data>
+  <data name="CurrentDll" xml:space="preserve">
+    <value>Aktualna biblioteka DLL</value>
+  </data>
+  <data name="OpenDllLocation" xml:space="preserve">
+    <value>Otwórz lokalizację biblioteki DLL</value>
+  </data>
+  <data name="NoDllsFound" xml:space="preserve">
+    <value>Nie znaleziono bibliotek DLL</value>
+  </data>
+  <data name="PleaseNavigateLibraryToDownloadDlls" xml:space="preserve">
+    <value>Proszę przejść do zakładki z bibliotekami DLL aby pobrać nowe.</value>
+  </data>
+  <data name="WaitToDownloadCompleteBeforeSwapping" xml:space="preserve">
+    <value>Proszę zaczekać na zakończenie pobierania przed podmianą</value>
+  </data>
+  <data name="StartingDownload" xml:space="preserve">
+    <value>Rozpoczynanie pobierania</value>
+  </data>
+  <data name="CouldNotFindFileTemplate" xml:space="preserve">
+    <value>Nie można znaleźć pliku "{0}".</value>
+  </data>
+  <data name="ResetDllToVersionTemplate" xml:space="preserve">
+    <value>Biblioteka DLL została zresetowana do {0}.</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notatki</value>
+  </data>
+  <data name="TitleNotManuallyAddedCantBeRemoved" xml:space="preserve">
+    <value>Ten tytuł nie został dodany ręcznie i nie można go usunąć.</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="Swap" xml:space="preserve">
+    <value>Podmień</value>
+  </data>
+  <data name="SelectVersionTemplate" xml:space="preserve">
+    <value>Wybierz {0} wersję</value>
+  </data>
+  <data name="RemoveDlssSwapperGameTemplate" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć "{0}" z DLSS Swapper? Nie spowoduje to żadnych zmian w plikach DLSS, które zostały już zamienione.</value>
+  </data>
+  <data name="MultipleDllsFoundTemplate" xml:space="preserve">
+    <value>Znaleziono wiele plików DLL {0}</value>
+  </data>
+  <data name="CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+    <value>Nie można znaleźć ścieżki "{0}".</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>włączone</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>wyłączone</value>
+  </data>
+  <data name="InstallPath" xml:space="preserve">
+    <value>Ścieżka instalacji</value>
+  </data>
+  <data name="Optional" xml:space="preserve">
+    <value>(opcjonalnie)</value>
+  </data>
+  <data name="AddCover" xml:space="preserve">
+    <value>Dodaj okładkę</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nazwa</value>
+  </data>
+  <data name="BelowMultipleDllFoundYouWillBeAbleToSwapInfo" xml:space="preserve">
+    <value>Poniżej przedstawiono wiele znalezionych bibliotek DLL. Nadal będziesz mógł zamieniać i przywracać biblioteki DLL w zwykły sposób, ponieważ wykonamy te czynności dla wszystkich bibliotek DLL jednocześnie. Ponieważ jednak nie wiemy, która z tych bibliotek DLL jest używana przez grę, pokazana wersja DLL dotyczy pierwszej wykrytej biblioteki DLL.</value>
+  </data>
+  <data name="WhileLoadingYourGameNewDllsDiscoveredHelpUs" xml:space="preserve">
+    <value>Podczas ładowania gier wykryto nowe biblioteki DLL, których nie ma w manifeście DLSS Swapper.</value>
+  </data>
+  <data name="StepOneCreateNewIssue" xml:space="preserve">
+    <value>Krok 1: Utwórz nowe zgłoszenie</value>
+  </data>
+  <data name="CreateNewGithubIssue" xml:space="preserve">
+    <value>Utwórz nowe zgłoszenie na GitHubie</value>
+  </data>
+  <data name="GithubAccountRequired" xml:space="preserve">
+    <value>(Wymagane konto GitHub)</value>
+  </data>
+  <data name="StepTwoCopyTitle" xml:space="preserve">
+    <value>Krok 2: Skopiuj tytuł</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopiuj</value>
+  </data>
+  <data name="StepThreeCopyBody" xml:space="preserve">
+    <value>Krok 3: Skopiuj treść</value>
+  </data>
+  <data name="StepFourSubmitYourIssue" xml:space="preserve">
+    <value>Krok 4: Zatwierdź zgłoszenie problemu</value>
+  </data>
+  <data name="YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+    <value>Pamiętaj,  że nie musisz przesyłać plików DLL. Wyśledzimy je na podstawie dostarczonych informacji.</value>
+  </data>
+  <data name="ThanksForHelping" xml:space="preserve">
+    <value>Dziękujemy za pomoc!</value>
+  </data>
+  <data name="IfButtonDoesntWorkTryHere" xml:space="preserve">
+    <value>Jeśli przycisk nie działa, spróbuj tutaj,</value>
+  </data>
+  <data name="Game" xml:space="preserve">
+    <value>Gra</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Wersja</value>
+  </data>
+  <data name="Hash" xml:space="preserve">
+    <value>Hash</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Otwórz folder</value>
+  </data>
+  <data name="GameNotReadyToPlayState" xml:space="preserve">
+    <value>Ta gra nie jest gotowa do gry.</value>
+  </data>
+  <data name="AddCustomCover" xml:space="preserve">
+    <value>Dodaj własną okładkę</value>
+  </data>
+  <data name="Grouping" xml:space="preserve">
+    <value>Grupowanie</value>
+  </data>
+  <data name="HideGamesWithNoSwappableItems" xml:space="preserve">
+    <value>Ukryj gry bez podmienialnych bibliotek DLL</value>
+  </data>
+  <data name="GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+    <value>Pogrupuj gry z tej samej biblioteki</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Opcje</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Szukaj</value>
+  </data>
+  <data name="AddingGamesManuallyInfoHtml" xml:space="preserve">
+    <value>Pamiętaj, że musisz wybrać ścieżkę swojej &lt;i&gt;gry&lt;/i&gt;, nie ścieżkę swoich &lt;i&gt;gier&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;Dla przykładu, jeśli masz grę w katalogu:&lt;br/&gt;&lt;b&gt;C:\Program Files\MojeGry\MojaUlubionaGra\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Musisz wybrać katalog &lt;b&gt;MojaUlubionaGra&lt;/b&gt; a nie katalog &lt;b&gt;MojeGry&lt;/b&gt;.</value>
+  </data>
+  <data name="SettingsLogging" xml:space="preserve">
+    <value>Logowanie</value>
+  </data>
+  <data name="SettingsAbout" xml:space="preserve">
+    <value>Informacje</value>
+  </data>
+  <data name="SettingsYes" xml:space="preserve">
+    <value>Włączone</value>
+  </data>
+  <data name="SettingsNo" xml:space="preserve">
+    <value>Wyłączone</value>
+  </data>
+  <data name="SettingsLanguage" xml:space="preserve">
+    <value>Język</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Pomoc</value>
+  </data>
+  <data name="DiagnosticsTest1Title" xml:space="preserve">
+    <value>Dostęp do google.com z poziomu DLSS Swapper (test ogólnej łączności z Internetem)</value>
+  </data>
+  <data name="DiagnosticsTest2Title" xml:space="preserve">
+    <value>Dostęp do bing.com z poziomu DLSS Swapper (testogólnej łączności z Internetem)</value>
+  </data>
+  <data name="DiagnosticsTest3Title" xml:space="preserve">
+    <value>Pobieranie DLSS Swapper DLL z poziomu DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsTest4Title" xml:space="preserve">
+    <value>Pobieranie DLSS Swapper DLL przez przeglądarkę</value>
+  </data>
+  <data name="DiagnosticsTest5Title" xml:space="preserve">
+    <value>Pobieranie okładki gry ze Steam</value>
+  </data>
+  <data name="DiagnosticsTest6Title" xml:space="preserve">
+    <value>Pobieranie okładki gry z Epic Game Store</value>
+  </data>
+  <data name="DiagnosticsTest7Title" xml:space="preserve">
+    <value>Pobieranie okładki gry z serwera plików DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsTest8Title" xml:space="preserve">
+    <value>Pobieranie okładki gry z alternatywnego serwera plików DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsTest9Title" xml:space="preserve">
+    <value>Wyszukiwanie DNS serwera plików DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsTest10Title" xml:space="preserve">
+    <value>Pobieranie DLSS Swapper DLL w DLSS Swapper z niestandardowym agentem użytkownika</value>
+  </data>
+  <data name="DiagnosticsTest11Title" xml:space="preserve">
+    <value>Pobieranie DLSS DLL z lustrzanego serwera UploadThing</value>
+  </data>
+  <data name="RunTest" xml:space="preserve">
+    <value>Uruchom test</value>
+  </data>
+  <data name="ClickToFavourite" xml:space="preserve">
+    <value>Dodaj do ulubionych</value>
+  </data>
+  <data name="Favourited" xml:space="preserve">
+    <value>Ulubiony</value>
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Pobieranie</value>
+  </data>
+  <data name="RequiresDownload" xml:space="preserve">
+    <value>Wymaga pobrania</value>
+  </data>
+  <data name="Imported" xml:space="preserve">
+    <value>Zaimportowano</value>
+  </data>
+  <data name="MultipleDllsFound" xml:space="preserve">
+    <value>Znaleziono wiele bibliotek DLL</value>
+  </data>
+  <data name="FileDescription" xml:space="preserve">
+    <value>Opis pliku</value>
+  </data>
+  <data name="DownloadFileSize" xml:space="preserve">
+    <value>Rozmiar pobranego pliku</value>
+  </data>
+  <data name="Label" xml:space="preserve">
+    <value>Etykieta</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>Rozmiar pliku</value>
+  </data>
+  <data name="CopyTestResults" xml:space="preserve">
+    <value>Skopiuj wyniki testów</value>
+  </data>
+  <data name="CreateBugReport" xml:space="preserve">
+    <value>Utwórz raport o błędzie</value>
+  </data>
+  <data name="CancelCurrentTest" xml:space="preserve">
+    <value>Anuluj bieżący test</value>
+  </data>
+  <data name="GithubIssues" xml:space="preserve">
+    <value>Problemy z GitHubem</value>
+  </data>
+  <data name="DlssSwappingConsideredCheatingInfo" xml:space="preserve">
+    <value>Chociaż zamiana wersji DLSS nie powinna być uznawana za oszustwo, niektóre systemy anty-cheatowe mogą nie być tego zadowolone, jeśli pliki w twoim katalogu gry nie są takie, z jakimi gra była dystrybuowana.</value>
+  </data>
+  <data name="NoteForMultiplayerGames" xml:space="preserve">
+    <value>Uwaga dotycząca gier wieloosobowych</value>
+  </data>
+  <data name="ManifestCouldNotBeLoaded" xml:space="preserve">
+    <value>Nie udało się załadować pliku manifest.json z komputera lub z Internetu.
+
+Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia błędów na GitHubie.</value>
+  </data>
+  <data name="CouldNotDeserializeManifestException" xml:space="preserve">
+    <value>Nie można deserializować pliku manifest.json.</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Aktualizuj</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Aktualizacja dostępna</value>
+  </data>
+  <data name="DlssSwapperUpdated" xml:space="preserve">
+    <value>DLSS Swapper został zaktualizowany</value>
+  </data>
+  <data name="CurrentVersionIsActualTemplate" xml:space="preserve">
+    <value>Już masz {0} zainstalowane.\n\n</value>
+  </data>
+  <data name="CouldNotLoadGithubReleaseDataException" xml:space="preserve">
+    <value>Nie można załadować danych Releasez z GitHuba.</value>
+  </data>
+  <data name="CouldNotDownloadFile" xml:space="preserve">
+    <value>Nie można pobrać pliku.</value>
+  </data>
+  <data name="DownloadFileWasInvalid" xml:space="preserve">
+    <value>Pobrany plik był nieprawidłowy.</value>
+  </data>
+  <data name="CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
+    <value>Nie można pobrać {0} DLL, proszę spróbować później lub lub sprawdzić swoje logi żeby sprawdzić czemu pobieranie się nie powiodło.</value>
+  </data>
+  <data name="OpenInBrowser" xml:space="preserve">
+    <value>Otwórz w przeglądarce</value>
+  </data>
+  <data name="BrowserTest" xml:space="preserve">
+    <value>Test przeglądarki</value>
+  </data>
+  <data name="Works" xml:space="preserve">
+    <value>Działa!</value>
+  </data>
+  <data name="StillDoesNotWork" xml:space="preserve">
+    <value>Wciąż nie działa</value>
+  </data>
+  <data name="UseUserAgentInfo" xml:space="preserve">
+    <value>Użyj dostarczonego UserAgenta lub wprowadź niestandardowego.</value>
+  </data>
+  <data name="CustomUserAgentTest" xml:space="preserve">
+    <value>Test niestandardowego UserAgenta</value>
+  </data>
+  <data name="OpenInBrowserInfo" xml:space="preserve">
+    <value>Kliknij przycisk Otwórz w przeglądarce lub skopiuj i wklej poniższy link do przeglądarki. Czy pobierany jest plik w przeglądarce?</value>
+  </data>
+  <data name="DeleteDll" xml:space="preserve">
+    <value>Usuń bibliotekę DLL</value>
+  </data>
+  <data name="UpdateManifest" xml:space="preserve">
+    <value>Zaktualizuj manifest</value>
+  </data>
+  <data name="ImportFeatureDisabled" xml:space="preserve">
+    <value>Funkcja importu jest wyłączona, nie można załadować manifestu importu.</value>
+  </data>
+  <data name="UnknownTypeDll" xml:space="preserve">
+    <value>Nieznany typ biblioteki DLL.</value>
+  </data>
+  <data name="UntrustedDll" xml:space="preserve">
+    <value>Biblioteka DLL niezaufana przez system Windows.</value>
+  </data>
+  <data name="AlreadyImported" xml:space="preserve">
+    <value>(aktualnie zaimportowana)</value>
+  </data>
+  <data name="CouldNotDetermineImportPath" xml:space="preserve">
+    <value>Nie można wyznaczyć ścieżki importu.</value>
+  </data>
+  <data name="UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Nieznana biblioteka gier {0} podczas ustawiania ID</value>
+  </data>
+  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
+    <value>Archiwum z DLL jest nieprawidłowe (nie znaleziono bibliotek DLL).</value>
+  </data>
+  <data name="DllZipInvalidMultipleDllFound" xml:space="preserve">
+    <value>Archiwum z DLL jest nieprawidłowe (znaleziono więcej niż jedną bibliotekę).</value>
+  </data>
+  <data name="CustomCoverRemove" xml:space="preserve">
+    <value>Usunąć własną okładkę?</value>
+  </data>
+  <data name="AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Czy jesteś pewien, że chcesz usunąć własną okładkę?</value>
+  </data>
+  <data name="GameCurrentlyProcessing" xml:space="preserve">
+    <value>Gra aktualnie się przetwarza</value>
+  </data>
+  <data name="GameProcessingPleaseWaitTemplate" xml:space="preserve">
+    <value>{0} wciąż się przetwarza. Prosimy poczekać aż ładowanie się zakończy zanim uruchomisz grę.</value>
+  </data>
+  <data name="CouldNotLoadImportedDlls" xml:space="preserve">
+    <value>Nie można załadować zaimportowanych bibliotek DLL</value>
+  </data>
+  <data name="ProcessedDlls" xml:space="preserve">
+    <value>Przetworzone biblioteki DLL: </value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Importowanie</value>
+  </data>
+  <data name="AlreadyDownloaded" xml:space="preserve">
+    <value>Aktualnie pobrana.</value>
+  </data>
+  <data name="ImportedAsExistingRecord" xml:space="preserve">
+    <value>Importowanie jako istniejąca biblioteka DLL.</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>Nie znaleziono pliku.</value>
+  </data>
+  <data name="ZipDidNotContainAnyDlls" xml:space="preserve">
+    <value>Archiwum nie posiada żadnych bibliotek DLL.</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Zakończono</value>
+  </data>
+  <data name="CouldNotDetectUbisoftConnectInstallKey" xml:space="preserve">
+    <value>Nie można wykryć ubisoftConnectInstallsKey</value>
+  </data>
+  <data name="CouldNotLoadGameLibraryTemplate" xml:space="preserve">
+    <value>Nie można wczytać biblioteki gry {0}</value>
+  </data>
+  <data name="CouldNotDeserializeGogCatalog" xml:space="preserve">
+    <value>Nie można zdeserializować GOGCatalogResponse dla url, {0}</value>
+  </data>
+  <data name="CouldNotFindAnyGogProduct" xml:space="preserve">
+    <value>Nie można znaleźć żadnego GOGCatalogProduct dla url, {0}</value>
+  </data>
+  <data name="CouldNotDeserializeGogEmbedFilteredResponse" xml:space="preserve">
+    <value>Nie można zdeserializować GOGEmbedFilteredResponse dla url, {0}</value>
+  </data>
+  <data name="CouldNotFindAnyGogEmbedFilteredProducts" xml:space="preserve">
+    <value>Nie można znaleźć żadnego GOGEmbedFilteredProducts dla url, {0}</value>
+  </data>
+  <data name="UpdateAttempt" xml:space="preserve">
+    <value>Próba aktualizacji</value>
+  </data>
+  <data name="DlssSwapperMustClose" xml:space="preserve">
+    <value>DLSS Swapper musi zostać zamknięty</value>
+  </data>
+  <data name="DlssSwapperCloseDueToManifest" xml:space="preserve">
+    <value>DLSS Swapper nie był w stanie wczytać pliku manifestu. teraz zostanie zamknięty.</value>
+  </data>
+  <data name="YouMayOnlyDragOneFileCover" xml:space="preserve">
+    <value>Możesz przeciągnąć tylko jeden plik jako okładkę</value>
+  </data>
+  <data name="StorageFileIsNull" xml:space="preserve">
+    <value>storageFile jest nullem</value>
+  </data>
+  <data name="InvalidFileTypeTemplate" xml:space="preserve">
+    <value>"{0}" nie jest właściwym typem pliku</value>
+  </data>
+</root>

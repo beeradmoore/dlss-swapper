@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using DLSS_Swapper.Translations.Windows;
 using Microsoft.UI.Xaml;
 
 namespace DLSS_Swapper;
@@ -13,4 +14,11 @@ public partial class MainWindowModel : ObservableObject
 
     [ObservableProperty]
     public partial Visibility AcknowledgementsVisibility { get; set; } = Visibility.Collapsed;
+
+    public MainWindowTranslationPropertiesViewModel TranslationProperties { get; } = new MainWindowTranslationPropertiesViewModel();
+
+    public MainWindowModel()
+    {
+
+    }
 }

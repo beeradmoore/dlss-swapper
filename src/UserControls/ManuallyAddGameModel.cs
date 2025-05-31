@@ -1,29 +1,17 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml;
-using Windows.Gaming.Input;
-using Windows.Storage.Pickers;
-using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Data.ManuallyAdded;
+using CommunityToolkit.Mvvm.ComponentModel;
+using DLSS_Swapper.Translations.UserControls;
 
 namespace DLSS_Swapper.UserControls
 {
     internal partial class ManuallyAddGameModel : ObservableObject
     {
-        ManuallyAddedGame game;
-        public ManuallyAddedGame Game => game;
-
-        WeakReference<ManuallyAddGameControl> manuallyAddGameControlWeakReference;
-
-        public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath)
+        public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath) : base()
         {
             manuallyAddGameControlWeakReference = new WeakReference<ManuallyAddGameControl>(manuallyAddGameControl);
 
@@ -33,6 +21,13 @@ namespace DLSS_Swapper.UserControls
                 InstallPath = PathHelpers.NormalizePath(installPath),
             };
         }
+
+        public ManuallyAddGameTranslationPropertiesViewModel TranslationProperties { get; } = new ManuallyAddGameTranslationPropertiesViewModel();
+
+        ManuallyAddedGame game;
+        public ManuallyAddedGame Game => game;
+
+        WeakReference<ManuallyAddGameControl> manuallyAddGameControlWeakReference;
 
         [RelayCommand]
         async Task AddCoverImageAsync()

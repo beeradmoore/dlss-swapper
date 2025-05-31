@@ -9,6 +9,7 @@ using DLSS_Swapper.Data.BattleNet;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.Interfaces
 {
@@ -46,7 +47,7 @@ namespace DLSS_Swapper.Interfaces
                 GameLibrary.XboxApp => XboxLibrary.Instance,
                 GameLibrary.ManuallyAdded => ManuallyAddedLibrary.Instance,
                 GameLibrary.BattleNet => BattleNetLibrary.Instance,
-                _ => throw new Exception($"Could not load game library {gameLibrary}"),
+                _ => throw new Exception(ResourceHelper.GetFormattedResourceTemplate("CouldNotLoadGameLibraryTemplate", gameLibrary)),
             };
         }
 

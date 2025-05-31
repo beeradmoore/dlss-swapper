@@ -1,6 +1,4 @@
-using AsyncAwaitBestPractices;
 using DLSS_Swapper.Data;
-using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Pages;
 using DLSS_Swapper.UserControls;
@@ -8,32 +6,15 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Documents;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.System;
 using Windows.UI;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace DLSS_Swapper
 {
@@ -56,7 +37,6 @@ namespace DLSS_Swapper
 
         public MainWindow()
         {
-            Title = "DLSS Swapper";
             this.InitializeComponent();
             ViewModel = new MainWindowModel();
 
@@ -72,8 +52,6 @@ namespace DLSS_Swapper
                     overlappedPresenter.Maximize();
                 }
             }
-
-
 
             Closed += (object sender, WindowEventArgs args) =>
             {
@@ -128,7 +106,7 @@ namespace DLSS_Swapper
 
         /// <summary>
         /// Default the Window Icon to the icon stored in the .exe, if any.
-        /// 
+        ///
         /// The Icon can be overriden by callers by calling SetIcon themselves.
         /// </summary>
         /// via this MAUI PR https://github.com/dotnet/maui/pull/6900
@@ -217,7 +195,7 @@ namespace DLSS_Swapper
                 return;
             }
 
-            // Only try manually set selected item if is not already selected. 
+            // Only try manually set selected item if is not already selected.
             if (MainNavigationView.SelectedItem is null || (MainNavigationView.SelectedItem is NavigationViewItem selectedItem && selectedItem.Tag.ToString() != page))
             {
                 foreach (NavigationViewItem navigationViewItem in MainNavigationView.MenuItems)
@@ -245,7 +223,7 @@ namespace DLSS_Swapper
             if (CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated)
             {
                 var currentAppVersion = App.CurrentApp.GetVersion();
-                releaseNotesTask = gitHubUpdater.GetReleaseFromTag($"v{currentAppVersion.Major}.{currentAppVersion.Minor}.{currentAppVersion.Build}.{currentAppVersion.Revision}"); 
+                releaseNotesTask = gitHubUpdater.GetReleaseFromTag($"v{currentAppVersion.Major}.{currentAppVersion.Minor}.{currentAppVersion.Build}.{currentAppVersion.Revision}");
             }
             */
 
@@ -261,10 +239,10 @@ namespace DLSS_Swapper
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
-                    Title = "Note for multiplayer games",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("NoteForMultiplayerGames"),
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = "While swapping DLSS versions should not be considered cheating, certain anti-cheat systems may not be happy with you if the files in your game directory are not what the game was distributed with.\n\nBecause of this we recommend using caution for multiplayer games.",
+                    Content = ResourceHelper.GetString("DlssSwappingConsideredCheatingInfo"),
                 };
                 var result = await dialog.ShowAsync();
 
@@ -276,14 +254,12 @@ namespace DLSS_Swapper
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
-                    Title = "Error",
-                    CloseButtonText = "Close",
-                    PrimaryButtonText = "GitHub issues",
-                    SecondaryButtonText = "Update manifest",
+                    Title = ResourceHelper.GetString("Error"),
+                    CloseButtonText = ResourceHelper.GetString("Close"),
+                    PrimaryButtonText = ResourceHelper.GetString("GithubIssues"),
+                    SecondaryButtonText = ResourceHelper.GetString("UpdateManifest"),
                     DefaultButton = ContentDialogButton.Primary,
-                    Content = @"We were unable to load manifest.json from your computer.
-
-If this keeps happening please file an report in our issue tracker on GitHub.",
+                    Content = ResourceHelper.GetString("ManifestCouldNotBeLoaded"),
                 };
                 var shouldClose = true;
 
@@ -296,7 +272,7 @@ If this keeps happening please file an report in our issue tracker on GitHub.",
                 {
                     dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                     {
-                        Title = "Attempting to update",
+                        Title = ResourceHelper.GetString("UpdateAttempt"),
                         DefaultButton = ContentDialogButton.Close,
                         Content = new ProgressRing()
                         {
@@ -320,10 +296,10 @@ If this keeps happening please file an report in our issue tracker on GitHub.",
                 {
                     dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                     {
-                        Title = "DLSS Swapper must close",
-                        CloseButtonText = "Close",
+                        Title = ResourceHelper.GetString("DlssSwapperMustClose"),
+                        CloseButtonText = ResourceHelper.GetString("Close"),
                         DefaultButton = ContentDialogButton.Close,
-                        Content = "DLSS Swapper was not able to load its manifest file. It will now close.",
+                        Content = ResourceHelper.GetString("DlssSwapperCloseDueToManifest"),
                     };
                     await dialog.ShowAsync();
 
@@ -335,10 +311,10 @@ If this keeps happening please file an report in our issue tracker on GitHub.",
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
-                    Title = "Could not load imported DLLs",
+                    Title = ResourceHelper.GetString("CouldNotLoadImportedDlls"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = new ImportSystemDisabledView(),
-                    CloseButtonText = "Close",
+                    CloseButtonText = ResourceHelper.GetString("Close"),
                 };
                 await dialog.ShowAsync();
             }
@@ -377,7 +353,7 @@ If this keeps happening please file an report in our issue tracker on GitHub.",
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         // Previously: FilterDLSSRecords
         internal void FilterDLLRecords()
@@ -402,7 +378,6 @@ If this keeps happening please file an report in our issue tracker on GitHub.",
             */
 
         }
-
 
         internal void UpdateColors(ElementTheme theme)
         {

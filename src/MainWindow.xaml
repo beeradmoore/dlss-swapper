@@ -2,12 +2,11 @@
     x:Class="DLSS_Swapper.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DLSS_Swapper"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    mc:Ignorable="d"
-    >
+    Title="{x:Bind ViewModel.TranslationProperties.Title, Mode=OneWay}"
+    mc:Ignorable="d">
 
     <Grid x:Name="RootGrid" MinWidth="400">
 
@@ -28,34 +27,33 @@
             <Image
                 x:Name="AppFontIcon"
                 Width="20"
-                Height="20" 
+                Height="20"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Grid.Column="0"
                 Source="Assets/icon_256.png" />
             <TextBlock
-                x:Name="AppTitle"
+                Text="{x:Bind ViewModel.TranslationProperties.AppTitleText, Mode=OneWay}"
                 Grid.Column="1"
                 Margin="20,0,0,0"
                 VerticalAlignment="Center"
-                Style="{StaticResource CaptionTextBlockStyle}"
-                Text="DLSS Swapper" />
+                Style="{StaticResource CaptionTextBlockStyle}" />
         </Grid>
-        
+
 
         <muxc:NavigationView Grid.Row="1" x:Name="MainNavigationView"
-                             ItemInvoked="MainNavigationView_ItemInvoked" 
+                             ItemInvoked="MainNavigationView_ItemInvoked"
                              PaneDisplayMode="LeftCompact"
-                             IsBackButtonVisible="Collapsed"      
+                             IsBackButtonVisible="Collapsed"
                              Loaded="MainNavigationView_Loaded"
                              Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <muxc:NavigationView.MenuItems>
-                <muxc:NavigationViewItem Content="Games" Tag="Games">
+                <muxc:NavigationViewItem Content="{x:Bind ViewModel.TranslationProperties.NavigationViewItemGamesText, Mode=OneWay}" Tag="Games">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE7FC;"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Icon="Library" Content="Library" Tag="Library" />
+                <muxc:NavigationViewItem Icon="Library" Content="{x:Bind ViewModel.TranslationProperties.NavigationViewItemLibraryText, Mode=OneWay}" Tag="Library" />
                 <muxc:NavigationViewItem Icon="Emoji" Content="Acknowledgements" Tag="Acknowledgements" Visibility="{x:Bind ViewModel.AcknowledgementsVisibility, Mode=OneWay}" />
             </muxc:NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" />

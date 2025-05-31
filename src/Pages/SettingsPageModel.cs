@@ -40,11 +40,7 @@ public partial class SettingsPageModel : LocalizedViewModelBase
         new DLSSOnScreenIndicatorSetting("EnabledForAllDlssDlls", 1024)
     };
 
-    public ObservableCollection<KeyValuePair<string, string>> Languages { get; init; } = new ObservableCollection<KeyValuePair<string, string>>()
-    {
-        KeyValuePair.Create("en-US", "English"),
-        KeyValuePair.Create("pl-PL", "Polish")
-    };
+    public ObservableCollection<KeyValuePair<string, string>> Languages { get; init; } = new ObservableCollection<KeyValuePair<string, string>>();
 
     [ObservableProperty]
     public partial KeyValuePair<string, string> SelectedLanguage { get; set; }
@@ -89,6 +85,14 @@ public partial class SettingsPageModel : LocalizedViewModelBase
     public SettingsPageModel(SettingsPage page) : base()
     {
         _weakPage = new WeakReference<SettingsPage>(page);
+
+        var knownLanguages = LanguageManager.Instance.GetKnownLanguages();
+        foreach (var knownLanguage in knownLanguages)
+        {
+            var languageName = LanguageManager.Instance.GetLanguageName(knownLanguage);
+            Languages.Add(new KeyValuePair<string, string>(knownLanguage, languageName));
+        }
+
         //work with selected language state
         SelectedLanguage = Languages.FirstOrDefault(x => x.Key == CultureInfo.CurrentCulture.Name);
 

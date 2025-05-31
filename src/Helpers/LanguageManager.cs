@@ -25,6 +25,26 @@ public class LanguageManager
         OnLanguageChanged?.Invoke();
     }
 
+    // TODO: Change this to be dynamic.
+    public string[] GetKnownLanguages()
+    {
+        return new string[]
+        {
+            "en-US",
+            "pl-PL",
+        };
+    }
+
+    public string GetLanguageName(string languageKey)
+    {
+        return languageKey switch
+        {
+            "en-US" => "English",
+            "pl-PL" => "Polish",
+            _ => languageKey,
+        };
+    }
+
     public static IEnumerable<string> GetClassLanguagePropertyNames(Type classType)
     {
         return classType.GetProperties().Where(p => p.GetCustomAttribute<TranslationPropertyAttribute>() != null).Select(p => p.Name).ToList();

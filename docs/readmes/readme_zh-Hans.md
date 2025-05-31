@@ -6,7 +6,7 @@
 </p>
 
 > [!WARNING]
-> 请注意自称是 DLSS Swapper 的恶意网站。本站是您唯一可以找到官方下载的地方。请参考我们的[官方链接](#official-links)来深入了解与 DLSS Swapper 相关的账号/网站。
+> 请注意自称是 DLSS Swapper 的恶意网站。本站是您唯一可以找到官方下载的地方。请参考我们的[官方链接](#官方链接)来深入了解与 DLSS Swapper 相关的账号/网站。
 
 <p align="center">
     <a href="https://github.com/beeradmoore/dlss-swapper/releases"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>

@@ -5,8 +5,8 @@
  <p align="center">DLSS Swapper é uma ferramenta que te permite baixar convenientemente, gerenciar, e trocar <strong>DLSS</strong>, <strong>FSR</strong> e <strong>XeSS</strong> dlls permitindo que você possa atualizar ou rebaixar o DLSS, FSR e a versão do XeSS e, um jogo sem precisar fazer atualização do mesmo.</p>
 </p>
 
-> [!WARNING]
-> Please be aware of malicious sites claiming to be DLSS Swapper. This is the only place you will find official downloads. See our [official links](#official-links) for accounts/sites affiliated with DLSS Swapper.
+> [!AVISO]
+> Fique atento a sites maliciosos que afirmam ser o DLSS Swapper. Este é o **único** lugar onde você encontrará downloads oficiais. Veja nossos [links oficiais](#links-oficiais) para conhecer as contas e sites afiliados ao DLSS Swapper.
 
 <p align="center">
     <a href="https://github.com/beeradmoore/dlss-swapper/releases"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>
@@ -75,11 +75,11 @@ Por favor, venha e compartilhe sua experiência DLSS em [r/DLSS_Swapper](https:/
 
 Você pode obter as últimas compilações em nossas paginas de [lançamentos do GitHub](https://github.com/beeradmoore/dlss-swapper/releases)
 
-You can also install with winget. 
+Você também pode instalar com o winget.
 
-> winget install --id=beeradmoore.dlss-swapper -e 
+> winget install --id=beeradmoore.dlss-swapper -e
 
-These are the only official places to get DLSS Swapper.
+Estes são os únicos locais oficiais para obter o DLSS Swapper.
 
 ## Seria legal se o DLSS Swapper podesse...
 
@@ -96,10 +96,10 @@ Mais informações sobre isso em breve.
 | SO        | Windows 10 64-bit (20H1, build 19041) |
 | GPU       | Qualquer modelo                       |
 
-## Official links
+## Links Oficiais
 
 - GitHub: https://github.com/beeradmoore/dlss-swapper/
 - Twitter: https://twitter.com/dlss_swapper
 - Reddit: https://www.reddit.com/r/DLSS_Swapper/
 
-If you have found an other accounts or sites claiming to be DLSS Swapper, please ignore them (or better yet, [file an issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) and let us know) 
+Se você encontrou outras contas ou sites que afirmam ser o DLSS Swapper, por favor, ignore-os (ou melhor ainda, [abra uma issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) e nos avise).

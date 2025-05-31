@@ -7,18 +7,9 @@ namespace DLSS_Swapper.Interfaces;
 
 public abstract class LocalizedViewModelBase : ObservableObject, IDisposable
 {
-    protected readonly LanguageManager _languageManager;
-
     public LocalizedViewModelBase()
     {
-        _languageManager = LanguageManager.Instance;
-        _languageManager.OnLanguageChanged += OnLanguageChanged;
-    }
-
-    public LocalizedViewModelBase(LanguageManager languageManager)
-    {
-        _languageManager = languageManager;
-        _languageManager.OnLanguageChanged += OnLanguageChanged;
+        LanguageManager.Instance.OnLanguageChanged += OnLanguageChanged;
     }
 
     protected virtual void OnLanguageChanged()
@@ -33,7 +24,7 @@ public abstract class LocalizedViewModelBase : ObservableObject, IDisposable
 
     public void Dispose()
     {
-        _languageManager.OnLanguageChanged -= OnLanguageChanged;
+        LanguageManager.Instance.OnLanguageChanged -= OnLanguageChanged;
     }
 
     ~LocalizedViewModelBase()

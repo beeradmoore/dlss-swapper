@@ -140,7 +140,7 @@ public partial class SettingsPageModel : LocalizedViewModelBase
         if (e.PropertyName == nameof(SelectedLanguage))
         {
             Settings.Instance.Language = SelectedLanguage.Key;
-            _languageManager.ChangeLanguage(SelectedLanguage.Key);
+            LanguageManager.Instance.ChangeLanguage(SelectedLanguage.Key);
         }
         else if (e.PropertyName == nameof(LightThemeSelected))
         {

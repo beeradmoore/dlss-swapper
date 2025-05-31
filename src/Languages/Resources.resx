@@ -513,10 +513,6 @@ Only import dlls from sources you trust.</value>
   <data name="Hash" xml:space="preserve">
     <value>Hash</value>
   </data>
-  <data name="NewDllFoundOn" xml:space="preserve">
-    <value>[NEW DLLs] Found on</value>
-    <comment>[NEW DLLs] Found on (context)TIME</comment>
-  </data>
   <data name="OpenFolder" xml:space="preserve">
     <value>Open folder</value>
   </data>

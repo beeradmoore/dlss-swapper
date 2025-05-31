@@ -16,6 +16,13 @@ namespace DLSS_Swapper.UserControls;
 
 public partial class NewDLLsControlModel : ObservableObject
 {
+
+    public NewDLLsTranslationPropertiesViewModel TranslationProperties { get; } = new NewDLLsTranslationPropertiesViewModel();
+
+    public string Title => $"[NEW DLLs] Found on {DateTime.Now.ToString("yyyy-MM-dd")}";
+
+    public string Body { get; init; }
+
     public NewDLLsControlModel() : base()
     {
         var unknownGameAssets = GameManager.Instance.GetUnknownGameAssets();
@@ -55,10 +62,6 @@ public partial class NewDLLsControlModel : ObservableObject
         Body = stringBuilder.ToString();
     }
 
-    public NewDLLsTranslationPropertiesViewModel TranslationProperties { get; } = new NewDLLsTranslationPropertiesViewModel();
-
-    public string Body { get; init; }
-
     [RelayCommand]
     async Task OpenGitHubIssueAsync()
     {
@@ -70,7 +73,7 @@ public partial class NewDLLsControlModel : ObservableObject
     void CopyTitle()
     {
         var package = new DataPackage();
-        package.SetText(TranslationProperties.Title);
+        package.SetText(Title);
         Clipboard.SetContent(package);
     }
 

@@ -29,7 +29,7 @@
                     <FontIcon Glyph="&#xE8C8;" />
                 </Button>
             </StackPanel>
-            <TextBox Text="{x:Bind ViewModel.TranslationProperties.Title, Mode=OneWay}" IsReadOnly="True" />
+            <TextBox Text="{x:Bind ViewModel.Title, Mode=OneWay}" IsReadOnly="True" />
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TranslationProperties.StepThreeCopyBodyText, Mode=OneWay}" />

@@ -507,9 +507,6 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="Hash" xml:space="preserve">
     <value>Hash</value>
   </data>
-  <data name="NewDllFoundOn" xml:space="preserve">
-    <value>[Znaleziono nowe biblioteki DLL]</value>
-  </data>
   <data name="OpenFolder" xml:space="preserve">
     <value>Otwórz folder</value>
   </data>

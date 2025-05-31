@@ -8,7 +8,6 @@ public class NewDLLsTranslationPropertiesViewModel : LocalizedViewModelBase
 {
     public NewDLLsTranslationPropertiesViewModel() : base() { }
 
-    [TranslationProperty] public string Title => $"{ResourceHelper.GetString("NewDllFoundOn")} {DateTime.Now.ToString("yyyy-MM-dd")}";
     [TranslationProperty] public string WhileLoadingYourGameNewDllsDiscoveredHelpUsText => ResourceHelper.GetString("WhileLoadingYourGameNewDllsDiscoveredHelpUs");
     [TranslationProperty] public string StepOneCreateNewIssueText => ResourceHelper.GetString("StepOneCreateNewIssue");
     [TranslationProperty] public string CreateNewGithubIssueText => ResourceHelper.GetString("CreateNewGithubIssue");

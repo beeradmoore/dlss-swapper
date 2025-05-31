@@ -74,7 +74,7 @@ public partial class LibraryPageModel : ObservableObject
                 SelectLibrary(gameAssetType);
             }
         }
-    } 
+    }
 
     [RelayCommand()]
     async Task RefreshAsync()
@@ -134,13 +134,35 @@ public partial class LibraryPageModel : ObservableObject
         }
 
 
+
+        var filesProgressBar = new ProgressBar()
+        {
+            IsIndeterminate = true
+        };
+        var progressTextBlock = new TextBlock()
+        {
+            Text = string.Empty,
+            HorizontalAlignment = HorizontalAlignment.Left,
+        };
+        progressTextBlock.Inlines.Add(new Run() { Text = "Exported DLLs: " });
+        var progressRun = new Run() { Text = "0" };
+        progressTextBlock.Inlines.Add(progressRun);
+        var progressStackPanel = new StackPanel()
+        {
+            Spacing = 16,
+            Orientation = Orientation.Vertical,
+            Children =
+            {
+                filesProgressBar,
+                progressTextBlock,
+            }
+        };
+
+
         var exportingDialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("Exporting"),
-            Content = new ProgressRing()
-            {
-                IsIndeterminate = true,
-            },
+            Content = progressStackPanel,
         };
 
         var tempExportPath = Path.Combine(Storage.GetTemp(), "export");
@@ -167,77 +189,89 @@ public partial class LibraryPageModel : ObservableObject
 
             _ = exportingDialog.ShowAsync();
 
-            // Give UI time to update and show import screen.
+            // Give UI time to update and show export loading wheel.
             await Task.Delay(50);
 
-            var exportCount = 0;
+            var toExport = new List<(string SourceFileName, string EntryName)>();
 
-            using (var fileStream = File.Create(finalExportZip))
+            foreach (var dllRecord in allDllRecords)
             {
-                using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create))
+                if (dllRecord.LocalRecord is null || dllRecord.LocalRecord.IsDownloaded == false)
                 {
-                    foreach (var dllRecord in allDllRecords)
-                    {
-                        if (dllRecord.LocalRecord is null)
-                        {
-                            continue;
-                        }
-
-                        // TODO: When fixing imported system, make sure to update this to use full path
-                        var internalZipDir = DLLManager.Instance.GetAssetTypeName(dllRecord.AssetType);
-                        if (dllRecord.LocalRecord.IsImported == true)
-                        {
-                            internalZipDir = Path.Combine("Imported", internalZipDir);
-                        }
-
-                        internalZipDir = Path.Combine(internalZipDir, dllRecord.DisplayName);
-
-                        using (var dlssFileStream = File.OpenRead(dllRecord.LocalRecord.ExpectedPath))
-                        {
-                            using (var dlssZip = new ZipArchive(dlssFileStream, ZipArchiveMode.Read))
-                            {
-                                var zippedDlls = dlssZip.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
-
-                                // If there is more than one dll something has gone wrong.
-                                if (zippedDlls.Length != 1)
-                                {
-                                    throw new Exception(ResourceHelper.GetFormattedResourceTemplate("ExportErrorDueToDllsCountTemplate", dllRecord.LocalRecord.ExpectedPath, zippedDlls.Length));
-                                }
-
-                                var tempFileExportPath = Path.Combine(tempExportPath, Guid.NewGuid().ToString("D"));
-                                Storage.CreateDirectoryIfNotExists(tempFileExportPath);
-
-                                var tempFile = Path.Combine(tempFileExportPath, Path.GetFileName(zippedDlls[0].Name));
-                                zippedDlls[0].ExtractToFile(tempFile);
-                                zipArchive.CreateEntryFromFile(tempFile, Path.Combine(internalZipDir, Path.GetFileName(tempFile)));
-
-                                // Try clean up as we go.
-                                try
-                                {
-                                    Directory.Delete(tempFileExportPath, true);
-                                }
-                                catch
-                                {
-                                    // NOOP
-                                }
-                            }
-                        }
-
-                        ++exportCount;
-                    }
+                    continue;
                 }
+
+                var expectedPathDirectory = Path.GetDirectoryName(dllRecord.LocalRecord.ExpectedPath);
+                if (string.IsNullOrWhiteSpace(expectedPathDirectory))
+                {
+                    continue;
+                }
+
+                // TODO: When fixing imported system, make sure to update this to use full path
+                var internalZipDir = DLLManager.Instance.GetAssetTypeName(dllRecord.AssetType);
+                if (dllRecord.LocalRecord.IsImported == true)
+                {
+                    internalZipDir = Path.Combine("Imported", internalZipDir);
+                }
+                var directoryInfo = new DirectoryInfo(expectedPathDirectory);
+
+                internalZipDir = Path.Combine(internalZipDir, directoryInfo.Name);
+
+                toExport.Add((dllRecord.LocalRecord.ExpectedPath, Path.Combine(internalZipDir, Path.GetFileName(dllRecord.LocalRecord.ExpectedPath))));
             }
 
-            exportingDialog.Hide();
 
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            Exception? exportError = null;
+
+            if (toExport.Count == 0)
             {
-                CloseButtonText = ResourceHelper.GetString("Okay"),
-                DefaultButton = ContentDialogButton.Close,
-                Title = ResourceHelper.GetString("Success"),
-                Content = ResourceHelper.GetFormattedResourceTemplate("ExportedDllsTemplate", exportCount, exportCount == 1 ? string.Empty : "s"),
-            };
-            await dialog.ShowAsync();
+                exportingDialog.Hide();
+
+                var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+                {
+                    CloseButtonText = "Okay",
+                    DefaultButton = ContentDialogButton.Close,
+                    Title = "Error",
+                    Content = $"No DLLs found suitible for exporting export.",
+                };
+                await dialog.ShowAsync();
+            }
+            else
+            {
+                filesProgressBar.IsIndeterminate = false;
+                filesProgressBar.Value = 0;
+                filesProgressBar.Maximum = toExport.Count;
+
+                var progress = new Progress<int>();
+                progress.ProgressChanged += (s, i) =>
+                {
+                    filesProgressBar.Value = i;
+                    progressRun.Text = i.ToString();
+                };
+
+                await Task.Run(() =>
+                {
+                    exportError = ExportDllWorker(finalExportZip, toExport, progress);
+                });
+
+                exportingDialog.Hide();
+
+                if (exportError is null)
+                {
+                    var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+                    {
+                        CloseButtonText = "Okay",
+                        DefaultButton = ContentDialogButton.Close,
+                        Title = "Success",
+                        Content = $"Exported {toExport.Count} dll{(toExport.Count == 1 ? string.Empty : "s")}.",
+                    };
+                    await dialog.ShowAsync();
+                }
+                else
+                {
+                    throw new Exception("Worker thread failed to export.", exportError);
+                }
+            }
         }
         catch (Exception err)
         {
@@ -285,6 +319,34 @@ public partial class LibraryPageModel : ObservableObject
             {
                 Logger.Error(err);
             }
+        }
+    }
+
+    Exception? ExportDllWorker(string zipPath, List<(string SourceFileName, string EntryName)> filesToAdd, IProgress<int>? progress)
+    {
+        try
+        {
+            using (var fileStream = File.Create(zipPath))
+            {
+                using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create))
+                {
+                    var exported = 0;
+                    foreach (var fileToAdd in filesToAdd)
+                    {
+                        zipArchive.CreateEntryFromFile(fileToAdd.SourceFileName, fileToAdd.EntryName);
+                        ++exported;
+
+                        progress?.Report(exported);
+                    }
+                }
+            }
+
+            return null;
+        }
+        catch (Exception err)
+        {
+            Logger.Error(err);
+            return err;
         }
     }
 
@@ -377,11 +439,35 @@ public partial class LibraryPageModel : ObservableObject
             {
                 if (File.Exists(dllRecord.LocalRecord.ExpectedPath))
                 {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        var localRecord = dllRecord.LocalRecord;
+                        localRecord.IsDownloaded = true;
+                        dllRecord.LocalRecord = null;
+                        dllRecord.LocalRecord = localRecord;
+                    });
+
                     importResults.Add(DLLImportResult.FromSucces(dllRecord.LocalRecord.ExpectedPath, ResourceHelper.GetString("AlreadyDownloaded"), true));
                     return true;
                 }
 
-                File.Copy(importedPath, dllRecord.LocalRecord.ExpectedPath);
+                try
+                {
+                    using (var fileStream = File.OpenRead(importedPath))
+                    {
+                        using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Read, true))
+                        {
+                            DLLManager.HandleExtractFromZip(zipArchive, dllRecord);
+                        }
+                    }
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err);
+                    importResults.Add(DLLImportResult.FromFail(importedPath, "Failed to extract DLL from zip."));
+                    return false;
+                }
+
                 App.CurrentApp.RunOnUIThread(() =>
                 {
                     var localRecord = dllRecord.LocalRecord;
@@ -397,6 +483,7 @@ public partial class LibraryPageModel : ObservableObject
                 // This should never happen.
                 Logger.Error("dllRecord.LocalRecord is null");
                 Debugger.Break();
+                importResults.Add(DLLImportResult.FromFail(importedPath, "dllRecord.LocalRecord is null"));
                 return false;
             }
         }
@@ -424,7 +511,7 @@ public partial class LibraryPageModel : ObservableObject
             var tempExtractPath = Path.Combine(Storage.GetTemp(), "import", Guid.NewGuid().ToString("D"));
             Storage.CreateDirectoryIfNotExists(tempExtractPath);
 
-           
+
             foreach (var importFile in openFileList)
             {
                 ++selectedFilesProcessed;
@@ -443,8 +530,8 @@ public partial class LibraryPageModel : ObservableObject
                 {
                     if (importFile.Path.EndsWith(".zip", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        // If we are importing a zip, first check if its hash is one 
-                        // that we expect.Then we can just bypass everything.                        
+                        // If we are importing a zip, first check if its hash is one
+                        // that we expect.Then we can just bypass everything.
                         var newZipHash = string.Empty;
                         using (var fileStream = File.OpenRead(importFile.Path))
                         {
@@ -588,7 +675,9 @@ public partial class LibraryPageModel : ObservableObject
 
                             foreach (var zippedDll in zippedDlls)
                             {
-                                var tempFile = Path.Combine(tempExtractPath, zippedDll.Name);
+                                var tempFile = Path.Combine(tempExtractPath, Guid.NewGuid().ToString("D"), zippedDll.Name);
+                                Storage.CreateDirectoryForFileIfNotExists(tempFile);
+
                                 zippedDll.ExtractToFile(tempFile, true);
 
                                 ++processedDllsInZip;
@@ -667,7 +756,7 @@ public partial class LibraryPageModel : ObservableObject
         }
 
         loadingDialog.Hide();
-  
+
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
             CloseButtonText = ResourceHelper.GetString("Okay"),
@@ -754,9 +843,9 @@ public partial class LibraryPageModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task ExportRecordAsync(DLLRecord record)
+    async Task ExportRecordAsync(DLLRecord dllRecord)
     {
-        if (record.LocalRecord is null)
+        if (dllRecord.LocalRecord is null)
         {
             return;
         }
@@ -773,23 +862,44 @@ public partial class LibraryPageModel : ObservableObject
 
         try
         {
+            var exportName = $"dlss_swapper_export_{dllRecord.DisplayName.Replace(" ", "_")}.zip";
+
+            var expectedPathDirectory = Path.GetDirectoryName(dllRecord.LocalRecord.ExpectedPath);
+            if (string.IsNullOrWhiteSpace(expectedPathDirectory) == false)
+            {
+                var directoryInfo = new DirectoryInfo(expectedPathDirectory);
+                exportName = $"export_{directoryInfo.Name}.zip";
+            }
+
             var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
             var savePicker = new Windows.Storage.Pickers.FileSavePicker();
             savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
             savePicker.FileTypeChoices.Add("Zip archive", new List<string>() { ".zip" });
-            savePicker.SuggestedFileName = $"dlss_swapper_export_{record.DisplayName.Replace(" ", "_")}.zip";
+            savePicker.SuggestedFileName = exportName;
             WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
             var saveFile = await savePicker.PickSaveFileAsync();
 
             if (saveFile is not null)
             {
-                // This will likley not be seen, but keeping it here incase export is very slow (eg. copy over very slow network).
+                // This will likley not be seen, but keeping it here in case export is very slow (eg. copy over very slow network).
                 _ = exportingDialog.ShowAsync();
 
                 // Give UI time to update and show import screen.
                 await Task.Delay(50);
 
-                File.Copy(record.LocalRecord.ExpectedPath, saveFile.Path, true);
+                var toExport = new List<(string SourceFileName, string EntryName)>();
+                toExport.Add((dllRecord.LocalRecord.ExpectedPath, Path.GetFileName(dllRecord.LocalRecord.ExpectedPath)));
+
+                Exception? exportError = null;
+                await Task.Run(() =>
+                {
+                    exportError = ExportDllWorker(saveFile.Path, toExport, null);
+                });
+
+                if (exportError is not null)
+                {
+                    throw new Exception("Worker thread failed to export.", exportError);
+                }
 
                 exportingDialog.Hide();
 
@@ -798,7 +908,7 @@ public partial class LibraryPageModel : ObservableObject
                     Title = ResourceHelper.GetString("Success"),
                     CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = ResourceHelper.GetFormattedResourceTemplate("ExportedDllTemplate", record.DisplayName),
+                    Content = ResourceHelper.GetFormattedResourceTemplate("ExportedDllTemplate", dllRecord.DisplayName),
                 };
                 await dialog.ShowAsync();
             }
@@ -849,5 +959,97 @@ public partial class LibraryPageModel : ObservableObject
         SelectedLibraryList = null;
         SelectedLibraryList = newList;
         OnPropertyChanged(nameof(SelectedLibraryList));
+    }
+
+    [RelayCommand]
+    async Task DownloadLatestAsync()
+    {
+        var startedDownloads = 0;
+        if (DownloadLatestRecord(DLLManager.Instance.DLSSRecords))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.DLSSDRecords))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.DLSSGRecords))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.FSR31DX12Records))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.FSR31VKRecords))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.XeSSRecords))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.XeSSFGRecords))
+        {
+            ++startedDownloads;
+        }
+        if (DownloadLatestRecord(DLLManager.Instance.XeLLRecords))
+        {
+            ++startedDownloads;
+        }
+
+        if (startedDownloads == 0)
+        {
+            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = "No new DLLs",
+                CloseButtonText = "Okay",
+                DefaultButton = ContentDialogButton.Close,
+                Content = "There were no new DLLs to download.",
+            };
+            await dialog.ShowAsync();
+        }
+        else
+        {
+            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = "Downloads started",
+                CloseButtonText = "Okay",
+                DefaultButton = ContentDialogButton.Close,
+                Content = $"Started {startedDownloads} new downloads.",
+            };
+            await dialog.ShowAsync();
+        }
+    }
+
+    bool DownloadLatestRecord(IReadOnlyList<DLLRecord> records)
+    {
+        var record = GetLatestRecord(records);
+        if (record?.LocalRecord?.IsDownloaded == false)
+        {
+            _ = record.DownloadAsync();
+            return true;
+        }
+
+        return false;
+    }
+
+    DLLRecord? GetLatestRecord(IReadOnlyList<DLLRecord> records)
+    {
+        if (records.Count == 0)
+        {
+            return null;
+        }
+
+        var latestRecord = records[0];
+        foreach (var record in records)
+        {
+            if (record.VersionNumber > latestRecord.VersionNumber)
+            {
+                latestRecord = record;
+            }
+        }
+
+        return latestRecord;
     }
 }

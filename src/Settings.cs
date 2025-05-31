@@ -1,7 +1,14 @@
+using CommunityToolkit.Mvvm.Messaging;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.Pages;
 using Microsoft.UI.Xaml;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Windows.Graphics;
 
 namespace DLSS_Swapper
 {
@@ -10,6 +17,8 @@ namespace DLSS_Swapper
         static Settings? _instance = null;
 
         public static Settings Instance => _instance ??= Settings.FromJson();
+        //public event EnabledGameLibrariesChangedHandler EnabledGameLibrariesChanged;
+        //public delegate Task EnabledGameLibrariesChangedHandler(object sender, EventArgs e);
 
         // We default this to false to prevent saves firing when loading from json.
         bool _autoSave = false;
@@ -178,6 +187,7 @@ namespace DLSS_Swapper
         }
 
         uint _enabledGameLibraries = uint.MaxValue;
+        [Obsolete("This property is deprecated. Use GameLibrarySettings array instead.")]
         public uint EnabledGameLibraries
         {
             get { return _enabledGameLibraries; }
@@ -186,10 +196,6 @@ namespace DLSS_Swapper
                 if (_enabledGameLibraries != value)
                 {
                     _enabledGameLibraries = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
                 }
             }
         }
@@ -333,36 +339,43 @@ namespace DLSS_Swapper
             }
         }
 
-        /*
-        public List<string> Directories { get; set; } = new List<string>();
-
-        public void AddDirectory(string directory)
+        string[] _ignoredPaths = new string[0];
+        public string[] IgnoredPaths
         {
-            if (Directories.Contains(directory))
+            get { return _ignoredPaths; }
+            set
             {
-                return;
-            }
-            
-            Directories.Add(directory);
-            
-            if (_autoSave)
-            {
-                SaveJson();
+                if (_ignoredPaths != value)
+                {
+                    _ignoredPaths = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                        WeakReferenceMessenger.Default.Send(new Messages.GameLibrariesStateChangedMessage());
+                    }
+                }
             }
         }
-        
-        public void RemoveDirectory(string directory)
+
+        GameLibrarySettings[] _gameLibrarySettings = Array.Empty<GameLibrarySettings>();
+        public GameLibrarySettings[] GameLibrarySettings
         {
-            Directories.Remove(directory);
-            
-            if (_autoSave)
+            get { return _gameLibrarySettings; }
+            set
             {
-                SaveJson();
+                if (_gameLibrarySettings != value)
+                {
+                    _gameLibrarySettings = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                        WeakReferenceMessenger.Default.Send(new Messages.GameLibrariesOrderChangedMessage());
+                    }
+                }
             }
         }
-        */
 
-        void SaveJson()
+        internal void SaveJson()
         {
             AsyncHelper.RunSync(() => Storage.SaveSettingsJsonAsync(this));
         }
@@ -383,9 +396,73 @@ namespace DLSS_Swapper
                 settings = settingsFromJson;
             }
 
+            var shouldSave = settings.CheckGameLibraries();
+            if (shouldSave)
+            {
+                settings.SaveJson();
+            }
+
             // Re-enable auto save.
             settings._autoSave = true;
             return settings;
+        }
+
+        /// <summary>
+        /// Checks game libraries to see if there are any new ones to be added, or misconfigured settings.
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckGameLibraries()
+        {
+            var gameLibraries = Enum.GetValues<GameLibrary>().ToList();
+
+            // If no items are in the list we are migrating them all
+            // If there are some items in the list we are only checking and adding new libraries
+            if (_gameLibrarySettings.Length == 0)
+            {
+#pragma warning disable CS0618 // Type or member is obsolete
+                var enabledGameLibraries = (GameLibrary)EnabledGameLibraries;
+#pragma warning restore CS0618 // Type or member is obsolete
+
+                var tempGameLibraries = new List<GameLibrarySettings>(gameLibraries.Count);
+                foreach (var gameLibrary in gameLibraries)
+                {
+                    // Enaable libraries based on EnabledGameLibraries property.
+                    tempGameLibraries.Add(new GameLibrarySettings()
+                    {
+                        GameLibrary = gameLibrary,
+                        IsEnabled = enabledGameLibraries.HasFlag(gameLibrary),
+                    });
+                }
+                _gameLibrarySettings = tempGameLibraries.ToArray();
+                return true;
+            }
+            else
+            {
+                // Remove each one of the loaded gameLibraries from the list.
+                foreach (var gameLibrarySetting in _gameLibrarySettings)
+                {
+                    gameLibraries.Remove(gameLibrarySetting.GameLibrary);
+                }
+
+                // If there are any items it could be a new launch, new library, or misconfigured settings.
+                if (gameLibraries.Count > 0)
+                {
+                    var tempGameLibraries = new List<GameLibrarySettings>(_gameLibrarySettings);
+                    foreach (var gameLibrary in gameLibraries)
+                    {
+                        // Because this is not a full migration new libraries are enabled by default.
+                        tempGameLibraries.Add(new GameLibrarySettings()
+                        {
+                            GameLibrary = gameLibrary,
+                            IsEnabled = true,
+                        });
+                    }
+                    _gameLibrarySettings = tempGameLibraries.ToArray();
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

@@ -8,6 +8,14 @@ using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.Translations.Pages;
+using System.Transactions;
+using AsyncAwaitBestPractices;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.Steam;
+using DLSS_Swapper.Messages;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -70,6 +78,18 @@ public partial class GameGridPageModel : ObservableObject
         GameGridViewType.ListView => new FontIcon() { Glyph = "\xE8FD" },
         _ => new FontIcon() { },
     };
+
+    public GameGridPageModel(GameGridPage gameGridPage)
+    {
+        WeakReferenceMessenger.Default.Register<GameLibrariesStateChangedMessage>(this, async (sender, message) =>
+        {
+            GameManager.Instance.RemoveAllGames();
+            await InitialLoadAsync();
+        });
+
+        this.gameGridPage = gameGridPage;
+        ApplyGameGroupFilter();
+    }
 
     public async Task InitialLoadAsync()
     {

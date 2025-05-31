@@ -5,6 +5,9 @@
  <p align="center">DLSS Swapper is a tool that allows you to conveniently download, manage, and swap <strong>DLSS</strong>, <strong>FSR</strong> and <strong>XeSS</strong> dlls allowing you to upgrade or downgrade DLSS, FSR and XeSS version in a game without the game needing an update.</p>
 </p>
 
+> [!WARNING]
+> Please be aware of malicious sites claiming to be DLSS Swapper. This is the only place you will find official downloads. See our [official links](#official-links) for accounts/sites affiliated with DLSS Swapper.
+
 <p align="center">
     <a href="https://github.com/beeradmoore/dlss-swapper/releases"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>
     <a href="https://github.com/beeradmoore/dlss-swapper/graphs/contributors"><img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/beeradmoore/dlss-swapper" /></a>
@@ -43,6 +46,7 @@
 - [Epic Games](https://store.epicgames.com/)
 - [Ubisoft Connect](https://www.ubisoft.com/)
 - [Xbox App](https://www.xbox.com/)
+- [Battle.net](https://shop.battle.net/)
 - Manually added via the `Add Game` button.
 
 ## Why would you want to change the DLSS dlls in your game?
@@ -71,6 +75,12 @@ Please, come and share your DLSS experience over in [r/DLSS_Swapper](https://www
 
 You can get the latest builds from our [GitHub releases](https://github.com/beeradmoore/dlss-swapper/releases) page.
 
+You can also install with winget. 
+
+> winget install --id=beeradmoore.dlss-swapper -e 
+
+These are the only official places to get DLSS Swapper.
+
 ## It would be cool if DLSS Swapper could...
 
 Create a [feature request](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml).
@@ -85,3 +95,11 @@ More info on this soon.
 | ----------- | ------------------------------------- |
 | OS          | Windows 10 64-bit (20H1, build 19041) |
 | GPU         | Any                                   |
+
+## Official links
+
+- GitHub: https://github.com/beeradmoore/dlss-swapper/
+- Twitter: https://twitter.com/dlss_swapper
+- Reddit: https://www.reddit.com/r/DLSS_Swapper/
+
+If you have found an other accounts or sites claiming to be DLSS Swapper, please ignore them (or better yet, [file an issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) and let us know) 

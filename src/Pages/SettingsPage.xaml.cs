@@ -7,7 +7,7 @@ namespace DLSS_Swapper.Pages;
 /// </summary>
 public sealed partial class SettingsPage : Page
 {
-    internal SettingsPageModel ViewModel { get; init; }
+    public SettingsPageModel ViewModel { get; private set; }
 
     public SettingsPage()
     {

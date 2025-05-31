@@ -105,6 +105,12 @@ namespace DLSS_Swapper
         /// <returns>True if the directory could be created</returns>
         public static bool CreateDirectoryForFileIfNotExists(string path)
         {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                Logger.Error("A path should not be empty in CreateDirectoryForFileIfNotExists");
+                return false;
+            }
+
             if (Directory.Exists(path))
             {
                 Logger.Error("A directory should not be passed to CreateDirectoryForFileIfNotExists");

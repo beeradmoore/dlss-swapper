@@ -23,6 +23,8 @@ namespace DLSS_Swapper
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        public MainWindowModel ViewModel { get; private set; }
+
         bool _isCustomizationSupported;
         ThemeWatcher _themeWatcher;
         IntPtr _windowIcon;
@@ -38,7 +40,7 @@ namespace DLSS_Swapper
         public MainWindow()
         {
             this.InitializeComponent();
-            ViewModel = new MainWindowViewModel();
+            ViewModel = new MainWindowModel();
 
             if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
             {
@@ -106,7 +108,7 @@ namespace DLSS_Swapper
 
         /// <summary>
         /// Default the Window Icon to the icon stored in the .exe, if any.
-        /// 
+        ///
         /// The Icon can be overriden by callers by calling SetIcon themselves.
         /// </summary>
         /// via this MAUI PR https://github.com/dotnet/maui/pull/6900
@@ -158,6 +160,8 @@ namespace DLSS_Swapper
 
         void GoToPage(string page)
         {
+            ViewModel.AcknowledgementsVisibility = Visibility.Collapsed;
+
             if (page == "Games")
             {
                 if (ContentFrame.Content is null || ContentFrame.Content as Page != gameGridPage)
@@ -179,14 +183,22 @@ namespace DLSS_Swapper
                     ContentFrame.Content = settingsPage ??= new SettingsPage();
                 }
             }
+            else if (page == "Acknowledgements")
+            {
+                if (ContentFrame.Content is null || ContentFrame.Content is not AcknowledgementsPage)
+                {
+                    ViewModel.AcknowledgementsVisibility = Visibility.Visible;
+                    ContentFrame.Content = new AcknowledgementsPage();
+                }
+            }
             else
             {
                 Logger.Error($"Attempting to navigate to a page that was not found, {page}");
                 return;
             }
 
-            // Only try manually set selected item if is not already selected. 
-            if (MainNavigationView.SelectedItem is null || (MainNavigationView.SelectedItem is string selectedItem && selectedItem != page))
+            // Only try manually set selected item if is not already selected.
+            if (MainNavigationView.SelectedItem is null || (MainNavigationView.SelectedItem is NavigationViewItem selectedItem && selectedItem.Tag.ToString() != page))
             {
                 foreach (NavigationViewItem navigationViewItem in MainNavigationView.MenuItems)
                 {
@@ -199,6 +211,11 @@ namespace DLSS_Swapper
             }
         }
 
+        internal void GoToAcknowledgements()
+        {
+            GoToPage("Acknowledgements");
+        }
+
         async void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
         {
             // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
@@ -208,7 +225,7 @@ namespace DLSS_Swapper
             if (CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated)
             {
                 var currentAppVersion = App.CurrentApp.GetVersion();
-                releaseNotesTask = gitHubUpdater.GetReleaseFromTag($"v{currentAppVersion.Major}.{currentAppVersion.Minor}.{currentAppVersion.Build}.{currentAppVersion.Revision}"); 
+                releaseNotesTask = gitHubUpdater.GetReleaseFromTag($"v{currentAppVersion.Major}.{currentAppVersion.Minor}.{currentAppVersion.Build}.{currentAppVersion.Revision}");
             }
             */
 
@@ -338,7 +355,7 @@ namespace DLSS_Swapper
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         // Previously: FilterDLSSRecords
         internal void FilterDLLRecords()

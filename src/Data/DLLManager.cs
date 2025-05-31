@@ -7,11 +7,9 @@ using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using DLSS_Swapper.Data.EpicGamesStore;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 
@@ -201,13 +199,34 @@ internal class DLLManager
     {
         try
         {
+            var oldManifestHash = string.Empty;
+
+            var manifestPath = Storage.GetManifestPath();
+            if (File.Exists(manifestPath))
+            {
+                using (var fileStream = File.OpenRead(manifestPath))
+                {
+                    oldManifestHash = fileStream.GetMD5Hash();
+                }
+            }
+
             using (var memoryStream = new MemoryStream())
             {
-                // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider 
-                // adding a "fast UpdateManifest" which will quit early if we were unable to load in 10sec 
+                // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider
+                // adding a "fast UpdateManifest" which will quit early if we were unable to load in 10sec
                 // which would then fall back to loading local.
                 var fileDownloader = new FileDownloader("https://raw.githubusercontent.com/beeradmoore/dlss-swapper-manifest-builder/refs/heads/main/manifest.json", 0);
                 await fileDownloader.DownloadFileToStreamAsync(memoryStream);
+
+                memoryStream.Position = 0;
+
+                var newManifestHash = memoryStream.GetMD5Hash();
+
+                // If the old manifest on disk is the same as the new one there is no need to do anything as it will already be loaded.
+                if (oldManifestHash == newManifestHash)
+                {
+                    return true;
+                }
 
                 memoryStream.Position = 0;
 
@@ -216,6 +235,8 @@ internal class DLLManager
                 {
                     throw new Exception(ResourceHelper.GetString("CouldNotDeserializeManifestException"));
                 }
+
+                Manifest = manifest;
 
                 await SaveManifestJsonAsync().ConfigureAwait(false);
                 await ProcessManifestsAsync().ConfigureAwait(false);
@@ -269,7 +290,7 @@ internal class DLLManager
         SetGameAssetType(Manifest.DLSS_G, GameAssetType.DLSS_G);
         SetGameAssetType(Manifest.FSR_31_DX12, GameAssetType.FSR_31_DX12);
         SetGameAssetType(Manifest.FSR_31_VK, GameAssetType.FSR_31_VK);
-        SetGameAssetType(Manifest.XeSS, GameAssetType.DLSS_D);
+        SetGameAssetType(Manifest.XeSS, GameAssetType.XeSS);
         SetGameAssetType(Manifest.XeSS_FG, GameAssetType.XeSS_FG);
         SetGameAssetType(Manifest.XeLL, GameAssetType.XeLL);
         if (ImportedManifest is not null)
@@ -279,9 +300,34 @@ internal class DLLManager
             SetGameAssetType(ImportedManifest.DLSS_G, GameAssetType.DLSS_G);
             SetGameAssetType(ImportedManifest.FSR_31_DX12, GameAssetType.FSR_31_DX12);
             SetGameAssetType(ImportedManifest.FSR_31_VK, GameAssetType.FSR_31_VK);
-            SetGameAssetType(ImportedManifest.XeSS, GameAssetType.DLSS_D);
+            SetGameAssetType(ImportedManifest.XeSS, GameAssetType.XeSS);
             SetGameAssetType(ImportedManifest.XeSS_FG, GameAssetType.XeSS_FG);
             SetGameAssetType(ImportedManifest.XeLL, GameAssetType.XeLL);
+        }
+
+        // Migrate records from zip to raw dlls
+        var zipDirectories = Directory.GetDirectories(Storage.GetStorageFolder(), "*_zip", SearchOption.TopDirectoryOnly);
+        if (zipDirectories.Length > 0)
+        {
+            var oldLoadingMessage = App.CurrentApp.MainWindow.ViewModel.LoadingMessage;
+            App.CurrentApp.RunOnUIThread(() =>
+            {
+                App.CurrentApp.MainWindow.ViewModel.LoadingMessage = "Migrating DLLs";
+            });
+
+            CheckDllRecordsForMigration_117(Manifest.DLSS, ImportedManifest?.DLSS);
+            CheckDllRecordsForMigration_117(Manifest.DLSS_D, ImportedManifest?.DLSS_D);
+            CheckDllRecordsForMigration_117(Manifest.DLSS_G, ImportedManifest?.DLSS_G);
+            CheckDllRecordsForMigration_117(Manifest.FSR_31_DX12, ImportedManifest?.FSR_31_DX12);
+            CheckDllRecordsForMigration_117(Manifest.FSR_31_VK, ImportedManifest?.FSR_31_VK);
+            CheckDllRecordsForMigration_117(Manifest.XeSS, ImportedManifest?.XeSS);
+            CheckDllRecordsForMigration_117(Manifest.XeSS_FG, ImportedManifest?.XeSS_FG);
+            CheckDllRecordsForMigration_117(Manifest.XeLL, ImportedManifest?.XeLL);
+
+            App.CurrentApp.RunOnUIThread(() =>
+            {
+                App.CurrentApp.MainWindow.ViewModel.LoadingMessage = oldLoadingMessage;
+            });
         }
 
         // Load local records
@@ -304,7 +350,7 @@ internal class DLLManager
             LoadLocalRecords(ImportedManifest.XeSS_FG, true);
             LoadLocalRecords(ImportedManifest.XeLL, true);
         }
-               
+
         // See if there is any imported manifest items that are to be migrated to downloaded
         // CheckImportedManifestForCleanUp needs to be called after LoadLocalRecords
         var didChangeImportedManifest = false;
@@ -357,7 +403,123 @@ internal class DLLManager
         }
     }
 
+    /// <summary>
+    /// Looks through each DllRecord and see if they need to be migrated to new folder structure in v1.1.7
+    ///
+    /// This needs to be called before LoadLocalRecords
+    /// </summary>
+    /// <param name="dllRecords"></param>
+    /// <param name="importedDllRecords"></param>
+    /// <returns></returns>
+    static void CheckDllRecordsForMigration_117(List<DLLRecord> dllRecords, List<DLLRecord>? importedDllRecords)
+    {
+        foreach (var dllRecord in dllRecords)
+        {
+            CheckDllRecordForMigration_117(dllRecord, false);
+        }
 
+        if (importedDllRecords is not null)
+        {
+            foreach (var dllRecord in dllRecords)
+            {
+                CheckDllRecordForMigration_117(dllRecord, true);
+            }
+        }
+    }
+
+    /// <summary>
+    /// As of v1.1.7 we migrated DLLs from being in a zip folder to being a DLL in a folder.
+    /// This method will move where the zip was to where the dll will be.
+    /// </summary>
+    /// <param name="dllRecord"></param>
+    /// <param name="isImported"></param>
+    static void CheckDllRecordForMigration_117(DLLRecord dllRecord, bool isImported)
+    {
+        // From GetExpectedZipPath
+        var recordType = dllRecord.GetRecordSimpleType();
+        if (recordType == string.Empty)
+        {
+            return;
+        }
+
+        var zipPath = Path.Combine(Storage.GetStorageFolder(), (isImported ? $"imported_{recordType}_zip" : $"{recordType}_zip"));
+        if (string.IsNullOrWhiteSpace(zipPath))
+        {
+            return;
+        }
+
+        // If the zip path does not exist then we don't need to continue any further.
+        if (Directory.Exists(zipPath) == false)
+        {
+            return;
+        }
+
+        var legacyExpectedPath = Path.Combine(zipPath, $"{dllRecord.Version}_{dllRecord.MD5Hash}.zip");
+        if (File.Exists(legacyExpectedPath) == false)
+        {
+            return;
+        }
+
+        var dllPath = GetExpectedDllFileName(dllRecord, isImported);
+        if (string.IsNullOrWhiteSpace(dllPath))
+        {
+            return;
+        }
+
+
+        var dllName = Path.GetFileName(dllPath);
+        if (string.IsNullOrWhiteSpace(dllName))
+        {
+            return;
+        }
+
+        Storage.CreateDirectoryForFileIfNotExists(dllPath);
+
+        var didExtract = false;
+
+        try
+        {
+            using (var fileStream = File.OpenRead(legacyExpectedPath))
+            {
+                using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Read, true))
+                {
+                    var dllEntry = zipArchive.Entries.Single(x => x.Name.Equals(dllName, StringComparison.OrdinalIgnoreCase));
+                    dllEntry.ExtractToFile(dllPath, true);
+                    didExtract = true;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Logger.Error(err, $"Could not extract {legacyExpectedPath} to {dllPath}.");
+        }
+
+        if (didExtract == true)
+        {
+            try
+            {
+                // Delete the zip we moved
+                File.Delete(legacyExpectedPath);
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err, $"Could not delete {legacyExpectedPath}");
+            }
+
+            // If the old zip father is empty we can delete it.
+            if (Directory.GetFiles(zipPath).Length == 0 && Directory.GetDirectories(zipPath).Length == 0)
+            {
+                try
+                {
+                    Directory.Delete(zipPath);
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err, $"Could not delete {zipPath}");
+                }
+            }
+        }
+    }
 
     /// <summary>
     /// Looks through each of the imported DLL records to see if they:
@@ -502,14 +664,7 @@ internal class DLLManager
             dllRecord.LocalRecord = null;
         });
 
-        // TODO: Move all of this to DLL folders instead of zip paths
-        var zipPath = GetExpectedZipPath(dllRecord, isImported);
-        if (string.IsNullOrWhiteSpace(zipPath))
-        {
-            return;
-        }
-
-        var expectedPath = Path.Combine(zipPath, dllRecord.GetExpectedZipName());
+        var expectedPath = GetExpectedDllFileName(dllRecord, isImported);
         if (string.IsNullOrWhiteSpace(expectedPath))
         {
             return;
@@ -538,7 +693,7 @@ internal class DLLManager
         importedManifestRecords?.Sort();
 
         var tempRecords = new List<DLLRecord>(records);
-      
+
             foreach (var dllRecord in manifestRecords)
             {
                 // LoadLocalRecord(dllRecord, false);
@@ -560,7 +715,7 @@ internal class DLLManager
                 }
             }
 
-            // Now that we have loaded DLL records we want to add the importedRecords back into that list. 
+            // Now that we have loaded DLL records we want to add the importedRecords back into that list.
             if (importedManifestRecords?.Any() == true)
             {
                 foreach (var importedRecord in importedManifestRecords)
@@ -616,18 +771,40 @@ internal class DLLManager
         }
     }
 
-    internal string GetExpectedZipPath(DLLRecord dllRecord, bool isImported = false)
+    static string GetExpectedDllFileName(DLLRecord dllRecord, bool isImported)
     {
-        var recordType = dllRecord.GetRecordSimpleType();
-
-        if (recordType == string.Empty)
+        var dllPath = GetExpectedDllPath(dllRecord, isImported);
+        if (string.IsNullOrWhiteSpace(dllPath))
         {
             return string.Empty;
         }
 
-        var zipPath = Path.Combine(Storage.GetStorageFolder(), (isImported ? $"imported_{recordType}_zip" : $"{recordType}_zip"));
+        var dllName = DllNameForGameAssetType(dllRecord.AssetType);
+        if (string.IsNullOrWhiteSpace(dllName))
+        {
+            return string.Empty;
+        }
 
-        return zipPath;
+        return Path.Combine(dllPath, dllName);
+
+    }
+    static string GetExpectedDllPath(DLLRecord dllRecord, bool isImported)
+    {
+        var recordType = dllRecord.GetRecordSimpleType();
+
+        var dllsPath = Path.Combine(Storage.GetStorageFolder(), "dlls", (isImported ? $"imported" : string.Empty), recordType);
+        if (string.IsNullOrWhiteSpace(dllsPath))
+        {
+            return string.Empty;
+        }
+
+        var individualDllPath = Path.Combine(dllsPath, $"{recordType}_v{dllRecord.Version}_{dllRecord.MD5Hash}");
+        if (string.IsNullOrWhiteSpace(individualDllPath))
+        {
+            return string.Empty;
+        }
+
+        return individualDllPath;
     }
 
     public string GetAssetTypeName(GameAssetType assetType)
@@ -1046,44 +1223,16 @@ internal class DLLManager
 
             // TODO: Get extra data from DLL if possible
 
-
-            var zipFilename = dllRecord.GetExpectedZipName();
-            var finalZipOutputPath = GetExpectedZipPath(dllRecord, !importingAsDownloadedDll);
-            if (string.IsNullOrWhiteSpace(finalZipOutputPath))
+            var expectedPath = GetExpectedDllFileName(dllRecord, !importingAsDownloadedDll);
+            if (string.IsNullOrWhiteSpace(expectedPath))
             {
-                return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("CouldNotDetermineImportPath"));
+                return DLLImportResult.FromFail(zippedDllFullName ?? filePath, "Could not import DLL.");
             }
-            Storage.CreateDirectoryIfNotExists(finalZipOutputPath);
-
-            var finalZipPath = Path.Combine(finalZipOutputPath, zipFilename);
-   
-            var tempExtractPath = Path.Combine(Storage.GetTemp(), "import");
-            Storage.CreateDirectoryIfNotExists(tempExtractPath);
-
-            var tempZipFile = Path.Combine(tempExtractPath, zipFilename);
-
-            using (var zipFile = File.Open(tempZipFile, FileMode.Create))
-            {
-                using (var zipArchive = new ZipArchive(zipFile, ZipArchiveMode.Create, true))
-                {
-                    zipArchive.CreateEntryFromFile(filePath, Path.GetFileName(fileName));
-                }
-
-                zipFile.Position = 0;
-
-                dllRecord.ZipFileSize = zipFile.Length;
-                // Once again, MD5 should never be used to check if a file has been tampered with.
-                // We are simply using it to check the integrity of the downloaded/extracted file.
-                using (var md5 = MD5.Create())
-                {
-                    var hash = md5.ComputeHash(zipFile);
-                    dllRecord.ZipMD5Hash = BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
-                }
-            }
+            Storage.CreateDirectoryForFileIfNotExists(expectedPath);
 
             // Move new record to where it should live
-            File.Move(tempZipFile, finalZipPath, true);
-            var newLocalRecord = LocalRecord.FromExpectedPath(finalZipPath, !importingAsDownloadedDll);
+            File.Copy(filePath, expectedPath, true);
+            var newLocalRecord = LocalRecord.FromExpectedPath(expectedPath, !importingAsDownloadedDll);
 
             App.CurrentApp.RunOnUIThread(() =>
             {
@@ -1183,5 +1332,47 @@ internal class DLLManager
 
         recordList.Remove(dllRecord);
         importedRecordList?.Remove(dllRecord);
+    }
+
+    internal static string DllNameForGameAssetType(GameAssetType gameAssetType)
+    {
+        return gameAssetType switch
+        {
+            GameAssetType.DLSS => "nvngx_dlss.dll",
+            GameAssetType.DLSS_G => "nvngx_dlssg.dll",
+            GameAssetType.DLSS_D => "nvngx_dlssd.dll",
+            GameAssetType.FSR_31_DX12 => "amd_fidelityfx_dx12.dll",
+            GameAssetType.FSR_31_VK => "amd_fidelityfx_vk.dll",
+            GameAssetType.XeSS => "libxess.dll",
+            GameAssetType.XeSS_FG => "libxess_fg.dll",
+            GameAssetType.XeLL => "libxell.dll",
+            _ => string.Empty,
+        };
+    }
+
+    /// <summary>
+    /// This handles extracting of the DLL from both downloaded and imported zips (when imported matches the hash of one that could be downloaded)
+    /// </summary>
+    /// <param name="zipArchive"></param>
+    /// <param name="dllRecord"></param>
+    /// <exception cref="Exception"></exception>
+    internal static void HandleExtractFromZip(ZipArchive zipArchive, DLLRecord dllRecord)
+    {
+        if (dllRecord.LocalRecord is null)
+        {
+            throw new Exception("LocalRecord was null when attempting to extract dll from zip.");
+        }
+
+        var dllName = DLLManager.DllNameForGameAssetType(dllRecord.AssetType);
+        var entry = zipArchive.Entries.Single(x => x.Name.Equals(dllName, StringComparison.OrdinalIgnoreCase));
+        if (entry is null)
+        {
+            throw new Exception("Could not find dll in zip.");
+        }
+        else
+        {
+            Storage.CreateDirectoryForFileIfNotExists(dllRecord.LocalRecord.ExpectedPath);
+            entry.ExtractToFile(dllRecord.LocalRecord.ExpectedPath, true);
+        }
     }
 }

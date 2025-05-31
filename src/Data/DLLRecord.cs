@@ -2,6 +2,9 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -33,7 +36,7 @@ namespace DLSS_Swapper.Data
         /// This hash is not guaranteed to be the same as the hash on the zip on the disk.
         /// It is used during download to validate a successful download. However if you
         /// import a DLL that exists in the manifest we will then create the zip for that
-        /// file. Doing so will cause the new generateed zip hash and this entry in the 
+        /// file. Doing so will cause the new generateed zip hash and this entry in the
         /// manifest to differ.
         /// </summary>
         [JsonPropertyName("zip_md5_hash")]
@@ -214,8 +217,7 @@ namespace DLSS_Swapper.Data
             var cancellationToken = _cancellationTokenSource.Token;
 
             var fileDownloader = new FileDownloader(DownloadUrl);
-            var tempPath = Storage.GetTemp();
-            var tempZipFile = Path.Combine(tempPath, $"{fileDownloader.Guid.ToString("D").ToUpper()}.zip");
+            var tempZipFile = Path.Combine(Storage.GetTemp(), $"{fileDownloader.Guid.ToString("D").ToUpper()}.zip");
 
             try
             {
@@ -236,11 +238,14 @@ namespace DLSS_Swapper.Data
                     {
                         throw new Exception(ResourceHelper.GetString("DownloadFileWasInvalid"));
                     }
-                }
 
-                var directory = Path.GetDirectoryName(LocalRecord.ExpectedPath) ?? string.Empty;
-                Storage.CreateDirectoryIfNotExists(directory);
-                File.Move(tempZipFile, LocalRecord.ExpectedPath, true);
+                    fileStream.Position = 0;
+
+                    using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Read, true))
+                    {
+                        DLLManager.HandleExtractFromZip(zipArchive, this);
+                    }
+                }
 
                 App.CurrentApp.RunOnUIThread(() =>
                 {
@@ -295,40 +300,6 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        internal string GetExpectedZipName()
-        {
-            return $"{GetRecordSimpleType()}_v{Version}_{MD5Hash}.zip";
-        }
-        
-        /*
-        internal static DLSSRecord FromImportedFile(string fileName)
-        {
-            if (File.Exists(fileName) == false)
-            {
-                return null;
-            }
-
-            var versionInfo = FileVersionInfo.GetVersionInfo(fileName);
-
-            var dlssRecord = new DLSSRecord()
-            {
-                Version = versionInfo.GetFormattedFileVersion(),
-                VersionNumber = versionInfo.GetFileVersionNumber(),
-                MD5Hash = versionInfo.GetMD5Hash(),
-                FileSize = 3,
-                ZipFileSize = 0,
-                ZipMD5Hash = string.Empty,
-                IsSignatureValid = WinTrust.VerifyEmbeddedSignature(fileName),
-            };
-
-            // TODO: Maybe don't load from here.
-
-            App.CurrentApp.LoadLocalRecordFromDLSSRecord(dlssRecord, true);
-
-            return dlssRecord;
-        }
-        */
-
         internal string GetRecordSimpleType()
         {
             return AssetType switch
@@ -344,7 +315,7 @@ namespace DLSS_Swapper.Data
                 _ => string.Empty,
             };
         }
-        
+
         internal void CopyFrom(DLLRecord newDllRecord)
         {
             Version = newDllRecord.Version;
@@ -368,6 +339,7 @@ namespace DLSS_Swapper.Data
             NotifyPropertyChanged(nameof(DisplayVersion));
             NotifyPropertyChanged(nameof(DisplayName));
         }
+
     }
 
 }

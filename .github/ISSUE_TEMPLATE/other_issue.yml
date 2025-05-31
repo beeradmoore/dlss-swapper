@@ -1,0 +1,16 @@
+name: 🤷‍♂️ Other issue
+description: Create an issue that does not fit in any of the other issue types
+
+body:
+- type: markdown
+  attributes:
+    value: |
+      Please fill out the form below with as much detail as possible.
+      If you intended to create a [bug report](https://github.com/beeradmoore/dlss-swapper/issues/new?template=bug_report.yml) or [feature request](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml), please use those other issue templates instead. 
+
+- type: textarea
+  id: description
+  attributes:
+    label: Describe your issue
+  validations:
+    required: true

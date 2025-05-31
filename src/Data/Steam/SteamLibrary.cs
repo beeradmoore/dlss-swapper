@@ -21,6 +21,9 @@ namespace DLSS_Swapper.Data.Steam
         static SteamLibrary? instance = null;
         public static SteamLibrary Instance => instance ??= new SteamLibrary();
 
+        GameLibrarySettings? _gameLibrarySettings;
+        public GameLibrarySettings? GameLibrarySettings => _gameLibrarySettings ??= GameManager.Instance.GetGameLibrarySettings(GameLibrary);
+
         static string _installPath = string.Empty;
 
         [GeneratedRegex(@"^([ \t]*)""(.*)""([ \t]*)""(?<path>.*)""$", RegexOptions.Multiline)]
@@ -180,6 +183,17 @@ namespace DLSS_Swapper.Data.Steam
                         activeGame.InstallPath = game.InstallPath;
                         activeGame.StateFlags = game.StateFlags;
 
+                        if (activeGame.IsInIgnoredPath())
+                        {
+                            continue;
+                        }
+
+                        if (Directory.Exists(activeGame.InstallPath) == false)
+                        {
+                            Logger.Warning($"{Name} library could not load game {activeGame.Title} ({activeGame.PlatformId}) because install path does not exist: {activeGame.InstallPath}");
+                            continue;
+                        }
+
                         await activeGame.SaveToDatabaseAsync().ConfigureAwait(false);
 
                         // If the game is not from cache, force processing
@@ -260,6 +274,21 @@ namespace DLSS_Swapper.Data.Steam
                 }
                 foreach (var game in games)
                 {
+                    if (game.IsInIgnoredPath())
+                    {
+                        continue;
+                    }
+
+                    if (Directory.Exists(game.InstallPath) == false)
+                    {
+                        Logger.Warning($"{Name} library could not load game {game.Title} ({game.PlatformId}) from cache because install path does not exist: {game.InstallPath}");
+                        // We remove the list of known game assets, but not the game itself.
+                        // Removing the game will remove its history, notes, and other data.
+                        // We don't want to do this in case it is just a temporary issue.
+                        await game.RemoveGameAssetsFromCacheAsync().ConfigureAwait(false);
+                        continue;
+                    }
+
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }

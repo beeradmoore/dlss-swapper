@@ -47,115 +47,6 @@ namespace DLSS_Swapper.Pages
             DataContext = ViewModel;
         }
 
-
-        async Task LoadGamesAsync()
-        {
-            // TODO: REMOVE
-            await Task.Delay(1);
-            /*
-            // Added this check so if we get to here and this is true we probably crashed loading games last time and we should prompt for that.
-            if (Settings.Instance.WasLoadingGames)
-            {
-                var richTextBlock = new RichTextBlock();
-                var paragraph = new Paragraph()
-                {
-                    Margin = new Thickness(0, 0, 0, 0),
-                };
-                paragraph.Inlines.Add(new Run()
-                {
-                    Text = "DLSS Swapper had an issue loading game libraries.  Please try disabling a game library below. You can re-enable these options later in the settings.",
-                });
-                richTextBlock.Blocks.Add(paragraph);
-                paragraph = new Paragraph()
-                {
-                    Margin = new Thickness(0, 0, 0, 0),
-                };
-                paragraph.Inlines.Add(new Run()
-                {
-                    Text = "If this keeps happening please file a bug report ",
-                });
-                var hyperLink = new Hyperlink()
-                {
-                    NavigateUri = new Uri("https://github.com/beeradmoore/dlss-swapper/issues"),
-
-                };
-                hyperLink.Inlines.Add(new Run()
-                {
-                    Text = "here"
-                });
-                paragraph.Inlines.Add(hyperLink);
-                paragraph.Inlines.Add(new Run()
-                {
-                    Text = ".",
-                });
-                richTextBlock.Blocks.Add(paragraph);
-
-
-
-
-                var grid = new Grid()
-                {
-                    RowSpacing = 10,
-                };
-                grid.RowDefinitions.Add(new RowDefinition());
-                grid.RowDefinitions.Add(new RowDefinition());
-
-                Grid.SetRow(richTextBlock, 0);
-                grid.Children.Add(richTextBlock);
-
-
-                var gameLibrarySelectorControl = new GameLibrarySelectorControl();
-
-                Grid.SetRow(gameLibrarySelectorControl, 1);
-                grid.Children.Add(gameLibrarySelectorControl);
-
-
-                var dialog = new EasyContentDialog(XamlRoot)
-                {
-                    Title = "Failed to load game libraries",
-                    PrimaryButtonText = "Save",
-                    SecondaryButtonText = "Cancel",
-                    DefaultButton = ContentDialogButton.Primary,
-                    Content = grid,
-                };
-                var result = await dialog.ShowAsync();
-                if (result == ContentDialogResult.Primary)
-                {
-                    gameLibrarySelectorControl.Save();
-                }
-            }
-
-            Settings.Instance.WasLoadingGames = true;
-
-            GameLibraries.Clear();
-
-            // Auto game library loading.
-            // Simply adding IGameLibrary interface means we will load the games.
-            var loadGameTasks = new List<Task>(); 
-            foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
-            {
-                var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
-                if (gameLibrary.IsEnabled())
-                {
-                    GameLibraries.Add(gameLibrary);
-                    loadGameTasks.Add(gameLibrary.ListGamesAsync());
-                }
-            }
-
-            // Await them all to finish loading games.
-            await Task.WhenAll(loadGameTasks);
-
-            Settings.Instance.WasLoadingGames = false;
-
-            App.CurrentApp.RunOnUIThread(() =>
-            {
-                FilterGames();
-            });
-            */
-        }
-
-
-
         bool hasFirstLoaded = false;
         void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -214,24 +105,6 @@ namespace DLSS_Swapper.Pages
         }
 
 
-
-        void UpdateGameLibraries()
-        {
-            /*
-            GameLibraries.Clear();
-
-            foreach (GameLibrary gameLibraryEnum in Enum.GetValues<GameLibrary>())
-            {
-                var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
-                if (gameLibrary.IsEnabled() == true)
-                {
-                    GameLibraries.Add(gameLibrary);
-                }
-            }
-            */
-        }
-
-
         async Task LoadGamesAndDlls()
         {
             // TODO: REMOVE
@@ -266,14 +139,22 @@ namespace DLSS_Swapper.Pages
             {
                 App.CurrentApp.RunOnUIThreadAsync(async () =>
                 {
-                    await mainGridView.SmoothScrollIntoViewWithItemAsync(game, ScrollItemPlacement.Center);
+                    var indexOfGame = mainGridView.Items.IndexOf(game);
+                    if (indexOfGame >= 0)
+                    {
+                        await mainGridView.SmoothScrollIntoViewWithItemAsync(indexOfGame);
+                    }
                 }).SafeFireAndForget();
             }
             else if (MainContentControl.ContentTemplateRoot is ListView mainListView)
             {
                 App.CurrentApp.RunOnUIThreadAsync(async () =>
                 {
-                    await mainListView.SmoothScrollIntoViewWithItemAsync(game, ScrollItemPlacement.Center);
+                    var indexOfGame = mainListView.Items.IndexOf(game);
+                    if (indexOfGame >= 0)
+                    {
+                        await mainListView.SmoothScrollIntoViewWithItemAsync(indexOfGame);
+                    }
                 }).SafeFireAndForget();
             }
         }

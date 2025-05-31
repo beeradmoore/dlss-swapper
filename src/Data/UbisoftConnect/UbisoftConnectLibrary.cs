@@ -38,6 +38,9 @@ namespace DLSS_Swapper.Data.UbisoftConnect
         static UbisoftConnectLibrary? instance = null;
         public static UbisoftConnectLibrary Instance => instance ??= new UbisoftConnectLibrary();
 
+        GameLibrarySettings? _gameLibrarySettings;
+        public GameLibrarySettings? GameLibrarySettings => _gameLibrarySettings ??= GameManager.Instance.GetGameLibrarySettings(GameLibrary);
+
         private UbisoftConnectLibrary()
         {
 
@@ -217,6 +220,17 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                 activeGame.InstallPath = PathHelpers.NormalizePath(installedTitles[configurationRecord.InstallId].InstallPath);
                                 activeGame.LocalHeaderImage = localImage;
                                 activeGame.RemoteHeaderImage = remoteImage;
+
+                                if (activeGame.IsInIgnoredPath())
+                                {
+                                    continue;
+                                }
+
+                                if (Directory.Exists(activeGame.InstallPath) == false)
+                                {
+                                    Logger.Warning($"{Name} library could not load game {activeGame.Title} ({activeGame.PlatformId}) because install path does not exist: {activeGame.InstallPath}");
+                                    continue;
+                                }
 
                                 await activeGame.SaveToDatabaseAsync();
 
@@ -468,6 +482,21 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 }
                 foreach (var game in games)
                 {
+                    if (game.IsInIgnoredPath())
+                    {
+                        continue;
+                    }
+
+                    if (Directory.Exists(game.InstallPath) == false)
+                    {
+                        Logger.Warning($"{Name} library could not load game {game.Title} ({game.PlatformId}) from cache because install path does not exist: {game.InstallPath}");
+                        // We remove the list of known game assets, but not the game itself.
+                        // Removing the game will remove its history, notes, and other data.
+                        // We don't want to do this in case it is just a temporary issue.
+                        await game.RemoveGameAssetsFromCacheAsync().ConfigureAwait(false);
+                        continue;
+                    }
+
                     await game.LoadGameAssetsFromCacheAsync().ConfigureAwait(false);
                     GameManager.Instance.AddGame(game);
                 }

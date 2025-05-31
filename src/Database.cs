@@ -1,5 +1,6 @@
 using System;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.BattleNet;
 using DLSS_Swapper.Data.EpicGamesStore;
 using DLSS_Swapper.Data.GOG;
 using DLSS_Swapper.Data.Steam;
@@ -77,6 +78,15 @@ internal class Database
             try
             {
                 syncConnection.CreateTable<ManuallyAddedGame>();
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err);
+            }
+
+            try
+            {
+                syncConnection.CreateTable<BattleNetGame>();
             }
             catch (Exception err)
             {

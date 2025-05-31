@@ -11,16 +11,14 @@
     xmlns:local="using:DLSS_Swapper"
     xmlns:ct_winui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d"
-    NavigationCacheMode="Required">
+    NavigationCacheMode="Required"
+    x:Name="RootPage">
     <Page.Resources>
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToNegationVisibilityConverter"  TrueValue="Collapsed" FalseValue="Visible" />
         <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter" />
     </Page.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -31,7 +29,7 @@
         <Grid Grid.Row="0" Padding="16,0,16,0">
             <TextBlock Margin="16,0,0,0" Text="{x:Bind ViewModel.TranslationProperties.SettingsText, Mode=OneWay}" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
 
-            <!-- Needed to achieve parity in the looking with other sites -->
+            <!-- Needed to achieve parity in the looking with other pages -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <AppBarButton Label="" IsEnabled="False"/>
             </StackPanel>
@@ -47,7 +45,7 @@
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
         <ScrollViewer Grid.Row="2">
-            <StackPanel HorizontalAlignment="Left" Padding="56,0,56,56">
+            <StackPanel Padding="56,0,56,56">
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
@@ -64,8 +62,48 @@
                     Margin="0,40,0,0"
                     Text="{x:Bind ViewModel.TranslationProperties.GameLibrariesText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0">
-                    <usercontrols:GameLibrarySelectorControl SavesWhenToggled="true" />
+                    <usercontrols:GameLibrarySelectorControl />
                 </StackPanel>
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Ignored Paths" />
+                <StackPanel Margin="0,10,0,0">
+                    <StackPanel.Resources>
+                        <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="Transparent" />
+                        <x:Double x:Key="CornerRadius">0</x:Double>
+                        <Thickness x:Key="ExpanderHeaderBorderThickness">0</Thickness>
+                        <Thickness x:Key="ExpanderHeaderPadding">0,0,0,0</Thickness>
+                    </StackPanel.Resources>
+
+                    <Button Content="Add Ignored Path" Command="{x:Bind ViewModel.AddIgnoredPathCommand}" />
+
+                    <ListView ItemsSource="{x:Bind ViewModel.IgnoredPaths}" SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Expander
+                                    ExpandDirection="Down"
+                                    HorizontalAlignment="Stretch"
+                                    BorderThickness="0"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    HorizontalContentAlignment="Stretch"
+                                    >
+                                    <Expander.Header>
+                                        <TextBlock Text="{x:Bind}" TextWrapping="Wrap" />
+                                    </Expander.Header>
+                                    <Expander.Content>
+                                        <Grid HorizontalAlignment="Right">
+                                            <Button Command="{Binding ElementName=RootPage, Path=ViewModel.DeleteIgnoredPathCommand}" CommandParameter="{x:Bind }">Remove</Button>
+                                        </Grid>
+                                    </Expander.Content>
+                                </Expander>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+
 
 
                 <TextBlock
@@ -99,7 +137,7 @@
                     <TextBlock Text="{x:Bind ViewModel.TranslationProperties.AllowDebugDllsInfo, Mode=OneWay}" Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0" />
                 </StackPanel>
 
-                
+
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
@@ -141,7 +179,7 @@
                     <Button Content="{x:Bind ViewModel.TranslationProperties.CheckForUpdatesText, Mode=OneWay}" Command="{x:Bind ViewModel.CheckForUpdatesCommand}" />
                     <ProgressRing Width="25" Height="25" IsIndeterminate="True" IsActive="{x:Bind ViewModel.IsCheckingForUpdates, Mode=OneWay}" />
                 </StackPanel>
-                                
+
                 <RichTextBlock Margin="0,24,0,0">
                     <Paragraph Margin="0,12,0,0">
                         GitHub:
@@ -172,7 +210,7 @@
                         <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper/issues">GitHub repository</Hyperlink>
                     </Paragraph>
                 </RichTextBlock>
-                
+
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"

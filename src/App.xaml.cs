@@ -65,8 +65,8 @@ namespace DLSS_Swapper
             Logger.Init();
 
             string language = Settings.Instance.Language;
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(language);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
+
+            LanguageManager.Instance.ChangeLanguage(language);
 
             UnhandledException += App_UnhandledException;
 

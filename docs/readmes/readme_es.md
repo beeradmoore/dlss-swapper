@@ -6,7 +6,7 @@
 </p>
 
 > [!ADVERTENCIA]
-> Por favor, ten en cuenta que existen sitios maliciosos que afirman ser DLSS Swapper. Este es el **único** lugar donde encontrarás descargas oficiales. Consulta nuestros [enlaces oficiales](#enlaces-oficiales) para ver las cuentas y sitios afiliados a DLSS Swapper.
+> Por favor, ten en cuenta que existen sitios maliciosos que afirman ser DLSS Swapper. Este es el **único** lugar donde encontrarás descargas oficiales. Consulta nuestros [enlaces oficiales](#links-oficiales) para ver las cuentas y sitios afiliados a DLSS Swapper.
 
 <p align="center">
     <a href="https://github.com/beeradmoore/dlss-swapper/releases"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>

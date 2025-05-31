@@ -4,10 +4,16 @@ using System.Resources;
 namespace DLSS_Swapper.Helpers;
 public class ResourceHelper
 {
+    static ResourceManager? _resourceManager;
+
     public static string GetString(string resourceName)
     {
-        ResourceManager rm = new ResourceManager("DLSS_Swapper.Languages.Resources", typeof(ResourceHelper).Assembly);
-        return rm.GetString(resourceName, CultureInfo.CurrentUICulture) ?? error;
+        if (_resourceManager is null)
+        {
+            _resourceManager = new ResourceManager("DLSS_Swapper.Languages.Resources", typeof(ResourceHelper).Assembly);
+        };
+
+        return _resourceManager.GetString(resourceName, CultureInfo.CurrentUICulture) ?? error;
     }
 
     public static string GetFormattedResourceTemplate(string templateResourceName, params object[] args)

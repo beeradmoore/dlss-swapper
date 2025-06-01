@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using System.Threading;
 using DLSS_Swapper.Attributes;
 
@@ -14,25 +16,51 @@ public class LanguageManager
     static LanguageManager? _instance;
     public static LanguageManager Instance => _instance ??= new LanguageManager();
 
+
     private LanguageManager()
     {
     }
 
     public void ChangeLanguage(string key)
     {
-        Thread.CurrentThread.CurrentCulture = new CultureInfo(key);
-        Thread.CurrentThread.CurrentUICulture = new CultureInfo(key);
+        try
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(key);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(key);
+        }
+        catch (Exception err)
+        {
+            Logger.Error($"Failed to set Thread.CurrentThread to {key}: {err.Message}");
+        }
+        ResourceHelper.LoadResource(key);
         OnLanguageChanged?.Invoke();
     }
 
-    // TODO: Change this to be dynamic.
     public string[] GetKnownLanguages()
     {
-        return new string[]
+        var languages = new List<string>();
+
+        var translationsBaseDirectory = Path.Combine(AppContext.BaseDirectory, "Translations");
+        var translationDirectories = Directory.GetDirectories(translationsBaseDirectory);
+        foreach (var translationDirectory in translationDirectories)
         {
-            "en-US",
-            "pl-PL",
-        };
+            var translationFile = Path.Combine(translationDirectory, "Resources.resw");
+            if (Path.Exists(translationFile))
+            {
+                languages.Add(Path.GetFileName(translationDirectory));
+            }
+        }
+
+        // If somehow this failed, always fall back to english.
+        if (languages.Count == 0)
+        {
+            return new string[]
+            {
+                "en-US", // Default language
+            };
+        }
+
+        return languages.ToArray();
     }
 
     public string GetLanguageName(string languageKey)

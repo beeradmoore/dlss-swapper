@@ -94,7 +94,7 @@ public partial class SettingsPageModel : LocalizedViewModelBase
         }
 
         //work with selected language state
-        SelectedLanguage = Languages.FirstOrDefault(x => x.Key == CultureInfo.CurrentCulture.Name);
+        SelectedLanguage = Languages.FirstOrDefault(x => x.Key == Settings.Instance.Language);
 
         _dlssSettingsManager = new DLSSSettingsManager();
         LightThemeSelected = Settings.Instance.AppTheme == ElementTheme.Light;

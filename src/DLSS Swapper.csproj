@@ -383,17 +383,7 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Languages\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Languages\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Folder Include="Languages\" />
   </ItemGroup>
 
   <!--
@@ -410,4 +400,12 @@
     <NativeLibrary Include="../extras/RTSSHooksCompatibility/RTSSHooksCompatibility.obj" />
   </ItemGroup>
   -->
+
+  <!-- Copy all "Resources.resw" files in the "Translations" folder to the output folder. -->
+  <ItemGroup>
+    <Content Include="Translations\**\*.resw">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
 </Project>

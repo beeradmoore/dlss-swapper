@@ -2,6 +2,7 @@ using CommunityToolkit.WinUI;
 using DLSS_Swapper.Helpers;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
+using Microsoft.Win32;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;

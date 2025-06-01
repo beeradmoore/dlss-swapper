@@ -694,46 +694,46 @@ internal class DLLManager
 
         var tempRecords = new List<DLLRecord>(records);
 
-            foreach (var dllRecord in manifestRecords)
-            {
-                // LoadLocalRecord(dllRecord, false);
+        foreach (var dllRecord in manifestRecords)
+        {
+            // LoadLocalRecord(dllRecord, false);
 
-                var insertIndex = tempRecords.BinarySearch(dllRecord);
-                if (insertIndex < 0) // InsertObject
+            var insertIndex = tempRecords.BinarySearch(dllRecord);
+            if (insertIndex < 0) // InsertObject
+            {
+                insertIndex = ~insertIndex;
+
+
+                records.Insert(insertIndex, dllRecord);
+
+                tempRecords.Insert(insertIndex, dllRecord);
+            }
+            else // Update object
+            {
+                records[insertIndex].CopyFrom(dllRecord);
+                tempRecords[insertIndex] = dllRecord;
+            }
+        }
+
+        // Now that we have loaded DLL records we want to add the importedRecords back into that list.
+        if (importedManifestRecords?.Any() == true)
+        {
+            foreach (var importedRecord in importedManifestRecords)
+            {
+                var insertIndex = tempRecords.BinarySearch(importedRecord);
+                if (insertIndex < 0)
                 {
                     insertIndex = ~insertIndex;
-
-
-                    records.Insert(insertIndex, dllRecord);
-
-                    tempRecords.Insert(insertIndex, dllRecord);
+                    records.Insert(insertIndex, importedRecord);
+                    tempRecords.Insert(insertIndex, importedRecord);
                 }
-                else // Update object
+                else
                 {
-                    records[insertIndex].CopyFrom(dllRecord);
-                    tempRecords[insertIndex] = dllRecord;
+                    records[insertIndex].CopyFrom(importedRecord);
+                    tempRecords[insertIndex] = importedRecord;
                 }
             }
-
-            // Now that we have loaded DLL records we want to add the importedRecords back into that list.
-            if (importedManifestRecords?.Any() == true)
-            {
-                foreach (var importedRecord in importedManifestRecords)
-                {
-                    var insertIndex = tempRecords.BinarySearch(importedRecord);
-                    if (insertIndex < 0)
-                    {
-                        insertIndex = ~insertIndex;
-                        records.Insert(insertIndex, importedRecord);
-                        tempRecords.Insert(insertIndex, importedRecord);
-                    }
-                    else
-                    {
-                        records[insertIndex].CopyFrom(importedRecord);
-                        tempRecords[insertIndex] = importedRecord;
-                    }
-                }
-            }
+        }
 
     }
 

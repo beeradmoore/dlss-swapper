@@ -11,7 +11,7 @@ public class ResourceHelper
         if (_resourceManager is null)
         {
             _resourceManager = new ResourceManager("DLSS_Swapper.Languages.Resources", typeof(ResourceHelper).Assembly);
-        };
+        }
 
         return _resourceManager.GetString(resourceName, CultureInfo.CurrentUICulture) ?? error;
     }

@@ -25,8 +25,10 @@ namespace DLSS_Swapper
 
         MainWindow? _window;
         public MainWindow MainWindow => _window ??= new MainWindow();
+        public WindowManager WindowManager { get; } = new WindowManager();
 
         public static App CurrentApp => (App)Application.Current;
+
 
         internal HttpClient? _httpClient;
         public HttpClient HttpClient
@@ -108,7 +110,7 @@ namespace DLSS_Swapper
             if (Storage.StoragePath.Trim(Path.DirectorySeparatorChar).Contains(Environment.SystemDirectory, StringComparison.InvariantCultureIgnoreCase))
             {
                 var failToLaunchWindow = new FailToLaunchWindow();
-                failToLaunchWindow.Activate();
+                WindowManager.ShowWindow(failToLaunchWindow);
                 return;
             }
 
@@ -119,7 +121,7 @@ namespace DLSS_Swapper
 
             Database.Instance.Init();
 
-            MainWindow.Activate();
+            WindowManager.ShowWindow(MainWindow);
 
             // No need to calculate this for portable app.
 #if !PORTABLE

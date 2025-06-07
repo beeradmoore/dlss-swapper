@@ -147,7 +147,7 @@ public partial class SettingsPageModel : LocalizedViewModelBase
             if (LightThemeSelected == true)
             {
                 Settings.Instance.AppTheme = ElementTheme.Light;
-                ((App)Application.Current).MainWindow.UpdateColors(ElementTheme.Light);
+                ((App)Application.Current).WindowManager.UpdateColors(ElementTheme.Light);
             }
         }
         else if (e.PropertyName == nameof(DarkThemeSelected))
@@ -155,7 +155,7 @@ public partial class SettingsPageModel : LocalizedViewModelBase
             if (DarkThemeSelected == true)
             {
                 Settings.Instance.AppTheme = ElementTheme.Dark;
-                ((App)Application.Current).MainWindow.UpdateColors(ElementTheme.Dark);
+                ((App)Application.Current).WindowManager.UpdateColors(ElementTheme.Dark);
             }
         }
         else if (e.PropertyName == nameof(DefaultThemeSelected))
@@ -163,7 +163,7 @@ public partial class SettingsPageModel : LocalizedViewModelBase
             if (DefaultThemeSelected == true)
             {
                 Settings.Instance.AppTheme = ElementTheme.Default;
-                ((App)Application.Current).MainWindow.UpdateColors(ElementTheme.Default);
+                ((App)Application.Current).WindowManager.UpdateColors(ElementTheme.Default);
             }
         }
         else if (e.PropertyName == nameof(SelectedDlssOnScreenIndicator))
@@ -289,14 +289,14 @@ public partial class SettingsPageModel : LocalizedViewModelBase
     void OpenNetworkTester()
     {
         var networkTesterWindow = new NetworkTesterWindow();
-        networkTesterWindow.Activate();
+        App.CurrentApp.WindowManager.ShowWindow(networkTesterWindow);
     }
 
     [RelayCommand]
     void OpenDiagnostics()
     {
         var diagnosticsWindow = new DiagnosticsWindow();
-        diagnosticsWindow.Activate();
+        App.CurrentApp.WindowManager.ShowWindow(diagnosticsWindow);
     }
 
     protected override void OnLanguageChanged()
@@ -386,6 +386,6 @@ public partial class SettingsPageModel : LocalizedViewModelBase
     void OpenTranslationTools()
     {
         var translationToolsWindow = new TranslationToolsWindow();
-        translationToolsWindow.Activate();
+        App.CurrentApp.WindowManager.ShowWindow(translationToolsWindow);
     }
 }

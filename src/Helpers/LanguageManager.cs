@@ -21,6 +21,11 @@ public class LanguageManager
     {
     }
 
+    internal void ReloadLanguage()
+    {
+        OnLanguageChanged?.Invoke();
+    }
+
     public void ChangeLanguage(string key)
     {
         try
@@ -33,34 +38,15 @@ public class LanguageManager
             Logger.Error($"Failed to set Thread.CurrentThread to {key}: {err.Message}");
         }
         ResourceHelper.LoadResource(key);
-        OnLanguageChanged?.Invoke();
+        ReloadLanguage();
     }
 
     public string[] GetKnownLanguages()
     {
-        var languages = new List<string>();
-
-        var translationsBaseDirectory = Path.Combine(AppContext.BaseDirectory, "Translations");
-        var translationDirectories = Directory.GetDirectories(translationsBaseDirectory);
-        foreach (var translationDirectory in translationDirectories)
-        {
-            var translationFile = Path.Combine(translationDirectory, "Resources.resw");
-            if (Path.Exists(translationFile))
-            {
-                languages.Add(Path.GetFileName(translationDirectory));
-            }
-        }
-
-        // If somehow this failed, always fall back to english.
-        if (languages.Count == 0)
-        {
-            return new string[]
-            {
-                "en-US", // Default language
-            };
-        }
-
-        return languages.ToArray();
+        return [
+            "en-US",
+            "pl-PL",
+        ];
     }
 
     public string GetLanguageName(string languageKey)

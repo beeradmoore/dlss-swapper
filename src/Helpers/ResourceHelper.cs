@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Xml.Linq;
+using DLSS_Swapper.Language;
 using Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel.Resources.Core;
 
@@ -12,15 +11,28 @@ public class ResourceHelper
 {
     static readonly ResourceLoader _resourceLoader = new ResourceLoader();
     static readonly ResourceContext _resourceContext = ResourceContext.GetForViewIndependentUse();
-    static ResourceMap _resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
+    static readonly ResourceMap _resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
 
     static readonly Dictionary<string, string> _resources = new Dictionary<string, string>();
+
+    static bool _translatorMode = false;
+    internal static bool TranslatorMode
+    {
+        get { return _translatorMode; }
+        set
+        {
+            if (value != _translatorMode)
+            {
+                _translatorMode = value;
+                LanguageManager.Instance.ReloadLanguage();
+            }
+        }
+    }
 
 
     internal static void LoadResource(string key)
     {
         _resources.Clear();
-
         try
         {
             _resourceContext.Languages = new List<string> { key };
@@ -29,49 +41,36 @@ public class ResourceHelper
         {
             Logger.Error($"Could not load resource map for key {key}: {err.Message}");
         }
+    }
 
-        var translationsPath = Path.Combine(AppContext.BaseDirectory, "Translations", key, "Resources.resw");
-        if (File.Exists(translationsPath))
+    internal static void UpdateFromLiveTranslations(List<TranslationRow> translations)
+    {
+        _resources.Clear();
+        foreach (var translation in translations)
         {
-            try
+            if (string.IsNullOrWhiteSpace(translation.NewTranslation))
             {
-                var xDocument = XDocument.Load(translationsPath);
-
-                foreach (var data in xDocument.Descendants("data"))
-                {
-                    var name = data.Attribute("name")?.Value;
-                    var value = data.Element("value")?.Value;
-
-                    // Only add the key/value if they both exist.
-                    if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(value) == false)
-                    {
-                        _resources[name] = value;
-                    }
-                }
+                continue;
             }
-            catch (Exception err)
-            {
-                Logger.Error($"Failed to load resources from {translationsPath}: {err.Message}");
-            }
+            // Add the translation to our dictionary.
+            _resources[translation.Key] = translation.NewTranslation;
         }
+        LanguageManager.Instance.ReloadLanguage();
     }
 
     public static string GetString(string resourceName)
     {
-        // Load from our dictionary first.
-        if (_resources.TryGetValue(resourceName, out var value))
+        // Load from our dictionary if we are in translator mode, but then fallback if we don't have the value.
+        if (TranslatorMode && _resources.TryGetValue(resourceName, out var value))
         {
             return value;
         }
 
         // But if we have a resource map fall back to it.
-        if (_resourceMap is not null)
+        var resourceCandidate = _resourceMap.GetValue(resourceName, _resourceContext);
+        if (string.IsNullOrWhiteSpace(resourceCandidate?.ValueAsString) == false)
         {
-            var resourceCandidate = _resourceMap.GetValue(resourceName, _resourceContext);
-            if (resourceCandidate is not null)
-            {
-                return resourceCandidate.ValueAsString;
-            }
+            return resourceCandidate.ValueAsString;
         }
 
         // If not we fallback to the original language.

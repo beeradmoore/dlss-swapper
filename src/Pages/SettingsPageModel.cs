@@ -381,4 +381,11 @@ public partial class SettingsPageModel : LocalizedViewModelBase
             }
         }
     }
+
+    [RelayCommand]
+    void OpenTranslationTools()
+    {
+        var translationToolsWindow = new TranslationToolsWindow();
+        translationToolsWindow.Activate();
+    }
 }

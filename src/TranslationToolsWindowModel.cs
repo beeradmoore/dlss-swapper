@@ -160,7 +160,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
                     Title = "Reset progress and continue?",
                     DefaultButton = ContentDialogButton.Close,
                     Content = "This will reset your current translation progress. Are you sure you want to continue?",
-                    PrimaryButtonText = "Yes",
+                    PrimaryButtonText = "Reset and continue",
                     CloseButtonText = "Cancel",
                 };
 
@@ -332,7 +332,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
                     Title = "Reset progress and continue?",
                     DefaultButton = ContentDialogButton.Close,
                     Content = "This will reset your current translation progress. Are you sure you want to continue?",
-                    PrimaryButtonText = "Yes",
+                    PrimaryButtonText = "Reset and continue",
                     CloseButtonText = "Cancel",
                 };
 

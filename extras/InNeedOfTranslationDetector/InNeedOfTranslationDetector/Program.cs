@@ -24,6 +24,12 @@ if (string.IsNullOrWhiteSpace(srcDirectory) == true)
 
 var results = new Dictionary<string, List<string>>();
 
+var filesToIgnore = new List<string>()
+{
+    "Converters\\DLSSStateVisibilityConverter.cs",
+};
+
+
 #region Xaml checking
 var allXamlFiles = Directory.GetFiles(srcDirectory, "*.xaml", SearchOption.AllDirectories).Where(file => file.Contains("\\obj\\") == false && file.Contains("\\bin\\") == false).ToList();
 
@@ -50,6 +56,12 @@ var ignoredXamlMatches = new List<string>()
 foreach (var xamlFile in allXamlFiles)
 {
     var relativePath = Path.GetRelativePath(srcDirectory, xamlFile);
+
+    if (filesToIgnore.Contains(relativePath))
+    {
+        continue;
+    }
+
     var fileData = File.ReadAllText(xamlFile);
     foreach (var xamlRegex in xamlRegexes)
     {
@@ -85,19 +97,68 @@ var allCSharpFiles = Directory.GetFiles(srcDirectory, "*.cs", SearchOption.AllDi
 
 var csharpRegexes = new List<Regex>()
 {
-    new Regex(@"Text = ""([^""{][^""]*)"""),
-    new Regex(@"Content = ""([^""{][^""]*)"""),
+    //new Regex(@"Text = ""([^""{][^""]*)"""),
+    //new Regex(@"Content = ""([^""{][^""]*)"""),
+    new Regex(@"= ""([^""{][^""]*)"""),
+    //new Regex("\"([^\"\\\\]*(\\\\.[^\"\\\\]*)*)\"\r\n")
 };
 
 var ignoredCSharpMatches = new List<string>()
 {
-    "Text = \"\\n\"",
-    "Text = \"0\"",
+    "= \"\\n\"",
+    "= \"0\"",
+    "= \"?\"",
+    "= \"runas\"",
+    "= \"reg\"",
+    "= \"cmd.exe\"",
+    "= \"runas\"",
+    "= \"LangResourceError\"",
+    "= \"SELECT * FROM Win32_OperatingSystem\"",
+    "= \"2.0\"",
+    "= \"1\"",
+    "= \"✅\"",
+    "= \"❌\"",
+    "= \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0\"",
+    "= \"AppsUseLightTheme\"",
+    "= \"LastUpdatedThemeId\"",
+    "= \"CryptQueryObject\"",
+    "= \"dlss-swapper-downloads.beeradmoore.com\"",
+    "= \"00AAC56B-CD44-11d0-8CC2-00C04FC295EE\"",
+    "= \"nvngx_dlss.dll\"",
+    "= \"nvngx_dlssg.dll\"",
+    "= \"nvngx_dlssd.dll\"",
+    "= \"amd_fidelityfx_dx12.dll\"",
+    "= \"amd_fidelityfx_vk.dll\"",
+    "= \"libxess.dll\"",
+    "= \"libxell.dll\"",
+    "= \"libxess_fg.dll\"",
+    "= \"FidelityFX_SDK\"",
+    "= \"FidelityFX-SDK\"",
+    "= \"SQLite_net\"",
+    "= \"SQLite-net\"",
+    "= \"notes.md\"",
+    "= \"license.txt\"",
+    "= \"\\xF0E2\"",
+    "= \"\\xE8FD\"",
+    "= \"MainNavigationView\"",
+    "= \"AppTitleBar\"",
+    "= \"DialogShowingStates\"",
+    "= \"DialogShowing\"",
+    "= \"DLSS_Swapper.Acknowledgements.\"",
+    "= \"en-US\"",
+    "= \"DieselGameBox\"",
+    "= \"DieselGameBoxTall\"",
 };
 
 foreach (var csharpFiles in allCSharpFiles)
 {
     var relativePath = Path.GetRelativePath(srcDirectory, csharpFiles);
+
+    if (filesToIgnore.Contains(relativePath))
+    {
+        continue;
+    }
+    
     var fileData = File.ReadAllText(csharpFiles);
     foreach (var csharpRegex in csharpRegexes)
     {
@@ -114,6 +175,11 @@ foreach (var csharpFiles in allCSharpFiles)
                 continue;
             }
 
+            if (match.Value.StartsWith("= \"https://"))
+            {
+                continue;
+            }
+
             if (results.ContainsKey(relativePath) == false)
             {
                 results[relativePath] = new List<string>();
@@ -125,17 +191,46 @@ foreach (var csharpFiles in allCSharpFiles)
 }
 #endregion
 
+var xamlFilesCount = 0;
+var xamlInstancesCount = 0;
+var csharpFilesCount = 0;
+var csharpInstancesCount = 0;
+
 foreach ((var file, var matches) in results)
 {
     Console.WriteLine($"File: {file}");
+    var isXamlFile = false;
+    var isCSharpFile = false;
+    if (file.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase))
+    {
+        xamlFilesCount += matches.Count;
+        isXamlFile = true;
+    }
+    else if (file.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
+    {
+        csharpFilesCount += matches.Count;
+        isCSharpFile = true;
+    }
+
     Console.WriteLine("Matches:");
     foreach (var match in matches)
     {
         Console.WriteLine($"  {match}");
+        if (isXamlFile)
+        {
+            ++xamlInstancesCount;
+        }
+        else if (isCSharpFile)
+        {
+            ++csharpInstancesCount;
+        }
     }
     Console.WriteLine();
 }
 
+
+Console.WriteLine($"Found {xamlInstancesCount} xaml instances across {xamlFilesCount} files.");
+Console.WriteLine($"Found {csharpInstancesCount} cs instances across {csharpFilesCount} files.");
 
 
 return 0;

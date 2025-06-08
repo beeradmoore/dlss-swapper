@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Resources;
 using System.Threading;
 using DLSS_Swapper.Attributes;
 
@@ -15,7 +13,6 @@ public class LanguageManager
 
     static LanguageManager? _instance;
     public static LanguageManager Instance => _instance ??= new LanguageManager();
-
 
     private LanguageManager()
     {
@@ -43,6 +40,7 @@ public class LanguageManager
 
     public string[] GetKnownLanguages()
     {
+        // For now this is a hardcoded list. It would be nice to dynamically discover from resource class or something.
         return [
             "en-US",
             "pl-PL",
@@ -51,6 +49,7 @@ public class LanguageManager
 
     public string GetLanguageName(string languageKey)
     {
+        // For now this is a hardcoded list. It would be nice to dynamically discover from resource class or something.
         return languageKey switch
         {
             "en-US" => "English",

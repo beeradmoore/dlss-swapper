@@ -9,21 +9,24 @@ namespace DLSS_Swapper.Helpers;
 
 public class ResourceHelper
 {
+    private const string error = "LangResourceError";
+
     static readonly ResourceLoader _resourceLoader = new ResourceLoader();
     static readonly ResourceContext _resourceContext = ResourceContext.GetForViewIndependentUse();
     static readonly ResourceMap _resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
 
     static readonly Dictionary<string, string> _resources = new Dictionary<string, string>();
 
-    static bool _translatorMode = false;
-    internal static bool TranslatorMode
+    static bool _translatorModeEnabled;
+
+    internal static bool TranslatorModeEnabled
     {
-        get { return _translatorMode; }
+        get { return _translatorModeEnabled; }
         set
         {
-            if (value != _translatorMode)
+            if (value != _translatorModeEnabled)
             {
-                _translatorMode = value;
+                _translatorModeEnabled = value;
                 LanguageManager.Instance.ReloadLanguage();
             }
         }
@@ -61,7 +64,7 @@ public class ResourceHelper
     public static string GetString(string resourceName)
     {
         // Load from our dictionary if we are in translator mode, but then fallback if we don't have the value.
-        if (TranslatorMode && _resources.TryGetValue(resourceName, out var value))
+        if (TranslatorModeEnabled && _resources.TryGetValue(resourceName, out var value))
         {
             return value;
         }
@@ -88,6 +91,4 @@ public class ResourceHelper
             return error;
         }
     }
-
-    private const string error = "LangResourceError";
 }

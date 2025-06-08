@@ -45,10 +45,10 @@ public sealed partial class TranslationToolsWindow : Window
             }
         }
 
-        ResourceHelper.TranslatorMode = true;
-        this.Closed += (sender, args) =>
+        ResourceHelper.TranslatorModeEnabled = true;
+        Closed += (sender, args) =>
         {
-            ResourceHelper.TranslatorMode = false;
+            ResourceHelper.TranslatorModeEnabled = false;
         };
     }
 }

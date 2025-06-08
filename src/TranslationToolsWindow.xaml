@@ -31,9 +31,9 @@
             <Button Content="Import as trasnlation" Command="{x:Bind ViewModel.ImportAsTranslationCommand}" VerticalAlignment="Bottom" />
         </StackPanel>
 
-        <Button Grid.Row="0" Grid.Column="1"  Content="Reload App" Command="{x:Bind ViewModel.ReloadAppCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        <Button Grid.Row="0" Grid.Column="1" Content="Reload App" Command="{x:Bind ViewModel.ReloadAppCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" />
 
-        <ctWinUI:DataGrid Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Single" GridLinesVisibility="All" VerticalAlignment="Stretch" ColumnWidth="*" AutoGenerateColumns="False" ItemsSource="{x:Bind ViewModel.TranslationRows, Mode=OneWay}">
+        <ctWinUI:DataGrid x:Name="MainDataGrid" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Single" GridLinesVisibility="All" VerticalAlignment="Stretch" ColumnWidth="*" AutoGenerateColumns="False" ItemsSource="{x:Bind ViewModel.TranslationRows, Mode=OneWay}">
 
             <ctWinUI:DataGrid.Resources>
                 <Style TargetType="TextBox">
@@ -96,7 +96,27 @@
                     <ctWinUI:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border BorderThickness="2" BorderBrush="{Binding NewTranslation, Converter={StaticResource EmptyStringToObjectConverter}, Mode=OneWay}">
-                                <TextBox Text="{Binding NewTranslation, Mode=TwoWay}" Padding="4" Background="Transparent" BorderBrush="Transparent" TextWrapping="Wrap" AcceptsReturn="true">
+
+                                <!-- This thing sucked, but did give better undo history -->
+                                <!--
+                                <RichEditBox
+                                             DataContextChanged="RichEditBox_DataContextChanged"
+                                             Padding="4"
+                                             Background="Transparent"
+                                             BorderBrush="Transparent"
+                                             TextWrapping="Wrap"
+                                             AcceptsReturn="false" 
+                                             IsTextPredictionEnabled="False"
+                                             ContextFlyout="{x:Null}"
+                                             SelectionFlyout="{x:Null}"
+                                             ClipboardCopyFormat="PlainText"
+                                             TextChanged="RichEditBox_TextChanged"
+                                             PreviewKeyDown="RichEditBox_PreviewKeyDown"
+                                             Loaded="RichEditBox_Loaded"
+                                  
+                                        />-->
+
+                                <TextBox Text="{Binding NewTranslation, Mode=TwoWay}" Padding="4" Background="Transparent" BorderBrush="Transparent" TextWrapping="Wrap" AcceptsReturn="false" PreviewKeyDown="TextBox_PreviewKeyDown">
                                     <TextBox.Resources>
                                         <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent" />
                                         <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent" />

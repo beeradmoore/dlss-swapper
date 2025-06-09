@@ -19,5 +19,10 @@ public class MainWindowModelTranslationProperties : LocalizedViewModelBase
     public string NavigationViewItemLibraryText => ResourceHelper.GetString("Library");
 
     [TranslationProperty]
+    public string NavigationViewItemAcknowledgementsText => ResourceHelper.GetString("Acknowledgements");
+
+    [TranslationProperty]
     public string LoadingProgressText => ResourceHelper.GetString("Loading");
+
+    
 }

@@ -40,6 +40,9 @@ public class SettingsPageModelTranslationProperties : LocalizedViewModelBase
     public string YourCurrentLogfileText => ResourceHelper.GetString("SettingsYourCurrentLogfile");
 
     [TranslationProperty]
+    public string OpenTranslationToolsText => ResourceHelper.GetString("SettingsOpenTranslationTools");
+
+    [TranslationProperty]
     public string ThemeLightText => ResourceHelper.GetString("SettingsThemeLight");
 
     [TranslationProperty]
@@ -53,6 +56,13 @@ public class SettingsPageModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string GameLibrariesText => ResourceHelper.GetString("SettingsGameLibraries");
+
+    [TranslationProperty]
+    public string IgnoredPathsText => ResourceHelper.GetString("IgnoredPaths");
+
+    [TranslationProperty]
+    public string AddIgnoredPathText => ResourceHelper.GetString("AddIgnoredPath");
+
 
     [TranslationProperty]
     public string DllsDeveloperOptionsText => ResourceHelper.GetString("SettingsDllsDeveloperOptions");

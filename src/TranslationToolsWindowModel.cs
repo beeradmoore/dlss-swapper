@@ -163,7 +163,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
                     DefaultButton = ContentDialogButton.Close,
                     Content = "This will reset your current translation progress. Are you sure you want to continue?",
                     PrimaryButtonText = "Reset and continue",
-                    CloseButtonText = "Cancel",
+                    CloseButtonText = ResourceHelper.GetString("Cancel"),
                 };
 
                 var result = await dialog.ShowAsync();
@@ -203,10 +203,10 @@ public partial class TranslationToolsWindowModel : ObservableObject
                     {
                         var dialog = new EasyContentDialog(window.Content.XamlRoot)
                         {
-                            Title = "Error",
+                            Title = ResourceHelper.GetString("Error"),
                             DefaultButton = ContentDialogButton.Close,
                             Content = "Not a valid DLSS Swapper translation file.",
-                            CloseButtonText = "Close",
+                            CloseButtonText = ResourceHelper.GetString("Close"),
                         };
                         await dialog.ShowAsync();
                         return;
@@ -231,10 +231,10 @@ public partial class TranslationToolsWindowModel : ObservableObject
 
                 var dialog = new EasyContentDialog(window.Content.XamlRoot)
                 {
-                    Title = "Error",
+                    Title = ResourceHelper.GetString("Error"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = "Could not load translation. Please see your error log for more information.",
-                    CloseButtonText = "Close",
+                    CloseButtonText = ResourceHelper.GetString("Close"),
                 };
                 await dialog.ShowAsync();
             }
@@ -260,10 +260,10 @@ public partial class TranslationToolsWindowModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(window.Content.XamlRoot)
                 {
-                    Title = "Error",
+                    Title = ResourceHelper.GetString("Error"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = "No translation data was found to save.",
-                    CloseButtonText = "Close",
+                    CloseButtonText = ResourceHelper.GetString("Close"),
                 };
                 await dialog.ShowAsync();
                 return;
@@ -275,7 +275,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
                 var savePicker = new FileSavePicker();
                 savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
                 savePicker.FileTypeChoices.Add("json", new List<string>() { ".json" });
-                savePicker.SuggestedFileName = $"dlss_swapper_translation.json";
+                savePicker.SuggestedFileName = "dlss_swapper_translation.json";
                 WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
                 var saveFile = await savePicker.PickSaveFileAsync();
 
@@ -302,10 +302,10 @@ public partial class TranslationToolsWindowModel : ObservableObject
 
                 var dialog = new EasyContentDialog(window.Content.XamlRoot)
                 {
-                    Title = "Error",
+                    Title = ResourceHelper.GetString("Error"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = "Could not save translation. Please see your error log for more information.",
-                    CloseButtonText = "Close",
+                    CloseButtonText = ResourceHelper.GetString("Close"),
                 };
                 await dialog.ShowAsync();
             }
@@ -335,7 +335,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
                     DefaultButton = ContentDialogButton.Close,
                     Content = "This will reset your current translation progress. Are you sure you want to continue?",
                     PrimaryButtonText = "Reset and continue",
-                    CloseButtonText = "Cancel",
+                    CloseButtonText = ResourceHelper.GetString("Cancel"),
                 };
 
                 var result = await dialog.ShowAsync();
@@ -370,10 +370,10 @@ public partial class TranslationToolsWindowModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(window.Content.XamlRoot)
                 {
-                    Title = "Error",
+                    Title = ResourceHelper.GetString("Error"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = "No translation data was found to publish.",
-                    CloseButtonText = "Close",
+                    CloseButtonText = ResourceHelper.GetString("Close"),
                 };
                 await dialog.ShowAsync();
                 return;
@@ -385,7 +385,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
                 var savePicker = new FileSavePicker();
                 savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
                 savePicker.FileTypeChoices.Add("zip", new List<string>() { ".zip" });
-                savePicker.SuggestedFileName = $"dlss_swapper_published_translation.zip";
+                savePicker.SuggestedFileName = "dlss_swapper_published_translation.zip";
                 WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
                 var saveFile = await savePicker.PickSaveFileAsync();
 
@@ -556,7 +556,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
                     PrimaryButtonCommand = OpenTranslationsGuideCommand,
                     PrimaryButtonText = "Translation guide",
                     Content = $"Your translation has been created. Please look at the DLSS Swapper translation guide as to waht to do next with {filename}.",
-                    CloseButtonText = "Close",
+                    CloseButtonText = ResourceHelper.GetString("Close"),
                 };
                 await dialog.ShowAsync();
             }
@@ -566,10 +566,10 @@ public partial class TranslationToolsWindowModel : ObservableObject
 
                 var dialog = new EasyContentDialog(window.Content.XamlRoot)
                 {
-                    Title = "Error",
+                    Title = ResourceHelper.GetString("Error"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = "Could not publish translation. Please see your error log for more information.",
-                    CloseButtonText = "Close",
+                    CloseButtonText = ResourceHelper.GetString("Close"),
                 };
                 await dialog.ShowAsync();
             }

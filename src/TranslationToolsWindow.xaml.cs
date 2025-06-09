@@ -38,10 +38,10 @@ public sealed partial class TranslationToolsWindow : Window
                 {
                     var dialog = new EasyContentDialog(Content.XamlRoot)
                     {
-                        Title = "Error",
+                        Title = ResourceHelper.GetString("Error"),
                         DefaultButton = ContentDialogButton.Close,
-                        Content = "You can not use the translation tool while it is runnning as admin. Please restart the application.",
-                        CloseButtonText = "Okay",
+                        Content = ResourceHelper.GetString("TranslationTools_AdminError"),
+                        CloseButtonText = ResourceHelper.GetString("Okay"),
                     };
                     await dialog.ShowAsync();
                     Close();

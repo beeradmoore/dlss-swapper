@@ -167,7 +167,7 @@ public partial class LibraryPageModel : ObservableObject
             var savePicker = new Windows.Storage.Pickers.FileSavePicker();
             savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
             savePicker.FileTypeChoices.Add("Zip archive", new List<string>() { ".zip" });
-            savePicker.SuggestedFileName = $"dlss_swapper_export.zip";
+            savePicker.SuggestedFileName = "dlss_swapper_export.zip";
             WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
             var saveFile = await savePicker.PickSaveFileAsync();
 
@@ -223,9 +223,9 @@ public partial class LibraryPageModel : ObservableObject
 
                 var dialog = new EasyContentDialog(libraryPage.XamlRoot)
                 {
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("Error"),
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Title = "Error",
                     Content = $"No DLLs found suitible for exporting export.",
                 };
                 await dialog.ShowAsync();
@@ -254,7 +254,7 @@ public partial class LibraryPageModel : ObservableObject
                 {
                     var dialog = new EasyContentDialog(libraryPage.XamlRoot)
                     {
-                        CloseButtonText = "Okay",
+                        CloseButtonText = ResourceHelper.GetString("Okay"),
                         DefaultButton = ContentDialogButton.Close,
                         Title = "Success",
                         Content = $"Exported {toExport.Count} dll{(toExport.Count == 1 ? string.Empty : "s")}.",
@@ -997,7 +997,7 @@ public partial class LibraryPageModel : ObservableObject
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
                 Title = "No new DLLs",
-                CloseButtonText = "Okay",
+                CloseButtonText = ResourceHelper.GetString("Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = "There were no new DLLs to download.",
             };
@@ -1008,7 +1008,7 @@ public partial class LibraryPageModel : ObservableObject
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
                 Title = "Downloads started",
-                CloseButtonText = "Okay",
+                CloseButtonText = ResourceHelper.GetString("Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = $"Started {startedDownloads} new downloads.",
             };

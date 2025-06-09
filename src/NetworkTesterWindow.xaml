@@ -131,12 +131,12 @@
             <ProgressRing Grid.Row="10" Style="{StaticResource TestingProgressRing}" IsActive="{x:Bind ViewModel.RunningTest11, Mode=OneWay}" />
         
             <StackPanel Orientation="Horizontal" Spacing="12" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
-                <Button Content="{x:Bind ViewModel.TranslationProperties.CopyTestResultsText}" Command="{x:Bind ViewModel.CopyTestResultsCommand}" />
-                <Button Content="{x:Bind ViewModel.TranslationProperties.CreateBugReportText}" Command="{x:Bind ViewModel.CreateBugReportCommand}" />
-                <Button Content="{x:Bind ViewModel.TranslationProperties.CancelCurrentTestText}" Command="{x:Bind ViewModel.CancelCurrentTestCommand}" />
+                <Button Content="{x:Bind ViewModel.TranslationProperties.CopyTestResultsText, Mode=OneWay}" Command="{x:Bind ViewModel.CopyTestResultsCommand}" />
+                <Button Content="{x:Bind ViewModel.TranslationProperties.CreateBugReportText, Mode=OneWay}" Command="{x:Bind ViewModel.CreateBugReportCommand}" />
+                <Button Content="{x:Bind ViewModel.TranslationProperties.CancelCurrentTestText, Mode=OneWay}" Command="{x:Bind ViewModel.CancelCurrentTestCommand}" />
             </StackPanel>
 
-            <TextBox Grid.Row="12" Grid.ColumnSpan="4" MinHeight="400" Header="Results" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Text="{x:Bind ViewModel.TestResults, Mode=OneWay}" />
+            <TextBox Grid.Row="12" Grid.ColumnSpan="4" MinHeight="400" Header="{x:Bind ViewModel.TranslationProperties.ResultsText, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Text="{x:Bind ViewModel.TestResults, Mode=OneWay}" />
 
 
         </Grid>

@@ -12,6 +12,8 @@ class ImportDLLSummaryControlModel
     public int SuccessCount { get; set; }
     public int FailedCount { get; set; }
 
+    public ImportDLLSummaryControlModelTranslationProperties TranslationProperties { get; } = new ImportDLLSummaryControlModelTranslationProperties();
+
     public ImportDLLSummaryControlModel(IReadOnlyList<DLLImportResult> dllImportResults)
     {
         SuccessCount = dllImportResults.Count(x => x.Success == true);

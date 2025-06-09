@@ -312,7 +312,7 @@ internal class DLLManager
             var oldLoadingMessage = App.CurrentApp.MainWindow.ViewModel.LoadingMessage;
             App.CurrentApp.RunOnUIThread(() =>
             {
-                App.CurrentApp.MainWindow.ViewModel.LoadingMessage = "Migrating DLLs";
+                App.CurrentApp.MainWindow.ViewModel.LoadingMessage = ResourceHelper.GetString("MigratingDlls");
             });
 
             CheckDllRecordsForMigration_117(Manifest.DLSS, ImportedManifest?.DLSS);

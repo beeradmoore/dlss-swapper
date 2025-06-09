@@ -49,6 +49,9 @@ public class NetworkTesterWindowModelTranslationProperties : LocalizedViewModelB
     public string CopyTestResultsText => ResourceHelper.GetString("CopyTestResults");
 
     [TranslationProperty]
+    public string ResultsText => ResourceHelper.GetString("Results");
+
+    [TranslationProperty]
     public string CreateBugReportText => ResourceHelper.GetString("CreateBugReport");
 
     [TranslationProperty]

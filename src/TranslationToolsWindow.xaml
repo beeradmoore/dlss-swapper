@@ -9,7 +9,7 @@
     xmlns:ctWinUI="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:converters="using:CommunityToolkit.WinUI.Converters"
     mc:Ignorable="d"
-    Title="DLSS Swapper - Translation Tools">
+    Title="{x:Bind ViewModel.TranslationProperties.ApplicationTilteTranslationToolsWindowText, Mode=OneWay}">
 
     <Window.SystemBackdrop>
         <MicaBackdrop />
@@ -27,11 +27,11 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0"  Orientation="Horizontal" Spacing="8">
-            <ComboBox Header="Source language" ItemsSource="{x:Bind ViewModel.SourceLanguages, Mode=OneWay}" DisplayMemberPath="Value" SelectedItem="{x:Bind ViewModel.SelectedSourceLanguage, Mode=TwoWay}" />
-            <Button Content="Import as trasnlation" Command="{x:Bind ViewModel.ImportAsTranslationCommand}" VerticalAlignment="Bottom" />
+            <ComboBox Header="{x:Bind ViewModel.TranslationProperties.SourceLanguageText, Mode=OneWay}" ItemsSource="{x:Bind ViewModel.SourceLanguages, Mode=OneWay}" DisplayMemberPath="Value" SelectedItem="{x:Bind ViewModel.SelectedSourceLanguage, Mode=TwoWay}" />
+            <Button Content="{x:Bind ViewModel.TranslationProperties.ImportAsTrasnlationText, Mode=OneWay}" Command="{x:Bind ViewModel.ImportAsTranslationCommand}" VerticalAlignment="Bottom" />
         </StackPanel>
 
-        <Button Grid.Row="0" Grid.Column="1" Content="Reload App" Command="{x:Bind ViewModel.ReloadAppCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        <Button Grid.Row="0" Grid.Column="1" Content="{x:Bind ViewModel.TranslationProperties.ReloadAppText, Mode=OneWay}" Command="{x:Bind ViewModel.ReloadAppCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" />
 
         <ctWinUI:DataGrid x:Name="MainDataGrid" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Single" GridLinesVisibility="All" VerticalAlignment="Stretch" ColumnWidth="*" AutoGenerateColumns="False" ItemsSource="{x:Bind ViewModel.TranslationRows, Mode=OneWay}">
 
@@ -47,7 +47,7 @@
             
             <ctWinUI:DataGrid.Columns>
 
-                <ctWinUI:DataGridTextColumn Width="*" Header="Key" Tag="Key" Binding="{Binding Key}" IsReadOnly="True">
+                <ctWinUI:DataGridTextColumn Width="*" Header="{x:Bind ViewModel.TranslationProperties.KeyText, Mode=OneWay}" Tag="Key" Binding="{Binding Key}" IsReadOnly="True">
                       <ctWinUI:DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -56,7 +56,7 @@
                     </ctWinUI:DataGridTextColumn.ElementStyle>
                 </ctWinUI:DataGridTextColumn>
 
-                <ctWinUI:DataGridTextColumn Width="*" Header="Comment" Tag="Comment" Binding="{Binding Comment}" IsReadOnly="True">
+                <ctWinUI:DataGridTextColumn Width="*" Header="{x:Bind ViewModel.TranslationProperties.CommentText, Mode=OneWay}" Tag="Comment" Binding="{Binding Comment}" IsReadOnly="True">
                     <ctWinUI:DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -65,7 +65,7 @@
                     </ctWinUI:DataGridTextColumn.ElementStyle>
                 </ctWinUI:DataGridTextColumn>
 
-                <ctWinUI:DataGridTextColumn Width="2*"  Header="Source Translation" Tag="SourceTranslation" IsReadOnly="True" Binding="{Binding SourceTranslation}">
+                <ctWinUI:DataGridTextColumn Width="2*"  Header="{x:Bind ViewModel.TranslationProperties.SourceTranslationText, Mode=OneWay}" Tag="SourceTranslation" IsReadOnly="True" Binding="{Binding SourceTranslation}">
                     <ctWinUI:DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -75,7 +75,7 @@
                 </ctWinUI:DataGridTextColumn>
 
                 <!--
-                <ctWinUI:DataGridTextColumn Width="2*" Header="New Translation" Tag="NewTranslation" IsReadOnly="False" Binding="{Binding NewTranslation, Mode=TwoWay}">
+                <ctWinUI:DataGridTextColumn Width="2*" Header="{x:Bind ViewModel.TranslationProperties.NewTranslationText, Mode=OneWay}" Tag="NewTranslation" IsReadOnly="False" Binding="{Binding NewTranslation, Mode=TwoWay}">
                     <ctWinUI:DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -92,7 +92,7 @@
                 -->
 
                 <!--  Binding="{Binding NewTranslation, Mode=TwoWay}"-->
-                <ctWinUI:DataGridTemplateColumn Width="2*" Header="New Translation" Tag="NewTranslation" IsReadOnly="False">
+                <ctWinUI:DataGridTemplateColumn Width="2*" Header="{x:Bind ViewModel.TranslationProperties.NewTranslationText, Mode=OneWay}" Tag="NewTranslation" IsReadOnly="False">
                     <ctWinUI:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border BorderThickness="2" BorderBrush="{Binding NewTranslation, Converter={StaticResource EmptyStringToObjectConverter}, Mode=OneWay}">
@@ -132,9 +132,9 @@
         </ctWinUI:DataGrid>
 
         <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Spacing="8" Orientation="Horizontal">
-            <Button Content="Load" Command="{x:Bind ViewModel.LoadCommand}" />
-            <Button Content="Save" Command="{x:Bind ViewModel.SaveCommand}" />
-            <Button Content="Publish" Command="{x:Bind ViewModel.PublishCommand}" />
+            <Button Content="{x:Bind ViewModel.TranslationProperties.LoadText, Mode=OneWay}" Command="{x:Bind ViewModel.LoadCommand}" />
+            <Button Content="{x:Bind ViewModel.TranslationProperties.SaveText, Mode=OneWay}" Command="{x:Bind ViewModel.SaveCommand}" />
+            <Button Content="{x:Bind ViewModel.TranslationProperties.PublishText, Mode=OneWay}" Command="{x:Bind ViewModel.PublishCommand}" />
         </StackPanel>
     </Grid>
 </Window>

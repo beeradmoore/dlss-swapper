@@ -235,6 +235,21 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="ListView" xml:space="preserve">
     <value>List View</value>
   </data>
+  <data name="IgnoredPaths" xml:space="preserve">
+    <value>Ignored Paths</value>
+  </data>
+  <data name="AddIgnoredPath" xml:space="preserve">
+    <value>Add Ignored Path</value>
+  </data>
+  <data name="SettingsOpenTranslationTools" xml:space="preserve">
+    <value>Open translation tools</value>
+  </data>
+  <data name="DllPath" xml:space="preserve">
+    <value>DLL Path</value>
+  </data>
+
+
+
   <data name="Loading" xml:space="preserve">
     <value>Loading</value>
   </data>
@@ -286,6 +301,9 @@ Only import dlls from sources you trust.</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Failed</value>
   </data>
   <data name="TopLevelDirectoryNotSupported" xml:space="preserve">
     <value>Adding top level directory is not supported. Please add the root of your game directory.</value>
@@ -422,6 +440,21 @@ Only import dlls from sources you trust.</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="Publish" xml:space="preserve">
+    <value>Publish</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="NewTranslation" xml:space="preserve">
+    <value>New Translation</value>
   </data>
   <data name="Notes" xml:space="preserve">
     <value>Notes</value>
@@ -624,6 +657,9 @@ Only import dlls from sources you trust.</value>
   <data name="FileSize" xml:space="preserve">
     <value>File size</value>
   </data>
+  <data name="Results" xml:space="preserve">
+    <value>Results</value>
+  </data>
   <data name="CopyTestResults" xml:space="preserve">
     <value>Copy test results</value>
   </data>
@@ -807,4 +843,26 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="enOnly" xml:space="preserve">
     <value>en only</value>
   </data>
+  <data name="TranslationTools" xml:space="preserve">
+    <value>Translation Tools</value>
+  </data>
+  <data name="SourceLanguage" xml:space="preserve">
+    <value>Source language</value>
+  </data>
+  <data name="SourceTranslation" xml:space="preserve">
+    <value>Source translation</value>
+  </data>
+  <data name="LicencesAndAcknowledgements" xml:space="preserve">
+    <value>Licences &amp; Acknowledgements</value>
+  </data>
+  <data name="AddCoverErrorSingleFile" xml:space="preserve">
+    <value>You may only drag over a single file for a cover</value>
+  </data>
+  <data name="MigratingDlls" xml:space="preserve">
+    <value>Migrating DLLs</value>
+  </data>
+  <data name="TranslationTools_AdminError" xml:space="preserve">
+    <value>You can not use the translation tool while it is runnning as admin. Please restart the application.</value>
+  </data>
+
 </root>

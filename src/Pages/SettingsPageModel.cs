@@ -310,8 +310,8 @@ public partial class SettingsPageModel : ObservableObject
             {
                 var errorDialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    Title = "Error",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("Error"),
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = "This feature is not supported if you are running the application as admin.",
                 };
@@ -341,8 +341,8 @@ public partial class SettingsPageModel : ObservableObject
             {
                 var errorDialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    Title = "Error",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("Error"),
+                    CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = $"The path {folderPath} is already ignored.",
                 };
@@ -363,7 +363,7 @@ public partial class SettingsPageModel : ObservableObject
             var dialog = new EasyContentDialog(settingsPage.XamlRoot)
             {
                 Title = "Delete Ignored Path",
-                CloseButtonText = "Cancel",
+                CloseButtonText = ResourceHelper.GetString("Cancel"),
                 DefaultButton = ContentDialogButton.Close,
                 PrimaryButtonText = "Delete",
                 Content = $"Are you sure you want to delete the ignored path {path}?",

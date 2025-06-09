@@ -39,7 +39,7 @@
               Title="Game asset not found in DLSS Swapper"
               Message="Would you like to import the current game asset into DLSS Swapper?">
                 <InfoBar.ActionButton>
-                    <Button Content="Import" />
+                    <Button Content="{x:Bind ViewModel.TranslationProperties.ImportText, Mode=OneWay}" />
                 </InfoBar.ActionButton>
         </InfoBar>-->
 

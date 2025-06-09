@@ -70,40 +70,6 @@ namespace DLSS_Swapper.Pages
             //await LoadGames();
         }
 
-        async void MainGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            if (e.AddedItems.Count == 0)
-            {
-                return;
-            }
-
-            if (e.AddedItems[0] is Game game)
-            {
-                // Deselect currently selected item.
-                if (sender is GridView gridView)
-                {
-                    gridView.SelectedItem = null;
-                }
-
-                if (game.Processing)
-                {
-                    var dialog = new EasyContentDialog(this.XamlRoot)
-                    {
-                        Title = "Game Currently Processing",
-                        CloseButtonText = "Okay",
-                        Content = $"{game.Title} is still processing. Please wait for the loading indicator to complete before opening.",
-                    };
-                    await dialog.ShowAsync();
-                    return;
-                }
-
-                var gameControl = new GameControl(game);
-                await gameControl.ShowAsync();
-
-            }
-        }
-
 
         async Task LoadGamesAndDlls()
         {

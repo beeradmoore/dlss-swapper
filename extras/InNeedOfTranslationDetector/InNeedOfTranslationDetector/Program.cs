@@ -37,6 +37,7 @@ var xamlRegexes = new List<Regex>()
 {
     new Regex(@"Text=""([^""{][^""]*)"""),
     new Regex(@"Content=""([^""{][^""]*)"""),
+    new Regex(@"Header=""([^""{][^""]*)"""),
 };
 
 var ignoredXamlMatches = new List<string>()
@@ -100,6 +101,7 @@ var csharpRegexes = new List<Regex>()
     //new Regex(@"Text = ""([^""{][^""]*)"""),
     //new Regex(@"Content = ""([^""{][^""]*)"""),
     new Regex(@"= ""([^""{][^""]*)"""),
+    new Regex(@"= \$""([^""{][^""]*)"""),
     //new Regex("\"([^\"\\\\]*(\\\\.[^\"\\\\]*)*)\"\r\n")
 };
 
@@ -109,6 +111,7 @@ var ignoredCSharpMatches = new List<string>()
     "= \"0\"",
     "= \"?\"",
     "= \"runas\"",
+    "= $\"add \\\"",
     "= \"reg\"",
     "= \"cmd.exe\"",
     "= \"runas\"",
@@ -148,6 +151,24 @@ var ignoredCSharpMatches = new List<string>()
     "= \"en-US\"",
     "= \"DieselGameBox\"",
     "= \"DieselGameBoxTall\"",
+    "= \"LANG_HUNT\"",
+    "= $\"gog_{gogGame.PlatformId}\"",
+    "= $\"/C copy \\\"",
+    "= \"Test 1\"",
+    "= \"Test 2\"",
+    "= \"Test 3\"",
+    "= \"Test 4\"",
+    "= \"Test 5\"",
+    "= \"Test 6\"",
+    "= \"Test 7\"",
+    "= \"Test 8\"",
+    "= \"Test 9\"",
+    "= \"Test 10\"",
+    "= \"Test 11\"",
+    "= $\"v{_displayVersion}\"",
+    "= \"dlss_swapper_export.zip\"",
+    "= \"dlss_swapper_translation.json\"",
+    "= \"dlss_swapper_published_translation.zip\"",
 };
 
 foreach (var csharpFiles in allCSharpFiles)
@@ -175,7 +196,12 @@ foreach (var csharpFiles in allCSharpFiles)
                 continue;
             }
 
-            if (match.Value.StartsWith("= \"https://"))
+            if (match.Value.StartsWith("= \"https:"))
+            {
+                continue;
+            }
+
+            if (match.Value.StartsWith("= $\"https:"))
             {
                 continue;
             }

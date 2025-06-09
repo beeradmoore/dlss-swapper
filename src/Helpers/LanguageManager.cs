@@ -44,6 +44,9 @@ public class LanguageManager
         return [
             "en-US",
             "pl-PL",
+#if DEBUG
+            "LANG_HUNT",
+#endif
         ];
     }
 

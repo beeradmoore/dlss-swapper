@@ -18,6 +18,9 @@ public class ResourceHelper
     static readonly Dictionary<string, string> _resources = new Dictionary<string, string>();
 
     static bool _translatorModeEnabled;
+#if DEBUG
+    static bool _langHunterEnabled = false;
+#endif
 
     internal static bool TranslatorModeEnabled
     {
@@ -35,6 +38,16 @@ public class ResourceHelper
 
     internal static void LoadResource(string key)
     {
+#if DEBUG
+        if (key == "LANG_HUNT")
+        {
+            _langHunterEnabled = true;
+        }
+        else
+        {
+            _langHunterEnabled = false;
+        }
+#endif
         _resources.Clear();
         try
         {
@@ -63,6 +76,14 @@ public class ResourceHelper
 
     public static string GetString(string resourceName)
     {
+
+#if DEBUG
+        if (_langHunterEnabled)
+        {
+            return "...";
+        }
+#endif
+
         // Load from our dictionary if we are in translator mode, but then fallback if we don't have the value.
         if (TranslatorModeEnabled && _resources.TryGetValue(resourceName, out var value))
         {

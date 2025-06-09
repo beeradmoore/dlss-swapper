@@ -9,21 +9,11 @@ using System.Diagnostics;
 using System.IO;
 using Windows.System;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Translations.UserControls;
 
 namespace DLSS_Swapper.UserControls;
 
 public partial class GameControlModel : ObservableObject
 {
-    public GameControlModel(GameControl gameControl, Game game) : base()
-    {
-        gameControlWeakReference = new WeakReference<GameControl>(gameControl);
-        Game = game;
-        GameTitle = game.Title;
-    }
-
-    public GameTranslationPropertiesViewModel TranslationProperties { get; } = new GameTranslationPropertiesViewModel();
-
     WeakReference<GameControl> gameControlWeakReference;
 
     public Game Game { get; init; }
@@ -50,6 +40,15 @@ public partial class GameControlModel : ObservableObject
 
             return GameTitle.Equals(Game.Title) == false;
         }
+    }
+
+    public GameControlModelTranslationProperties TranslationProperties { get; } = new GameControlModelTranslationProperties();
+
+    public GameControlModel(GameControl gameControl, Game game) : base()
+    {
+        gameControlWeakReference = new WeakReference<GameControl>(gameControl);
+        Game = game;
+        GameTitle = game.Title;
     }
 
     [RelayCommand]

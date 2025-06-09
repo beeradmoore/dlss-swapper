@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,6 @@ using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
-using DLSS_Swapper.Translations.UserControls;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.System;
 
@@ -16,12 +16,11 @@ namespace DLSS_Swapper.UserControls;
 
 public partial class NewDLLsControlModel : ObservableObject
 {
-
-    public NewDLLsTranslationPropertiesViewModel TranslationProperties { get; } = new NewDLLsTranslationPropertiesViewModel();
-
-    public string Title => $"[NEW DLLs] Found on {DateTime.Now.ToString("yyyy-MM-dd")}";
+    public string Title => $"[NEW DLLs] Found on {DateTime.Now.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)}";
 
     public string Body { get; init; }
+
+    public NewDLLsControlModelTranslationProperties TranslationProperties { get; } = new NewDLLsControlModelTranslationProperties();
 
     public NewDLLsControlModel() : base()
     {
@@ -45,15 +44,15 @@ public partial class NewDLLsControlModel : ObservableObject
         var stringBuilder = new StringBuilder();
         foreach (var gameLibrayKeyPair in gameAssetsLibraryGroup)
         {
-            stringBuilder.AppendLine($"{ResourceHelper.GetString("Library")}: {gameLibrayKeyPair.Key}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"{ResourceHelper.GetString("Library")}: {gameLibrayKeyPair.Key}");
 
             var libraryDicionary = gameLibrayKeyPair.Value as Dictionary<string, List<UnknownGameAsset>>;
             foreach (var gameAssetsDictionary in libraryDicionary)
             {
-                stringBuilder.AppendLine($"- {ResourceHelper.GetString("Game")}: {gameAssetsDictionary.Key}");
+                stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"- {ResourceHelper.GetString("Game")}: {gameAssetsDictionary.Key}");
                 foreach (var unknownGameAsset in gameAssetsDictionary.Value)
                 {
-                    stringBuilder.AppendLine($"-- {Path.GetFileName(unknownGameAsset.GameAsset.Path)}, {ResourceHelper.GetString("Version")}: {unknownGameAsset.GameAsset.Version}, {ResourceHelper.GetString("Hash")}: {unknownGameAsset.GameAsset.Hash}");
+                    stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"-- {Path.GetFileName(unknownGameAsset.GameAsset.Path)}, {ResourceHelper.GetString("Version")}: {unknownGameAsset.GameAsset.Version}, {ResourceHelper.GetString("Hash")}: {unknownGameAsset.GameAsset.Hash}");
                 }
                 stringBuilder.AppendLine();
             }

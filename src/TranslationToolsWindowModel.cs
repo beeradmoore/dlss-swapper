@@ -36,6 +36,8 @@ public partial class TranslationToolsWindowModel : ObservableObject
     readonly ResourceMap _resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
     readonly ResourceContext _resourceContext = ResourceContext.GetForViewIndependentUse();
 
+    public TranslationToolsWindowModelTranslationProperties TranslationProperties => new TranslationToolsWindowModelTranslationProperties();
+
     public TranslationToolsWindowModel(TranslationToolsWindow window)
     {
         _weakWindow = new WeakReference<TranslationToolsWindow>(window);

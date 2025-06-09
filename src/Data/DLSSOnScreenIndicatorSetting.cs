@@ -23,5 +23,4 @@ public class DLSSOnScreenIndicatorSetting : LocalizedViewModelBase
     {
         return Label;
     }
-
 }

@@ -10,7 +10,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Translations.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -46,6 +45,8 @@ public partial class DLLPickerControlModel : ObservableObject
     public partial GameAsset? BackupGameAsset { get; set; } = null;
 
     public bool CanCloseParentDialog { get; set; } = false;
+
+    public DLLPickerControlModelTranslationProperties TranslationProperties { get; } = new DLLPickerControlModelTranslationProperties();
 
     public DLLPickerControlModel(GameControl gameControl, EasyContentDialog parentDialog, DLLPickerControl dllPickerControl, Game game, GameAssetType gameAssetType) : base()
     {
@@ -166,8 +167,6 @@ public partial class DLLPickerControlModel : ObservableObject
 
         ResetSelection();
     }
-
-    public DLLPickerTranslationPropertiesViewModel TranslationProperties { get; } = new DLLPickerTranslationPropertiesViewModel();
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {

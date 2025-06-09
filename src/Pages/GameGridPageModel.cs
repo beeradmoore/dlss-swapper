@@ -6,7 +6,6 @@ using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Builders;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Translations.Pages;
 using CommunityToolkit.Mvvm.Messaging;
 using DLSS_Swapper.Messages;
 using DLSS_Swapper.UserControls;
@@ -27,8 +26,6 @@ public enum GameGridViewType
 public partial class GameGridPageModel : ObservableObject
 {
     GameGridPage gameGridPage;
-
-    public GameGridPageTranslationPropertiesViewModel TranslationProperties { get; } = new GameGridPageTranslationPropertiesViewModel();
 
     [ObservableProperty]
     public partial Game? SelectedGame { get; set; } = null;
@@ -63,6 +60,8 @@ public partial class GameGridPageModel : ObservableObject
         GameGridViewType.ListView => new FontIcon() { Glyph = "\xE8FD" },
         _ => new FontIcon() { },
     };
+
+    public GameGridPageModelTranslationProperties TranslationProperties { get; } = new GameGridPageModelTranslationProperties();
 
     public GameGridPageModel(GameGridPage gameGridPage)
     {

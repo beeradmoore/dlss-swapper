@@ -4,19 +4,15 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Translations.Pages;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Documents;
 using CommunityToolkit.WinUI;
 using System.Diagnostics;
@@ -36,6 +32,8 @@ public partial class LibraryPageModel : ObservableObject
 
     [ObservableProperty]
     public partial SelectorBarItem? SelectedSelectorBarItem { get; set; } = null;
+
+    public LibraryPageModelTranslationProperties TranslationProperties { get; } = new LibraryPageModelTranslationProperties();
 
     public LibraryPageModel(LibraryPage libraryPage)
     {
@@ -57,8 +55,6 @@ public partial class LibraryPageModel : ObservableObject
             SelectedSelectorBarItem = upscalerSelectorBar.Items[0];
         }
     }
-
-    public LibraryPageTranslationPropertiesViewModel TranslationProperties { get; } = new LibraryPageTranslationPropertiesViewModel();
 
     [RelayCommand]
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,14 +13,12 @@ using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using DLSS_Swapper.Translations.Pages;
 using DLSS_Swapper.Collections;
 using System.Collections.Specialized;
-using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Pages;
 
-public partial class SettingsPageModel : LocalizedViewModelBase
+public partial class SettingsPageModel : ObservableObject
 {
     readonly WeakReference<SettingsPage> _weakPage;
     readonly DLSSSettingsManager _dlssSettingsManager;
@@ -82,9 +79,16 @@ public partial class SettingsPageModel : LocalizedViewModelBase
 
     bool _hasSetDefaults = false;
 
-    public SettingsPageModel(SettingsPage page) : base()
+    public SettingsPageModelTranslationProperties TranslationProperties { get; } = new SettingsPageModelTranslationProperties();
+
+    public SettingsPageModel(SettingsPage page)
     {
         _weakPage = new WeakReference<SettingsPage>(page);
+
+        LanguageManager.Instance.OnLanguageChanged += () =>
+        {
+            DLSSOnScreenIndicatorOptions.RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        };
 
         var knownLanguages = LanguageManager.Instance.GetKnownLanguages();
         foreach (var knownLanguage in knownLanguages)
@@ -125,8 +129,6 @@ public partial class SettingsPageModel : LocalizedViewModelBase
 
         _hasSetDefaults = true;
     }
-
-    public SettingsPageTranslationPropertiesViewModel TranslationProperties { get; } = new SettingsPageTranslationPropertiesViewModel();
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
@@ -297,11 +299,6 @@ public partial class SettingsPageModel : LocalizedViewModelBase
     {
         var diagnosticsWindow = new DiagnosticsWindow();
         App.CurrentApp.WindowManager.ShowWindow(diagnosticsWindow);
-    }
-
-    protected override void OnLanguageChanged()
-    {
-        DLSSOnScreenIndicatorOptions.RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
     }
 
     [RelayCommand]

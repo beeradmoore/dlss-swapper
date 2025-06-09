@@ -7,20 +7,19 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Translations.UserControls;
 
 namespace DLSS_Swapper.UserControls;
 
 public partial class MultipleDLLsFoundControlModel : ObservableObject
 {
+    public List<GameAsset> DLLsList { get; init; }
+
+    public MultipleDLLsFoundControlModelTranslationProperties TranslationProperties { get; } = new MultipleDLLsFoundControlModelTranslationProperties();
+
     public MultipleDLLsFoundControlModel(Game game, GameAssetType gameAssetType) : base()
     {
         DLLsList = game.GameAssets.Where(x => x.AssetType == gameAssetType).ToList();
     }
-
-    public MultipleDLLsFoundTranslationPropertiesViewModel TranslationProperties { get; } = new MultipleDLLsFoundTranslationPropertiesViewModel();
-
-    public List<GameAsset> DLLsList { get; init; }
 
     [RelayCommand]
     void OpenDLLPath(GameAsset gameAsset)

@@ -5,40 +5,38 @@ using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Data.ManuallyAdded;
 using CommunityToolkit.Mvvm.ComponentModel;
-using DLSS_Swapper.Translations.UserControls;
 
-namespace DLSS_Swapper.UserControls
+namespace DLSS_Swapper.UserControls;
+
+internal partial class ManuallyAddGameModel : ObservableObject
 {
-    internal partial class ManuallyAddGameModel : ObservableObject
+    ManuallyAddedGame _game;
+    public ManuallyAddedGame Game => _game;
+
+    WeakReference<ManuallyAddGameControl> _manuallyAddGameControlWeakReference;
+
+    public ManuallyAddGameModelTranslationProperties TranslationProperties { get; } = new ManuallyAddGameModelTranslationProperties();
+
+    public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath) : base()
     {
-        public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath) : base()
-        {
-            manuallyAddGameControlWeakReference = new WeakReference<ManuallyAddGameControl>(manuallyAddGameControl);
+        _manuallyAddGameControlWeakReference = new WeakReference<ManuallyAddGameControl>(manuallyAddGameControl);
 
-            game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
-            {
-                Title = Path.GetFileName(installPath),
-                InstallPath = PathHelpers.NormalizePath(installPath),
-            };
+        _game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
+        {
+            Title = Path.GetFileName(installPath),
+            InstallPath = PathHelpers.NormalizePath(installPath),
+        };
+    }
+
+    [RelayCommand]
+    async Task AddCoverImageAsync()
+    {
+        if (_game.CoverImage == _game.ExpectedCustomCoverImage)
+        {
+            await _game.PromptToRemoveCustomCover();
+            return;
         }
 
-        public ManuallyAddGameTranslationPropertiesViewModel TranslationProperties { get; } = new ManuallyAddGameTranslationPropertiesViewModel();
-
-        ManuallyAddedGame game;
-        public ManuallyAddedGame Game => game;
-
-        WeakReference<ManuallyAddGameControl> manuallyAddGameControlWeakReference;
-
-        [RelayCommand]
-        async Task AddCoverImageAsync()
-        {
-            if (game.CoverImage == game.ExpectedCustomCoverImage)
-            {
-                await game.PromptToRemoveCustomCover();
-                return;
-            }
-
-            await game.PromptToBrowseCustomCover();
-        }
+        await _game.PromptToBrowseCustomCover();
     }
 }

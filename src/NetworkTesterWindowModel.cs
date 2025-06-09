@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Translations.Windows;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -131,7 +130,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
         AppendTestResults("Init", $"DLSS Swapper version: v{App.CurrentApp.GetVersionString()}");
     }
 
-    public NetworkTesterWindowTranslationPropertiesViewModel TranslationProperties { get; } = new NetworkTesterWindowTranslationPropertiesViewModel();
+    public NetworkTesterWindowModelTranslationProperties TranslationProperties { get; } = new NetworkTesterWindowModelTranslationProperties();
 
     void AppendTestResults(string testName, string message)
     {

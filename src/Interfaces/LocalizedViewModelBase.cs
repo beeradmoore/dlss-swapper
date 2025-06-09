@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using DLSS_Swapper.Helpers;
 
@@ -14,21 +13,21 @@ public abstract class LocalizedViewModelBase : ObservableObject, IDisposable
 
     protected virtual void OnLanguageChanged()
     {
-        Type currentClassType = GetType();
-        IEnumerable<string> languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
-        foreach (string propertyName in languageProperties)
+        var currentClassType = GetType();
+        var languageProperties = LanguageManager.GetClassLanguagePropertyNames(currentClassType);
+        foreach (var propertyName in languageProperties)
         {
             OnPropertyChanged(propertyName);
         }
     }
 
-    public void Dispose()
-    {
-        LanguageManager.Instance.OnLanguageChanged -= OnLanguageChanged;
-    }
-
     ~LocalizedViewModelBase()
     {
         Dispose();
+    }
+
+    public void Dispose()
+    {
+        LanguageManager.Instance.OnLanguageChanged -= OnLanguageChanged;
     }
 }

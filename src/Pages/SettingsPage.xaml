@@ -111,7 +111,7 @@
                     Margin="0,40,0,0"
                     Text="{x:Bind ViewModel.TranslationProperties.DllsDeveloperOptionsText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0">
-                    <ComboBox Header="{x:Bind ViewModel.TranslationProperties.ShowOnScreenIndicatorText, Mode=OneWay}" ItemsSource="{Binding DLSSOnScreenIndicatorOptions, Mode=OneTime}" SelectedItem="{Binding SelectedDlssOnScreenIndicator, Mode=TwoWay}" Margin="0,0,0,8" />
+                    <ComboBox Header="{x:Bind ViewModel.TranslationProperties.ShowOnScreenIndicatorText, Mode=OneWay}" ItemsSource="{Binding DLSSOnScreenIndicatorOptions, Mode=OneTime}" SelectedItem="{Binding SelectedDlssOnScreenIndicator, Mode=TwoWay}" DisplayMemberPath="Label" Margin="0,0,0,8" />
                     <CheckBox Content="{x:Bind ViewModel.TranslationProperties.EnableLoggingToFileText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
                     <CheckBox Content="{x:Bind ViewModel.TranslationProperties.VerboseLoggingText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.DlssVerboseLogging, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>
                     <CheckBox Content="{x:Bind ViewModel.TranslationProperties.EnableLoggingToConsoleWindowText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.DlssLoggingToWindow, Mode=TwoWay}"  Margin="0,0,0,4"/>

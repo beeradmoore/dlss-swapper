@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using DLSS_Swapper.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.DataTransfer;
@@ -57,7 +58,7 @@ namespace DLSS_Swapper.UserControls
                 else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.Copy;
-                    coverDragDropDragUIOverrideCaption = "Add custom cover";
+                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("AddCustomCover");
                 }
                 else
                 {
@@ -68,7 +69,7 @@ namespace DLSS_Swapper.UserControls
             else
             {
                 coverDragDropAcceptedOperation = DataPackageOperation.None;
-                coverDragDropDragUIOverrideCaption = "You may only drag over a single file for a cover";
+                coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("AddCoverErrorSingleFile");
             }
         }
 

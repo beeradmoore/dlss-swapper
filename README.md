@@ -25,7 +25,7 @@
 > 此 Fork 也是您唯一能找到的修改版官方下载地方。请参考我们的[官方链接](#官方链接)来深入了解与 DLSS Swapper 相关的账号/网站。
 
 <p align="center">
-    <img src="https://beeradmoore.github.io/dlss-swapper/images/usage/usage_4.gif" />
+    <img src="https://github.com/Matte4773/dlss-swapper-chinese/blob/main/docs/images/dlssswapgifchn02.gif" />
 </p>
 
 ## 它支持哪些游戏库？

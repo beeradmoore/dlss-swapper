@@ -21,7 +21,7 @@
 
 
 > [!WARNING]
-> 请注意自称是 DLSS Swapper 的恶意网站。本站是您唯一可以找到官方下载的地方。此 Fork 也是您唯一能找到的修改版官方下载地方。请参考我们的[官方链接](#官方链接)来深入了解与 DLSS Swapper 相关的账号/网站。
+> 请注意自称是 DLSS Swapper 的恶意网站。本站是您唯一可以找到官方下载的地方。  此 Fork 也是您唯一能找到的修改版官方下载地方。请参考我们的[官方链接](#官方链接)来深入了解与 DLSS Swapper 相关的账号/网站。
 
 <p align="center">
     <img src="https://beeradmoore.github.io/dlss-swapper/images/usage/usage_4.gif" />

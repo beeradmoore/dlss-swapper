@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Acknowledgements" xml:space="preserve">
+    <value>鸣谢</value>
+  </data>
+  <data name="AddCover" xml:space="preserve">
+    <value>添加艺术图</value>
+  </data>
+  <data name="AddCoverErrorSingleFile" xml:space="preserve">
+    <value>您只能选择一张图片</value>
+  </data>
+  <data name="AddCustomCover" xml:space="preserve">
+    <value>自定义艺术图</value>
+  </data>
+  <data name="AddGame" xml:space="preserve">
+    <value>添加游戏</value>
+  </data>
+  <data name="AddIgnoredPath" xml:space="preserve">
+    <value>添加排除项</value>
+  </data>
+  <data name="AddingGameError" xml:space="preserve">
+    <value>添加您的游戏时出错</value>
+  </data>
+  <data name="AddingGameErrorReportIssue" xml:space="preserve">
+    <value>出现了错误，您的游戏暂时无法添加，请报告此问题</value>
+  </data>
+  <data name="AddingGamesManuallyAnotherNote" xml:space="preserve">
+    <value>关于手动添加游戏的另一个提示</value>
+  </data>
+  <data name="AddingGamesManuallyInfoHtml" xml:space="preserve">
+    <value>您必须选择您的 &lt;i&gt;游戏&lt;/i&gt; 目录，而不是 &lt;i&gt;游戏平台&lt;/i&gt; 目录&lt;br/&gt;&lt;br/&gt;例如，您的游戏在：&lt;br/&gt;&lt;b&gt;"C:\Program Files\Steam\Steamapps\common\游戏目录&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;您需要选择 &lt;b&gt;游戏目录&lt;/b&gt; 而不是选择 &lt;b&gt;Steam 或 Steamapps&lt;/b&gt; 的目录。</value>
+  </data>
+  <data name="AddingGamesManuallyNote" xml:space="preserve">
+    <value>通常情况下 DLSS Swapper 会自动从已安装的游戏库中查找游戏，如果您已安装的游戏未出现在此列表，可能是某些设置导致了这一情况，请检查:
+
+- 主菜单游戏库的过滤选项 ""隐藏不支持替换 DLL 的游戏""
+- 设置中某个游戏平台检测是否启用
+
+如果您已经检查了以上所描述的内容，但您的游戏仍未显示在列表，则可能存在错误，如果您能报告此情况，我们将不胜感激，在我们的 GitHub 仓库中提交该问题，以便我们进行修复，并在将来更好地检测您的游戏。</value>
+  </data>
+  <data name="AddingGamesManuallyNoteTitle" xml:space="preserve">
+    <value>关于手动添加游戏的提示</value>
+  </data>
+  <data name="AlreadyDownloaded" xml:space="preserve">
+    <value>已下载。</value>
+  </data>
+  <data name="AlreadyImported" xml:space="preserve">
+    <value>已导入。</value>
+  </data>
+  <data name="ApplicationRunsInAdministrativeModeInfo" xml:space="preserve">
+    <value>程序正在以管理员权限的方式运行</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>DLSS Swapper</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>您确定要删除自定义的艺术图吗？</value>
+  </data>
+  <data name="BelowMultipleDllFoundYouWillBeAbleToSwapInfo" xml:space="preserve">
+    <value>检测到多个 DLL 文件，您仍然可以和之前一样替换和还原 DLL 文件，因为我们会对所有 DLL 文件同时执行这些操作，但是，由于我们并不知道游戏使用了这些 DLL 文件中的哪一个，因此显示的 DLL 文件版本是检测到的第一个 DLL 文件的版本。</value>
+  </data>
+  <data name="BrowserTest" xml:space="preserve">
+    <value>浏览器测试</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="CancelCurrentTest" xml:space="preserve">
+    <value>取消当前的测试</value>
+  </data>
+  <data name="ClickToCopyDetails" xml:space="preserve">
+    <value>点击复制以下详细信息</value>
+  </data>
+  <data name="ClickToFavourite" xml:space="preserve">
+    <value>添加收藏</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>说明</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="CopyTestResults" xml:space="preserve">
+    <value>复制测试输出</value>
+  </data>
+  <data name="CouldNotDeserializeGogCatalog" xml:space="preserve">
+    <value>GOG 目录数据解析加载失败：{0}</value>
+  </data>
+  <data name="CouldNotDeserializeGogEmbedFilteredResponse" xml:space="preserve">
+    <value>未能从 URL {0} 获取有效的 GOG 内容数据</value>
+  </data>
+  <data name="CouldNotDeserializeManifestException" xml:space="preserve">
+    <value>无法加载 manifest.json 文件。</value>
+  </data>
+  <data name="CouldNotDetectUbisoftConnectInstallKey" xml:space="preserve">
+    <value>未找到 Ubisoft Connect 的安装路径。</value>
+  </data>
+  <data name="CouldNotDetermineImportPath" xml:space="preserve">
+    <value>无法确定导入路径。</value>
+  </data>
+  <data name="CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
+    <value>无法下载 {0} DLL 文件，请稍后再试，或查看日志以了解下载失败的原因。</value>
+  </data>
+  <data name="CouldNotDownloadFile" xml:space="preserve">
+    <value>无法下载文件。</value>
+  </data>
+  <data name="CouldNotFindAnyGogEmbedFilteredProducts" xml:space="preserve">
+    <value>无法从 URL {0} 加载任何 GOG 相关列表。</value>
+  </data>
+  <data name="CouldNotFindAnyGogProduct" xml:space="preserve">
+    <value>无法从 URL {0} 获取 GOG 的信息。</value>
+  </data>
+  <data name="CouldNotFindFileTemplate" xml:space="preserve">
+    <value>无法找到文件 "{0}"。</value>
+  </data>
+  <data name="CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+    <value>无法找到路径 "{0}"。</value>
+  </data>
+  <data name="CouldNotLoadGameLibraryTemplate" xml:space="preserve">
+    <value>无法加载游戏库 {0}</value>
+  </data>
+  <data name="CouldNotLoadGithubReleaseDataException" xml:space="preserve">
+    <value>无法获取 GitHub 版本发布信息。</value>
+  </data>
+  <data name="CouldNotLoadImportedDlls" xml:space="preserve">
+    <value>无法加载导入的 DLL 文件。</value>
+  </data>
+  <data name="CouldNotOpenLogFileTryManual" xml:space="preserve">
+    <value>无法直接从 DLSS Swapper 打开您的日志文件，请尝试手动打开。</value>
+  </data>
+  <data name="CouldntDownloadNow" xml:space="preserve">
+    <value>目前无法下载。</value>
+  </data>
+  <data name="CouldntExportDlssDll" xml:space="preserve">
+    <value>无法导出 DLSS DLL 文件。</value>
+  </data>
+  <data name="CreateBugReport" xml:space="preserve">
+    <value>创建问题报告。</value>
+  </data>
+  <data name="CreateNewGithubIssue" xml:space="preserve">
+    <value>创建一个新的 GitHub 问题报告。</value>
+  </data>
+  <data name="CurrentDll" xml:space="preserve">
+    <value>当前的 DLL 文件。</value>
+  </data>
+  <data name="CurrentVersionIsActualTemplate" xml:space="preserve">
+    <value>您当前有 {0} 已经安装.\n\n</value>
+  </data>
+  <data name="CustomCoverRemove" xml:space="preserve">
+    <value>移除自定义艺术图？</value>
+  </data>
+  <data name="CustomUserAgentTest" xml:space="preserve">
+    <value>自定义代理测试</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="DeleteDll" xml:space="preserve">
+    <value>删除 DLL</value>
+  </data>
+  <data name="DeleteDllVersionTemplate" xml:space="preserve">
+    <value>删除 {0} v{1}?</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>诊断系统/系统信息</value>
+  </data>
+  <data name="DiagnosticsTest10Title" xml:space="preserve">
+    <value>使用代理在 DLSS Swap 中下载 DLSS Swap DLL 文件</value>
+  </data>
+  <data name="DiagnosticsTest11Title" xml:space="preserve">
+    <value>从 UploadThing 镜像下载 DLSS DLL 文件</value>
+  </data>
+  <data name="DiagnosticsTest1Title" xml:space="preserve">
+    <value>测试 Google.com 响应以检查互联网连接</value>
+  </data>
+  <data name="DiagnosticsTest2Title" xml:space="preserve">
+    <value>测试微软必应响应以检查互联网连接</value>
+  </data>
+  <data name="DiagnosticsTest3Title" xml:space="preserve">
+    <value>在 DLSS Swapper 清单中下载 DLSS DLL 文件测试</value>
+  </data>
+  <data name="DiagnosticsTest4Title" xml:space="preserve">
+    <value>从浏览器下载 DLL 文件测试</value>
+  </data>
+  <data name="DiagnosticsTest5Title" xml:space="preserve">
+    <value>从 Steam 下载游戏封面艺术图</value>
+  </data>
+  <data name="DiagnosticsTest6Title" xml:space="preserve">
+    <value>从 Epic Games 商店下载游戏封面艺术图</value>
+  </data>
+  <data name="DiagnosticsTest7Title" xml:space="preserve">
+    <value>从 DLSS Swapper 的服务器下载游戏封面艺术图</value>
+  </data>
+  <data name="DiagnosticsTest8Title" xml:space="preserve">
+    <value>从 DLSS Swapper 的其它服务器下载游戏封面艺术图</value>
+  </data>
+  <data name="DiagnosticsTest9Title" xml:space="preserve">
+    <value>查询 DLSS Swapper 的 DNS 服务器地址</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>停用</value>
+  </data>
+  <data name="DllPath" xml:space="preserve">
+    <value>DLL 文件路径。</value>
+  </data>
+  <data name="DllZipInvalidMultipleDllFound" xml:space="preserve">
+    <value>DLL Zip 压缩包无效（包含了多个 DLL 文件）</value>
+  </data>
+  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
+    <value>DLL Zip 压缩包无效（未找到 DLL 文件）</value>
+  </data>
+  <data name="DlssSwapperCloseDueToManifest" xml:space="preserve">
+    <value>DLSS Swapper 无法加载其清单文件，需要关闭。</value>
+  </data>
+  <data name="DlssSwapperFailedToLaunch" xml:space="preserve">
+    <value>DLSS Swapper 启动失败。</value>
+  </data>
+  <data name="DlssSwapperMustClose" xml:space="preserve">
+    <value>DLSS Swapper 需要关闭。</value>
+  </data>
+  <data name="DlssSwapperUpdated" xml:space="preserve">
+    <value>DLSS Swapper 已更新。</value>
+  </data>
+  <data name="DlssSwappingConsideredCheatingInfo" xml:space="preserve">
+    <value>替换 DLSS 版本通常情况下不会被视为修改文件（即作弊），但如果您游戏目录中的文件与游戏新版的文件不一致，某些反作弊可能会尝试拦截游戏启动。\n\n因此，如果您玩的游戏是多人游戏且使用反作弊，请谨慎操作。</value>
+  </data>
+  <data name="DontShowAgain" xml:space="preserve">
+    <value>不再提示此信息。</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>下载错误</value>
+  </data>
+  <data name="DownloadFileSize" xml:space="preserve">
+    <value>下载大小</value>
+  </data>
+  <data name="DownloadFileWasInvalid" xml:space="preserve">
+    <value>下载文件大小: </value>
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>下载中</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="EnabledForAllDlssDlls" xml:space="preserve">
+    <value>对所有的 DLSS 版本显示信息</value>
+  </data>
+  <data name="EnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>仅对 DLSS Debug 版本显示信息</value>
+  </data>
+  <data name="EnableLoggingToFile" xml:space="preserve">
+    <value>日志保存到文件</value>
+  </data>
+  <data name="enOnly" xml:space="preserve">
+    <value>仅限英文</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>错误信息</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="ExportAll" xml:space="preserve">
+    <value>全部导出</value>
+  </data>
+  <data name="ExportedDllsTemplate" xml:space="preserve">
+    <value>导出了 {0} DLSS DLL 文件{1}。</value>
+  </data>
+  <data name="ExportedDllTemplate" xml:space="preserve">
+    <value>已导出 DLL 文件 {0}。</value>
+  </data>
+  <data name="ExportErrorDueToDllsCountTemplate" xml:space="preserve">
+    <value>无法导出，因为 "{0}" 存在 {1} 个 DLL 而不是一个。</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="FailedToLaunch" xml:space="preserve">
+    <value>启动失败</value>
+  </data>
+  <data name="Favourited" xml:space="preserve">
+    <value>已收藏</value>
+  </data>
+  <data name="FileDescription" xml:space="preserve">
+    <value>文件描述</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>未能找到文件。</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>文件大小</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>过滤</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="Game" xml:space="preserve">
+    <value>游戏库</value>
+  </data>
+  <data name="GameCurrentlyProcessing" xml:space="preserve">
+    <value>游戏正在处理</value>
+  </data>
+  <data name="GameNotReadyToPlayState" xml:space="preserve">
+    <value>游戏当前未准备就绪</value>
+  </data>
+  <data name="GameProcessingPleaseWaitTemplate" xml:space="preserve">
+    <value>{0} 仍在处理中，请等待加载进度完成，然后再打开。</value>
+  </data>
+  <data name="Games" xml:space="preserve">
+    <value>游戏库</value>
+  </data>
+  <data name="GithubAccountRequired" xml:space="preserve">
+    <value>(GitHub 授权)</value>
+  </data>
+  <data name="GithubIssues" xml:space="preserve">
+    <value>GitHub issues</value>
+  </data>
+  <data name="GridView" xml:space="preserve">
+    <value>网格视图</value>
+  </data>
+  <data name="GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+    <value>将不同平台的游戏分组显示</value>
+  </data>
+  <data name="Grouping" xml:space="preserve">
+    <value>分组</value>
+  </data>
+  <data name="Hash" xml:space="preserve">
+    <value>Hash</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="HideGamesWithNoSwappableItems" xml:space="preserve">
+    <value>隐藏不支持替换 DLL 文件的游戏</value>
+  </data>
+  <data name="IfButtonDoesntWorkTryHere" xml:space="preserve">
+    <value>如果上方按钮按了无反应，请点击此链接,</value>
+  </data>
+  <data name="IgnoredPaths" xml:space="preserve">
+    <value>排除目录</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="Imported" xml:space="preserve">
+    <value>已导入</value>
+  </data>
+  <data name="ImportedAsExistingRecord" xml:space="preserve">
+    <value>已作为现有 DLL 记录导入。</value>
+  </data>
+  <data name="ImportFeatureDisabled" xml:space="preserve">
+    <value>导入功能已禁用，无法加载导入清单。</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>导入中</value>
+  </data>
+  <data name="ImportSystemCurrentlyBroken" xml:space="preserve">
+    <value>导入功能当前不可用，但已在修复计划中。</value>
+  </data>
+  <data name="InstallPath" xml:space="preserve">
+    <value>安装路径</value>
+  </data>
+  <data name="InstallPathAlreadyExistsTemplate" xml:space="preserve">
+    <value>当前路径 "{0}" 已经存在，因此无法再次添加。</value>
+  </data>
+  <data name="InvalidFileTypeTemplate" xml:space="preserve">
+    <value>"{0}" 无效的文件类型</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>DLL 库</value>
+  </data>
+  <data name="ListView" xml:space="preserve">
+    <value>列表视图</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>加载</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>正在加载</value>
+  </data>
+  <data name="MalliciousDllsInfo" xml:space="preserve">
+    <value>手动导入 DLL 到您的电脑上是危险的操作
+
+            如果意外的将恶意 DLL 文件放入游戏，就像运行您刚从 LimeWire 下载的“Linking_park_-_nUmB_mp3.exe”一样危险。
+          
+ 
+ 请只从您信任的来源导入 DLL 文件。</value>
+  </data>
+  <data name="ManifestCouldNotBeLoaded" xml:space="preserve">
+    <value>我们无法从您的电脑或服务器中加载 manifest.json。
+
+如果这种问题继续发生，请在 GitHub 上的问题跟踪中提交报告。</value>
+  </data>
+  <data name="MigratingDlls" xml:space="preserve">
+    <value>正在迁移 DLL 文件</value>
+  </data>
+  <data name="MultipleDllsFound" xml:space="preserve">
+    <value>发现多个 DLL 文件</value>
+  </data>
+  <data name="MultipleDllsFoundTemplate" xml:space="preserve">
+    <value>发现多个 {0} DLL 文件</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="NetworkTester" xml:space="preserve">
+    <value>网络测试</value>
+  </data>
+  <data name="NewDlls" xml:space="preserve">
+    <value>发现新的 DLL !</value>
+  </data>
+  <data name="NewDllsFound" xml:space="preserve">
+    <value>发现新的 DLL 文件</value>
+  </data>
+  <data name="NewTranslation" xml:space="preserve">
+    <value>新翻译</value>
+  </data>
+  <data name="NoDllsFound" xml:space="preserve">
+    <value>没有 DLL 文件</value>
+  </data>
+  <data name="NoDllsToExport" xml:space="preserve">
+    <value>您没有可导出的 DLL 记录。</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="NoNewUpdatesAvailable" xml:space="preserve">
+    <value>当前已是最新版本。</value>
+  </data>
+  <data name="NoteForMultiplayerGames" xml:space="preserve">
+    <value>欢迎使用 DLSS Swapper，请先阅读此内容</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>便签</value>
+  </data>
+  <data name="Okay" xml:space="preserve">
+    <value>好</value>
+  </data>
+  <data name="Oops" xml:space="preserve">
+    <value>哎呀</value>
+  </data>
+  <data name="OpenDllLocation" xml:space="preserve">
+    <value>打开 DLL 文件路径</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>打开文件夹</value>
+  </data>
+  <data name="OpenInBrowser" xml:space="preserve">
+    <value>打开您的浏览器</value>
+  </data>
+  <data name="OpenInBrowserInfo" xml:space="preserve">
+    <value>点击 “在浏览器中打开”按钮，或将以下链接复制并粘贴到浏览器中，检查您的浏览器是否正在下载文件？</value>
+  </data>
+  <data name="Optional" xml:space="preserve">
+    <value>(可选)</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="OriginalDll" xml:space="preserve">
+    <value>原始的 DLL 版本</value>
+  </data>
+  <data name="OriginalDllRestore" xml:space="preserve">
+    <value>还原原始 DLL 版本</value>
+  </data>
+  <data name="PleaseNavigateLibraryToDownloadDlls" xml:space="preserve">
+    <value>请在 DLL 库 下载新的 DLL 文件。</value>
+  </data>
+  <data name="PleaseOpenIssuePartial1" xml:space="preserve">
+    <value>请打开</value>
+  </data>
+  <data name="PleaseOpenIssuePartial2" xml:space="preserve">
+    <value>一个新的 issues</value>
+  </data>
+  <data name="PleaseOpenIssuePartial3" xml:space="preserve">
+    <value>在 DLSS Swapper 的 GitHub 仓库，并在“附加上下文”部分提供以下信息。</value>
+  </data>
+  <data name="ProcessedDlls" xml:space="preserve">
+    <value>已处理的 DLL 文件：</value>
+  </data>
+  <data name="Publish" xml:space="preserve">
+    <value>发布</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="RemoveDlssSwapperGameTemplate" xml:space="preserve">
+    <value>您确定要从 DLSS Swapper 删除 "{0}" 这不会影响已经替换的 DLL 文件。</value>
+  </data>
+  <data name="ReportIssue" xml:space="preserve">
+    <value>报告问题</value>
+  </data>
+  <data name="RequiresDownload" xml:space="preserve">
+    <value>需要下载</value>
+  </data>
+  <data name="ResetDllToVersionTemplate" xml:space="preserve">
+    <value>DLL 已还原为原始版本： {0}.</value>
+  </data>
+  <data name="Results" xml:space="preserve">
+    <value>测试详情</value>
+  </data>
+  <data name="RunTest" xml:space="preserve">
+    <value>开始测试</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="SelectGameFolder" xml:space="preserve">
+    <value>选择游戏目录</value>
+  </data>
+  <data name="SelectVersionTemplate" xml:space="preserve">
+    <value>选择 {0} 版本</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="SettingsAbout" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="SettingsAllowDebugDlls" xml:space="preserve">
+    <value>允许 Debug DLL 文件</value>
+  </data>
+  <data name="SettingsAllowDebugDllsInfo" xml:space="preserve">
+    <value>SDK 有时会发布调试 DLL 文件，允许文件在屏幕上显示额外的调试信息。</value>
+  </data>
+  <data name="SettingsAllowUntrusted" xml:space="preserve">
+    <value>允许不受信任的文件</value>
+  </data>
+  <data name="SettingsAllowUntrustedInfo" xml:space="preserve">
+    <value>在将 DLL 文件替换到游戏文件夹之前，Windows 会通过验证签名来检查其是否受信任，如果 DLL 文件未能通过签名验证，则不会被使用，建议保持此功能关闭。</value>
+  </data>
+  <data name="SettingsApliesOnlyToDllPickerNotLibrary" xml:space="preserve">
+    <value>在替换 DLL 时，仅显示已经下载的文件，而不是所有不同版本，此选项不影响 DLL 库。</value>
+  </data>
+  <data name="SettingsCheckForUpdates" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="SettingsDllsDeveloperOptions" xml:space="preserve">
+    <value>DLSS 开发者选项</value>
+  </data>
+  <data name="SettingsEnableLoggingToConsoleWindow" xml:space="preserve">
+    <value>将日志输出到控制台窗口</value>
+  </data>
+  <data name="SettingsGameLibraries" xml:space="preserve">
+    <value>游戏平台</value>
+  </data>
+  <data name="SettingsGeneralTroubleshootingGuide" xml:space="preserve">
+    <value>故障排除的指南</value>
+  </data>
+  <data name="SettingsGiveFeedback" xml:space="preserve">
+    <value>反馈</value>
+  </data>
+  <data name="SettingsGiveFeedbackInfo" xml:space="preserve">
+    <value>您可以为 DLSS Swapper 上提交建议功能或报告问题。</value>
+  </data>
+  <data name="SettingsLanguage" xml:space="preserve">
+    <value>语言选择</value>
+  </data>
+  <data name="SettingsLogging" xml:space="preserve">
+    <value>日志记录</value>
+  </data>
+  <data name="SettingsNo" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="SettingsOpenTranslationTools" xml:space="preserve">
+    <value>打开语言翻译工具</value>
+  </data>
+  <data name="SettingsShowOnlyDownloadedDlls" xml:space="preserve">
+    <value>只显示已经下载的 DLL 文件</value>
+  </data>
+  <data name="SettingsShowOnScreenIndicator" xml:space="preserve">
+    <value>在屏幕上显示信息</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="SettingsThemeMode" xml:space="preserve">
+    <value>主题设置</value>
+  </data>
+  <data name="SettingsThemeSystemSettingDefault" xml:space="preserve">
+    <value>跟随系统设置</value>
+  </data>
+  <data name="SettingsTroubleshooting" xml:space="preserve">
+    <value>故障排除</value>
+  </data>
+  <data name="SettingsVerboseLogging" xml:space="preserve">
+    <value>详细日志</value>
+  </data>
+  <data name="SettingsYes" xml:space="preserve">
+    <value>开启</value>
+  </data>
+  <data name="SettingsYourCurrentLogfile" xml:space="preserve">
+    <value>您的日志文件在：</value>
+  </data>
+  <data name="Sorry" xml:space="preserve">
+    <value>抱歉</value>
+  </data>
+  <data name="SourceLanguage" xml:space="preserve">
+    <value>当前语言</value>
+  </data>
+  <data name="SourceTranslation" xml:space="preserve">
+    <value>当前翻译</value>
+  </data>
+  <data name="StartingDownload" xml:space="preserve">
+    <value>开始下载</value>
+  </data>
+  <data name="StepFourSubmitYourIssue" xml:space="preserve">
+    <value>第四步：提交报告</value>
+  </data>
+  <data name="StepOneCreateNewIssue" xml:space="preserve">
+    <value>第一步：创建一个新的 issue</value>
+  </data>
+  <data name="StepThreeCopyBody" xml:space="preserve">
+    <value>第三步：复制正文</value>
+  </data>
+  <data name="StepTwoCopyTitle" xml:space="preserve">
+    <value>第二步：复制标题</value>
+  </data>
+  <data name="StillDoesNotWork" xml:space="preserve">
+    <value>无法下载</value>
+  </data>
+  <data name="StorageFileIsNull" xml:space="preserve">
+    <value>存储文件是空的</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="Swap" xml:space="preserve">
+    <value>替换</value>
+  </data>
+  <data name="ThanksForHelping" xml:space="preserve">
+    <value>感谢您的帮助！</value>
+  </data>
+  <data name="TitleNotManuallyAddedCantBeRemoved" xml:space="preserve">
+    <value>此标题不是手动添加的，无法删除。</value>
+  </data>
+  <data name="TopLevelDirectoryNotSupported" xml:space="preserve">
+    <value>您似乎选择了错误的目录，请重新选择游戏的根目录。</value>
+  </data>
+  <data name="TranslationTools" xml:space="preserve">
+    <value>翻译工具</value>
+  </data>
+  <data name="TranslationTools_AdminError" xml:space="preserve">
+    <value>翻译工具以管理员身份运行时无法使用。请重新启动应用程序。</value>
+  </data>
+  <data name="UnableToDeleteRecord" xml:space="preserve">
+    <value>无法删除 {0} 条记录。</value>
+  </data>
+  <data name="UnableToDllUpdate" xml:space="preserve">
+    <value>无法更新 DLL 的记录。</value>
+  </data>
+  <data name="UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>设置 ID 时，发现未知的游戏平台 {0}。</value>
+  </data>
+  <data name="UnknownTypeDll" xml:space="preserve">
+    <value>DLL 文件的类型未知。</value>
+  </data>
+  <data name="UntrustedDll" xml:space="preserve">
+    <value>当前 DLL 文件不被 Windows 受信任</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="UpdateAttempt" xml:space="preserve">
+    <value>正在尝试更新</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>有一个可用的更新</value>
+  </data>
+  <data name="UpdateManifest" xml:space="preserve">
+    <value>更新清单</value>
+  </data>
+  <data name="UseUserAgentInfo" xml:space="preserve">
+    <value>使用提供的代理或输入自定义的用户代理。</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="ViewType" xml:space="preserve">
+    <value>视图类型</value>
+  </data>
+  <data name="WaitToDownloadCompleteBeforeSwapping" xml:space="preserve">
+    <value>请等待 DLL 下载完成后再替换</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="WhileLoadingYourGameNewDllsDiscoveredHelpUs" xml:space="preserve">
+    <value>在加载您的游戏时，我们发现了一些新的 DLL，这些 DLL 不在 DLSS Swapper 仓库清单中。</value>
+  </data>
+  <data name="Works" xml:space="preserve">
+    <value>下载正常</value>
+  </data>
+  <data name="YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+    <value>请注意：您无需提交 DLL 文件，我们会根据您提交的报告信息查找新的 DLL</value>
+  </data>
+  <data name="YouMayOnlyDragOneFileCover" xml:space="preserve">
+    <value>您只能拖入单个文件作为封面。</value>
+  </data>
+  <data name="ZipDidNotContainAnyDlls" xml:space="preserve">
+    <value>Zip 文件不包含任何 DLL。</value>
+  </data>
+</root>

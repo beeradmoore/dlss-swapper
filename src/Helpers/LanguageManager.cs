@@ -44,6 +44,7 @@ public class LanguageManager
         return [
             "en-US",
             "pl-PL",
+            "zh-CN",
 #if DEBUG
             "LANG_HUNT",
 #endif
@@ -57,6 +58,7 @@ public class LanguageManager
         {
             "en-US" => "English",
             "pl-PL" => "Polish",
+            "zh-CN" => "简体中文",
             _ => languageKey,
         };
     }

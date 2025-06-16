@@ -10,11 +10,11 @@
 
     <StackPanel Orientation="Vertical">
         <TextBlock>
-            <Run Text="Success: " FontWeight="Bold"></Run>
+            <Run Text="{x:Bind ViewModel.TranslationProperties.SuccessText, Mode=OneWay}" FontWeight="Bold"></Run>
             <Run Text="{x:Bind ViewModel.SuccessCount}" />
         </TextBlock>
         <TextBlock>
-            <Run Text="Failed: " FontWeight="Bold"></Run>
+            <Run Text="{x:Bind ViewModel.TranslationProperties.FailedText, Mode=OneWay}" FontWeight="Bold"></Run>
             <Run Text="{x:Bind ViewModel.FailedCount}" />
         </TextBlock>
     </StackPanel>

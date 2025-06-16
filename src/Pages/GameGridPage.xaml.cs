@@ -1,43 +1,15 @@
 using DLSS_Swapper.Data;
-using DLSS_Swapper.Data.EpicGamesStore;
-using DLSS_Swapper.Data.GOG;
-using DLSS_Swapper.Data.GitHub;
-using DLSS_Swapper.Data.Steam;
-using DLSS_Swapper.Data.UbisoftConnect;
-using DLSS_Swapper.Data.Xbox;
-using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Security.Principal;
-using System.Text.Json;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Storage.Pickers;
 using Windows.System;
-using System.Text;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.CodeDom;
-using System.Collections.Concurrent;
 using AsyncAwaitBestPractices;
 using CommunityToolkit.WinUI;
 using System.Threading;
+using DLSS_Swapper.Helpers;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -96,40 +68,6 @@ namespace DLSS_Swapper.Pages
             //await LoadGamesFromCacheAsync();
             //UpdateGameLibraries();
             //await LoadGames();
-        }
-
-        async void MainGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            if (e.AddedItems.Count == 0)
-            {
-                return;
-            }
-
-            if (e.AddedItems[0] is Game game)
-            {
-                // Deselect currently selected item.
-                if (sender is GridView gridView)
-                {
-                    gridView.SelectedItem = null;
-                }
-
-                if (game.Processing)
-                {
-                    var dialog = new EasyContentDialog(this.XamlRoot)
-                    {
-                        Title = "Game Currently Processing",
-                        CloseButtonText = "Okay",
-                        Content = $"{game.Title} is still processing. Please wait for the loading indicator to complete before opening.",
-                    };
-                    await dialog.ShowAsync();
-                    return;
-                }
-
-                var gameControl = new GameControl(game);
-                await gameControl.ShowAsync();
-
-            }
         }
 
 
@@ -202,9 +140,9 @@ namespace DLSS_Swapper.Pages
                 {
                     var dialog = new EasyContentDialog(XamlRoot)
                     {
-                        Title = "Game Currently Processing",
-                        CloseButtonText = "Okay",
-                        Content = $"{selectedGame.Title} is still processing. Please wait for the loading indicator to complete before opening.",
+                        Title = ResourceHelper.GetString("GameCurrentlyProcessing"),
+                        CloseButtonText = ResourceHelper.GetString("Okay"),
+                        Content = ResourceHelper.GetFormattedResourceTemplate("GameProcessingPleaseWaitTemplate", selectedGame.Title),
                     };
                     _ = dialog.ShowAsync();
                     return;

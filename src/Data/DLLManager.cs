@@ -212,8 +212,8 @@ internal class DLLManager
 
             using (var memoryStream = new MemoryStream())
             {
-                // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider 
-                // adding a "fast UpdateManifest" which will quit early if we were unable to load in 10sec 
+                // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider
+                // adding a "fast UpdateManifest" which will quit early if we were unable to load in 10sec
                 // which would then fall back to loading local.
                 var fileDownloader = new FileDownloader("https://raw.githubusercontent.com/beeradmoore/dlss-swapper-manifest-builder/refs/heads/main/manifest.json", 0);
                 await fileDownloader.DownloadFileToStreamAsync(memoryStream);
@@ -233,7 +233,7 @@ internal class DLLManager
                 var manifest = await JsonSerializer.DeserializeAsync(memoryStream, SourceGenerationContext.Default.Manifest);
                 if (manifest is null)
                 {
-                    throw new Exception("Could not deserialize manifest.json.");
+                    throw new Exception(ResourceHelper.GetString("CouldNotDeserializeManifestException"));
                 }
 
                 Manifest = manifest;
@@ -312,7 +312,7 @@ internal class DLLManager
             var oldLoadingMessage = App.CurrentApp.MainWindow.ViewModel.LoadingMessage;
             App.CurrentApp.RunOnUIThread(() =>
             {
-                App.CurrentApp.MainWindow.ViewModel.LoadingMessage = "Migrating DLLs";
+                App.CurrentApp.MainWindow.ViewModel.LoadingMessage = ResourceHelper.GetString("MigratingDlls");
             });
 
             CheckDllRecordsForMigration_117(Manifest.DLSS, ImportedManifest?.DLSS);
@@ -350,7 +350,7 @@ internal class DLLManager
             LoadLocalRecords(ImportedManifest.XeSS_FG, true);
             LoadLocalRecords(ImportedManifest.XeLL, true);
         }
-               
+
         // See if there is any imported manifest items that are to be migrated to downloaded
         // CheckImportedManifestForCleanUp needs to be called after LoadLocalRecords
         var didChangeImportedManifest = false;
@@ -693,47 +693,47 @@ internal class DLLManager
         importedManifestRecords?.Sort();
 
         var tempRecords = new List<DLLRecord>(records);
-      
-            foreach (var dllRecord in manifestRecords)
-            {
-                // LoadLocalRecord(dllRecord, false);
 
-                var insertIndex = tempRecords.BinarySearch(dllRecord);
-                if (insertIndex < 0) // InsertObject
+        foreach (var dllRecord in manifestRecords)
+        {
+            // LoadLocalRecord(dllRecord, false);
+
+            var insertIndex = tempRecords.BinarySearch(dllRecord);
+            if (insertIndex < 0) // InsertObject
+            {
+                insertIndex = ~insertIndex;
+
+
+                records.Insert(insertIndex, dllRecord);
+
+                tempRecords.Insert(insertIndex, dllRecord);
+            }
+            else // Update object
+            {
+                records[insertIndex].CopyFrom(dllRecord);
+                tempRecords[insertIndex] = dllRecord;
+            }
+        }
+
+        // Now that we have loaded DLL records we want to add the importedRecords back into that list.
+        if (importedManifestRecords?.Any() == true)
+        {
+            foreach (var importedRecord in importedManifestRecords)
+            {
+                var insertIndex = tempRecords.BinarySearch(importedRecord);
+                if (insertIndex < 0)
                 {
                     insertIndex = ~insertIndex;
-
-
-                    records.Insert(insertIndex, dllRecord);
-
-                    tempRecords.Insert(insertIndex, dllRecord);
+                    records.Insert(insertIndex, importedRecord);
+                    tempRecords.Insert(insertIndex, importedRecord);
                 }
-                else // Update object
+                else
                 {
-                    records[insertIndex].CopyFrom(dllRecord);
-                    tempRecords[insertIndex] = dllRecord;
+                    records[insertIndex].CopyFrom(importedRecord);
+                    tempRecords[insertIndex] = importedRecord;
                 }
             }
-
-            // Now that we have loaded DLL records we want to add the importedRecords back into that list. 
-            if (importedManifestRecords?.Any() == true)
-            {
-                foreach (var importedRecord in importedManifestRecords)
-                {
-                    var insertIndex = tempRecords.BinarySearch(importedRecord);
-                    if (insertIndex < 0)
-                    {
-                        insertIndex = ~insertIndex;
-                        records.Insert(insertIndex, importedRecord);
-                        tempRecords.Insert(insertIndex, importedRecord);
-                    }
-                    else
-                    {
-                        records[insertIndex].CopyFrom(importedRecord);
-                        tempRecords[insertIndex] = importedRecord;
-                    }
-                }
-            }
+        }
 
     }
 
@@ -1117,7 +1117,7 @@ internal class DLLManager
     {
         if (ImportedManifest is null)
         {
-            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, "Import feature is disabled, import manifest could not be loaded.");
+            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("ImportFeatureDisabled"));
         }
 
         var fileName = Path.GetFileName(filePath);
@@ -1177,7 +1177,7 @@ internal class DLLManager
 
         if (gameAssetType is null || recordList is null || importedRecordList is null)
         {
-            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, $"DLL not a known type.");
+            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("UnknownTypeDll"));
         }
 
         var versionInfo = FileVersionInfo.GetVersionInfo(filePath);
@@ -1186,7 +1186,7 @@ internal class DLLManager
         // Don't do anything with untrusted dlls.
         if (Settings.Instance.AllowUntrusted == false && isTrusted == false)
         {
-            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, $"DLL is not trusted by Windows.");
+            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("UntrustedDll"));
         }
 
         var dllHash = versionInfo.GetMD5Hash();
@@ -1200,7 +1200,7 @@ internal class DLLManager
             // If the DLL is already imported we can skip it.
             if (existingDll.LocalRecord?.IsDownloaded == true)
             {
-                return DLLImportResult.FromSucces(zippedDllFullName ?? filePath, $"{fileName} (already imported)", false);
+                return DLLImportResult.FromSucces(zippedDllFullName ?? filePath, $"{fileName} {ResourceHelper.GetString("AlreadyImported")}", false);
             }
             importingAsDownloadedDll = true;
         }

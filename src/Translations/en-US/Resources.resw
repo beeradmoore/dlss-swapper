@@ -424,7 +424,7 @@ Only import dlls from sources you trust.</value>
     <value>No DLLs Found</value>
   </data>
   <data name="PleaseNavigateLibraryToDownloadDlls" xml:space="preserve">
-    <value>Please go to the libary page to download new DLLs.</value>
+    <value>Please go to the library page to download new DLLs.</value>
   </data>
   <data name="WaitToDownloadCompleteBeforeSwapping" xml:space="preserve">
     <value>Please wait for download to complete before swapping</value>
@@ -601,7 +601,7 @@ Only import dlls from sources you trust.</value>
     <value>Downloading DLSS Swapper DLL within DLSS Swapper</value>
   </data>
   <data name="DiagnosticsTest4Title" xml:space="preserve">
-    <value>Downlodaing DLSS Swapper DLL from browser</value>
+    <value>Downloading DLSS Swapper DLL from browser</value>
   </data>
   <data name="DiagnosticsTest5Title" xml:space="preserve">
     <value>Downloading game cover from Steam</value>
@@ -697,7 +697,7 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   </data>
   <data name="CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>You currently have {0} installed.\n\n</value>
-    <comment>0 = {currentVerion}</comment>
+    <comment>{0} is the currently installed version.</comment>
   </data>
   <data name="CouldNotLoadGithubReleaseDataException" xml:space="preserve">
     <value>Could not load GitHub release data.</value>
@@ -862,7 +862,7 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
     <value>Migrating DLLs</value>
   </data>
   <data name="TranslationTools_AdminError" xml:space="preserve">
-    <value>You can not use the translation tool while it is runnning as admin. Please restart the application.</value>
+    <value>You can not use the translation tool while it is running as admin. Please restart the application.</value>
   </data>
 
   <data name="TranslationTools_ResetProgressTitle" xml:space="preserve">

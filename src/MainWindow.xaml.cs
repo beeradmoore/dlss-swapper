@@ -123,7 +123,7 @@ namespace DLSS_Swapper
         {
             if (args.IsSettingsInvoked)
             {
-                GoToPage("Settings");
+                GoToPage(SettingsPage.PageTag);
             }
             else if (args.InvokedItemContainer.Tag is string invokedItem)
             {
@@ -146,28 +146,28 @@ namespace DLSS_Swapper
         {
             ViewModel.AcknowledgementsVisibility = Visibility.Collapsed;
 
-            if (page == "Games")
+            if (page == GameGridPage.PageTag)
             {
                 if (ContentFrame.Content is null || ContentFrame.Content as Page != gameGridPage)
                 {
                     ContentFrame.Content = gameGridPage ??= new GameGridPage();
                 }
             }
-            else if (page == "Library")
+            else if (page == LibraryPage.PageTag)
             {
                 if (ContentFrame.Content is null || ContentFrame.Content as Page != libraryPage)
                 {
                     ContentFrame.Content = libraryPage ??= new LibraryPage();
                 }
             }
-            else if (page == "Settings")
+            else if (page == SettingsPage.PageTag)
             {
                 if (ContentFrame.Content is null || ContentFrame.Content as Page != settingsPage)
                 {
                     ContentFrame.Content = settingsPage ??= new SettingsPage();
                 }
             }
-            else if (page == "Acknowledgements")
+            else if (page ==  AcknowledgementsPage.PageTag)
             {
                 if (ContentFrame.Content is null || ContentFrame.Content is not AcknowledgementsPage)
                 {
@@ -197,11 +197,17 @@ namespace DLSS_Swapper
 
         internal void GoToAcknowledgements()
         {
-            GoToPage("Acknowledgements");
+            GoToPage(AcknowledgementsPage.PageTag);
         }
 
         async void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
         {
+            if (sender is NavigationView navigationView && navigationView.SettingsItem is NavigationViewItem settingsNavigationViewItem)
+            {
+                settingsNavigationViewItem.Tag = SettingsPage.PageTag;
+            }
+
+
             // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
             /*
             // If this is a new build, fetch updates to display to the user.
@@ -313,7 +319,7 @@ namespace DLSS_Swapper
             // We are now ready to show the games list.
             LoadingStackPanel.Visibility = Visibility.Collapsed;
 
-            GoToPage("Games");
+            GoToPage(GameGridPage.PageTag);
 
             // TODO: Disabled because CommunityToolkit.WinUI.Helpers.SystemInformation.Instance.IsAppUpdated throws exceptions for unpackaged apps.
             /*

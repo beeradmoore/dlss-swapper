@@ -22,6 +22,8 @@ namespace DLSS_Swapper.Pages
     /// </summary>
     public sealed partial class GameGridPage : Page
     {
+        public static string PageTag { get; } = "PageTag_Games";
+
         /*
         public List<IGameLibrary> GameLibraries { get; } = new List<IGameLibrary>();
 

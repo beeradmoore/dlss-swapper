@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:pages="using:DLSS_Swapper.Pages"
     Title="{x:Bind ViewModel.TranslationProperties.Title, Mode=OneWay}"
     mc:Ignorable="d">
 
@@ -48,13 +49,13 @@
                              Loaded="MainNavigationView_Loaded"
                              Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <muxc:NavigationView.MenuItems>
-                <muxc:NavigationViewItem Content="{x:Bind ViewModel.TranslationProperties.NavigationViewItemGamesText, Mode=OneWay}" Tag="Games">
+                <muxc:NavigationViewItem Content="{x:Bind ViewModel.TranslationProperties.NavigationViewItemGamesText, Mode=OneWay}" Tag="{x:Bind pages:GameGridPage.PageTag}">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE7FC;"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Icon="Library" Content="{x:Bind ViewModel.TranslationProperties.NavigationViewItemLibraryText, Mode=OneWay}" Tag="Library" />
-                <muxc:NavigationViewItem Icon="Emoji" Content="{x:Bind ViewModel.TranslationProperties.NavigationViewItemAcknowledgementsText, Mode=OneWay}" Tag="Acknowledgements" Visibility="{x:Bind ViewModel.AcknowledgementsVisibility, Mode=OneWay}" />
+                <muxc:NavigationViewItem Icon="Library" Content="{x:Bind ViewModel.TranslationProperties.NavigationViewItemLibraryText, Mode=OneWay}" Tag="{x:Bind pages:LibraryPage.PageTag}" />
+                <muxc:NavigationViewItem Icon="Emoji" Content="{x:Bind ViewModel.TranslationProperties.NavigationViewItemAcknowledgementsText, Mode=OneWay}" Tag="{x:Bind pages:AcknowledgementsPage.PageTag}" Visibility="{x:Bind ViewModel.AcknowledgementsVisibility, Mode=OneWay}" />
             </muxc:NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" />
         </muxc:NavigationView>

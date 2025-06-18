@@ -15,6 +15,8 @@ namespace DLSS_Swapper.Pages
     /// </summary>
     public sealed partial class LibraryPage : Page
     {
+        public static string PageTag { get; } = "PageTag_Library";
+
         public LibraryPageModel ViewModel { get; private set; }
 
         public LibraryPage()

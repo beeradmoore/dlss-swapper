@@ -86,6 +86,15 @@ namespace DLSS_Swapper
             }
 
             SetIcon();
+
+            // Update settings text when language changes.
+            LanguageManager.Instance.OnLanguageChanged += () =>
+            {
+                if (MainNavigationView.SettingsItem is NavigationViewItem settingsNavigationViewItem)
+                {
+                    settingsNavigationViewItem.Content = ResourceHelper.GetString("Settings");
+                }
+            };
         }
 
 
@@ -205,6 +214,7 @@ namespace DLSS_Swapper
             if (sender is NavigationView navigationView && navigationView.SettingsItem is NavigationViewItem settingsNavigationViewItem)
             {
                 settingsNavigationViewItem.Tag = SettingsPage.PageTag;
+                settingsNavigationViewItem.Content = ResourceHelper.GetString("Settings");
             }
 
 

@@ -552,7 +552,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
                     DefaultButton = ContentDialogButton.Primary,
                     PrimaryButtonCommand = OpenTranslationsGuideCommand,
                     PrimaryButtonText = ResourceHelper.GetString("TranslationTools_TranslationGuideButton"),
-                    Content = string.Format(CultureInfo.InvariantCulture, ResourceHelper.GetString("TranslationTools_TranslationGuideMessage"), filename),
+                    Content = ResourceHelper.GetFormattedResourceTemplate("TranslationTools_TranslationGuideMessage", filename),
                     CloseButtonText = ResourceHelper.GetString("Close"),
                 };
                 await dialog.ShowAsync();

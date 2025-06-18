@@ -865,4 +865,45 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
     <value>You can not use the translation tool while it is runnning as admin. Please restart the application.</value>
   </data>
 
+  <data name="TranslationTools_ResetProgressTitle" xml:space="preserve">
+    <value>Reset progress and continue?</value>
+  </data>
+  <data name="TranslationTools_ResetProgressMessage" xml:space="preserve">
+    <value>This will reset your current translation progress. Are you sure you want to continue?</value>
+  </data>
+  <data name="TranslationTools_ResetProgressButton" xml:space="preserve">
+    <value>Reset and continue</value>
+  </data>
+  <data name="TranslationTools_NotValidTranslationFile" xml:space="preserve">
+    <value>Not a valid DLSS Swapper translation file.</value>
+    <comment>Error that the json translation file the user opened is not valid.</comment>
+  </data>
+
+  <data name="TranslationTools_TranslationGuideButton" xml:space="preserve">
+    <value>Translation guide</value>
+  </data>
+
+  <data name="TranslationTools_TranslationGuideMessage" xml:space="preserve">
+    <value>$"Your translation has been created. Please look at the DLSS Swapper translation guide as to what to do next with {0}.</value>
+    <comment>Here {0} will be the filename of the translation file the user published.</comment>
+  </data>
+
+
+
+
+  <data name="TranslationTools_LoadFailedMessage" xml:space="preserve">
+    <value>Could not load translation. Please see your error log for more information.</value>
+  </data>
+  <data name="TranslationTools_NoDataToSave" xml:space="preserve">
+    <value>No translation data was found to save.</value>
+  </data>
+  <data name="TranslationTools_NoDataToPublish" xml:space="preserve">
+    <value>No translation data was found to publish.</value>
+  </data>
+  <data name="TranslationTools_SaveFailedMessage" xml:space="preserve">
+    <value>Could not save translation. Please see your error log for more information.</value>
+  </data>
+  <data name="TranslationTools_PublishFailedMessage" xml:space="preserve">
+    <value>Could not publish translation. Please see your error log for more information.</value>
+  </data>
 </root>

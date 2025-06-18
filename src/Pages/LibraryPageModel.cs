@@ -138,7 +138,7 @@ public partial class LibraryPageModel : ObservableObject
             Text = string.Empty,
             HorizontalAlignment = HorizontalAlignment.Left,
         };
-        progressTextBlock.Inlines.Add(new Run() { Text = "Exported DLLs: " });
+        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ExportedDLLs") });
         var progressRun = new Run() { Text = "0" };
         progressTextBlock.Inlines.Add(progressRun);
         var progressStackPanel = new StackPanel()
@@ -226,7 +226,7 @@ public partial class LibraryPageModel : ObservableObject
                     Title = ResourceHelper.GetString("Error"),
                     CloseButtonText = ResourceHelper.GetString("Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = $"No DLLs found suitible for exporting export.",
+                    Content = ResourceHelper.GetString("LibraryPage_NoDLLsForExport_Message"),
                 };
                 await dialog.ShowAsync();
             }
@@ -256,8 +256,8 @@ public partial class LibraryPageModel : ObservableObject
                     {
                         CloseButtonText = ResourceHelper.GetString("Okay"),
                         DefaultButton = ContentDialogButton.Close,
-                        Title = "Success",
-                        Content = $"Exported {toExport.Count} dll{(toExport.Count == 1 ? string.Empty : "s")}.",
+                        Title = ResourceHelper.GetString("Success"),
+                        Content = ResourceHelper.GetFormattedResourceTemplate("LibraryPage_ExportedDLLsCount_Message", toExport.Count),
                     };
                     await dialog.ShowAsync();
                 }
@@ -996,10 +996,10 @@ public partial class LibraryPageModel : ObservableObject
         {
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = "No new DLLs",
+                Title = ResourceHelper.GetString("LibraryPage_NoNewDLLsTitle"),
                 CloseButtonText = ResourceHelper.GetString("Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = "There were no new DLLs to download.",
+                Content = ResourceHelper.GetString("LibraryPage_NoNewDLLsMessage"),
             };
             await dialog.ShowAsync();
         }
@@ -1007,10 +1007,10 @@ public partial class LibraryPageModel : ObservableObject
         {
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = "Downloads started",
+                Title = ResourceHelper.GetString("LibraryPage_DownloadsStarted_Title"),
                 CloseButtonText = ResourceHelper.GetString("Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = $"Started {startedDownloads} new downloads.",
+                Content = ResourceHelper.GetFormattedResourceTemplate("LibraryPage_DownloadsStarted_Message", startedDownloads),
             };
             await dialog.ShowAsync();
         }

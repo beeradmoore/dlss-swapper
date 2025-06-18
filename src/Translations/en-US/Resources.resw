@@ -922,4 +922,29 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
     <value>The path {0} is already ignored.</value>
     <comment>{0} is the path that the user tried to add but it was already ignored.</comment>
   </data>
+
+  <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
+    <value>Exported DLLs: </value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
+    <value>"No new DLLs"</value>
+  </data>
+
+  <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
+    <value>There were no new DLLs to download.</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
+    <value>Downloads started</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
+    <value>Started {0} new downloads.</value>
+    <comment>{0} is the number of downloads started.</comment>
+  </data>
+  <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
+    <value>No DLLs found for export.</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
+    <value>Exported {0} DLLs.</value>
+    <comment>{0} is the number of DLLs exported.</comment>
+  </data>
 </root>

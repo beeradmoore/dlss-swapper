@@ -322,7 +322,7 @@ namespace DLSS_Swapper
             }
         }
 
-        string _language = "en-US";
+        string _language = string.Empty;
         public string Language
         {
             get { return _language; }

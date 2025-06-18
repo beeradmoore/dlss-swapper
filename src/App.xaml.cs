@@ -67,7 +67,32 @@ namespace DLSS_Swapper
         {
             Logger.Init();
 
-            string language = Settings.Instance.Language;
+            var language = Settings.Instance.Language;
+
+            // Language is not set, try to fetch from system.
+            if (string.IsNullOrWhiteSpace(language))
+            {
+                // Try the language of the current thread.
+                var currentLauguage = Thread.CurrentThread.CurrentCulture.Name;
+                var knownLanguages = LanguageManager.Instance.GetKnownLanguages();
+                foreach (var knownLanguage in knownLanguages)
+                {
+                    if (string.Equals(currentLauguage, knownLanguage, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        language = knownLanguage;
+                        break;
+                    }
+                }
+
+                // TODO: Can we fallback to other languages? eg. Is fr-CA acceptable to fallback to fr-FR or does the app just default back to en-US?
+            }
+
+            // If we failed to fetch the users language, default to en-US.
+            if (string.IsNullOrWhiteSpace(language))
+            {
+                language = "en-US";
+                Settings.Instance.Language = language;
+            }
 
             LanguageManager.Instance.ChangeLanguage(language);
 

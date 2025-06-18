@@ -906,4 +906,20 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="TranslationTools_PublishFailedMessage" xml:space="preserve">
     <value>Could not publish translation. Please see your error log for more information.</value>
   </data>
+
+  <data name="FeatureNotSupportedWhenAdmin" xml:space="preserve">
+    <value>This feature is not supported if you are running the application as admin.</value>
+  </data>
+
+  <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
+    <value>Delete Ignored Path</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
+    <value>Are you sure you want to delete the ignored path {0}?</value>
+    <comment>{0} is the file path that the user is removing from the ignored path feature.</comment>
+  </data>
+  <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
+    <value>The path {0} is already ignored.</value>
+    <comment>{0} is the path that the user tried to add but it was already ignored.</comment>
+  </data>
 </root>

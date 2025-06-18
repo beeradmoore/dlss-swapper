@@ -758,10 +758,10 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
     <value>Unknown GameLibrary {0} while setting ID</value>
   </data>
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
-    <value>Dll zip was invalid (no dll found).</value>
+    <value>DLL zip was invalid (no DLL found).</value>
   </data>
   <data name="DllZipInvalidMultipleDllFound" xml:space="preserve">
-    <value>Dll zip was invalid (more than one dll found).</value>
+    <value>DLL zip was invalid (more than one DLL found).</value>
   </data>
   <data name="CustomCoverRemove" xml:space="preserve">
     <value>Remove custom cover?</value>

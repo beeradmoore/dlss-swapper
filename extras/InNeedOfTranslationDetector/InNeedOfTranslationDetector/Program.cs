@@ -23,6 +23,7 @@ if (string.IsNullOrWhiteSpace(srcDirectory) == true)
 }
 
 var results = new Dictionary<string, List<string>>();
+var keyResults = new Dictionary<string, List<string>>();
 
 var filesToIgnore = new List<string>()
 {
@@ -226,6 +227,28 @@ var ignoredCSharpMatches = new List<string>()
 
 };
 
+
+var getStringRegexes = new List<Regex>()
+{
+    new Regex(@"ResourceHelper.GetString\(""(?<key>[^""]*)""\)", RegexOptions.Compiled),
+};
+
+var ignoredStringKeyPrefixes = new List<string>()
+{
+    "General_",
+    "SettingsPage_",
+    "LibraryPage_",
+    "TranslationTools_", // TODO: RENAME TO TranslationToolsPage_
+    "NetworkTesterPage_",
+    "MainWindow_",
+    "FailedToLaunchPage_",
+    "DiagnosticsPage_",
+    "ApplicationTitle",
+    "GamesPage_Title",
+    "AcknowledgementsPage_",
+
+};
+
 foreach (var csharpFiles in allCSharpFiles)
 {
     var relativePath = Path.GetRelativePath(srcDirectory, csharpFiles);
@@ -234,7 +257,7 @@ foreach (var csharpFiles in allCSharpFiles)
     {
         continue;
     }
-    
+
     var fileData = File.ReadAllText(csharpFiles);
     foreach (var csharpRegex in csharpRegexes)
     {
@@ -274,6 +297,39 @@ foreach (var csharpFiles in allCSharpFiles)
             results[relativePath].Add(match.Value);
         }
     }
+
+    foreach (var getStringRegex in getStringRegexes)
+    {
+        var matches = getStringRegex.Matches(fileData);
+        if (matches is null || matches.Count == 0)
+        {
+            continue;
+        }
+
+        foreach (Match match in matches)
+        {
+            var key = match.Groups["key"].Value;
+            var validKey = false;
+            foreach (var ignoredStringKeyPrefix in ignoredStringKeyPrefixes)
+            {
+                if (key.StartsWith(ignoredStringKeyPrefix))
+                {
+                    validKey = true;
+                    break;
+                }
+            }
+
+            if (validKey == false)
+            {
+                if (keyResults.ContainsKey(relativePath) == false)
+                {
+                    keyResults[relativePath] = new List<string>();
+                }
+
+                keyResults[relativePath].Add(key);                
+            };
+        }
+    }
 }
 #endregion
 
@@ -281,6 +337,7 @@ var xamlFilesCount = 0;
 var xamlInstancesCount = 0;
 var csharpFilesCount = 0;
 var csharpInstancesCount = 0;
+var unprefixedKeysCount = 0;
 
 foreach ((var file, var matches) in results)
 {
@@ -314,9 +371,27 @@ foreach ((var file, var matches) in results)
     Console.WriteLine();
 }
 
+Console.WriteLine();
+Console.WriteLine("Unprefixed keys:");
+Console.WriteLine();
+
+foreach ((var file, var matches) in keyResults)
+{
+    Console.WriteLine($"File: {file}");
+
+    Console.WriteLine("Matches:");
+    foreach (var match in matches)
+    {
+        ++unprefixedKeysCount;
+        Console.WriteLine($"  {match}");
+    }
+    Console.WriteLine();
+}
+
 
 Console.WriteLine($"Found {xamlInstancesCount} xaml instances across {xamlFilesCount} files.");
 Console.WriteLine($"Found {csharpInstancesCount} cs instances across {csharpFilesCount} files.");
+Console.WriteLine($"Found {unprefixedKeysCount} unprefixed keys.");
 
 
 return 0;

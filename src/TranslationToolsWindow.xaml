@@ -9,7 +9,7 @@
     xmlns:ctWinUI="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:converters="using:CommunityToolkit.WinUI.Converters"
     mc:Ignorable="d"
-    Title="{x:Bind ViewModel.TranslationProperties.ApplicationTilteTranslationToolsWindowText, Mode=OneWay}">
+    Title="{x:Bind ViewModel.TranslationProperties.ApplicationTilteTranslationToolsWindowText, Mode=OneTime}">
 
     <Window.SystemBackdrop>
         <MicaBackdrop />

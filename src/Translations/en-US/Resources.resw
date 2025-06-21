@@ -123,7 +123,7 @@
   <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
     <value>Error adding your game</value>
   </data>
-  <data name="AddingGameErrorReportIssue" xml:space="preserve">
+  <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
     <value>There was a problem and your game could not be added at this time. Please report this issue.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
@@ -188,6 +188,10 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="General_ErrorMessage" xml:space="preserve">
+    <value>Error message</value>
+    <comment>Would be used to provide context, eg. Error message: you can't do that at this time.</comment>
+  </data>
   <data name="General_Export" xml:space="preserve">
     <value>Export</value>
   </data>
@@ -204,13 +208,13 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="ExportErrorDueToDllsCountTemplate" xml:space="preserve">
     <value>Could not export due to "{0}" having {1} dlls instead of 1.</value>
   </data>
-  <data name="Filter" xml:space="preserve">
+  <data name="General_Filter" xml:space="preserve">
     <value>Filter</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Games</value>
   </data>
-  <data name="GridView" xml:space="preserve">
+  <data name="GamesPage_ViewType_GridView" xml:space="preserve">
     <value>Grid View</value>
   </data>
   <data name="General_Import" xml:space="preserve">
@@ -219,14 +223,14 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="ImportSystemCurrentlyBroken" xml:space="preserve">
     <value>Import system is currently broken, but it is on the roadmap to be fixed.</value>
   </data>
-  <data name="InstallPathAlreadyExistsTemplate" xml:space="preserve">
+  <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
     <value>The install path "{0}" already exists and can't be added again.</value>
     <comment>Leave 0 as it is and use safe string format</comment>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
     <value>Library</value>
   </data>
-  <data name="ListView" xml:space="preserve">
+  <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>List View</value>
   </data>
   <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
@@ -254,11 +258,17 @@ Placing a malicious dll into a game is as bad as running Linking_park_-_nUmB_mp3
 
 Only import dlls from sources you trust.</value>
   </data>
-  <data name="NewDlls" xml:space="preserve">
+  <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>New DLLs</value>
   </data>
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
     <value>New DLLs Found</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
+    <value>No DLLs Found</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
+    <value>Please go to the libary page to download new DLLs.</value>
   </data>
   <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
     <value>You have no DLL records to export.</value>
@@ -309,7 +319,7 @@ Only import dlls from sources you trust.</value>
   <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
     <value>Unable to update DLL records.</value>
   </data>
-  <data name="ViewType" xml:space="preserve">
+  <data name="GamesPage_ViewType" xml:space="preserve">
     <value>View Type</value>
   </data>
   <data name="General_Warning" xml:space="preserve">
@@ -408,13 +418,13 @@ Only import dlls from sources you trust.</value>
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>Network Tester</value>
   </data>
-  <data name="OriginalDll" xml:space="preserve">
+  <data name="GamePage_OriginalDll" xml:space="preserve">
     <value>Original DLL</value>
   </data>
-  <data name="OriginalDllRestore" xml:space="preserve">
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>Restore original DLL</value>
   </data>
-  <data name="CurrentDll" xml:space="preserve">
+  <data name="GamePage_CurrentDll" xml:space="preserve">
     <value>Current DLL</value>
   </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
@@ -460,7 +470,7 @@ Only import dlls from sources you trust.</value>
     <value>Notes</value>
     <comment>in context of Notes - {GameTitle}</comment>
   </data>
-  <data name="GamePage_ManuallyAddedGameCantBeRemoved" xml:space="preserve">
+  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
     <value>This title is not manually added and can't be removed.</value>
   </data>
   <data name="General_Remove" xml:space="preserve">
@@ -508,37 +518,37 @@ Only import dlls from sources you trust.</value>
   <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
     <value>Shown below are the multiple DLLs found. You will still be able to swap and restore DLLs as usual as we will do these actions to all DLLs at once. However because we don't know what one of these DLLs is used by the game the DLL version shown is of the first DLL detected.</value>
   </data>
-  <data name="WhileLoadingYourGameNewDllsDiscoveredHelpUs" xml:space="preserve">
+  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
     <value>While loading your games some new DLLs have been discovered which are not in the DLSS Swapper manifest.</value>
   </data>
-  <data name="StepOneCreateNewIssue" xml:space="preserve">
+  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
     <value>Step 1: Create new issue</value>
   </data>
-  <data name="CreateNewGithubIssue" xml:space="preserve">
+  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Create new GitHub issue</value>
   </data>
-  <data name="GithubAccountRequired" xml:space="preserve">
+  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
     <value>(GitHub account required)</value>
   </data>
-  <data name="StepTwoCopyTitle" xml:space="preserve">
+  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
     <value>Step 2: Copy title</value>
   </data>
   <data name="General_Copy" xml:space="preserve">
     <value>Copy</value>
   </data>
-  <data name="StepThreeCopyBody" xml:space="preserve">
+  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
     <value>Step 3: Copy body</value>
   </data>
-  <data name="StepFourSubmitYourIssue" xml:space="preserve">
+  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
     <value>Step 4: Submit your issue</value>
   </data>
-  <data name="YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>You do not have to submit the DLLs. We will track them down based on the information provided.</value>
   </data>
-  <data name="ThanksForHelping" xml:space="preserve">
+  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
     <value>Thanks for helping!</value>
   </data>
-  <data name="IfButtonDoesntWorkTryHere" xml:space="preserve">
+  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
     <value>If the button does not work try here,</value>
   </data>
   <data name="Game" xml:space="preserve">
@@ -547,7 +557,7 @@ Only import dlls from sources you trust.</value>
   <data name="General_Version" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="Hash" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
     <value>Hash</value>
   </data>
   <data name="General_OpenFolder" xml:space="preserve">
@@ -559,19 +569,19 @@ Only import dlls from sources you trust.</value>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Add Custom Cover</value>
   </data>
-  <data name="Grouping" xml:space="preserve">
+  <data name="GamesPage_Grouping" xml:space="preserve">
     <value>Grouping</value>
   </data>
-  <data name="HideGamesWithNoSwappableItems" xml:space="preserve">
+  <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
     <value>Hide games with no swappable items</value>
   </data>
-  <data name="GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+  <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
     <value>Group games from the same library together</value>
   </data>
-  <data name="Options" xml:space="preserve">
+  <data name="General_Options" xml:space="preserve">
     <value>Options</value>
   </data>
-  <data name="Search" xml:space="preserve">
+  <data name="General_Search" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
@@ -649,16 +659,16 @@ Only import dlls from sources you trust.</value>
   <data name="GamePage_MultipleDllsFound" xml:space="preserve">
     <value>Multiple DLLs found</value>
   </data>
-  <data name="FileDescription" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
     <value>File description</value>
   </data>
-  <data name="DownloadFileSize" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
     <value>Download file size</value>
   </data>
-  <data name="Label" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Label</value>
   </data>
-  <data name="FileSize" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
     <value>File size</value>
   </data>
   <data name="NetworkTesterPage_Results" xml:space="preserve">
@@ -864,7 +874,7 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="AcknowledgementsPage_Title" xml:space="preserve">
     <value>Licences &amp; Acknowledgements</value>
   </data>
-  <data name="AddCoverErrorSingleFile" xml:space="preserve">
+  <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
     <value>You may only drag over a single file for a cover</value>
   </data>
   <data name="DllManager_MigratingDlls" xml:space="preserve">

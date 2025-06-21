@@ -238,7 +238,7 @@ public partial class GameGridPageModel : ObservableObject
                 {
                     Title = ResourceHelper.GetString("GamesPage_ManuallyAdding_ErrorTitle"),
                     CloseButtonText = ResourceHelper.GetString("General_Close"),
-                    Content = ResourceHelper.GetFormattedResourceTemplate("InstallPathAlreadyExistsTemplate", installPath),
+                    Content = ResourceHelper.GetFormattedResourceTemplate("GamesPage_ManuallyAdding_PathExistsTemplate", installPath),
                 };
                 await dialog.ShowAsync();
                 return;
@@ -281,7 +281,7 @@ public partial class GameGridPageModel : ObservableObject
                 CloseButtonText = ResourceHelper.GetString("General_Close"),
                 PrimaryButtonText = ResourceHelper.GetString("General_ReportIssue"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = $"{ResourceHelper.GetString("AddingGameErrorReportIssue")}\n\n{ResourceHelper.GetString("Error message")}: {err.Message}",
+                Content = $"{ResourceHelper.GetString("GamesPage_ManuallyAdding_CouldntAddError")}\n\n{ResourceHelper.GetString("General_ErrorMessage")}: {err.Message}",
             };
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
@@ -308,7 +308,7 @@ public partial class GameGridPageModel : ObservableObject
 
         var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
         {
-            Title = ResourceHelper.GetString("Filter"),
+            Title = ResourceHelper.GetString("General_Filter"),
             PrimaryButtonText = ResourceHelper.GetString("General_Apply"),
             CloseButtonText = ResourceHelper.GetString("General_Cancel"),
             DefaultButton = ContentDialogButton.Primary,

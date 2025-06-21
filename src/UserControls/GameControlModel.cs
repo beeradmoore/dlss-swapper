@@ -156,7 +156,7 @@ public partial class GameControlModel : ObservableObject
                     Title = ResourceHelper.GetString("General_Error"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = ResourceHelper.GetString("GamePage_ManuallyAddedGameCantBeRemoved"),
+                    Content = ResourceHelper.GetString("GamePage_ManuallyAdded_CantBeRemoved"),
                 };
                 await cantDeleteDialog.ShowAsync();
                 return;

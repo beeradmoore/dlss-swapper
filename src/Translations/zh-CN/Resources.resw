@@ -123,7 +123,7 @@
   <data name="AddCover" xml:space="preserve">
     <value>添加艺术图</value>
   </data>
-  <data name="AddCoverErrorSingleFile" xml:space="preserve">
+  <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
     <value>您只能选择一张图片</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
@@ -138,7 +138,7 @@
   <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
     <value>添加您的游戏时出错</value>
   </data>
-  <data name="AddingGameErrorReportIssue" xml:space="preserve">
+  <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
     <value>出现了错误，您的游戏暂时无法添加，请报告此问题</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
@@ -260,10 +260,10 @@
   <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
     <value>创建问题报告。</value>
   </data>
-  <data name="CreateNewGithubIssue" xml:space="preserve">
+  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>创建一个新的 GitHub 问题报告。</value>
   </data>
-  <data name="CurrentDll" xml:space="preserve">
+  <data name="GamePage_CurrentDll" xml:space="preserve">
     <value>当前的 DLL 文件。</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
@@ -359,7 +359,7 @@
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>下载错误</value>
   </data>
-  <data name="DownloadFileSize" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
     <value>下载大小</value>
   </data>
   <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
@@ -382,6 +382,9 @@
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>错误</value>
+  </data>
+  <data name="General_ErrorMessage" xml:space="preserve">
+    <value>错误信息</value>
   </data>
   <data name="General_Export" xml:space="preserve">
     <value>导出</value>
@@ -407,16 +410,16 @@
   <data name="GamePage_Favorited" xml:space="preserve">
     <value>已收藏</value>
   </data>
-  <data name="FileDescription" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
     <value>文件描述</value>
   </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
     <value>未能找到文件。</value>
   </data>
-  <data name="FileSize" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
     <value>文件大小</value>
   </data>
-  <data name="Filter" xml:space="preserve">
+  <data name="General_Filter" xml:space="preserve">
     <value>过滤</value>
   </data>
   <data name="LibraryPage_Finished" xml:space="preserve">
@@ -437,31 +440,31 @@
   <data name="GamesPage_Title" xml:space="preserve">
     <value>游戏库</value>
   </data>
-  <data name="GithubAccountRequired" xml:space="preserve">
+  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
     <value>(GitHub 授权)</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
     <value>GitHub issues</value>
   </data>
-  <data name="GridView" xml:space="preserve">
+  <data name="GamesPage_ViewType_GridView" xml:space="preserve">
     <value>网格视图</value>
   </data>
-  <data name="GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+  <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
     <value>将不同平台的游戏分组显示</value>
   </data>
-  <data name="Grouping" xml:space="preserve">
+  <data name="GamesPage_Grouping" xml:space="preserve">
     <value>分组</value>
   </data>
-  <data name="Hash" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
     <value>Hash</value>
   </data>
   <data name="General_Help" xml:space="preserve">
     <value>帮助</value>
   </data>
-  <data name="HideGamesWithNoSwappableItems" xml:space="preserve">
+  <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
     <value>隐藏不支持替换 DLL 文件的游戏</value>
   </data>
-  <data name="IfButtonDoesntWorkTryHere" xml:space="preserve">
+  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
     <value>如果上方按钮按了无反应，请点击此链接,</value>
   </data>
   <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
@@ -488,7 +491,7 @@
   <data name="GamePage_InstallPath" xml:space="preserve">
     <value>安装路径</value>
   </data>
-  <data name="InstallPathAlreadyExistsTemplate" xml:space="preserve">
+  <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
     <value>当前路径 "{0}" 已经存在，因此无法再次添加。</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
@@ -497,7 +500,7 @@
   <data name="LibraryPage_Title" xml:space="preserve">
     <value>DLL 库</value>
   </data>
-  <data name="ListView" xml:space="preserve">
+  <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>列表视图</value>
   </data>
   <data name="General_Load" xml:space="preserve">
@@ -537,7 +540,7 @@
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>网络测试</value>
   </data>
-  <data name="NewDlls" xml:space="preserve">
+  <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>发现新的 DLL !</value>
   </data>
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
@@ -585,13 +588,13 @@
   <data name="General_Optional" xml:space="preserve">
     <value>(可选)</value>
   </data>
-  <data name="Options" xml:space="preserve">
+  <data name="General_Options" xml:space="preserve">
     <value>选项</value>
   </data>
-  <data name="OriginalDll" xml:space="preserve">
+  <data name="GamePage_OriginalDll" xml:space="preserve">
     <value>原始的 DLL 版本</value>
   </data>
-  <data name="OriginalDllRestore" xml:space="preserve">
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>还原原始 DLL 版本</value>
   </data>
   <data name="PleaseNavigateLibraryToDownloadDlls" xml:space="preserve">
@@ -639,7 +642,7 @@
   <data name="General_Save" xml:space="preserve">
     <value>保存</value>
   </data>
-  <data name="Search" xml:space="preserve">
+  <data name="General_Search" xml:space="preserve">
     <value>搜索</value>
   </data>
   <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
@@ -744,16 +747,16 @@
   <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
     <value>开始下载</value>
   </data>
-  <data name="StepFourSubmitYourIssue" xml:space="preserve">
+  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
     <value>第四步：提交报告</value>
   </data>
-  <data name="StepOneCreateNewIssue" xml:space="preserve">
+  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
     <value>第一步：创建一个新的 issue</value>
   </data>
-  <data name="StepThreeCopyBody" xml:space="preserve">
+  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
     <value>第三步：复制正文</value>
   </data>
-  <data name="StepTwoCopyTitle" xml:space="preserve">
+  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
     <value>第二步：复制标题</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
@@ -768,10 +771,10 @@
   <data name="General_Swap" xml:space="preserve">
     <value>替换</value>
   </data>
-  <data name="ThanksForHelping" xml:space="preserve">
+  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
     <value>感谢您的帮助！</value>
   </data>
-  <data name="GamePage_ManuallyAddedGameCantBeRemoved" xml:space="preserve">
+  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
     <value>此标题不是手动添加的，无法删除。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
@@ -816,7 +819,7 @@
   <data name="General_Version" xml:space="preserve">
     <value>版本</value>
   </data>
-  <data name="ViewType" xml:space="preserve">
+  <data name="GamesPage_ViewType" xml:space="preserve">
     <value>视图类型</value>
   </data>
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
@@ -825,13 +828,13 @@
   <data name="General_Warning" xml:space="preserve">
     <value>警告</value>
   </data>
-  <data name="WhileLoadingYourGameNewDllsDiscoveredHelpUs" xml:space="preserve">
+  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
     <value>在加载您的游戏时，我们发现了一些新的 DLL，这些 DLL 不在 DLSS Swapper 仓库清单中。</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
     <value>下载正常</value>
   </data>
-  <data name="YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>请注意：您无需提交 DLL 文件，我们会根据您提交的报告信息查找新的 DLL</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">

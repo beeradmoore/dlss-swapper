@@ -123,7 +123,7 @@
   <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
     <value>Wystąpił błąd podczas dodawania gry</value>
   </data>
-  <data name="AddingGameErrorReportIssue" xml:space="preserve">
+  <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
     <value>Wystąpił problem, twoja gra nie może zostać dodana. Prosimy o przesłanie błędu wraz z informacjami.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
@@ -191,6 +191,9 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="General_Error" xml:space="preserve">
     <value>Błąd</value>
   </data>
+    <data name="General_ErrorMessage" xml:space="preserve">
+    <value>Wiadomość z błędem</value>
+  </data>
   <data name="General_Export" xml:space="preserve">
     <value>Eksport</value>
   </data>
@@ -206,13 +209,13 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="ExportErrorDueToDllsCountTemplate" xml:space="preserve">
     <value>Nie można wyeksportować ponieważ "{0}" ma {1} dllki zamiast 1.</value>
   </data>
-  <data name="Filter" xml:space="preserve">
+  <data name="General_Filter" xml:space="preserve">
     <value>Filtr</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Gry</value>
   </data>
-  <data name="GridView" xml:space="preserve">
+  <data name="GamesPage_ViewType_GridView" xml:space="preserve">
     <value>Widok siatki</value>
   </data>
   <data name="General_Import" xml:space="preserve">
@@ -221,13 +224,13 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="ImportSystemCurrentlyBroken" xml:space="preserve">
     <value>Funkcjonalność importu aktualnie nie działa, ale zostanie naprawiona.</value>
   </data>
-  <data name="InstallPathAlreadyExistsTemplate" xml:space="preserve">
+  <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
     <value>Ścieżka instalacji "{0}" już istnieje i nie może zostać dodana ponownie.</value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
     <value>Biblioteka</value>
   </data>
-  <data name="ListView" xml:space="preserve">
+  <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Widok listy</value>
   </data>
   <data name="General_Loading" xml:space="preserve">
@@ -240,7 +243,7 @@ Umieszczenie podpięcie złośliwej biblioteki DLL do gry może być tak złe ja
 
 Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   </data>
-  <data name="NewDlls" xml:space="preserve">
+  <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Nowe biblioteki DLL</value>
   </data>
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
@@ -291,7 +294,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
     <value>Nie można zaktualizować rekordów z bibliotekami DLL.</value>
   </data>
-  <data name="ViewType" xml:space="preserve">
+  <data name="GamesPage_ViewType" xml:space="preserve">
     <value>Typ widoku</value>
   </data>
   <data name="General_Warning" xml:space="preserve">
@@ -390,13 +393,13 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>Tester Sieciowy</value>
   </data>
-  <data name="OriginalDll" xml:space="preserve">
+  <data name="GamePage_OriginalDll" xml:space="preserve">
     <value>Oryginalna biblioteka DLL</value>
   </data>
-  <data name="OriginalDllRestore" xml:space="preserve">
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>Przywróć oryginalną bibliotekę DLL</value>
   </data>
-  <data name="CurrentDll" xml:space="preserve">
+  <data name="GamePage_CurrentDll" xml:space="preserve">
     <value>Aktualna biblioteka DLL</value>
   </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
@@ -426,7 +429,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="GamePage_Notes" xml:space="preserve">
     <value>Notatki</value>
   </data>
-  <data name="GamePage_ManuallyAddedGameCantBeRemoved" xml:space="preserve">
+  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
     <value>Ten tytuł nie został dodany ręcznie i nie można go usunąć.</value>
   </data>
   <data name="General_Remove" xml:space="preserve">
@@ -468,37 +471,37 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
     <value>Poniżej przedstawiono wiele znalezionych bibliotek DLL. Nadal będziesz mógł zamieniać i przywracać biblioteki DLL w zwykły sposób, ponieważ wykonamy te czynności dla wszystkich bibliotek DLL jednocześnie. Ponieważ jednak nie wiemy, która z tych bibliotek DLL jest używana przez grę, pokazana wersja DLL dotyczy pierwszej wykrytej biblioteki DLL.</value>
   </data>
-  <data name="WhileLoadingYourGameNewDllsDiscoveredHelpUs" xml:space="preserve">
+  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
     <value>Podczas ładowania gier wykryto nowe biblioteki DLL, których nie ma w manifeście DLSS Swapper.</value>
   </data>
-  <data name="StepOneCreateNewIssue" xml:space="preserve">
+  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
     <value>Krok 1: Utwórz nowe zgłoszenie</value>
   </data>
-  <data name="CreateNewGithubIssue" xml:space="preserve">
+  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Utwórz nowe zgłoszenie na GitHubie</value>
   </data>
-  <data name="GithubAccountRequired" xml:space="preserve">
+  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
     <value>(Wymagane konto GitHub)</value>
   </data>
-  <data name="StepTwoCopyTitle" xml:space="preserve">
+  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
     <value>Krok 2: Skopiuj tytuł</value>
   </data>
   <data name="General_Copy" xml:space="preserve">
     <value>Kopiuj</value>
   </data>
-  <data name="StepThreeCopyBody" xml:space="preserve">
+  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
     <value>Krok 3: Skopiuj treść</value>
   </data>
-  <data name="StepFourSubmitYourIssue" xml:space="preserve">
+  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
     <value>Krok 4: Zatwierdź zgłoszenie problemu</value>
   </data>
-  <data name="YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Pamiętaj,  że nie musisz przesyłać plików DLL. Wyśledzimy je na podstawie dostarczonych informacji.</value>
   </data>
-  <data name="ThanksForHelping" xml:space="preserve">
+  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
     <value>Dziękujemy za pomoc!</value>
   </data>
-  <data name="IfButtonDoesntWorkTryHere" xml:space="preserve">
+  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
     <value>Jeśli przycisk nie działa, spróbuj tutaj,</value>
   </data>
   <data name="Game" xml:space="preserve">
@@ -507,7 +510,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="General_Version" xml:space="preserve">
     <value>Wersja</value>
   </data>
-  <data name="Hash" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
     <value>Hash</value>
   </data>
   <data name="General_OpenFolder" xml:space="preserve">
@@ -519,19 +522,19 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Dodaj własną okładkę</value>
   </data>
-  <data name="Grouping" xml:space="preserve">
+  <data name="GamesPage_Grouping" xml:space="preserve">
     <value>Grupowanie</value>
   </data>
-  <data name="HideGamesWithNoSwappableItems" xml:space="preserve">
+  <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
     <value>Ukryj gry bez podmienialnych bibliotek DLL</value>
   </data>
-  <data name="GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+  <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
     <value>Pogrupuj gry z tej samej biblioteki</value>
   </data>
-  <data name="Options" xml:space="preserve">
+  <data name="General_Options" xml:space="preserve">
     <value>Opcje</value>
   </data>
-  <data name="Search" xml:space="preserve">
+  <data name="General_Search" xml:space="preserve">
     <value>Szukaj</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
@@ -609,16 +612,16 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="GamePage_MultipleDllsFound" xml:space="preserve">
     <value>Znaleziono wiele bibliotek DLL</value>
   </data>
-  <data name="FileDescription" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
     <value>Opis pliku</value>
   </data>
-  <data name="DownloadFileSize" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
     <value>Rozmiar pobranego pliku</value>
   </data>
-  <data name="Label" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Etykieta</value>
   </data>
-  <data name="FileSize" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
     <value>Rozmiar pliku</value>
   </data>
   <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">

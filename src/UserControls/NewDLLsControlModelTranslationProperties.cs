@@ -7,35 +7,35 @@ namespace DLSS_Swapper.UserControls;
 public class NewDLLsControlModelTranslationProperties : LocalizedViewModelBase
 {
     [TranslationProperty]
-    public string WhileLoadingYourGameNewDllsDiscoveredHelpUsText => ResourceHelper.GetString("WhileLoadingYourGameNewDllsDiscoveredHelpUs");
+    public string WhileLoadingYourGameNewDllsDiscoveredHelpUsText => ResourceHelper.GetString("GamesPage_NewDlls_DiscoveredHelpUs");
 
     [TranslationProperty]
-    public string StepOneCreateNewIssueText => ResourceHelper.GetString("StepOneCreateNewIssue");
+    public string StepOneCreateNewIssueText => ResourceHelper.GetString("GamesPage_NewDlls_StepOneCreateNewIssue");
 
     [TranslationProperty]
-    public string CreateNewGithubIssueText => ResourceHelper.GetString("CreateNewGithubIssue");
+    public string CreateNewGithubIssueText => ResourceHelper.GetString("GamesPage_NewDlls_CreateNewGitHubIssue");
 
     [TranslationProperty]
-    public string GithubAccountRequiredText => ResourceHelper.GetString("GithubAccountRequired");
+    public string GithubAccountRequiredText => ResourceHelper.GetString("GamesPage_NewDlls_GitHubAccountRequired");
 
     [TranslationProperty]
-    public string IfButtonDoesntWorkTryHereText => ResourceHelper.GetString("IfButtonDoesntWorkTryHere");
+    public string IfButtonDoesntWorkTryHereText => ResourceHelper.GetString("GamesPage_NewDlls_IfButtonDoesntWorkTryHere");
 
     [TranslationProperty]
-    public string StepTwoCopyTitleText => ResourceHelper.GetString("StepTwoCopyTitle");
+    public string StepTwoCopyTitleText => ResourceHelper.GetString("GamesPage_NewDlls_StepTwoCopyTitle");
 
     [TranslationProperty]
     public string CopyText => ResourceHelper.GetString("General_Copy");
 
     [TranslationProperty]
-    public string StepThreeCopyBodyText => ResourceHelper.GetString("StepThreeCopyBody");
+    public string StepThreeCopyBodyText => ResourceHelper.GetString("GamesPage_NewDlls_StepThreeCopyBody");
 
     [TranslationProperty]
-    public string StepFourSubmitYourIssueText => ResourceHelper.GetString("StepFourSubmitYourIssue");
+    public string StepFourSubmitYourIssueText => ResourceHelper.GetString("GamesPage_NewDlls_StepFourSubmitYourIssue");
 
     [TranslationProperty]
-    public string YouDoNotHaveToSubmitDllAutoTrackText => ResourceHelper.GetString("YouDoNotHaveToSubmitDllAutoTrack");
+    public string YouDoNotHaveToSubmitDllAutoTrackText => ResourceHelper.GetString("GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack");
 
     [TranslationProperty]
-    public string ThanksForHelpingText => ResourceHelper.GetString("ThanksForHelping");
+    public string ThanksForHelpingText => ResourceHelper.GetString("GamesPage_NewDlls_ThanksForHelping");
 }

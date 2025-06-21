@@ -9,14 +9,14 @@ public class GameFilterControlViewModelTranslationProperties : LocalizedViewMode
     //public GameFilterControlViewModelTranslationProperties() : base() { }
 
     [TranslationProperty]
-    public string OptionsText => $"{ResourceHelper.GetString("Options")}:";
+    public string OptionsText => $"{ResourceHelper.GetString("General_Options")}:";
 
     [TranslationProperty]
-    public string GroupingText => $"{ResourceHelper.GetString("Grouping")}:";
+    public string GroupingText => $"{ResourceHelper.GetString("GamesPage_Grouping")}:";
 
     [TranslationProperty]
-    public string HideGamesWithNoSwappableItemsText => ResourceHelper.GetString("HideGamesWithNoSwappableItems");
+    public string HideGamesWithNoSwappableItemsText => ResourceHelper.GetString("GamesPage_HideGamesWithNoSwappableItems");
 
     [TranslationProperty]
-    public string GroupGamesFromTheSameLibraryTogetherText => ResourceHelper.GetString("GroupGamesFromTheSameLibraryTogether");
+    public string GroupGamesFromTheSameLibraryTogetherText => ResourceHelper.GetString("GamesPage_GroupGamesFromTheSameLibraryTogether");
 }

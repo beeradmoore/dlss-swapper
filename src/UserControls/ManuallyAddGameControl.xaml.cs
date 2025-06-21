@@ -69,7 +69,7 @@ namespace DLSS_Swapper.UserControls
             else
             {
                 coverDragDropAcceptedOperation = DataPackageOperation.None;
-                coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("AddCoverErrorSingleFile");
+                coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("GamesPage_ManuallyAdding_AddCoverErrorSingleFile");
             }
         }
 

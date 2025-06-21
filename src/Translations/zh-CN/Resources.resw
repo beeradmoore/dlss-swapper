@@ -324,7 +324,7 @@
     <value>查询 DLSS Swapper 的 DNS 服务器地址</value>
   </data>
   <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
-    <value>停用</value>
+    <value>{0} 停用</value>
   </data>
   <data name="DllPath" xml:space="preserve">
     <value>DLL 文件路径。</value>
@@ -369,7 +369,7 @@
     <value>下载中</value>
   </data>
   <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
-    <value>启用</value>
+    <value>{0} 启用</value>
   </data>
   <data name="EnabledForAllDlssDlls" xml:space="preserve">
     <value>对所有的 DLSS 版本显示信息</value>

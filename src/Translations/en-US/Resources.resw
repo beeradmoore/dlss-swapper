@@ -486,10 +486,12 @@ Only import dlls from sources you trust.</value>
     <comment>{0} is the game install path</comment>
   </data>
   <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
-    <value>enabled</value>
+    <value>{0} enabled</value>
+    <comment>{0} is the game library name (eg. Steam, GOG)</comment>
   </data>
   <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
-    <value>disabled</value>
+    <value>{0} disabled</value>
+    <comment>{0} is the game library name (eg. Steam, GOG)</comment>
   </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
     <value>Install path</value>

@@ -448,10 +448,10 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
     <value>Nie można znaleźć ścieżki "{0}".</value>
   </data>
   <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
-    <value>włączone</value>
+    <value>{0} włączone</value>
   </data>
   <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
-    <value>wyłączone</value>
+    <value>{0} wyłączone</value>
   </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
     <value>Ścieżka instalacji</value>

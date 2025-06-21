@@ -7,5 +7,5 @@ namespace DLSS_Swapper.Pages;
 public class AcknowledgementsPageModelTranslationProperties : LocalizedViewModelBase
 {
     [TranslationProperty]
-    public string LicencesAndAcknowledgementsText => ResourceHelper.GetString("AcknowledgementsPage__Title");
+    public string LicencesAndAcknowledgementsText => ResourceHelper.GetString("AcknowledgementsPage_Title");
 }

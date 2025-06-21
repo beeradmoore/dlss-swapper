@@ -849,7 +849,7 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="TranslationTools_SourceTranslation" xml:space="preserve">
     <value>Source translation</value>
   </data>
-  <data name="AcknowledgementsPage__Title" xml:space="preserve">
+  <data name="AcknowledgementsPage_Title" xml:space="preserve">
     <value>Licences &amp; Acknowledgements</value>
   </data>
   <data name="AddCoverErrorSingleFile" xml:space="preserve">

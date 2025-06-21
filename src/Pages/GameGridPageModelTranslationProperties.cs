@@ -31,7 +31,7 @@ public class GameGridPageModelTranslationProperties : LocalizedViewModelBase
     public string ListViewText => ResourceHelper.GetString("ListView");
 
     [TranslationProperty]
-    public string GamesText => ResourceHelper.GetString("GamesPage_Title");
+    public string PageTitle => ResourceHelper.GetString("GamesPage_Title");
 
     [TranslationProperty]
     public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("General_ApplicationRunningAsAdmin");

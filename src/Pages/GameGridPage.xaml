@@ -186,7 +186,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="16">
-                <TextBlock Text="{x:Bind ViewModel.TranslationProperties.GamesText, Mode=OneWay}" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+                <TextBlock Text="{x:Bind ViewModel.TranslationProperties.PageTitle, Mode=OneWay}" Margin="16,0,0,0" TextWrapping="NoWrap" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
                 <muxc:ProgressRing IsActive="True" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.IsLoading, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"  />
             </StackPanel>
 

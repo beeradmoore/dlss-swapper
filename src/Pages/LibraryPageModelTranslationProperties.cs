@@ -25,5 +25,5 @@ public class LibraryPageModelTranslationProperties : LocalizedViewModelBase
     public string CancelText => ResourceHelper.GetString("General_Cancel");
 
     [TranslationProperty]
-    public string LibraryText => ResourceHelper.GetString("LibraryPage_Title");
+    public string PageTitle => ResourceHelper.GetString("LibraryPage_Title");
 }

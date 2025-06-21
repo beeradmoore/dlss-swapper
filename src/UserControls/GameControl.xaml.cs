@@ -87,7 +87,7 @@ namespace DLSS_Swapper.UserControls
 
             // This thing likes to break so I took the advice from this thread https://github.com/microsoft/microsoft-ui-xaml/issues/8108
 
-            // Default to this.           
+            // Default to this.
             coverDragDropAcceptedOperation = DataPackageOperation.None;
             coverDragDropDragUIOverrideCaption = string.Empty;
 
@@ -95,7 +95,7 @@ namespace DLSS_Swapper.UserControls
             e.DragUIOverride.Caption = coverDragDropDragUIOverrideCaption;
 
             // This await messes things up. So what we do is also handle in CoverButton_DragOver which will have hopefully
-            // mean this code is finished by then. 
+            // mean this code is finished by then.
             var items = await e.DataView.GetStorageItemsAsync();
             if (items.Count == 1)
             {

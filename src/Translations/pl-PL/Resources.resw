@@ -435,22 +435,22 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="General_Swap" xml:space="preserve">
     <value>Podmień</value>
   </data>
-  <data name="SelectVersionTemplate" xml:space="preserve">
+  <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
     <value>Wybierz {0} wersję</value>
   </data>
-  <data name="RemoveDlssSwapperGameTemplate" xml:space="preserve">
+  <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć "{0}" z DLSS Swapper? Nie spowoduje to żadnych zmian w plikach DLSS, które zostały już zamienione.</value>
   </data>
-  <data name="MultipleDllsFoundTemplate" xml:space="preserve">
+  <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
     <value>Znaleziono wiele plików DLL {0}</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>Nie można znaleźć ścieżki "{0}".</value>
   </data>
-  <data name="Enabled" xml:space="preserve">
+  <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
     <value>włączone</value>
   </data>
-  <data name="Disabled" xml:space="preserve">
+  <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
     <value>wyłączone</value>
   </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
@@ -510,10 +510,10 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="Hash" xml:space="preserve">
     <value>Hash</value>
   </data>
-  <data name="OpenFolder" xml:space="preserve">
+  <data name="General_OpenFolder" xml:space="preserve">
     <value>Otwórz folder</value>
   </data>
-  <data name="GameNotReadyToPlayState" xml:space="preserve">
+  <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>Ta gra nie jest gotowa do gry.</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
@@ -552,7 +552,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="SettingsPage_Language" xml:space="preserve">
     <value>Język</value>
   </data>
-  <data name="Help" xml:space="preserve">
+  <data name="General_Help" xml:space="preserve">
     <value>Pomoc</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
@@ -591,10 +591,10 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="NetworkTesterPage_RunTest" xml:space="preserve">
     <value>Uruchom test</value>
   </data>
-  <data name="Favourited" xml:space="preserve">
+  <data name="GamePage_Favorited" xml:space="preserve">
     <value>Ulubiony</value>
   </data>
-  <data name="ClickToFavourite" xml:space="preserve">
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Dodaj do ulubionych</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
@@ -606,7 +606,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>Zaimportowano</value>
   </data>
-  <data name="MultipleDllsFound" xml:space="preserve">
+  <data name="GamePage_MultipleDllsFound" xml:space="preserve">
     <value>Znaleziono wiele bibliotek DLL</value>
   </data>
   <data name="FileDescription" xml:space="preserve">

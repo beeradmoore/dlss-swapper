@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Favourited" xml:space="preserve">
+  <data name="GamePage_Favorited" xml:space="preserve">
     <value>Favourited</value>
   </data>
-  <data name="ClickToFavourite" xml:space="preserve">
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Click to favourite</value>
   </data>
 

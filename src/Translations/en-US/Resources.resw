@@ -469,24 +469,26 @@ Only import dlls from sources you trust.</value>
   <data name="General_Swap" xml:space="preserve">
     <value>Swap</value>
   </data>
-  <data name="SelectVersionTemplate" xml:space="preserve">
+  <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
     <value>Select {0} version</value>
+    <comment>{0} is the DLL type (eg. DLSS, FSR, XeSS)</comment>
   </data>
-  <data name="RemoveDlssSwapperGameTemplate" xml:space="preserve">
+  <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
     <value>Are you sure you want to remove "{0}" from DLSS Swapper? This will not make any changes to DLSS files that have already been swapped.</value>
     <comment>{0} is the game name</comment>
   </data>
-  <data name="MultipleDllsFoundTemplate" xml:space="preserve">
+  <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
     <value>Multiple {0} DLLs Found</value>
+    <comment>{0} is the DLL type (eg. DLSS, FSR, XeSS)</comment>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>Could not find path "{0}".</value>
     <comment>{0} is the game install path</comment>
   </data>
-  <data name="Enabled" xml:space="preserve">
+  <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
     <value>enabled</value>
   </data>
-  <data name="Disabled" xml:space="preserve">
+  <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
     <value>disabled</value>
   </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
@@ -546,10 +548,10 @@ Only import dlls from sources you trust.</value>
   <data name="Hash" xml:space="preserve">
     <value>Hash</value>
   </data>
-  <data name="OpenFolder" xml:space="preserve">
+  <data name="General_OpenFolder" xml:space="preserve">
     <value>Open folder</value>
   </data>
-  <data name="GameNotReadyToPlayState" xml:space="preserve">
+  <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>This game is not in a ready to play state.</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
@@ -588,7 +590,7 @@ Only import dlls from sources you trust.</value>
   <data name="SettingsPage_Language" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="Help" xml:space="preserve">
+  <data name="General_Help" xml:space="preserve">
     <value>Help</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
@@ -627,10 +629,10 @@ Only import dlls from sources you trust.</value>
   <data name="NetworkTesterPage_RunTest" xml:space="preserve">
     <value>Run test</value>
   </data>
-  <data name="Favourited" xml:space="preserve">
+  <data name="GamePage_Favorited" xml:space="preserve">
     <value>Favorited</value>
   </data>
-  <data name="ClickToFavourite" xml:space="preserve">
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Click to favorite</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
@@ -642,7 +644,7 @@ Only import dlls from sources you trust.</value>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>Imported</value>
   </data>
-  <data name="MultipleDllsFound" xml:space="preserve">
+  <data name="GamePage_MultipleDllsFound" xml:space="preserve">
     <value>Multiple DLLs found</value>
   </data>
   <data name="FileDescription" xml:space="preserve">

@@ -171,7 +171,7 @@ public partial class GameControlModel : ObservableObject
                 PrimaryButtonText = ResourceHelper.GetString("General_Remove"),
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = ResourceHelper.GetFormattedResourceTemplate("RemoveDlssSwapperGameTemplate", Game.Title),
+                Content = ResourceHelper.GetFormattedResourceTemplate("GamePage_ManuallyAdded_RemoveGameTemplate", Game.Title),
             };
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
@@ -197,7 +197,7 @@ public partial class GameControlModel : ObservableObject
         {
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = ResourceHelper.GetFormattedResourceTemplate("SelectVersionTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
+                Title = ResourceHelper.GetFormattedResourceTemplate("GamePage_SelectDllTemplateTitle", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
                 PrimaryButtonText = ResourceHelper.GetString("General_Swap"),
                 IsPrimaryButtonEnabled = false,
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
@@ -225,7 +225,7 @@ public partial class GameControlModel : ObservableObject
         {
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = ResourceHelper.GetFormattedResourceTemplate("MultipleDllsFoundTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
+                Title = ResourceHelper.GetFormattedResourceTemplate("GamePage_MultipleDllsFoundTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
                 PrimaryButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = new MultipleDLLsFoundControl(Game, gameAssetType),

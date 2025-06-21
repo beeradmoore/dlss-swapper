@@ -13,10 +13,10 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
     public string AddCustomCoverText => ResourceHelper.GetString("GamePage_AddCustomCover");
 
     [TranslationProperty]
-    public string GameNotReadyToPlayStateText => ResourceHelper.GetString("GameNotReadyToPlayState");
+    public string GameNotReadyToPlayStateText => ResourceHelper.GetString("GamePage_NotReadyToPlayState");
 
     [TranslationProperty]
-    public string HelpText => ResourceHelper.GetString("Help");
+    public string HelpText => ResourceHelper.GetString("General_Help");
 
     [TranslationProperty]
     public string NameText => ResourceHelper.GetString("General_Name");
@@ -28,13 +28,13 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
     public string InstallPathText => ResourceHelper.GetString("GamePage_InstallPath");
 
     [TranslationProperty]
-    public string OpenFolderText => ResourceHelper.GetString("OpenFolder");
+    public string OpenFolderText => ResourceHelper.GetString("General_OpenFolder");
 
     [TranslationProperty]
-    public string FavouritedText => ResourceHelper.GetString("Favourited");
+    public string FavouritedText => ResourceHelper.GetString("GamePage_Favorited");
 
     [TranslationProperty]
-    public string ClickToFavouriteText => ResourceHelper.GetString("ClickToFavourite");
+    public string ClickToFavouriteText => ResourceHelper.GetString("GamePage_ClickToFavorite");
 
     [TranslationProperty]
     public string NotesText => ResourceHelper.GetString("GamePage_Notes");
@@ -43,5 +43,5 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
     public string CloseText => ResourceHelper.GetString("General_Close");
 
     [TranslationProperty]
-    public string MultipleDllsFoundText => ResourceHelper.GetString("MultipleDllsFound");
+    public string MultipleDllsFoundText => ResourceHelper.GetString("GamePage_MultipleDllsFound");
 }

@@ -191,7 +191,7 @@
   <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
     <value>点击复制以下详细信息</value>
   </data>
-  <data name="ClickToFavourite" xml:space="preserve">
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>添加收藏</value>
   </data>
   <data name="General_Close" xml:space="preserve">
@@ -323,7 +323,7 @@
   <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
     <value>查询 DLSS Swapper 的 DNS 服务器地址</value>
   </data>
-  <data name="Disabled" xml:space="preserve">
+  <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
     <value>停用</value>
   </data>
   <data name="DllPath" xml:space="preserve">
@@ -368,7 +368,7 @@
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>下载中</value>
   </data>
-  <data name="Enabled" xml:space="preserve">
+  <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
     <value>启用</value>
   </data>
   <data name="EnabledForAllDlssDlls" xml:space="preserve">
@@ -404,7 +404,7 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>启动失败</value>
   </data>
-  <data name="Favourited" xml:space="preserve">
+  <data name="GamePage_Favorited" xml:space="preserve">
     <value>已收藏</value>
   </data>
   <data name="FileDescription" xml:space="preserve">
@@ -428,7 +428,7 @@
   <data name="Game_CurrentlyProcessing" xml:space="preserve">
     <value>游戏正在处理</value>
   </data>
-  <data name="GameNotReadyToPlayState" xml:space="preserve">
+  <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>游戏当前未准备就绪</value>
   </data>
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
@@ -455,7 +455,7 @@
   <data name="Hash" xml:space="preserve">
     <value>Hash</value>
   </data>
-  <data name="Help" xml:space="preserve">
+  <data name="General_Help" xml:space="preserve">
     <value>帮助</value>
   </data>
   <data name="HideGamesWithNoSwappableItems" xml:space="preserve">
@@ -522,10 +522,10 @@
   <data name="DllManager_MigratingDlls" xml:space="preserve">
     <value>正在迁移 DLL 文件</value>
   </data>
-  <data name="MultipleDllsFound" xml:space="preserve">
+  <data name="GamePage_MultipleDllsFound" xml:space="preserve">
     <value>发现多个 DLL 文件</value>
   </data>
-  <data name="MultipleDllsFoundTemplate" xml:space="preserve">
+  <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
     <value>发现多个 {0} DLL 文件</value>
   </data>
   <data name="General_Name" xml:space="preserve">
@@ -573,7 +573,7 @@
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
     <value>打开 DLL 文件路径</value>
   </data>
-  <data name="OpenFolder" xml:space="preserve">
+  <data name="General_OpenFolder" xml:space="preserve">
     <value>打开文件夹</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
@@ -618,7 +618,7 @@
   <data name="General_Remove" xml:space="preserve">
     <value>移除</value>
   </data>
-  <data name="RemoveDlssSwapperGameTemplate" xml:space="preserve">
+  <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
     <value>您确定要从 DLSS Swapper 删除 "{0}" 这不会影响已经替换的 DLL 文件。</value>
   </data>
   <data name="General_ReportIssue" xml:space="preserve">
@@ -645,7 +645,7 @@
   <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
     <value>选择游戏目录</value>
   </data>
-  <data name="SelectVersionTemplate" xml:space="preserve">
+  <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
     <value>选择 {0} 版本</value>
   </data>
   <data name="SettingsPage_Title" xml:space="preserve">

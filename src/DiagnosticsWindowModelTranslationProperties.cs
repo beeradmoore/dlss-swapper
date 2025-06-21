@@ -7,8 +7,8 @@ namespace DLSS_Swapper;
 public class DiagnosticsWindowModelTranslationProperties : LocalizedViewModelBase
 {
     [TranslationProperty]
-    public string ApplicationTilteDiagnosticsWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("Diagnostics_WindowTitle")}";
+    public string ApplicationTilteDiagnosticsWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("DiagnosticsPage_WindowTitle")}";
 
     [TranslationProperty]
-    public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
+    public string ClickToCopyDetailsText => ResourceHelper.GetString("DiagnosticsPage_ClickToCopyDetails");
 }

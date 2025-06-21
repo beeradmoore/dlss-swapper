@@ -19,7 +19,7 @@ public class FailToLaunchWindowModelTranslationProperties : LocalizedViewModelBa
     public string PleaseOpenIssuePartial3Text => ResourceHelper.GetString("PleaseOpenIssuePartial3");
 
     [TranslationProperty]
-    public string ClickToCopyDetailsText => ResourceHelper.GetString("ClickToCopyDetails");
+    public string ClickToCopyDetailsText => ResourceHelper.GetString("DiagnosticsPage_ClickToCopyDetails");
 
     [TranslationProperty]
     public string DlssSwapperFailedToLaunchText => ResourceHelper.GetString("DlssSwapperFailedToLaunch");

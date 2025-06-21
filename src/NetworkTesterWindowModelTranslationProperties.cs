@@ -7,53 +7,53 @@ namespace DLSS_Swapper;
 public class NetworkTesterWindowModelTranslationProperties : LocalizedViewModelBase
 {
     [TranslationProperty]
-    public string NetworkTesterWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("NetworkTester_WindowTitle")}";
+    public string NetworkTesterWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("NetworkTesterPage_WindowTitle")}";
 
     [TranslationProperty]
-    public string Test1TitleText => ResourceHelper.GetString("DiagnosticsTest1Title");
+    public string Test1TitleText => ResourceHelper.GetString("NetworkTesterPage_DiagnosticsTest1Title");
 
     [TranslationProperty]
-    public string Test2TitleText => ResourceHelper.GetString("DiagnosticsTest2Title");
+    public string Test2TitleText => ResourceHelper.GetString("NetworkTesterPage_DiagnosticsTest2Title");
 
     [TranslationProperty]
-    public string Test3TitleText => ResourceHelper.GetString("DiagnosticsTest3Title");
+    public string Test3TitleText => ResourceHelper.GetString("NetworkTesterPage_DiagnosticsTest3Title");
 
     [TranslationProperty]
-    public string Test4TitleText => ResourceHelper.GetString("DiagnosticsTest4Title");
+    public string Test4TitleText => ResourceHelper.GetString("NetworkTesterPage_DiagnosticsTest4Title");
 
     [TranslationProperty]
-    public string Test5TitleText => ResourceHelper.GetString("DiagnosticsTest5Title");
+    public string Test5TitleText => ResourceHelper.GetString("NetworkTesterPage_DiagnosticsTest5Title");
 
     [TranslationProperty]
-    public string Test6TitleText => ResourceHelper.GetString("DiagnosticsTest6Title");
+    public string Test6TitleText => ResourceHelper.GetString("NetworkTesterPage_DiagnosticsTest6Title");
 
     [TranslationProperty]
-    public string Test7TitleText => ResourceHelper.GetString("DiagnosticsTest7Title");
+    public string Test7TitleText => ResourceHelper.GetString("NetworkTesterPage_DiagnosticsTest7Title");
 
     [TranslationProperty]
-    public string Test8TitleText => ResourceHelper.GetString("DiagnosticsTest8Title");
+    public string Test8TitleText => ResourceHelper.GetString("NetworkTesterPage_DiagnosticsTest8Title");
 
     [TranslationProperty]
-    public string Test9TitleText => ResourceHelper.GetString("DiagnosticsTest9Title");
+    public string Test9TitleText => ResourceHelper.GetString("NetworkTesterPage_DiagnosticsTest9Title");
 
     [TranslationProperty]
-    public string Test10TitleText => ResourceHelper.GetString("DiagnosticsTest10Title");
+    public string Test10TitleText => ResourceHelper.GetString("NetworkTesterPage_DiagnosticsTest10Title");
 
     [TranslationProperty]
-    public string Test11TitleText => ResourceHelper.GetString("DiagnosticsTest11Title");
+    public string Test11TitleText => ResourceHelper.GetString("NetworkTesterPage_DiagnosticsTest11Title");
 
     [TranslationProperty]
-    public string RunTestText => ResourceHelper.GetString("RunTest");
+    public string RunTestText => ResourceHelper.GetString("NetworkTesterPage_RunTest");
 
     [TranslationProperty]
-    public string CopyTestResultsText => ResourceHelper.GetString("CopyTestResults");
+    public string CopyTestResultsText => ResourceHelper.GetString("NetworkTesterPage_CopyTestResults");
 
     [TranslationProperty]
-    public string ResultsText => ResourceHelper.GetString("Results");
+    public string ResultsText => ResourceHelper.GetString("NetworkTesterPage_Results");
 
     [TranslationProperty]
-    public string CreateBugReportText => ResourceHelper.GetString("CreateBugReport");
+    public string CreateBugReportText => ResourceHelper.GetString("NetworkTesterPage_CreateBugReport");
 
     [TranslationProperty]
-    public string CancelCurrentTestText => ResourceHelper.GetString("CancelCurrentTest");
+    public string CancelCurrentTestText => ResourceHelper.GetString("NetworkTesterPage_CancelCurrentTest");
 }

@@ -381,13 +381,13 @@ Only import dlls from sources you trust.</value>
   <data name="EnabledForAllDlssDlls" xml:space="preserve">
     <value>Enabled for all DLSS DLLs</value>
   </data>
-  <data name="ClickToCopyDetails" xml:space="preserve">
+  <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
     <value>Click to copy below details</value>
   </data>
   <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
     <value>Diagnostics</value>
   </data>
-  <data name="Diagnostics_WindowTitle" xml:space="preserve">
+  <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
     <value>Diagnostics</value>
   </data>
   <data name="FailedToLaunch" xml:space="preserve">
@@ -408,7 +408,7 @@ Only import dlls from sources you trust.</value>
   <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
     <value>Network Tester</value>
   </data>
-  <data name="NetworkTester_WindowTitle" xml:space="preserve">
+  <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>Network Tester</value>
   </data>
   <data name="OriginalDll" xml:space="preserve">
@@ -522,7 +522,7 @@ Only import dlls from sources you trust.</value>
   <data name="StepTwoCopyTitle" xml:space="preserve">
     <value>Step 2: Copy title</value>
   </data>
-  <data name="Copy" xml:space="preserve">
+  <data name="General_Copy" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="StepThreeCopyBody" xml:space="preserve">
@@ -594,40 +594,40 @@ Only import dlls from sources you trust.</value>
   <data name="Help" xml:space="preserve">
     <value>Help</value>
   </data>
-  <data name="DiagnosticsTest1Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
     <value>Accessing google.com from within DLSS Swapper (tests general internet connectivity)</value>
   </data>
-  <data name="DiagnosticsTest2Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
     <value>Accessing bing.com from within DLSS Swapper (tests general internet connectivity)</value>
   </data>
-  <data name="DiagnosticsTest3Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
     <value>Downloading DLSS Swapper DLL within DLSS Swapper</value>
   </data>
-  <data name="DiagnosticsTest4Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
     <value>Downloading DLSS Swapper DLL from browser</value>
   </data>
-  <data name="DiagnosticsTest5Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
     <value>Downloading game cover from Steam</value>
   </data>
-  <data name="DiagnosticsTest6Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
     <value>Downloading game cover from Epic Game Store</value>
   </data>
-  <data name="DiagnosticsTest7Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
     <value>Downloading game cover from DLSS Swapper file server</value>
   </data>
-  <data name="DiagnosticsTest8Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
     <value>Downloading game cover from alternative DLSS Swapper file server</value>
   </data>
-  <data name="DiagnosticsTest9Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
     <value>DNS lookup of DLSS Swapper file server</value>
   </data>
-  <data name="DiagnosticsTest10Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
     <value>Downloading DLSS Swapper DLL within DLSS Swapper with custom user agent</value>
   </data>
-  <data name="DiagnosticsTest11Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
     <value>Downloading DLSS DLL from UploadThing mirror</value>
   </data>
-  <data name="RunTest" xml:space="preserve">
+  <data name="NetworkTesterPage_RunTest" xml:space="preserve">
     <value>Run test</value>
   </data>
   <data name="Favourited" xml:space="preserve">
@@ -660,16 +660,16 @@ Only import dlls from sources you trust.</value>
   <data name="FileSize" xml:space="preserve">
     <value>File size</value>
   </data>
-  <data name="Results" xml:space="preserve">
+  <data name="NetworkTesterPage_Results" xml:space="preserve">
     <value>Results</value>
   </data>
-  <data name="CopyTestResults" xml:space="preserve">
+  <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
     <value>Copy test results</value>
   </data>
-  <data name="CreateBugReport" xml:space="preserve">
+  <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
     <value>Create bug report</value>
   </data>
-  <data name="CancelCurrentTest" xml:space="preserve">
+  <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
     <value>Cancel current test</value>
   </data>
   <data name="NoteForMultiplayerGames" xml:space="preserve">
@@ -715,25 +715,27 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
     <value>Could not download {0} DLL, please try again later or check your logs to see why the download failed.</value>
     <comment>0 = {{DLLManager.Instance.GetAssetTypeName(AssetType)}</comment>
   </data>
-  <data name="OpenInBrowser" xml:space="preserve">
+  <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
     <value>Open in browser</value>
   </data>
-  <data name="BrowserTest" xml:space="preserve">
+  <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
     <value>Browser Test</value>
   </data>
-  <data name="Works" xml:space="preserve">
+  <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
     <value>Works!</value>
+    <comment>Meaning the test was successful.</comment>
   </data>
-  <data name="StillDoesNotWork" xml:space="preserve">
+  <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
     <value>Still does not work</value>
+    <comment>Meaning the test failed.</comment>
   </data>
-  <data name="OpenInBrowserInfo" xml:space="preserve">
+  <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
     <value>Click the open in browser button, or copy and paste following link into your browser. Does it download a file in your browser?</value>
   </data>
-  <data name="UseUserAgentInfo" xml:space="preserve">
+  <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
     <value>Use the provided user agent or enter a custom one of your choice.</value>
   </data>
-  <data name="CustomUserAgentTest" xml:space="preserve">
+  <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
     <value>Custom user agent test</value>
   </data>
   <data name="DeleteDll" xml:space="preserve">

@@ -360,13 +360,13 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="EnabledForAllDlssDlls" xml:space="preserve">
     <value>Włączone dla wszystkich bibliotek DLSS DLL</value>
   </data>
-  <data name="ClickToCopyDetails" xml:space="preserve">
+  <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
     <value>Kliknij aby skopiować poniższe dane</value>
   </data>
   <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
     <value>Diagnostyka</value>
   </data>
-  <data name="Diagnostics_WindowTitle" xml:space="preserve">
+  <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
     <value>Diagnostyka</value>
   </data>
   <data name="FailedToLaunch" xml:space="preserve">
@@ -387,7 +387,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
     <value>Tester Sieciowy</value>
   </data>
-  <data name="NetworkTester_WindowTitle" xml:space="preserve">
+  <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>Tester Sieciowy</value>
   </data>
   <data name="OriginalDll" xml:space="preserve">
@@ -483,7 +483,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="StepTwoCopyTitle" xml:space="preserve">
     <value>Krok 2: Skopiuj tytuł</value>
   </data>
-  <data name="Copy" xml:space="preserve">
+  <data name="General_Copy" xml:space="preserve">
     <value>Kopiuj</value>
   </data>
   <data name="StepThreeCopyBody" xml:space="preserve">
@@ -555,40 +555,40 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="Help" xml:space="preserve">
     <value>Pomoc</value>
   </data>
-  <data name="DiagnosticsTest1Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
     <value>Dostęp do google.com z poziomu DLSS Swapper (test ogólnej łączności z Internetem)</value>
   </data>
-  <data name="DiagnosticsTest2Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
     <value>Dostęp do bing.com z poziomu DLSS Swapper (testogólnej łączności z Internetem)</value>
   </data>
-  <data name="DiagnosticsTest3Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
     <value>Pobieranie DLSS Swapper DLL z poziomu DLSS Swapper</value>
   </data>
-  <data name="DiagnosticsTest4Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
     <value>Pobieranie DLSS Swapper DLL przez przeglądarkę</value>
   </data>
-  <data name="DiagnosticsTest5Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
     <value>Pobieranie okładki gry ze Steam</value>
   </data>
-  <data name="DiagnosticsTest6Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
     <value>Pobieranie okładki gry z Epic Game Store</value>
   </data>
-  <data name="DiagnosticsTest7Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
     <value>Pobieranie okładki gry z serwera plików DLSS Swapper</value>
   </data>
-  <data name="DiagnosticsTest8Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
     <value>Pobieranie okładki gry z alternatywnego serwera plików DLSS Swapper</value>
   </data>
-  <data name="DiagnosticsTest9Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
     <value>Wyszukiwanie DNS serwera plików DLSS Swapper</value>
   </data>
-  <data name="DiagnosticsTest10Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
     <value>Pobieranie DLSS Swapper DLL w DLSS Swapper z niestandardowym agentem użytkownika</value>
   </data>
-  <data name="DiagnosticsTest11Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
     <value>Pobieranie DLSS DLL z lustrzanego serwera UploadThing</value>
   </data>
-  <data name="RunTest" xml:space="preserve">
+  <data name="NetworkTesterPage_RunTest" xml:space="preserve">
     <value>Uruchom test</value>
   </data>
   <data name="Favourited" xml:space="preserve">
@@ -621,13 +621,13 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="FileSize" xml:space="preserve">
     <value>Rozmiar pliku</value>
   </data>
-  <data name="CopyTestResults" xml:space="preserve">
+  <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
     <value>Skopiuj wyniki testów</value>
   </data>
-  <data name="CreateBugReport" xml:space="preserve">
+  <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
     <value>Utwórz raport o błędzie</value>
   </data>
-  <data name="CancelCurrentTest" xml:space="preserve">
+  <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
     <value>Anuluj bieżący test</value>
   </data>
   <data name="NoteForMultiplayerGames" xml:space="preserve">
@@ -671,25 +671,25 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Nie można pobrać {0} DLL, proszę spróbować później lub lub sprawdzić swoje logi żeby sprawdzić czemu pobieranie się nie powiodło.</value>
   </data>
-  <data name="OpenInBrowser" xml:space="preserve">
+  <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
     <value>Otwórz w przeglądarce</value>
   </data>
-  <data name="BrowserTest" xml:space="preserve">
+  <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
     <value>Test przeglądarki</value>
   </data>
-  <data name="Works" xml:space="preserve">
+  <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
     <value>Działa!</value>
   </data>
-  <data name="StillDoesNotWork" xml:space="preserve">
+  <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
     <value>Wciąż nie działa</value>
   </data>
-  <data name="OpenInBrowserInfo" xml:space="preserve">
+  <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
     <value>Kliknij przycisk Otwórz w przeglądarce lub skopiuj i wklej poniższy link do przeglądarki. Czy pobierany jest plik w przeglądarce?</value>
   </data>
-  <data name="UseUserAgentInfo" xml:space="preserve">
+  <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
     <value>Użyj dostarczonego UserAgenta lub wprowadź niestandardowego.</value>
   </data>
-  <data name="CustomUserAgentTest" xml:space="preserve">
+  <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
     <value>Test niestandardowego UserAgenta</value>
   </data>
   <data name="DeleteDll" xml:space="preserve">

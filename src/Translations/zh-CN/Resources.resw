@@ -179,16 +179,16 @@
   <data name="BelowMultipleDllFoundYouWillBeAbleToSwapInfo" xml:space="preserve">
     <value>检测到多个 DLL 文件，您仍然可以和之前一样替换和还原 DLL 文件，因为我们会对所有 DLL 文件同时执行这些操作，但是，由于我们并不知道游戏使用了这些 DLL 文件中的哪一个，因此显示的 DLL 文件版本是检测到的第一个 DLL 文件的版本。</value>
   </data>
-  <data name="BrowserTest" xml:space="preserve">
+  <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
     <value>浏览器测试</value>
   </data>
   <data name="General_Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name="CancelCurrentTest" xml:space="preserve">
+  <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
     <value>取消当前的测试</value>
   </data>
-  <data name="ClickToCopyDetails" xml:space="preserve">
+  <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
     <value>点击复制以下详细信息</value>
   </data>
   <data name="ClickToFavourite" xml:space="preserve">
@@ -200,10 +200,10 @@
   <data name="Comment" xml:space="preserve">
     <value>说明</value>
   </data>
-  <data name="Copy" xml:space="preserve">
+  <data name="General_Copy" xml:space="preserve">
     <value>复制</value>
   </data>
-  <data name="CopyTestResults" xml:space="preserve">
+  <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
     <value>复制测试输出</value>
   </data>
   <data name="CouldNotDeserializeGogCatalog" xml:space="preserve">
@@ -257,7 +257,7 @@
   <data name="CouldntExportDlssDll" xml:space="preserve">
     <value>无法导出 DLSS DLL 文件。</value>
   </data>
-  <data name="CreateBugReport" xml:space="preserve">
+  <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
     <value>创建问题报告。</value>
   </data>
   <data name="CreateNewGithubIssue" xml:space="preserve">
@@ -272,7 +272,7 @@
   <data name="CustomCoverRemove" xml:space="preserve">
     <value>移除自定义艺术图？</value>
   </data>
-  <data name="CustomUserAgentTest" xml:space="preserve">
+  <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
     <value>自定义代理测试</value>
   </data>
   <data name="General_Delete" xml:space="preserve">
@@ -287,40 +287,40 @@
   <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
     <value>诊断系统/系统信息</value>
   </data>
-  <data name="Diagnostics_WindowTitle" xml:space="preserve">
+  <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
     <value>诊断系统/系统信息</value>
   </data>
-  <data name="DiagnosticsTest10Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
     <value>使用代理在 DLSS Swap 中下载 DLSS Swap DLL 文件</value>
   </data>
-  <data name="DiagnosticsTest11Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
     <value>从 UploadThing 镜像下载 DLSS DLL 文件</value>
   </data>
-  <data name="DiagnosticsTest1Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
     <value>测试 Google.com 响应以检查互联网连接</value>
   </data>
-  <data name="DiagnosticsTest2Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
     <value>测试微软必应响应以检查互联网连接</value>
   </data>
-  <data name="DiagnosticsTest3Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
     <value>在 DLSS Swapper 清单中下载 DLSS DLL 文件测试</value>
   </data>
-  <data name="DiagnosticsTest4Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
     <value>从浏览器下载 DLL 文件测试</value>
   </data>
-  <data name="DiagnosticsTest5Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
     <value>从 Steam 下载游戏封面艺术图</value>
   </data>
-  <data name="DiagnosticsTest6Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
     <value>从 Epic Games 商店下载游戏封面艺术图</value>
   </data>
-  <data name="DiagnosticsTest7Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
     <value>从 DLSS Swapper 的服务器下载游戏封面艺术图</value>
   </data>
-  <data name="DiagnosticsTest8Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
     <value>从 DLSS Swapper 的其它服务器下载游戏封面艺术图</value>
   </data>
-  <data name="DiagnosticsTest9Title" xml:space="preserve">
+  <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
     <value>查询 DLSS Swapper 的 DNS 服务器地址</value>
   </data>
   <data name="Disabled" xml:space="preserve">
@@ -534,7 +534,7 @@
   <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
     <value>网络测试</value>
   </data>
-  <data name="NetworkTester_WindowTitle" xml:space="preserve">
+  <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>网络测试</value>
   </data>
   <data name="NewDlls" xml:space="preserve">
@@ -576,10 +576,10 @@
   <data name="OpenFolder" xml:space="preserve">
     <value>打开文件夹</value>
   </data>
-  <data name="OpenInBrowser" xml:space="preserve">
+  <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
     <value>打开您的浏览器</value>
   </data>
-  <data name="OpenInBrowserInfo" xml:space="preserve">
+  <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
     <value>点击 “在浏览器中打开”按钮，或将以下链接复制并粘贴到浏览器中，检查您的浏览器是否正在下载文件？</value>
   </data>
   <data name="Optional" xml:space="preserve">
@@ -630,10 +630,10 @@
   <data name="ResetDllToVersionTemplate" xml:space="preserve">
     <value>DLL 已还原为原始版本： {0}.</value>
   </data>
-  <data name="Results" xml:space="preserve">
+  <data name="NetworkTesterPage_Results" xml:space="preserve">
     <value>测试详情</value>
   </data>
-  <data name="RunTest" xml:space="preserve">
+  <data name="NetworkTesterPage_RunTest" xml:space="preserve">
     <value>开始测试</value>
   </data>
   <data name="General_Save" xml:space="preserve">
@@ -756,7 +756,7 @@
   <data name="StepTwoCopyTitle" xml:space="preserve">
     <value>第二步：复制标题</value>
   </data>
-  <data name="StillDoesNotWork" xml:space="preserve">
+  <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
     <value>无法下载</value>
   </data>
   <data name="StorageFileIsNull" xml:space="preserve">
@@ -810,7 +810,7 @@
   <data name="UpdateManifest" xml:space="preserve">
     <value>更新清单</value>
   </data>
-  <data name="UseUserAgentInfo" xml:space="preserve">
+  <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
     <value>使用提供的代理或输入自定义的用户代理。</value>
   </data>
   <data name="General_Version" xml:space="preserve">
@@ -828,7 +828,7 @@
   <data name="WhileLoadingYourGameNewDllsDiscoveredHelpUs" xml:space="preserve">
     <value>在加载您的游戏时，我们发现了一些新的 DLL，这些 DLL 不在 DLSS Swapper 仓库清单中。</value>
   </data>
-  <data name="Works" xml:space="preserve">
+  <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
     <value>下载正常</value>
   </data>
   <data name="YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">

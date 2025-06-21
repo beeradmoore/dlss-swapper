@@ -25,7 +25,7 @@ public class NewDLLsControlModelTranslationProperties : LocalizedViewModelBase
     public string StepTwoCopyTitleText => ResourceHelper.GetString("StepTwoCopyTitle");
 
     [TranslationProperty]
-    public string CopyText => ResourceHelper.GetString("Copy");
+    public string CopyText => ResourceHelper.GetString("General_Copy");
 
     [TranslationProperty]
     public string StepThreeCopyBodyText => ResourceHelper.GetString("StepThreeCopyBody");

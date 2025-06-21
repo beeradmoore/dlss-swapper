@@ -16,7 +16,7 @@ namespace DLSS_Swapper;
 
 public partial class NetworkTesterWindowModel : ObservableObject
 {
-    WeakReference<NetworkTesterWindow> _weakWindow;
+    readonly WeakReference<NetworkTesterWindow> _weakWindow;
     readonly string _dlssSwapperDomainTestLink = "dlss-swapper-downloads.beeradmoore.com";
     readonly string _dlssSwapperDownloadTestLink = "https://dlss-swapper-downloads.beeradmoore.com/dlss/nvngx_dlss_v1.0.0.0.zip";
     readonly string _uploadThingDownloadTestLink = "https://hb4kzlkh4u.ufs.sh/f/isdnLt22yljeRWLOje0oeKXyth5OC7M6sI02T3YfL8GPbvpd";
@@ -324,7 +324,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
             };
             stackPanel.Children.Add(new TextBlock()
             {
-                Text = ResourceHelper.GetString("OpenInBrowserInfo"),
+                Text = ResourceHelper.GetString("NetworkTesterPage_OpenInBrowserInfo"),
                 TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
             });
             var horizontalGrid = new Grid()
@@ -345,7 +345,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
             var copyButton = new Button()
             {
-                Content = ResourceHelper.GetString("Copy"),
+                Content = ResourceHelper.GetString("General_Copy"),
             };
             copyButton.Tapped += (sender, e) =>
             {
@@ -357,7 +357,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
             var openButton = new Button()
             {
-                Content = ResourceHelper.GetString("OpenInBrowser")
+                Content = ResourceHelper.GetString("NetworkTesterPage_OpenInBrowser")
             };
             openButton.Tapped += async (sender, e) =>
             {
@@ -371,9 +371,9 @@ public partial class NetworkTesterWindowModel : ObservableObject
             stackPanel.Children.Add(horizontalGrid);
             var dialog = new EasyContentDialog(networkTesterWindow.Content.XamlRoot)
             {
-                Title = ResourceHelper.GetString("BrowserTest"),
-                PrimaryButtonText = ResourceHelper.GetString("Works"),
-                SecondaryButtonText = ResourceHelper.GetString("StillDoesNotWork"),
+                Title = ResourceHelper.GetString("NetworkTesterPage_BrowserTestTitle"),
+                PrimaryButtonText = ResourceHelper.GetString("NetworkTesterPage_BrowserTesterWorks"),
+                SecondaryButtonText = ResourceHelper.GetString("NetworkTesterPage_BrowserTesterStillDoesNotWork"),
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = stackPanel,
@@ -679,7 +679,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
             };
             stackPanel.Children.Add(new TextBlock()
             {
-                Text = ResourceHelper.GetString("UseUserAgentInfo"),
+                Text = ResourceHelper.GetString("NetworkTesterPage_UseUserAgentInfo"),
                 TextWrapping = TextWrapping.Wrap,
             });
 
@@ -691,8 +691,8 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
             var dialog = new EasyContentDialog(networkTesterWindow.Content.XamlRoot)
             {
-                Title = ResourceHelper.GetString("CustomUserAgentTest"),
-                PrimaryButtonText = ResourceHelper.GetString("RunTest"),
+                Title = ResourceHelper.GetString("NetworkTesterPage_CustomUserAgentTest"),
+                PrimaryButtonText = ResourceHelper.GetString("NetworkTesterPage_RunTest"),
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = stackPanel,

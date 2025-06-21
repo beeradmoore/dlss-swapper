@@ -450,10 +450,10 @@ Only import dlls from sources you trust.</value>
   <data name="General_Publish" xml:space="preserve">
     <value>Publish</value>
   </data>
-  <data name="Key" xml:space="preserve">
+  <data name="TranslationToolsPage_Key" xml:space="preserve">
     <value>Key</value>
   </data>
-  <data name="Comment" xml:space="preserve">
+  <data name="TranslationToolsPage_Comment" xml:space="preserve">
     <value>Comment</value>
   </data>
   <data name="TranslationToolsPage_NewTranslation" xml:space="preserve">

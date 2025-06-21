@@ -31,10 +31,10 @@ public class TranslationToolsWindowModelTranslationProperties : LocalizedViewMod
     public string PublishText => ResourceHelper.GetString("General_Publish");
 
     [TranslationProperty]
-    public string KeyText => ResourceHelper.GetString("Key");
+    public string KeyText => ResourceHelper.GetString("TranslationToolsPage_Key");
 
     [TranslationProperty]
-    public string CommentText => ResourceHelper.GetString("Comment");
+    public string CommentText => ResourceHelper.GetString("TranslationToolsPage_Comment");
 
     [TranslationProperty]
     public string SourceTranslationText => ResourceHelper.GetString("TranslationToolsPage_SourceTranslation");

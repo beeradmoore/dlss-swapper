@@ -197,7 +197,7 @@
   <data name="General_Close" xml:space="preserve">
     <value>关闭</value>
   </data>
-  <data name="Comment" xml:space="preserve">
+  <data name="TranslationToolsPage_Comment" xml:space="preserve">
     <value>说明</value>
   </data>
   <data name="General_Copy" xml:space="preserve">

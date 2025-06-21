@@ -630,16 +630,16 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
     <value>Anuluj bieżący test</value>
   </data>
-  <data name="NoteForMultiplayerGames" xml:space="preserve">
+  <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>Uwaga dotycząca gier wieloosobowych</value>
   </data>
-  <data name="DlssSwappingConsideredCheatingInfo" xml:space="preserve">
+  <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
     <value>Chociaż zamiana wersji DLSS nie powinna być uznawana za oszustwo, niektóre systemy anty-cheatowe mogą nie być tego zadowolone, jeśli pliki w twoim katalogu gry nie są takie, z jakimi gra była dystrybuowana.</value>
   </data>
-  <data name="GithubIssues" xml:space="preserve">
+  <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
     <value>Problemy z GitHubem</value>
   </data>
-  <data name="ManifestCouldNotBeLoaded" xml:space="preserve">
+  <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
     <value>Nie udało się załadować pliku manifest.json z komputera lub z Internetu.
 
 Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia błędów na GitHubie.</value>
@@ -695,7 +695,7 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="DeleteDll" xml:space="preserve">
     <value>Usuń bibliotekę DLL</value>
   </data>
-  <data name="UpdateManifest" xml:space="preserve">
+  <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
     <value>Zaktualizuj manifest</value>
   </data>
   <data name="ImportFeatureDisabled" xml:space="preserve">
@@ -734,7 +734,7 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="GameProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} wciąż się przetwarza. Prosimy poczekać aż ładowanie się zakończy zanim uruchomisz grę.</value>
   </data>
-  <data name="CouldNotLoadImportedDlls" xml:space="preserve">
+  <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
     <value>Nie można załadować zaimportowanych bibliotek DLL</value>
   </data>
   <data name="ProcessedDlls" xml:space="preserve">
@@ -776,13 +776,13 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="CouldNotFindAnyGogEmbedFilteredProducts" xml:space="preserve">
     <value>Nie można znaleźć żadnego GOGEmbedFilteredProducts dla url, {0}</value>
   </data>
-  <data name="UpdateAttempt" xml:space="preserve">
+  <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
     <value>Próba aktualizacji</value>
   </data>
-  <data name="DlssSwapperMustClose" xml:space="preserve">
+  <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
     <value>DLSS Swapper musi zostać zamknięty</value>
   </data>
-  <data name="DlssSwapperCloseDueToManifest" xml:space="preserve">
+  <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
     <value>DLSS Swapper nie był w stanie wczytać pliku manifestu. teraz zostanie zamknięty.</value>
   </data>
   <data name="StorageFileIsNull" xml:space="preserve">

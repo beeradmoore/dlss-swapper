@@ -241,10 +241,10 @@ namespace DLSS_Swapper
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("NoteForMultiplayerGames"),
+                    Title = ResourceHelper.GetString("MainWindow_NoteForMultiplayerGames_Title"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = ResourceHelper.GetString("DlssSwappingConsideredCheatingInfo"),
+                    Content = ResourceHelper.GetString("MainWindow_NoteForMultiplayerGames_Message"),
                 };
                 var result = await dialog.ShowAsync();
 
@@ -258,10 +258,10 @@ namespace DLSS_Swapper
                 {
                     Title = ResourceHelper.GetString("General_Error"),
                     CloseButtonText = ResourceHelper.GetString("General_Close"),
-                    PrimaryButtonText = ResourceHelper.GetString("GithubIssues"),
-                    SecondaryButtonText = ResourceHelper.GetString("UpdateManifest"),
+                    PrimaryButtonText = ResourceHelper.GetString("MainWindow_ManifestCouldNotBeLoaded_GitHubIssues"),
+                    SecondaryButtonText = ResourceHelper.GetString("MainWindow_ManifestCouldNotBeLoaded_UpdateManifest"),
                     DefaultButton = ContentDialogButton.Primary,
-                    Content = ResourceHelper.GetString("ManifestCouldNotBeLoaded"),
+                    Content = ResourceHelper.GetString("MainWindow_ManifestCouldNotBeLoaded_Message"),
                 };
                 var shouldClose = true;
 
@@ -274,7 +274,7 @@ namespace DLSS_Swapper
                 {
                     dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                     {
-                        Title = ResourceHelper.GetString("UpdateAttempt"),
+                        Title = ResourceHelper.GetString("MainWindow_AttemptingManifestUpdate"),
                         DefaultButton = ContentDialogButton.Close,
                         Content = new ProgressRing()
                         {
@@ -298,10 +298,10 @@ namespace DLSS_Swapper
                 {
                     dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                     {
-                        Title = ResourceHelper.GetString("DlssSwapperMustClose"),
+                        Title = ResourceHelper.GetString("MainWindow_DlssSwapperMustClose"),
                         CloseButtonText = ResourceHelper.GetString("General_Close"),
                         DefaultButton = ContentDialogButton.Close,
-                        Content = ResourceHelper.GetString("DlssSwapperCloseDueToManifest"),
+                        Content = ResourceHelper.GetString("MainWindow_DlssSwapperCloseDueToManifest"),
                     };
                     await dialog.ShowAsync();
 
@@ -313,7 +313,7 @@ namespace DLSS_Swapper
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("CouldNotLoadImportedDlls"),
+                    Title = ResourceHelper.GetString("LibraryPage_CouldNotLoadImportedDlls"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = new ImportSystemDisabledView(),
                     CloseButtonText = ResourceHelper.GetString("General_Close"),

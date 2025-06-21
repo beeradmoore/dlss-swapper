@@ -245,7 +245,7 @@
   <data name="CouldNotLoadGithubReleaseDataException" xml:space="preserve">
     <value>无法获取 GitHub 版本发布信息。</value>
   </data>
-  <data name="CouldNotLoadImportedDlls" xml:space="preserve">
+  <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
     <value>无法加载导入的 DLL 文件。</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
@@ -335,19 +335,19 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>DLL Zip 压缩包无效（未找到 DLL 文件）</value>
   </data>
-  <data name="DlssSwapperCloseDueToManifest" xml:space="preserve">
+  <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
     <value>DLSS Swapper 无法加载其清单文件，需要关闭。</value>
   </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper 启动失败。</value>
   </data>
-  <data name="DlssSwapperMustClose" xml:space="preserve">
+  <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
     <value>DLSS Swapper 需要关闭。</value>
   </data>
   <data name="DlssSwapperUpdated" xml:space="preserve">
     <value>DLSS Swapper 已更新。</value>
   </data>
-  <data name="DlssSwappingConsideredCheatingInfo" xml:space="preserve">
+  <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
     <value>替换 DLSS 版本通常情况下不会被视为修改文件（即作弊），但如果您游戏目录中的文件与游戏新版的文件不一致，某些反作弊可能会尝试拦截游戏启动。\n\n因此，如果您玩的游戏是多人游戏且使用反作弊，请谨慎操作。</value>
   </data>
   <data name="DontShowAgain" xml:space="preserve">
@@ -440,7 +440,7 @@
   <data name="GithubAccountRequired" xml:space="preserve">
     <value>(GitHub 授权)</value>
   </data>
-  <data name="GithubIssues" xml:space="preserve">
+  <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
     <value>GitHub issues</value>
   </data>
   <data name="GridView" xml:space="preserve">
@@ -514,7 +514,7 @@
 
  请只从您信任的来源导入 DLL 文件。</value>
   </data>
-  <data name="ManifestCouldNotBeLoaded" xml:space="preserve">
+  <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
     <value>我们无法从您的电脑或服务器中加载 manifest.json。
 
 如果这种问题继续发生，请在 GitHub 上的问题跟踪中提交报告。</value>
@@ -558,7 +558,7 @@
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>当前已是最新版本。</value>
   </data>
-  <data name="NoteForMultiplayerGames" xml:space="preserve">
+  <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>欢迎使用 DLSS Swapper，请先阅读此内容</value>
   </data>
   <data name="Notes" xml:space="preserve">
@@ -801,13 +801,13 @@
   <data name="Update" xml:space="preserve">
     <value>更新</value>
   </data>
-  <data name="UpdateAttempt" xml:space="preserve">
+  <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
     <value>正在尝试更新</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>有一个可用的更新</value>
   </data>
-  <data name="UpdateManifest" xml:space="preserve">
+  <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
     <value>更新清单</value>
   </data>
   <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">

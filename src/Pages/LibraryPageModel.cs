@@ -352,7 +352,7 @@ public partial class LibraryPageModel : ObservableObject
         {
             var couldNotImportDialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = ResourceHelper.GetString("CouldNotLoadImportedDlls"),
+                Title = ResourceHelper.GetString("LibraryPage_CouldNotLoadImportedDlls"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = new ImportSystemDisabledView(),
                 CloseButtonText = ResourceHelper.GetString("General_Close"),

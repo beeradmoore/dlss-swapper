@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using DLSS_Swapper.Language;
 using Windows.ApplicationModel.Resources;
@@ -96,6 +97,8 @@ public class ResourceHelper
         {
             return resourceCandidate.ValueAsString;
         }
+
+        Debug.WriteLine($"Translation not found: {resourceName}");
 
         // If not we fallback to the original language.
         return _resourceLoader.GetString(resourceName);

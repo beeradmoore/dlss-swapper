@@ -338,7 +338,7 @@
   <data name="DlssSwapperCloseDueToManifest" xml:space="preserve">
     <value>DLSS Swapper 无法加载其清单文件，需要关闭。</value>
   </data>
-  <data name="DlssSwapperFailedToLaunch" xml:space="preserve">
+  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper 启动失败。</value>
   </data>
   <data name="DlssSwapperMustClose" xml:space="preserve">
@@ -401,7 +401,7 @@
   <data name="General_Failed" xml:space="preserve">
     <value>失败</value>
   </data>
-  <data name="FailedToLaunch" xml:space="preserve">
+  <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>启动失败</value>
   </data>
   <data name="Favourited" xml:space="preserve">
@@ -597,13 +597,13 @@
   <data name="PleaseNavigateLibraryToDownloadDlls" xml:space="preserve">
     <value>请在 DLL 库 下载新的 DLL 文件。</value>
   </data>
-  <data name="PleaseOpenIssuePartial1" xml:space="preserve">
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
     <value>请打开</value>
   </data>
-  <data name="PleaseOpenIssuePartial2" xml:space="preserve">
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
     <value>一个新的 issues</value>
   </data>
-  <data name="PleaseOpenIssuePartial3" xml:space="preserve">
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
     <value>在 DLSS Swapper 的 GitHub 仓库，并在“附加上下文”部分提供以下信息。</value>
   </data>
   <data name="ProcessedDlls" xml:space="preserve">

@@ -369,19 +369,19 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
     <value>Diagnostyka</value>
   </data>
-  <data name="FailedToLaunch" xml:space="preserve">
+  <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Problem z uruchomieniem</value>
   </data>
-  <data name="PleaseOpenIssuePartial1" xml:space="preserve">
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
     <value>Proszę otwórz </value>
   </data>
-  <data name="PleaseOpenIssuePartial2" xml:space="preserve">
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
     <value>nowe zgłoszenie</value>
   </data>
-  <data name="PleaseOpenIssuePartial3" xml:space="preserve">
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
     <value> w repozytorium DLSS Swapper GitHub i podaj następujące informacje w sekcji dodatkowego kontekstu.</value>
   </data>
-  <data name="DlssSwapperFailedToLaunch" xml:space="preserve">
+  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>Nie udało się uruchomić DLSS Swapper</value>
   </data>
   <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">

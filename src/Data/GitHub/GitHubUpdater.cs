@@ -68,7 +68,7 @@ namespace DLSS_Swapper.Data.GitHub
                         var githubRelease = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GitHubRelease);
                         if (githubRelease is null)
                         {
-                            throw new Exception(ResourceHelper.GetString("CouldNotLoadGithubReleaseDataException"));
+                            throw new Exception(ResourceHelper.GetString("GitHubUpdater_CouldNotLoadGitHubReleaseDataException"));
                         }
 
                         memoryStream.Position = 0;
@@ -105,7 +105,7 @@ namespace DLSS_Swapper.Data.GitHub
                     var githubRelease = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GitHubRelease);
                     if (githubRelease is null)
                     {
-                        throw new Exception(ResourceHelper.GetString("CouldNotLoadGithubReleaseDataException"));
+                        throw new Exception(ResourceHelper.GetString("GitHubUpdater_CouldNotLoadGitHubReleaseDataException"));
                     }
 
                     return githubRelease;
@@ -178,10 +178,10 @@ namespace DLSS_Swapper.Data.GitHub
 
             var currentVerion = App.CurrentApp.GetVersionString();
 
-            var yourVersion = ResourceHelper.GetFormattedResourceTemplate("CurrentVersionIsActualTemplate", currentVerion);
+            var yourVersion = ResourceHelper.GetFormattedResourceTemplate("GitHubUpdater_CurrentVersionIsActualTemplate", currentVerion);
             var contentUpdate = new MarkdownTextBlock()
             {
-                Text = yourVersion + gitHubRelease.Body,
+                Text = $"{yourVersion}\n\n{gitHubRelease.Body}",
                 Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
                 Config = new MarkdownConfig(),
             };
@@ -190,8 +190,8 @@ namespace DLSS_Swapper.Data.GitHub
             {
                 var dialog = new EasyContentDialog(xamlRoot)
                 {
-                    Title = $"{ResourceHelper.GetString("UpdateAvailable")} - {gitHubRelease.Name}",
-                    PrimaryButtonText = ResourceHelper.GetString("Update"),
+                    Title = $"{ResourceHelper.GetString("GitHubUpdater_UpdateAvailable")} - {gitHubRelease.Name}",
+                    PrimaryButtonText = ResourceHelper.GetString("General_Update"),
                     CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                     DefaultButton = ContentDialogButton.Primary,
                     Content = new ScrollViewer()
@@ -219,7 +219,7 @@ namespace DLSS_Swapper.Data.GitHub
 
             var dialog = new EasyContentDialog(xamlRoot)
             {
-                Title = $"{ResourceHelper.GetString("DlssSwapperUpdated")} - {gitHubRelease.Name}",
+                Title = $"{ResourceHelper.GetString("GitHubUpdater_DlssSwapperUpdated")} - {gitHubRelease.Name}",
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = new ScrollViewer()

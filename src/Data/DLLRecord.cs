@@ -219,12 +219,12 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
 
                 if (didDownload == false)
                 {
-                    throw new Exception(ResourceHelper.GetString("CouldNotDownloadFile"));
+                    throw new Exception(ResourceHelper.GetString("DllRecord_CouldNotDownloadFile"));
                 }
 
                 if (ZipMD5Hash != fileStream.GetMD5Hash())
                 {
-                    throw new Exception(ResourceHelper.GetString("DownloadFileWasInvalid"));
+                    throw new Exception(ResourceHelper.GetString("DllRecord_DownloadFileWasInvalid"));
                 }
 
                 fileStream.Position = 0;
@@ -262,7 +262,7 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
             {
                 LocalRecord.IsDownloaded = false;
                 LocalRecord.HasDownloadError = true;
-                LocalRecord.DownloadErrorMessage = ResourceHelper.GetFormattedResourceTemplate("CouldNotDownloadAssetTypeTemplate", DLLManager.Instance.GetAssetTypeName(AssetType));
+                LocalRecord.DownloadErrorMessage = ResourceHelper.GetFormattedResourceTemplate("DllRecord_CouldNotDownloadAssetTypeTemplate", DLLManager.Instance.GetAssetTypeName(AssetType));
                 NotifyPropertyChanged(nameof(LocalRecord));
             });
 

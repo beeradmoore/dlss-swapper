@@ -10,7 +10,7 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
     public string RemoveText => ResourceHelper.GetString("General_Remove");
 
     [TranslationProperty]
-    public string AddCustomCoverText => ResourceHelper.GetString("AddCustomCover");
+    public string AddCustomCoverText => ResourceHelper.GetString("GamePage_AddCustomCover");
 
     [TranslationProperty]
     public string GameNotReadyToPlayStateText => ResourceHelper.GetString("GameNotReadyToPlayState");
@@ -19,13 +19,13 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
     public string HelpText => ResourceHelper.GetString("Help");
 
     [TranslationProperty]
-    public string NameText => ResourceHelper.GetString("Name");
+    public string NameText => ResourceHelper.GetString("General_Name");
 
     [TranslationProperty]
     public string SaveText => ResourceHelper.GetString("General_Save");
 
     [TranslationProperty]
-    public string InstallPathText => ResourceHelper.GetString("InstallPath");
+    public string InstallPathText => ResourceHelper.GetString("GamePage_InstallPath");
 
     [TranslationProperty]
     public string OpenFolderText => ResourceHelper.GetString("OpenFolder");
@@ -37,7 +37,7 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
     public string ClickToFavouriteText => ResourceHelper.GetString("ClickToFavourite");
 
     [TranslationProperty]
-    public string NotesText => ResourceHelper.GetString("Notes");
+    public string NotesText => ResourceHelper.GetString("GamePage_Notes");
 
     [TranslationProperty]
     public string CloseText => ResourceHelper.GetString("General_Close");

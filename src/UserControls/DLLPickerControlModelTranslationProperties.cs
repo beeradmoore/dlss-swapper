@@ -13,7 +13,7 @@ public class DLLPickerControlModelTranslationProperties : LocalizedViewModelBase
     public string PleaseNavigateLibraryToDownloadDllsText => ResourceHelper.GetString("PleaseNavigateLibraryToDownloadDllsText");
 
     [TranslationProperty]
-    public string OpenDllLocationText => ResourceHelper.GetString("OpenDllLocation");
+    public string OpenDllLocationText => ResourceHelper.GetString("GamePage_OpenDllLocation");
 
     [TranslationProperty]
     public string CurrentDllText => ResourceHelper.GetString("CurrentDll");

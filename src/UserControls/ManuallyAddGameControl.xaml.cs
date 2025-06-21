@@ -58,7 +58,7 @@ namespace DLSS_Swapper.UserControls
                 else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.Copy;
-                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("AddCustomCover");
+                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("GamePage_AddCustomCover");
                 }
                 else
                 {

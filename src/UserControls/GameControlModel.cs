@@ -62,7 +62,7 @@ public partial class GameControlModel : ObservableObject
             }
             else
             {
-                throw new Exception(ResourceHelper.GetFormattedResourceTemplate("CouldNotFindGameInstallPathTemplate", Game.InstallPath));
+                throw new Exception(ResourceHelper.GetFormattedResourceTemplate("GamePage_CouldNotFindGameInstallPathTemplate", Game.InstallPath));
             }
         }
         catch (Exception err)
@@ -98,7 +98,7 @@ public partial class GameControlModel : ObservableObject
 
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = $"{ResourceHelper.GetString("Notes")} - {Game.Title}",
+                Title = $"{ResourceHelper.GetString("GamePage_Notes")} - {Game.Title}",
                 PrimaryButtonText = ResourceHelper.GetString("General_Save"),
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
@@ -156,7 +156,7 @@ public partial class GameControlModel : ObservableObject
                     Title = ResourceHelper.GetString("General_Error"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = ResourceHelper.GetString("TitleNotManuallyAddedCantBeRemoved"),
+                    Content = ResourceHelper.GetString("GamePage_ManuallyAddedGameCantBeRemoved"),
                 };
                 await cantDeleteDialog.ShowAsync();
                 return;
@@ -198,7 +198,7 @@ public partial class GameControlModel : ObservableObject
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
                 Title = ResourceHelper.GetFormattedResourceTemplate("SelectVersionTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
-                PrimaryButtonText = ResourceHelper.GetString("Swap"),
+                PrimaryButtonText = ResourceHelper.GetString("General_Swap"),
                 IsPrimaryButtonEnabled = false,
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,

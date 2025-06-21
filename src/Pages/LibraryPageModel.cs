@@ -92,7 +92,7 @@ public partial class LibraryPageModel : ObservableObject
                 Title = ResourceHelper.GetString("General_Error"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = ResourceHelper.GetString("UnableToDllUpdate"),
+                Content = ResourceHelper.GetString("LibraryPage_UnableToUpdateDllRecord"),
             };
             await errorDialog.ShowAsync();
         }
@@ -121,7 +121,7 @@ public partial class LibraryPageModel : ObservableObject
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Title = ResourceHelper.GetString("General_Error"),
-                Content = ResourceHelper.GetString("NoDllsToExport"),
+                Content = ResourceHelper.GetString("LibraryPage_NoDllsToExport"),
             };
             await dialog.ShowAsync();
             return;
@@ -155,7 +155,7 @@ public partial class LibraryPageModel : ObservableObject
 
         var exportingDialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = ResourceHelper.GetString("Exporting"),
+            Title = ResourceHelper.GetString("LibraryPage_Exporting"),
             Content = progressStackPanel,
         };
 
@@ -295,7 +295,7 @@ public partial class LibraryPageModel : ObservableObject
                 Title = ResourceHelper.GetString("General_Error"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = ResourceHelper.GetString("CouldntExportDlssDll"),
+                Content = ResourceHelper.GetString("LibraryPage_CouldntExportDll"),
             };
             await dialog.ShowAsync();
         }
@@ -368,7 +368,7 @@ public partial class LibraryPageModel : ObservableObject
                 Title = ResourceHelper.GetString("General_Warning"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = ResourceHelper.GetString("MalliciousDllsInfo"),
+                Content = ResourceHelper.GetString("LibraryPage_MalliciousDllsInfo"),
             };
             await warningDialog.ShowAsync();
 
@@ -402,7 +402,7 @@ public partial class LibraryPageModel : ObservableObject
             Text = string.Empty,
             HorizontalAlignment = HorizontalAlignment.Left,
         };
-        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("ProcessedDlls") });
+        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ProcessedDlls") });
         var progressRun = new Run() { Text = "0" };
         progressTextBlock.Inlines.Add(progressRun);
         var progressStackPanel = new StackPanel()
@@ -419,7 +419,7 @@ public partial class LibraryPageModel : ObservableObject
 
         var loadingDialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = ResourceHelper.GetString("Importing"),
+            Title = ResourceHelper.GetString("LibraryPage_Importing"),
             // I would like this to be a progress ring but for some reason the ring will not show.
             Content = progressStackPanel,
         };
@@ -441,7 +441,7 @@ public partial class LibraryPageModel : ObservableObject
                         dllRecord.LocalRecord = localRecord;
                     });
 
-                    importResults.Add(DLLImportResult.FromSucces(dllRecord.LocalRecord.ExpectedPath, ResourceHelper.GetString("AlreadyDownloaded"), true));
+                    importResults.Add(DLLImportResult.FromSucces(dllRecord.LocalRecord.ExpectedPath, ResourceHelper.GetString("LibraryPage_AlreadyDownloaded"), true));
                     return true;
                 }
 
@@ -469,7 +469,7 @@ public partial class LibraryPageModel : ObservableObject
                     dllRecord.LocalRecord = null;
                     dllRecord.LocalRecord = localRecord;
                 });
-                importResults.Add(DLLImportResult.FromSucces(importedPath, ResourceHelper.GetString("ImportedAsExistingRecord"), true));
+                importResults.Add(DLLImportResult.FromSucces(importedPath, ResourceHelper.GetString("LibraryPage_ImportedAsExistingRecord"), true));
                 return true;
             }
             else
@@ -516,7 +516,7 @@ public partial class LibraryPageModel : ObservableObject
 
                 if (importFile is null || File.Exists(importFile.Path) == false)
                 {
-                    importResults.Add(DLLImportResult.FromFail(importFile?.Path ?? string.Empty, ResourceHelper.GetString("FileNotFound")));
+                    importResults.Add(DLLImportResult.FromFail(importFile?.Path ?? string.Empty, ResourceHelper.GetString("LibraryPage_FileNotFound")));
                     continue;
                 }
 
@@ -654,7 +654,7 @@ public partial class LibraryPageModel : ObservableObject
                             var zippedDlls = archive.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
                             if (zippedDlls.Length == 0)
                             {
-                                throw new Exception(ResourceHelper.GetString("ZipDidNotContainAnyDlls"));
+                                throw new Exception(ResourceHelper.GetString("LibraryPage_ZipDidNotContainAnyDlls"));
                             }
 
                             var dllsInZip = zippedDlls.Length;
@@ -755,7 +755,7 @@ public partial class LibraryPageModel : ObservableObject
         {
             CloseButtonText = ResourceHelper.GetString("General_Okay"),
             DefaultButton = ContentDialogButton.Close,
-            Title = ResourceHelper.GetString("Finished"),
+            Title = ResourceHelper.GetString("LibraryPage_Finished"),
             Content = new ImportDLLSummaryControl(importResults),
         };
         await dialog.ShowAsync();
@@ -773,11 +773,11 @@ public partial class LibraryPageModel : ObservableObject
         var assetTypeName = DLLManager.Instance.GetAssetTypeName(record.AssetType);
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = ResourceHelper.GetString("DeleteDll"),
+            Title = ResourceHelper.GetString("LibraryPage_DeleteDll"),
             PrimaryButtonText = ResourceHelper.GetString("General_Delete"),
             CloseButtonText = ResourceHelper.GetString("General_Cancel"),
             DefaultButton = ContentDialogButton.Primary,
-            Content = ResourceHelper.GetFormattedResourceTemplate("DeleteDllVersionTemplate", assetTypeName, record.Version),
+            Content = ResourceHelper.GetFormattedResourceTemplate("LibraryPage_DeleteDllVersionTemplate", assetTypeName, record.Version),
         };
         var response = await dialog.ShowAsync();
         if (response == ContentDialogResult.Primary)
@@ -804,7 +804,7 @@ public partial class LibraryPageModel : ObservableObject
                     Title = ResourceHelper.GetString("General_Error"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = ResourceHelper.GetFormattedResourceTemplate("UnableToDeleteRecord", assetTypeName),
+                    Content = ResourceHelper.GetFormattedResourceTemplate("LibraryPage_UnableToDeleteRecord", assetTypeName),
                 };
                 await errorDialog.ShowAsync();
             }
@@ -846,7 +846,7 @@ public partial class LibraryPageModel : ObservableObject
 
         var exportingDialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = ResourceHelper.GetString("Exporting"),
+            Title = ResourceHelper.GetString("LibraryPage_Exporting"),
             // I would like this to be a progress ring but for some reason the ring will not show.
             Content = new ProgressRing()
             {
@@ -902,7 +902,7 @@ public partial class LibraryPageModel : ObservableObject
                     Title = ResourceHelper.GetString("General_Success"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = ResourceHelper.GetFormattedResourceTemplate("ExportedDllTemplate", dllRecord.DisplayName),
+                    Content = ResourceHelper.GetFormattedResourceTemplate("LibraryPage_ExportedDllTemplate", dllRecord.DisplayName),
                 };
                 await dialog.ShowAsync();
             }
@@ -918,7 +918,7 @@ public partial class LibraryPageModel : ObservableObject
                 Title = ResourceHelper.GetString("General_Error"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = ResourceHelper.GetString("CouldntExportDll"),
+                Content = ResourceHelper.GetString("LibraryPage_CouldntExportDll"),
             };
             await dialog.ShowAsync();
         }
@@ -931,7 +931,7 @@ public partial class LibraryPageModel : ObservableObject
         {
             Title = ResourceHelper.GetString("General_Error"),
             CloseButtonText = ResourceHelper.GetString("General_Okay"),
-            Content = record.LocalRecord?.DownloadErrorMessage ?? ResourceHelper.GetString("CouldntDownloadNow"),
+            Content = record.LocalRecord?.DownloadErrorMessage ?? ResourceHelper.GetString("LibraryPage_CouldntDownload"),
         };
         await dialog.ShowAsync();
     }

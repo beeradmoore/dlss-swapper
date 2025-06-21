@@ -207,12 +207,12 @@ public partial class DLLPickerControlModel : ObservableObject
 
         if (SelectedDLLRecord.LocalRecord.FileDownloader is not null)
         {
-            ShowTempInfoBar(string.Empty, ResourceHelper.GetString("WaitToDownloadCompleteBeforeSwapping"));
+            ShowTempInfoBar(string.Empty, ResourceHelper.GetString("GamePage_DllPicker_WaitToDownloadBeforeSwapping"));
             return;
         }
         else if (SelectedDLLRecord.LocalRecord.IsDownloaded == false)
         {
-            ShowTempInfoBar(string.Empty, ResourceHelper.GetString("StartingDownload"));
+            ShowTempInfoBar(string.Empty, ResourceHelper.GetString("GamePage_DllPicker_StartingDownload"));
             SelectedDLLRecord.DownloadAsync().SafeFireAndForget();
             return;
         }
@@ -303,7 +303,7 @@ public partial class DLLPickerControlModel : ObservableObject
                 }
                 else
                 {
-                    throw new Exception(ResourceHelper.GetFormattedResourceTemplate("CouldNotFindFileTemplate", CurrentGameAsset.Path));
+                    throw new Exception(ResourceHelper.GetFormattedResourceTemplate("GamePage_DllPicker_CouldNotFindFileTemplate", CurrentGameAsset.Path));
                 }
             }
         }
@@ -322,7 +322,7 @@ public partial class DLLPickerControlModel : ObservableObject
         if (didReset.Success == true)
         {
             ResetSelection();
-            ShowTempInfoBar(ResourceHelper.GetString("General_Success"), ResourceHelper.GetFormattedResourceTemplate("ResetDllToVersionTemplate", CurrentGameAsset?.DisplayVersion ?? string.Empty), severity: InfoBarSeverity.Success, gridIndex: 0);
+            ShowTempInfoBar(ResourceHelper.GetString("General_Success"), ResourceHelper.GetFormattedResourceTemplate("GamePage_DllPicker_ResetDllToVersionTemplate", CurrentGameAsset?.DisplayVersion ?? string.Empty), severity: InfoBarSeverity.Success, gridIndex: 0);
         }
         else
         {

@@ -231,6 +231,7 @@ var ignoredCSharpMatches = new List<string>()
 var getStringRegexes = new List<Regex>()
 {
     new Regex(@"ResourceHelper.GetString\(""(?<key>[^""]*)""\)", RegexOptions.Compiled),
+    new Regex(@"ResourceHelper.GetFormattedResourceTemplate\(""(?<key>[^""]*)""", RegexOptions.Compiled),    
 };
 
 var ignoredStringKeyPrefixes = new List<string>()
@@ -246,7 +247,13 @@ var ignoredStringKeyPrefixes = new List<string>()
     "ApplicationTitle",
     "GamesPage_Title",
     "AcknowledgementsPage_",
-
+    "DllRecord_",
+    "Game_",
+    "DllManager_",
+    "GameLibrary_",
+    "GamePage_",
+    "GamesPage_",
+    "GitHubUpdater_"
 };
 
 foreach (var csharpFiles in allCSharpFiles)

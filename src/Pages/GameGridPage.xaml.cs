@@ -142,9 +142,9 @@ namespace DLSS_Swapper.Pages
                 {
                     var dialog = new EasyContentDialog(XamlRoot)
                     {
-                        Title = ResourceHelper.GetString("GameCurrentlyProcessing"),
+                        Title = ResourceHelper.GetString("Game_CurrentlyProcessing"),
                         CloseButtonText = ResourceHelper.GetString("General_Okay"),
-                        Content = ResourceHelper.GetFormattedResourceTemplate("GameProcessingPleaseWaitTemplate", selectedGame.Title),
+                        Content = ResourceHelper.GetFormattedResourceTemplate("GamePage_ProcessingPleaseWaitTemplate", selectedGame.Title),
                     };
                     _ = dialog.ShowAsync();
                     return;

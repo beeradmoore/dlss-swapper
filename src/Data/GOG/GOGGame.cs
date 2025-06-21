@@ -73,12 +73,12 @@ namespace DLSS_Swapper.Data.GOG
                     var catalogResponse = JsonSerializer.Deserialize<GOGCatalogResponse>(memoryStream);
                     if (catalogResponse is null)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("CouldNotDeserializeGogCatalog", url));
+                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotDeserializeCatalog", url));
                     }
 
                     if (catalogResponse.Products.Length == 0)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("CouldNotFindAnyGogProduct", url));
+                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotFindAnyProduct", url));
                     }
 
                     foreach (var product in catalogResponse.Products)
@@ -116,12 +116,12 @@ namespace DLSS_Swapper.Data.GOG
                     var embedFilteredResponse = JsonSerializer.Deserialize<GOGEmbedFilteredResponse>(memoryStream);
                     if (embedFilteredResponse is null)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("CouldNotDeserializeGogEmbedFilterResponse", url));
+                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotDeserializeEmbedFilterResponse", url));
                     }
 
                     if (embedFilteredResponse.Products.Length == 0)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("CouldNotFindAnyGogEmbedFilteredProducts", url));
+                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotFindAnyEmbedFilteredProducts", url));
                     }
 
                     foreach (var product in embedFilteredResponse.Products)

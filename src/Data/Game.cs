@@ -195,7 +195,7 @@ namespace DLSS_Swapper.Data
                 GameLibrary.XboxApp => $"xboxapp_{platformId}",
                 GameLibrary.ManuallyAdded => $"manuallyadded_{platformId}",
                 GameLibrary.BattleNet => $"battlenet_{platformId}",
-                _ => throw new Exception(ResourceHelper.GetFormattedResourceTemplate("UnknownGameLibraryTemplate", GameLibrary)),
+                _ => throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_UnknownGameLibraryTemplate", GameLibrary)),
             };
         }
 
@@ -1120,11 +1120,11 @@ namespace DLSS_Swapper.Data
         {
             var dialog = new EasyContentDialog(App.CurrentApp.MainWindow.Content.XamlRoot)
             {
-                Title = ResourceHelper.GetString("CustomCoverRemove"),
+                Title = ResourceHelper.GetString("Game_CustomCoverRemove"),
                 PrimaryButtonText = ResourceHelper.GetString("General_Remove"),
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = ResourceHelper.GetString("AreYouSureRemoveCustomCover"),
+                Content = ResourceHelper.GetString("Game_AreYouSureRemoveCustomCover"),
             };
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)

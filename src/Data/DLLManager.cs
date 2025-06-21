@@ -233,7 +233,7 @@ internal class DLLManager
                 var manifest = await JsonSerializer.DeserializeAsync(memoryStream, SourceGenerationContext.Default.Manifest);
                 if (manifest is null)
                 {
-                    throw new Exception(ResourceHelper.GetString("CouldNotDeserializeManifestException"));
+                    throw new Exception(ResourceHelper.GetString("DllManager_CouldNotDeserializeManifestException"));
                 }
 
                 Manifest = manifest;
@@ -312,7 +312,7 @@ internal class DLLManager
             var oldLoadingMessage = App.CurrentApp.MainWindow.ViewModel.LoadingMessage;
             App.CurrentApp.RunOnUIThread(() =>
             {
-                App.CurrentApp.MainWindow.ViewModel.LoadingMessage = ResourceHelper.GetString("MigratingDlls");
+                App.CurrentApp.MainWindow.ViewModel.LoadingMessage = ResourceHelper.GetString("DllManager_MigratingDlls");
             });
 
             CheckDllRecordsForMigration_117(Manifest.DLSS, ImportedManifest?.DLSS);
@@ -1117,7 +1117,7 @@ internal class DLLManager
     {
         if (ImportedManifest is null)
         {
-            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("ImportFeatureDisabled"));
+            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("DllManager_ImportFeatureDisabled"));
         }
 
         var fileName = Path.GetFileName(filePath);
@@ -1177,7 +1177,7 @@ internal class DLLManager
 
         if (gameAssetType is null || recordList is null || importedRecordList is null)
         {
-            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("UnknownTypeDll"));
+            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("DllManager_UnknownTypeDll"));
         }
 
         var versionInfo = FileVersionInfo.GetVersionInfo(filePath);
@@ -1186,7 +1186,7 @@ internal class DLLManager
         // Don't do anything with untrusted dlls.
         if (Settings.Instance.AllowUntrusted == false && isTrusted == false)
         {
-            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("UntrustedDll"));
+            return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("DllManager_UntrustedDll"));
         }
 
         var dllHash = versionInfo.GetMD5Hash();
@@ -1200,7 +1200,7 @@ internal class DLLManager
             // If the DLL is already imported we can skip it.
             if (existingDll.LocalRecord?.IsDownloaded == true)
             {
-                return DLLImportResult.FromSucces(zippedDllFullName ?? filePath, $"{fileName} {ResourceHelper.GetString("AlreadyImported")}", false);
+                return DLLImportResult.FromSucces(zippedDllFullName ?? filePath, $"{fileName} {ResourceHelper.GetString("DllManager_AlreadyImported")}", false);
             }
             importingAsDownloadedDll = true;
         }

@@ -104,23 +104,23 @@ namespace DLSS_Swapper.UserControls
                 if (storageFile is null)
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.None;
-                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("StorageFileIsNull");
+                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("GamePage_StorageFileIsNull");
                 }
                 else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.Copy;
-                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("AddCustomCover");
+                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("GamePage_AddCustomCover");
                 }
                 else
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.None;
-                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetFormattedResourceTemplate("InvalidFileTypeTemplate", storageFile.FileType);
+                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetFormattedResourceTemplate("GamePage_InvalidFileTypeTemplate", storageFile.FileType);
                 }
             }
             else
             {
                 coverDragDropAcceptedOperation = DataPackageOperation.None;
-                coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("YouMayOnlyDragOneFileCover");
+                coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("GamePage_YouMayOnlyDragOneFileCover");
             }
         }
 

@@ -113,15 +113,15 @@ public partial class GameGridPageModel : ObservableObject
             {
                 Content = new TextBlock()
                 {
-                    Text = ResourceHelper.GetString("DontShowAgain"),
+                    Text = ResourceHelper.GetString("General_DontShowAgain"),
                 },
             };
 
             var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
             {
-                Title = ResourceHelper.GetString("AddingGamesManuallyNoteTitle"),
-                PrimaryButtonText = ResourceHelper.GetString("AddGame"),
-                SecondaryButtonText = ResourceHelper.GetString("ReportIssue"),
+                Title = ResourceHelper.GetString("GamesPage_ManuallyAdding_NoteTitle"),
+                PrimaryButtonText = ResourceHelper.GetString("GamesPage_AddGame"),
+                SecondaryButtonText = ResourceHelper.GetString("General_ReportIssue"),
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = new StackPanel()
@@ -130,7 +130,7 @@ public partial class GameGridPageModel : ObservableObject
                         new TextBlock()
                         {
                             TextWrapping = TextWrapping.Wrap,
-                            Text = ResourceHelper.GetString("AddingGamesManuallyNote"),
+                            Text = ResourceHelper.GetString("GamesPage_ManuallyAdding_NoteMessage"),
                         },
                         dontShowAgainCheckbox,
                     },
@@ -170,14 +170,14 @@ public partial class GameGridPageModel : ObservableObject
     async Task AddGameManually()
     {
 
-        TextBlockBuilder textBlockBuilder = new TextBlockBuilder(ResourceHelper.GetString("AddingGamesManuallyInfoHtml"));
+        TextBlockBuilder textBlockBuilder = new TextBlockBuilder(ResourceHelper.GetString("GamesPage_ManuallyAdding_InfoHtml"));
 
         if (Settings.Instance.HasShownAddGameFolderMessage == false)
         {
             var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
             {
-                Title = ResourceHelper.GetString("AddingGamesManuallyAnotherNote"),
-                PrimaryButtonText = ResourceHelper.GetString("AddGame"),
+                Title = ResourceHelper.GetString("GamesPage_ManuallyAdding_AnotherNoteTitle"),
+                PrimaryButtonText = ResourceHelper.GetString("GamesPage_AddGame"),
                 CloseButtonText = ResourceHelper.GetString("General_Close"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = textBlockBuilder.Build()
@@ -196,7 +196,7 @@ public partial class GameGridPageModel : ObservableObject
         var folderPicker = new FolderPicker()
         {
             SuggestedStartLocation = PickerLocationId.ComputerFolder,
-            CommitButtonText = ResourceHelper.GetString("SelectGameFolder"),
+            CommitButtonText = ResourceHelper.GetString("GamesPage_ManuallyAdding_SelectGameFolder"),
         };
         folderPicker.FileTypeFilter.Add("*");
 
@@ -224,7 +224,7 @@ public partial class GameGridPageModel : ObservableObject
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Title = ResourceHelper.GetString("General_Error"),
-                    Content = ResourceHelper.GetString("TopLevelDirectoryNotSupported"),
+                    Content = ResourceHelper.GetString("GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported"),
                 };
                 await dialog.ShowAsync();
                 return;
@@ -236,7 +236,7 @@ public partial class GameGridPageModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("AddingGameError"),
+                    Title = ResourceHelper.GetString("GamesPage_ManuallyAdding_ErrorTitle"),
                     CloseButtonText = ResourceHelper.GetString("General_Close"),
                     Content = ResourceHelper.GetFormattedResourceTemplate("InstallPathAlreadyExistsTemplate", installPath),
                 };
@@ -248,7 +248,7 @@ public partial class GameGridPageModel : ObservableObject
             var addGameDialog = new FakeContentDialog() //XamlRoot
             {
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
-                PrimaryButtonText = ResourceHelper.GetString("AddGame"),
+                PrimaryButtonText = ResourceHelper.GetString("GamesPage_AddGame"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = manuallyAddGameControl,
             };
@@ -277,9 +277,9 @@ public partial class GameGridPageModel : ObservableObject
             Logger.Error(err, $"Attempted to manually add game from path \"{installPath}\" but got an error.");
             var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
             {
-                Title = ResourceHelper.GetString("AddingGameError"),
+                Title = ResourceHelper.GetString("GamesPage_ManuallyAdding_ErrorTitle"),
                 CloseButtonText = ResourceHelper.GetString("General_Close"),
-                PrimaryButtonText = ResourceHelper.GetString("ReportIssue"),
+                PrimaryButtonText = ResourceHelper.GetString("General_ReportIssue"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = $"{ResourceHelper.GetString("AddingGameErrorReportIssue")}\n\n{ResourceHelper.GetString("Error message")}: {err.Message}",
             };
@@ -343,7 +343,7 @@ public partial class GameGridPageModel : ObservableObject
 
         var dialog = new EasyContentDialog(gameGridPage.XamlRoot)
         {
-            Title = ResourceHelper.GetString("NewDllsFound"),
+            Title = ResourceHelper.GetString("GamesPage_NewDllsFound"),
             CloseButtonText = ResourceHelper.GetString("General_Close"),
             Content = newDllsControl,
         };

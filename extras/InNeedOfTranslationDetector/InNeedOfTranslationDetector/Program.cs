@@ -238,7 +238,7 @@ var ignoredStringKeyPrefixes = new List<string>()
     "General_",
     "SettingsPage_",
     "LibraryPage_",
-    "TranslationTools_", // TODO: RENAME TO TranslationToolsPage_
+    "TranslationToolsPage_",
     "NetworkTesterPage_",
     "MainWindow_",
     "FailedToLaunchPage_",

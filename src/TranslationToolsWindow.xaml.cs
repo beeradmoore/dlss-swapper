@@ -40,7 +40,7 @@ public sealed partial class TranslationToolsWindow : Window
                     {
                         Title = ResourceHelper.GetString("General_Error"),
                         DefaultButton = ContentDialogButton.Close,
-                        Content = ResourceHelper.GetString("TranslationTools_AdminError"),
+                        Content = ResourceHelper.GetString("TranslationToolsPage_AdminError"),
                         CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     };
                     await dialog.ShowAsync();

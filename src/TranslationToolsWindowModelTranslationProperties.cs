@@ -7,19 +7,19 @@ namespace DLSS_Swapper;
 public class TranslationToolsWindowModelTranslationProperties : LocalizedViewModelBase
 {
     [TranslationProperty]
-    public string ApplicationTilteTranslationToolsWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("TranslationTools_WindowTitle")}";
+    public string ApplicationTilteTranslationToolsWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("TranslationToolsPage_WindowTitle")}";
 
     [TranslationProperty]
-    public string SourceLanguageText => $"{ResourceHelper.GetString("TranslationTools_SourceLanguage")}: ";
+    public string SourceLanguageText => $"{ResourceHelper.GetString("TranslationToolsPage_SourceLanguage")}: ";
 
     [TranslationProperty]
-    public string ImportAsTrasnlationText => ResourceHelper.GetString("TranslationTools_ImportAsTranslation");
+    public string ImportAsTrasnlationText => ResourceHelper.GetString("TranslationToolsPage_ImportAsTranslation");
 
     [TranslationProperty]
-    public string LoadExistingTranslationText => ResourceHelper.GetString("TranslationTools_LoadExistingTranslation");
+    public string LoadExistingTranslationText => ResourceHelper.GetString("TranslationToolsPage_LoadExistingTranslation");
 
     [TranslationProperty]
-    public string ReloadAppText => ResourceHelper.GetString("TranslationTools_ReloadApp");
+    public string ReloadAppText => ResourceHelper.GetString("TranslationToolsPage_ReloadApp");
 
     [TranslationProperty]
     public string LoadText => ResourceHelper.GetString("General_Load");
@@ -37,11 +37,11 @@ public class TranslationToolsWindowModelTranslationProperties : LocalizedViewMod
     public string CommentText => ResourceHelper.GetString("Comment");
 
     [TranslationProperty]
-    public string SourceTranslationText => ResourceHelper.GetString("TranslationTools_SourceTranslation");
+    public string SourceTranslationText => ResourceHelper.GetString("TranslationToolsPage_SourceTranslation");
 
     [TranslationProperty]
-    public string NewTranslationText => ResourceHelper.GetString("TranslationTools_NewTranslation");
+    public string NewTranslationText => ResourceHelper.GetString("TranslationToolsPage_NewTranslation");
 
     [TranslationProperty]
-    public string TranslationProgressText => $"{ResourceHelper.GetString("TranslationTools_TranslationProgress")}: ";
+    public string TranslationProgressText => $"{ResourceHelper.GetString("TranslationToolsPage_TranslationProgress")}: ";
 }

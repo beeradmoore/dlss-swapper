@@ -543,7 +543,7 @@
   <data name="NewDllsFound" xml:space="preserve">
     <value>发现新的 DLL 文件</value>
   </data>
-  <data name="TranslationTools_NewTranslation" xml:space="preserve">
+  <data name="TranslationToolsPage_NewTranslation" xml:space="preserve">
     <value>新翻译</value>
   </data>
   <data name="NoDllsFound" xml:space="preserve">
@@ -735,10 +735,10 @@
   <data name="General_Sorry" xml:space="preserve">
     <value>抱歉</value>
   </data>
-  <data name="TranslationTools_SourceLanguage" xml:space="preserve">
+  <data name="TranslationToolsPage_SourceLanguage" xml:space="preserve">
     <value>当前语言</value>
   </data>
-  <data name="TranslationTools_SourceTranslation" xml:space="preserve">
+  <data name="TranslationToolsPage_SourceTranslation" xml:space="preserve">
     <value>当前翻译</value>
   </data>
   <data name="StartingDownload" xml:space="preserve">
@@ -777,10 +777,10 @@
   <data name="TopLevelDirectoryNotSupported" xml:space="preserve">
     <value>您似乎选择了错误的目录，请重新选择游戏的根目录。</value>
   </data>
-  <data name="TranslationTools_WindowTitle" xml:space="preserve">
+  <data name="TranslationToolsPage_WindowTitle" xml:space="preserve">
     <value>翻译工具</value>
   </data>
-  <data name="TranslationTools_AdminError" xml:space="preserve">
+  <data name="TranslationToolsPage_AdminError" xml:space="preserve">
     <value>翻译工具以管理员身份运行时无法使用。请重新启动应用程序。</value>
   </data>
   <data name="UnableToDeleteRecord" xml:space="preserve">

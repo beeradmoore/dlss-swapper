@@ -35,6 +35,7 @@ public partial class AcknowledgementsPageModel : ObservableObject
         {
             "You",
             "DLSS",
+            "Streamline",
             "FidelityFX-SDK",
             "XeSS"
         };

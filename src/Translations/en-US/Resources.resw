@@ -251,7 +251,7 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Loading" xml:space="preserve">
     <value>Loading</value>
   </data>
-  <data name="LibraryPage_MalliciousDllsInfo" xml:space="preserve">
+  <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
     <value>Replacing dlls on your computer can be dangerous.
 
 Placing a malicious dll into a game is as bad as running Linking_park_-_nUmB_mp3.exe that you just downloaded from LimeWire.
@@ -268,7 +268,7 @@ Only import dlls from sources you trust.</value>
     <value>No DLLs Found</value>
   </data>
   <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
-    <value>Please go to the libary page to download new DLLs.</value>
+    <value>Please go to the library page to download new DLLs.</value>
   </data>
   <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
     <value>You have no DLL records to export.</value>

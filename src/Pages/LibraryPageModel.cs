@@ -368,7 +368,7 @@ public partial class LibraryPageModel : ObservableObject
                 Title = ResourceHelper.GetString("General_Warning"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = ResourceHelper.GetString("LibraryPage_MalliciousDllsInfo"),
+                Content = ResourceHelper.GetString("LibraryPage_MaliciousDllsInfo"),
             };
             await warningDialog.ShowAsync();
 

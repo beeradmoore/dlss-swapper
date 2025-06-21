@@ -236,7 +236,7 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="General_Loading" xml:space="preserve">
     <value>Ładowanie</value>
   </data>
-  <data name="LibraryPage_MalliciousDllsInfo" xml:space="preserve">
+  <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
     <value>Podmienianie bibliotek DLL na twoim komputerze może być niebezpieczne
 
 Umieszczenie podpięcie złośliwej biblioteki DLL do gry może być tak złe jak uruchomienie A-Soul-as-Red-as-a-Ground-Cherry[dYvvKyYIc5s][youtube-online-converter.com][128kbs].mp3.exe które pobrałeś przed chwilą z jakiejś podejrzanej strony.

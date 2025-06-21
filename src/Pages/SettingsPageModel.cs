@@ -234,7 +234,7 @@ public partial class SettingsPageModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    CloseButtonText = ResourceHelper.GetString("Okay"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("NoNewUpdatesAvailable"),
                 };
@@ -271,7 +271,7 @@ public partial class SettingsPageModel : ObservableObject
                 var dialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
                     Title = ResourceHelper.GetString("Oops"),
-                    CloseButtonText = ResourceHelper.GetString("Okay"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("CouldNotOpenLogFileTryManual"),
                 };
@@ -310,8 +310,8 @@ public partial class SettingsPageModel : ObservableObject
             {
                 var errorDialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Error"),
-                    CloseButtonText = ResourceHelper.GetString("Okay"),
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("FeatureNotSupportedWhenAdmin"),
                 };
@@ -341,8 +341,8 @@ public partial class SettingsPageModel : ObservableObject
             {
                 var errorDialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Error"),
-                    CloseButtonText = ResourceHelper.GetString("Okay"),
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetFormattedResourceTemplate("SettingsPage_PathAlreadyIgnored", folderPath),
                 };
@@ -365,7 +365,7 @@ public partial class SettingsPageModel : ObservableObject
                 Title = ResourceHelper.GetString("SettingsPage_DeleteIgnoredPathTitle"),
                 CloseButtonText = ResourceHelper.GetString("Cancel"),
                 DefaultButton = ContentDialogButton.Close,
-                PrimaryButtonText = ResourceHelper.GetString("Delete"),
+                PrimaryButtonText = ResourceHelper.GetString("General_Delete"),
                 Content = ResourceHelper.GetFormattedResourceTemplate("SettingsPage_DeleteIgnoredPathMessage", path),
             };
 

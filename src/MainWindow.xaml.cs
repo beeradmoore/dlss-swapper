@@ -242,7 +242,7 @@ namespace DLSS_Swapper
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
                     Title = ResourceHelper.GetString("NoteForMultiplayerGames"),
-                    CloseButtonText = ResourceHelper.GetString("Okay"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("DlssSwappingConsideredCheatingInfo"),
                 };
@@ -256,8 +256,8 @@ namespace DLSS_Swapper
             {
                 var dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Error"),
-                    CloseButtonText = ResourceHelper.GetString("Close"),
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Close"),
                     PrimaryButtonText = ResourceHelper.GetString("GithubIssues"),
                     SecondaryButtonText = ResourceHelper.GetString("UpdateManifest"),
                     DefaultButton = ContentDialogButton.Primary,
@@ -299,7 +299,7 @@ namespace DLSS_Swapper
                     dialog = new EasyContentDialog(MainNavigationView.XamlRoot)
                     {
                         Title = ResourceHelper.GetString("DlssSwapperMustClose"),
-                        CloseButtonText = ResourceHelper.GetString("Close"),
+                        CloseButtonText = ResourceHelper.GetString("General_Close"),
                         DefaultButton = ContentDialogButton.Close,
                         Content = ResourceHelper.GetString("DlssSwapperCloseDueToManifest"),
                     };
@@ -316,7 +316,7 @@ namespace DLSS_Swapper
                     Title = ResourceHelper.GetString("CouldNotLoadImportedDlls"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = new ImportSystemDisabledView(),
-                    CloseButtonText = ResourceHelper.GetString("Close"),
+                    CloseButtonText = ResourceHelper.GetString("General_Close"),
                 };
                 await dialog.ShowAsync();
             }

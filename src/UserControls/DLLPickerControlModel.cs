@@ -221,7 +221,7 @@ public partial class DLLPickerControlModel : ObservableObject
 
         if (didUpdate.Success == false)
         {
-            ShowTempInfoBar(ResourceHelper.GetString("Error"), didUpdate.Message, severity: InfoBarSeverity.Error);
+            ShowTempInfoBar(ResourceHelper.GetString("General_Error"), didUpdate.Message, severity: InfoBarSeverity.Error);
             return;
         }
 
@@ -310,7 +310,7 @@ public partial class DLLPickerControlModel : ObservableObject
         catch (Exception err)
         {
             Logger.Error(err);
-            ShowTempInfoBar(ResourceHelper.GetString("Error"), err.Message, severity: InfoBarSeverity.Error);
+            ShowTempInfoBar(ResourceHelper.GetString("General_Error"), err.Message, severity: InfoBarSeverity.Error);
         }
     }
 
@@ -322,11 +322,11 @@ public partial class DLLPickerControlModel : ObservableObject
         if (didReset.Success == true)
         {
             ResetSelection();
-            ShowTempInfoBar(ResourceHelper.GetString("Success"), ResourceHelper.GetFormattedResourceTemplate("ResetDllToVersionTemplate", CurrentGameAsset?.DisplayVersion ?? string.Empty), severity: InfoBarSeverity.Success, gridIndex: 0);
+            ShowTempInfoBar(ResourceHelper.GetString("General_Success"), ResourceHelper.GetFormattedResourceTemplate("ResetDllToVersionTemplate", CurrentGameAsset?.DisplayVersion ?? string.Empty), severity: InfoBarSeverity.Success, gridIndex: 0);
         }
         else
         {
-            ShowTempInfoBar(ResourceHelper.GetString("Error"), didReset.Message, severity: InfoBarSeverity.Error, gridIndex: 0);
+            ShowTempInfoBar(ResourceHelper.GetString("General_Error"), didReset.Message, severity: InfoBarSeverity.Error, gridIndex: 0);
         }
     }
 

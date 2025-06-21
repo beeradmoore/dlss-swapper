@@ -155,13 +155,13 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="ApplicationTitle" xml:space="preserve">
     <value>DLSS Swapper</value>
   </data>
-  <data name="Apply" xml:space="preserve">
+  <data name="General_Apply" xml:space="preserve">
     <value>Potwierdź</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
+  <data name="General_Cancel" xml:space="preserve">
     <value>Anuluj</value>
   </data>
-  <data name="Close" xml:space="preserve">
+  <data name="General_Close" xml:space="preserve">
     <value>Zamknij</value>
   </data>
   <data name="CouldntDownloadNow" xml:space="preserve">
@@ -170,7 +170,7 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="CouldntExportDlssDll" xml:space="preserve">
     <value>Nie można wyexportować DLL z DLSSem.</value>
   </data>
-  <data name="Delete" xml:space="preserve">
+  <data name="General_Delete" xml:space="preserve">
     <value>Usuń</value>
   </data>
   <data name="DeleteDllVersionTemplate" xml:space="preserve">
@@ -188,16 +188,16 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="EnableLoggingToFile" xml:space="preserve">
     <value>Zezwól na zapisywanie logów do pliku</value>
   </data>
-  <data name="Error" xml:space="preserve">
+  <data name="General_Error" xml:space="preserve">
     <value>Błąd</value>
   </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>Wiadomość z błędem</value>
   </data>
-  <data name="Export" xml:space="preserve">
+  <data name="General_Export" xml:space="preserve">
     <value>Eksport</value>
   </data>
-  <data name="ExportAll" xml:space="preserve">
+  <data name="General_ExportAll" xml:space="preserve">
     <value>Eksport wszystkich</value>
   </data>
   <data name="ExportedDllTemplate" xml:space="preserve">
@@ -218,7 +218,7 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="GridView" xml:space="preserve">
     <value>Widok siatki</value>
   </data>
-  <data name="Import" xml:space="preserve">
+  <data name="General_Import" xml:space="preserve">
     <value>Import</value>
   </data>
   <data name="ImportSystemCurrentlyBroken" xml:space="preserve">
@@ -252,10 +252,10 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="NoDllsToExport" xml:space="preserve">
     <value>Nie masz rekordów z bibliotekami DLL do eksportu.</value>
   </data>
-  <data name="Okay" xml:space="preserve">
+  <data name="General_Okay" xml:space="preserve">
     <value>Ok</value>
   </data>
-  <data name="Refresh" xml:space="preserve">
+  <data name="General_Refresh" xml:space="preserve">
     <value>Odśwież</value>
   </data>
   <data name="ReportIssue" xml:space="preserve">
@@ -279,10 +279,10 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="SettingsShowOnScreenIndicator" xml:space="preserve">
     <value>Pokaż indykator na ekranie</value>
   </data>
-  <data name="Sorry" xml:space="preserve">
+  <data name="General_Sorry" xml:space="preserve">
     <value>Sorka</value>
   </data>
-  <data name="Success" xml:space="preserve">
+  <data name="General_Success" xml:space="preserve">
     <value>Sukces</value>
   </data>
   <data name="TopLevelDirectoryNotSupported" xml:space="preserve">

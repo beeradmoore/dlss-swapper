@@ -89,8 +89,8 @@ public partial class LibraryPageModel : ObservableObject
         {
             var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = ResourceHelper.GetString("Error"),
-                CloseButtonText = ResourceHelper.GetString("Okay"),
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = ResourceHelper.GetString("UnableToDllUpdate"),
             };
@@ -118,9 +118,9 @@ public partial class LibraryPageModel : ObservableObject
         {
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                CloseButtonText = ResourceHelper.GetString("Okay"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Title = ResourceHelper.GetString("Error"),
+                Title = ResourceHelper.GetString("General_Error"),
                 Content = ResourceHelper.GetString("NoDllsToExport"),
             };
             await dialog.ShowAsync();
@@ -223,8 +223,8 @@ public partial class LibraryPageModel : ObservableObject
 
                 var dialog = new EasyContentDialog(libraryPage.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Error"),
-                    CloseButtonText = ResourceHelper.GetString("Okay"),
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("LibraryPage_NoDLLsForExport_Message"),
                 };
@@ -254,9 +254,9 @@ public partial class LibraryPageModel : ObservableObject
                 {
                     var dialog = new EasyContentDialog(libraryPage.XamlRoot)
                     {
-                        CloseButtonText = ResourceHelper.GetString("Okay"),
+                        CloseButtonText = ResourceHelper.GetString("General_Okay"),
                         DefaultButton = ContentDialogButton.Close,
-                        Title = ResourceHelper.GetString("Success"),
+                        Title = ResourceHelper.GetString("General_Success"),
                         Content = ResourceHelper.GetFormattedResourceTemplate("LibraryPage_ExportedDLLsCount_Message", toExport.Count),
                     };
                     await dialog.ShowAsync();
@@ -292,8 +292,8 @@ public partial class LibraryPageModel : ObservableObject
             // If the fullExpectedPath does not exist, or there was an error writing it.
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = ResourceHelper.GetString("Error"),
-                CloseButtonText = ResourceHelper.GetString("Okay"),
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = ResourceHelper.GetString("CouldntExportDlssDll"),
             };
@@ -355,7 +355,7 @@ public partial class LibraryPageModel : ObservableObject
                 Title = ResourceHelper.GetString("CouldNotLoadImportedDlls"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = new ImportSystemDisabledView(),
-                CloseButtonText = ResourceHelper.GetString("Close"),
+                CloseButtonText = ResourceHelper.GetString("General_Close"),
             };
             await couldNotImportDialog.ShowAsync();
             return;
@@ -366,7 +366,7 @@ public partial class LibraryPageModel : ObservableObject
             var warningDialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("Warning"),
-                CloseButtonText = ResourceHelper.GetString("Okay"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = ResourceHelper.GetString("MalliciousDllsInfo"),
             };
@@ -753,7 +753,7 @@ public partial class LibraryPageModel : ObservableObject
 
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            CloseButtonText = ResourceHelper.GetString("Okay"),
+            CloseButtonText = ResourceHelper.GetString("General_Okay"),
             DefaultButton = ContentDialogButton.Close,
             Title = ResourceHelper.GetString("Finished"),
             Content = new ImportDLLSummaryControl(importResults),
@@ -774,7 +774,7 @@ public partial class LibraryPageModel : ObservableObject
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("DeleteDll"),
-            PrimaryButtonText = ResourceHelper.GetString("Delete"),
+            PrimaryButtonText = ResourceHelper.GetString("General_Delete"),
             CloseButtonText = ResourceHelper.GetString("Cancel"),
             DefaultButton = ContentDialogButton.Primary,
             Content = ResourceHelper.GetFormattedResourceTemplate("DeleteDllVersionTemplate", assetTypeName, record.Version),
@@ -801,8 +801,8 @@ public partial class LibraryPageModel : ObservableObject
             {
                 var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Error"),
-                    CloseButtonText = ResourceHelper.GetString("Okay"),
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetFormattedResourceTemplate("UnableToDeleteRecord", assetTypeName),
                 };
@@ -819,8 +819,8 @@ public partial class LibraryPageModel : ObservableObject
         {
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = ResourceHelper.GetString("Error"),
-                CloseButtonText = ResourceHelper.GetString("Okay"),
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = result.Message,
             };
@@ -899,8 +899,8 @@ public partial class LibraryPageModel : ObservableObject
 
                 var dialog = new EasyContentDialog(libraryPage.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Success"),
-                    CloseButtonText = ResourceHelper.GetString("Okay"),
+                    Title = ResourceHelper.GetString("General_Success"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetFormattedResourceTemplate("ExportedDllTemplate", dllRecord.DisplayName),
                 };
@@ -915,8 +915,8 @@ public partial class LibraryPageModel : ObservableObject
             // If the fullExpectedPath does not exist, or there was an error writing it.
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = ResourceHelper.GetString("Error"),
-                CloseButtonText = ResourceHelper.GetString("Okay"),
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = ResourceHelper.GetString("CouldntExportDll"),
             };
@@ -929,8 +929,8 @@ public partial class LibraryPageModel : ObservableObject
     {
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = ResourceHelper.GetString("Error"),
-            CloseButtonText = ResourceHelper.GetString("Okay"),
+            Title = ResourceHelper.GetString("General_Error"),
+            CloseButtonText = ResourceHelper.GetString("General_Okay"),
             Content = record.LocalRecord?.DownloadErrorMessage ?? ResourceHelper.GetString("CouldntDownloadNow"),
         };
         await dialog.ShowAsync();
@@ -997,7 +997,7 @@ public partial class LibraryPageModel : ObservableObject
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("LibraryPage_NoNewDLLsTitle"),
-                CloseButtonText = ResourceHelper.GetString("Okay"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = ResourceHelper.GetString("LibraryPage_NoNewDLLsMessage"),
             };
@@ -1008,7 +1008,7 @@ public partial class LibraryPageModel : ObservableObject
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("LibraryPage_DownloadsStarted_Title"),
-                CloseButtonText = ResourceHelper.GetString("Okay"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = ResourceHelper.GetFormattedResourceTemplate("LibraryPage_DownloadsStarted_Message", startedDownloads),
             };

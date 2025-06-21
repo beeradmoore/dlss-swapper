@@ -38,10 +38,10 @@ public sealed partial class TranslationToolsWindow : Window
                 {
                     var dialog = new EasyContentDialog(Content.XamlRoot)
                     {
-                        Title = ResourceHelper.GetString("Error"),
+                        Title = ResourceHelper.GetString("General_Error"),
                         DefaultButton = ContentDialogButton.Close,
                         Content = ResourceHelper.GetString("TranslationTools_AdminError"),
-                        CloseButtonText = ResourceHelper.GetString("Okay"),
+                        CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     };
                     await dialog.ShowAsync();
                     Close();
@@ -174,8 +174,8 @@ public sealed partial class TranslationToolsWindow : Window
                         // We are at the end, remove focus.
                         //BottomStackPanel.Focus(FocusState.Programmatic);
                     }
-                       
-                    
+
+
 
                     //this.Content.Focus(FocusState.Programmatic);
                     //textBox.Focus(FocusState.Unfocused);

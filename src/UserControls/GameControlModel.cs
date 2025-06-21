@@ -73,8 +73,8 @@ public partial class GameControlModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(gameControl.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Error"),
-                    CloseButtonText = ResourceHelper.GetString("Okay"),
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     Content = err.Message,
                 };
                 await dialog.ShowAsync();
@@ -153,8 +153,8 @@ public partial class GameControlModel : ObservableObject
             {
                 var cantDeleteDialog = new EasyContentDialog(gameControl.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Error"),
-                    CloseButtonText = ResourceHelper.GetString("Okay"),
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("TitleNotManuallyAddedCantBeRemoved"),
                 };
@@ -226,7 +226,7 @@ public partial class GameControlModel : ObservableObject
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
                 Title = ResourceHelper.GetFormattedResourceTemplate("MultipleDllsFoundTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
-                PrimaryButtonText = ResourceHelper.GetString("Okay"),
+                PrimaryButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = new MultipleDLLsFoundControl(Game, gameAssetType),
             };

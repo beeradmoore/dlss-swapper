@@ -25,5 +25,5 @@ public class DLLPickerControlModelTranslationProperties : LocalizedViewModelBase
     public string OriginalDllText => ResourceHelper.GetString("OriginalDllText");
 
     [TranslationProperty]
-    public string ImportText => ResourceHelper.GetString("Import");    
+    public string ImportText => ResourceHelper.GetString("General_Import");
 }

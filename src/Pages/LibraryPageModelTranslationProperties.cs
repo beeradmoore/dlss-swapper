@@ -10,13 +10,13 @@ public class LibraryPageModelTranslationProperties : LocalizedViewModelBase
     public string ApplicationRunsInAdministrativeModeInfo => ResourceHelper.GetString("ApplicationRunsInAdministrativeModeInfo");
 
     [TranslationProperty]
-    public string ImportText => ResourceHelper.GetString("Import");
+    public string ImportText => ResourceHelper.GetString("General_Import");
 
     [TranslationProperty]
-    public string ExportAllText => ResourceHelper.GetString("ExportAll");
+    public string ExportAllText => ResourceHelper.GetString("General_ExportAll");
 
     [TranslationProperty]
-    public string RefreshText => ResourceHelper.GetString("Refresh");
+    public string RefreshText => ResourceHelper.GetString("General_Refresh");
 
     [TranslationProperty]
     public string WarningText => ResourceHelper.GetString("Warning");

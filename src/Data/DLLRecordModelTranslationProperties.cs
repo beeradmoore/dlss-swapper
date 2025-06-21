@@ -7,10 +7,10 @@ namespace DLSS_Swapper.Data;
 public class DLLRecordModelTranslationProperties : LocalizedViewModelBase
 {
     [TranslationProperty]
-    public string ExportText => ResourceHelper.GetString("Export");
+    public string ExportText => ResourceHelper.GetString("General_Export");
 
     [TranslationProperty]
-    public string DeleteText => ResourceHelper.GetString("Delete");
+    public string DeleteText => ResourceHelper.GetString("General_Delete");
 
     [TranslationProperty]
     public string DownloadText => ResourceHelper.GetString("Download");

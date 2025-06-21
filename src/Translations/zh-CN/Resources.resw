@@ -170,7 +170,7 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>DLSS Swapper</value>
   </data>
-  <data name="Apply" xml:space="preserve">
+  <data name="General_Apply" xml:space="preserve">
     <value>应用</value>
   </data>
   <data name="AreYouSureRemoveCustomCover" xml:space="preserve">
@@ -182,7 +182,7 @@
   <data name="BrowserTest" xml:space="preserve">
     <value>浏览器测试</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
+  <data name="General_Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
   <data name="CancelCurrentTest" xml:space="preserve">
@@ -194,7 +194,7 @@
   <data name="ClickToFavourite" xml:space="preserve">
     <value>添加收藏</value>
   </data>
-  <data name="Close" xml:space="preserve">
+  <data name="General_Close" xml:space="preserve">
     <value>关闭</value>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -275,7 +275,7 @@
   <data name="CustomUserAgentTest" xml:space="preserve">
     <value>自定义代理测试</value>
   </data>
-  <data name="Delete" xml:space="preserve">
+  <data name="General_Delete" xml:space="preserve">
     <value>删除</value>
   </data>
   <data name="DeleteDll" xml:space="preserve">
@@ -377,16 +377,16 @@
   <data name="EnableLoggingToFile" xml:space="preserve">
     <value>日志保存到文件</value>
   </data>
-  <data name="Error" xml:space="preserve">
+  <data name="General_Error" xml:space="preserve">
     <value>错误</value>
   </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>错误信息</value>
   </data>
-  <data name="Export" xml:space="preserve">
+  <data name="General_Export" xml:space="preserve">
     <value>导出</value>
   </data>
-  <data name="ExportAll" xml:space="preserve">
+  <data name="General_ExportAll" xml:space="preserve">
     <value>全部导出</value>
   </data>
   <data name="ExportedDllsTemplate" xml:space="preserve">
@@ -398,7 +398,7 @@
   <data name="ExportErrorDueToDllsCountTemplate" xml:space="preserve">
     <value>无法导出，因为 "{0}" 存在 {1} 个 DLL 而不是一个。</value>
   </data>
-  <data name="Failed" xml:space="preserve">
+  <data name="General_Failed" xml:space="preserve">
     <value>失败</value>
   </data>
   <data name="FailedToLaunch" xml:space="preserve">
@@ -467,7 +467,7 @@
   <data name="IgnoredPaths" xml:space="preserve">
     <value>排除目录</value>
   </data>
-  <data name="Import" xml:space="preserve">
+  <data name="General_Import" xml:space="preserve">
     <value>导入</value>
   </data>
   <data name="Imported" xml:space="preserve">
@@ -561,7 +561,7 @@
   <data name="Notes" xml:space="preserve">
     <value>便签</value>
   </data>
-  <data name="Okay" xml:space="preserve">
+  <data name="General_Okay" xml:space="preserve">
     <value>好</value>
   </data>
   <data name="Oops" xml:space="preserve">
@@ -609,7 +609,7 @@
   <data name="Publish" xml:space="preserve">
     <value>发布</value>
   </data>
-  <data name="Refresh" xml:space="preserve">
+  <data name="General_Refresh" xml:space="preserve">
     <value>刷新</value>
   </data>
   <data name="Remove" xml:space="preserve">
@@ -729,7 +729,7 @@
   <data name="SettingsYourCurrentLogfile" xml:space="preserve">
     <value>您的日志文件在：</value>
   </data>
-  <data name="Sorry" xml:space="preserve">
+  <data name="General_Sorry" xml:space="preserve">
     <value>抱歉</value>
   </data>
   <data name="TranslationTools_SourceLanguage" xml:space="preserve">
@@ -759,7 +759,7 @@
   <data name="StorageFileIsNull" xml:space="preserve">
     <value>存储文件是空的</value>
   </data>
-  <data name="Success" xml:space="preserve">
+  <data name="General_Success" xml:space="preserve">
     <value>完成</value>
   </data>
   <data name="Swap" xml:space="preserve">

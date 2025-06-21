@@ -40,7 +40,7 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
     public string NotesText => ResourceHelper.GetString("Notes");
 
     [TranslationProperty]
-    public string CloseText => ResourceHelper.GetString("Close");
+    public string CloseText => ResourceHelper.GetString("General_Close");
 
     [TranslationProperty]
     public string MultipleDllsFoundText => ResourceHelper.GetString("MultipleDllsFound");

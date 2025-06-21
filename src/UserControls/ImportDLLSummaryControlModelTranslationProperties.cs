@@ -8,8 +8,8 @@ internal class ImportDLLSummaryControlModelTranslationProperties : LocalizedView
     //public ImportDLLSummaryControlModelTranslationProperties() : base() { }
 
     [TranslationProperty]
-    public string SuccessText => $"{ResourceHelper.GetString("Success")}: ";
+    public string SuccessText => $"{ResourceHelper.GetString("General_Success")}: ";
 
     [TranslationProperty]
-    public string FailedText => $"{ResourceHelper.GetString("Failed")}: ";
+    public string FailedText => $"{ResourceHelper.GetString("General_Failed")}: ";
 }

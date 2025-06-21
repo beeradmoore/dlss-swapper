@@ -13,7 +13,7 @@ public class GameGridPageModelTranslationProperties : LocalizedViewModelBase
     public string AddGameText => ResourceHelper.GetString("AddGame");
 
     [TranslationProperty]
-    public string RefreshText => ResourceHelper.GetString("Refresh");
+    public string RefreshText => ResourceHelper.GetString("General_Refresh");
 
     [TranslationProperty]
     public string FilterText => ResourceHelper.GetString("Filter");

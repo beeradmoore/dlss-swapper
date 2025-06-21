@@ -29,7 +29,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
 
     [ObservableProperty]
     public partial KeyValuePair<string, string> SelectedSourceLanguage { get; set; }
-    
+
     readonly ResourceMap _resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
     readonly ResourceContext _resourceContext = ResourceContext.GetForViewIndependentUse();
 
@@ -170,7 +170,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
                 }
             }
 
-           
+
             try
             {
                 var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
@@ -200,10 +200,10 @@ public partial class TranslationToolsWindowModel : ObservableObject
                     {
                         var dialog = new EasyContentDialog(window.Content.XamlRoot)
                         {
-                            Title = ResourceHelper.GetString("Error"),
+                            Title = ResourceHelper.GetString("General_Error"),
                             DefaultButton = ContentDialogButton.Close,
                             Content = ResourceHelper.GetString("TranslationTools_NotValidTranslationFile"),
-                            CloseButtonText = ResourceHelper.GetString("Close"),
+                            CloseButtonText = ResourceHelper.GetString("General_Close"),
                         };
                         await dialog.ShowAsync();
                         return;
@@ -228,15 +228,15 @@ public partial class TranslationToolsWindowModel : ObservableObject
 
                 var dialog = new EasyContentDialog(window.Content.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Error"),
+                    Title = ResourceHelper.GetString("General_Error"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("TranslationTools_LoadFailedMessage"),
-                    CloseButtonText = ResourceHelper.GetString("Close"),
+                    CloseButtonText = ResourceHelper.GetString("General_Close"),
                 };
                 await dialog.ShowAsync();
             }
         }
-    
+
     }
 
     [RelayCommand]
@@ -257,10 +257,10 @@ public partial class TranslationToolsWindowModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(window.Content.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Error"),
+                    Title = ResourceHelper.GetString("General_Error"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("TranslationTools_NoDataToSave"),
-                    CloseButtonText = ResourceHelper.GetString("Close"),
+                    CloseButtonText = ResourceHelper.GetString("General_Close"),
                 };
                 await dialog.ShowAsync();
                 return;
@@ -299,10 +299,10 @@ public partial class TranslationToolsWindowModel : ObservableObject
 
                 var dialog = new EasyContentDialog(window.Content.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Error"),
+                    Title = ResourceHelper.GetString("General_Error"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("TranslationTools_SaveFailedMessage"),
-                    CloseButtonText = ResourceHelper.GetString("Close"),
+                    CloseButtonText = ResourceHelper.GetString("General_Close"),
                 };
                 await dialog.ShowAsync();
             }
@@ -367,10 +367,10 @@ public partial class TranslationToolsWindowModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(window.Content.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Error"),
+                    Title = ResourceHelper.GetString("General_Error"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("TranslationTools_NoDataToPublish"),
-                    CloseButtonText = ResourceHelper.GetString("Close"),
+                    CloseButtonText = ResourceHelper.GetString("General_Close"),
                 };
                 await dialog.ShowAsync();
                 return;
@@ -548,12 +548,12 @@ public partial class TranslationToolsWindowModel : ObservableObject
 
                 var dialog = new EasyContentDialog(window.Content.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Success"),
+                    Title = ResourceHelper.GetString("General_Success"),
                     DefaultButton = ContentDialogButton.Primary,
                     PrimaryButtonCommand = OpenTranslationsGuideCommand,
                     PrimaryButtonText = ResourceHelper.GetString("TranslationTools_TranslationGuideButton"),
                     Content = ResourceHelper.GetFormattedResourceTemplate("TranslationTools_TranslationGuideMessage", filename),
-                    CloseButtonText = ResourceHelper.GetString("Close"),
+                    CloseButtonText = ResourceHelper.GetString("General_Close"),
                 };
                 await dialog.ShowAsync();
             }
@@ -563,10 +563,10 @@ public partial class TranslationToolsWindowModel : ObservableObject
 
                 var dialog = new EasyContentDialog(window.Content.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Error"),
+                    Title = ResourceHelper.GetString("General_Error"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("TranslationTools_PublishFailedMessage"),
-                    CloseButtonText = ResourceHelper.GetString("Close"),
+                    CloseButtonText = ResourceHelper.GetString("General_Close"),
                 };
                 await dialog.ShowAsync();
             }

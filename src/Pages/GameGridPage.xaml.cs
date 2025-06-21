@@ -32,7 +32,7 @@ namespace DLSS_Swapper.Pages
 
         public List<GameGroup> GroupedGameGroups { get; } = new List<GameGroup>();
         public List<GameGroup> UngroupedGameGroups { get; } = new List<GameGroup>();
-        
+
         ObservableCollection<Game> FavouriteGames = new ObservableCollection<Game>();
         ObservableCollection<Game> AllGames = new ObservableCollection<Game>();
         */
@@ -92,7 +92,7 @@ namespace DLSS_Swapper.Pages
 
 
             await Task.WhenAll(tasks);
-            
+
             */
             App.CurrentApp.RunOnUIThread(() =>
             {
@@ -143,7 +143,7 @@ namespace DLSS_Swapper.Pages
                     var dialog = new EasyContentDialog(XamlRoot)
                     {
                         Title = ResourceHelper.GetString("GameCurrentlyProcessing"),
-                        CloseButtonText = ResourceHelper.GetString("Okay"),
+                        CloseButtonText = ResourceHelper.GetString("General_Okay"),
                         Content = ResourceHelper.GetFormattedResourceTemplate("GameProcessingPleaseWaitTemplate", selectedGame.Title),
                     };
                     _ = dialog.ShowAsync();

@@ -155,13 +155,13 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="ApplicationTitle" xml:space="preserve">
     <value>DLSS Swapper</value>
   </data>
-  <data name="Apply" xml:space="preserve">
+  <data name="General_Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
+  <data name="General_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="Close" xml:space="preserve">
+  <data name="General_Close" xml:space="preserve">
     <value>Close</value>
   </data>
   <data name="CouldntDownloadNow" xml:space="preserve">
@@ -170,7 +170,7 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="CouldntExportDlssDll" xml:space="preserve">
     <value>Could not export DLSS dll.</value>
   </data>
-  <data name="Delete" xml:space="preserve">
+  <data name="General_Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="DeleteDllVersionTemplate" xml:space="preserve">
@@ -188,16 +188,16 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="EnableLoggingToFile" xml:space="preserve">
     <value>Enable logging to file</value>
   </data>
-  <data name="Error" xml:space="preserve">
+  <data name="General_Error" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error message</value>
   </data>
-  <data name="Export" xml:space="preserve">
+  <data name="General_Export" xml:space="preserve">
     <value>Export</value>
   </data>
-  <data name="ExportAll" xml:space="preserve">
+  <data name="General_ExportAll" xml:space="preserve">
     <value>Export All</value>
   </data>
   <data name="ExportedDllTemplate" xml:space="preserve">
@@ -219,7 +219,7 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="GridView" xml:space="preserve">
     <value>Grid View</value>
   </data>
-  <data name="Import" xml:space="preserve">
+  <data name="General_Import" xml:space="preserve">
     <value>Import</value>
   </data>
   <data name="ImportSystemCurrentlyBroken" xml:space="preserve">
@@ -269,10 +269,10 @@ Only import dlls from sources you trust.</value>
   <data name="NoDllsToExport" xml:space="preserve">
     <value>You have no DLL records to export.</value>
   </data>
-  <data name="Okay" xml:space="preserve">
+  <data name="General_Okay" xml:space="preserve">
     <value>Okay</value>
   </data>
-  <data name="Refresh" xml:space="preserve">
+  <data name="General_Refresh" xml:space="preserve">
     <value>Refresh</value>
   </data>
   <data name="ReportIssue" xml:space="preserve">
@@ -296,13 +296,13 @@ Only import dlls from sources you trust.</value>
   <data name="SettingsShowOnScreenIndicator" xml:space="preserve">
     <value>Show on-screen indicator</value>
   </data>
-  <data name="Sorry" xml:space="preserve">
+  <data name="General_Sorry" xml:space="preserve">
     <value>Sorry</value>
   </data>
-  <data name="Success" xml:space="preserve">
+  <data name="General_Success" xml:space="preserve">
     <value>Success</value>
   </data>
-  <data name="Failed" xml:space="preserve">
+  <data name="General_Failed" xml:space="preserve">
     <value>Failed</value>
   </data>
   <data name="TopLevelDirectoryNotSupported" xml:space="preserve">

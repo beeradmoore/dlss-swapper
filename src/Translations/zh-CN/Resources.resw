@@ -380,9 +380,6 @@
   <data name="General_Error" xml:space="preserve">
     <value>错误</value>
   </data>
-  <data name="ErrorMessage" xml:space="preserve">
-    <value>错误信息</value>
-  </data>
   <data name="General_Export" xml:space="preserve">
     <value>导出</value>
   </data>
@@ -500,10 +497,10 @@
   <data name="ListView" xml:space="preserve">
     <value>列表视图</value>
   </data>
-  <data name="Load" xml:space="preserve">
+  <data name="General_Load" xml:space="preserve">
     <value>加载</value>
   </data>
-  <data name="Loading" xml:space="preserve">
+  <data name="General_Loading" xml:space="preserve">
     <value>正在加载</value>
   </data>
   <data name="MalliciousDllsInfo" xml:space="preserve">
@@ -564,7 +561,7 @@
   <data name="General_Okay" xml:space="preserve">
     <value>好</value>
   </data>
-  <data name="Oops" xml:space="preserve">
+  <data name="General_Oops" xml:space="preserve">
     <value>哎呀</value>
   </data>
   <data name="OpenDllLocation" xml:space="preserve">
@@ -606,13 +603,13 @@
   <data name="ProcessedDlls" xml:space="preserve">
     <value>已处理的 DLL 文件：</value>
   </data>
-  <data name="Publish" xml:space="preserve">
+  <data name="General_Publish" xml:space="preserve">
     <value>发布</value>
   </data>
   <data name="General_Refresh" xml:space="preserve">
     <value>刷新</value>
   </data>
-  <data name="Remove" xml:space="preserve">
+  <data name="General_Remove" xml:space="preserve">
     <value>移除</value>
   </data>
   <data name="RemoveDlssSwapperGameTemplate" xml:space="preserve">
@@ -633,7 +630,7 @@
   <data name="RunTest" xml:space="preserve">
     <value>开始测试</value>
   </data>
-  <data name="Save" xml:space="preserve">
+  <data name="General_Save" xml:space="preserve">
     <value>保存</value>
   </data>
   <data name="Search" xml:space="preserve">

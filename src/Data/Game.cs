@@ -1121,8 +1121,8 @@ namespace DLSS_Swapper.Data
             var dialog = new EasyContentDialog(App.CurrentApp.MainWindow.Content.XamlRoot)
             {
                 Title = ResourceHelper.GetString("CustomCoverRemove"),
-                PrimaryButtonText = ResourceHelper.GetString("Remove"),
-                CloseButtonText = ResourceHelper.GetString("Cancel"),
+                PrimaryButtonText = ResourceHelper.GetString("General_Remove"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = ResourceHelper.GetString("AreYouSureRemoveCustomCover"),
             };

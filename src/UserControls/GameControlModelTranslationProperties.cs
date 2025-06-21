@@ -7,7 +7,7 @@ namespace DLSS_Swapper.UserControls;
 public class GameControlModelTranslationProperties : LocalizedViewModelBase
 {
     [TranslationProperty]
-    public string RemoveText => ResourceHelper.GetString("Remove");
+    public string RemoveText => ResourceHelper.GetString("General_Remove");
 
     [TranslationProperty]
     public string AddCustomCoverText => ResourceHelper.GetString("AddCustomCover");
@@ -22,7 +22,7 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
     public string NameText => ResourceHelper.GetString("Name");
 
     [TranslationProperty]
-    public string SaveText => ResourceHelper.GetString("Save");
+    public string SaveText => ResourceHelper.GetString("General_Save");
 
     [TranslationProperty]
     public string InstallPathText => ResourceHelper.GetString("InstallPath");

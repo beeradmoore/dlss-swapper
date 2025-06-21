@@ -22,7 +22,7 @@ public class LibraryPageModelTranslationProperties : LocalizedViewModelBase
     public string WarningText => ResourceHelper.GetString("Warning");
 
     [TranslationProperty]
-    public string CancelText => ResourceHelper.GetString("Cancel");
+    public string CancelText => ResourceHelper.GetString("General_Cancel");
 
     [TranslationProperty]
     public string LibraryText => ResourceHelper.GetString("Library");

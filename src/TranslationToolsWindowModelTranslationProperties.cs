@@ -19,13 +19,13 @@ public class TranslationToolsWindowModelTranslationProperties : LocalizedViewMod
     public string ReloadAppText => ResourceHelper.GetString("TranslationTools_ReloadApp");
 
     [TranslationProperty]
-    public string LoadText => ResourceHelper.GetString("Load");
+    public string LoadText => ResourceHelper.GetString("General_Load");
 
     [TranslationProperty]
-    public string SaveText => ResourceHelper.GetString("Save");
+    public string SaveText => ResourceHelper.GetString("General_Save");
 
     [TranslationProperty]
-    public string PublishText => ResourceHelper.GetString("Publish");
+    public string PublishText => ResourceHelper.GetString("General_Publish");
 
     [TranslationProperty]
     public string KeyText => ResourceHelper.GetString("Key");

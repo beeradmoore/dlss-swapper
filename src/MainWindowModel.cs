@@ -10,7 +10,7 @@ public partial class MainWindowModel : ObservableObject
     public partial bool IsLoading { get; set; } = true;
 
     [ObservableProperty]
-    public partial string LoadingMessage { get; set; } = ResourceHelper.GetString("Loading");
+    public partial string LoadingMessage { get; set; } = ResourceHelper.GetString("General_Loading");
 
     [ObservableProperty]
     public partial Visibility AcknowledgementsVisibility { get; set; } = Visibility.Collapsed;

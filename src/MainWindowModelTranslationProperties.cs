@@ -22,7 +22,7 @@ public class MainWindowModelTranslationProperties : LocalizedViewModelBase
     public string NavigationViewItemAcknowledgementsText => ResourceHelper.GetString("Acknowledgements");
 
     [TranslationProperty]
-    public string LoadingProgressText => ResourceHelper.GetString("Loading");
+    public string LoadingProgressText => ResourceHelper.GetString("General_Loading");
 
-    
+
 }

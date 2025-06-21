@@ -775,7 +775,7 @@ public partial class LibraryPageModel : ObservableObject
         {
             Title = ResourceHelper.GetString("DeleteDll"),
             PrimaryButtonText = ResourceHelper.GetString("General_Delete"),
-            CloseButtonText = ResourceHelper.GetString("Cancel"),
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
             DefaultButton = ContentDialogButton.Primary,
             Content = ResourceHelper.GetFormattedResourceTemplate("DeleteDllVersionTemplate", assetTypeName, record.Version),
         };

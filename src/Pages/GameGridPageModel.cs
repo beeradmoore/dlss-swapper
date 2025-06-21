@@ -122,7 +122,7 @@ public partial class GameGridPageModel : ObservableObject
                 Title = ResourceHelper.GetString("AddingGamesManuallyNoteTitle"),
                 PrimaryButtonText = ResourceHelper.GetString("AddGame"),
                 SecondaryButtonText = ResourceHelper.GetString("ReportIssue"),
-                CloseButtonText = ResourceHelper.GetString("Cancel"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = new StackPanel()
                 {
@@ -247,7 +247,7 @@ public partial class GameGridPageModel : ObservableObject
             var manuallyAddGameControl = new ManuallyAddGameControl(installPath);
             var addGameDialog = new FakeContentDialog() //XamlRoot
             {
-                CloseButtonText = ResourceHelper.GetString("Cancel"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 PrimaryButtonText = ResourceHelper.GetString("AddGame"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = manuallyAddGameControl,
@@ -310,7 +310,7 @@ public partial class GameGridPageModel : ObservableObject
         {
             Title = ResourceHelper.GetString("Filter"),
             PrimaryButtonText = ResourceHelper.GetString("General_Apply"),
-            CloseButtonText = ResourceHelper.GetString("Cancel"),
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
             DefaultButton = ContentDialogButton.Primary,
             Content = gameFilterControl,
         };

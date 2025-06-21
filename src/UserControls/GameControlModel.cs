@@ -99,8 +99,8 @@ public partial class GameControlModel : ObservableObject
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
                 Title = $"{ResourceHelper.GetString("Notes")} - {Game.Title}",
-                PrimaryButtonText = ResourceHelper.GetString("Save"),
-                CloseButtonText = ResourceHelper.GetString("Cancel"),
+                PrimaryButtonText = ResourceHelper.GetString("General_Save"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = textBox,
             };
@@ -167,9 +167,9 @@ public partial class GameControlModel : ObservableObject
             // This needs to be set after AcceptsReturn otherwise it will strip out the \r
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = $"{ResourceHelper.GetString("Remove")} {Game.Title}?",
-                PrimaryButtonText = ResourceHelper.GetString("Remove"),
-                CloseButtonText = ResourceHelper.GetString("Cancel"),
+                Title = $"{ResourceHelper.GetString("General_Remove")} {Game.Title}?",
+                PrimaryButtonText = ResourceHelper.GetString("General_Remove"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = ResourceHelper.GetFormattedResourceTemplate("RemoveDlssSwapperGameTemplate", Game.Title),
             };
@@ -200,7 +200,7 @@ public partial class GameControlModel : ObservableObject
                 Title = ResourceHelper.GetFormattedResourceTemplate("SelectVersionTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
                 PrimaryButtonText = ResourceHelper.GetString("Swap"),
                 IsPrimaryButtonEnabled = false,
-                CloseButtonText = ResourceHelper.GetString("Cancel"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
             };
 

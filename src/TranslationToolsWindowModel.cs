@@ -160,7 +160,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("TranslationTools_ResetProgressMessage"),
                     PrimaryButtonText = ResourceHelper.GetString("TranslationTools_ResetProgressButton"),
-                    CloseButtonText = ResourceHelper.GetString("Cancel"),
+                    CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 };
 
                 var result = await dialog.ShowAsync();
@@ -332,7 +332,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("TranslationTools_ResetProgressMessage"),
                     PrimaryButtonText = ResourceHelper.GetString("TranslationTools_ResetProgressButton"),
-                    CloseButtonText = ResourceHelper.GetString("Cancel"),
+                    CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 };
 
                 var result = await dialog.ShowAsync();

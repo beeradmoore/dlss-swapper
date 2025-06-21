@@ -270,7 +270,7 @@ public partial class SettingsPageModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    Title = ResourceHelper.GetString("Oops"),
+                    Title = ResourceHelper.GetString("General_Oops"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = ResourceHelper.GetString("CouldNotOpenLogFileTryManual"),
@@ -363,7 +363,7 @@ public partial class SettingsPageModel : ObservableObject
             var dialog = new EasyContentDialog(settingsPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("SettingsPage_DeleteIgnoredPathTitle"),
-                CloseButtonText = ResourceHelper.GetString("Cancel"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Close,
                 PrimaryButtonText = ResourceHelper.GetString("General_Delete"),
                 Content = ResourceHelper.GetFormattedResourceTemplate("SettingsPage_DeleteIgnoredPathMessage", path),

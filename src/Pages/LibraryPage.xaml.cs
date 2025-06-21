@@ -40,7 +40,7 @@ namespace DLSS_Swapper.Pages
                 var dialog = new EasyContentDialog(XamlRoot)
                 {
                     Title = DLLManager.Instance.GetAssetTypeName(dllRecord.AssetType),
-                    CloseButtonText = ResourceHelper.GetString("Cancel"),
+                    CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                     DefaultButton = ContentDialogButton.Close,
                     Content = new DLLRecordInfoControl(dllRecord),
                 };

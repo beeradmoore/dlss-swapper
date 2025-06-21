@@ -374,7 +374,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 Title = ResourceHelper.GetString("BrowserTest"),
                 PrimaryButtonText = ResourceHelper.GetString("Works"),
                 SecondaryButtonText = ResourceHelper.GetString("StillDoesNotWork"),
-                CloseButtonText = ResourceHelper.GetString("Cancel"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = stackPanel,
             };
@@ -693,7 +693,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
             {
                 Title = ResourceHelper.GetString("CustomUserAgentTest"),
                 PrimaryButtonText = ResourceHelper.GetString("RunTest"),
-                CloseButtonText = ResourceHelper.GetString("Cancel"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = stackPanel,
             };
@@ -704,7 +704,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
                 var result = await dialog.ShowAsync();
                 if (result == ContentDialogResult.Primary)
                 {
-                    // Reset test start 
+                    // Reset test start
                     testStart = DateTime.Now;
 
                     AppendTestResults(testName, $"Testing with User-Agent \"{userAgentTextBox.Text}\"");

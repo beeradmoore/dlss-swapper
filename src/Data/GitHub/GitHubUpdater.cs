@@ -192,7 +192,7 @@ namespace DLSS_Swapper.Data.GitHub
                 {
                     Title = $"{ResourceHelper.GetString("UpdateAvailable")} - {gitHubRelease.Name}",
                     PrimaryButtonText = ResourceHelper.GetString("Update"),
-                    CloseButtonText = ResourceHelper.GetString("Cancel"),
+                    CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                     DefaultButton = ContentDialogButton.Primary,
                     Content = new ScrollViewer()
                     {
@@ -220,7 +220,7 @@ namespace DLSS_Swapper.Data.GitHub
             var dialog = new EasyContentDialog(xamlRoot)
             {
                 Title = $"{ResourceHelper.GetString("DlssSwapperUpdated")} - {gitHubRelease.Name}",
-                CloseButtonText = ResourceHelper.GetString("Cancel"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = new ScrollViewer()
                 {

@@ -19,7 +19,7 @@ public class DLLRecordModelTranslationProperties : LocalizedViewModelBase
     public string DownloadErrorText => ResourceHelper.GetString("DownloadError");
 
     [TranslationProperty]
-    public string CancelText => ResourceHelper.GetString("Cancel");
+    public string CancelText => ResourceHelper.GetString("General_Cancel");
 
     [TranslationProperty]
     public string DownloadingText => ResourceHelper.GetString("Downloading");

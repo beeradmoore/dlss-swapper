@@ -191,9 +191,6 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="General_Error" xml:space="preserve">
     <value>Błąd</value>
   </data>
-  <data name="ErrorMessage" xml:space="preserve">
-    <value>Wiadomość z błędem</value>
-  </data>
   <data name="General_Export" xml:space="preserve">
     <value>Eksport</value>
   </data>
@@ -233,7 +230,7 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="ListView" xml:space="preserve">
     <value>Widok listy</value>
   </data>
-  <data name="Loading" xml:space="preserve">
+  <data name="General_Loading" xml:space="preserve">
     <value>Ładowanie</value>
   </data>
   <data name="MalliciousDllsInfo" xml:space="preserve">
@@ -345,7 +342,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="SettingsGiveFeedbackInfo" xml:space="preserve">
     <value>Możesz zasugerować funkcję lub zgłosić problem na DLSS Swapper</value>
   </data>
-  <data name="Oops" xml:space="preserve">
+  <data name="General_Oops" xml:space="preserve">
     <value>Upss</value>
   </data>
   <data name="NoNewUpdatesAvailable" xml:space="preserve">
@@ -417,7 +414,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="ResetDllToVersionTemplate" xml:space="preserve">
     <value>Biblioteka DLL została zresetowana do {0}.</value>
   </data>
-  <data name="Save" xml:space="preserve">
+  <data name="General_Save" xml:space="preserve">
     <value>Zapisz</value>
   </data>
   <data name="Notes" xml:space="preserve">
@@ -426,7 +423,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="TitleNotManuallyAddedCantBeRemoved" xml:space="preserve">
     <value>Ten tytuł nie został dodany ręcznie i nie można go usunąć.</value>
   </data>
-  <data name="Remove" xml:space="preserve">
+  <data name="General_Remove" xml:space="preserve">
     <value>Usuń</value>
   </data>
   <data name="Swap" xml:space="preserve">

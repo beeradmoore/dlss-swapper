@@ -191,9 +191,6 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Error" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="ErrorMessage" xml:space="preserve">
-    <value>Error message</value>
-  </data>
   <data name="General_Export" xml:space="preserve">
     <value>Export</value>
   </data>
@@ -250,7 +247,7 @@ If you have checked these and your game is still not showing up there may be a b
 
 
 
-  <data name="Loading" xml:space="preserve">
+  <data name="General_Loading" xml:space="preserve">
     <value>Loading</value>
   </data>
   <data name="MalliciousDllsInfo" xml:space="preserve">
@@ -366,7 +363,7 @@ Only import dlls from sources you trust.</value>
   <data name="SettingsGiveFeedbackInfo" xml:space="preserve">
     <value>You can suggest a feature or report a problem or on the DLSS Swapper</value>
   </data>
-  <data name="Oops" xml:space="preserve">
+  <data name="General_Oops" xml:space="preserve">
     <value>Oops</value>
   </data>
   <data name="NoNewUpdatesAvailable" xml:space="preserve">
@@ -438,13 +435,13 @@ Only import dlls from sources you trust.</value>
   <data name="ResetDllToVersionTemplate" xml:space="preserve">
     <value>DLL has been reset to {0}.</value>
   </data>
-  <data name="Save" xml:space="preserve">
+  <data name="General_Save" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="Load" xml:space="preserve">
+  <data name="General_Load" xml:space="preserve">
     <value>Load</value>
   </data>
-  <data name="Publish" xml:space="preserve">
+  <data name="General_Publish" xml:space="preserve">
     <value>Publish</value>
   </data>
   <data name="Key" xml:space="preserve">
@@ -463,7 +460,7 @@ Only import dlls from sources you trust.</value>
   <data name="TitleNotManuallyAddedCantBeRemoved" xml:space="preserve">
     <value>This title is not manually added and can't be removed.</value>
   </data>
-  <data name="Remove" xml:space="preserve">
+  <data name="General_Remove" xml:space="preserve">
     <value>Remove</value>
   </data>
   <data name="Swap" xml:space="preserve">

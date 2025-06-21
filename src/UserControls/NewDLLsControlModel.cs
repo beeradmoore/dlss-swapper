@@ -44,15 +44,15 @@ public partial class NewDLLsControlModel : ObservableObject
         var stringBuilder = new StringBuilder();
         foreach (var gameLibrayKeyPair in gameAssetsLibraryGroup)
         {
-            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"{ResourceHelper.GetString("Library")}: {gameLibrayKeyPair.Key}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"Library: {gameLibrayKeyPair.Key}");
 
             var libraryDicionary = gameLibrayKeyPair.Value as Dictionary<string, List<UnknownGameAsset>>;
             foreach (var gameAssetsDictionary in libraryDicionary)
             {
-                stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"- {ResourceHelper.GetString("Game")}: {gameAssetsDictionary.Key}");
+                stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"- Game: {gameAssetsDictionary.Key}");
                 foreach (var unknownGameAsset in gameAssetsDictionary.Value)
                 {
-                    stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"-- {Path.GetFileName(unknownGameAsset.GameAsset.Path)}, {ResourceHelper.GetString("Version")}: {unknownGameAsset.GameAsset.Version}, {ResourceHelper.GetString("Hash")}: {unknownGameAsset.GameAsset.Hash}");
+                    stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"-- {Path.GetFileName(unknownGameAsset.GameAsset.Path)}, Version: {unknownGameAsset.GameAsset.Version}, Hash: {unknownGameAsset.GameAsset.Hash}");
                 }
                 stringBuilder.AppendLine();
             }

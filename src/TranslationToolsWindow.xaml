@@ -15,25 +15,71 @@
         <MicaBackdrop />
     </Window.SystemBackdrop>
 
-    <Grid RowSpacing="8" ColumnSpacing="8" Margin="16">
+    <Grid RowSpacing="8">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0"  Orientation="Horizontal" Spacing="8">
-            <ComboBox Header="{x:Bind ViewModel.TranslationProperties.SourceLanguageText, Mode=OneWay}" ItemsSource="{x:Bind ViewModel.SourceLanguages, Mode=OneWay}" DisplayMemberPath="Value" SelectedItem="{x:Bind ViewModel.SelectedSourceLanguage, Mode=TwoWay}" />
-            <Button Content="{x:Bind ViewModel.TranslationProperties.ImportAsTrasnlationText, Mode=OneWay}" Command="{x:Bind ViewModel.ImportAsTranslationCommand}" VerticalAlignment="Bottom" />
-        </StackPanel>
+        <Grid Margin="16,0" Grid.Row="0">
 
-        <Button Grid.Row="0" Grid.Column="1" Content="{x:Bind ViewModel.TranslationProperties.ReloadAppText, Mode=OneWay}" Command="{x:Bind ViewModel.ReloadAppCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+            <StackPanel Orientation="Vertical" Spacing="8" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.SourceLanguageText, Mode=OneWay}" FontWeight="Bold" VerticalAlignment="Center" />
+                    <ComboBox Header="" ItemsSource="{x:Bind ViewModel.SourceLanguages, Mode=OneWay}" DisplayMemberPath="Value" SelectedItem="{x:Bind ViewModel.SelectedSourceLanguage, Mode=TwoWay}" />
+                </StackPanel>
+                <TextBlock VerticalAlignment="Center">
+                    <Run Text="{x:Bind ViewModel.TranslationProperties.TranslationProgressText, Mode=OneWay}" FontWeight="Bold" />
+                    <Run Text="{x:Bind ViewModel.TranslationProgressString, Mode=OneWay}"/>
+                </TextBlock>
+            </StackPanel>
 
-        <ctWinUI:DataGrid x:Name="MainDataGrid" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Single" GridLinesVisibility="All" VerticalAlignment="Stretch" ColumnWidth="*" AutoGenerateColumns="False" ItemsSource="{x:Bind ViewModel.TranslationRows, Mode=OneWay}">
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Spacing="8" HorizontalAlignment="Right">
+
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.LoadExistingTranslationText, Mode=OneWay}" Command="{x:Bind ViewModel.LoadExistingTranslationCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE8B5;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.LoadText, Mode=OneWay}" Command="{x:Bind ViewModel.LoadCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE8B7;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.SaveText, Mode=OneWay}" Command="{x:Bind ViewModel.SaveCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE74E;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.PublishText, Mode=OneWay}" Command="{x:Bind ViewModel.PublishCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xEDE1;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+
+                <AppBarSeparator />
+
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.ReloadAppText, Mode=OneWay}" Command="{x:Bind ViewModel.ReloadAppCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE72C;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+
+            </StackPanel>
+
+        </Grid>
+
+
+        <ctWinUI:DataGrid x:Name="MainDataGrid" Grid.Row="1" SelectionMode="Single" GridLinesVisibility="All" VerticalAlignment="Stretch" ColumnWidth="*" AutoGenerateColumns="False" ItemsSource="{x:Bind ViewModel.TranslationRows, Mode=OneWay}">
 
             <ctWinUI:DataGrid.Resources>
                 <Style TargetType="TextBox">
@@ -116,7 +162,7 @@
                                   
                                         />-->
 
-                                <TextBox Text="{Binding NewTranslation, Mode=TwoWay}" Padding="4" Background="Transparent" BorderBrush="Transparent" TextWrapping="Wrap" AcceptsReturn="false" PreviewKeyDown="TextBox_PreviewKeyDown">
+                                <TextBox Text="{Binding NewTranslation, Mode=TwoWay}" Padding="4" Background="Transparent" BorderBrush="Transparent" TextWrapping="Wrap" AcceptsReturn="false" LostFocus="TextBox_LostFocus" PreviewKeyDown="TextBox_PreviewKeyDown">
                                     <TextBox.Resources>
                                         <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent" />
                                         <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent" />
@@ -130,11 +176,5 @@
 
             </ctWinUI:DataGrid.Columns>
         </ctWinUI:DataGrid>
-
-        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Spacing="8" Orientation="Horizontal">
-            <Button Content="{x:Bind ViewModel.TranslationProperties.LoadText, Mode=OneWay}" Command="{x:Bind ViewModel.LoadCommand}" />
-            <Button Content="{x:Bind ViewModel.TranslationProperties.SaveText, Mode=OneWay}" Command="{x:Bind ViewModel.SaveCommand}" />
-            <Button Content="{x:Bind ViewModel.TranslationProperties.PublishText, Mode=OneWay}" Command="{x:Bind ViewModel.PublishCommand}" />
-        </StackPanel>
     </Grid>
 </Window>

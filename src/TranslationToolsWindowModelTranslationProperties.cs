@@ -10,10 +10,13 @@ public class TranslationToolsWindowModelTranslationProperties : LocalizedViewMod
     public string ApplicationTilteTranslationToolsWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("TranslationTools_WindowTitle")}";
 
     [TranslationProperty]
-    public string SourceLanguageText => ResourceHelper.GetString("TranslationTools_SourceLanguage");
+    public string SourceLanguageText => $"{ResourceHelper.GetString("TranslationTools_SourceLanguage")}: ";
 
     [TranslationProperty]
     public string ImportAsTrasnlationText => ResourceHelper.GetString("TranslationTools_ImportAsTranslation");
+
+    [TranslationProperty]
+    public string LoadExistingTranslationText => ResourceHelper.GetString("TranslationTools_LoadExistingTranslation");
 
     [TranslationProperty]
     public string ReloadAppText => ResourceHelper.GetString("TranslationTools_ReloadApp");
@@ -38,4 +41,7 @@ public class TranslationToolsWindowModelTranslationProperties : LocalizedViewMod
 
     [TranslationProperty]
     public string NewTranslationText => ResourceHelper.GetString("TranslationTools_NewTranslation");
+
+    [TranslationProperty]
+    public string TranslationProgressText => $"{ResourceHelper.GetString("TranslationTools_TranslationProgress")}: ";
 }

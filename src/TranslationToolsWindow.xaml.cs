@@ -111,6 +111,11 @@ public sealed partial class TranslationToolsWindow : Window
         }
     }
 
+    void TextBox_LostFocus(object sender, RoutedEventArgs e)
+    {
+        ViewModel.RecalculateTranslationProgress();
+    }
+
 
     /*
     private void RichEditBox_PreviewKeyDown(object sender, KeyRoutedEventArgs e)

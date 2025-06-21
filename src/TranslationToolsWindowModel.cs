@@ -35,6 +35,9 @@ public partial class TranslationToolsWindowModel : ObservableObject
 
     public TranslationToolsWindowModelTranslationProperties TranslationProperties => new TranslationToolsWindowModelTranslationProperties();
 
+    [ObservableProperty]
+    public partial string TranslationProgressString { get; set; } = string.Empty;
+
     public TranslationToolsWindowModel(TranslationToolsWindow window)
     {
         _weakWindow = new WeakReference<TranslationToolsWindow>(window);
@@ -85,6 +88,8 @@ public partial class TranslationToolsWindowModel : ObservableObject
                 Logger.Error($"Failed to load default resource file {defaultResxFile}: {err.Message}");
             }
         }
+
+        RecalculateTranslationProgress();
     }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
@@ -95,6 +100,29 @@ public partial class TranslationToolsWindowModel : ObservableObject
         {
             ReloadSourceLanguage();
         }
+    }
+
+    internal void RecalculateTranslationProgress()
+    {
+        // This should never happen, but will prevent problems if it does.
+        if (TranslationRows.Count == 0)
+        {
+            TranslationProgressString = string.Empty;
+            return;
+        }
+
+        var currentTranslated = 0;
+        var totalToBeTranslated = TranslationRows.Count;
+
+        foreach (var translationRow in TranslationRows)
+        {
+            if (string.IsNullOrWhiteSpace(translationRow.NewTranslation) == false)
+            {
+                ++currentTranslated;
+            }
+        }
+
+        TranslationProgressString = $"{currentTranslated} / {totalToBeTranslated} ({(currentTranslated / (double)totalToBeTranslated):P0})";
     }
 
     void ReloadSourceLanguage()
@@ -217,9 +245,10 @@ public partial class TranslationToolsWindowModel : ObservableObject
                         }
                         else
                         {
-                            translationRow.NewTranslation = string.Empty; ;
+                            translationRow.NewTranslation = string.Empty;
                         }
                     }
+                    RecalculateTranslationProgress();
                 }
             }
             catch (Exception ex)
@@ -310,7 +339,7 @@ public partial class TranslationToolsWindowModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task ImportAsTranslationAsync()
+    async Task LoadExistingTranslationAsync()
     {
         if (_weakWindow.TryGetTarget(out var window))
         {
@@ -342,10 +371,60 @@ public partial class TranslationToolsWindowModel : ObservableObject
                 }
             }
 
-            foreach (var translationRow in TranslationRows)
+            var comboBox = new ComboBox()
             {
-                translationRow.NewTranslation = translationRow.SourceTranslation;
+                ItemsSource = SourceLanguages,
+                DisplayMemberPath = "Value",
+                SelectedItem = SourceLanguages[0],
+                HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch,
+                HorizontalContentAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch,
+            };
+
+            var loadExistingDialog = new EasyContentDialog(window.Content.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("TranslationTools_SelectLanguageToLoad"),
+                DefaultButton = ContentDialogButton.Close,
+                PrimaryButtonText = ResourceHelper.GetString("General_Load"),
+                Content = comboBox,
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+            };
+            var loadExistingDialogResult = await loadExistingDialog.ShowAsync();
+            if (loadExistingDialogResult == ContentDialogResult.None)
+            {
+                return;
             }
+
+            if (comboBox.SelectedItem is KeyValuePair<string, string> selectedLanguage)
+            {
+                var resourceContext = ResourceContext.GetForViewIndependentUse();
+                try
+                {
+                    resourceContext.Languages = new List<string> { selectedLanguage.Key };
+                }
+                catch (Exception err)
+                {
+                    Logger.Error($"Could not load resource map for key {selectedLanguage.Key}: {err.Message}");
+                    return;
+                }
+
+                foreach (var resourceMapKey in _resourceMap.Keys)
+                {
+                    if (_translationRowsDictionary.TryGetValue(resourceMapKey, out var translationRow))
+                    {
+                        var resourceCandidate = _resourceMap.GetValue(resourceMapKey, resourceContext);
+                        if (resourceCandidate.IsDefault == false && string.IsNullOrWhiteSpace(resourceCandidate?.ValueAsString) == false)
+                        {
+                            translationRow.NewTranslation = resourceCandidate.ValueAsString;
+                        }
+                        else
+                        {
+                            translationRow.NewTranslation = string.Empty;
+                        }
+                    }
+                }
+            }
+
+            RecalculateTranslationProgress();
         }
     }
 

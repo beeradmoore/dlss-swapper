@@ -915,11 +915,18 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="TranslationTools_PublishFailedMessage" xml:space="preserve">
     <value>Could not publish translation. Please see your error log for more information.</value>
   </data>
-
+  <data name="TranslationTools_TranslationProgress" xml:space="preserve">
+    <value>Translation progress</value>
+  </data>
+  <data name="TranslationTools_LoadExistingTranslation" xml:space="preserve">
+    <value>Load existing</value>
+  </data>
+  <data name="TranslationTools_SelectLanguageToLoad" xml:space="preserve">
+    <value>Select language to load</value>
+  </data>
   <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
     <value>This feature is not supported if you are running the application as admin.</value>
   </data>
-
   <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
     <value>Delete Ignored Path</value>
   </data>

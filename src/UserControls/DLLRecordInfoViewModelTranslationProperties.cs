@@ -7,7 +7,7 @@ namespace DLSS_Swapper.UserControls;
 public class DLLRecordInfoViewModelTranslationProperties : LocalizedViewModelBase
 {
     [TranslationProperty]
-    public string VersionText => $"{ResourceHelper.GetString("Version")}: ";
+    public string VersionText => $"{ResourceHelper.GetString("General_Version")}: ";
 
     [TranslationProperty]
     public string LabelText => $"{ResourceHelper.GetString("Label")}: ";

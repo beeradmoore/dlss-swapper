@@ -140,16 +140,16 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="AddingGamesManuallyNoteTitle" xml:space="preserve">
     <value>Uwaga dotycząca ręcznego dodawania gier</value>
   </data>
-  <data name="SettingsAllowDebugDlls" xml:space="preserve">
+  <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
     <value>Zezwalaj na debugowanie bibliotek DLL</value>
   </data>
-  <data name="SettingsAllowUntrusted" xml:space="preserve">
+  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
     <value>Zezwalaj niezaufanym źródłom</value>
   </data>
-  <data name="SettingsApliesOnlyToDllPickerNotLibrary" xml:space="preserve">
+  <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>Dotyczy to tylko selektora DLL, a nie strony biblioteki.</value>
   </data>
-  <data name="ApplicationRunsInAdministrativeModeInfo" xml:space="preserve">
+  <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Aplikacja uruchomiona jest z nadanymi prawami administratora.</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
@@ -185,7 +185,7 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="DownloadError" xml:space="preserve">
     <value>Błąd pobierania</value>
   </data>
-  <data name="EnableLoggingToFile" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
     <value>Zezwól na zapisywanie logów do pliku</value>
   </data>
   <data name="General_Error" xml:space="preserve">
@@ -209,7 +209,7 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="Filter" xml:space="preserve">
     <value>Filtr</value>
   </data>
-  <data name="Games" xml:space="preserve">
+  <data name="GamesPage_Title" xml:space="preserve">
     <value>Gry</value>
   </data>
   <data name="GridView" xml:space="preserve">
@@ -224,7 +224,7 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="InstallPathAlreadyExistsTemplate" xml:space="preserve">
     <value>Ścieżka instalacji "{0}" już istnieje i nie może zostać dodana ponownie.</value>
   </data>
-  <data name="Library" xml:space="preserve">
+  <data name="LibraryPage_Title" xml:space="preserve">
     <value>Biblioteka</value>
   </data>
   <data name="ListView" xml:space="preserve">
@@ -261,19 +261,19 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="SelectGameFolder" xml:space="preserve">
     <value>Wybierz folder gry</value>
   </data>
-  <data name="SettingsCheckForUpdates" xml:space="preserve">
+  <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
     <value>Sprawdź aktualizacje</value>
   </data>
-  <data name="SettingsGiveFeedback" xml:space="preserve">
+  <data name="SettingsPage_GiveFeedback" xml:space="preserve">
     <value>Zostaw informację zwrotną</value>
   </data>
-  <data name="SettingsShowOnlyDownloadedDlls" xml:space="preserve">
+  <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
     <value>Pokaż tylko pobrane biblioteki DLL</value>
   </data>
-  <data name="SettingsTroubleshooting" xml:space="preserve">
+  <data name="SettingsPage_Troubleshooting" xml:space="preserve">
     <value>Naprawa i diagnozowanie błędów</value>
   </data>
-  <data name="SettingsShowOnScreenIndicator" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
     <value>Pokaż indykator na ekranie</value>
   </data>
   <data name="General_Sorry" xml:space="preserve">
@@ -294,61 +294,61 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="ViewType" xml:space="preserve">
     <value>Typ widoku</value>
   </data>
-  <data name="Warning" xml:space="preserve">
+  <data name="General_Warning" xml:space="preserve">
     <value>Ostrzeżenie</value>
   </data>
-  <data name="SettingsEnableLoggingToConsoleWindow" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
     <value>Włącz logowanie do konsoli okienkowej</value>
   </data>
-  <data name="SettingsDllsDeveloperOptions" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
     <value>Opcje deweloperskie DLSS</value>
   </data>
-  <data name="SettingsGameLibraries" xml:space="preserve">
+  <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>Biblioteka Gier</value>
   </data>
-  <data name="SettingsThemeMode" xml:space="preserve">
+  <data name="SettingsPage_ThemeMode" xml:space="preserve">
     <value>Wybierz motyw</value>
   </data>
-  <data name="Settings" xml:space="preserve">
+  <data name="SettingsPage_Title" xml:space="preserve">
     <value>Ustawienia</value>
   </data>
-  <data name="SettingsVerboseLogging" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>Logowanie z dużą ilością informacji</value>
   </data>
-  <data name="SettingsThemeLight" xml:space="preserve">
+  <data name="SettingsPage_ThemeLight" xml:space="preserve">
     <value>Jasny</value>
   </data>
-  <data name="SettingsThemeDark" xml:space="preserve">
+  <data name="SettingsPage_ThemeDark" xml:space="preserve">
     <value>Ciemny</value>
   </data>
-  <data name="SettingsThemeSystemSettingDefault" xml:space="preserve">
+  <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
     <value>Zgodny z domyślnym w systemie operacyjnym</value>
   </data>
-  <data name="SettingsYourCurrentLogfile" xml:space="preserve">
+  <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
     <value>Twój aktualny plik z logami </value>
   </data>
-  <data name="SettingsAllowUntrustedInfo" xml:space="preserve">
+  <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
     <value>Biblioteki DLL są sprawdzane pod kątem zaufania w systemie Windows poprzez weryfikację podpisu przed umieszczeniem ich w folderze gry. Jeśli biblioteka DLL nie przejdzie weryfikacji podpisu, nie zostanie użyta. Zaleca się pozostawienie tej opcji wyłączonej.</value>
   </data>
-  <data name="SettingsAllowDebugDllsInfo" xml:space="preserve">
+  <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
     <value>Zestawy SDK czasami udostępniają biblioteki DLL debugowania, które umożliwiają wyświetlanie dodatkowych informacji na ekranie.</value>
   </data>
-  <data name="Acknowledgements" xml:space="preserve">
+  <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
     <value>Podziękowania</value>
   </data>
-  <data name="SettingsGeneralTroubleshootingGuide" xml:space="preserve">
+  <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
     <value>Ogólny przewodnik rozwiązywania problemów</value>
   </data>
-  <data name="SettingsGiveFeedbackInfo" xml:space="preserve">
+  <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
     <value>Możesz zasugerować funkcję lub zgłosić problem na DLSS Swapper</value>
   </data>
   <data name="General_Oops" xml:space="preserve">
     <value>Upss</value>
   </data>
-  <data name="NoNewUpdatesAvailable" xml:space="preserve">
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>Nie ma nowych aktualizacji.</value>
   </data>
-  <data name="CouldNotOpenLogFileTryManual" xml:space="preserve">
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>Nie udało się otworzyć pliku z logami bezpośrednio z DLSS Swapper. Spróbuj otworzyć go ręcznie.</value>
   </data>
   <data name="None" xml:space="preserve">
@@ -363,7 +363,10 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="ClickToCopyDetails" xml:space="preserve">
     <value>Kliknij aby skopiować poniższe dane</value>
   </data>
-  <data name="Diagnostics" xml:space="preserve">
+  <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
+    <value>Diagnostyka</value>
+  </data>
+  <data name="Diagnostics_WindowTitle" xml:space="preserve">
     <value>Diagnostyka</value>
   </data>
   <data name="FailedToLaunch" xml:space="preserve">
@@ -381,7 +384,10 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>Nie udało się uruchomić DLSS Swapper</value>
   </data>
-  <data name="NetworkTester" xml:space="preserve">
+  <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
+    <value>Tester Sieciowy</value>
+  </data>
+  <data name="NetworkTester_WindowTitle" xml:space="preserve">
     <value>Tester Sieciowy</value>
   </data>
   <data name="OriginalDll" xml:space="preserve">
@@ -498,7 +504,7 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="Game" xml:space="preserve">
     <value>Gra</value>
   </data>
-  <data name="Version" xml:space="preserve">
+  <data name="General_Version" xml:space="preserve">
     <value>Wersja</value>
   </data>
   <data name="Hash" xml:space="preserve">
@@ -531,19 +537,19 @@ Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   <data name="AddingGamesManuallyInfoHtml" xml:space="preserve">
     <value>Pamiętaj, że musisz wybrać ścieżkę swojej &lt;i&gt;gry&lt;/i&gt;, nie ścieżkę swoich &lt;i&gt;gier&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;Dla przykładu, jeśli masz grę w katalogu:&lt;br/&gt;&lt;b&gt;C:\Program Files\MojeGry\MojaUlubionaGra\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Musisz wybrać katalog &lt;b&gt;MojaUlubionaGra&lt;/b&gt; a nie katalog &lt;b&gt;MojeGry&lt;/b&gt;.</value>
   </data>
-  <data name="SettingsLogging" xml:space="preserve">
+  <data name="SettingsPage_Logging" xml:space="preserve">
     <value>Logowanie</value>
   </data>
-  <data name="SettingsAbout" xml:space="preserve">
+  <data name="SettingsPage_About" xml:space="preserve">
     <value>Informacje</value>
   </data>
-  <data name="SettingsYes" xml:space="preserve">
+  <data name="General_Yes" xml:space="preserve">
     <value>Włączone</value>
   </data>
-  <data name="SettingsNo" xml:space="preserve">
+  <data name="General_No" xml:space="preserve">
     <value>Wyłączone</value>
   </data>
-  <data name="SettingsLanguage" xml:space="preserve">
+  <data name="SettingsPage_Language" xml:space="preserve">
     <value>Język</value>
   </data>
   <data name="Help" xml:space="preserve">

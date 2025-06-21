@@ -7,7 +7,7 @@ namespace DLSS_Swapper;
 public class NetworkTesterWindowModelTranslationProperties : LocalizedViewModelBase
 {
     [TranslationProperty]
-    public string NetworkTesterWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("NetworkTester")}";
+    public string NetworkTesterWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("NetworkTester_WindowTitle")}";
 
     [TranslationProperty]
     public string Test1TitleText => ResourceHelper.GetString("DiagnosticsTest1Title");

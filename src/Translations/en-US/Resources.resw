@@ -140,16 +140,16 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="AddingGamesManuallyNoteTitle" xml:space="preserve">
     <value>Note for manually adding games</value>
   </data>
-  <data name="SettingsAllowDebugDlls" xml:space="preserve">
+  <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
     <value>Allow Debug DLLs</value>
   </data>
-  <data name="SettingsAllowUntrusted" xml:space="preserve">
+  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
     <value>Allow Untrusted</value>
   </data>
-  <data name="SettingsApliesOnlyToDllPickerNotLibrary" xml:space="preserve">
+  <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>This only applies to the DLL picker, not the library page.</value>
   </data>
-  <data name="ApplicationRunsInAdministrativeModeInfo" xml:space="preserve">
+  <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>This app is running with administrative privileges.</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
@@ -185,7 +185,7 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="DownloadError" xml:space="preserve">
     <value>Download Error</value>
   </data>
-  <data name="EnableLoggingToFile" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
     <value>Enable logging to file</value>
   </data>
   <data name="General_Error" xml:space="preserve">
@@ -210,7 +210,7 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="Filter" xml:space="preserve">
     <value>Filter</value>
   </data>
-  <data name="Games" xml:space="preserve">
+  <data name="GamesPage_Title" xml:space="preserve">
     <value>Games</value>
   </data>
   <data name="GridView" xml:space="preserve">
@@ -226,19 +226,19 @@ If you have checked these and your game is still not showing up there may be a b
     <value>The install path "{0}" already exists and can't be added again.</value>
     <comment>Leave 0 as it is and use safe string format</comment>
   </data>
-  <data name="Library" xml:space="preserve">
+  <data name="LibraryPage_Title" xml:space="preserve">
     <value>Library</value>
   </data>
   <data name="ListView" xml:space="preserve">
     <value>List View</value>
   </data>
-  <data name="IgnoredPaths" xml:space="preserve">
+  <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
     <value>Ignored Paths</value>
   </data>
-  <data name="AddIgnoredPath" xml:space="preserve">
+  <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
     <value>Add Ignored Path</value>
   </data>
-  <data name="SettingsOpenTranslationTools" xml:space="preserve">
+  <data name="SettingsPage_OpenTranslationTools" xml:space="preserve">
     <value>Open translation tools</value>
   </data>
   <data name="DllPath" xml:space="preserve">
@@ -278,19 +278,19 @@ Only import dlls from sources you trust.</value>
   <data name="SelectGameFolder" xml:space="preserve">
     <value>Select Game Folder</value>
   </data>
-  <data name="SettingsCheckForUpdates" xml:space="preserve">
+  <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
     <value>Check for updates</value>
   </data>
-  <data name="SettingsGiveFeedback" xml:space="preserve">
+  <data name="SettingsPage_GiveFeedback" xml:space="preserve">
     <value>Give Feedback</value>
   </data>
-  <data name="SettingsShowOnlyDownloadedDlls" xml:space="preserve">
+  <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
     <value>Only Show Downloaded DLLs</value>
   </data>
-  <data name="SettingsTroubleshooting" xml:space="preserve">
+  <data name="SettingsPage_Troubleshooting" xml:space="preserve">
     <value>Troubleshooting</value>
   </data>
-  <data name="SettingsShowOnScreenIndicator" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
     <value>Show on-screen indicator</value>
   </data>
   <data name="General_Sorry" xml:space="preserve">
@@ -315,61 +315,61 @@ Only import dlls from sources you trust.</value>
   <data name="ViewType" xml:space="preserve">
     <value>View Type</value>
   </data>
-  <data name="Warning" xml:space="preserve">
+  <data name="General_Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
-  <data name="SettingsEnableLoggingToConsoleWindow" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
     <value>Enable logging to console window</value>
   </data>
-  <data name="SettingsDllsDeveloperOptions" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
     <value>DLSS Developer Options</value>
   </data>
-  <data name="SettingsGameLibraries" xml:space="preserve">
+  <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>Game Libraries</value>
   </data>
-  <data name="SettingsThemeMode" xml:space="preserve">
+  <data name="SettingsPage_ThemeMode" xml:space="preserve">
     <value>Theme Mode</value>
   </data>
-  <data name="Settings" xml:space="preserve">
+  <data name="SettingsPage_Title" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="SettingsVerboseLogging" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>Verbose logging</value>
   </data>
-  <data name="SettingsThemeLight" xml:space="preserve">
+  <data name="SettingsPage_ThemeLight" xml:space="preserve">
     <value>Light</value>
   </data>
-  <data name="SettingsThemeDark" xml:space="preserve">
+  <data name="SettingsPage_ThemeDark" xml:space="preserve">
     <value>Dark</value>
   </data>
-  <data name="SettingsThemeSystemSettingDefault" xml:space="preserve">
+  <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
     <value>Use system setting</value>
   </data>
-  <data name="SettingsYourCurrentLogfile" xml:space="preserve">
+  <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
     <value>Your current log file is </value>
   </data>
-  <data name="SettingsAllowUntrustedInfo" xml:space="preserve">
+  <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
     <value>DLLs are checked if they are trusted in Windows by validating the signature before being swapped into a game folder. If a DLL fails signature validation then it will not be used. It is recommended to keep this off.</value>
   </data>
-  <data name="SettingsAllowDebugDllsInfo" xml:space="preserve">
+  <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
     <value>SDKs sometimes release debug DLLs which allow additional on-screen information to be displayed.</value>
   </data>
-  <data name="Acknowledgements" xml:space="preserve">
+  <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
     <value>Acknowledgements</value>
   </data>
-  <data name="SettingsGeneralTroubleshootingGuide" xml:space="preserve">
+  <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
     <value>General troubleshooting guide</value>
   </data>
-  <data name="SettingsGiveFeedbackInfo" xml:space="preserve">
+  <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
     <value>You can suggest a feature or report a problem or on the DLSS Swapper</value>
   </data>
   <data name="General_Oops" xml:space="preserve">
     <value>Oops</value>
   </data>
-  <data name="NoNewUpdatesAvailable" xml:space="preserve">
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>No new updates are available.</value>
   </data>
-  <data name="CouldNotOpenLogFileTryManual" xml:space="preserve">
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>Could not open your log file directly from DLSS Swapper. Please try open it manually.</value>
   </data>
   <data name="None" xml:space="preserve">
@@ -384,7 +384,10 @@ Only import dlls from sources you trust.</value>
   <data name="ClickToCopyDetails" xml:space="preserve">
     <value>Click to copy below details</value>
   </data>
-  <data name="Diagnostics" xml:space="preserve">
+  <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
+    <value>Diagnostics</value>
+  </data>
+  <data name="Diagnostics_WindowTitle" xml:space="preserve">
     <value>Diagnostics</value>
   </data>
   <data name="FailedToLaunch" xml:space="preserve">
@@ -402,7 +405,10 @@ Only import dlls from sources you trust.</value>
   <data name="DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper has failed to launch</value>
   </data>
-  <data name="NetworkTester" xml:space="preserve">
+  <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
+    <value>Network Tester</value>
+  </data>
+  <data name="NetworkTester_WindowTitle" xml:space="preserve">
     <value>Network Tester</value>
   </data>
   <data name="OriginalDll" xml:space="preserve">
@@ -537,7 +543,7 @@ Only import dlls from sources you trust.</value>
   <data name="Game" xml:space="preserve">
     <value>Game</value>
   </data>
-  <data name="Version" xml:space="preserve">
+  <data name="General_Version" xml:space="preserve">
     <value>Version</value>
   </data>
   <data name="Hash" xml:space="preserve">
@@ -570,19 +576,19 @@ Only import dlls from sources you trust.</value>
   <data name="AddingGamesManuallyInfoHtml" xml:space="preserve">
     <value>You must select your &lt;i&gt;game&lt;/i&gt; directory, not your &lt;i&gt;games&lt;/i&gt; directory.&lt;br/&gt;&lt;br/&gt;For example, if you have a game at:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavouriteGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;You would select the &lt;b&gt;MyFavouriteGame&lt;/b&gt; directory and not the &lt;b&gt;MyGamesFolder&lt;/b&gt; directory.</value>
   </data>
-  <data name="SettingsLogging" xml:space="preserve">
+  <data name="SettingsPage_Logging" xml:space="preserve">
     <value>Logging</value>
   </data>
-  <data name="SettingsAbout" xml:space="preserve">
+  <data name="SettingsPage_About" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="SettingsYes" xml:space="preserve">
+  <data name="General_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="SettingsNo" xml:space="preserve">
+  <data name="General_No" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="SettingsLanguage" xml:space="preserve">
+  <data name="SettingsPage_Language" xml:space="preserve">
     <value>Language</value>
   </data>
   <data name="Help" xml:space="preserve">
@@ -910,7 +916,7 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
     <value>Could not publish translation. Please see your error log for more information.</value>
   </data>
 
-  <data name="FeatureNotSupportedWhenAdmin" xml:space="preserve">
+  <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
     <value>This feature is not supported if you are running the application as admin.</value>
   </data>
 

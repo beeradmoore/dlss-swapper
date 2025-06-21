@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Acknowledgements" xml:space="preserve">
+  <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
     <value>鸣谢</value>
   </data>
   <data name="AddCover" xml:space="preserve">
@@ -132,7 +132,7 @@
   <data name="AddGame" xml:space="preserve">
     <value>添加游戏</value>
   </data>
-  <data name="AddIgnoredPath" xml:space="preserve">
+  <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
     <value>添加排除项</value>
   </data>
   <data name="AddingGameError" xml:space="preserve">
@@ -164,7 +164,7 @@
   <data name="AlreadyImported" xml:space="preserve">
     <value>已导入。</value>
   </data>
-  <data name="ApplicationRunsInAdministrativeModeInfo" xml:space="preserve">
+  <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>程序正在以管理员权限的方式运行</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
@@ -248,7 +248,7 @@
   <data name="CouldNotLoadImportedDlls" xml:space="preserve">
     <value>无法加载导入的 DLL 文件。</value>
   </data>
-  <data name="CouldNotOpenLogFileTryManual" xml:space="preserve">
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>无法直接从 DLSS Swapper 打开您的日志文件，请尝试手动打开。</value>
   </data>
   <data name="CouldntDownloadNow" xml:space="preserve">
@@ -284,7 +284,10 @@
   <data name="DeleteDllVersionTemplate" xml:space="preserve">
     <value>删除 {0} v{1}?</value>
   </data>
-  <data name="Diagnostics" xml:space="preserve">
+  <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
+    <value>诊断系统/系统信息</value>
+  </data>
+  <data name="Diagnostics_WindowTitle" xml:space="preserve">
     <value>诊断系统/系统信息</value>
   </data>
   <data name="DiagnosticsTest10Title" xml:space="preserve">
@@ -374,7 +377,7 @@
   <data name="EnabledForDebugDlssDllOnly" xml:space="preserve">
     <value>仅对 DLSS Debug 版本显示信息</value>
   </data>
-  <data name="EnableLoggingToFile" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
     <value>日志保存到文件</value>
   </data>
   <data name="General_Error" xml:space="preserve">
@@ -431,7 +434,7 @@
   <data name="GameProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} 仍在处理中，请等待加载进度完成，然后再打开。</value>
   </data>
-  <data name="Games" xml:space="preserve">
+  <data name="GamesPage_Title" xml:space="preserve">
     <value>游戏库</value>
   </data>
   <data name="GithubAccountRequired" xml:space="preserve">
@@ -461,7 +464,7 @@
   <data name="IfButtonDoesntWorkTryHere" xml:space="preserve">
     <value>如果上方按钮按了无反应，请点击此链接,</value>
   </data>
-  <data name="IgnoredPaths" xml:space="preserve">
+  <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
     <value>排除目录</value>
   </data>
   <data name="General_Import" xml:space="preserve">
@@ -491,7 +494,7 @@
   <data name="InvalidFileTypeTemplate" xml:space="preserve">
     <value>"{0}" 无效的文件类型</value>
   </data>
-  <data name="Library" xml:space="preserve">
+  <data name="LibraryPage_Title" xml:space="preserve">
     <value>DLL 库</value>
   </data>
   <data name="ListView" xml:space="preserve">
@@ -528,7 +531,10 @@
   <data name="Name" xml:space="preserve">
     <value>名称</value>
   </data>
-  <data name="NetworkTester" xml:space="preserve">
+  <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
+    <value>网络测试</value>
+  </data>
+  <data name="NetworkTester_WindowTitle" xml:space="preserve">
     <value>网络测试</value>
   </data>
   <data name="NewDlls" xml:space="preserve">
@@ -549,7 +555,7 @@
   <data name="None" xml:space="preserve">
     <value>无</value>
   </data>
-  <data name="NoNewUpdatesAvailable" xml:space="preserve">
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>当前已是最新版本。</value>
   </data>
   <data name="NoteForMultiplayerGames" xml:space="preserve">
@@ -642,88 +648,88 @@
   <data name="SelectVersionTemplate" xml:space="preserve">
     <value>选择 {0} 版本</value>
   </data>
-  <data name="Settings" xml:space="preserve">
+  <data name="SettingsPage_Title" xml:space="preserve">
     <value>设置</value>
   </data>
-  <data name="SettingsAbout" xml:space="preserve">
+  <data name="SettingsPage_About" xml:space="preserve">
     <value>关于</value>
   </data>
-  <data name="SettingsAllowDebugDlls" xml:space="preserve">
+  <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
     <value>允许 Debug DLL 文件</value>
   </data>
-  <data name="SettingsAllowDebugDllsInfo" xml:space="preserve">
+  <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
     <value>SDK 有时会发布调试 DLL 文件，允许文件在屏幕上显示额外的调试信息。</value>
   </data>
-  <data name="SettingsAllowUntrusted" xml:space="preserve">
+  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
     <value>允许不受信任的文件</value>
   </data>
-  <data name="SettingsAllowUntrustedInfo" xml:space="preserve">
+  <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
     <value>在将 DLL 文件替换到游戏文件夹之前，Windows 会通过验证签名来检查其是否受信任，如果 DLL 文件未能通过签名验证，则不会被使用，建议保持此功能关闭。</value>
   </data>
-  <data name="SettingsApliesOnlyToDllPickerNotLibrary" xml:space="preserve">
+  <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>在替换 DLL 时，仅显示已经下载的文件，而不是所有不同版本，此选项不影响 DLL 库。</value>
   </data>
-  <data name="SettingsCheckForUpdates" xml:space="preserve">
+  <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
     <value>检查更新</value>
   </data>
-  <data name="SettingsDllsDeveloperOptions" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
     <value>DLSS 开发者选项</value>
   </data>
-  <data name="SettingsEnableLoggingToConsoleWindow" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
     <value>将日志输出到控制台窗口</value>
   </data>
-  <data name="SettingsGameLibraries" xml:space="preserve">
+  <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>游戏平台</value>
   </data>
-  <data name="SettingsGeneralTroubleshootingGuide" xml:space="preserve">
+  <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
     <value>故障排除的指南</value>
   </data>
-  <data name="SettingsGiveFeedback" xml:space="preserve">
+  <data name="SettingsPage_GiveFeedback" xml:space="preserve">
     <value>反馈</value>
   </data>
-  <data name="SettingsGiveFeedbackInfo" xml:space="preserve">
+  <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
     <value>您可以为 DLSS Swapper 上提交建议功能或报告问题。</value>
   </data>
-  <data name="SettingsLanguage" xml:space="preserve">
+  <data name="SettingsPage_Language" xml:space="preserve">
     <value>语言选择</value>
   </data>
-  <data name="SettingsLogging" xml:space="preserve">
+  <data name="SettingsPage_Logging" xml:space="preserve">
     <value>日志记录</value>
   </data>
-  <data name="SettingsNo" xml:space="preserve">
+  <data name="General_No" xml:space="preserve">
     <value>关闭</value>
   </data>
-  <data name="SettingsOpenTranslationTools" xml:space="preserve">
+  <data name="SettingsPage_OpenTranslationTools" xml:space="preserve">
     <value>打开语言翻译工具</value>
   </data>
-  <data name="SettingsShowOnlyDownloadedDlls" xml:space="preserve">
+  <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
     <value>只显示已经下载的 DLL 文件</value>
   </data>
-  <data name="SettingsShowOnScreenIndicator" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
     <value>在屏幕上显示信息</value>
   </data>
-  <data name="SettingsThemeDark" xml:space="preserve">
+  <data name="SettingsPage_ThemeDark" xml:space="preserve">
     <value>深色</value>
   </data>
-  <data name="SettingsThemeLight" xml:space="preserve">
+  <data name="SettingsPage_ThemeLight" xml:space="preserve">
     <value>浅色</value>
   </data>
-  <data name="SettingsThemeMode" xml:space="preserve">
+  <data name="SettingsPage_ThemeMode" xml:space="preserve">
     <value>主题设置</value>
   </data>
-  <data name="SettingsThemeSystemSettingDefault" xml:space="preserve">
+  <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
     <value>跟随系统设置</value>
   </data>
-  <data name="SettingsTroubleshooting" xml:space="preserve">
+  <data name="SettingsPage_Troubleshooting" xml:space="preserve">
     <value>故障排除</value>
   </data>
-  <data name="SettingsVerboseLogging" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>详细日志</value>
   </data>
-  <data name="SettingsYes" xml:space="preserve">
+  <data name="General_Yes" xml:space="preserve">
     <value>开启</value>
   </data>
-  <data name="SettingsYourCurrentLogfile" xml:space="preserve">
+  <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
     <value>您的日志文件在：</value>
   </data>
   <data name="General_Sorry" xml:space="preserve">
@@ -807,7 +813,7 @@
   <data name="UseUserAgentInfo" xml:space="preserve">
     <value>使用提供的代理或输入自定义的用户代理。</value>
   </data>
-  <data name="Version" xml:space="preserve">
+  <data name="General_Version" xml:space="preserve">
     <value>版本</value>
   </data>
   <data name="ViewType" xml:space="preserve">
@@ -816,7 +822,7 @@
   <data name="WaitToDownloadCompleteBeforeSwapping" xml:space="preserve">
     <value>请等待 DLL 下载完成后再替换</value>
   </data>
-  <data name="Warning" xml:space="preserve">
+  <data name="General_Warning" xml:space="preserve">
     <value>警告</value>
   </data>
   <data name="WhileLoadingYourGameNewDllsDiscoveredHelpUs" xml:space="preserve">

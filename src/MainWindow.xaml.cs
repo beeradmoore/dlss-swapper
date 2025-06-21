@@ -92,7 +92,7 @@ namespace DLSS_Swapper
             {
                 if (MainNavigationView.SettingsItem is NavigationViewItem settingsNavigationViewItem)
                 {
-                    settingsNavigationViewItem.Content = ResourceHelper.GetString("Settings");
+                    settingsNavigationViewItem.Content = ResourceHelper.GetString("SettingsPage_Title");
                 }
             };
         }
@@ -214,7 +214,7 @@ namespace DLSS_Swapper
             if (sender is NavigationView navigationView && navigationView.SettingsItem is NavigationViewItem settingsNavigationViewItem)
             {
                 settingsNavigationViewItem.Tag = SettingsPage.PageTag;
-                settingsNavigationViewItem.Content = ResourceHelper.GetString("Settings");
+                settingsNavigationViewItem.Content = ResourceHelper.GetString("SettingsPage_Title");
             }
 
 

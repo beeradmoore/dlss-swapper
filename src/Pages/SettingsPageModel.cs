@@ -236,7 +236,7 @@ public partial class SettingsPageModel : ObservableObject
                 {
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = ResourceHelper.GetString("NoNewUpdatesAvailable"),
+                    Content = ResourceHelper.GetString("SettingsPage_NoNewUpdatesAvailable"),
                 };
                 await dialog.ShowAsync();
 
@@ -273,7 +273,7 @@ public partial class SettingsPageModel : ObservableObject
                     Title = ResourceHelper.GetString("General_Oops"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = ResourceHelper.GetString("CouldNotOpenLogFileTryManual"),
+                    Content = ResourceHelper.GetString("SettingsPage_CouldNotOpenLogFileTryManual"),
                 };
 
                 await dialog.ShowAsync();
@@ -313,7 +313,7 @@ public partial class SettingsPageModel : ObservableObject
                     Title = ResourceHelper.GetString("General_Error"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = ResourceHelper.GetString("FeatureNotSupportedWhenAdmin"),
+                    Content = ResourceHelper.GetString("General_FeatureNotSupportedWhenAdmin"),
                 };
                 await errorDialog.ShowAsync();
                 return;

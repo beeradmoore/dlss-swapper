@@ -365,7 +365,7 @@ public partial class LibraryPageModel : ObservableObject
         {
             var warningDialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = ResourceHelper.GetString("Warning"),
+                Title = ResourceHelper.GetString("General_Warning"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = ResourceHelper.GetString("MalliciousDllsInfo"),

@@ -14,10 +14,10 @@
 
             <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TranslationProperties.StepOneCreateNewIssueText, Mode=OneWay}" />
             <StackPanel Orientation="Horizontal" Spacing="12">
-                <Button Content="{x:Bind ViewModel.TranslationProperties.CreateNewGithubIssueText, Mode=OneWay}" Command="{x:Bind ViewModel.OpenGitHubIssueCommand}" />
-                <TextBlock Text="{x:Bind ViewModel.TranslationProperties.GithubAccountRequiredText, Mode=OneWay}" VerticalAlignment="Center" />
+                <Button Content="{x:Bind ViewModel.TranslationProperties.CreateNewGitHubIssueText, Mode=OneWay}" Command="{x:Bind ViewModel.OpenGitHubIssueCommand}" />
+                <TextBlock Text="{x:Bind ViewModel.TranslationProperties.GitHubAccountRequiredText, Mode=OneWay}" VerticalAlignment="Center" />
             </StackPanel>
-            
+
             <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="Wrap">
                 <Run Text="{x:Bind ViewModel.TranslationProperties.IfButtonDoesntWorkTryHereText, Mode=OneWay}"/>
                 <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper-manifest-builder/issues/">https://github.com/beeradmoore/dlss-swapper-manifest-builder/issues/</Hyperlink>

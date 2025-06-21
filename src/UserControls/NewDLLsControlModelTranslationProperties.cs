@@ -13,10 +13,10 @@ public class NewDLLsControlModelTranslationProperties : LocalizedViewModelBase
     public string StepOneCreateNewIssueText => ResourceHelper.GetString("GamesPage_NewDlls_StepOneCreateNewIssue");
 
     [TranslationProperty]
-    public string CreateNewGithubIssueText => ResourceHelper.GetString("GamesPage_NewDlls_CreateNewGitHubIssue");
+    public string CreateNewGitHubIssueText => ResourceHelper.GetString("GamesPage_NewDlls_CreateNewGitHubIssue");
 
     [TranslationProperty]
-    public string GithubAccountRequiredText => ResourceHelper.GetString("GamesPage_NewDlls_GitHubAccountRequired");
+    public string GitHubAccountRequiredText => ResourceHelper.GetString("GamesPage_NewDlls_GitHubAccountRequired");
 
     [TranslationProperty]
     public string IfButtonDoesntWorkTryHereText => ResourceHelper.GetString("GamesPage_NewDlls_IfButtonDoesntWorkTryHere");

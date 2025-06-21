@@ -574,7 +574,7 @@ Only import dlls from sources you trust.</value>
     <value>Search</value>
   </data>
   <data name="AddingGamesManuallyInfoHtml" xml:space="preserve">
-    <value>You must select your &lt;i&gt;game&lt;/i&gt; directory, not your &lt;i&gt;games&lt;/i&gt; directory.&lt;br/&gt;&lt;br/&gt;For example, if you have a game at:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavouriteGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;You would select the &lt;b&gt;MyFavouriteGame&lt;/b&gt; directory and not the &lt;b&gt;MyGamesFolder&lt;/b&gt; directory.</value>
+    <value>You must select your &lt;i&gt;game&lt;/i&gt; directory, not your &lt;i&gt;games&lt;/i&gt; directory.&lt;br/&gt;&lt;br/&gt;For example, if you have a game at:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;You would select the &lt;b&gt;MyFavGame&lt;/b&gt; directory and not the &lt;b&gt;MyGamesFolder&lt;/b&gt; directory.</value>
   </data>
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>Logging</value>
@@ -631,10 +631,10 @@ Only import dlls from sources you trust.</value>
     <value>Run test</value>
   </data>
   <data name="Favourited" xml:space="preserve">
-    <value>Favourited</value>
+    <value>Favorited</value>
   </data>
   <data name="ClickToFavourite" xml:space="preserve">
-    <value>Click to favourite</value>
+    <value>Click to favorite</value>
   </data>
   <data name="Downloading" xml:space="preserve">
     <value>Downloading</value>

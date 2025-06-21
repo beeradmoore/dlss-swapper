@@ -7,16 +7,16 @@ namespace DLSS_Swapper;
 public class TranslationToolsWindowModelTranslationProperties : LocalizedViewModelBase
 {
     [TranslationProperty]
-    public string ApplicationTilteTranslationToolsWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("TranslationTools")}";
+    public string ApplicationTilteTranslationToolsWindowText => $"{ResourceHelper.GetString("ApplicationTitle")} - {ResourceHelper.GetString("TranslationTools_WindowTitle")}";
 
     [TranslationProperty]
-    public string SourceLanguageText => ResourceHelper.GetString("SourceLanguage");
+    public string SourceLanguageText => ResourceHelper.GetString("TranslationTools_SourceLanguage");
 
     [TranslationProperty]
-    public string ImportAsTrasnlationText => ResourceHelper.GetString("ImportAsTrasnlation");
+    public string ImportAsTrasnlationText => ResourceHelper.GetString("TranslationTools_ImportAsTranslation");
 
     [TranslationProperty]
-    public string ReloadAppText => ResourceHelper.GetString("ReloadApp");
+    public string ReloadAppText => ResourceHelper.GetString("TranslationTools_ReloadApp");
 
     [TranslationProperty]
     public string LoadText => ResourceHelper.GetString("Load");
@@ -34,8 +34,8 @@ public class TranslationToolsWindowModelTranslationProperties : LocalizedViewMod
     public string CommentText => ResourceHelper.GetString("Comment");
 
     [TranslationProperty]
-    public string SourceTranslationText => ResourceHelper.GetString("SourceTranslation");
+    public string SourceTranslationText => ResourceHelper.GetString("TranslationTools_SourceTranslation");
 
     [TranslationProperty]
-    public string NewTranslationText => ResourceHelper.GetString("NewTranslation");
+    public string NewTranslationText => ResourceHelper.GetString("TranslationTools_NewTranslation");
 }

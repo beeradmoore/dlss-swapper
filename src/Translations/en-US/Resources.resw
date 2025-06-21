@@ -453,7 +453,7 @@ Only import dlls from sources you trust.</value>
   <data name="Comment" xml:space="preserve">
     <value>Comment</value>
   </data>
-  <data name="NewTranslation" xml:space="preserve">
+  <data name="TranslationTools_NewTranslation" xml:space="preserve">
     <value>New Translation</value>
   </data>
   <data name="Notes" xml:space="preserve">
@@ -840,16 +840,16 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="InvalidFileTypeTemplate" xml:space="preserve">
     <value>"{0}" is an invalid file type</value>
   </data>
-  <data name="enOnly" xml:space="preserve">
-    <value>en only</value>
-  </data>
-  <data name="TranslationTools" xml:space="preserve">
+  <data name="TranslationTools_WindowTitle" xml:space="preserve">
     <value>Translation Tools</value>
   </data>
-  <data name="SourceLanguage" xml:space="preserve">
+  <data name="TranslationTools_ImportAsTranslation" xml:space="preserve">
+    <value>Import language as translation</value>
+  </data>
+  <data name="TranslationTools_SourceLanguage" xml:space="preserve">
     <value>Source language</value>
   </data>
-  <data name="SourceTranslation" xml:space="preserve">
+  <data name="TranslationTools_SourceTranslation" xml:space="preserve">
     <value>Source translation</value>
   </data>
   <data name="LicencesAndAcknowledgements" xml:space="preserve">
@@ -882,6 +882,12 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="TranslationTools_TranslationGuideButton" xml:space="preserve">
     <value>Translation guide</value>
   </data>
+
+  <data name="TranslationTools_ReloadApp" xml:space="preserve">
+    <value>Reload app</value>
+  </data>
+
+
 
   <data name="TranslationTools_TranslationGuideMessage" xml:space="preserve">
     <value>$"Your translation has been created. Please look at the DLSS Swapper translation guide as to what to do next with {0}.</value>

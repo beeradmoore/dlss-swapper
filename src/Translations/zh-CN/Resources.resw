@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -377,9 +377,6 @@
   <data name="EnableLoggingToFile" xml:space="preserve">
     <value>日志保存到文件</value>
   </data>
-  <data name="enOnly" xml:space="preserve">
-    <value>仅限英文</value>
-  </data>
   <data name="Error" xml:space="preserve">
     <value>错误</value>
   </data>
@@ -513,8 +510,8 @@
     <value>手动导入 DLL 到您的电脑上是危险的操作
 
             如果意外的将恶意 DLL 文件放入游戏，就像运行您刚从 LimeWire 下载的“Linking_park_-_nUmB_mp3.exe”一样危险。
-          
- 
+
+
  请只从您信任的来源导入 DLL 文件。</value>
   </data>
   <data name="ManifestCouldNotBeLoaded" xml:space="preserve">
@@ -543,7 +540,7 @@
   <data name="NewDllsFound" xml:space="preserve">
     <value>发现新的 DLL 文件</value>
   </data>
-  <data name="NewTranslation" xml:space="preserve">
+  <data name="TranslationTools_NewTranslation" xml:space="preserve">
     <value>新翻译</value>
   </data>
   <data name="NoDllsFound" xml:space="preserve">
@@ -735,10 +732,10 @@
   <data name="Sorry" xml:space="preserve">
     <value>抱歉</value>
   </data>
-  <data name="SourceLanguage" xml:space="preserve">
+  <data name="TranslationTools_SourceLanguage" xml:space="preserve">
     <value>当前语言</value>
   </data>
-  <data name="SourceTranslation" xml:space="preserve">
+  <data name="TranslationTools_SourceTranslation" xml:space="preserve">
     <value>当前翻译</value>
   </data>
   <data name="StartingDownload" xml:space="preserve">
@@ -777,7 +774,7 @@
   <data name="TopLevelDirectoryNotSupported" xml:space="preserve">
     <value>您似乎选择了错误的目录，请重新选择游戏的根目录。</value>
   </data>
-  <data name="TranslationTools" xml:space="preserve">
+  <data name="TranslationTools_WindowTitle" xml:space="preserve">
     <value>翻译工具</value>
   </data>
   <data name="TranslationTools_AdminError" xml:space="preserve">

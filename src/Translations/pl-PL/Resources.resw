@@ -794,7 +794,4 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="InvalidFileTypeTemplate" xml:space="preserve">
     <value>"{0}" nie jest właściwym typem pliku</value>
   </data>
-  <data name="plOnly" xml:space="preserve">
-    <value>pl only</value>
-  </data>
 </root>

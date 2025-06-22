@@ -165,7 +165,7 @@
                     Text="{x:Bind ViewModel.TranslationProperties.LanguageText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0" Spacing="8">
                     <ComboBox x:Name="LanguageComboBox" ItemsSource="{x:Bind ViewModel.Languages}" DisplayMemberPath="Value" SelectedItem="{x:Bind ViewModel.SelectedLanguage, Mode=TwoWay}" />
-                    <Button Content="{x:Bind ViewModel.TranslationProperties.OpenTranslationToolsText, Mode=OneWay}" Command="{x:Bind ViewModel.OpenTranslationToolsCommand}" />
+                    <Button Content="{x:Bind ViewModel.TranslationProperties.OpenTranslationToolboxText, Mode=OneWay}" Command="{x:Bind ViewModel.OpenTranslationToolboxCommand}" />
                 </StackPanel>
 
                 <TextBlock

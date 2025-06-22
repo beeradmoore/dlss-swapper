@@ -104,7 +104,7 @@
     <None Remove="Pages\AcknowledgementsPage.xaml" />
     <None Remove="Pages\NetworkTesterWindow.xaml" />
     <None Remove="Themes\FakeContentDialogStyle.xaml" />
-    <None Remove="TranslationToolsWindow.xaml" />
+    <None Remove="TranslationToolboxWindow.xaml" />
     <None Remove="UserControls\DLLPickerControl.xaml" />
     <None Remove="UserControls\GameControl.xaml" />
     <None Remove="UserControls\ImportDLLSummaryControl.xaml" />
@@ -306,7 +306,7 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
-        <Page Update="TranslationToolsWindow.xaml">
+        <Page Update="TranslationToolboxWindow.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>
         <Page Update="Pages\AcknowledgementsPage.xaml">
@@ -410,5 +410,5 @@
     </Content>
   </ItemGroup>
 
-  
+
 </Project>

@@ -197,7 +197,7 @@
   <data name="General_Close" xml:space="preserve">
     <value>关闭</value>
   </data>
-  <data name="TranslationToolsPage_Comment" xml:space="preserve">
+  <data name="TranslationToolboxPage_Comment" xml:space="preserve">
     <value>说明</value>
   </data>
   <data name="General_Copy" xml:space="preserve">
@@ -546,7 +546,7 @@
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
     <value>发现新的 DLL 文件</value>
   </data>
-  <data name="TranslationToolsPage_NewTranslation" xml:space="preserve">
+  <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
     <value>新翻译</value>
   </data>
   <data name="NoDllsFound" xml:space="preserve">
@@ -702,9 +702,6 @@
   <data name="General_No" xml:space="preserve">
     <value>关闭</value>
   </data>
-  <data name="SettingsPage_OpenTranslationTools" xml:space="preserve">
-    <value>打开语言翻译工具</value>
-  </data>
   <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
     <value>只显示已经下载的 DLL 文件</value>
   </data>
@@ -738,10 +735,10 @@
   <data name="General_Sorry" xml:space="preserve">
     <value>抱歉</value>
   </data>
-  <data name="TranslationToolsPage_SourceLanguage" xml:space="preserve">
+  <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
     <value>当前语言</value>
   </data>
-  <data name="TranslationToolsPage_SourceTranslation" xml:space="preserve">
+  <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
     <value>当前翻译</value>
   </data>
   <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
@@ -780,10 +777,7 @@
   <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
     <value>您似乎选择了错误的目录，请重新选择游戏的根目录。</value>
   </data>
-  <data name="TranslationToolsPage_WindowTitle" xml:space="preserve">
-    <value>翻译工具</value>
-  </data>
-  <data name="TranslationToolsPage_AdminError" xml:space="preserve">
+  <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
     <value>翻译工具以管理员身份运行时无法使用。请重新启动应用程序。</value>
   </data>
   <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">

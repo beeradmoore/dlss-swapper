@@ -40,7 +40,7 @@ public class SettingsPageModelTranslationProperties : LocalizedViewModelBase
     public string YourCurrentLogfileText => ResourceHelper.GetString("SettingsPage_YourCurrentLogFile");
 
     [TranslationProperty]
-    public string OpenTranslationToolsText => ResourceHelper.GetString("SettingsPage_OpenTranslationTools");
+    public string OpenTranslationToolboxText => ResourceHelper.GetString("SettingsPage_OpenTranslationToolbox");
 
     [TranslationProperty]
     public string ThemeLightText => ResourceHelper.GetString("SettingsPage_ThemeLight");

@@ -380,9 +380,9 @@ public partial class SettingsPageModel : ObservableObject
     }
 
     [RelayCommand]
-    void OpenTranslationTools()
+    void OpenTranslationToolbox()
     {
-        var translationToolsWindow = new TranslationToolsWindow();
-        App.CurrentApp.WindowManager.ShowWindow(translationToolsWindow);
+        var translationToolboxWindow = new TranslationToolboxWindow();
+        App.CurrentApp.WindowManager.ShowWindow(translationToolboxWindow);
     }
 }

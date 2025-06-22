@@ -17,17 +17,17 @@ namespace DLSS_Swapper;
 /// <summary>
 /// An empty window that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class TranslationToolsWindow : Window
+public sealed partial class TranslationToolboxWindow : Window
 {
-    public TranslationToolsWindowModel ViewModel { get; private set; }
+    public TranslationToolboxWindowModel ViewModel { get; private set; }
 
-    public TranslationToolsWindow()
+    public TranslationToolboxWindow()
     {
         InitializeComponent();
 
         AppWindow.SetIcon("Assets\\icon.ico");
 
-        ViewModel = new TranslationToolsWindowModel(this);
+        ViewModel = new TranslationToolboxWindowModel(this);
 
         // Kick them out early if they are running as admin so we don't have to worry about the export data.
         if (Environment.IsPrivilegedProcess)
@@ -40,7 +40,7 @@ public sealed partial class TranslationToolsWindow : Window
                     {
                         Title = ResourceHelper.GetString("General_Error"),
                         DefaultButton = ContentDialogButton.Close,
-                        Content = ResourceHelper.GetString("TranslationToolsPage_AdminError"),
+                        Content = ResourceHelper.GetString("TranslationToolboxPage_AdminError"),
                         CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     };
                     await dialog.ShowAsync();

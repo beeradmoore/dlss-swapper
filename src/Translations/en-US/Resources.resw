@@ -239,8 +239,8 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
     <value>Add Ignored Path</value>
   </data>
-  <data name="SettingsPage_OpenTranslationTools" xml:space="preserve">
-    <value>Open translation tools</value>
+  <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
+    <value>Open translation toolbox</value>
   </data>
   <data name="DllPath" xml:space="preserve">
     <value>DLL Path</value>
@@ -457,13 +457,13 @@ Only import dlls from sources you trust.</value>
   <data name="General_Publish" xml:space="preserve">
     <value>Publish</value>
   </data>
-  <data name="TranslationToolsPage_Key" xml:space="preserve">
+  <data name="TranslationToolboxPage_Key" xml:space="preserve">
     <value>Key</value>
   </data>
-  <data name="TranslationToolsPage_Comment" xml:space="preserve">
+  <data name="TranslationToolboxPage_Comment" xml:space="preserve">
     <value>Comment</value>
   </data>
-  <data name="TranslationToolsPage_NewTranslation" xml:space="preserve">
+  <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
     <value>New Translation</value>
   </data>
   <data name="GamePage_Notes" xml:space="preserve">
@@ -859,16 +859,16 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
     <value>"{0}" is an invalid file type</value>
   </data>
-  <data name="TranslationToolsPage_WindowTitle" xml:space="preserve">
-    <value>Translation Tools</value>
+  <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
+    <value>Translation Toolbox</value>
   </data>
-  <data name="TranslationToolsPage_ImportAsTranslation" xml:space="preserve">
+  <data name="TranslationToolboxPage_ImportAsTranslation" xml:space="preserve">
     <value>Import language as translation</value>
   </data>
-  <data name="TranslationToolsPage_SourceLanguage" xml:space="preserve">
+  <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
     <value>Source language</value>
   </data>
-  <data name="TranslationToolsPage_SourceTranslation" xml:space="preserve">
+  <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
     <value>Source translation</value>
   </data>
   <data name="AcknowledgementsPage_Title" xml:space="preserve">
@@ -880,35 +880,35 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="DllManager_MigratingDlls" xml:space="preserve">
     <value>Migrating DLLs</value>
   </data>
-  <data name="TranslationToolsPage_AdminError" xml:space="preserve">
+  <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
     <value>You can not use the translation tool while it is running as admin. Please restart the application.</value>
   </data>
 
-  <data name="TranslationToolsPage_ResetProgressTitle" xml:space="preserve">
+  <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
     <value>Reset progress and continue?</value>
   </data>
-  <data name="TranslationToolsPage_ResetProgressMessage" xml:space="preserve">
+  <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
     <value>This will reset your current translation progress. Are you sure you want to continue?</value>
   </data>
-  <data name="TranslationToolsPage_ResetProgressButton" xml:space="preserve">
+  <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
     <value>Reset and continue</value>
   </data>
-  <data name="TranslationToolsPage_NotValidTranslationFile" xml:space="preserve">
+  <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
     <value>Not a valid DLSS Swapper translation file.</value>
     <comment>Error that the json translation file the user opened is not valid.</comment>
   </data>
 
-  <data name="TranslationToolsPage_TranslationGuideButton" xml:space="preserve">
+  <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
     <value>Translation guide</value>
   </data>
 
-  <data name="TranslationToolsPage_ReloadApp" xml:space="preserve">
+  <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
     <value>Reload app</value>
   </data>
 
 
 
-  <data name="TranslationToolsPage_TranslationGuideMessage" xml:space="preserve">
+  <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
     <value>Your translation has been created. Please look at the DLSS Swapper translation guide as to what to do next with {0}.</value>
     <comment>Here {0} will be the filename of the translation file the user published.</comment>
   </data>
@@ -916,28 +916,28 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
 
 
 
-  <data name="TranslationToolsPage_LoadFailedMessage" xml:space="preserve">
+  <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
     <value>Could not load translation. Please see your error log for more information.</value>
   </data>
-  <data name="TranslationToolsPage_NoDataToSave" xml:space="preserve">
+  <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
     <value>No translation data was found to save.</value>
   </data>
-  <data name="TranslationToolsPage_NoDataToPublish" xml:space="preserve">
+  <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
     <value>No translation data was found to publish.</value>
   </data>
-  <data name="TranslationToolsPage_SaveFailedMessage" xml:space="preserve">
+  <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
     <value>Could not save translation. Please see your error log for more information.</value>
   </data>
-  <data name="TranslationToolsPage_PublishFailedMessage" xml:space="preserve">
+  <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
     <value>Could not publish translation. Please see your error log for more information.</value>
   </data>
-  <data name="TranslationToolsPage_TranslationProgress" xml:space="preserve">
+  <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
     <value>Translation progress</value>
   </data>
-  <data name="TranslationToolsPage_LoadExistingTranslation" xml:space="preserve">
+  <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
     <value>Load existing</value>
   </data>
-  <data name="TranslationToolsPage_SelectLanguageToLoad" xml:space="preserve">
+  <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
     <value>Select language to load</value>
   </data>
   <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">

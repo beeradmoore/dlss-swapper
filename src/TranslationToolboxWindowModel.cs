@@ -533,7 +533,7 @@ public partial class TranslationToolboxWindowModel : ObservableObject
 
                             using (var streamWriter = new StreamWriter(entryStream))
                             {
-                                streamWriter.WriteLine(@"""<?xml version=""1.0"" encoding=""utf-8""?>
+                                streamWriter.WriteLine(@"<?xml version=""1.0"" encoding=""utf-8""?>
 <root>
   <!--
     Microsoft ResX Schema
@@ -651,18 +651,18 @@ public partial class TranslationToolboxWindowModel : ObservableObject
   </resheader>
   <resheader name=""writer"">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>""");
+  </resheader>");
                                 foreach (var translationRow in TranslationRows)
                                 {
                                     if (string.IsNullOrWhiteSpace(translationRow.NewTranslation) == false)
                                     {
-                                        streamWriter.WriteLine(@$"""  <data name=""{translationRow.Key}"" xml:space=""preserve"">
+                                        streamWriter.WriteLine(@$"  <data name=""{translationRow.Key}"" xml:space=""preserve"">
     <value>{translationRow.NewTranslation}</value>
-  </data>""");
+  </data>");
                                     }
                                 }
 
-                                streamWriter.WriteLine(" </root>");
+                                streamWriter.Write("</root>");
                                 streamWriter.Flush();
                             }
                         }

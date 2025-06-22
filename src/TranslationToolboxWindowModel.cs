@@ -368,11 +368,46 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                 }
             }
 
+            // Remove en-US, you can't load this as an existing language.
+            var sourceLanguagesWithoutEnUS = new List<KeyValuePair<string, string>>(SourceLanguages);
+            var indexToRemove = -1;
+            for (var i = 0; i < sourceLanguagesWithoutEnUS.Count; ++i)
+            {
+                if (sourceLanguagesWithoutEnUS[i].Key == "en-US")
+                {
+                    indexToRemove = i;
+                    break;
+                }
+            }
+
+            if (indexToRemove >= 0)
+            {
+                sourceLanguagesWithoutEnUS.RemoveAt(indexToRemove);
+            }
+
+#if DEBUG
+            // Also remove LANG_HUNT
+            indexToRemove = -1;
+            for (var i = 0; i < sourceLanguagesWithoutEnUS.Count; ++i)
+            {
+                if (sourceLanguagesWithoutEnUS[i].Key == "LANG_HUNT")
+                {
+                    indexToRemove = i;
+                    break;
+                }
+            }
+
+            if (indexToRemove >= 0)
+            {
+                sourceLanguagesWithoutEnUS.RemoveAt(indexToRemove);
+            }
+#endif
+
             var comboBox = new ComboBox()
             {
-                ItemsSource = SourceLanguages,
+                ItemsSource = sourceLanguagesWithoutEnUS,
                 DisplayMemberPath = "Value",
-                SelectedItem = SourceLanguages[0],
+                SelectedItem = sourceLanguagesWithoutEnUS[0],
                 HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch,
                 HorizontalContentAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch,
             };
@@ -409,13 +444,27 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                     if (_translationRowsDictionary.TryGetValue(resourceMapKey, out var translationRow))
                     {
                         var resourceCandidate = _resourceMap.GetValue(resourceMapKey, resourceContext);
-                        if (resourceCandidate.IsDefault == false && string.IsNullOrWhiteSpace(resourceCandidate?.ValueAsString) == false)
+
+                        translationRow.NewTranslation = string.Empty;
+
+                        // Make sure there is a value before we start caring about it.
+                        if (string.IsNullOrWhiteSpace(resourceCandidate?.ValueAsString) == false)
                         {
-                            translationRow.NewTranslation = resourceCandidate.ValueAsString;
-                        }
-                        else
-                        {
-                            translationRow.NewTranslation = string.Empty;
+                            if (resourceCandidate.Qualifiers.Count == 0)
+                            {
+                                // this should never happen
+                            }
+                            else
+                            {
+                                // This should always just be 1 item, not more than 1, maybe?
+                                var qualifier = resourceCandidate.Qualifiers.First();
+
+                                // If the qualifier has a value of en-US, then we don't want to use it.
+                                if (qualifier.QualifierValue.Equals("EN-US", StringComparison.InvariantCultureIgnoreCase) == false)
+                                {
+                                    translationRow.NewTranslation = resourceCandidate.ValueAsString;
+                                }
+                            }
                         }
                     }
                 }

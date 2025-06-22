@@ -909,7 +909,7 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
 
 
   <data name="TranslationToolsPage_TranslationGuideMessage" xml:space="preserve">
-    <value>$"Your translation has been created. Please look at the DLSS Swapper translation guide as to what to do next with {0}.</value>
+    <value>Your translation has been created. Please look at the DLSS Swapper translation guide as to what to do next with {0}.</value>
     <comment>Here {0} will be the filename of the translation file the user published.</comment>
   </data>
 
@@ -959,7 +959,7 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
     <value>Exported DLLs: </value>
   </data>
   <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
-    <value>"No new DLLs"</value>
+    <value>No new DLLs</value>
   </data>
 
   <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">

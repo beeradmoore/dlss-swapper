@@ -42,6 +42,12 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="0" Spacing="8" HorizontalAlignment="Right">
 
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.HelpText, Mode=OneWay}" Command="{x:Bind ViewModel.OpenTranslationsGuideCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE897;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+                
                 <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.LoadExistingTranslationText, Mode=OneWay}" Command="{x:Bind ViewModel.LoadExistingTranslationCommand}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE8B5;" />

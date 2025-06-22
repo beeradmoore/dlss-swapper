@@ -31,6 +31,9 @@ public class TranslationToolsWindowModelTranslationProperties : LocalizedViewMod
     public string PublishText => ResourceHelper.GetString("General_Publish");
 
     [TranslationProperty]
+    public string HelpText => ResourceHelper.GetString("General_Help");
+        
+    [TranslationProperty]
     public string KeyText => ResourceHelper.GetString("TranslationToolsPage_Key");
 
     [TranslationProperty]

@@ -1,0 +1,48 @@
+name: 📑 Translation submission
+description: Submit a new translation file
+title: "[TRANSLATION] "
+labels: ["translation"]
+
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thank you for creating a translation! This issue is for those submitting a translation to the app, not a translation of the readme. As per the [translation guide](https://github.com/beeradmoore/dlss-swapper/wiki/Translation-Guide#submitting-translations) the preferred method for sending in translations is via a pull request. If you are unable to create a pull request please continue filling out the below. If you are creating a pull request you do not need to open this issue.
+
+- type: textarea
+  id: translation_file
+  attributes:
+    label: Translation file
+    placeholder: Drag and drop your published translation zip file here.
+  validations:
+    required: true
+
+- type: input
+  id: language_code
+  attributes:
+    label: Language code
+    placeholder: e.g. en-AU, ja-JP, pt-BR, etc.
+  validations:
+    required: true
+
+- type: input
+  id: language_name_eng
+  attributes:
+    label: Language name (as you want to see it in DLSS Swapper)
+    placeholder: e.g. English (Australia), Polish, etc.
+  validations:
+    required: true
+
+- type: input
+  id: language_name_native
+  attributes:
+    label: Language native name (as you want to see it in DLSS Swapper)
+    placeholder: e.g. 简体中文, etc.
+  validations:
+    required: true
+
+- type: textarea
+  id: comments
+  attributes:
+    label: Additional comments (optional)
+

@@ -1,1 +1,920 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
 
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcknowledgementsPage_Title" xml:space="preserve">
+    <value>Lisanslar ve Teşekkürler</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
+    <value>Aşağıdaki ayrıntıları kopyalamak için tıklayın</value>
+  </data>
+  <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
+    <value>Tanılama</value>
+  </data>
+  <data name="DllManager_AlreadyImported" xml:space="preserve">
+    <value>zaten içe aktarıldı)</value>
+  </data>
+  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
+    <value>manifest.json dosyası çözümlenemedi.</value>
+  </data>
+  <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
+    <value>İçe aktarma özelliği devre dışı, içe aktarma manifestosu yüklenemedi.</value>
+  </data>
+  <data name="DllManager_MigratingDlls" xml:space="preserve">
+    <value>DLL'ler Taşınıyor</value>
+  </data>
+  <data name="DllManager_UnknownTypeDll" xml:space="preserve">
+    <value>Bilinmeyen DLL türü.</value>
+  </data>
+  <data name="DllManager_UntrustedDll" xml:space="preserve">
+    <value>DLL, Windows tarafından güvenilir bulunmuyor.</value>
+  </data>
+  <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
+    <value>{0} DLL'i indirilemedi. Lütfen daha sonra tekrar deneyin veya indirme işleminin neden başarısız olduğunu görmek için günlüklerinizi  kontrol edin.</value>
+  </data>
+  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
+    <value>Dosya indirilemedi.</value>
+  </data>
+  <data name="DllRecord_Download" xml:space="preserve">
+    <value>İndir</value>
+  </data>
+  <data name="DllRecord_DownloadError" xml:space="preserve">
+    <value>İndirme Hatası</value>
+  </data>
+  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
+    <value>İndirilen dosya geçersizdi.</value>
+  </data>
+  <data name="DllRecord_Downloading" xml:space="preserve">
+    <value>İndiriliyor</value>
+  </data>
+  <data name="DllRecord_Imported" xml:space="preserve">
+    <value>İçe Aktarıldı</value>
+  </data>
+  <data name="DllRecord_RequiresDownload" xml:space="preserve">
+    <value>İndirme gerekli</value>
+  </data>
+  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
+    <value>DLL zip dosyası geçersizdi (içinde DLL bulunamadı).</value>
+  </data>
+  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
+    <value>DLSS Swapper başlatılamadı</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
+    <value>Lütfen DLSS Swapper GitHub deposunda </value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
+    <value>yeni bir sorun oluşturun</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
+    <value>ve ek bağlam bölümünde aşağıdaki bilgileri sağlayın.</value>
+  </data>
+  <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
+    <value>Başlatma başarısız</value>
+  </data>
+  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Oyun kütüphanesi {0} yüklenemedi</value>
+  </data>
+  <data name="GamePage_AddCustomCover" xml:space="preserve">
+    <value>Özel Kapak Ekle</value>
+  </data>
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
+    <value>Favorilere eklemek için tıklayın</value>
+  </data>
+  <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+    <value>"{0}" yolu bulunamadı.</value>
+  </data>
+  <data name="GamePage_CurrentDll" xml:space="preserve">
+    <value>Mevcut DLL</value>
+  </data>
+  <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
+    <value>"{0}" dosyası bulunamadı.</value>
+  </data>
+  <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
+    <value>DLL, {0} sürümüne sıfırlandı.</value>
+  </data>
+  <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
+    <value>İndirme başlatılıyor</value>
+  </data>
+  <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
+    <value>Lütfen değiştirmeden önce indirmenin tamamlanmasını bekleyin</value>
+  </data>
+  <data name="GamePage_Favorited" xml:space="preserve">
+    <value>Favorilere Eklendi</value>
+  </data>
+  <data name="GamePage_InstallPath" xml:space="preserve">
+    <value>Yükleme yolu</value>
+  </data>
+  <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
+    <value>"{0}" geçersiz bir dosya türüdür</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
+    <value>Bu başlık manuel olarak eklenmemiştir ve kaldırılamaz.</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
+    <value>"{0}" oyununu DLSS Swapper'dan kaldırmak istediğinizden emin misiniz? Bu işlem, daha önce değiştirilmiş olan DLSS dosyalarında herhangi bir değişiklik yapmayacaktır.</value>
+  </data>
+  <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
+    <value>Aşağıda bulunan birden fazla DLL gösterilmektedir. Tüm DLL'ler için bu işlemleri aynı anda yapacağımızdan, DLL'leri her zamanki gibi değiştirebilir ve geri yükleyebilirsiniz. Ancak, bu DLL'lerden hangisinin oyun tarafından kullanıldığını bilmediğimiz için gösterilen DLL sürümü, tespit edilen ilk DLL'e aittir.</value>
+  </data>
+  <data name="GamePage_MultipleDllsFound" xml:space="preserve">
+    <value>Birden Fazla DLL Bulundu</value>
+  </data>
+  <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
+    <value>Birden Fazla {0} DLL'i Bulundu</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
+    <value>Yeni DLL'leri indirmek için lütfen kütüphane sayfasına gidin.</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
+    <value>Hiç DLL Bulunamadı</value>
+  </data>
+  <data name="GamePage_Notes" xml:space="preserve">
+    <value>Notlar</value>
+  </data>
+  <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
+    <value>Bu oyun oynamaya hazır durumda değil.</value>
+  </data>
+  <data name="GamePage_OpenDllLocation" xml:space="preserve">
+    <value>DLL konumunu aç</value>
+  </data>
+  <data name="GamePage_OriginalDll" xml:space="preserve">
+    <value>Orijinal DLL</value>
+  </data>
+  <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
+    <value>{0} hala işleniyor. Lütfen açmadan önce yükleme göstergesinin tamamlanmasını bekleyin.</value>
+  </data>
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
+    <value>Orijinal DLL'i geri yükle</value>
+  </data>
+  <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
+    <value>{0} sürümünü seçin</value>
+  </data>
+  <data name="GamePage_StorageFileIsNull" xml:space="preserve">
+    <value>storageFile boş (null)</value>
+  </data>
+  <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
+    <value>Kapak resmi için yalnızca tek bir dosya sürükleyebilirsiniz</value>
+  </data>
+  <data name="GamesPage_AddGame" xml:space="preserve">
+    <value>Oyun Ekle</value>
+  </data>
+  <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+    <value>Aynı kütüphanedeki oyunları birlikte grupla</value>
+  </data>
+  <data name="GamesPage_Grouping" xml:space="preserve">
+    <value>Gruplama</value>
+  </data>
+  <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
+    <value>Değiştirilebilir öğesi olmayan oyunları gizle</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
+    <value>Kapak resmi için yalnızca tek bir dosya sürükleyebilirsiniz</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
+    <value>Oyunları manuel eklemek için bir not daha</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
+    <value>Bir sorun oluştu ve oyununuz şu anda eklenemedi. Lütfen bu sorunu bildirin.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
+    <value>Oyununuz eklenirken hata oluştu</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
+    <value><i>Dizinini</i> değil, <i>oyun</i> dizininizi seçmelisiniz.<br/><br/>Örneğin, oyununuz şu konumdaysa:<br/><b>C:\Program Files\MyGamesFolder\MyFavGame</b><br/><br/><b>MyGamesFolder</b> dizinini değil, <b>MyFavGame</b> dizinini seçmelisiniz.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
+    <value>DLSS Swapper, yüklü oyun kütüphanelerinizdeki oyunları otomatik olarak bulmalıdır. Eğer oyununuz listede yoksa, bunu engelleyen birkaç ayar olabilir. Lütfen şunları kontrol edin: Oyun listesi filtresinin "Değiştirilebilir öğesi olmayan oyunları gizle" olarak ayarlanmadığından emin olun. İlgili oyun kütüphanesinin ayarlarda etkinleştirildiğinden emin olun. Bunları kontrol etmenize rağmen oyununuz hala görünmüyorsa, bir hata olabilir. Gelecekte oyunlarınızı daha iyi tespit edebilmemiz ve bir düzeltme yapabilmemiz için sorunu GitHub depomuzda bildirirseniz memnun oluruz.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
+    <value>Oyunları manuel ekleme notu</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
+    <value>"{0}" yükleme yolu zaten mevcut ve tekrar eklenemez.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
+    <value>Oyun Klasörünü Seç</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
+    <value>Üst düzey dizin ekleme desteklenmiyor. Lütfen oyununuzun kök dizinini ekleyin.</value>
+  </data>
+  <data name="GamesPage_NewDlls" xml:space="preserve">
+    <value>Yeni DLL'ler</value>
+  </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Yeni DLL'ler Bulundu</value>
+  </data>
+  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
+    <value>Yeni GitHub sorunu oluştur</value>
+  </data>
+  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
+    <value>Oyunlarınız yüklenirken, DLSS Swapper manifestosunda bulunmayan bazı yeni DLL'ler keşfedildi.</value>
+  </data>
+  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
+    <value>(GitHub hesabı gereklidir)</value>
+  </data>
+  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
+    <value>Eğer düğme çalışmazsa buradan deneyin,</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
+    <value>Adım 4: Sorununuzu gönderin</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
+    <value>Adım 1: Yeni sorun oluşturun</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
+    <value>Adım 3: İçeriği kopyalayın</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
+    <value>Adım 2: Başlığı kopyalayın</value>
+  </data>
+  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
+    <value>Yardımınız için teşekkürler!</value>
+  </data>
+  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+    <value>DLL'leri göndermenize gerek yok. Sağladığınız bilgilere dayanarak onları biz bulacağız.</value>
+  </data>
+  <data name="GamesPage_Title" xml:space="preserve">
+    <value>Oyunlar</value>
+  </data>
+  <data name="GamesPage_ViewType" xml:space="preserve">
+    <value>Görünüm Türü</value>
+  </data>
+  <data name="GamesPage_ViewType_GridView" xml:space="preserve">
+    <value>Tablo Görünümü</value>
+  </data>
+  <data name="GamesPage_ViewType_ListView" xml:space="preserve">
+    <value>Liste Görünümü</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Özel kapak resmini kaldırmak istediğinizden emin misiniz?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Oyun Şu Anda İşleniyor</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Özel kapak kaldırılsın mı?</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>{0} URL'si için GOGCatalogResponse çözümlenemedi</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>{0} URL'si için GOGEmbedFilteredResponse çözümlenemedi</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>{0} URL'si için herhangi bir GOGEmbedFilteredProducts bulunamadı</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>{0} URL'si için herhangi bir GOGCatalogProduct bulunamadı</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>ubisoftConnectInstallsKey tespit edilemedi</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Kimlik ayarlanırken bilinmeyen Oyun Kütüphanesi {0}</value>
+  </data>
+  <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
+    <value>Bu uygulama yönetici ayrıcalıklarıyla çalışıyor.</value>
+  </data>
+  <data name="General_Apply" xml:space="preserve">
+    <value>Uygula</value>
+  </data>
+  <data name="General_Cancel" xml:space="preserve">
+    <value>İptal</value>
+  </data>
+  <data name="General_Close" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="General_Copy" xml:space="preserve">
+    <value>Kopyala</value>
+  </data>
+  <data name="General_Delete" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="General_DontShowAgain" xml:space="preserve">
+    <value>Tekrar gösterme</value>
+  </data>
+  <data name="General_Error" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="General_ErrorMessage" xml:space="preserve">
+    <value>Hata mesajı</value>
+  </data>
+  <data name="General_Export" xml:space="preserve">
+    <value>Dışa aktar</value>
+  </data>
+  <data name="General_ExportAll" xml:space="preserve">
+    <value>Tümünü Dışa Aktar</value>
+  </data>
+  <data name="General_Failed" xml:space="preserve">
+    <value>Başarısız</value>
+  </data>
+  <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
+    <value>Uygulamayı yönetici olarak çalıştırıyorsanız bu özellik desteklenmez.</value>
+  </data>
+  <data name="General_Filter" xml:space="preserve">
+    <value>Filtrele</value>
+  </data>
+  <data name="General_Help" xml:space="preserve">
+    <value>Yardım</value>
+  </data>
+  <data name="General_Import" xml:space="preserve">
+    <value>İçe Aktar</value>
+  </data>
+  <data name="General_Load" xml:space="preserve">
+    <value>Yükle</value>
+  </data>
+  <data name="General_Loading" xml:space="preserve">
+    <value>Yükleniyor</value>
+  </data>
+  <data name="General_Name" xml:space="preserve">
+    <value>Ad</value>
+  </data>
+  <data name="General_No" xml:space="preserve">
+    <value>Hayır</value>
+  </data>
+  <data name="General_None" xml:space="preserve">
+    <value>Hiçbiri</value>
+  </data>
+  <data name="General_Okay" xml:space="preserve">
+    <value>Tamam</value>
+  </data>
+  <data name="General_Oops" xml:space="preserve">
+    <value>Hay Aksi</value>
+  </data>
+  <data name="General_OpenFolder" xml:space="preserve">
+    <value>Klasörü aç</value>
+  </data>
+  <data name="General_Optional" xml:space="preserve">
+    <value>(isteğe bağlı)</value>
+  </data>
+  <data name="General_Options" xml:space="preserve">
+    <value>Seçenekler</value>
+  </data>
+  <data name="General_Publish" xml:space="preserve">
+    <value>Yayınla</value>
+  </data>
+  <data name="General_Refresh" xml:space="preserve">
+    <value>Yenile</value>
+  </data>
+  <data name="General_Remove" xml:space="preserve">
+    <value>Kaldır</value>
+  </data>
+  <data name="General_ReportIssue" xml:space="preserve">
+    <value>Sorun bildir</value>
+  </data>
+  <data name="General_Save" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="General_Search" xml:space="preserve">
+    <value>Ara</value>
+  </data>
+  <data name="General_Sorry" xml:space="preserve">
+    <value>Üzgünüz</value>
+  </data>
+  <data name="General_Success" xml:space="preserve">
+    <value>Başarılı</value>
+  </data>
+  <data name="General_Swap" xml:space="preserve">
+    <value>Değiştir</value>
+  </data>
+  <data name="General_Update" xml:space="preserve">
+    <value>Güncelle</value>
+  </data>
+  <data name="General_Version" xml:space="preserve">
+    <value>Sürüm</value>
+  </data>
+  <data name="General_Warning" xml:space="preserve">
+    <value>Uyarı</value>
+  </data>
+  <data name="General_Yes" xml:space="preserve">
+    <value>Evet</value>
+  </data>
+  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
+    <value>GitHub sürüm verileri yüklenemedi.</value>
+  </data>
+  <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
+    <value>Şu anda {0} sürümü yüklü.</value>
+  </data>
+  <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
+    <value>DLSS Swapper az önce güncellendi</value>
+  </data>
+  <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
+    <value>Güncelleme Mevcut</value>
+  </data>
+  <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
+    <value>Zaten indirildi.</value>
+  </data>
+  <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
+    <value>İçe aktarılan DLL'ler yüklenemedi</value>
+  </data>
+  <data name="LibraryPage_CouldntDownload" xml:space="preserve">
+    <value>Şu anda indirilemedi.</value>
+  </data>
+  <data name="LibraryPage_CouldntExportDll" xml:space="preserve">
+    <value>DLL'ler dışa aktarılamadı.</value>
+  </data>
+  <data name="LibraryPage_DeleteDll" xml:space="preserve">
+    <value>DLL'i Sil</value>
+  </data>
+  <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
+    <value>{0} v{1} silinsin mi?</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
+    <value>İndirme dosya boyutu</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
+    <value>Dosya açıklaması</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
+    <value>Dosya boyutu</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
+    <value>Hash</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
+    <value>Etiket</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
+    <value>{0} yeni indirme başlatıldı.</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
+    <value>İndirmeler başlatıldı</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
+    <value>Dışa Aktarılan DLL'ler:</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
+    <value>{0} adet DLL dışa aktarıldı.</value>
+  </data>
+  <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
+    <value>{0} DLL'i dışa aktarıldı.</value>
+  </data>
+  <data name="LibraryPage_FileNotFound" xml:space="preserve">
+    <value>Dosya bulunamadı.</value>
+  </data>
+  <data name="LibraryPage_Finished" xml:space="preserve">
+    <value>Tamamlandı</value>
+  </data>
+  <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
+    <value>Mevcut bir DLL kaydı olarak içe aktarıldı.</value>
+  </data>
+  <data name="LibraryPage_Importing" xml:space="preserve">
+    <value>İçe Aktarılıyor</value>
+  </data>
+  <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
+    <value>Bilgisayarınızdaki DLL'leri değiştirmek tehlikeli olabilir.
+
+Kötü amaçlı bir DLL'i bir oyuna yerleştirmek, Limewire'dan yeni indirdiğiniz Linking_park-_nUmB_mp3.exe dosyasını çalıştırmak kadar kötüdür.
+
+Yalnızca güvendiğiniz kaynaklardan DLL'leri içe aktarın.</value>
+  </data>
+  <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
+    <value>Dışa aktarılacak DLL bulunamadı.</value>
+  </data>
+  <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
+    <value>Dışa aktarılacak DLL kaydınız yok.</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
+    <value>İndirilecek yeni DLL yoktu.</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
+    <value>Yeni DLL Yok</value>
+  </data>
+  <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
+    <value>İşlenen DLL'ler:</value>
+  </data>
+  <data name="LibraryPage_Title" xml:space="preserve">
+    <value>Kütüphane</value>
+  </data>
+  <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
+    <value>{0} kaydı silinemiyor.</value>
+  </data>
+  <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
+    <value>DLL kayıtları güncellenemiyor.</value>
+  </data>
+  <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
+    <value>Zip dosyası herhangi bir DLL içermiyordu.</value>
+  </data>
+  <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
+    <value>Güncelleme deneniyor</value>
+  </data>
+  <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
+    <value>DLSS Swapper, manifesto dosyasını yükleyemedi. Şimdi kapanacak.</value>
+  </data>
+  <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
+    <value>DLSS Swapper Kapanmalı</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
+    <value>GitHub Sorunları</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
+    <value>manifest.json dosyasını bilgisayarınızdan veya internetten yükleyemedik.
+
+Bu durum devam ederse lütfen GitHub'daki sorun izleyicimizde bir rapor oluşturun.</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
+    <value>Manifestoyu güncelle</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
+    <value>DLSS sürümlerini değiştirmek hile olarak kabul edilmese de, oyun dizininizdeki dosyalar oyunun dağıtıldığı orijinal dosyalarla aynı değilse bazı hile koruma sistemleri bu durumdan hoşlanmayabilir.\n\nBu nedenle çok oyunculu oyunlarda dikkatli olmanızı öneririz.</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
+    <value>Çok oyunculu oyunlar için not</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
+    <value>Hala çalışmıyor</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
+    <value>Çalışıyor!</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
+    <value>Tarayıcı Testi</value>
+  </data>
+  <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
+    <value>Mevcut testi iptal et</value>
+  </data>
+  <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
+    <value>Test sonuçlarını kopyala</value>
+  </data>
+  <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
+    <value>Hata raporu oluştur</value>
+  </data>
+  <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
+    <value>Özel kullanıcı aracısı testi</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
+    <value>Özel kullanıcı aracısı ile DLSS Swapper içinden DLSS Swapper DLL'i indiriliyor</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
+    <value>UploadThing yansımasından DLSS DLL'i indiriliyor</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
+    <value>DLSS Swapper içinden google.com'a erişiliyor (genel internet bağlantısını test eder)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
+    <value>DLSS Swapper içinden bing.com'a erişiliyor (genel internet bağlantısını test eder)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
+    <value>DLSS Swapper içinden DLSS Swapper DLL'i indiriliyor</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
+    <value>Tarayıcıdan DLSS Swapper DLL'i indiriliyor</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
+    <value>Steam'den oyun kapağı indiriliyor</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
+    <value>Epic Game Store'dan oyun kapağı indiriliyor</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
+    <value>
+ 
+DLSS Swapper dosya sunucusundan oyun kapağı indiriliyor
+ 
+</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
+    <value>Alternatif DLSS Swapper dosya sunucusundan oyun kapağı indiriliyor</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
+    <value>DLSS Swapper dosya sunucusunun DNS sorgusu</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
+    <value>Tarayıcıda aç</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
+    <value>"Tarayıcıda aç" düğmesine tıklayın veya aşağıdaki bağlantıyı kopyalayıp tarayıcınıza yapıştırın. Tarayıcınızda bir dosya indiriyor mu?</value>
+  </data>
+  <data name="NetworkTesterPage_Results" xml:space="preserve">
+    <value>Sonuçlar</value>
+  </data>
+  <data name="NetworkTesterPage_RunTest" xml:space="preserve">
+    <value>Testi çalıştır</value>
+  </data>
+  <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
+    <value>Sağlanan kullanıcı aracısını (user agent) kullanın veya kendi seçtiğiniz özel bir tanesini girin.</value>
+  </data>
+  <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
+    <value>Ağ Test Aracı</value>
+  </data>
+  <data name="SettingsPage_About" xml:space="preserve">
+    <value>Hakkında
+</value>
+  </data>
+  <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
+    <value>Yoksayılan Yol Ekle</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
+    <value>Hata Ayıklama (Debug) DLL'lerine İzin Ver</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
+    <value>SDK'lar bazen ekranda ilave bilgilerin gösterilmesini sağlayan hata ayıklama (debug) DLL'leri yayınlar.</value>
+  </data>
+  <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
+    <value>DLL'ler, bir oyun klasörüne değiştirilmeden önce imzaları doğrulanarak Windows'ta güvenilir olup olmadıkları kontrol edilir. Bir DLL imza doğrulamasında başarısız olursa kullanılmaz. Bu ayarın kapalı tutulması önerilir.</value>
+  </data>
+  <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
+    <value>Bu yalnızca DLL seçici için geçerlidir, kütüphane sayfası için değil.</value>
+  </data>
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
+    <value>Günlük (log) dosyanız doğrudan DLSS Swapper'dan açılamadı. Lütfen manuel olarak açmayı deneyin.</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
+    <value>Yoksayılan {0} yolunu silmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
+    <value>Yoksayılan Yolu Sil</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
+    <value>DLSS Geliştirici Seçenekleri</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
+    <value>Konsol penceresine günlük kaydını etkinleştir</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
+    <value>Dosyaya günlük kaydını etkinleştir</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
+    <value>Tüm DLSS DLL'leri için etkin</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>Yalnızca hata ayıklama (debug) DLL'leri için etkin</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
+    <value>Ekranda gösterge göster</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
+    <value>Ayrıntılı günlük kaydı</value>
+  </data>
+  <data name="SettingsPage_GameLibraries" xml:space="preserve">
+    <value>Oyun Kütüphaneleri</value>
+  </data>
+  <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
+    <value>Genel sorun giderme kılavuzu</value>
+  </data>
+  <data name="SettingsPage_GiveFeedback" xml:space="preserve">
+    <value>Geri Bildirimde Bulun</value>
+  </data>
+  <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
+    <value>DLSS Swapper'da bir özellik önerebilir veya bir sorun bildirebilirsiniz</value>
+  </data>
+  <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
+    <value>Yoksayılan Yollar</value>
+  </data>
+  <data name="SettingsPage_Language" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
+    <value>{0} devre dışı</value>
+  </data>
+  <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
+    <value>0} etkin</value>
+  </data>
+  <data name="SettingsPage_Logging" xml:space="preserve">
+    <value>Günlük Kaydı</value>
+  </data>
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
+    <value>Yeni güncelleme mevcut değil.</value>
+  </data>
+  <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
+    <value>Teşekkürler</value>
+  </data>
+  <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
+    <value>Tanılama</value>
+  </data>
+  <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
+    <value>Ağ Test Aracı</value>
+  </data>
+  <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
+    <value>Çeviri araç kutusunu aç</value>
+  </data>
+  <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
+    <value>{0} yolu zaten yoksayılıyor.</value>
+  </data>
+  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
+    <value>Güvenilmeyenlere İzin Ver</value>
+  </data>
+  <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
+    <value>Güncellemeleri kontrol et</value>
+  </data>
+  <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
+    <value>Yalnızca İndirilen DLL'leri Göster</value>
+  </data>
+  <data name="SettingsPage_ThemeDark" xml:space="preserve">
+    <value>Koyu</value>
+  </data>
+  <data name="SettingsPage_ThemeLight" xml:space="preserve">
+    <value>Açık</value>
+  </data>
+  <data name="SettingsPage_ThemeMode" xml:space="preserve">
+    <value>Tema Modu</value>
+  </data>
+  <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
+    <value>Sistem ayarını kullan</value>
+  </data>
+  <data name="SettingsPage_Title" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="SettingsPage_Troubleshooting" xml:space="preserve">
+    <value>Sorun Giderme</value>
+  </data>
+  <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
+    <value>Mevcut günlük (log) dosyanız:</value>
+  </data>
+  <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
+    <value>Uygulama yönetici olarak çalışırken çeviri aracını kullanamazsınız. Lütfen uygulamayı yeniden başlatın.</value>
+  </data>
+  <data name="TranslationToolboxPage_Comment" xml:space="preserve">
+    <value>Yorum</value>
+  </data>
+  <data name="TranslationToolboxPage_ImportAsTranslation" xml:space="preserve">
+    <value>Dili çeviri olarak içe aktar</value>
+  </data>
+  <data name="TranslationToolboxPage_Key" xml:space="preserve">
+    <value>Anahtar</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
+    <value>Mevcut Çeviriyi Yükle</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
+    <value>Çeviri yüklenemedi. Daha fazla bilgi için lütfen hata günlüğünüze (error log) bakın.</value>
+  </data>
+  <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
+    <value>Yeni çeviri</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
+    <value>Yayınlanacak çeviri verisi bulunamadı.</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
+    <value>Kaydedilecek çeviri verisi bulunamadı.</value>
+  </data>
+  <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
+    <value>Geçerli bir DLSS Swapper çeviri dosyası değil.</value>
+  </data>
+  <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
+    <value>Çeviri yayınlanamadı. Daha fazla bilgi için lütfen hata günlüğünüze (error log) bakın.</value>
+  </data>
+  <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
+    <value>Uygulamayı yeniden yükle</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
+    <value>Sıfırla ve devam et</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
+    <value>Bu, mevcut çeviri ilerlemenizi sıfırlayacaktır. Devam etmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
+    <value>İlerleme sıfırlansın ve devam edilsin mi?</value>
+  </data>
+  <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
+    <value>Çeviri kaydedilemedi. Daha fazla bilgi için lütfen hata günlüğünüze (error log) bakın.</value>
+  </data>
+  <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
+    <value>Yüklenecek dili seçin</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
+    <value>Kaynak dil</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
+    <value>Kaynak çeviri</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
+    <value>Çeviri kılavuzu</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
+    <value>Çeviriniz oluşturuldu. {0} ile bundan sonra ne yapacağınızı öğrenmek için lütfen DLSS Swapper çeviri kılavuzuna bakın.</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
+    <value>Çeviri ilerlemesi</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
+    <value>Kaydetmeden kapat</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
+    <value>Kaydedilmemiş çeviri değişiklikleriniz olabilir. Bu pencereyi kapatırsanız bu değişiklikler kaybolacaktır.</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
+    <value>Kaydedilmemiş çeviri değişiklikleri</value>
+  </data>
+  <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
+    <value>Çeviri Araç Kutusu</value>
+  </data>
+</root>

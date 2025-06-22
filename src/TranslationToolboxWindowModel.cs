@@ -185,7 +185,7 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                 var dialog = new EasyContentDialog(window.Content.XamlRoot)
                 {
                     Title = ResourceHelper.GetString("TranslationToolboxPage_ResetProgressTitle"),
-                    DefaultButton = ContentDialogButton.Close,
+                    DefaultButton = ContentDialogButton.Primary,
                     Content = ResourceHelper.GetString("TranslationToolboxPage_ResetProgressMessage"),
                     PrimaryButtonText = ResourceHelper.GetString("TranslationToolboxPage_ResetProgressButton"),
                     CloseButtonText = ResourceHelper.GetString("General_Cancel"),
@@ -383,7 +383,7 @@ public partial class TranslationToolboxWindowModel : ObservableObject
             var loadExistingDialog = new EasyContentDialog(window.Content.XamlRoot)
             {
                 Title = ResourceHelper.GetString("TranslationToolboxPage_SelectLanguageToLoad"),
-                DefaultButton = ContentDialogButton.Close,
+                DefaultButton = ContentDialogButton.Primary,
                 PrimaryButtonText = ResourceHelper.GetString("General_Load"),
                 Content = comboBox,
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),

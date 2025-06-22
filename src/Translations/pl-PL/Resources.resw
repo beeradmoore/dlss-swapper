@@ -165,12 +165,6 @@
   <data name="DllRecord_RequiresDownload" xml:space="preserve">
     <value>Wymaga pobrania</value>
   </data>
-  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
-    <value>Włączone dla wszystkich bibliotek DLSS DLL</value>
-  </data>
-  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
-    <value>Włączone tylko dla debugowania bibliotek DLSS DLL</value>
-  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>Nie udało się uruchomić DLSS Swapper</value>
   </data>
@@ -263,6 +257,12 @@
   </data>
   <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
     <value>Znaleziono wiele plików DLL {0}</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
+    <value>Proszę przejść do zakładki z bibliotekami DLL aby pobrać nowe.</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
+    <value>Nie znaleziono bibliotek DLL</value>
   </data>
   <data name="GamePage_Notes" xml:space="preserve">
     <value>Notatki</value>
@@ -433,6 +433,9 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   </data>
   <data name="General_No" xml:space="preserve">
     <value>Wyłączone</value>
+  </data>
+  <data name="General_None" xml:space="preserve">
+    <value>Brak</value>
   </data>
   <data name="General_Okay" xml:space="preserve">
     <value>Ok</value>
@@ -665,15 +668,6 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>Tester Sieciowy</value>
   </data>
-  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
-    <value>Nie znaleziono bibliotek DLL</value>
-  </data>
-  <data name="General_None" xml:space="preserve">
-    <value>Brak</value>
-  </data>
-  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
-    <value>Proszę przejść do zakładki z bibliotekami DLL aby pobrać nowe.</value>
-  </data>
   <data name="SettingsPage_About" xml:space="preserve">
     <value>Informacje</value>
   </data>
@@ -700,6 +694,12 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
     <value>Zezwól na zapisywanie logów do pliku</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
+    <value>Włączone dla wszystkich bibliotek DLSS DLL</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>Włączone tylko dla debugowania bibliotek DLSS DLL</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
     <value>Pokaż indykator na ekranie</value>

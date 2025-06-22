@@ -168,12 +168,6 @@
   <data name="DllRecord_RequiresDownload" xml:space="preserve">
     <value>需要下载</value>
   </data>
-  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
-    <value>对所有的 DLSS 版本显示信息</value>
-  </data>
-  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
-    <value>仅对 DLSS Debug 版本显示信息</value>
-  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper 启动失败。</value>
   </data>
@@ -266,6 +260,12 @@
   </data>
   <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
     <value>发现多个 {0} DLL 文件</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
+    <value>请在 DLL 库 下载新的 DLL 文件。</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
+    <value>没有 DLL 文件</value>
   </data>
   <data name="GamePage_Notes" xml:space="preserve">
     <value>便签</value>
@@ -445,6 +445,9 @@
   </data>
   <data name="General_No" xml:space="preserve">
     <value>关闭</value>
+  </data>
+  <data name="General_None" xml:space="preserve">
+    <value>无</value>
   </data>
   <data name="General_Okay" xml:space="preserve">
     <value>好</value>
@@ -681,15 +684,6 @@
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>网络测试</value>
   </data>
-  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
-    <value>没有 DLL 文件</value>
-  </data>
-  <data name="General_None" xml:space="preserve">
-    <value>无</value>
-  </data>
-  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
-    <value>请在 DLL 库 下载新的 DLL 文件。</value>
-  </data>
   <data name="SettingsPage_About" xml:space="preserve">
     <value>关于</value>
   </data>
@@ -719,6 +713,12 @@
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
     <value>日志保存到文件</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
+    <value>对所有的 DLSS 版本显示信息</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>仅对 DLSS Debug 版本显示信息</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
     <value>在屏幕上显示信息</value>

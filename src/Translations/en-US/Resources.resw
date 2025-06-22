@@ -175,12 +175,6 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>DLL zip was invalid (no DLL found).</value>
   </data>
-  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
-    <value>Enabled for all DLSS DLLs</value>
-  </data>
-  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
-    <value>Enabled for debug DLSS DLLs only</value>
-  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper has failed to launch</value>
   </data>
@@ -474,6 +468,9 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="General_None" xml:space="preserve">
+    <value>None</value>
+  </data>
   <data name="General_Okay" xml:space="preserve">
     <value>Okay</value>
   </data>
@@ -739,9 +736,6 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>Network Tester</value>
   </data>
-  <data name="General_None" xml:space="preserve">
-    <value>None</value>
-  </data>
   <data name="SettingsPage_About" xml:space="preserve">
     <value>About</value>
   </data>
@@ -778,6 +772,12 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
     <value>Enable logging to file</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
+    <value>Enabled for all DLSS DLLs</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>Enabled for debug DLSS DLLs only</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
     <value>Show on-screen indicator</value>

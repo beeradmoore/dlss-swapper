@@ -59,7 +59,7 @@ public partial class TranslationToolboxWindowModel : ObservableObject
         }
 
         // Select this language based on the users language.
-        SelectedSourceLanguage = SourceLanguages.FirstOrDefault(x => x.Key == Settings.Instance.Language);
+        SelectedSourceLanguage = SourceLanguages.FirstOrDefault(x => x.Key == "en-US");
 
         // Load the comments from the en-US resw file. That is the only thing this file does.
         // Maybe in future comments should be translated? But not today.

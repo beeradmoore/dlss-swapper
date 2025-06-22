@@ -701,6 +701,6 @@ public partial class TranslationToolboxWindowModel : ObservableObject
     [RelayCommand]
     async Task OpenTranslationsGuideAsync()
     {
-        await Windows.System.Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/Translations"));
+        await Windows.System.Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/Translation-Guide"));
     }
 }

@@ -91,8 +91,8 @@ namespace DLSS_Swapper
             if (string.IsNullOrWhiteSpace(language))
             {
                 language = "en-US";
-                Settings.Instance.Language = language;
             }
+            Settings.Instance.Language = language;
 
             LanguageManager.Instance.ChangeLanguage(language);
 

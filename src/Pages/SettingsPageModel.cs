@@ -32,9 +32,9 @@ public partial class SettingsPageModel : ObservableObject
 
     public RefreshableObservableCollection<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; init; } = new RefreshableObservableCollection<DLSSOnScreenIndicatorSetting>()
     {
-        new DLSSOnScreenIndicatorSetting("None", 0),
-        new DLSSOnScreenIndicatorSetting("EnabledForDebugDlssDllOnly", 1),
-        new DLSSOnScreenIndicatorSetting("EnabledForAllDlssDlls", 1024)
+        new DLSSOnScreenIndicatorSetting("General_None", 0),
+        new DLSSOnScreenIndicatorSetting("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly", 1),
+        new DLSSOnScreenIndicatorSetting("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls", 1024)
     };
 
     public ObservableCollection<KeyValuePair<string, string>> Languages { get; init; } = new ObservableCollection<KeyValuePair<string, string>>();

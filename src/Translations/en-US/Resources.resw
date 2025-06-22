@@ -120,14 +120,8 @@
   <data name="AcknowledgementsPage_Title" xml:space="preserve">
     <value>Licences &amp; Acknowledgements</value>
   </data>
-  <data name="AddCover" xml:space="preserve">
-    <value>Add Cover</value>
-  </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>DLSS Swapper</value>
-  </data>
-  <data name="CouldNotDetermineImportPath" xml:space="preserve">
-    <value>Could not determine import path.</value>
   </data>
   <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
     <value>Click to copy below details</value>
@@ -152,9 +146,6 @@
   </data>
   <data name="DllManager_UntrustedDll" xml:space="preserve">
     <value>DLL is not trusted by Windows.</value>
-  </data>
-  <data name="DllPath" xml:space="preserve">
-    <value>DLL Path</value>
   </data>
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Could not download {0} DLL, please try again later or check your logs to see why the download failed.</value>
@@ -181,23 +172,14 @@
   <data name="DllRecord_RequiresDownload" xml:space="preserve">
     <value>Requires download</value>
   </data>
-  <data name="DllZipInvalidMultipleDllFound" xml:space="preserve">
-    <value>DLL zip was invalid (more than one DLL found).</value>
-  </data>
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>DLL zip was invalid (no DLL found).</value>
   </data>
-  <data name="EnabledForAllDlssDlls" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
     <value>Enabled for all DLSS DLLs</value>
   </data>
-  <data name="EnabledForDebugDlssDllOnly" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
     <value>Enabled for debug DLSS DLLs only</value>
-  </data>
-  <data name="ExportedDllsTemplate" xml:space="preserve">
-    <value>Exported {0} DLSS dll{1}.</value>
-  </data>
-  <data name="ExportErrorDueToDllsCountTemplate" xml:space="preserve">
-    <value>Could not export due to "{0}" having {1} dlls instead of 1.</value>
   </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper has failed to launch</value>
@@ -213,9 +195,6 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Failed to Launch</value>
-  </data>
-  <data name="Game" xml:space="preserve">
-    <value>Game</value>
   </data>
   <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
     <value>Are you sure you want to remove the custom cover image?</value>
@@ -562,9 +541,6 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
     <value>Update Available</value>
   </data>
-  <data name="ImportSystemCurrentlyBroken" xml:space="preserve">
-    <value>Import system is currently broken, but it is on the roadmap to be fixed.</value>
-  </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>Already downloaded.</value>
   </data>
@@ -763,14 +739,8 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>Network Tester</value>
   </data>
-  <data name="NoDllsFound" xml:space="preserve">
-    <value>No DLLs Found</value>
-  </data>
-  <data name="None" xml:space="preserve">
+  <data name="General_None" xml:space="preserve">
     <value>None</value>
-  </data>
-  <data name="PleaseNavigateLibraryToDownloadDlls" xml:space="preserve">
-    <value>Please go to the library page to download new DLLs.</value>
   </data>
   <data name="SettingsPage_About" xml:space="preserve">
     <value>About</value>

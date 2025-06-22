@@ -6,7 +6,7 @@ namespace DLSS_Swapper.Data;
 
 public class DLSSOnScreenIndicatorSetting : LocalizedViewModelBase
 {
-    public string LabelTranslationProperty { get; init; } = "None";
+    public string LabelTranslationProperty { get; init; } = "General_None";
 
     [TranslationProperty]
     public string Label => ResourceHelper.GetString(LabelTranslationProperty);

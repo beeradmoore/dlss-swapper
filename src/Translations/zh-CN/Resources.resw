@@ -117,14 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddCover" xml:space="preserve">
-    <value>添加艺术图</value>
-  </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>DLSS Swapper</value>
-  </data>
-  <data name="CouldNotDetermineImportPath" xml:space="preserve">
-    <value>无法确定导入路径。</value>
   </data>
   <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
     <value>点击复制以下详细信息</value>
@@ -150,9 +144,6 @@
   <data name="DllManager_UntrustedDll" xml:space="preserve">
     <value>当前 DLL 文件不被 Windows 受信任</value>
   </data>
-  <data name="DllPath" xml:space="preserve">
-    <value>DLL 文件路径。</value>
-  </data>
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>无法下载 {0} DLL 文件，请稍后再试，或查看日志以了解下载失败的原因。</value>
   </data>
@@ -177,23 +168,11 @@
   <data name="DllRecord_RequiresDownload" xml:space="preserve">
     <value>需要下载</value>
   </data>
-  <data name="DllZipInvalidMultipleDllFound" xml:space="preserve">
-    <value>DLL Zip 压缩包无效（包含了多个 DLL 文件）</value>
-  </data>
-  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
-    <value>DLL Zip 压缩包无效（未找到 DLL 文件）</value>
-  </data>
-  <data name="EnabledForAllDlssDlls" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
     <value>对所有的 DLSS 版本显示信息</value>
   </data>
-  <data name="EnabledForDebugDlssDllOnly" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
     <value>仅对 DLSS Debug 版本显示信息</value>
-  </data>
-  <data name="ExportedDllsTemplate" xml:space="preserve">
-    <value>导出了 {0} DLSS DLL 文件{1}。</value>
-  </data>
-  <data name="ExportErrorDueToDllsCountTemplate" xml:space="preserve">
-    <value>无法导出，因为 "{0}" 存在 {1} 个 DLL 而不是一个。</value>
   </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper 启动失败。</value>
@@ -209,9 +188,6 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>启动失败</value>
-  </data>
-  <data name="Game" xml:space="preserve">
-    <value>游戏库</value>
   </data>
   <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
     <value>您确定要删除自定义的艺术图吗？</value>
@@ -536,9 +512,6 @@
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
     <value>有一个可用的更新</value>
   </data>
-  <data name="ImportSystemCurrentlyBroken" xml:space="preserve">
-    <value>导入功能当前不可用，但已在修复计划中。</value>
-  </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>已下载。</value>
   </data>
@@ -708,13 +681,13 @@
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>网络测试</value>
   </data>
-  <data name="NoDllsFound" xml:space="preserve">
+  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
     <value>没有 DLL 文件</value>
   </data>
-  <data name="None" xml:space="preserve">
+  <data name="General_None" xml:space="preserve">
     <value>无</value>
   </data>
-  <data name="PleaseNavigateLibraryToDownloadDlls" xml:space="preserve">
+  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
     <value>请在 DLL 库 下载新的 DLL 文件。</value>
   </data>
   <data name="SettingsPage_About" xml:space="preserve">

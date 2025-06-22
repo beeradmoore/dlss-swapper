@@ -876,13 +876,13 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
     <value>Key</value>
   </data>
   <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
-    <value>Load existing</value>
+    <value>Load Existing</value>
   </data>
   <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
     <value>Could not load translation. Please see your error log for more information.</value>
   </data>
   <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
-    <value>New Translation</value>
+    <value>New translation</value>
   </data>
   <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
     <value>No translation data was found to publish.</value>

@@ -931,6 +931,15 @@ If this keeps happening please file an report in our issue tracker on GitHub.</v
   <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
     <value>Translation progress</value>
   </data>
+  <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
+    <value>Close without saving</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
+    <value>You possibly have unsaved translation changes. If you close this window these will be lost.</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
+    <value>Unsaved translation changes</value>
+  </data>
   <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
     <value>Translation Toolbox</value>
   </data>

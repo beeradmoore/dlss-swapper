@@ -165,20 +165,25 @@ public partial class TranslationToolboxWindowModel : ObservableObject
         ResourceHelper.UpdateFromLiveTranslations(TranslationRows);
     }
 
+    internal bool HasUnsavedChanges()
+    {
+        foreach (var translationRow in TranslationRows)
+        {
+            if (string.IsNullOrWhiteSpace(translationRow.NewTranslation) == false)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     [RelayCommand]
     async Task LoadAsync()
     {
         if (_weakWindow.TryGetTarget(out var window))
         {
-            var shouldPromptOverwrite = false;
-            foreach (var translationRow in TranslationRows)
-            {
-                if (string.IsNullOrWhiteSpace(translationRow.NewTranslation) == false)
-                {
-                    shouldPromptOverwrite = true;
-                    break;
-                }
-            }
+            var shouldPromptOverwrite = HasUnsavedChanges();
 
             if (shouldPromptOverwrite)
             {
@@ -343,15 +348,7 @@ public partial class TranslationToolboxWindowModel : ObservableObject
     {
         if (_weakWindow.TryGetTarget(out var window))
         {
-            var shouldPromptOverwrite = false;
-            foreach (var translationRow in TranslationRows)
-            {
-                if (string.IsNullOrWhiteSpace(translationRow.NewTranslation) == false)
-                {
-                    shouldPromptOverwrite = true;
-                    break;
-                }
-            }
+            var shouldPromptOverwrite = HasUnsavedChanges();
 
             if (shouldPromptOverwrite)
             {

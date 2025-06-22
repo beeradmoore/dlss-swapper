@@ -1,13 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using CommunityToolkit.WinUI.UI.Controls;
 using DLSS_Swapper.Helpers;
-using DLSS_Swapper.Language;
 using DLSS_Swapper.UserControls;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -50,10 +44,33 @@ public sealed partial class TranslationToolboxWindow : Window
         }
 
         ResourceHelper.TranslatorModeEnabled = true;
-        Closed += (sender, args) =>
+        Closed += TranslationToolboxWindow_Closed;
+    }
+
+    async void TranslationToolboxWindow_Closed(object sender, WindowEventArgs args)
+    {
+        if (ViewModel.HasUnsavedChanges() == true)
         {
-            ResourceHelper.TranslatorModeEnabled = false;
-        };
+            args.Handled = true;
+            var dialog = new EasyContentDialog(Content.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("TranslationToolboxPage_UnsavedChangesTitle"),
+                DefaultButton = ContentDialogButton.Close,
+                Content = ResourceHelper.GetString("TranslationToolboxPage_UnsavedChangesMessage"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+                PrimaryButtonText = ResourceHelper.GetString("TranslationToolboxPage_UnsavedChangesButton"),
+            };
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.None)
+            {
+                return;
+            }
+        }
+
+        ResourceHelper.TranslatorModeEnabled = false;
+
+        Closed -= TranslationToolboxWindow_Closed;
+        Close();
     }
 
 

@@ -7,7 +7,7 @@ body:
 - type: markdown
   attributes:
     value: |
-      Thank you for creating a translation! This issue is for those submitting a translation to the app, not a translation of the readme. As per the <a href="https://github.com/beeradmoore/dlss-swapper/wiki/Translation-Guide#submitting-translations" target="_blank">translation guide</a> the preferred method for sending in translations is via a pull request. If you are unable to create a pull request please continue filling out the below. If you are creating a pull request you do not need to open this issue.
+      Thank you for creating a translation! This issue is for those submitting a translation to the app, not a translation of the readme. As per the [translation guide](https://github.com/beeradmoore/dlss-swapper/wiki/Translation-Guide#submitting-translations) the preferred method for sending in translations is via a pull request. If you are unable to create a pull request please continue filling out the below. If you are creating a pull request you do not need to open this issue.
 
 - type: textarea
   id: translation_file

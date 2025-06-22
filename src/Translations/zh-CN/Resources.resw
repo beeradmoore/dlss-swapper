@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
     Microsoft ResX Schema
@@ -117,32 +117,230 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
-    <value>鸣谢</value>
-  </data>
   <data name="AddCover" xml:space="preserve">
     <value>添加艺术图</value>
   </data>
-  <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
-    <value>您只能选择一张图片</value>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>DLSS Swapper</value>
+  </data>
+  <data name="CouldNotDetermineImportPath" xml:space="preserve">
+    <value>无法确定导入路径。</value>
+  </data>
+  <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
+    <value>点击复制以下详细信息</value>
+  </data>
+  <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
+    <value>诊断系统/系统信息</value>
+  </data>
+  <data name="DllManager_AlreadyImported" xml:space="preserve">
+    <value>已导入。</value>
+  </data>
+  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
+    <value>无法加载 manifest.json 文件。</value>
+  </data>
+  <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
+    <value>导入功能已禁用，无法加载导入清单。</value>
+  </data>
+  <data name="DllManager_MigratingDlls" xml:space="preserve">
+    <value>正在迁移 DLL 文件</value>
+  </data>
+  <data name="DllManager_UnknownTypeDll" xml:space="preserve">
+    <value>DLL 文件的类型未知。</value>
+  </data>
+  <data name="DllManager_UntrustedDll" xml:space="preserve">
+    <value>当前 DLL 文件不被 Windows 受信任</value>
+  </data>
+  <data name="DllPath" xml:space="preserve">
+    <value>DLL 文件路径。</value>
+  </data>
+  <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
+    <value>无法下载 {0} DLL 文件，请稍后再试，或查看日志以了解下载失败的原因。</value>
+  </data>
+  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
+    <value>无法下载文件。</value>
+  </data>
+  <data name="DllRecord_Download" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="DllRecord_DownloadError" xml:space="preserve">
+    <value>下载错误</value>
+  </data>
+  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
+    <value>下载文件大小: </value>
+  </data>
+  <data name="DllRecord_Downloading" xml:space="preserve">
+    <value>下载中</value>
+  </data>
+  <data name="DllRecord_Imported" xml:space="preserve">
+    <value>已导入</value>
+  </data>
+  <data name="DllRecord_RequiresDownload" xml:space="preserve">
+    <value>需要下载</value>
+  </data>
+  <data name="DllZipInvalidMultipleDllFound" xml:space="preserve">
+    <value>DLL Zip 压缩包无效（包含了多个 DLL 文件）</value>
+  </data>
+  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
+    <value>DLL Zip 压缩包无效（未找到 DLL 文件）</value>
+  </data>
+  <data name="EnabledForAllDlssDlls" xml:space="preserve">
+    <value>对所有的 DLSS 版本显示信息</value>
+  </data>
+  <data name="EnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>仅对 DLSS Debug 版本显示信息</value>
+  </data>
+  <data name="ExportedDllsTemplate" xml:space="preserve">
+    <value>导出了 {0} DLSS DLL 文件{1}。</value>
+  </data>
+  <data name="ExportErrorDueToDllsCountTemplate" xml:space="preserve">
+    <value>无法导出，因为 "{0}" 存在 {1} 个 DLL 而不是一个。</value>
+  </data>
+  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
+    <value>DLSS Swapper 启动失败。</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
+    <value>请打开</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
+    <value>一个新的 issues</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
+    <value>在 DLSS Swapper 的 GitHub 仓库，并在“附加上下文”部分提供以下信息。</value>
+  </data>
+  <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
+    <value>启动失败</value>
+  </data>
+  <data name="Game" xml:space="preserve">
+    <value>游戏库</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>您确定要删除自定义的艺术图吗？</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>游戏正在处理</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>移除自定义艺术图？</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>GOG 目录数据解析加载失败：{0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>未能从 URL {0} 获取有效的 GOG 内容数据</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>无法从 URL {0} 加载任何 GOG 相关列表。</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>无法从 URL {0} 获取 GOG 的信息。</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>未找到 Ubisoft Connect 的安装路径。</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>设置 ID 时，发现未知的游戏平台 {0}。</value>
+  </data>
+  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>无法加载游戏库 {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>自定义艺术图</value>
   </data>
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
+    <value>添加收藏</value>
+  </data>
+  <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+    <value>无法找到路径 "{0}"。</value>
+  </data>
+  <data name="GamePage_CurrentDll" xml:space="preserve">
+    <value>当前的 DLL 文件。</value>
+  </data>
+  <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
+    <value>无法找到文件 "{0}"。</value>
+  </data>
+  <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
+    <value>DLL 已还原为原始版本： {0}.</value>
+  </data>
+  <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
+    <value>开始下载</value>
+  </data>
+  <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
+    <value>请等待 DLL 下载完成后再替换</value>
+  </data>
+  <data name="GamePage_Favorited" xml:space="preserve">
+    <value>已收藏</value>
+  </data>
+  <data name="GamePage_InstallPath" xml:space="preserve">
+    <value>安装路径</value>
+  </data>
+  <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
+    <value>"{0}" 无效的文件类型</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
+    <value>此标题不是手动添加的，无法删除。</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
+    <value>您确定要从 DLSS Swapper 删除 "{0}" 这不会影响已经替换的 DLL 文件。</value>
+  </data>
+  <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
+    <value>检测到多个 DLL 文件，您仍然可以和之前一样替换和还原 DLL 文件，因为我们会对所有 DLL 文件同时执行这些操作，但是，由于我们并不知道游戏使用了这些 DLL 文件中的哪一个，因此显示的 DLL 文件版本是检测到的第一个 DLL 文件的版本。</value>
+  </data>
+  <data name="GamePage_MultipleDllsFound" xml:space="preserve">
+    <value>发现多个 DLL 文件</value>
+  </data>
+  <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
+    <value>发现多个 {0} DLL 文件</value>
+  </data>
+  <data name="GamePage_Notes" xml:space="preserve">
+    <value>便签</value>
+  </data>
+  <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
+    <value>游戏当前未准备就绪</value>
+  </data>
+  <data name="GamePage_OpenDllLocation" xml:space="preserve">
+    <value>打开 DLL 文件路径</value>
+  </data>
+  <data name="GamePage_OriginalDll" xml:space="preserve">
+    <value>原始的 DLL 版本</value>
+  </data>
+  <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
+    <value>{0} 仍在处理中，请等待加载进度完成，然后再打开。</value>
+  </data>
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
+    <value>还原原始 DLL 版本</value>
+  </data>
+  <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
+    <value>选择 {0} 版本</value>
+  </data>
+  <data name="GamePage_StorageFileIsNull" xml:space="preserve">
+    <value>存储文件是空的</value>
+  </data>
+  <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
+    <value>您只能拖入单个文件作为封面。</value>
+  </data>
   <data name="GamesPage_AddGame" xml:space="preserve">
     <value>添加游戏</value>
   </data>
-  <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
-    <value>添加排除项</value>
+  <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+    <value>将不同平台的游戏分组显示</value>
   </data>
-  <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
-    <value>添加您的游戏时出错</value>
+  <data name="GamesPage_Grouping" xml:space="preserve">
+    <value>分组</value>
+  </data>
+  <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
+    <value>隐藏不支持替换 DLL 文件的游戏</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
+    <value>您只能选择一张图片</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
+    <value>关于手动添加游戏的另一个提示</value>
   </data>
   <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
     <value>出现了错误，您的游戏暂时无法添加，请报告此问题</value>
   </data>
-  <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
-    <value>关于手动添加游戏的另一个提示</value>
+  <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
+    <value>添加您的游戏时出错</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
     <value>您必须选择您的 &lt;i&gt;游戏&lt;/i&gt; 目录，而不是 &lt;i&gt;游戏平台&lt;/i&gt; 目录&lt;br/&gt;&lt;br/&gt;例如，您的游戏在：&lt;br/&gt;&lt;b&gt;"C:\Program Files\Steam\Steamapps\common\游戏目录&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;您需要选择 &lt;b&gt;游戏目录&lt;/b&gt; 而不是选择 &lt;b&gt;Steam 或 Steamapps&lt;/b&gt; 的目录。</value>
@@ -158,98 +356,194 @@
   <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
     <value>关于手动添加游戏的提示</value>
   </data>
-  <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
-    <value>已下载。</value>
+  <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
+    <value>当前路径 "{0}" 已经存在，因此无法再次添加。</value>
   </data>
-  <data name="DllManager_AlreadyImported" xml:space="preserve">
-    <value>已导入。</value>
+  <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
+    <value>选择游戏目录</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
+    <value>您似乎选择了错误的目录，请重新选择游戏的根目录。</value>
+  </data>
+  <data name="GamesPage_NewDlls" xml:space="preserve">
+    <value>发现新的 DLL !</value>
+  </data>
+  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
+    <value>创建一个新的 GitHub 问题报告。</value>
+  </data>
+  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
+    <value>在加载您的游戏时，我们发现了一些新的 DLL，这些 DLL 不在 DLSS Swapper 仓库清单中。</value>
+  </data>
+  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
+    <value>(GitHub 授权)</value>
+  </data>
+  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
+    <value>如果上方按钮按了无反应，请点击此链接,</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
+    <value>第四步：提交报告</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
+    <value>第一步：创建一个新的 issue</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
+    <value>第三步：复制正文</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
+    <value>第二步：复制标题</value>
+  </data>
+  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
+    <value>感谢您的帮助！</value>
+  </data>
+  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+    <value>请注意：您无需提交 DLL 文件，我们会根据您提交的报告信息查找新的 DLL</value>
+  </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>发现新的 DLL 文件</value>
+  </data>
+  <data name="GamesPage_Title" xml:space="preserve">
+    <value>游戏库</value>
+  </data>
+  <data name="GamesPage_ViewType" xml:space="preserve">
+    <value>视图类型</value>
+  </data>
+  <data name="GamesPage_ViewType_GridView" xml:space="preserve">
+    <value>网格视图</value>
+  </data>
+  <data name="GamesPage_ViewType_ListView" xml:space="preserve">
+    <value>列表视图</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>程序正在以管理员权限的方式运行</value>
   </data>
-  <data name="ApplicationTitle" xml:space="preserve">
-    <value>DLSS Swapper</value>
-  </data>
   <data name="General_Apply" xml:space="preserve">
     <value>应用</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>您确定要删除自定义的艺术图吗？</value>
-  </data>
-  <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
-    <value>检测到多个 DLL 文件，您仍然可以和之前一样替换和还原 DLL 文件，因为我们会对所有 DLL 文件同时执行这些操作，但是，由于我们并不知道游戏使用了这些 DLL 文件中的哪一个，因此显示的 DLL 文件版本是检测到的第一个 DLL 文件的版本。</value>
-  </data>
-  <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
-    <value>浏览器测试</value>
   </data>
   <data name="General_Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
-    <value>取消当前的测试</value>
-  </data>
-  <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
-    <value>点击复制以下详细信息</value>
-  </data>
-  <data name="GamePage_ClickToFavorite" xml:space="preserve">
-    <value>添加收藏</value>
-  </data>
   <data name="General_Close" xml:space="preserve">
     <value>关闭</value>
-  </data>
-  <data name="TranslationToolboxPage_Comment" xml:space="preserve">
-    <value>说明</value>
   </data>
   <data name="General_Copy" xml:space="preserve">
     <value>复制</value>
   </data>
-  <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
-    <value>复制测试输出</value>
+  <data name="General_Delete" xml:space="preserve">
+    <value>删除</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>GOG 目录数据解析加载失败：{0}</value>
+  <data name="General_DontShowAgain" xml:space="preserve">
+    <value>不再提示此信息。</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>未能从 URL {0} 获取有效的 GOG 内容数据</value>
+  <data name="General_Error" xml:space="preserve">
+    <value>错误</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>无法加载 manifest.json 文件。</value>
+  <data name="General_ErrorMessage" xml:space="preserve">
+    <value>错误信息</value>
   </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>未找到 Ubisoft Connect 的安装路径。</value>
+  <data name="General_Export" xml:space="preserve">
+    <value>导出</value>
   </data>
-  <data name="CouldNotDetermineImportPath" xml:space="preserve">
-    <value>无法确定导入路径。</value>
+  <data name="General_ExportAll" xml:space="preserve">
+    <value>全部导出</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
-    <value>无法下载 {0} DLL 文件，请稍后再试，或查看日志以了解下载失败的原因。</value>
+  <data name="General_Failed" xml:space="preserve">
+    <value>失败</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>无法下载文件。</value>
+  <data name="General_Filter" xml:space="preserve">
+    <value>过滤</value>
   </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>无法从 URL {0} 加载任何 GOG 相关列表。</value>
+  <data name="General_Help" xml:space="preserve">
+    <value>帮助</value>
   </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>无法从 URL {0} 获取 GOG 的信息。</value>
+  <data name="General_Import" xml:space="preserve">
+    <value>导入</value>
   </data>
-  <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
-    <value>无法找到文件 "{0}"。</value>
+  <data name="General_Load" xml:space="preserve">
+    <value>加载</value>
   </data>
-  <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
-    <value>无法找到路径 "{0}"。</value>
+  <data name="General_Loading" xml:space="preserve">
+    <value>正在加载</value>
   </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>无法加载游戏库 {0}</value>
+  <data name="General_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="General_No" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="General_Okay" xml:space="preserve">
+    <value>好</value>
+  </data>
+  <data name="General_Oops" xml:space="preserve">
+    <value>哎呀</value>
+  </data>
+  <data name="General_OpenFolder" xml:space="preserve">
+    <value>打开文件夹</value>
+  </data>
+  <data name="General_Optional" xml:space="preserve">
+    <value>(可选)</value>
+  </data>
+  <data name="General_Options" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="General_Publish" xml:space="preserve">
+    <value>发布</value>
+  </data>
+  <data name="General_Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="General_Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="General_ReportIssue" xml:space="preserve">
+    <value>报告问题</value>
+  </data>
+  <data name="General_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="General_Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="General_Sorry" xml:space="preserve">
+    <value>抱歉</value>
+  </data>
+  <data name="General_Success" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="General_Swap" xml:space="preserve">
+    <value>替换</value>
+  </data>
+  <data name="General_Update" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="General_Version" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="General_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="General_Yes" xml:space="preserve">
+    <value>开启</value>
   </data>
   <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
     <value>无法获取 GitHub 版本发布信息。</value>
   </data>
+  <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
+    <value>您当前有 {0} 已经安装.</value>
+  </data>
+  <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
+    <value>DLSS Swapper 已更新。</value>
+  </data>
+  <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
+    <value>有一个可用的更新</value>
+  </data>
+  <data name="ImportSystemCurrentlyBroken" xml:space="preserve">
+    <value>导入功能当前不可用，但已在修复计划中。</value>
+  </data>
+  <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
+    <value>已下载。</value>
+  </data>
   <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
     <value>无法加载导入的 DLL 文件。</value>
-  </data>
-  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
-    <value>无法直接从 DLSS Swapper 打开您的日志文件，请尝试手动打开。</value>
   </data>
   <data name="LibraryPage_CouldntDownload" xml:space="preserve">
     <value>目前无法下载。</value>
@@ -257,38 +551,111 @@
   <data name="LibraryPage_CouldntExportDll" xml:space="preserve">
     <value>无法导出 DLL 文件。</value>
   </data>
-  <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
-    <value>创建问题报告。</value>
-  </data>
-  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
-    <value>创建一个新的 GitHub 问题报告。</value>
-  </data>
-  <data name="GamePage_CurrentDll" xml:space="preserve">
-    <value>当前的 DLL 文件。</value>
-  </data>
-  <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
-    <value>您当前有 {0} 已经安装.</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>移除自定义艺术图？</value>
-  </data>
-  <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
-    <value>自定义代理测试</value>
-  </data>
-  <data name="General_Delete" xml:space="preserve">
-    <value>删除</value>
-  </data>
   <data name="LibraryPage_DeleteDll" xml:space="preserve">
     <value>删除 DLL</value>
   </data>
   <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
     <value>删除 {0} v{1}?</value>
   </data>
-  <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
-    <value>诊断系统/系统信息</value>
+  <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
+    <value>下载大小</value>
   </data>
-  <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
-    <value>诊断系统/系统信息</value>
+  <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
+    <value>文件描述</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
+    <value>文件大小</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
+    <value>Hash</value>
+  </data>
+  <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
+    <value>已导出 DLL 文件 {0}。</value>
+  </data>
+  <data name="LibraryPage_FileNotFound" xml:space="preserve">
+    <value>未能找到文件。</value>
+  </data>
+  <data name="LibraryPage_Finished" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
+    <value>已作为现有 DLL 记录导入。</value>
+  </data>
+  <data name="LibraryPage_Importing" xml:space="preserve">
+    <value>导入中</value>
+  </data>
+  <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
+    <value>手动导入 DLL 到您的电脑上是危险的操作
+
+            如果意外的将恶意 DLL 文件放入游戏，就像运行您刚从 LimeWire 下载的“Linking_park_-_nUmB_mp3.exe”一样危险。
+
+
+ 请只从您信任的来源导入 DLL 文件。</value>
+  </data>
+  <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
+    <value>您没有可导出的 DLL 记录。</value>
+  </data>
+  <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
+    <value>已处理的 DLL 文件：</value>
+  </data>
+  <data name="LibraryPage_Title" xml:space="preserve">
+    <value>DLL 库</value>
+  </data>
+  <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
+    <value>无法删除 {0} 条记录。</value>
+  </data>
+  <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
+    <value>无法更新 DLL 的记录。</value>
+  </data>
+  <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
+    <value>Zip 文件不包含任何 DLL。</value>
+  </data>
+  <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
+    <value>正在尝试更新</value>
+  </data>
+  <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
+    <value>DLSS Swapper 无法加载其清单文件，需要关闭。</value>
+  </data>
+  <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
+    <value>DLSS Swapper 需要关闭。</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
+    <value>GitHub issues</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
+    <value>我们无法从您的电脑或服务器中加载 manifest.json。
+
+如果这种问题继续发生，请在 GitHub 上的问题跟踪中提交报告。</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
+    <value>更新清单</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
+    <value>替换 DLSS 版本通常情况下不会被视为修改文件（即作弊），但如果您游戏目录中的文件与游戏新版的文件不一致，某些反作弊可能会尝试拦截游戏启动。\n\n因此，如果您玩的游戏是多人游戏且使用反作弊，请谨慎操作。</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
+    <value>欢迎使用 DLSS Swapper，请先阅读此内容</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
+    <value>无法下载</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
+    <value>下载正常</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
+    <value>浏览器测试</value>
+  </data>
+  <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
+    <value>取消当前的测试</value>
+  </data>
+  <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
+    <value>复制测试输出</value>
+  </data>
+  <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
+    <value>创建问题报告。</value>
+  </data>
+  <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
+    <value>自定义代理测试</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
     <value>使用代理在 DLSS Swap 中下载 DLSS Swap DLL 文件</value>
@@ -323,315 +690,11 @@
   <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
     <value>查询 DLSS Swapper 的 DNS 服务器地址</value>
   </data>
-  <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
-    <value>{0} 停用</value>
-  </data>
-  <data name="DllPath" xml:space="preserve">
-    <value>DLL 文件路径。</value>
-  </data>
-  <data name="DllZipInvalidMultipleDllFound" xml:space="preserve">
-    <value>DLL Zip 压缩包无效（包含了多个 DLL 文件）</value>
-  </data>
-  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
-    <value>DLL Zip 压缩包无效（未找到 DLL 文件）</value>
-  </data>
-  <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
-    <value>DLSS Swapper 无法加载其清单文件，需要关闭。</value>
-  </data>
-  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
-    <value>DLSS Swapper 启动失败。</value>
-  </data>
-  <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
-    <value>DLSS Swapper 需要关闭。</value>
-  </data>
-  <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
-    <value>DLSS Swapper 已更新。</value>
-  </data>
-  <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>替换 DLSS 版本通常情况下不会被视为修改文件（即作弊），但如果您游戏目录中的文件与游戏新版的文件不一致，某些反作弊可能会尝试拦截游戏启动。\n\n因此，如果您玩的游戏是多人游戏且使用反作弊，请谨慎操作。</value>
-  </data>
-  <data name="General_DontShowAgain" xml:space="preserve">
-    <value>不再提示此信息。</value>
-  </data>
-  <data name="DllRecord_Download" xml:space="preserve">
-    <value>下载</value>
-  </data>
-  <data name="DllRecord_DownloadError" xml:space="preserve">
-    <value>下载错误</value>
-  </data>
-  <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
-    <value>下载大小</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>下载文件大小: </value>
-  </data>
-  <data name="DllRecord_Downloading" xml:space="preserve">
-    <value>下载中</value>
-  </data>
-  <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
-    <value>{0} 启用</value>
-  </data>
-  <data name="EnabledForAllDlssDlls" xml:space="preserve">
-    <value>对所有的 DLSS 版本显示信息</value>
-  </data>
-  <data name="EnabledForDebugDlssDllOnly" xml:space="preserve">
-    <value>仅对 DLSS Debug 版本显示信息</value>
-  </data>
-  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
-    <value>日志保存到文件</value>
-  </data>
-  <data name="General_Error" xml:space="preserve">
-    <value>错误</value>
-  </data>
-  <data name="General_ErrorMessage" xml:space="preserve">
-    <value>错误信息</value>
-  </data>
-  <data name="General_Export" xml:space="preserve">
-    <value>导出</value>
-  </data>
-  <data name="General_ExportAll" xml:space="preserve">
-    <value>全部导出</value>
-  </data>
-  <data name="ExportedDllsTemplate" xml:space="preserve">
-    <value>导出了 {0} DLSS DLL 文件{1}。</value>
-  </data>
-  <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
-    <value>已导出 DLL 文件 {0}。</value>
-  </data>
-  <data name="ExportErrorDueToDllsCountTemplate" xml:space="preserve">
-    <value>无法导出，因为 "{0}" 存在 {1} 个 DLL 而不是一个。</value>
-  </data>
-  <data name="General_Failed" xml:space="preserve">
-    <value>失败</value>
-  </data>
-  <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
-    <value>启动失败</value>
-  </data>
-  <data name="GamePage_Favorited" xml:space="preserve">
-    <value>已收藏</value>
-  </data>
-  <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
-    <value>文件描述</value>
-  </data>
-  <data name="LibraryPage_FileNotFound" xml:space="preserve">
-    <value>未能找到文件。</value>
-  </data>
-  <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
-    <value>文件大小</value>
-  </data>
-  <data name="General_Filter" xml:space="preserve">
-    <value>过滤</value>
-  </data>
-  <data name="LibraryPage_Finished" xml:space="preserve">
-    <value>已完成</value>
-  </data>
-  <data name="Game" xml:space="preserve">
-    <value>游戏库</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>游戏正在处理</value>
-  </data>
-  <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
-    <value>游戏当前未准备就绪</value>
-  </data>
-  <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
-    <value>{0} 仍在处理中，请等待加载进度完成，然后再打开。</value>
-  </data>
-  <data name="GamesPage_Title" xml:space="preserve">
-    <value>游戏库</value>
-  </data>
-  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
-    <value>(GitHub 授权)</value>
-  </data>
-  <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
-    <value>GitHub issues</value>
-  </data>
-  <data name="GamesPage_ViewType_GridView" xml:space="preserve">
-    <value>网格视图</value>
-  </data>
-  <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
-    <value>将不同平台的游戏分组显示</value>
-  </data>
-  <data name="GamesPage_Grouping" xml:space="preserve">
-    <value>分组</value>
-  </data>
-  <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
-    <value>Hash</value>
-  </data>
-  <data name="General_Help" xml:space="preserve">
-    <value>帮助</value>
-  </data>
-  <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
-    <value>隐藏不支持替换 DLL 文件的游戏</value>
-  </data>
-  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
-    <value>如果上方按钮按了无反应，请点击此链接,</value>
-  </data>
-  <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
-    <value>排除目录</value>
-  </data>
-  <data name="General_Import" xml:space="preserve">
-    <value>导入</value>
-  </data>
-  <data name="DllRecord_Imported" xml:space="preserve">
-    <value>已导入</value>
-  </data>
-  <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
-    <value>已作为现有 DLL 记录导入。</value>
-  </data>
-  <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
-    <value>导入功能已禁用，无法加载导入清单。</value>
-  </data>
-  <data name="LibraryPage_Importing" xml:space="preserve">
-    <value>导入中</value>
-  </data>
-  <data name="ImportSystemCurrentlyBroken" xml:space="preserve">
-    <value>导入功能当前不可用，但已在修复计划中。</value>
-  </data>
-  <data name="GamePage_InstallPath" xml:space="preserve">
-    <value>安装路径</value>
-  </data>
-  <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
-    <value>当前路径 "{0}" 已经存在，因此无法再次添加。</value>
-  </data>
-  <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
-    <value>"{0}" 无效的文件类型</value>
-  </data>
-  <data name="LibraryPage_Title" xml:space="preserve">
-    <value>DLL 库</value>
-  </data>
-  <data name="GamesPage_ViewType_ListView" xml:space="preserve">
-    <value>列表视图</value>
-  </data>
-  <data name="General_Load" xml:space="preserve">
-    <value>加载</value>
-  </data>
-  <data name="General_Loading" xml:space="preserve">
-    <value>正在加载</value>
-  </data>
-  <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
-    <value>手动导入 DLL 到您的电脑上是危险的操作
-
-            如果意外的将恶意 DLL 文件放入游戏，就像运行您刚从 LimeWire 下载的“Linking_park_-_nUmB_mp3.exe”一样危险。
-
-
- 请只从您信任的来源导入 DLL 文件。</value>
-  </data>
-  <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
-    <value>我们无法从您的电脑或服务器中加载 manifest.json。
-
-如果这种问题继续发生，请在 GitHub 上的问题跟踪中提交报告。</value>
-  </data>
-  <data name="DllManager_MigratingDlls" xml:space="preserve">
-    <value>正在迁移 DLL 文件</value>
-  </data>
-  <data name="GamePage_MultipleDllsFound" xml:space="preserve">
-    <value>发现多个 DLL 文件</value>
-  </data>
-  <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
-    <value>发现多个 {0} DLL 文件</value>
-  </data>
-  <data name="General_Name" xml:space="preserve">
-    <value>名称</value>
-  </data>
-  <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
-    <value>网络测试</value>
-  </data>
-  <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
-    <value>网络测试</value>
-  </data>
-  <data name="GamesPage_NewDlls" xml:space="preserve">
-    <value>发现新的 DLL !</value>
-  </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>发现新的 DLL 文件</value>
-  </data>
-  <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
-    <value>新翻译</value>
-  </data>
-  <data name="NoDllsFound" xml:space="preserve">
-    <value>没有 DLL 文件</value>
-  </data>
-  <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
-    <value>您没有可导出的 DLL 记录。</value>
-  </data>
-  <data name="None" xml:space="preserve">
-    <value>无</value>
-  </data>
-  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
-    <value>当前已是最新版本。</value>
-  </data>
-  <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
-    <value>欢迎使用 DLSS Swapper，请先阅读此内容</value>
-  </data>
-  <data name="GamePage_Notes" xml:space="preserve">
-    <value>便签</value>
-  </data>
-  <data name="General_Okay" xml:space="preserve">
-    <value>好</value>
-  </data>
-  <data name="General_Oops" xml:space="preserve">
-    <value>哎呀</value>
-  </data>
-  <data name="GamePage_OpenDllLocation" xml:space="preserve">
-    <value>打开 DLL 文件路径</value>
-  </data>
-  <data name="General_OpenFolder" xml:space="preserve">
-    <value>打开文件夹</value>
-  </data>
   <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
     <value>打开您的浏览器</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
     <value>点击 “在浏览器中打开”按钮，或将以下链接复制并粘贴到浏览器中，检查您的浏览器是否正在下载文件？</value>
-  </data>
-  <data name="General_Optional" xml:space="preserve">
-    <value>(可选)</value>
-  </data>
-  <data name="General_Options" xml:space="preserve">
-    <value>选项</value>
-  </data>
-  <data name="GamePage_OriginalDll" xml:space="preserve">
-    <value>原始的 DLL 版本</value>
-  </data>
-  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
-    <value>还原原始 DLL 版本</value>
-  </data>
-  <data name="PleaseNavigateLibraryToDownloadDlls" xml:space="preserve">
-    <value>请在 DLL 库 下载新的 DLL 文件。</value>
-  </data>
-  <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
-    <value>请打开</value>
-  </data>
-  <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
-    <value>一个新的 issues</value>
-  </data>
-  <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
-    <value>在 DLSS Swapper 的 GitHub 仓库，并在“附加上下文”部分提供以下信息。</value>
-  </data>
-  <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
-    <value>已处理的 DLL 文件：</value>
-  </data>
-  <data name="General_Publish" xml:space="preserve">
-    <value>发布</value>
-  </data>
-  <data name="General_Refresh" xml:space="preserve">
-    <value>刷新</value>
-  </data>
-  <data name="General_Remove" xml:space="preserve">
-    <value>移除</value>
-  </data>
-  <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
-    <value>您确定要从 DLSS Swapper 删除 "{0}" 这不会影响已经替换的 DLL 文件。</value>
-  </data>
-  <data name="General_ReportIssue" xml:space="preserve">
-    <value>报告问题</value>
-  </data>
-  <data name="DllRecord_RequiresDownload" xml:space="preserve">
-    <value>需要下载</value>
-  </data>
-  <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
-    <value>DLL 已还原为原始版本： {0}.</value>
   </data>
   <data name="NetworkTesterPage_Results" xml:space="preserve">
     <value>测试详情</value>
@@ -639,23 +702,26 @@
   <data name="NetworkTesterPage_RunTest" xml:space="preserve">
     <value>开始测试</value>
   </data>
-  <data name="General_Save" xml:space="preserve">
-    <value>保存</value>
+  <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
+    <value>使用提供的代理或输入自定义的用户代理。</value>
   </data>
-  <data name="General_Search" xml:space="preserve">
-    <value>搜索</value>
+  <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
+    <value>网络测试</value>
   </data>
-  <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
-    <value>选择游戏目录</value>
+  <data name="NoDllsFound" xml:space="preserve">
+    <value>没有 DLL 文件</value>
   </data>
-  <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
-    <value>选择 {0} 版本</value>
+  <data name="None" xml:space="preserve">
+    <value>无</value>
   </data>
-  <data name="SettingsPage_Title" xml:space="preserve">
-    <value>设置</value>
+  <data name="PleaseNavigateLibraryToDownloadDlls" xml:space="preserve">
+    <value>请在 DLL 库 下载新的 DLL 文件。</value>
   </data>
   <data name="SettingsPage_About" xml:space="preserve">
     <value>关于</value>
+  </data>
+  <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
+    <value>添加排除项</value>
   </data>
   <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
     <value>允许 Debug DLL 文件</value>
@@ -663,23 +729,29 @@
   <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
     <value>SDK 有时会发布调试 DLL 文件，允许文件在屏幕上显示额外的调试信息。</value>
   </data>
-  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
-    <value>允许不受信任的文件</value>
-  </data>
   <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
     <value>在将 DLL 文件替换到游戏文件夹之前，Windows 会通过验证签名来检查其是否受信任，如果 DLL 文件未能通过签名验证，则不会被使用，建议保持此功能关闭。</value>
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>在替换 DLL 时，仅显示已经下载的文件，而不是所有不同版本，此选项不影响 DLL 库。</value>
   </data>
-  <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
-    <value>检查更新</value>
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
+    <value>无法直接从 DLSS Swapper 打开您的日志文件，请尝试手动打开。</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
     <value>DLSS 开发者选项</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
     <value>将日志输出到控制台窗口</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
+    <value>日志保存到文件</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
+    <value>在屏幕上显示信息</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
+    <value>详细日志</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>游戏平台</value>
@@ -693,20 +765,41 @@
   <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
     <value>您可以为 DLSS Swapper 上提交建议功能或报告问题。</value>
   </data>
+  <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
+    <value>排除目录</value>
+  </data>
   <data name="SettingsPage_Language" xml:space="preserve">
     <value>语言选择</value>
+  </data>
+  <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
+    <value>{0} 停用</value>
+  </data>
+  <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
+    <value>{0} 启用</value>
   </data>
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>日志记录</value>
   </data>
-  <data name="General_No" xml:space="preserve">
-    <value>关闭</value>
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
+    <value>当前已是最新版本。</value>
+  </data>
+  <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
+    <value>鸣谢</value>
+  </data>
+  <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
+    <value>诊断系统/系统信息</value>
+  </data>
+  <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
+    <value>网络测试</value>
+  </data>
+  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
+    <value>允许不受信任的文件</value>
+  </data>
+  <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
+    <value>检查更新</value>
   </data>
   <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
     <value>只显示已经下载的 DLL 文件</value>
-  </data>
-  <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
-    <value>在屏幕上显示信息</value>
   </data>
   <data name="SettingsPage_ThemeDark" xml:space="preserve">
     <value>深色</value>
@@ -720,121 +813,28 @@
   <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
     <value>跟随系统设置</value>
   </data>
+  <data name="SettingsPage_Title" xml:space="preserve">
+    <value>设置</value>
+  </data>
   <data name="SettingsPage_Troubleshooting" xml:space="preserve">
     <value>故障排除</value>
-  </data>
-  <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
-    <value>详细日志</value>
-  </data>
-  <data name="General_Yes" xml:space="preserve">
-    <value>开启</value>
   </data>
   <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
     <value>您的日志文件在：</value>
   </data>
-  <data name="General_Sorry" xml:space="preserve">
-    <value>抱歉</value>
+  <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
+    <value>翻译工具以管理员身份运行时无法使用。请重新启动应用程序。</value>
+  </data>
+  <data name="TranslationToolboxPage_Comment" xml:space="preserve">
+    <value>说明</value>
+  </data>
+  <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
+    <value>新翻译</value>
   </data>
   <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
     <value>当前语言</value>
   </data>
   <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
     <value>当前翻译</value>
-  </data>
-  <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
-    <value>开始下载</value>
-  </data>
-  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
-    <value>第四步：提交报告</value>
-  </data>
-  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
-    <value>第一步：创建一个新的 issue</value>
-  </data>
-  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
-    <value>第三步：复制正文</value>
-  </data>
-  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
-    <value>第二步：复制标题</value>
-  </data>
-  <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
-    <value>无法下载</value>
-  </data>
-  <data name="GamePage_StorageFileIsNull" xml:space="preserve">
-    <value>存储文件是空的</value>
-  </data>
-  <data name="General_Success" xml:space="preserve">
-    <value>完成</value>
-  </data>
-  <data name="General_Swap" xml:space="preserve">
-    <value>替换</value>
-  </data>
-  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
-    <value>感谢您的帮助！</value>
-  </data>
-  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
-    <value>此标题不是手动添加的，无法删除。</value>
-  </data>
-  <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
-    <value>您似乎选择了错误的目录，请重新选择游戏的根目录。</value>
-  </data>
-  <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
-    <value>翻译工具以管理员身份运行时无法使用。请重新启动应用程序。</value>
-  </data>
-  <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
-    <value>无法删除 {0} 条记录。</value>
-  </data>
-  <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
-    <value>无法更新 DLL 的记录。</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>设置 ID 时，发现未知的游戏平台 {0}。</value>
-  </data>
-  <data name="DllManager_UnknownTypeDll" xml:space="preserve">
-    <value>DLL 文件的类型未知。</value>
-  </data>
-  <data name="DllManager_UntrustedDll" xml:space="preserve">
-    <value>当前 DLL 文件不被 Windows 受信任</value>
-  </data>
-  <data name="General_Update" xml:space="preserve">
-    <value>更新</value>
-  </data>
-  <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
-    <value>正在尝试更新</value>
-  </data>
-  <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
-    <value>有一个可用的更新</value>
-  </data>
-  <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
-    <value>更新清单</value>
-  </data>
-  <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
-    <value>使用提供的代理或输入自定义的用户代理。</value>
-  </data>
-  <data name="General_Version" xml:space="preserve">
-    <value>版本</value>
-  </data>
-  <data name="GamesPage_ViewType" xml:space="preserve">
-    <value>视图类型</value>
-  </data>
-  <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
-    <value>请等待 DLL 下载完成后再替换</value>
-  </data>
-  <data name="General_Warning" xml:space="preserve">
-    <value>警告</value>
-  </data>
-  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
-    <value>在加载您的游戏时，我们发现了一些新的 DLL，这些 DLL 不在 DLSS Swapper 仓库清单中。</value>
-  </data>
-  <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
-    <value>下载正常</value>
-  </data>
-  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
-    <value>请注意：您无需提交 DLL 文件，我们会根据您提交的报告信息查找新的 DLL</value>
-  </data>
-  <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
-    <value>您只能拖入单个文件作为封面。</value>
-  </data>
-  <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
-    <value>Zip 文件不包含任何 DLL。</value>
   </data>
 </root>

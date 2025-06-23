@@ -47,6 +47,7 @@ public class LanguageManager
             "en-US",
             "pl-PL",
             "zh-CN",
+            "zh-TW",
 #if DEBUG
             "LANG_HUNT",
 #endif
@@ -63,7 +64,7 @@ public class LanguageManager
             "en-US" => "English (United States)",
             "pl-PL" => "Polish",
             "zh-CN" => "简体中文",
-
+            "zh-TW" => "繁體中文 (臺灣)",
             _ => languageKey,
         };
     }

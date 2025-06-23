@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CsvHelper;
+using CsvHelper.Configuration;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Language;
 using DLSS_Swapper.UserControls;
@@ -212,6 +214,7 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                 {
                     SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
                 };
+                fileOpenPicker.FileTypeFilter.Add(".csv");
                 fileOpenPicker.FileTypeFilter.Add(".json");
                 WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);
 
@@ -229,31 +232,71 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                     {
                         throw new System.Exception("Could not open stream for the selected path.");
                     }
-                    var loadedDictionary = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.DictionaryStringString);
-                    if (loadedDictionary is null)
+
+
+                    if (existingFile.Name.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))
                     {
-                        var dialog = new EasyContentDialog(window.Content.XamlRoot)
+                        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
                         {
-                            Title = ResourceHelper.GetString("General_Error"),
-                            DefaultButton = ContentDialogButton.Close,
-                            Content = ResourceHelper.GetString("TranslationToolboxPage_NotValidTranslationFile"),
-                            CloseButtonText = ResourceHelper.GetString("General_Close"),
+                            PrepareHeaderForMatch = args => args.Header.ToLower(),
                         };
-                        await dialog.ShowAsync();
-                        return;
+                        using (var reader = new StreamReader(stream))
+                        {
+                            using (var csv = new CsvReader(reader, config))
+                            {
+                                var loadedTranslationRows = csv.GetRecords<TranslationRow>().ToList();
+                                var loadedDictionary = new Dictionary<string, string>(loadedTranslationRows.Count);
+                                foreach (var loadedTranslationRow in loadedTranslationRows)
+                                {
+                                    if (string.IsNullOrWhiteSpace(loadedTranslationRow.NewTranslation) == false)
+                                    {
+                                        loadedDictionary[loadedTranslationRow.Key] = loadedTranslationRow.NewTranslation; //.Replace(@"\\", @"\");
+                                    }
+                                }
+                                foreach (var translationRow in TranslationRows)
+                                {
+                                    if (loadedDictionary.TryGetValue(translationRow.Key, out var translation))
+                                    {
+                                        translationRow.NewTranslation = translation;
+                                    }
+                                    else
+                                    {
+                                        translationRow.NewTranslation = string.Empty;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if ( existingFile.Name.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var loadedDictionary = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.DictionaryStringString);
+                        if (loadedDictionary is null)
+                        {
+                            var dialog = new EasyContentDialog(window.Content.XamlRoot)
+                            {
+                                Title = ResourceHelper.GetString("General_Error"),
+                                DefaultButton = ContentDialogButton.Close,
+                                Content = ResourceHelper.GetString("TranslationToolboxPage_NotValidTranslationFile"),
+                                CloseButtonText = ResourceHelper.GetString("General_Close"),
+                            };
+                            await dialog.ShowAsync();
+                            return;
+                        }
+
+                        foreach (var translationRow in TranslationRows)
+                        {
+                            if (loadedDictionary.TryGetValue(translationRow.Key, out var translation))
+                            {
+                                translationRow.NewTranslation = translation;
+                            }
+                            else
+                            {
+                                translationRow.NewTranslation = string.Empty;
+                            }
+                        }
                     }
 
-                    foreach (var translationRow in TranslationRows)
-                    {
-                        if (loadedDictionary.TryGetValue(translationRow.Key, out var translation))
-                        {
-                            translationRow.NewTranslation = translation;
-                        }
-                        else
-                        {
-                            translationRow.NewTranslation = string.Empty;
-                        }
-                    }
+                    
                     RecalculateTranslationProgress();
                 }
             }
@@ -306,8 +349,9 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                 var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
                 var savePicker = new FileSavePicker();
                 savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+                savePicker.FileTypeChoices.Add("csv", new List<string>() { ".csv" });
                 savePicker.FileTypeChoices.Add("json", new List<string>() { ".json" });
-                savePicker.SuggestedFileName = "dlss_swapper_translation.json";
+                savePicker.SuggestedFileName = "dlss_swapper_translation";
                 WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
                 var saveFile = await savePicker.PickSaveFileAsync();
 
@@ -325,7 +369,36 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                     {
                         throw new InvalidOperationException("Could not create fileStream for the selected path.");
                     }
-                    await JsonSerializer.SerializeAsync(fileStream, outputData, SourceGenerationContext.Default.DictionaryStringString);
+
+                    if (outputPath.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))
+                    {
+                        using (var streamWriter = new StreamWriter(fileStream, System.Text.Encoding.UTF8))
+                        {
+                            using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture))
+                            {
+
+                                var translationRows = new List<TranslationRow>(TranslationRows.Count);
+                                foreach (var originalTranslationRow in TranslationRows)
+                                {
+                                    var translationRow = new TranslationRow()
+                                    {
+                                        Key = originalTranslationRow.Key,
+                                        Comment = originalTranslationRow.Comment,
+                                        SourceTranslation = originalTranslationRow.SourceTranslation, //.Replace(@"\", @"\\"),
+                                        NewTranslation = originalTranslationRow.NewTranslation, //.Replace(@"\", @"\\"),
+                                    };
+                                    translationRows.Add(translationRow);
+                                }
+                                csv.WriteRecords(translationRows);
+                            }
+                        }
+                    }
+                    else if (outputPath.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+                    {
+                        await JsonSerializer.SerializeAsync(fileStream, outputData, SourceGenerationContext.Default.DictionaryStringString);
+
+                    }
+
                 }
             }
             catch (Exception ex)

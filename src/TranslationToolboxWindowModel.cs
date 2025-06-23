@@ -7,6 +7,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Helpers;
@@ -531,9 +532,7 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                                 throw new Exception("Could not create exported zip.");
                             }
 
-                            using (var streamWriter = new StreamWriter(entryStream))
-                            {
-                                streamWriter.WriteLine(@"<?xml version=""1.0"" encoding=""utf-8""?>
+                            var template = @"<?xml version=""1.0"" encoding=""utf-8""?>
 <root>
   <!--
     Microsoft ResX Schema
@@ -651,20 +650,28 @@ public partial class TranslationToolboxWindowModel : ObservableObject
   </resheader>
   <resheader name=""writer"">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>");
+  </resheader>
+</root>";
+                            var doc = XDocument.Parse(template);
+
+                            if (doc.Root is not null)
+                            {
                                 foreach (var translationRow in TranslationRows)
                                 {
                                     if (string.IsNullOrWhiteSpace(translationRow.NewTranslation) == false)
                                     {
-                                        streamWriter.WriteLine(@$"  <data name=""{translationRow.Key}"" xml:space=""preserve"">
-    <value>{translationRow.NewTranslation}</value>
-  </data>");
+                                        var newNode = new XElement("data",
+                                            new XAttribute("name", translationRow.Key),
+                                            new XAttribute(XNamespace.Xml + "space", "preserve"),
+                                            new XElement("value", translationRow.NewTranslation)
+                                        );
+                                        doc.Root.Add(newNode);
+
                                     }
                                 }
-
-                                streamWriter.Write("</root>");
-                                streamWriter.Flush();
                             }
+
+                            doc.Save(entryStream);
                         }
                     }
                 }

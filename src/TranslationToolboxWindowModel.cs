@@ -437,29 +437,15 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                 }
             }
 
-            // Remove en-US, you can't load this as an existing language.
-            var sourceLanguagesWithoutEnUS = new List<KeyValuePair<string, string>>(SourceLanguages);
-            var indexToRemove = -1;
-            for (var i = 0; i < sourceLanguagesWithoutEnUS.Count; ++i)
-            {
-                if (sourceLanguagesWithoutEnUS[i].Key == "en-US")
-                {
-                    indexToRemove = i;
-                    break;
-                }
-            }
+            var sourceLangauges = new List<KeyValuePair<string, string>>(SourceLanguages);
 
-            if (indexToRemove >= 0)
-            {
-                sourceLanguagesWithoutEnUS.RemoveAt(indexToRemove);
-            }
 
 #if DEBUG
-            // Also remove LANG_HUNT
-            indexToRemove = -1;
-            for (var i = 0; i < sourceLanguagesWithoutEnUS.Count; ++i)
+            // Remove LANG_HUNT
+            var indexToRemove = -1;
+            for (var i = 0; i < sourceLangauges.Count; ++i)
             {
-                if (sourceLanguagesWithoutEnUS[i].Key == "LANG_HUNT")
+                if (sourceLangauges[i].Key == "LANG_HUNT")
                 {
                     indexToRemove = i;
                     break;
@@ -468,15 +454,15 @@ public partial class TranslationToolboxWindowModel : ObservableObject
 
             if (indexToRemove >= 0)
             {
-                sourceLanguagesWithoutEnUS.RemoveAt(indexToRemove);
+                sourceLangauges.RemoveAt(indexToRemove);
             }
 #endif
 
             var comboBox = new ComboBox()
             {
-                ItemsSource = sourceLanguagesWithoutEnUS,
+                ItemsSource = sourceLangauges,
                 DisplayMemberPath = "Value",
-                SelectedItem = sourceLanguagesWithoutEnUS[0],
+                SelectedItem = sourceLangauges[0],
                 HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch,
                 HorizontalContentAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch,
             };
@@ -525,13 +511,21 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                             }
                             else
                             {
-                                // This should always just be 1 item, not more than 1, maybe?
-                                var qualifier = resourceCandidate.Qualifiers.First();
-
-                                // If the qualifier has a value of en-US, then we don't want to use it.
-                                if (qualifier.QualifierValue.Equals("EN-US", StringComparison.InvariantCultureIgnoreCase) == false)
+                                // Special case to allow en-US translations to be loaded.
+                                if (selectedLanguage.Key == "en-US")
                                 {
                                     translationRow.NewTranslation = resourceCandidate.ValueAsString;
+                                }
+                                else
+                                {
+                                    // This should always just be 1 item, not more than 1, maybe?
+                                    var qualifier = resourceCandidate.Qualifiers.First();
+
+                                    // If the qualifier has a value of en-US, then we don't want to use it.
+                                    if (qualifier.QualifierValue.Equals("EN-US", StringComparison.InvariantCultureIgnoreCase) == false)
+                                    {
+                                        translationRow.NewTranslation = resourceCandidate.ValueAsString;
+                                    }
                                 }
                             }
                         }

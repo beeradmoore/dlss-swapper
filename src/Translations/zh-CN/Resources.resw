@@ -301,7 +301,12 @@
     <value>您必须选择您的 <i> 游戏 </i> 目录，而不是 <i> 游戏平台 </i> 目录<br/><br/>例如，您的游戏在：<br/><b>"C:\Program Files\Steam\Steamapps\common\游戏目录</b><br/><br/>您需要选择 <b> 游戏目录 </b> 而不是选择 <b> Steam 或 Steamapps </b> 的目录。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
-    <value>通常情况下DLSS切换器会自动从已安装的游戏库中查找游戏，如果您已安装的游戏未出现在此列表，可能是某些设置导致了这一情况，请检查:- 主菜单游戏库的过滤选项 ""隐藏不支持替换DLL的游戏""- 设置中某个游戏平台检测是否启用如果您已经检查了以上所描述的内容，但您的游戏仍未显示在列表，则可能存在错误，如果您能报告此情况，我们将不胜感激，在我们的 GitHub 仓库中提交该问题，以便我们进行修复，并在将来更好地检测您的游戏。</value>
+    <value>通常情况下DLSS切换器会自动从已安装的游戏库中查找游戏，如果您已安装的游戏未出现在此列表，可能是某些设置导致了这一情况，请检查:
+
+- 主菜单游戏库的过滤选项 ""隐藏不支持替换DLL的游戏""
+- 设置中某个游戏平台检测是否启用
+
+如果您已经检查了以上所描述的内容，但您的游戏仍未显示在列表，则可能存在错误，如果您能报告此情况，我们将不胜感激，在我们的 GitHub 仓库中提交该问题，以便我们进行修复，并在将来更好地检测您的游戏。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
     <value>关于手动添加游戏的提示</value>
@@ -580,7 +585,11 @@
     <value>导入中</value>
   </data>
   <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
-    <value>手动导入DLL到您的电脑上是危险的操作            如果意外的将恶意DLL文件放入游戏，就像运行您刚从LimeWire下载的“Linking_park_-_nUmB_mp3.exe”一样危险。请只从您信任的来源导入DLL文件。</value>
+    <value>手动导入DLL到您的电脑上是危险的操作
+
+如果意外的将恶意DLL文件放入游戏，就像运行您刚从LimeWire下载的“Linking_park_-_nUmB_mp3.exe”一样危险。
+
+请只从您信任的来源导入DLL文件。</value>
   </data>
   <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
     <value>未找到可供导出的DLL文件。</value>
@@ -622,13 +631,17 @@
     <value>GitHub issues</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
-    <value>我们无法从您的电脑或服务器中加载 manifest.json。如果这种问题继续发生，请在GitHub上的问题跟踪中提交报告。</value>
+    <value>我们无法从您的电脑或服务器中加载 manifest.json。
+
+如果这种问题继续发生，请在GitHub上的问题跟踪中提交报告。</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
     <value>更新清单</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>替换DLSS版本通常情况下不会被视为修改文件（视为开挂），但如果您游戏目录中的文件与游戏新版的文件不一致，某些反作弊系统可能会尝试拦截游戏启动。\n\n因此，如果您玩的游戏是多人游戏且使用了反作弊系统，请谨慎操作。</value>
+    <value>替换DLSS版本通常情况下不会被视为修改文件（视为开挂），但如果您游戏目录中的文件与游戏新版的文件不一致，某些反作弊系统可能会尝试拦截游戏启动。
+
+因此，如果您玩的游戏是多人游戏且使用了反作弊系统，请谨慎操作。</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>欢迎使用DLSS切换器，请先阅读此内容</value>

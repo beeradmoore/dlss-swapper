@@ -130,7 +130,7 @@
     <value>Tanılama</value>
   </data>
   <data name="DllManager_AlreadyImported" xml:space="preserve">
-    <value>zaten içe aktarıldı)</value>
+    <value>(zaten içe aktarıldı)</value>
   </data>
   <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
     <value>manifest.json dosyası çözümlenemedi.</value>
@@ -634,7 +634,9 @@ Bu durum devam ederse lütfen GitHub'daki sorun izleyicimizde bir rapor oluştur
     <value>Manifestoyu güncelle</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>DLSS sürümlerini değiştirmek hile olarak kabul edilmese de, oyun dizininizdeki dosyalar oyunun dağıtıldığı orijinal dosyalarla aynı değilse bazı hile koruma sistemleri bu durumdan hoşlanmayabilir.\n\nBu nedenle çok oyunculu oyunlarda dikkatli olmanızı öneririz.</value>
+    <value>DLSS sürümlerini değiştirmek hile olarak kabul edilmese de, oyun dizininizdeki dosyalar oyunun dağıtıldığı orijinal dosyalarla aynı değilse bazı hile koruma sistemleri bu durumdan hoşlanmayabilir.
+
+Bu nedenle çok oyunculu oyunlarda dikkatli olmanızı öneririz.</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>Çok oyunculu oyunlar için not</value>
@@ -685,11 +687,7 @@ Bu durum devam ederse lütfen GitHub'daki sorun izleyicimizde bir rapor oluştur
     <value>Epic Game Store'dan oyun kapağı indiriliyor</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
-    <value>
- 
-DLSS Swapper dosya sunucusundan oyun kapağı indiriliyor
- 
-</value>
+    <value>DLSS Swapper dosya sunucusundan oyun kapağı indiriliyor</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
     <value>Alternatif DLSS Swapper dosya sunucusundan oyun kapağı indiriliyor</value>
@@ -716,8 +714,7 @@ DLSS Swapper dosya sunucusundan oyun kapağı indiriliyor
     <value>Ağ Test Aracı</value>
   </data>
   <data name="SettingsPage_About" xml:space="preserve">
-    <value>Hakkında
-</value>
+    <value>Hakkında</value>
   </data>
   <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
     <value>Yoksayılan Yol Ekle</value>

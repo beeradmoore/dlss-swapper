@@ -47,6 +47,7 @@ public class LanguageManager
             "en-US",
             "pl-PL",
             "pt-BR",
+            "tr-TR",
             "zh-CN",
             "zh-TW",
 #if DEBUG
@@ -65,6 +66,7 @@ public class LanguageManager
             "en-US" => "English (United States)",
             "pl-PL" => "Polish",
             "pt-BR" => "Português BR",
+            "tr-TR" => "Turkish",
             "zh-CN" => "简体中文",
             "zh-TW" => "繁體中文 (臺灣)",
             _ => languageKey,

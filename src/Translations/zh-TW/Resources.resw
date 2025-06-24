@@ -301,7 +301,12 @@
     <value>您必須選取您的 <i>遊戲</i> 目錄，而不是 <i>遊戲平台</i> 目錄。<br/><br/>舉例來說，若您的遊戲安裝於：<br/><b>C:\Program Files\MyGamesFolder\MyFavGame\</b><br/><br/>您應該選取 <b>MyFavGame</b> 目錄，而不是 <b>MyGamesFolder</b> 目錄。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
-    <value>DLSS Swapper 通常會自動從您已安裝的遊戲平台中掃描到遊戲。如果您的遊戲沒有顯示，可能有幾項設定阻礙了它。請檢查以下因素：- 遊戲列表篩選器未設定為「隱藏無法替換 DLL 檔案的遊戲」- 未在設定中已啟用特定的遊戲平台如果您已經檢查過這些設定，但遊戲仍然沒有顯示，那可能是有 Bug 問題。如果您能將這個問題回報到我們的 GitHub 儲存庫，我們會萬分感謝，這樣我們就能修復它，並讓您的遊戲在未來能被更好地掃描到。</value>
+    <value>DLSS Swapper 通常會自動從您已安裝的遊戲平台中掃描到遊戲。如果您的遊戲沒有顯示，可能有幾項設定阻礙了它。請檢查以下因素：
+
+- 遊戲列表篩選器未設定為「隱藏無法替換 DLL 檔案的遊戲」
+- 未在設定中已啟用特定的遊戲平台
+
+如果您已經檢查過這些設定，但遊戲仍然沒有顯示，那可能是有 Bug 問題。如果您能將這個問題回報到我們的 GitHub 儲存庫，我們會萬分感謝，這樣我們就能修復它，並讓您的遊戲在未來能被更好地掃描到。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
     <value>手動新增遊戲說明</value>
@@ -580,7 +585,11 @@
     <value>匯入中</value>
   </data>
   <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
-    <value>在您的電腦上手動匯入 dll 檔案可能有風險。若意外將惡意 dll 檔案放入遊戲中，就會像執行你剛從 LimeWire 下載的 Linking_park_-_nUmB_mp3.exe 一樣糟糕。請確保您匯入的 dll 檔案是來自可信任的來源。</value>
+    <value>在您的電腦上手動匯入 dll 檔案可能有風險。
+
+若意外將惡意 dll 檔案放入遊戲中，就會像執行你剛從 LimeWire 下載的 Linking_park_-_nUmB_mp3.exe 一樣糟糕。
+
+請確保您匯入的 dll 檔案是來自可信任的來源。</value>
   </data>
   <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
     <value>未找到用於匯出的 DLL 檔案。</value>
@@ -622,13 +631,17 @@
     <value>GitHub 問題回報</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
-    <value>我們無法從您的電腦或伺服器載入 manifest.json。如果這個問題持續發生，請在 GitHub 的問題回報系統提交回報。</value>
+    <value>我們無法從您的電腦或伺服器載入 manifest.json。
+
+如果這個問題持續發生，請在 GitHub 的問題回報系統提交回報。</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
     <value>更新清單</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>替換 DLSS 版本通常不會被視為修改檔案（也就是作弊），但如果您遊戲資料夾中的檔案與遊戲新版本的檔案不符，某些反作弊系統可能會試圖阻擋遊戲啟動。\n\n因此，如果您遊玩的遊戲是多人線上遊戲，而且有使用反作弊系統，請務必小心謹慎。</value>
+    <value>替換 DLSS 版本通常不會被視為修改檔案（也就是作弊），但如果您遊戲資料夾中的檔案與遊戲新版本的檔案不符，某些反作弊系統可能會試圖阻擋遊戲啟動。
+
+因此，如果您遊玩的遊戲是多人線上遊戲，而且有使用反作弊系統，請務必小心謹慎。</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>歡迎使用 DLSS Swapper，在使用前請先閱讀此內容</value>

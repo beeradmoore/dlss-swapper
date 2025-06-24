@@ -33,6 +33,8 @@
     <a href="./docs/readmes/readme_ja-JP.md">日本語</a>
     ·
     <a href="./docs/readmes/readme_zh-TW.md">繁體中文</a>
+    ·
+    <a href="./docs/readmes/readme_zh-Hans.md">简体中文</a>
 </p>
 
 <p align="center">

@@ -6,7 +6,7 @@
 </p>
 
 > [!WARNING]
-> 請注意，有部份的惡意網站聲稱自己為 DLSS Swapper 官方。特此聲明，本網站是您唯一能找到的官方下載管道。請參閱我們的[官方連結](#official-links)來深入了解與 DLSS Swapper 相關的帳號/網站。
+> 請注意，有部份的惡意網站聲稱自己為 DLSS Swapper 官方。特此聲明，本網站是您唯一能找到的官方下載管道。請參閱我們的[官方連結](#官方連結)來深入了解與 DLSS Swapper 相關的帳號/網站。
 
 <p align="center">
     <a href="https://github.com/beeradmoore/dlss-swapper/releases"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>
@@ -33,6 +33,8 @@
     <a href="./readme_ja-JP.md">日本語</a>
     ·
     繁體中文
+    ·
+    <a href="./readme_zh-Hans.md">简体中文</a>
 </p>
 
 <p align="center">

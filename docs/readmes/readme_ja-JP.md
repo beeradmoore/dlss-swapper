@@ -25,6 +25,8 @@
     日本語
     ·
     <a href="./readme_zh-TW.md">繁體中文</a>
+    ·
+    <a href="./readme_zh-Hans.md">简体中文</a>
 </p>
 
 <p align="center">

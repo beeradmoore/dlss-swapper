@@ -6,7 +6,7 @@
 </p>
 
 > [!WARNING]
-> Please be aware of malicious sites claiming to be DLSS Swapper. This is the only place you will find official downloads. See our [official links](#official-links) for accounts/sites affiliated with DLSS Swapper.
+> Por favor, ten en cuenta que existen sitios maliciosos que afirman ser DLSS Swapper. Este es el **único** lugar donde encontrarás descargas oficiales. Consulta nuestros [enlaces oficiales](#links-oficiales) para ver las cuentas y sitios afiliados a DLSS Swapper.
 
 <p align="center">
     <a href="https://github.com/beeradmoore/dlss-swapper/releases"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>
@@ -33,6 +33,8 @@
     <a href="./readme_ja-JP.md">日本語</a>
     ·
     <a href="./readme_zh-TW.md">繁體中文</a>
+     ·
+    <a href="./readme_zh-Hans.md">简体中文</a>
 </p>
 
 <p align="center">
@@ -75,11 +77,11 @@ Por favor, ven y comparte su experiencia DLSS en [r/DLSS_Swapper](https://www.re
 
 Puede obtener la última compilación en nosotros página web de [lanzamiento de el GitHub](https://github.com/beeradmoore/dlss-swapper/releases)
 
-You can also install with winget. 
+También puedes instalarlo con winget.
 
-> winget install --id=beeradmoore.dlss-swapper -e 
+> winget install --id=beeradmoore.dlss-swapper -e
 
-These are the only official places to get DLSS Swapper.
+Estos son los únicos lugares oficiales para obtener DLSS Swapper.
 
 ## Sería genial si el DLSS Swapper pudiera…
 
@@ -96,10 +98,10 @@ Mas información sobre eso en breve…
 | SO        | Windows 10 64-bit (20H1, build 19041) |
 | GPU       | Cualquier modelo                      |
 
-## Official links
+## Links Oficiales
 
 - GitHub: https://github.com/beeradmoore/dlss-swapper/
 - Twitter: https://twitter.com/dlss_swapper
 - Reddit: https://www.reddit.com/r/DLSS_Swapper/
 
-If you have found an other accounts or sites claiming to be DLSS Swapper, please ignore them (or better yet, [file an issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) and let us know) 
+Si has encontrado otras cuentas o sitios que afirman ser DLSS Swapper, por favor ignóralos (o mejor aún, [abre una issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) y avísanos).

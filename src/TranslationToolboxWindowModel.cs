@@ -236,13 +236,9 @@ public partial class TranslationToolboxWindowModel : ObservableObject
 
                     if (existingFile.Name.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))
                     {
-                        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-                        {
-                            PrepareHeaderForMatch = args => args.Header.ToLower(),
-                        };
                         using (var reader = new StreamReader(stream))
                         {
-                            using (var csv = new CsvReader(reader, config))
+                            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                             {
                                 var loadedTranslationRows = csv.GetRecords<TranslationRow>().ToList();
                                 var loadedDictionary = new Dictionary<string, string>(loadedTranslationRows.Count);
@@ -250,7 +246,7 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                                 {
                                     if (string.IsNullOrWhiteSpace(loadedTranslationRow.NewTranslation) == false)
                                     {
-                                        loadedDictionary[loadedTranslationRow.Key] = loadedTranslationRow.NewTranslation; //.Replace(@"\\", @"\");
+                                        loadedDictionary[loadedTranslationRow.Key] = loadedTranslationRow.NewTranslation;
                                     }
                                 }
                                 foreach (var translationRow in TranslationRows)
@@ -376,7 +372,6 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                         {
                             using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture))
                             {
-
                                 var translationRows = new List<TranslationRow>(TranslationRows.Count);
                                 foreach (var originalTranslationRow in TranslationRows)
                                 {
@@ -384,8 +379,8 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                                     {
                                         Key = originalTranslationRow.Key,
                                         Comment = originalTranslationRow.Comment,
-                                        SourceTranslation = originalTranslationRow.SourceTranslation, //.Replace(@"\", @"\\"),
-                                        NewTranslation = originalTranslationRow.NewTranslation, //.Replace(@"\", @"\\"),
+                                        SourceTranslation = originalTranslationRow.SourceTranslation,
+                                        NewTranslation = originalTranslationRow.NewTranslation,
                                     };
                                     translationRows.Add(translationRow);
                                 }

@@ -66,9 +66,9 @@ public class LanguageManager
             "en-US" => "English (United States)",
             "pl-PL" => "Polish",
             "pt-BR" => "Português BR",
-            "tr-TR" => "Turkish",
-            "zh-CN" => "简体中文",
-            "zh-TW" => "繁體中文 (臺灣)",
+            "tr-TR" => "Türkçe", // Turkish
+            "zh-CN" => "简体中文", // Simplified Chinese
+            "zh-TW" => "繁體中文 (臺灣)", // Traditional Chinese (Taiwan)
             _ => languageKey,
         };
     }

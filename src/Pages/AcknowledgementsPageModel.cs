@@ -25,6 +25,8 @@ public partial class AcknowledgementsPageModel : ObservableObject
 
     public MarkdownConfig MarkdownConfig { get; set; } = new MarkdownConfig();
 
+    public AcknowledgementsPageModelTranslationProperties TranslationProperties { get; } = new AcknowledgementsPageModelTranslationProperties();
+
     public AcknowledgementsPageModel(AcknowledgementsPage page)
     {
         _weakPage = new WeakReference<AcknowledgementsPage>(page);
@@ -33,6 +35,7 @@ public partial class AcknowledgementsPageModel : ObservableObject
         {
             "You",
             "DLSS",
+            "Streamline",
             "FidelityFX-SDK",
             "XeSS"
         };

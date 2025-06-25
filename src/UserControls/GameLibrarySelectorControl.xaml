@@ -23,8 +23,8 @@
                     <FontIcon Glyph="&#xE700;" FontSize="12" FontWeight="Bold" />
                     <ToggleSwitch
                         IsOn="{x:Bind IsEnabled, Mode=TwoWay}"
-                        OffContent="{x:Bind OffContentLabel}"
-                        OnContent="{x:Bind OnContentLabel}"
+                        OffContent="{x:Bind OffContentLabel, Mode=OneWay}"
+                        OnContent="{x:Bind OnContentLabel, Mode=OneWay}"
                         Tag="{x:Bind GameLibrary}"
                         />
                 </StackPanel>

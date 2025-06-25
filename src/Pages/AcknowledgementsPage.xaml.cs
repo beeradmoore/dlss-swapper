@@ -9,6 +9,8 @@ namespace DLSS_Swapper.Pages;
 /// </summary>
 public sealed partial class AcknowledgementsPage : Page
 {
+    public static string PageTag { get; } = "PageTag_Acknowledgements";
+
     public AcknowledgementsPageModel ViewModel { get; private set; }
     public AcknowledgementsPage()
     {

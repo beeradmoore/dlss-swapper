@@ -175,7 +175,7 @@ namespace DLSS_Swapper.Data
         protected void SetID()
         {
             // Seeing as we use ID, it sure would be a shame if a PlatformId was set to "C:\Program Files\"
-            // So try to remove all funky characters before 
+            // So try to remove all funky characters before
 
             var platformId = PlatformId;
             foreach (var invalidPathChar in PathHelpers.InvalidFileNamePathChars)
@@ -195,7 +195,7 @@ namespace DLSS_Swapper.Data
                 GameLibrary.XboxApp => $"xboxapp_{platformId}",
                 GameLibrary.ManuallyAdded => $"manuallyadded_{platformId}",
                 GameLibrary.BattleNet => $"battlenet_{platformId}",
-                _ => throw new Exception($"Unknown GameLibrary {GameLibrary} while setting ID"),
+                _ => throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_UnknownGameLibraryTemplate", GameLibrary)),
             };
         }
 
@@ -887,7 +887,7 @@ namespace DLSS_Swapper.Data
 
         protected async Task ResizeCoverAsync(Stream imageStream)
         {
-            // TODO: 
+            // TODO:
             // - find optimal format (eg, is displaying 100 webp images more intense than 100 png images)
             // - load image based on scale
             try
@@ -932,7 +932,7 @@ namespace DLSS_Swapper.Data
 
         public void AddCustomCover(Stream stream)
         {
-            // TODO: 
+            // TODO:
             // - find optimal format (eg, is displaying 100 webp images more intense than 100 png images)
             // - load image based on scale
             try
@@ -999,7 +999,7 @@ namespace DLSS_Swapper.Data
                     await fileDownloader.DownloadFileToStreamAsync(memoryStream).ConfigureAwait(false);
                     memoryStream.Position = 0;
 
-                    // Now if the image is downloaded lets resize it, 
+                    // Now if the image is downloaded lets resize it,
                     await ResizeCoverAsync(memoryStream).ConfigureAwait(false);
                 }
             }
@@ -1120,11 +1120,11 @@ namespace DLSS_Swapper.Data
         {
             var dialog = new EasyContentDialog(App.CurrentApp.MainWindow.Content.XamlRoot)
             {
-                Title = $"Remove custom cover?",
-                PrimaryButtonText = "Remove",
-                CloseButtonText = "Cancel",
+                Title = ResourceHelper.GetString("Game_CustomCoverRemove"),
+                PrimaryButtonText = ResourceHelper.GetString("General_Remove"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = "Are you sure you want to remove the custom cover image?",
+                Content = ResourceHelper.GetString("Game_AreYouSureRemoveCustomCover"),
             };
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)

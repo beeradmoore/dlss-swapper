@@ -322,6 +322,23 @@ namespace DLSS_Swapper
             }
         }
 
+        string _language = string.Empty;
+        public string Language
+        {
+            get { return _language; }
+            set
+            {
+                if (_language != value)
+                {
+                    _language = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
         string[] _ignoredPaths = new string[0];
         public string[] IgnoredPaths
         {
@@ -444,7 +461,7 @@ namespace DLSS_Swapper
                     return true;
                 }
             }
-              
+
             return false;
         }
     }

@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Helpers;
@@ -14,7 +9,9 @@ public partial class DiagnosticsWindowModel : ObservableObject
 {
     public string DiagnosticsLog { get; set; } = string.Empty;
 
-    public DiagnosticsWindowModel()
+    public DiagnosticsWindowModelTranslationProperties TranslationProperties { get; } = new DiagnosticsWindowModelTranslationProperties();
+
+    public DiagnosticsWindowModel() : base()
     {
         var systemDetails = new SystemDetails();
         DiagnosticsLog = $"{systemDetails.GetSystemData()}\n\n{systemDetails.GetLibraryData()}\n";

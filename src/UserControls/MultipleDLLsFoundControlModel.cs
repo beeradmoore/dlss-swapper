@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -15,7 +14,9 @@ public partial class MultipleDLLsFoundControlModel : ObservableObject
 {
     public List<GameAsset> DLLsList { get; init; }
 
-    public MultipleDLLsFoundControlModel(Game game, GameAssetType gameAssetType)
+    public MultipleDLLsFoundControlModelTranslationProperties TranslationProperties { get; } = new MultipleDLLsFoundControlModelTranslationProperties();
+
+    public MultipleDLLsFoundControlModel(Game game, GameAssetType gameAssetType) : base()
     {
         DLLsList = game.GameAssets.Where(x => x.AssetType == gameAssetType).ToList();
     }
@@ -38,7 +39,7 @@ public partial class MultipleDLLsFoundControlModel : ObservableObject
                 }
                 else
                 {
-                    throw new Exception($"Could not find file \"{gameAsset.Path}\".");
+                    throw new Exception(ResourceHelper.GetFormattedResourceTemplate("GamePage_CouldNotFindGameInstallPathTemplate", gameAsset.Path));
                 }
             }
         }

@@ -1,32 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AsyncAwaitBestPractices.MVVM;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.WinUI;
-using CommunityToolkit.WinUI.Collections;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.UserControls;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Documents;
+using CommunityToolkit.WinUI;
+using System.Diagnostics;
+using Microsoft.UI.Xaml;
+using System.ComponentModel;
 
 namespace DLSS_Swapper.Pages;
 
-public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.ObservableObject
+public partial class LibraryPageModel : ObservableObject
 {
     LibraryPage libraryPage;
 
@@ -37,6 +32,8 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
 
     [ObservableProperty]
     public partial SelectorBarItem? SelectedSelectorBarItem { get; set; } = null;
+
+    public LibraryPageModelTranslationProperties TranslationProperties { get; } = new LibraryPageModelTranslationProperties();
 
     public LibraryPageModel(LibraryPage libraryPage)
     {
@@ -70,7 +67,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                 SelectLibrary(gameAssetType);
             }
         }
-    } 
+    }
 
     [RelayCommand()]
     async Task RefreshAsync()
@@ -91,10 +88,10 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         {
             var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = "Error",
-                CloseButtonText = "Okay",
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = "Unable to update manifest of DLL records.",
+                Content = ResourceHelper.GetString("LibraryPage_UnableToUpdateDllRecord"),
             };
             await errorDialog.ShowAsync();
         }
@@ -120,10 +117,10 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         {
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                CloseButtonText = "Okay",
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Title = "Error",
-                Content = $"You have no DLL records to export.",
+                Title = ResourceHelper.GetString("General_Error"),
+                Content = ResourceHelper.GetString("LibraryPage_NoDllsToExport"),
             };
             await dialog.ShowAsync();
             return;
@@ -140,7 +137,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
             Text = string.Empty,
             HorizontalAlignment = HorizontalAlignment.Left,
         };
-        progressTextBlock.Inlines.Add(new Run() { Text = "Exported DLLs: " });
+        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ExportedDLLs") });
         var progressRun = new Run() { Text = "0" };
         progressTextBlock.Inlines.Add(progressRun);
         var progressStackPanel = new StackPanel()
@@ -157,7 +154,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
 
         var exportingDialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = "Exporting",
+            Title = ResourceHelper.GetString("LibraryPage_Exporting"),
             Content = progressStackPanel,
         };
 
@@ -169,7 +166,7 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
             var savePicker = new Windows.Storage.Pickers.FileSavePicker();
             savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
             savePicker.FileTypeChoices.Add("Zip archive", new List<string>() { ".zip" });
-            savePicker.SuggestedFileName = $"dlss_swapper_export.zip";
+            savePicker.SuggestedFileName = "dlss_swapper_export.zip";
             WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
             var saveFile = await savePicker.PickSaveFileAsync();
 
@@ -225,10 +222,10 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
 
                 var dialog = new EasyContentDialog(libraryPage.XamlRoot)
                 {
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Title = "Error",
-                    Content = $"No DLLs found suitible for exporting export.",
+                    Content = ResourceHelper.GetString("LibraryPage_NoDLLsForExport_Message"),
                 };
                 await dialog.ShowAsync();
             }
@@ -256,10 +253,10 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
                 {
                     var dialog = new EasyContentDialog(libraryPage.XamlRoot)
                     {
-                        CloseButtonText = "Okay",
+                        CloseButtonText = ResourceHelper.GetString("General_Okay"),
                         DefaultButton = ContentDialogButton.Close,
-                        Title = "Success",
-                        Content = $"Exported {toExport.Count} dll{(toExport.Count == 1 ? string.Empty : "s")}.",
+                        Title = ResourceHelper.GetString("General_Success"),
+                        Content = ResourceHelper.GetFormattedResourceTemplate("LibraryPage_ExportedDLLsCount_Message", toExport.Count),
                     };
                     await dialog.ShowAsync();
                 }
@@ -294,10 +291,10 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
             // If the fullExpectedPath does not exist, or there was an error writing it.
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = "Error",
-                CloseButtonText = "Okay",
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = "Could not export DLLs.",
+                Content = ResourceHelper.GetString("LibraryPage_CouldntExportDll"),
             };
             await dialog.ShowAsync();
         }
@@ -354,10 +351,10 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         {
             var couldNotImportDialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = "Could not load imported DLLs",
+                Title = ResourceHelper.GetString("LibraryPage_CouldNotLoadImportedDlls"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = new ImportSystemDisabledView(),
-                CloseButtonText = "Close",
+                CloseButtonText = ResourceHelper.GetString("General_Close"),
             };
             await couldNotImportDialog.ShowAsync();
             return;
@@ -367,21 +364,16 @@ public partial class LibraryPageModel : CommunityToolkit.Mvvm.ComponentModel.Obs
         {
             var warningDialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = "Warning",
-                CloseButtonText = "Okay",
+                Title = ResourceHelper.GetString("General_Warning"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = @"Replacing dlls on your computer can be dangerous.
-
-Placing a malicious dll into a game is as bad as running Linking_park_-_nUmB_mp3.exe that you just downloaded from LimeWire.
-
-Only import dlls from sources you trust.",
+                Content = ResourceHelper.GetString("LibraryPage_MaliciousDllsInfo"),
             };
             await warningDialog.ShowAsync();
 
             Settings.Instance.HasShownWarning = true;
         }
 
-        
         var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
         var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
         openPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
@@ -409,7 +401,7 @@ Only import dlls from sources you trust.",
             Text = string.Empty,
             HorizontalAlignment = HorizontalAlignment.Left,
         };
-        progressTextBlock.Inlines.Add(new Run() { Text = "Processed DLLs: " });
+        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ProcessedDlls") });
         var progressRun = new Run() { Text = "0" };
         progressTextBlock.Inlines.Add(progressRun);
         var progressStackPanel = new StackPanel()
@@ -426,7 +418,7 @@ Only import dlls from sources you trust.",
 
         var loadingDialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = "Importing",
+            Title = ResourceHelper.GetString("LibraryPage_Importing"),
             // I would like this to be a progress ring but for some reason the ring will not show.
             Content = progressStackPanel,
         };
@@ -448,7 +440,7 @@ Only import dlls from sources you trust.",
                         dllRecord.LocalRecord = localRecord;
                     });
 
-                    importResults.Add(DLLImportResult.FromSucces(dllRecord.LocalRecord.ExpectedPath, "Already downloaded.", true));
+                    importResults.Add(DLLImportResult.FromSucces(dllRecord.LocalRecord.ExpectedPath, ResourceHelper.GetString("LibraryPage_AlreadyDownloaded"), true));
                     return true;
                 }
 
@@ -476,7 +468,7 @@ Only import dlls from sources you trust.",
                     dllRecord.LocalRecord = null;
                     dllRecord.LocalRecord = localRecord;
                 });
-                importResults.Add(DLLImportResult.FromSucces(importedPath, "Imported as existing DLL record.", true));
+                importResults.Add(DLLImportResult.FromSucces(importedPath, ResourceHelper.GetString("LibraryPage_ImportedAsExistingRecord"), true));
                 return true;
             }
             else
@@ -512,7 +504,7 @@ Only import dlls from sources you trust.",
             var tempExtractPath = Path.Combine(Storage.GetTemp(), "import", Guid.NewGuid().ToString("D"));
             Storage.CreateDirectoryIfNotExists(tempExtractPath);
 
-           
+
             foreach (var importFile in openFileList)
             {
                 ++selectedFilesProcessed;
@@ -523,7 +515,7 @@ Only import dlls from sources you trust.",
 
                 if (importFile is null || File.Exists(importFile.Path) == false)
                 {
-                    importResults.Add(DLLImportResult.FromFail(importFile?.Path ?? string.Empty, "File not found."));
+                    importResults.Add(DLLImportResult.FromFail(importFile?.Path ?? string.Empty, ResourceHelper.GetString("LibraryPage_FileNotFound")));
                     continue;
                 }
 
@@ -531,8 +523,8 @@ Only import dlls from sources you trust.",
                 {
                     if (importFile.Path.EndsWith(".zip", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        // If we are importing a zip, first check if its hash is one 
-                        // that we expect.Then we can just bypass everything.                        
+                        // If we are importing a zip, first check if its hash is one
+                        // that we expect.Then we can just bypass everything.
                         var newZipHash = string.Empty;
                         using (var fileStream = File.OpenRead(importFile.Path))
                         {
@@ -661,7 +653,7 @@ Only import dlls from sources you trust.",
                             var zippedDlls = archive.Entries.Where(x => x.Name.EndsWith(".dll")).ToArray();
                             if (zippedDlls.Length == 0)
                             {
-                                throw new Exception("Zip did not contain any dlls.");
+                                throw new Exception(ResourceHelper.GetString("LibraryPage_ZipDidNotContainAnyDlls"));
                             }
 
                             var dllsInZip = zippedDlls.Length;
@@ -757,12 +749,12 @@ Only import dlls from sources you trust.",
         }
 
         loadingDialog.Hide();
-  
+
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            CloseButtonText = "Okay",
+            CloseButtonText = ResourceHelper.GetString("General_Okay"),
             DefaultButton = ContentDialogButton.Close,
-            Title = "Finished",
+            Title = ResourceHelper.GetString("LibraryPage_Finished"),
             Content = new ImportDLLSummaryControl(importResults),
         };
         await dialog.ShowAsync();
@@ -780,11 +772,11 @@ Only import dlls from sources you trust.",
         var assetTypeName = DLLManager.Instance.GetAssetTypeName(record.AssetType);
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = "Delete DLL",
-            Content = $"Are you sure you want to delete {assetTypeName} v{record.Version}?",
-            PrimaryButtonText = "Delete",
-            CloseButtonText = "Cancel",
+            Title = ResourceHelper.GetString("LibraryPage_DeleteDll"),
+            PrimaryButtonText = ResourceHelper.GetString("General_Delete"),
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
             DefaultButton = ContentDialogButton.Primary,
+            Content = ResourceHelper.GetFormattedResourceTemplate("LibraryPage_DeleteDllVersionTemplate", assetTypeName, record.Version),
         };
         var response = await dialog.ShowAsync();
         if (response == ContentDialogResult.Primary)
@@ -808,10 +800,10 @@ Only import dlls from sources you trust.",
             {
                 var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
                 {
-                    Title = "Error",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = $"Unable to delete {assetTypeName} record.",
+                    Content = ResourceHelper.GetFormattedResourceTemplate("LibraryPage_UnableToDeleteRecord", assetTypeName),
                 };
                 await errorDialog.ShowAsync();
             }
@@ -826,8 +818,8 @@ Only import dlls from sources you trust.",
         {
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = "Error",
-                CloseButtonText = "Okay",
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = result.Message,
             };
@@ -853,7 +845,7 @@ Only import dlls from sources you trust.",
 
         var exportingDialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = "Exporting",
+            Title = ResourceHelper.GetString("LibraryPage_Exporting"),
             // I would like this to be a progress ring but for some reason the ring will not show.
             Content = new ProgressRing()
             {
@@ -906,10 +898,10 @@ Only import dlls from sources you trust.",
 
                 var dialog = new EasyContentDialog(libraryPage.XamlRoot)
                 {
-                    Title = "Success",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("General_Success"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = $"Exported DLL {dllRecord.DisplayName}.",
+                    Content = ResourceHelper.GetFormattedResourceTemplate("LibraryPage_ExportedDllTemplate", dllRecord.DisplayName),
                 };
                 await dialog.ShowAsync();
             }
@@ -922,10 +914,10 @@ Only import dlls from sources you trust.",
             // If the fullExpectedPath does not exist, or there was an error writing it.
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = "Error",
-                CloseButtonText = "Okay",
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = "Could not export DLL.",
+                Content = ResourceHelper.GetString("LibraryPage_CouldntExportDll"),
             };
             await dialog.ShowAsync();
         }
@@ -936,9 +928,9 @@ Only import dlls from sources you trust.",
     {
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = "Error",
-            CloseButtonText = "Okay",
-            Content = record.LocalRecord?.DownloadErrorMessage ?? "Could not download at this time.",
+            Title = ResourceHelper.GetString("General_Error"),
+            CloseButtonText = ResourceHelper.GetString("General_Okay"),
+            Content = record.LocalRecord?.DownloadErrorMessage ?? ResourceHelper.GetString("LibraryPage_CouldntDownload"),
         };
         await dialog.ShowAsync();
     }
@@ -1003,10 +995,10 @@ Only import dlls from sources you trust.",
         {
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = "No new DLLs",
-                CloseButtonText = "Okay",
+                Title = ResourceHelper.GetString("LibraryPage_NoNewDLLsTitle"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = "There were no new DLLs to download.",
+                Content = ResourceHelper.GetString("LibraryPage_NoNewDLLsMessage"),
             };
             await dialog.ShowAsync();
         }
@@ -1014,10 +1006,10 @@ Only import dlls from sources you trust.",
         {
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = "Downloads started",
-                CloseButtonText = "Okay",
+                Title = ResourceHelper.GetString("LibraryPage_DownloadsStarted_Title"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = $"Started {startedDownloads} new downloads.",
+                Content = ResourceHelper.GetFormattedResourceTemplate("LibraryPage_DownloadsStarted_Message", startedDownloads),
             };
             await dialog.ShowAsync();
         }

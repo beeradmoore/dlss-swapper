@@ -1,26 +1,13 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using DLSS_Swapper.Data;
-using Microsoft.UI;
+using DLSS_Swapper.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Animation;
-using Microsoft.UI.Xaml.Media.Imaging;
-using Microsoft.UI.Xaml.Navigation;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.ApplicationModel.DataTransfer.DragDrop.Core;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -100,7 +87,7 @@ namespace DLSS_Swapper.UserControls
 
             // This thing likes to break so I took the advice from this thread https://github.com/microsoft/microsoft-ui-xaml/issues/8108
 
-            // Default to this.           
+            // Default to this.
             coverDragDropAcceptedOperation = DataPackageOperation.None;
             coverDragDropDragUIOverrideCaption = string.Empty;
 
@@ -108,7 +95,7 @@ namespace DLSS_Swapper.UserControls
             e.DragUIOverride.Caption = coverDragDropDragUIOverrideCaption;
 
             // This await messes things up. So what we do is also handle in CoverButton_DragOver which will have hopefully
-            // mean this code is finished by then. 
+            // mean this code is finished by then.
             var items = await e.DataView.GetStorageItemsAsync();
             if (items.Count == 1)
             {
@@ -117,23 +104,23 @@ namespace DLSS_Swapper.UserControls
                 if (storageFile is null)
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.None;
-                    coverDragDropDragUIOverrideCaption = "storageFile is null";
+                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("GamePage_StorageFileIsNull");
                 }
                 else if (customCoverValidFileTypes.Contains(storageFile.FileType.ToLower()) == true)
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.Copy;
-                    coverDragDropDragUIOverrideCaption = "Add custom cover";
+                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("GamePage_AddCustomCover");
                 }
                 else
                 {
                     coverDragDropAcceptedOperation = DataPackageOperation.None;
-                    coverDragDropDragUIOverrideCaption = $"\"{storageFile.FileType}\" is an invalid file type";
+                    coverDragDropDragUIOverrideCaption = ResourceHelper.GetFormattedResourceTemplate("GamePage_InvalidFileTypeTemplate", storageFile.FileType);
                 }
             }
             else
             {
                 coverDragDropAcceptedOperation = DataPackageOperation.None;
-                coverDragDropDragUIOverrideCaption = "You may only drag over a single file for a cover";
+                coverDragDropDragUIOverrideCaption = ResourceHelper.GetString("GamePage_YouMayOnlyDragOneFileCover");
             }
         }
 

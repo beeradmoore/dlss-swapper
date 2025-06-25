@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -10,8 +7,8 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using System.Diagnostics;
 using System.IO;
-using System.ComponentModel;
 using Windows.System;
+using DLSS_Swapper.Helpers;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -45,7 +42,9 @@ public partial class GameControlModel : ObservableObject
         }
     }
 
-    public GameControlModel(GameControl gameControl, Game game)
+    public GameControlModelTranslationProperties TranslationProperties { get; } = new GameControlModelTranslationProperties();
+
+    public GameControlModel(GameControl gameControl, Game game) : base()
     {
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
@@ -63,7 +62,7 @@ public partial class GameControlModel : ObservableObject
             }
             else
             {
-                throw new Exception($"Could not find path \"{Game.InstallPath}\".");
+                throw new Exception(ResourceHelper.GetFormattedResourceTemplate("GamePage_CouldNotFindGameInstallPathTemplate", Game.InstallPath));
             }
         }
         catch (Exception err)
@@ -74,8 +73,8 @@ public partial class GameControlModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(gameControl.XamlRoot)
                 {
-                    Title = $"Error",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     Content = err.Message,
                 };
                 await dialog.ShowAsync();
@@ -99,9 +98,9 @@ public partial class GameControlModel : ObservableObject
 
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = $"Notes - {Game.Title}",
-                PrimaryButtonText = "Save",
-                CloseButtonText = "Cancel",
+                Title = $"{ResourceHelper.GetString("GamePage_Notes")} - {Game.Title}",
+                PrimaryButtonText = ResourceHelper.GetString("General_Save"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = textBox,
             };
@@ -154,10 +153,10 @@ public partial class GameControlModel : ObservableObject
             {
                 var cantDeleteDialog = new EasyContentDialog(gameControl.XamlRoot)
                 {
-                    Title = "Error",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = "This title is not manually added and can't be removed.",
+                    Content = ResourceHelper.GetString("GamePage_ManuallyAdded_CantBeRemoved"),
                 };
                 await cantDeleteDialog.ShowAsync();
                 return;
@@ -168,11 +167,11 @@ public partial class GameControlModel : ObservableObject
             // This needs to be set after AcceptsReturn otherwise it will strip out the \r
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = $"Remove {Game.Title}?",
-                PrimaryButtonText = "Remove",
-                CloseButtonText = "Cancel",
+                Title = $"{ResourceHelper.GetString("General_Remove")} {Game.Title}?",
+                PrimaryButtonText = ResourceHelper.GetString("General_Remove"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
-                Content = $"Are you sure you want to remove \"{Game.Title}\" from DLSS Swapper? This will not make any changes to DLSS files that have already been swapped.",
+                Content = ResourceHelper.GetFormattedResourceTemplate("GamePage_ManuallyAdded_RemoveGameTemplate", Game.Title),
             };
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
@@ -198,10 +197,10 @@ public partial class GameControlModel : ObservableObject
         {
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = $"Select {DLLManager.Instance.GetAssetTypeName(gameAssetType)} version",
-                PrimaryButtonText = "Swap",
+                Title = ResourceHelper.GetFormattedResourceTemplate("GamePage_SelectDllTemplateTitle", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
+                PrimaryButtonText = ResourceHelper.GetString("General_Swap"),
                 IsPrimaryButtonEnabled = false,
-                CloseButtonText = "Cancel",
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Primary,
             };
 
@@ -226,8 +225,8 @@ public partial class GameControlModel : ObservableObject
         {
             var dialog = new EasyContentDialog(gameControl.XamlRoot)
             {
-                Title = $"Multiple {DLLManager.Instance.GetAssetTypeName(gameAssetType)} DLLs Found",
-                PrimaryButtonText = "Okay",
+                Title = ResourceHelper.GetFormattedResourceTemplate("GamePage_MultipleDllsFoundTemplate", DLLManager.Instance.GetAssetTypeName(gameAssetType)),
+                PrimaryButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Primary,
                 Content = new MultipleDLLsFoundControl(Game, gameAssetType),
             };

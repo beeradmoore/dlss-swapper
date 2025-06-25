@@ -1,0 +1,44 @@
+.table-equal-width {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.table-equal-width th,
+.table-equal-width td {
+    width: 33.33%;
+    vertical-align: top;
+}
+
+.table-equal-width td:first-child {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.table-equal-width textarea.form-control {
+    border: none;
+    box-shadow: none;
+    resize: vertical;
+    overflow: auto;
+    min-height: 60px;
+    background-color: transparent;
+    color: inherit;
+}
+
+body {
+    padding-bottom: 80px;
+}
+
+.footer-bg {
+    background-color: rgb(248, 249, 250) !important; 
+    color: rgb(222, 226, 230) !important;
+    border-top-color: rgb(222, 226, 230) !important;
+}
+
+@media (prefers-color-scheme: dark)
+{
+    .footer-bg {
+        background-color: rgb(33, 37, 41) !important; 
+        color: rgb(222, 226, 230) !important;
+        border-top-color: rgb(73, 80, 87) !important;
+    }
+}

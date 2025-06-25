@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -19,7 +16,7 @@ namespace DLSS_Swapper;
 
 public partial class NetworkTesterWindowModel : ObservableObject
 {
-    WeakReference<NetworkTesterWindow> _weakWindow;
+    readonly WeakReference<NetworkTesterWindow> _weakWindow;
     readonly string _dlssSwapperDomainTestLink = "dlss-swapper-downloads.beeradmoore.com";
     readonly string _dlssSwapperDownloadTestLink = "https://dlss-swapper-downloads.beeradmoore.com/dlss/nvngx_dlss_v1.0.0.0.zip";
     readonly string _uploadThingDownloadTestLink = "https://hb4kzlkh4u.ufs.sh/f/isdnLt22yljeRWLOje0oeKXyth5OC7M6sI02T3YfL8GPbvpd";
@@ -126,12 +123,14 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
     CancellationTokenSource? _cancellationTokenSource = null;
 
-    public NetworkTesterWindowModel(NetworkTesterWindow window)
+    public NetworkTesterWindowModel(NetworkTesterWindow window) : base()
     {
         _weakWindow = new WeakReference<NetworkTesterWindow>(window);
 
         AppendTestResults("Init", $"DLSS Swapper version: v{App.CurrentApp.GetVersionString()}");
     }
+
+    public NetworkTesterWindowModelTranslationProperties TranslationProperties { get; } = new NetworkTesterWindowModelTranslationProperties();
 
     void AppendTestResults(string testName, string message)
     {
@@ -325,7 +324,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
             };
             stackPanel.Children.Add(new TextBlock()
             {
-                Text = "Click the open in browser button, or copy and paste following link into your browser. Does it download a file in your browser?",
+                Text = ResourceHelper.GetString("NetworkTesterPage_OpenInBrowserInfo"),
                 TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
             });
             var horizontalGrid = new Grid()
@@ -346,7 +345,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
             var copyButton = new Button()
             {
-                Content = "Copy",
+                Content = ResourceHelper.GetString("General_Copy"),
             };
             copyButton.Tapped += (sender, e) =>
             {
@@ -358,7 +357,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
             var openButton = new Button()
             {
-                Content = "Open in browser"
+                Content = ResourceHelper.GetString("NetworkTesterPage_OpenInBrowser")
             };
             openButton.Tapped += async (sender, e) =>
             {
@@ -372,10 +371,10 @@ public partial class NetworkTesterWindowModel : ObservableObject
             stackPanel.Children.Add(horizontalGrid);
             var dialog = new EasyContentDialog(networkTesterWindow.Content.XamlRoot)
             {
-                Title = $"Browser Test",
-                PrimaryButtonText = "Works!",
-                SecondaryButtonText = "Still does not work",
-                CloseButtonText = "Cancel",
+                Title = ResourceHelper.GetString("NetworkTesterPage_BrowserTestTitle"),
+                PrimaryButtonText = ResourceHelper.GetString("NetworkTesterPage_BrowserTesterWorks"),
+                SecondaryButtonText = ResourceHelper.GetString("NetworkTesterPage_BrowserTesterStillDoesNotWork"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = stackPanel,
             };
@@ -680,7 +679,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
             };
             stackPanel.Children.Add(new TextBlock()
             {
-                Text = "Use the provided user agent or enter a custom one of your choice.",
+                Text = ResourceHelper.GetString("NetworkTesterPage_UseUserAgentInfo"),
                 TextWrapping = TextWrapping.Wrap,
             });
 
@@ -692,9 +691,9 @@ public partial class NetworkTesterWindowModel : ObservableObject
 
             var dialog = new EasyContentDialog(networkTesterWindow.Content.XamlRoot)
             {
-                Title = $"Custom user agent test",
-                PrimaryButtonText = "Run Test",
-                CloseButtonText = "Cancel",
+                Title = ResourceHelper.GetString("NetworkTesterPage_CustomUserAgentTest"),
+                PrimaryButtonText = ResourceHelper.GetString("NetworkTesterPage_RunTest"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = stackPanel,
             };

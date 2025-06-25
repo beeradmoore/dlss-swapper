@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="DLSS_Swapper.TranslationToolboxWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DLSS_Swapper"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ctWinUI="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:converters="using:CommunityToolkit.WinUI.Converters"
+    mc:Ignorable="d"
+    Title="{x:Bind ViewModel.TranslationProperties.ApplicationTilteTranslationToolboxWindowText, Mode=OneTime}">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid RowSpacing="8">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="16,0" Grid.Row="0">
+
+            <StackPanel Orientation="Vertical" Spacing="8" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.SourceLanguageText, Mode=OneWay}" FontWeight="Bold" VerticalAlignment="Center" />
+                    <ComboBox Header="" ItemsSource="{x:Bind ViewModel.SourceLanguages, Mode=OneWay}" DisplayMemberPath="Value" SelectedItem="{x:Bind ViewModel.SelectedSourceLanguage, Mode=TwoWay}" />
+                </StackPanel>
+                <TextBlock VerticalAlignment="Center">
+                    <Run Text="{x:Bind ViewModel.TranslationProperties.TranslationProgressText, Mode=OneWay}" FontWeight="Bold" />
+                    <Run Text="{x:Bind ViewModel.TranslationProgressString, Mode=OneWay}"/>
+                </TextBlock>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Spacing="8" HorizontalAlignment="Right">
+
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.HelpText, Mode=OneWay}" Command="{x:Bind ViewModel.OpenTranslationsGuideCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE897;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.LoadExistingTranslationText, Mode=OneWay}" Command="{x:Bind ViewModel.LoadExistingTranslationCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE8B5;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.LoadText, Mode=OneWay}" Command="{x:Bind ViewModel.LoadCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE8B7;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.SaveText, Mode=OneWay}" Command="{x:Bind ViewModel.SaveCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE74E;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.PublishText, Mode=OneWay}" Command="{x:Bind ViewModel.PublishCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xEDE1;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+
+                <AppBarSeparator />
+
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.ReloadAppText, Mode=OneWay}" Command="{x:Bind ViewModel.ReloadAppCommand}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE72C;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+
+            </StackPanel>
+
+        </Grid>
+
+
+        <ctWinUI:DataGrid x:Name="MainDataGrid" Grid.Row="1" SelectionMode="Single" GridLinesVisibility="All" VerticalAlignment="Stretch" ColumnWidth="*" AutoGenerateColumns="False" ItemsSource="{x:Bind ViewModel.TranslationRows, Mode=OneWay}">
+
+            <ctWinUI:DataGrid.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Style>
+
+                <converters:EmptyStringToObjectConverter x:Key="EmptyStringToObjectConverter" EmptyValue="{StaticResource SystemFillColorCriticalBrush}" NotEmptyValue="Transparent" />
+
+            </ctWinUI:DataGrid.Resources>
+
+            <ctWinUI:DataGrid.Columns>
+
+                <ctWinUI:DataGridTextColumn Width="*" Header="{x:Bind ViewModel.TranslationProperties.KeyText, Mode=OneWay}" Tag="Key" Binding="{Binding Key}" IsReadOnly="True">
+                      <ctWinUI:DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="IsTextSelectionEnabled" Value="True" />
+                        </Style>
+                    </ctWinUI:DataGridTextColumn.ElementStyle>
+                </ctWinUI:DataGridTextColumn>
+
+                <ctWinUI:DataGridTextColumn Width="*" Header="{x:Bind ViewModel.TranslationProperties.CommentText, Mode=OneWay}" Tag="Comment" Binding="{Binding Comment}" IsReadOnly="True">
+                    <ctWinUI:DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="IsTextSelectionEnabled" Value="True" />
+                        </Style>
+                    </ctWinUI:DataGridTextColumn.ElementStyle>
+                </ctWinUI:DataGridTextColumn>
+
+                <ctWinUI:DataGridTextColumn Width="2*"  Header="{x:Bind ViewModel.TranslationProperties.SourceTranslationText, Mode=OneWay}" Tag="SourceTranslation" IsReadOnly="True" Binding="{Binding SourceTranslation}">
+                    <ctWinUI:DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="IsTextSelectionEnabled" Value="True" />
+                        </Style>
+                    </ctWinUI:DataGridTextColumn.ElementStyle>
+                </ctWinUI:DataGridTextColumn>
+
+                <!--
+                <ctWinUI:DataGridTextColumn Width="2*" Header="{x:Bind ViewModel.TranslationProperties.NewTranslationText, Mode=OneWay}" Tag="NewTranslation" IsReadOnly="False" Binding="{Binding NewTranslation, Mode=TwoWay}">
+                    <ctWinUI:DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="IsTextSelectionEnabled" Value="True" />
+                        </Style>
+                    </ctWinUI:DataGridTextColumn.ElementStyle>
+                    <ctWinUI:DataGridTextColumn.EditingElementStyle>
+                        <Style TargetType="TextBox">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="AcceptsReturn" Value="true" />
+                        </Style>
+                    </ctWinUI:DataGridTextColumn.EditingElementStyle>
+                </ctWinUI:DataGridTextColumn>
+                -->
+
+                <!--  Binding="{Binding NewTranslation, Mode=TwoWay}"-->
+                <ctWinUI:DataGridTemplateColumn Width="2*" Header="{x:Bind ViewModel.TranslationProperties.NewTranslationText, Mode=OneWay}" Tag="NewTranslation" IsReadOnly="False">
+                    <ctWinUI:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="2" BorderBrush="{Binding NewTranslation, Converter={StaticResource EmptyStringToObjectConverter}, Mode=OneWay}">
+
+                                <!-- This thing sucked, but did give better undo history -->
+                                <!--
+                                <RichEditBox
+                                             DataContextChanged="RichEditBox_DataContextChanged"
+                                             Padding="4"
+                                             Background="Transparent"
+                                             BorderBrush="Transparent"
+                                             TextWrapping="Wrap"
+                                             AcceptsReturn="false"
+                                             IsTextPredictionEnabled="False"
+                                             ContextFlyout="{x:Null}"
+                                             SelectionFlyout="{x:Null}"
+                                             ClipboardCopyFormat="PlainText"
+                                             TextChanged="RichEditBox_TextChanged"
+                                             PreviewKeyDown="RichEditBox_PreviewKeyDown"
+                                             Loaded="RichEditBox_Loaded"
+
+                                        />-->
+
+                                <TextBox Text="{Binding NewTranslation, Mode=TwoWay}" Padding="4" Background="Transparent" BorderBrush="Transparent" TextWrapping="Wrap" AcceptsReturn="false" LostFocus="TextBox_LostFocus" PreviewKeyDown="TextBox_PreviewKeyDown">
+                                    <TextBox.Resources>
+                                        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent" />
+                                        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent" />
+                                    </TextBox.Resources>
+                                </TextBox>
+                            </Border>
+                        </DataTemplate>
+                    </ctWinUI:DataGridTemplateColumn.CellTemplate>
+                </ctWinUI:DataGridTemplateColumn>
+
+
+            </ctWinUI:DataGrid.Columns>
+        </ctWinUI:DataGrid>
+    </Grid>
+</Window>

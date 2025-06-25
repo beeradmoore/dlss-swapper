@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Microsoft.UI.Windowing;
 
 namespace DLSS_Swapper;
 
+[JsonSourceGenerationOptions(WriteIndented = true)]
 [JsonSerializable(typeof(Data.GitHub.GitHubRelease))]
 [JsonSerializable(typeof(Data.EpicGamesStore.CacheItem[]))]
 [JsonSerializable(typeof(Data.EpicGamesStore.ManifestFile))]
@@ -16,6 +18,7 @@ namespace DLSS_Swapper;
 [JsonSerializable(typeof(OverlappedPresenterState))]
 [JsonSerializable(typeof(Data.HashedKnownDLL))]
 [JsonSerializable(typeof(Data.GameLibrarySettings))]
+[JsonSerializable(typeof(Dictionary<string, string>))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }

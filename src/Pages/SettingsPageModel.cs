@@ -13,6 +13,8 @@ using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using DLSS_Swapper.Collections;
+using System.Collections.Specialized;
 
 namespace DLSS_Swapper.Pages;
 
@@ -24,11 +26,21 @@ public partial class SettingsPageModel : ObservableObject
     public IEnumerable<LoggingLevel> LoggingLevels => Enum.GetValues<LoggingLevel>();
     public string CurrentLogPath => Logger.GetCurrentLogPath();
     public string AppVersion => App.CurrentApp.GetVersionString();
-    public List<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; } = new List<DLSSOnScreenIndicatorSetting>(){
-        new DLSSOnScreenIndicatorSetting() { Label = "None", Value = 0 },
-        new DLSSOnScreenIndicatorSetting() { Label = "Enabled for debug DLSS DLLs only", Value = 1 },
-        new DLSSOnScreenIndicatorSetting() { Label = "Enabled for all DLSS DLLs", Value = 1024 }
+
+    [ObservableProperty]
+    public partial DLSSOnScreenIndicatorSetting SelectedDlssOnScreenIndicator { get; set; }
+
+    public RefreshableObservableCollection<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; init; } = new RefreshableObservableCollection<DLSSOnScreenIndicatorSetting>()
+    {
+        new DLSSOnScreenIndicatorSetting("General_None", 0),
+        new DLSSOnScreenIndicatorSetting("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly", 1),
+        new DLSSOnScreenIndicatorSetting("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls", 1024)
     };
+
+    public ObservableCollection<KeyValuePair<string, string>> Languages { get; init; } = new ObservableCollection<KeyValuePair<string, string>>();
+
+    [ObservableProperty]
+    public partial KeyValuePair<string, string> SelectedLanguage { get; set; }
 
     [ObservableProperty]
     public partial bool LightThemeSelected { get; set; } = false;
@@ -38,9 +50,6 @@ public partial class SettingsPageModel : ObservableObject
 
     [ObservableProperty]
     public partial bool DefaultThemeSelected { get; set; } = false;
-
-    [ObservableProperty]
-    public partial DLSSOnScreenIndicatorSetting SelectedDlssOnScreenIndicator { get; set; }
 
     [ObservableProperty]
     public partial bool DlssEnableLogging { get; set; } = false;
@@ -70,9 +79,26 @@ public partial class SettingsPageModel : ObservableObject
 
     bool _hasSetDefaults = false;
 
+    public SettingsPageModelTranslationProperties TranslationProperties { get; } = new SettingsPageModelTranslationProperties();
+
     public SettingsPageModel(SettingsPage page)
     {
         _weakPage = new WeakReference<SettingsPage>(page);
+
+        LanguageManager.Instance.OnLanguageChanged += () =>
+        {
+            DLSSOnScreenIndicatorOptions.RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        };
+
+        var knownLanguages = LanguageManager.Instance.GetKnownLanguages();
+        foreach (var knownLanguage in knownLanguages)
+        {
+            var languageName = LanguageManager.Instance.GetLanguageName(knownLanguage);
+            Languages.Add(new KeyValuePair<string, string>(knownLanguage, languageName));
+        }
+
+        //work with selected language state
+        SelectedLanguage = Languages.FirstOrDefault(x => x.Key == Settings.Instance.Language);
 
         _dlssSettingsManager = new DLSSSettingsManager();
         LightThemeSelected = Settings.Instance.AppTheme == ElementTheme.Light;
@@ -80,7 +106,7 @@ public partial class SettingsPageModel : ObservableObject
         DefaultThemeSelected = Settings.Instance.AppTheme == ElementTheme.Default;
 
         var dlssShowOnScreenIndicatorIndicator = _dlssSettingsManager.GetShowDlssIndicator();
-        SelectedDlssOnScreenIndicator = DLSSOnScreenIndicatorOptions.FirstOrDefault(x => x.Value == dlssShowOnScreenIndicatorIndicator);
+        SelectedDlssOnScreenIndicator = DLSSOnScreenIndicatorOptions.FirstOrDefault(x => x.Value == dlssShowOnScreenIndicatorIndicator) ?? DLSSOnScreenIndicatorOptions[0];
 
         var logLevel = _dlssSettingsManager.GetLogLevel();
         if (logLevel == 1)
@@ -113,12 +139,17 @@ public partial class SettingsPageModel : ObservableObject
             return;
         }
 
-        if (e.PropertyName == nameof(LightThemeSelected))
+        if (e.PropertyName == nameof(SelectedLanguage))
+        {
+            Settings.Instance.Language = SelectedLanguage.Key;
+            LanguageManager.Instance.ChangeLanguage(SelectedLanguage.Key);
+        }
+        else if (e.PropertyName == nameof(LightThemeSelected))
         {
             if (LightThemeSelected == true)
             {
                 Settings.Instance.AppTheme = ElementTheme.Light;
-                ((App)Application.Current).MainWindow.UpdateColors(ElementTheme.Light);
+                ((App)Application.Current).WindowManager.UpdateColors(ElementTheme.Light);
             }
         }
         else if (e.PropertyName == nameof(DarkThemeSelected))
@@ -126,7 +157,7 @@ public partial class SettingsPageModel : ObservableObject
             if (DarkThemeSelected == true)
             {
                 Settings.Instance.AppTheme = ElementTheme.Dark;
-                ((App)Application.Current).MainWindow.UpdateColors(ElementTheme.Dark);
+                ((App)Application.Current).WindowManager.UpdateColors(ElementTheme.Dark);
             }
         }
         else if (e.PropertyName == nameof(DefaultThemeSelected))
@@ -134,7 +165,7 @@ public partial class SettingsPageModel : ObservableObject
             if (DefaultThemeSelected == true)
             {
                 Settings.Instance.AppTheme = ElementTheme.Default;
-                ((App)Application.Current).MainWindow.UpdateColors(ElementTheme.Default);
+                ((App)Application.Current).WindowManager.UpdateColors(ElementTheme.Default);
             }
         }
         else if (e.PropertyName == nameof(SelectedDlssOnScreenIndicator))
@@ -203,9 +234,9 @@ public partial class SettingsPageModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    CloseButtonText = "Okay",
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = "No new updates are available.",
+                    Content = ResourceHelper.GetString("SettingsPage_NoNewUpdatesAvailable"),
                 };
                 await dialog.ShowAsync();
 
@@ -239,10 +270,10 @@ public partial class SettingsPageModel : ObservableObject
             {
                 var dialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    Title = "Oops",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("General_Oops"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = "Could not open your log file directly from DLSS Swapper. Please try open it manually.",
+                    Content = ResourceHelper.GetString("SettingsPage_CouldNotOpenLogFileTryManual"),
                 };
 
                 await dialog.ShowAsync();
@@ -260,16 +291,15 @@ public partial class SettingsPageModel : ObservableObject
     void OpenNetworkTester()
     {
         var networkTesterWindow = new NetworkTesterWindow();
-        networkTesterWindow.Activate();
+        App.CurrentApp.WindowManager.ShowWindow(networkTesterWindow);
     }
 
     [RelayCommand]
     void OpenDiagnostics()
     {
         var diagnosticsWindow = new DiagnosticsWindow();
-        diagnosticsWindow.Activate();
+        App.CurrentApp.WindowManager.ShowWindow(diagnosticsWindow);
     }
-
 
     [RelayCommand]
     async Task AddIgnoredPathAsync(string path)
@@ -280,10 +310,10 @@ public partial class SettingsPageModel : ObservableObject
             {
                 var errorDialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    Title = "Error",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = "This feature is not supported if you are running the application as admin.",
+                    Content = ResourceHelper.GetString("General_FeatureNotSupportedWhenAdmin"),
                 };
                 await errorDialog.ShowAsync();
                 return;
@@ -311,10 +341,10 @@ public partial class SettingsPageModel : ObservableObject
             {
                 var errorDialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
-                    Title = "Error",
-                    CloseButtonText = "Okay",
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = $"The path {folderPath} is already ignored.",
+                    Content = ResourceHelper.GetFormattedResourceTemplate("SettingsPage_PathAlreadyIgnored", folderPath),
                 };
                 await errorDialog.ShowAsync();
                 return;
@@ -332,11 +362,11 @@ public partial class SettingsPageModel : ObservableObject
         {
             var dialog = new EasyContentDialog(settingsPage.XamlRoot)
             {
-                Title = "Delete Ignored Path",
-                CloseButtonText = "Cancel",
+                Title = ResourceHelper.GetString("SettingsPage_DeleteIgnoredPathTitle"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 DefaultButton = ContentDialogButton.Close,
-                PrimaryButtonText = "Delete",
-                Content = $"Are you sure you want to delete the ignored path {path}?",
+                PrimaryButtonText = ResourceHelper.GetString("General_Delete"),
+                Content = ResourceHelper.GetFormattedResourceTemplate("SettingsPage_DeleteIgnoredPathMessage", path),
             };
 
             var result = await dialog.ShowAsync();
@@ -347,5 +377,12 @@ public partial class SettingsPageModel : ObservableObject
                 Settings.Instance.IgnoredPaths = IgnoredPaths.ToArray();
             }
         }
+    }
+
+    [RelayCommand]
+    void OpenTranslationToolbox()
+    {
+        var translationToolboxWindow = new TranslationToolboxWindow();
+        App.CurrentApp.WindowManager.ShowWindow(translationToolboxWindow);
     }
 }

@@ -19,7 +19,6 @@
         <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
         <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter"  />
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToInvisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
-        <ct_converters:BoolToObjectConverter x:Key="FavouriteTextConverter" TrueValue="Favourited" FalseValue="Click to favourite" />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteGlyphConverter" TrueValue="&#xE735;" FalseValue="&#xE734;" />
         <ct_converters:EmptyObjectToObjectConverter x:Key="NullObjectToBoolConverter" NotEmptyValue="True" EmptyValue="False" />
         <ct_converters:EmptyCollectionToObjectConverter  x:Key="EmptyCollectionToObjectConverter" NotEmptyValue="True" EmptyValue="False" />
@@ -32,7 +31,7 @@
 
         <ControlTemplate x:Key="LeftButtonsControlTemplate" TargetType="ContentControl">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" XYFocusKeyboardNavigation="Enabled" Padding="{ThemeResource ContentDialogPadding}" Background="{TemplateBinding Background}" Spacing="8">
-                <Button ToolTipService.ToolTip="Notes" Command="{Binding EditNotesCommand}">
+                <Button ToolTipService.ToolTip="{Binding TranslationProperties.NotesText, Mode=OneWay}" Command="{Binding EditNotesCommand}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE70B;"/>
                     </Button.Content>
@@ -52,7 +51,7 @@
                 </Button>
                 -->
 
-                <Button Command="{Binding FavouriteCommand}" ToolTipService.ToolTip="{Binding  Game.IsFavourite, Converter={StaticResource FavouriteTextConverter}}">
+                <Button Command="{Binding FavouriteCommand}" ToolTipService.ToolTip="{Binding Game.IsFavourite, Converter={StaticResource FavouriteTextConverter}}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="{Binding Game.IsFavourite, Converter={StaticResource FavouriteGlyphConverter}}"/>
                     </Button.Content>
@@ -60,13 +59,10 @@
             </StackPanel>
         </ControlTemplate>
 
-
-
         <ControlTemplate x:Key="RightButtonsControlTemplate" TargetType="ContentControl">
-
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" XYFocusKeyboardNavigation="Enabled" Padding="{ThemeResource ContentDialogPadding}" Background="{TemplateBinding Background}" Spacing="8">
-                <Button Content="Remove" Visibility="{Binding IsManuallyAdded, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding RemoveCommand}" />
-                <Button x:Name="CloseButton" IsTabStop="False" Content="Close" Style="{ThemeResource DefaultButtonStyle}" ElementSoundMode="FocusOnly" Command="{Binding CloseCommand}" KeyboardAcceleratorPlacementMode="Hidden">
+                <Button Content="{Binding TranslationProperties.RemoveText, Mode=OneWay}" Visibility="{Binding IsManuallyAdded, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding RemoveCommand}" />
+                <Button x:Name="CloseButton" IsTabStop="False" Content="{Binding TranslationProperties.CloseText, Mode=OneWay}" Style="{ThemeResource DefaultButtonStyle}" ElementSoundMode="FocusOnly" Command="{Binding CloseCommand}" KeyboardAcceleratorPlacementMode="Hidden">
                     <Button.KeyboardAccelerators>
                         <KeyboardAccelerator Key="Escape" Modifiers="None" />
                     </Button.KeyboardAccelerators>
@@ -108,7 +104,7 @@
 
                     <Button HorizontalAlignment="Stretch" Background="Transparent" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.AddCoverImageCommand}" AllowDrop="True" DragEnter="CoverButton_DragEnter" DragOver="CoverButton_DragOver" Drop="CoverButton_Drop" />
                 </Grid>
-                <Button Content="Add Custom Cover" HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.AddCoverImageCommand}" />
+                <Button Content="{x:Bind ViewModel.TranslationProperties.AddCustomCoverText, Mode=OneWay}" HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.AddCoverImageCommand}" />
             </StackPanel>
 
             <Grid Grid.Column="1" >
@@ -120,34 +116,34 @@
                         Severity="Warning"
                         IsOpen="True"
                         IsClosable="False"
-                        Message="This game is not in a ready to play state.">
+                        Message="{x:Bind ViewModel.TranslationProperties.GameNotReadyToPlayStateText, Mode=OneWay}">
                         <InfoBar.ActionButton>
-                            <Button Content="Help" Command="{x:Bind ViewModel.ReadyToPlayStateMoreInformationCommand}" HorizontalAlignment="Right" />
+                            <Button Content="{x:Bind ViewModel.TranslationProperties.HelpText, Mode=OneWay}" Command="{x:Bind ViewModel.ReadyToPlayStateMoreInformationCommand}" HorizontalAlignment="Right" />
                         </InfoBar.ActionButton>
                     </InfoBar>
 
-                    <TextBlock Text="Name" FontWeight="Bold" />
+                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NameText, Mode=OneWay}" FontWeight="Bold" />
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0" VerticalAlignment="Stretch" Text="{x:Bind ViewModel.GameTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{x:Bind ViewModel.IsManuallyAdded, Converter={StaticResource BoolNegationConverter}}" />
-                        <Button Grid.Column="1" VerticalAlignment="Stretch" ToolTipService.ToolTip="Save" Visibility="{x:Bind ViewModel.IsManuallyAdded, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{x:Bind ViewModel.GameTitleHasChanged, Mode=OneWay}" Command="{x:Bind ViewModel.SaveTitleCommand}">
+                        <Button Grid.Column="1" VerticalAlignment="Stretch" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.SaveText, Mode=OneWay}" Visibility="{x:Bind ViewModel.IsManuallyAdded, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{x:Bind ViewModel.GameTitleHasChanged, Mode=OneWay}" Command="{x:Bind ViewModel.SaveTitleCommand}">
                             <Button.Content>
                                 <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE74E;"/>
                             </Button.Content>
                         </Button>
                     </Grid>
 
-                    <TextBlock Text="Install path" FontWeight="Bold" Padding="0,8,0,0" />
+                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.InstallPathText, Mode=OneWay}" FontWeight="Bold" Padding="0,8,0,0" />
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0" IsReadOnly="True" Text="{x:Bind ViewModel.Game.InstallPath}" VerticalAlignment="Stretch" />
-                        <Button Grid.Column="1" ToolTipService.ToolTip="Open folder" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenInstallPathCommand}">
+                        <Button Grid.Column="1" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.OpenFolderText, Mode=OneWay}" VerticalAlignment="Stretch" Command="{x:Bind ViewModel.OpenInstallPathCommand}">
                             <Button.Content>
                                 <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE8A7;"/>
                             </Button.Content>
@@ -170,7 +166,7 @@
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="0">
                             <TextBlock Text="DLSS" FontWeight="Bold" VerticalAlignment="Center" Margin="0" Padding="0" />
-                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource InformationalFontIcon}" />
                                 </Button.Content>
@@ -181,7 +177,7 @@
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="1" Grid.Row="0" >
                             <TextBlock Text="DLSS Frame Generation" FontWeight="Bold" />
-                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSGFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSGFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource InformationalFontIcon}" />
                                 </Button.Content>
@@ -192,7 +188,7 @@
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="3">
                             <TextBlock Text="DLSS Ray Reconstruction" FontWeight="Bold" />
-                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource InformationalFontIcon}" />
                                 </Button.Content>
@@ -228,7 +224,7 @@
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="0">
                             <TextBlock Text="FSR 3.1 (DirectX 12)" FontWeight="Bold" />
-                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource InformationalFontIcon}" />
                                 </Button.Content>
@@ -240,7 +236,7 @@
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="1" Grid.Row="0">
                             <TextBlock Text="FSR 3.1 (Vulkan)" FontWeight="Bold" />
-                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource InformationalFontIcon}" />
                                 </Button.Content>
@@ -268,7 +264,7 @@
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="0">
                             <TextBlock Text="XeSS" FontWeight="Bold" />
-                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource InformationalFontIcon}" />
                                 </Button.Content>
@@ -280,7 +276,7 @@
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="1" Grid.Row="0">
                             <TextBlock Text="XeSS Frame Generation" FontWeight="Bold" />
-                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource InformationalFontIcon}" />
                                 </Button.Content>
@@ -292,24 +288,16 @@
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="3">
                             <TextBlock Text="XeLL" FontWeight="Bold" />
-                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="Multiple DLLs found">
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource InformationalFontIcon}" />
                                 </Button.Content>
                             </Button>
                         </StackPanel>
                         <Button Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentXeLL, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentXeLL.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeLL}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
-
                     </Grid>
-
                 </StackPanel>
             </Grid>
-
-
-
         </Grid>
-
-
-
     </usercontrols:FakeContentDialog.Content>
 </usercontrols:FakeContentDialog>

@@ -1,49 +1,42 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml;
-using Windows.Gaming.Input;
-using Windows.Storage.Pickers;
-using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Data.ManuallyAdded;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace DLSS_Swapper.UserControls
+namespace DLSS_Swapper.UserControls;
+
+internal partial class ManuallyAddGameModel : ObservableObject
 {
-    internal partial class ManuallyAddGameModel : ObservableObject
+    ManuallyAddedGame _game;
+    public ManuallyAddedGame Game => _game;
+
+    WeakReference<ManuallyAddGameControl> _manuallyAddGameControlWeakReference;
+
+    public ManuallyAddGameModelTranslationProperties TranslationProperties { get; } = new ManuallyAddGameModelTranslationProperties();
+
+    public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath) : base()
     {
-        ManuallyAddedGame game;
-        public ManuallyAddedGame Game => game;
+        _manuallyAddGameControlWeakReference = new WeakReference<ManuallyAddGameControl>(manuallyAddGameControl);
 
-        WeakReference<ManuallyAddGameControl> manuallyAddGameControlWeakReference;
-
-        public ManuallyAddGameModel(ManuallyAddGameControl manuallyAddGameControl, string installPath)
+        _game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
         {
-            manuallyAddGameControlWeakReference = new WeakReference<ManuallyAddGameControl>(manuallyAddGameControl);
+            Title = Path.GetFileName(installPath),
+            InstallPath = PathHelpers.NormalizePath(installPath),
+        };
+    }
 
-            game = new ManuallyAddedGame(Guid.NewGuid().ToString("D"))
-            {
-                Title = Path.GetFileName(installPath),
-                InstallPath = PathHelpers.NormalizePath(installPath),
-            };
+    [RelayCommand]
+    async Task AddCoverImageAsync()
+    {
+        if (_game.CoverImage == _game.ExpectedCustomCoverImage)
+        {
+            await _game.PromptToRemoveCustomCover();
+            return;
         }
 
-        [RelayCommand]
-        async Task AddCoverImageAsync()
-        {
-            if (game.CoverImage == game.ExpectedCustomCoverImage)
-            {
-                await game.PromptToRemoveCustomCover();
-                return;
-            }
-
-            await game.PromptToBrowseCustomCover();
-        }
+        await _game.PromptToBrowseCustomCover();
     }
 }

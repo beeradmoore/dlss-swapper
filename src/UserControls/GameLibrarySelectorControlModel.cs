@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.UserControls;
@@ -26,6 +27,14 @@ internal partial class GameLibrarySelectorControlModel : ObservableObject
 
         // Only add CollectionChanged after it has been loaded initially.
         GameLibraries.CollectionChanged += GameLibraries_CollectionChanged;
+
+        LanguageManager.Instance.OnLanguageChanged += () =>
+        {
+            foreach (var gameLibrarySelector in GameLibraries)
+            {
+                gameLibrarySelector.ReloadLabels();
+            }
+        };
     }
 
     void GameLibraries_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)

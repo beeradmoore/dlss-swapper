@@ -1,37 +1,18 @@
 using CommunityToolkit.WinUI;
-using DLSS_Swapper.Data;
-using DLSS_Swapper.Data.EpicGamesStore;
-using DLSS_Swapper.Data.GOG;
-using DLSS_Swapper.Data.Steam;
-using DLSS_Swapper.Data.UbisoftConnect;
-using DLSS_Swapper.Data.Xbox;
-using DLSS_Swapper.Interfaces;
+using DLSS_Swapper.Helpers;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
-using SQLite;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Principal;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace DLSS_Swapper
 {
@@ -44,8 +25,10 @@ namespace DLSS_Swapper
 
         MainWindow? _window;
         public MainWindow MainWindow => _window ??= new MainWindow();
+        public WindowManager WindowManager { get; } = new WindowManager();
 
         public static App CurrentApp => (App)Application.Current;
+
 
         internal HttpClient? _httpClient;
         public HttpClient HttpClient
@@ -84,6 +67,35 @@ namespace DLSS_Swapper
         {
             Logger.Init();
 
+            var language = Settings.Instance.Language;
+
+            // Language is not set, try to fetch from system.
+            if (string.IsNullOrWhiteSpace(language))
+            {
+                // Try the language of the current thread.
+                var currentLauguage = Thread.CurrentThread.CurrentCulture.Name;
+                var knownLanguages = LanguageManager.Instance.GetKnownLanguages();
+                foreach (var knownLanguage in knownLanguages)
+                {
+                    if (string.Equals(currentLauguage, knownLanguage, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        language = knownLanguage;
+                        break;
+                    }
+                }
+
+                // TODO: Can we fallback to other languages? eg. Is fr-CA acceptable to fallback to fr-FR or does the app just default back to en-US?
+            }
+
+            // If we failed to fetch the users language, default to en-US.
+            if (string.IsNullOrWhiteSpace(language))
+            {
+                language = "en-US";
+            }
+            Settings.Instance.Language = language;
+
+            LanguageManager.Instance.ChangeLanguage(language);
+
             UnhandledException += App_UnhandledException;
 
             GlobalElementTheme = Settings.Instance.AppTheme;
@@ -104,7 +116,6 @@ namespace DLSS_Swapper
         /// <param name="args">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
-
             // If this is the first instance launched, then register it as the "main" instance.
             // If this isn't the first instance launched, then "main" will already be registered,
             // so retrieve it.
@@ -124,7 +135,7 @@ namespace DLSS_Swapper
             if (Storage.StoragePath.Trim(Path.DirectorySeparatorChar).Contains(Environment.SystemDirectory, StringComparison.InvariantCultureIgnoreCase))
             {
                 var failToLaunchWindow = new FailToLaunchWindow();
-                failToLaunchWindow.Activate();
+                WindowManager.ShowWindow(failToLaunchWindow);
                 return;
             }
 
@@ -135,7 +146,7 @@ namespace DLSS_Swapper
 
             Database.Instance.Init();
 
-            MainWindow.Activate();
+            WindowManager.ShowWindow(MainWindow);
 
 #if !PORTABLE
             // No need to calculate this for portable app.

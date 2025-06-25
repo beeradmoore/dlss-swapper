@@ -10,42 +10,39 @@
 
     <ScrollViewer>
         <StackPanel Orientation="Vertical" Spacing="12">
-            <TextBlock TextWrapping="Wrap">
-                While loading your games some new DLLs have been discovered which are not in the DLSS Swapper manifest.
-                You can help us add these files by submitting a GitHub issue.</TextBlock>
+            <TextBlock Text="{x:Bind ViewModel.TranslationProperties.WhileLoadingYourGameNewDllsDiscoveredHelpUsText, Mode=OneWay}" TextWrapping="Wrap" />
 
-            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Step 1: Create new issue" />
+            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TranslationProperties.StepOneCreateNewIssueText, Mode=OneWay}" />
             <StackPanel Orientation="Horizontal" Spacing="12">
-                <Button Command="{x:Bind ViewModel.OpenGitHubIssueCommand}">Create new GitHub issue</Button>
-                <TextBlock Text="(GitHub account required)" VerticalAlignment="Center" />
+                <Button Content="{x:Bind ViewModel.TranslationProperties.CreateNewGitHubIssueText, Mode=OneWay}" Command="{x:Bind ViewModel.OpenGitHubIssueCommand}" />
+                <TextBlock Text="{x:Bind ViewModel.TranslationProperties.GitHubAccountRequiredText, Mode=OneWay}" VerticalAlignment="Center" />
             </StackPanel>
-            
+
             <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="Wrap">
-                If the button does not work try here,
+                <Run Text="{x:Bind ViewModel.TranslationProperties.IfButtonDoesntWorkTryHereText, Mode=OneWay}"/>
                 <Hyperlink NavigateUri="https://github.com/beeradmoore/dlss-swapper-manifest-builder/issues/">https://github.com/beeradmoore/dlss-swapper-manifest-builder/issues/</Hyperlink>
             </TextBlock>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Step 2: Copy title" />                
-                <Button Command="{x:Bind ViewModel.CopyTitleCommand}" ToolTipService.ToolTip="Copy" Style="{StaticResource TextBlockButtonStyle}">
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TranslationProperties.StepTwoCopyTitleText, Mode=OneWay}" />
+                <Button Command="{x:Bind ViewModel.CopyTitleCommand}" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.CopyText, Mode=OneWay}" Style="{StaticResource TextBlockButtonStyle}">
                     <FontIcon Glyph="&#xE8C8;" />
                 </Button>
             </StackPanel>
-            <TextBox Text="{x:Bind ViewModel.Title}" IsReadOnly="True" />
-
+            <TextBox Text="{x:Bind ViewModel.Title, Mode=OneWay}" IsReadOnly="True" />
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Step 3: Copy body" />
-                <Button Command="{x:Bind ViewModel.CopyBodyCommand}" ToolTipService.ToolTip="Copy" Style="{StaticResource TextBlockButtonStyle}">
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TranslationProperties.StepThreeCopyBodyText, Mode=OneWay}" />
+                <Button Command="{x:Bind ViewModel.CopyBodyCommand}" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.CopyText, Mode=OneWay}" Style="{StaticResource TextBlockButtonStyle}">
                     <FontIcon Glyph="&#xE8C8;" />
                 </Button>
             </StackPanel>
             <TextBox Text="{x:Bind ViewModel.Body}" AcceptsReturn="True" TextWrapping="Wrap" Height="200" IsReadOnly="True" />
 
-            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Step 4: Submit your issue" />
-            <TextBlock TextWrapping="Wrap">You do not have to submit the DLLs. We will track them down based on the information provided.</TextBlock>
+            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.TranslationProperties.StepFourSubmitYourIssueText, Mode=OneWay}" />
+            <TextBlock Text="{x:Bind ViewModel.TranslationProperties.YouDoNotHaveToSubmitDllAutoTrackText, Mode=OneWay}"  TextWrapping="Wrap" />
 
-            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" HorizontalAlignment="Center">Thanks for helping!</TextBlock>
+            <TextBlock Text="{x:Bind ViewModel.TranslationProperties.ThanksForHelpingText, Mode=OneWay}" Style="{StaticResource SubtitleTextBlockStyle}" HorizontalAlignment="Center" />
 
         </StackPanel>
     </ScrollViewer>

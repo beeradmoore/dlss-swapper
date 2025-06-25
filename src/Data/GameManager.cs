@@ -142,7 +142,7 @@ internal partial class GameManager : ObservableObject
             Source = groupedList,
             ItemsPath = new PropertyPath("Games"),
         };
-        
+
 
         UngroupedGameCollectionViewSource = new CollectionViewSource()
         {
@@ -162,7 +162,7 @@ internal partial class GameManager : ObservableObject
             groupedList.Add(groupedGameLibraryList[0]);
             groupedGameLibraryList.RemoveAt(0);
 
-            
+
             // Add each of the items in the order that is from settings.
             foreach (var gameLibrarySetting in Settings.Instance.GameLibrarySettings)
             {
@@ -330,7 +330,8 @@ internal partial class GameManager : ObservableObject
             // TODO: Cancel loading of games here
             _synchronisedAllGames.Clear();
 
-            App.CurrentApp.RunOnUIThread(() => {
+            App.CurrentApp.RunOnUIThread(() =>
+            {
                 _allGames.Clear();
             });
         }

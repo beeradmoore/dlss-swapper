@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -108,6 +108,6 @@ namespace DLSS_Swapper.Helpers
 
 public class DlssPresetOption
 {
-    public string Value { get; set; }
-    public string Label { get; set; }
+    public string Value { get; set; } = string.Empty;
+    public string Label { get; set; } = string.Empty;
 }

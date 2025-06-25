@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.IO;
 using Windows.System;
 using DLSS_Swapper.Helpers;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DLSS_Swapper.UserControls;
 

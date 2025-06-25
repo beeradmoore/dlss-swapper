@@ -19,6 +19,7 @@
         <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
         <ct_converters:BoolNegationConverter x:Key="BoolNegationConverter"  />
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToInvisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+        <ct_converters:BoolToObjectConverter x:Key="FavouriteTextConverter" TrueValue="{Binding TranslationProperties.FavouritedText, Mode=OneWay}" FalseValue="{Binding TranslationProperties.ClickToFavouriteText, Mode=OneWay}" />
         <ct_converters:BoolToObjectConverter x:Key="FavouriteGlyphConverter" TrueValue="&#xE735;" FalseValue="&#xE734;" />
         <ct_converters:EmptyObjectToObjectConverter x:Key="NullObjectToBoolConverter" NotEmptyValue="True" EmptyValue="False" />
         <ct_converters:EmptyCollectionToObjectConverter  x:Key="EmptyCollectionToObjectConverter" NotEmptyValue="True" EmptyValue="False" />

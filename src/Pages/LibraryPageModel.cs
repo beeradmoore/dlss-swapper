@@ -56,7 +56,6 @@ public partial class LibraryPageModel : ObservableObject
         }
     }
 
-    [RelayCommand]
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);

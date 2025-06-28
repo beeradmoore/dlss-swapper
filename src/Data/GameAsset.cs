@@ -1,8 +1,10 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Helpers.FSR31;
 using SQLite;
 
 namespace DLSS_Swapper.Data;
@@ -35,6 +37,39 @@ public class GameAsset : IEquatable<GameAsset>
                 return _displayVersion;
             }
 
+            if (AssetType == GameAssetType.FSR_31_DX12 || AssetType == GameAssetType.FSR_31_DX12_BACKUP ||
+                AssetType == GameAssetType.FSR_31_VK || AssetType == GameAssetType.FSR_31_VK_BACKUP)
+            {
+                // First try get it from the DLLManager.
+                if (AssetType == GameAssetType.FSR_31_DX12 || AssetType == GameAssetType.FSR_31_DX12_BACKUP)
+                {
+                    var record = DLLManager.Instance.FSR31DX12Records.FirstOrDefault(x => x.MD5Hash == Hash);
+                    if (record is not null)
+                    {
+                        _displayVersion = record.DisplayVersion;
+                        return _displayVersion;
+                    }
+                }
+                else
+                {
+                    var record = DLLManager.Instance.FSR31VKRecords.FirstOrDefault(x => x.MD5Hash == Hash);
+                    if (record is not null)
+                    {
+                        _displayVersion = record.DisplayVersion;
+                        return _displayVersion;
+                    }
+                }
+
+                var latestVersion = FSR31Helper.GetLatestVersion(Path);
+                if (string.IsNullOrWhiteSpace(latestVersion) == false)
+                {
+                    _displayVersion = latestVersion;
+                    return _displayVersion;
+                }
+
+                // If this isn't loaded we fall back to the existing stuff.
+            }
+
             var version = Version.AsSpan();
 
             // Remove all the .0's, such that 2.5.0.0 becomes 2.5
@@ -51,17 +86,53 @@ public class GameAsset : IEquatable<GameAsset>
                 _displayVersion = $"{_displayVersion}.0";
             }
 
-            _displayVersion = $"v{_displayVersion}";
-
             return _displayVersion;
         }
     }
 
+    string _displayName = string.Empty;
+
     [property: Ignore]
     public string DisplayName
     {
-        // TODO: Improve to show relevant name
-        get { return DisplayVersion; }
+        get
+        {
+            if (string.IsNullOrWhiteSpace(_displayName) == false)
+            {
+                return _displayName;
+            }
+
+            if (AssetType == GameAssetType.FSR_31_DX12 || AssetType == GameAssetType.FSR_31_DX12_BACKUP ||
+                AssetType == GameAssetType.FSR_31_VK || AssetType == GameAssetType.FSR_31_VK_BACKUP)
+            {
+                _displayName = $"v{DisplayVersion} (v{Version})";
+                return _displayName;
+                /*
+
+                var version = Version.AsSpan();
+
+                // Remove all the .0's, such that 2.5.0.0 becomes 2.5
+                while (version.EndsWith(".0"))
+                {
+                    version = version.Slice(0, version.Length - 2);
+                }
+
+                var dllVersion = version.ToString();
+
+                // If the value is a single value, eg 1, make it 1.0
+                if (dllVersion.Contains(".") == false)
+                {
+                    dllVersion = $"{dllVersion}.0";
+                }
+
+                _displayName = $"v{DisplayVersion} (v{dllVersion})";
+                return _displayName;
+                */
+            }
+
+            _displayName = $"v{DisplayVersion}";
+            return _displayName;
+        }
     }
 
     [property: Column("Hash")]

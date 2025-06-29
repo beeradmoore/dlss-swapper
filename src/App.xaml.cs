@@ -144,6 +144,41 @@ namespace DLSS_Swapper
             Logger.Info($"App launch - v{versionString}", null);
             Logger.Info($"StoragePath: {Storage.StoragePath}");
 
+            // Check if its the first launch of the app from a new version.
+            var lastLaunchVersion = Settings.Instance.LastLaunchVersion;
+            if (lastLaunchVersion != versionString)
+            {
+                try
+                {
+                    var manifestPath = Storage.GetManifestPath();
+                    if (File.Exists(manifestPath))
+                    {
+                        var fileInfo = new FileInfo(manifestPath);
+                        using (var staticManifestStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DLSS_Swapper.Assets.static_manifest.json"))
+                        {
+                            if (staticManifestStream is not null)
+                            {
+                                // If the static manifest is larger than the file, we likely want to replace the current manifest.
+                                if (staticManifestStream.Length >= fileInfo.Length)
+                                {
+                                    using (var fileWriter = File.Create(manifestPath))
+                                    {
+                                        var length = fileWriter.Length;
+                                        staticManifestStream.CopyTo(fileWriter);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    Settings.Instance.LastLaunchVersion = lastLaunchVersion;
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err, "Unable to perform first launch duties.");
+                }
+            }
+
             Database.Instance.Init();
 
             WindowManager.ShowWindow(MainWindow);

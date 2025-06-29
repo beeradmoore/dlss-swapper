@@ -321,7 +321,7 @@ public partial class DLLPickerControlModel : ObservableObject
         if (didReset.Success == true)
         {
             ResetSelection();
-            ShowTempInfoBar(ResourceHelper.GetString("General_Success"), ResourceHelper.GetFormattedResourceTemplate("GamePage_DllPicker_ResetDllToVersionTemplate", CurrentGameAsset?.DisplayVersion ?? string.Empty), severity: InfoBarSeverity.Success, gridIndex: 0);
+            ShowTempInfoBar(ResourceHelper.GetString("General_Success"), ResourceHelper.GetFormattedResourceTemplate("GamePage_DllPicker_ResetDllToVersionTemplate", CurrentGameAsset?.DisplayName ?? string.Empty), severity: InfoBarSeverity.Success, gridIndex: 0);
         }
         else
         {

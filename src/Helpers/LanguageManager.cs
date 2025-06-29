@@ -47,6 +47,7 @@ public class LanguageManager
             "en-US",
             "pl-PL",
             "pt-BR",
+            "ru-RU",
             "tr-TR",
             "zh-CN",
             "zh-TW",
@@ -66,6 +67,7 @@ public class LanguageManager
             "en-US" => "English (United States)",
             "pl-PL" => "Polish",
             "pt-BR" => "Português BR",
+            "ru-RU" => "Русский", // Russian
             "tr-TR" => "Türkçe", // Turkish
             "zh-CN" => "简体中文", // Simplified Chinese
             "zh-TW" => "繁體中文 (臺灣)", // Traditional Chinese (Taiwan)

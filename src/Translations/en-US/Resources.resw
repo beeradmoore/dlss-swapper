@@ -571,6 +571,12 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Label</value>
   </data>
+  <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
+    <value>Internal Name</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
+    <value>Internal Name Extra</value>
+  </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>Started {0} new downloads.</value>
     <comment>{0} is the number of downloads started.</comment>

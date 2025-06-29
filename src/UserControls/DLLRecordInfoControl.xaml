@@ -27,6 +27,14 @@
             <Run FontWeight="Bold" Text="{Binding TranslationProperties.LabelText}" /> 
             <Run Text="{x:Bind DLLRecord.AdditionalLabel}"/>
         </TextBlock>
+        <TextBlock IsTextSelectionEnabled="True" Visibility="{x:Bind DLLRecord.InternalName, Converter={StaticResource StringVisibilityConverter}}">
+            <Run FontWeight="Bold" Text="{Binding TranslationProperties.InternalNameText}" /> 
+            <Run Text="{x:Bind DLLRecord.InternalName}"/>
+        </TextBlock>
+        <TextBlock IsTextSelectionEnabled="True" Visibility="{x:Bind DLLRecord.InternalNameExtra, Converter={StaticResource StringVisibilityConverter}}">
+            <Run FontWeight="Bold" Text="{Binding TranslationProperties.InternalNameExtraText}" /> 
+            <Run Text="{x:Bind DLLRecord.InternalNameExtra}"/>
+        </TextBlock>
         <TextBlock IsTextSelectionEnabled="True">
             <Run FontWeight="Bold" Text="{Binding TranslationProperties.FileSizeText}" />
             <Run Text="{x:Bind DLLRecord.FileSize, Converter={StaticResource BytesToKiloBytesConverter}}"/>

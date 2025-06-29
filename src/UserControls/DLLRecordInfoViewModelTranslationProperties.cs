@@ -13,6 +13,12 @@ public class DLLRecordInfoViewModelTranslationProperties : LocalizedViewModelBas
     public string LabelText => $"{ResourceHelper.GetString("LibraryPage_DllRecordInfo_Label")}: ";
 
     [TranslationProperty]
+    public string InternalNameText => $"{ResourceHelper.GetString("LibraryPage_DllRecordInfo_InternalName")}: ";
+
+    [TranslationProperty]
+    public string InternalNameExtraText => $"{ResourceHelper.GetString("LibraryPage_DllRecordInfo_InternalNameExtra")}: ";
+
+    [TranslationProperty]
     public string FileSizeText => $"{ResourceHelper.GetString("LibraryPage_DllRecordInfo_FileSize")}: ";
 
     [TranslationProperty]

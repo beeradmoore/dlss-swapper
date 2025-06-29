@@ -24,17 +24,19 @@
 </p>
 
 <p align="center">
-    <a href="../../README.md">English</a>
-    ·
-    <a href="./readme_pt-BR.md">Português BR</a>
+    <a href="../README.md">English</a>    
     ·
     Español
     ·
-    <a href="./readme_ja-JP.md">日本語</a>
+    <a href="./readme_ja-JP.md">日本語</a>    
+    ·
+    <a href="./readme_pt-BR.md">Português BR</a>
+    ·
+    <a href="./readme_tr-TR.md">Türkçe</a>
+    ·
+    <a href="./readme_zh-Hans.md">简体中文</a>
     ·
     <a href="./readme_zh-TW.md">繁體中文</a>
-     ·
-    <a href="./readme_zh-Hans.md">简体中文</a>
 </p>
 
 <p align="center">

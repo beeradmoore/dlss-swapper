@@ -210,7 +210,7 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
                 return other.AdditionalLabel.CompareTo(AdditionalLabel);
             }
 
-            return other.IsDevFile.CompareTo(IsDevFile);
+            return IsDevFile.CompareTo(other.IsDevFile);
         }
 
         return other.VersionNumber.CompareTo(VersionNumber);

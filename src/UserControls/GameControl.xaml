@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:usercontrols="using:DLSS_Swapper.UserControls"
     xmlns:converters="using:DLSS_Swapper.Converters"
+    xmlns:helpers="using:DLSS_Swapper.Helpers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
@@ -184,7 +185,23 @@
 
                         <Button Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
-                        <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="1" Grid.Row="0" >
+                        <StackPanel Grid.Column="1" Grid.Row="0" Spacing="6" Orientation="Horizontal">
+                            <TextBlock Text="DLSS Preset" FontWeight="Bold"/>
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.CanSelectDlssPreset, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
+                                <Button.Content>
+                                    <FontIcon Style="{StaticResource InformationalFontIcon}" />
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+                        <ComboBox Grid.Column="1" Grid.Row="1"
+                            HorizontalAlignment="Stretch"
+                            SelectedItem="{x:Bind ViewModel.SelectedDlssPreset, Mode=TwoWay}"
+                            ItemsSource="{x:Bind ViewModel.DlssPresetOptions}"
+                            DisplayMemberPath="Name"
+                            IsEnabled="{x:Bind ViewModel.CanSelectDlssPreset, Mode=OneWay}" />
+
+                        <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="3" >
                             <TextBlock Text="DLSS Frame Generation" FontWeight="Bold" />
                             <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSGFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
                                 <Button.Content>
@@ -193,9 +210,9 @@
                             </Button>
                         </StackPanel>
 
-                        <Button Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_G.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <Button Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_G.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
-                        <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="3">
+                        <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="1" Grid.Row="3">
                             <TextBlock Text="DLSS Ray Reconstruction" FontWeight="Bold" />
                             <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
                                 <Button.Content>
@@ -204,19 +221,9 @@
                             </Button>
                         </StackPanel>
 
-                        <Button Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_D.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
-                        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
-                            <TextBlock Text="DLSS Preset" FontWeight="Bold"/>
-                            <FontIcon Glyph="&#xE73E;" Visibility="{x:Bind ViewModel.IsDlssPresetSaved, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter }}" Margin="5,0,0,0"/>
-                            <ProgressRing Visibility="{x:Bind ViewModel.IsDlssPresetSaved, Mode=OneWay, Converter={StaticResource BoolToInvisibilityConverter }}" Width="16" Height="16" Margin="5,0,0,0"/>
-                        </StackPanel>
-                        <ComboBox Grid.Column="1" Grid.Row="4"
-                            ItemsSource="{x:Bind ViewModel.DlssPresetOptions}"
-                            SelectedItem="{x:Bind ViewModel.SelectedDlssPreset, Mode=TwoWay}"
-                            DisplayMemberPath="Label"
-                            IsEnabled="{x:Bind ViewModel.DlssPresetOptions, Mode=OneWay, Converter={StaticResource EmptyCollectionToObjectConverter}}"
-                        />
-                        <Button Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_D.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <Button Grid.Column="1" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_D.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+
+                        
                     </Grid>
 
 

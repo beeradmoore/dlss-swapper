@@ -44,4 +44,7 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string MultipleDllsFoundText => ResourceHelper.GetString("GamePage_MultipleDllsFound");
+
+    [TranslationProperty]
+    public string LaunchText => ResourceHelper.GetString("GamePage_Launch");
 }

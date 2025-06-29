@@ -11,6 +11,8 @@ using Windows.System;
 using DLSS_Swapper.Helpers;
 using System.Collections.Generic;
 using System.Linq;
+using DLSS_Swapper.Data.DLSS;
+using System.ComponentModel;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -26,33 +28,12 @@ public partial class GameControlModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(GameTitleHasChanged))]
     public partial string GameTitle { get; set; }
 
-    public List<DlssPresetOption> DlssPresetOptions;
+    public List<PresetOption> DlssPresetOptions { get; } = new List<PresetOption>();
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(DlssPresetHasChanged))]
-    public partial string DlssPreset { get; set; }
+    public partial PresetOption? SelectedDlssPreset { get; set; }
 
-    [ObservableProperty]
-    private DlssPresetOption selectedDlssPreset;
-
-    [ObservableProperty]
-    private bool canSelectDlssPreset = false;
-
-    [ObservableProperty]
-    private bool isDlssPresetSaved = true;
-
-    // Declare and implement the partial method
-    partial void OnSelectedDlssPresetChanged(DlssPresetOption value)
-    {
-        // This code executes whenever SelectedDlssPreset changes.
-        // Automatically trigger the save command:
-        if(Game.DlssPreset != value.Value)
-        {
-            IsDlssPresetSaved = false;
-            DlssPreset = value.Value;
-            SaveDlssPresetCommand.Execute(null);
-        }
-    }
+    public bool CanSelectDlssPreset { get; private set; }
 
     public bool GameTitleHasChanged
     {
@@ -72,20 +53,6 @@ public partial class GameControlModel : ObservableObject
         }
     }
 
-    public bool DlssPresetHasChanged
-    {
-        get
-        {
-
-            if (string.IsNullOrEmpty(DlssPreset))
-            {
-                return false;
-            }
-
-            return DlssPreset.Equals(Game.DlssPreset) == false;
-        }
-    }
-
     public GameControlModelTranslationProperties TranslationProperties { get; } = new GameControlModelTranslationProperties();
 
     public GameControlModel(GameControl gameControl, Game game) : base()
@@ -93,11 +60,51 @@ public partial class GameControlModel : ObservableObject
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
         GameTitle = game.Title;
-        DlssPresetOptions = NVAPIHelper.Instance.DlssPresetOptions;
-        SelectedDlssPreset = DlssPresetOptions.FirstOrDefault(o => o.Value.Equals(game.DlssPreset, StringComparison.OrdinalIgnoreCase));
-        if (game.CurrentDLSS is null)
+
+
+        // Make sure NVAPIHelper is supported and the game has DLSS.
+        if (NVAPIHelper.Instance.Supported && game.CurrentDLSS is not null)
         {
-            NVAPIHelper.Instance.DlssPresetOptions.Clear();
+            // Try load the DriverSettingProfile for the given game. If it is not found the game is not supported.
+
+            var gameProfile = NVAPIHelper.Instance.FindGameProfile(game);
+            if (gameProfile is not null)
+            {
+                CanSelectDlssPreset = true;
+                game.DlssPreset = NVAPIHelper.Instance.GetGameDLSSPreset(game);
+
+                DlssPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
+
+                if (game.DlssPreset is null)
+                {
+                    // If it was never set, ensure it goes to default.
+                    SelectedDlssPreset = DlssPresetOptions.FirstOrDefault(x => x.Value == 0);
+                }
+                else
+                {
+                    SelectedDlssPreset = DlssPresetOptions.FirstOrDefault(x => x.Value == game.DlssPreset);
+                }
+            }
+        }
+
+        if (CanSelectDlssPreset == false)
+        {
+            var disabledPresetOption = new PresetOption(ResourceHelper.GetString("General_NotSupported"), 0);
+            DlssPresetOptions.Add(disabledPresetOption);
+            SelectedDlssPreset = disabledPresetOption;
+        }
+    }
+
+    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+
+        if (e.PropertyName == nameof(SelectedDlssPreset))
+        {
+            if (SelectedDlssPreset is not null && SelectedDlssPreset.Value != Game.DlssPreset)
+            {
+                NVAPIHelper.Instance.SetGameDLSSPreset(Game, SelectedDlssPreset.Value);
+            }
         }
     }
 
@@ -308,18 +315,5 @@ public partial class GameControlModel : ObservableObject
     async Task ReadyToPlayStateMoreInformationAsync()
     {
         await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting#game-is-not-in-a-ready-to-play-state"));
-    }
-
-    [RelayCommand]
-    async Task SaveDlssPresetAsync()
-    {
-        if(DlssPreset is not null)
-        {
-            Game.DlssPreset = DlssPreset;
-            NVAPIHelper.Instance.SetGameDLSSPreset(Game);
-            await Game.SaveToDatabaseAsync();
-            OnPropertyChanged(nameof(DlssPresetHasChanged));
-            IsDlssPresetSaved = true;
-        }
     }
 }

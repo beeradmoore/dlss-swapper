@@ -103,7 +103,20 @@ public partial class GameControlModel : ObservableObject
         {
             if (SelectedDlssPreset is not null && SelectedDlssPreset.Value != Game.DlssPreset)
             {
-                NVAPIHelper.Instance.SetGameDLSSPreset(Game, SelectedDlssPreset.Value);
+                var didSet = NVAPIHelper.Instance.SetGameDLSSPreset(Game, SelectedDlssPreset.Value);
+                if (didSet == false)
+                {
+                    if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+                    {
+                        var dialog = new EasyContentDialog(gameControl.XamlRoot)
+                        {
+                            Title = ResourceHelper.GetString("General_Error"),
+                            CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                            Content = ResourceHelper.GetString("GamePage_UnableToChangePreset"),
+                        };
+                        _ = dialog.ShowAsync();
+                    }                    
+                }
             }
         }
     }

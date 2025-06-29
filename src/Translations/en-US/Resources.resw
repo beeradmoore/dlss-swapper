@@ -311,6 +311,9 @@
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
     <value>storageFile is null</value>
   </data>
+  <data name="GamePage_UnableToChangePreset" xml:space="preserve">
+    <value>Unable to change preset. Please see your error log for more information.</value>
+  </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
     <value>You may only drag over a single file for a cover</value>
   </data>

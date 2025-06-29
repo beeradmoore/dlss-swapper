@@ -236,7 +236,20 @@ public partial class SettingsPageModel : ObservableObject
         {
             if (NVAPIHelper.Instance.Supported && SelectedGlobalDlssPreset is not null)
             {
-                NVAPIHelper.Instance.SetGlobalDLSSPreset(SelectedGlobalDlssPreset.Value);
+                var didSet = NVAPIHelper.Instance.SetGlobalDLSSPreset(SelectedGlobalDlssPreset.Value);
+                if (didSet == false)
+                {
+                    if (_weakPage.TryGetTarget(out var page))
+                    {
+                        var dialog = new EasyContentDialog(page.XamlRoot)
+                        {
+                            Title = ResourceHelper.GetString("General_Error"),
+                            CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                            Content = ResourceHelper.GetString("GamePage_UnableToChangePreset"),
+                        };
+                        _ = dialog.ShowAsync();
+                    }
+                }
             }
         }
     }

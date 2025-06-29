@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Helpers.FSR31;
 
@@ -101,13 +98,10 @@ internal class FSR31Helper
                         versionIds.Add(0);
                     }
 
-
                     //versionQuery.versionIds = versionIds.data();
                     //versionQuery.versionNames = versionNames.data();
 
                     versionQuery.versionIds = Marshal.AllocHGlobal(sizeof(UInt64) * versionCountInt);
-
-
                     versionQuery.versionNames = Marshal.AllocHGlobal(IntPtr.Size * versionCountInt);
 
                     for (var i = 0; i < versionCountInt; i++)
@@ -116,7 +110,7 @@ internal class FSR31Helper
                         //Marshal.WriteInt64(versionIdsPtrs[i], (long)versionIds[i]);
                         //Marshal.WriteIntPtr(versionQuery.versionIds, i * IntPtr.Size, versionIdsPtrs[i]);
 
-                        Marshal.WriteInt64(versionQuery.versionIds, i * sizeof(UInt64), 0l);
+                        Marshal.WriteInt64(versionQuery.versionIds, i * sizeof(UInt64), 0L);
 
                         versionNamesPtrs[i] = Marshal.StringToHGlobalAnsi(versionNames[i]);
                         Marshal.WriteIntPtr(versionQuery.versionNames, i * IntPtr.Size, versionNamesPtrs[i]);

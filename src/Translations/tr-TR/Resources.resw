@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
     Microsoft ResX Schema
@@ -189,6 +189,33 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Başlatma başarısız</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Özel kapak resmini kaldırmak istediğinizden emin misiniz?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Oyun Şu Anda İşleniyor</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Özel kapak kaldırılsın mı?</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>{0} URL'si için GOGCatalogResponse çözümlenemedi</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>{0} URL'si için GOGEmbedFilteredResponse çözümlenemedi</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>{0} URL'si için herhangi bir GOGEmbedFilteredProducts bulunamadı</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>{0} URL'si için herhangi bir GOGCatalogProduct bulunamadı</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>ubisoftConnectInstallsKey tespit edilemedi</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Kimlik ayarlanırken bilinmeyen Oyun Kütüphanesi {0}</value>
+  </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>Oyun kütüphanesi {0} yüklenemedi</value>
   </data>
@@ -298,7 +325,7 @@
     <value>Oyununuz eklenirken hata oluştu</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value><i>Dizinini</i> değil, <i>oyun</i> dizininizi seçmelisiniz.<br/><br/>Örneğin, oyununuz şu konumdaysa:<br/><b>C:\Program Files\MyGamesFolder\MyFavGame</b><br/><br/><b>MyGamesFolder</b> dizinini değil, <b>MyFavGame</b> dizinini seçmelisiniz.</value>
+    <value><i>Dizinini</i> değil, <i>oyun</i> dizininizi seçmelisiniz.<br /><br />Örneğin, oyununuz şu konumdaysa:<br /><b>C:\Program Files\MyGamesFolder\MyFavGame</b><br /><br /><b>MyGamesFolder</b> dizinini değil, <b>MyFavGame</b> dizinini seçmelisiniz.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
     <value>DLSS Swapper, yüklü oyun kütüphanelerinizdeki oyunları otomatik olarak bulmalıdır. Eğer oyununuz listede yoksa, bunu engelleyen birkaç ayar olabilir. Lütfen şunları kontrol edin: Oyun listesi filtresinin "Değiştirilebilir öğesi olmayan oyunları gizle" olarak ayarlanmadığından emin olun. İlgili oyun kütüphanesinin ayarlarda etkinleştirildiğinden emin olun. Bunları kontrol etmenize rağmen oyununuz hala görünmüyorsa, bir hata olabilir. Gelecekte oyunlarınızı daha iyi tespit edebilmemiz ve bir düzeltme yapabilmemiz için sorunu GitHub depomuzda bildirirseniz memnun oluruz.</value>
@@ -317,9 +344,6 @@
   </data>
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Yeni DLL'ler</value>
-  </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Yeni DLL'ler Bulundu</value>
   </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Yeni GitHub sorunu oluştur</value>
@@ -351,6 +375,9 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>DLL'leri göndermenize gerek yok. Sağladığınız bilgilere dayanarak onları biz bulacağız.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Yeni DLL'ler Bulundu</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Oyunlar</value>
   </data>
@@ -362,33 +389,6 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Liste Görünümü</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Özel kapak resmini kaldırmak istediğinizden emin misiniz?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Oyun Şu Anda İşleniyor</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Özel kapak kaldırılsın mı?</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>{0} URL'si için GOGCatalogResponse çözümlenemedi</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>{0} URL'si için GOGEmbedFilteredResponse çözümlenemedi</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>{0} URL'si için herhangi bir GOGEmbedFilteredProducts bulunamadı</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>{0} URL'si için herhangi bir GOGCatalogProduct bulunamadı</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>ubisoftConnectInstallsKey tespit edilemedi</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Kimlik ayarlanırken bilinmeyen Oyun Kütüphanesi {0}</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Bu uygulama yönetici ayrıcalıklarıyla çalışıyor.</value>

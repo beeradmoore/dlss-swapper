@@ -189,6 +189,33 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Не удалось запустить</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить пользовательское изображение обложки?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Игра в процессе обработки</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Удалить пользовательскую обложку?</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>Не удалось преобразовать GOGCatalogResponse для адреса, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>Не удалось преобразовать GOGEmbedFilteredResponse для адреса, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>Не удалось найти GOGEmbedFilteredProducts для адреса, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>Не удалось найти GOGCatalogProduct для адреса, {0}</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>Не удалось обнаружить ubisoftConnectInstallsKey</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Неизвестная GameLibrary {0} при установке ID</value>
+  </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>Не удалось загрузить библиотеку игр {0}</value>
   </data>
@@ -323,9 +350,6 @@
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Новые DLL</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Обнаружены новые DLL</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Создать новую заявку в GitHub</value>
   </data>
@@ -356,6 +380,9 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Вам не нужно отправлять DLL. Мы найдем их на основе предоставленной информации.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Обнаружены новые DLL</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Игры</value>
   </data>
@@ -367,33 +394,6 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Просмотр списка</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Вы уверены, что хотите удалить пользовательское изображение обложки?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Игра в процессе обработки</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Удалить пользовательскую обложку?</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Не удалось преобразовать GOGCatalogResponse для адреса, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Не удалось преобразовать GOGEmbedFilteredResponse для адреса, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Не удалось найти GOGEmbedFilteredProducts для адреса, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Не удалось найти GOGCatalogProduct для адреса, {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>Не удалось обнаружить ubisoftConnectInstallsKey</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Неизвестная GameLibrary {0} при установке ID</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Это приложение запущено с правами администратора.</value>

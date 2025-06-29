@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
     Microsoft ResX Schema
@@ -189,6 +189,33 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>启动失败</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>您确定要移除自定义封面图吗？</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>游戏正在处理</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>移除自定义封面图？</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>GOG目录数据解析加载失败：{0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>未能从 URL {0} 获取有效的GOG内容数据</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>无法从 URL {0} 加载任何GOG相关列表。</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>无法从 URL {0} 获取GOG的信息。</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>未找到Ubisoft Connect的安装路径。</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>设置ID时，发现未知的游戏平台 {0}。</value>
+  </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>无法加载游戏库 {0}</value>
   </data>
@@ -298,7 +325,7 @@
     <value>添加您的游戏时出错</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value>您必须选择您的 <i> 游戏 </i> 目录，而不是 <i> 游戏平台 </i> 目录<br/><br/>例如，您的游戏在：<br/><b>"C:\Program Files\Steam\Steamapps\common\游戏目录</b><br/><br/>您需要选择 <b> 游戏目录 </b> 而不是选择 <b> Steam 或 Steamapps </b> 的目录。</value>
+    <value>您必须选择您的 <i> 游戏 </i> 目录，而不是 <i> 游戏平台 </i> 目录<br /><br />例如，您的游戏在：<br /><b>"C:\Program Files\Steam\Steamapps\common\游戏目录</b><br /><br />您需要选择 <b> 游戏目录 </b> 而不是选择 <b> Steam 或 Steamapps </b> 的目录。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
     <value>通常情况下DLSS切换器会自动从已安装的游戏库中查找游戏，如果您已安装的游戏未出现在此列表，可能是某些设置导致了这一情况，请检查:
@@ -322,9 +349,6 @@
   </data>
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>发现新的DLL！</value>
-  </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>发现新的DLL文件</value>
   </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>创建一个新的 GitHub 问题报告。</value>
@@ -356,6 +380,9 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>请注意：您无需提交DLL文件，我们会根据您提交的报告信息查找新的DLL</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>发现新的DLL文件</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>游戏库</value>
   </data>
@@ -367,33 +394,6 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>列表视图</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>您确定要移除自定义封面图吗？</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>游戏正在处理</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>移除自定义封面图？</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>GOG目录数据解析加载失败：{0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>未能从 URL {0} 获取有效的GOG内容数据</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>无法从 URL {0} 加载任何GOG相关列表。</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>无法从 URL {0} 获取GOG的信息。</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>未找到Ubisoft Connect的安装路径。</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>设置ID时，发现未知的游戏平台 {0}。</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>程序正在以管理员身份的方式运行</value>

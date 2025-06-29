@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-    English
+    <a href="./readme.md">English</a>
     ·
     <a href="./docs/readmes/readme_pt-BR.md">Português BR</a>
     ·
@@ -35,6 +35,8 @@
     <a href="./docs/readmes/readme_zh-TW.md">繁體中文</a>
     ·
     <a href="./docs/readmes/readme_zh-Hans.md">简体中文</a>
+    ·
+    <a href="./docs/readmes/readme_tr-TR.md">Türkçe</a>
 </p>
 
 <p align="center">

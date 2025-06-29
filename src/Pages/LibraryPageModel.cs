@@ -971,10 +971,10 @@ public partial class LibraryPageModel : ObservableObject
         {
             var dialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = ResourceHelper.GetString("LibraryPage_NoNewDLLsTitle"),
+                Title = ResourceHelper.GetString("LibraryPage_NoNewDLLs_Title"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = ResourceHelper.GetString("LibraryPage_NoNewDLLsMessage"),
+                Content = ResourceHelper.GetString("LibraryPage_NoNewDLLs_Message"),
             };
             await dialog.ShowAsync();
         }

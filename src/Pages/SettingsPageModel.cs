@@ -15,6 +15,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using DLSS_Swapper.Collections;
 using System.Collections.Specialized;
+using DLSS_Swapper.Data.DLSS;
 
 namespace DLSS_Swapper.Pages;
 
@@ -36,6 +37,11 @@ public partial class SettingsPageModel : ObservableObject
         new DLSSOnScreenIndicatorSetting("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly", 1),
         new DLSSOnScreenIndicatorSetting("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls", 1024)
     };
+
+    [ObservableProperty]
+    public partial PresetOption? SelectedGlobalDlssPreset { get; set; }
+
+    public List<PresetOption> DlssPresetOptions { get; } = new List<PresetOption>();
 
     public ObservableCollection<KeyValuePair<string, string>> Languages { get; init; } = new ObservableCollection<KeyValuePair<string, string>>();
 
@@ -127,6 +133,19 @@ public partial class SettingsPageModel : ObservableObject
 
         IgnoredPaths = new ObservableCollection<string>(Settings.Instance.IgnoredPaths);
 
+        if (NVAPIHelper.Instance.Supported)
+        {
+            DlssPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
+            var globalPreset = NVAPIHelper.Instance.GetGlobalDLSSPreset();
+            SelectedGlobalDlssPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == globalPreset);
+        }
+        else
+        {
+            var notSupportedPresetOption = new PresetOption(ResourceHelper.GetString("General_NotSupported"), 0);
+            DlssPresetOptions.Add(notSupportedPresetOption);
+            SelectedGlobalDlssPreset = notSupportedPresetOption;
+        }
+
         _hasSetDefaults = true;
     }
 
@@ -212,6 +231,13 @@ public partial class SettingsPageModel : ObservableObject
         {
             Settings.Instance.LoggingLevel = LoggingLevel;
             Logger.ChangeLoggingLevel(LoggingLevel);
+        }
+        else if (e.PropertyName == nameof(SelectedGlobalDlssPreset))
+        {
+            if (NVAPIHelper.Instance.Supported && SelectedGlobalDlssPreset is not null)
+            {
+                NVAPIHelper.Instance.SetGlobalDLSSPreset(SelectedGlobalDlssPreset.Value);
+            }
         }
     }
 

@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
+using DLSS_Swapper.Helpers.FSR31;
 
 namespace DLSS_Swapper.Data;
 
@@ -22,6 +23,9 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
 
     [JsonPropertyName("internal_name")]
     public string InternalName { get; set; } = string.Empty;
+
+    [JsonPropertyName("internal_name_extra")]
+    public string InternalNameExtra { get; set; } = string.Empty;
 
     [JsonPropertyName("additional_label")]
     public string AdditionalLabel { get; set; } = string.Empty;
@@ -45,7 +49,7 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
     [JsonPropertyName("file_description")]
     public string FileDescription { get; set; } = string.Empty;
 
-    [JsonIgnore]
+    [JsonPropertyName("signed_datetime")]
     public DateTime SignedDateTime { get; set; } = DateTime.MinValue;
 
     [JsonPropertyName("is_signature_valid")]
@@ -81,9 +85,32 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
         get
         {
             // return cached version.
-            if (_displayVersion != string.Empty)
+            if (string.IsNullOrWhiteSpace(_displayVersion) == false)
             {
                 return _displayVersion;
+            }
+
+            // If FSR the display version is the internal version
+            if (AssetType == GameAssetType.FSR_31_DX12 || AssetType == GameAssetType.FSR_31_VK ||
+                AssetType == GameAssetType.FSR_31_DX12_BACKUP || AssetType == GameAssetType.FSR_31_VK_BACKUP)
+            {
+                if (string.IsNullOrEmpty(InternalName) == false)
+                {
+                    _displayVersion = InternalName;
+                    return _displayVersion;
+                }
+
+                if (LocalRecord is not null)
+                {
+                    var latestVersion = FSR31Helper.GetLatestVersion(LocalRecord.ExpectedPath);
+                    if (string.IsNullOrWhiteSpace(latestVersion) == false)
+                    {
+                        _displayVersion = latestVersion;
+                        return _displayVersion;
+                    }
+                }
+
+                // If this isn't loaded we fall back to the existing stuff.
             }
 
 
@@ -116,6 +143,14 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
         get
         {
             var devString = IsDevFile ? " (Debug)" : string.Empty;
+
+
+            if (AssetType == GameAssetType.FSR_31_DX12 || AssetType == GameAssetType.FSR_31_VK ||
+                AssetType == GameAssetType.FSR_31_DX12_BACKUP || AssetType == GameAssetType.FSR_31_VK_BACKUP)
+            {
+                    return $"v{DisplayVersion}{devString} (v{Version})";
+            }
+
             if (string.IsNullOrEmpty(AdditionalLabel))
             {
                 return $"v{DisplayVersion}{devString}";
@@ -156,6 +191,18 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
             return 0;
         }
 
+        if ((AssetType == GameAssetType.FSR_31_DX12 && other.AssetType == GameAssetType.FSR_31_DX12) ||
+            (AssetType == GameAssetType.FSR_31_VK && other.AssetType == GameAssetType.FSR_31_VK))
+        {
+            if (string.IsNullOrEmpty(InternalName) == false && string.IsNullOrEmpty(other.InternalName) == false)
+            {
+                if (InternalName != other.InternalName)
+                {
+                    return other.InternalName.CompareTo(InternalName);
+                }
+            }
+        }
+
         if (VersionNumber == other.VersionNumber)
         {
             if (IsDevFile == other.IsDevFile)
@@ -163,7 +210,7 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
                 return other.AdditionalLabel.CompareTo(AdditionalLabel);
             }
 
-            return other.IsDevFile.CompareTo(IsDevFile);
+            return IsDevFile.CompareTo(other.IsDevFile);
         }
 
         return other.VersionNumber.CompareTo(VersionNumber);

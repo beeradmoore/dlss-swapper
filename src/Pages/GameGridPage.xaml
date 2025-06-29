@@ -77,7 +77,7 @@
                             <ProgressRing Grid.Column="2" VerticalAlignment="Center" Width="16" Height="16" Visibility="{x:Bind Processing, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" />
                             <TextBlock Grid.Column="3" VerticalAlignment="Center">
                                 <Run Text="DLSS: " />
-                                <Run Text="{x:Bind CurrentDLSS.Version, FallbackValue='N/A', Mode=OneWay}" />
+                                <Run Text="{x:Bind CurrentDLSS.DisplayName, FallbackValue='N/A', Mode=OneWay}" />
                             </TextBlock>
 
                         </Grid>
@@ -152,7 +152,7 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Grid.Column="0" FontWeight="Bold" Text="DLSS" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" />
-                                <TextBlock Grid.Column="1" Text="{x:Bind CurrentDLSS.Version, FallbackValue='N/A', Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Visibility="{x:Bind Processing, Converter={StaticResource InverseBoolToVisibilityConverter}, Mode=OneWay}" />
+                                <TextBlock Grid.Column="1" Text="{x:Bind CurrentDLSS.DisplayName, FallbackValue='N/A', Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Visibility="{x:Bind Processing, Converter={StaticResource InverseBoolToVisibilityConverter}, Mode=OneWay}" />
                                 <ProgressRing Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Width="16" Height="16" Visibility="{x:Bind Processing, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" />
                             </Grid>
                         </Grid>

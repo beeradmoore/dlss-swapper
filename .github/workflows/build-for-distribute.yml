@@ -32,7 +32,11 @@ jobs:
       run: |
         $ver = Select-String '<Version>(.+?)</Version>' "${{ github.workspace }}\src\DLSS Swapper.csproj" | % { $_.Matches[0].Groups[1].Value }
         echo "VERSION=$ver" >> $env:GITHUB_ENV
-        
+    
+    - name: Update static_manifest.json
+      run: ${{ github.workspace }}\update_manifest.cmd
+      working-directory: ${{ github.workspace }}\
+      
     - name: Build DLSS Swapper portable
       run: ${{ github.workspace }}\package\build_Portable.cmd
       working-directory: ${{ github.workspace }}\package\

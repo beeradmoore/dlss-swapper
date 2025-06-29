@@ -129,34 +129,6 @@ internal class DLLManager
 
 
     /// <summary>
-    /// Saves manifest to the dynamic manifest.json file.
-    /// </summary>
-    internal async Task SaveManifestJsonAsync()
-    {
-        // Don't attempt to save it if we never loaded it.
-        if (Manifest is null)
-        {
-            return;
-        }
-
-        var manifestPath = Storage.GetManifestPath();
-        try
-        {
-            Storage.CreateDirectoryForFileIfNotExists(manifestPath);
-            using (var stream = File.Create(manifestPath))
-            {
-                await JsonSerializer.SerializeAsync(stream, Manifest, SourceGenerationContext.Default.Manifest).ConfigureAwait(false);
-            }
-        }
-        catch (Exception err)
-        {
-            Logger.Error(err);
-            Debugger.Break();
-        }
-    }
-
-
-    /// <summary>
     /// Checks if the manifest is out of date (3 hours old), and if it is we will attempt to reload it.
     /// </summary>
     internal async Task UpdateManifestIfOldAsync()
@@ -238,7 +210,21 @@ internal class DLLManager
 
                 Manifest = manifest;
 
-                await SaveManifestJsonAsync().ConfigureAwait(false);
+                try
+                {
+                    Storage.CreateDirectoryForFileIfNotExists(manifestPath);
+                    using (var stream = File.Create(manifestPath))
+                    {
+                        memoryStream.Position = 0;
+                        memoryStream.CopyTo(stream);
+                    }
+                }
+                catch (Exception err)
+                {
+                    Logger.Error(err);
+                    Debugger.Break();
+                }
+
                 await ProcessManifestsAsync().ConfigureAwait(false);
 
                 return true;

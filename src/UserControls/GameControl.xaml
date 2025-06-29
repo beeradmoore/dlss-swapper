@@ -32,6 +32,14 @@
 
         <ControlTemplate x:Key="LeftButtonsControlTemplate" TargetType="ContentControl">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" XYFocusKeyboardNavigation="Enabled" Padding="{ThemeResource ContentDialogPadding}" Background="{TemplateBinding Background}" Spacing="8">
+
+
+                <Button Command="{Binding LaunchCommand}" ToolTipService.ToolTip="{Binding TranslationProperties.LaunchText, Mode=OneWay}">
+                    <Button.Content>
+                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE768;" />
+                    </Button.Content>
+                </Button>
+
                 <Button ToolTipService.ToolTip="{Binding TranslationProperties.NotesText, Mode=OneWay}" Command="{Binding EditNotesCommand}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE70B;"/>

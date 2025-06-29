@@ -132,6 +132,25 @@ public partial class GameControlModel : ObservableObject
         }
     }
 
+    [RelayCommand(CanExecute = nameof(CanLaunchGame))]
+    async Task LaunchAsync()
+    {
+        if (Game.GameLibrary == Interfaces.GameLibrary.Steam)
+        {
+            await Launcher.LaunchUriAsync(new Uri($"steam://rungameid/{Game.PlatformId}"));
+        }
+    }
+
+    bool CanLaunchGame()
+    {
+        if (Game.GameLibrary == Interfaces.GameLibrary.Steam)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     [RelayCommand]
     async Task EditNotesAsync()
     {

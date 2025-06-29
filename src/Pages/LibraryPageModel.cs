@@ -958,38 +958,14 @@ public partial class LibraryPageModel : ObservableObject
     async Task DownloadLatestAsync()
     {
         var startedDownloads = 0;
-        if (DownloadLatestRecord(DLLManager.Instance.DLSSRecords))
-        {
-            ++startedDownloads;
-        }
-        if (DownloadLatestRecord(DLLManager.Instance.DLSSDRecords))
-        {
-            ++startedDownloads;
-        }
-        if (DownloadLatestRecord(DLLManager.Instance.DLSSGRecords))
-        {
-            ++startedDownloads;
-        }
-        if (DownloadLatestRecord(DLLManager.Instance.FSR31DX12Records))
-        {
-            ++startedDownloads;
-        }
-        if (DownloadLatestRecord(DLLManager.Instance.FSR31VKRecords))
-        {
-            ++startedDownloads;
-        }
-        if (DownloadLatestRecord(DLLManager.Instance.XeSSRecords))
-        {
-            ++startedDownloads;
-        }
-        if (DownloadLatestRecord(DLLManager.Instance.XeSSFGRecords))
-        {
-            ++startedDownloads;
-        }
-        if (DownloadLatestRecord(DLLManager.Instance.XeLLRecords))
-        {
-            ++startedDownloads;
-        }
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.DLSSRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.DLSSDRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.DLSSGRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.FSR31DX12Records);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.FSR31VKRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.XeSSRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.XeSSFGRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.XeLLRecords);
 
         if (startedDownloads == 0)
         {
@@ -1015,32 +991,50 @@ public partial class LibraryPageModel : ObservableObject
         }
     }
 
-    bool DownloadLatestRecord(IReadOnlyList<DLLRecord> records)
+    int DownloadLatestRecord(IReadOnlyList<DLLRecord> records)
     {
-        var record = GetLatestRecord(records);
+        var startedCount = 0;
+        var record = GetLatestRecord(records, false);
         if (record?.LocalRecord?.IsDownloaded == false)
         {
             _ = record.DownloadAsync();
-            return true;
+            ++startedCount;
         }
 
-        return false;
+        if (Settings.Instance.AllowDebugDlls)
+        {
+            record = GetLatestRecord(records, true);
+            if (record?.LocalRecord?.IsDownloaded == false)
+            {
+                _ = record.DownloadAsync();
+                ++startedCount;
+            }
+        }
+
+        return startedCount;
     }
 
-    DLLRecord? GetLatestRecord(IReadOnlyList<DLLRecord> records)
+    DLLRecord? GetLatestRecord(IReadOnlyList<DLLRecord> records, bool devDllsOnly)
     {
         if (records.Count == 0)
         {
             return null;
         }
 
-        var latestRecord = records[0];
+        DLLRecord? latestRecord = null;
         foreach (var record in records)
         {
-            if (record.VersionNumber > latestRecord.VersionNumber)
+            if (record.IsDevFile == devDllsOnly)
             {
-                latestRecord = record;
-            }
+                if (latestRecord is null)
+                {
+                    latestRecord = record;
+                }
+                else if (record.VersionNumber > latestRecord.VersionNumber)
+                {
+                    latestRecord = record;
+                }
+            }           
         }
 
         return latestRecord;

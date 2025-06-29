@@ -375,6 +375,23 @@ namespace DLSS_Swapper
             }
         }
 
+        string _lastLaunchVersion = string.Empty;
+        public string LastLaunchVersion
+        {
+            get { return _lastLaunchVersion; }
+            set
+            {
+                if (_lastLaunchVersion != value)
+                {
+                    _lastLaunchVersion = value;
+                    if (_autoSave)
+                    {
+                        SaveJson();
+                    }
+                }
+            }
+        }
+
         internal void SaveJson()
         {
             AsyncHelper.RunSync(() => Storage.SaveSettingsJsonAsync(this));

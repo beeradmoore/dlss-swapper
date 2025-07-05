@@ -249,6 +249,25 @@
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
     <value>Please wait for download to complete before swapping</value>
   </data>
+  <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
+    <value>Preset information</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
+    <value>DLSS presets are contained within DLSS DLL files contained within your games install directory. Different DLSS DLLs have different presets. For example preset K was not introduced until DLSS v310.2. So if you use DLSS v3.7 and you set preset to K it will not use preset K and instead it will fallback to whatever preset the game chooses to use.
+
+The same applies to global presets. If you select preset K but your game uses DLSS v3.7 you will not be using preset K and instead the game will fallback to whatever its default is.
+
+To verify what preset is being used please enable the DLSS on-screen indicator.</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
+    <value>On-screen indicator information</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
+    <value>DLSS preset information</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
+    <value>Setting a DLSS preset does not guarantee that the preset is used.</value>
+  </data>
   <data name="GamePage_Favorited" xml:space="preserve">
     <value>Favorited</value>
   </data>
@@ -257,6 +276,9 @@
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
     <value>"{0}" is an invalid file type</value>
+  </data>
+  <data name="GamePage_Launch" xml:space="preserve">
+    <value>Launch</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
     <value>This title is not manually added and can't be removed.</value>
@@ -307,6 +329,9 @@
   </data>
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
     <value>storageFile is null</value>
+  </data>
+  <data name="GamePage_UnableToChangePreset" xml:space="preserve">
+    <value>Unable to change preset. Please see your error log for more information.</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
     <value>You may only drag over a single file for a cover</value>
@@ -471,6 +496,9 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_None" xml:space="preserve">
     <value>None</value>
   </data>
+  <data name="General_NotSupported" xml:space="preserve">
+    <value>Not supported</value>
+  </data>
   <data name="General_Okay" xml:space="preserve">
     <value>Okay</value>
   </data>
@@ -568,14 +596,14 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
     <value>Hash</value>
   </data>
-  <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
-    <value>Label</value>
-  </data>
   <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
     <value>Internal Name</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
     <value>Internal Name Extra</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
+    <value>Label</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>Started {0} new downloads.</value>
@@ -792,6 +820,12 @@ Because of this we recommend using caution for multiplayer games.</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>Verbose logging</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>DLSS Options</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>Global preset</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>Game Libraries</value>

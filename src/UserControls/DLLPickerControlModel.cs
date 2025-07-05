@@ -64,7 +64,6 @@ public partial class DLLPickerControlModel : ObservableObject
                 }
             }
         };
-
         Game = game;
         GameAssetType = gameAssetType;
         parentDialog.PrimaryButtonCommand = SwapDllCommand;

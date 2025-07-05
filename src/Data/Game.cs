@@ -4,6 +4,7 @@ using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
+using NvAPIWrapper.DRS;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SQLite;
@@ -43,6 +44,13 @@ namespace DLSS_Swapper.Data
         [ObservableProperty]
         [Column("cover_image")]
         public partial string? CoverImage { get; set; } = null;
+
+        [ObservableProperty]
+        [Ignore]
+        public partial uint? DlssPreset { get; set; }
+
+        [Ignore]
+        public DriverSettingsProfile? DriverSettingsProfile { get; set; }
 
         /*
         [ObservableProperty]
@@ -1228,6 +1236,12 @@ namespace DLSS_Swapper.Data
             if (CurrentDLSS != game.CurrentDLSS)
             {
                 CurrentDLSS = game.CurrentDLSS;
+                didChange = true;
+            }
+
+            if (DlssPreset != game.DlssPreset)
+            {
+                DlssPreset = game.DlssPreset;
                 didChange = true;
             }
 

@@ -15,6 +15,8 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using DLSS_Swapper.Collections;
 using System.Collections.Specialized;
+using DLSS_Swapper.Data.DLSS;
+using Windows.System;
 
 namespace DLSS_Swapper.Pages;
 
@@ -36,6 +38,11 @@ public partial class SettingsPageModel : ObservableObject
         new DLSSOnScreenIndicatorSetting("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly", 1),
         new DLSSOnScreenIndicatorSetting("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls", 1024)
     };
+
+    [ObservableProperty]
+    public partial PresetOption? SelectedGlobalDlssPreset { get; set; }
+
+    public List<PresetOption> DlssPresetOptions { get; } = new List<PresetOption>();
 
     public ObservableCollection<KeyValuePair<string, string>> Languages { get; init; } = new ObservableCollection<KeyValuePair<string, string>>();
 
@@ -127,6 +134,21 @@ public partial class SettingsPageModel : ObservableObject
 
         IgnoredPaths = new ObservableCollection<string>(Settings.Instance.IgnoredPaths);
 
+        if (NVAPIHelper.Instance.Supported)
+        {
+            // "Always use latest" does not seem to do anything when set as global preset so don't include it here.
+            var dlssPresetOptions = NVAPIHelper.Instance.DlssPresetOptions.Where(x => x.Value != 0x00FFFFFF);
+            DlssPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
+            var globalPreset = NVAPIHelper.Instance.GetGlobalDLSSPreset();
+            SelectedGlobalDlssPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == globalPreset);
+        }
+        else
+        {
+            var notSupportedPresetOption = new PresetOption(ResourceHelper.GetString("General_NotSupported"), 0);
+            DlssPresetOptions.Add(notSupportedPresetOption);
+            SelectedGlobalDlssPreset = notSupportedPresetOption;
+        }
+
         _hasSetDefaults = true;
     }
 
@@ -212,6 +234,26 @@ public partial class SettingsPageModel : ObservableObject
         {
             Settings.Instance.LoggingLevel = LoggingLevel;
             Logger.ChangeLoggingLevel(LoggingLevel);
+        }
+        else if (e.PropertyName == nameof(SelectedGlobalDlssPreset))
+        {
+            if (NVAPIHelper.Instance.Supported && SelectedGlobalDlssPreset is not null)
+            {
+                var didSet = NVAPIHelper.Instance.SetGlobalDLSSPreset(SelectedGlobalDlssPreset.Value);
+                if (didSet == false)
+                {
+                    if (_weakPage.TryGetTarget(out var page))
+                    {
+                        var dialog = new EasyContentDialog(page.XamlRoot)
+                        {
+                            Title = ResourceHelper.GetString("General_Error"),
+                            CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                            Content = ResourceHelper.GetString("GamePage_UnableToChangePreset"),
+                        };
+                        _ = dialog.ShowAsync();
+                    }
+                }
+            }
         }
     }
 
@@ -384,5 +426,27 @@ public partial class SettingsPageModel : ObservableObject
     {
         var translationToolboxWindow = new TranslationToolboxWindow();
         App.CurrentApp.WindowManager.ShowWindow(translationToolboxWindow);
+    }
+
+    [RelayCommand]
+    async Task DLSSPresetInfoAsync()
+    {
+        if (_weakPage.TryGetTarget(out var page))
+        {
+            var dialog = new EasyContentDialog(page.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("GamePage_DLSSPresetInfo_Title"),
+                PrimaryButtonText = ResourceHelper.GetString("General_Okay"),
+                SecondaryButtonText = ResourceHelper.GetString("GamePage_DLSSPresetInfo_OnScreenIndicator"),
+                DefaultButton = ContentDialogButton.Primary,
+                Content = ResourceHelper.GetString("GamePage_DLSSPresetInfo_Message"),
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Secondary)
+            {
+                await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/DLSS-Developer-Options#on-screen-indicator"));
+            }
+        }
     }
 }

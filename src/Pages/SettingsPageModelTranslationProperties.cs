@@ -64,7 +64,13 @@ public class SettingsPageModelTranslationProperties : LocalizedViewModelBase
     public string AddIgnoredPathText => ResourceHelper.GetString("SettingsPage_AddIgnoredPath");
 
     [TranslationProperty]
-    public string DllsDeveloperOptionsText => ResourceHelper.GetString("SettingsPage_DLSSDeveloperOptions");
+    public string DLSSOptionsText => ResourceHelper.GetString("SettingsPage_DLSSOptions");
+
+    [TranslationProperty]
+    public string DLSSOptionsGlobalPresetText => ResourceHelper.GetString("SettingsPage_DLSSOptions_GlobalPreset");
+
+    [TranslationProperty]
+    public string DLSSDeveloperOptionsText => ResourceHelper.GetString("SettingsPage_DLSSDeveloperOptions");
 
     [TranslationProperty]
     public string ShowOnScreenIndicatorText => ResourceHelper.GetString("SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator");
@@ -116,4 +122,10 @@ public class SettingsPageModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string LanguageText => ResourceHelper.GetString("SettingsPage_Language");
+
+    [TranslationProperty]
+    public string DLSSPresetInfoTooltipText => ResourceHelper.GetString("GamePage_DLSSPresetInfo_Tooltip");
+
+    [TranslationProperty]
+    public string DLSSPresetInfoText => ResourceHelper.GetString("GamePage_DLSSPresetInfo");
 }

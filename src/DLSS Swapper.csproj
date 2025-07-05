@@ -38,6 +38,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+      <Content Remove="Assets\dlss_presets.json" />
       <Content Remove="Assets\static_manifest.json" />
   </ItemGroup>
 
@@ -302,6 +303,9 @@
     </ItemGroup>
 
     <ItemGroup>
+        <None Update="Assets\dlss_presets.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
         <None Update="Asssets\icon_256.png">
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
@@ -367,6 +371,7 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4188" />
     <PackageReference Include="Nito.AsyncEx" Version="5.1.2" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.10" />
+    <PackageReference Include="NvAPIWrapper.Net" Version="0.8.1.101" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
     <PackageReference Include="Serilog" Version="4.3.0" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />

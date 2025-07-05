@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Default",
+    "value": "0x00000000",
+    "used": true
+  },
+  {
+    "name": "Preset A",
+    "value": "0x00000001",
+    "used": true
+  },
+  {
+    "name": "Preset B",
+    "value": "0x00000002",
+    "used": true
+  },
+  {
+    "name": "Preset C",
+    "value": "0x00000003",
+    "used": true
+  },
+  {
+    "name": "Preset D",
+    "value": "0x00000004",
+    "used": true
+  },
+  {
+    "name": "Preset E",
+    "value": "0x00000005",
+    "used": true
+  },
+  {
+    "name": "Preset F",
+    "value": "0x00000006",
+    "used": true
+  },
+  {
+    "name": "Preset G",
+    "value": "0x00000007",
+    "used": false
+  },
+  {
+    "name": "Preset H",
+    "value": "0x00000008",
+    "used": false
+  },
+  {
+    "name": "Preset I",
+    "value": "0x00000009",
+    "used": false
+  },
+  {
+    "name": "Preset J",
+    "value": "0x0000000A",
+    "used": true
+  },
+  {
+    "name": "Preset K",
+    "value": "0x0000000B",
+    "used": true
+  },
+  {
+    "name": "Preset L",
+    "value": "0x0000000B",
+    "used": false
+  },
+  {
+    "name": "Preset M",
+    "value": "0x0000000B",
+    "used": false
+  },
+  {
+    "name": "Preset N",
+    "value": "0x0000000B",
+    "used": false
+  },
+  {
+    "name": "Always use latest",
+    "value": "0x00FFFFFF",
+    "used": true
+  }
+]

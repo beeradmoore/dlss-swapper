@@ -1,44 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-        <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
             <xsd:complexType>
-                <xsd:choice maxOccurs="unbounded">
-                    <xsd:element name="data">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="resheader">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required" />
-                        </xsd:complexType>
-                    </xsd:element>
-                </xsd:choice>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
             </xsd:complexType>
-        </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>1.3</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <data name="AcknowledgementsPage_Title" xml:space="preserve">
     <value>Licenças e Agradecimentos</value>
   </data>
@@ -148,13 +148,13 @@
     <value>Clique para favoritar</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
-    <value>Caminho não encontrado: &quot;{0}&quot;.</value>
+    <value>Caminho não encontrado: "{0}".</value>
   </data>
   <data name="GamePage_CurrentDll" xml:space="preserve">
     <value>DLL Atual</value>
   </data>
   <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
-    <value>Arquivo não encontrado: &quot;{0}&quot;.</value>
+    <value>Arquivo não encontrado: "{0}".</value>
   </data>
   <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
     <value>DLL redefinida para a versão {0}.</value>
@@ -172,13 +172,13 @@
     <value>Caminho de instalação</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
-    <value>&quot;{0}&quot; é um tipo de arquivo inválido</value>
+    <value>"{0}" é um tipo de arquivo inválido</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
     <value>Este título não foi adicionado manualmente e não pode ser removido.</value>
   </data>
   <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
-    <value>Tem certeza de que deseja remover &quot;{0}&quot; do DLSS Swapper? Isso não afetará os arquivos de DLSS já trocados.</value>
+    <value>Tem certeza de que deseja remover "{0}" do DLSS Swapper? Isso não afetará os arquivos de DLSS já trocados.</value>
   </data>
   <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
     <value>Múltiplas DLLs encontradas abaixo. As ações de troca e restauração afetarão todas elas. No entanto, como não sabemos qual DLL é usada pelo jogo, a versão mostrada é a da primeira detectada.</value>
@@ -252,7 +252,7 @@
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
     <value>O DLSS Swapper deve encontrar jogos automaticamente nas bibliotecas instaladas. Se o seu jogo não estiver listado, pode haver algumas configurações impedindo isso. Verifique:
 
-- O filtro da lista de jogos não está definido como &quot;Ocultar jogos sem itens substituíveis&quot;
+- O filtro da lista de jogos não está definido como "Ocultar jogos sem itens substituíveis"
 - A biblioteca de jogos específica está ativada nas configurações
 
 Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agradecemos se você puder reportar o problema em nosso repositório do GitHub para que possamos corrigi-lo e melhorar a detecção no futuro.</value>
@@ -261,7 +261,7 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
     <value>Observação sobre adição manual de jogos</value>
   </data>
   <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
-    <value>O caminho de instalação &quot;{0}&quot; já existe e não pode ser adicionado novamente.</value>
+    <value>O caminho de instalação "{0}" já existe e não pode ser adicionado novamente.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
     <value>Selecionar pasta do jogo</value>
@@ -626,7 +626,7 @@ Recomendamos cautela ao usar isso em jogos multiplayer.</value>
     <value>Abrir no navegador</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
-    <value>Clique no botão &quot;Abrir no navegador&quot; ou copie e cole o seguinte link no seu navegador. O arquivo é baixado corretamente?</value>
+    <value>Clique no botão "Abrir no navegador" ou copie e cole o seguinte link no seu navegador. O arquivo é baixado corretamente?</value>
   </data>
   <data name="NetworkTesterPage_Results" xml:space="preserve">
     <value>Resultados</value>

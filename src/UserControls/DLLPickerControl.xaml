@@ -22,7 +22,7 @@
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
         <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
     </UserControl.Resources>
-    
+
     <Grid RowSpacing="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -30,7 +30,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        
+
         <!-- Reserved for: https://github.com/beeradmoore/dlss-swapper/issues/227 -->
         <!-- <InfoBar
               IsOpen="True"
@@ -78,7 +78,7 @@
                 </Button.Content>
             </Button>
         </Grid>
-        
+
         <ListView Grid.Row="2" Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" ItemsSource="{x:Bind ViewModel.DLLRecords}" SelectedItem="{x:Bind ViewModel.SelectedDLLRecord, Mode=TwoWay}" MaxHeight="400">
 
             <ListView.ItemTemplate>
@@ -112,8 +112,8 @@
               Visibility="{x:Bind ViewModel.AnyDLLsVisible, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}"
               Severity="Warning"
               IsOpen="True"
-              IsClosable="False"        
-              Title="{x:Bind ViewModel.TranslationProperties.NoDllsFoundText, Mode=OneWay}"                 
+              IsClosable="False"
+              Title="{x:Bind ViewModel.TranslationProperties.NoDllsFoundText, Mode=OneWay}"
               Message="{x:Bind ViewModel.TranslationProperties.PleaseNavigateLibraryToDownloadDllsText, Mode=OneWay}">
         </InfoBar>
 

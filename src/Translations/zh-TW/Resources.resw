@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
     Microsoft ResX Schema
@@ -189,6 +189,33 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>啟動失敗</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>確定要刪除自訂遊戲封面嗎？</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>遊戲正在處理</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>刪除自訂封面</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>GOG 目錄資料解析載入失敗：{0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>無法從 URL {0} 取得有效的 GOG 內容資料</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>無法從 URL {0} 載入任何 GOG 相關列表。</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>無法從 URL {0} 取得 GOG 的資訊。</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>未掃描到 Ubisoft Connect 的安裝路徑。</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>設定 ID 時，發現未知的遊戲平台 {0}。</value>
+  </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>無法載入收藏庫 {0}</value>
   </data>
@@ -298,7 +325,7 @@
     <value>新增遊戲時發生錯誤</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value>您必須選取您的 <i>遊戲</i> 目錄，而不是 <i>遊戲平台</i> 目錄。<br/><br/>舉例來說，若您的遊戲安裝於：<br/><b>C:\Program Files\MyGamesFolder\MyFavGame\</b><br/><br/>您應該選取 <b>MyFavGame</b> 目錄，而不是 <b>MyGamesFolder</b> 目錄。</value>
+    <value>您必須選取您的 <i>遊戲</i> 目錄，而不是 <i>遊戲平台</i> 目錄。<br /><br />舉例來說，若您的遊戲安裝於：<br /><b>C:\Program Files\MyGamesFolder\MyFavGame\</b><br /><br />您應該選取 <b>MyFavGame</b> 目錄，而不是 <b>MyGamesFolder</b> 目錄。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
     <value>DLSS Swapper 通常會自動從您已安裝的遊戲平台中掃描到遊戲。如果您的遊戲沒有顯示，可能有幾項設定阻礙了它。請檢查以下因素：
@@ -322,9 +349,6 @@
   </data>
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>DLL 回報</value>
-  </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>我找到了新版本的 DLL 檔案</value>
   </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>建立一個新的 GitHub 問題回報</value>
@@ -356,6 +380,9 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>您無需提交 DLL 檔案，我們會根據您提交的回報來搜尋新版本的 DLL 檔案。</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>我找到了新版本的 DLL 檔案</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>收藏庫</value>
   </data>
@@ -367,33 +394,6 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>列表檢視</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>確定要刪除自訂遊戲封面嗎？</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>遊戲正在處理</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>刪除自訂封面</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>GOG 目錄資料解析載入失敗：{0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>無法從 URL {0} 取得有效的 GOG 內容資料</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>無法從 URL {0} 載入任何 GOG 相關列表。</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>無法從 URL {0} 取得 GOG 的資訊。</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>未掃描到 Ubisoft Connect 的安裝路徑。</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>設定 ID 時，發現未知的遊戲平台 {0}。</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>應用程式正在以管理員權限執行</value>

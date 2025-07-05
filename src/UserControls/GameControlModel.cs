@@ -9,6 +9,10 @@ using System.Diagnostics;
 using System.IO;
 using Windows.System;
 using DLSS_Swapper.Helpers;
+using System.Collections.Generic;
+using System.Linq;
+using DLSS_Swapper.Data.DLSS;
+using System.ComponentModel;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -23,6 +27,13 @@ public partial class GameControlModel : ObservableObject
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(GameTitleHasChanged))]
     public partial string GameTitle { get; set; }
+
+    public List<PresetOption> DlssPresetOptions { get; } = new List<PresetOption>();
+
+    [ObservableProperty]
+    public partial PresetOption? SelectedDlssPreset { get; set; }
+
+    public bool CanSelectDlssPreset { get; private set; }
 
     public bool GameTitleHasChanged
     {
@@ -49,6 +60,65 @@ public partial class GameControlModel : ObservableObject
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
         GameTitle = game.Title;
+
+
+        // Make sure NVAPIHelper is supported and the game has DLSS.
+        if (NVAPIHelper.Instance.Supported && game.CurrentDLSS is not null)
+        {
+            // Try load the DriverSettingProfile for the given game. If it is not found the game is not supported.
+
+            var gameProfile = NVAPIHelper.Instance.FindGameProfile(game);
+            if (gameProfile is not null)
+            {
+                CanSelectDlssPreset = true;
+                game.DlssPreset = NVAPIHelper.Instance.GetGameDLSSPreset(game);
+
+                DlssPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
+
+                if (game.DlssPreset is null)
+                {
+                    // If it was never set, ensure it goes to default.
+                    SelectedDlssPreset = DlssPresetOptions.FirstOrDefault(x => x.Value == 0);
+                }
+                else
+                {
+                    SelectedDlssPreset = DlssPresetOptions.FirstOrDefault(x => x.Value == game.DlssPreset);
+                }
+            }
+        }
+
+        if (CanSelectDlssPreset == false)
+        {
+            var disabledPresetOption = new PresetOption(ResourceHelper.GetString("General_NotSupported"), 0);
+            DlssPresetOptions.Add(disabledPresetOption);
+            SelectedDlssPreset = disabledPresetOption;
+        }
+    }
+
+    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+
+        if (e.PropertyName == nameof(SelectedDlssPreset))
+        {
+            if (SelectedDlssPreset is not null && SelectedDlssPreset.Value != Game.DlssPreset)
+            {
+                var didSet = NVAPIHelper.Instance.SetGameDLSSPreset(Game, SelectedDlssPreset.Value);
+                if (didSet == false)
+                {
+                    if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+                    {
+                        var dialog = new EasyContentDialog(gameControl.XamlRoot)
+                        {
+                            Title = ResourceHelper.GetString("General_Error"),
+                            CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                            Content = ResourceHelper.GetString("GamePage_UnableToChangePreset"),
+                        };
+                        _ = dialog.ShowAsync();
+                    }                    
+                }
+            }
+        }
     }
 
     [RelayCommand]
@@ -80,6 +150,25 @@ public partial class GameControlModel : ObservableObject
                 await dialog.ShowAsync();
             }
         }
+    }
+
+    [RelayCommand(CanExecute = nameof(CanLaunchGame))]
+    async Task LaunchAsync()
+    {
+        if (Game.GameLibrary == Interfaces.GameLibrary.Steam)
+        {
+            await Launcher.LaunchUriAsync(new Uri($"steam://rungameid/{Game.PlatformId}"));
+        }
+    }
+
+    bool CanLaunchGame()
+    {
+        if (Game.GameLibrary == Interfaces.GameLibrary.Steam)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     [RelayCommand]
@@ -239,5 +328,27 @@ public partial class GameControlModel : ObservableObject
     async Task ReadyToPlayStateMoreInformationAsync()
     {
         await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting#game-is-not-in-a-ready-to-play-state"));
+    }
+
+    [RelayCommand]
+    async Task DLSSPresetInfoAsync()
+    {
+        if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+        {
+            var dialog = new EasyContentDialog(gameControl.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("GamePage_DLSSPresetInfo_Title"),
+                PrimaryButtonText = ResourceHelper.GetString("General_Okay"),
+                SecondaryButtonText = ResourceHelper.GetString("GamePage_DLSSPresetInfo_OnScreenIndicator"),
+                DefaultButton = ContentDialogButton.Primary,
+                Content = ResourceHelper.GetString("GamePage_DLSSPresetInfo_Message"),
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Secondary)
+            {
+                await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/DLSS-Developer-Options#on-screen-indicator"));
+            }
+        }
     }
 }

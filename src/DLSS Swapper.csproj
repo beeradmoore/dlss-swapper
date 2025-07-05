@@ -38,6 +38,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+      <Content Remove="Assets\dlss_presets.json" />
       <Content Remove="Assets\static_manifest.json" />
   </ItemGroup>
 
@@ -302,6 +303,9 @@
     </ItemGroup>
 
     <ItemGroup>
+        <None Update="Assets\dlss_presets.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
         <None Update="Asssets\icon_256.png">
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>

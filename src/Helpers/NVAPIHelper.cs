@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.DLSS;
 using NvAPIWrapper.DRS;
@@ -14,22 +15,7 @@ internal class NVAPIHelper
 
     public bool Supported { get; init; }
 
-    // TODO: Load from config file so people can add presets in future.
-    public IReadOnlyList<PresetOption> DlssPresetOptions { get; } = [
-        new PresetOption("Default", 0x00000000),
-        new PresetOption("Preset A", 0x00000001),
-        new PresetOption("Preset B", 0x00000002),
-        new PresetOption("Preset C", 0x00000003),
-        new PresetOption("Preset D", 0x00000004),
-        new PresetOption("Preset E", 0x00000005),
-        new PresetOption("Preset F", 0x00000006),
-        // new DlssPresetOption("Preset G", 0x00000007),
-        // new DlssPresetOption("Preset H", 0x00000008),
-        // new DlssPresetOption("Preset I", 0x00000009),
-        new PresetOption("Preset J", 0x0000000A),
-        new PresetOption("Preset K", 0x0000000B),
-        new PresetOption("Always use latest", 0x00FFFFFF),
-    ];
+    public IReadOnlyList<PresetOption> DlssPresetOptions { get; init; }
 
     public static NVAPIHelper Instance { get; private set; } = new NVAPIHelper();
 
@@ -38,6 +24,46 @@ internal class NVAPIHelper
 
     private NVAPIHelper()
     {
+        try
+        {
+            var dlssPresetsJsonPath = @"Assets\dlss_presets.json";
+            if (File.Exists(dlssPresetsJsonPath) == true)
+            {
+                var dlssPresetOptions = JsonSerializer.Deserialize<List<PresetOption>>(File.ReadAllText(dlssPresetsJsonPath))?.Where(x => x.Used == true)?.ToList();
+                if (dlssPresetOptions is not null && dlssPresetOptions.Count > 0)
+                {
+                    DlssPresetOptions = dlssPresetOptions.AsReadOnly();
+                }
+                else
+                {
+                    throw new Exception("dlss_presets.json is empty or invalid.");
+                }
+            }
+            else
+            {
+                throw new Exception("dlss_presets.json not found.");
+            }
+        }
+        catch (Exception err)
+        {
+            Logger.Error(err, "Could not load dlss_presets.json, using default presets.");
+            DlssPresetOptions = [
+               new PresetOption("Default", 0x00000000),
+                new PresetOption("Preset A", 0x00000001),
+                new PresetOption("Preset B", 0x00000002),
+                new PresetOption("Preset C", 0x00000003),
+                new PresetOption("Preset D", 0x00000004),
+                new PresetOption("Preset E", 0x00000005),
+                new PresetOption("Preset F", 0x00000006),
+                // new DlssPresetOption("Preset G", 0x00000007),
+                // new DlssPresetOption("Preset H", 0x00000008),
+                // new DlssPresetOption("Preset I", 0x00000009),
+                new PresetOption("Preset J", 0x0000000A),
+                new PresetOption("Preset K", 0x0000000B),
+                new PresetOption("Always use latest", 0x00FFFFFF),
+            ];
+        }
+
         try
         {
             _driverSettingSession = DriverSettingsSession.CreateAndLoad();

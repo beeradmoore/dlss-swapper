@@ -125,4 +125,7 @@ public class SettingsPageModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string DLSSPresetInfoTooltipText => ResourceHelper.GetString("GamePage_DLSSPresetInfo_Tooltip");
+
+    [TranslationProperty]
+    public string DLSSPresetInfoText => ResourceHelper.GetString("GamePage_DLSSPresetInfo");    
 }

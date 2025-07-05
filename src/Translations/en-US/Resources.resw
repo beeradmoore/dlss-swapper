@@ -249,6 +249,9 @@
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
     <value>Please wait for download to complete before swapping</value>
   </data>
+  <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
+    <value>Preset information</value>
+  </data>
   <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
     <value>DLSS presets are contained within DLSS DLL files contained within your games install directory. Different DLSS DLLs have different presets. For example preset K was not introduced until DLSS v310.2. So if you use DLSS v3.7 and you set preset to K it will not use preset K and instead it will fallback to whatever preset the game chooses to use.
 

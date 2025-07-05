@@ -16,6 +16,7 @@ using Microsoft.UI.Xaml.Controls;
 using DLSS_Swapper.Collections;
 using System.Collections.Specialized;
 using DLSS_Swapper.Data.DLSS;
+using Windows.System;
 
 namespace DLSS_Swapper.Pages;
 
@@ -135,6 +136,8 @@ public partial class SettingsPageModel : ObservableObject
 
         if (NVAPIHelper.Instance.Supported)
         {
+            // "Always use latest" does not seem to do anything when set as global preset so don't include it here.
+            var dlssPresetOptions = NVAPIHelper.Instance.DlssPresetOptions.Where(x => x.Value != 0x00FFFFFF);
             DlssPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
             var globalPreset = NVAPIHelper.Instance.GetGlobalDLSSPreset();
             SelectedGlobalDlssPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == globalPreset);
@@ -423,5 +426,27 @@ public partial class SettingsPageModel : ObservableObject
     {
         var translationToolboxWindow = new TranslationToolboxWindow();
         App.CurrentApp.WindowManager.ShowWindow(translationToolboxWindow);
+    }
+
+    [RelayCommand]
+    async Task DLSSPresetInfoAsync()
+    {
+        if (_weakPage.TryGetTarget(out var page))
+        {
+            var dialog = new EasyContentDialog(page.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("GamePage_DLSSPresetInfo_Title"),
+                PrimaryButtonText = ResourceHelper.GetString("General_Okay"),
+                SecondaryButtonText = ResourceHelper.GetString("GamePage_DLSSPresetInfo_OnScreenIndicator"),
+                DefaultButton = ContentDialogButton.Primary,
+                Content = ResourceHelper.GetString("GamePage_DLSSPresetInfo_Message"),
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Secondary)
+            {
+                await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/DLSS-Developer-Options#on-screen-indicator"));
+            }
+        }
     }
 }

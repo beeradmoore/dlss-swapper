@@ -105,18 +105,25 @@
                     </ListView>
                 </StackPanel>
 
-                <TextBlock
-                       Style="{StaticResource SubtitleTextBlockStyle}"
-                       Margin="0,40,0,0"
-                       Text="DLSS Options" />
-                <StackPanel Margin="0,10,0,0">
-                    <ComboBox Header="Global preset" IsEnabled="{x:Bind helpers:NVAPIHelper.Instance.Supported, Mode=OneTime}" ItemsSource="{x:Bind ViewModel.DlssPresetOptions, Mode=OneTime}" SelectedItem="{x:Bind ViewModel.SelectedGlobalDlssPreset, Mode=TwoWay}" DisplayMemberPath="Name" Margin="0,0,0,8" />
+                <StackPanel Orientation="Horizontal"
+                       Margin="0,40,0,0" Spacing="10">
+                    <TextBlock
+                           Style="{StaticResource SubtitleTextBlockStyle}"
+                           Text="{x:Bind ViewModel.TranslationProperties.DLSSOptionsText, Mode=OneWay}" />
                 </StackPanel>
+
+                <StackPanel Margin="0,10,0,0">
+                    <ComboBox Header="{x:Bind ViewModel.TranslationProperties.DLSSOptionsGlobalPresetText, Mode=OneWay}" IsEnabled="{x:Bind helpers:NVAPIHelper.Instance.Supported, Mode=OneTime}" ItemsSource="{x:Bind ViewModel.DlssPresetOptions, Mode=OneTime}" SelectedItem="{x:Bind ViewModel.SelectedGlobalDlssPreset, Mode=TwoWay}" DisplayMemberPath="Name" Margin="0,0,0,8" />
+                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
+                        <Run Text="{x:Bind ViewModel.TranslationProperties.DLSSPresetInfoTooltipText, Mode=OneWay}" /> <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.DLSSPresetInfoCommand}"><Run Text="Preset information" /></Hyperlink>.
+                    </TextBlock>
+                </StackPanel>
+
 
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="{x:Bind ViewModel.TranslationProperties.DllsDeveloperOptionsText, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.TranslationProperties.DLSSDeveloperOptionsText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0">
                     <ComboBox Header="{x:Bind ViewModel.TranslationProperties.ShowOnScreenIndicatorText, Mode=OneWay}" ItemsSource="{Binding DLSSOnScreenIndicatorOptions, Mode=OneTime}" SelectedItem="{Binding SelectedDlssOnScreenIndicator, Mode=TwoWay}" DisplayMemberPath="Label" Margin="0,0,0,8" />
                     <CheckBox Content="{x:Bind ViewModel.TranslationProperties.EnableLoggingToFileText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.DlssEnableLogging, Mode=TwoWay}" Margin="0,0,0,4"/>

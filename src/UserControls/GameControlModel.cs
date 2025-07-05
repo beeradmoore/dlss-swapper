@@ -329,4 +329,26 @@ public partial class GameControlModel : ObservableObject
     {
         await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/Troubleshooting#game-is-not-in-a-ready-to-play-state"));
     }
+
+    [RelayCommand]
+    async Task DLSSPresetInfoAsync()
+    {
+        if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+        {
+            var dialog = new EasyContentDialog(gameControl.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("GamePage_DLSSPresetInfo_Title"),
+                PrimaryButtonText = ResourceHelper.GetString("General_Okay"),
+                SecondaryButtonText = ResourceHelper.GetString("GamePage_DLSSPresetInfo_OnScreenIndicator"),
+                DefaultButton = ContentDialogButton.Primary,
+                Content = ResourceHelper.GetString("GamePage_DLSSPresetInfo_Message"),
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Secondary)
+            {
+                await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/DLSS-Developer-Options#on-screen-indicator"));
+            }
+        }
+    }
 }

@@ -290,7 +290,7 @@ namespace DLSS_Swapper.Data.GOG
                     }
                     else
                     {
-                        Logger.Error($"Unable to get covers through any methods for {gogGame.PlatformId}.");
+                        Logger.Error($"Unable to get covers through any normal methods for {gogGame.PlatformId}.");
                     }
                 }
 

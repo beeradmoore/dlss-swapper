@@ -102,7 +102,7 @@ public partial class GameControlModel : ObservableObject
 
         if (e.PropertyName == nameof(SelectedDlssPreset))
         {
-            if (SelectedDlssPreset is not null && SelectedDlssPreset.Value != Game.DlssPreset)
+            if (CanSelectDlssPreset == true && SelectedDlssPreset is not null && SelectedDlssPreset.Value != Game.DlssPreset)
             {
                 var didSet = NVAPIHelper.Instance.SetGameDLSSPreset(Game, SelectedDlssPreset.Value);
                 if (didSet == false)

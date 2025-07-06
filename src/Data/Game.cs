@@ -644,7 +644,7 @@ namespace DLSS_Swapper.Data
                     var dllHistory = new GameHistory()
                     {
                         GameId = ID,
-                        EventType = GameHistoryEventType.Reset,
+                        EventType = GameHistoryEventType.DLLReset,
                         EventTime = DateTime.Now,
                         AssetType = gameAssetType,
                         AssetVersion = existingBackupRecords.FirstOrDefault()?.DisplayName ?? string.Empty,
@@ -824,7 +824,7 @@ namespace DLSS_Swapper.Data
                 var dllHistory = new GameHistory()
                 {
                     GameId = ID,
-                    EventType = GameHistoryEventType.Swap,
+                    EventType = GameHistoryEventType.DLLSwap,
                     EventTime = DateTime.Now,
                     AssetType = dllRecord.AssetType,
                     AssetVersion = dllRecord.DisplayName,

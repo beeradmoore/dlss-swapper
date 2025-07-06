@@ -10,8 +10,8 @@ namespace DLSS_Swapper.Data;
 public enum GameHistoryEventType
 {
     Unknown,
-    Swap,
-    Reset,
+    DLLSwap,
+    DLLReset,
 }
 
 public class GameHistory

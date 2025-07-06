@@ -236,6 +236,12 @@
   <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
     <value>Version</value>
   </data>
+  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
+    <value>DLL Reset</value>
+  </data>
+  <data name="GameHistoryEventType_DLLSwap" xml:space="preserve">
+    <value>DLL Swap</value>
+  </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>Could not load game library {0}</value>
   </data>
@@ -561,6 +567,9 @@ If you have checked these and your game is still not showing up there may be a b
   </data>
   <data name="General_Swap" xml:space="preserve">
     <value>Swap</value>
+  </data>
+  <data name="General_Unknown" xml:space="preserve">
+    <value>Unknown</value>
   </data>
   <data name="General_Update" xml:space="preserve">
     <value>Update</value>

@@ -15,7 +15,7 @@ public class GameHistoryControlModelTranslationProperties : LocalizedViewModelBa
     public string EventTimeHeader => ResourceHelper.GetString("GameHistoryControl_EventTimeHeader");
 
     [TranslationProperty]
-    public string ActionHeader => ResourceHelper.GetString("GameHistoryControl_ActionHeader");
+    public string EventTypeHeader => ResourceHelper.GetString("GameHistoryControl_EventTypeHeader");
 
     [TranslationProperty]
     public string AssetTypeHeader => ResourceHelper.GetString("GameHistoryControl_AssetTypeHeader");

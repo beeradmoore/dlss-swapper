@@ -29,7 +29,7 @@
 
             <ctWinUI:DataGrid.Columns>
                 <ctWinUI:DataGridTextColumn Header="{x:Bind ViewModel.TranslationProperties.EventTimeHeader, Mode=OneWay}" Tag="EventTime" Binding="{Binding EventTime}" />
-                <ctWinUI:DataGridTextColumn Header="{x:Bind ViewModel.TranslationProperties.ActionHeader, Mode=OneWay}" Tag="Action" Binding="{Binding EventType, Converter={StaticResource GameHistoryEventTypeToLabelConverter}}" />
+                <ctWinUI:DataGridTextColumn Header="{x:Bind ViewModel.TranslationProperties.EventTypeHeader, Mode=OneWay}" Tag="EventType" Binding="{Binding EventType, Converter={StaticResource GameHistoryEventTypeToLabelConverter}}" />
                 <ctWinUI:DataGridTextColumn Header="{x:Bind ViewModel.TranslationProperties.AssetTypeHeader, Mode=OneWay}" Tag="AssetType" Binding="{Binding AssetTypeName}" />
                 <ctWinUI:DataGridTextColumn Header="{x:Bind ViewModel.TranslationProperties.VersionHeader, Mode=OneWay}" Tag="Version" Binding="{Binding AssetVersion}" />
             </ctWinUI:DataGrid.Columns>

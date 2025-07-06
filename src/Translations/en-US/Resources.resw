@@ -221,14 +221,14 @@
   <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>Unknown GameLibrary {0} while setting ID</value>
   </data>
-  <data name="GameHistoryControl_ActionHeader" xml:space="preserve">
-    <value>Action</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Asset Type</value>
   </data>
   <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
     <value>Event Time</value>
+  </data>
+  <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
+    <value>Event Type</value>
   </data>
   <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
     <value>No history found.</value>

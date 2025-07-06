@@ -51,4 +51,6 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
     [TranslationProperty]
     public string DLSSPresetInfoTooltipText => ResourceHelper.GetString("GamePage_DLSSPresetInfo_Tooltip");
 
+    [TranslationProperty]
+    public string ReloadText => ResourceHelper.GetString("General_Reload");
 }

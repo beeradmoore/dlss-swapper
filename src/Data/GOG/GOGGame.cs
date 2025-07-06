@@ -83,7 +83,7 @@ namespace DLSS_Swapper.Data.GOG
 
                     foreach (var product in catalogResponse.Products)
                     {
-                        if (product.Id.ToString().Equals(PlatformId, StringComparison.OrdinalIgnoreCase) == false)
+                        if (product.Id.Equals(PlatformId, StringComparison.OrdinalIgnoreCase) == false)
                         {
                             continue;
                         }

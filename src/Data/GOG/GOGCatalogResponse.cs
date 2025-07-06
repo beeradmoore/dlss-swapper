@@ -28,7 +28,7 @@ class GOGCatalogResponse
 class GOGCatalogProduct
 {
     [JsonPropertyName("id")]
-    public long Id { get; set; }
+    public string Id { get; set; } = string.Empty;
 
     [JsonPropertyName("title")]
     public string Title { get; set; } = string.Empty;

@@ -641,6 +641,15 @@ namespace DLSS_Swapper.Data
                 // Update game assets list by deleting and re-adding.
                 using (await Database.Instance.Mutex.LockAsync())
                 {
+                    var dllHistory = new GameHistory()
+                    {
+                        GameId = ID,
+                        EventType = GameHistoryEventType.DLLReset,
+                        EventTime = DateTime.Now,
+                        AssetType = gameAssetType,
+                        AssetVersion = existingBackupRecords.FirstOrDefault()?.DisplayName ?? string.Empty,
+                    };
+                    await Database.Instance.Connection.InsertAsync(dllHistory);
                     await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
                     await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
                 }
@@ -812,6 +821,15 @@ namespace DLSS_Swapper.Data
             // Update game assets list by deleting and re-adding.
             using (await Database.Instance.Mutex.LockAsync())
             {
+                var dllHistory = new GameHistory()
+                {
+                    GameId = ID,
+                    EventType = GameHistoryEventType.DLLSwap,
+                    EventTime = DateTime.Now,
+                    AssetType = dllRecord.AssetType,
+                    AssetVersion = dllRecord.DisplayName,
+                };
+                await Database.Instance.Connection.InsertAsync(dllHistory);
                 await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
                 await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
             }

@@ -47,13 +47,13 @@
                     </Button.Content>
                 </Button>
 
-                <!--
-                <Button ToolTipService.ToolTip="History" Command="{Binding ViewHistoryCommand}">
+                <Button ToolTipService.ToolTip="{Binding TranslationProperties.HistoryText, Mode=OneWay}" Command="{Binding ViewHistoryCommand}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE81C;"/>
                     </Button.Content>
                 </Button>
 
+                <!--
                 <Button ToolTipService.ToolTip="Reset All" Command="{Binding ResetAllCommand}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xED62;"/>

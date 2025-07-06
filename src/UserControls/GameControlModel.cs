@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DLSS_Swapper.Data.DLSS;
 using System.ComponentModel;
+using Windows.ApplicationModel.Background;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -348,6 +349,84 @@ public partial class GameControlModel : ObservableObject
             if (result == ContentDialogResult.Secondary)
             {
                 await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/DLSS-Developer-Options#on-screen-indicator"));
+            }
+        }
+    }
+
+    TaskCompletionSource? _reloadGameTaskCompletionSource;
+
+    [RelayCommand]
+    async Task ReloadGameAsync()
+    {
+        if (_reloadGameTaskCompletionSource is not null)
+        {
+            _reloadGameTaskCompletionSource.SetCanceled();
+        }
+
+        if (gameControlWeakReference.TryGetTarget(out var control))
+        {
+            _reloadGameTaskCompletionSource = new TaskCompletionSource();
+
+            Game.PropertyChanged += Game_PropertyChanged;
+            Game.NeedsProcessing = true;
+            Game.ProcessGame();
+
+            var dialogStart = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+            var dialog = new EasyContentDialog(App.CurrentApp.MainWindow.Content.XamlRoot)
+            {
+                Title = "Reloading game",
+                Content = new ProgressRing()
+                {
+                    IsIndeterminate = true,
+                },
+                PrimaryButtonText = ResourceHelper.GetString("General_Cancel")
+            };
+            var dialogTask = dialog.ShowAsync().AsTask();
+
+            await Task.WhenAny(dialogTask, _reloadGameTaskCompletionSource.Task);
+
+            Game.PropertyChanged -= Game_PropertyChanged;
+
+
+            if (dialogTask.IsCompleted)
+            {
+                // User clicked cancel, close the current dialog.
+                Close();
+            }
+            else
+            {
+                var loadingDuration = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - dialogStart;
+
+                if (loadingDuration < 1000)
+                {
+                    // Force loading dialog to exist for at least 1 second
+                    await Task.Delay(1000 - (int)loadingDuration);
+                }
+
+                Close();
+
+                if (dialogTask.IsCompleted == true)
+                {
+                    return;
+                }
+
+                // Game finished reloading so re-launch the GameControl.
+                _reloadGameTaskCompletionSource = null;
+                dialog.Hide();
+                var gameControl = new GameControl(Game);
+                _ = gameControl.ShowAsync();
+            }
+        }
+    }
+
+    private void Game_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(Game.Processing))
+        {
+            if (Game.Processing == true)
+            {
+                _reloadGameTaskCompletionSource?.SetResult();
             }
         }
     }

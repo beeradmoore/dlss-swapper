@@ -66,6 +66,13 @@
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="{Binding Game.IsFavourite, Converter={StaticResource FavouriteGlyphConverter}}"/>
                     </Button.Content>
                 </Button>
+                
+                <Button Command="{Binding ReloadGameCommand}" ToolTipService.ToolTip="{Binding TranslationProperties.ReloadText, Mode=OneWay}">
+                    <Button.Content>
+                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE72C;"/>
+                    </Button.Content>
+                </Button>
+                
             </StackPanel>
         </ControlTemplate>
 

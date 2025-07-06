@@ -520,6 +520,9 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Refresh" xml:space="preserve">
     <value>Refresh</value>
   </data>
+  <data name="General_Reload" xml:space="preserve">
+    <value>Reload</value>
+  </data>
   <data name="General_Remove" xml:space="preserve">
     <value>Remove</value>
   </data>

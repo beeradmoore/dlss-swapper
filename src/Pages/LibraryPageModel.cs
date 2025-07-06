@@ -102,6 +102,19 @@ public partial class LibraryPageModel : ObservableObject
     [RelayCommand]
     async Task ExportAllAsync()
     {
+        if (Environment.IsPrivilegedProcess)
+        {
+            var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                DefaultButton = ContentDialogButton.Close,
+                Content = ResourceHelper.GetString("General_FeatureNotSupportedWhenAdmin"),
+            };
+            await errorDialog.ShowAsync();
+            return;
+        }
+
         // Check that there are records to export first.
         var allDllRecords = new List<DLLRecord>();
         allDllRecords.AddRange(DLLManager.Instance.DLSSRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
@@ -347,6 +360,19 @@ public partial class LibraryPageModel : ObservableObject
     [RelayCommand]
     async Task ImportAsync()
     {
+        if (Environment.IsPrivilegedProcess)
+        {
+            var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                DefaultButton = ContentDialogButton.Close,
+                Content = ResourceHelper.GetString("General_FeatureNotSupportedWhenAdmin"),
+            };
+            await errorDialog.ShowAsync();
+            return;
+        }
+
         if (DLLManager.Instance.ImportedManifest is null)
         {
             var couldNotImportDialog = new EasyContentDialog(libraryPage.XamlRoot)
@@ -838,6 +864,19 @@ public partial class LibraryPageModel : ObservableObject
     [RelayCommand]
     async Task ExportRecordAsync(DLLRecord dllRecord)
     {
+        if (Environment.IsPrivilegedProcess)
+        {
+            var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                DefaultButton = ContentDialogButton.Close,
+                Content = ResourceHelper.GetString("General_FeatureNotSupportedWhenAdmin"),
+            };
+            await errorDialog.ShowAsync();
+            return;
+        }
+
         if (dllRecord.LocalRecord is null)
         {
             return;

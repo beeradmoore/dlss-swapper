@@ -107,6 +107,19 @@ public partial class GameGridPageModel : ObservableObject
     [RelayCommand]
     async Task AddManualGameButtonAsync()
     {
+        if (Environment.IsPrivilegedProcess)
+        {
+            var errorDialog = new EasyContentDialog(gameGridPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                DefaultButton = ContentDialogButton.Close,
+                Content = ResourceHelper.GetString("General_FeatureNotSupportedWhenAdmin"),
+            };
+            await errorDialog.ShowAsync();
+            return;
+        }
+
         if (Settings.Instance.DontShowManuallyAddingGamesNotice == false)
         {
             var dontShowAgainCheckbox = new CheckBox()
@@ -169,7 +182,6 @@ public partial class GameGridPageModel : ObservableObject
 
     async Task AddGameManually()
     {
-
         TextBlockBuilder textBlockBuilder = new TextBlockBuilder(ResourceHelper.GetString("GamesPage_ManuallyAdding_InfoHtml"));
 
         if (Settings.Instance.HasShownAddGameFolderMessage == false)

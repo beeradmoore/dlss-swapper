@@ -53,4 +53,7 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string ReloadText => ResourceHelper.GetString("General_Reload");
+
+    [TranslationProperty]
+    public string HistoryText => ResourceHelper.GetString("GamePage_History");
 }

@@ -27,6 +27,15 @@ internal class Database
         {
             try
             {
+                syncConnection.CreateTable<GameHistory>();
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err);
+            }
+
+            try
+            {
                 syncConnection.CreateTable<SteamGame>();
             }
             catch (Exception err)

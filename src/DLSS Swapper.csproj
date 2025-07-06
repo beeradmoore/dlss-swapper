@@ -108,6 +108,7 @@
     <None Remove="TranslationToolboxWindow.xaml" />
     <None Remove="UserControls\DLLPickerControl.xaml" />
     <None Remove="UserControls\GameControl.xaml" />
+    <None Remove="UserControls\GameHistoryControl.xaml" />
     <None Remove="UserControls\ImportDLLSummaryControl.xaml" />
     <None Remove="UserControls\ImportSystemDisabledView.xaml" />
     <None Remove="UserControls\ManuallyAddGameControl.xaml" />
@@ -310,6 +311,9 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Page Update="UserControls\GameHistoryControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
         <Page Update="TranslationToolboxWindow.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>

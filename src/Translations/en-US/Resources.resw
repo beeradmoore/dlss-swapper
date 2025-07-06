@@ -221,6 +221,21 @@
   <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>Unknown GameLibrary {0} while setting ID</value>
   </data>
+  <data name="GameHistoryControl_ActionHeader" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
+    <value>Asset Type</value>
+  </data>
+  <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
+    <value>Event Time</value>
+  </data>
+  <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
+    <value>No history found.</value>
+  </data>
+  <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
+    <value>Version</value>
+  </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>Could not load game library {0}</value>
   </data>
@@ -270,6 +285,9 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
     <value>Favorited</value>
+  </data>
+  <data name="GamePage_History" xml:space="preserve">
+    <value>History</value>
   </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
     <value>Install path</value>

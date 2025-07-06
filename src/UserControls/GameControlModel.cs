@@ -207,9 +207,19 @@ public partial class GameControlModel : ObservableObject
     [RelayCommand]
     async Task ViewHistoryAsync()
     {
-        //ViewHistoryCommand
-        // TODO: implement
-        await Task.Delay(100);
+        if (gameControlWeakReference.TryGetTarget(out var control))
+        {
+            var dialog = new EasyContentDialog(control.XamlRoot)
+            {
+                Title = $"{ResourceHelper.GetFormattedResourceTemplate("GamePage_History")} - {Game.Title}",
+                PrimaryButtonText = ResourceHelper.GetString("General_Close"),
+                DefaultButton = ContentDialogButton.Primary,
+                Content = new GameHistoryControl(Game),
+            };
+            dialog.Resources["ContentDialogMinWidth"] = 800;
+
+            await dialog.ShowAsync();
+        }
     }
 
     [RelayCommand]

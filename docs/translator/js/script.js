@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadEnglishResw() {
   const url =
-    "https://raw.githubusercontent.com/beeradmoore/dlss-swapper/refs/heads/feature/translations-setup/src/Translations/en-US/Resources.resw";
+    "https://raw.githubusercontent.com/beeradmoore/dlss-swapper/refs/heads/main/src/Translations/en-US/Resources.resw";
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error(response.statusText);

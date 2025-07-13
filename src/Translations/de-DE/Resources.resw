@@ -720,10 +720,10 @@ Aus diesem Umstand empfehlen wir besondere Vorsicht im Umgang mit Multiplayer Sp
     <value>Anmerkung für Multiplayer Spiele</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
-    <value>Funktioniert immer noch nicht</value>
+    <value>Funktioniert nicht</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
-    <value>Funktioniert!</value>
+    <value>Funktioniert</value>
   </data>
   <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
     <value>Browser Test</value>

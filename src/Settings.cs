@@ -432,6 +432,10 @@ namespace DLSS_Swapper
         {
             var gameLibraries = Enum.GetValues<GameLibrary>().ToList();
 
+            // Move manually added to the end of the list by default.
+            gameLibraries.Remove(GameLibrary.ManuallyAdded);
+            gameLibraries.Add(GameLibrary.ManuallyAdded);
+
             // If no items are in the list we are migrating them all
             // If there are some items in the list we are only checking and adding new libraries
             if (_gameLibrarySettings.Length == 0)

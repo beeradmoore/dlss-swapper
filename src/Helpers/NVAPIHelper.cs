@@ -125,15 +125,23 @@ internal class NVAPIHelper
             return 0;
         }
 
-        if (_driverSettingSession.CurrentGlobalProfile is null)
+        try
         {
-            Logger.Error("Current global profile is null, cannot get DLSS preset.");
-            return 0;
-        }
+            if (_driverSettingSession.CurrentGlobalProfile is null)
+            {
+                Logger.Error("Current global profile is null, cannot get DLSS preset.");
+                return 0;
+            }
 
-        if (_driverSettingSession.CurrentGlobalProfile.GetSetting(OVERRIDE_DLSS_SR_PRESET_SETTING_ID).CurrentValue is uint currentValue)
+            if (_driverSettingSession.CurrentGlobalProfile.GetSetting(OVERRIDE_DLSS_SR_PRESET_SETTING_ID).CurrentValue is uint currentValue)
+            {
+                return currentValue;
+            }
+        }
+        catch (Exception err)
         {
-            return currentValue;
+            Logger.Error(err, "Could not get setting for CurrentGlobalProfile.");
+            return 0;
         }
 
         return 0;
@@ -160,7 +168,7 @@ internal class NVAPIHelper
         }
         catch (Exception err)
         {
-            Logger.Error(err.Message);
+            Logger.Error(err, "Could not set setting for CurrentGlobalProfile.");
             return false;
         }
     }

@@ -125,6 +125,12 @@ internal class NVAPIHelper
             return 0;
         }
 
+        if (_driverSettingSession.CurrentGlobalProfile is null)
+        {
+            Logger.Error("Current global profile is null, cannot get DLSS preset.");
+            return 0;
+        }
+
         if (_driverSettingSession.CurrentGlobalProfile.GetSetting(OVERRIDE_DLSS_SR_PRESET_SETTING_ID).CurrentValue is uint currentValue)
         {
             return currentValue;
@@ -142,6 +148,12 @@ internal class NVAPIHelper
 
         try
         {
+            if (_driverSettingSession.CurrentGlobalProfile is null)
+            {
+                Logger.Error("Current global profile is null, cannot set DLSS preset.");
+                return false;
+            }
+
             _driverSettingSession.CurrentGlobalProfile.SetSetting(OVERRIDE_DLSS_SR_PRESET_SETTING_ID, preset);
             _driverSettingSession.Save();
             return true;

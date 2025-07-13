@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SQLite;
 
 namespace DLSS_Swapper.Data;
@@ -10,8 +6,11 @@ namespace DLSS_Swapper.Data;
 public enum GameHistoryEventType
 {
     Unknown,
-    DLLSwap,
+    DLLSwapped,
     DLLReset,
+    DLLDetected,
+    DLLChangedExternally,
+    DLLBackupRemoved,
 }
 
 public class GameHistory
@@ -25,6 +24,9 @@ public class GameHistory
 
     [Column("asset_type")]
     public GameAssetType? AssetType { get; set; }
+
+    [Column("asset_path")]
+    public string? AssetPath { get; set; }
 
     [Ignore]
     public string AssetTypeName
@@ -45,6 +47,4 @@ public class GameHistory
 
     [Column("asset_version")]
     public string? AssetVersion { get; set; }
-
-
 }

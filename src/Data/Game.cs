@@ -309,7 +309,82 @@ namespace DLSS_Swapper.Data
                     var xessDllPaths = Directory.GetFiles(InstallPath, "libxess.dll", enumerationOptions);
                     */
 
+                    var dllHistory = new List<GameHistory>();
                     var unknownGameAssets = new List<GameAsset>();
+
+                    void ProcessGame_ProcessGameAsset(GameAsset gameAsset)
+                    {
+                        gameAsset.LoadVersionAndHash();
+
+                        var oldGameAsset = oldGameAssets.FirstOrDefault(x => x.Path.Equals(gameAsset.Path, StringComparison.OrdinalIgnoreCase));
+
+                        if (oldGameAsset is not null) // DLL existed previously
+                        {
+                            if (gameAsset.Version == oldGameAsset.Version)
+                            {
+                                // NOOP
+                            }
+                            else
+                            {
+                                dllHistory.Add(new GameHistory()
+                                {
+                                    GameId = ID,
+                                    EventType = GameHistoryEventType.DLLChangedExternally,
+                                    EventTime = DateTime.Now,
+                                    AssetType = gameAsset.AssetType,
+                                    AssetPath = gameAsset.Path,
+                                    AssetVersion = gameAsset.DisplayName,
+                                });
+
+                                // If the DLL was changed externally (eg. game update) we delete the backup.
+                                // This fixes the issue where looking at your game it may appear to be downgraded but
+                                // in reality it is because the game updated to a newer version than you had swapped to.
+                                var expectedBackupPath = $"{gameAsset.Path}.dlsss";
+                                if (File.Exists(expectedBackupPath))
+                                {
+                                    var tempBackupGameAsset = new GameAsset()
+                                    {
+                                        Id = ID,
+                                        AssetType = DLLManager.Instance.GetAssetBackupType(gameAsset.AssetType),
+                                        Path = expectedBackupPath,
+                                    };
+                                    tempBackupGameAsset.LoadVersionAndHash();
+
+                                    dllHistory.Add(new GameHistory()
+                                    {
+                                        GameId = ID,
+                                        EventType = GameHistoryEventType.DLLBackupRemoved,
+                                        EventTime = DateTime.Now,
+                                        AssetType = tempBackupGameAsset.AssetType,
+                                        AssetPath = tempBackupGameAsset.Path,
+                                        AssetVersion = tempBackupGameAsset.DisplayName,
+                                    });
+
+                                    File.Delete(expectedBackupPath);
+                                }
+                            }
+                        }
+                        else // DLL is new
+                        {
+                            dllHistory.Add(new GameHistory()
+                            {
+                                GameId = ID,
+                                EventType = GameHistoryEventType.DLLDetected,
+                                EventTime = DateTime.Now,
+                                AssetType = gameAsset.AssetType,
+                                AssetPath = gameAsset.Path,
+                                AssetVersion = gameAsset.DisplayName,
+                            });
+                        }
+
+                        if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
+                        {
+                            unknownGameAssets.Add(gameAsset);
+                        }
+
+                        LoadBackupForGameAsset(gameAsset);
+
+                    }
 
                     foreach (var dllPath in dllPaths)
                     {
@@ -324,15 +399,8 @@ namespace DLSS_Swapper.Data
                                 AssetType = GameAssetType.DLSS,
                                 Path = dllPath,
                             };
-                            gameAsset.LoadVersionAndHash();
+                            ProcessGame_ProcessGameAsset(gameAsset);
                             GameAssets.Add(gameAsset);
-
-                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
-                            {
-                                unknownGameAssets.Add(gameAsset);
-                            }
-
-                            LoadBackupForGameAsset(gameAsset);
                         }
                         else if (dllName == "nvngx_dlssg.dll")
                         {
@@ -342,15 +410,8 @@ namespace DLSS_Swapper.Data
                                 AssetType = GameAssetType.DLSS_G,
                                 Path = dllPath,
                             };
-                            gameAsset.LoadVersionAndHash();
+                            ProcessGame_ProcessGameAsset(gameAsset);
                             GameAssets.Add(gameAsset);
-
-                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
-                            {
-                                unknownGameAssets.Add(gameAsset);
-                            }
-
-                            LoadBackupForGameAsset(gameAsset);
                         }
                         else if (dllName == "nvngx_dlssd.dll")
                         {
@@ -360,15 +421,8 @@ namespace DLSS_Swapper.Data
                                 AssetType = GameAssetType.DLSS_D,
                                 Path = dllPath,
                             };
-                            gameAsset.LoadVersionAndHash();
+                            ProcessGame_ProcessGameAsset(gameAsset);
                             GameAssets.Add(gameAsset);
-
-                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
-                            {
-                                unknownGameAssets.Add(gameAsset);
-                            }
-
-                            LoadBackupForGameAsset(gameAsset);
                         }
                         else if (dllName == "amd_fidelityfx_dx12.dll")
                         {
@@ -378,15 +432,8 @@ namespace DLSS_Swapper.Data
                                 AssetType = GameAssetType.FSR_31_DX12,
                                 Path = dllPath,
                             };
-                            gameAsset.LoadVersionAndHash();
+                            ProcessGame_ProcessGameAsset(gameAsset);
                             GameAssets.Add(gameAsset);
-
-                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
-                            {
-                                unknownGameAssets.Add(gameAsset);
-                            }
-
-                            LoadBackupForGameAsset(gameAsset);
                         }
                         else if (dllName == "amd_fidelityfx_vk.dll")
                         {
@@ -396,15 +443,8 @@ namespace DLSS_Swapper.Data
                                 AssetType = GameAssetType.FSR_31_VK,
                                 Path = dllPath,
                             };
-                            gameAsset.LoadVersionAndHash();
+                            ProcessGame_ProcessGameAsset(gameAsset);
                             GameAssets.Add(gameAsset);
-
-                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
-                            {
-                                unknownGameAssets.Add(gameAsset);
-                            }
-
-                            LoadBackupForGameAsset(gameAsset);
                         }
                         else if (dllName == "libxess.dll")
                         {
@@ -414,15 +454,8 @@ namespace DLSS_Swapper.Data
                                 AssetType = GameAssetType.XeSS,
                                 Path = dllPath,
                             };
-                            gameAsset.LoadVersionAndHash();
+                            ProcessGame_ProcessGameAsset(gameAsset);
                             GameAssets.Add(gameAsset);
-
-                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
-                            {
-                                unknownGameAssets.Add(gameAsset);
-                            }
-
-                            LoadBackupForGameAsset(gameAsset);
                         }
                         else if (dllName == "libxell.dll")
                         {
@@ -432,15 +465,8 @@ namespace DLSS_Swapper.Data
                                 AssetType = GameAssetType.XeLL,
                                 Path = dllPath,
                             };
-                            gameAsset.LoadVersionAndHash();
+                            ProcessGame_ProcessGameAsset(gameAsset);
                             GameAssets.Add(gameAsset);
-
-                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
-                            {
-                                unknownGameAssets.Add(gameAsset);
-                            }
-
-                            LoadBackupForGameAsset(gameAsset);
                         }
                         else if (dllName == "libxess_fg.dll")
                         {
@@ -450,31 +476,16 @@ namespace DLSS_Swapper.Data
                                 AssetType = GameAssetType.XeSS_FG,
                                 Path = dllPath,
                             };
-                            gameAsset.LoadVersionAndHash();
+                            ProcessGame_ProcessGameAsset(gameAsset);
                             GameAssets.Add(gameAsset);
-
-                            if (DLLManager.Instance.IsInKnownGameAsset(gameAsset, this) == false)
-                            {
-                                unknownGameAssets.Add(gameAsset);
-                            }
-
-                            LoadBackupForGameAsset(gameAsset);
                         }
-
-                        /*
-                        var backupGameAsset = gameAsset.GetBackup();
-                        if (backupGameAsset is not null)
-                        {
-                            GameAssets.Add(backupGameAsset);
-                        }
-                        */
                     }
-
 
                     App.CurrentApp.RunOnUIThread(() =>
                     {
                         UpdateCurrentDLLsFromGameAssets();
                     });
+
                     if (GameAssets.Any())
                     {
                         newHasSwappableItems = true;
@@ -483,6 +494,7 @@ namespace DLSS_Swapper.Data
                         //savePoint is not valid, and should be the result of a call to SaveTransactionPoint.
                         using (await Database.Instance.Mutex.LockAsync())
                         {
+                            await Database.Instance.Connection.InsertAllAsync(dllHistory, false).ConfigureAwait(false);
                             await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
                         }
 
@@ -587,6 +599,7 @@ namespace DLSS_Swapper.Data
             }
             else
             {
+                var dllHistory = new List<GameHistory>();
                 foreach (var existingBackupRecord in existingBackupRecords)
                 {
                     var primaryRecordName = existingBackupRecord.Path.Replace(".dlsss", string.Empty);
@@ -631,6 +644,17 @@ namespace DLSS_Swapper.Data
                         Hash = existingBackupRecord.Hash,
                     };
 
+
+                    dllHistory.Add(new GameHistory()
+                    {
+                        GameId = ID,
+                        EventType = GameHistoryEventType.DLLReset,
+                        EventTime = DateTime.Now,
+                        AssetType = gameAssetType,
+                        AssetPath = existingRecord.Path,
+                        AssetVersion = existingBackupRecord.DisplayName,
+                    });
+
                     UpdateCurrentAsset(newGameAsset, gameAssetType);
 
                     GameAssets.Remove(existingRecord);
@@ -638,18 +662,11 @@ namespace DLSS_Swapper.Data
                     GameAssets.Add(newGameAsset);
                 }
 
-                // Update game assets list by deleting and re-adding.
                 using (await Database.Instance.Mutex.LockAsync())
                 {
-                    var dllHistory = new GameHistory()
-                    {
-                        GameId = ID,
-                        EventType = GameHistoryEventType.DLLReset,
-                        EventTime = DateTime.Now,
-                        AssetType = gameAssetType,
-                        AssetVersion = existingBackupRecords.FirstOrDefault()?.DisplayName ?? string.Empty,
-                    };
-                    await Database.Instance.Connection.InsertAsync(dllHistory);
+                    await Database.Instance.Connection.InsertAllAsync(dllHistory, false);
+
+                    // Update game assets list by deleting and re-adding.
                     await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
                     await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
                 }
@@ -762,6 +779,8 @@ namespace DLSS_Swapper.Data
                 }
             }
 
+            var dllHistory = new List<GameHistory>();
+
             foreach (var existingRecord in existingRecords)
             {
                 try
@@ -779,6 +798,16 @@ namespace DLSS_Swapper.Data
                     };
                     // No need to call LoadVersionAndHash, the data is already here.
                     newGameAssets.Add(newGameAsset);
+
+                    dllHistory.Add(new GameHistory()
+                    {
+                        GameId = ID,
+                        EventType = GameHistoryEventType.DLLSwapped,
+                        EventTime = DateTime.Now,
+                        AssetType = dllRecord.AssetType,
+                        AssetPath = existingRecord.Path,
+                        AssetVersion = dllRecord.DisplayName,
+                    });
                 }
                 catch (UnauthorizedAccessException err)
                 {
@@ -821,15 +850,7 @@ namespace DLSS_Swapper.Data
             // Update game assets list by deleting and re-adding.
             using (await Database.Instance.Mutex.LockAsync())
             {
-                var dllHistory = new GameHistory()
-                {
-                    GameId = ID,
-                    EventType = GameHistoryEventType.DLLSwap,
-                    EventTime = DateTime.Now,
-                    AssetType = dllRecord.AssetType,
-                    AssetVersion = dllRecord.DisplayName,
-                };
-                await Database.Instance.Connection.InsertAsync(dllHistory);
+                await Database.Instance.Connection.InsertAllAsync(dllHistory, false);
                 await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
                 await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
             }

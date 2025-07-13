@@ -28,7 +28,7 @@ internal class FSR31Helper
         {
             return new List<string?>();
         }
-        Console.WriteLine($"AMDFidelityFXAPI - Loading {dllPath}");
+        Logger.Info($"AMDFidelityFXAPI - Loading {dllPath}");
         var hModule = LoadLibrary(dllPath);
         if (hModule == IntPtr.Zero)
         {
@@ -62,11 +62,11 @@ internal class FSR31Helper
             versionQuery.outputCount = Marshal.AllocHGlobal(sizeof(UInt64));
             Marshal.WriteInt64(versionQuery.outputCount, (UInt32)versionCount);
 
-            Console.WriteLine("AMDFidelityFXAPI - Reading version count");
+            Logger.Info("AMDFidelityFXAPI - Reading version count");
             // get number of versions for allocation
             // ffxQuery(IntPtr.Zero, &versionQuery.header);
             var returnCode = ffxQuery(IntPtr.Zero, ref versionQuery);
-            Console.WriteLine($"AMDFidelityFXAPI - returnCode: {returnCode}");
+            Logger.Info($"AMDFidelityFXAPI - returnCode: {returnCode}");
 
             if (returnCode != FfxApiReturnCodes.FFX_API_RETURN_OK)
             {
@@ -74,7 +74,7 @@ internal class FSR31Helper
             }
 
             versionCount = (UInt64)Marshal.ReadInt64(versionQuery.outputCount);
-            Console.WriteLine($"AMDFidelityFXAPI - versionCount: {versionCount}");
+            Logger.Info($"AMDFidelityFXAPI - versionCount: {versionCount}");
 
             if (versionCount > 0)
             {
@@ -119,7 +119,7 @@ internal class FSR31Helper
                     // fill version ids and names arrays.
                     //ffxQuery(nullptr, &versionQuery.header);
                     returnCode = ffxQuery(IntPtr.Zero, ref versionQuery);
-                    Console.WriteLine($"AMDFidelityFXAPI - returnCode: {returnCode}");
+                    Logger.Info($"AMDFidelityFXAPI - returnCode: {returnCode}");
 
                     if (returnCode != FfxApiReturnCodes.FFX_API_RETURN_OK)
                     {
@@ -133,7 +133,7 @@ internal class FSR31Helper
                         versionNames[i] = Marshal.PtrToStringAnsi(Marshal.ReadIntPtr(versionQuery.versionNames, i * IntPtr.Size));
                     }
 
-                    Console.WriteLine("AMDFidelityFXAPI - Version Names and IDs:");
+                    Logger.Info("AMDFidelityFXAPI - Version Names and IDs:");
 
                     for (var i = 0; i < versionCountInt; i++)
                     {
@@ -142,7 +142,7 @@ internal class FSR31Helper
                         var minor = (versionIds[i] >> 12) & 0x3FF;
                         var patch = versionIds[i] & 0xFFF;
 
-                        Console.WriteLine($"ID: {versionIds[i]}, {major}.{minor}.{patch}, Name: {versionNames[i]}");
+                        Logger.Info($"ID: {versionIds[i]}, {major}.{minor}.{patch}, Name: {versionNames[i]}");
                     }
 
                     return versionNames;

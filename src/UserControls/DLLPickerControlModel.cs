@@ -10,6 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -250,8 +251,16 @@ public partial class DLLPickerControlModel : ObservableObject
                 // https://github.com/microsoft/microsoft-ui-xaml/issues/5741
                 if (App.Current.Resources.TryGetValue("InfoBarInformationalSeverityBackgroundBrush", out var infoBarInformationalSeverityBackground) && infoBarInformationalSeverityBackground is SolidColorBrush infoBarInformationalSeverityBackgroundBrush)
                 {
-                    infoBarInformationalSeverityBackgroundBrush.Color = Color.FromArgb(255, infoBarInformationalSeverityBackgroundBrush.Color.R, infoBarInformationalSeverityBackgroundBrush.Color.G, infoBarInformationalSeverityBackgroundBrush.Color.B);
-                    infoBar.Background = infoBarInformationalSeverityBackgroundBrush;
+                    // Temp fix to make download indicator visibile in dark mode.
+                    if (WindowManager.CurrentTheme == ElementTheme.Dark)
+                    {
+                        infoBar.Background = new SolidColorBrush(Color.FromArgb(255, 23, 23, 23));
+                    }
+                    else
+                    {
+                        infoBarInformationalSeverityBackgroundBrush.Color = Color.FromArgb(255, infoBarInformationalSeverityBackgroundBrush.Color.R, infoBarInformationalSeverityBackgroundBrush.Color.G, infoBarInformationalSeverityBackgroundBrush.Color.B);
+                        infoBar.Background = infoBarInformationalSeverityBackgroundBrush;
+                    }
                 }
 
                 Grid.SetRow(infoBar, gridIndex);

@@ -14,6 +14,8 @@ public class WindowManager
 
     public static bool IsCustomizationSupported => AppWindowTitleBar.IsCustomizationSupported();
 
+    public static ElementTheme CurrentTheme { get; private set; } = ElementTheme.Default;
+
     ThemeWatcher _themeWatcher;
 
     public WindowManager()
@@ -91,6 +93,8 @@ public class WindowManager
 
     void UpdateColorsLight()
     {
+        CurrentTheme = ElementTheme.Light;
+
         var theme = App.CurrentApp.Resources.MergedDictionaries[1].ThemeDictionaries["Light"] as ResourceDictionary;
 
         if (theme is null)
@@ -143,6 +147,8 @@ public class WindowManager
 
     void UpdateColorsDark()
     {
+        CurrentTheme = ElementTheme.Dark;
+
         var theme = App.CurrentApp.Resources.MergedDictionaries[1].ThemeDictionaries["Dark"] as ResourceDictionary;
 
         if (theme is null)

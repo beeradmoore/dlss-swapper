@@ -13,8 +13,11 @@ internal class GameHistoryEventTypeToLabelConverter : IValueConverter
         {
             return eventType switch
             {
-                GameHistoryEventType.DLLSwap => ResourceHelper.GetString("GameHistoryEventType_DLLSwap"),
+                GameHistoryEventType.DLLSwapped => ResourceHelper.GetString("GameHistoryEventType_DLLSwapped"),
                 GameHistoryEventType.DLLReset => ResourceHelper.GetString("GameHistoryEventType_DLLReset"),
+                GameHistoryEventType.DLLDetected => ResourceHelper.GetString("GameHistoryEventType_DLLDetected"),
+                GameHistoryEventType.DLLChangedExternally => ResourceHelper.GetString("GameHistoryEventType_DLLChangedExternally"),
+                GameHistoryEventType.DLLBackupRemoved => ResourceHelper.GetString("GameHistoryEventType_DLLBackupRemoved"),
                 _ => ResourceHelper.GetString("General_Unknown"),
             };
         }

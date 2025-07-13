@@ -236,11 +236,20 @@
   <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
-    <value>DLL Reset</value>
+  <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
+    <value>DLL backup removed</value>
   </data>
-  <data name="GameHistoryEventType_DLLSwap" xml:space="preserve">
-    <value>DLL Swap</value>
+  <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
+    <value>DLL was changed externally</value>
+  </data>
+  <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
+    <value>DLL detected</value>
+  </data>
+  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
+    <value>DLL reset</value>
+  </data>
+  <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
+    <value>DLL swapped</value>
   </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>Could not load game library {0}</value>

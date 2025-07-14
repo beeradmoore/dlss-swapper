@@ -64,7 +64,7 @@ public class LanguageManager
         // For now this is a hardcoded list. It would be nice to dynamically discover from resource class or something.
         return languageKey switch
         {
-            "ca-CA" => "Català", // Catalan
+            "ca-ES" => "Català", // Catalan
             "de-DE" => "Deutsch (Deutschland)", // German (Germany)
             "en-AU" => "English (Australia)",
             "en-GB" => "English (United Kingdom)",

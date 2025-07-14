@@ -68,7 +68,7 @@ public class LanguageManager
             "en-AU" => "English (Australia)",
             "en-GB" => "English (United Kingdom)",
             "en-US" => "English (United States)",
-            "en-US" => "French (France)", // French (France)
+            "fr-FR" => "French (France)", // French (France)
             "pl-PL" => "Polish",
             "pt-BR" => "Português BR",
             "ru-RU" => "Русский", // Russian

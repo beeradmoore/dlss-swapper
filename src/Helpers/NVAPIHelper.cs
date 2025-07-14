@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.DLSS;
+using NvAPIWrapper;
 using NvAPIWrapper.DRS;
 
 namespace DLSS_Swapper.Helpers;
@@ -21,6 +23,13 @@ internal class NVAPIHelper
 
     readonly DriverSettingsSession? _driverSettingSession;
     readonly Dictionary<string, DriverSettingsProfile> _cachedProfiles = new Dictionary<string, DriverSettingsProfile>();
+
+
+    [DllImport("kernel32.dll")]
+    private static extern IntPtr LoadLibrary(string dllToLoad);
+
+    [DllImport("kernel32.dll")]
+    private static extern bool FreeLibrary(IntPtr hModule);
 
     private NVAPIHelper()
     {
@@ -66,11 +75,25 @@ internal class NVAPIHelper
 
         try
         {
-            _driverSettingSession = DriverSettingsSession.CreateAndLoad();
-            // Looked at checking if it is worth filtering this by IsValid and GPUSupport.IsGeForceSupported,
-            // but it only dropped number of items from 7200 to 7000.
-            _cachedProfiles = _driverSettingSession.Profiles.AsParallel().ToDictionary(profile => profile.Name);
-            Supported = true;
+            // Attempt to load nvapi64 before we try use NvAPIWrapper
+            var handle = LoadLibrary("nvapi64.dll");
+            if (handle == IntPtr.Zero)
+            {
+                // Could not load nvapi64.dll, NVIDIA drivers are not installed.
+            }
+            else
+            {
+                // Library should exist, unload it and continue
+                FreeLibrary(handle);
+
+                NVIDIA.Initialize();
+
+                _driverSettingSession = DriverSettingsSession.CreateAndLoad();
+                // Looked at checking if it is worth filtering this by IsValid and GPUSupport.IsGeForceSupported,
+                // but it only dropped number of items from 7200 to 7000.
+                _cachedProfiles = _driverSettingSession.Profiles.AsParallel().ToDictionary(profile => profile.Name);
+                Supported = true;
+            }
         }
         catch (Exception err)
         {

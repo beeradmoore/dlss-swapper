@@ -16,7 +16,7 @@
     <PackageIcon>Assets\icon_256.png</PackageIcon>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <Version>1.2.0.2</Version>
+    <Version>1.2.0.3</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <PublishSingleFile>false</PublishSingleFile>

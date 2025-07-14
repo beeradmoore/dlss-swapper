@@ -498,7 +498,7 @@
     <value>Успешно</value>
   </data>
   <data name="General_Swap" xml:space="preserve">
-    <value>Обмен</value>
+    <value>Заменить</value>
   </data>
   <data name="General_Update" xml:space="preserve">
     <value>Обновление</value>

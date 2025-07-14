@@ -189,32 +189,35 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Başlatma başarısız</value>
   </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Özel kapak resmini kaldırmak istediğinizden emin misiniz?</value>
+  <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
+    <value>İçerik türü</value>
   </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Oyun Şu Anda İşleniyor</value>
+  <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
+    <value>Olay zamanı</value>
   </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Özel kapak kaldırılsın mı?</value>
+  <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
+    <value>Olay türü</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>{0} URL'si için GOGCatalogResponse çözümlenemedi</value>
+  <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
+    <value>Geçmiş bulunamadı.</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>{0} URL'si için GOGEmbedFilteredResponse çözümlenemedi</value>
+  <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
+    <value>Versiyon</value>
   </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>{0} URL'si için herhangi bir GOGEmbedFilteredProducts bulunamadı</value>
+  <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
+    <value>DLL geri yüklemesi silindi</value>
   </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>{0} URL'si için herhangi bir GOGCatalogProduct bulunamadı</value>
+  <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
+    <value>DLL dışarıdan değiştirildi</value>
   </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>ubisoftConnectInstallsKey tespit edilemedi</value>
+  <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
+    <value>DLL algılandı</value>
   </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Kimlik ayarlanırken bilinmeyen Oyun Kütüphanesi {0}</value>
+  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
+    <value>DLL resetlendi</value>
+  </data>
+  <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
+    <value>DLL değiştirildi</value>
   </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>Oyun kütüphanesi {0} yüklenemedi</value>
@@ -243,14 +246,39 @@
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
     <value>Lütfen değiştirmeden önce indirmenin tamamlanmasını bekleyin</value>
   </data>
+  <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
+    <value>Ön ayar bilgisi</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
+    <value>DLSS ön ayarları, oyunlarınızın kurulum dizininde bulunan DLSS DLL dosyalarının içinde yer alır. Farklı DLSS DLL dosyalarında farklı ön ayarlar bulunur. Örneğin, K ön ayarı ilk olarak DLSS v310.2 sürümünde tanıtılmıştır. Dolayısıyla, DLSS v3.7 kullanıyorsanız ve ön ayarı K olarak ayarlarsanız, aslında K ön ayarı kullanılmaz; bunun yerine oyun hangi ön ayarı kullanıyorsa ona geri döner.
+
+Aynı durum global ön ayarlar için de geçerlidir. Örneğin K ön ayarını seçseniz bile, eğer oyununuz DLSS v3.7 sürümünü kullanıyorsa, K ön ayarı devreye girmez ve oyun kendi varsayılan ön ayarına geri döner.
+
+Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran üstü göstergesini (on-screen indicator) etkinleştirmeniz gerekir.</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
+    <value>Ekran gösterge bilgisi</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
+    <value>DLSS ön ayarı bligisi</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
+    <value>Bir DLSS ön ayarı seçmek o ön ayarın kullanılacağını garanti etmez.</value>
+  </data>
   <data name="GamePage_Favorited" xml:space="preserve">
     <value>Favorilere Eklendi</value>
+  </data>
+  <data name="GamePage_History" xml:space="preserve">
+    <value>Geçmiş</value>
   </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
     <value>Yükleme yolu</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
     <value>"{0}" geçersiz bir dosya türüdür</value>
+  </data>
+  <data name="GamePage_Launch" xml:space="preserve">
+    <value>Başlat</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
     <value>Bu başlık manuel olarak eklenmemiştir ve kaldırılamaz.</value>
@@ -297,6 +325,9 @@
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
     <value>storageFile boş (null)</value>
   </data>
+  <data name="GamePage_UnableToChangePreset" xml:space="preserve">
+    <value>Ön ayar değiştirilemedi. Daha fazla detay için hata günlük kayıtlarına göz atın.</value>
+  </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
     <value>Kapak resmi için yalnızca tek bir dosya sürükleyebilirsiniz</value>
   </data>
@@ -325,7 +356,7 @@
     <value>Oyununuz eklenirken hata oluştu</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value><i>Dizinini</i> değil, <i>oyun</i> dizininizi seçmelisiniz.<br /><br />Örneğin, oyununuz şu konumdaysa:<br /><b>C:\Program Files\MyGamesFolder\MyFavGame</b><br /><br /><b>MyGamesFolder</b> dizinini değil, <b>MyFavGame</b> dizinini seçmelisiniz.</value>
+    <value>Dizinini değil, oyun dizininizi seçmelisiniz.Örneğin, oyununuz şu konumdaysa:C:\Program Files\MyGamesFolder\MyFavGameMyGamesFolder dizinini değil, MyFavGame dizinini seçmelisiniz.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
     <value>DLSS Swapper, yüklü oyun kütüphanelerinizdeki oyunları otomatik olarak bulmalıdır. Eğer oyununuz listede yoksa, bunu engelleyen birkaç ayar olabilir. Lütfen şunları kontrol edin: Oyun listesi filtresinin "Değiştirilebilir öğesi olmayan oyunları gizle" olarak ayarlanmadığından emin olun. İlgili oyun kütüphanesinin ayarlarda etkinleştirildiğinden emin olun. Bunları kontrol etmenize rağmen oyununuz hala görünmüyorsa, bir hata olabilir. Gelecekte oyunlarınızı daha iyi tespit edebilmemiz ve bir düzeltme yapabilmemiz için sorunu GitHub depomuzda bildirirseniz memnun oluruz.</value>
@@ -344,6 +375,9 @@
   </data>
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Yeni DLL'ler</value>
+  </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Yeni DLL'ler Bulundu</value>
   </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Yeni GitHub sorunu oluştur</value>
@@ -375,9 +409,6 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>DLL'leri göndermenize gerek yok. Sağladığınız bilgilere dayanarak onları biz bulacağız.</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Yeni DLL'ler Bulundu</value>
-  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Oyunlar</value>
   </data>
@@ -389,6 +420,33 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Liste Görünümü</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Özel kapak resmini kaldırmak istediğinizden emin misiniz?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Oyun Şu Anda İşleniyor</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Özel kapak kaldırılsın mı?</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>{0} URL'si için GOGCatalogResponse çözümlenemedi</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>{0} URL'si için GOGEmbedFilteredResponse çözümlenemedi</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>{0} URL'si için herhangi bir GOGEmbedFilteredProducts bulunamadı</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>{0} URL'si için herhangi bir GOGCatalogProduct bulunamadı</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>ubisoftConnectInstallsKey tespit edilemedi</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Kimlik ayarlanırken bilinmeyen Oyun Kütüphanesi {0}</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Bu uygulama yönetici ayrıcalıklarıyla çalışıyor.</value>
@@ -453,6 +511,9 @@
   <data name="General_None" xml:space="preserve">
     <value>Hiçbiri</value>
   </data>
+  <data name="General_NotSupported" xml:space="preserve">
+    <value>Desteklenmiyor</value>
+  </data>
   <data name="General_Okay" xml:space="preserve">
     <value>Tamam</value>
   </data>
@@ -474,6 +535,9 @@
   <data name="General_Refresh" xml:space="preserve">
     <value>Yenile</value>
   </data>
+  <data name="General_Reload" xml:space="preserve">
+    <value>Yeniden yükle</value>
+  </data>
   <data name="General_Remove" xml:space="preserve">
     <value>Kaldır</value>
   </data>
@@ -494,6 +558,9 @@
   </data>
   <data name="General_Swap" xml:space="preserve">
     <value>Değiştir</value>
+  </data>
+  <data name="General_Unknown" xml:space="preserve">
+    <value>Bilinmeyen</value>
   </data>
   <data name="General_Update" xml:space="preserve">
     <value>Güncelle</value>
@@ -548,6 +615,12 @@
   </data>
   <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
     <value>Hash</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
+    <value>Dosya içi isim</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
+    <value>Dosya içi isim ekstra</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Etiket</value>
@@ -760,6 +833,12 @@ Bu nedenle çok oyunculu oyunlarda dikkatli olmanızı öneririz.</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>Ayrıntılı günlük kaydı</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>DLSS Seçenekleri</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>Genel ön ayar</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>Oyun Kütüphaneleri</value>

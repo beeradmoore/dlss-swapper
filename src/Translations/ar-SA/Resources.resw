@@ -1,0 +1,1004 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcknowledgementsPage_Title" xml:space="preserve">
+    <value>التراخيص والشكر والتقدير</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
+    <value>انقر لنسخ التفاصيل أدناه</value>
+  </data>
+  <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
+    <value>التشخيصات</value>
+  </data>
+  <data name="DllManager_AlreadyImported" xml:space="preserve">
+    <value>(تم الاستيراد مسبقًا)</value>
+  </data>
+  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
+    <value>تعذّر تحليل ملف manifest.json</value>
+  </data>
+  <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
+    <value>ميزة الاستيراد معطّلة, تعذّر تحميل ملف manifest الخاص بالاستيراد.</value>
+  </data>
+  <data name="DllManager_MigratingDlls" xml:space="preserve">
+    <value>يتم ترحيل ملفات DLL</value>
+  </data>
+  <data name="DllManager_UnknownTypeDll" xml:space="preserve">
+    <value>ملف DLL هذا غير معروف نوعه</value>
+  </data>
+  <data name="DllManager_UntrustedDll" xml:space="preserve">
+    <value>ملف DLL غير موثوق من قِبل نظام ويندوز</value>
+  </data>
+  <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
+    <value>تعذّر تنزيل {0} DLL. يُرجى المحاولة لاحقًا أو التحقق من السجلات لمعرفة سبب فشل التنزيل.</value>
+  </data>
+  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
+    <value>تعذّر تنزيل الملف.</value>
+  </data>
+  <data name="DllRecord_Download" xml:space="preserve">
+    <value>تنزيل</value>
+  </data>
+  <data name="DllRecord_DownloadError" xml:space="preserve">
+    <value>خطأ في التنزيل</value>
+  </data>
+  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
+    <value>الملف الذي تم تنزيله غير صالح.</value>
+  </data>
+  <data name="DllRecord_Downloading" xml:space="preserve">
+    <value>جارٍ التنزيل</value>
+  </data>
+  <data name="DllRecord_Imported" xml:space="preserve">
+    <value>تم الاستيراد</value>
+  </data>
+  <data name="DllRecord_RequiresDownload" xml:space="preserve">
+    <value>يتطلب التنزيل</value>
+  </data>
+  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
+    <value>ملف ZIP الخاص بـ DLL غير صالح (لم يتم العثور على أي ملف DLL)</value>
+  </data>
+  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
+    <value>فشل تشغيل DLSS Swapper</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
+    <value>يُرجى فتح </value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
+    <value>بلاغ جديد</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
+    <value>في مستودع GitHub الخاص بـ DLSS Swapper وتقديم المعلومات التالية في قسم "جهات الاتصال الإضافية"</value>
+  </data>
+  <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
+    <value>فشل التشغيل</value>
+  </data>
+  <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
+    <value>نوع الأصل</value>
+  </data>
+  <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
+    <value>زمن الحدث</value>
+  </data>
+  <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
+    <value>نوع الحدث</value>
+  </data>
+  <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
+    <value>لم يتم العثور على سجل</value>
+  </data>
+  <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
+    <value>الإصدار</value>
+  </data>
+  <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
+    <value>تم حذف النسخة الاحتياطية لملف DLL</value>
+  </data>
+  <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
+    <value>تم تعديل ملف DLL خارجيًا</value>
+  </data>
+  <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
+    <value>تم اكتشاف ملف DLL</value>
+  </data>
+  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
+    <value>تم إعادة تعيين ملف DLL</value>
+  </data>
+  <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
+    <value>تم تبديل ملف DLL</value>
+  </data>
+  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>تعذّر تحميل مكتبة اللعبة {0}</value>
+  </data>
+  <data name="GamePage_AddCustomCover" xml:space="preserve">
+    <value>إضافة غلاف مخصص</value>
+  </data>
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
+    <value>انقر للإضافة إلى المفضلة</value>
+  </data>
+  <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+    <value>تعذّر العثور على مسار "{0}".</value>
+  </data>
+  <data name="GamePage_CurrentDll" xml:space="preserve">
+    <value>ملف DLL الحالي</value>
+  </data>
+  <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
+    <value>تعذّر العثور على الملف "{0}".</value>
+  </data>
+  <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
+    <value>تمت إعادة تعيين ملف DLL إلى {0}.</value>
+  </data>
+  <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
+    <value>تم بدء التنزيل</value>
+  </data>
+  <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
+    <value>يُرجى الانتظار حتى يكتمل التنزيل قبل التبديل</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
+    <value>معلومات الإعداد المسبق</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
+    <value>الإعدادات المسبقة لـ DLSS موجودة داخل ملفات DLL الخاصة بـ DLSS، والتي تكون ضمن مجلد تثبيت اللعبة (install directory).
+ملفات DLL المختلفة لـ DLSS يحتوي كل منها على إعدادات مختلفة.
+
+على سبيل المثال، الإعداد المسبق K لم يتم تقديمه حتى إصدار DLSS v310.2.
+لذلك، إذا كنت تستخدم DLSS v3.7 وقمت بتعيين الإعداد إلى K، فلن يتم استخدام الإعداد K، وبدلاً من ذلك سيتم الرجوع إلى أي إعداد تختاره اللعبة.
+
+ينطبق الأمر نفسه على الإعدادات العامة.
+إذا اخترت الإعداد K ولكن لعبتك تستخدم DLSS v3.7، فلن يتم استخدام الإعداد K، وبدلاً من ذلك ستعود اللعبة إلى الإعداد الافتراضي الخاص بها.
+
+للتحقق من الإعداد المسبق المستخدم، يُرجى تفعيل مؤشر DLSS الذي يظهر على الشاشة. (DLSS on-screen indicator).</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
+    <value>معلومات المؤشر الظاهر على الشاشة</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
+    <value>معلومات إعدادات DLSS المسبقة</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
+    <value>تعيين إعداد مسبق لـ DLSS لا يضمن أنه سيتم استخدامه.</value>
+  </data>
+  <data name="GamePage_Favorited" xml:space="preserve">
+    <value>تم الإضافة إلى المفضلة</value>
+  </data>
+  <data name="GamePage_History" xml:space="preserve">
+    <value>السجل</value>
+  </data>
+  <data name="GamePage_InstallPath" xml:space="preserve">
+    <value>مسار التثبيت</value>
+  </data>
+  <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
+    <value>نوع الملف هذا "{0}" غير صالح</value>
+  </data>
+  <data name="GamePage_Launch" xml:space="preserve">
+    <value>تشغيل</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
+    <value>لم تتم إضافة هذا العنوان يدويًا ولا يمكن حذفه.</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد إزالة "{0}" من DLSS Swapper؟ هذا لن يُحدث أي تغييرات في ملفات DLSS التي تم تبديلها بالفعل.</value>
+  </data>
+  <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
+    <value>الموضح ادناه هي بعض من ملفات الDLLs التي وجدت. لا يزال بإمكانك تبديل واستعادة ملفات DLL كالمعتاد، حيث سنقوم بتنفيذ هذه العمليات على جميع الملفات دفعة واحدة. ومع ذلك، نظرًا لأننا لا نعلم أي من ملفات DLL هذه يتم استخدامها من قِبل اللعبة، فإن الإصدار المعروض هو لأحد أول الملفات التي تم اكتشافها.</value>
+  </data>
+  <data name="GamePage_MultipleDllsFound" xml:space="preserve">
+    <value>تم العثور على ملفات DLL متعددة</value>
+  </data>
+  <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
+    <value>تم العثور على عدة ملفات DLL من نوع {0}</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
+    <value>يُرجى الانتقال إلى صفحة المكتبة لتنزيل ملفات DLL جديدة.</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
+    <value>لم يتم العثور على ملفات DLL</value>
+  </data>
+  <data name="GamePage_Notes" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
+    <value>هذه اللعبة غير جاهزة للتشغيل حاليًا.</value>
+  </data>
+  <data name="GamePage_OpenDllLocation" xml:space="preserve">
+    <value>فتح موقع ملف DLL</value>
+  </data>
+  <data name="GamePage_OriginalDll" xml:space="preserve">
+    <value>ملف DLL الأصلي</value>
+  </data>
+  <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
+    <value>{0} لا يزال قيد المعالجة. يُرجى الانتظار حتى يكتمل شريط التحميل قبل الفتح</value>
+  </data>
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
+    <value>استعادة ملف DLL الأصلي</value>
+  </data>
+  <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
+    <value>اختيار إصدار {0}</value>
+  </data>
+  <data name="GamePage_StorageFileIsNull" xml:space="preserve">
+    <value>storageFile غير موجود (قيمة فارغة)</value>
+  </data>
+  <data name="GamePage_UnableToChangePreset" xml:space="preserve">
+    <value>تعذّر تغيير الإعداد المسبق. يُرجى مراجعة سجل الأخطاء لمزيد من المعلومات.</value>
+  </data>
+  <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
+    <value>يمكنك سحب ملف واحد فقط لإضافته كغلاف</value>
+  </data>
+  <data name="GamesPage_AddGame" xml:space="preserve">
+    <value>إضافة لعبة</value>
+  </data>
+  <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+    <value>تجميع الألعاب من نفس المكتبة معًا</value>
+  </data>
+  <data name="GamesPage_Grouping" xml:space="preserve">
+    <value>التجميع</value>
+  </data>
+  <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
+    <value>إخفاء الألعاب التي لا تحتوي على عناصر قابلة للتبديل</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
+    <value>يمكنك سحب ملف واحد فقط لاستخدامه كغلاف.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
+    <value>ملاحظة إضافية عند إضافة الألعاب يدويًا</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
+    <value>حدثت مشكلة ولم يتمكن النظام من إضافة لعبتك في الوقت الحالي. يُرجى الإبلاغ عن هذا الخطأ.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
+    <value>خطأ في إضافة لعبتك</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
+    <value>يجب عليك اختيار مجلد &lt;i&gt;game&lt;/i&gt; الخاص بك، وليس مجلد &lt;i&gt;games&lt;/i&gt; بالكامل.&lt;br/&gt;&lt;br/&gt;على سبيل المثال، إذا كانت لعبتك موجودة في:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;فستقوم باختيار مجلد &lt;b&gt;MyFavGame&lt;/b&gt; (أي الـ &lt;b&gt;directory&lt;/b&gt; الخاص باللعبة نفسها)، وليس مجلد &lt;b&gt;MyGamesFolder&lt;/b&gt;.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
+    <value>يجب أن يتمكن DLSS Swapper من العثور على الألعاب من مكتبات الألعاب المثبّتة لديك بشكل تلقائي.
+إذا لم تكن لعبتك مدرجة، فقد تكون هناك بعض الإعدادات التي تمنع ظهورها. يُرجى التحقق مما يلي:
+
+- أن فلتر قائمة الألعاب غير مضبوط على "إخفاء الألعاب التي لا تحتوي على عناصر قابلة للتبديل"
+
+- أن مكتبة الألعاب الخاصة محددة ومفعّلة في الإعدادات
+
+إذا كنت قد تحقّقت من هذه الإعدادات وما زالت لعبتك لا تظهر، فقد يكون هناك خلل (bug).
+نُقدّر لك الإبلاغ عن المشكلة في مستودع GitHub الخاص بنا حتى نتمكن من إصلاحها وتحسين اكتشاف ألعابك في المستقبل.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
+    <value>ملاحظة حول إضافة الألعاب يدويًا</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
+    <value>مسار التثبيت "{0}" موجود بالفعل ولا يمكن إضافته مرة أخرى.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
+    <value>اختيار مجلد اللعبة</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
+    <value>لا يمكن إضافة المجلد الأعلى (top level directory). يُرجى إضافة مجلد الجذر الخاص بلعبتك.</value>
+  </data>
+  <data name="GamesPage_NewDlls" xml:space="preserve">
+    <value>ملفات DLL جديدة</value>
+  </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>تم العثور على ملفات DLL جديدة</value>
+  </data>
+  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
+    <value>إنشاء بلاغ جديد في GitHub</value>
+  </data>
+  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
+    <value>أثناء تحميل الألعاب، تم اكتشاف بعض ملفات DLL الجديدة التي لا توجد في manifest الخاص بـ DLSS Swapper.</value>
+  </data>
+  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
+    <value>(يتطلب حساب GitHub)</value>
+  </data>
+  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
+    <value>إذا لم يعمل الزر، جرّب من هنا،</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
+    <value>الخطوة 4: إرسال البلاغ</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
+    <value>الخطوة 1: إنشاء بلاغ جديد</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
+    <value>الخطوة 3: نسخ المحتوى</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
+    <value>الخطوة 2: نسخ العنوان</value>
+  </data>
+  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
+    <value>شكرًا لمساعدتك!</value>
+  </data>
+  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+    <value>لست مضطرًا لتقديم ملفات DLL. سنقوم بتتبعها بناءً على المعلومات المقدمة.</value>
+  </data>
+  <data name="GamesPage_Title" xml:space="preserve">
+    <value>الألعاب</value>
+  </data>
+  <data name="GamesPage_ViewType" xml:space="preserve">
+    <value>نوع العرض</value>
+  </data>
+  <data name="GamesPage_ViewType_GridView" xml:space="preserve">
+    <value>عرض شبكي</value>
+  </data>
+  <data name="GamesPage_ViewType_ListView" xml:space="preserve">
+    <value>عرض قائمة</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد إزالة صورة الغلاف المخصصة؟</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>اللعبة قيد المعالجة حاليًا</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>إزالة الغلاف المخصص؟</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>تعذّر تحليل GOGCatalogResponse من الرابط {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>تعذّر تحليل GOGEmbedFilteredResponse من الرابط {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>لم يتم العثور على أي GOGEmbedFilteredProducts من الرابط {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>لم يتم العثور على أي GOGCatalogProduct من الرابط {0}</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>تعذّر اكتشاف ubisoftConnectInstallsKey</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>مكتبة ألعاب غير معروفة {0} أثناء تعيين المعرف</value>
+  </data>
+  <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
+    <value>هذا التطبيق يعمل بصلاحيات المسؤول</value>
+  </data>
+  <data name="General_Apply" xml:space="preserve">
+    <value>تطبيق</value>
+  </data>
+  <data name="General_Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="General_Close" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+  <data name="General_Copy" xml:space="preserve">
+    <value>نسخ</value>
+  </data>
+  <data name="General_Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="General_DontShowAgain" xml:space="preserve">
+    <value>لا تُظهر هذا مرة أخرى</value>
+  </data>
+  <data name="General_Error" xml:space="preserve">
+    <value>خطأ</value>
+  </data>
+  <data name="General_ErrorMessage" xml:space="preserve">
+    <value>رسالة الخطأ</value>
+  </data>
+  <data name="General_Export" xml:space="preserve">
+    <value>تصدير</value>
+  </data>
+  <data name="General_ExportAll" xml:space="preserve">
+    <value>تصدير الكل</value>
+  </data>
+  <data name="General_Failed" xml:space="preserve">
+    <value>فشل</value>
+  </data>
+  <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
+    <value>هذه الميزة غير مدعومة إذا كنت تشغّل التطبيق كمسؤول</value>
+  </data>
+  <data name="General_Filter" xml:space="preserve">
+    <value>فلتر</value>
+  </data>
+  <data name="General_Help" xml:space="preserve">
+    <value>المساعدة</value>
+  </data>
+  <data name="General_Import" xml:space="preserve">
+    <value>استيراد</value>
+  </data>
+  <data name="General_Load" xml:space="preserve">
+    <value>تحميل</value>
+  </data>
+  <data name="General_Loading" xml:space="preserve">
+    <value>جارٍ التحميل</value>
+  </data>
+  <data name="General_Name" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="General_No" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="General_None" xml:space="preserve">
+    <value>لا شيء</value>
+  </data>
+  <data name="General_NotSupported" xml:space="preserve">
+    <value>غير مدعوم</value>
+  </data>
+  <data name="General_Okay" xml:space="preserve">
+    <value>موافق</value>
+  </data>
+  <data name="General_Oops" xml:space="preserve">
+    <value>عذرًا</value>
+  </data>
+  <data name="General_OpenFolder" xml:space="preserve">
+    <value>فتح المجلد</value>
+  </data>
+  <data name="General_Optional" xml:space="preserve">
+    <value>(اختياري)</value>
+  </data>
+  <data name="General_Options" xml:space="preserve">
+    <value>الخيارات</value>
+  </data>
+  <data name="General_Publish" xml:space="preserve">
+    <value>نشر</value>
+  </data>
+  <data name="General_Refresh" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="General_Reload" xml:space="preserve">
+    <value>إعادة تحميل</value>
+  </data>
+  <data name="General_Remove" xml:space="preserve">
+    <value>إزالة</value>
+  </data>
+  <data name="General_ReportIssue" xml:space="preserve">
+    <value>الإبلاغ عن مشكلة</value>
+  </data>
+  <data name="General_Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="General_Search" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="General_Sorry" xml:space="preserve">
+    <value>المعذره</value>
+  </data>
+  <data name="General_Success" xml:space="preserve">
+    <value>تم بنجاح</value>
+  </data>
+  <data name="General_Swap" xml:space="preserve">
+    <value>تبديل</value>
+  </data>
+  <data name="General_Unknown" xml:space="preserve">
+    <value>غير معروف</value>
+  </data>
+  <data name="General_Update" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="General_Version" xml:space="preserve">
+    <value>الإصدار</value>
+  </data>
+  <data name="General_Warning" xml:space="preserve">
+    <value>تحذير</value>
+  </data>
+  <data name="General_Yes" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
+    <value>تعذّر تحميل بيانات إصدار GitHub</value>
+  </data>
+  <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
+    <value>لديك حاليًا {0} مُثبّتًا</value>
+  </data>
+  <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
+    <value>تم تحديث DLSS Swapper للتو</value>
+  </data>
+  <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
+    <value>هناك تحديث متوفر</value>
+  </data>
+  <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
+    <value>تم التنزيل مسبقًا</value>
+  </data>
+  <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
+    <value>تعذّر تحميل ملفات DLL المُستوردة</value>
+  </data>
+  <data name="LibraryPage_CouldntDownload" xml:space="preserve">
+    <value>تعذّر التنزيل في الوقت الحالي</value>
+  </data>
+  <data name="LibraryPage_CouldntExportDll" xml:space="preserve">
+    <value>تعذّر تصدير ملفات DLL</value>
+  </data>
+  <data name="LibraryPage_DeleteDll" xml:space="preserve">
+    <value>حذف DLL</value>
+  </data>
+  <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
+    <value>حذف {0} الإصدار {1}؟</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
+    <value>حجم الملف عند التنزيل</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
+    <value>وصف الملف</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
+    <value>حجم الملف</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
+    <value>Hash</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
+    <value>الاسم الداخلي</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
+    <value>الاسم الداخلي الإضافي</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
+    <value>التسمية</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
+    <value>بدأ {0} تنزيل جديد</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
+    <value>تم بدء التنزيلات</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
+    <value>ملفات DLL التي تم تصديرها:</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
+    <value>تم تصدير {0} من ملفات DLL</value>
+  </data>
+  <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
+    <value>تم تصدير ملف DLL {0}</value>
+  </data>
+  <data name="LibraryPage_FileNotFound" xml:space="preserve">
+    <value>الملف غير موجود</value>
+  </data>
+  <data name="LibraryPage_Finished" xml:space="preserve">
+    <value>تم الانتهاء</value>
+  </data>
+  <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
+    <value>تم استيراده كسجل DLL موجود</value>
+  </data>
+  <data name="LibraryPage_Importing" xml:space="preserve">
+    <value>جارٍ الاستيراد</value>
+  </data>
+  <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
+    <value>استبدال ملفات dll على جهازك قد يكون خطيرًا. وضع ملف dll مشتبه به هو في نفس مستوى الخطر كأنك لو قمت بتحميل فيروس يسمح للمهكرين ان يخترقوا جهازك! استورد ملفات dll فقط من مصادر تثق بها.</value>
+  </data>
+  <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
+    <value>لم يتم العثور على ملفات DLL للتصدير</value>
+  </data>
+  <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
+    <value>لا توجد سجلات DLL للتصدير</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
+    <value>لا توجد ملفات DLL جديدة للتنزيل</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
+    <value>لا توجد ملفات DLL جديدة</value>
+  </data>
+  <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
+    <value>ملفات DLL التي تمت معالجتها:</value>
+  </data>
+  <data name="LibraryPage_Title" xml:space="preserve">
+    <value>المكتبة</value>
+  </data>
+  <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
+    <value>تعذّر حذف سجل {0}</value>
+  </data>
+  <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
+    <value>تعذّر تحديث سجلات DLL</value>
+  </data>
+  <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
+    <value>ملف ZIP لا يحتوي على أي ملفات dll</value>
+  </data>
+  <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
+    <value>تجرى محاولة تحديث</value>
+  </data>
+  <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
+    <value>لم يتمكن DLSS Swapper من تحميل ملف manifest الخاص به. سيتم إغلاقه الآن.</value>
+  </data>
+  <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
+    <value>يجب إغلاق DLSS Swapper</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
+    <value>بلاغات GitHub</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
+    <value>لم نتمكن من تحميل manifest.json من جهازك أو من الإنترنت. إذا استمرت هذه المشكلة، يُرجى تقديم بلاغ في أداة تتبع المشاكل (issue tracker) على GitHub.</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
+    <value>تحديث manifest</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
+    <value>على الرغم من أن تبديل إصدارات DLSS لا يُعتبر غشًا، إلا أن بعض أنظمة مكافحة الغش قد لا تقبل بذلك إذا كانت الملفات في مجلد لعبتك تختلف عن الملفات الأصلية التي تم توزيعها مع اللعبة. 
+لذلك نوصي بالحذر عند استخدام هذه الأداة في العاب الاونلاين (متعددة اللاعبين).</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
+    <value>ملاحظة حول العاب الاونلاين (متعددة اللاعبين)</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
+    <value>لا يزال لا يعمل</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
+    <value>يعمل!</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
+    <value>اختبار المتصفح</value>
+  </data>
+  <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
+    <value>إلغاء الاختبار الحالي</value>
+  </data>
+  <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
+    <value>نسخ نتائج الاختبار</value>
+  </data>
+  <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
+    <value>إنشاء بلاغ خطأ</value>
+  </data>
+  <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
+    <value>اختبار user agent مخصص</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
+    <value>تنزيل ملف DLL الخاص بـ DLSS Swapper من داخل DLSS Swapper باستخدام user agent مخصص</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
+    <value>تنزيل ملف DLL الخاص بـ DLSS من mirror على UploadThing</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
+    <value>الوصول إلى google.com من داخل DLSS Swapper (لاختبار اتصال الإنترنت العام)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
+    <value>الوصول إلى bing.com من داخل DLSS Swapper (لاختبار اتصال الإنترنت العام)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
+    <value>تنزيل ملف DLL الخاص بـ DLSS Swapper من داخل DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
+    <value>تنزيل ملف DLL الخاص بـ DLSS Swapper من المتصفح</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
+    <value>تنزيل صورة غلاف اللعبة من Steam</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
+    <value>تنزيل صورة غلاف اللعبة من Epic Game Store</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
+    <value>تنزيل صورة غلاف اللعبة من خادم ملفات DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
+    <value>تنزيل صورة غلاف اللعبة من خادم ملفات بديل لـ DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
+    <value>البحث عن DNS الخاص بخادم ملفات DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
+    <value>فتح في المتصفح</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
+    <value>انقر على زر "فتح في المتصفح"، أو انسخ الرابط التالي والصقه في المتصفح. هل تم تنزيل ملف في متصفحك؟
+
+</value>
+  </data>
+  <data name="NetworkTesterPage_Results" xml:space="preserve">
+    <value>النتائج</value>
+  </data>
+  <data name="NetworkTesterPage_RunTest" xml:space="preserve">
+    <value>تنفيذ الاختبار</value>
+  </data>
+  <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
+    <value>استخدم user agent المقدم أو أدخل واحدًا مخصصًا حسب رغبتك.</value>
+  </data>
+  <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
+    <value>أداة اختبار الشبكة</value>
+  </data>
+  <data name="SettingsPage_About" xml:space="preserve">
+    <value>حول</value>
+  </data>
+  <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
+    <value>إضافة مسار مُتجاهل</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
+    <value>السماح بملفات DLL الخاصة بالتنقيح (Debug DLLs)</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
+    <value>تصدر بعض SDKs ملفات DLL خاصة بالتنقيح تعرض معلومات إضافية على الشاشة.</value>
+  </data>
+  <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
+    <value>يتم التحقق من موثوقية ملفات DLL في نظام ويندوز من خلال توقيعها الرقمي قبل استخدامها داخل مجلد اللعبة. إذا فشل التوقيع، فلن يتم استخدامها. يُنصح بترك هذا الخيار مُعطلاً.</value>
+  </data>
+  <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
+    <value>هذا ينطبق فقط على أداة اختيار DLL، وليس على صفحة المكتبة.</value>
+  </data>
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
+    <value>تعذّر فتح ملف السجل مباشرة من DLSS Swapper. يُرجى فتحه يدويًا.</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد حذف المسار المُتجاهل {0}؟</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
+    <value>حذف المسار المُتجاهل</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
+    <value>خيارات المطور لـ DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
+    <value>تفعيل السجل في نافذة الكونسول</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
+    <value>تفعيل السجل في ملف</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
+    <value>مُفعّل لجميع ملفات DLL الخاصة بـ DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>مُفعّل فقط لملفات DLL الخاصة بالتنقيح</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
+    <value>عرض المؤشر على الشاشة</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
+    <value>السجل التفصيلي (Verbose logging)</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>خيارات DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>الإعداد العام</value>
+  </data>
+  <data name="SettingsPage_GameLibraries" xml:space="preserve">
+    <value>مكتبات الألعاب</value>
+  </data>
+  <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
+    <value>دليل استكشاف المشاكل الشائعة</value>
+  </data>
+  <data name="SettingsPage_GiveFeedback" xml:space="preserve">
+    <value>إرسال ملاحظات</value>
+  </data>
+  <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
+    <value>يمكنك اقتراح ميزة أو الإبلاغ عن مشكلة على DLSS Swapper</value>
+  </data>
+  <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
+    <value>المسارات المُتجاهلة</value>
+  </data>
+  <data name="SettingsPage_Language" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
+  <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
+    <value>{0} معطّل</value>
+  </data>
+  <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
+    <value>{0} مُفعّل</value>
+  </data>
+  <data name="SettingsPage_Logging" xml:space="preserve">
+    <value>التسجيل</value>
+  </data>
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
+    <value>لا توجد تحديثات جديدة متوفرة</value>
+  </data>
+  <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
+    <value>الشكر والتقدير</value>
+  </data>
+  <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
+    <value>التشخيصات</value>
+  </data>
+  <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
+    <value>أداة اختبار الشبكة</value>
+  </data>
+  <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
+    <value>فتح أداة الترجمة</value>
+  </data>
+  <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
+    <value>المسار {0} مُدرج مسبقًا في المسارات المُتجاهلة</value>
+  </data>
+  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
+    <value>السماح بغير الموثوق به</value>
+  </data>
+  <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
+    <value>التحقق من التحديثات</value>
+  </data>
+  <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
+    <value>عرض ملفات DLL المُحمّلة فقط</value>
+  </data>
+  <data name="SettingsPage_ThemeDark" xml:space="preserve">
+    <value>داكن</value>
+  </data>
+  <data name="SettingsPage_ThemeLight" xml:space="preserve">
+    <value>فاتح</value>
+  </data>
+  <data name="SettingsPage_ThemeMode" xml:space="preserve">
+    <value>وضع المظهر</value>
+  </data>
+  <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
+    <value>استخدام إعداد النظام</value>
+  </data>
+  <data name="SettingsPage_Title" xml:space="preserve">
+    <value>الإعدادات</value>
+  </data>
+  <data name="SettingsPage_Troubleshooting" xml:space="preserve">
+    <value>استكشاف الأخطاء</value>
+  </data>
+  <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
+    <value>ملف السجل الحالي الخاص بك هو</value>
+  </data>
+  <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
+    <value>لا يمكنك استخدام أداة الترجمة أثناء تشغيل التطبيق كمسؤول. يُرجى إعادة تشغيل التطبيق بدون صلاحيات المسؤول.</value>
+  </data>
+  <data name="TranslationToolboxPage_Comment" xml:space="preserve">
+    <value>تعليق</value>
+  </data>
+  <data name="TranslationToolboxPage_ImportAsTranslation" xml:space="preserve">
+    <value>استيراد اللغة كترجمة</value>
+  </data>
+  <data name="TranslationToolboxPage_Key" xml:space="preserve">
+    <value>المفتاح</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
+    <value>تحميل الموجود</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
+    <value>تعذّر تحميل الترجمة. يُرجى مراجعة سجل الأخطاء لمزيد من المعلومات.</value>
+  </data>
+  <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
+    <value>ترجمة جديدة</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
+    <value>لم يتم العثور على بيانات ترجمة لكي تنشر</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
+    <value>لم يتم العثور على بيانات ترجمة لكي تحفظ</value>
+  </data>
+  <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
+    <value>هذا ليس ملف ترجمة صالح لـ DLSS Swapper</value>
+  </data>
+  <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
+    <value>تعذّر نشر الترجمة. يُرجى مراجعة سجل الأخطاء لمزيد من المعلومات.</value>
+  </data>
+  <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
+    <value>إعادة تشغيل التطبيق</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
+    <value>إعادة التعيين والمتابعة</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
+    <value>سيؤدي هذا إلى إعادة تعيين تقدم الترجمة الحالي. هل أنت متأكد أنك تريد المتابعة؟</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
+    <value>إعادة تعيين التقدم والمتابعة؟</value>
+  </data>
+  <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
+    <value>تعذّر حفظ الترجمة. يُرجى مراجعة سجل الأخطاء لمزيد من المعلومات.</value>
+  </data>
+  <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
+    <value>اختيار اللغة المراد تحميلها</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
+    <value>مصدر اللغة</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
+    <value>الترجمة المصدر</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
+    <value>دليل الترجمة</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
+    <value>تم إنشاء الترجمة الخاصة بك. يُرجى مراجعة دليل ترجمة DLSS Swapper لمعرفة ما يجب فعله بعد ذلك باستخدام {0}.</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
+    <value>تقدم الترجمة</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
+    <value>إغلاق دون حفظ</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
+    <value>قد تكون لديك تغييرات ترجمة غير محفوظة. إذا قمت بإغلاق هذه النافذة، فستفقد هذه التغييرات.</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
+    <value>تغييرات الترجمة غير المحفوظة</value>
+  </data>
+  <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
+    <value>أداة الترجمة (Translation Toolbox)</value>
+  </data>
+</root>

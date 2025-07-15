@@ -383,13 +383,12 @@
     <value>添加游戏时发生错误</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value>必须选择&lt;i&gt;游戏&lt;/i&gt;目录，而不是&lt;i&gt;游戏库&lt;/i&gt;目录。&lt;br/&gt;&lt;br/&gt;例如，如果游戏位于：&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;应该选择&lt;b&gt;MyFavGame&lt;/b&gt;目录而不是&lt;b&gt;MyGamesFolder&lt;/b&gt;目录。</value>
-  </data>
+    <value>必须选择游戏目录，而不是游戏库目录。例如，如果游戏位于C:\Program Files\MyGamesFolder\MyFavGame ，应该选择 MyFavGame 目录，而不是 MyGamesFolder 目录。</value>
 
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
     <value>通常情况下 DLSS Swapper 会自动从已安装的游戏库中查找游戏，如果游戏未列出，则可能被某些设置阻止了，请检查:
 
-- 游戏列表筛选器未设置为 ""隐藏没有可管理 DLL 的游戏""
+- 游戏列表筛选器未设置为 “隐藏没有可管理 DLL 的游戏”
 - 在设置中启用了特定的游戏库
 
 如果已经检查过这些设置，但游戏仍然没有显示，可能是存在错误，如果能在 GitHub 仓库中报告这个问题，将不胜感激，这样可以修复并改进未来游戏的检测。</value>

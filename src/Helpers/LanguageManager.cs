@@ -42,6 +42,7 @@ public class LanguageManager
     {
         // For now this is a hardcoded list. It would be nice to dynamically discover from resource class or something.
         return [
+            "ar-SY",
             "de-DE",
             "en-AU",
             "en-GB",
@@ -63,6 +64,7 @@ public class LanguageManager
         // For now this is a hardcoded list. It would be nice to dynamically discover from resource class or something.
         return languageKey switch
         {
+            "ar-SY" => " (سوريا) العربية", // Arabic (Syria)
             "de-DE" => "Deutsch (Deutschland)", // German (Germany)
             "en-AU" => "English (Australia)",
             "en-GB" => "English (United Kingdom)",

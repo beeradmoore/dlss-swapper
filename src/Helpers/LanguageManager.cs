@@ -83,4 +83,52 @@ public class LanguageManager
     {
         return classType.GetProperties().Where(p => p.GetCustomAttribute<TranslationPropertyAttribute>() != null).Select(p => p.Name).ToList();
     }
+
+    /// <summary>
+    /// Determines if the specified language requires Right-to-Left (RTL) text direction.
+    /// </summary>
+    /// <param name="languageKey">The language key (e.g., "ar-SY", "he-IL")</param>
+    /// <returns>True if the language requires RTL layout, false otherwise</returns>
+    public static bool IsRightToLeftLanguage(string languageKey)
+    {
+        if (string.IsNullOrWhiteSpace(languageKey))
+            return false;
+    
+        // List of RTL language codes (Semitic and other RTL languages)
+        var rtlLanguages = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "ar",      // Arabic
+            "ar-SY",   // Arabic (Syria)
+            "ar-SA",   // Arabic (Saudi Arabia)
+            "ar-EG",   // Arabic (Egypt)
+            "ar-AE",   // Arabic (UAE)
+            "ar-JO",   // Arabic (Jordan)
+            "ar-LB",   // Arabic (Lebanon)
+            "ar-IQ",   // Arabic (Iraq)
+            "ar-KW",   // Arabic (Kuwait)
+            "ar-MA",   // Arabic (Morocco)
+            "ar-TN",   // Arabic (Tunisia)
+            "ar-DZ",   // Arabic (Algeria)
+            "he",      // Hebrew
+            "he-IL",   // Hebrew (Israel)
+            "fa",      // Persian/Farsi
+            "fa-IR",   // Persian (Iran)
+            "ur",      // Urdu
+            "ur-PK",   // Urdu (Pakistan)
+            "ps",      // Pashto
+            "ps-AF",   // Pashto (Afghanistan)
+            "sd",      // Sindhi
+            "ckb",     // Central Kurdish
+            "dv",      // Divehi
+            "yi"       // Yiddish
+        };
+    
+        // Check exact match first
+        if (rtlLanguages.Contains(languageKey))
+            return true;
+    
+        // Check language part only (e.g., "ar" from "ar-SY")
+        var languagePart = languageKey.Split('-')[0];
+        return rtlLanguages.Contains(languagePart);
+    }
 }

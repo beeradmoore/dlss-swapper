@@ -24,7 +24,9 @@
 </p>
 
 <p align="center">
-    English    
+    <a href="./readmes/readme_ca.md">Català</a>
+    .
+    English
     ·
     <a href="./readmes/readme_es.md">Español</a>
     ·
@@ -77,11 +79,11 @@ Please, come and share your DLSS experience over in [r/DLSS_Swapper](https://www
 
 ## How do I get it?
 
-You can get the latest builds from our [GitHub releases](https://github.com/beeradmoore/dlss-swapper/releases) page. 
+You can get the latest builds from our [GitHub releases](https://github.com/beeradmoore/dlss-swapper/releases) page.
 
-You can also install with winget. 
+You can also install with winget.
 
-> winget install --id=beeradmoore.dlss-swapper -e 
+> winget install --id=beeradmoore.dlss-swapper -e
 
 These are the only official places to get DLSS Swapper.
 
@@ -106,4 +108,4 @@ More info on this soon.
 - Twitter: https://twitter.com/dlss_swapper
 - Reddit: https://www.reddit.com/r/DLSS_Swapper/
 
-If you have found an other accounts or sites claiming to be DLSS Swapper, please ignore them (or better yet, [file an issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) and let us know) 
+If you have found an other accounts or sites claiming to be DLSS Swapper, please ignore them (or better yet, [file an issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) and let us know)

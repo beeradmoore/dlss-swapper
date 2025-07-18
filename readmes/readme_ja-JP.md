@@ -16,6 +16,8 @@
 </p>
 
 <p align="center">
+    <a href="./readmes/readme_ca.md">Català</a>
+    .
     <a href="../README.md">English</a>    
     ·
     <a href="./readme_es.md">Español</a>
@@ -71,9 +73,9 @@ DLSS の経験を[r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/)で共�
 
 最新のビルドは[GitHub リリース](https://github.com/beeradmoore/dlss-swapper/releases)ページから入手できます。
 
-You can also install with winget. 
+You can also install with winget.
 
-> winget install --id=beeradmoore.dlss-swapper -e 
+> winget install --id=beeradmoore.dlss-swapper -e
 
 These are the only official places to get DLSS Swapper.
 
@@ -98,4 +100,4 @@ These are the only official places to get DLSS Swapper.
 - Twitter: https://twitter.com/dlss_swapper
 - Reddit: https://www.reddit.com/r/DLSS_Swapper/
 
-If you have found an other accounts or sites claiming to be DLSS Swapper, please ignore them (or better yet, [file an issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) and let us know) 
+If you have found an other accounts or sites claiming to be DLSS Swapper, please ignore them (or better yet, [file an issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) and let us know)

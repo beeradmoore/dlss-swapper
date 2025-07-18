@@ -24,6 +24,8 @@
 </p>
 
 <p align="center">
+    <a href="./readmes/readme_ca.md">Català</a>
+    .
     <a href="../README.md">English</a>    
     ·
     <a href="./readme_es.md">Español</a>
@@ -95,10 +97,10 @@ Bu konuda daha fazla bilgi yakında eklenecektir.
 
 ## Minimum Sistem Gereksinimleri
 
-| Gereksinim | Açıklama                              |
-| ----------- | ------------------------------------- |
+| Gereksinim      | Açıklama                              |
+| --------------- | ------------------------------------- |
 | İşletim Sistemi | Windows 10 64-bit (20H1, build 19041) |
-| Ekran Kartı    | Herhangi biri                         |
+| Ekran Kartı     | Herhangi biri                         |
 
 ## Resmi bağlantılar
 

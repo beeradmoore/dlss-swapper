@@ -384,7 +384,7 @@
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
     <value>必须选择游戏目录，而不是游戏库目录。例如，如果游戏位于C:\Program Files\MyGamesFolder\MyFavGame ，应该选择 MyFavGame 目录，而不是 MyGamesFolder 目录。</value>
-
+  </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
     <value>通常情况下 DLSS Swapper 会自动从已安装的游戏库中查找游戏，如果游戏未列出，则可能被某些设置阻止了，请检查:
 
@@ -517,7 +517,7 @@
     <value>无</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
-    <value不支持</value>
+    <value>不支持</value>
   </data>
   <data name="General_Okay" xml:space="preserve">
     <value>确定</value>
@@ -695,7 +695,7 @@
     <value>DLSS Swapper 无法加载其清单文件，需要关闭。</value>
   </data>
   <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
-    <valueDLSS Swapper 需要关闭</value>
+    <value>DLSS Swapper 需要关闭</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
     <value>GitHub issues</value>

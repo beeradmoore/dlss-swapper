@@ -2,11 +2,11 @@
  <img width="150px" src="https://beeradmoore.github.io/dlss-swapper/logo_250.png" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">DLSS Swapper
 </h2>
- <p align="center">DLSS Swapperは、<strong>DLSS</strong>、<strong>FSR</strong>、<strong>XeSS</strong>のdllを便利にダウンロード、管理、交換できるツールで、ゲームのアップデートを必要とせずにDLSS、FSR、XeSSのバージョンをアップグレードまたはダウングレードすることができます。</p>
+ <p align="center">DLSS Swapper は、<strong>DLSS</strong>、<strong>FSR</strong>、<strong>XeSS</strong>の dll を便利にダウンロード、管理、交換できるツールで、ゲームのアップデートを必要とせずに DLSS、FSR、XeSS のバージョンをアップグレードまたはダウングレードすることができます。</p>
 </p>
 
 > [!WARNING]
-> Please be aware of malicious sites claiming to be DLSS Swapper. This is the only place you will find official downloads. See our [official links](#official-links) for accounts/sites affiliated with DLSS Swapper.
+> 悪意ある偽サイトによる DLSS Swapper の配布にご注意ください。このサイトが公式のダウンロードができる唯一のサイトです。DLSS Swapper に関連するアカウント/サイトについては、[公式リンク](#公式リンク)を参照してください。
 
 <p align="center">
     <a href="https://github.com/beeradmoore/dlss-swapper/releases"><img alt="Github Release" src="https://img.shields.io/github/v/release/beeradmoore/dlss-swapper" /></a>
@@ -37,7 +37,7 @@
     <img src="https://beeradmoore.github.io/dlss-swapper/images/usage/usage_4.gif" />
 </p>
 
-## サポートされているゲームライブラリは何ですか？
+## サポートされているゲームライブラリ
 
 - [Steam](https://store.steampowered.com/)
 - [GOG](https://www.gog.com/en/)
@@ -47,9 +47,9 @@
 - [Battle.net](https://shop.battle.net/)
 - `Add Game`ボタンを使用して手動で追加
 
-## なぜゲーム内の DLSS dll を変更したいのですか？
+## ゲーム内の DLSS dll を変更する理由
 
-この[クリップ](https://youtube.com/clip/UgzYyeox3s7jFJZAvYF4AaABCQ)を参照してください。または、Digital Foundry のビデオ全体を視聴してください（[Lego Builder's Journey Ray Tracing Showcase + DLSS 2.2 Upgrades Analysis](https://www.youtube.com/watch?v=dtbqJXb1UDw)）。DLSS 2.2 の議論は 11:40 から始まります。
+この[クリップ](https://youtube.com/clip/UgzYyeox3s7jFJZAvYF4AaABCQ)を参照してください。または、Digital Foundry のビデオ全体を視聴してください。（[Lego Builder's Journey Ray Tracing Showcase + DLSS 2.2 Upgrades Analysis](https://www.youtube.com/watch?v=dtbqJXb1UDw)）DLSS 2.2 の議論は 11:40 から始まります。
 
 ## 注意事項
 
@@ -61,29 +61,29 @@
 - DLSS のアーティファクトが減少する。
 - クラッシュのない体験を提供する。
 
-多くの場合、いくつかの問題を修正することができますが、他の場合ではゲームの起動を妨げることがあります（元の dll をツールで復元するまで）。
+多くの場合、いくつかの問題を修正することができますが、ゲームの起動を妨げることもあります。（これは元の dll をツールで復元することで回復します）
 
-実験を楽しんでください。私の大学教授がかつて言ったように、
+実験を楽しんでください。私の大学教授はかつてこう言いました：
 
-> コンピュータ[サイエンス]の良いところは、「もしも...？」と考えながら死ぬことがないことです。
+> コンピュータサイエンスの素敵なところは、「もしあのときこうしていたら…」と後悔したまま人生を終えずに済むことです。
 
-DLSS の経験を[r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/)で共有してください。
+DLSS の経験を [r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/) で共有してください。
 
-## どうやって入手できますか？
+## 入手方法
 
-最新のビルドは[GitHub リリース](https://github.com/beeradmoore/dlss-swapper/releases)ページから入手できます。
+最新のビルドは [GitHub リリース](https://github.com/beeradmoore/dlss-swapper/releases) ページから入手できます。
 
-You can also install with winget.
+winget を使用してインストールすることもできます。
 
 > winget install --id=beeradmoore.dlss-swapper -e
 
-These are the only official places to get DLSS Swapper.
+これらが DLSS Swapper を入手するための唯一の公式な方法です。
 
-## DLSS Swapper ができたらいいなと思うこと...
+## DLSS Swapper へのリクエスト
 
-[機能リクエスト](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml)を作成してください。
+[機能リクエスト](https://github.com/beeradmoore/dlss-swapper/issues/new?template=feature_request.yml) を作成してください。
 
-## どうやって貢献できますか？
+## 貢献方法
 
 詳細は近日公開予定です。
 
@@ -94,10 +94,11 @@ These are the only official places to get DLSS Swapper.
 | OS   | Windows 10 64-bit (20H1, build 19041) |
 | GPU  | 任意                                  |
 
-## Official links
+## 公式リンク
 
 - GitHub: https://github.com/beeradmoore/dlss-swapper/
 - Twitter: https://twitter.com/dlss_swapper
 - Reddit: https://www.reddit.com/r/DLSS_Swapper/
 
-If you have found an other accounts or sites claiming to be DLSS Swapper, please ignore them (or better yet, [file an issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) and let us know)
+もし DLSS Swapper に関連する公式以外のアカウントやサイトを見つけた場合も無視してください。
+（もしくは [Issues](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) から私たちにお知らせください）

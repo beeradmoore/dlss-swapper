@@ -184,19 +184,19 @@
     <value>новый выпуск</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
-    <value> в репозитории DLSS Swapper GitHub и предоставьте следующую информацию в разделе дополнительного контекста.</value>
+    <value> в репозитории DLSS Swapper GitHub и предоставьте следующую информацию в разделе дополнительной связи..</value>
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Не удалось запустить</value>
   </data>
   <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Вы уверены, что хотите удалить пользовательское изображение обложки?</value>
+    <value>Вы уверены, что хотите удалить изображение обложки пользователя?</value>
   </data>
   <data name="Game_CurrentlyProcessing" xml:space="preserve">
     <value>Игра в процессе обработки</value>
   </data>
   <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Удалить пользовательскую обложку?</value>
+    <value>Удалить обложку пользователя?</value>
   </data>
   <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
     <value>Не удалось преобразовать GOGCatalogResponse для адреса, {0}</value>
@@ -216,11 +216,41 @@
   <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>Неизвестная GameLibrary {0} при установке ID</value>
   </data>
+  <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
+    <value>Тип компонента</value>
+  </data>
+  <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
+    <value>Время события</value>
+  </data>
+  <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
+    <value>Тип события</value>
+  </data>
+  <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
+    <value>История не найдена.</value>
+  </data>
+  <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
+    <value>Версия</value>
+  </data>
+  <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
+    <value>Резервная копия DLL удалена</value>
+  </data>
+  <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
+    <value>DLL была изменена внешним образом</value>
+  </data>
+  <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
+    <value>Обнаружена DLL</value>
+  </data>
+  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
+    <value>Сброс DLL</value>
+  </data>
+  <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
+    <value>DLL заменена</value>
+  </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>Не удалось загрузить библиотеку игр {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
-    <value>Добавить пользовательскую обложку</value>
+    <value>Добавить свою обложку</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Добавить в избранное</value>
@@ -235,7 +265,7 @@
     <value>Не удалось найти файл "{0}".</value>
   </data>
   <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
-    <value>DLL был сброшен до {0}.</value>
+    <value>DLL была сброшена до {0}.</value>
   </data>
   <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
     <value>Начало загрузки</value>
@@ -243,14 +273,39 @@
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
     <value>Пожалуйста, дождитесь завершения загрузки, прежде чем произвести замену</value>
   </data>
+  <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
+    <value>Исходная информация</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
+    <value>Пресеты DLSS содержатся в файлах DLSS DLL, которые находятся в каталоге установки ваших игр. Разные файлы DLSS DLL имеют разные пресеты. Например, пресет K был введен только в DLSS v310.2. Поэтому, если вы используете DLSS v3.7 и установили пресет K, он не будет использоваться, а вместо этого будет использоваться пресет, выбранный игрой.
+
+То же самое относится к глобальным пресетам. Если вы выберете пресет K, но ваша игра использует DLSS v3.7, вы не будете использовать пресет K, а вместо этого игра будет использовать пресет по умолчанию.
+
+Чтобы проверить, какой пресет используется, включите экранный индикатор DLSS.</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
+    <value>Информационный экранный индикатор</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
+    <value>Информация по пресетам DLSS</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
+    <value>Установка пресета DLSS не гарантирует, что он будет использоваться.</value>
+  </data>
   <data name="GamePage_Favorited" xml:space="preserve">
     <value>В избранном</value>
+  </data>
+  <data name="GamePage_History" xml:space="preserve">
+    <value>История</value>
   </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
     <value>Путь установки</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
     <value>"{0}" недопустимый тип файла</value>
+  </data>
+  <data name="GamePage_Launch" xml:space="preserve">
+    <value>Запустить</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
     <value>Этот заголовок не добавляется вручную и не может быть удален.</value>
@@ -297,6 +352,9 @@
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
     <value>storageFile имеет значение null</value>
   </data>
+  <data name="GamePage_UnableToChangePreset" xml:space="preserve">
+    <value>Невозможно изменить пресет. Дополнительную информацию смотри в журнале ошибок.</value>
+  </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
     <value>Вы можете перетащить только один файл для обложки</value>
   </data>
@@ -310,7 +368,7 @@
     <value>Группировка</value>
   </data>
   <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
-    <value>Скрыть игры без взаимозаменяемых предметов</value>
+    <value>Скрыть игры без взаимозаменяемых объектов</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
     <value>Вы можете перетащить только один файл для обложки</value>
@@ -328,9 +386,9 @@
     <value>Вы должны выбрать свою &lt;i&gt;game&lt;/i&gt; директорию, а не вашу &lt;i&gt;games&lt;/i&gt; папку.&lt;br/&gt;&lt;br/&gt;Например, если у вас есть игра по адресу:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Вам нужно выбрать &lt;b&gt;MyFavGame&lt;/b&gt; директорию, а не &lt;b&gt;MyGamesFolder&lt;/b&gt; папку.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
-    <value>DLSS Swapper должен автоматически находить игры из вашей библиотеки установленных игр. Если ваша игра не отображается в списке, возможно, это связано с некоторыми настройками. Пожалуйста, проверьте:
+    <value>DLSS Swapper должен автоматически находить игры из вашей библиотеки установленных игр. Если ваша игра не отображается в списке, возможно, это связано с личными настройками. Пожалуйста, проверьте:
 
-- Фильтр списка игр не установлен на «Скрыть игры без взаимозаменяемых элементов»
+- Фильтр списка игр не установлен на «Скрыть игры без взаимозаменяемых объектов»
 - В настройках включена конкретная библиотека игр
 
 Если вы проверили все это, но ваша игра по-прежнему не отображается, возможно, это баг. Мы будем благодарны, если вы сообщите об этой проблеме в нашем репозитории GitHub, чтобы мы могли исправить ее и в будущем лучше распознавать ваши игры.</value>
@@ -351,7 +409,7 @@
     <value>Новые DLL</value>
   </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
-    <value>Создать новую заявку в GitHub</value>
+    <value>Создать новую заявку на GitHub</value>
   </data>
   <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
     <value>При загрузке ваших игр были обнаружены новые DLL, которые отсутствуют в списке DLSS Swapper.</value>
@@ -387,13 +445,13 @@
     <value>Игры</value>
   </data>
   <data name="GamesPage_ViewType" xml:space="preserve">
-    <value>Тип просмотра</value>
+    <value>Тип вида</value>
   </data>
   <data name="GamesPage_ViewType_GridView" xml:space="preserve">
-    <value>Просмотр сетки</value>
+    <value>Вид таблицей</value>
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
-    <value>Просмотр списка</value>
+    <value>Вид списком</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Это приложение запущено с правами администратора.</value>
@@ -402,7 +460,7 @@
     <value>Применить</value>
   </data>
   <data name="General_Cancel" xml:space="preserve">
-    <value>Отмена</value>
+    <value>Отменить</value>
   </data>
   <data name="General_Close" xml:space="preserve">
     <value>Закрыть</value>
@@ -423,10 +481,10 @@
     <value>Сообщение об ошибке</value>
   </data>
   <data name="General_Export" xml:space="preserve">
-    <value>Экспорт</value>
+    <value>Экспортировать</value>
   </data>
   <data name="General_ExportAll" xml:space="preserve">
-    <value>Экспорт всего</value>
+    <value>Экспортировать все</value>
   </data>
   <data name="General_Failed" xml:space="preserve">
     <value>Сбой</value>
@@ -441,7 +499,7 @@
     <value>Помощь</value>
   </data>
   <data name="General_Import" xml:space="preserve">
-    <value>Импорт</value>
+    <value>Импортировать</value>
   </data>
   <data name="General_Load" xml:space="preserve">
     <value>Загрузить</value>
@@ -457,6 +515,9 @@
   </data>
   <data name="General_None" xml:space="preserve">
     <value>Ничего</value>
+  </data>
+  <data name="General_NotSupported" xml:space="preserve">
+    <value>Не поддерживается</value>
   </data>
   <data name="General_Okay" xml:space="preserve">
     <value>Ок</value>
@@ -479,8 +540,11 @@
   <data name="General_Refresh" xml:space="preserve">
     <value>Обновить</value>
   </data>
+  <data name="General_Reload" xml:space="preserve">
+    <value>Перезагрузить</value>
+  </data>
   <data name="General_Remove" xml:space="preserve">
-    <value>Удаление</value>
+    <value>Удалить</value>
   </data>
   <data name="General_ReportIssue" xml:space="preserve">
     <value>Отправить сообщение</value>
@@ -499,6 +563,9 @@
   </data>
   <data name="General_Swap" xml:space="preserve">
     <value>Заменить</value>
+  </data>
+  <data name="General_Unknown" xml:space="preserve">
+    <value>Неизвестно</value>
   </data>
   <data name="General_Update" xml:space="preserve">
     <value>Обновление</value>
@@ -553,6 +620,12 @@
   </data>
   <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
     <value>Хеш</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
+    <value>Внутреннее название</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
+    <value>Внутреннее название Экстра</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Метка</value>
@@ -639,7 +712,7 @@
     <value>Обновление метаданных</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>Хотя замена версий DLSS не считается читингом, некоторые античит-системы могут не одобрить это, если файлы в вашем игровом каталоге не соответствуют тем, с которыми была распространена игра.
+    <value>Хотя замена версий DLSS не считается читерством, некоторые античит-системы могут не одобрить это, если файлы в вашем игровом каталоге не соответствуют тем, с которыми была распространена игра.
 
 По этой причине мы рекомендуем проявлять осторожность при игре в многопользовательских играх.</value>
   </data>
@@ -704,7 +777,7 @@
     <value>Открыть в браузере</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
-    <value>Нажмите кнопку «Открыть в браузере» или скопируйте и вставьте следующую ссылку в браузер. Загружает ли он файл в ваш браузер?</value>
+    <value>Нажмите кнопку «Открыть в браузере» или скопируйте и вставьте следующую ссылку в браузер. Грузит ли он файл в ваш браузер?</value>
   </data>
   <data name="NetworkTesterPage_Results" xml:space="preserve">
     <value>Результаты</value>
@@ -743,16 +816,16 @@
     <value>Вы уверены, что хотите удалить игнорируемый путь {0}?</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
-    <value>Удалить проигнорированный путь</value>
+    <value>Удалить игнорируемый путь</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
     <value>Параметры разработчика DLSS</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
-    <value>Включить логгирование в окне консоли</value>
+    <value>Разрешить логирование в окне консоли</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
-    <value>Включить логгирование в файл</value>
+    <value>Разрешить логирование в файл</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
     <value>Включено для всех DLSS DLL</value>
@@ -764,7 +837,13 @@
     <value>Показать индикатор на экране</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
-    <value>Подробное логгирование</value>
+    <value>Подробное логирование</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>Параметры DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>Глобальный пресет</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>Библиотеки игр</value>
@@ -773,10 +852,10 @@
     <value>Общее руководство по устранению неполадок</value>
   </data>
   <data name="SettingsPage_GiveFeedback" xml:space="preserve">
-    <value>Дать отзыв</value>
+    <value>Оставить отзыв</value>
   </data>
   <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
-    <value>Вы можете предложить функцию или сообщить о проблеме на DLSS Swapper</value>
+    <value>Вы можете предложить функцию или сообщить о проблеме по DLSS Swapper</value>
   </data>
   <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
     <value>Игнорируемые пути</value>
@@ -785,13 +864,13 @@
     <value>Язык</value>
   </data>
   <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
-    <value>{0} отключено</value>
+    <value>{0} отключен</value>
   </data>
   <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
-    <value>{0} включено</value>
+    <value>{0} включен</value>
   </data>
   <data name="SettingsPage_Logging" xml:space="preserve">
-    <value>Логгирование</value>
+    <value>Логирование</value>
   </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>Новых обновлений нет.</value>
@@ -806,13 +885,13 @@
     <value>Сетевой тестер</value>
   </data>
   <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
-    <value>Открыть инструментарий переводчика</value>
+    <value>Открыть панель инструментов переводчика</value>
   </data>
   <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
     <value>Путь {0} уже проигнорирован.</value>
   </data>
   <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
-    <value>Разрешить ненадежным</value>
+    <value>Разрешить непроверенные</value>
   </data>
   <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
     <value>Проверить наличие обновлений</value>
@@ -842,7 +921,7 @@
     <value>Ваш текущий файл лога:</value>
   </data>
   <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
-    <value>Вы не можете использовать инструментарий переводчика, пока он запущен под администратором. Пожалуйста, перезапустите приложение.</value>
+    <value>Вы не можете использовать панель инструментов переводчика, пока она запущена под администратором. Пожалуйста, перезапустите приложение.</value>
   </data>
   <data name="TranslationToolboxPage_Comment" xml:space="preserve">
     <value>Комментарий</value>
@@ -911,12 +990,12 @@
     <value>Закрыть без сохранения</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
-    <value>У вас, возможно, есть несохраненные изменения перевода. Если вы закроете это окно, они будут потеряны.</value>
+    <value>У вас, возможно, есть несохраненные изменения в переводе. Если вы закроете это окно, они будут потеряны.</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
-    <value>Несохраненные изменения перевода</value>
+    <value>Несохраненные изменения в переводе</value>
   </data>
   <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
-    <value>Инструментарий переводчика</value>
+    <value>Панель инструментов переводчика</value>
   </data>
 </root>

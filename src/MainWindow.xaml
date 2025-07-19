@@ -9,7 +9,7 @@
     Title="{x:Bind ViewModel.TranslationProperties.Title, Mode=OneWay}"
     mc:Ignorable="d">
 
-    <Grid x:Name="RootGrid" MinWidth="400">
+    <Grid x:Name="RootGrid" MinWidth="400" FlowDirection="{x:Bind ViewModel.AppFlowDirection, Mode=OneWay}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="28" />

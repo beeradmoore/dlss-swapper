@@ -42,7 +42,7 @@
                  Severity="Warning"
                  IsClosable="False"
                  Title="{x:Bind ViewModel.TranslationProperties.WarningText, Mode=OneWay}"
-                 Message="{x:Bind ViewModel.TranslationProperties.ApplicationRunsInAdministrativeModeInfo}"
+                 Message="{x:Bind ViewModel.TranslationProperties.ApplicationRunsInAdministrativeModeInfo, Mode=OneWay}"
                  Visibility="{x:Bind system:Environment.IsPrivilegedProcess, Converter={StaticResource BoolToVisibilityConverter}}" />
 
         <ScrollViewer Grid.Row="2">

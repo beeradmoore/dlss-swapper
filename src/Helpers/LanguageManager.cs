@@ -42,7 +42,7 @@ public class LanguageManager
     {
         // For now this is a hardcoded list. It would be nice to dynamically discover from resource class or something.
         return [
-            "ca-CA",
+            "ca-ES",
             "de-DE",
             "en-AU",
             "en-GB",

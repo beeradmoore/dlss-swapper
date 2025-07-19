@@ -16,6 +16,8 @@
 </p>
 
 <p align="center">
+    <a href="./readmes/readme_ca.md">Català</a>
+    .
     <a href="../README.md">English</a>    
     ·
     <a href="./readme_es.md">Español</a>
@@ -73,7 +75,7 @@ DLSS の経験を [r/DLSS_Swapper](https://www.reddit.com/r/DLSS_Swapper/) で�
 
 winget を使用してインストールすることもできます。
 
-> winget install --id=beeradmoore.dlss-swapper -e 
+> winget install --id=beeradmoore.dlss-swapper -e
 
 これらが DLSS Swapper を入手するための唯一の公式な方法です。
 

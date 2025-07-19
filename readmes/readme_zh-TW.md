@@ -24,6 +24,8 @@
 </p>
 
 <p align="center">
+    <a href="./readmes/readme_ca.md">Català</a>
+    .
     <a href="../README.md">English</a>    
     ·
     <a href="./readme_es.md">Español</a>
@@ -81,7 +83,7 @@
 
 您也可以使用 winget 來進行安裝。
 
-> winget install --id=beeradmoore.dlss-swapper -e 
+> winget install --id=beeradmoore.dlss-swapper -e
 
 以上就是取得 DLSS Swapper 的唯一官方管道。
 

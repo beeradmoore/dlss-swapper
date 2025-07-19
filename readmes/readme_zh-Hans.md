@@ -24,6 +24,8 @@
 </p>
 
 <p align="center">
+    <a href="./readmes/readme_ca.md">Català</a>
+    .
     <a href="../README.md">English</a>    
     ·
     <a href="./readme_es.md">Español</a>
@@ -61,7 +63,7 @@
 
 此工具**无法**让您将 DLSS 加入到未支持 DLSS 的游戏中。
 
-此工具**无法**保证在更换 DLSS dll之后能够：
+此工具**无法**保证在更换 DLSS dll 之后能够：
 
 - 提升 DLSS 的性能。
 - 降低 DLSS 所带来的伪影问题。
@@ -81,7 +83,7 @@
 
 也可以使用 winget 来进行安装。
 
-> winget install --id=beeradmoore.dlss-swapper -e 
+> winget install --id=beeradmoore.dlss-swapper -e
 
 以上就是取得 DLSS Swapper 的唯一官方渠道。
 
@@ -98,7 +100,7 @@
 | 需求     | 说明                                     |
 | -------- | ---------------------------------------- |
 | 操作系统 | Windows 10 64-bit (20H1, 内部版本 19041) |
-| 显卡   | 任意                                     |
+| 显卡     | 任意                                     |
 
 ## 官方链接
 

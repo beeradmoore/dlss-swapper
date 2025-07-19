@@ -25,7 +25,7 @@
 
 <p align="center">
     Català
-    .
+    ·
     <a href="../README.md">English</a>    
     ·
     <a href="./readmes/readme_es.md">Español</a>

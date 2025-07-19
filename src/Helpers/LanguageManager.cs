@@ -48,6 +48,7 @@ public class LanguageManager
             "en-AU",
             "en-GB",
             "en-US",
+            "es-ES",
             "fr-FR",
             "pl-PL",
             "pt-BR",
@@ -72,6 +73,7 @@ public class LanguageManager
             "en-AU" => "English (Australia)",
             "en-GB" => "English (United Kingdom)",
             "en-US" => "English (United States)",
+            "es-ES" => "Español", // Spanish
             "fr-FR" => "French (France)", // French (France)
             "pl-PL" => "Polish",
             "pt-BR" => "Português BR",

@@ -25,7 +25,7 @@
 
 <p align="center">
     <a href="./readmes/readme_ca.md">Català</a>
-    .
+    ·
     <a href="../README.md">English</a>    
     ·
     Español

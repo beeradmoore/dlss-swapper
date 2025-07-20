@@ -109,7 +109,10 @@
                     <!-- Padding="{ThemeResource ContentDialogPadding}" -->
 
                     <!-- Weird, but allows image to strecth centered rather than left align -->
-                    <Border BorderThickness="0" Width="200" Height="300">
+                    <Border BorderThickness="0" Width="200" Height="300" FlowDirection="LeftToRight">
+                        <Border.RenderTransform>
+                            <CompositeTransform ScaleX="1" />
+                        </Border.RenderTransform>
                         <Border.Background>
                             <ImageBrush Stretch="UniformToFill">
                                 <ImageBrush.ImageSource>

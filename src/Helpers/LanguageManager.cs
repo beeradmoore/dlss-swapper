@@ -73,11 +73,9 @@ public class LanguageManager
             "en-AU" => "English (Australia)",
             "en-GB" => "English (United Kingdom)",
             "en-US" => "English (United States)",
+            "es-ES" => "Español", // Spanish
             "fr-FR" => "Français (France)", // French (France)
             "pl-PL" => "Polski", // Polish
-            "es-ES" => "Español", // Spanish
-            "fr-FR" => "French (France)", // French (France)
-            "pl-PL" => "Polish",
             "pt-BR" => "Português BR",
             "ru-RU" => "Русский", // Russian
             "tr-TR" => "Türkçe", // Turkish

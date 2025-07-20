@@ -50,6 +50,7 @@ public class LanguageManager
             "en-US",
             "es-ES",
             "fr-FR",
+            "it-IT",
             "pl-PL",
             "pt-BR",
             "ru-RU",
@@ -75,6 +76,7 @@ public class LanguageManager
             "en-US" => "English (United States)",
             "es-ES" => "Español", // Spanish
             "fr-FR" => "Français (France)", // French (France)
+            "it-IT" => "Italiano (Italia)", // Italian (Italy)
             "pl-PL" => "Polski", // Polish
             "pt-BR" => "Português BR",
             "ru-RU" => "Русский", // Russian

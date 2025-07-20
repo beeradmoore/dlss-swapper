@@ -107,19 +107,6 @@ public partial class GameGridPageModel : ObservableObject
     [RelayCommand]
     async Task AddManualGameButtonAsync()
     {
-        if (Environment.IsPrivilegedProcess)
-        {
-            var errorDialog = new EasyContentDialog(gameGridPage.XamlRoot)
-            {
-                Title = ResourceHelper.GetString("General_Error"),
-                CloseButtonText = ResourceHelper.GetString("General_Okay"),
-                DefaultButton = ContentDialogButton.Close,
-                Content = ResourceHelper.GetString("General_FeatureNotSupportedWhenAdmin"),
-            };
-            await errorDialog.ShowAsync();
-            return;
-        }
-
         if (Settings.Instance.DontShowManuallyAddingGamesNotice == false)
         {
             var dontShowAgainCheckbox = new CheckBox()
@@ -204,29 +191,21 @@ public partial class GameGridPageModel : ObservableObject
             Settings.Instance.HasShownAddGameFolderMessage = true;
         }
 
-
-        var folderPicker = new FolderPicker()
-        {
-            SuggestedStartLocation = PickerLocationId.ComputerFolder,
-            CommitButtonText = ResourceHelper.GetString("GamesPage_ManuallyAdding_SelectGameFolder"),
-        };
-        folderPicker.FileTypeFilter.Add("*");
-
         var installPath = string.Empty;
         try
         {
             // Associate the HWND with the folder picker
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
-            WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
 
-            var folder = await folderPicker.PickSingleFolderAsync();
 
-            if (folder is null)
+            var folder = FileSystemHelper.OpenFolder(hWnd, okButtonLabel: ResourceHelper.GetString("GamesPage_ManuallyAdding_SelectGameFolder"));
+
+            if (string.IsNullOrWhiteSpace(folder))
             {
                 return;
             }
 
-            installPath = folder.Path;
+            installPath = folder;
 
             // If top level directory throw error.
             if (installPath == Path.GetPathRoot(installPath))

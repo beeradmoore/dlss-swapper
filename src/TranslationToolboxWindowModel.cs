@@ -17,7 +17,6 @@ using DLSS_Swapper.Language;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.Resources.Core;
-using Windows.Storage.Pickers;
 
 namespace DLSS_Swapper;
 
@@ -209,24 +208,22 @@ public partial class TranslationToolboxWindowModel : ObservableObject
 
             try
             {
-                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
-                var fileOpenPicker = new FileOpenPicker()
+                var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+                var fileFilters = new List<FileSystemHelper.FileFilter>()
                 {
-                    SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
+                    new FileSystemHelper.FileFilter("JSON files", "*.json"),
+                    new FileSystemHelper.FileFilter("CSV files", "*.csv")
                 };
-                fileOpenPicker.FileTypeFilter.Add(".csv");
-                fileOpenPicker.FileTypeFilter.Add(".json");
-                WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);
 
-                var existingFile = await fileOpenPicker.PickSingleFileAsync();
+                var existingFile = FileSystemHelper.OpenFile(hWnd, fileFilters, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), defaultExtension: "json");
 
                 // User cancelled.
-                if (existingFile is null)
+                if (string.IsNullOrWhiteSpace(existingFile))
                 {
                     return;
                 }
 
-                using (var stream = await existingFile.OpenStreamForReadAsync())
+                using (var stream = File.OpenRead(existingFile))
                 {
                     if (stream is null)
                     {
@@ -234,7 +231,7 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                     }
 
 
-                    if (existingFile.Name.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))
+                    if (existingFile.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))
                     {
                         using (var reader = new StreamReader(stream))
                         {
@@ -263,7 +260,7 @@ public partial class TranslationToolboxWindowModel : ObservableObject
                             }
                         }
                     }
-                    else if ( existingFile.Name.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+                    else if ( existingFile.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
                     {
                         var loadedDictionary = await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.DictionaryStringString);
                         if (loadedDictionary is null)
@@ -342,22 +339,19 @@ public partial class TranslationToolboxWindowModel : ObservableObject
 
             try
             {
-                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
-                var savePicker = new FileSavePicker();
-                savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-                savePicker.FileTypeChoices.Add("csv", new List<string>() { ".csv" });
-                savePicker.FileTypeChoices.Add("json", new List<string>() { ".json" });
-                savePicker.SuggestedFileName = "dlss_swapper_translation";
-                WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
-                var saveFile = await savePicker.PickSaveFileAsync();
+                var fileFilters = new List<FileSystemHelper.FileFilter>()
+                {
+                    new FileSystemHelper.FileFilter("JSON files", ".json"),
+                    new FileSystemHelper.FileFilter("CSV files", ".csv"),
+                };
+                var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+                var outputPath = FileSystemHelper.SaveFile(hWnd, fileFilters, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "dlss_swapper_translation.json", "json");
 
                 // User cancelled.
-                if (saveFile is null)
+                if (string.IsNullOrWhiteSpace(outputPath))
                 {
                     return;
                 }
-
-                var outputPath = saveFile.Path;
 
                 using (var fileStream = File.Create(outputPath))
                 {
@@ -566,21 +560,18 @@ public partial class TranslationToolboxWindowModel : ObservableObject
 
             try
             {
-                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
-                var savePicker = new FileSavePicker();
-                savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-                savePicker.FileTypeChoices.Add("zip", new List<string>() { ".zip" });
-                savePicker.SuggestedFileName = "dlss_swapper_published_translation.zip";
-                WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
-                var saveFile = await savePicker.PickSaveFileAsync();
+                var fileFilters = new List<FileSystemHelper.FileFilter>()
+                {
+                    new FileSystemHelper.FileFilter("ZIP files", ".zip"),
+                };
+                var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+                var outputPath = FileSystemHelper.SaveFile(hWnd, fileFilters, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "dlss_swapper_published_translation.zip", "zip");
 
                 // User cancelled.
-                if (saveFile is null)
+                if (string.IsNullOrWhiteSpace(outputPath))
                 {
                     return;
                 }
-
-                var outputPath = saveFile.Path;
 
                 using (var fileStream = File.Create(outputPath))
                 {

@@ -231,7 +231,7 @@ public partial class GameControlModel : ObservableObject
             return;
         }
 
-        await Game.PromptToBrowseCustomCover();
+        Game.PromptToBrowseCustomCover();
     }
 
     [RelayCommand]

@@ -16,7 +16,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.Storage.Pickers;
 
 namespace DLSS_Swapper.Data
 {
@@ -1193,30 +1192,28 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        public async Task PromptToBrowseCustomCover()
+        public void PromptToBrowseCustomCover()
         {
             try
             {
-                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
-                var fileOpenPicker = new FileOpenPicker()
+                var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
+
+                var fileFilters = new List<FileSystemHelper.FileFilter>()
                 {
-                    SuggestedStartLocation = PickerLocationId.PicturesLibrary,
-                    ViewMode = PickerViewMode.Thumbnail,
+                    new FileSystemHelper.FileFilter("Image files", "*.jpg; *.jpeg; *.png; *.webp"),
                 };
-                fileOpenPicker.FileTypeFilter.Add(".jpg");
-                fileOpenPicker.FileTypeFilter.Add(".jpeg");
-                fileOpenPicker.FileTypeFilter.Add(".png");
-                fileOpenPicker.FileTypeFilter.Add(".webp");
-                WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);
 
-                var coverImageFile = await fileOpenPicker.PickSingleFileAsync();
+                var coverImageFile = FileSystemHelper.OpenFile(hWnd, fileFilters, Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
 
-                if (coverImageFile is null)
+                //                    ViewMode = PickerViewMode.Thumbnail,
+
+
+                if (string.IsNullOrWhiteSpace(coverImageFile))
                 {
                     return;
                 }
 
-                AddCustomCover(coverImageFile.Path);
+                AddCustomCover(coverImageFile);
             }
             catch (Exception err)
             {

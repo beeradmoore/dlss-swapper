@@ -23,26 +23,6 @@ public sealed partial class TranslationToolboxWindow : Window
 
         ViewModel = new TranslationToolboxWindowModel(this);
 
-        // Kick them out early if they are running as admin so we don't have to worry about the export data.
-        if (Environment.IsPrivilegedProcess)
-        {
-            if (this.Content is Grid grid)
-            {
-                grid.Loaded += async (sender, e) =>
-                {
-                    var dialog = new EasyContentDialog(Content.XamlRoot)
-                    {
-                        Title = ResourceHelper.GetString("General_Error"),
-                        DefaultButton = ContentDialogButton.Close,
-                        Content = ResourceHelper.GetString("TranslationToolboxPage_AdminError"),
-                        CloseButtonText = ResourceHelper.GetString("General_Okay"),
-                    };
-                    await dialog.ShowAsync();
-                    Close();
-                };
-            }
-        }
-
         ResourceHelper.TranslatorModeEnabled = true;
         Closed += TranslationToolboxWindow_Closed;
     }

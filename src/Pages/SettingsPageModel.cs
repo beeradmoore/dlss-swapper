@@ -348,33 +348,42 @@ public partial class SettingsPageModel : ObservableObject
     {
         if (_weakPage.TryGetTarget(out SettingsPage? settingsPage))
         {
-            if (Environment.IsPrivilegedProcess)
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
+
+            var folderPath = string.Empty;
+            try
             {
+                var folder = FileSystemHelper.OpenFolder(hWnd, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+
+                // User cancelled.
+                if (string.IsNullOrWhiteSpace(folder))
+                {
+                    return;
+                }
+
+                folderPath = folder;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
                 var errorDialog = new EasyContentDialog(settingsPage.XamlRoot)
                 {
                     Title = ResourceHelper.GetString("General_Error"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
                     DefaultButton = ContentDialogButton.Close,
-                    Content = ResourceHelper.GetString("General_FeatureNotSupportedWhenAdmin"),
+                    Content = ResourceHelper.GetString("SettingsPage_CouldNotOpenFolderDialog"),
                 };
                 await errorDialog.ShowAsync();
                 return;
             }
 
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.CurrentApp.MainWindow);
-            var folderPicker = new Windows.Storage.Pickers.FolderPicker();
-            folderPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-            WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
-            var folder = await folderPicker.PickSingleFolderAsync();
-
-            // User cancelled.
-            if (folder is null)
+            if (string.IsNullOrWhiteSpace(folderPath))
             {
                 return;
             }
 
-            var folderPath = folder.Path;
-            if (folder.Path.EndsWith(Path.DirectorySeparatorChar) == false)
+            // Ensure ends with a directory separator
+            if (folderPath.EndsWith(Path.DirectorySeparatorChar) == false)
             {
                 folderPath += Path.DirectorySeparatorChar;
             }

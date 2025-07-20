@@ -42,11 +42,15 @@ public class LanguageManager
     {
         // For now this is a hardcoded list. It would be nice to dynamically discover from resource class or something.
         return [
+            "ar-SA",
             "ar-SY",
+            "ca-ES",
             "de-DE",
             "en-AU",
             "en-GB",
             "en-US",
+            "es-ES",
+            "fr-FR",
             "pl-PL",
             "pt-BR",
             "ru-RU",
@@ -64,11 +68,17 @@ public class LanguageManager
         // For now this is a hardcoded list. It would be nice to dynamically discover from resource class or something.
         return languageKey switch
         {
+            "ar-SA" => "اللغة العربية (المملكة العربية السعودية)", // Arabic (Saudi Arabia)
             "ar-SY" => " (سوريا) العربية", // Arabic (Syria)
+            "ca-ES" => "Català", // Catalan
             "de-DE" => "Deutsch (Deutschland)", // German (Germany)
             "en-AU" => "English (Australia)",
             "en-GB" => "English (United Kingdom)",
             "en-US" => "English (United States)",
+            "fr-FR" => "Français (France)", // French (France)
+            "pl-PL" => "Polski", // Polish
+            "es-ES" => "Español", // Spanish
+            "fr-FR" => "French (France)", // French (France)
             "pl-PL" => "Polish",
             "pt-BR" => "Português BR",
             "ru-RU" => "Русский", // Russian

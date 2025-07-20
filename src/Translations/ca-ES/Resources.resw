@@ -118,884 +118,884 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AcknowledgementsPage_Title" xml:space="preserve">
-    <value>Лицензии и подтверждения</value>
+    <value>Llicències i reconeixements</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>DLSS Swapper</value>
   </data>
   <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
-    <value>Нажмите, чтобы скопировать следующие данные</value>
+    <value>Clica per copiar els detalls de sota</value>
   </data>
   <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
-    <value>Диагностика</value>
+    <value>Diagnòstics</value>
   </data>
   <data name="DllManager_AlreadyImported" xml:space="preserve">
-    <value>(уже импортировано)</value>
+    <value>(ja importat)</value>
   </data>
   <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>Не удалось преобразовать файл manifest.json.</value>
+    <value>No s'ha pogut deserialitzar manifest.json.</value>
   </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
-    <value>Функция импорта отключена, метаданные импорта не могут быть загружены.</value>
+    <value>La funció d'importació està desactivada; no s'ha pogut carregar el manifest d'importació.</value>
   </data>
   <data name="DllManager_MigratingDlls" xml:space="preserve">
-    <value>Миграция DLL</value>
+    <value>Migrant DLLs</value>
   </data>
   <data name="DllManager_UnknownTypeDll" xml:space="preserve">
-    <value>DLL неизвестного типа.</value>
+    <value>DLL no és un tipus conegut.</value>
   </data>
   <data name="DllManager_UntrustedDll" xml:space="preserve">
-    <value>DLL не является доверенным для Windows.</value>
+    <value>Windows no confia en la DLL.</value>
   </data>
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
-    <value>Не удалось загрузить {0} DLL, попробуйте позже или проверьте журналы, чтобы узнать причину сбоя загрузки.</value>
+    <value>No s'ha pogut descarregar la DLL {0}. Si us plau, torneu-ho a provar més tard o consulteu els registres per veure per què ha fallat la descàrrega.</value>
   </data>
   <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Не удалось загрузить файл.</value>
+    <value>No s'ha pogut descarregar el fitxer.</value>
   </data>
   <data name="DllRecord_Download" xml:space="preserve">
-    <value>Загрузить</value>
+    <value>Descarrega</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
-    <value>Ошибка загрузки</value>
+    <value>Error de descàrrega</value>
   </data>
   <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>Загруженный файл был поврежден.</value>
+    <value>El fitxer descarregat no era vàlid.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
-    <value>Загрузка</value>
+    <value>Descarregant</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
-    <value>Импортировано</value>
+    <value>Importat</value>
   </data>
   <data name="DllRecord_RequiresDownload" xml:space="preserve">
-    <value>Требуется загрузка</value>
+    <value>Requereix descàrrega</value>
   </data>
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
-    <value>DLL zip был поврежден (DLL не найден).</value>
+    <value>El fitxer zip de la DLL no era vàlid (no s'ha trobat cap DLL).</value>
   </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
-    <value>DLSS Swapper не удалось запустить</value>
+    <value>No s'ha pogut iniciar DLSS Swapper</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
-    <value>Пожалуйста, откройте</value>
+    <value>Si us plau, obriu un </value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
-    <value>новый выпуск</value>
+    <value>nou error</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
-    <value> в репозитории DLSS Swapper GitHub и предоставьте следующую информацию в разделе дополнительной связи..</value>
+    <value> al repositori de GitHub de DLSS Swapper i proporciona la següent informació a la secció de context addicional.</value>
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
-    <value>Не удалось запустить</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Вы уверены, что хотите удалить изображение обложки пользователя?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Игра в процессе обработки</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Удалить обложку пользователя?</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Не удалось преобразовать GOGCatalogResponse для адреса, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Не удалось преобразовать GOGEmbedFilteredResponse для адреса, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Не удалось найти GOGEmbedFilteredProducts для адреса, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Не удалось найти GOGCatalogProduct для адреса, {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>Не удалось обнаружить ubisoftConnectInstallsKey</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Неизвестная GameLibrary {0} при установке ID</value>
+    <value>No s'ha pogut iniciar</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
-    <value>Тип компонента</value>
+    <value>Tipus d'actiu</value>
   </data>
   <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
-    <value>Время события</value>
+    <value>Hora de l'esdeveniment</value>
   </data>
   <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
-    <value>Тип события</value>
+    <value>Tipus d'esdeveniment</value>
   </data>
   <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
-    <value>История не найдена.</value>
+    <value>No s'ha trobat cap historial.</value>
   </data>
   <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
-    <value>Версия</value>
+    <value>Versió</value>
   </data>
   <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
-    <value>Резервная копия DLL удалена</value>
+    <value>S'ha eliminat la còpia de seguretat de la DLL</value>
   </data>
   <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
-    <value>DLL была изменена внешним образом</value>
+    <value>La DLL s'ha modificat externament</value>
   </data>
   <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
-    <value>Обнаружена DLL</value>
+    <value>DLL detectada</value>
   </data>
   <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
-    <value>Сброс DLL</value>
+    <value>Restablir DLL</value>
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
-    <value>DLL заменена</value>
+    <value>DLL intercanviada</value>
   </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Не удалось загрузить библиотеку игр {0}</value>
+    <value>No s'ha pogut carregar la biblioteca de jocs {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
-    <value>Добавить свою обложку</value>
+    <value>Afegir portada personalitzada</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
-    <value>Добавить в избранное</value>
+    <value>Fes clic per afegir als preferits</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
-    <value>Не удалось найти путь "{0}".</value>
+    <value>No s'ha pogut trobar la ruta "{0}".</value>
   </data>
   <data name="GamePage_CurrentDll" xml:space="preserve">
-    <value>Текущая DLL</value>
+    <value>DLL actual</value>
   </data>
   <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
-    <value>Не удалось найти файл "{0}".</value>
+    <value>No s'ha pogut trobar el fitxer "{0}".</value>
   </data>
   <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
-    <value>DLL была сброшена до {0}.</value>
+    <value>La DLL s'ha restablert a {0}.</value>
   </data>
   <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
-    <value>Начало загрузки</value>
+    <value>S'està iniciant la descàrrega</value>
   </data>
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
-    <value>Пожалуйста, дождитесь завершения загрузки, прежде чем произвести замену</value>
+    <value>Si us plau, espereu que la descàrrega s'acabi abans d'intercanviar</value>
   </data>
   <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
-    <value>Исходная информация</value>
+    <value>Informació del preset</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
-    <value>Пресеты DLSS содержатся в файлах DLSS DLL, которые находятся в каталоге установки ваших игр. Разные файлы DLSS DLL имеют разные пресеты. Например, пресет K был введен только в DLSS v310.2. Поэтому, если вы используете DLSS v3.7 и установили пресет K, он не будет использоваться, а вместо этого будет использоваться пресет, выбранный игрой.
+    <value>Els presets del DLSS es troben dins dels fitxers DLL de DLSS que es troben al directori d'instal·lació dels jocs. Diferents DLL de DLSS tenen presets diferents. Per exemple, el preset K no es va introduir fins a DLSS v310.2. Per tant, si utilitzeu DLSS v3.7 i definiu el preset a K, no utilitzarà el preset K i, en canvi, tornarà a qualsevol preset que el joc decideixi utilitzar.
 
-То же самое относится к глобальным пресетам. Если вы выберете пресет K, но ваша игра использует DLSS v3.7, вы не будете использовать пресет K, а вместо этого игра будет использовать пресет по умолчанию.
+El mateix s'aplica als presets globals. Si seleccioneu el preset K però el vostre joc utilitza DLSS v3.7, no utilitzareu el preset K i, en canvi, el joc tornarà a la seva configuració predeterminada.
 
-Чтобы проверить, какой пресет используется, включите экранный индикатор DLSS.</value>
+Per verificar quin preset s'està utilitzant, activeu l'indicador de DLSS en pantalla.</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
-    <value>Информационный экранный индикатор</value>
+    <value>Informació de l'indicador en pantalla</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
-    <value>Информация по пресетам DLSS</value>
+    <value>Informació del preset de DLSS</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
-    <value>Установка пресета DLSS не гарантирует, что он будет использоваться.</value>
+    <value>Establint un preset de DLSS no garanteix que el preset sigui utilitzat.</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
-    <value>В избранном</value>
+    <value>Afegit a preferits</value>
   </data>
   <data name="GamePage_History" xml:space="preserve">
-    <value>История</value>
+    <value>Historial</value>
   </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
-    <value>Путь установки</value>
+    <value>Ruta d'instal·lació</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
-    <value>"{0}" недопустимый тип файла</value>
+    <value>"{0}" és un tipus de fitxer no vàlid</value>
   </data>
   <data name="GamePage_Launch" xml:space="preserve">
-    <value>Запустить</value>
+    <value>Inicia</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
-    <value>Этот заголовок не добавляется вручную и не может быть удален.</value>
+    <value>Aquest títol no ha sigut afegit manualment i no es pot eliminar.</value>
   </data>
   <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
-    <value>Вы уверены, что хотите удалить "{0}" из DLSS Swapper? Это не повлияет на DLSS-файлы, которые уже были заменены.</value>
+    <value>Esteu segur que voleu eliminar "{0}" del DLSS Swapper? Això no farà cap canvi als fitxers DLSS que ja s'han intercanviat.</value>
   </data>
   <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
-    <value>Ниже показаны найденные DLL. Вы по-прежнему сможете обменивать и восстанавливать DLL, как обычно, поскольку мы будем выполнять эти действия со всеми DLL одновременно. Однако, поскольку мы не знаем, какой из этих DLL используется игрой, показана версия первого обнаруженного DLL.</value>
+    <value>A continuació es mostren les diverses DLL trobades. Encara podreu intercanviar i restaurar les DLL com de costum, ja que farem aquestes accions a totes les DLL alhora. Tanmateix, com que no sabem quina d'aquestes DLL utilitza el joc, la versió de DLL que es mostra és de la primera DLL detectada.</value>
   </data>
   <data name="GamePage_MultipleDllsFound" xml:space="preserve">
-    <value>Найдены несколько DLL</value>
+    <value>S'han trobat diverses DLL</value>
   </data>
   <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
-    <value>Найдено несколько {0} DLL</value>
+    <value>S'han trobat diverses {0} DLL</value>
   </data>
   <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
-    <value>Перейдите на страницу библиотеки, чтобы загрузить новые DLL.</value>
+    <value>Si us plau, aneu a la pàgina de la biblioteca per descarregar noves DLL.</value>
   </data>
   <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
-    <value>DLL не найдены</value>
+    <value>No s'han trobat DLL</value>
   </data>
   <data name="GamePage_Notes" xml:space="preserve">
-    <value>Заметки</value>
+    <value>Notes</value>
   </data>
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
-    <value>Эта игра не готова к запуску.</value>
+    <value>Aquest joc no està en un estat llest per jugar.</value>
   </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
-    <value>Открыть расположение DLL</value>
+    <value>Obre la ubicació de la DLL</value>
   </data>
   <data name="GamePage_OriginalDll" xml:space="preserve">
-    <value>Исходная DLL</value>
+    <value>DLL original</value>
   </data>
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
-    <value>{0} все еще обрабатывается. Пожалуйста, дождитесь завершения загрузки, прежде чем открывать.</value>
+    <value>{0} encara s'està processant. Espereu que l'indicador de càrrega s'acabi abans d'obrir.</value>
   </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
-    <value>Восстановить исходный DLL</value>
+    <value>Restaurar la DLL original</value>
   </data>
   <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
-    <value>Выбрать версию {0}</value>
+    <value>Selecciona la versió {0}</value>
   </data>
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
-    <value>storageFile имеет значение null</value>
+    <value>El fitxer d'emmagatzematge és nul</value>
   </data>
   <data name="GamePage_UnableToChangePreset" xml:space="preserve">
-    <value>Невозможно изменить пресет. Дополнительную информацию смотри в журнале ошибок.</value>
+    <value>No es pot canviar la configuració predefinida. Si us plau, consulteu el registre d'errors per obtenir més informació.</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
-    <value>Вы можете перетащить только один файл для обложки</value>
+    <value>Només podeu arrossegar un sol fitxer per a una portada</value>
   </data>
   <data name="GamesPage_AddGame" xml:space="preserve">
-    <value>Добавить игру</value>
+    <value>Afegeix un joc</value>
   </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
-    <value>Группировать игры из одной библиотеки вместе</value>
+    <value>Agrupa jocs de la mateixa biblioteca junts</value>
   </data>
   <data name="GamesPage_Grouping" xml:space="preserve">
-    <value>Группировка</value>
+    <value>Agrupant</value>
   </data>
   <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
-    <value>Скрыть игры без взаимозаменяемых объектов</value>
+    <value>Amaga els jocs sense elements intercanviables</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
-    <value>Вы можете перетащить только один файл для обложки</value>
+    <value>Només podeu arrossegar un sol fitxer per a una coberta</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
-    <value>Еще одно примечание о ручном добавлении игр</value>
+    <value>Una altra nota per afegir jocs manualment</value>
   </data>
   <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
-    <value>Возникла ошибка, и ваша игра не может быть добавлена в данный момент. Пожалуйста, сообщите об этой проблеме.</value>
+    <value>Hi ha hagut un problema i no s'ha pogut afegir el teu joc en aquest moment. Si us plau, informa d'aquest problema.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
-    <value>Ошибка при добавлении игры</value>
+    <value>S'ha produït un error en afegir el joc</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value>Вы должны выбрать свою &lt;i&gt;game&lt;/i&gt; директорию, а не вашу &lt;i&gt;games&lt;/i&gt; папку.&lt;br/&gt;&lt;br/&gt;Например, если у вас есть игра по адресу:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Вам нужно выбрать &lt;b&gt;MyFavGame&lt;/b&gt; директорию, а не &lt;b&gt;MyGamesFolder&lt;/b&gt; папку.</value>
+    <value>Heu de seleccionar el directori &lt;i&gt;game&lt;/i&gt;, no el directori &lt;i&gt;games&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;Per exemple, si teniu un joc a:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavJoc\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Hauríeu de seleccionar el directori &lt;b&gt;MyFavJoc&lt;/b&gt; i no el directori &lt;b&gt;MyGamesFolder&lt;/b&gt;.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
-    <value>DLSS Swapper должен автоматически находить игры из вашей библиотеки установленных игр. Если ваша игра не отображается в списке, возможно, это связано с личными настройками. Пожалуйста, проверьте:
+    <value>DLSS Swapper hauria de trobar jocs de les biblioteques de jocs instal·lades automàticament. Si el vostre joc no apareix a la llista, pot haver-hi algunes opcions de configuració que ho impedeixin. Si us plau, comproveu:
 
-- Фильтр списка игр не установлен на «Скрыть игры без взаимозаменяемых объектов»
-- В настройках включена конкретная библиотека игр
+- El filtre de la llista de jocs no està configurat com a "Amaga els jocs sense elements intercanviables"
+- Una biblioteca de jocs específica està habilitada a la configuració
 
-Если вы проверили все это, но ваша игра по-прежнему не отображается, возможно, это баг. Мы будем благодарны, если вы сообщите об этой проблеме в нашем репозитории GitHub, чтобы мы могли исправить ее и в будущем лучше распознавать ваши игры.</value>
+Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi un error. Us agrairíem que informéssiu del problema al nostre repositori de GitHub perquè puguem solucionar-ho i que els vostres jocs es detectin millor en el futur.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
-    <value>Примечание по ручному добавлению игр</value>
+    <value>Nota per afegir jocs manualment</value>
   </data>
   <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
-    <value>Путь установки "{0}" уже существует и не может быть добавлен повторно.</value>
+    <value>La ruta d'instal·lació "{0}" ja existeix i no es pot tornar a afegir.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
-    <value>Выбрать папку игры</value>
+    <value>Selecciona la carpeta del joc</value>
   </data>
   <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
-    <value>Добавление директории верхнего уровня не поддерживается. Пожалуйста, добавьте корневую директорию вашей игры.</value>
+    <value>No es permet afegir un directori de nivell superior. Si us plau, afegiu l'arrel del directori del joc.</value>
   </data>
   <data name="GamesPage_NewDlls" xml:space="preserve">
-    <value>Новые DLL</value>
-  </data>
-  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
-    <value>Создать новую заявку на GitHub</value>
-  </data>
-  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
-    <value>При загрузке ваших игр были обнаружены новые DLL, которые отсутствуют в списке DLSS Swapper.</value>
-  </data>
-  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
-    <value>(требуется учетная запись GitHub)</value>
-  </data>
-  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
-    <value>Если кнопка не работает, попробуйте здесь,</value>
-  </data>
-  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
-    <value>Шаг 4: Отправить свою заявку</value>
-  </data>
-  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
-    <value>Шаг 1: Создать новую заявку</value>
-  </data>
-  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
-    <value>Шаг 3: Скопировать текст</value>
-  </data>
-  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
-    <value>Шаг 2: Скопировать заголовок</value>
-  </data>
-  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
-    <value>Благодарим за поддержку!</value>
-  </data>
-  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
-    <value>Вам не нужно отправлять DLL. Мы найдем их на основе предоставленной информации.</value>
+    <value>Noves DLL</value>
   </data>
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Обнаружены новые DLL</value>
+    <value>S'han trobat noves DLL</value>
+  </data>
+  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
+    <value>Crea una nova incidència de GitHub</value>
+  </data>
+  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
+    <value>Mentre carregaves els jocs, s'han descobert algunes DLL noves que no es troben al manifest de l'intercanviador de DLSS.</value>
+  </data>
+  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
+    <value>(Cal un compte de GitHub)</value>
+  </data>
+  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
+    <value>Si el botó no funciona, prova aquí.</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
+    <value>Pas 4: Enviar el vostre problema</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
+    <value>Pas 1: Crear un problema nou</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
+    <value>Pas 3: Copiar el cos</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
+    <value>Pas 2: Copiar el títol</value>
+  </data>
+  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
+    <value>Gràcies per ajudar!</value>
+  </data>
+  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+    <value>No cal que envieu les DLL. Les localitzarem en funció de la informació proporcionada.</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
-    <value>Игры</value>
+    <value>Games</value>
   </data>
   <data name="GamesPage_ViewType" xml:space="preserve">
-    <value>Тип вида</value>
+    <value>Tipus de vista</value>
   </data>
   <data name="GamesPage_ViewType_GridView" xml:space="preserve">
-    <value>Вид таблицей</value>
+    <value>Vista de quadrícula</value>
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
-    <value>Вид списком</value>
+    <value>Vista de llista</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Esteu segur que voleu eliminar la imatge de la portada personalitzada?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Joc actualment en processament</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Voleu treure la portada personalitzada?</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>No s'ha pogut deserialitzar GOGCatalogResponse per a l'URL, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>No s'ha pogut deserialitzar GOGEmbedFilteredResponse per a l'URL {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>No s'ha trobat cap GOGEmbedFilteredProducts per a l'URL {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>No s'ha trobat cap GOGCatalogProduct per a l'URL {0}</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>No s'ha pogut detectar la clau d'instal·lació d'Ubisoft Connect.</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Biblioteca de jocs desconeguda {0} en configurar l'ID</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
-    <value>Это приложение запущено с правами администратора.</value>
+    <value>Aquesta aplicació s'està executant amb privilegis d'administrador.</value>
   </data>
   <data name="General_Apply" xml:space="preserve">
-    <value>Применить</value>
+    <value>Aplica</value>
   </data>
   <data name="General_Cancel" xml:space="preserve">
-    <value>Отменить</value>
+    <value>Cancel·la</value>
   </data>
   <data name="General_Close" xml:space="preserve">
-    <value>Закрыть</value>
+    <value>Tanca</value>
   </data>
   <data name="General_Copy" xml:space="preserve">
-    <value>Копировать</value>
+    <value>Copia</value>
   </data>
   <data name="General_Delete" xml:space="preserve">
-    <value>Удалить</value>
+    <value>Suprimeix</value>
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
-    <value>Не показывать больше</value>
+    <value>No tornis a mostrar</value>
   </data>
   <data name="General_Error" xml:space="preserve">
-    <value>Ошибка</value>
+    <value>Error</value>
   </data>
   <data name="General_ErrorMessage" xml:space="preserve">
-    <value>Сообщение об ошибке</value>
+    <value>Missatge d'error</value>
   </data>
   <data name="General_Export" xml:space="preserve">
-    <value>Экспортировать</value>
+    <value>Exporta</value>
   </data>
   <data name="General_ExportAll" xml:space="preserve">
-    <value>Экспортировать все</value>
+    <value>Exportat tot</value>
   </data>
   <data name="General_Failed" xml:space="preserve">
-    <value>Сбой</value>
+    <value>Fallat</value>
   </data>
   <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
-    <value>Эта функция не поддерживается, если вы запускаете приложение от имени администратора.</value>
+    <value>Aquesta funció no és compatible si executeu l'aplicació com a administrador.</value>
   </data>
   <data name="General_Filter" xml:space="preserve">
-    <value>Фильтр</value>
+    <value>Filtre</value>
   </data>
   <data name="General_Help" xml:space="preserve">
-    <value>Помощь</value>
+    <value>Ajuda</value>
   </data>
   <data name="General_Import" xml:space="preserve">
-    <value>Импортировать</value>
+    <value>Importa</value>
   </data>
   <data name="General_Load" xml:space="preserve">
-    <value>Загрузить</value>
+    <value>Carrega</value>
   </data>
   <data name="General_Loading" xml:space="preserve">
-    <value>Загрузка</value>
+    <value>Carregant</value>
   </data>
   <data name="General_Name" xml:space="preserve">
-    <value>Наименование</value>
+    <value>Nom</value>
   </data>
   <data name="General_No" xml:space="preserve">
-    <value>Нет</value>
+    <value>No</value>
   </data>
   <data name="General_None" xml:space="preserve">
-    <value>Ничего</value>
+    <value>Cap</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
-    <value>Не поддерживается</value>
+    <value>No compatible</value>
   </data>
   <data name="General_Okay" xml:space="preserve">
-    <value>Ок</value>
+    <value>D'acord</value>
   </data>
   <data name="General_Oops" xml:space="preserve">
-    <value>Упс</value>
+    <value>Ups</value>
   </data>
   <data name="General_OpenFolder" xml:space="preserve">
-    <value>Открыть папку</value>
+    <value>Obre la carpeta</value>
   </data>
   <data name="General_Optional" xml:space="preserve">
-    <value>(необязательно)</value>
+    <value>(opcional)</value>
   </data>
   <data name="General_Options" xml:space="preserve">
-    <value>Опции</value>
+    <value>Opcions</value>
   </data>
   <data name="General_Publish" xml:space="preserve">
-    <value>Oпубликовать</value>
+    <value>Publica</value>
   </data>
   <data name="General_Refresh" xml:space="preserve">
-    <value>Обновить</value>
+    <value>Actualitzar</value>
   </data>
   <data name="General_Reload" xml:space="preserve">
-    <value>Перезагрузить</value>
+    <value>Torna a carregar</value>
   </data>
   <data name="General_Remove" xml:space="preserve">
-    <value>Удалить</value>
+    <value>Elimina</value>
   </data>
   <data name="General_ReportIssue" xml:space="preserve">
-    <value>Отправить сообщение</value>
+    <value>Informar d'un problema</value>
   </data>
   <data name="General_Save" xml:space="preserve">
-    <value>Сохранить</value>
+    <value>Desa</value>
   </data>
   <data name="General_Search" xml:space="preserve">
-    <value>Поиск</value>
+    <value>Cerca</value>
   </data>
   <data name="General_Sorry" xml:space="preserve">
-    <value>Простите</value>
+    <value>Perdó</value>
   </data>
   <data name="General_Success" xml:space="preserve">
-    <value>Успешно</value>
+    <value>Èxit</value>
   </data>
   <data name="General_Swap" xml:space="preserve">
-    <value>Заменить</value>
+    <value>Intercanvia</value>
   </data>
   <data name="General_Unknown" xml:space="preserve">
-    <value>Неизвестно</value>
+    <value>Desconegut</value>
   </data>
   <data name="General_Update" xml:space="preserve">
-    <value>Обновление</value>
+    <value>Actualitza</value>
   </data>
   <data name="General_Version" xml:space="preserve">
-    <value>Версия</value>
+    <value>Versió</value>
   </data>
   <data name="General_Warning" xml:space="preserve">
-    <value>Предупреждение</value>
+    <value>Avís</value>
   </data>
   <data name="General_Yes" xml:space="preserve">
-    <value>Да</value>
+    <value>Sí</value>
   </data>
   <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Не удалось загрузить данные о релизе GitHub.</value>
+    <value>No s'han pogut carregar les dades de la versió de GitHub.</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
-    <value>В настоящее время у вас установлено {0}.</value>
+    <value>Actualment teniu {0} instal·lat.</value>
   </data>
   <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
-    <value>DLSS Swapper был обновлен</value>
+    <value>DLSS Swapper s'acaba d'actualitzar</value>
   </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
-    <value>Доступно обновление</value>
+    <value>Actualització disponible</value>
   </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
-    <value>Уже загружено.</value>
+    <value>Ja s'ha descarregat.</value>
   </data>
   <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
-    <value>Не удалось загрузить импортированные DLL</value>
+    <value>No s'han pogut carregar les DLL importades</value>
   </data>
   <data name="LibraryPage_CouldntDownload" xml:space="preserve">
-    <value>В данный момент загрузка невозможна.</value>
+    <value>No s'ha pogut descarregar en aquest moment.</value>
   </data>
   <data name="LibraryPage_CouldntExportDll" xml:space="preserve">
-    <value>Не удалось экспортировать DLL.</value>
+    <value>No s'han pogut exportar les DLL.</value>
   </data>
   <data name="LibraryPage_DeleteDll" xml:space="preserve">
-    <value>Удалить DLL</value>
+    <value>Suprimeix la DLL</value>
   </data>
   <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
-    <value>Удалить {0} v{1}?</value>
+    <value>Voleu suprimir {0} v{1}?</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
-    <value>Размер загружаемого файла</value>
+    <value>Mida del fitxer de descàrrega</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
-    <value>Описание файла</value>
+    <value>Descripció del fitxer</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
-    <value>Размер файла</value>
+    <value>Mida del fitxer</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
-    <value>Хеш</value>
+    <value>Hash</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
-    <value>Внутреннее название</value>
+    <value>Nom intern</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
-    <value>Внутреннее название Экстра</value>
+    <value>Nom intern addicional</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
-    <value>Метка</value>
+    <value>Etiqueta</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
-    <value>Запущено {0} новых загрузок.</value>
+    <value>S'han iniciat {0} noves descàrregues.</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
-    <value>Скачивание началось</value>
+    <value>Descàrregues iniciades</value>
   </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
-    <value>Экспортированные DLL:</value>
+    <value>DLL exportades:</value>
   </data>
   <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
-    <value>Экспортировано {0} DLL.</value>
+    <value>S'han exportat {0} DLL.</value>
   </data>
   <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
-    <value>Экспортированная DLL {0}.</value>
+    <value>DLL exportada {0}.</value>
   </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
-    <value>Файл не найден.</value>
+    <value>No s'ha trobat el fitxer.</value>
   </data>
   <data name="LibraryPage_Finished" xml:space="preserve">
-    <value>Готово</value>
+    <value>Finalitzat</value>
   </data>
   <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
-    <value>Импортировано как существующая запись DLL.</value>
+    <value>Importat com a registre DLL existent.</value>
   </data>
   <data name="LibraryPage_Importing" xml:space="preserve">
-    <value>Импорт</value>
+    <value>S'està important</value>
   </data>
   <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
-    <value>Замена dll-файлов на вашем компьютере может быть опасной.
+    <value>Substituir fitxers DLL a l'ordinador pot ser perillós.
 
-Вставка вредоносного dll-файла в игру так же опасна, как запуск файла Linking_park_-_nUmB_mp3.exe, который вы только что скачали из LimeWire.
+Posar un fitxer DLL maliciós en un joc és tan dolent com executar Linking_park_-_nUmB_mp3.exe que acabes de descarregar de LimeWire.
 
-Импортируйте dll только из надежных источников.</value>
+Només importa fitxers DLL de fonts de confiança.</value>
   </data>
   <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
-    <value>Не найдено DLL для экспорта.</value>
+    <value>No DLLs found for export.</value>
   </data>
   <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
-    <value>У вас нет записей DLL для экспорта.</value>
+    <value>No teniu cap registre DLL per exportar.</value>
   </data>
   <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
-    <value>Новых DLL для загрузки не было.</value>
+    <value>No hi havia noves DLL per descarregar.</value>
   </data>
   <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
-    <value>Нет новых DLL</value>
+    <value>No hi ha noves DLL</value>
   </data>
   <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
-    <value>Обработанные DLL:</value>
+    <value>DLL processades:</value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
-    <value>Библиотека</value>
+    <value>Biblioteca</value>
   </data>
   <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
-    <value>Невозможно удалить запись {0}.</value>
+    <value>No s'ha pogut suprimir el registre {0}.</value>
   </data>
   <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
-    <value>Невозможно обновить записи DLL.</value>
+    <value>No s'han pogut actualitzar els registres DLL.</value>
   </data>
   <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
-    <value>Архив не содержит никаких dll.</value>
+    <value>El zip no contenia cap DLL.</value>
   </data>
   <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
-    <value>Попытка обновления</value>
+    <value>Intentant actualitzar</value>
   </data>
   <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
-    <value>DLSS Swapper не смог загрузить свой метафайл. Теперь он будет закрыт.</value>
+    <value>El DLSS Swapper no ha pogut carregar el seu fitxer de manifest. Ara es tancarà.</value>
   </data>
   <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
-    <value>DLSS Swapper должен закрыться</value>
+    <value>El DLSS Swapper s'ha de tancar</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
-    <value>Проблемы GitHub</value>
+    <value>Incidències de GitHub</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
-    <value>Мы не смогли загрузить файл manifest.json с вашего компьютера или из интернета.
+    <value>No hem pogut carregar manifest.json des del vostre ordinador ni des d'Internet.
 
-Если эта проблема повторяется, пожалуйста, отправьте отчет в нашу систему отслеживания проблем на GitHub.</value>
+Si això continua passant, envieu un informe al nostre rastrejador d'incidències a GitHub.</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
-    <value>Обновление метаданных</value>
+    <value>Actualitzar el manifest</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>Хотя замена версий DLSS не считается читерством, некоторые античит-системы могут не одобрить это, если файлы в вашем игровом каталоге не соответствуют тем, с которыми была распространена игра.
+    <value>Tot i que l'intercanvi de versions de DLSS no s'ha de considerar una trampa, és possible que alguns sistemes antitrampa no estiguin contents amb tu si els fitxers del directori del joc no són els que s'hi van distribuir.
 
-По этой причине мы рекомендуем проявлять осторожность при игре в многопользовательских играх.</value>
+Per això, recomanem anar amb compte amb les partides multijugador.</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
-    <value>Примечание для многопользовательских игр</value>
+    <value>Nota per a jocs multijugador</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
-    <value>Все еще не работает</value>
+    <value>Encara no funciona</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
-    <value>Работает!</value>
+    <value>Funciona!</value>
   </data>
   <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
-    <value>Тест браузера</value>
+    <value>Prova del navegador</value>
   </data>
   <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
-    <value>Отменить текущий тест</value>
+    <value>Cancel·la la prova actual</value>
   </data>
   <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
-    <value>Скопировать результаты теста</value>
+    <value>Copia els resultats de la prova</value>
   </data>
   <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
-    <value>Создать отчет об ошибке</value>
+    <value>Crea un informe d'errors</value>
   </data>
   <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
-    <value>Тест пользовательского агента</value>
+    <value>Prova d'agent d'usuari personalitzada</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
-    <value>Загрузка DLL DLSS Swapper в DLSS Swapper с помощью пользовательского агента</value>
+    <value>Descarregant la DLL del DLSS Swapper dins de DLSS Swapper amb un agent d'usuari personalitzat</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
-    <value>Загрузка DLSS DLL с зеркала UploadThing</value>
+    <value>Descarregant la DLL del DLSS des del mirall d'UploadThing</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
-    <value>Доступ к google.com из DLSS Swapper (тестирует общее подключение к интернету)</value>
+    <value>Accedint a google.com des de DLSS Swapper (prova de la connectivitat general a Internet)</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
-    <value>Доступ к bing.com из DLSS Swapper (тестирует общее подключение к интернету)</value>
+    <value>Accedint a bing.com des de DLSS Swapper (prova de la connectivitat general a Internet)</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
-    <value>Загрузка DLL DLSS Swapper в DLSS Swapper</value>
+    <value>Descarregant la DLL del DLSS Swapper dins de DLSS Swapper</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
-    <value>Загрузка DLL DLSS Swapper из браузера</value>
+    <value>Descarregant la DLL del DLSS Swapper des del navegador</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
-    <value>Загрузка обложки игры из Steam</value>
+    <value>Descarregant la portada del joc des de Steam</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
-    <value>Загрузка обложки игры из Epic Game Store</value>
+    <value>Descarregant la portada del joc de l'Epic Game Store</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
-    <value>Загрузка обложки игры с файлового сервера DLSS Swapper</value>
+    <value>Descarregant la portada del joc des del servidor de fitxers DLSS Swapper</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
-    <value>Загрузка обложки игры с альтернативного файлового сервера DLSS Swapper</value>
+    <value>Descarregant la portada del joc des d'un servidor de fitxers DLSS Swapper alternatiu</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
-    <value>DNS-поиск файлового сервера DLSS Swapper</value>
+    <value>Cerca DNS del servidor de fitxers DLSS Swapper</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
-    <value>Открыть в браузере</value>
+    <value>Obre al navegador</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
-    <value>Нажмите кнопку «Открыть в браузере» или скопируйте и вставьте следующую ссылку в браузер. Грузит ли он файл в ваш браузер?</value>
+    <value>Feu clic al botó obrir al navegador o copieu i enganxeu l'enllaç següent al vostre navegador. Es descarrega algun fitxer al vostre navegador?</value>
   </data>
   <data name="NetworkTesterPage_Results" xml:space="preserve">
-    <value>Результаты</value>
+    <value>Resultats</value>
   </data>
   <data name="NetworkTesterPage_RunTest" xml:space="preserve">
-    <value>Запустить тест</value>
+    <value>Executa la prova</value>
   </data>
   <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
-    <value>Используйте предоставленный пользовательский агент или введите свой по вашему выбору.</value>
+    <value>Feu servir l'agent d'usuari proporcionat o introduïu-ne un de personalitzat que trieu.</value>
   </data>
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
-    <value>Сетевой тестер</value>
+    <value>Provador de xarxa</value>
   </data>
   <data name="SettingsPage_About" xml:space="preserve">
-    <value>О нас</value>
+    <value>Sobre</value>
   </data>
   <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
-    <value>Добавить игнорируемый путь</value>
+    <value>Afegeix una ruta ignorada</value>
   </data>
   <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
-    <value>Разрешить отладку DLL</value>
+    <value>Permet DLL de depuració</value>
   </data>
   <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
-    <value>Иногда SDK выпускают отладочные DLL, которые позволяют отображать на экране дополнительную информацию.</value>
+    <value>Els SDK de vegades publiquen DLL de depuració que permeten mostrar informació addicional en pantalla.</value>
   </data>
   <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
-    <value>DLL проверяются на предмет доверия в Windows путем проверки подписи перед тем, как быть перемещенными в папку игры. Если DLL не проходит проверку подписи, она не будет использоваться. Рекомендуется отключить эту функцию.</value>
+    <value>Es comprova si les DLL són de confiança a Windows validant la signatura abans de canviar-les a una carpeta de joc. Si una DLL falla la validació de la signatura, no s'utilitzarà. Es recomana mantenir-ho desactivat.</value>
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
-    <value>Это применимо только к выбору DLL, а не к странице библиотеки.</value>
+    <value>Això només s'aplica al selector de DLL, no a la pàgina de la biblioteca.</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
-    <value>Не удалось открыть ваш файл журнала напрямую из DLSS Swapper. Попробуйте открыть его вручную.</value>
+    <value>No s'ha pogut obrir el fitxer de registre directament des de DLSS Swapper. Si us plau, proveu d'obrir-lo manualment.</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
-    <value>Вы уверены, что хотите удалить игнорируемый путь {0}?</value>
+    <value>Esteu segur que voleu suprimir el camí ignorat {0}?</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
-    <value>Удалить игнорируемый путь</value>
+    <value>Suprimeix la ruta ignorada</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
-    <value>Параметры разработчика DLSS</value>
+    <value>Opcions de desenvolupador de DLSS</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
-    <value>Разрешить логирование в окне консоли</value>
+    <value>Habilita el registre a la finestra de la consola</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
-    <value>Разрешить логирование в файл</value>
+    <value>Habilita el registre al fitxer</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
-    <value>Включено для всех DLSS DLL</value>
+    <value>Activat per a totes les DLL de DLSS</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
-    <value>Включено только для отладочных библиотек DLL DLSS</value>
+    <value>Només habilitat per a DLL de DLSS de depuració</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
-    <value>Показать индикатор на экране</value>
+    <value>Mostra l'indicador en pantalla</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
-    <value>Подробное логирование</value>
+    <value>Registre detallat</value>
   </data>
   <data name="SettingsPage_DLSSOptions" xml:space="preserve">
-    <value>Параметры DLSS</value>
+    <value>Opcions de DLSS</value>
   </data>
   <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
-    <value>Глобальный пресет</value>
+    <value>Preset global</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
-    <value>Библиотеки игр</value>
+    <value>Biblioteques de jocs</value>
   </data>
   <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
-    <value>Общее руководство по устранению неполадок</value>
+    <value>Guia general de resolució de problemes</value>
   </data>
   <data name="SettingsPage_GiveFeedback" xml:space="preserve">
-    <value>Оставить отзыв</value>
+    <value>Donar comentaris</value>
   </data>
   <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
-    <value>Вы можете предложить функцию или сообщить о проблеме по DLSS Swapper</value>
+    <value>Podeu suggerir una funció o informar d'un problema al DLSS Swapper</value>
   </data>
   <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
-    <value>Игнорируемые пути</value>
+    <value>Rutes ignorades</value>
   </data>
   <data name="SettingsPage_Language" xml:space="preserve">
-    <value>Язык</value>
+    <value>Llengua</value>
   </data>
   <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
-    <value>{0} отключен</value>
+    <value>{0} desactivat</value>
   </data>
   <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
-    <value>{0} включен</value>
+    <value>{0} activat</value>
   </data>
   <data name="SettingsPage_Logging" xml:space="preserve">
-    <value>Логирование</value>
+    <value>Registre</value>
   </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
-    <value>Новых обновлений нет.</value>
+    <value>No hi ha noves actualitzacions disponibles.</value>
   </data>
   <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
-    <value>Благодарности</value>
+    <value>Agraïments</value>
   </data>
   <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
-    <value>Диагностика</value>
+    <value>Diagnòstics</value>
   </data>
   <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
-    <value>Сетевой тестер</value>
+    <value>Provador de xarxa</value>
   </data>
   <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
-    <value>Открыть панель инструментов переводчика</value>
+    <value>Caixa d'eines de traducció oberta</value>
   </data>
   <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
-    <value>Путь {0} уже проигнорирован.</value>
+    <value>El camí {0} ja s'ha ignorat.</value>
   </data>
   <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
-    <value>Разрешить непроверенные</value>
+    <value>Permet fonts no fiables</value>
   </data>
   <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
-    <value>Проверить наличие обновлений</value>
+    <value>Comprova si hi ha actualitzacions</value>
   </data>
   <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
-    <value>Показывать только загруженные DLL</value>
+    <value>Mostra només les DLL descarregades</value>
   </data>
   <data name="SettingsPage_ThemeDark" xml:space="preserve">
-    <value>Темный</value>
+    <value>Fosc</value>
   </data>
   <data name="SettingsPage_ThemeLight" xml:space="preserve">
-    <value>Светлый</value>
+    <value>Clar</value>
   </data>
   <data name="SettingsPage_ThemeMode" xml:space="preserve">
-    <value>Тематический режим</value>
+    <value>Mode del tema</value>
   </data>
   <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
-    <value>Использовать системные настройки</value>
+    <value>Utilitza la configuració del sistema</value>
   </data>
   <data name="SettingsPage_Title" xml:space="preserve">
-    <value>Настройки</value>
+    <value>Configuració</value>
   </data>
   <data name="SettingsPage_Troubleshooting" xml:space="preserve">
-    <value>Устранение неполадок</value>
+    <value>Resolució de problemes</value>
   </data>
   <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
-    <value>Ваш текущий файл лога:</value>
+    <value>El vostre fitxer de registre actual és</value>
   </data>
   <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
-    <value>Вы не можете использовать панель инструментов переводчика, пока она запущена под администратором. Пожалуйста, перезапустите приложение.</value>
+    <value>No podeu utilitzar l'eina de traducció mentre s'executa com a administrador. Reinicieu l'aplicació.</value>
   </data>
   <data name="TranslationToolboxPage_Comment" xml:space="preserve">
-    <value>Комментарий</value>
+    <value>Comentari</value>
   </data>
   <data name="TranslationToolboxPage_ImportAsTranslation" xml:space="preserve">
-    <value>Импортировать язык как перевод</value>
+    <value>Importa l'idioma com a traducció</value>
   </data>
   <data name="TranslationToolboxPage_Key" xml:space="preserve">
-    <value>Ключ</value>
+    <value>Clau</value>
   </data>
   <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
-    <value>Загрузить существующий</value>
+    <value>Carrega existent</value>
   </data>
   <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
-    <value>Не удалось загрузить перевод. Пожалуйста, смотрите журнал ошибок для получения дополнительной информации.</value>
+    <value>No s'ha pogut carregar la traducció. Consulteu el registre d'errors per obtenir més informació.</value>
   </data>
   <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
-    <value>Новый перевод</value>
+    <value>Nova traducció</value>
   </data>
   <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
-    <value>Данных по переводу для публикации не найдено.</value>
+    <value>No s'han trobat dades de traducció per publicar.</value>
   </data>
   <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
-    <value>Не найдено данных перевода для сохранения.</value>
+    <value>No s'han trobat dades de traducció per desar.</value>
   </data>
   <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
-    <value>Недопустимый файл перевода DLSS Swapper.</value>
+    <value>No s'han trobat dades de traducció per desar.</value>
   </data>
   <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
-    <value>Не удалось опубликовать перевод. Пожалуйста, смотрите журнал ошибок для получения дополнительной информации.</value>
+    <value>No s'ha pogut publicar la traducció. Consulteu el registre d'errors per obtenir més informació.</value>
   </data>
   <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
-    <value>Перезагрузить приложение</value>
+    <value>Torna a carregar l'aplicació</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
-    <value>Сбросить и продолжить</value>
+    <value>Restableix i continua</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
-    <value>Это сбросит ваш текущий прогресс перевода. Вы уверены, что хотите продолжить?</value>
+    <value>Això restablirà el progrés actual de la traducció. Esteu segur que voleu continuar?</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
-    <value>Сбросить прогресс и продолжить?</value>
+    <value>Voleu restablir el progrés i continuar?</value>
   </data>
   <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
-    <value>Не удалось сохранить перевод. Пожалуйста, смотрите журнал ошибок для получения дополнительной информации.</value>
+    <value>No s'ha pogut desar la traducció. Consulteu el registre d'errors per obtenir més informació.</value>
   </data>
   <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
-    <value>Выберите язык для загрузки</value>
+    <value>Selecciona l'idioma per carregar</value>
   </data>
   <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
-    <value>Исходный язык</value>
+    <value>Idioma d'origen</value>
   </data>
   <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
-    <value>Источник перевода</value>
+    <value>Traducció original</value>
   </data>
   <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
-    <value>Руководство перевода</value>
+    <value>Guia de traducció</value>
   </data>
   <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
-    <value>Ваш перевод создан. Пожалуйста, ознакомьтесь с руководством по переводу DLSS Swapper, чтобы узнать, что делать дальше с {0}.</value>
+    <value>La vostra traducció s'ha creat. Consulteu la guia de traducció de DLSS Swapper per saber què cal fer a continuació amb {0}.</value>
   </data>
   <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
-    <value>Прогресс перевода</value>
+    <value>Progrés de la traducció</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
-    <value>Закрыть без сохранения</value>
+    <value>Tanca sense desar</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
-    <value>У вас, возможно, есть несохраненные изменения в переводе. Если вы закроете это окно, они будут потеряны.</value>
+    <value>És possible que tingueu canvis de traducció no desats. Si tanqueu aquesta finestra, es perdran.</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
-    <value>Несохраненные изменения в переводе</value>
+    <value>Canvis de traducció no desats</value>
   </data>
   <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
-    <value>Панель инструментов переводчика</value>
+    <value>Caixa d'eines de traducció</value>
   </data>
 </root>

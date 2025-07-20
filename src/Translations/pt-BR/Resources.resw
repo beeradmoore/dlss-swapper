@@ -70,7 +70,7 @@
     <value>DLL não é confiável pelo Windows.</value>
   </data>
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
-    <value>Não foi possível baixar a DLL {0}, tente novamente mais tarde ou verifique os logs para entender o motivo da falha.</value>
+    <value>Não foi possível baixar a DLL do {0}, tente novamente mais tarde ou verifique os logs para entender o motivo da falha.</value>
   </data>
   <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
     <value>Não foi possível baixar o arquivo.</value>
@@ -138,6 +138,36 @@
   <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>Biblioteca de jogos desconhecida {0} ao definir o ID</value>
   </data>
+  <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
+    <value>Asset Type</value>
+  </data>
+  <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
+    <value>Event Time</value>
+  </data>
+  <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
+    <value>Event Type</value>
+  </data>
+  <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
+    <value>Nenhum histórico encontrado.</value>
+  </data>
+  <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
+    <value>Versão</value>
+  </data>
+  <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
+    <value>Backup de DLL removido</value>
+  </data>
+  <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
+    <value>DLL foi alterada externamente</value>
+  </data>
+  <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
+    <value>DLL detectada</value>
+  </data>
+  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
+    <value>Redefinição de DLL</value>
+  </data>
+  <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
+    <value>DLL trocada</value>
+  </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>Não foi possível carregar a biblioteca de jogos {0}</value>
   </data>
@@ -165,14 +195,39 @@
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
     <value>Aguarde a conclusão do download antes de trocar</value>
   </data>
+  <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
+    <value>Informações da predefinição</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
+    <value>As predefinições do DLSS estão contidas em arquivos DLL do DLSS, contidos no diretório de instalação do seu jogo. Diferentes DLLs do DLSS têm predefinições diferentes. Por exemplo, a predefinição K só foi introduzida com o DLSS v310.2. Portanto, se você usar o DLSS v3.7 e definir a predefinição como K, ele não usará a predefinição K e, em vez disso, retornará para a predefinição que o jogo escolher usar.
+
+O mesmo se aplica às predefinições globais. Se você selecionar a predefinição K, mas seu jogo usar o DLSS v3.7, você não usará a predefinição K e, em vez disso, o jogo retornará para a predefinição padrão.
+
+Para verificar qual predefinição está sendo usada, ative o indicador DLSS na tela.</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
+    <value>Informações do indicador na tela</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
+    <value>Informações da predefinição DLSS</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
+    <value>Definir uma predefinição DLSS não garante que a predefinição seja usada.</value>
+  </data>
   <data name="GamePage_Favorited" xml:space="preserve">
     <value>Favoritado</value>
+  </data>
+  <data name="GamePage_History" xml:space="preserve">
+    <value>Histórico</value>
   </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
     <value>Caminho de instalação</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
     <value>"{0}" é um tipo de arquivo inválido</value>
+  </data>
+  <data name="GamePage_Launch" xml:space="preserve">
+    <value>Iniciar</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
     <value>Este título não foi adicionado manualmente e não pode ser removido.</value>
@@ -187,7 +242,7 @@
     <value>Múltiplas DLLs encontradas</value>
   </data>
   <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
-    <value>Múltiplas DLLs {0} encontradas</value>
+    <value>Múltiplas DLLs do {0} encontradas</value>
   </data>
   <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
     <value>Por favor vá até a página da biblioteca para baixar novas DLLs.</value>
@@ -214,10 +269,13 @@
     <value>Restaurar DLL original</value>
   </data>
   <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
-    <value>Selecionar versão {0}</value>
+    <value>Selecionar versão do {0}</value>
   </data>
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
     <value>storageFile está nulo</value>
+  </data>
+  <data name="GamePage_UnableToChangePreset" xml:space="preserve">
+    <value>Não foi possível alterar a predefinição. Consulte o seu registro (log) de erros para obter mais informações.</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
     <value>Você só pode arrastar um único arquivo para a capa</value>
@@ -380,6 +438,9 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
   <data name="General_None" xml:space="preserve">
     <value>Nenhum</value>
   </data>
+  <data name="General_NotSupported" xml:space="preserve">
+    <value>Não suportado</value>
+  </data>
   <data name="General_Okay" xml:space="preserve">
     <value>Ok</value>
   </data>
@@ -401,6 +462,9 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
   <data name="General_Refresh" xml:space="preserve">
     <value>Atualizar</value>
   </data>
+  <data name="General_Reload" xml:space="preserve">
+    <value>Recarregar</value>
+  </data>
   <data name="General_Remove" xml:space="preserve">
     <value>Remover</value>
   </data>
@@ -421,6 +485,9 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
   </data>
   <data name="General_Swap" xml:space="preserve">
     <value>Trocar</value>
+  </data>
+  <data name="General_Unknown" xml:space="preserve">
+    <value>Desconhecido</value>
   </data>
   <data name="General_Update" xml:space="preserve">
     <value>Atualizar</value>
@@ -475,6 +542,12 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
   </data>
   <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
     <value>Hash</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
+    <value>Internal Name</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
+    <value>Internal Name Extra</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Rótulo</value>
@@ -687,6 +760,12 @@ Recomendamos cautela ao usar isso em jogos multiplayer.</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>Log detalhado</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>Opções de DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>Predefinição global</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>Bibliotecas de jogos</value>

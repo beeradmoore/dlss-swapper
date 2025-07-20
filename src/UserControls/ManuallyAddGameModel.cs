@@ -37,6 +37,6 @@ internal partial class ManuallyAddGameModel : ObservableObject
             return;
         }
 
-        await _game.PromptToBrowseCustomCover();
+        _game.PromptToBrowseCustomCover();
     }
 }

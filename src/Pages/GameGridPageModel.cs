@@ -12,7 +12,6 @@ using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
-using Windows.Storage.Pickers;
 using Windows.System;
 
 namespace DLSS_Swapper.Pages;

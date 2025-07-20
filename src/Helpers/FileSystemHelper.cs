@@ -81,6 +81,21 @@ internal class FileSystemHelper
 
     internal static string OpenFile(nint hWnd, IReadOnlyList<FileFilter>? filters, string? defaultPath = null, string? defaultExtension = null, string? okButtonLabel = null)
     {
+        var openedFile = OpenFileInternal(hWnd, false, filters, defaultPath, defaultExtension, okButtonLabel);
+        if (openedFile.Count == 1)
+        {
+            return openedFile[0];
+        }
+        return string.Empty;
+    }
+
+    internal static List<string> OpenMultipleFiles(nint hWnd, IReadOnlyList<FileFilter>? filters, string? defaultPath = null, string? defaultExtension = null, string? okButtonLabel = null)
+    {
+        return OpenFileInternal(hWnd, true, filters, defaultPath, defaultExtension, okButtonLabel);
+    }
+
+    static List<string> OpenFileInternal(nint hWnd, bool pickMultiple, IReadOnlyList<FileFilter>? filters, string? defaultPath = null, string? defaultExtension = null, string? okButtonLabel = null)
+    {
         try
         {
             var hResult = PInvoke.CoCreateInstance<IFileOpenDialog>(typeof(FileOpenDialog).GUID, null, CLSCTX.CLSCTX_INPROC_SERVER, out var fileOpenDialog);
@@ -143,22 +158,66 @@ internal class FileSystemHelper
                 fileOpenDialog.SetDefaultExtension(defaultExtension);
             }
 
+            if (pickMultiple)
+            {
+                fileOpenDialog.SetOptions(FILEOPENDIALOGOPTIONS.FOS_ALLOWMULTISELECT | FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM);
+            }
+            else
+            {
+                fileOpenDialog.SetOptions(FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM);
+            }
+
             fileOpenDialog.Show(new HWND(hWnd));
 
-            fileOpenDialog.GetResult(out var ppsi);
+            var results = new List<string>();
 
-            unsafe
+            if (pickMultiple)
             {
-                PWSTR filename;
-                ppsi.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, &filename);
-                var pathName = filename.ToString();
-                return pathName;
+                fileOpenDialog.GetResults(out var ppsiArray);
+
+                unsafe
+                {
+                    ppsiArray.GetCount(out uint count);
+                    for (uint i = 0; i < count; ++i)
+                    {
+                        ppsiArray.GetItemAt(i, out var ppsi);
+
+                        if (ppsi is null)
+                        {
+                            throw new Exception("Failed to get result from file open dialog.");
+                        }
+
+                        PWSTR filename;
+                        ppsi.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, &filename);
+                        var pathName = filename.ToString();
+                        results.Add(pathName);
+                    }
+                }
             }
+            else
+            {
+                fileOpenDialog.GetResult(out var ppsi);
+
+                if (ppsi is null)
+                {
+                    throw new Exception("Failed to get result from file open dialog.");
+                }
+
+                unsafe
+                {
+                    PWSTR filename;
+                    ppsi.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, &filename);
+                    var pathName = filename.ToString();
+                    results.Add(pathName);
+                }
+            }
+
+            return results;
         }
         catch (COMException ex) when (ex.HResult == ERROR_CANCELLED)
         {
             // NOOP
-            return string.Empty;
+            return new List<string>();
         }
     }
 

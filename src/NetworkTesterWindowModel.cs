@@ -25,6 +25,8 @@ public partial class NetworkTesterWindowModel : ObservableObject
     readonly string _steamCoverImageTestLink = "https://steamcdn-a.akamaihd.net/steam/apps/870780/library_600x900_2x.jpg";
     readonly string _egsCoverImageTestLink = "https://cdn1.epicgames.com/item/calluna/Control_Portrait_Storefront_1200X1600_1200x1600-456c920cae7a0aa9b36670cd5e1237a1?w=600&h=900&resize=1";
 
+    [ObservableProperty]
+    public partial FlowDirection AppFlowDirection { get; set; } = FlowDirection.LeftToRight;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsRunningTest))]
@@ -126,8 +128,22 @@ public partial class NetworkTesterWindowModel : ObservableObject
     public NetworkTesterWindowModel(NetworkTesterWindow window) : base()
     {
         _weakWindow = new WeakReference<NetworkTesterWindow>(window);
+        
+        // Initialize FlowDirection based on current language
+        UpdateFlowDirection();
+        
+        // Subscribe to language changes
+        LanguageManager.Instance.OnLanguageChanged += UpdateFlowDirection;
 
         AppendTestResults("Init", $"DLSS Swapper version: v{App.CurrentApp.GetVersionString()}");
+    }
+    
+    private void UpdateFlowDirection()
+    {
+        var currentLanguage = Settings.Instance.Language;
+        AppFlowDirection = LanguageManager.IsRightToLeftLanguage(currentLanguage)
+            ? FlowDirection.RightToLeft
+            : FlowDirection.LeftToRight;
     }
 
     public NetworkTesterWindowModelTranslationProperties TranslationProperties { get; } = new NetworkTesterWindowModelTranslationProperties();

@@ -63,7 +63,10 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <Border Grid.Row="0" BorderThickness="0" CornerRadius="4" Width="40" Height="60">
+                            <Border Grid.Row="0" BorderThickness="0" CornerRadius="4" Width="40" Height="60" FlowDirection="LeftToRight">
+                                <Border.RenderTransform>
+                                    <CompositeTransform ScaleX="1" />
+                                </Border.RenderTransform>
                                 <Border.Background>
                                     <ImageBrush Stretch="UniformToFill">
                                         <ImageBrush.ImageSource>
@@ -130,7 +133,10 @@
                             <TextBlock Text="{x:Bind Title}" Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{ThemeResource ButtonForegroundColor}" />
 
                             <!-- Weird, but allows image to strecth centered rather than left align -->
-                            <Border BorderThickness="0">
+                            <Border BorderThickness="0" FlowDirection="LeftToRight">
+                                <Border.RenderTransform>
+                                    <CompositeTransform ScaleX="1" />
+                                </Border.RenderTransform>
                                 <Border.Background>
                                     <ImageBrush Stretch="UniformToFill">
                                         <ImageBrush.ImageSource>

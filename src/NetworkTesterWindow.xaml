@@ -10,7 +10,7 @@
     mc:Ignorable="d"
     Title="{x:Bind ViewModel.TranslationProperties.NetworkTesterWindowText}">
     <ScrollView>
-        <Grid Margin="16" ColumnSpacing="12" RowSpacing="12" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid Margin="16" ColumnSpacing="12" RowSpacing="12" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FlowDirection="{x:Bind ViewModel.AppFlowDirection, Mode=OneWay}">
             <Grid.Resources>
 
                 <Style x:Key="TestNumberTextBlock" TargetType="TextBlock">

@@ -2,23 +2,16 @@
 
 call "%~dp0config.cmd"
 
-REM Delete bin and obj directory
-rmdir /s /q ..\src\bin\publish\installer\
-rmdir /s /q ..\src\obj\
-
 REM create the output folder if it doesn't already exist.
 mkdir Output > NUL 2>&1
 
 echo.
 echo ################################
-echo Compiling app
+echo Zipping app
 echo ################################
 echo.
 
-dotnet publish "%csproj_file%" ^
-	--runtime win-x64 ^
-    --self-contained ^
-    -p:PublishDir=bin\publish\installer\ || goto :error
+pwsh.exe -ExecutionPolicy Bypass -Command Import-Module Microsoft.PowerShell.Archive; Compress-Archive -Force -Path "..\src\bin\publish\portable\*" -DestinationPath "%output_zip%" || goto :error
 
 REM Everything is fine, go to the end of the file.
 goto :end

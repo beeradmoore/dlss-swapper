@@ -5,7 +5,9 @@ REM We only do this in the build_all as to ensure both versions have THE EXACT s
 call ..\update_manifest.cmd || goto :error
 
 call build_Portable.cmd || goto :error
+call package_Portable.cmd || goto :error
 call build_Installer.cmd || goto :error
+call package_Installer.cmd || goto :error
 
 goto :EOF
 

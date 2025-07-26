@@ -2,23 +2,22 @@
 
 call "%~dp0config.cmd"
 
-REM Delete bin and obj directory
-rmdir /s /q ..\src\bin\publish\installer\
-rmdir /s /q ..\src\obj\
-
-REM create the output folder if it doesn't already exist.
-mkdir Output > NUL 2>&1
-
 echo.
 echo ################################
-echo Compiling app
+echo Packaging installer
 echo ################################
 echo.
 
-dotnet publish "%csproj_file%" ^
-	--runtime win-x64 ^
-    --self-contained ^
-    -p:PublishDir=bin\publish\installer\ || goto :error
+:installer 
+DEL NSIS\installer.exe > NUL 2>&1
+DEL NSIS\FileList.nsh > NUL 2>&1
+
+pwsh.exe .\NSIS\create_nsh_file_list.ps1 || goto :error
+
+makensis.exe NSIS\Installer.nsi || goto :error
+ 
+REM Move the installer to the output folder.
+move NSIS\installer.exe "%output_installer%" || goto :error
 
 REM Everything is fine, go to the end of the file.
 goto :end

@@ -11,10 +11,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Setup .NET 9.0.300
+    - name: Setup .NET 9.0
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.300'
+        dotnet-version: '9.0.303'
 
     - name: Display .NET Info
       run: dotnet --info
@@ -44,8 +44,49 @@ jobs:
     - name: Build DLSS Swapper installer
       run: ${{ github.workspace }}\package\build_Installer.cmd
       working-directory: ${{ github.workspace }}\package\
+    
+    - name: Upload unsigned artifacts
+      id: upload-unsigned-artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: pre-signed-packages
+        retention-days: 1
+        path: |
+          ${{ github.workspace }}\src\bin\publish\installer\
+          ${{ github.workspace }}\src\bin\publish\portable\
+        compression-level: 0
+        if-no-files-found: error
 
-    - name: Upload portable build artifacts
+    - name: Sign with SignPath 
+      id: sign-with-signpath
+      uses: signpath/github-action-submit-signing-request@v1.2
+      with:
+        api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
+        organization-id: '9b913506-76ef-4356-b93a-0fe60061013c'
+        project-slug: 'dlss-swapper'
+        signing-policy-slug: 'test-signing'
+        artifact-configuration-slug: 'installer-and-portable-raw-files'
+        github-artifact-id: '${{ steps.upload-unsigned-artifacts.outputs.artifact-id }}'
+        wait-for-completion: true
+        output-artifact-directory: '${{ github.workspace }}\src\bin\signed\'
+
+    - name: Move signed assets into original built position
+      shell: pwsh
+      run: |
+        Remove-Item -LiteralPath "${{ github.workspace }}\src\bin\publish\installer\" -Force -Recurse
+        Remove-Item -LiteralPath "${{ github.workspace }}\src\bin\publish\portable\" -Force -Recurse
+        Move-Item -Path "${{ github.workspace }}\src\bin\signed\installer\"  -Destination "${{ github.workspace }}\src\bin\publish\installer\" 
+        Move-Item -Path "${{ github.workspace }}\src\bin\signed\portable\"  -Destination "${{ github.workspace }}\src\bin\publish\portable\" 
+
+    - name: Package DLSS Swapper portable
+      run: ${{ github.workspace }}\package\package_Portable.cmd
+      working-directory: ${{ github.workspace }}\package\
+
+    - name: Package DLSS Swapper installer
+      run: ${{ github.workspace }}\package\package_Installer.cmd
+      working-directory: ${{ github.workspace }}\package\
+
+    - name: Upload completed signed portable build artifact
       uses: actions/upload-artifact@v4
       with:
         name: DLSS.Swapper-${{ env.VERSION }}-portable
@@ -53,11 +94,39 @@ jobs:
         compression-level: 0
         if-no-files-found: error
 
-    - name: Upload installer build artifacts
+    - name: Upload installer artifact to be signed
+      id: upload-unsigned-installer-artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: DLSS.Swapper-${{ env.VERSION }}-installer
+        name: unsigned-installer-artifacts
+        retention-days: 1
         path: ${{ github.workspace }}\package\Output\DLSS.Swapper-${{ env.VERSION }}-installer.exe
         compression-level: 0
         if-no-files-found: error
-      
+  
+    - name: Sign installer with SignPath 
+      id: sign-installer-with-signpath
+      uses: signpath/github-action-submit-signing-request@v1.2
+      with:
+        api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
+        organization-id: '9b913506-76ef-4356-b93a-0fe60061013c'
+        project-slug: 'dlss-swapper'
+        signing-policy-slug: 'test-signing'
+        artifact-configuration-slug: 'installer'
+        github-artifact-id: '${{ steps.upload-unsigned-installer-artifacts.outputs.artifact-id }}'
+        wait-for-completion: true
+        output-artifact-directory: '${{ github.workspace }}\src\bin\signed_installer\'
+
+    - name: Output signed path
+      shell: pwsh
+      run: |
+        Get-ChildItem -Path "${{ github.workspace }}\src\bin\signed_installer\"
+        tree "${{ github.workspace }}\src\bin\signed_installer\"
+
+    - name: Upload completed signed installer build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: DLSS.Swapper-${{ env.VERSION }}-installer
+        path: ${{ github.workspace }}\src\bin\signed_installer\DLSS.Swapper-${{ env.VERSION }}-installer.exe
+        compression-level: 0
+        if-no-files-found: error

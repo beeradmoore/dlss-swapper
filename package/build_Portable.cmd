@@ -1,13 +1,9 @@
 @echo off
 
-set app_version=1.2.0.3
-set initial_directory=%cd%
-
-set csproj_file=..\src\DLSS Swapper.csproj
-set output_zip=Output\DLSS.Swapper-%app_version%-portable.zip
+call "%~dp0config.cmd"
 
 REM Delete bin and obj directory
-rmdir /s /q ..\src\bin\
+rmdir /s /q ..\src\bin\publish\portable\
 rmdir /s /q ..\src\obj\
 
 REM create the output folder if it doesn't already exist.
@@ -24,15 +20,6 @@ dotnet publish "%csproj_file%" ^
     --self-contained ^
     --configuration Release_Portable ^
     -p:PublishDir=bin\publish\portable\ || goto :error
-
-
-echo.
-echo ################################
-echo Zipping app
-echo ################################
-echo.
-
-pwsh.exe -ExecutionPolicy Bypass -Command Import-Module Microsoft.PowerShell.Archive; Compress-Archive -Force -Path "..\src\bin\publish\portable\*" -DestinationPath "%output_zip%" || goto :error
 
 REM Everything is fine, go to the end of the file.
 goto :end

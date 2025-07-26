@@ -44,20 +44,30 @@ jobs:
     - name: Build DLSS Swapper installer
       run: ${{ github.workspace }}\package\build_Installer.cmd
       working-directory: ${{ github.workspace }}\package\
-
+    
     - name: Upload portable build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: DLSS.Swapper-${{ env.VERSION }}-portable
-        path: ${{ github.workspace }}\package\Output\DLSS.Swapper-${{ env.VERSION }}-portable.zip
+        name: pre-signed-packages
+        path: |
+          ${{ github.workspace }}\src\bin\publish\installer\
+          ${{ github.workspace }}\src\bin\publish\portable\
         compression-level: 0
         if-no-files-found: error
 
-    - name: Upload installer build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: DLSS.Swapper-${{ env.VERSION }}-installer
-        path: ${{ github.workspace }}\package\Output\DLSS.Swapper-${{ env.VERSION }}-installer.exe
-        compression-level: 0
-        if-no-files-found: error
+    #- name: Upload portable build artifacts
+    #  uses: actions/upload-artifact@v4
+    #  with:
+    #    name: DLSS.Swapper-${{ env.VERSION }}-portable
+    #    path: ${{ github.workspace }}\package\Output\DLSS.Swapper-${{ env.VERSION }}-portable.zip
+    #    compression-level: 0
+    #    if-no-files-found: error
+
+    #- name: Upload installer build artifacts
+    #  uses: actions/upload-artifact@v4
+    #  with:
+    #    name: DLSS.Swapper-${{ env.VERSION }}-installer
+    #    path: ${{ github.workspace }}\package\Output\DLSS.Swapper-${{ env.VERSION }}-installer.exe
+    #    compression-level: 0
+    #    if-no-files-found: error
       

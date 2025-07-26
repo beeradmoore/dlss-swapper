@@ -64,6 +64,7 @@ jobs:
         organization-id: '9b913506-76ef-4356-b93a-0fe60061013c'
         project-slug: 'dlss-swapper'
         signing-policy-slug: 'test-signing'
+        artifact-configuration-slug: 'installer-and-portable-raw-files'
         github-artifact-id: '${{ steps.upload-unsigned-artifacts.outputs.artifact-id }}'
         wait-for-completion: true
         output-artifact-directory: '${{ github.workspace }}\src\bin\signed\'

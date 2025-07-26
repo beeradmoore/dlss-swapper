@@ -120,4 +120,13 @@ jobs:
     - name: Output signed path
       shell: pwsh
       run: |
+        Get-ChildItem -Path "${{ github.workspace }}\src\bin\signed_installer\"
         tree "${{ github.workspace }}\src\bin\signed_installer\"
+
+    - name: Upload completed signed installer build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: DLSS.Swapper-${{ env.VERSION }}-installer
+        path: ${{ github.workspace }}\src\bin\signed_installer\DLSS.Swapper-${{ env.VERSION }}-installer.exe
+        compression-level: 0
+        if-no-files-found: error

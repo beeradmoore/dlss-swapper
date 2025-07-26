@@ -95,9 +95,10 @@ jobs:
         if-no-files-found: error
 
     - name: Upload installer artifact to be signed
+      id: upload-unsigned-installer-artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: upload-unsigned-installer-artifacts
+        name: unsigned-installer-artifacts
         retention-days: 1
         path: ${{ github.workspace }}\package\Output\DLSS.Swapper-${{ env.VERSION }}-installer.exe
         compression-level: 0

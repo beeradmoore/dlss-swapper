@@ -45,15 +45,17 @@ jobs:
       run: ${{ github.workspace }}\package\build_Installer.cmd
       working-directory: ${{ github.workspace }}\package\
     
-    - name: Upload unsigned artifacts
+    - name: Upload unsigned artifacts to be signed
       id: upload-unsigned-artifacts
       uses: actions/upload-artifact@v4
       with:
         name: pre-signed-packages
         retention-days: 1
         path: |
-          ${{ github.workspace }}\src\bin\publish\installer\
-          ${{ github.workspace }}\src\bin\publish\portable\
+          ${{ github.workspace }}\src\bin\publish\installer\DLSS Swapper.dll
+          ${{ github.workspace }}\src\bin\publish\installer\DLSS Swapper.exe
+          ${{ github.workspace }}\src\bin\publish\portable\DLSS Swapper.dll
+          ${{ github.workspace }}\src\bin\publish\portable\DLSS Swapper.exe
         compression-level: 0
         if-no-files-found: error
 
@@ -73,17 +75,13 @@ jobs:
     - name: Move signed assets into original built position
       shell: pwsh
       run: |
-        Remove-Item -LiteralPath "${{ github.workspace }}\src\bin\publish\installer\" -Force -Recurse
-        Remove-Item -LiteralPath "${{ github.workspace }}\src\bin\publish\portable\" -Force -Recurse
-        Move-Item -Path "${{ github.workspace }}\src\bin\signed\installer\"  -Destination "${{ github.workspace }}\src\bin\publish\installer\" 
-        Move-Item -Path "${{ github.workspace }}\src\bin\signed\portable\"  -Destination "${{ github.workspace }}\src\bin\publish\portable\" 
+        Move-Item -Path "${{ github.workspace }}\src\bin\signed\installer\DLSS Swapper.dll" -Destination "${{ github.workspace }}\src\bin\publish\installer\" -Force
+        Move-Item -Path "${{ github.workspace }}\src\bin\signed\installer\DLSS Swapper.exe" -Destination "${{ github.workspace }}\src\bin\publish\installer\" -Force
+        Move-Item -Path "${{ github.workspace }}\src\bin\signed\portable\DLSS Swapper.dll" -Destination "${{ github.workspace }}\src\bin\publish\portable\" -Force
+        Move-Item -Path "${{ github.workspace }}\src\bin\signed\portable\DLSS Swapperexe" -Destination "${{ github.workspace }}\src\bin\publish\portable\" -Force
 
     - name: Package DLSS Swapper portable
       run: ${{ github.workspace }}\package\package_Portable.cmd
-      working-directory: ${{ github.workspace }}\package\
-
-    - name: Package DLSS Swapper installer
-      run: ${{ github.workspace }}\package\package_Installer.cmd
       working-directory: ${{ github.workspace }}\package\
 
     - name: Upload completed signed portable build artifact
@@ -93,6 +91,11 @@ jobs:
         path: ${{ github.workspace }}\package\Output\DLSS.Swapper-${{ env.VERSION }}-portable.zip
         compression-level: 0
         if-no-files-found: error
+        
+    - name: Package DLSS Swapper installer
+      run: ${{ github.workspace }}\package\package_Installer.cmd
+      working-directory: ${{ github.workspace }}\package\
+
 
     - name: Upload installer artifact to be signed
       id: upload-unsigned-installer-artifacts

@@ -76,6 +76,8 @@ jobs:
       run: |
         Tree "${{ github.workspace }}\src\bin\signed\"
         Get-ChildItem -Path "${{ github.workspace }}\src\bin\signed\"
+        Get-ChildItem -Path "${{ github.workspace }}\src\bin\signed\installer"
+        Get-ChildItem -Path "${{ github.workspace }}\src\bin\signed\portable"
         Move-Item -Path "${{ github.workspace }}\src\bin\signed\installer\DLSS Swapper.dll" -Destination "${{ github.workspace }}\src\bin\publish\installer\" -Force
         Move-Item -Path "${{ github.workspace }}\src\bin\signed\installer\DLSS Swapper.exe" -Destination "${{ github.workspace }}\src\bin\publish\installer\" -Force
         Move-Item -Path "${{ github.workspace }}\src\bin\signed\portable\DLSS Swapper.dll" -Destination "${{ github.workspace }}\src\bin\publish\portable\" -Force

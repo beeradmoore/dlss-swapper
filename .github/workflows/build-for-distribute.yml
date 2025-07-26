@@ -74,7 +74,7 @@ jobs:
       shell: pwsh
       run: |
         Remove-Item -LiteralPath "${{ github.workspace }}\src\bin\publish\installer\" -Force -Recurse
-        Remove-Item -LiteralPath ${{ github.workspace }}\src\bin\publish\portable\" -Force -Recurse
+        Remove-Item -LiteralPath "${{ github.workspace }}\src\bin\publish\portable\" -Force -Recurse
         Move-Item -Path "${{ github.workspace }}\src\bin\signed\installer\"  -Destination "${{ github.workspace }}\src\bin\publish\installer\" 
         Move-Item -Path "${{ github.workspace }}\src\bin\signed\portable\"  -Destination "${{ github.workspace }}\src\bin\publish\portable\" 
 

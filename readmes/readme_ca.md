@@ -53,7 +53,7 @@
 - [Ubisoft Connect](https://www.ubisoft.com/)
 - [Xbox App](https://www.xbox.com/)
 - [Battle.net](https://shop.battle.net/)
-- Afegit manualment mitjançant el botó `Afegeix partida`.
+- Afegit manualment mitjançant el botó `Afegeix joc`.
 
 ## Per què voldries canviar les DLL de DLSS al teu joc?
 
@@ -65,9 +65,9 @@ Aquesta eina **NO** et permet afegir DLSS a jocs que no el suporten.
 
 Aquesta eina **NO** garanteix que l'intercanvi del DLL del DLSS:
 
-- Millorar el rendiment del DLSS.
-- Reduir els artefactes del DLSS.
-- Oferir una experiència estable i sense errors.
+- Millori el rendiment del DLSS.
+- Redueixi els artefactes del DLSS.
+- Ofereixi una experiència estable i sense errors.
 
 En molts casos, podeu solucionar alguns problemes, en altres casos podeu impedir que s'iniciï un joc (fins que restaureu la DLL original, proporcionada a l'eina).
 

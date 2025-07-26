@@ -11,10 +11,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Setup .NET 9.0.300
+    - name: Setup .NET 9.0
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.300'
+        dotnet-version: '9.0.303'
 
     - name: Display .NET Info
       run: dotnet --info
@@ -45,7 +45,8 @@ jobs:
       run: ${{ github.workspace }}\package\build_Installer.cmd
       working-directory: ${{ github.workspace }}\package\
     
-    - name: Upload portable build artifacts
+    - name: Upload unsigned artifacts
+      id: upload-unsigned-artifacts
       uses: actions/upload-artifact@v4
       with:
         name: pre-signed-packages
@@ -54,6 +55,23 @@ jobs:
           ${{ github.workspace }}\src\bin\publish\portable\
         compression-level: 0
         if-no-files-found: error
+
+    - name: Sign with SignPath 
+      id: sign-with-signpath
+      uses: signpath/github-action-submit-signing-request@v1.2
+      with:
+        api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
+        organization-id: '9b913506-76ef-4356-b93a-0fe60061013c'
+        project-slug: 'dlss-swapper'
+        signing-policy-slug: 'test-signing'
+        github-artifact-id: '${{ steps.upload-unsigned-artifacts.outputs.artifact-id }}'
+        wait-for-completion: true
+        output-artifact-directory: '${{ github.workspace }}\src\bin\signed\'
+
+    - name: Output signed path
+      shell: pwsh
+      run: |
+        tree "${{ github.workspace }}\src\bin\signed\"
 
     #- name: Upload portable build artifacts
     #  uses: actions/upload-artifact@v4

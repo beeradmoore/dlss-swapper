@@ -74,14 +74,10 @@ jobs:
     - name: Move signed assets into original built position
       shell: pwsh
       run: |
-        Tree "${{ github.workspace }}\src\bin\signed\"
-        Get-ChildItem -Path "${{ github.workspace }}\src\bin\signed\"
-        Get-ChildItem -Path "${{ github.workspace }}\src\bin\signed\installer"
-        Get-ChildItem -Path "${{ github.workspace }}\src\bin\signed\portable"
         Move-Item -Path "${{ github.workspace }}\src\bin\signed\installer\DLSS Swapper.dll" -Destination "${{ github.workspace }}\src\bin\publish\installer\" -Force
         Move-Item -Path "${{ github.workspace }}\src\bin\signed\installer\DLSS Swapper.exe" -Destination "${{ github.workspace }}\src\bin\publish\installer\" -Force
         Move-Item -Path "${{ github.workspace }}\src\bin\signed\portable\DLSS Swapper.dll" -Destination "${{ github.workspace }}\src\bin\publish\portable\" -Force
-        Move-Item -Path "${{ github.workspace }}\src\bin\signed\portable\DLSS Swapperexe" -Destination "${{ github.workspace }}\src\bin\publish\portable\" -Force
+        Move-Item -Path "${{ github.workspace }}\src\bin\signed\portable\DLSS Swapper.exe" -Destination "${{ github.workspace }}\src\bin\publish\portable\" -Force
 
     - name: Package DLSS Swapper portable
       run: ${{ github.workspace }}\package\package_Portable.cmd

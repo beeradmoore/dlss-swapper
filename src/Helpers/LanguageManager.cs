@@ -56,6 +56,7 @@ public class LanguageManager
             "pt-BR",
             "ru-RU",
             "tr-TR",
+            "vi-VN",
             "zh-CN",
             "zh-TW",
 #if DEBUG
@@ -80,9 +81,10 @@ public class LanguageManager
             "fr-FR" => "Français (France)", // French (France)
             "it-IT" => "Italiano (Italia)", // Italian (Italy)
             "pl-PL" => "Polski", // Polish
-            "pt-BR" => "Português BR",
+            "pt-BR" => "Português BR", // Portuguese
             "ru-RU" => "Русский", // Russian
             "tr-TR" => "Türkçe", // Turkish
+            "vi-VN" => "Tiếng Việt", // Vietnamese
             "zh-CN" => "简体中文", // Simplified Chinese
             "zh-TW" => "繁體中文 (臺灣)", // Traditional Chinese (Taiwan)
             _ => languageKey,

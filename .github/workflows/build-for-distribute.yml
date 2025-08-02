@@ -17,6 +17,29 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v4
+    
+    - name: Update static BuildInfo details
+      shell: pwsh
+      working-directory: ${{ github.workspace }}
+      run: |
+        $buildInfoFile = "${{ github.workspace }}\src\BuildInfo.cs"
+        $gitTag = git describe --tags --exact-match
+        $buildTimestamp = (Get-Date -UFormat %s)
+        $gitCommit = (git rev-parse HEAD)
+        $gitBranch = (git branch --show-current)
+        $buildInfoContent = (Get-Content $buildInfoFile -Raw) 
+
+        $buildInfoContent = $buildInfoContent -replace "GitBranch { get; } = string.Empty;", "GitBranch { get; } = `"$gitBranch`";"
+        $buildInfoContent = $buildInfoContent -replace "GitCommit { get; } = string.Empty;", "GitCommit { get; } = `"$gitCommit`";"
+        $buildInfoContent = $buildInfoContent -replace "BuildTimestamp { get; }", "BuildTimestamp { get; } = $buildTimestamp;"
+
+        if ($gitTag)
+        {
+            $buildInfoContent = $buildInfoContent -replace "GitTag { get; } = string.Empty;", "GitTag { get; } = `"$gitTag`";"
+        }
+
+        Write-Output $buildInfoContent
+        Set-Content -Path $buildInfoFile -Value $buildInfoContent
 
     - name: Setup .NET 9.0
       uses: actions/setup-dotnet@v4

@@ -829,6 +829,12 @@ Because of this we recommend using caution for multiplayer games.</value>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>This only applies to the DLL picker, not the library page.</value>
   </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>Build commit</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>Build date</value>
+  </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>Could not open your log file directly from DLSS Swapper. Please try open it manually.</value>
   </data>

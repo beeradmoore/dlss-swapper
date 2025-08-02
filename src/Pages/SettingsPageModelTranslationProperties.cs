@@ -10,6 +10,15 @@ public class SettingsPageModelTranslationProperties : LocalizedViewModelBase
     public string VersionText => $"{ResourceHelper.GetString("General_Version")}:";
 
     [TranslationProperty]
+    public string BuildDateText => $"{ResourceHelper.GetString("SettingsPage_BuildDate")}:";
+
+    [TranslationProperty]
+    public string BuildCommitText => $"{ResourceHelper.GetString("SettingsPage_BuildCommit")}:";
+
+    [TranslationProperty]
+    public string CopyText => ResourceHelper.GetString("General_Copy");
+
+    [TranslationProperty]
     public string GiveFeedbackInfo => ResourceHelper.GetString("SettingsPage_GiveFeedbackInfo");
 
     [TranslationProperty]

@@ -703,7 +703,7 @@ Importieren Sie DLL-Dateien nur aus vertrauenswürdigen Quellen.</value>
     <value>Versuche zu aktualisieren</value>
   </data>
   <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
-    <value>LSS Swapper konnte seine Manifestdatei nicht laden. Das Programm wird nun geschlossen.</value>
+    <value>DLSS Swapper konnte seine Manifestdatei nicht laden. Das Programm wird nun geschlossen.</value>
   </data>
   <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
     <value>DLSS Swapper muss geschlossen werden</value>

@@ -22,7 +22,7 @@ jobs:
       shell: pwsh
       working-directory: ${{ github.workspace }}
       run: |
-        $buildInfoFile = ${{ github.workspace }}\src\BuildInfo.cs
+        $buildInfoFile = "${{ github.workspace }}\src\BuildInfo.cs"
         $gitTag = git describe --tags --exact-match
         $buildTimestamp = (Get-Date -UFormat %s)
         $gitCommit = (git rev-parse HEAD)

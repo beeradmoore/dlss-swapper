@@ -9,7 +9,7 @@ internal static class BuildInfo
     public static string GitBranch { get; } = string.Empty;
     public static string GitCommit { get; } = string.Empty;
     public static string GitTag { get; } = string.Empty;
-    public static long BuildTimestamp { get; } = 0;
+    public static long BuildTimestamp { get; }
 
 
     public static string GitCommitShort

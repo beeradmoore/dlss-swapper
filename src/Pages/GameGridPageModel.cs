@@ -308,8 +308,12 @@ public partial class GameGridPageModel : ObservableObject
 
         if (result == ContentDialogResult.Primary)
         {
-            Settings.Instance.HideNonDLSSGames = gameFilterControl.IsHideNonDLSSGamesChecked();
-            Settings.Instance.GroupGameLibrariesTogether = gameFilterControl.IsGroupGameLibrariesTogetherChecked();
+            if (gameFilterControl.DataContext is GameFilterControlViewModel gameFilterControlViewModel)
+            {
+                Settings.Instance.HideNonDLSSGames = gameFilterControlViewModel.HideNonSwappableGames;
+                GameManager.Instance.ShowHiddenGames = gameFilterControlViewModel.ShowHiddenGames;
+                Settings.Instance.GroupGameLibrariesTogether = gameFilterControlViewModel.GroupGameLibrariesTogether;
+            }
 
             ApplyGameGroupFilter();
         }

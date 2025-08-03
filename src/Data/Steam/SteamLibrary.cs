@@ -51,6 +51,10 @@ namespace DLSS_Swapper.Data.Steam
             return string.IsNullOrEmpty(GetInstallPath()) == false;
         }
 
+        readonly string[] _defaultHiddenGames = [
+            "228980", // Steamworks Common Redistributables
+        ];
+
         public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
             // If we don't detect a steam install patg return an empty list.
@@ -117,12 +121,6 @@ namespace DLSS_Swapper.Data.Steam
                     var appManifestPaths = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
                     foreach (var appManifestPath in appManifestPaths)
                     {
-                        // Don't bother adding Steamworks Common Redistributables.
-                        if (appManifestPath.EndsWith("appmanifest_228980.acf") == true)
-                        {
-                            continue;
-                        }
-
                         SteamGame? game = null;
 
                         try
@@ -179,6 +177,13 @@ namespace DLSS_Swapper.Data.Steam
 
                         var cachedGame = GameManager.Instance.GetGame<SteamGame>(game.PlatformId);
                         var activeGame = cachedGame ?? game;
+
+                        if (activeGame.IsHidden is null && _defaultHiddenGames.Contains(activeGame.PlatformId))
+                        {
+                            activeGame.IsHidden = true;
+                        }
+
+
                         activeGame.Title = game.Title;  // TODO: Will this be a problem if the game is already loaded
                         activeGame.InstallPath = game.InstallPath;
                         activeGame.StateFlags = game.StateFlags;

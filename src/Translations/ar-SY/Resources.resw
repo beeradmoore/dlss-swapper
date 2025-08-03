@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
     Microsoft ResX Schema
@@ -188,6 +188,33 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>فشل في التشغيل</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>هل أنت متأكد من أنك تريد إزالة صورة الغلاف المخصصة؟</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>اللعبة قيد المعالجة حالياً</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>إزالة الغلاف المخصص؟</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>تعذر إلغاء تسلسل GOGCatalogResponse للرابط، {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>تعذر إلغاء تسلسل GOGEmbedFilteredResponse للرابط، {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>لم يتم العثور على أي GOGEmbedFilteredProducts للرابط، {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>لم يتم العثور على أي GOGCatalogProduct للرابط، {0}</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>تعذر اكتشاف ubisoftConnectInstallsKey</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>مكتبة ألعاب غير معروفة {0} أثناء تعيين المعرف</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>نوع العنصر</value>
@@ -380,9 +407,6 @@
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>ملفات DLL جديدة</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>تم العثور على ملفات DLL جديدة</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>إنشاء تقرير GitHub جديد</value>
   </data>
@@ -413,6 +437,9 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>لا تحتاج إلى إرسال ملفات DLL. سنقوم بتتبعها بناءً على المعلومات المقدمة.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>تم العثور على ملفات DLL جديدة</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>الألعاب</value>
   </data>
@@ -424,33 +451,6 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>عرض القائمة</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>هل أنت متأكد من أنك تريد إزالة صورة الغلاف المخصصة؟</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>اللعبة قيد المعالجة حالياً</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>إزالة الغلاف المخصص؟</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>تعذر إلغاء تسلسل GOGCatalogResponse للرابط، {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>تعذر إلغاء تسلسل GOGEmbedFilteredResponse للرابط، {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>لم يتم العثور على أي GOGEmbedFilteredProducts للرابط، {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>لم يتم العثور على أي GOGCatalogProduct للرابط، {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>تعذر اكتشاف ubisoftConnectInstallsKey</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>مكتبة ألعاب غير معروفة {0} أثناء تعيين المعرف</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>هذا التطبيق يعمل بصلاحيات إدارية.</value>

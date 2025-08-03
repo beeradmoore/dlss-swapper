@@ -189,6 +189,33 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Avvio fallito</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Vuoi davvero rimuovere l'immagine di copertina personalizzata?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Gioco in fase di elaborazione</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Vuoi rimuovere la copertina personalizzata?</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>Impossibile deserializzare GOGCatalogResponse per l'URL, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>Impossibile deserializzare GOGEmbedFilteredResponse per l'URL {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>Impossibile trovare GOGEmbedFilteredProducts per l'URL {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>Impossibile trovare alcun GOGCatalogProduct per l'URL {0}</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>Impossibile rilevare ubisoftConnectInstallsKey</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>GameLibrary {0} sconosciuta durante l'impostazione dell'ID</value>
+  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Tipo di risorsa</value>
   </data>
@@ -382,9 +409,6 @@ Se hai verificato queste opzioni e il tuo gioco continua a non essere visualizza
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Nuove DLL</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Nuove DLL rilevate</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Segnala un nuovo problema su GitHub</value>
   </data>
@@ -415,6 +439,9 @@ Se hai verificato queste opzioni e il tuo gioco continua a non essere visualizza
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Non è necessario inviarci le DLL. Le rintracceremo in base alle informazioni fornite.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Nuove DLL rilevate</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Giochi</value>
   </data>
@@ -426,33 +453,6 @@ Se hai verificato queste opzioni e il tuo gioco continua a non essere visualizza
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Modalità elenco</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Vuoi davvero rimuovere l'immagine di copertina personalizzata?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Gioco in fase di elaborazione</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Vuoi rimuovere la copertina personalizzata?</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Impossibile deserializzare GOGCatalogResponse per l'URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Impossibile deserializzare GOGEmbedFilteredResponse per l'URL {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Impossibile trovare GOGEmbedFilteredProducts per l'URL {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Impossibile trovare alcun GOGCatalogProduct per l'URL {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>Impossibile rilevare ubisoftConnectInstallsKey</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>GameLibrary {0} sconosciuta durante l'impostazione dell'ID</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>L'app è stata lanciata con privilegi amministrativi.</value>

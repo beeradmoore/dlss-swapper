@@ -189,6 +189,33 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Khởi chạy thất bại</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Bạn có chắc muốn xóa ảnh bìa tùy chỉnh?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Trò chơi đang xử lý</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Xóa ảnh bìa tùy chỉnh?</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>Không thể giải mã GOGCatalogResponse cho URL, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>Không thể giải mã GOGEmbedFilteredResponse cho URL, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>Không tìm thấy GOGEmbedFilteredProducts nào cho URL, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>Không tìm thấy GOGCatalogProduct nào cho URL, {0}</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>Không thể phát hiện ubisoftConnectInstallsKey</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Thư viện trò chơi không xác định {0} khi đặt ID</value>
+  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Loại tài sản</value>
   </data>
@@ -381,9 +408,6 @@ Nếu đã kiểm tra những mục này mà trò chơi vẫn không hiển th�
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>DLL mới</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Đã tìm thấy DLL mới</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Tạo báo cáo lỗi GitHub mới</value>
   </data>
@@ -414,6 +438,9 @@ Nếu đã kiểm tra những mục này mà trò chơi vẫn không hiển th�
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Bạn không cần gửi DLL. Chúng tôi sẽ theo dõi chúng dựa trên thông tin được cung cấp.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Đã tìm thấy DLL mới</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Trò chơi</value>
   </data>
@@ -425,33 +452,6 @@ Nếu đã kiểm tra những mục này mà trò chơi vẫn không hiển th�
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Chế độ xem danh sách</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Bạn có chắc muốn xóa ảnh bìa tùy chỉnh?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Trò chơi đang xử lý</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Xóa ảnh bìa tùy chỉnh?</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Không thể giải mã GOGCatalogResponse cho URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Không thể giải mã GOGEmbedFilteredResponse cho URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Không tìm thấy GOGEmbedFilteredProducts nào cho URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Không tìm thấy GOGCatalogProduct nào cho URL, {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>Không thể phát hiện ubisoftConnectInstallsKey</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Thư viện trò chơi không xác định {0} khi đặt ID</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Ứng dụng này đang chạy với quyền quản trị.</value>

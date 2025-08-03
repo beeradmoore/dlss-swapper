@@ -21,8 +21,10 @@
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
         <ct_converters:BoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
         <ct_converters:StringVisibilityConverter x:Key="StringVisibilityConverter" EmptyValue="Collapsed" NotEmptyValue="Visible" />
+        <ct_converters:StringVisibilityConverter x:Key="InverseStringVisibilityConverter" EmptyValue="Visible" NotEmptyValue="Collapsed" />
         <converters:BitmapImageUriConverter x:Key="BitmapImageUriConverter" />
-
+        <converters:BoolToOpacityConverter x:Key="BoolToOpacityConverter" TrueValue="0.25" FalseValue="1.0" NullValue="1.0" />
+        
 
 
 
@@ -52,7 +54,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="data:Game">
-                        <Grid ColumnSpacing="12">
+                        <Grid ColumnSpacing="12" Opacity="{x:Bind IsHidden, Mode=OneWay, Converter={StaticResource BoolToOpacityConverter}}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="80" />
                             </Grid.RowDefinitions>
@@ -100,7 +102,7 @@
                         <GroupStyle.HeaderTemplate>
                             <DataTemplate x:DataType="data:GameGroup">
                                 <Grid Margin="0" Visibility="{x:Bind Name, Converter={StaticResource StringVisibilityConverter}}">
-                                    <TextBlock Text="{x:Bind Name}"  Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <TextBlock Text="{x:Bind Name}" Margin="0" Style="{StaticResource TitleTextBlockStyle}"/>
                                 </Grid>
                             </DataTemplate>
                         </GroupStyle.HeaderTemplate>
@@ -121,7 +123,7 @@
                         <Grid 
                             Width="{Binding ElementName=RootGameGridPage, Path=ViewModel.GridViewItemWidth, Mode=OneWay}"
                             Height="{Binding ElementName=RootGameGridPage, Path=ViewModel.GridViewItemHeight, Mode=OneWay}"
-                            CornerRadius="8" BorderThickness="1" ColumnSpacing="0" RowSpacing="0" Margin="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                            CornerRadius="8" Opacity="{x:Bind IsHidden, Mode=OneWay, Converter={StaticResource BoolToOpacityConverter}}" BorderThickness="1" ColumnSpacing="0" RowSpacing="0" Margin="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
@@ -130,7 +132,7 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Text="{x:Bind Title}" Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{ThemeResource ButtonForegroundColor}" />
+                            <TextBlock Text="{x:Bind Title}" Visibility="{x:Bind CoverImage, Mode=OneWay, Converter={StaticResource InverseStringVisibilityConverter}}"  Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{ThemeResource ButtonForegroundColor}" />
 
                             <!-- Weird, but allows image to strecth centered rather than left align -->
                             <Border BorderThickness="0" FlowDirection="LeftToRight">

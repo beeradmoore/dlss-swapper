@@ -85,6 +85,14 @@ namespace DLSS_Swapper.Data
         [Column("is_favourite")]
         public partial bool IsFavourite { get; set; } = false;
 
+        /// <summary>
+        /// If the game is hidden from the main list or not. All hidden games are still processed.
+        /// If the value is null the user has not set the value and this should be considered as not hidden.
+        /// </summary>
+        [ObservableProperty]
+        [Column("is_hidden")]
+        public partial bool? IsHidden { get; set; } = null;
+
         [ObservableProperty]
         [Ignore]
         public partial bool Processing { get; set; } = false;

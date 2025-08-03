@@ -440,4 +440,18 @@ public partial class GameControlModel : ObservableObject
             }
         }
     }
+
+    [RelayCommand]
+    async Task ShowHideGameAsync()
+    {
+        if (Game.IsHidden is null)
+        {
+            Game.IsHidden = true;
+        }
+        else
+        {
+            Game.IsHidden = !Game.IsHidden;
+        }
+        await Game.SaveToDatabaseAsync();
+    }
 }

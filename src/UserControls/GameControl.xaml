@@ -30,7 +30,7 @@
         <converters:DLSSStateVisibilityConverter x:Key="IsNotFoundConverter" DesierdState="NotFound" />
         <converters:DLSSStateVisibilityConverter x:Key="IsImportedConverter" DesierdState="Imported" />
         <converters:BitmapImageUriConverter x:Key="BitmapImageUriConverter" />
-        <converters:NullableBoolToObjectConverter x:Key="HideGameTextConverter" NullValue="Click to hide" FalseValue="Click to hide" TrueValue="Hidden"  />
+        <converters:NullableBoolToObjectConverter x:Key="HideGameTextConverter" NullValue="{Binding TranslationProperties.ClickToHideText, Mode=OneWay}" FalseValue="{Binding TranslationProperties.ClickToHideText, Mode=OneWay}" TrueValue="{Binding TranslationProperties.HiddenText, Mode=OneWay}" />
         <converters:NullableBoolToObjectConverter x:Key="HideGameGlyphConverter" NullValue="&#xE7B3;" FalseValue="&#xE7B3;" TrueValue="&#xED1A;"  />
 
         <ControlTemplate x:Key="LeftButtonsControlTemplate" TargetType="ContentControl">
@@ -56,7 +56,7 @@
                 </Button>
 
                 <!--
-                <Button ToolTipService.ToolTip="Reset All" Command="{Binding ResetAllCommand}">
+                <Button ToolTipService.ToolTip="{Binding TranslationProperties.ResetAllText, Mode=OneWay}" Command="{Binding ResetAllCommand}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xED62;"/>
                     </Button.Content>

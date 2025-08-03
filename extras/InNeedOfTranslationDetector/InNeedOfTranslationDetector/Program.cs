@@ -39,6 +39,8 @@ var xamlRegexes = new List<Regex>()
     new Regex(@"Text=""([^""{][^""]*)"""),
     new Regex(@"Content=""([^""{][^""]*)"""),
     new Regex(@"Header=""([^""{][^""]*)"""),
+    new Regex(@"ToolTip=""([^""{][^""]*)"""),
+    new Regex(@"Label=""([^""{][^""]*)"""),
 };
 
 var ignoredXamlMatches = new List<string>()
@@ -53,6 +55,8 @@ var ignoredXamlMatches = new List<string>()
     "Text=\"XeSS\"",
     "Text=\"XeSS Frame Generation\"",
     "Text=\"XeLL\"",
+    "Text=\"&#xE8C8;\"",
+    "Text=\"DLSS Preset\""
 };
 
 foreach (var xamlFile in allXamlFiles)
@@ -224,6 +228,13 @@ var ignoredCSharpMatches = new List<string>()
     "= \"AppTitleBar\"",
     "= \"DialogShowing\"",
     "= \"DialogShowingStates\"",
+    " = \"Value\"",
+    "= \"en-US\"",
+    " = \"General_None\"",
+    " = $\"v{DisplayVersion} (v{Version})\"",
+    " = $\"v{DisplayVersion} (v{dllVersion})\"",
+    " = $\"v{DisplayVersion}\"",
+    "=\"languageKey\""
 
 };
 
@@ -253,7 +264,10 @@ var ignoredStringKeyPrefixes = new List<string>()
     "GameLibrary_",
     "GamePage_",
     "GamesPage_",
-    "GitHubUpdater_"
+    "GitHubUpdater_",
+    "TranslationToolboxPage_",
+    "GameHistoryEventType_",
+    "GameHistoryControl_",
 };
 
 foreach (var csharpFiles in allCSharpFiles)

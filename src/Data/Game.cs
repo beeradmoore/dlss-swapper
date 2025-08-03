@@ -1060,7 +1060,7 @@ namespace DLSS_Swapper.Data
             catch (Exception err)
             {
                 Logger.Error(err, $"For url: {url}");
-                Debugger.Break();
+                //Debugger.Break();
             }
             finally
             {

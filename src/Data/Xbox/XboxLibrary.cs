@@ -43,6 +43,11 @@ namespace DLSS_Swapper.Data.Xbox
             return packages.Any();
         }
 
+        readonly string[] _defaultHiddenGames = [
+            "38985CA0.ChicagoDLC04StandardPack01_5bkah9njm3e9g", // Tony Hawk's™ Pro Skater™ 3 + 4 (DLC)
+            "38985CA0.ChicagoDLC02DigitalDeluxePack01_5bkah9njm3e9g", // Tony Hawk's™ Pro Skater™ 3 + 4 - Digital Deluxe Edition (DLC)
+            "38985CA0.ChicagoDLC03POPack01_5bkah9njm3e9g", // Tony Hawk's™ Pro Skater™ 3 + 4 - Pre Order Pack (DLC)
+        ];
 
         public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
@@ -208,6 +213,12 @@ namespace DLSS_Swapper.Data.Xbox
                     {
                         var cachedGame = GameManager.Instance.GetGame<XboxGame>(familyName);
                         var activeGame = cachedGame ?? new XboxGame(familyName);
+
+                        if (activeGame.IsHidden is null && _defaultHiddenGames.Contains(activeGame.PlatformId))
+                        {
+                            activeGame.IsHidden = true;
+                        }
+
                         activeGame.Title = package.DisplayName;  // TODO: Will this be a problem if the game is already loaded
                         activeGame.InstallPath = PathHelpers.NormalizePath(package.InstalledPath);
 

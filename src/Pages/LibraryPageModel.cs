@@ -1038,11 +1038,27 @@ public partial class LibraryPageModel : ObservableObject
                 {
                     latestRecord = record;
                 }
-                else if (record.VersionNumber > latestRecord.VersionNumber)
+                else
                 {
-                    latestRecord = record;
+                    if (record.AssetType == GameAssetType.FSR_31_DX12 ||
+                        record.AssetType == GameAssetType.FSR_31_VK ||
+                        record.AssetType == GameAssetType.FSR_31_DX12_BACKUP ||
+                        record.AssetType == GameAssetType.FSR_31_VK_BACKUP)
+                    {
+                        if (record.DisplayVersionVersion > latestRecord.DisplayVersionVersion)
+                        {
+                            latestRecord = record;
+                        }
+                    }
+                    else
+                    {
+                        if (record.VersionNumber > latestRecord.VersionNumber)
+                        {
+                            latestRecord = record;
+                        }
+                    }
                 }
-            }           
+            }
         }
 
         return latestRecord;

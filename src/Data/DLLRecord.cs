@@ -134,6 +134,32 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
         }
     }
 
+    Version? _displayVersionVersion;
+    [JsonIgnore]
+    public Version DisplayVersionVersion
+    {
+        get
+        {
+            if (_displayVersionVersion is not null)
+            {
+                return _displayVersionVersion;
+            }
+
+            try
+            {
+                var version = new Version(DisplayVersion);
+                _displayVersionVersion = version;
+                return version;
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err, $"Failed to parse display version ({DisplayVersion}) into a Version object.");
+                return new Version(0, 0, 0, 0);
+            }
+        }
+    }
+
+
     /// <summary>
     /// Returns the display version (eg 2.5.0.0 slimmed down to 2.5) and prefixes with v, and suffix with additional label if it exists.
     /// </summary>

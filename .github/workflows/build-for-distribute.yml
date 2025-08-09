@@ -17,6 +17,42 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v4
+      
+    - name: Check static_manifest.json is up to date
+      shell: pwsh
+      run: |
+        # Calculate the current static manifest hash
+        $staticManifestPath = "src\Assets\static_manifest.json"
+        $currentHash = Get-FileHash -Path $staticManifestPath -Algorithm SHA1
+
+        if (-not $currentHash)
+        {
+          Write-Host "Could not get sha1 hash of $staticManifestPath"
+          exit 1
+        }
+
+        # Download a fresh copy and calculate its hash
+        $url = " https://raw.githubusercontent.com/beeradmoore/dlss-swapper-manifest-builder/refs/heads/main/manifest.json"
+        $tempStaticManifestPath =  Join-Path $env:TEMP "temp_static_manifest.json"
+
+        Invoke-WebRequest -Uri $url -OutFile $tempStaticManifestPath
+
+        $remoteHash = Get-FileHash -Path $tempStaticManifestPath -Algorithm SHA1
+
+        if (-not $remoteHash)
+        {
+          Write-Host "Could not get sha1 hash of $tempStaticManifestPath"
+          exit 1
+        }
+
+        # If they don't match abort the build
+        if ($currentHash.Hash -eq $remoteHash.Hash) {
+            Write-Host "static_manifest.json is up to date."
+        } else {
+            Write-Host "static_manifest.json is out of date. Aborting build."
+            exit 1
+        }
+      working-directory: ${{ github.workspace }}\
     
     - name: Update static BuildInfo details
       shell: pwsh
@@ -62,43 +98,7 @@ jobs:
       run: |
         $ver = Select-String '<Version>(.+?)</Version>' "${{ github.workspace }}\src\DLSS Swapper.csproj" | % { $_.Matches[0].Groups[1].Value }
         echo "VERSION=$ver" >> $env:GITHUB_ENV
-    
-    - name: Check static_manifest.json is up to date
-      shell: pwsh
-      run: |
-        # Calculate the current static manifest hash
-        $staticManifestPath = "src\Assets\static_manifest.json"
-        $currentHash = Get-FileHash -Path $staticManifestPath -Algorithm SHA1
-
-        if (-not $currentHash)
-        {
-          Write-Host "Could not get sha1 hash of $staticManifestPath"
-          exit 1
-        }
-
-        # Download a fresh copy and calculate its hash
-        $url = " https://raw.githubusercontent.com/beeradmoore/dlss-swapper-manifest-builder/refs/heads/main/manifest.json"
-        $tempStaticManifestPath =  Join-Path $env:TEMP "temp_static_manifest.json"
-
-        Invoke-WebRequest -Uri $url -OutFile $tempStaticManifestPath
-
-        $remoteHash = Get-FileHash -Path $tempStaticManifestPath -Algorithm SHA1
-
-        if (-not $remoteHash)
-        {
-          Write-Host "Could not get sha1 hash of $tempStaticManifestPath"
-          exit 1
-        }
-
-        # If they don't match abort the build
-        if ($currentHash.Hash -eq $remoteHash.Hash) {
-            Write-Host "static_manifest.json is up to date."
-        } else {
-            Write-Host "static_manifest.json is out of date. Aborting build."
-            exit 1
-        }
-      working-directory: ${{ github.workspace }}\
-      
+          
     - name: Build DLSS Swapper portable
       run: ${{ github.workspace }}\package\build_Portable.cmd
       working-directory: ${{ github.workspace }}\package\

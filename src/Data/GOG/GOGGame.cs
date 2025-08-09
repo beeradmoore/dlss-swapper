@@ -73,12 +73,12 @@ namespace DLSS_Swapper.Data.GOG
                     var catalogResponse = JsonSerializer.Deserialize<GOGCatalogResponse>(memoryStream);
                     if (catalogResponse is null)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotDeserializeCatalog", url));
+                        throw new Exception($"Could not deserialize GOGCatalogResponse for url, {url}");
                     }
 
                     if (catalogResponse.Products.Length == 0)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotFindAnyProduct", url));
+                        throw new Exception($"Could not find any GOGCatalogProduct for url, {url}");
                     }
 
                     foreach (var product in catalogResponse.Products)
@@ -118,12 +118,12 @@ namespace DLSS_Swapper.Data.GOG
                     var embedFilteredResponse = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GOGEmbedFilteredResponse);
                     if (embedFilteredResponse is null)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotDeserializeEmbedFilterResponse", url));
+                        throw new Exception($"Could not deserialize GOGEmbedFilteredResponse for url, {url}");
                     }
 
                     if (embedFilteredResponse.Products.Length == 0)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotFindAnyEmbedFilteredProducts", url));
+                        throw new Exception($"Could not find any GOGEmbedFilteredProducts for url, {url}");
                     }
 
                     foreach (var product in embedFilteredResponse.Products)

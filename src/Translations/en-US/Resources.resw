@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(already imported)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>Could not deserialize manifest.json.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>Import feature is disabled, import manifest could not be loaded.</value>
   </data>
@@ -151,17 +148,11 @@
     <value>Could not download {0} DLL, please try again later or check your logs to see why the download failed.</value>
     <comment>{0} will be the DLL type (eg. DLSS, FSR, XeSS)</comment>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Could not download file.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Download</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Download Error</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>Downloaded file was invalid.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Downloading</value>
@@ -199,28 +190,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Remove custom cover?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Could not deserialize GOGCatalogResponse for url, {0}</value>
-    <comment>0 = url</comment>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Could not deserialize GOGEmbedFilteredResponse for url, {0}</value>
-    <comment>0 = url</comment>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Could not find any GOGEmbedFilteredProducts for url, {0}</value>
-    <comment>0 = url</comment>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Could not find any GOGCatalogProduct for url, {0}</value>
-    <comment>0 = url</comment>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>Could not detect ubisoftConnectInstallsKey</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Unknown GameLibrary {0} while setting ID</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Asset Type</value>
   </data>
@@ -250,9 +219,6 @@
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL swapped</value>
-  </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Could not load game library {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Add Custom Cover</value>
@@ -607,9 +573,6 @@ If you have checked these and your game is still not showing up there may be a b
   </data>
   <data name="General_Yes" xml:space="preserve">
     <value>Yes</value>
-  </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Could not load GitHub release data.</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>You currently have {0} installed.</value>

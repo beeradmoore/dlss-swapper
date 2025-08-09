@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(ya importado)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>No se pudo deserializar manifest.json.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>La función de importación está deshabilitada, no se pudo cargar el manifiesto de importación.</value>
   </data>
@@ -150,17 +147,11 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>No se pudo descargar el DLL {0}, por favor inténtalo de nuevo más tarde o revisa tus registros para ver por qué falló la descarga.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>No se pudo descargar el archivo.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Descargar</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Error de Descarga</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>El archivo descargado no era válido.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Descargando</value>
@@ -188,6 +179,15 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Fallo al Iniciar</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>¿Estás seguro de que quieres eliminar la carátula personalizada?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Juego Procesándose Actualmente</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>¿Eliminar carátula personalizada?</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Tipo de Recurso</value>
@@ -218,9 +218,6 @@
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL intercambiado</value>
-  </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>No se pudo cargar la biblioteca de juegos {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Añadir Carátula Personalizada</value>
@@ -593,9 +590,6 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   </data>
   <data name="General_Yes" xml:space="preserve">
     <value>Sí</value>
-  </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>No se pudieron cargar los datos de la versión de GitHub.</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Actualmente tienes la versión {0} instalada.</value>

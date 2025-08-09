@@ -129,7 +129,7 @@ jobs:
         api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
         organization-id: '9b913506-76ef-4356-b93a-0fe60061013c'
         project-slug: 'dlss-swapper'
-        signing-policy-slug: 'test-signing'
+        signing-policy-slug: 'release-signing'
         artifact-configuration-slug: 'installer-and-portable-raw-files'
         github-artifact-id: '${{ steps.upload-unsigned-artifacts.outputs.artifact-id }}'
         wait-for-completion: true
@@ -177,7 +177,7 @@ jobs:
         api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
         organization-id: '9b913506-76ef-4356-b93a-0fe60061013c'
         project-slug: 'dlss-swapper'
-        signing-policy-slug: 'test-signing'
+        signing-policy-slug: 'release-signing'
         artifact-configuration-slug: 'installer'
         github-artifact-id: '${{ steps.upload-unsigned-installer-artifacts.outputs.artifact-id }}'
         wait-for-completion: true

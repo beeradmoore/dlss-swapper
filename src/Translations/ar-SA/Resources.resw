@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(تم الاستيراد مسبقًا)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>تعذّر تحليل ملف manifest.json</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>ميزة الاستيراد معطّلة, تعذّر تحميل ملف manifest الخاص بالاستيراد.</value>
   </data>
@@ -150,17 +147,11 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>تعذّر تنزيل {0} DLL. يُرجى المحاولة لاحقًا أو التحقق من السجلات لمعرفة سبب فشل التنزيل.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>تعذّر تنزيل الملف.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>تنزيل</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>خطأ في التنزيل</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>الملف الذي تم تنزيله غير صالح.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>جارٍ التنزيل</value>
@@ -188,6 +179,15 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>فشل التشغيل</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد إزالة صورة الغلاف المخصصة؟</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>اللعبة قيد المعالجة حاليًا</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>إزالة الغلاف المخصص؟</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>نوع الأصل</value>
@@ -218,9 +218,6 @@
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>تم تبديل ملف DLL</value>
-  </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>تعذّر تحميل مكتبة اللعبة {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>إضافة غلاف مخصص</value>
@@ -389,9 +386,6 @@
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>ملفات DLL جديدة</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>تم العثور على ملفات DLL جديدة</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>إنشاء بلاغ جديد في GitHub</value>
   </data>
@@ -422,6 +416,9 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>لست مضطرًا لتقديم ملفات DLL. سنقوم بتتبعها بناءً على المعلومات المقدمة.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>تم العثور على ملفات DLL جديدة</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>الألعاب</value>
   </data>
@@ -433,33 +430,6 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>عرض قائمة</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>هل أنت متأكد أنك تريد إزالة صورة الغلاف المخصصة؟</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>اللعبة قيد المعالجة حاليًا</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>إزالة الغلاف المخصص؟</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>تعذّر تحليل GOGCatalogResponse من الرابط {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>تعذّر تحليل GOGEmbedFilteredResponse من الرابط {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>لم يتم العثور على أي GOGEmbedFilteredProducts من الرابط {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>لم يتم العثور على أي GOGCatalogProduct من الرابط {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>تعذّر اكتشاف ubisoftConnectInstallsKey</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>مكتبة ألعاب غير معروفة {0} أثناء تعيين المعرف</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>هذا التطبيق يعمل بصلاحيات المسؤول</value>
@@ -586,9 +556,6 @@
   </data>
   <data name="General_Yes" xml:space="preserve">
     <value>نعم</value>
-  </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>تعذّر تحميل بيانات إصدار GitHub</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>لديك حاليًا {0} مُثبّتًا</value>

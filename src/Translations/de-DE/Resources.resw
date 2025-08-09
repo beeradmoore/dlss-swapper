@@ -135,9 +135,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(bereits importiert)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>Die Deserialisierung von manifest.json war nicht möglich.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>Die Importfunktion ist deaktiviert, das Import-Manifest konnte nicht geladen werden.</value>
   </data>
@@ -153,17 +150,11 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Die DLL {0} konnte nicht heruntergeladen werden. Bitte versuchen Sie es später erneut oder überprüfen Sie Ihre Protokolle, um festzustellen, warum der Download fehlgeschlagen ist.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Die Datei konnte nicht heruntergeladen werden.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Herunterladen</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Download-Fehler</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>Die heruntergeladene Datei war ungültig.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Lade herunter</value>
@@ -191,6 +182,15 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Start fehlgeschlagen</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Bist Du dir sicher, dass Du dein hinzugefügtes Titelbild entfernen willst?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Spiel wird aktuell untersucht</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Titelbild entfernen?</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Asset-Typ</value>
@@ -221,9 +221,6 @@
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL ausgetauscht</value>
-  </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Die Spielbibliothek {0} konnte nicht geladen werden</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Benutzerdefiniertes Cover hinzufügen</value>
@@ -389,9 +386,6 @@ Wenn Sie dies überprüft haben und Ihr Spiel immer noch nicht angezeigt wird, l
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Neue DLLs</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Neue DLLs gefunden</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Neues GitHub-Problem erstellen</value>
   </data>
@@ -422,6 +416,9 @@ Wenn Sie dies überprüft haben und Ihr Spiel immer noch nicht angezeigt wird, l
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Sie müssen die DLLs nicht einreichen. Wir werden sie anhand der bereitgestellten Informationen ausfindig machen.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Neue DLLs gefunden</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Spiele</value>
   </data>
@@ -433,33 +430,6 @@ Wenn Sie dies überprüft haben und Ihr Spiel immer noch nicht angezeigt wird, l
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Listenansicht</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Sind Sie sicher, dass Sie das benutzerdefinierte Titelbild entfernen möchten?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Spiel wird derzeit verarbeitet</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Benutzerdefiniertes Cover entfernen?</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Die Deserialisierung von GOGCatalogResponse für die URL {0} war nicht möglich</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Die Deserialisierung von GOGEmbedFilteredResponse für die URL {0} war nicht möglich</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Es konnten keine GOGEmbedFilteredProducts für die URL {0} gefunden werden</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Es konnte kein GOGCatalogProduct für die URL {0} gefunden werden.</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>ubisoftConnectInstallsKey konnte nicht erkannt werden</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Unbekannte Spielbibliothek {0} beim Festlegen der ID</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Diese App wird mit Administratorrechten ausgeführt.</value>
@@ -586,9 +556,6 @@ Wenn Sie dies überprüft haben und Ihr Spiel immer noch nicht angezeigt wird, l
   </data>
   <data name="General_Yes" xml:space="preserve">
     <value>Ja</value>
-  </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Die GitHub-Release-Daten konnten nicht geladen werden.</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Sie haben derzeit {0} installiert.</value>

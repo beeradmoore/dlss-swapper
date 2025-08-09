@@ -22,7 +22,7 @@ class GOGEmbedFilteredResponse
     public int TotalPages { get; set; }
 
     [JsonPropertyName("totalResults")]
-    public string TotalResults { get; set; } = string.Empty;
+    public int TotalResults { get; set; }
 
     [JsonPropertyName("totalGamesFound")]
     public int TotalGamesFound { get; set; }

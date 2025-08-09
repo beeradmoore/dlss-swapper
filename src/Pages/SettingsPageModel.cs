@@ -17,6 +17,7 @@ using DLSS_Swapper.Collections;
 using System.Collections.Specialized;
 using DLSS_Swapper.Data.DLSS;
 using Windows.System;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace DLSS_Swapper.Pages;
 
@@ -457,5 +458,26 @@ public partial class SettingsPageModel : ObservableObject
                 await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/wiki/DLSS-Developer-Options#on-screen-indicator"));
             }
         }
+    }
+
+    [RelayCommand]
+    async Task OpenVersionAsync()
+    {
+        if (string.IsNullOrWhiteSpace(BuildInfo.GitTag))
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/releases"));
+        }
+        else
+        {
+            await Launcher.LaunchUriAsync(new Uri($"https://github.com/beeradmoore/dlss-swapper/releases/tag/{BuildInfo.GitTag}"));
+        }
+    }
+
+    [RelayCommand]
+    void CopyGitCommit()
+    {
+        var package = new DataPackage();
+        package.SetText(BuildInfo.GitCommitShort);
+        Clipboard.SetContent(package);
     }
 }

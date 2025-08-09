@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>（已导入）</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>无法加载 manifest.json</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>导入功能已禁用，无法加载导入清单。</value>
   </data>
@@ -150,17 +147,11 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>无法下载 {0} DLL 文件，请稍后再试，或查看日志以了解下载失败的原因。</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>无法下载文件</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>下载</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>下载错误</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>下载文件无效</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>下载中</value>
@@ -198,24 +189,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>移除自定义封面？</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>GOG 目录数据解析加载失败：{0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>未能从 URL {0} 获取有效的 GOG 内容数据</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>无法从 URL {0} 加载任何 GOG 相关列表</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>无法从 URL {0} 获取 GOG 的信息</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>未找到 Ubisoft Connect 的安装路径</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>设置 ID 时，发现未知的游戏平台 {0}。</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>资产类型</value>
   </data>
@@ -245,9 +218,6 @@
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>替换 DLL</value>
-  </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>无法加载游戏库 {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>自定义封面</value>
@@ -578,9 +548,6 @@
   </data>
   <data name="General_Yes" xml:space="preserve">
     <value>开启</value>
-  </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>无法获取 GitHub 版本发布信息</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>当前有 {0} 已经安装</value>

@@ -47,7 +47,7 @@ namespace DLSS_Swapper.Interfaces
                 GameLibrary.XboxApp => XboxLibrary.Instance,
                 GameLibrary.ManuallyAdded => ManuallyAddedLibrary.Instance,
                 GameLibrary.BattleNet => BattleNetLibrary.Instance,
-                _ => throw new Exception(ResourceHelper.GetFormattedResourceTemplate("GameLibrary_UnknownGameLibraryTemplate", gameLibrary)),
+                _ => throw new Exception($"Could not load game library {gameLibrary}."),
             };
         }
 

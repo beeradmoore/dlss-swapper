@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(đã nhập)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>Không thể giải mã manifest.json.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>Tính năng nhập đã tắt, không thể tải tệp kê khai nhập.</value>
   </data>
@@ -150,17 +147,11 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Không thể tải xuống DLL {0}, vui lòng thử lại sau hoặc kiểm tra nhật ký để xem lý do thất bại.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Không thể tải xuống tệp.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Tải xuống</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Lỗi tải xuống</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>Tệp tải xuống không hợp lệ.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Đang tải xuống</value>
@@ -188,6 +179,15 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Khởi chạy thất bại</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Bạn có chắc muốn xóa ảnh bìa tùy chỉnh?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Trò chơi đang xử lý</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Xóa ảnh bìa tùy chỉnh?</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Loại tài sản</value>
@@ -218,9 +218,6 @@
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>Đã hoán đổi DLL</value>
-  </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Không thể tải thư viện trò chơi {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Thêm Ảnh bìa Tùy chỉnh</value>
@@ -381,9 +378,6 @@ Nếu đã kiểm tra những mục này mà trò chơi vẫn không hiển th�
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>DLL mới</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Đã tìm thấy DLL mới</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Tạo báo cáo lỗi GitHub mới</value>
   </data>
@@ -414,6 +408,9 @@ Nếu đã kiểm tra những mục này mà trò chơi vẫn không hiển th�
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Bạn không cần gửi DLL. Chúng tôi sẽ theo dõi chúng dựa trên thông tin được cung cấp.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Đã tìm thấy DLL mới</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Trò chơi</value>
   </data>
@@ -425,33 +422,6 @@ Nếu đã kiểm tra những mục này mà trò chơi vẫn không hiển th�
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Chế độ xem danh sách</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Bạn có chắc muốn xóa ảnh bìa tùy chỉnh?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Trò chơi đang xử lý</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Xóa ảnh bìa tùy chỉnh?</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Không thể giải mã GOGCatalogResponse cho URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Không thể giải mã GOGEmbedFilteredResponse cho URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Không tìm thấy GOGEmbedFilteredProducts nào cho URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Không tìm thấy GOGCatalogProduct nào cho URL, {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>Không thể phát hiện ubisoftConnectInstallsKey</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Thư viện trò chơi không xác định {0} khi đặt ID</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Ứng dụng này đang chạy với quyền quản trị.</value>
@@ -578,9 +548,6 @@ Nếu đã kiểm tra những mục này mà trò chơi vẫn không hiển th�
   </data>
   <data name="General_Yes" xml:space="preserve">
     <value>Có</value>
-  </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Không thể tải dữ liệu phát hành GitHub.</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Bạn hiện đang cài phiên bản {0}.</value>

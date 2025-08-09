@@ -16,6 +16,9 @@ public class LibraryPageModelTranslationProperties : LocalizedViewModelBase
     public string ExportAllText => ResourceHelper.GetString("General_ExportAll");
 
     [TranslationProperty]
+    public string DownloadLatestText => ResourceHelper.GetString("LibraryPage_DownloadLatest");
+
+    [TranslationProperty]
     public string RefreshText => ResourceHelper.GetString("General_Refresh");
 
     [TranslationProperty]

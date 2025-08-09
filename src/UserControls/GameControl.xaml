@@ -30,6 +30,8 @@
         <converters:DLSSStateVisibilityConverter x:Key="IsNotFoundConverter" DesierdState="NotFound" />
         <converters:DLSSStateVisibilityConverter x:Key="IsImportedConverter" DesierdState="Imported" />
         <converters:BitmapImageUriConverter x:Key="BitmapImageUriConverter" />
+        <converters:NullableBoolToObjectConverter x:Key="HideGameTextConverter" NullValue="{Binding TranslationProperties.ClickToHideText, Mode=OneWay}" FalseValue="{Binding TranslationProperties.ClickToHideText, Mode=OneWay}" TrueValue="{Binding TranslationProperties.HiddenText, Mode=OneWay}" />
+        <converters:NullableBoolToObjectConverter x:Key="HideGameGlyphConverter" NullValue="&#xE7B3;" FalseValue="&#xE7B3;" TrueValue="&#xED1A;"  />
 
         <ControlTemplate x:Key="LeftButtonsControlTemplate" TargetType="ContentControl">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" XYFocusKeyboardNavigation="Enabled" Padding="{ThemeResource ContentDialogPadding}" Background="{TemplateBinding Background}" Spacing="8">
@@ -54,7 +56,7 @@
                 </Button>
 
                 <!--
-                <Button ToolTipService.ToolTip="Reset All" Command="{Binding ResetAllCommand}">
+                <Button ToolTipService.ToolTip="{Binding TranslationProperties.ResetAllText, Mode=OneWay}" Command="{Binding ResetAllCommand}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xED62;"/>
                     </Button.Content>
@@ -66,13 +68,19 @@
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="{Binding Game.IsFavourite, Converter={StaticResource FavouriteGlyphConverter}}"/>
                     </Button.Content>
                 </Button>
-                
+
                 <Button Command="{Binding ReloadGameCommand}" ToolTipService.ToolTip="{Binding TranslationProperties.ReloadText, Mode=OneWay}">
                     <Button.Content>
                         <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="&#xE72C;"/>
                     </Button.Content>
                 </Button>
-                
+
+                <Button Command="{Binding ShowHideGameCommand}" ToolTipService.ToolTip="{Binding Game.IsHidden, Mode=OneWay, Converter={StaticResource HideGameTextConverter}}">
+                    <Button.Content>
+                        <FontIcon Style="{StaticResource SagoeFluentIconsFontIcon}" Glyph="{Binding Game.IsHidden, Mode=OneWay, Converter={StaticResource HideGameGlyphConverter}}" />
+                    </Button.Content>
+                </Button>
+
             </StackPanel>
         </ControlTemplate>
 

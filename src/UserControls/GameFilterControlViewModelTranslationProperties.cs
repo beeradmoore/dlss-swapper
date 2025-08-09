@@ -18,5 +18,8 @@ public class GameFilterControlViewModelTranslationProperties : LocalizedViewMode
     public string HideGamesWithNoSwappableItemsText => ResourceHelper.GetString("GamesPage_HideGamesWithNoSwappableItems");
 
     [TranslationProperty]
+    public string ShowHiddenGamesText => ResourceHelper.GetString("GamesPage_ShowHiddenGamesText");
+
+    [TranslationProperty]
     public string GroupGamesFromTheSameLibraryTogetherText => ResourceHelper.GetString("GamesPage_GroupGamesFromTheSameLibraryTogether");
 }

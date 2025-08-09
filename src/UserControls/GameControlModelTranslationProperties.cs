@@ -56,4 +56,13 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string HistoryText => ResourceHelper.GetString("GamePage_History");
+
+    [TranslationProperty]
+    public string ResetAllText => ResourceHelper.GetString("GamePage_ResetAll");
+
+    [TranslationProperty]
+    public string ClickToHideText => ResourceHelper.GetString("GamePage_ClickToHide");
+
+    [TranslationProperty]
+    public string HiddenText => ResourceHelper.GetString("General_Hidden");
 }

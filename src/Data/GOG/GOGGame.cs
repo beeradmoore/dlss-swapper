@@ -73,12 +73,12 @@ namespace DLSS_Swapper.Data.GOG
                     var catalogResponse = JsonSerializer.Deserialize<GOGCatalogResponse>(memoryStream);
                     if (catalogResponse is null)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotDeserializeCatalog", url));
+                        throw new Exception($"Could not deserialize GOGCatalogResponse for url, {url}");
                     }
 
                     if (catalogResponse.Products.Length == 0)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotFindAnyProduct", url));
+                        throw new Exception($"Could not find any GOGCatalogProduct for url, {url}");
                     }
 
                     foreach (var product in catalogResponse.Products)
@@ -104,24 +104,26 @@ namespace DLSS_Swapper.Data.GOG
 
 
             // If catalog failed fall back to embeded search.
+            /*
             try
             {
                 var url = "https://embed.gog.com/games/ajax/filtered?mediaType=game&search=" + Uri.EscapeDataString(Title);
+
                 var fileDownloader = new FileDownloader(url);
                 using (var memoryStream = new MemoryStream())
                 {
                     await fileDownloader.DownloadFileToStreamAsync(memoryStream);
                     memoryStream.Position = 0;
 
-                    var embedFilteredResponse = JsonSerializer.Deserialize<GOGEmbedFilteredResponse>(memoryStream);
+                    var embedFilteredResponse = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GOGEmbedFilteredResponse);
                     if (embedFilteredResponse is null)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotDeserializeEmbedFilterResponse", url));
+                        throw new Exception($"Could not deserialize GOGEmbedFilteredResponse for url, {url}");
                     }
 
                     if (embedFilteredResponse.Products.Length == 0)
                     {
-                        throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotFindAnyEmbedFilteredProducts", url));
+                        throw new Exception($"Could not find any GOGEmbedFilteredProducts for url, {url}");
                     }
 
                     foreach (var product in embedFilteredResponse.Products)
@@ -150,6 +152,7 @@ namespace DLSS_Swapper.Data.GOG
                 Logger.Error(err);
                 //Debugger.Break();
             }
+            */
 
 
             // If we got here then we did not find the game in search. We can load from the product endpoint

@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(已匯入)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>無法載入  manifest.json 檔案。</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>匯入功能已被停用，無法載入匯入清單。</value>
   </data>
@@ -150,17 +147,11 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>無法下載 {0} DLL 檔案，請稍後再試一次或檢查日誌來確認下載錯誤的原因。</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>無法下載檔案</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>下載</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>下載錯誤</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>下載檔案大小:</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>下載中</value>
@@ -197,27 +188,6 @@
   </data>
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>刪除自訂封面</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>GOG 目錄資料解析載入失敗：{0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>無法從 URL {0} 取得有效的 GOG 內容資料</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>無法從 URL {0} 載入任何 GOG 相關列表。</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>無法從 URL {0} 取得 GOG 的資訊。</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>未掃描到 Ubisoft Connect 的安裝路徑。</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>設定 ID 時，發現未知的遊戲平台 {0}。</value>
-  </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>無法載入收藏庫 {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>自訂遊戲封面</value>
@@ -511,9 +481,6 @@
   </data>
   <data name="General_Yes" xml:space="preserve">
     <value>開啟</value>
-  </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>無法載入 GitHub 的版本發佈資訊。</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>您目前有 {0} 已安裝。</value>

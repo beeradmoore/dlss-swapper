@@ -154,9 +154,6 @@
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Download Error</value>
   </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>Downloaded file was invalid.</value>
-  </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Downloading</value>
   </data>

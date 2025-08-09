@@ -153,9 +153,6 @@
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>خطأ في التنزيل</value>
   </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>الملف الذي تم تنزيله غير صالح.</value>
-  </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>جارٍ التنزيل</value>
   </data>

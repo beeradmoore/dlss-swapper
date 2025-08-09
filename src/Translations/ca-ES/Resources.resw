@@ -153,9 +153,6 @@
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Error de descàrrega</value>
   </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>El fitxer descarregat no era vàlid.</value>
-  </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Descarregant</value>
   </data>

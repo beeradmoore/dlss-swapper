@@ -153,9 +153,6 @@
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Lỗi tải xuống</value>
   </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>Tệp tải xuống không hợp lệ.</value>
-  </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Đang tải xuống</value>
   </data>

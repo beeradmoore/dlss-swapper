@@ -153,9 +153,6 @@
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Ошибка загрузки</value>
   </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>Загруженный файл был поврежден.</value>
-  </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Загрузка</value>
   </data>

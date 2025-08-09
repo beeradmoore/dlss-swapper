@@ -154,9 +154,6 @@
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Erreur de téléchargement</value>
   </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>Le fichier téléchargé était invalide.</value>
-  </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Téléchargement en cours</value>
   </data>

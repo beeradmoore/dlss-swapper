@@ -297,7 +297,7 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
 
                 if (ZipMD5Hash != fileStream.GetMD5Hash())
                 {
-                    throw new Exception(ResourceHelper.GetString("DllRecord_DownloadFileWasInvalid"));
+                    throw new Exception("Downloaded file was invalid.");
                 }
 
                 fileStream.Position = 0;

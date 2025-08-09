@@ -147,9 +147,6 @@
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Błąd pobierania</value>
   </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>Pobrany plik był nieprawidłowy.</value>
-  </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Pobieranie</value>
   </data>

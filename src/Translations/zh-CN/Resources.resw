@@ -153,9 +153,6 @@
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>下载错误</value>
   </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>下载文件无效</value>
-  </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>下载中</value>
   </data>

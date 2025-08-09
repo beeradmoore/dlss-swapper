@@ -231,9 +231,6 @@
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>تم تبديل ملف DLL</value>
   </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>تعذّر تحميل مكتبة اللعبة {0}</value>
-  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>إضافة غلاف مخصص</value>
   </data>

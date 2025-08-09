@@ -231,9 +231,6 @@
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL değiştirildi</value>
   </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Oyun kütüphanesi {0} yüklenemedi</value>
-  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Özel Kapak Ekle</value>
   </data>

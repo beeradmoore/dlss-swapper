@@ -231,9 +231,6 @@
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL intercambiado</value>
   </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>No se pudo cargar la biblioteca de juegos {0}</value>
-  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Añadir Carátula Personalizada</value>
   </data>

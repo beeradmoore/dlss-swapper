@@ -231,9 +231,6 @@
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL intercanviada</value>
   </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>No s'ha pogut carregar la biblioteca de jocs {0}</value>
-  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Afegir portada personalitzada</value>
   </data>

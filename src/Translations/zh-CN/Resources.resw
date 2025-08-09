@@ -231,9 +231,6 @@
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>替换 DLL</value>
   </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>无法加载游戏库 {0}</value>
-  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>自定义封面</value>
   </data>

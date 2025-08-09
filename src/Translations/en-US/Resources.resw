@@ -236,9 +236,6 @@
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL swapped</value>
   </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Could not load game library {0}</value>
-  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Add Custom Cover</value>
   </data>

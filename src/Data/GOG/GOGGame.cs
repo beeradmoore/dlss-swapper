@@ -104,16 +104,18 @@ namespace DLSS_Swapper.Data.GOG
 
 
             // If catalog failed fall back to embeded search.
+            /*
             try
             {
                 var url = "https://embed.gog.com/games/ajax/filtered?mediaType=game&search=" + Uri.EscapeDataString(Title);
+
                 var fileDownloader = new FileDownloader(url);
                 using (var memoryStream = new MemoryStream())
                 {
                     await fileDownloader.DownloadFileToStreamAsync(memoryStream);
                     memoryStream.Position = 0;
 
-                    var embedFilteredResponse = JsonSerializer.Deserialize<GOGEmbedFilteredResponse>(memoryStream);
+                    var embedFilteredResponse = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GOGEmbedFilteredResponse);
                     if (embedFilteredResponse is null)
                     {
                         throw new Exception(ResourceHelper.GetFormattedResourceTemplate("Game_GOG_CouldNotDeserializeEmbedFilterResponse", url));
@@ -150,6 +152,7 @@ namespace DLSS_Swapper.Data.GOG
                 Logger.Error(err);
                 //Debugger.Break();
             }
+            */
 
 
             // If we got here then we did not find the game in search. We can load from the product endpoint

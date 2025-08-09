@@ -12,6 +12,7 @@ namespace DLSS_Swapper;
 [JsonSerializable(typeof(Data.GOG.LimitedDetail.LimitedDetailImages))]
 [JsonSerializable(typeof(Data.GOG.GamePiece.GamePieceOriginalImages))]
 [JsonSerializable(typeof(Data.GOG.ResourceImages))]
+[JsonSerializable(typeof(Data.GOG.GOGEmbedFilteredResponse))]
 [JsonSerializable(typeof(Data.Manifest))]
 [JsonSerializable(typeof(Data.DLLRecord))]
 [JsonSerializable(typeof(Settings))]

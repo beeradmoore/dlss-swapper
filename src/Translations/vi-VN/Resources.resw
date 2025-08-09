@@ -567,9 +567,6 @@ Nếu đã kiểm tra những mục này mà trò chơi vẫn không hiển th�
   <data name="General_Yes" xml:space="preserve">
     <value>Có</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Không thể tải dữ liệu phát hành GitHub.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Bạn hiện đang cài phiên bản {0}.</value>
   </data>

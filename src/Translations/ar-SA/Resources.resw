@@ -575,9 +575,6 @@
   <data name="General_Yes" xml:space="preserve">
     <value>نعم</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>تعذّر تحميل بيانات إصدار GitHub</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>لديك حاليًا {0} مُثبّتًا</value>
   </data>

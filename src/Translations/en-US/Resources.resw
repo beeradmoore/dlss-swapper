@@ -596,9 +596,6 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Could not load GitHub release data.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>You currently have {0} installed.</value>
     <comment>{0} is the currently installed version.</comment>

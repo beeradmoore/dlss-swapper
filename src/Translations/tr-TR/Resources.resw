@@ -562,9 +562,6 @@ Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran �
   <data name="General_Yes" xml:space="preserve">
     <value>Evet</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>GitHub sürüm verileri yüklenemedi.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Şu anda {0} sürümü yüklü.</value>
   </data>

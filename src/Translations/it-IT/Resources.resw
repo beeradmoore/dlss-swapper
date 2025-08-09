@@ -568,9 +568,6 @@ Se hai verificato queste opzioni e il tuo gioco continua a non essere visualizza
   <data name="General_Yes" xml:space="preserve">
     <value>Sì</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Impossibile caricare le note di rilascio di GitHub.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Attualmente hai installato {0}.</value>
   </data>

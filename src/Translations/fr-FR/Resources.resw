@@ -580,9 +580,6 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   <data name="General_Yes" xml:space="preserve">
     <value>Oui</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Impossible de charger les données de publication GitHub.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Vous avez actuellement {0} installé.</value>
     <comment>{0} est la version actuellement installée.</comment>

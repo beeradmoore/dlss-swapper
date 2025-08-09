@@ -567,9 +567,6 @@
   <data name="General_Yes" xml:space="preserve">
     <value>开启</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>无法获取 GitHub 版本发布信息</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>当前有 {0} 已经安装</value>
   </data>

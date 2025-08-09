@@ -500,9 +500,6 @@
   <data name="General_Yes" xml:space="preserve">
     <value>開啟</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>無法載入 GitHub 的版本發佈資訊。</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>您目前有 {0} 已安裝。</value>
   </data>

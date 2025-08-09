@@ -489,9 +489,6 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
   <data name="General_Yes" xml:space="preserve">
     <value>Sim</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Não foi possível carregar os dados de lançamento do GitHub.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Você tem atualmente o {0} instalado.</value>
   </data>

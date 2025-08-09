@@ -567,9 +567,6 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   <data name="General_Yes" xml:space="preserve">
     <value>Sí</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>No s'han pogut carregar les dades de la versió de GitHub.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Actualment teniu {0} instal·lat.</value>
   </data>

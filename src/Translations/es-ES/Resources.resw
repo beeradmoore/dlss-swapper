@@ -567,9 +567,6 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   <data name="General_Yes" xml:space="preserve">
     <value>Sí</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>No se pudieron cargar los datos de la versión de GitHub.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Actualmente tienes la versión {0} instalada.</value>
   </data>

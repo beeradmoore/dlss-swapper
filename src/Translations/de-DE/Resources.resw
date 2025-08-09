@@ -567,9 +567,6 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   <data name="General_Yes" xml:space="preserve">
     <value>Ja</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Die GitHub-Release-Daten konnten nicht geladen werden.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Aktuell ist die Version {0} installiert.</value>
   </data>

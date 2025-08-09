@@ -476,9 +476,6 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="General_Yes" xml:space="preserve">
     <value>Włączone</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Nie można załadować danych Releasez z GitHuba.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Już masz {0} zainstalowane.</value>
   </data>

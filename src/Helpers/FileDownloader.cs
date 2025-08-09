@@ -167,9 +167,9 @@ public partial class FileDownloader : ObservableObject
                 using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                 {
                     var bytesRead = 0;
-                    while ((bytesRead = await responseStream.ReadAsync(buffer, 0, BufferSize, cancellationToken).ConfigureAwait(false)) > 0)
+                    while ((bytesRead = await responseStream.ReadAsync(buffer.AsMemory(0, BufferSize), cancellationToken).ConfigureAwait(false)) > 0)
                     {
-                        await outputStream.WriteAsync(buffer, 0, bytesRead, cancellationToken).ConfigureAwait(false);
+                        await outputStream.WriteAsync(buffer.AsMemory(0, bytesRead), cancellationToken).ConfigureAwait(false);
                         //Interlocked.Add(ref totalBytesRead, bytesRead);
                         totalBytesRead += bytesRead;
                     }
@@ -181,6 +181,7 @@ public partial class FileDownloader : ObservableObject
                 Percent = 100.0;
             });
 
+            Logger.Verbose($"{LogPrefix}Complete. Read {totalBytesRead} bytes from {_url}");
             return true;
         }
         catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested == false)

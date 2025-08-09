@@ -49,7 +49,7 @@ jobs:
         if ($currentHash.Hash -eq $remoteHash.Hash) {
             Write-Host "static_manifest.json is up to date."
         } else {
-            Write-Host "static_manifest.json is out of date. Aborting build."
+            Write-Host "static_manifest.json is out of date $($currentHash.Hash) vs $($remoteHash.Hash). Aborting build."
             exit 1
         }
       working-directory: ${{ github.workspace }}\

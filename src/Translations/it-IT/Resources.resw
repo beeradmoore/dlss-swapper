@@ -201,9 +201,6 @@
   <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
     <value>Impossibile trovare alcun GOGCatalogProduct per l'URL {0}</value>
   </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>Impossibile rilevare ubisoftConnectInstallsKey</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Tipo di risorsa</value>
   </data>

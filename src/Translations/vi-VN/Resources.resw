@@ -201,9 +201,6 @@
   <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
     <value>Không tìm thấy GOGCatalogProduct nào cho URL, {0}</value>
   </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>Không thể phát hiện ubisoftConnectInstallsKey</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Loại tài sản</value>
   </data>

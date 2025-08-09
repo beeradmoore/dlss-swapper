@@ -201,9 +201,6 @@
   <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
     <value>無法從 URL {0} 取得 GOG 的資訊。</value>
   </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>未掃描到 Ubisoft Connect 的安裝路徑。</value>
-  </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>無法載入收藏庫 {0}</value>
   </data>

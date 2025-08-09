@@ -201,9 +201,6 @@
   <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
     <value>لم يتم العثور على أي GOGCatalogProduct من الرابط {0}</value>
   </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>تعذّر اكتشاف ubisoftConnectInstallsKey</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>نوع الأصل</value>
   </data>

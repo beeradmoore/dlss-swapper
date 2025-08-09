@@ -201,9 +201,6 @@
   <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
     <value>无法从 URL {0} 获取 GOG 的信息</value>
   </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>未找到 Ubisoft Connect 的安装路径</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>资产类型</value>
   </data>

@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(تم الاستيراد مسبقًا)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>تعذّر تحليل ملف manifest.json</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>ميزة الاستيراد معطّلة, تعذّر تحميل ملف manifest الخاص بالاستيراد.</value>
   </data>

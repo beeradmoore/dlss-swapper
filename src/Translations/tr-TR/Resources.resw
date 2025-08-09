@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(zaten içe aktarıldı)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>manifest.json dosyası çözümlenemedi.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>İçe aktarma özelliği devre dışı, içe aktarma manifestosu yüklenemedi.</value>
   </data>

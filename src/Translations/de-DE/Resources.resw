@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(bereits importiert)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>Die Datei „manifest.json“ konnte nicht deserialisiert werden.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>Die Importfunktion ist deaktiviert, das Import-Manifest konnte nicht geladen werden.</value>
   </data>

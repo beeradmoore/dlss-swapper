@@ -129,9 +129,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(aktualnie zaimportowana)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>Nie można deserializować pliku manifest.json.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>Funkcja importu jest wyłączona, nie można załadować manifestu importu.</value>
   </data>

@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(مستورد بالفعل)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>فشل في تحليل ملف manifest.json.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>خاصية الاستيراد غير مفعلة، لا يمكن تحميل ملف الـmanifest.</value>
   </data>

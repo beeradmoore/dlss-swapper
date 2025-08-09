@@ -54,9 +54,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(já importado)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>Não foi possível desserializar o arquivo manifest.json.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>O recurso de importação está desativado, o manifesto de importação não pôde ser carregado.</value>
   </data>

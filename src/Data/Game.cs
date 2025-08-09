@@ -1019,19 +1019,19 @@ namespace DLSS_Swapper.Data
             }
         }
 
-        protected async Task DownloadCoverAsync(string url)
+        protected async Task<bool> DownloadCoverAsync(string url)
         {
             if (string.IsNullOrEmpty(url))
             {
                 Logger.Error($"Tried to download cover image but url was null or empty. Game: {Title}, Library: {GameLibrary}");
-                return;
+                return false;
             }
 
             if (url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) == false &&
                 url.StartsWith("https://", StringComparison.OrdinalIgnoreCase) == false)
             {
                 Logger.Error($"Tried to download cover image but url was not valid. Game: {Title}, Library: {GameLibrary}, Url: {url}");
-                return;
+                return false;
             }
 
 
@@ -1056,11 +1056,13 @@ namespace DLSS_Swapper.Data
                     // Now if the image is downloaded lets resize it,
                     await ResizeCoverAsync(memoryStream).ConfigureAwait(false);
                 }
+                return true;
             }
             catch (Exception err)
             {
                 Logger.Error(err, $"For url: {url}");
                 //Debugger.Break();
+                return false;
             }
             finally
             {

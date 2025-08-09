@@ -204,9 +204,6 @@
   <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
     <value>Konnte den ubisoftConnectInstallsKey nicht finden</value>
   </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Unbekannte GameLibrary {0} beim festlegen der ID</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Asset Typ</value>
   </data>

@@ -204,9 +204,6 @@
   <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
     <value>ubisoftConnectInstallsKey tespit edilemedi</value>
   </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Kimlik ayarlanırken bilinmeyen Oyun Kütüphanesi {0}</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>İçerik türü</value>
   </data>

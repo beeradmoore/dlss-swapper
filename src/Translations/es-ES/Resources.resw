@@ -204,9 +204,6 @@
   <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
     <value>No se pudo detectar la clave de instalación de Ubisoft Connect</value>
   </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Biblioteca de juegos desconocida {0} al establecer el ID</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Tipo de Recurso</value>
   </data>

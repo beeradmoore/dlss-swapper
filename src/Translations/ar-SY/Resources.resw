@@ -204,9 +204,6 @@
   <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
     <value>تعذر اكتشاف ubisoftConnectInstallsKey</value>
   </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>مكتبة ألعاب غير معروفة {0} أثناء تعيين المعرف</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>نوع العنصر</value>
   </data>

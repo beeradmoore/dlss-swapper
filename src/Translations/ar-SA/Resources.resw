@@ -147,9 +147,6 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>تعذّر تنزيل {0} DLL. يُرجى المحاولة لاحقًا أو التحقق من السجلات لمعرفة سبب فشل التنزيل.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>تعذّر تنزيل الملف.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>تنزيل</value>
   </data>

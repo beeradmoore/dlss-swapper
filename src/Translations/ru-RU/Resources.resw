@@ -147,9 +147,6 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Не удалось загрузить {0} DLL, попробуйте позже или проверьте журналы, чтобы узнать причину сбоя загрузки.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Не удалось загрузить файл.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Загрузить</value>
   </data>

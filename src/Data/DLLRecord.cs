@@ -292,7 +292,7 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
 
                 if (didDownload == false)
                 {
-                    throw new Exception(ResourceHelper.GetString("DllRecord_CouldNotDownloadFile"));
+                    throw new Exception("Could not download file.");
                 }
 
                 if (ZipMD5Hash != fileStream.GetMD5Hash())

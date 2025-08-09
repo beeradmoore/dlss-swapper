@@ -69,9 +69,6 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Não foi possível baixar a DLL do {0}, tente novamente mais tarde ou verifique os logs para entender o motivo da falha.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Não foi possível baixar o arquivo.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Baixar</value>
   </data>

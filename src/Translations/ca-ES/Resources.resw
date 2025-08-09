@@ -147,9 +147,6 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>No s'ha pogut descarregar la DLL {0}. Si us plau, torneu-ho a provar més tard o consulteu els registres per veure per què ha fallat la descàrrega.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>No s'ha pogut descarregar el fitxer.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Descarrega</value>
   </data>

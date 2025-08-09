@@ -147,9 +147,6 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>فشل في تنزيل {0} DLL، يرجى إعادة المحاولة لاحقاً أو مراجعة ملفات السجل لمعرفة سبب الفشل.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>لا يمكن تحميل هذا الملف.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>تحميل</value>
   </data>

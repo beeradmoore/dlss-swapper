@@ -147,9 +147,6 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Không thể tải xuống DLL {0}, vui lòng thử lại sau hoặc kiểm tra nhật ký để xem lý do thất bại.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Không thể tải xuống tệp.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Tải xuống</value>
   </data>

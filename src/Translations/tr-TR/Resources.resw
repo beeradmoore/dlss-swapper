@@ -147,9 +147,6 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>{0} DLL'i indirilemedi. Lütfen daha sonra tekrar deneyin veya indirme işleminin neden başarısız olduğunu görmek için günlüklerinizi  kontrol edin.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Dosya indirilemedi.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>İndir</value>
   </data>

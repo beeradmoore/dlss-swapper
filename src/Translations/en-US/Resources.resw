@@ -148,9 +148,6 @@
     <value>Could not download {0} DLL, please try again later or check your logs to see why the download failed.</value>
     <comment>{0} will be the DLL type (eg. DLSS, FSR, XeSS)</comment>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Could not download file.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Download</value>
   </data>

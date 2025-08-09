@@ -147,9 +147,6 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Die {0} DLL konnte nicht heruntergeladen werden. Bitte versuche es später noch einmal oder schau in der Log Datei nach, warum der Download nicht geklappt hat.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Datei konnte nicht heruntergeladen werden.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Herunterladen</value>
   </data>

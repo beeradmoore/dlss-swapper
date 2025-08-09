@@ -147,9 +147,6 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Impossibile scaricare {0} DLL. Riprova più tardi o controlla i log per scoprire perché il download non sia riuscito.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Impossibile scaricare il file.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Download</value>
   </data>

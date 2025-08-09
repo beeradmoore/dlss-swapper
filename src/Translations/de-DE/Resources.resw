@@ -189,18 +189,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Titelbild entfernen?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Konnte die GOGCatalogResponse für die folgende URL {0} nicht deserialisieren</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Konnte die GOGEmbedFilteredResponse für die folgende URL {0} nicht deserialisieren</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Konnte keine GOGEmbedFilteredProducts für die folgende URL {0} finden</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Konnte kein GOGCatalogProduct für die folgende URL {0} finden</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Asset Typ</value>
   </data>

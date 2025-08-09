@@ -189,18 +189,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Özel kapak kaldırılsın mı?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>{0} URL'si için GOGCatalogResponse çözümlenemedi</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>{0} URL'si için GOGEmbedFilteredResponse çözümlenemedi</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>{0} URL'si için herhangi bir GOGEmbedFilteredProducts bulunamadı</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>{0} URL'si için herhangi bir GOGCatalogProduct bulunamadı</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>İçerik türü</value>
   </data>

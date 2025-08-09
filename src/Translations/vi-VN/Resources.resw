@@ -189,18 +189,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Xóa ảnh bìa tùy chỉnh?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Không thể giải mã GOGCatalogResponse cho URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Không thể giải mã GOGEmbedFilteredResponse cho URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Không tìm thấy GOGEmbedFilteredProducts nào cho URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Không tìm thấy GOGCatalogProduct nào cho URL, {0}</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Loại tài sản</value>
   </data>

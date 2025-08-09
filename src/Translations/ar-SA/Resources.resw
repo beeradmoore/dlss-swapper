@@ -189,18 +189,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>إزالة الغلاف المخصص؟</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>تعذّر تحليل GOGCatalogResponse من الرابط {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>تعذّر تحليل GOGEmbedFilteredResponse من الرابط {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>لم يتم العثور على أي GOGEmbedFilteredProducts من الرابط {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>لم يتم العثور على أي GOGCatalogProduct من الرابط {0}</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>نوع الأصل</value>
   </data>

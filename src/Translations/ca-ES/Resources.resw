@@ -189,18 +189,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Voleu treure la portada personalitzada?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>No s'ha pogut deserialitzar GOGCatalogResponse per a l'URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>No s'ha pogut deserialitzar GOGEmbedFilteredResponse per a l'URL {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>No s'ha trobat cap GOGEmbedFilteredProducts per a l'URL {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>No s'ha trobat cap GOGCatalogProduct per a l'URL {0}</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Tipus d'actiu</value>
   </data>

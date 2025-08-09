@@ -190,22 +190,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Supprimer la couverture personnalisée ?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Impossible de désérialiser GOGCatalogResponse pour l'URL {0}</value>
-    <comment>0 = url</comment>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Impossible de désérialiser GOGEmbedFilteredResponse pour l'URL {0}</value>
-    <comment>0 = url</comment>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Aucun GOGEmbedFilteredProducts trouvé pour l'URL {0}</value>
-    <comment>0 = url</comment>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Aucun GOGCatalogProduct trouvé pour l'URL {0}</value>
-    <comment>0 = url</comment>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Type d'actif</value>
   </data>

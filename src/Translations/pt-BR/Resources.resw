@@ -111,18 +111,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Remover capa personalizada?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Não foi possível desserializar o GOGCatalogResponse para a URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Não foi possível desserializar o GOGEmbedFilteredResponse para a URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Não foram encontrados produtos GOGEmbedFiltered para a URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Nenhum produto GOGCatalog encontrado para a URL, {0}</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Asset Type</value>
   </data>

@@ -189,18 +189,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>刪除自訂封面</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>GOG 目錄資料解析載入失敗：{0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>無法從 URL {0} 取得有效的 GOG 內容資料</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>無法從 URL {0} 載入任何 GOG 相關列表。</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>無法從 URL {0} 取得 GOG 的資訊。</value>
-  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>自訂遊戲封面</value>
   </data>

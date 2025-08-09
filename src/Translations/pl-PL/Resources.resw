@@ -180,18 +180,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Usunąć własną okładkę?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Nie można zdeserializować GOGCatalogResponse dla url, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Nie można zdeserializować GOGEmbedFilteredResponse dla url, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Nie można znaleźć żadnego GOGEmbedFilteredProducts dla url, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Nie można znaleźć żadnego GOGCatalogProduct dla url, {0}</value>
-  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Dodaj własną okładkę</value>
   </data>

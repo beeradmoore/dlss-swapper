@@ -474,19 +474,6 @@ public partial class SettingsPageModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task OpenGitCommitsAsync()
-    {
-        if (string.IsNullOrWhiteSpace(BuildInfo.GitBranch))
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://github.com/beeradmoore/dlss-swapper/"));
-        }
-        else
-        {
-            await Launcher.LaunchUriAsync(new Uri($"https://github.com/beeradmoore/dlss-swapper/commits/{BuildInfo.GitBranch}"));
-        }
-    }
-
-    [RelayCommand]
     void CopyGitCommit()
     {
         var package = new DataPackage();

@@ -202,9 +202,7 @@
 
                 <TextBlock Visibility="{x:Bind local:BuildInfo.IsFromTagBuild, Converter={StaticResource BoolToNegationVisibilityConverter}}">
                     <Run Text="{x:Bind ViewModel.TranslationProperties.BuildCommitText, Mode=OneWay}" FontWeight="Bold" />
-                    <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenGitCommitsCommand}">
-                        <Run Text="{x:Bind local:BuildInfo.GitCommitShort}" />
-                    </Hyperlink>
+                    <Run Text="{x:Bind local:BuildInfo.GitCommitShort}" />
                     <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.CopyGitCommitCommand}" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.CopyText, Mode=OneWay}" FontStyle="Normal" FontSize="12">
                         <Run Text="&#xE8C8;" FontFamily="/Assets/Fonts/Segoe-Fluent-Icons.ttf#Segoe Fluent Icons" />
                     </Hyperlink>

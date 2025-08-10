@@ -52,6 +52,7 @@ public class LanguageManager
             "es-ES",
             "fr-FR",
             "it-IT",
+            "ja-JP",
             "pl-PL",
             "pt-BR",
             "ru-RU",
@@ -81,6 +82,7 @@ public class LanguageManager
             "es-ES" => "Español", // Spanish
             "fr-FR" => "Français (France)", // French (France)
             "it-IT" => "Italiano (Italia)", // Italian (Italy)
+            "ja-JP" => "日本語", // Japanese
             "pl-PL" => "Polski", // Polish
             "pt-BR" => "Português BR", // Portuguese
             "ru-RU" => "Русский", // Russian

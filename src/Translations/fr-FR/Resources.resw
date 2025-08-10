@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AcknowledgementsPage_Title" xml:space="preserve">
-    <value>Licences et Remerciements</value>
+    <value>Licences et mentions légales</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>DLSS Swapper</value>
@@ -127,114 +127,115 @@
     <value>Cliquez pour copier les détails ci-dessous</value>
   </data>
   <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
-    <value>Diagnostics</value>
+    <value>Diagnostic</value>
   </data>
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(déjà importé)</value>
   </data>
+  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
+    <value>Impossible de désérialiser le fichier manifest.json.</value>
+  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
-    <value>La fonction d'importation est désactivée, le manifeste d'importation n'a pas pu être chargé.</value>
+    <value>La fonctionnalité d'importation est désactivée, le manifeste d'importation n'a pas pu être chargé.</value>
   </data>
   <data name="DllManager_MigratingDlls" xml:space="preserve">
-    <value>Migration des DLL</value>
+    <value>Migration du DLL</value>
   </data>
   <data name="DllManager_UnknownTypeDll" xml:space="preserve">
-    <value>DLL n'est pas un type connu.</value>
+    <value>DLL de type inconnu.</value>
   </data>
   <data name="DllManager_UntrustedDll" xml:space="preserve">
-    <value>La DLL n'est pas approuvée par Windows.</value>
+    <value>Le DLL n'est pas approuvée par Windows.</value>
   </data>
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
-    <value>Impossible de télécharger la DLL {0}, veuillez réessayer plus tard ou consulter vos logs pour voir pourquoi le téléchargement a échoué.</value>
-    <comment>{0} sera le type de DLL (par exemple, DLSS, FSR, XeSS)</comment>
+    <value>Impossible de télécharger le DLL {0}. Veuillez réessayer plus tard ou consulter vos journaux pour déterminer la cause de l'échec du téléchargement.</value>
+  </data>
+  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
+    <value>Impossible de télécharger le fichier.</value>
   </data>
   <data name="DllRecord_Download" xml:space="preserve">
-    <value>Télécharger</value>
+    <value>Téléchargement</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Erreur de téléchargement</value>
+  </data>
+  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
+    <value>Le fichier téléchargé n'est pas valide.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Téléchargement en cours</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
-    <value>Importé</value>
+    <value>Importer</value>
   </data>
   <data name="DllRecord_RequiresDownload" xml:space="preserve">
-    <value>Nécessite un téléchargement</value>
+    <value>Téléchargement requis</value>
   </data>
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
-    <value>Le fichier zip de la DLL était invalide (aucune DLL trouvée).</value>
+    <value>Le fichier DLL zip n'était pas valide (aucun fichier DLL trouvé).</value>
   </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
-    <value>DLSS Swapper a échoué au lancement</value>
+    <value>DLSS Swapper n'a pas pu être lancé.</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
     <value>Veuillez ouvrir un</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
-    <value>nouveau problème</value>
+    <value>Nouveau ticket</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
-    <value>sur le dépôt GitHub de DLSS Swapper et fournir les informations suivantes dans la section de contexte supplémentaire.</value>
+    <value>sur le dépôt GitHub DLSS Swapper et fournissez les informations suivantes dans la section « Contexte supplémentaire ».</value>
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Échec du lancement</value>
   </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer l'image de couverture personnalisée ?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Jeu actuellement en cours de traitement</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Supprimer la couverture personnalisée ?</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
-    <value>Type d'actif</value>
+    <value>Type d'asset</value>
   </data>
   <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
-    <value>Heure de l'événement</value>
+    <value>Temps d'événement</value>
   </data>
   <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
     <value>Type d'événement</value>
   </data>
   <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
-    <value>Aucun historique trouvé.</value>
+    <value>Pas d'historique trouvé</value>
   </data>
   <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
     <value>Version</value>
   </data>
   <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
-    <value>Sauvegarde de la DLL supprimée</value>
+    <value>Sauvegarde du DLL supprimée</value>
   </data>
   <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
-    <value>La DLL a été modifiée externement</value>
+    <value>DLL a été modifié en externe</value>
   </data>
   <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
-    <value>DLL détectée</value>
+    <value>DLL détecté</value>
   </data>
   <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
-    <value>Réinitialisation de la DLL</value>
+    <value>Réinitialisé le DLL par défaut</value>
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
-    <value>Échange de la DLL</value>
+    <value>Échanger le DLL</value>
+  </data>
+  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Impossible de charger la bibliothèque de jeux {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Ajouter une couverture personnalisée</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
-    <value>Cliquez pour ajouter aux favoris</value>
+    <value>Cliquez pour ajouter à vos favoris</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
-    <value>Impossible de trouver le chemin "{0}".</value>
-    <comment>{0} est le chemin d'installation du jeu</comment>
+    <value>Impossible de trouver le chemin « {0} ».</value>
   </data>
   <data name="GamePage_CurrentDll" xml:space="preserve">
-    <value>DLL actuelle</value>
+    <value>DLL actuel</value>
   </data>
   <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
-    <value>Impossible de trouver le fichier "{0}".</value>
+    <value>Impossible de trouver le fichier « {0} ».</value>
   </data>
   <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
     <value>La DLL a été réinitialisée à {0}.</value>
@@ -243,29 +244,29 @@
     <value>Début du téléchargement</value>
   </data>
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
-    <value>Veuillez attendre la fin du téléchargement avant d'échanger</value>
+    <value>Veuillez attendre la fin du téléchargement avant de procéder à l'échange.</value>
   </data>
   <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
-    <value>Informations sur les préréglages</value>
+    <value>Informations prédéfinies</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
-    <value>Les préréglages DLSS sont contenus dans les fichiers DLL DLSS situés dans le répertoire d'installation de vos jeux. Différentes DLL DLSS ont différents préréglages. Par exemple, le préréglage K n'a été introduit qu'à partir de DLSS v310.2. Donc, si vous utilisez DLSS v3.7 et que vous définissez le préréglage sur K, il n'utilisera pas le préréglage K et utilisera plutôt le préréglage que le jeu choisit d'utiliser. 
+    <value>Les préréglages DLSS sont contenus dans les fichiers DLL DLSS situés dans le répertoire d'installation de vos jeux. Différents fichiers DLL DLSS ont différents préréglages. Par exemple, le préréglage K n'a été introduit qu'à partir de la version DLSS v310.2. Ainsi, si vous utilisez DLSS v3.7 et que vous définissez le préréglage sur K, le préréglage K ne sera pas utilisé et le jeu se rabattra sur le préréglage qu'il choisit d'utiliser.
 
-La même chose s'applique aux préréglages globaux. Si vous sélectionnez le préréglage K mais que votre jeu utilise DLSS v3.7, vous n'utiliserez pas le préréglage K et le jeu utilisera plutôt sa valeur par défaut.
+Il en va de même pour les préréglages globaux. Si vous sélectionnez le préréglage K mais que votre jeu utilise DLSS v3.7, vous n'utiliserez pas le préréglage K et le jeu se rabattra sur son préréglage par défaut.
 
 Pour vérifier quel préréglage est utilisé, veuillez activer l'indicateur DLSS à l'écran.</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
-    <value>Informations sur l'indicateur à l'écran</value>
+    <value>Informations affichées à l'écran</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
     <value>Informations sur les préréglages DLSS</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
-    <value>La définition d'un préréglage DLSS ne garantit pas que le préréglage est utilisé.</value>
+    <value>Le fait de définir un préréglage DLSS ne garantit pas que ce préréglage sera utilisé.</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
-    <value>Ajouté aux favoris</value>
+    <value>Favoris</value>
   </data>
   <data name="GamePage_History" xml:space="preserve">
     <value>Historique</value>
@@ -274,135 +275,133 @@ Pour vérifier quel préréglage est utilisé, veuillez activer l'indicateur DLS
     <value>Chemin d'installation</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
-    <value>"{0}" est un type de fichier invalide</value>
+    <value>« {0} » est un type de fichier non valide.</value>
   </data>
   <data name="GamePage_Launch" xml:space="preserve">
     <value>Lancer</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
-    <value>Ce titre n'a pas été ajouté manuellement et ne peut pas être supprimé.</value>
+    <value>Ce titre n'est pas ajouté manuellement et ne peut pas être supprimé.</value>
   </data>
   <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer "{0}" de DLSS Swapper ? Cela n'apportera aucune modification aux fichiers DLSS qui ont déjà été échangés.</value>
-    <comment>{0} est le nom du jeu</comment>
+    <value>Êtes-vous sûr de vouloir supprimer « {0} » de DLSS Swapper ? Cela n'aura aucun effet sur les fichiers DLSS qui ont déjà été remplacés.</value>
   </data>
   <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
-    <value>Ci-dessous sont affichées les multiples DLL trouvées. Vous pourrez toujours échanger et restaurer les DLL comme d'habitude car nous effectuerons ces actions sur toutes les DLL à la fois. Cependant, comme nous ne savons pas laquelle de ces DLL est utilisée par le jeu, la version de la DLL affichée est celle de la première DLL détectée.</value>
+    <value>Vous trouverez ci-dessous les multiples DLL trouvées. Vous pourrez toujours échanger et restaurer les DLL comme d'habitude, car nous effectuerons ces actions sur toutes les DLL en même temps. Cependant, comme nous ne savons pas laquelle de ces DLL est utilisée par le jeu, la version de DLL affichée est celle de la première DLL détectée.</value>
   </data>
   <data name="GamePage_MultipleDllsFound" xml:space="preserve">
-    <value>Plusieurs DLL trouvées</value>
+    <value>Plusieurs fichiers DLL trouvés</value>
   </data>
   <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
-    <value>Plusieurs DLL {0} trouvées</value>
-    <comment>{0} est le type de DLL (par exemple, DLSS, FSR, XeSS)</comment>
+    <value>Plusieurs fichiers DLL {0} trouvés</value>
   </data>
   <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
-    <value>Veuillez vous rendre sur la page de la bibliothèque pour télécharger de nouvelles DLL.</value>
+    <value>Veuillez vous rendre sur la page de la bibliothèque pour télécharger les nouveaux DLL.</value>
   </data>
   <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
-    <value>Aucune DLL trouvée</value>
+    <value>Aucun fichier DLL trouvé</value>
   </data>
   <data name="GamePage_Notes" xml:space="preserve">
-    <value>Notes</value>
-    <comment>dans le contexte des Notes - {GameTitle}</comment>
+    <value>Note</value>
   </data>
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
-    <value>Ce jeu n'est pas dans un état prêt à être joué.</value>
+    <value>Ce jeu n'est pas prêt à être joué.</value>
   </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
-    <value>Ouvrir l'emplacement de la DLL</value>
+    <value>Ouvrir l'emplacement DLL</value>
   </data>
   <data name="GamePage_OriginalDll" xml:space="preserve">
-    <value>DLL originale</value>
+    <value>Version originel DLL</value>
   </data>
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
-    <value>{0} est encore en cours de traitement. Veuillez attendre que l'indicateur de chargement soit terminé avant d'ouvrir.</value>
-    <comment>{0} est le titre du jeu sélectionné.</comment>
+    <value>{0} est toujours en cours de traitement. Veuillez patienter jusqu'à ce que l'indicateur de chargement soit terminé avant d'ouvrir.</value>
   </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
-    <value>Restaurer la DLL originale</value>
+    <value>Valeur par défaut DLL</value>
   </data>
   <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
-    <value>Sélectionner la version {0}</value>
-    <comment>{0} est le type de DLL (par exemple, DLSS, FSR, XeSS)</comment>
+    <value>Sélectionné la version {0}</value>
   </data>
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
-    <value>storageFile est null</value>
+    <value>storageFile est nul</value>
   </data>
   <data name="GamePage_UnableToChangePreset" xml:space="preserve">
-    <value>Impossible de changer le préréglage. Veuillez consulter votre journal d'erreurs pour plus d'informations.</value>
+    <value>Impossible de modifier le préréglage. Veuillez consulter votre journal d'erreurs pour plus d'informations.</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
-    <value>Vous ne pouvez faire glisser qu'un seul fichier pour une couverture</value>
+    <value>Vous ne pouvez faire glisser qu'un seul fichier pour une couverture.</value>
   </data>
   <data name="GamesPage_AddGame" xml:space="preserve">
-    <value>Ajouter un jeu</value>
+    <value>Ajouter un jeux</value>
   </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
-    <value>Grouper les jeux de la même bibliothèque ensemble</value>
+    <value>Regroupez les jeux provenant de la même bibliothèque</value>
   </data>
   <data name="GamesPage_Grouping" xml:space="preserve">
-    <value>Groupement</value>
+    <value>Grouper</value>
   </data>
   <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
-    <value>Masquer les jeux sans éléments échangeables</value>
+    <value>Masquer les jeux sans échange DLL possible</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
-    <value>Vous ne pouvez faire glisser qu'un seul fichier pour une couverture</value>
+    <value>Vous ne pouvez glisser qu'un seul fichier pour une couverture.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
-    <value>Une autre note pour l'ajout manuel de jeux</value>
+    <value>Another note for manually adding games</value>
   </data>
   <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
-    <value>Il y a eu un problème et votre jeu n'a pas pu être ajouté pour le moment. Veuillez signaler ce problème.</value>
+    <value>Un problème est survenu et votre jeu n'a pas pu être ajouté pour le moment. Veuillez signaler ce problème.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
     <value>Erreur lors de l'ajout de votre jeu</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value>Vous devez sélectionner votre répertoire de &lt;i&gt;jeu&lt;/i&gt;, et non votre répertoire de &lt;i&gt;jeux&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;Par exemple, si vous avez un jeu à l'emplacement suivant :&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Vous sélectionneriez le répertoire &lt;b&gt;MyFavGame&lt;/b&gt; et non le répertoire &lt;b&gt;MyGamesFolder&lt;/b&gt;.</value>
+    <value>Vous devez sélectionner votre répertoire &lt;i&gt;game&lt;/i&gt;, et non votre répertoire &lt;i&gt;games&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;Par exemple, si vous avez un jeu à l’emplacement suivant :&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Vous devez sélectionner le répertoire &lt;b&gt;MyFavGame&lt;/b&gt; et non le répertoire &lt;b&gt;MyGamesFolder&lt;/b&gt;.
+</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
-    <value>DLSS Swapper devrait trouver les jeux de vos bibliothèques de jeux installées automatiquement. Si votre jeu n'est pas listé, il peut y avoir quelques paramètres qui l'empêchent. Veuillez vérifier :
+    <value>DLSS Swapper devrait trouver automatiquement les jeux dans vos bibliothèques de jeux installées. Si votre jeu n'apparaît pas dans la liste, certains paramètres peuvent l'empêcher. Veuillez vérifier les points suivants :
 
-- Le filtre de la liste des jeux n'est pas défini sur "Masquer les jeux sans éléments échangeables"
+- Le filtre de la liste des jeux n'est pas réglé sur « Masquer les jeux sans éléments échangeables »
 - La bibliothèque de jeux spécifique est activée dans les paramètres
 
-Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il peut y avoir un bug. Nous vous serions reconnaissants de signaler le problème sur notre dépôt GitHub afin que nous puissions le corriger et mieux détecter vos jeux à l'avenir.</value>
+Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il se peut qu'il y ait un bug. Nous vous serions reconnaissants de bien vouloir signaler le problème sur notre dépôt GitHub afin que nous puissions le corriger et améliorer la détection de vos jeux à l'avenir.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
     <value>Note pour l'ajout manuel de jeux</value>
   </data>
   <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
-    <value>Le chemin d'installation "{0}" existe déjà et ne peut pas être ajouté à nouveau.</value>
-    <comment>Laisser 0 tel quel et utiliser un format de chaîne sûr</comment>
+    <value>Le chemin d'installation « {0} » existe déjà et ne peut pas être ajouté à nouveau.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
-    <value>Sélectionner le dossier du jeu</value>
+    <value>Sélectionnez le dossier du jeu</value>
   </data>
   <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
-    <value>L'ajout d'un répertoire de niveau supérieur n'est pas supporté. Veuillez ajouter la racine de votre répertoire de jeu.</value>
+    <value>L'ajout d'un répertoire de niveau supérieur n'est pas pris en charge. Veuillez ajouter la racine de votre répertoire de jeu.</value>
   </data>
   <data name="GamesPage_NewDlls" xml:space="preserve">
-    <value>Nouvelles DLL</value>
+    <value>Nouveaux fichiers DLL</value>
+  </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Nouveaux fichiers DLL trouvés</value>
   </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
-    <value>Créer un nouveau problème GitHub</value>
+    <value>Créer un nouveau ticket GitHub</value>
   </data>
   <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
-    <value>Lors du chargement de vos jeux, de nouvelles DLL ont été découvertes qui ne sont pas dans le manifeste de DLSS Swapper.</value>
+    <value>Lors du chargement de vos jeux, de nouveaux DLL ont été découvertes qui ne figurent pas dans le manifeste DLSS Swapper.</value>
   </data>
   <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
-    <value>(Compte GitHub requis)</value>
+    <value>Compte GitHub nécessaire</value>
   </data>
   <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
     <value>Si le bouton ne fonctionne pas, essayez ici,</value>
   </data>
   <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
-    <value>Étape 4 : Soumettre votre problème</value>
+    <value>Étape 4 : Soumettez votre problème</value>
   </data>
   <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
-    <value>Étape 1 : Créer un nouveau problème</value>
+    <value>Étape 1 : Créer un nouveau ticket</value>
   </data>
   <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
     <value>Étape 3 : Copier le corps</value>
@@ -414,10 +413,7 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>Merci pour votre aide !</value>
   </data>
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
-    <value>Vous n'avez pas besoin de soumettre les DLL. Nous les retrouverons en fonction des informations fournies.</value>
-  </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Nouvelles DLL trouvées</value>
+    <value>Vous n'avez pas besoin de soumettre les fichiers DLL. Nous les rechercherons à partir des informations fournies.</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Jeux</value>
@@ -426,13 +422,40 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>Type de vue</value>
   </data>
   <data name="GamesPage_ViewType_GridView" xml:space="preserve">
-    <value>Vue en grille</value>
+    <value>Vue grille</value>
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
-    <value>Vue en liste</value>
+    <value>Vue liste</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer l'image de couverture personnalisée ?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Jeu en cours de traitement</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Supprimer la couverture personnalisée ?</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>Impossible de désérialiser GOGCatalogResponse pour l'URL {0}.</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>Impossible de désérialiser GOGEmbedFilteredResponse pour l'URL {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>Impossible de trouver GOGEmbedFilteredProducts pour l'URL {0}.</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>Impossible de trouver un produit GOGCatalogProduct pour l'URL {0}.</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>Impossible de détecter ubisoftConnectInstallsKey</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Bibliothèque de jeux inconnue {0} lors de la configuration de l'ID</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
-    <value>Cette application s'exécute avec des privilèges administratifs.</value>
+    <value>Cette application s'exécute avec les privilèges administrateurs.</value>
   </data>
   <data name="General_Apply" xml:space="preserve">
     <value>Appliquer</value>
@@ -457,7 +480,6 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   </data>
   <data name="General_ErrorMessage" xml:space="preserve">
     <value>Message d'erreur</value>
-    <comment>Serait utilisé pour fournir un contexte, par exemple, Message d'erreur : vous ne pouvez pas faire cela pour le moment.</comment>
   </data>
   <data name="General_Export" xml:space="preserve">
     <value>Exporter</value>
@@ -469,10 +491,10 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>Échec</value>
   </data>
   <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
-    <value>Cette fonctionnalité n'est pas supportée si vous exécutez l'application en tant qu'administrateur.</value>
+    <value>Cette fonctionnalité n'est pas prise en charge si vous exécutez l'application en tant qu'administrateur.</value>
   </data>
   <data name="General_Filter" xml:space="preserve">
-    <value>Filtre</value>
+    <value>Filter</value>
   </data>
   <data name="General_Help" xml:space="preserve">
     <value>Aide</value>
@@ -484,7 +506,7 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>Charger</value>
   </data>
   <data name="General_Loading" xml:space="preserve">
-    <value>Chargement</value>
+    <value>Chargement...</value>
   </data>
   <data name="General_Name" xml:space="preserve">
     <value>Nom</value>
@@ -496,10 +518,10 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>Aucun</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
-    <value>Non supporté</value>
+    <value>Non supporter</value>
   </data>
   <data name="General_Okay" xml:space="preserve">
-    <value>OK</value>
+    <value>D'accord</value>
   </data>
   <data name="General_Oops" xml:space="preserve">
     <value>Oups</value>
@@ -508,7 +530,7 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>Ouvrir le dossier</value>
   </data>
   <data name="General_Optional" xml:space="preserve">
-    <value>(optionnel)</value>
+    <value>(facultatif)</value>
   </data>
   <data name="General_Options" xml:space="preserve">
     <value>Options</value>
@@ -517,7 +539,7 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>Publier</value>
   </data>
   <data name="General_Refresh" xml:space="preserve">
-    <value>Rafraîchir</value>
+    <value>Actualiser</value>
   </data>
   <data name="General_Reload" xml:space="preserve">
     <value>Recharger</value>
@@ -547,7 +569,7 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>Inconnu</value>
   </data>
   <data name="General_Update" xml:space="preserve">
-    <value>Mettre à jour</value>
+    <value>Mise à jour</value>
   </data>
   <data name="General_Version" xml:space="preserve">
     <value>Version</value>
@@ -558,12 +580,14 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   <data name="General_Yes" xml:space="preserve">
     <value>Oui</value>
   </data>
+  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
+    <value>Impossible de charger les données de publication GitHub.</value>
+  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Vous avez actuellement {0} installé.</value>
-    <comment>{0} est la version actuellement installée.</comment>
   </data>
   <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
-    <value>DLSS Swapper vient de se mettre à jour</value>
+    <value>DLSS Swapper vient d'être mis à jour</value>
   </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
     <value>Mise à jour disponible</value>
@@ -572,7 +596,7 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>Déjà téléchargé.</value>
   </data>
   <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
-    <value>Impossible de charger les DLL importées</value>
+    <value>Impossible de charger les DLL importés</value>
   </data>
   <data name="LibraryPage_CouldntDownload" xml:space="preserve">
     <value>Impossible de télécharger pour le moment.</value>
@@ -581,13 +605,13 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>Impossible d'exporter les DLL.</value>
   </data>
   <data name="LibraryPage_DeleteDll" xml:space="preserve">
-    <value>Supprimer la DLL</value>
+    <value>Supprimer le DLL</value>
   </data>
   <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
     <value>Supprimer {0} v{1} ?</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
-    <value>Taille du fichier de téléchargement</value>
+    <value>Taille du fichier à télécharger</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
     <value>Description du fichier</value>
@@ -605,25 +629,22 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>Nom interne supplémentaire</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
-    <value>Étiquette</value>
+    <value>Libellé</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
-    <value>{0} nouveaux téléchargements démarrés.</value>
-    <comment>{0} est le nombre de téléchargements démarrés.</comment>
+    <value>Lancement de {0} nouveaux téléchargements.</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
     <value>Téléchargements démarrés</value>
   </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
-    <value>DLL exportées : </value>
+    <value>DLL exportés :</value>
   </data>
   <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
-    <value>{0} DLL exportées.</value>
-    <comment>{0} est le nombre de DLL exportées.</comment>
+    <value>Exportation de {0} DLL.</value>
   </data>
   <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
-    <value>DLL exportée {0}.</value>
-    <comment>Laisser 0 tel quel et utiliser un format de chaîne sûr</comment>
+    <value>DLL exporté {0}.</value>
   </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
     <value>Fichier introuvable.</value>
@@ -632,45 +653,44 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>Terminé</value>
   </data>
   <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
-    <value>Importé en tant qu'enregistrement de DLL existant.</value>
+    <value>Importé en tant qu'enregistrement DLL existant.</value>
   </data>
   <data name="LibraryPage_Importing" xml:space="preserve">
-    <value>Importation</value>
+    <value>Importation...</value>
   </data>
   <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
-    <value>Remplacer des dll sur votre ordinateur peut être dangereux.
+    <value>Le remplacement des fichiers DLL sur votre ordinateur peut être dangereux.
 
-Placer une dll malveillante dans un jeu est aussi mauvais que d'exécuter Linking_park_-_nUmB_mp3.exe que vous venez de télécharger depuis LimeWire.
+Placer un fichier DLL malveillant dans un jeu est aussi dangereux que d'exécuter le fichier Linking_park_-_nUmB_mp3.exe que vous venez de télécharger depuis LimeWire.
 
-N'importez des dll que depuis des sources de confiance.</value>
+N'importez que des fichiers DLL provenant que de sources fiables.</value>
   </data>
   <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
-    <value>Aucune DLL trouvée pour l'exportation.</value>
+    <value>Aucun DLL trouvée pour l'exportation.</value>
   </data>
   <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
-    <value>Vous n'avez aucun enregistrement de DLL à exporter.</value>
+    <value>Vous n'avez aucun enregistrement DLL à exporter.</value>
   </data>
   <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
-    <value>Il n'y avait aucune nouvelle DLL à télécharger.</value>
+    <value>Il n'y avait pas de nouveaux DLL à télécharger.</value>
   </data>
   <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
-    <value>Aucune nouvelle DLL</value>
+    <value>Aucun nouveau DLL</value>
   </data>
   <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
-    <value>DLL traitées : </value>
+    <value>Bibliothèques DLL traités :</value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
     <value>Bibliothèque</value>
   </data>
   <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
     <value>Impossible de supprimer l'enregistrement {0}.</value>
-    <comment>Laisser 0 tel quel et utiliser un format de chaîne sûr</comment>
   </data>
   <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
-    <value>Impossible de mettre à jour les enregistrements de DLL.</value>
+    <value>Impossible de mettre à jour les enregistrements DLL.</value>
   </data>
   <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
-    <value>Le fichier zip ne contenait aucune dll.</value>
+    <value>Le fichier Zip ne contenait aucun fichier dll.</value>
   </data>
   <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
     <value>Tentative de mise à jour</value>
@@ -679,34 +699,32 @@ N'importez des dll que depuis des sources de confiance.</value>
     <value>DLSS Swapper n'a pas pu charger son fichier manifeste. Il va maintenant se fermer.</value>
   </data>
   <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
-    <value>DLSS Swapper doit se fermer</value>
+    <value>DLSS Swapper doit être fermer</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
-    <value>Problèmes GitHub</value>
+    <value>Ticket Github</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
-    <value>Nous n'avons pas pu charger manifest.json depuis votre ordinateur ou depuis Internet.
+    <value>Nous n'avons pas pu charger le fichier manifest.json depuis votre ordinateur ou depuis Internet.
 
-Si cela continue à se produire, veuillez déposer un rapport dans notre suivi de problèmes sur GitHub.</value>
+Si ce problème persiste, veuillez le signaler dans notre outil de suivi des problèmes sur GitHub.</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
-    <value>Mettre à jour le manifeste</value>
+    <value>Mise à jour du manifeste</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>Bien que l'échange de versions DLSS ne devrait pas être considéré comme de la triche, certains systèmes anti-triche pourraient ne pas être satisfaits si les fichiers dans votre répertoire de jeu ne sont pas ceux avec lesquels le jeu a été distribué.
+    <value>Bien que le fait de changer de version DLSS ne soit pas considéré comme de la triche, certains systèmes anti-triche pourraient vous sanctionner si les fichiers présents dans le répertoire du jeu ne correspondent pas à ceux fournis avec le jeu lors de sa distribution.
 
-Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.</value>
+C'est pourquoi nous vous recommandons d'être prudent lorsque vous jouez à des jeux multijoueurs.</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
-    <value>Note pour les jeux multijoueurs</value>
+    <value>Remarque concernant les jeux multijoueurs</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
-    <value>Ne fonctionne toujours pas</value>
-    <comment>Signifie que le test a échoué.</comment>
+    <value>Ça ne marche toujours pas.</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
-    <value>Fonctionne !</value>
-    <comment>Signifie que le test a réussi.</comment>
+    <value>Ça marche !</value>
   </data>
   <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
     <value>Test du navigateur</value>
@@ -721,37 +739,37 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
     <value>Créer un rapport de bug</value>
   </data>
   <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
-    <value>Test de l'agent utilisateur personnalisé</value>
+    <value>Test personnalisé de l'agent utilisateur</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
-    <value>Téléchargement de la DLL DLSS Swapper dans DLSS Swapper avec un agent utilisateur personnalisé</value>
+    <value>Téléchargement du fichier DLL DLSS Swapper dans DLSS Swapper avec un agent utilisateur personnalisé</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
-    <value>Téléchargement de la DLL DLSS depuis le miroir UploadThing</value>
+    <value>Téléchargement du fichier DLL DLSS à partir du miroir UploadThing</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
-    <value>Accès à google.com depuis DLSS Swapper (test de la connectivité internet générale)</value>
+    <value>Accéder à google.com depuis DLSS Swapper (teste la connectivité Internet générale)</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
-    <value>Accès à bing.com depuis DLSS Swapper (test de la connectivité internet générale)</value>
+    <value>Accéder à bing.com depuis DLSS Swapper (teste la connectivité Internet générale)</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
-    <value>Téléchargement de la DLL DLSS Swapper dans DLSS Swapper</value>
+    <value>Téléchargement du fichier DLL DLSS Swapper dans DLSS Swapper</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
-    <value>Téléchargement de la DLL DLSS Swapper depuis le navigateur</value>
+    <value>Téléchargement du fichier DLL DLSS Swapper depuis le navigateur</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
-    <value>Téléchargement de la couverture du jeu depuis Steam</value>
+    <value>Téléchargement de la jaquette du jeu depuis Steam</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
-    <value>Téléchargement de la couverture du jeu depuis l'Epic Game Store</value>
+    <value>Téléchargement de la jaquette du jeu depuis Epic Game Store</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
-    <value>Téléchargement de la couverture du jeu depuis le serveur de fichiers DLSS Swapper</value>
+    <value>Téléchargement de la jaquette du jeu depuis le serveur de fichiers DLSS Swapper</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
-    <value>Téléchargement de la couverture du jeu depuis le serveur de fichiers alternatif DLSS Swapper</value>
+    <value>Téléchargement de la jaquette du jeu à partir d'un autre serveur de fichiers DLSS Swapper</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
     <value>Recherche DNS du serveur de fichiers DLSS Swapper</value>
@@ -760,16 +778,16 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
     <value>Ouvrir dans le navigateur</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
-    <value>Cliquez sur le bouton ouvrir dans le navigateur, ou copiez et collez le lien suivant dans votre navigateur. Télécharge-t-il un fichier dans votre navigateur ?</value>
+    <value>Cliquez sur le bouton « Ouvrir dans le navigateur » ou copiez-collez le lien suivant dans votre navigateur. Le fichier se télécharge-t-il dans votre navigateur ?</value>
   </data>
   <data name="NetworkTesterPage_Results" xml:space="preserve">
     <value>Résultats</value>
   </data>
   <data name="NetworkTesterPage_RunTest" xml:space="preserve">
-    <value>Exécuter le test</value>
+    <value>Lancer le test</value>
   </data>
   <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
-    <value>Utilisez l'agent utilisateur fourni ou entrez un agent personnalisé de votre choix.</value>
+    <value>Utilisez l'agent utilisateur fourni ou entrez un agent utilisateur personnalisé de votre choix.</value>
   </data>
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>Testeur de réseau</value>
@@ -787,32 +805,31 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
     <value>Les SDK publient parfois des DLL de débogage qui permettent d'afficher des informations supplémentaires à l'écran.</value>
   </data>
   <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
-    <value>Les DLL sont vérifiées pour voir si elles sont fiables dans Windows en validant la signature avant d'être échangées dans un dossier de jeu. Si une DLL échoue à la validation de la signature, elle ne sera pas utilisée. Il est recommandé de garder cette option désactivée.</value>
+    <value>Les DLL sont vérifiés pour s'assurer qu'ils sont fiables dans Windows en validant leur signature avant d'être transférés dans un dossier de jeu. Si un DLL échou à la validation de signature, il ne sera pas utilisé. Il est recommandé de désactiver cette option.</value>
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
-    <value>Cela s'applique uniquement au sélecteur de DLL, pas à la page de la bibliothèque.</value>
+    <value>Cela s'applique uniquement au sélecteur DLL, et non à la page de bibliothèque.</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
-    <value>Impossible d'ouvrir votre fichier de log directement depuis DLSS Swapper. Veuillez essayer de l'ouvrir manuellement.</value>
+    <value>Impossible d'ouvrir votre fichier journal directement à partir de DLSS Swapper. Veuillez essayer de l'ouvrir manuellement.</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
     <value>Êtes-vous sûr de vouloir supprimer le chemin ignoré {0} ?</value>
-    <comment>{0} est le chemin de fichier que l'utilisateur supprime de la fonction de chemin ignoré.</comment>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
     <value>Supprimer le chemin ignoré</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
-    <value>Options du développeur DLSS</value>
+    <value>Options développeur DLSS</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
-    <value>Activer la journalisation dans la fenêtre de la console</value>
+    <value>Activer la journalisation dans la fenêtre de console</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
     <value>Activer la journalisation dans un fichier</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
-    <value>Activé pour toutes les DLL DLSS</value>
+    <value>Activé pour tous les DLL DLSS</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
     <value>Activé uniquement pour les DLL DLSS de débogage</value>
@@ -821,7 +838,7 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
     <value>Afficher l'indicateur à l'écran</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
-    <value>Journalisation détaillée</value>
+    <value>Journal détaillée</value>
   </data>
   <data name="SettingsPage_DLSSOptions" xml:space="preserve">
     <value>Options DLSS</value>
@@ -836,7 +853,7 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
     <value>Guide général de dépannage</value>
   </data>
   <data name="SettingsPage_GiveFeedback" xml:space="preserve">
-    <value>Donner un avis</value>
+    <value>Donner votre avis</value>
   </data>
   <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
     <value>Vous pouvez suggérer une fonctionnalité ou signaler un problème sur DLSS Swapper</value>
@@ -849,14 +866,12 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
   </data>
   <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
     <value>{0} désactivé</value>
-    <comment>{0} est le nom de la bibliothèque de jeux (par exemple, Steam, GOG)</comment>
   </data>
   <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
     <value>{0} activé</value>
-    <comment>{0} est le nom de la bibliothèque de jeux (par exemple, Steam, GOG)</comment>
   </data>
   <data name="SettingsPage_Logging" xml:space="preserve">
-    <value>Journalisation</value>
+    <value>Journal</value>
   </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>Aucune nouvelle mise à jour n'est disponible.</value>
@@ -868,20 +883,19 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
     <value>Diagnostics</value>
   </data>
   <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
-    <value>Testeur de réseau</value>
+    <value>Testeur réseau</value>
   </data>
   <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
     <value>Ouvrir la boîte à outils de traduction</value>
   </data>
   <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
     <value>Le chemin {0} est déjà ignoré.</value>
-    <comment>{0} est le chemin que l'utilisateur a essayé d'ajouter mais qui était déjà ignoré.</comment>
   </data>
   <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
-    <value>Autoriser les non fiables</value>
+    <value>Autoriser les éléments non fiables</value>
   </data>
   <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
-    <value>Vérifier les mises à jour</value>
+    <value>Rechercher les mises à jour</value>
   </data>
   <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
     <value>Afficher uniquement les DLL téléchargées</value>
@@ -893,10 +907,10 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
     <value>Clair</value>
   </data>
   <data name="SettingsPage_ThemeMode" xml:space="preserve">
-    <value>Mode de thème</value>
+    <value>Mode thème</value>
   </data>
   <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
-    <value>Utiliser le paramètre système</value>
+    <value>Utiliser les paramètres système</value>
   </data>
   <data name="SettingsPage_Title" xml:space="preserve">
     <value>Paramètres</value>
@@ -905,7 +919,7 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
     <value>Dépannage</value>
   </data>
   <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
-    <value>Votre fichier de log actuel est </value>
+    <value>Votre fichier journal actuel est </value>
   </data>
   <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
     <value>Vous ne pouvez pas utiliser l'outil de traduction lorsqu'il est exécuté en tant qu'administrateur. Veuillez redémarrer l'application.</value>
@@ -932,11 +946,10 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
     <value>Aucune donnée de traduction n'a été trouvée à publier.</value>
   </data>
   <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
-    <value>Aucune donnée de traduction n'a été trouvée à sauvegarder.</value>
+    <value>Aucune donnée de traduction n'a été trouvée à enregistrer.</value>
   </data>
   <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
-    <value>Ce n'est pas un fichier de traduction DLSS Swapper valide.</value>
-    <comment>Erreur indiquant que le fichier de traduction JSON ouvert par l'utilisateur n'est pas valide.</comment>
+    <value>Fichier de traduction DLSS Swapper non valide.</value>
   </data>
   <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
     <value>Impossible de publier la traduction. Veuillez consulter votre journal d'erreurs pour plus d'informations.</value>
@@ -954,7 +967,7 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
     <value>Réinitialiser la progression et continuer ?</value>
   </data>
   <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
-    <value>Impossible de sauvegarder la traduction. Veuillez consulter votre journal d'erreurs pour plus d'informations.</value>
+    <value>Impossible d'enregistrer la traduction. Veuillez consulter votre journal d'erreurs pour plus d'informations.</value>
   </data>
   <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
     <value>Sélectionner la langue à charger</value>
@@ -969,20 +982,19 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
     <value>Guide de traduction</value>
   </data>
   <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
-    <value>Votre traduction a été créée. Veuillez consulter le guide de traduction de DLSS Swapper pour savoir quoi faire ensuite avec {0}.</value>
-    <comment>Ici, {0} sera le nom du fichier de traduction que l'utilisateur a publié.</comment>
+    <value>Votre traduction a été créée. Veuillez consulter le guide de traduction DLSS Swapper pour savoir quoi faire ensuite avec {0}.</value>
   </data>
   <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
     <value>Progression de la traduction</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
-    <value>Fermer sans sauvegarder</value>
+    <value>Fermer sans enregistrer</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
-    <value>Vous avez peut-être des modifications de traduction non sauvegardées. Si vous fermez cette fenêtre, elles seront perdues.</value>
+    <value>Vous avez peut-être des modifications de traduction non enregistrées. Si vous fermez cette fenêtre celles-ci seront perdues.</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
-    <value>Modifications de traduction non sauvegardées</value>
+    <value>Modifications de traduction non enregistrées</value>
   </data>
   <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
     <value>Boîte à outils de traduction</value>

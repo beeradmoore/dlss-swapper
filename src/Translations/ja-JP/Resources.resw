@@ -228,6 +228,9 @@
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>お気に入りに追加する</value>
   </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>クリックして非表示にする</value>
+  </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>パス "{0}" が見つかりませんでした</value>
   </data>

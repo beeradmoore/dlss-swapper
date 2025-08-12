@@ -257,7 +257,7 @@
     <value>Встановлення пресету DLSS не гарантує його використання.</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
-    <value>Додано до обраного</value>
+    <value>В обраному</value>
   </data>
   <data name="GamePage_History" xml:space="preserve">
     <value>Історія</value>
@@ -269,7 +269,7 @@
     <value>"{0}" є недійсним типом файлу</value>
   </data>
   <data name="GamePage_Launch" xml:space="preserve">
-    <value>Запуск</value>
+    <value>Запустити</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
     <value>Цей заголовок не додано вручну та не можна видалити.</value>
@@ -385,7 +385,7 @@
     <value>Під час завантаження ваших ігор було виявлено деякі нові DLL, яких немає в маніфесті DLSS Swapper.</value>
   </data>
   <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
-    <value>(Потрібен обліковий запис GitHub)</value>
+    <value>(потрібен обліковий запис GitHub)</value>
   </data>
   <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
     <value>Якщо кнопка не працює, спробуйте тут,</value>
@@ -412,7 +412,7 @@
     <value>Перезавантаження гри</value>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
-    <value>Показувати приховані ігри (за замовчуванням вимкнено під час запуску)</value>
+    <value>Показати приховані ігри (за замовчуванням вимкнено під час запуску)</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Ігри</value>
@@ -777,7 +777,7 @@
     <value>Мережевий тестер</value>
   </data>
   <data name="SettingsPage_About" xml:space="preserve">
-    <value>Про нас</value>
+    <value>Про програму</value>
   </data>
   <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
     <value>Додати ігнорований шлях</value>
@@ -945,7 +945,7 @@
     <value>Не вдалося опублікувати переклад. Перегляньте журнал помилок для отримання додаткової інформації.</value>
   </data>
   <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
-    <value>Перезавантажте додаток</value>
+    <value>Перезавантажити програму</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
     <value>Скинути та продовжити</value>

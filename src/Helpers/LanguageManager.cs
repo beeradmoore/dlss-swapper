@@ -75,13 +75,13 @@ public class LanguageManager
             "ar-SA" => "اللغة العربية (المملكة العربية السعودية)", // Arabic (Saudi Arabia)
             "ar-SY" => " (سوريا) العربية", // Arabic (Syria)
             "ca-ES" => "Català", // Catalan
-            "de-DE" => "Deutsch (Deutschland)", // German (Germany)
+            "de-DE" => "Deutsch", // German (Germany)
             "en-AU" => "English (Australia)",
             "en-GB" => "English (United Kingdom)",
             "en-US" => "English (United States)",
             "es-ES" => "Español", // Spanish
-            "fr-FR" => "Français (France)", // French (France)
-            "it-IT" => "Italiano (Italia)", // Italian (Italy)
+            "fr-FR" => "Français", // French (France)
+            "it-IT" => "Italiano", // Italian (Italy)
             "ja-JP" => "日本語", // Japanese
             "pl-PL" => "Polski", // Polish
             "pt-BR" => "Português BR", // Portuguese

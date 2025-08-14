@@ -8,10 +8,11 @@
     mc:Ignorable="d">
 
     <StackPanel>
-        <TextBlock x:Name="OptionsTextBlock" Text="{x:Bind ViewModel.TranslationProperties.OptionsText, Mode=OneWay}" Style="{ThemeResource BaseTextBlockStyle}" />
-        <CheckBox x:Name="HideNonDLSSGamesCheckBox" Content="{x:Bind ViewModel.TranslationProperties.HideGamesWithNoSwappableItemsText, Mode=OneWay}"  IsChecked="{Binding HideNonDLSSGames}" />
-
-        <TextBlock x:Name="GroupingTextBlock"  Text="{x:Bind ViewModel.TranslationProperties.GroupingText, Mode=OneWay}" Style="{ThemeResource BaseTextBlockStyle}"  Margin="0,10,0,0" />
-        <CheckBox x:Name="GroupGameLibrariesTogetherCheckBox" Content="{x:Bind ViewModel.TranslationProperties.GroupGamesFromTheSameLibraryTogetherText, Mode=OneWay}" />
+        <TextBlock Text="{x:Bind ViewModel.TranslationProperties.OptionsText, Mode=OneWay}" Style="{ThemeResource BaseTextBlockStyle}" />
+        <CheckBox Content="{x:Bind ViewModel.TranslationProperties.HideGamesWithNoSwappableItemsText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.HideNonSwappableGames, Mode=TwoWay}" />
+        <CheckBox Content="{x:Bind ViewModel.TranslationProperties.ShowHiddenGamesText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.ShowHiddenGames, Mode=TwoWay}" />
+        
+        <TextBlock Text="{x:Bind ViewModel.TranslationProperties.GroupingText, Mode=OneWay}" Style="{ThemeResource BaseTextBlockStyle}"  Margin="0,10,0,0" />
+        <CheckBox Content="{x:Bind ViewModel.TranslationProperties.GroupGamesFromTheSameLibraryTogetherText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.GroupGameLibrariesTogether, Mode=TwoWay}" />
     </StackPanel>
 </UserControl>

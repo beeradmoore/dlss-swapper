@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(уже импортировано)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>Не удалось преобразовать файл manifest.json.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>Функция импорта отключена, метаданные импорта не могут быть загружены.</value>
   </data>
@@ -150,17 +147,11 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Не удалось загрузить {0} DLL, попробуйте позже или проверьте журналы, чтобы узнать причину сбоя загрузки.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Не удалось загрузить файл.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Загрузить</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Ошибка загрузки</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>Загруженный файл был поврежден.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Загрузка</value>
@@ -198,24 +189,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Удалить обложку пользователя?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Не удалось преобразовать GOGCatalogResponse для адреса, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Не удалось преобразовать GOGEmbedFilteredResponse для адреса, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Не удалось найти GOGEmbedFilteredProducts для адреса, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Не удалось найти GOGCatalogProduct для адреса, {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>Не удалось обнаружить ubisoftConnectInstallsKey</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Неизвестная GameLibrary {0} при установке ID</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Тип компонента</value>
   </data>
@@ -245,9 +218,6 @@
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL заменена</value>
-  </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Не удалось загрузить библиотеку игр {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Добавить свою обложку</value>
@@ -578,9 +548,6 @@
   </data>
   <data name="General_Yes" xml:space="preserve">
     <value>Да</value>
-  </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Не удалось загрузить данные о релизе GitHub.</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>В настоящее время у вас установлено {0}.</value>

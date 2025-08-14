@@ -385,7 +385,7 @@ public partial class GameControlModel : ObservableObject
 
             var dialog = new EasyContentDialog(App.CurrentApp.MainWindow.Content.XamlRoot)
             {
-                Title = "Reloading game",
+                Title = ResourceHelper.GetString("GamesPage_ReloadingGame"),
                 Content = new ProgressRing()
                 {
                     IsIndeterminate = true,
@@ -439,5 +439,19 @@ public partial class GameControlModel : ObservableObject
                 _reloadGameTaskCompletionSource?.SetResult();
             }
         }
+    }
+
+    [RelayCommand]
+    async Task ShowHideGameAsync()
+    {
+        if (Game.IsHidden is null)
+        {
+            Game.IsHidden = true;
+        }
+        else
+        {
+            Game.IsHidden = !Game.IsHidden;
+        }
+        await Game.SaveToDatabaseAsync();
     }
 }

@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(already imported)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>Could not deserialize manifest.json.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>Import feature is disabled, import manifest could not be loaded.</value>
   </data>
@@ -151,17 +148,11 @@
     <value>Could not download {0} DLL, please try again later or check your logs to see why the download failed.</value>
     <comment>{0} will be the DLL type (eg. DLSS, FSR, XeSS)</comment>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Could not download file.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Download</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Download Error</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>Downloaded file was invalid.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Downloading</value>
@@ -199,28 +190,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Remove custom cover?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Could not deserialize GOGCatalogResponse for url, {0}</value>
-    <comment>0 = url</comment>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Could not deserialize GOGEmbedFilteredResponse for url, {0}</value>
-    <comment>0 = url</comment>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Could not find any GOGEmbedFilteredProducts for url, {0}</value>
-    <comment>0 = url</comment>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Could not find any GOGCatalogProduct for url, {0}</value>
-    <comment>0 = url</comment>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>Could not detect ubisoftConnectInstallsKey</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Unknown GameLibrary {0} while setting ID</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Asset Type</value>
   </data>
@@ -251,14 +220,14 @@
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL swapped</value>
   </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Could not load game library {0}</value>
-  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Add Custom Cover</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Click to favorite</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>Click to hide</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>Could not find path "{0}".</value>
@@ -352,6 +321,9 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} is still processing. Please wait for the loading indicator to complete before opening.</value>
     <comment>{0} is the selected game title.</comment>
+  </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>Reset all</value>
   </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>Restore original DLL</value>
@@ -453,6 +425,13 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
     <value>New DLLs Found</value>
   </data>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <comment>Used as a loading box title when the user clicks reload game button on a games detail page</comment>
+    <value>Reloading game</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>Show hidden games (defaults to off on launch)</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Games</value>
   </data>
@@ -510,6 +489,9 @@ If you have checked these and your game is still not showing up there may be a b
   </data>
   <data name="General_Help" xml:space="preserve">
     <value>Help</value>
+  </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>Hidden</value>
   </data>
   <data name="General_Import" xml:space="preserve">
     <value>Import</value>
@@ -592,9 +574,6 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Could not load GitHub release data.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>You currently have {0} installed.</value>
     <comment>{0} is the currently installed version.</comment>
@@ -643,6 +622,9 @@ If you have checked these and your game is still not showing up there may be a b
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Label</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>Download Latest</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>Started {0} new downloads.</value>
@@ -828,6 +810,12 @@ Because of this we recommend using caution for multiplayer games.</value>
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>This only applies to the DLL picker, not the library page.</value>
+  </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>Build commit</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>Build date</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>Could not open your log file directly from DLSS Swapper. Please try open it manually.</value>

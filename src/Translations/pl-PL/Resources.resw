@@ -129,9 +129,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(aktualnie zaimportowana)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>Nie można deserializować pliku manifest.json.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>Funkcja importu jest wyłączona, nie można załadować manifestu importu.</value>
   </data>
@@ -144,17 +141,11 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Nie można pobrać {0} DLL, proszę spróbować później lub lub sprawdzić swoje logi żeby sprawdzić czemu pobieranie się nie powiodło.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Nie można pobrać pliku.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Pobierz</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Błąd pobierania</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>Pobrany plik był nieprawidłowy.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Pobieranie</value>
@@ -188,27 +179,6 @@
   </data>
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Usunąć własną okładkę?</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Nie można zdeserializować GOGCatalogResponse dla url, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Nie można zdeserializować GOGEmbedFilteredResponse dla url, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Nie można znaleźć żadnego GOGEmbedFilteredProducts dla url, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Nie można znaleźć żadnego GOGCatalogProduct dla url, {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>Nie można wykryć ubisoftConnectInstallsKey</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Nieznana biblioteka gier {0} podczas ustawiania ID</value>
-  </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Nie można wczytać biblioteki gry {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Dodaj własną okładkę</value>
@@ -487,9 +457,6 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   </data>
   <data name="General_Yes" xml:space="preserve">
     <value>Włączone</value>
-  </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Nie można załadować danych Releasez z GitHuba.</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Już masz {0} zainstalowane.</value>

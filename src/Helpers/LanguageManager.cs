@@ -52,10 +52,13 @@ public class LanguageManager
             "es-ES",
             "fr-FR",
             "it-IT",
+            "ja-JP",
             "pl-PL",
             "pt-BR",
             "ru-RU",
             "tr-TR",
+            "uk-UA",
+            "vi-VN",
             "zh-CN",
             "zh-TW",
 #if DEBUG
@@ -79,10 +82,13 @@ public class LanguageManager
             "es-ES" => "Español", // Spanish
             "fr-FR" => "Français", // French (France)
             "it-IT" => "Italiano", // Italian (Italy)
+            "ja-JP" => "日本語", // Japanese
             "pl-PL" => "Polski", // Polish
-            "pt-BR" => "Português BR",
+            "pt-BR" => "Português BR", // Portuguese
             "ru-RU" => "Русский", // Russian
             "tr-TR" => "Türkçe", // Turkish
+            "uk-UA" => "Українська", // Ukrainian
+            "vi-VN" => "Tiếng Việt", // Vietnamese
             "zh-CN" => "简体中文", // Simplified Chinese
             "zh-TW" => "繁體中文 (臺灣)", // Traditional Chinese (Taiwan)
             _ => languageKey,

@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(ja importat)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>No s'ha pogut deserialitzar manifest.json.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>La funció d'importació està desactivada; no s'ha pogut carregar el manifest d'importació.</value>
   </data>
@@ -150,17 +147,11 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>No s'ha pogut descarregar la DLL {0}. Si us plau, torneu-ho a provar més tard o consulteu els registres per veure per què ha fallat la descàrrega.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>No s'ha pogut descarregar el fitxer.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Descarrega</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Error de descàrrega</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>El fitxer descarregat no era vàlid.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Descarregant</value>
@@ -188,6 +179,42 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>No s'ha pogut iniciar</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Esteu segur que voleu eliminar la imatge de la portada personalitzada?</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Esteu segur que voleu eliminar la imatge de la portada personalitzada?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Joc actualment en processament</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Joc actualment en processament</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Voleu treure la portada personalitzada?</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Voleu treure la portada personalitzada?</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>No s'ha pogut deserialitzar GOGCatalogResponse per a l'URL, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>No s'ha pogut deserialitzar GOGEmbedFilteredResponse per a l'URL {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>No s'ha trobat cap GOGEmbedFilteredProducts per a l'URL {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>No s'ha trobat cap GOGCatalogProduct per a l'URL {0}</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>No s'ha pogut detectar la clau d'instal·lació d'Ubisoft Connect.</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Biblioteca de jocs desconeguda {0} en configurar l'ID</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Tipus d'actiu</value>
@@ -219,14 +246,14 @@
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL intercanviada</value>
   </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>No s'ha pogut carregar la biblioteca de jocs {0}</value>
-  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Afegir portada personalitzada</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Fes clic per afegir als preferits</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>Fes clic per amagar</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>No s'ha pogut trobar la ruta "{0}".</value>
@@ -316,8 +343,11 @@ Per verificar quin preset s'està utilitzant, activeu l'indicador de DLSS en pan
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} encara s'està processant. Espereu que l'indicador de càrrega s'acabi abans d'obrir.</value>
   </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>Restableix-ho tot</value>
+  </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
-    <value>Restaurar la DLL original</value>
+    <value>Restaura la DLL original</value>
   </data>
   <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
     <value>Selecciona la versió {0}</value>
@@ -381,9 +411,6 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Noves DLL</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>S'han trobat noves DLL</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Crea una nova incidència de GitHub</value>
   </data>
@@ -414,44 +441,26 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>No cal que envieu les DLL. Les localitzarem en funció de la informació proporcionada.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>S'han trobat noves DLL</value>
+  </data>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>Recarregant el joc</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>Mostra els jocs ocults (per defecte, desactivat en iniciar-se)</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
-    <value>Games</value>
+    <value>Jocs</value>
   </data>
   <data name="GamesPage_ViewType" xml:space="preserve">
     <value>Tipus de vista</value>
   </data>
   <data name="GamesPage_ViewType_GridView" xml:space="preserve">
-    <value>Vista de quadrícula</value>
+    <value>Quadrícula</value>
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
-    <value>Vista de llista</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Esteu segur que voleu eliminar la imatge de la portada personalitzada?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Joc actualment en processament</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Voleu treure la portada personalitzada?</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>No s'ha pogut deserialitzar GOGCatalogResponse per a l'URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>No s'ha pogut deserialitzar GOGEmbedFilteredResponse per a l'URL {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>No s'ha trobat cap GOGEmbedFilteredProducts per a l'URL {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>No s'ha trobat cap GOGCatalogProduct per a l'URL {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>No s'ha pogut detectar la clau d'instal·lació d'Ubisoft Connect.</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Biblioteca de jocs desconeguda {0} en configurar l'ID</value>
+    <value>Llista</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Aquesta aplicació s'està executant amb privilegis d'administrador.</value>
@@ -497,6 +506,9 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   </data>
   <data name="General_Help" xml:space="preserve">
     <value>Ajuda</value>
+  </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>Amagat</value>
   </data>
   <data name="General_Import" xml:space="preserve">
     <value>Importa</value>
@@ -579,9 +591,6 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   <data name="General_Yes" xml:space="preserve">
     <value>Sí</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>No s'han pogut carregar les dades de la versió de GitHub.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Actualment teniu {0} instal·lat.</value>
   </data>
@@ -629,6 +638,9 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Etiqueta</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>Descarrega l'última versió</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>S'han iniciat {0} noves descàrregues.</value>
@@ -809,8 +821,14 @@ Per això, recomanem anar amb compte amb les partides multijugador.</value>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>Això només s'aplica al selector de DLL, no a la pàgina de la biblioteca.</value>
   </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>Commit de compilació</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>Data de compilació</value>
+  </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
-    <value>No s'ha pogut obrir el fitxer de registre directament des de DLSS Swapper. Si us plau, proveu d'obrir-lo manualment.</value>
+    <value>No s'ha pogut obrir elz fitxer de registre directament des de DLSS Swapper. Si us plau, proveu d'obrir-lo manualment.</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
     <value>Esteu segur que voleu suprimir el camí ignorat {0}?</value>
@@ -918,7 +936,7 @@ Per això, recomanem anar amb compte amb les partides multijugador.</value>
     <value>Resolució de problemes</value>
   </data>
   <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
-    <value>El vostre fitxer de registre actual és</value>
+    <value>El vostre fitxer de registre actual és </value>
   </data>
   <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
     <value>No podeu utilitzar l'eina de traducció mentre s'executa com a administrador. Reinicieu l'aplicació.</value>

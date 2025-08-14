@@ -54,9 +54,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(já importado)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>Não foi possível desserializar o arquivo manifest.json.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>O recurso de importação está desativado, o manifesto de importação não pôde ser carregado.</value>
   </data>
@@ -72,17 +69,11 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Não foi possível baixar a DLL do {0}, tente novamente mais tarde ou verifique os logs para entender o motivo da falha.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>Não foi possível baixar o arquivo.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Baixar</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Erro ao baixar</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>O arquivo baixado era inválido.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Baixando</value>
@@ -120,24 +111,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Remover capa personalizada?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>Não foi possível desserializar o GOGCatalogResponse para a URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>Não foi possível desserializar o GOGEmbedFilteredResponse para a URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>Não foram encontrados produtos GOGEmbedFiltered para a URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>Nenhum produto GOGCatalog encontrado para a URL, {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>Não foi possível detectar a chave de instalação do Ubisoft Connect</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Biblioteca de jogos desconhecida {0} ao definir o ID</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Asset Type</value>
   </data>
@@ -167,9 +140,6 @@
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL trocada</value>
-  </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Não foi possível carregar a biblioteca de jogos {0}</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Adicionar capa personalizada</value>
@@ -500,9 +470,6 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
   </data>
   <data name="General_Yes" xml:space="preserve">
     <value>Sim</value>
-  </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>Não foi possível carregar os dados de lançamento do GitHub.</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Você tem atualmente o {0} instalado.</value>

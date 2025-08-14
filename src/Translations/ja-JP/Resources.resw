@@ -1,0 +1,996 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcknowledgementsPage_Title" xml:space="preserve">
+    <value>ライセンスと謝辞</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
+    <value>以下の詳細をクリックしてコピーして下さい</value>
+  </data>
+  <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
+    <value>診断</value>
+  </data>
+  <data name="DllManager_AlreadyImported" xml:space="preserve">
+    <value>(既にインポート済み)</value>
+  </data>
+  <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
+    <value>インポート機能が無効になっている為、インポート マニフェストを読み込む事が出来ませんでした</value>
+  </data>
+  <data name="DllManager_MigratingDlls" xml:space="preserve">
+    <value>DLLの移動</value>
+  </data>
+  <data name="DllManager_UnknownTypeDll" xml:space="preserve">
+    <value>DLLが未知のタイプです</value>
+  </data>
+  <data name="DllManager_UntrustedDll" xml:space="preserve">
+    <value>このDLLは、Windowsによって信頼されていません</value>
+  </data>
+  <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
+    <value>{0} DLL のダウンロードに失敗しました。後で再試行するか、ログを確認してダウンロードが失敗した原因を確認して下さい。</value>
+  </data>
+  <data name="DllRecord_Download" xml:space="preserve">
+    <value>ダウンロード</value>
+  </data>
+  <data name="DllRecord_DownloadError" xml:space="preserve">
+    <value>ダウンロードエラー</value>
+  </data>
+  <data name="DllRecord_Downloading" xml:space="preserve">
+    <value>ダウンロード中</value>
+  </data>
+  <data name="DllRecord_Imported" xml:space="preserve">
+    <value>インポートされました</value>
+  </data>
+  <data name="DllRecord_RequiresDownload" xml:space="preserve">
+    <value>ダウンロードが必要です</value>
+  </data>
+  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
+    <value>DLLファイルが破損しています(DLLファイルが見つかりません)</value>
+  </data>
+  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
+    <value>DLSS Swapperが起動に失敗しました</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
+    <value>Aを開いて下さい</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
+    <value>新たな問題</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
+    <value>DLSS Swapper GitHubリポジトリにアクセスし、追加のコンテキスト セクションに以下の情報を提供して下さい</value>
+  </data>
+  <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
+    <value>起動に失敗しました</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>カスタムカバー画像を削除してもよろしいですか?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>ゲームが現在実行中です</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>カスタムカバーを削除しますか?</value>
+  </data>
+  <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
+    <value>アセットの種類</value>
+  </data>
+  <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
+    <value>イベントの時間</value>
+  </data>
+  <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
+    <value>イベントの種類</value>
+  </data>
+  <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
+    <value>履歴が見つかりませんでした</value>
+  </data>
+  <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
+    <value>バージョン</value>
+  </data>
+  <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
+    <value>DLLのバックアップが削除されました</value>
+  </data>
+  <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
+    <value>DLLが外部から変更されました</value>
+  </data>
+  <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
+    <value>DLLが検出されました</value>
+  </data>
+  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
+    <value>DLLのリセットをする</value>
+  </data>
+  <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
+    <value>DLLの置き換えました</value>
+  </data>
+  <data name="GamePage_AddCustomCover" xml:space="preserve">
+    <value>カスタムカバーを追加する</value>
+  </data>
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
+    <value>お気に入りに追加する</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>クリックして非表示にする</value>
+  </data>
+  <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+    <value>パス "{0}" が見つかりませんでした</value>
+  </data>
+  <data name="GamePage_CurrentDll" xml:space="preserve">
+    <value>現在のDLL</value>
+  </data>
+  <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
+    <value>ファイル "{0}" が見つかりませんでした</value>
+  </data>
+  <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
+    <value>DLL が {0} にリセットされました</value>
+  </data>
+  <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
+    <value>ダウンロードを開始します</value>
+  </data>
+  <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
+    <value>ダウンロードが完了するまでお待ち下さい。その後、切り替えて下さい</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
+    <value>プリセット情報</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
+    <value>DLSSプリセットは、ゲームインストールディレクトリ内に含まれるDLSS DLLファイル内に格納されています。異なるDLSS DLLには異なるプリセットが設定されています。例えば、プリセットKはDLSS v310.2以降で初めて導入されました。したがって、DLSS v3.7を使用しプリセットをKに設定した場合、プリセットKは使用されず、代わりにゲームが選択するデフォルトのプリセットにフォールバックします。
+
+グローバルプリセットにも同じことが適用されます。プリセットKを選択しても、ゲームがDLSS v3.7を使用している場合、プリセットKは使用されず、代わりにゲームのデフォルト設定にフォールバックします。
+
+使用されているプリセットを確認するには、DLSSの画面表示インジケーターを有効にして下さい。</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
+    <value>画面表示のインジケーター情報</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
+    <value>DLSSプリセット情報</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
+    <value>DLSSプリセットを設定しても、そのプリセットが使用される事を保証するものではありません</value>
+  </data>
+  <data name="GamePage_Favorited" xml:space="preserve">
+    <value>お気に入り</value>
+  </data>
+  <data name="GamePage_History" xml:space="preserve">
+    <value>履歴</value>
+  </data>
+  <data name="GamePage_InstallPath" xml:space="preserve">
+    <value>インストール先パス</value>
+  </data>
+  <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
+    <value>"{0}" は有効なファイル形式ではありません</value>
+  </data>
+  <data name="GamePage_Launch" xml:space="preserve">
+    <value>起動</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
+    <value>このタイトルは手動で追加されたものではなく、削除出来ません</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
+    <value>DLSS Swapperから "{0}" を削除してもよろしいですか？すでに切り替えたDLSSファイルには何の変更も加わらないです</value>
+  </data>
+  <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
+    <value>以下は、検出された複数のDLLを示しています。これらの操作は全てのDLLに対して一度に行われる為、通常通りDLLを切り替えたり復元したりする事が出来ます。但し、これらのDLLのうちどれがゲームで使用されているかは不明である為、表示されているDLLバージョンは最初に検出されたDLLのものです</value>
+  </data>
+  <data name="GamePage_MultipleDllsFound" xml:space="preserve">
+    <value>複数のDLLが見つかりました</value>
+  </data>
+  <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
+    <value>複数の {0} DLLが見つかりました</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
+    <value>新しいDLLをダウンロードするには、ライブラリページに移動して下さい</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
+    <value>DLLファイルが見つかりませんでした</value>
+  </data>
+  <data name="GamePage_Notes" xml:space="preserve">
+    <value>注記</value>
+  </data>
+  <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
+    <value>このゲームはプレイ可能な状態ではありません</value>
+  </data>
+  <data name="GamePage_OpenDllLocation" xml:space="preserve">
+    <value>DLLファイルの保存場所を開く</value>
+  </data>
+  <data name="GamePage_OriginalDll" xml:space="preserve">
+    <value>オリジナル DLL</value>
+  </data>
+  <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
+    <value>{0} は現在処理中です。読み込みインジケーターが完了するまでお待ち下さい</value>
+  </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>全てをリセットする</value>
+  </data>
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
+    <value>元のDLLを復元します</value>
+  </data>
+  <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
+    <value>{0} バージョンを選択して下さい</value>
+  </data>
+  <data name="GamePage_StorageFileIsNull" xml:space="preserve">
+    <value>storageFileはnullです</value>
+  </data>
+  <data name="GamePage_UnableToChangePreset" xml:space="preserve">
+    <value>プリセットを変更出来ません。詳細については、エラーログをご確認下さい</value>
+  </data>
+  <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
+    <value>カバーとして使用するには、1つのファイルのみをドラッグ出来ます</value>
+  </data>
+  <data name="GamesPage_AddGame" xml:space="preserve">
+    <value>ゲームを追加する</value>
+  </data>
+  <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+    <value>同じライブラリ内のゲームをグループ化します</value>
+  </data>
+  <data name="GamesPage_Grouping" xml:space="preserve">
+    <value>グループ化</value>
+  </data>
+  <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
+    <value>交換可能なアイテムがないゲームを非表示にする</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
+    <value>カバーとして使用するには、1つのファイルのみをドラッグ出来ます</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
+    <value>手動でゲームを追加する際の注意点</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
+    <value>問題が発生した為、現在ゲームを追加出来ませんでした。この問題を報告して下さい</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
+    <value>ゲームを追加中にエラーが発生しました</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
+    <value>&lt;i&gt;ゲーム&lt;/i&gt; ディレクトリを選択する必要があります。
+&lt;i&gt;ゲーム&lt;/i&gt; フォルダーディレクトリではありません。&lt;br/&gt;&lt;br/&gt;
+例えば、ゲームが次のようなパスにある場合：&lt;br/&gt;&lt;b&gt;
+C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;b&gt;MyFavGame&lt;/b&gt;ディレクトリを選択し、&lt;b&gt;MyGamesFolder&lt;/b&gt;ディレクトリは選択しません。</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
+    <value>DLSS Swapperは、インストール済みのゲームライブラリからゲームを自動的に検出します。ゲームがリストに表示されない場合は、いくつかの設定が原因で表示されない可能性があります。以下の点を確認して下さい:
+
+- ゲームリストのフィルターが「交換可能なアイテムがないゲームを非表示にする」に設定されていない事
+- 設定で特定のゲームライブラリが有効になっている
+
+これらの確認を行ってもゲームが表示されない場合は、バグの可能性があります。問題をご報告頂ければ幸いです。当社のGitHubリポジトリで報告頂ければ、修正を行い、今後のゲーム検出を改善できるよう努めます。</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
+    <value>手動でゲームを追加する際の注意事項</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
+    <value>インストールパス "{0}" は既に存在する為、再度追加出来ません</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
+    <value>ゲームフォルダーを選択して下さい</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
+    <value>最上位ディレクトリの追加はサポートされていません。ゲームのディレクトリのルートを追加して下さい</value>
+  </data>
+  <data name="GamesPage_NewDlls" xml:space="preserve">
+    <value>新しいDLLファイル</value>
+  </data>
+  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
+    <value>GitHubの新しい報告を作成する</value>
+  </data>
+  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
+    <value>ゲームを読み込む際に、DLSS Swapperマニフェストに存在しない新しいDLLが検出されました</value>
+  </data>
+  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
+    <value>(GitHubアカウントが必要です)</value>
+  </data>
+  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
+    <value>ボタンが動作しない場合は、こちらを試して下さい</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
+    <value>ステップ4:問題を提出する</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
+    <value>ステップ1:新たな問題を作成する</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
+    <value>ステップ3:本文をコピーする</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
+    <value>ステップ2:タイトルをコピーする</value>
+  </data>
+  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
+    <value>ご協力ありがとうございます</value>
+  </data>
+  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+    <value>DLLを提出する必要はありません。提供された情報に基づいて、私達でDLLを特定致します</value>
+  </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>新しいDLLファイルが検出されました</value>
+  </data>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>ゲームの再読み込み</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>非表示のゲームを表示する（起動時はデフォルトでオフ）</value>
+  </data>
+  <data name="GamesPage_Title" xml:space="preserve">
+    <value>ゲーム</value>
+  </data>
+  <data name="GamesPage_ViewType" xml:space="preserve">
+    <value>表示タイプ</value>
+  </data>
+  <data name="GamesPage_ViewType_GridView" xml:space="preserve">
+    <value>グリッド表示</value>
+  </data>
+  <data name="GamesPage_ViewType_ListView" xml:space="preserve">
+    <value>リスト表示</value>
+  </data>
+  <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
+    <value>このアプリは管理者権限で実行されています</value>
+  </data>
+  <data name="General_Apply" xml:space="preserve">
+    <value>適用</value>
+  </data>
+  <data name="General_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="General_Close" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="General_Copy" xml:space="preserve">
+    <value>コピー</value>
+  </data>
+  <data name="General_Delete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="General_DontShowAgain" xml:space="preserve">
+    <value>再び表示しない</value>
+  </data>
+  <data name="General_Error" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="General_ErrorMessage" xml:space="preserve">
+    <value>エラーメッセージ</value>
+  </data>
+  <data name="General_Export" xml:space="preserve">
+    <value>エクスポート</value>
+  </data>
+  <data name="General_ExportAll" xml:space="preserve">
+    <value>全てエクスポート</value>
+  </data>
+  <data name="General_Failed" xml:space="preserve">
+    <value>失敗しました</value>
+  </data>
+  <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
+    <value>この機能は、アプリケーションを管理者権限で実行している場合、利用出来ません</value>
+  </data>
+  <data name="General_Filter" xml:space="preserve">
+    <value>フィルター</value>
+  </data>
+  <data name="General_Help" xml:space="preserve">
+    <value>ヘルプ</value>
+  </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>非表示</value>
+  </data>
+  <data name="General_Import" xml:space="preserve">
+    <value>インポート</value>
+  </data>
+  <data name="General_Load" xml:space="preserve">
+    <value>読み込み</value>
+  </data>
+  <data name="General_Loading" xml:space="preserve">
+    <value>読み込み中</value>
+  </data>
+  <data name="General_Name" xml:space="preserve">
+    <value>名前</value>
+  </data>
+  <data name="General_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="General_None" xml:space="preserve">
+    <value>なし</value>
+  </data>
+  <data name="General_NotSupported" xml:space="preserve">
+    <value>対応していません</value>
+  </data>
+  <data name="General_Okay" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="General_Oops" xml:space="preserve">
+    <value>おっと</value>
+  </data>
+  <data name="General_OpenFolder" xml:space="preserve">
+    <value>フォルダを開く</value>
+  </data>
+  <data name="General_Optional" xml:space="preserve">
+    <value>(任意)</value>
+  </data>
+  <data name="General_Options" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="General_Publish" xml:space="preserve">
+    <value>公開する</value>
+  </data>
+  <data name="General_Refresh" xml:space="preserve">
+    <value>リフレッシュ</value>
+  </data>
+  <data name="General_Reload" xml:space="preserve">
+    <value>再読み込み</value>
+  </data>
+  <data name="General_Remove" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="General_ReportIssue" xml:space="preserve">
+    <value>問題を報告する</value>
+  </data>
+  <data name="General_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="General_Search" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="General_Sorry" xml:space="preserve">
+    <value>申し訳ありません</value>
+  </data>
+  <data name="General_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="General_Swap" xml:space="preserve">
+    <value>切り替え</value>
+  </data>
+  <data name="General_Unknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="General_Update" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="General_Version" xml:space="preserve">
+    <value>バージョン</value>
+  </data>
+  <data name="General_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="General_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
+    <value>現在、 {0} がインストールされています</value>
+  </data>
+  <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
+    <value>DLSS Swapperが更新されました</value>
+  </data>
+  <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
+    <value>更新が利用可能です</value>
+  </data>
+  <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
+    <value>既にダウンロード済みです</value>
+  </data>
+  <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
+    <value>インポートされたDLLを正常に読み込めませんでした</value>
+  </data>
+  <data name="LibraryPage_CouldntDownload" xml:space="preserve">
+    <value>現在、ダウンロード出来ません</value>
+  </data>
+  <data name="LibraryPage_CouldntExportDll" xml:space="preserve">
+    <value>DLLのエクスポートに失敗しました</value>
+  </data>
+  <data name="LibraryPage_DeleteDll" xml:space="preserve">
+    <value>DLLを削除する</value>
+  </data>
+  <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
+    <value>{0} v{1} を削除しますか?</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
+    <value>ダウンロードファイルの容量</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
+    <value>ファイルの説明</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
+    <value>ファイルの容量</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
+    <value>ハッシュ値</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
+    <value>内部名称</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
+    <value>内部名称追加</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
+    <value>ラベル</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>最新バージョンをダウンロード</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
+    <value>{0} 件の新しいダウンロードを開始しました</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
+    <value>ダウンロードが開始されました</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
+    <value>エクスポートされたDLLファイル:</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
+    <value>{0} 個のDLLをエクスポートしました</value>
+  </data>
+  <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
+    <value>エクスポートされたDLL {0}</value>
+  </data>
+  <data name="LibraryPage_FileNotFound" xml:space="preserve">
+    <value>ファイルが見つかりません</value>
+  </data>
+  <data name="LibraryPage_Finished" xml:space="preserve">
+    <value>完了しました</value>
+  </data>
+  <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
+    <value>既存のDLLレコードとしてインポートされました</value>
+  </data>
+  <data name="LibraryPage_Importing" xml:space="preserve">
+    <value>インポート</value>
+  </data>
+  <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
+    <value>コンピュータのDLLを置き換える事は危険です。
+
+ゲームに悪意のあるDLLを挿入する事は、LimeWireからダウンロードしたばかりのLinking_park_-_nUmB_mp3.exeを実行するのと同程度の危険性があります。
+
+DLLは信頼できるソースからのみインポートして下さい</value>
+  </data>
+  <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
+    <value>エクスポート用のDLLが見つかりませんでした</value>
+  </data>
+  <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
+    <value>エクスポートするDLLの記録がありません</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
+    <value>新しいDLLはダウンロードする必要がありませんでした</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
+    <value>新しいDLLは追加されません</value>
+  </data>
+  <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
+    <value>処理済みDLL:</value>
+  </data>
+  <data name="LibraryPage_Title" xml:space="preserve">
+    <value>ライブラリ</value>
+  </data>
+  <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
+    <value>{0} 件の記録を削除出来ませんでした</value>
+  </data>
+  <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
+    <value>DLLの記録を更新出来ません</value>
+  </data>
+  <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
+    <value>ZipファイルにはDLLファイルが含まれていませんでした</value>
+  </data>
+  <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
+    <value>更新を試行中</value>
+  </data>
+  <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
+    <value>DLSS Swapperはマニフェスト ファイルを読み込む事が出来ませんでした。その為、ソフトウェアを閉じています。</value>
+  </data>
+  <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
+    <value>DLSS Swapperを終了する必要があります</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
+    <value>GitHubの報告</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
+    <value>お使いのコンピュータ又はインターネットから manifest.jsonを読み込む事が出来ませんでした。
+
+この問題が解決しない場合は、GitHubの問題追跡システムに報告して下さい</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
+    <value>マニフェストを更新する</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
+    <value>DLSSバージョンの切り替えは不正行為とはみなされませんが、ゲームディレクトリ内のファイルがゲームに付属のファイルと一致しない場合、一部の不正行為防止システムによって問題となる場合があります。
+
+その為、マルチプレイヤーゲームでは注意してご利用頂く事をお勧めします</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
+    <value>マルチプレイヤーゲームに関する注意事項</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
+    <value>まだ動作しません</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
+    <value>動作します</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
+    <value>ブラウザテスト</value>
+  </data>
+  <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
+    <value>現在のテストを中止する</value>
+  </data>
+  <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
+    <value>テスト結果のコピー</value>
+  </data>
+  <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
+    <value>バグ報告を作成する</value>
+  </data>
+  <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
+    <value>カスタムユーザーエージェントテスト</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
+    <value>DLSS Swapper内でカスタム ユーザー エージェントを使用してDLSS Swapper DLLをダウンロードする</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
+    <value>UploadThingミラーからDLSS DLLをダウンロードする</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
+    <value>DLSS Swapper内からgoogle.comにアクセスする(一般的なインターネット接続を確認する)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
+    <value>DLSS Swapper内からbing.comにアクセスする(一般的なインターネット接続を確認する)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
+    <value>DLSS Swapper内でDLSS Swapper DLLをダウンロードする</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
+    <value>ブラウザからDLSS Swapper DLLをダウンロードする</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
+    <value>Steamからゲームカバーをダウンロードする</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
+    <value>Epic Games Storeからゲームカバーをダウンロードする</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
+    <value>DLSS Swapperファイルサーバーからゲームカバーをダウンロードする</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
+    <value>代替のDLSS Swapperファイルサーバーからゲームカバーをダウンロードする</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
+    <value>DLSS Swapperファイル サーバーのDNS解決</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
+    <value>ブラウザで開く</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
+    <value>ブラウザで開くボタンをクリックするか、以下のリンクをブラウザにコピーして貼り付けて下さい。ブラウザでファイルをダウンロードされますか?</value>
+  </data>
+  <data name="NetworkTesterPage_Results" xml:space="preserve">
+    <value>結果</value>
+  </data>
+  <data name="NetworkTesterPage_RunTest" xml:space="preserve">
+    <value>テストを実行する</value>
+  </data>
+  <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
+    <value>提供されているユーザーエージェントを使用するか、お好みのカスタムユーザーエージェントを入力して下さい</value>
+  </data>
+  <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
+    <value>ネットワーク診断ツール</value>
+  </data>
+  <data name="SettingsPage_About" xml:space="preserve">
+    <value>概要</value>
+  </data>
+  <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
+    <value>無視するパスを追加する</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
+    <value>デバッグDLLの使用を許可する</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
+    <value>SDKは、画面上に追加の情報を表示出来るようにするデバッグ用DLLをリリースする事があります</value>
+  </data>
+  <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
+    <value>DLLは、ゲームフォルダに切り替える前に、Windowsで署名検証を行って信頼性があるかどうかが確認されます。DLLが署名検証に失敗した場合、そのDLLは使用されません。この設定はオフのままにしておく事をお勧めします</value>
+  </data>
+  <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
+    <value>これはDLL選択ツールにのみ適用され、ライブラリページには適用されません</value>
+  </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>コミットを作成する</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>ビルド日</value>
+  </data>
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
+    <value>DLSS Swapperから直接ログファイルを開く事ができませんでした。手動で開いてみて下さい</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
+    <value>無視されたパス {0} を削除してもよろしいですか?</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
+    <value>無視されたパスを削除する</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
+    <value>DLSS開発者向け設定</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
+    <value>コンソールウィンドウへのログ出力を有効にする</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
+    <value>ファイルへのログ記録を有効にする</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
+    <value>全てのDLSS DLLで有効化されています</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>デバッグ用DLSS DLLのみ有効化されています</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
+    <value>画面に表示するインジケーターを表示する</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
+    <value>詳細なログ記録</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>DLSS設定</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>グローバルプリセット</value>
+  </data>
+  <data name="SettingsPage_GameLibraries" xml:space="preserve">
+    <value>ゲームライブラリ</value>
+  </data>
+  <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
+    <value>一般的なトラブルシューティングガイド</value>
+  </data>
+  <data name="SettingsPage_GiveFeedback" xml:space="preserve">
+    <value>フィードバックを送信する</value>
+  </data>
+  <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
+    <value>機能の提案や問題の報告は、DLSS Swapperで行う事が出来ます</value>
+  </data>
+  <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
+    <value>無視されたパス</value>
+  </data>
+  <data name="SettingsPage_Language" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
+    <value>{0} 無効</value>
+  </data>
+  <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
+    <value>{0} 有効</value>
+  </data>
+  <data name="SettingsPage_Logging" xml:space="preserve">
+    <value>ログ記録</value>
+  </data>
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
+    <value>新しい更新は現在ありません</value>
+  </data>
+  <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
+    <value>謝辞</value>
+  </data>
+  <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
+    <value>診断</value>
+  </data>
+  <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
+    <value>ネットワーク診断ツール</value>
+  </data>
+  <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
+    <value>翻訳ツールボックスを開く</value>
+  </data>
+  <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
+    <value>パス {0} は既に無視されています</value>
+  </data>
+  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
+    <value>信頼できない物を許可する</value>
+  </data>
+  <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
+    <value>更新を確認する</value>
+  </data>
+  <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
+    <value>ダウンロード済みのDLLのみを表示する</value>
+  </data>
+  <data name="SettingsPage_ThemeDark" xml:space="preserve">
+    <value>ダーク</value>
+  </data>
+  <data name="SettingsPage_ThemeLight" xml:space="preserve">
+    <value>ライト</value>
+  </data>
+  <data name="SettingsPage_ThemeMode" xml:space="preserve">
+    <value>テーマモード</value>
+  </data>
+  <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
+    <value>システム設定を使用する</value>
+  </data>
+  <data name="SettingsPage_Title" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="SettingsPage_Troubleshooting" xml:space="preserve">
+    <value>トラブルシューティング</value>
+  </data>
+  <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
+    <value>現在のログファイルは</value>
+  </data>
+  <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
+    <value>管理者権限で実行中の間は、翻訳ツールを使用出来ません。アプリケーションを再起動して下さい</value>
+  </data>
+  <data name="TranslationToolboxPage_Comment" xml:space="preserve">
+    <value>コメント</value>
+  </data>
+  <data name="TranslationToolboxPage_ImportAsTranslation" xml:space="preserve">
+    <value>言語を翻訳としてインポートする</value>
+  </data>
+  <data name="TranslationToolboxPage_Key" xml:space="preserve">
+    <value>キー</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
+    <value>既存のデータをロードする</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
+    <value>翻訳を読み込めませんでした。詳細についてはエラーログをご確認下さい</value>
+  </data>
+  <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
+    <value>新しい翻訳</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
+    <value>公開する為の翻訳データが見つかりませんでした</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
+    <value>翻訳データが見つからなかった為、保存出来ませんでした</value>
+  </data>
+  <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
+    <value>有効なDLSS Swapper翻訳ファイルではありません</value>
+  </data>
+  <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
+    <value>翻訳の公開に失敗しました。詳細についてはエラーログをご確認下さい</value>
+  </data>
+  <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
+    <value>アプリを再読み込みする</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
+    <value>初期化して再開する</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
+    <value>現在の翻訳の進捗が初期化されます。本当に続行しますか?</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
+    <value>進行状況を初期化して再開しますか?</value>
+  </data>
+  <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
+    <value>翻訳を保存出来ませんでした。詳細については、エラーログをご確認下さい</value>
+  </data>
+  <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
+    <value>言語を選択して読み込む</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
+    <value>ソース言語</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
+    <value>原文翻訳</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
+    <value>翻訳ガイド</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
+    <value>翻訳が完了しました。{0} の次に何をすべきかについては、DLSS Swapper翻訳ガイドをご確認下さい</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
+    <value>翻訳の進捗状況</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
+    <value>保存せずに閉じる</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
+    <value>未保存の翻訳変更がある可能性があります。このウィンドウを閉じると、これらの変更が失われます</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
+    <value>保存されていない翻訳の変更</value>
+  </data>
+  <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
+    <value>翻訳ツールボックス</value>
+  </data>
+</root>

@@ -54,7 +54,7 @@
                         <FontIcon Glyph="&#xEDE1;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton HorizontalAlignment="Right" Label="Download Latest" Command="{x:Bind ViewModel.DownloadLatestCommand}">
+                <AppBarButton HorizontalAlignment="Right" Label="{x:Bind ViewModel.TranslationProperties.DownloadLatestText, Mode=OneWay}" Command="{x:Bind ViewModel.DownloadLatestCommand}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE896;" />
                     </AppBarButton.Content>

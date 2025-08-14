@@ -186,10 +186,33 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="{x:Bind ViewModel.TranslationProperties.AboutText, Mode=OneWay}" />
-                <TextBlock Margin="0,12,0,0">
-                    <Run Text="{x:Bind ViewModel.TranslationProperties.VersionText, Mode=OneWay}" />
-                    <Run Text="{x:Bind ViewModel.AppVersion}" />
+                <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                    <TextBlock Visibility="{x:Bind local:BuildInfo.IsFromTagBuild, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <Run Text="{x:Bind ViewModel.TranslationProperties.VersionText, Mode=OneWay}" FontWeight="Bold" />
+                        <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenVersionCommand}" >
+                            <Run Text="{x:Bind ViewModel.AppVersion}" />
+                        </Hyperlink>
+                    </TextBlock>
+
+                    <TextBlock Visibility="{x:Bind local:BuildInfo.IsFromTagBuild, Converter={StaticResource BoolToNegationVisibilityConverter}}">
+                        <Run Text="{x:Bind ViewModel.TranslationProperties.VersionText, Mode=OneWay}" FontWeight="Bold" />
+                        <Run Text="{x:Bind ViewModel.AppVersion}" />
+                    </TextBlock>
+                </StackPanel>
+
+                <TextBlock Visibility="{x:Bind local:BuildInfo.IsFromTagBuild, Converter={StaticResource BoolToNegationVisibilityConverter}}">
+                    <Run Text="{x:Bind ViewModel.TranslationProperties.BuildCommitText, Mode=OneWay}" FontWeight="Bold" />
+                    <Run Text="{x:Bind local:BuildInfo.GitCommitShort}" />
+                    <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.CopyGitCommitCommand}" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.CopyText, Mode=OneWay}" FontStyle="Normal" FontSize="12">
+                        <Run Text="&#xE8C8;" FontFamily="/Assets/Fonts/Segoe-Fluent-Icons.ttf#Segoe Fluent Icons" />
+                    </Hyperlink>
                 </TextBlock>
+
+                <TextBlock>
+                    <Run Text="{x:Bind ViewModel.TranslationProperties.BuildDateText, Mode=OneWay}" FontWeight="Bold" />
+                    <Run Text="{x:Bind local:BuildInfo.BuildDateTimeFormattedString}" />
+                </TextBlock>
+                
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,12,0,0" Spacing="16" >
                     <Button Content="{x:Bind ViewModel.TranslationProperties.CheckForUpdatesText, Mode=OneWay}" Command="{x:Bind ViewModel.CheckForUpdatesCommand}" />
                     <ProgressRing Width="25" Height="25" IsIndeterminate="True" IsActive="{x:Bind ViewModel.IsCheckingForUpdates, Mode=OneWay}" />

@@ -1,0 +1,968 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcknowledgementsPage_Title" xml:space="preserve">
+    <value>Giấy phép &amp; Lời cảm ơn</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
+    <value>Nhấn để sao chép chi tiết bên dưới</value>
+  </data>
+  <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
+    <value>Chẩn đoán</value>
+  </data>
+  <data name="DllManager_AlreadyImported" xml:space="preserve">
+    <value>(đã nhập)</value>
+  </data>
+  <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
+    <value>Tính năng nhập đã tắt, không thể tải tệp kê khai nhập.</value>
+  </data>
+  <data name="DllManager_MigratingDlls" xml:space="preserve">
+    <value>Đang di chuyển DLL</value>
+  </data>
+  <data name="DllManager_UnknownTypeDll" xml:space="preserve">
+    <value>DLL không thuộc loại đã biết.</value>
+  </data>
+  <data name="DllManager_UntrustedDll" xml:space="preserve">
+    <value>DLL không được Windows tin cậy.</value>
+  </data>
+  <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
+    <value>Không thể tải xuống DLL {0}, vui lòng thử lại sau hoặc kiểm tra nhật ký để xem lý do thất bại.</value>
+  </data>
+  <data name="DllRecord_Download" xml:space="preserve">
+    <value>Tải xuống</value>
+  </data>
+  <data name="DllRecord_DownloadError" xml:space="preserve">
+    <value>Lỗi tải xuống</value>
+  </data>
+  <data name="DllRecord_Downloading" xml:space="preserve">
+    <value>Đang tải xuống</value>
+  </data>
+  <data name="DllRecord_Imported" xml:space="preserve">
+    <value>Đã nhập</value>
+  </data>
+  <data name="DllRecord_RequiresDownload" xml:space="preserve">
+    <value>Cần tải xuống</value>
+  </data>
+  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
+    <value>Tệp ZIP DLL không hợp lệ (không tìm thấy DLL).</value>
+  </data>
+  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
+    <value>DLSS Swapper khởi chạy thất bại</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
+    <value>Vui lòng mở </value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
+    <value>báo cáo lỗi mới</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
+    <value> tại kho lưu trữ GitHub của DLSS Swapper và cung cấp thông tin sau ở mục bối cảnh bổ sung.</value>
+  </data>
+  <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
+    <value>Khởi chạy thất bại</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Bạn có chắc muốn xóa ảnh bìa tùy chỉnh?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Trò chơi đang xử lý</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Xóa ảnh bìa tùy chỉnh?</value>
+  </data>
+  <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
+    <value>Loại tài sản</value>
+  </data>
+  <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
+    <value>Thời gian sự kiện</value>
+  </data>
+  <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
+    <value>Loại sự kiện</value>
+  </data>
+  <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
+    <value>Không tìm thấy lịch sử.</value>
+  </data>
+  <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
+    <value>Phiên bản</value>
+  </data>
+  <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
+    <value>Đã xóa bản sao lưu DLL</value>
+  </data>
+  <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
+    <value>DLL đã bị thay đổi từ bên ngoài</value>
+  </data>
+  <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
+    <value>Đã phát hiện DLL</value>
+  </data>
+  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
+    <value>Đã đặt lại DLL</value>
+  </data>
+  <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
+    <value>Đã hoán đổi DLL</value>
+  </data>
+  <data name="GamePage_AddCustomCover" xml:space="preserve">
+    <value>Thêm Ảnh bìa Tùy chỉnh</value>
+  </data>
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
+    <value>Nhấn để thêm vào Mục ưa thích</value>
+  </data>
+  <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+    <value>Không tìm thấy đường dẫn "{0}".</value>
+  </data>
+  <data name="GamePage_CurrentDll" xml:space="preserve">
+    <value>DLL hiện tại</value>
+  </data>
+  <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
+    <value>Không tìm thấy tệp "{0}".</value>
+  </data>
+  <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
+    <value>Đã đặt lại DLL về {0}.</value>
+  </data>
+  <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
+    <value>Bắt đầu tải xuống</value>
+  </data>
+  <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
+    <value>Vui lòng đợi tải xuống hoàn tất trước khi hoán đổi</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
+    <value>Thông tin cài đặt trước</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
+    <value>Cài đặt trước DLSS nằm trong các tệp DLL DLSS trong thư mục cài đặt trò chơi. Các DLL DLSS khác nhau có cài đặt trước khác nhau. Ví dụ: cài đặt trước K chỉ được giới thiệu từ DLSS v310.2. Nếu bạn sử dụng DLSS v3.7 và đặt cài đặt trước thành K, nó sẽ không sử dụng cài đặt trước K mà thay vào đó sẽ quay về cài đặt trước mà trò chơi chọn sử dụng.
+
+Điều tương tự áp dụng cho cài đặt trước toàn cục. Nếu bạn chọn cài đặt trước K nhưng trò chơi sử dụng DLSS v3.7, bạn sẽ không sử dụng được cài đặt trước K và trò chơi sẽ quay về mặc định.
+
+Để xác minh cài đặt trước đang được sử dụng, vui lòng bật chỉ báo DLSS trên màn hình.</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
+    <value>Thông tin chỉ báo trên màn hình</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
+    <value>Thông tin cài đặt trước DLSS</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
+    <value>Việc đặt cài đặt trước DLSS không đảm bảo rằng cài đặt trước đó sẽ được sử dụng.</value>
+  </data>
+  <data name="GamePage_Favorited" xml:space="preserve">
+    <value>Đã thích</value>
+  </data>
+  <data name="GamePage_History" xml:space="preserve">
+    <value>Lịch sử</value>
+  </data>
+  <data name="GamePage_InstallPath" xml:space="preserve">
+    <value>Đường dẫn cài đặt</value>
+  </data>
+  <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
+    <value>"{0}" không phải loại tệp hợp lệ</value>
+  </data>
+  <data name="GamePage_Launch" xml:space="preserve">
+    <value>Khởi chạy</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
+    <value>Tựa đề này không được thêm thủ công và không thể xóa.</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
+    <value>Bạn có chắc muốn xóa "{0}" khỏi DLSS Swapper? Điều này sẽ không thay đổi các tệp DLSS đã được hoán đổi.</value>
+  </data>
+  <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
+    <value>Dưới đây là các DLL đa tìm thấy. Bạn vẫn có thể hoán đổi và khôi phục DLL như thường lệ vì chúng tôi sẽ thực hiện các hành động này cho tất cả DLL cùng lúc. Tuy nhiên</value>
+  </data>
+  <data name="GamePage_MultipleDllsFound" xml:space="preserve">
+    <value>Tìm thấy nhiều DLL</value>
+  </data>
+  <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
+    <value>Đã tìm thấy nhiều DLL {0}</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
+    <value>Vui lòng truy cập trang thư viện để tải xuống DLL mới.</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
+    <value>Không tìm thấy DLL</value>
+  </data>
+  <data name="GamePage_Notes" xml:space="preserve">
+    <value>Ghi chú</value>
+  </data>
+  <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
+    <value>Trò chơi này chưa sẵn sàng để chơi.</value>
+  </data>
+  <data name="GamePage_OpenDllLocation" xml:space="preserve">
+    <value>Mở vị trí DLL</value>
+  </data>
+  <data name="GamePage_OriginalDll" xml:space="preserve">
+    <value>DLL gốc</value>
+  </data>
+  <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
+    <value>{0} vẫn đang xử lý. Vui lòng đợi chỉ báo tải hoàn tất trước khi mở.</value>
+  </data>
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
+    <value>Khôi phục DLL gốc</value>
+  </data>
+  <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
+    <value>Chọn phiên bản {0}</value>
+  </data>
+  <data name="GamePage_StorageFileIsNull" xml:space="preserve">
+    <value>storageFile là null</value>
+  </data>
+  <data name="GamePage_UnableToChangePreset" xml:space="preserve">
+    <value>Không thể thay đổi cài đặt trước. Vui lòng xem nhật ký lỗi để biết thêm chi tiết.</value>
+  </data>
+  <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
+    <value>Bạn chỉ có thể kéo một tệp duy nhất làm ảnh bìa</value>
+  </data>
+  <data name="GamesPage_AddGame" xml:space="preserve">
+    <value>Thêm Trò chơi</value>
+  </data>
+  <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+    <value>Nhóm trò chơi cùng thư viện</value>
+  </data>
+  <data name="GamesPage_Grouping" xml:space="preserve">
+    <value>Nhóm</value>
+  </data>
+  <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
+    <value>Ẩn trò chơi không có mục hoán đổi</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
+    <value>Bạn chỉ có thể kéo một tệp duy nhất làm ảnh bìa</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
+    <value>Lưu ý khác khi thêm trò chơi thủ công</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
+    <value>Đã xảy ra sự cố và không thể thêm trò chơi của bạn. Vui lòng báo cáo vấn đề này.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
+    <value>Lỗi thêm trò chơi</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
+    <value>Bạn phải chọn thư mục &lt;i&gt;trò chơi&lt;/i&gt;, không phải thư mục &lt;i&gt;các trò chơi&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;Ví dụ: nếu bạn có trò chơi tại:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Bạn nên chọn thư mục &lt;b&gt;MyFavGame&lt;/b&gt; chứ không phải thư mục &lt;b&gt;MyGamesFolder&lt;/b&gt;.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
+    <value>DLSS Swapper sẽ tự động tìm trò chơi từ thư viện đã cài đặt. Nếu trò chơi của bạn không có trong danh sách, có thể do một số cài đặt ngăn chặn. Vui lòng kiểm tra:
+
+- Bộ lọc danh sách trò chơi không được đặt thành "Ẩn trò chơi không có mục hoán đổi"
+- Thư viện trò chơi cụ thể đã được bật trong cài đặt
+
+Nếu đã kiểm tra những mục này mà trò chơi vẫn không hiển thị, có thể có lỗi. Chúng tôi đánh giá cao nếu bạn báo cáo sự cố trên kho lưu trữ GitHub để chúng tôi sửa lỗi và phát hiện trò chơi tốt hơn trong tương lai.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
+    <value>Lưu ý khi thêm trò chơi thủ công</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
+    <value>Đường dẫn cài đặt "{0}" đã tồn tại và không thể thêm lại.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
+    <value>Chọn Thư mục Trò chơi</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
+    <value>Không hỗ trợ thêm thư mục cấp cao nhất. Vui lòng thêm thư mục gốc của trò chơi.</value>
+  </data>
+  <data name="GamesPage_NewDlls" xml:space="preserve">
+    <value>DLL mới</value>
+  </data>
+  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
+    <value>Tạo báo cáo lỗi GitHub mới</value>
+  </data>
+  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
+    <value>Trong khi tải trò chơi</value>
+  </data>
+  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
+    <value>(Cần tài khoản GitHub)</value>
+  </data>
+  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
+    <value>Nếu nút không hoạt động, thử tại đây,</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
+    <value>Bước 4: Gửi báo cáo lỗi</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
+    <value>Bước 1: Tạo báo cáo lỗi mới</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
+    <value>Bước 3: Sao chép nội dung</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
+    <value>Bước 2: Sao chép tiêu đề</value>
+  </data>
+  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
+    <value>Cảm ơn đã hỗ trợ!</value>
+  </data>
+  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+    <value>Bạn không cần gửi DLL. Chúng tôi sẽ theo dõi chúng dựa trên thông tin được cung cấp.</value>
+  </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Đã tìm thấy DLL mới</value>
+  </data>
+  <data name="GamesPage_Title" xml:space="preserve">
+    <value>Trò chơi</value>
+  </data>
+  <data name="GamesPage_ViewType" xml:space="preserve">
+    <value>Loại chế độ xem</value>
+  </data>
+  <data name="GamesPage_ViewType_GridView" xml:space="preserve">
+    <value>Chế độ xem lưới</value>
+  </data>
+  <data name="GamesPage_ViewType_ListView" xml:space="preserve">
+    <value>Chế độ xem danh sách</value>
+  </data>
+  <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
+    <value>Ứng dụng này đang chạy với quyền quản trị.</value>
+  </data>
+  <data name="General_Apply" xml:space="preserve">
+    <value>Áp dụng</value>
+  </data>
+  <data name="General_Cancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="General_Close" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="General_Copy" xml:space="preserve">
+    <value>Sao chép</value>
+  </data>
+  <data name="General_Delete" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="General_DontShowAgain" xml:space="preserve">
+    <value>Đừng hiển thị lại</value>
+  </data>
+  <data name="General_Error" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="General_ErrorMessage" xml:space="preserve">
+    <value>Thông báo lỗi</value>
+  </data>
+  <data name="General_Export" xml:space="preserve">
+    <value>Xuất</value>
+  </data>
+  <data name="General_ExportAll" xml:space="preserve">
+    <value>Xuất tất cả</value>
+  </data>
+  <data name="General_Failed" xml:space="preserve">
+    <value>Thất bại</value>
+  </data>
+  <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
+    <value>Tính năng này không được hỗ trợ khi chạy ứng dụng với quyền quản trị.</value>
+  </data>
+  <data name="General_Filter" xml:space="preserve">
+    <value>Bộ lọc</value>
+  </data>
+  <data name="General_Help" xml:space="preserve">
+    <value>Trợ giúp</value>
+  </data>
+  <data name="General_Import" xml:space="preserve">
+    <value>Nhập</value>
+  </data>
+  <data name="General_Load" xml:space="preserve">
+    <value>Tải</value>
+  </data>
+  <data name="General_Loading" xml:space="preserve">
+    <value>Đang tải</value>
+  </data>
+  <data name="General_Name" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="General_No" xml:space="preserve">
+    <value>Không</value>
+  </data>
+  <data name="General_None" xml:space="preserve">
+    <value>Không có</value>
+  </data>
+  <data name="General_NotSupported" xml:space="preserve">
+    <value>Không được hỗ trợ</value>
+  </data>
+  <data name="General_Okay" xml:space="preserve">
+    <value>Đồng ý</value>
+  </data>
+  <data name="General_Oops" xml:space="preserve">
+    <value>Rất tiếc</value>
+  </data>
+  <data name="General_OpenFolder" xml:space="preserve">
+    <value>Mở thư mục</value>
+  </data>
+  <data name="General_Optional" xml:space="preserve">
+    <value>(tùy chọn)</value>
+  </data>
+  <data name="General_Options" xml:space="preserve">
+    <value>Tùy chọn</value>
+  </data>
+  <data name="General_Publish" xml:space="preserve">
+    <value>Công bố</value>
+  </data>
+  <data name="General_Refresh" xml:space="preserve">
+    <value>Làm mới</value>
+  </data>
+  <data name="General_Reload" xml:space="preserve">
+    <value>Tải lại</value>
+  </data>
+  <data name="General_Remove" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="General_ReportIssue" xml:space="preserve">
+    <value>Báo cáo lỗi</value>
+  </data>
+  <data name="General_Save" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="General_Search" xml:space="preserve">
+    <value>Tìm kiếm</value>
+  </data>
+  <data name="General_Sorry" xml:space="preserve">
+    <value>Xin lỗi</value>
+  </data>
+  <data name="General_Success" xml:space="preserve">
+    <value>Thành công</value>
+  </data>
+  <data name="General_Swap" xml:space="preserve">
+    <value>Hoán đổi</value>
+  </data>
+  <data name="General_Unknown" xml:space="preserve">
+    <value>Không xác định</value>
+  </data>
+  <data name="General_Update" xml:space="preserve">
+    <value>Cập nhật</value>
+  </data>
+  <data name="General_Version" xml:space="preserve">
+    <value>Phiên bản</value>
+  </data>
+  <data name="General_Warning" xml:space="preserve">
+    <value>Cảnh báo</value>
+  </data>
+  <data name="General_Yes" xml:space="preserve">
+    <value>Có</value>
+  </data>
+  <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
+    <value>Bạn hiện đang cài phiên bản {0}.</value>
+  </data>
+  <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
+    <value>DLSS Swapper vừa được cập nhật</value>
+  </data>
+  <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
+    <value>Có bản cập nhật</value>
+  </data>
+  <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
+    <value>Đã tải xuống.</value>
+  </data>
+  <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
+    <value>Không thể tải DLL đã nhập</value>
+  </data>
+  <data name="LibraryPage_CouldntDownload" xml:space="preserve">
+    <value>Không thể tải xuống lúc này.</value>
+  </data>
+  <data name="LibraryPage_CouldntExportDll" xml:space="preserve">
+    <value>Không thể xuất DLL.</value>
+  </data>
+  <data name="LibraryPage_DeleteDll" xml:space="preserve">
+    <value>Xóa DLL</value>
+  </data>
+  <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
+    <value>Xóa {0} v{1}?</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
+    <value>Kích thước tệp tải xuống</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
+    <value>Mô tả tệp</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
+    <value>Kích thước tệp</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
+    <value>Mã băm</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
+    <value>Tên nội bộ</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
+    <value>Tên nội bộ bổ sung</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
+    <value>Nhãn</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
+    <value>Đã bắt đầu {0} lượt tải xuống mới.</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
+    <value>Đã bắt đầu tải xuống</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
+    <value>Đã xuất DLL: </value>
+  </data>
+  <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
+    <value>Đã xuất {0} DLL.</value>
+  </data>
+  <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
+    <value>Đã xuất DLL {0}.</value>
+  </data>
+  <data name="LibraryPage_FileNotFound" xml:space="preserve">
+    <value>Không tìm thấy tệp.</value>
+  </data>
+  <data name="LibraryPage_Finished" xml:space="preserve">
+    <value>Hoàn tất</value>
+  </data>
+  <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
+    <value>Đã nhập dưới dạng bản ghi DLL hiện có.</value>
+  </data>
+  <data name="LibraryPage_Importing" xml:space="preserve">
+    <value>Đang nhập</value>
+  </data>
+  <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
+    <value>Thay thế DLL trên máy tính có thể nguy hiểm.
+
+Đặt DLL độc hại vào trò chơi nguy hiểm như chạy Linking_park_-_nUmB_mp3.exe vừa tải từ LimeWire.
+
+Chỉ nhập DLL từ nguồn đáng tin cậy.</value>
+  </data>
+  <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
+    <value>Không tìm thấy DLL để xuất.</value>
+  </data>
+  <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
+    <value>Bạn không có bản ghi DLL nào để xuất.</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
+    <value>Không có DLL mới để tải xuống.</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
+    <value>Không có DLL mới</value>
+  </data>
+  <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
+    <value>DLL đã xử lý: </value>
+  </data>
+  <data name="LibraryPage_Title" xml:space="preserve">
+    <value>Thư viện</value>
+  </data>
+  <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
+    <value>Không thể xóa bản ghi {0}.</value>
+  </data>
+  <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
+    <value>Không thể cập nhật bản ghi DLL.</value>
+  </data>
+  <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
+    <value>Tệp ZIP không chứa DLL nào.</value>
+  </data>
+  <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
+    <value>Đang thử cập nhật</value>
+  </data>
+  <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
+    <value>DLSS Swapper không thể tải tệp kê khai. Ứng dụng sẽ đóng ngay.</value>
+  </data>
+  <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
+    <value>DLSS Swapper phải đóng</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
+    <value>Vấn đề GitHub</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
+    <value>Chúng tôi không thể tải manifest.json từ máy tính hoặc internet.
+
+Nếu tình trạng này tiếp diễn, vui lòng báo cáo trên trình theo dõi sự cố GitHub của chúng tôi.</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
+    <value>Cập nhật tệp kê khai</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
+    <value>Mặc dù hoán đổi phiên bản DLSS không bị coi là gian lận, một số hệ thống chống gian lận có thể phản ứng nếu tệp trong thư mục trò chơi không khớp với bản phân phối.
+
+Do đó, chúng tôi khuyên nên thận trọng với trò chơi nhiều người chơi.</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
+    <value>Lưu ý cho trò chơi nhiều người chơi</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
+    <value>Vẫn không hoạt động</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
+    <value>Hoạt động!</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
+    <value>Kiểm tra trình duyệt</value>
+  </data>
+  <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
+    <value>Hủy kiểm tra hiện tại</value>
+  </data>
+  <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
+    <value>Sao chép kết quả kiểm tra</value>
+  </data>
+  <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
+    <value>Tạo báo cáo lỗi</value>
+  </data>
+  <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
+    <value>Kiểm tra tác nhân người dùng tùy chỉnh</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
+    <value>Tải xuống DLL DLSS Swapper trong DLSS Swapper với tác nhân người dùng tùy chỉnh</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
+    <value>Tải xuống DLL DLSS từ gương UploadThing</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
+    <value>Truy cập google.com từ DLSS Swapper (kiểm tra kết nối internet chung)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
+    <value>Truy cập bing.com từ DLSS Swapper (kiểm tra kết nối internet chung)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
+    <value>Tải xuống DLL DLSS Swapper trong DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
+    <value>Tải xuống DLL DLSS Swapper từ trình duyệt</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
+    <value>Tải ảnh bìa trò chơi từ Steam</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
+    <value>Tải ảnh bìa trò chơi từ Epic Game Store</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
+    <value>Tải ảnh bìa trò chơi từ máy chủ tệp DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
+    <value>Tải ảnh bìa trò chơi từ máy chủ tệp DLSS Swapper thay thế</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
+    <value>Truy vấn DNS máy chủ tệp DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
+    <value>Mở trong trình duyệt</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
+    <value>Nhấn nút mở trong trình duyệt hoặc sao chép liên kết sau vào trình duyệt. Nó có tải xuống tệp không?</value>
+  </data>
+  <data name="NetworkTesterPage_Results" xml:space="preserve">
+    <value>Kết quả</value>
+  </data>
+  <data name="NetworkTesterPage_RunTest" xml:space="preserve">
+    <value>Chạy kiểm tra</value>
+  </data>
+  <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
+    <value>Sử dụng tác nhân người dùng được cung cấp hoặc nhập tùy chỉnh.</value>
+  </data>
+  <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
+    <value>Trình kiểm tra mạng</value>
+  </data>
+  <data name="SettingsPage_About" xml:space="preserve">
+    <value>Giới thiệu</value>
+  </data>
+  <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
+    <value>Thêm Đường dẫn Bỏ qua</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
+    <value>Cho phép DLL Gỡ lỗi</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
+    <value>SDK đôi khi phát hành DLL gỡ lỗi hiển thị thông tin bổ sung trên màn hình.</value>
+  </data>
+  <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
+    <value>DLL được kiểm tra tính tin cậy trên Windows bằng cách xác thực chữ ký trước khi hoán đổi vào thư mục trò chơi. Nếu DLL không xác thực chữ ký</value>
+  </data>
+  <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
+    <value>Điều này chỉ áp dụng cho trình chọn DLL, không phải trang thư viện.</value>
+  </data>
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
+    <value>Không thể mở nhật ký trực tiếp từ DLSS Swapper. Vui lòng thử mở thủ công.</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
+    <value>Bạn có chắc muốn xóa đường dẫn bỏ qua {0}?</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
+    <value>Xóa Đường dẫn Bỏ qua</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
+    <value>Tùy chọn Nhà phát triển DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
+    <value>Bật ghi nhật ký ra cửa sổ console</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
+    <value>Bật ghi nhật ký vào tệp</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
+    <value>Bật cho tất cả DLL DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>Chỉ bật cho DLL DLSS gỡ lỗi</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
+    <value>Hiển thị chỉ báo trên màn hình</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
+    <value>Ghi nhật ký chi tiết</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>Tùy chọn DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>Cài đặt trước toàn cục</value>
+  </data>
+  <data name="SettingsPage_GameLibraries" xml:space="preserve">
+    <value>Thư viện Trò chơi</value>
+  </data>
+  <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
+    <value>Hướng dẫn xử lý sự cố chung</value>
+  </data>
+  <data name="SettingsPage_GiveFeedback" xml:space="preserve">
+    <value>Gửi phản hồi</value>
+  </data>
+  <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
+    <value>Bạn có thể đề xuất tính năng hoặc báo cáo sự cố trên DLSS Swapper</value>
+  </data>
+  <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
+    <value>Đường dẫn Bỏ qua</value>
+  </data>
+  <data name="SettingsPage_Language" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
+    <value>{0} đã tắt</value>
+  </data>
+  <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
+    <value>{0} đã bật</value>
+  </data>
+  <data name="SettingsPage_Logging" xml:space="preserve">
+    <value>Ghi nhật ký</value>
+  </data>
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
+    <value>Không có bản cập nhật mới.</value>
+  </data>
+  <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
+    <value>Lời cảm ơn</value>
+  </data>
+  <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
+    <value>Chẩn đoán</value>
+  </data>
+  <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
+    <value>Trình kiểm tra mạng</value>
+  </data>
+  <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
+    <value>Mở hộp công cụ dịch thuật</value>
+  </data>
+  <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
+    <value>Đường dẫn {0} đã bị bỏ qua.</value>
+  </data>
+  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
+    <value>Cho phép Không tin cậy</value>
+  </data>
+  <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
+    <value>Kiểm tra cập nhật</value>
+  </data>
+  <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
+    <value>Chỉ Hiển thị DLL Đã Tải Xuống</value>
+  </data>
+  <data name="SettingsPage_ThemeDark" xml:space="preserve">
+    <value>Tối</value>
+  </data>
+  <data name="SettingsPage_ThemeLight" xml:space="preserve">
+    <value>Sáng</value>
+  </data>
+  <data name="SettingsPage_ThemeMode" xml:space="preserve">
+    <value>Chế độ giao diện</value>
+  </data>
+  <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
+    <value>Sử dụng cài đặt hệ thống</value>
+  </data>
+  <data name="SettingsPage_Title" xml:space="preserve">
+    <value>Cài đặt</value>
+  </data>
+  <data name="SettingsPage_Troubleshooting" xml:space="preserve">
+    <value>Xử lý sự cố</value>
+  </data>
+  <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
+    <value>Nhật ký hiện tại của bạn là </value>
+  </data>
+  <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
+    <value>Không thể sử dụng công cụ dịch thuật khi chạy với quyền quản trị. Vui lòng khởi động lại ứng dụng.</value>
+  </data>
+  <data name="TranslationToolboxPage_Comment" xml:space="preserve">
+    <value>Ghi chú</value>
+  </data>
+  <data name="TranslationToolboxPage_ImportAsTranslation" xml:space="preserve">
+    <value>Nhập ngôn ngữ làm bản dịch</value>
+  </data>
+  <data name="TranslationToolboxPage_Key" xml:space="preserve">
+    <value>Khóa</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
+    <value>Tải Bản dịch Có sẵn</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
+    <value>Không thể tải bản dịch. Vui lòng xem nhật ký lỗi để biết thêm chi tiết.</value>
+  </data>
+  <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
+    <value>Bản dịch mới</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
+    <value>Không tìm thấy dữ liệu dịch để công bố.</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
+    <value>Không tìm thấy dữ liệu dịch để lưu.</value>
+  </data>
+  <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
+    <value>Không phải tệp dịch DLSS Swapper hợp lệ.</value>
+  </data>
+  <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
+    <value>Không thể công bố bản dịch. Vui lòng xem nhật ký lỗi để biết thêm chi tiết.</value>
+  </data>
+  <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
+    <value>Tải lại ứng dụng</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
+    <value>Đặt lại và tiếp tục</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
+    <value>Điều này sẽ đặt lại tiến trình dịch hiện tại. Bạn có chắc muốn tiếp tục?</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
+    <value>Đặt lại tiến trình và tiếp tục?</value>
+  </data>
+  <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
+    <value>Không thể lưu bản dịch. Vui lòng xem nhật ký lỗi để biết thêm chi tiết.</value>
+  </data>
+  <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
+    <value>Chọn ngôn ngữ cần tải</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
+    <value>Ngôn ngữ nguồn</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
+    <value>Bản dịch nguồn</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
+    <value>Hướng dẫn dịch thuật</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
+    <value>Bản dịch của bạn đã được tạo. Vui lòng xem hướng dẫn dịch thuật DLSS Swapper để biết các bước tiếp theo với {0}.</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
+    <value>Tiến trình dịch thuật</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
+    <value>Đóng mà không lưu</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
+    <value>Bạn có thể có thay đổi dịch thuật chưa lưu. Nếu đóng cửa sổ này</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
+    <value>Thay đổi dịch thuật chưa lưu</value>
+  </data>
+  <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
+    <value>Hộp công cụ Dịch thuật</value>
+  </data>
+</root>

@@ -35,6 +35,9 @@ internal partial class GameManager : ObservableObject
 
     List<UnknownGameAsset> _unknownGameAssets { get; } = new List<UnknownGameAsset>();
 
+    [ObservableProperty]
+    public partial bool ShowHiddenGames { get; set; } = false;
+
     object gameLock = new object();
     object unknownGameAsseetLock = new object();
 
@@ -44,47 +47,54 @@ internal partial class GameManager : ObservableObject
     public AdvancedCollectionView AllGamesView { get; init; }
     public AdvancedCollectionView FavouriteGamesView { get; init; }
 
-
-    bool Filter_Favourite_WithDLSS(object obj)
-    {
-        return ((Game)obj).IsFavourite;
-    }
-
-    bool Filter_Favourite_Any(object obj)
-    {
-        return ((Game)obj).IsFavourite;
-    }
-
     Dictionary<GameLibrary, GameGroup> libraryGameGroups = new Dictionary<GameLibrary, GameGroup>();
     Dictionary<GameLibrary, AdvancedCollectionView> libraryGamesView = new Dictionary<GameLibrary, AdvancedCollectionView>();
 
 
-    private Predicate<object> GetPredicateForAllGames(bool hideNonDLSSGames, string? filterText = null)
+    Predicate<object> GetPredicateForAllGames(bool hideNonDLSSGames, string? filterText = null)
     {
         return (obj) =>
         {
             var game = (Game)obj;
+
+            if (ShowHiddenGames == false && game.IsHidden == true)
+            {
+                return false;
+            }
+
             bool matchesText = string.IsNullOrEmpty(filterText) || game.Title.Contains(filterText, StringComparison.OrdinalIgnoreCase);
             return (!hideNonDLSSGames || game.HasSwappableItems) && matchesText;
         };
     }
 
-    private Predicate<object> GetPredicateForFavouriteGames(bool hideNonDLSSGames, string? filterText = null)
+    Predicate<object> GetPredicateForFavouriteGames(bool hideNonDLSSGames, string? filterText = null)
     {
         return (obj) =>
         {
             var game = (Game)obj;
+
+            if (ShowHiddenGames == false && game.IsHidden == true)
+            {
+                return false;
+            }
+
             bool matchesText = string.IsNullOrEmpty(filterText) || game.Title.Contains(filterText, StringComparison.OrdinalIgnoreCase);
             return game.IsFavourite && (!hideNonDLSSGames || game.HasSwappableItems) && matchesText;
         };
     }
 
 
-    private Predicate<object> GetPredicateForLibraryGames(GameLibrary library, bool hideNonDLSSGames, string? filterText = null)
+    Predicate<object> GetPredicateForLibraryGames(GameLibrary library, bool hideNonDLSSGames, string? filterText = null)
     {
         return (obj) =>
         {
             var game = (Game)obj;
+
+            if (ShowHiddenGames == false && game.IsHidden == true)
+            {
+                return false;
+            }
+
             bool matchesText = string.IsNullOrEmpty(filterText) || game.Title.Contains(filterText, StringComparison.OrdinalIgnoreCase);
             return game.GameLibrary == library && (!hideNonDLSSGames || game.HasSwappableItems) && matchesText;
         };
@@ -94,13 +104,17 @@ internal partial class GameManager : ObservableObject
     {
         FavouriteGamesView = new AdvancedCollectionView(_allGames, true);
         FavouriteGamesView.Filter = GetPredicateForFavouriteGames(Settings.Instance.HideNonDLSSGames);
+        FavouriteGamesView.ObserveFilterProperty(nameof(ShowHiddenGames));
         FavouriteGamesView.ObserveFilterProperty(nameof(Game.IsFavourite));
         FavouriteGamesView.ObserveFilterProperty(nameof(Game.HasSwappableItems));
+        FavouriteGamesView.ObserveFilterProperty(nameof(Game.IsHidden));
         FavouriteGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
         AllGamesView = new AdvancedCollectionView(_allGames, true);
         AllGamesView.Filter = GetPredicateForAllGames(Settings.Instance.HideNonDLSSGames);
+        AllGamesView.ObserveFilterProperty(nameof(ShowHiddenGames));
         AllGamesView.ObserveFilterProperty(nameof(Game.HasSwappableItems));
+        AllGamesView.ObserveFilterProperty(nameof(Game.IsHidden));
         AllGamesView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
 
@@ -126,6 +140,8 @@ internal partial class GameManager : ObservableObject
             var gameView = new AdvancedCollectionView(_allGames, true);
             gameView.Filter = GetPredicateForLibraryGames(gameLibraryEnum, Settings.Instance.HideNonDLSSGames);
             gameView.ObserveFilterProperty(nameof(Game.HasSwappableItems));
+            gameView.ObserveFilterProperty(nameof(ShowHiddenGames));
+            gameView.ObserveFilterProperty(nameof(Game.IsHidden));
             gameView.SortDescriptions.Add(new SortDescription(nameof(Game.Title), SortDirection.Ascending));
 
             libraryGamesView[gameLibraryEnum] = gameView;

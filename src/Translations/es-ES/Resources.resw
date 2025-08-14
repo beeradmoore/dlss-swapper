@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
     Microsoft ResX Schema
@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(ya importado)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>No se pudo deserializar manifest.json.</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>La función de importación está deshabilitada, no se pudo cargar el manifiesto de importación.</value>
   </data>
@@ -150,17 +147,11 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>No se pudo descargar el DLL {0}, por favor inténtalo de nuevo más tarde o revisa tus registros para ver por qué falló la descarga.</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>No se pudo descargar el archivo.</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Descargar</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Error de Descarga</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>El archivo descargado no era válido.</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>Descargando</value>
@@ -188,6 +179,42 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Fallo al Iniciar</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>¿Estás seguro de que quieres eliminar la carátula personalizada?</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>¿Estás seguro de que quieres eliminar la carátula personalizada?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Juego Procesándose Actualmente</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Juego Procesándose Actualmente</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>¿Eliminar carátula personalizada?</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>¿Eliminar carátula personalizada?</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>No se pudo deserializar GOGCatalogResponse para la url, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>No se pudo deserializar GOGEmbedFilteredResponse para la url, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>No se pudo encontrar ningún GOGEmbedFilteredProducts para la url, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>No se pudo encontrar ningún GOGCatalogProduct para la url, {0}</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>No se pudo detectar la clave de instalación de Ubisoft Connect</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Biblioteca de juegos desconocida {0} al establecer el ID</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Tipo de Recurso</value>
@@ -219,14 +246,14 @@
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL intercambiado</value>
   </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>No se pudo cargar la biblioteca de juegos {0}</value>
-  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Añadir Carátula Personalizada</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Hacer clic para añadir a favoritos</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>Haz clic para esconder</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>No se pudo encontrar la ruta "{0}".</value>
@@ -316,6 +343,9 @@ Para verificar qué preajuste se está utilizando, por favor, activa el indicado
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} aún se está procesando. Por favor, espere a que se complete el indicador de carga antes de abrir.</value>
   </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>Restablecer todo</value>
+  </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>Restaurar DLL original</value>
   </data>
@@ -326,7 +356,7 @@ Para verificar qué preajuste se está utilizando, por favor, activa el indicado
     <value>storageFile es nulo</value>
   </data>
   <data name="GamePage_UnableToChangePreset" xml:space="preserve">
-    <value> consulta tu registro de errores para más información.</value>
+    <value>No se puede cambiar la configuración preestablecida. Consulte el registro de errores para obtener más información.</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
     <value>Solo puedes arrastrar un único archivo para una carátula</value>
@@ -381,9 +411,6 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Nuevos DLLs</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Nuevos DLLs Encontrados</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Crear nuevo issue en GitHub</value>
   </data>
@@ -414,6 +441,15 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>No es necesario que envíe los DLL. Nosotros los localizaremos basándonos en la información facilitada.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Nuevos DLLs Encontrados</value>
+  </data>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>Recargando juego</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>Mostrar juegos ocultos (desactivado de forma predeterminada al iniciar)</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Juegos</value>
   </data>
@@ -425,33 +461,6 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Vista de lista</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>¿Estás seguro de que quieres eliminar la carátula personalizada?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Juego Procesándose Actualmente</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>¿Eliminar carátula personalizada?</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>No se pudo deserializar GOGCatalogResponse para la url, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>No se pudo deserializar GOGEmbedFilteredResponse para la url, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>No se pudo encontrar ningún GOGEmbedFilteredProducts para la url, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>No se pudo encontrar ningún GOGCatalogProduct para la url, {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>No se pudo detectar la clave de instalación de Ubisoft Connect</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Biblioteca de juegos desconocida {0} al establecer el ID</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Esta aplicación se está ejecutando con privilegios de administrador.</value>
@@ -497,6 +506,9 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   </data>
   <data name="General_Help" xml:space="preserve">
     <value>Ayuda</value>
+  </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>Oculto</value>
   </data>
   <data name="General_Import" xml:space="preserve">
     <value>Importar</value>
@@ -579,9 +591,6 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   <data name="General_Yes" xml:space="preserve">
     <value>Sí</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>No se pudieron cargar los datos de la versión de GitHub.</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Actualmente tienes la versión {0} instalada.</value>
   </data>
@@ -629,6 +638,9 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Etiqueta</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>Descargar última versión</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>Se iniciaron {0} nuevas descargas.</value>
@@ -809,6 +821,12 @@ Debido a esto, recomendamos tener precaución con los juegos multijugador.</valu
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>Esto solo se aplica al selector de DLL, no a la página de la biblioteca.</value>
   </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>Commit de compilación</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>Fecha de compilación</value>
+  </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>No se ha podido abrir el archivo de registro directamente desde DLSS Swapper. Intente abrirlo manualmente.</value>
   </data>
@@ -918,7 +936,7 @@ Debido a esto, recomendamos tener precaución con los juegos multijugador.</valu
     <value>Solución de problemas</value>
   </data>
   <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
-    <value>Su archivo de registro actual es</value>
+    <value>Su archivo de registro actual es  </value>
   </data>
   <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
     <value>No puede utilizar la herramienta de traducción mientras se ejecuta como administrador. Reinicie la aplicación.</value>

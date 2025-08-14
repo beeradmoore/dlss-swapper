@@ -180,6 +180,15 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>起動に失敗しました</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>カスタムカバー画像を削除してもよろしいですか?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>ゲームが現在実行中です</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>カスタムカバーを削除しますか?</value>
+  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>アセットの種類</value>
   </data>
@@ -379,9 +388,6 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>新しいDLLファイル</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>新しいDLLファイルが検出されました</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>GitHubの新しい報告を作成する</value>
   </data>
@@ -412,6 +418,9 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>DLLを提出する必要はありません。提供された情報に基づいて、私達でDLLを特定致します</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>新しいDLLファイルが検出されました</value>
+  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>ゲームの再読み込み</value>
   </data>
@@ -429,15 +438,6 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>リスト表示</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>カスタムカバー画像を削除してもよろしいですか?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>ゲームが現在実行中です</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>カスタムカバーを削除しますか?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>このアプリは管理者権限で実行されています</value>

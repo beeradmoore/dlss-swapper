@@ -183,11 +183,38 @@
   <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
     <value>Esteu segur que voleu eliminar la imatge de la portada personalitzada?</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Esteu segur que voleu eliminar la imatge de la portada personalitzada?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Joc actualment en processament</value>
+  </data>
   <data name="Game_CurrentlyProcessing" xml:space="preserve">
     <value>Joc actualment en processament</value>
   </data>
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Voleu treure la portada personalitzada?</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Voleu treure la portada personalitzada?</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>No s'ha pogut deserialitzar GOGCatalogResponse per a l'URL, {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>No s'ha pogut deserialitzar GOGEmbedFilteredResponse per a l'URL {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>No s'ha trobat cap GOGEmbedFilteredProducts per a l'URL {0}</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>No s'ha trobat cap GOGCatalogProduct per a l'URL {0}</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>No s'ha pogut detectar la clau d'instal·lació d'Ubisoft Connect.</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>Biblioteca de jocs desconeguda {0} en configurar l'ID</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Tipus d'actiu</value>
@@ -384,9 +411,6 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Noves DLL</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>S'han trobat noves DLL</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Crea una nova incidència de GitHub</value>
   </data>
@@ -417,6 +441,9 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>No cal que envieu les DLL. Les localitzarem en funció de la informació proporcionada.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>S'han trobat noves DLL</value>
+  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Recarregant el joc</value>
   </data>
@@ -434,33 +461,6 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Llista</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Esteu segur que voleu eliminar la imatge de la portada personalitzada?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Joc actualment en processament</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Voleu treure la portada personalitzada?</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>No s'ha pogut deserialitzar GOGCatalogResponse per a l'URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>No s'ha pogut deserialitzar GOGEmbedFilteredResponse per a l'URL {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>No s'ha trobat cap GOGEmbedFilteredProducts per a l'URL {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>No s'ha trobat cap GOGCatalogProduct per a l'URL {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>No s'ha pogut detectar la clau d'instal·lació d'Ubisoft Connect.</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Biblioteca de jocs desconeguda {0} en configurar l'ID</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Aquesta aplicació s'està executant amb privilegis d'administrador.</value>

@@ -180,6 +180,15 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Не вдалося запустити</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Ви впевнені, що хочете видалити власне зображення обкладинки?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Гра зараз обробляється</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Видалити власну обкладинку?</value>
+  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Тип активу</value>
   </data>
@@ -375,9 +384,6 @@
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Нові DLL</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Знайдено нові DLL</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Створіть нову проблему на GitHub</value>
   </data>
@@ -408,6 +414,9 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Вам не потрібно надсилати DLL-файли. Ми знайдемо їх на основі наданої інформації.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Знайдено нові DLL</value>
+  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Перезавантаження гри</value>
   </data>
@@ -425,15 +434,6 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Список</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Ви впевнені, що хочете видалити власне зображення обкладинки?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Гра зараз обробляється</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Видалити власну обкладинку?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Ця програма працює з правами адміністратора.</value>

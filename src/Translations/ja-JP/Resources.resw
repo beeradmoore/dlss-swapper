@@ -132,9 +132,6 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>(既にインポート済み)</value>
   </data>
-  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
-    <value>manifest.jsonの復元が出来ませんでした</value>
-  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>インポート機能が無効になっている為、インポート マニフェストを読み込む事が出来ませんでした</value>
   </data>
@@ -150,17 +147,11 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>{0} DLL のダウンロードに失敗しました。後で再試行するか、ログを確認してダウンロードが失敗した原因を確認して下さい。</value>
   </data>
-  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
-    <value>ファイルをダウンロード出来ませんでした</value>
-  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>ダウンロード</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>ダウンロードエラー</value>
-  </data>
-  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
-    <value>ダウンロードしたファイルが無効</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>ダウンロード中</value>
@@ -188,33 +179,6 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>起動に失敗しました</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>カスタムカバー画像を削除してもよろしいですか?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>ゲームが現在実行中です</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>カスタムカバーを削除しますか?</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>GOGCatalogResponseのURL {0} に対してデシリアライズ出来ませんでした</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>GOGEmbedFilteredResponseのURL {0} に対してデシリアライズ出来ませんでした</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>URL {0} に対してGOGEmbedFilteredProductsが見つかりませんでした</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>URL {0} に対応するGOGCatalogProductが見つかりませんでした</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>UbisoftConnectInstallsKeyを検出出来ませんでした</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>ゲームライブラリ {0} が不明な状態でIDを設定しています</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>アセットの種類</value>
@@ -246,14 +210,14 @@
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLLの置き換えました</value>
   </data>
-  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>ゲームライブラリ {0} を読み込み出来ませんでした</value>
-  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>カスタムカバーを追加する</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>お気に入りに追加する</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>クリックして非表示にする</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>パス "{0}" が見つかりませんでした</value>
@@ -343,6 +307,9 @@
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} は現在処理中です。読み込みインジケーターが完了するまでお待ち下さい</value>
   </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>全てをリセットする</value>
+  </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>元のDLLを復元します</value>
   </data>
@@ -412,6 +379,9 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>新しいDLLファイル</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>新しいDLLファイルが検出されました</value>
+  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>GitHubの新しい報告を作成する</value>
   </data>
@@ -442,8 +412,11 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>DLLを提出する必要はありません。提供された情報に基づいて、私達でDLLを特定致します</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>新しいDLLファイルが検出されました</value>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>ゲームの再読み込み</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>非表示のゲームを表示する（起動時はデフォルトでオフ）</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>ゲーム</value>
@@ -456,6 +429,15 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>リスト表示</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>カスタムカバー画像を削除してもよろしいですか?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>ゲームが現在実行中です</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>カスタムカバーを削除しますか?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>このアプリは管理者権限で実行されています</value>
@@ -501,6 +483,9 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   </data>
   <data name="General_Help" xml:space="preserve">
     <value>ヘルプ</value>
+  </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>非表示</value>
   </data>
   <data name="General_Import" xml:space="preserve">
     <value>インポート</value>
@@ -583,9 +568,6 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   <data name="General_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
-    <value>GitHubのリリースデータを取得出来ませんでした</value>
-  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>現在、 {0} がインストールされています</value>
   </data>
@@ -633,6 +615,9 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>ラベル</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>最新バージョンをダウンロード</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>{0} 件の新しいダウンロードを開始しました</value>
@@ -812,6 +797,12 @@ DLLは信頼できるソースからのみインポートして下さい</value>
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>これはDLL選択ツールにのみ適用され、ライブラリページには適用されません</value>
+  </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>コミットを作成する</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>ビルド日</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>DLSS Swapperから直接ログファイルを開く事ができませんでした。手動で開いてみて下さい</value>

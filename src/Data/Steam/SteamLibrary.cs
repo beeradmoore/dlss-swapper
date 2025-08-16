@@ -1,3 +1,4 @@
+using DLSS_Swapper.Data.Steam.Manifest;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
@@ -6,8 +7,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ValveKeyValue;
 
 namespace DLSS_Swapper.Data.Steam
 {
@@ -18,28 +19,13 @@ namespace DLSS_Swapper.Data.Steam
 
         public Type GameType => typeof(SteamGame);
 
-        static SteamLibrary? instance = null;
+        static SteamLibrary? instance;
         public static SteamLibrary Instance => instance ??= new SteamLibrary();
 
         GameLibrarySettings? _gameLibrarySettings;
         public GameLibrarySettings? GameLibrarySettings => _gameLibrarySettings ??= GameManager.Instance.GetGameLibrarySettings(GameLibrary);
 
         static string _installPath = string.Empty;
-
-        [GeneratedRegex(@"^([ \t]*)""(.*)""([ \t]*)""(?<path>.*)""$", RegexOptions.Multiline)]
-        private static partial Regex LibraryFoldersRegex();
-
-        [GeneratedRegex(@"^([ \t]*)""StateFlags""([ \t]*)""(?<StateFlags>\d+)""([ \t]*)$", RegexOptions.Multiline)]
-        private static partial Regex StateFlagsRegex();
-
-        [GeneratedRegex(@"^([ \t]*)""appid""([ \t]*)""(?<appid>.*)""$", RegexOptions.Multiline)]
-        private static partial Regex AppIdRegex();
-
-        [GeneratedRegex(@"^([ \t]*)""name""([ \t]*)""(?<name>.*)""$", RegexOptions.Multiline)]
-        private static partial Regex NameRegex();
-
-        [GeneratedRegex(@"^([ \t]*)""installdir""([ \t]*)""(?<installdir>.*)""$", RegexOptions.Multiline)]
-        private static partial Regex InstallDirRegex();
 
         private SteamLibrary()
         {
@@ -53,7 +39,7 @@ namespace DLSS_Swapper.Data.Steam
 
         readonly string[] _defaultHiddenGames = [
             "228980", // Steamworks Common Redistributables
-        ];
+    ];
 
         public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
@@ -71,151 +57,137 @@ namespace DLSS_Swapper.Data.Steam
             // I hope this runs on a background thread. 
             // Tasks are whack.
 
-            var games = new List<Game>();
-
-            // Base steamapps folder contains libraryfolders.vdf which has references to other steamapps folders.
+            // Base steamapps folder contains libraryfolders.vdf which has references to other steamapps folders and individual installed Steam games.
             // All of these folders contain appmanifest_[some_id].acf which contains information about the game.
-            // We parse all of these files with jank regex, rather than building a parser.
-            // If we ever need to this page probably contains info on how to do that, https://developer.valvesoftware.com/wiki/KeyValues
 
             var baseSteamAppsFolder = Path.Combine(installPath, "steamapps");
-
-            var libraryFolders = new List<string>();
-            libraryFolders.Add(Helpers.PathHelpers.NormalizePath(baseSteamAppsFolder));
-
             var libraryFoldersFile = Path.Combine(baseSteamAppsFolder, "libraryfolders.vdf");
-            if (File.Exists(libraryFoldersFile))
+            if (File.Exists(libraryFoldersFile) == false)
             {
-                try
-                {
-                    var libraryFoldersFileText = await File.ReadAllTextAsync(libraryFoldersFile).ConfigureAwait(false);
+                return new List<Game>();
+            }
 
-                    var matches = LibraryFoldersRegex().Matches(libraryFoldersFileText);
-                    if (matches.Count > 0)
+            var allAppManifestPaths = new List<string>();
+            var kvSerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
+
+            try
+            {
+                using (var fileStream = File.OpenRead(libraryFoldersFile))
+                {
+                    var libraryFoldersVDF = kvSerializer.Deserialize<Dictionary<string, LibraryFoldersVDF>>(fileStream);
+                    foreach (var libraryFolderVDF in libraryFoldersVDF)
                     {
-                        foreach (Match match in matches)
+                        var path = PathHelpers.NormalizePath(libraryFolderVDF.Value.Path);
+                        path = Path.Combine(path, "steamapps");
+
+                        foreach (var steamApp in libraryFolderVDF.Value.Apps)
                         {
-                            // This is weird, but for some reason some libraryfolders.vdf are formatted very differently than others.
-                            var path = match.Groups["path"].ToString();
-                            if (Directory.Exists(path))
+                            // Here steamApp.Value would be size on disk.
+                            var appManifestPath = Path.Combine(path, $"appmanifest_{steamApp.Key}.acf");
+                            if (File.Exists(appManifestPath))
                             {
-                                libraryFolders.Add(Helpers.PathHelpers.NormalizePath(Path.Combine(path, "steamapps")));
+                                allAppManifestPaths.Add(appManifestPath);
+                            }
+                            else
+                            {
+                                Logger.Error($"Expected manifest path was not found - {appManifestPath}");
                             }
                         }
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err, $"Unable to process {libraryFoldersFile}");
+                Debugger.Break();
+            }
+
+            var games = new List<Game>();
+
+            foreach (var appManifestPath in allAppManifestPaths)
+            {
+                SteamGame? game;
+
+                try
+                {
+                    using (var fileStream = File.OpenRead(appManifestPath))
+                    {
+                        var appManifestACF = kvSerializer.Deserialize<AppManifestACF>(fileStream);
+
+                        if (appManifestACF is null || string.IsNullOrEmpty(appManifestACF.AppId))
+                        {
+                            Logger.Error($"Unable to parse app manifest - {appManifestPath}");
+                            continue;
+                        }
+
+                        game = new SteamGame(appManifestACF.AppId);
+
+                        if (Enum.TryParse(appManifestACF.StateFlags, out SteamStateFlag stateFlags) == false)
+                        {
+                            // The AppState couldn't be parsed from the appmanifest_*.acf
+                            Logger.Error($"Unable to parse StateFlags {appManifestACF.StateFlags} for app {appManifestACF.AppId} in {appManifestPath}");
+                            continue;
+                        }
+                        game.StateFlags = stateFlags;
+                        game.Title = appManifestACF.Name;
+
+                        var baseDir = Path.GetDirectoryName(appManifestPath);
+                        if (string.IsNullOrEmpty(baseDir))
+                        {
+                            continue;
+                        }
+
+                        var installDir = PathHelpers.NormalizePath(Path.Combine(baseDir, "common", appManifestACF.InstallDir));
+                        if (Directory.Exists(installDir) == false)
+                        {
+                            // If the install directory does not exist, skip this game.
+                            Logger.Error($"SteamLibary could not load game {game.Title} ({game.PlatformId}) because install path does not exist: {installDir}");
+                            continue;
+                        }
+                        game.InstallPath = installDir;
                     }
                 }
                 catch (Exception err)
                 {
-                    // TODO: Report
-                    Logger.Error(err, $"Unable to parse libraryfolders.vdf");
+                    Logger.Error(err);
+                    continue;
                 }
-            }
 
-            // Makes sure all library folders are unique.
-            libraryFolders = libraryFolders.Distinct().ToList();
+                var cachedGame = GameManager.Instance.GetGame<SteamGame>(game.PlatformId);
+                var activeGame = cachedGame ?? game;
 
-            foreach (var libraryFolder in libraryFolders)
-            {
-                if (Directory.Exists(libraryFolder))
+                if (activeGame.IsHidden is null && _defaultHiddenGames.Contains(activeGame.PlatformId))
                 {
-                    var appManifestPaths = Directory.GetFiles(libraryFolder, "appmanifest_*.acf");
-                    foreach (var appManifestPath in appManifestPaths)
-                    {
-                        SteamGame? game = null;
-
-                        try
-                        {
-                            var appManifest = await File.ReadAllTextAsync(appManifestPath).ConfigureAwait(false);
-
-                            var matches = AppIdRegex().Matches(appManifest);
-                            if (matches.Count == 0)
-                            {
-                                continue;
-                            }
-
-                            var steamGameAppId = matches[0].Groups["appid"].Value;
-                            game = new SteamGame(steamGameAppId);
-
-                            var stateFlagsMatch = StateFlagsRegex().Match(appManifest);
-                            if (!stateFlagsMatch.Success || !Enum.TryParse(stateFlagsMatch.Groups["StateFlags"].Value, out SteamStateFlag stateFlags))
-                            {
-                                // The AppState couldn't be parsed from the appmanifest_*.acf
-                                continue;
-                            }
-
-                            game.StateFlags = stateFlags;
-
-                            matches = NameRegex().Matches(appManifest);
-                            if (matches.Count == 0)
-                            {
-                                continue;
-                            }
-
-                            game.Title = matches[0].Groups["name"].ToString();
-
-                            matches = InstallDirRegex().Matches(appManifest);
-                            if (matches.Count == 0)
-                            {
-                                continue;
-                            }
-
-                            var installDir = matches[0].Groups["installdir"].ToString();
-
-                            var baseDir = Path.GetDirectoryName(appManifestPath);
-                            if (string.IsNullOrEmpty(baseDir))
-                            {
-                                continue;
-                            }
-
-                            game.InstallPath = PathHelpers.NormalizePath(Path.Combine(baseDir, "common", installDir));
-                        }
-                        catch (Exception err)
-                        {
-                            Logger.Error(err);
-                            continue;
-                        }
-
-                        var cachedGame = GameManager.Instance.GetGame<SteamGame>(game.PlatformId);
-                        var activeGame = cachedGame ?? game;
-
-                        if (activeGame.IsHidden is null && _defaultHiddenGames.Contains(activeGame.PlatformId))
-                        {
-                            activeGame.IsHidden = true;
-                        }
-
-
-                        activeGame.Title = game.Title;  // TODO: Will this be a problem if the game is already loaded
-                        activeGame.InstallPath = game.InstallPath;
-                        activeGame.StateFlags = game.StateFlags;
-
-                        if (activeGame.IsInIgnoredPath())
-                        {
-                            continue;
-                        }
-
-                        if (Directory.Exists(activeGame.InstallPath) == false)
-                        {
-                            Logger.Warning($"{Name} library could not load game {activeGame.Title} ({activeGame.PlatformId}) because install path does not exist: {activeGame.InstallPath}");
-                            continue;
-                        }
-
-                        await activeGame.SaveToDatabaseAsync().ConfigureAwait(false);
-
-                        // If the game is not from cache, force processing
-                        if (cachedGame is null)
-                        {
-                            activeGame.NeedsProcessing = true;
-                        }
-
-                        if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
-                        {
-                            activeGame.ProcessGame();
-                        }
-
-                        games.Add(activeGame);
-                    }
+                    activeGame.IsHidden = true;
                 }
+
+
+                activeGame.Title = game.Title;  // TODO: Will this be a problem if the game is already loaded
+                activeGame.InstallPath = game.InstallPath;
+                activeGame.StateFlags = game.StateFlags;
+
+                if (activeGame.IsInIgnoredPath())
+                {
+                    continue;
+                }
+
+                await activeGame.SaveToDatabaseAsync().ConfigureAwait(false);
+
+                // If the game is not from cache, force processing
+                if (cachedGame is null)
+                {
+                    activeGame.NeedsProcessing = true;
+                }
+
+                if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+                {
+                    activeGame.ProcessGame();
+                }
+
+                games.Add(activeGame);
             }
+
+
             games.Sort();
 
             // Delete games that are no longer loaded, they are likely uninstalled

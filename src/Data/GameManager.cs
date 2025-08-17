@@ -14,6 +14,7 @@ using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.Messages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
+using Windows.System;
 
 namespace DLSS_Swapper.Data;
 
@@ -455,5 +456,33 @@ internal partial class GameManager : ObservableObject
 
         return gameLibrariesToReturn;
 
+    }
+
+    public bool CanLaunchGame(Game game)
+    {
+        return game.GameLibrary switch
+        {
+            GameLibrary.Steam => true,
+            GameLibrary.EAApp => true,
+            _ => false,
+        };
+    }
+
+    public async Task LaunchGameAsync(Game game)
+    {
+        if (CanLaunchGame(game) == false)
+        {
+            Logger.Error($"Cannot launch game {game.Title} from {game.GameLibrary}");
+            return;
+        }
+
+        if (game.GameLibrary == Interfaces.GameLibrary.Steam)
+        {
+            await Launcher.LaunchUriAsync(new Uri($"steam://rungameid/{game.PlatformId}"));
+        }
+        else if (game.GameLibrary == GameLibrary.EAApp)
+        {
+            await Launcher.LaunchUriAsync(new Uri($"origin2://game/launch?offerIds={game.PlatformId}"));
+        }
     }
 }

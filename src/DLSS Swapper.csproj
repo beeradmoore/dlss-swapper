@@ -16,7 +16,7 @@
     <PackageIcon>Assets\icon_256.png</PackageIcon>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <Version>1.2.1.0</Version>
+    <Version>1.2.1.1</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <PublishSingleFile>false</PublishSingleFile>
@@ -391,6 +391,7 @@
     <PackageReference Include="System.Private.Uri" Version="4.3.2" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+    <PackageReference Include="ValveKeyValue" Version="0.20.0.417" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>

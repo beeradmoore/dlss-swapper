@@ -132,6 +132,9 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>（已导入）</value>
   </data>
+  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
+    <value>未知游戏库模板</value>
+  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>导入功能已禁用，无法加载导入清单。</value>
   </data>
@@ -147,11 +150,17 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>无法下载 {0} DLL 文件，请稍后再试，或查看日志以了解下载失败的原因。</value>
   </data>
+  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
+    <value>无法下载文件</value>
+  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>下载</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>下载错误</value>
+  </data>
+  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
+    <value>下载文件无效</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>下载中</value>
@@ -172,22 +181,13 @@
     <value>请打开</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
-    <value>新问题</value>
+    <value>一个新 issues</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
     <value>请在 DLSS Swapper 的 GitHub 仓库，并在 “附加上下文” 部分提供以下信息。</value>
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>启动失败</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>确定要移除自定义封面吗？</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>游戏正在处理中</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>移除自定义封面？</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>资产类型</value>
@@ -208,7 +208,7 @@
     <value>已删除 DLL 备份</value>
   </data>
   <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
-    <value>DLL 已经被其它外部因素所更改</value>
+    <value>DLL 已经被其他外部因素所更改了</value>
   </data>
   <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
     <value>检测到动态链接库（DLL）</value>
@@ -218,6 +218,9 @@
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>替换 DLL</value>
+  </data>
+  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>未知游戏库模板</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>自定义封面</value>
@@ -250,9 +253,9 @@
     <value>预设信息</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
-    <value>DLSS 的预设信息保存于游戏安装目录中的 DLSS DLL 文件中。不同的 DLSS DLL 文件提供不同的预设。例如，预设 K 是在 DLSS v310.2 版本中才引入的。所以，如果使用的是 DLSS v3.7 版本，并将预设设置为 K，它将不会使用预设 K，而是会回退到游戏所选择的任何预设。
+    <value>DLSS 的预设信息保存于游戏安装目录中的 DLSS DLL 文件中。不同的 DLSS DLL 文件提供不同的预设。例如，预设 K 是在 DLSS v310.2 版本中才引入的。所以，如果您使用的是 DLSS v3.7 版本，并将预设设置为 K，它将不会使用预设 K，而是会回退到游戏所选择的任何预设。
 
-这种情况也适用于全局预设。如果选择了全局预设 K，但游戏使用的是 DLSS v3.7 版本，将无法使用预设 K，而是会回退到游戏的默认预设。
+这种情况也适用于全局预设。如果您选择了全局预设 K，但您的游戏使用的是 DLSS v3.7 版本，您将无法使用预设 K，而是会回退到游戏的默认预设。
 
 若要确认正在使用的预设版本，请启用 DLSS 屏幕指示器。</value>
   </data>
@@ -263,7 +266,7 @@
     <value>DLSS 预设信息</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
-    <value>所设置的 DLSS 预设并不能绝对确保该预设能被游戏软件正确使用。</value>
+    <value>你所设置的 DLSS 预设并不能绝对确保该预设能被游戏软件正确使用。</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
     <value>已收藏</value>
@@ -317,7 +320,7 @@
     <value>{0} 仍在处理中，请等待加载进度完成后再打开。</value>
   </data>
   <data name="GamePage_ResetAll" xml:space="preserve">
-    <value>全部重置</value>
+    <value>重置所有</value>
   </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>重置原始 DLL 版本</value>
@@ -329,7 +332,7 @@
     <value>存储文件为空</value>
   </data>
   <data name="GamePage_UnableToChangePreset" xml:space="preserve">
-    <value>无法更改预设，请查看错误日志以获取更多信息。</value>
+    <value>无法更改预设。请查看错误日志以获取更多信息。</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
     <value>只能拖入单个文件作为封面</value>
@@ -384,6 +387,9 @@
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>发现新的 DLL！</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>发现新的 DLL 文件</value>
+  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>创建一个新的 GitHub 问题报告</value>
   </data>
@@ -394,7 +400,7 @@
     <value>(GitHub 授权)</value>
   </data>
   <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
-    <value>如果上方按钮按了无反应，请点击此链接,</value>
+    <value>如果上方按钮按了无反应，请点击此链接</value>
   </data>
   <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
     <value>第四步：提交报告</value>
@@ -414,14 +420,11 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>请注意：无需提交 DLL 文件，我们会根据提交的报告信息查找 DLL</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>发现新的 DLL 文件</value>
-  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>重新加载游戏</value>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
-    <value>显示隐藏游戏（启动时默认关闭）</value>
+    <value>显示隐藏游戏（默认下在启动时处于关闭状态）</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>游戏库</value>
@@ -434,6 +437,33 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>列表视图</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>确定要移除自定义封面吗？</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>游戏正在处理中</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>移除自定义封面？</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>无法反序列化目录</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>无法反序列化嵌入过滤器</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>无法找到任何已嵌入过滤器的产品</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>无法找到任何产品。</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>未检测到安装的密钥</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>未知游戏库模板</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>程序正在以管理员身份运行</value>
@@ -481,7 +511,7 @@
     <value>帮助</value>
   </data>
   <data name="General_Hidden" xml:space="preserve">
-    <value>隐藏</value>
+    <value>已隐藏</value>
   </data>
   <data name="General_Import" xml:space="preserve">
     <value>导入</value>
@@ -564,6 +594,9 @@
   <data name="General_Yes" xml:space="preserve">
     <value>开启</value>
   </data>
+  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
+    <value>无法加载 GitHub 发布数据</value>
+  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>当前有 {0} 已经安装</value>
   </data>
@@ -571,7 +604,7 @@
     <value>DLSS Swapper 已更新</value>
   </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
-    <value>有可用的更新</value>
+    <value>有一个可用的更新</value>
   </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>已下载</value>
@@ -607,13 +640,13 @@
     <value>内部名称</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
-    <value>其它内部名称</value>
+    <value>其他内部名称</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>标签</value>
   </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
-    <value>下载最新版本</value>
+    <value>下载最新版</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>已开始 {0} 个新下载</value>
@@ -691,7 +724,7 @@
 如果这种问题继续发生，请在 GitHub 上的问题跟踪中提交报告。</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
-    <value>更新清单</value>
+    <value>无法加载清单</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
     <value>虽然替换 DLSS 版本不应被视为作弊，但某些反作弊系统可能会对游戏目录中的文件与游戏发行时的文件不一致进行检测；
@@ -789,13 +822,13 @@
     <value>在将 DLL 文件替换到游戏文件夹之前，Windows 会通过验证签名来检查其是否受信任，如果 DLL 文件未能通过签名验证，则不会被使用，建议保持此功能关闭。</value>
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
-    <value>此设置仅适用于 DLL 选择，不作用于库页面。</value>
+    <value>在替换 DLL 时，仅显示已经下载的文件，而不是所有不同版本，此选项不影响 DLL 库。</value>
   </data>
   <data name="SettingsPage_BuildCommit" xml:space="preserve">
-    <value>构建提交</value>
+    <value>提交版本</value>
   </data>
   <data name="SettingsPage_BuildDate" xml:space="preserve">
-    <value>构建日期</value>
+    <value>版本日期</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>无法直接从 DLSS Swapper 打开日志文件，请尝试手动打开。</value>
@@ -807,7 +840,7 @@
     <value>删除忽略路径</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
-    <value>DLSS 开发者选项</value>
+    <value>DLSS开发者选项</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
     <value>将日志输出到控制台窗口</value>
@@ -822,7 +855,7 @@
     <value>仅对 DLSS 调试版本显示信息</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
-    <value>在屏幕上显示信息</value>
+    <value>DLSS 屏幕指示器</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>详细日志记录</value>

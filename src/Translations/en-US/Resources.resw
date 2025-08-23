@@ -511,6 +511,9 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_None" xml:space="preserve">
     <value>None</value>
   </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>Not found</value>
+  </data>
   <data name="General_NotSupported" xml:space="preserve">
     <value>Not supported</value>
   </data>

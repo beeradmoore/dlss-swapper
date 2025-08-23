@@ -32,6 +32,9 @@
         <converters:BitmapImageUriConverter x:Key="BitmapImageUriConverter" />
         <converters:NullableBoolToObjectConverter x:Key="HideGameTextConverter" NullValue="{Binding TranslationProperties.ClickToHideText, Mode=OneWay}" FalseValue="{Binding TranslationProperties.ClickToHideText, Mode=OneWay}" TrueValue="{Binding TranslationProperties.HiddenText, Mode=OneWay}" />
         <converters:NullableBoolToObjectConverter x:Key="HideGameGlyphConverter" NullValue="&#xE7B3;" FalseValue="&#xE7B3;" TrueValue="&#xED1A;"  />
+        <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+        <converters:NullToInverseVisibilityConverter x:Key="NullToInverseVisibilityConverter" />
+        
 
         <ControlTemplate x:Key="LeftButtonsControlTemplate" TargetType="ContentControl">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" XYFocusKeyboardNavigation="Enabled" Padding="{ThemeResource ContentDialogPadding}" Background="{TemplateBinding Background}" Spacing="8">
@@ -201,7 +204,14 @@
                             </Button>
                         </StackPanel>
 
-                        <Button Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <DropDownButton Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                            <DropDownButton.Content>
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind ViewModel.Game.CurrentDLSS.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentDLSS, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NotFoundText, Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentDLSS, Converter={StaticResource NullToInverseVisibilityConverter}}" />
+                                </StackPanel>
+                            </DropDownButton.Content>
+                        </DropDownButton>
 
                         <StackPanel Grid.Column="1" Grid.Row="0" Spacing="6" Orientation="Horizontal">
                             <TextBlock Text="DLSS Preset" FontWeight="Bold"/>
@@ -228,7 +238,14 @@
                             </Button>
                         </StackPanel>
 
-                        <Button Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_G.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <DropDownButton Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                            <DropDownButton.Content>
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind ViewModel.Game.CurrentDLSS_G.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NotFoundText, Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullToInverseVisibilityConverter}}" />
+                                </StackPanel>
+                            </DropDownButton.Content>
+                        </DropDownButton>
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="1" Grid.Row="3">
                             <TextBlock Text="DLSS Ray Reconstruction" FontWeight="Bold" />
@@ -239,7 +256,14 @@
                             </Button>
                         </StackPanel>
 
-                        <Button Grid.Column="1" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentDLSS_D.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <DropDownButton Grid.Column="1" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                            <DropDownButton.Content>
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind ViewModel.Game.CurrentDLSS_D.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NotFoundText, Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullToInverseVisibilityConverter}}" />
+                                </StackPanel>
+                            </DropDownButton.Content>
+                        </DropDownButton>
 
                         
                     </Grid>
@@ -265,7 +289,14 @@
                             </Button>
                         </StackPanel>
 
-                        <Button Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentFSR_31_DX12, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentFSR_31_DX12.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.FSR_31_DX12}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <DropDownButton Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentFSR_31_DX12, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.FSR_31_DX12}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                            <DropDownButton.Content>
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind ViewModel.Game.CurrentFSR_31_DX12.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentFSR_31_DX12, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NotFoundText, Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentFSR_31_DX12, Converter={StaticResource NullToInverseVisibilityConverter}}" />
+                                </StackPanel>
+                            </DropDownButton.Content>
+                        </DropDownButton>
 
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="1" Grid.Row="0">
@@ -277,7 +308,14 @@
                             </Button>
                         </StackPanel>
 
-                        <Button Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentFSR_31_VK, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentFSR_31_VK.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.FSR_31_VK}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <DropDownButton Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentFSR_31_VK, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.FSR_31_VK}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                            <DropDownButton.Content>
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind ViewModel.Game.CurrentFSR_31_VK.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentFSR_31_VK, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NotFoundText, Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentFSR_31_VK, Converter={StaticResource NullToInverseVisibilityConverter}}" />
+                                </StackPanel>
+                            </DropDownButton.Content>
+                        </DropDownButton>
 
                     </Grid>
 
@@ -305,7 +343,14 @@
                             </Button>
                         </StackPanel>
 
-                        <Button Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentXeSS, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentXeSS.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeSS}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <DropDownButton Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentXeSS, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeSS}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                            <DropDownButton.Content>
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind ViewModel.Game.CurrentXeSS.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentXeSS, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NotFoundText, Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentXeSS, Converter={StaticResource NullToInverseVisibilityConverter}}" />
+                                </StackPanel>
+                            </DropDownButton.Content>
+                        </DropDownButton>
 
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="1" Grid.Row="0">
@@ -317,7 +362,14 @@
                             </Button>
                         </StackPanel>
 
-                        <Button Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentXeSS_FG, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentXeSS_FG.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeSS_FG}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <DropDownButton Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind ViewModel.Game.CurrentXeSS_FG, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeSS_FG}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                            <DropDownButton.Content>
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind ViewModel.Game.CurrentXeSS_FG.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentXeSS_FG, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NotFoundText, Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentXeSS_FG, Converter={StaticResource NullToInverseVisibilityConverter}}" />
+                                </StackPanel>
+                            </DropDownButton.Content>
+                        </DropDownButton>
 
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="3">
@@ -328,7 +380,14 @@
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                        <Button Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentXeLL, Converter={StaticResource NullObjectToBoolConverter}}" Content="{x:Bind ViewModel.Game.CurrentXeLL.DisplayName, FallbackValue='Not found', Mode=OneWay}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeLL}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+                        <DropDownButton Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentXeLL, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeLL}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                            <DropDownButton.Content>
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind ViewModel.Game.CurrentXeLL.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentXeLL, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NotFoundText, Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentXeLL, Converter={StaticResource NullToInverseVisibilityConverter}}" />
+                                </StackPanel>
+                            </DropDownButton.Content>
+                        </DropDownButton>
                     </Grid>
                 </StackPanel>
             </Grid>

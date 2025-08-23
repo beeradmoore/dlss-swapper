@@ -65,4 +65,7 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string HiddenText => ResourceHelper.GetString("General_Hidden");
+
+    [TranslationProperty]
+    public string NotFoundText => ResourceHelper.GetString("General_NotFound");
 }

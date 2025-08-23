@@ -41,6 +41,8 @@ var xamlRegexes = new List<Regex>()
     new Regex(@"Header=""([^""{][^""]*)"""),
     new Regex(@"ToolTip=""([^""{][^""]*)"""),
     new Regex(@"Label=""([^""{][^""]*)"""),
+    new Regex(@"FallbackValue=""([^""{][^""]*)"""),
+    new Regex(@"FallbackValue='([^'{][^']*)'"),
 };
 
 var ignoredXamlMatches = new List<string>()

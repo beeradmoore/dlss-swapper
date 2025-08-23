@@ -7,7 +7,7 @@ namespace DLSS_Swapper.Data.DLSS;
 public class PresetOption
 {
     [JsonPropertyName("name")]
-    public string Name { get; init; }
+    public string Name { get; set; }
 
     [JsonPropertyName("value")]
     [JsonConverter(typeof(HexStringToUintConverter))]
@@ -15,7 +15,6 @@ public class PresetOption
 
     [JsonPropertyName("used")]
     public bool Used { get; set; }
-
 
     [JsonConstructor]
     public PresetOption(string name, uint value)

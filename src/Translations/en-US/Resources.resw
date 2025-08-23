@@ -166,6 +166,16 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>DLL zip was invalid (no DLL found).</value>
   </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>Always use latest</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>Preset {0}</value>
+    <comment>Here {0} will be the letter of the preset, eg. Preset K</comment>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper has failed to launch</value>
   </data>

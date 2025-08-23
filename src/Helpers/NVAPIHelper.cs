@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.DLSS;
 using NvAPIWrapper;
@@ -41,6 +42,27 @@ internal class NVAPIHelper
                 var dlssPresetOptions = JsonSerializer.Deserialize<List<PresetOption>>(File.ReadAllText(dlssPresetsJsonPath))?.Where(x => x.Used == true)?.ToList();
                 if (dlssPresetOptions is not null && dlssPresetOptions.Count > 0)
                 {
+                    var presetRegex = new Regex("^Preset (?<letter>.*)$", RegexOptions.Compiled);
+                    for (var i = 0; i < dlssPresetOptions.Count; ++i)
+                    {
+                        if (dlssPresetOptions[i].Name == "Default")
+                        {
+                            dlssPresetOptions[i].Name = ResourceHelper.GetString("DLSS_Preset_Default");
+                        }
+                        else if (dlssPresetOptions[i].Name == "Always use latest")
+                        {
+                            dlssPresetOptions[i].Name = ResourceHelper.GetString("DLSS_Preset_AlwaysUseLatest");
+                        }
+                        else
+                        {
+                            var match = presetRegex.Match(dlssPresetOptions[i].Name);
+                            if (match.Success)
+                            {
+                                dlssPresetOptions[i].Name = ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", match.Groups["letter"].Value);
+                            }
+                        }
+                    }
+
                     DlssPresetOptions = dlssPresetOptions.AsReadOnly();
                 }
                 else
@@ -57,19 +79,19 @@ internal class NVAPIHelper
         {
             Logger.Error(err, "Could not load dlss_presets.json, using default presets.");
             DlssPresetOptions = [
-               new PresetOption("Default", 0x00000000),
-                new PresetOption("Preset A", 0x00000001),
-                new PresetOption("Preset B", 0x00000002),
-                new PresetOption("Preset C", 0x00000003),
-                new PresetOption("Preset D", 0x00000004),
-                new PresetOption("Preset E", 0x00000005),
-                new PresetOption("Preset F", 0x00000006),
-                // new DlssPresetOption("Preset G", 0x00000007),
-                // new DlssPresetOption("Preset H", 0x00000008),
-                // new DlssPresetOption("Preset I", 0x00000009),
-                new PresetOption("Preset J", 0x0000000A),
-                new PresetOption("Preset K", 0x0000000B),
-                new PresetOption("Always use latest", 0x00FFFFFF),
+                new PresetOption(ResourceHelper.GetString("DLSS_Preset_Default"), 0x00000000),
+                new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "A"), 0x00000001),
+                new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "B"), 0x00000002),
+                new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "C"), 0x00000003),
+                new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "D"), 0x00000004),
+                new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "E"), 0x00000005),
+                new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "F"), 0x00000006),
+                // new DlssPresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "G"), 0x00000007),
+                // new DlssPresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "H"), 0x00000008),
+                // new DlssPresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "I"), 0x00000009),
+                new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "J"), 0x0000000A),
+                new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "K"), 0x0000000B),
+                new PresetOption(ResourceHelper.GetString("DLSS_Preset_AlwaysUseLatest"), 0x00FFFFFF),
             ];
         }
 

@@ -180,6 +180,15 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Không thể khởi chạy</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xóa hình ảnh bìa tùy chỉnh không?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Trò Chơi Đang Xử Lý</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Xóa bìa tùy chỉnh?</value>
+  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Loại tài sản</value>
   </data>
@@ -375,9 +384,6 @@ Nếu bạn đã kiểm tra những điều này và trò chơi của bạn vẫ
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>DLL Mới</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Tìm Thấy DLL Mới</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Tạo vấn đề GitHub mới</value>
   </data>
@@ -408,6 +414,9 @@ Nếu bạn đã kiểm tra những điều này và trò chơi của bạn vẫ
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Bạn không cần gửi DLL. Chúng tôi sẽ theo dõi chúng dựa trên thông tin được cung cấp.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Tìm Thấy DLL Mới</value>
+  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Đang tải lại trò chơi</value>
   </data>
@@ -425,15 +434,6 @@ Nếu bạn đã kiểm tra những điều này và trò chơi của bạn vẫ
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Xem Danh Sách</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Bạn có chắc chắn muốn xóa hình ảnh bìa tùy chỉnh không?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Trò Chơi Đang Xử Lý</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Xóa bìa tùy chỉnh?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Ứng dụng này đang chạy với quyền quản trị.</value>

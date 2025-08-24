@@ -198,24 +198,6 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>¿Eliminar carátula personalizada?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>No se pudo deserializar GOGCatalogResponse para la url, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>No se pudo deserializar GOGEmbedFilteredResponse para la url, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>No se pudo encontrar ningún GOGEmbedFilteredProducts para la url, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>No se pudo encontrar ningún GOGCatalogProduct para la url, {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>No se pudo detectar la clave de instalación de Ubisoft Connect</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Biblioteca de juegos desconocida {0} al establecer el ID</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Tipo de Recurso</value>
   </data>

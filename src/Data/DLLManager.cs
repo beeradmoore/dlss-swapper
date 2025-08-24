@@ -827,6 +827,26 @@ internal class DLLManager
     }
 
     /// <summary>
+    /// This is used for any part of the app that displays GameAssetTypes in a list. This is the defined order they should be in.
+    /// </summary>
+    /// <returns></returns>
+    public GameAssetType[] GetOrderedGameAssetTypes()
+    {
+        // TODO: Change order based on prefered upscaler.
+        return [
+            GameAssetType.DLSS,
+            GameAssetType.DLSS_G,
+            GameAssetType.DLSS_D,
+            GameAssetType.FSR_31_DX12,
+            GameAssetType.FSR_31_VK,
+            GameAssetType.XeSS,
+            GameAssetType.XeSS_FG,
+            GameAssetType.XeLL,
+        ];
+    }
+
+
+    /// <summary>
     /// Checks to see if the current GameAsset DLL is known to already existing DLL record known GameAsset for a game in a particular library
     /// </summary>
     /// <param name="gameAsset"></param>

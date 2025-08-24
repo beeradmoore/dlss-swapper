@@ -189,11 +189,44 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>刪除自訂封面</value>
   </data>
+  <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
+    <value>資產類型</value>
+  </data>
+  <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
+    <value>活動時間</value>
+  </data>
+  <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
+    <value>活動類型</value>
+  </data>
+  <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
+    <value>未找到歷史紀錄</value>
+  </data>
+  <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
+    <value>DLL 備份已移除</value>
+  </data>
+  <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
+    <value>DLL 已被外部修改</value>
+  </data>
+  <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
+    <value>已刪除 DLL</value>
+  </data>
+  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
+    <value>重置 DLL</value>
+  </data>
+  <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
+    <value>已替換 DLL</value>
+  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>自訂遊戲封面</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>加入我的最愛</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>隱藏此遊戲</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>找不到路徑「{0}」。</value>
@@ -213,14 +246,39 @@
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
     <value>請等待檔案下載完成後再進行替換</value>
   </data>
+  <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
+    <value>更多預設資訊</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
+    <value>DLSS 預設儲存在您遊戲安裝目錄中的 DLSS DLL 檔案內。不同的 DLSS DLL 檔案會有不同的預設。舉例來說，預設 K 直到 DLSS v310.2 版本才推出。因此，如果您使用 DLSS v3.7 版本並將預設設為 K，遊戲將不會啟用預設 K，而是會退回遊戲原本選擇的預設。
+
+全域預設也是同樣的道理。如果您選擇預設 K，但您的遊戲使用的是 DLSS v3.7 版本，那麼遊戲將不會啟用預設 K，而是會退回其本身的預設。
+
+若要驗證目前使用中的預設為何，請啟用 DLSS 畫面指示器。</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
+    <value>畫面指示器資訊</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
+    <value>DLSS 預設資訊</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
+    <value>設定預設狀態下為全域套用的 DLSS 預設。(變更此選項無法保證一定能讓該預設成功生效)</value>
+  </data>
   <data name="GamePage_Favorited" xml:space="preserve">
-    <value>已加入我的最愛</value>
+    <value>從我的最愛移除</value>
+  </data>
+  <data name="GamePage_History" xml:space="preserve">
+    <value>歷史紀錄</value>
   </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
     <value>安裝路徑</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
     <value>「{0}」為無效檔案類型</value>
+  </data>
+  <data name="GamePage_Launch" xml:space="preserve">
+    <value>啟動</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
     <value>這個標題並非手動新增，無法移除。</value>
@@ -258,6 +316,9 @@
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} 正在進行處理，請等待載入進度完成再開啟此遊戲。</value>
   </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>重置全部</value>
+  </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>恢復為遊戲的原始 DLL 版本</value>
   </data>
@@ -267,8 +328,11 @@
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
     <value>儲存的檔案為空</value>
   </data>
+  <data name="GamePage_UnableToChangePreset" xml:space="preserve">
+    <value>無法變更預設，請參閱錯誤日誌以取得更多資訊。</value>
+  </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
-    <value>您只能拖曳單個圖片作為封面。</value>
+    <value>您只能拖曳單張圖片來作為封面。</value>
   </data>
   <data name="GamesPage_AddGame" xml:space="preserve">
     <value>新增遊戲</value>
@@ -295,7 +359,7 @@
     <value>新增遊戲時發生錯誤</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value>您必須選取您的 <i>遊戲</i> 目錄，而不是 <i>遊戲平台</i> 目錄。<br /><br />舉例來說，若您的遊戲安裝於：<br /><b>C:\Program Files\MyGamesFolder\MyFavGame\</b><br /><br />您應該選取 <b>MyFavGame</b> 目錄，而不是 <b>MyGamesFolder</b> 目錄。</value>
+    <value>您必須選取您的 &lt;i&gt;遊戲&lt;/i&gt; 目錄，而不是 &lt;i&gt;遊戲平台&lt;/i&gt; 目錄。&lt;br/&gt;&lt;br/&gt;舉例來說，若您的遊戲安裝於：&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;您應該選取 &lt;b&gt;MyFavGame&lt;/b&gt; 目錄，而不是 &lt;b&gt;MyGamesFolder&lt;/b&gt; 目錄。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
     <value>DLSS Swapper 通常會自動從您已安裝的遊戲平台中掃描到遊戲。如果您的遊戲沒有顯示，可能有幾項設定阻礙了它。請檢查以下因素：
@@ -352,6 +416,12 @@
   </data>
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
     <value>我找到了新版本的 DLL 檔案</value>
+  </data>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>正在重新載入遊戲</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>顯示已隱藏遊戲 (啟動時預設關閉)</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>收藏庫</value>
@@ -410,6 +480,9 @@
   <data name="General_Help" xml:space="preserve">
     <value>幫助</value>
   </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>取消隱藏</value>
+  </data>
   <data name="General_Import" xml:space="preserve">
     <value>匯入</value>
   </data>
@@ -427,6 +500,9 @@
   </data>
   <data name="General_None" xml:space="preserve">
     <value>無</value>
+  </data>
+  <data name="General_NotSupported" xml:space="preserve">
+    <value>不支援</value>
   </data>
   <data name="General_Okay" xml:space="preserve">
     <value>確認</value>
@@ -449,6 +525,9 @@
   <data name="General_Refresh" xml:space="preserve">
     <value>重新整理</value>
   </data>
+  <data name="General_Reload" xml:space="preserve">
+    <value>重新載入</value>
+  </data>
   <data name="General_Remove" xml:space="preserve">
     <value>刪除</value>
   </data>
@@ -469,6 +548,9 @@
   </data>
   <data name="General_Swap" xml:space="preserve">
     <value>替換</value>
+  </data>
+  <data name="General_Unknown" xml:space="preserve">
+    <value>未知</value>
   </data>
   <data name="General_Update" xml:space="preserve">
     <value>更新</value>
@@ -521,8 +603,17 @@
   <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
     <value>雜湊值</value>
   </data>
+  <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
+    <value>內部名稱</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
+    <value>內部名稱額外資訊</value>
+  </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>標籤</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>下載最新版本</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>已開始 {0} 個新的下載。</value>
@@ -606,9 +697,7 @@
     <value>更新清單</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>替換 DLSS 版本通常不會被視為修改檔案（也就是作弊），但如果您遊戲資料夾中的檔案與遊戲新版本的檔案不符，某些反作弊系統可能會試圖阻擋遊戲啟動。
-
-因此，如果您遊玩的遊戲是多人線上遊戲，而且有使用反作弊系統，請務必小心謹慎。</value>
+    <value>替換 DLSS 版本通常不會被視為修改檔案（也就是作弊），但如果您遊戲資料夾中的檔案與遊戲新版本的檔案不符，某些反作弊系統可能會試圖阻擋遊戲啟動。\n\n因此，如果您遊玩的遊戲是多人線上遊戲，而且有使用反作弊系統，請務必小心謹慎。</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>歡迎使用 DLSS Swapper，在使用前請先閱讀此內容</value>
@@ -703,6 +792,12 @@
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>在替換 DLL 時，僅顯示已經下載的檔案，而不是所有不同的版本，此選項不影響 DLL 清單。</value>
   </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>建置提交</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>建置日期</value>
+  </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>無法直接從 DLSS Swapper 開啟您的日誌，請嘗試手動開啟。</value>
   </data>
@@ -732,6 +827,12 @@
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>詳細日誌</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>DLSS 選項</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>全域預設</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>遊戲平台</value>

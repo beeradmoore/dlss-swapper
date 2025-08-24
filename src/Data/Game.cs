@@ -210,6 +210,7 @@ namespace DLSS_Swapper.Data
                 GameLibrary.XboxApp => $"xboxapp_{platformId}",
                 GameLibrary.ManuallyAdded => $"manuallyadded_{platformId}",
                 GameLibrary.BattleNet => $"battlenet_{platformId}",
+                GameLibrary.EAApp => $"eaapp_{platformId}",
                 _ => throw new Exception($"Unknown GameLibrary {GameLibrary} while setting ID"),
             };
         }

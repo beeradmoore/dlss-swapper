@@ -9,6 +9,7 @@ using DLSS_Swapper.Data.Xbox;
 using DLSS_Swapper.Data.ManuallyAdded;
 using Nito.AsyncEx;
 using SQLite;
+using DLSS_Swapper.Data.EAApp;
 
 namespace DLSS_Swapper;
 
@@ -96,6 +97,15 @@ internal class Database
             try
             {
                 syncConnection.CreateTable<BattleNetGame>();
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err);
+            }
+
+            try
+            {
+                syncConnection.CreateTable<EAAppGame>();
             }
             catch (Exception err)
             {

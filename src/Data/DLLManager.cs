@@ -797,14 +797,14 @@ internal class DLLManager
     {
         return assetType switch
         {
-            GameAssetType.DLSS => "DLSS",
-            GameAssetType.DLSS_G => "DLSS Frame Generation",
-            GameAssetType.DLSS_D => "DLSS Ray Reconstruction",
-            GameAssetType.FSR_31_DX12 => "FSR 3.1 DirectX 12",
-            GameAssetType.FSR_31_VK => "FSR 3.1 Vulkan",
-            GameAssetType.XeSS => "XeSS",
-            GameAssetType.XeLL => "XeLL",
-            GameAssetType.XeSS_FG => "XeSS Frame Generation",
+            GameAssetType.DLSS => ResourceHelper.GetString("General_Name_DLSS"),
+            GameAssetType.DLSS_G => ResourceHelper.GetString("General_Name_DLSS_G"),
+            GameAssetType.DLSS_D => ResourceHelper.GetString("General_Name_DLSS_D"),
+            GameAssetType.FSR_31_DX12 => ResourceHelper.GetString("General_Name_FSR_31_DX12"),
+            GameAssetType.FSR_31_VK => ResourceHelper.GetString("General_Name_FSR_31_VK"),
+            GameAssetType.XeSS => ResourceHelper.GetString("General_Name_XeSS"),
+            GameAssetType.XeLL => ResourceHelper.GetString("General_Name_XeLL"),
+            GameAssetType.XeSS_FG => ResourceHelper.GetString("General_Name_XeSS_FG"),
             _ => throw new Exception($"Unknown AssetType: {assetType}"),
         };
     }

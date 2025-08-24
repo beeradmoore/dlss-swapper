@@ -189,15 +189,6 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>No s'ha pogut iniciar</value>
   </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Esteu segur que voleu eliminar la imatge de la portada personalitzada?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Joc actualment en processament</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Voleu treure la portada personalitzada?</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Tipus d'actiu</value>
   </data>
@@ -393,6 +384,9 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Noves DLL</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>S'han trobat noves DLL</value>
+  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Crea una nova incidència de GitHub</value>
   </data>
@@ -423,9 +417,6 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>No cal que envieu les DLL. Les localitzarem en funció de la informació proporcionada.</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>S'han trobat noves DLL</value>
-  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Recarregant el joc</value>
   </data>
@@ -443,6 +434,15 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Llista</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Esteu segur que voleu eliminar la imatge de la portada personalitzada?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Joc actualment en processament</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Voleu treure la portada personalitzada?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Aquesta aplicació s'està executant amb privilegis d'administrador.</value>
@@ -503,6 +503,33 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   </data>
   <data name="General_Name" xml:space="preserve">
     <value>Nom</value>
+  </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>Reconstrucció de Raigs de DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>Generació de Fotogrames de DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>Perfil de DLSS</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>Generació de Fotogrames de XeSS</value>
   </data>
   <data name="General_No" xml:space="preserve">
     <value>No</value>

@@ -165,6 +165,15 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>DLL 压缩包无效（未找到 DLL 文件）</value>
   </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>始终使用最新版本</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>预设 {0}</value>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper 启动失败</value>
   </data>
@@ -329,7 +338,7 @@
     <value>存储文件为空</value>
   </data>
   <data name="GamePage_UnableToChangePreset" xml:space="preserve">
-    <value>无法更改预设。请查看错误日志以获取更多信息。</value>
+    <value>无法更改预设，请查看错误日志以获取更多信息。</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
     <value>只能拖入单个文件作为封面</value>
@@ -495,11 +504,44 @@
   <data name="General_Name" xml:space="preserve">
     <value>名称</value>
   </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>DLSSRR 光线重建</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>DLSSFG 帧生成</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>DLSS 预设</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>XeSSFG 帧生成</value>
+
+  </data>
   <data name="General_No" xml:space="preserve">
     <value>关闭</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>无</value>
+  </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>未找到</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
     <value>不支持</value>

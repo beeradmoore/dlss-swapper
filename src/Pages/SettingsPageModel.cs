@@ -96,6 +96,11 @@ public partial class SettingsPageModel : ObservableObject
         LanguageManager.Instance.OnLanguageChanged += () =>
         {
             DLSSOnScreenIndicatorOptions.RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+
+            foreach (var dlssPresetOption in DlssPresetOptions)
+            {
+                dlssPresetOption.UpdateNameFromTranslation();
+            }
         };
 
         var knownLanguages = LanguageManager.Instance.GetKnownLanguages();
@@ -137,8 +142,6 @@ public partial class SettingsPageModel : ObservableObject
 
         if (NVAPIHelper.Instance.Supported)
         {
-            // "Always use latest" does not seem to do anything when set as global preset so don't include it here.
-            var dlssPresetOptions = NVAPIHelper.Instance.DlssPresetOptions.Where(x => x.Value != 0x00FFFFFF);
             DlssPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
             var globalPreset = NVAPIHelper.Instance.GetGlobalDLSSPreset();
             SelectedGlobalDlssPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == globalPreset);

@@ -121,6 +121,16 @@ internal class NVAPIHelper
         {
             Logger.Error(err, "If you don't have an NVIDIA card this is expected and can be ignored.");
         }
+
+        LanguageManager.Instance.OnLanguageChanged += LanguageManager_OnLanguageChanged;
+    }
+
+    void LanguageManager_OnLanguageChanged()
+    {
+        foreach (var dlssPresetOption in DlssPresetOptions)
+        {
+            dlssPresetOption.UpdateNameFromTranslation();
+        }
     }
 
     public DriverSettingsProfile? FindGameProfile(Game game)

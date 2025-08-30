@@ -512,7 +512,7 @@ Se hai verificato queste opzioni e il tuo gioco continua a non essere visualizza
     <value>Ricostruzione dei Raggi DLSS</value>
   </data>
   <data name="General_Name_DLSS_G" xml:space="preserve">
-    <value>Generazione di Frame XeSS</value>
+    <value>Generazione di Frame DLSS</value>
   </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>Preset DLSS</value>

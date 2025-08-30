@@ -119,7 +119,7 @@ If you have found an other accounts or sites claiming to be DLSS Swapper, please
             <img src="https://beeradmoore.github.io/dlss-swapper/images/sponsors/signpath.png" width="50" height="50">
         </td>
         <td>
-            Free code signing on Windows provided by <a href="https://signpath.io/" target="_blank">SignPath.io</a>, certificate by <a href="https://www.signpath.com/solutions/for-open-source-community-foundation" target="_blank">SignPath Foundation</a>.
+            Free code signing on Windows provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://www.signpath.com/solutions/for-open-source-community-foundation).
         </td>
     </tr>
 </table>

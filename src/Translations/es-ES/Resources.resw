@@ -508,10 +508,10 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
     <value>DLSS</value>
   </data>
   <data name="General_Name_DLSS_D" xml:space="preserve">
-    <value>Reconstrucción de Rayos de DLSS</value>
+    <value>Reconstrucción de Rayos DLSS</value>
   </data>
   <data name="General_Name_DLSS_G" xml:space="preserve">
-    <value>Generación de Fotogramas de DLSS</value>
+    <value>Generación de Fotogramas DLSS</value>
   </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>Perfil de DLSS</value>
@@ -529,7 +529,7 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
     <value>XeSS</value>
   </data>
   <data name="General_Name_XeSS_FG" xml:space="preserve">
-    <value>Generación de Fotogramas de XeSS</value>
+    <value>Generación de Fotogramas XeSS</value>
   </data>
   <data name="General_No" xml:space="preserve">
     <value>No</value>

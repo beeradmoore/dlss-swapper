@@ -508,10 +508,10 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
     <value>DLSS</value>
   </data>
   <data name="General_Name_DLSS_D" xml:space="preserve">
-    <value>Reconstrucció de Raigs de DLSS</value>
+    <value>Reconstrucció de Raigs DLSS</value>
   </data>
   <data name="General_Name_DLSS_G" xml:space="preserve">
-    <value>Generació de Fotogrames de DLSS</value>
+    <value>Generació de Fotogrames DLSS</value>
   </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>Perfil de DLSS</value>
@@ -529,7 +529,7 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
     <value>XeSS</value>
   </data>
   <data name="General_Name_XeSS_FG" xml:space="preserve">
-    <value>Generació de Fotogrames de XeSS</value>
+    <value>Generació de Fotogrames XeSS</value>
   </data>
   <data name="General_No" xml:space="preserve">
     <value>No</value>

@@ -102,3 +102,16 @@ winget を使用してインストールすることもできます。
 
 もし DLSS Swapper に関連する公式以外のアカウントやサイトを見つけた場合も無視してください。
 （もしくは [Issues](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) から私たちにお知らせください）
+
+## Sponsors
+
+<table>
+    <tr>
+        <td style="width:50px">
+            <img src="https://beeradmoore.github.io/dlss-swapper/images/sponsors/signpath.png" width="50" height="50">
+        </td>
+        <td>
+            Free code signing on Windows provided by <a href="https://signpath.io/">SignPath.io</a>, certificate by <a href="https://www.signpath.com/solutions/for-open-source-community-foundation">SignPath Foundation</a>.
+        </td>
+    </tr>
+</table>

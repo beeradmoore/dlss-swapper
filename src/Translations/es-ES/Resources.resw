@@ -165,6 +165,15 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>El zip del DLL no era válido (no se encontró ningún DLL).</value>
   </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>Siempre usar la última versión</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>Por defecto</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>Perfil {0}</value>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper no se ha podido iniciar</value>
   </data>
@@ -179,24 +188,6 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Fallo al Iniciar</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>¿Estás seguro de que quieres eliminar la carátula personalizada?</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>¿Estás seguro de que quieres eliminar la carátula personalizada?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Juego Procesándose Actualmente</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Juego Procesándose Actualmente</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>¿Eliminar carátula personalizada?</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>¿Eliminar carátula personalizada?</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Tipo de Recurso</value>
@@ -256,23 +247,23 @@
     <value> espera a que la descarga se complete antes de intercambiar</value>
   </data>
   <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
-    <value>Información de preajustes</value>
+    <value>Información de perfiles</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
-    <value>Los preajustes de DLSS se encuentran en los archivos DLL de DLSS dentro del directorio de instalación de tus juegos. Diferentes DLL de DLSS tienen diferentes preajustes. Por ejemplo, el preajuste K no se introdujo hasta la v3.10.2 de DLSS. Así que si usas DLSS v3.7 y estableces el preajuste en K, no se usará el preajuste K y en su lugar se recurrirá al preajuste que el juego elija usar.
+    <value>Los perfiles de DLSS se encuentran en los archivos DLL de DLSS dentro del directorio de instalación de tus juegos. Diferentes DLL de DLSS tienen diferentes perfiles. Por ejemplo, el perfil K no se introdujo hasta la v3.10.2 de DLSS. Así que si usas DLSS v3.7 y estableces el perfil en K, no se usará el perfil K y en su lugar se recurrirá al preajuste que el juego elija usar.
 
-Lo mismo se aplica a los preajustes globales. Si seleccionas el preajuste K pero tu juego usa DLSS v3.7, no estarás usando el preajuste K y en su lugar el juego recurrirá a su valor predeterminado.
+Lo mismo se aplica a los perfiles globales. Si seleccionas el perfil K pero tu juego usa DLSS v3.7, no estarás usando el perfil K y en su lugar el juego recurrirá a su valor predeterminado.
 
-Para verificar qué preajuste se está utilizando, por favor, activa el indicador en pantalla de DLSS.</value>
+Para verificar qué perfil se está utilizando, por favor, activa el indicador en pantalla de DLSS.</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
     <value>Información del indicador en pantalla</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
-    <value>Información de preajustes de DLSS</value>
+    <value>Información de perfiles de DLSS</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
-    <value>Establecer un preajuste de DLSS no garantiza que se utilice el preajuste.</value>
+    <value>Establecer un perfil de DLSS no garantiza que se utilice el perfil.</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
     <value>Añadido a favoritos</value>
@@ -393,6 +384,9 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Nuevos DLLs</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Nuevos DLLs Encontrados</value>
+  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Crear nuevo issue en GitHub</value>
   </data>
@@ -423,9 +417,6 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>No es necesario que envíe los DLL. Nosotros los localizaremos basándonos en la información facilitada.</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Nuevos DLLs Encontrados</value>
-  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Recargando juego</value>
   </data>
@@ -443,6 +434,15 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Vista de lista</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>¿Estás seguro de que quieres eliminar la carátula personalizada?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Juego Procesándose Actualmente</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>¿Eliminar carátula personalizada?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Esta aplicación se está ejecutando con privilegios de administrador.</value>
@@ -504,11 +504,41 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   <data name="General_Name" xml:space="preserve">
     <value>Nombre</value>
   </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>Reconstrucción de Rayos de DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>Generación de Fotogramas de DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>Perfil de DLSS</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>Generación de Fotogramas de XeSS</value>
+  </data>
   <data name="General_No" xml:space="preserve">
     <value>No</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>Ninguno</value>
+  </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>No encontrado</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
     <value>No compatible</value>

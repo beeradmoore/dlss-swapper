@@ -109,3 +109,16 @@ Mas información sobre eso en breve…
 - Reddit: https://www.reddit.com/r/DLSS_Swapper/
 
 Si has encontrado otras cuentas o sitios que afirman ser DLSS Swapper, por favor ignóralos (o mejor aún, [abre una issue](https://github.com/beeradmoore/dlss-swapper/issues/new?template=other_issue.yml) y avísanos).
+
+## Sponsors
+
+<table>
+    <tr>
+        <td style="width:50px">
+            <img src="https://beeradmoore.github.io/dlss-swapper/images/sponsors/signpath.png" width="50" height="50">
+        </td>
+        <td>
+            Free code signing on Windows provided by <a href="https://signpath.io/">SignPath.io</a>, certificate by <a href="https://www.signpath.com/solutions/for-open-source-community-foundation">SignPath Foundation</a>.
+        </td>
+    </tr>
+</table>

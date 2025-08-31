@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Default",
+    "value": "0x00000000",
+    "used": true
+  },
+  {
+    "name": "Preset A (Deprecated)",
+    "value": "0x00000001",
+    "used": true
+  },
+  {
+    "name": "Preset B (Deprecated)",
+    "value": "0x00000002",
+    "used": true
+  },
+  {
+    "name": "Preset C (Deprecated)",
+    "value": "0x00000003",
+    "used": true
+  },
+  {
+    "name": "Preset D",
+    "value": "0x00000004",
+    "used": true
+  },
+  {
+    "name": "Preset E",
+    "value": "0x00000005",
+    "used": true
+  }
+]

@@ -160,11 +160,20 @@ public partial class GameControlModel : ObservableObject
         {
             await Launcher.LaunchUriAsync(new Uri($"steam://rungameid/{Game.PlatformId}"));
         }
+        else if (Game.GameLibrary == Interfaces.GameLibrary.EpicGamesStore)
+        {
+            var installPathString = Uri.EscapeDataString(Game.InstallPath);
+            await Launcher.LaunchUriAsync(new Uri($"com.epicgames.launcher://apps/{installPathString}?action=launch&silent=true"));
+        }
     }
 
     bool CanLaunchGame()
     {
         if (Game.GameLibrary == Interfaces.GameLibrary.Steam)
+        {
+            return true;
+        }
+        if (Game.GameLibrary == Interfaces.GameLibrary.EpicGamesStore)
         {
             return true;
         }

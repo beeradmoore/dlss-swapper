@@ -14,6 +14,7 @@ using System.Linq;
 using DLSS_Swapper.Data.DLSS;
 using System.ComponentModel;
 using Windows.ApplicationModel.Background;
+using DLSS_Swapper.Data.Xbox;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -165,6 +166,14 @@ public partial class GameControlModel : ObservableObject
             var installPathString = Uri.EscapeDataString(Game.InstallPath);
             await Launcher.LaunchUriAsync(new Uri($"com.epicgames.launcher://apps/{installPathString}?action=launch&silent=true"));
         }
+        else if (Game.GameLibrary == Interfaces.GameLibrary.XboxApp)
+        {
+            if (Game is XboxGame xboxGame)
+            {
+                var launchCode = $"shell:appsFolder\\{xboxGame.PlatformId}!{xboxGame.ApplicationId}";
+                Process.Start(new ProcessStartInfo("explorer.exe", launchCode) { UseShellExecute = true });
+            }
+        }
     }
 
     bool CanLaunchGame()
@@ -177,7 +186,13 @@ public partial class GameControlModel : ObservableObject
         {
             return true;
         }
-
+        if (Game.GameLibrary == Interfaces.GameLibrary.XboxApp)
+        {
+            if (Game is XboxGame xboxGame && string.IsNullOrWhiteSpace(xboxGame.ApplicationId) == false)
+            {
+                return true;
+            }
+        }
         return false;
     }
 

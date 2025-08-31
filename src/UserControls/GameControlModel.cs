@@ -36,6 +36,14 @@ public partial class GameControlModel : ObservableObject
 
     public bool CanSelectDlssPreset { get; private set; }
 
+    public bool CanSelectDlssDPreset { get; private set; }
+        
+    public List<PresetOption> DlssDPresetOptions { get; } = new List<PresetOption>();
+
+    [ObservableProperty]
+    public partial PresetOption? SelectedDlssDPreset { get; set; }
+
+
     public bool GameTitleHasChanged
     {
         get
@@ -73,9 +81,7 @@ public partial class GameControlModel : ObservableObject
             {
                 CanSelectDlssPreset = true;
                 game.DlssPreset = NVAPIHelper.Instance.GetGameDLSSPreset(game);
-
                 DlssPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
-
                 if (game.DlssPreset is null)
                 {
                     // If it was never set, ensure it goes to default.
@@ -85,6 +91,24 @@ public partial class GameControlModel : ObservableObject
                 {
                     SelectedDlssPreset = DlssPresetOptions.FirstOrDefault(x => x.Value == game.DlssPreset);
                 }
+
+                if (Game.CurrentDLSS_D is not null)
+                {
+                    CanSelectDlssDPreset = true;
+
+                    game.DlssDPreset = NVAPIHelper.Instance.GetGameDLSSDPreset(game);
+                    DlssDPresetOptions.AddRange(NVAPIHelper.Instance.DlssDPresetOptions);
+                    if (game.DlssDPreset is null)
+                    {
+                        // If it was never set, ensure it goes to default.
+                        SelectedDlssDPreset = DlssDPresetOptions.FirstOrDefault(x => x.Value == 0);
+                    }
+                    else
+                    {
+                        SelectedDlssDPreset = DlssDPresetOptions.FirstOrDefault(x => x.Value == game.DlssDPreset);
+                    }
+                }
+
             }
         }
 
@@ -93,6 +117,13 @@ public partial class GameControlModel : ObservableObject
             var disabledPresetOption = new PresetOption(ResourceHelper.GetString("General_NotSupported"), 0);
             DlssPresetOptions.Add(disabledPresetOption);
             SelectedDlssPreset = disabledPresetOption;
+        }
+
+        if (CanSelectDlssDPreset == false)
+        {
+            var disabledPresetOption = new PresetOption(ResourceHelper.GetString("General_NotSupported"), 0);
+            DlssDPresetOptions.Add(disabledPresetOption);
+            SelectedDlssDPreset = disabledPresetOption;
         }
     }
 
@@ -117,6 +148,26 @@ public partial class GameControlModel : ObservableObject
                         };
                         _ = dialog.ShowAsync();
                     }                    
+                }
+            }
+        }
+        else if (e.PropertyName == nameof(SelectedDlssDPreset))
+        {
+            if (CanSelectDlssDPreset == true && SelectedDlssDPreset is not null && SelectedDlssDPreset.Value != Game.DlssDPreset)
+            {
+                var didSet = NVAPIHelper.Instance.SetGameDLSSDPreset(Game, SelectedDlssDPreset.Value);
+                if (didSet == false)
+                {
+                    if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+                    {
+                        var dialog = new EasyContentDialog(gameControl.XamlRoot)
+                        {
+                            Title = ResourceHelper.GetString("General_Error"),
+                            CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                            Content = ResourceHelper.GetString("GamePage_UnableToChangePreset"),
+                        };
+                        _ = dialog.ShowAsync();
+                    }
                 }
             }
         }

@@ -193,6 +193,9 @@
                             <RowDefinition Height="0" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="0" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="0">
@@ -229,25 +232,7 @@
                             DisplayMemberPath="Name"
                             IsEnabled="{x:Bind ViewModel.CanSelectDlssPreset, Mode=OneWay}" />
 
-                        <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="3" >
-                            <TextBlock Text="{x:Bind data:DLLManager.Instance.GetAssetTypeName(data:GameAssetType.DLSS_G)}" FontWeight="Bold" />
-                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSGFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
-                                <Button.Content>
-                                    <FontIcon Style="{StaticResource InformationalFontIcon}" />
-                                </Button.Content>
-                            </Button>
-                        </StackPanel>
-
-                        <DropDownButton Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
-                            <DropDownButton.Content>
-                                <StackPanel>
-                                    <TextBlock Text="{x:Bind ViewModel.Game.CurrentDLSS_G.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullToVisibilityConverter}}" />
-                                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NotFoundText, Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullToInverseVisibilityConverter}}" />
-                                </StackPanel>
-                            </DropDownButton.Content>
-                        </DropDownButton>
-
-                        <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="1" Grid.Row="3">
+                        <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="3">
                             <TextBlock Text="{x:Bind data:DLLManager.Instance.GetAssetTypeName(data:GameAssetType.DLSS_D)}" FontWeight="Bold" />
                             <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSDFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
                                 <Button.Content>
@@ -256,7 +241,7 @@
                             </Button>
                         </StackPanel>
 
-                        <DropDownButton Grid.Column="1" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                        <DropDownButton Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_D}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
                             <DropDownButton.Content>
                                 <StackPanel>
                                     <TextBlock Text="{x:Bind ViewModel.Game.CurrentDLSS_D.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentDLSS_D, Converter={StaticResource NullToVisibilityConverter}}" />
@@ -265,7 +250,45 @@
                             </DropDownButton.Content>
                         </DropDownButton>
 
-                        
+                        <StackPanel Grid.Column="1" Grid.Row="3" Spacing="6" Orientation="Horizontal">
+                            <TextBlock Text="DLSS RR Preset" FontWeight="Bold"/>
+                            <!--{x:Bind ViewModel.TranslationProperties.DLSSPresetText, Mode=OneWay}-->
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.CanSelectDlssDPreset, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding DLSSPresetInfoCommand}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.DLSSPresetInfoTooltipText, Mode=OneWay}">
+                                <Button.Content>
+                                    <FontIcon Style="{StaticResource InformationalFontIcon}" />
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+                        <ComboBox Grid.Column="1" Grid.Row="4"
+                            HorizontalAlignment="Stretch"
+                            SelectedItem="{x:Bind ViewModel.SelectedDlssDPreset, Mode=TwoWay}"
+                            ItemsSource="{x:Bind ViewModel.DlssDPresetOptions}"
+                            DisplayMemberPath="Name"
+                            IsEnabled="{x:Bind ViewModel.CanSelectDlssDPreset, Mode=OneWay}" />
+
+
+
+                        <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="6" >
+                            <TextBlock Text="{x:Bind data:DLLManager.Instance.GetAssetTypeName(data:GameAssetType.DLSS_G)}" FontWeight="Bold" />
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSGFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
+                                <Button.Content>
+                                    <FontIcon Style="{StaticResource InformationalFontIcon}" />
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+                        <DropDownButton Grid.Column="0" Grid.Row="7" IsEnabled="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS_G}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                            <DropDownButton.Content>
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind ViewModel.Game.CurrentDLSS_G.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NotFoundText, Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentDLSS_G, Converter={StaticResource NullToInverseVisibilityConverter}}" />
+                                </StackPanel>
+                            </DropDownButton.Content>
+                        </DropDownButton>
+
+
+
                     </Grid>
 
 

@@ -70,7 +70,7 @@ public class XboxGame : Game
             }
             catch (Exception err)
             {
-                Logger.Error(err, "Could not load ApplicationId");
+                Logger.Error(err, $"Could not load ApplicationId for {PlatformId}");
             }
         }
 

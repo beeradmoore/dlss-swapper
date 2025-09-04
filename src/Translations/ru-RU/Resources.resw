@@ -508,10 +508,10 @@
     <value>DLSS</value>
   </data>
   <data name="General_Name_DLSS_D" xml:space="preserve">
-    <value>DLSS Ray Reconstruction</value>
+    <value>Реконструкция лучей DLSS</value>
   </data>
   <data name="General_Name_DLSS_G" xml:space="preserve">
-    <value>DLSS Frame Generation</value>
+    <value>Генерация кадров DLSS</value>
   </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>Пресет DLSS</value>
@@ -529,7 +529,7 @@
     <value>XeSS</value>
   </data>
   <data name="General_Name_XeSS_FG" xml:space="preserve">
-    <value>XeSS Frame Generation</value>
+    <value>Генерация кадров XeSS</value>
   </data>
   <data name="General_No" xml:space="preserve">
     <value>Нет</value>

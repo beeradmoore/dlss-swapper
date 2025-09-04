@@ -180,15 +180,6 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Не удалось запустить</value>
   </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Вы уверены, что хотите удалить изображение обложки пользователя?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Игра в процессе обработки</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Удалить обложку пользователя?</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Тип компонента</value>
   </data>
@@ -224,6 +215,9 @@
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Добавить в избранное</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>Нажмите, чтобы скрыть</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>Не удалось найти путь "{0}".</value>
@@ -313,6 +307,9 @@
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} все еще обрабатывается. Пожалуйста, дождитесь завершения загрузки, прежде чем открывать.</value>
   </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>Сбросить все</value>
+  </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>Восстановить исходный DLL</value>
   </data>
@@ -378,6 +375,9 @@
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Новые DLL</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Обнаружены новые DLL</value>
+  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Создать новую заявку на GitHub</value>
   </data>
@@ -408,8 +408,11 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Вам не нужно отправлять DLL. Мы найдем их на основе предоставленной информации.</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Обнаружены новые DLL</value>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>Перезагрузка игры</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>Показать скрытые игры (по умолчанию отключено при запуске)</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Игры</value>
@@ -422,6 +425,15 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Вид списком</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить изображение обложки пользователя?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Игра в процессе обработки</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Удалить обложку пользователя?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Это приложение запущено с правами администратора.</value>
@@ -467,6 +479,9 @@
   </data>
   <data name="General_Help" xml:space="preserve">
     <value>Помощь</value>
+  </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>Скрыть</value>
   </data>
   <data name="General_Import" xml:space="preserve">
     <value>Импортировать</value>
@@ -596,6 +611,9 @@
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Метка</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>Скачать последнюю версию</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>Запущено {0} новых загрузок.</value>
@@ -775,6 +793,12 @@
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>Это применимо только к выбору DLL, а не к странице библиотеки.</value>
+  </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>Создать коммит</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>Дата создания</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>Не удалось открыть ваш файл журнала напрямую из DLSS Swapper. Попробуйте открыть его вручную.</value>

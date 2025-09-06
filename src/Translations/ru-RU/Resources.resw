@@ -189,6 +189,15 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Не удалось запустить</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить изображение обложки пользователя?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Игра в процессе обработки</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Удалить обложку пользователя?</value>
+  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Тип компонента</value>
   </data>
@@ -384,9 +393,6 @@
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Новые DLL</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Обнаружены новые DLL</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Создать новую заявку на GitHub</value>
   </data>
@@ -417,6 +423,9 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Вам не нужно отправлять DLL. Мы найдем их на основе предоставленной информации.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Обнаружены новые DLL</value>
+  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Перезагрузка игры</value>
   </data>
@@ -434,15 +443,6 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Вид списком</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Вы уверены, что хотите удалить изображение обложки пользователя?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Игра в процессе обработки</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Удалить обложку пользователя?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Это приложение запущено с правами администратора.</value>

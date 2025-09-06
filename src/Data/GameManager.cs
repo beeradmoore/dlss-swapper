@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.WinUI.Collections;
+using DLSS_Swapper.Data.Xbox;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.Messages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
+using Windows.System;
 
 namespace DLSS_Swapper.Data;
 
@@ -455,5 +457,56 @@ internal partial class GameManager : ObservableObject
 
         return gameLibrariesToReturn;
 
+    }
+
+    public bool CanLaunchGame(Game game)
+    {
+        // Xbox App games are only valid if ApplicationId is loaded.
+        if (game.GameLibrary == GameLibrary.XboxApp)
+        {
+            if (game is XboxGame xboxGame && string.IsNullOrWhiteSpace(xboxGame.ApplicationId) == false)
+            {
+                return true;
+            }
+        }
+
+        return game.GameLibrary switch
+        {
+            GameLibrary.Steam => true,
+            GameLibrary.EpicGamesStore => true,
+            GameLibrary.EAApp => true,
+            _ => false,
+        };
+    }
+
+    public async Task LaunchGameAsync(Game game)
+    {
+        if (CanLaunchGame(game) == false)
+        {
+            Logger.Error($"Cannot launch game {game.Title} from {game.GameLibrary}");
+            return;
+        }
+
+        if (game.GameLibrary == GameLibrary.Steam)
+        {
+            await Launcher.LaunchUriAsync(new Uri($"steam://rungameid/{game.PlatformId}"));
+        }
+        else if (game.GameLibrary == GameLibrary.EpicGamesStore)
+        {
+            var installPathString = Uri.EscapeDataString(game.InstallPath);
+            await Launcher.LaunchUriAsync(new Uri($"com.epicgames.launcher://apps/{installPathString}?action=launch&silent=true"));
+        }
+        else if (game.GameLibrary == GameLibrary.EAApp)
+        {
+            await Launcher.LaunchUriAsync(new Uri($"origin2://game/launch?offerIds={game.PlatformId}"));
+        }
+        else if (game.GameLibrary == GameLibrary.XboxApp)
+        {
+            if (game is XboxGame xboxGame)
+            {
+                var launchCode = $"shell:appsFolder\\{xboxGame.PlatformId}!{xboxGame.ApplicationId}";
+                Process.Start(new ProcessStartInfo("explorer.exe", launchCode) { UseShellExecute = true });
+            }
+        }
     }
 }

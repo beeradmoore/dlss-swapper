@@ -4,3 +4,6 @@ IFileSaveDialog
 IFileOpenDialog
 FileOpenDialog
 SHCreateItemFromParsingName
+SHGetFileInfoW
+DestroyIcon
+ExtractIconExW

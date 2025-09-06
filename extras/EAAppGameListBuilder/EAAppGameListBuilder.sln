@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAAppGameListBuilder", "EAAppGameListBuilder\EAAppGameListBuilder.csproj", "{0D3E94F4-CA30-4113-8DBE-7A18C2D615BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D3E94F4-CA30-4113-8DBE-7A18C2D615BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D3E94F4-CA30-4113-8DBE-7A18C2D615BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D3E94F4-CA30-4113-8DBE-7A18C2D615BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D3E94F4-CA30-4113-8DBE-7A18C2D615BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E40E6561-63DC-474D-962E-EC84472F1B7F}
+	EndGlobalSection
+EndGlobal

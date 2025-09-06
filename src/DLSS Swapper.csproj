@@ -40,6 +40,7 @@
 
   <ItemGroup>
       <Content Remove="Assets\dlss_presets.json" />
+      <Content Remove="Assets\ea_app_titles.json" />
       <Content Remove="Assets\static_manifest.json" />
   </ItemGroup>
 
@@ -308,6 +309,9 @@
         <None Update="Assets\dlss_presets.json">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
+        <None Update="Assets\ea_app_titles.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
         <None Update="Asssets\icon_256.png">
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
@@ -364,6 +368,7 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.DataGrid" Version="7.1.2" />
     <PackageReference Include="CsvHelper" Version="33.1.0" />
+    <PackageReference Include="FuzzySharp" Version="2.0.2" />
     <PackageReference Include="HtmlAgilityPack" Version="1.12.2" />
     <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.2.250402" />
     <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.2.250402" />
@@ -386,6 +391,7 @@
     <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.8" />
     <PackageReference Include="System.Management" Version="9.0.8" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Private.Uri" Version="4.3.2" />

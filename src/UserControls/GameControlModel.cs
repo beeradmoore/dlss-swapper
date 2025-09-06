@@ -117,7 +117,7 @@ public partial class GameControlModel : ObservableObject
                             Content = ResourceHelper.GetString("GamePage_UnableToChangePreset"),
                         };
                         _ = dialog.ShowAsync();
-                    }                    
+                    }
                 }
             }
         }
@@ -154,46 +154,27 @@ public partial class GameControlModel : ObservableObject
         }
     }
 
-    [RelayCommand(CanExecute = nameof(CanLaunchGame))]
+    [RelayCommand]
     async Task LaunchAsync()
     {
-        if (Game.GameLibrary == Interfaces.GameLibrary.Steam)
+        if (GameManager.Instance.CanLaunchGame(Game))
         {
-            await Launcher.LaunchUriAsync(new Uri($"steam://rungameid/{Game.PlatformId}"));
+            await GameManager.Instance.LaunchGameAsync(Game);
         }
-        else if (Game.GameLibrary == Interfaces.GameLibrary.EpicGamesStore)
+        else
         {
-            var installPathString = Uri.EscapeDataString(Game.InstallPath);
-            await Launcher.LaunchUriAsync(new Uri($"com.epicgames.launcher://apps/{installPathString}?action=launch&silent=true"));
-        }
-        else if (Game.GameLibrary == Interfaces.GameLibrary.XboxApp)
-        {
-            if (Game is XboxGame xboxGame)
+            if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
             {
-                var launchCode = $"shell:appsFolder\\{xboxGame.PlatformId}!{xboxGame.ApplicationId}";
-                Process.Start(new ProcessStartInfo("explorer.exe", launchCode) { UseShellExecute = true });
+                var dialog = new EasyContentDialog(gameControl.XamlRoot)
+                {
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = ResourceHelper.GetFormattedResourceTemplate("GamePage_CantLaunchFromLibraryTemplate", Game.GameLibrary),
+                };
+                await dialog.ShowAsync();
             }
         }
-    }
-
-    bool CanLaunchGame()
-    {
-        if (Game.GameLibrary == Interfaces.GameLibrary.Steam)
-        {
-            return true;
-        }
-        if (Game.GameLibrary == Interfaces.GameLibrary.EpicGamesStore)
-        {
-            return true;
-        }
-        if (Game.GameLibrary == Interfaces.GameLibrary.XboxApp)
-        {
-            if (Game is XboxGame xboxGame && string.IsNullOrWhiteSpace(xboxGame.ApplicationId) == false)
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
     [RelayCommand]

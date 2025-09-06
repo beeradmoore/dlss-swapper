@@ -292,6 +292,9 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
   <data name="GamePage_Launch" xml:space="preserve">
     <value>Launch</value>
   </data>
+  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>Launching games from your {0} library is currently not supported.</value>
+  </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
     <value>This title is not manually added and can't be removed.</value>
   </data>

@@ -154,15 +154,27 @@ public partial class GameControlModel : ObservableObject
         }
     }
 
-    [RelayCommand(CanExecute = nameof(CanLaunchGame))]
+    [RelayCommand]
     async Task LaunchAsync()
     {
-        await GameManager.Instance.LaunchGameAsync(Game);
-    }
-
-    bool CanLaunchGame()
-    {
-        return GameManager.Instance.CanLaunchGame(Game);
+        if (GameManager.Instance.CanLaunchGame(Game))
+        {
+            await GameManager.Instance.LaunchGameAsync(Game);
+        }
+        else
+        {
+            if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+            {
+                var dialog = new EasyContentDialog(gameControl.XamlRoot)
+                {
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = ResourceHelper.GetFormattedResourceTemplate("GamePage_CantLaunchFromLibraryTemplate", Game.GameLibrary),
+                };
+                await dialog.ShowAsync();
+            }
+        }
     }
 
     [RelayCommand]

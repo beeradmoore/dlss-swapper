@@ -14,6 +14,7 @@ using System.Linq;
 using DLSS_Swapper.Data.DLSS;
 using System.ComponentModel;
 using Windows.ApplicationModel.Background;
+using DLSS_Swapper.Data.Xbox;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -116,7 +117,7 @@ public partial class GameControlModel : ObservableObject
                             Content = ResourceHelper.GetString("GamePage_UnableToChangePreset"),
                         };
                         _ = dialog.ShowAsync();
-                    }                    
+                    }
                 }
             }
         }

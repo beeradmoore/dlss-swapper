@@ -54,6 +54,25 @@ public partial class LibraryPageModel : ObservableObject
 
             SelectedSelectorBarItem = upscalerSelectorBar.Items[0];
         }
+
+        LanguageManager.Instance.OnLanguageChanged += OnLanguageChanged;
+    }
+
+    void OnLanguageChanged()
+    {
+        var upscalerSelectorBar = libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
+        if (upscalerSelectorBar is null)
+        {
+            return;
+        }
+
+        foreach (var item in upscalerSelectorBar.Items)
+        {
+            if (item?.Tag is GameAssetType gameAssetType)
+            {
+                item.Text = DLLManager.Instance.GetAssetTypeName(gameAssetType);
+            }
+        }
     }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)

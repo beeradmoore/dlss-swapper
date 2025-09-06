@@ -118,914 +118,875 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AcknowledgementsPage_Title" xml:space="preserve">
-    <value>许可证 &amp; 致谢</value>
+    <value>Ліцензії та Подяки</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>DLSS Swapper - DLSS 管理程序</value>
+    <value>DLSS Swapper</value>
   </data>
   <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
-    <value>点击复制以下详细信息</value>
+    <value>Натисніть, щоб скопіювати наступні дані</value>
   </data>
   <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
-    <value>诊断信息</value>
+    <value>Діагностика</value>
   </data>
   <data name="DllManager_AlreadyImported" xml:space="preserve">
-    <value>（已导入）</value>
+    <value>(вже імпортовано)</value>
   </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
-    <value>导入功能已禁用，无法加载导入清单。</value>
+    <value>Функцію імпорту вимкнено, маніфест імпорту не вдалося завантажити.</value>
   </data>
   <data name="DllManager_MigratingDlls" xml:space="preserve">
-    <value>正在迁移 DLL 文件</value>
+    <value>Міграція DLL</value>
   </data>
   <data name="DllManager_UnknownTypeDll" xml:space="preserve">
-    <value>DLL 文件的类型未知</value>
+    <value>DLL невідомого типу</value>
   </data>
   <data name="DllManager_UntrustedDll" xml:space="preserve">
-    <value>当前 DLL 文件不被 Windows 信任</value>
+    <value>DLL не є надійною для Windows.</value>
   </data>
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
-    <value>无法下载 {0} DLL 文件，请稍后再试，或查看日志以了解下载失败的原因。</value>
+    <value>Не вдалося завантажити {0} DLL. Спробуйте ще раз пізніше або перевірте журнали, щоб дізнатися, чому завантаження не вдалося.</value>
   </data>
   <data name="DllRecord_Download" xml:space="preserve">
-    <value>下载</value>
+    <value>Завантажити</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
-    <value>下载错误</value>
+    <value>Помилка завантаження</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
-    <value>下载中</value>
+    <value>Завантажується</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
-    <value>已导入</value>
+    <value>Імпортовано</value>
   </data>
   <data name="DllRecord_RequiresDownload" xml:space="preserve">
-    <value>需要下载</value>
+    <value>Необхідне завантаження</value>
   </data>
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
-    <value>DLL 压缩包无效（未找到 DLL 文件）</value>
-  </data>
-  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
-    <value>始终使用最新版本</value>
-  </data>
-  <data name="DLSS_Preset_Default" xml:space="preserve">
-    <value>默认</value>
-  </data>
-  <data name="DLSS_Preset_Letter" xml:space="preserve">
-    <value>预设 {0}</value>
+    <value>Архів DLL пошкоджено (DLL не знайдено).</value>
   </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
-    <value>DLSS Swapper 启动失败</value>
+    <value>DLSS Swapper не вдалося запустити</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
-    <value>请打开</value>
+    <value>Будь ласка, відкрийте</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
-    <value>一个新 issues</value>
+    <value>нову проблему</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
-    <value>请在 DLSS Swapper 的 GitHub 仓库，并在 “附加上下文” 部分提供以下信息。</value>
+    <value> у репозиторії DLSS Swapper на GitHub та надайте наступну інформацію в розділі додаткового контексту.</value>
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
-    <value>启动失败</value>
+    <value>Не вдалося запустити</value>
   </data>
   <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>确定要移除自定义封面吗？</value>
+    <value>Ви впевнені, що хочете видалити власне зображення обкладинки?</value>
   </data>
   <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>游戏正在处理中</value>
+    <value>Гра зараз обробляється</value>
   </data>
   <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>移除自定义封面？</value>
+    <value>Видалити власну обкладинку?</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
-    <value>资产类型</value>
+    <value>Тип активу</value>
   </data>
   <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
-    <value>事件时间</value>
+    <value>Час події</value>
   </data>
   <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
-    <value>事件类型</value>
+    <value>Тип події</value>
   </data>
   <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
-    <value>未找到历史记录</value>
+    <value>Історії не знайдено.</value>
   </data>
   <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
-    <value>版本</value>
+    <value>Версія</value>
   </data>
   <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
-    <value>已删除 DLL 备份</value>
+    <value>Резервну копію DLL видалено</value>
   </data>
   <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
-    <value>DLL 已经被其他外部因素所更改了</value>
+    <value>DLL було змінено ззовні</value>
   </data>
   <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
-    <value>检测到动态链接库（DLL）</value>
+    <value>DLL виявлено</value>
   </data>
   <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
-    <value>重置 DLL</value>
+    <value>DLL скинуто</value>
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
-    <value>替换 DLL</value>
+    <value>DLL замінено</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
-    <value>自定义封面</value>
+    <value>Додати власну обкладинку</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
-    <value>添加收藏</value>
+    <value>Додати до обраного</value>
   </data>
   <data name="GamePage_ClickToHide" xml:space="preserve">
-    <value>添加隐藏</value>
+    <value>Приховати</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
-    <value>无法找到路径 "{0}"</value>
+    <value>Не вдалося знайти шлях "{0}".</value>
   </data>
   <data name="GamePage_CurrentDll" xml:space="preserve">
-    <value>当前 DLL</value>
+    <value>Поточна DLL</value>
   </data>
   <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
-    <value>无法找到文件 "{0}"</value>
+    <value>Не вдалося знайти файл "{0}".</value>
   </data>
   <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
-    <value>DLL 文件已还原为原始版本：{0}</value>
+    <value>DLL скинуто до {0}.</value>
   </data>
   <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
-    <value>开始下载</value>
+    <value>Початок завантаження</value>
   </data>
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
-    <value>请等待下载完成后再替换</value>
+    <value>Будь ласка, зачекайте завершення завантаження, перш ніж замінювати</value>
   </data>
   <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
-    <value>预设信息</value>
+    <value>Інформація про пресет</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
-    <value>DLSS 的预设信息保存于游戏安装目录中的 DLSS DLL 文件中。不同的 DLSS DLL 文件提供不同的预设。例如，预设 K 是在 DLSS v310.2 版本中才引入的。所以，如果您使用的是 DLSS v3.7 版本，并将预设设置为 K，它将不会使用预设 K，而是会回退到游戏所选择的任何预设。
+    <value>Пресети DLSS містяться у DLSS DLL, що знаходяться в каталозі встановлення вашої гри. Різні DLSS DLL мають різні пресети. Наприклад, пресет K не був представлений до DLSS версії 310.2. Тому, якщо ви використовуєте DLSS версії 3.7 і встановите пресет на K, він не використовуватиме пресет K, а натомість повернеться до будь-якого пресету, який вирішить використовувати гра.
 
-这种情况也适用于全局预设。如果您选择了全局预设 K，但您的游戏使用的是 DLSS v3.7 版本，您将无法使用预设 K，而是会回退到游戏的默认预设。
+Те саме стосується глобальних пресетів. Якщо ви виберете пресет K, але ваша гра використовує DLSS версії 3.7, ви не використовуватимете пресет K, а натомість гра повернеться до будь-якого його пресету за замовчуванням.
 
-若要确认正在使用的预设版本，请启用 DLSS 屏幕指示器。</value>
+Щоб перевірити, який пресет використовується, увімкніть екранний індикатор DLSS.</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
-    <value>DLSS 屏幕指示器</value>
+    <value>Інформація екранного індикатора</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
-    <value>DLSS 预设信息</value>
+    <value>Інформація про пресет DLSS</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
-    <value>你所设置的 DLSS 预设并不能绝对确保该预设能被游戏软件正确使用。</value>
+    <value>Встановлення пресету DLSS не гарантує його використання.</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
-    <value>已收藏</value>
+    <value>В обраному</value>
   </data>
   <data name="GamePage_History" xml:space="preserve">
-    <value>历史</value>
+    <value>Історія</value>
   </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
-    <value>安装路径</value>
+    <value>Шлях встановлення</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
-    <value>"{0}" 是无效的文件类型</value>
+    <value>"{0}" є недійсним типом файлу</value>
   </data>
   <data name="GamePage_Launch" xml:space="preserve">
-    <value>启动</value>
+    <value>Запустити</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
-    <value>此标题不是手动添加的，无法移除。</value>
+    <value>Цей заголовок не додано вручну та не можна видалити.</value>
   </data>
   <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
-    <value>确定要从 DLSS Swapper 中删除 "{0}" ？这不会影响已经替换的 DLL 文件。</value>
+    <value>Ви впевнені, що хочете видалити "{0}" з DLSS Swapper? Це не внесе жодних змін у файли DLSS, які вже були обмінені.</value>
   </data>
   <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
-    <value>下方显示的是检测到的多个 DLL 文件，仍然可以像往常一样进行 DLL 替换和重置操作，因为这些操作将会同时应用于所有 DLL 文件。但由于无法确定游戏具体使用的是 DLL 版本，因此显示的 DLL 版本是检测到的第一个 DLL 的版本。</value>
+    <value>Нижче показано кілька знайдених DLL. Ви все ще зможете обмінювати та відновлювати DLL як завжди, оскільки ми виконуватимемо ці дії з усіма DLL одночасно. Однак, оскільки ми не знаємо, яка з цих DLL використовується грою, показана версія першої виявленої DLL.</value>
   </data>
   <data name="GamePage_MultipleDllsFound" xml:space="preserve">
-    <value>发现多个 DLL 文件</value>
+    <value>Знайдено кілька DLL</value>
   </data>
   <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
-    <value>发现多个 {0} DLL文件</value>
+    <value>Знайдено кілька {0} DLL</value>
   </data>
   <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
-    <value>请在 DLL 库下载新的 DLL 文件</value>
+    <value>Будь ласка, перейдіть на сторінку бібліотеки, щоб завантажити нові DLL.</value>
   </data>
   <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
-    <value>未找到 DLL 文件</value>
+    <value>DLL не знайдено</value>
   </data>
   <data name="GamePage_Notes" xml:space="preserve">
-    <value>备注</value>
+    <value>Примітки</value>
   </data>
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
-    <value>游戏当前未准备就绪</value>
+    <value>Ця гра не готова до запуску.</value>
   </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
-    <value>打开 DLL 文件路径</value>
+    <value>Відкрити розташування DLL</value>
   </data>
   <data name="GamePage_OriginalDll" xml:space="preserve">
-    <value>原始 DLL 文件</value>
+    <value>Оригінальна DLL</value>
   </data>
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
-    <value>{0} 仍在处理中，请等待加载进度完成后再打开。</value>
+    <value>{0} все ще обробляється. Будь ласка, зачекайте, поки завантаження завершиться, перш ніж відкривати.</value>
   </data>
   <data name="GamePage_ResetAll" xml:space="preserve">
-    <value>重置全部</value>
+    <value>Скинути все</value>
   </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
-    <value>重置原始 DLL 版本</value>
+    <value>Відновити оригінальну DLL</value>
   </data>
   <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
-    <value>选择 {0} 版本</value>
+    <value>Виберіть {0} версію</value>
   </data>
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
-    <value>存储文件为空</value>
+    <value>storageFile має значення null</value>
   </data>
   <data name="GamePage_UnableToChangePreset" xml:space="preserve">
-    <value>无法更改预设，请查看错误日志以获取更多信息。</value>
+    <value>Не вдалося змінити пресет. Перегляньте журнал помилок для отримання додаткової інформації.</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
-    <value>只能拖入单个文件作为封面</value>
+    <value>Ви можете перетягнути лише один файл для обкладинки</value>
   </data>
   <data name="GamesPage_AddGame" xml:space="preserve">
-    <value>添加游戏</value>
+    <value>Додати гру</value>
   </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
-    <value>将不同平台的游戏分组显示</value>
+    <value>Групуйте ігри з однієї бібліотеки разом</value>
   </data>
   <data name="GamesPage_Grouping" xml:space="preserve">
-    <value>分组</value>
+    <value>Групування</value>
   </data>
   <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
-    <value>隐藏没有可管理 DLL 的游戏</value>
+    <value>Приховати ігри без елементів, які можна обміняти</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
-    <value>只能拖入单个文件作为封面</value>
+    <value>Ви можете перетягнути лише один файл для обкладинки</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
-    <value>手动添加游戏注意事项</value>
+    <value>Ще одна примітка для ігор доданих вручну</value>
   </data>
   <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
-    <value>发生错误，目前无法添加游戏，请报告此问题。</value>
+    <value>Виникла проблема, і вашу гру наразі не вдалося додати. Будь ласка, повідомте про цю проблему.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
-    <value>添加游戏时发生错误</value>
+    <value>Помилка додавання гри</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value>必须选择游戏目录，而不是游戏库目录。例如，如果游戏位于C:\Program Files\MyGamesFolder\MyFavGame ，应该选择 MyFavGame 目录，而不是 MyGamesFolder 目录。</value>
+    <value>Ви повинні вибрати каталог &lt;i&gt;гри&lt;/i&gt;, а не каталог &lt;i&gt;ігор&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;Наприклад, якщо у вас є гра за адресою:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Ви повинні вибрати каталог &lt;b&gt;MyFavGame&lt;/b&gt;, а не каталог &lt;b&gt;MyGamesFolder&lt;/b&gt;.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
-    <value>通常情况下 DLSS Swapper 会自动从已安装的游戏库中查找游戏，如果游戏未列出，则可能被某些设置阻止了，请检查:
+    <value>DLSS Swapper має автоматично знаходити ігри з ваших встановлених бібліотек ігор. Якщо вашої гри немає у списку, можливо, цьому заважають деякі налаштування. Будь ласка, перевірте:
 
-- 游戏列表筛选器未设置为 “隐藏没有可管理 DLL 的游戏”
-- 在设置中启用了特定的游戏库
+- Фільтр списку ігор не встановлено на "Приховати ігри без елементів, які можна обміняти"
+- У налаштуваннях увімкнено певну бібліотеку ігор
 
-如果已经检查过这些设置，但游戏仍然没有显示，可能是存在错误，如果能在 GitHub 仓库中报告这个问题，将不胜感激，这样可以修复并改进未来游戏的检测。</value>
+Якщо ви перевірили ці пункти, а ваша гра все ще не відображається, можливо, це баг. Ми були б вдячні, якби ви повідомили про проблему в нашому репозиторії GitHub, щоб ми могли виправити її та покращити виявлення ваших ігор у майбутньому.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
-    <value>手动添加游戏注意事项</value>
+    <value>Примітка для ігор доданих вручну</value>
   </data>
   <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
-    <value>当前路径 "{0}" 已经存在，因此无法再次添加。</value>
+    <value>Шлях встановлення "{0}" вже існує та не може бути доданий знову.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
-    <value>选择游戏目录</value>
+    <value>Виберіть папку з грою</value>
   </data>
   <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
-    <value>不支持添加游戏库目录，请重新选择游戏的根目录。</value>
+    <value>Додавання каталогу верхнього рівня не підтримується. Будь ласка, додайте кореневий каталог вашої гри.</value>
   </data>
   <data name="GamesPage_NewDlls" xml:space="preserve">
-    <value>发现新的 DLL！</value>
+    <value>Нові DLL</value>
   </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
-    <value>创建一个新的 GitHub 问题报告</value>
+    <value>Створіть нову проблему на GitHub</value>
   </data>
   <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
-    <value>在加载游戏时发现了一些不在 DLSS Swapper 清单中的新 DLL</value>
+    <value>Під час завантаження ваших ігор було виявлено деякі нові DLL, яких немає в маніфесті DLSS Swapper.</value>
   </data>
   <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
-    <value>(GitHub 授权)</value>
+    <value>(потрібен обліковий запис GitHub)</value>
   </data>
   <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
-    <value>如果上方按钮按了无反应，请点击此链接,</value>
+    <value>Якщо кнопка не працює, спробуйте тут,</value>
   </data>
   <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
-    <value>第四步：提交报告</value>
+    <value>Крок 4: Надішліть свою проблему</value>
   </data>
   <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
-    <value>第一步：创建一个新的 issue</value>
+    <value>Крок 1: Створіть нову проблему</value>
   </data>
   <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
-    <value>第三步：复制正文</value>
+    <value>Крок 3: Скопіюйте текст</value>
   </data>
   <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
-    <value>第二步：复制标题</value>
+    <value>Крок 2: Скопіюйте заголовок</value>
   </data>
   <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
-    <value>感谢您的帮助！</value>
+    <value>Дякую за допомогу!</value>
   </data>
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
-    <value>请注意：无需提交 DLL 文件，我们会根据提交的报告信息查找 DLL</value>
+    <value>Вам не потрібно надсилати DLL-файли. Ми знайдемо їх на основі наданої інформації.</value>
   </data>
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>发现新的 DLL 文件</value>
+    <value>Знайдено нові DLL</value>
   </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
-    <value>重新加载游戏</value>
+    <value>Перезавантаження гри</value>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
-    <value>显示隐藏游戏（默认启动时为关闭状态）</value>
+    <value>Показати приховані ігри (за замовчуванням вимкнено під час запуску)</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
-    <value>游戏库</value>
+    <value>Ігри</value>
   </data>
   <data name="GamesPage_ViewType" xml:space="preserve">
-    <value>视图类型</value>
+    <value>Тип перегляду</value>
   </data>
   <data name="GamesPage_ViewType_GridView" xml:space="preserve">
-    <value>网格视图</value>
+    <value>Сітка</value>
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
-    <value>列表视图</value>
+    <value>Список</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
-    <value>程序正在以管理员身份运行</value>
+    <value>Ця програма працює з правами адміністратора.</value>
   </data>
   <data name="General_Apply" xml:space="preserve">
-    <value>应用</value>
+    <value>Застосувати</value>
   </data>
   <data name="General_Cancel" xml:space="preserve">
-    <value>取消</value>
+    <value>Скасувати</value>
   </data>
   <data name="General_Close" xml:space="preserve">
-    <value>关闭</value>
+    <value>Закрити</value>
   </data>
   <data name="General_Copy" xml:space="preserve">
-    <value>复制</value>
+    <value>Скопіювати</value>
   </data>
   <data name="General_Delete" xml:space="preserve">
-    <value>删除</value>
+    <value>Видалити</value>
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
-    <value>不再提示此信息</value>
+    <value>Більше не показувати</value>
   </data>
   <data name="General_Error" xml:space="preserve">
-    <value>错误</value>
+    <value>Помилка</value>
   </data>
   <data name="General_ErrorMessage" xml:space="preserve">
-    <value>错误信息</value>
+    <value>Повідомлення про помилку</value>
   </data>
   <data name="General_Export" xml:space="preserve">
-    <value>导出</value>
+    <value>Експорт</value>
   </data>
   <data name="General_ExportAll" xml:space="preserve">
-    <value>全部导出</value>
+    <value>Експортувати все</value>
   </data>
   <data name="General_Failed" xml:space="preserve">
-    <value>失败</value>
+    <value>Не вдалося</value>
   </data>
   <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
-    <value>若以管理员身份运行该应用程序，则不支持此功能。</value>
+    <value>Ця функція не підтримується, якщо ви запускаєте програму від імені адміністратора.</value>
   </data>
   <data name="General_Filter" xml:space="preserve">
-    <value>筛选</value>
+    <value>Фільтр</value>
   </data>
   <data name="General_Help" xml:space="preserve">
-    <value>帮助</value>
+    <value>Допомога</value>
   </data>
   <data name="General_Hidden" xml:space="preserve">
-    <value>隐藏</value>
+    <value>Приховано</value>
   </data>
   <data name="General_Import" xml:space="preserve">
-    <value>导入</value>
+    <value>Імпорт</value>
   </data>
   <data name="General_Load" xml:space="preserve">
-    <value>加载</value>
+    <value>Завантажити</value>
   </data>
   <data name="General_Loading" xml:space="preserve">
-    <value>正在加载</value>
+    <value>Завантаження</value>
   </data>
   <data name="General_Name" xml:space="preserve">
-    <value>名称</value>
-  </data>
-  <data name="General_Name_DLSS" xml:space="preserve">
-    <value>DLSS</value>
-  </data>
-  <data name="General_Name_DLSS_D" xml:space="preserve">
-    <value>DLSSRR 光线重建</value>
-  </data>
-  <data name="General_Name_DLSS_G" xml:space="preserve">
-    <value>DLSSFG 帧生成</value>
-  </data>
-  <data name="General_Name_DLSS_Preset" xml:space="preserve">
-    <value>DLSS 预设</value>
-  </data>
-  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
-    <value>FSR 3.1 DirectX 12</value>
-
-  </data>
-  <data name="General_Name_FSR_31_VK" xml:space="preserve">
-    <value>FSR 3.1 Vulkan</value>
-  </data>
-  <data name="General_Name_XeLL" xml:space="preserve">
-    <value>XeLL</value>
-
-  </data>
-  <data name="General_Name_XeSS" xml:space="preserve">
-    <value>XeSS</value>
-  </data>
-  <data name="General_Name_XeSS_FG" xml:space="preserve">
-    <value>XeSSFG 帧生成</value>
-
+    <value>Назва</value>
   </data>
   <data name="General_No" xml:space="preserve">
-    <value>关闭</value>
+    <value>Ні</value>
   </data>
   <data name="General_None" xml:space="preserve">
-    <value>无</value>
-  </data>
-  <data name="General_NotFound" xml:space="preserve">
-    <value>未找到</value>
+    <value>Немає</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
-    <value>不支持</value>
+    <value>Не підтримується</value>
   </data>
   <data name="General_Okay" xml:space="preserve">
-    <value>确定</value>
+    <value>Добре</value>
   </data>
   <data name="General_Oops" xml:space="preserve">
-    <value>哎呀</value>
+    <value>Ой</value>
   </data>
   <data name="General_OpenFolder" xml:space="preserve">
-    <value>打开文件夹</value>
+    <value>Відкрити папку</value>
   </data>
   <data name="General_Optional" xml:space="preserve">
-    <value>(可选)</value>
+    <value>(необов'язково)</value>
   </data>
   <data name="General_Options" xml:space="preserve">
-    <value>选项</value>
+    <value>Налаштування</value>
   </data>
   <data name="General_Publish" xml:space="preserve">
-    <value>发布</value>
+    <value>Опублікувати</value>
   </data>
   <data name="General_Refresh" xml:space="preserve">
-    <value>刷新</value>
+    <value>Оновити</value>
   </data>
   <data name="General_Reload" xml:space="preserve">
-    <value>重新加载</value>
+    <value>Перезавантажити</value>
   </data>
   <data name="General_Remove" xml:space="preserve">
-    <value>移除</value>
+    <value>Видалити</value>
   </data>
   <data name="General_ReportIssue" xml:space="preserve">
-    <value>报告问题</value>
+    <value>Повідомити про проблему</value>
   </data>
   <data name="General_Save" xml:space="preserve">
-    <value>保存</value>
+    <value>Зберегти</value>
   </data>
   <data name="General_Search" xml:space="preserve">
-    <value>搜索</value>
+    <value>Пошук</value>
   </data>
   <data name="General_Sorry" xml:space="preserve">
-    <value>抱歉</value>
+    <value>Вибачте</value>
   </data>
   <data name="General_Success" xml:space="preserve">
-    <value>完成</value>
+    <value>Успіх</value>
   </data>
   <data name="General_Swap" xml:space="preserve">
-    <value>替换</value>
+    <value>Обміняти</value>
   </data>
   <data name="General_Unknown" xml:space="preserve">
-    <value>未知</value>
+    <value>Невідомо</value>
   </data>
   <data name="General_Update" xml:space="preserve">
-    <value>更新</value>
+    <value>Оновлення</value>
   </data>
   <data name="General_Version" xml:space="preserve">
-    <value>版本</value>
+    <value>Версія</value>
   </data>
   <data name="General_Warning" xml:space="preserve">
-    <value>警告</value>
+    <value>Увага</value>
   </data>
   <data name="General_Yes" xml:space="preserve">
-    <value>开启</value>
+    <value>Так</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
-    <value>当前有 {0} 已经安装</value>
+    <value>У вас зараз встановлено {0}.</value>
   </data>
   <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
-    <value>DLSS Swapper 已更新</value>
+    <value>DLSS Swapper щойно оновився</value>
   </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
-    <value>有一个可用的更新</value>
+    <value>Доступне Оновлення</value>
   </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
-    <value>已下载</value>
+    <value>Вже завантажено.</value>
   </data>
   <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
-    <value>无法加载导入的 DLL 文件</value>
+    <value>Не вдалося завантажити імпортовані DLL</value>
   </data>
   <data name="LibraryPage_CouldntDownload" xml:space="preserve">
-    <value>目前无法下载</value>
+    <value>Наразі не вдалося завантажити.</value>
   </data>
   <data name="LibraryPage_CouldntExportDll" xml:space="preserve">
-    <value>无法导出 DLL 文件</value>
+    <value>Не вдалося експортувати DLL.</value>
   </data>
   <data name="LibraryPage_DeleteDll" xml:space="preserve">
-    <value>删除 DLL</value>
+    <value>Видалити DLL</value>
   </data>
   <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
-    <value>删除 {0} v{1}?</value>
+    <value>Видалити {0} v{1}?</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
-    <value>下载大小</value>
+    <value>Розмір файлу для завантаження</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
-    <value>文件描述</value>
+    <value>Опис файлу</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
-    <value>文件大小</value>
+    <value>Розмір файлу</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
-    <value>哈希值</value>
+    <value>Хеш</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
-    <value>内部名称</value>
+    <value>Внутрішня Назва</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
-    <value>其他内部名称</value>
+    <value>Внутрішня Назва Додатково</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
-    <value>标签</value>
+    <value>Мітка</value>
   </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
-    <value>下载最新版本</value>
+    <value>Завантажити останню версію</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
-    <value>已开始 {0} 个新下载</value>
+    <value>Розпочато {0} нових завантажень.</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
-    <value>下载已开始</value>
+    <value>Завантаження розпочато</value>
   </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
-    <value>导出的 DLL ：</value>
+    <value>Експортовані DLL:</value>
   </data>
   <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
-    <value>已导出 {0} 个 DLL</value>
+    <value>Експортовано {0} DLL.</value>
   </data>
   <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
-    <value>已导出 DLL 文件 {0}</value>
+    <value>Експортовано DLL {0}.</value>
   </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
-    <value>未能找到文件</value>
+    <value>Файл не знайдено.</value>
   </data>
   <data name="LibraryPage_Finished" xml:space="preserve">
-    <value>已完成</value>
+    <value>Завершено</value>
   </data>
   <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
-    <value>已作为现有 DLL 记录导入</value>
+    <value>Імпортовано як існуючий запис DLL.</value>
   </data>
   <data name="LibraryPage_Importing" xml:space="preserve">
-    <value>导入中</value>
+    <value>Імпорт</value>
   </data>
   <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
-    <value>手动导入 DLL 到电脑上是危险的操作
-请只从信任的来源导入 DLL 文件</value>
+    <value>Заміна DLL на вашому комп'ютері може бути небезпечною.
+
+Встановлення шкідливої DLL в грі таке ж небезпечне, як і запуск Linking_park_-_nUmB_mp3.exe, який ви щойно завантажили з LimeWire.
+
+Імпортуйте DLL лише з джерел, яким ви довіряєте.</value>
   </data>
   <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
-    <value>未找到可供导出的 DLL 文件</value>
+    <value>Не знайдено DLL для експорту.</value>
   </data>
   <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
-    <value>没有可导出的 DLL 记录</value>
+    <value>У вас немає DLL-записів для експорту.</value>
   </data>
   <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
-    <value>没有新的 DLL 文件需要下载</value>
+    <value>Немає нових DLL для завантаження.</value>
   </data>
   <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
-    <value>没有新的 DLL 文件</value>
+    <value>Немає нових DLL</value>
   </data>
   <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
-    <value>已处理的 DLL 文件：</value>
+    <value>Оброблені DLL:</value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
-    <value>DLL 库</value>
+    <value>Бібліотека</value>
   </data>
   <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
-    <value>无法删除 {0} 条记录。</value>
+    <value>Не вдається видалити запис {0}.</value>
   </data>
   <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
-    <value>无法更新 DLL 记录</value>
+    <value>Не вдається оновити DLL-записи.</value>
   </data>
   <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
-    <value>Zip 文件不包含任何 DLL</value>
+    <value>Архів не містив жодних DLL.</value>
   </data>
   <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
-    <value>正在尝试更新</value>
+    <value>Спроба оновлення</value>
   </data>
   <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
-    <value>DLSS Swapper 无法加载其清单文件，需要关闭。</value>
+    <value>DLSS Swapper не зміг завантажити файл маніфесту. Тепер він закриється.</value>
   </data>
   <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
-    <value>DLSS Swapper 需要关闭</value>
+    <value>DLSS Swapper має бути закритий</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
-    <value>GitHub 问题报告</value>
+    <value>Проблеми GitHub</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
-    <value>无法从电脑或服务器中加载 manifest.json
+    <value>Нам не вдалося завантажити manifest.json з вашого комп’ютера або з Інтернету.
 
-如果这种问题继续发生，请在 GitHub 上的问题跟踪中提交报告。</value>
+Якщо це повторюється, будь ласка, повідомте про це в нашому трекері проблем на GitHub.</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
-    <value>更新清单</value>
+    <value>Оновити маніфест</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>虽然替换 DLSS 版本不应被视为作弊，但某些反作弊系统可能会对游戏目录中的文件与游戏发行时的文件不一致进行检测；
+    <value>Хоча заміну версій DLSS не слід вважати шахрайством, деякі античіт системи можуть бути незадоволені вами, якщо файли у вашому каталозі гри не відповідають тим, з якими розповсюджувалася гра.
 
-因此，我们建议在多人游戏中谨慎使用。</value>
+Через це ми рекомендуємо бути обережними в багатокористувацьких іграх.</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
-    <value>多人游戏注意事项</value>
+    <value>Примітка для багатокористувацьких ігор</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
-    <value>无法下载</value>
+    <value>Все ще не працює</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
-    <value>下载正常</value>
+    <value>Працює!</value>
   </data>
   <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
-    <value>浏览器测试</value>
+    <value>Тест Браузера</value>
   </data>
   <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
-    <value>取消当前的测试</value>
+    <value>Скасувати поточний тест</value>
   </data>
   <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
-    <value>复制测试输出</value>
+    <value>Копіювати результати тесту</value>
   </data>
   <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
-    <value>创建问题报告</value>
+    <value>Створити звіт про помилку</value>
   </data>
   <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
-    <value>自定义代理测试</value>
+    <value>Тест користувацького агента</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
-    <value>使用代理在 DLSS Swapper 中下载 DLSS Swap DLL 文件</value>
+    <value>Завантаження DLSS Swapper DLL у DLSS Swapper за допомогою власного агента користувача</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
-    <value>从 UploadThing 镜像下载 DLSS DLL文件</value>
+    <value>Завантаження DLSS DLL з дзеркала UploadThing</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
-    <value>测试 Google.com 响应以检查互联网连接</value>
+    <value>Доступ до google.com з DLSS Swapper (тестує загальне підключення до Інтернету)</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
-    <value>测试微软必应响应以检查互联网连接</value>
+    <value>Доступ до bing.com з DLSS Swapper (тестує загальне підключення до Інтернету)</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
-    <value>在 DLSS Swapper 清单中下载 DLSS DLL 文件测试</value>
+    <value>Завантаження DLSS Swapper DLL в DLSS Swapper</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
-    <value>从浏览器下载 DLL 文件测试</value>
+    <value>Завантаження DLSS Swapper DLL з браузера</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
-    <value>从 Steam 下载游戏封面</value>
+    <value>Завантаження обкладинки гри зі Steam</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
-    <value>从 Epic Games Store 下载游戏封面图</value>
+    <value>Завантаження обкладинки гри з Epic Game Store</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
-    <value>从 DLSS Swapper 的服务器下载游戏封面</value>
+    <value>Завантаження обкладинки гри з файлового сервера DLSS Swapper</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
-    <value>从 DLSS Swapper 的其它服务器下载游戏封面</value>
+    <value>Завантаження обкладинки гри з альтернативного файлового сервера DLSS Swapper</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
-    <value>查询 DLSS Swapper 的 DNS 服务器地址</value>
+    <value>DNS-пошук файлового сервера DLSS Swapper</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
-    <value>在浏览器中打开</value>
+    <value>Відкрити у браузері</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
-    <value>点击 “在浏览器中打开” 按钮，或将以下链接复制并粘贴到浏览器中，检查浏览器是否正在下载文件？</value>
+    <value>Натисніть кнопку «Відкрити у браузері» або скопіюйте та вставте наступне посилання у ваш браузер. Чи завантажується файл у вашому браузері?</value>
   </data>
   <data name="NetworkTesterPage_Results" xml:space="preserve">
-    <value>测试详情</value>
+    <value>Результати</value>
   </data>
   <data name="NetworkTesterPage_RunTest" xml:space="preserve">
-    <value>开始测试</value>
+    <value>Виконати тест</value>
   </data>
   <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
-    <value>使用提供的代理或输入自定义的用户代理</value>
+    <value>Використовуйте наданий агент користувача або введіть власний на ваш вибір.</value>
   </data>
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
-    <value>网络测试</value>
+    <value>Мережевий тестер</value>
   </data>
   <data name="SettingsPage_About" xml:space="preserve">
-    <value>关于</value>
+    <value>Про програму</value>
   </data>
   <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
-    <value>添加忽略路径</value>
+    <value>Додати ігнорований шлях</value>
   </data>
   <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
-    <value>允许调试 DLL 文件</value>
+    <value>Дозволити налагоджувальні DLL</value>
   </data>
   <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
-    <value>SDK 有时会发布调试 DLL 文件，允许文件在屏幕上显示额外的调试信息。</value>
+    <value>SDK іноді випускають налагоджувальні DLL, які дозволяють відображати додаткову інформацію на екрані.</value>
   </data>
   <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
-    <value>在将 DLL 文件替换到游戏文件夹之前，Windows 会通过验证签名来检查其是否受信任，如果 DLL 文件未能通过签名验证，则不会被使用，建议保持此功能关闭。</value>
+    <value>Перед перенесенням у папку гри DLL перевіряються на довіру до них у Windows шляхом перевірки підпису. Якщо DLL не проходить перевірку підпису, вона не використовуватиметься. Рекомендується вимкнути цю опцію.</value>
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
-    <value>在替换 DLL 时，仅显示已经下载的文件，而不是所有不同版本，此选项不影响 DLL 库。</value>
+    <value>Це стосується лише засобу вибору DLL, а не сторінки бібліотеки.</value>
   </data>
   <data name="SettingsPage_BuildCommit" xml:space="preserve">
-    <value>构建提交</value>
+    <value>Збірка коміту</value>
   </data>
   <data name="SettingsPage_BuildDate" xml:space="preserve">
-    <value>构建日期</value>
+    <value>Дата збірки</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
-    <value>无法直接从 DLSS Swapper 打开日志文件，请尝试手动打开。</value>
+    <value>Не вдалося відкрити файл журналу безпосередньо з DLSS Swapper. Спробуйте відкрити його вручну.</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
-    <value>确定要删除已忽略路径 {0} 吗？</value>
+    <value>Ви впевнені, що хочете видалити проігнорований шлях {0}?</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
-    <value>删除忽略路径</value>
+    <value>Видалити проігнорований шлях</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
-    <value>DLSS开发者选项</value>
+    <value>DLSS Параметри Розробника</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
-    <value>将日志输出到控制台窗口</value>
+    <value>Увімкнути ведення журналу у вікні консолі</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
-    <value>日志保存到文件</value>
+    <value>Увімкнути ведення журналу у файл</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
-    <value>对所有的 DLSS 版本显示信息</value>
+    <value>Увімкнено для всіх DLSS DLL</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
-    <value>仅对 DLSS 调试版本显示信息</value>
+    <value>Увімкнено для налагоджувальних DLSS DLL</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
-    <value>在屏幕上显示信息</value>
+    <value>Показати екранний індикатор</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
-    <value>详细日志记录</value>
+    <value>Детальне ведення журналу</value>
   </data>
   <data name="SettingsPage_DLSSOptions" xml:space="preserve">
-    <value>DLSS 选项</value>
+    <value>DLSS Параметри</value>
   </data>
   <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
-    <value>全局预设</value>
+    <value>Глобальний пресет</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
-    <value>游戏库</value>
+    <value>Бібліотеки ігор</value>
   </data>
   <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
-    <value>故障排除的指南</value>
+    <value>Загальний посібник з усунення несправностей</value>
   </data>
   <data name="SettingsPage_GiveFeedback" xml:space="preserve">
-    <value>反馈</value>
+    <value>Залишити відгук</value>
   </data>
   <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
-    <value>可以在 DLSS Swapper 上提交建议功能或报告问题</value>
+    <value>Ви можете запропонувати функцію або повідомити про проблему DLSS Swapper</value>
   </data>
   <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
-    <value>忽略路径</value>
+    <value>Ігноровані шляхи</value>
   </data>
   <data name="SettingsPage_Language" xml:space="preserve">
-    <value>语言</value>
+    <value>Мова</value>
   </data>
   <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
-    <value>{0} 已禁用</value>
+    <value>{0} вимкнено</value>
   </data>
   <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
-    <value>{0} 启用</value>
+    <value>{0} увімкнено</value>
   </data>
   <data name="SettingsPage_Logging" xml:space="preserve">
-    <value>日志记录</value>
+    <value>Ведення журналу</value>
   </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
-    <value>当前已是最新版本</value>
+    <value>Нових оновлень немає.</value>
   </data>
   <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
-    <value>鸣谢</value>
+    <value>Подяки</value>
   </data>
   <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
-    <value>诊断信息</value>
+    <value>Діагностика</value>
   </data>
   <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
-    <value>网络测试</value>
+    <value>Мережевий тестер</value>
   </data>
   <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
-    <value>打开翻译工具箱</value>
+    <value>Відкрити інструментарій перекладу</value>
   </data>
   <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
-    <value>路径 {0} 已被忽略</value>
+    <value>Шлях {0} вже ігнорується.</value>
   </data>
   <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
-    <value>允许不受信任的文件</value>
+    <value>Дозволити ненадійні</value>
   </data>
   <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
-    <value>检查更新</value>
+    <value>Перевірити наявність оновлень</value>
   </data>
   <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
-    <value>只显示已经下载的 DLL 文件</value>
+    <value>Показувати лише завантажені DLL</value>
   </data>
   <data name="SettingsPage_ThemeDark" xml:space="preserve">
-    <value>深色</value>
+    <value>Темна</value>
   </data>
   <data name="SettingsPage_ThemeLight" xml:space="preserve">
-    <value>浅色</value>
+    <value>Світла</value>
   </data>
   <data name="SettingsPage_ThemeMode" xml:space="preserve">
-    <value>主题设置</value>
+    <value>Тема</value>
   </data>
   <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
-    <value>跟随系统设置</value>
+    <value>Використати системні налаштування</value>
   </data>
   <data name="SettingsPage_Title" xml:space="preserve">
-    <value>设置</value>
+    <value>Налаштування</value>
   </data>
   <data name="SettingsPage_Troubleshooting" xml:space="preserve">
-    <value>故障排除</value>
+    <value>Усунення несправностей</value>
   </data>
   <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
-    <value>当前日志文件：</value>
+    <value>Ваш поточний файл журналу</value>
   </data>
   <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
-    <value>翻译工具以管理员身份运行时无法使用，请重新启动应用程序。</value>
+    <value>Ви не можете використовувати інструмент перекладу, поки він працює від імені адміністратора. Будь ласка, перезапустіть програму.</value>
   </data>
   <data name="TranslationToolboxPage_Comment" xml:space="preserve">
-    <value>说明</value>
+    <value>Коментар</value>
   </data>
   <data name="TranslationToolboxPage_ImportAsTranslation" xml:space="preserve">
-    <value>导入语言作为翻译</value>
+    <value>Імпортувати мову як переклад</value>
   </data>
   <data name="TranslationToolboxPage_Key" xml:space="preserve">
-    <value>键值</value>
+    <value>Ключ</value>
   </data>
   <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
-    <value>加载现有</value>
+    <value>Завантажити існуючий</value>
   </data>
   <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
-    <value>无法加载翻译，请查看错误日志以获取更多信息。</value>
+    <value>Не вдалося завантажити переклад. Перегляньте журнал помилок для отримання додаткової інформації.</value>
   </data>
   <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
-    <value>新翻译</value>
+    <value>Новий переклад</value>
   </data>
   <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
-    <value>未找到可发布的翻译数据</value>
+    <value>Не знайдено даних перекладу для публікації.</value>
   </data>
   <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
-    <value>未找到可保存的翻译数。</value>
+    <value>Не знайдено даних перекладу для збереження.</value>
   </data>
   <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
-    <value>无效的 DLSS Swapper 翻译文件</value>
+    <value>Недійсний файл перекладу DLSS Swapper.</value>
   </data>
   <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
-    <value>无法发布翻译，请查看错误日志以获取更多信息。</value>
+    <value>Не вдалося опублікувати переклад. Перегляньте журнал помилок для отримання додаткової інформації.</value>
   </data>
   <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
-    <value>重新加载应用</value>
+    <value>Перезавантажити програму</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
-    <value>重置并继续</value>
+    <value>Скинути та продовжити</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
-    <value>这将重置当前的翻译进度，确定要继续吗？</value>
+    <value>Це скине ваш поточний прогрес перекладу. Ви впевнені, що хочете продовжити?</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
-    <value>重置进度并继续？</value>
+    <value>Скинути прогрес і продовжити?</value>
   </data>
   <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
-    <value>无法保存翻译，请查看错误日志以获取更多信息。</value>
+    <value>Не вдалося зберегти переклад. Перегляньте журнал помилок для отримання додаткової інформації.</value>
   </data>
   <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
-    <value>选择要加载的语言</value>
+    <value>Виберіть мову для завантаження</value>
   </data>
   <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
-    <value>当前语言</value>
+    <value>Мова джерела</value>
   </data>
   <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
-    <value>当前翻译</value>
+    <value>Переклад джерела</value>
   </data>
   <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
-    <value>翻译指南</value>
+    <value>Посібник з перекладу</value>
   </data>
   <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
-    <value>翻译已创建完成，请查阅 DLSS Swapper 的翻译指南，了解接下来如何处理 {0}。</value>
+    <value>Ваш переклад створено. Будь ласка, ознайомтеся з посібником з перекладу DLSS Swapper, щоб дізнатися, що робити далі з {0}.</value>
   </data>
   <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
-    <value>翻译进度</value>
+    <value>Прогрес перекладу</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
-    <value>不保存并关闭</value>
+    <value>Закрити без збереження</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
-    <value>可能有未保存的翻译更改，如果关闭此窗口，这些更改将会丢失。</value>
+    <value>Можливо, у вас є незбережені зміни перекладу. Якщо ви закриєте це вікно, вони будуть втрачені.</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
-    <value>未保存的翻译更改</value>
+    <value>Незбережені зміни перекладу</value>
   </data>
   <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
-    <value>翻译工具箱</value>
+    <value>Інструменти перекладу</value>
   </data>
 </root>

@@ -16,7 +16,7 @@
     <PackageIcon>Assets\icon_256.png</PackageIcon>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <Version>1.2.1.0</Version>
+    <Version>1.2.1.1</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <PublishSingleFile>false</PublishSingleFile>
@@ -374,15 +374,15 @@
     <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.2.250402" />
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.250402" />
     <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.250402" />
-    <PackageReference Include="Google.Protobuf" Version="3.31.1" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3351.48" PrivateAssets="all" />
+    <PackageReference Include="Google.Protobuf" Version="3.32.0" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3405.78" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.183">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4654" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4948" />
     <PackageReference Include="Nito.AsyncEx" Version="5.1.2" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
     <PackageReference Include="NvAPIWrapper.Net" Version="0.8.1.101" />
@@ -397,6 +397,7 @@
     <PackageReference Include="System.Private.Uri" Version="4.3.2" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+    <PackageReference Include="ValveKeyValue" Version="0.20.0.417" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>

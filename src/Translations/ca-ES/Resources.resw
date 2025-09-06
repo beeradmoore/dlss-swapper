@@ -165,6 +165,15 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>El fitxer zip de la DLL no era vàlid (no s'ha trobat cap DLL).</value>
   </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>Utilitzeu sempre l'última versió</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>Per defecte</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>Perfil {0}</value>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>No s'ha pogut iniciar DLSS Swapper</value>
   </data>
@@ -179,15 +188,6 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>No s'ha pogut iniciar</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Esteu segur que voleu eliminar la imatge de la portada personalitzada?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Joc actualment en processament</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Voleu treure la portada personalitzada?</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Tipus d'actiu</value>
@@ -247,23 +247,23 @@
     <value>Si us plau, espereu que la descàrrega s'acabi abans d'intercanviar</value>
   </data>
   <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
-    <value>Informació del preset</value>
+    <value>Informació del perfil</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
-    <value>Els presets del DLSS es troben dins dels fitxers DLL de DLSS que es troben al directori d'instal·lació dels jocs. Diferents DLL de DLSS tenen presets diferents. Per exemple, el preset K no es va introduir fins a DLSS v310.2. Per tant, si utilitzeu DLSS v3.7 i definiu el preset a K, no utilitzarà el preset K i, en canvi, tornarà a qualsevol preset que el joc decideixi utilitzar.
+    <value>Els perfils del DLSS es troben dins dels fitxers DLL de DLSS que es troben al directori d'instal·lació dels jocs. Diferents DLL de DLSS tenen perfils diferents. Per exemple, el perfil K no es va introduir fins a DLSS v310.2. Per tant, si utilitzeu DLSS v3.7 i definiu el perfil a K, no utilitzarà el perfil K i, en canvi, tornarà a qualsevol perfil que el joc decideixi utilitzar.
 
-El mateix s'aplica als presets globals. Si seleccioneu el preset K però el vostre joc utilitza DLSS v3.7, no utilitzareu el preset K i, en canvi, el joc tornarà a la seva configuració predeterminada.
+El mateix s'aplica als perfils globals. Si seleccioneu el perfil K però el vostre joc utilitza DLSS v3.7, no utilitzareu el perfil K i, en canvi, el joc tornarà a la seva configuració predeterminada.
 
-Per verificar quin preset s'està utilitzant, activeu l'indicador de DLSS en pantalla.</value>
+Per verificar quin perfil s'està utilitzant, activeu l'indicador de DLSS en pantalla.</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
     <value>Informació de l'indicador en pantalla</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
-    <value>Informació del preset de DLSS</value>
+    <value>Informació del perfil de DLSS</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
-    <value>Establint un preset de DLSS no garanteix que el preset sigui utilitzat.</value>
+    <value>Establint un perfil de DLSS no garanteix que el perfil sigui utilitzat.</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
     <value>Afegit a preferits</value>
@@ -444,24 +444,6 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Voleu treure la portada personalitzada?</value>
   </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>No s'ha pogut deserialitzar GOGCatalogResponse per a l'URL, {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>No s'ha pogut deserialitzar GOGEmbedFilteredResponse per a l'URL {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>No s'ha trobat cap GOGEmbedFilteredProducts per a l'URL {0}</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>No s'ha trobat cap GOGCatalogProduct per a l'URL {0}</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>No s'ha pogut detectar la clau d'instal·lació d'Ubisoft Connect.</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>Biblioteca de jocs desconeguda {0} en configurar l'ID</value>
-  </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Aquesta aplicació s'està executant amb privilegis d'administrador.</value>
   </data>
@@ -522,11 +504,41 @@ Si heu marcat aquestes opcions i el vostre joc encara no apareix, pot haver-hi u
   <data name="General_Name" xml:space="preserve">
     <value>Nom</value>
   </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>Reconstrucció de Raigs DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>Generació de Fotogrames DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>Perfil de DLSS</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>Generació de Fotogrames XeSS</value>
+  </data>
   <data name="General_No" xml:space="preserve">
     <value>No</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>Cap</value>
+  </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>No s'ha trobat</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
     <value>No compatible</value>
@@ -924,7 +936,7 @@ Per això, recomanem anar amb compte amb les partides multijugador.</value>
     <value>Clar</value>
   </data>
   <data name="SettingsPage_ThemeMode" xml:space="preserve">
-    <value>Mode del tema</value>
+    <value>Tema</value>
   </data>
   <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
     <value>Utilitza la configuració del sistema</value>

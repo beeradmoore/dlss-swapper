@@ -65,4 +65,10 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string HiddenText => ResourceHelper.GetString("General_Hidden");
+
+    [TranslationProperty]
+    public string NotFoundText => ResourceHelper.GetString("General_NotFound");
+
+    [TranslationProperty]
+    public string DLSSPresetText => ResourceHelper.GetString("General_Name_DLSS_Preset");    
 }

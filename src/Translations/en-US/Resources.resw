@@ -166,6 +166,16 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>DLL zip was invalid (no DLL found).</value>
   </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>Always use latest</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>Preset {0}</value>
+    <comment>Here {0} will be the letter of the preset, eg. Preset K</comment>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper has failed to launch</value>
   </data>
@@ -505,11 +515,53 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>DLSS Ray Reconstruction</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>DLSS Frame Generation</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>DLSS Preset</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+    <comment>If FSR does not have a direct translation put in the English characters for it</comment>
+
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+    <comment>If FSR does not have a direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+    <comment>If XeLL does not have a direct translation put in the English characters for it</comment>
+
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+    <comment>If XeSS does not have a direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>XeSS Frame Generation</value>
+    <comment>If XeSS does not have a direct translation put in the English characters for it</comment>
+
+  </data>
   <data name="General_No" xml:space="preserve">
     <value>No</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>None</value>
+  </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>Not found</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
     <value>Not supported</value>

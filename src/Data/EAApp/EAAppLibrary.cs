@@ -1,13 +1,16 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
+using FuzzySharp;
 
 namespace DLSS_Swapper.Data.EAApp;
 
@@ -24,6 +27,37 @@ internal class EAAppLibrary : IGameLibrary
     public string Name => "EA App";
 
     public Type GameType => typeof(EAAppGame);
+
+    readonly FrozenSet<GameSearchResult> _gameSearchResults = [];
+
+    private EAAppLibrary()
+    {
+        // The best way to get covers from EA apps is a static list from the EAAppGameListBuilder tool.
+        try
+        {
+            var eaAppTitlesJsonPath = @"Assets\ea_app_titles.json";
+            if (File.Exists(eaAppTitlesJsonPath) == true)
+            {
+                using (var fileStream = File.OpenRead(eaAppTitlesJsonPath))
+                {
+                    var gameSearchResults = JsonSerializer.Deserialize<List<GameSearchResult>>(fileStream);
+                    if (gameSearchResults is null || gameSearchResults.Count == 0)
+                    {
+                        throw new Exception($"{eaAppTitlesJsonPath} is empty or invalid.");
+                    }
+                    _gameSearchResults = gameSearchResults.ToFrozenSet();
+                }
+            }
+            else
+            {
+                throw new Exception($"{eaAppTitlesJsonPath} not found.");
+            }
+        }
+        catch (Exception err)
+        {
+            Logger.Error(err, "Unable to load ea_app_titles.json.");
+        }
+    }
 
     public bool IsInstalled()
     {
@@ -231,5 +265,37 @@ internal class EAAppLibrary : IGameLibrary
             Logger.Error(err);
             Debugger.Break();
         }
+    }
+
+    internal string SearchForCover(Game game)
+    {
+        // Use ExtractOne with a selector to match by the Name property
+        var search = new GameSearchResult()
+        {
+            Title = game.Title,
+        };
+        var bestMatch = FuzzySharp.Process.ExtractOne(search, _gameSearchResults, g => g.Title);
+
+        if (bestMatch is null || bestMatch.Score < 60)
+        {
+            return string.Empty;
+        }
+
+        if (string.IsNullOrWhiteSpace(bestMatch.Value.PackArtImage?.Path) == false)
+        {
+            return bestMatch.Value.PackArtImage.Path;
+        }
+
+        if (string.IsNullOrWhiteSpace(bestMatch.Value.KeyArtImage?.Path) == false)
+        {
+            return bestMatch.Value.KeyArtImage.Path;
+        }
+
+        if (string.IsNullOrWhiteSpace(bestMatch.Value.LogoImage?.Path) == false)
+        {
+            return bestMatch.Value.LogoImage.Path;
+        }
+
+        return string.Empty;
     }
 }

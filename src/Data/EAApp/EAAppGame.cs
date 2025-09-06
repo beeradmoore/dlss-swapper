@@ -36,63 +36,25 @@ internal class EAAppGame : Game
 
     protected override async Task UpdateCacheImageAsync()
     {
+        var coverUrl = EAAppLibrary.Instance.SearchForCover(this);
+
+        if (string.IsNullOrWhiteSpace(coverUrl) == false)
+        {
+            var didDownload = await DownloadCoverAsync(coverUrl).ConfigureAwait(false);
+            if (didDownload)
+            {
+                return;
+            }
+
+            Logger.Error($"Unable to download cover for {this.Title} ({coverUrl})");
+        }
+
+        // Fall back to using icon from the game exe.
         if (string.IsNullOrWhiteSpace(DisplayIconPath))
         {
             return;
         }
-
-        /*
-        There is no hard connection between the game contentId (eg, 71715 for Bejewled 3) and the slug from loading the endpoint
-        https://service-aggregation-layer.juno.ea.com/graphql?operationName=GameSearchImages&variables={"field":"RELEASE_DATE","direction":"DESC","filter":{"gameTypes":["BASE_GAME"],"prereleaseGameTypes":["OPEN_BETA"],"productLifecycleFilter":{"availabilities":["ACQUIRABLE"],"lifecycleTypes":["SELF","ORIGIN_ACCESS_BASIC","ORIGIN_ACCESS_PREMIER"]}},"offset":0,"limit":500,"locale":"en"}&extensions={"persistedQuery":{"version":1,"sha256Hash":"91fa40e48f5ea0cf9e26c3fde1f99cd661217f66de82a611d08b0e810d1eccce"}}
-        We can try look in the registry at say
-        HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Origin Games\71715_pc to see the value DisplayName
-        We can try best-case it by looking at subkeys in HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Origin Games\ for something that
-        is 71715  or starts with 71715_ to get DisplayName of Bejeweled® 3
-        However this may be locale specific.
-        We can try get "title" from installerdata.xml which is where we got contentId. That way we
-        can ensure locale matches. EG. <localeInfo locale="en_US"><title>Bejeweled® 3</title>
-        Even if we did that we don't have a hard link of the name "Bejewled 3" to get the slug "bejewed-3" from the URL
-        https://service-aggregation-layer.juno.ea.com/graphql?operationName=GameSearch&variables={"field":"RELEASE_DATE","direction":"DESC","filter":{"gameTypes":["BASE_GAME"],"prereleaseGameTypes":["OPEN_BETA"],"productLifecycleFilter":{"availabilities":["ACQUIRABLE"],"lifecycleTypes":["SELF","ORIGIN_ACCESS_BASIC","ORIGIN_ACCESS_PREMIER"]}},"offset":0,"limit":500,"locale":"en"}&extensions={"persistedQuery":{"version":1,"sha256Hash":"bac31eba9ff4d69912149c10d6a981b78f22c9caffd5455d9949c51202a1cb58"}}
-        That data would be
-
-        {
-            "id": "bejeweled-3",
-            "title": "Bejeweled 3",
-            "slug": "bejeweled-3",
-            "baseGameSlug": null,
-            "gameType": "BASE_GAME",
-            "prereleaseGameType": null,
-            "subscriptionAvailabilities": [],
-            "isFreeToPlay": false,
-            "playFirstTrialAvailable": false,
-            "releaseDate": null,
-            "__typename": "GameSearchResult"
-        }
-
-        To then match the image response 
-
-        {
-            "id": "bejeweled-3",
-            "keyArtImage": {
-                "path": "https://app-images.ea.com/ps9x41qn6x3c/6Jn8DFWwRUffCexjj3Rmla/9c9ff2f47649389a88b346a3f9e8437f/bejeweled-3-ce-m-keyart-1x1-en.jpg",
-                "__typename": "Image"
-            },
-            "packArtImage": {
-                "path": "https://app-images.ea.com/ps9x41qn6x3c/7f6z9PMG2cVUBgN9s73ijg/041d3d14522fe4460036ca04aeab5da6/bejeweled-3-ce-m-packart-9x16-en.jpg",
-                "__typename": "Image"
-            },
-            "logoImage": {
-                "height": 244,
-                "width": 752,
-                "path": "https://app-images.ea.com/ps9x41qn6x3c/7CMXspRbwA85Ei7Ry9RO57/d13b36f6be065bc877b2fa6e4e55573d/bejeweled-3-ce-m-keyart-logo-en.png",
-                "__typename": "Image"
-            },
-            "__typename": "GameSearchResult"
-        }
-
-        // Mabye we can get do a best approximation guess later with FuzzySharp or something?
-        */
-
+               
         var extension = Path.GetExtension(DisplayIconPath) ?? string.Empty;
         if (extension?.Equals(".exe", StringComparison.InvariantCultureIgnoreCase) == true)
         {

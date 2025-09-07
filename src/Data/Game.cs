@@ -48,6 +48,10 @@ namespace DLSS_Swapper.Data
         [Ignore]
         public partial uint? DlssPreset { get; set; }
 
+        [ObservableProperty]
+        [Ignore]
+        public partial uint? DlssDPreset { get; set; }
+
         [Ignore]
         public DriverSettingsProfile? DriverSettingsProfile { get; set; }
 
@@ -1289,6 +1293,12 @@ namespace DLSS_Swapper.Data
             if (DlssPreset != game.DlssPreset)
             {
                 DlssPreset = game.DlssPreset;
+                didChange = true;
+            }
+
+            if (DlssDPreset != game.DlssDPreset)
+            {
+                DlssDPreset = game.DlssDPreset;
                 didChange = true;
             }
 

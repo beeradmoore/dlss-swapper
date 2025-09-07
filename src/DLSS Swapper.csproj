@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <AssemblyName>DLSS Swapper</AssemblyName>
@@ -40,6 +40,7 @@
 
   <ItemGroup>
       <Content Remove="Assets\dlss_presets.json" />
+      <Content Remove="Assets\dlss_d_presets.json" />
       <Content Remove="Assets\ea_app_titles.json" />
       <Content Remove="Assets\static_manifest.json" />
   </ItemGroup>
@@ -307,6 +308,9 @@
 
     <ItemGroup>
         <None Update="Assets\dlss_presets.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Assets\dlss_d_presets.json">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
         <None Update="Assets\ea_app_titles.json">

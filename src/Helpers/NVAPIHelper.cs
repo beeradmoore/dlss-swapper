@@ -167,6 +167,11 @@ internal class NVAPIHelper
                 _driverSettingSession = DriverSettingsSession.CreateAndLoad();
                 // Looked at checking if it is worth filtering this by IsValid and GPUSupport.IsGeForceSupported,
                 // but it only dropped number of items from 7200 to 7000.
+
+                // TODO: This takes ~400ms on my dev machine (in debug mode)
+                // Time this in release mode and see if it can be done better (eg, of main thread so it isn't blocking)
+                // It may also pay to do initilize this earlier, as currently this will all run when
+                // you click your first game.
                 _cachedProfiles = _driverSettingSession.Profiles.AsParallel().ToDictionary(profile => profile.Name);
                 Supported = true;
             }

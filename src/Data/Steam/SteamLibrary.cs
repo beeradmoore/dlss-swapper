@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ValveKeyValue;
 
@@ -60,14 +61,28 @@ internal partial class SteamLibrary : IGameLibrary
         // Base steamapps folder contains libraryfolders.vdf which has references to other steamapps folders and individual installed Steam games.
         // All of these folders contain appmanifest_[some_id].acf which contains information about the game.
 
-        var baseSteamAppsFolder = Path.Combine(installPath, "steamapps");
+        var baseSteamAppsFolder = Path.Combine(installPath, "steamapps") ?? string.Empty;
+
+        // This should never happen, but it is a compiler hint for later.
+        if (string.IsNullOrWhiteSpace(baseSteamAppsFolder))
+        {
+            return new List<Game>();
+        }
+
         var libraryFoldersFile = Path.Combine(baseSteamAppsFolder, "libraryfolders.vdf");
         if (File.Exists(libraryFoldersFile) == false)
         {
             return new List<Game>();
         }
 
-        var allAppManifestPaths = new List<string>();
+        var libraryFoldersFileInfo = new FileInfo(libraryFoldersFile);
+
+        var steamAppsPaths = new List<string>()
+        {
+            baseSteamAppsFolder
+        };
+        var knownAppManifestPaths = new Dictionary<string, string>();
+
         var kvSerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
 
         try
@@ -80,17 +95,29 @@ internal partial class SteamLibrary : IGameLibrary
                     var path = PathHelpers.NormalizePath(libraryFolderVDF.Value.Path);
                     path = Path.Combine(path, "steamapps");
 
-                    foreach (var steamApp in libraryFolderVDF.Value.Apps)
+                    if (string.IsNullOrWhiteSpace(path) == false && Directory.Exists(path))
                     {
-                        // Here steamApp.Value would be size on disk.
-                        var appManifestPath = Path.Combine(path, $"appmanifest_{steamApp.Key}.acf");
-                        if (File.Exists(appManifestPath))
+                        steamAppsPaths.Add(path);
+
+                        foreach (var steamApp in libraryFolderVDF.Value.Apps)
                         {
-                            allAppManifestPaths.Add(appManifestPath);
-                        }
-                        else
-                        {
-                            Logger.Error($"Expected manifest path was not found - {appManifestPath}");
+                            // If the appManifestPath does not exist it is likely the game was freshly uninstalled.
+                            var appManifestPath = Path.Combine(path, $"appmanifest_{steamApp.Key}.acf");
+                            if (File.Exists(appManifestPath))
+                            {
+                                if (knownAppManifestPaths.ContainsKey(steamApp.Key) == false)
+                                {
+                                    knownAppManifestPaths[steamApp.Key] = appManifestPath;
+                                }
+                                else
+                                {
+                                    Logger.Error($"Went to add {steamApp.Key} to knownAppManifestPaths, but this key already exists.");
+                                }
+                            }
+                            else
+                            {
+                                Logger.Error($"Expected manifest path was not found - {appManifestPath}");
+                            }
                         }
                     }
                 }
@@ -102,9 +129,46 @@ internal partial class SteamLibrary : IGameLibrary
             Debugger.Break();
         }
 
+        // Look for files within steamAppsPaths.
+        // If the file already exists in knownAppManifestPaths we can skip it.
+        // If the file does not exist in knownAppManifestPaths we should process it as it is likly freshly installed.
+
+        var appManifestRegex = new Regex(@"^(.*)\\appmanifest_(?<app_id>\d*)\.acf$");
+        foreach (var steamAppPath in steamAppsPaths)
+        {
+            var appManifestPaths = Directory.GetFiles(steamAppPath, "*.acf", SearchOption.TopDirectoryOnly);
+            if (appManifestPaths?.Length > 0)
+            {
+                foreach (var appManifestPath in appManifestPaths)
+                {
+                    var match = appManifestRegex.Match(appManifestPath);
+                    if (match.Success)
+                    {
+                        var appId = match.Groups["app_id"].Value;
+
+                        // If the app_id is not known this is either a new install or a corrupt/leftover file.
+                        if (knownAppManifestPaths.ContainsKey(appId) == false)
+                        {
+                            var fileInfo = new FileInfo(appManifestPath);
+
+                            // If the appManifest is newer than the last time libraryFoldersFileInfo was updated it is likely a new install.
+                            if (fileInfo.LastWriteTime > libraryFoldersFileInfo.LastWriteTime)
+                            {
+                                knownAppManifestPaths[appId] = appManifestPath;
+                            }
+                            else
+                            {
+                                Logger.Error($"Found potential rogue file when loading Steam manifests: appId {appId}, {appManifestPath}");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         var games = new List<Game>();
 
-        foreach (var appManifestPath in allAppManifestPaths)
+        foreach (var appManifestPath in knownAppManifestPaths.Values)
         {
             SteamGame? game;
 

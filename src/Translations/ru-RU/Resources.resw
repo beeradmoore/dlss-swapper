@@ -165,6 +165,15 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>DLL zip был поврежден (DLL не найден).</value>
   </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>Всегда последняя версия</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>По умолчанию</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>Пресет {0}</value>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper не удалось запустить</value>
   </data>
@@ -224,6 +233,9 @@
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Добавить в избранное</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>Нажмите, чтобы скрыть</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>Не удалось найти путь "{0}".</value>
@@ -312,6 +324,9 @@
   </data>
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} все еще обрабатывается. Пожалуйста, дождитесь завершения загрузки, прежде чем открывать.</value>
+  </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>Сбросить все</value>
   </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>Восстановить исходный DLL</value>
@@ -411,6 +426,12 @@
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
     <value>Обнаружены новые DLL</value>
   </data>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>Перезагрузка игры</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>Показать скрытые игры (по умолчанию отключено при запуске)</value>
+  </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Игры</value>
   </data>
@@ -468,6 +489,9 @@
   <data name="General_Help" xml:space="preserve">
     <value>Помощь</value>
   </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>Скрыть</value>
+  </data>
   <data name="General_Import" xml:space="preserve">
     <value>Импортировать</value>
   </data>
@@ -480,11 +504,41 @@
   <data name="General_Name" xml:space="preserve">
     <value>Наименование</value>
   </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>Реконструкция лучей DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>Генерация кадров DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>Пресет DLSS</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>Генерация кадров XeSS</value>
+  </data>
   <data name="General_No" xml:space="preserve">
     <value>Нет</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>Ничего</value>
+  </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>Не найдено</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
     <value>Не поддерживается</value>
@@ -596,6 +650,9 @@
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Метка</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>Скачать последнюю версию</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>Запущено {0} новых загрузок.</value>
@@ -775,6 +832,12 @@
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>Это применимо только к выбору DLL, а не к странице библиотеки.</value>
+  </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>Создать коммит</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>Дата создания</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>Не удалось открыть ваш файл журнала напрямую из DLSS Swapper. Попробуйте открыть его вручную.</value>

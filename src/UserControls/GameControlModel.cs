@@ -14,6 +14,7 @@ using System.Linq;
 using DLSS_Swapper.Data.DLSS;
 using System.ComponentModel;
 using Windows.ApplicationModel.Background;
+using DLSS_Swapper.Data.Xbox;
 
 namespace DLSS_Swapper.UserControls;
 
@@ -147,7 +148,7 @@ public partial class GameControlModel : ObservableObject
                             Content = ResourceHelper.GetString("GamePage_UnableToChangePreset"),
                         };
                         _ = dialog.ShowAsync();
-                    }                    
+                    }
                 }
             }
         }
@@ -204,23 +205,27 @@ public partial class GameControlModel : ObservableObject
         }
     }
 
-    [RelayCommand(CanExecute = nameof(CanLaunchGame))]
+    [RelayCommand]
     async Task LaunchAsync()
     {
-        if (Game.GameLibrary == Interfaces.GameLibrary.Steam)
+        if (GameManager.Instance.CanLaunchGame(Game))
         {
-            await Launcher.LaunchUriAsync(new Uri($"steam://rungameid/{Game.PlatformId}"));
+            await GameManager.Instance.LaunchGameAsync(Game);
         }
-    }
-
-    bool CanLaunchGame()
-    {
-        if (Game.GameLibrary == Interfaces.GameLibrary.Steam)
+        else
         {
-            return true;
+            if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+            {
+                var dialog = new EasyContentDialog(gameControl.XamlRoot)
+                {
+                    Title = ResourceHelper.GetString("General_Error"),
+                    CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                    DefaultButton = ContentDialogButton.Close,
+                    Content = ResourceHelper.GetFormattedResourceTemplate("GamePage_CantLaunchFromLibraryTemplate", Game.GameLibrary),
+                };
+                await dialog.ShowAsync();
+            }
         }
-
-        return false;
     }
 
     [RelayCommand]

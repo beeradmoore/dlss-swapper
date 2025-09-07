@@ -233,6 +233,8 @@ namespace DLSS_Swapper.Data.Xbox
                             continue;
                         }
 
+                        activeGame.LoadApplicationId();
+
                         await activeGame.SetLocalHeaderImagesAsync(gameNamesToFindPackages[packageName]);
                         //await game.UpdateCacheImageAsync();
                         await activeGame.SaveToDatabaseAsync();

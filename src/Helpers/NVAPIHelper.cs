@@ -132,7 +132,7 @@ internal class NVAPIHelper
         catch (Exception err)
         {
             Logger.Error(err, "Could not load dlss_presets.json, using default presets.");
-            DlssPresetOptions = [
+            DlssDPresetOptions = [
                 new PresetOption(ResourceHelper.GetString("DLSS_Preset_Default"), 0x00000000),
                 new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter_Deprecated", "A"), 0x00000001),
                 new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter_Deprecated", "B"), 0x00000002),
@@ -186,9 +186,9 @@ internal class NVAPIHelper
             dlssPresetOption.UpdateNameFromTranslation();
         }
 
-        foreach (var dlssPresetOption in DlssDPresetOptions)
+        foreach (var dlssDPresetOption in DlssDPresetOptions)
         {
-            dlssPresetOption.UpdateNameFromTranslation();
+            dlssDPresetOption.UpdateNameFromTranslation();
         }
     }
 

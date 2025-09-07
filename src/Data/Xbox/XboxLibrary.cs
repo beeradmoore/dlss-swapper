@@ -43,11 +43,7 @@ namespace DLSS_Swapper.Data.Xbox
             return packages.Any();
         }
 
-        readonly string[] _defaultHiddenGames = [
-            "38985CA0.ChicagoDLC04StandardPack01_5bkah9njm3e9g", // Tony Hawk's™ Pro Skater™ 3 + 4 (DLC)
-            "38985CA0.ChicagoDLC02DigitalDeluxePack01_5bkah9njm3e9g", // Tony Hawk's™ Pro Skater™ 3 + 4 - Digital Deluxe Edition (DLC)
-            "38985CA0.ChicagoDLC03POPack01_5bkah9njm3e9g", // Tony Hawk's™ Pro Skater™ 3 + 4 - Pre Order Pack (DLC)
-        ];
+        readonly string[] _defaultHiddenGames = [];
 
         public async Task<List<Game>> ListGamesAsync(bool forceNeedsProcessing = false)
         {
@@ -194,17 +190,32 @@ namespace DLSS_Swapper.Data.Xbox
                     continue;
                 }
 
+                // Filter out frameworks and resource packages first
+                if (package.IsFramework || package.IsResourcePackage)
+                {
+                    continue;
+                }
+
                 var packageName = package.Id?.Name ?? string.Empty;
 
-                if (gameNamesToFindPackages.ContainsKey(packageName))
+
+                if (string.IsNullOrWhiteSpace(packageName) == false && gameNamesToFindPackages.TryGetValue(packageName, out var localCoverImages))
                 {
+                    var familyName = package.Id?.FamilyName ?? string.Empty;
+                    if (string.IsNullOrEmpty(familyName))
+                    {
+                        continue;
+                    }
+
+                    // Does the install path exist?
                     if (Directory.Exists(package.InstalledPath) == false)
                     {
                         continue;
                     }
 
-                    var familyName = package.Id?.FamilyName ?? string.Empty;
-                    if (string.IsNullOrEmpty(familyName))
+                    // Does the product have appEntries?
+                    var appEntries = await package.GetAppListEntriesAsync();
+                    if (appEntries.Count == 0)
                     {
                         continue;
                     }
@@ -235,7 +246,7 @@ namespace DLSS_Swapper.Data.Xbox
 
                         activeGame.LoadApplicationId();
 
-                        await activeGame.SetLocalHeaderImagesAsync(gameNamesToFindPackages[packageName]);
+                        await activeGame.SetLocalHeaderImagesAsync(localCoverImages);
                         //await game.UpdateCacheImageAsync();
                         await activeGame.SaveToDatabaseAsync();
 

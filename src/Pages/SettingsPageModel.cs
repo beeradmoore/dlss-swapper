@@ -45,6 +45,14 @@ public partial class SettingsPageModel : ObservableObject
 
     public List<PresetOption> DlssPresetOptions { get; } = new List<PresetOption>();
 
+    // Setting global preset for DLSS D does not perform as expected so it is currently disabled.
+    /*
+    [ObservableProperty]
+    public partial PresetOption? SelectedGlobalDlssDPreset { get; set; }
+
+    public List<PresetOption> DlssDPresetOptions { get; } = new List<PresetOption>();
+    */
+
     public ObservableCollection<KeyValuePair<string, string>> Languages { get; init; } = new ObservableCollection<KeyValuePair<string, string>>();
 
     [ObservableProperty]
@@ -143,14 +151,24 @@ public partial class SettingsPageModel : ObservableObject
         if (NVAPIHelper.Instance.Supported)
         {
             DlssPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
-            var globalPreset = NVAPIHelper.Instance.GetGlobalDLSSPreset();
-            SelectedGlobalDlssPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == globalPreset);
+            var dlssGlobalPreset = NVAPIHelper.Instance.GetGlobalDLSSPreset();
+            SelectedGlobalDlssPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == dlssGlobalPreset);
+
+            /*
+            DlssDPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
+            var dlssDGlobalPreset = NVAPIHelper.Instance.GetGlobalDLSSDPreset();
+            SelectedGlobalDlssDPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == dlssDGlobalPreset);
+            */
         }
         else
         {
             var notSupportedPresetOption = new PresetOption(ResourceHelper.GetString("General_NotSupported"), 0);
             DlssPresetOptions.Add(notSupportedPresetOption);
             SelectedGlobalDlssPreset = notSupportedPresetOption;
+            /*
+            DlssDPresetOptions.AddRange(notSupportedPresetOption);
+            SelectedGlobalDlssDPreset = notSupportedPresetOption;
+            */
         }
 
         _hasSetDefaults = true;
@@ -259,6 +277,28 @@ public partial class SettingsPageModel : ObservableObject
                 }
             }
         }
+        /*
+        else if (e.PropertyName == nameof(SelectedGlobalDlssDPreset))
+        {
+            if (NVAPIHelper.Instance.Supported && SelectedGlobalDlssDPreset is not null)
+            {
+                var didSet = NVAPIHelper.Instance.SetGlobalDLSSDPreset(SelectedGlobalDlssDPreset.Value);
+                if (didSet == false)
+                {
+                    if (_weakPage.TryGetTarget(out var page))
+                    {
+                        var dialog = new EasyContentDialog(page.XamlRoot)
+                        {
+                            Title = ResourceHelper.GetString("General_Error"),
+                            CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                            Content = ResourceHelper.GetString("GamePage_UnableToChangePreset"),
+                        };
+                        _ = dialog.ShowAsync();
+                    }
+                }
+            }
+        }
+        */
     }
 
     [RelayCommand]

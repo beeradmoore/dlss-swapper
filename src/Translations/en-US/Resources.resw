@@ -176,6 +176,10 @@
     <value>Preset {0}</value>
     <comment>Here {0} will be the letter of the preset, eg. Preset K</comment>
   </data>
+  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
+    <value>Preset {0} (Deprecated)</value>
+    <comment>Here {0} will be the letter of the preset, eg. Preset K</comment>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper has failed to launch</value>
   </data>

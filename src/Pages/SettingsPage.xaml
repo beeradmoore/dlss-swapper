@@ -113,11 +113,28 @@
                 </StackPanel>
 
                 <StackPanel Margin="0,10,0,0">
-                    <ComboBox Header="{x:Bind ViewModel.TranslationProperties.DLSSOptionsGlobalPresetText, Mode=OneWay}" IsEnabled="{x:Bind helpers:NVAPIHelper.Instance.Supported, Mode=OneTime}" ItemsSource="{x:Bind ViewModel.DlssPresetOptions, Mode=OneTime}" SelectedItem="{x:Bind ViewModel.SelectedGlobalDlssPreset, Mode=TwoWay}" DisplayMemberPath="Name" Margin="0,0,0,8" />
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <ComboBox Header="{x:Bind ViewModel.TranslationProperties.DLSSOptionsGlobalPresetText, Mode=OneWay}" IsEnabled="{x:Bind helpers:NVAPIHelper.Instance.IsSupported, Mode=OneWay}" ItemsSource="{x:Bind ViewModel.DlssPresetOptions, Mode=OneTime}" SelectedItem="{x:Bind ViewModel.SelectedGlobalDlssPreset, Mode=TwoWay}" DisplayMemberPath="Name" />
+                        <Button Visibility="{x:Bind helpers:NVAPIHelper.Instance.PermissionIssue, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{x:Bind ViewModel.NVAPIErrorCommand, Mode=OneTime}" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.NVAPIErrorTooltipText, Mode=OneWay}" Style="{StaticResource TextBlockButtonStyle}" VerticalAlignment="Bottom">
+                            <Button.Content>
+                                <FontIcon Style="{StaticResource ErrorFontIcon}" />
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
                         <Run Text="{x:Bind ViewModel.TranslationProperties.DLSSPresetInfoTooltipText, Mode=OneWay}" /> <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.DLSSPresetInfoCommand}"><Run Text="{x:Bind ViewModel.TranslationProperties.DLSSPresetInfoText, Mode=OneWay}" /></Hyperlink>.
                     </TextBlock>
                 </StackPanel>
+
+                <!--
+                Setting global preset does not perform as expected so it is currently disabled.
+                <StackPanel Margin="0,10,0,0">
+                    <ComboBox Header="{x:Bind ViewModel.TranslationProperties.DLSSOptionsGlobalPresetText, Mode=OneWay}" IsEnabled="{x:Bind helpers:NVAPIHelper.Instance.Supported, Mode=OneTime}" ItemsSource="{x:Bind ViewModel.DlssDPresetOptions, Mode=OneTime}" SelectedItem="{x:Bind ViewModel.SelectedGlobalDlssDPreset, Mode=TwoWay}" DisplayMemberPath="Name" Margin="0,0,0,8" />
+                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
+                        <Run Text="{x:Bind ViewModel.TranslationProperties.DLSSPresetInfoTooltipText, Mode=OneWay}" /> <Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.DLSSPresetInfoCommand}"><Run Text="{x:Bind ViewModel.TranslationProperties.DLSSPresetInfoText, Mode=OneWay}" /></Hyperlink>.
+                    </TextBlock>
+                </StackPanel>
+                --> 
 
 
                 <TextBlock

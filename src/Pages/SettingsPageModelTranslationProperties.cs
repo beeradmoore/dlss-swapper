@@ -137,4 +137,7 @@ public class SettingsPageModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string DLSSPresetInfoText => ResourceHelper.GetString("GamePage_DLSSPresetInfo");
+
+    [TranslationProperty]
+    public string NVAPIErrorTooltipText => ResourceHelper.GetString("GamePage_NVAPIError_Tooltip");
 }

@@ -81,7 +81,7 @@ jobs:
     - name: Setup .NET 9.0
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.303'
+        dotnet-version: '9.0.305'
 
     - name: Display .NET Info
       run: dotnet --info

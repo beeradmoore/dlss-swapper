@@ -1,4 +1,4 @@
-﻿<Application
+<Application
     x:Class="DLSS_Swapper.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -60,6 +60,14 @@
 
                 <ResourceDictionary Source="Themes/FakeContentDialogStyle.xaml" />
 
+                <ResourceDictionary>
+                    <Style x:Key="ErrorFontIcon" TargetType="FontIcon">
+                        <Setter Property="Glyph" Value="&#xE783;" />
+                        <Setter Property="FontSize" Value="20" />
+                        <Setter Property="Foreground" Value="{ThemeResource SystemErrorTextColor}" />
+                    </Style>
+                </ResourceDictionary>
+                
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
 

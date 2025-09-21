@@ -43,7 +43,17 @@ public partial class SettingsPageModel : ObservableObject
     [ObservableProperty]
     public partial PresetOption? SelectedGlobalDlssPreset { get; set; }
 
+    PresetOption? _previousGlobalDlssPreset;
+
     public List<PresetOption> DlssPresetOptions { get; } = new List<PresetOption>();
+
+    // Setting global preset for DLSS D does not perform as expected so it is currently disabled.
+    /*
+    [ObservableProperty]
+    public partial PresetOption? SelectedGlobalDlssDPreset { get; set; }
+
+    public List<PresetOption> DlssDPresetOptions { get; } = new List<PresetOption>();
+    */
 
     public ObservableCollection<KeyValuePair<string, string>> Languages { get; init; } = new ObservableCollection<KeyValuePair<string, string>>();
 
@@ -140,20 +150,38 @@ public partial class SettingsPageModel : ObservableObject
 
         IgnoredPaths = new ObservableCollection<string>(Settings.Instance.IgnoredPaths);
 
-        if (NVAPIHelper.Instance.Supported)
+        if (NVAPIHelper.Instance.IsSupported)
         {
             DlssPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
-            var globalPreset = NVAPIHelper.Instance.GetGlobalDLSSPreset();
-            SelectedGlobalDlssPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == globalPreset);
+            var dlssGlobalPreset = NVAPIHelper.Instance.GetGlobalDLSSPreset();
+            if (dlssGlobalPreset.Success)
+            {
+                SelectedGlobalDlssPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == dlssGlobalPreset.Result);
+            }
+
+            /*
+            DlssDPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
+            var dlssDGlobalPreset = NVAPIHelper.Instance.GetGlobalDLSSDPreset();
+            SelectedGlobalDlssDPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == dlssDGlobalPreset);
+            */
         }
         else
         {
             var notSupportedPresetOption = new PresetOption(ResourceHelper.GetString("General_NotSupported"), 0);
             DlssPresetOptions.Add(notSupportedPresetOption);
             SelectedGlobalDlssPreset = notSupportedPresetOption;
+            /*
+            DlssDPresetOptions.AddRange(notSupportedPresetOption);
+            SelectedGlobalDlssDPreset = notSupportedPresetOption;
+            */
         }
 
         _hasSetDefaults = true;
+    }
+
+    partial void OnSelectedGlobalDlssPresetChanging(PresetOption? value)
+    {
+        _previousGlobalDlssPreset = SelectedGlobalDlssPreset;
     }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
@@ -241,9 +269,29 @@ public partial class SettingsPageModel : ObservableObject
         }
         else if (e.PropertyName == nameof(SelectedGlobalDlssPreset))
         {
-            if (NVAPIHelper.Instance.Supported && SelectedGlobalDlssPreset is not null)
+            if (NVAPIHelper.Instance.IsSupported && SelectedGlobalDlssPreset is not null)
             {
-                var didSet = NVAPIHelper.Instance.SetGlobalDLSSPreset(SelectedGlobalDlssPreset.Value);
+                var setDLSSPresetResult = NVAPIHelper.Instance.SetGlobalDLSSPreset(SelectedGlobalDlssPreset.Value);
+                if (setDLSSPresetResult.Success == false)
+                {
+                    if (_weakPage.TryGetTarget(out var page))
+                    {
+                        page.DispatcherQueue.TryEnqueue(() =>
+                        {
+                            SelectedGlobalDlssPreset = _previousGlobalDlssPreset;
+                        });
+
+                        _ = NVAPIHelper.Instance.DisplayNVAPIErrorAsync(page.XamlRoot);
+                    }
+                }
+            }
+        }
+        /*
+        else if (e.PropertyName == nameof(SelectedGlobalDlssDPreset))
+        {
+            if (NVAPIHelper.Instance.Supported && SelectedGlobalDlssDPreset is not null)
+            {
+                var didSet = NVAPIHelper.Instance.SetGlobalDLSSDPreset(SelectedGlobalDlssDPreset.Value);
                 if (didSet == false)
                 {
                     if (_weakPage.TryGetTarget(out var page))
@@ -259,6 +307,7 @@ public partial class SettingsPageModel : ObservableObject
                 }
             }
         }
+        */
     }
 
     [RelayCommand]
@@ -301,11 +350,11 @@ public partial class SettingsPageModel : ObservableObject
         {
             if (File.Exists(CurrentLogPath))
             {
-                Process.Start("explorer.exe", $"/select,{CurrentLogPath}");
+                FileSystemHelper.OpenFolderInExplorerSelectFile(CurrentLogPath);
             }
             else
             {
-                Process.Start("explorer.exe", Logger.LogDirectory);
+                FileSystemHelper.OpenFolderInExplorer(Logger.LogDirectory);
             }
         }
         catch (Exception err)
@@ -482,5 +531,14 @@ public partial class SettingsPageModel : ObservableObject
         var package = new DataPackage();
         package.SetText(BuildInfo.GitCommitShort);
         Clipboard.SetContent(package);
+    }
+
+    [RelayCommand]
+    async Task NVAPIErrorAsync()
+    {
+        if (_weakPage.TryGetTarget(out var page))
+        {
+            await NVAPIHelper.Instance.DisplayNVAPIErrorAsync(page.XamlRoot);
+        }
     }
 }

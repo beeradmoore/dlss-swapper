@@ -312,8 +312,8 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(true, currentValue);
             }
 
-            Logger.Error("Could not get value for NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID");
-            return new NVAPIResult<uint>(false, 0);
+            // No default value found.
+            return new NVAPIResult<uint>(true, 0);
         }
         catch (NVIDIAApiException ex)
         {
@@ -354,8 +354,8 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(true, currentValue);
             }
 
-            Logger.Error("Could not get value for NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID");
-            return new NVAPIResult<uint>(false, 0);
+            // No default value found.
+            return new NVAPIResult<uint>(true, 0);
         }
         catch (NVIDIAApiException ex)
         {
@@ -478,8 +478,8 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(true, currentValue);
             }
 
-            Logger.Error($"Could not get value for NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID for game {game.Title}.");
-            return new NVAPIResult<uint>(false, 0);
+            // No default value found.
+            return new NVAPIResult<uint>(true, 0);
         }
         catch (NVIDIAApiException ex)
         {
@@ -524,8 +524,8 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(true, currentValue);
             }
 
-            Logger.Error($"Could not get value for NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID for game {game.Title}.");
-            return new NVAPIResult<uint>(false, 0);
+            // No default value found.
+            return new NVAPIResult<uint>(true, 0);
         }
         catch (NVIDIAApiException ex)
         {

@@ -550,6 +550,10 @@ If you have checked these and your game is still not showing up there may be a b
     <value>DLSS Preset</value>
     <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
   </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>DLSS RR Preset</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
+  </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
     <comment>If FSR does not have a direct translation put in the English characters for it</comment>

@@ -73,5 +73,8 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
     public string DLSSPresetText => ResourceHelper.GetString("General_Name_DLSS_Preset");
 
     [TranslationProperty]
+    public string DLSSDPresetText => ResourceHelper.GetString("General_Name_DLSSD_Preset");
+
+    [TranslationProperty]
     public string NVAPIErrorTooltipText => ResourceHelper.GetString("GamePage_NVAPIError_Tooltip");
 }

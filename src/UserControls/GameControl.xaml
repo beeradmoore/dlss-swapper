@@ -266,8 +266,7 @@
                         </DropDownButton>
 
                         <StackPanel Grid.Column="1" Grid.Row="3" Spacing="6" Orientation="Horizontal">
-                            <TextBlock Text="DLSS RR Preset" FontWeight="Bold"/>
-                            <!--{x:Bind ViewModel.TranslationProperties.DLSSPresetText, Mode=OneWay}-->
+                            <TextBlock Text="{x:Bind ViewModel.TranslationProperties.DLSSDPresetText, Mode=OneWay}" FontWeight="Bold"/>
                             <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.CanSelectDlssDPreset, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding DLSSPresetInfoCommand}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.DLSSPresetInfoTooltipText, Mode=OneWay}">
                                 <Button.Content>
                                     <FontIcon Style="{StaticResource InformationalFontIcon}" />

@@ -225,12 +225,27 @@
                             </Button>
                         </StackPanel>
 
-                        <ComboBox Grid.Column="1" Grid.Row="1"
-                            HorizontalAlignment="Stretch"
-                            SelectedItem="{x:Bind ViewModel.SelectedDlssPreset, Mode=TwoWay}"
-                            ItemsSource="{x:Bind ViewModel.DlssPresetOptions}"
-                            DisplayMemberPath="Name"
-                            IsEnabled="{x:Bind ViewModel.CanSelectDlssPreset, Mode=OneWay}" />
+                        <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <ComboBox
+                                Grid.Column="0"
+                                HorizontalAlignment="Stretch"
+                                SelectedItem="{x:Bind ViewModel.SelectedDlssPreset, Mode=TwoWay}"
+                                ItemsSource="{x:Bind ViewModel.DlssPresetOptions}"
+                                DisplayMemberPath="Name"
+                                IsEnabled="{x:Bind ViewModel.CanSelectDlssPreset, Mode=OneWay}" />
+
+                            <Button Grid.Column="1" Padding="12,0,0,0" Visibility="{x:Bind helpers:NVAPIHelper.Instance.PermissionIssue, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{x:Bind ViewModel.NVAPIErrorCommand, Mode=OneTime}" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.NVAPIErrorTooltipText, Mode=OneWay}" Style="{StaticResource TextBlockButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                <Button.Content>
+                                    <FontIcon Style="{StaticResource ErrorFontIcon}" />
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="3">
                             <TextBlock Text="{x:Bind data:DLLManager.Instance.GetAssetTypeName(data:GameAssetType.DLSS_D)}" FontWeight="Bold" />
@@ -260,12 +275,28 @@
                             </Button>
                         </StackPanel>
 
-                        <ComboBox Grid.Column="1" Grid.Row="4"
-                            HorizontalAlignment="Stretch"
-                            SelectedItem="{x:Bind ViewModel.SelectedDlssDPreset, Mode=TwoWay}"
-                            ItemsSource="{x:Bind ViewModel.DlssDPresetOptions}"
-                            DisplayMemberPath="Name"
-                            IsEnabled="{x:Bind ViewModel.CanSelectDlssDPreset, Mode=OneWay}" />
+
+
+                        <Grid Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <ComboBox Grid.Column="0"
+                                HorizontalAlignment="Stretch"
+                                SelectedItem="{x:Bind ViewModel.SelectedDlssDPreset, Mode=TwoWay}"
+                                ItemsSource="{x:Bind ViewModel.DlssDPresetOptions}"
+                                DisplayMemberPath="Name"
+                                IsEnabled="{x:Bind ViewModel.CanSelectDlssDPreset, Mode=OneWay}" />
+
+                            <Button Grid.Column="1" Padding="12,0,0,0" Visibility="{x:Bind helpers:NVAPIHelper.Instance.PermissionIssue, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{x:Bind ViewModel.NVAPIErrorCommand, Mode=OneTime}" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.NVAPIErrorTooltipText, Mode=OneWay}" Style="{StaticResource TextBlockButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                <Button.Content>
+                                    <FontIcon Style="{StaticResource ErrorFontIcon}" />
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+
 
 
 

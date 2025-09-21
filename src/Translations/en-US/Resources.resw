@@ -329,6 +329,18 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>This game is not in a ready to play state.</value>
   </data>
+  <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
+    <value>NVAPI has encountered an error. More information has been written to the error log.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
+    <value>NVAPI has encountered an error. Running the application as admin may resolve the issue. More information has been written to the error log.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
+    <value>NVAPI Error</value>
+  </data>
+  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
+    <value>NVAPI has encountered an error. Click for more information.</value>
+  </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
     <value>Open DLL location</value>
   </data>
@@ -581,6 +593,9 @@ If you have checked these and your game is still not showing up there may be a b
   </data>
   <data name="General_OpenFolder" xml:space="preserve">
     <value>Open folder</value>
+  </data>
+  <data name="General_OpenLogsDirectory" xml:space="preserve">
+    <value>Open logs directory</value>
   </data>
   <data name="General_Optional" xml:space="preserve">
     <value>(optional)</value>

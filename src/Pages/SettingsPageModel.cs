@@ -43,6 +43,8 @@ public partial class SettingsPageModel : ObservableObject
     [ObservableProperty]
     public partial PresetOption? SelectedGlobalDlssPreset { get; set; }
 
+    PresetOption? _previousGlobalDlssPreset;
+
     public List<PresetOption> DlssPresetOptions { get; } = new List<PresetOption>();
 
     // Setting global preset for DLSS D does not perform as expected so it is currently disabled.
@@ -148,11 +150,14 @@ public partial class SettingsPageModel : ObservableObject
 
         IgnoredPaths = new ObservableCollection<string>(Settings.Instance.IgnoredPaths);
 
-        if (NVAPIHelper.Instance.Supported)
+        if (NVAPIHelper.Instance.IsSupported)
         {
             DlssPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
             var dlssGlobalPreset = NVAPIHelper.Instance.GetGlobalDLSSPreset();
-            SelectedGlobalDlssPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == dlssGlobalPreset);
+            if (dlssGlobalPreset.Success)
+            {
+                SelectedGlobalDlssPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == dlssGlobalPreset.Result);
+            }
 
             /*
             DlssDPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
@@ -172,6 +177,11 @@ public partial class SettingsPageModel : ObservableObject
         }
 
         _hasSetDefaults = true;
+    }
+
+    partial void OnSelectedGlobalDlssPresetChanging(PresetOption? value)
+    {
+        _previousGlobalDlssPreset = SelectedGlobalDlssPreset;
     }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
@@ -259,20 +269,19 @@ public partial class SettingsPageModel : ObservableObject
         }
         else if (e.PropertyName == nameof(SelectedGlobalDlssPreset))
         {
-            if (NVAPIHelper.Instance.Supported && SelectedGlobalDlssPreset is not null)
+            if (NVAPIHelper.Instance.IsSupported && SelectedGlobalDlssPreset is not null)
             {
-                var didSet = NVAPIHelper.Instance.SetGlobalDLSSPreset(SelectedGlobalDlssPreset.Value);
-                if (didSet == false)
+                var setDLSSPresetResult = NVAPIHelper.Instance.SetGlobalDLSSPreset(SelectedGlobalDlssPreset.Value);
+                if (setDLSSPresetResult.Success == false)
                 {
                     if (_weakPage.TryGetTarget(out var page))
                     {
-                        var dialog = new EasyContentDialog(page.XamlRoot)
+                        page.DispatcherQueue.TryEnqueue(() =>
                         {
-                            Title = ResourceHelper.GetString("General_Error"),
-                            CloseButtonText = ResourceHelper.GetString("General_Okay"),
-                            Content = ResourceHelper.GetString("GamePage_UnableToChangePreset"),
-                        };
-                        _ = dialog.ShowAsync();
+                            SelectedGlobalDlssPreset = _previousGlobalDlssPreset;
+                        });
+
+                        _ = NVAPIHelper.Instance.DisplayNVAPIErrorAsync(page.XamlRoot);
                     }
                 }
             }
@@ -341,11 +350,11 @@ public partial class SettingsPageModel : ObservableObject
         {
             if (File.Exists(CurrentLogPath))
             {
-                Process.Start("explorer.exe", $"/select,{CurrentLogPath}");
+                FileSystemHelper.OpenFolderInExplorerSelectFile(CurrentLogPath);
             }
             else
             {
-                Process.Start("explorer.exe", Logger.LogDirectory);
+                FileSystemHelper.OpenFolderInExplorer(Logger.LogDirectory);
             }
         }
         catch (Exception err)
@@ -522,5 +531,14 @@ public partial class SettingsPageModel : ObservableObject
         var package = new DataPackage();
         package.SetText(BuildInfo.GitCommitShort);
         Clipboard.SetContent(package);
+    }
+
+    [RelayCommand]
+    async Task NVAPIErrorAsync()
+    {
+        if (_weakPage.TryGetTarget(out var page))
+        {
+            await NVAPIHelper.Instance.DisplayNVAPIErrorAsync(page.XamlRoot);
+        }
     }
 }

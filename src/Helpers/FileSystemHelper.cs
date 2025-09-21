@@ -8,6 +8,7 @@ using Windows.Win32;
 using Windows.Win32.Foundation;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Helpers;
 
@@ -309,5 +310,15 @@ internal class FileSystemHelper
             // NOOP
             return string.Empty;
         }
+    }
+
+    internal static void OpenFolderInExplorer(string path)
+    {
+        Process.Start("explorer.exe", path);
+    }
+
+    internal static void OpenFolderInExplorerSelectFile(string path)
+    {
+        Process.Start("explorer.exe", $"/select,{path}");
     }
 }

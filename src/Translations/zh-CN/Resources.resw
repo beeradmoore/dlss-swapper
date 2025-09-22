@@ -451,7 +451,7 @@
     <value>重新载入现有游戏</value>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
-    <value>显示隐藏游戏（启动时默认关闭）</value>
+    <value>显示隐藏游戏（启动时默认为关闭状态）</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>游戏库</value>

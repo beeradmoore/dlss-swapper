@@ -132,6 +132,9 @@
   <data name="DllManager_AlreadyImported" xml:space="preserve">
     <value>（已导入）</value>
   </data>
+  <data name="DllManager_CouldNotDeserializeManifestException" xml:space="preserve">
+    <value>无法恢复manifest.json文件</value>
+  </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>导入功能已禁用，无法加载导入清单。</value>
   </data>
@@ -147,11 +150,17 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>无法下载 {0} DLL 文件，请稍后再试，或查看日志以了解下载失败的原因。</value>
   </data>
+  <data name="DllRecord_CouldNotDownloadFile" xml:space="preserve">
+    <value>无法下载文件</value>
+  </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>下载</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>下载错误</value>
+  </data>
+  <data name="DllRecord_DownloadFileWasInvalid" xml:space="preserve">
+    <value>下载文件无效</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
     <value>下载中</value>
@@ -174,6 +183,9 @@
   <data name="DLSS_Preset_Letter" xml:space="preserve">
     <value>预设 {0}</value>
   </data>
+  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
+    <value>预设 {0}（已弃用）</value>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper 启动失败</value>
   </data>
@@ -188,15 +200,6 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>启动失败</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>确定要移除自定义封面吗？</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>游戏正在处理中</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>移除自定义封面？</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>资产类型</value>
@@ -228,14 +231,20 @@
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>替换 DLL</value>
   </data>
+  <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>无法加载游戏库 {0}</value>
+  </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>自定义封面</value>
+  </data>
+  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>目前不支持从您的 {0} 库中启动游戏</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>添加收藏</value>
   </data>
   <data name="GamePage_ClickToHide" xml:space="preserve">
-    <value>添加隐藏</value>
+    <value>点击以隐藏</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>无法找到路径 "{0}"</value>
@@ -316,6 +325,18 @@
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>游戏当前未准备就绪</value>
   </data>
+  <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
+    <value>NVAPI遇到错误，更多信息已写入错误日志</value>
+  </data>
+  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
+    <value>NVAPI遇到错误，以管理员身份运行本应用程序可能解决此问题。更多信息已写入错误日志。</value>
+  </data>
+  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
+    <value>NVAPI错误</value>
+  </data>
+  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
+    <value>NVAPI遇到错误，点击以查看更多信息。</value>
+  </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
     <value>打开 DLL 文件路径</value>
   </data>
@@ -326,7 +347,7 @@
     <value>{0} 仍在处理中，请等待加载进度完成后再打开。</value>
   </data>
   <data name="GamePage_ResetAll" xml:space="preserve">
-    <value>重置全部</value>
+    <value>重置所有设置</value>
   </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>重置原始 DLL 版本</value>
@@ -393,6 +414,9 @@
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>发现新的 DLL！</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>发现新的 DLL 文件</value>
+  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>创建一个新的 GitHub 问题报告</value>
   </data>
@@ -423,14 +447,11 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>请注意：无需提交 DLL 文件，我们会根据提交的报告信息查找 DLL</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>发现新的 DLL 文件</value>
-  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
-    <value>重新加载游戏</value>
+    <value>重新载入现有游戏</value>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
-    <value>显示隐藏游戏（默认启动时为关闭状态）</value>
+    <value>显示隐藏游戏（启动时默认为关闭状态）</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>游戏库</value>
@@ -443,6 +464,33 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>列表视图</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>确定要移除自定义封面吗？</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>游戏正在处理中</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>移除自定义封面？</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>无法对GOG游戏目录返回的URL {0} 进行反序列化</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>无法对GOG嵌入筛选返回的URL {0} 进行反序列化</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>未找到对应URL {0} 的GOG嵌入筛选结果</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>未找到与URL {0} 对应的GOG游戏目录</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>未能检测到Ubisoft Connect安装密钥</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>正在为未知游戏库 {0} 设置ID</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>程序正在以管理员身份运行</value>
@@ -507,6 +555,9 @@
   <data name="General_Name_DLSS" xml:space="preserve">
     <value>DLSS</value>
   </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>DLSSRR 预设</value>
+  </data>
   <data name="General_Name_DLSS_D" xml:space="preserve">
     <value>DLSSRR 光线重建</value>
   </data>
@@ -518,21 +569,18 @@
   </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
-
   </data>
   <data name="General_Name_FSR_31_VK" xml:space="preserve">
     <value>FSR 3.1 Vulkan</value>
   </data>
   <data name="General_Name_XeLL" xml:space="preserve">
     <value>XeLL</value>
-
   </data>
   <data name="General_Name_XeSS" xml:space="preserve">
     <value>XeSS</value>
   </data>
   <data name="General_Name_XeSS_FG" xml:space="preserve">
     <value>XeSSFG 帧生成</value>
-
   </data>
   <data name="General_No" xml:space="preserve">
     <value>关闭</value>
@@ -554,6 +602,9 @@
   </data>
   <data name="General_OpenFolder" xml:space="preserve">
     <value>打开文件夹</value>
+  </data>
+  <data name="General_OpenLogsDirectory" xml:space="preserve">
+    <value>打开日志文件夹</value>
   </data>
   <data name="General_Optional" xml:space="preserve">
     <value>(可选)</value>
@@ -606,6 +657,9 @@
   <data name="General_Yes" xml:space="preserve">
     <value>开启</value>
   </data>
+  <data name="GitHubUpdater_CouldNotLoadGitHubReleaseDataException" xml:space="preserve">
+    <value>无法获取GitHub的发布数据</value>
+  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>当前有 {0} 已经安装</value>
   </data>
@@ -655,7 +709,7 @@
     <value>标签</value>
   </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
-    <value>下载最新版本</value>
+    <value>下载最新版本文件</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>已开始 {0} 个新下载</value>
@@ -834,7 +888,7 @@
     <value>在替换 DLL 时，仅显示已经下载的文件，而不是所有不同版本，此选项不影响 DLL 库。</value>
   </data>
   <data name="SettingsPage_BuildCommit" xml:space="preserve">
-    <value>构建提交</value>
+    <value>提交当前构建</value>
   </data>
   <data name="SettingsPage_BuildDate" xml:space="preserve">
     <value>构建日期</value>

@@ -359,7 +359,7 @@
     <value>存储文件为空</value>
   </data>
   <data name="GamePage_UnableToChangePreset" xml:space="preserve">
-    <value>无法更改预设。请查看错误日志以获取更多信息。</value>
+    <value>无法更改预设，请查看错误日志以获取更多信息。</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
     <value>只能拖入单个文件作为封面</value>
@@ -709,7 +709,7 @@
     <value>标签</value>
   </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
-    <value>下载最新文件</value>
+    <value>下载最新版本文件</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>已开始 {0} 个新下载</value>

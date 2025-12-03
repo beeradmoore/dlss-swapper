@@ -180,15 +180,6 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Başlatma başarısız</value>
   </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Özel kapak resmini kaldırmak istediğinizden emin misiniz?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Oyun Şu Anda İşleniyor</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Özel kapak kaldırılsın mı?</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>İçerik türü</value>
   </data>
@@ -214,7 +205,7 @@
     <value>DLL algılandı</value>
   </data>
   <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
-    <value>DLL resetlendi</value>
+    <value>DLL sıfırlandı</value>
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>DLL değiştirildi</value>
@@ -313,6 +304,12 @@ Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran �
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} hala işleniyor. Lütfen açmadan önce yükleme göstergesinin tamamlanmasını bekleyin.</value>
   </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>Gizlemek için tıkla</value>
+  </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>Hepsini sıfırla</value>
+  </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>Orijinal DLL'i geri yükle</value>
   </data>
@@ -353,7 +350,7 @@ Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran �
     <value>Oyununuz eklenirken hata oluştu</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value>Dizinini değil, oyun dizininizi seçmelisiniz.Örneğin, oyununuz şu konumdaysa:C:\Program Files\MyGamesFolder\MyFavGameMyGamesFolder dizinini değil, MyFavGame dizinini seçmelisiniz.</value>
+    <value>Dizinini değil, oyun dizininizi seçmelisiniz. Örneğin, oyununuz şu konumdaysa: C:\Program Files\MyGamesFolder\MyFavGameMyGamesFolder dizinini değil, MyFavGame dizinini seçmelisiniz.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
     <value>DLSS Swapper, yüklü oyun kütüphanelerinizdeki oyunları otomatik olarak bulmalıdır. Eğer oyununuz listede yoksa, bunu engelleyen birkaç ayar olabilir. Lütfen şunları kontrol edin: Oyun listesi filtresinin "Değiştirilebilir öğesi olmayan oyunları gizle" olarak ayarlanmadığından emin olun. İlgili oyun kütüphanesinin ayarlarda etkinleştirildiğinden emin olun. Bunları kontrol etmenize rağmen oyununuz hala görünmüyorsa, bir hata olabilir. Gelecekte oyunlarınızı daha iyi tespit edebilmemiz ve bir düzeltme yapabilmemiz için sorunu GitHub depomuzda bildirirseniz memnun oluruz.</value>
@@ -372,6 +369,9 @@ Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran �
   </data>
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Yeni DLL'ler</value>
+  </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Yeni DLL'ler Bulundu</value>
   </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Yeni GitHub sorunu oluştur</value>
@@ -403,8 +403,11 @@ Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran �
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>DLL'leri göndermenize gerek yok. Sağladığınız bilgilere dayanarak onları biz bulacağız.</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Yeni DLL'ler Bulundu</value>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>Oyun yeniden yükleniyor</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>Gizli oyunları göster (varsayılan olarak kapalı)</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Oyunlar</value>
@@ -417,6 +420,15 @@ Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran �
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Liste Görünümü</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Özel kapak resmini kaldırmak istediğinizden emin misiniz?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Oyun şu anda İşleniyor</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Özel kapak kaldırılsın mı?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Bu uygulama yönetici ayrıcalıklarıyla çalışıyor.</value>
@@ -462,6 +474,9 @@ Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran �
   </data>
   <data name="General_Help" xml:space="preserve">
     <value>Yardım</value>
+  </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>Gizli</value>
   </data>
   <data name="General_Import" xml:space="preserve">
     <value>İçe Aktar</value>
@@ -592,6 +607,9 @@ Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran �
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Etiket</value>
   </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>En Sonuncuyu İndir</value>
+  </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>{0} yeni indirme başlatıldı.</value>
   </data>
@@ -706,7 +724,7 @@ Bu nedenle çok oyunculu oyunlarda dikkatli olmanızı öneririz.</value>
     <value>Özel kullanıcı aracısı ile DLSS Swapper içinden DLSS Swapper DLL'i indiriliyor</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
-    <value>UploadThing yansımasından DLSS DLL'i indiriliyor</value>
+    <value>UploadThing kaynağından DLSS DLL'i indiriliyor</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
     <value>DLSS Swapper içinden google.com'a erişiliyor (genel internet bağlantısını test eder)</value>
@@ -770,6 +788,12 @@ Bu nedenle çok oyunculu oyunlarda dikkatli olmanızı öneririz.</value>
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>Bu yalnızca DLL seçici için geçerlidir, kütüphane sayfası için değil.</value>
+  </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>Derleme işlemi</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>Derleme tarihi</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>Günlük (log) dosyanız doğrudan DLSS Swapper'dan açılamadı. Lütfen manuel olarak açmayı deneyin.</value>

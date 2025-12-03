@@ -125,22 +125,14 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
             // Cache path used to be relative to the install path, but now it appears to be in %LOCALAPPDATA%\Ubisoft Game Launcher\
             // Check both paths just to be sure.
-            var cachePath = Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "Ubisoft Game Launcher", "cache");
-            if (Directory.Exists(cachePath) == false)
+            var configurationPath = Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "Ubisoft Game Launcher", "cache", "configuration", "configurations");
+            if (File.Exists(configurationPath) == false)
             {
-                cachePath = Path.Combine(GetInstallPath(), "cache");
-                if (Directory.Exists(cachePath) == false)
+                configurationPath = Path.Combine(GetInstallPath(), "cache", "configuration", "configurations");
+                if (File.Exists(configurationPath) == false)
                 {
                     return games;
                 }
-            }
-
-            var configurationPath = Path.Combine(cachePath, "configuration", "configurations");
-            var assetsPath = Path.Combine(cachePath, "assets");
-
-            if (File.Exists(configurationPath) == false)
-            {
-                return games;
             }
 
             //var yamlDeserializer = new StaticDeserializerBuilder(new Helpers.StaticContext())

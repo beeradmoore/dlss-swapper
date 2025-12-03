@@ -123,9 +123,25 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 return games;
             }
 
-            var configurationPath = Path.Combine(GetInstallPath(), "cache", "configuration", "configurations");
-            var assetsPath = Path.Combine(GetInstallPath(), "cache", "assets");
+            // Cache path used to be relative to the install path, but now it appears to be in %LOCALAPPDATA%\Ubisoft Game Launcher\
+            // Check both paths just to be sure.
+            var cachePath = Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "Ubisoft Game Launcher", "cache");
+            if (Directory.Exists(cachePath) == false)
+            {
+                cachePath = Path.Combine(GetInstallPath(), "cache");
+                if (Directory.Exists(cachePath) == false)
+                {
+                    return games;
+                }
+            }
 
+            var configurationPath = Path.Combine(cachePath, "configuration", "configurations");
+            var assetsPath = Path.Combine(cachePath, "assets");
+
+            if (File.Exists(configurationPath) == false)
+            {
+                return games;
+            }
 
             //var yamlDeserializer = new StaticDeserializerBuilder(new Helpers.StaticContext())
             var yamlDeserializer = new DeserializerBuilder()

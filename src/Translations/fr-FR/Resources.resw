@@ -181,15 +181,6 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Échec du lancement</value>
   </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer l'image de couverture personnalisée ?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Jeu actuellement en cours de traitement</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Supprimer la couverture personnalisée ?</value>
-  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Type d'actif</value>
   </data>
@@ -225,6 +216,9 @@
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Cliquez pour ajouter aux favoris</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>Cliquez pour masquer</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>Impossible de trouver le chemin "{0}".</value>
@@ -319,6 +313,9 @@ Pour vérifier quel préréglage est utilisé, veuillez activer l'indicateur DLS
     <value>{0} est encore en cours de traitement. Veuillez attendre que l'indicateur de chargement soit terminé avant d'ouvrir.</value>
     <comment>{0} est le titre du jeu sélectionné.</comment>
   </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>Réinitialiser tout</value>
+  </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>Restaurer la DLL originale</value>
   </data>
@@ -386,6 +383,9 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Nouvelles DLL</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Nouvelles DLL trouvées</value>
+  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Créer un nouveau problème GitHub</value>
   </data>
@@ -416,8 +416,11 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Vous n'avez pas besoin de soumettre les DLL. Nous les retrouverons en fonction des informations fournies.</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Nouvelles DLL trouvées</value>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>Recharger le jeux</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>Afficher les jeux masqués (désactivé par défaut lors du chargement)</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Jeux</value>
@@ -430,6 +433,15 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Vue en liste</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer l'image de couverture personnalisée ?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Jeu actuellement en cours de traitement</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Supprimer la couverture personnalisée ?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Cette application s'exécute avec des privilèges administratifs.</value>
@@ -476,6 +488,9 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   </data>
   <data name="General_Help" xml:space="preserve">
     <value>Aide</value>
+  </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>Masquer</value>
   </data>
   <data name="General_Import" xml:space="preserve">
     <value>Importer</value>
@@ -606,6 +621,9 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Étiquette</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>Télécharger la dernière version</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>{0} nouveaux téléchargements démarrés.</value>
@@ -791,6 +809,12 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>Cela s'applique uniquement au sélecteur de DLL, pas à la page de la bibliothèque.</value>
+  </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>Numéro de version</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>Modifié le</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>Impossible d'ouvrir votre fichier de log directement depuis DLSS Swapper. Veuillez essayer de l'ouvrir manuellement.</value>

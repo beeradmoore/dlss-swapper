@@ -12,9 +12,6 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         public override bool IsReadyToPlay => true;
 
-        [Column("local_header_image")]
-        public string LocalHeaderImage { get; set; } = string.Empty;
-
         [Column("remote_header_image")]
         public string RemoteHeaderImage { get; set; } = string.Empty;
 
@@ -31,15 +28,6 @@ namespace DLSS_Swapper.Data.UbisoftConnect
 
         protected override async Task UpdateCacheImageAsync()
         {
-            if (File.Exists(LocalHeaderImage))
-            {
-                using (var fileStream = File.Open(LocalHeaderImage, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    await ResizeCoverAsync(fileStream).ConfigureAwait(false);
-                }
-                return;
-            }
-
             await DownloadCoverAsync(RemoteHeaderImage).ConfigureAwait(false);
         }
 

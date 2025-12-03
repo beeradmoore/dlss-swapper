@@ -123,9 +123,17 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                 return games;
             }
 
-            var configurationPath = Path.Combine(GetInstallPath(), "cache", "configuration", "configurations");
-            var assetsPath = Path.Combine(GetInstallPath(), "cache", "assets");
-
+            // Cache path used to be relative to the install path, but now it appears to be in %LOCALAPPDATA%\Ubisoft Game Launcher\
+            // Check both paths just to be sure.
+            var configurationPath = Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "Ubisoft Game Launcher", "cache", "configuration", "configurations");
+            if (File.Exists(configurationPath) == false)
+            {
+                configurationPath = Path.Combine(GetInstallPath(), "cache", "configuration", "configurations");
+                if (File.Exists(configurationPath) == false)
+                {
+                    return games;
+                }
+            }
 
             //var yamlDeserializer = new StaticDeserializerBuilder(new Helpers.StaticContext())
             var yamlDeserializer = new DeserializerBuilder()
@@ -190,13 +198,11 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                 }
 
 
-                                var localImage = string.Empty;
                                 var remoteImage = string.Empty;
                                 if (ubisoftConnectConfigurationItem.Root.LogoImage is not null)
                                 {
                                     if (ubisoftConnectConfigurationItem.Root.ThumbImage.EndsWith(".jpg", StringComparison.InvariantCultureIgnoreCase) || ubisoftConnectConfigurationItem.Root.ThumbImage.EndsWith(".png", StringComparison.InvariantCultureIgnoreCase))
                                     {
-                                        localImage = Path.Combine(assetsPath, ubisoftConnectConfigurationItem.Root.ThumbImage);
                                         remoteImage = $"https://ubistatic3-a.akamaihd.net/orbit/uplay_launcher_3_0/assets/{ubisoftConnectConfigurationItem.Root.ThumbImage}";
                                     }
                                     else
@@ -207,7 +213,6 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                         {
                                             if (ubisoftConnectConfigurationItem.Localizations["default"]?.ContainsKey(ubisoftConnectConfigurationItem.Root.ThumbImage) == true)
                                             {
-                                                localImage = Path.Combine(assetsPath, ubisoftConnectConfigurationItem.Localizations["default"][ubisoftConnectConfigurationItem.Root.ThumbImage]);
                                                 remoteImage = $"https://ubistatic3-a.akamaihd.net/orbit/uplay_launcher_3_0/assets/{ubisoftConnectConfigurationItem.Localizations["default"][ubisoftConnectConfigurationItem.Root.ThumbImage]}";
                                             }
                                         }
@@ -218,7 +223,6 @@ namespace DLSS_Swapper.Data.UbisoftConnect
                                 var activeGame = cachedGame ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString());
                                 activeGame.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;  // TODO: Will this be a problem if the game is already loaded
                                 activeGame.InstallPath = PathHelpers.NormalizePath(installedTitles[configurationRecord.InstallId].InstallPath);
-                                activeGame.LocalHeaderImage = localImage;
                                 activeGame.RemoteHeaderImage = remoteImage;
 
                                 if (activeGame.IsInIgnoredPath())

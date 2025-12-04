@@ -567,9 +567,6 @@
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>DLSS 预设</value>
   </data>
-  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
-    <value>DLSS RR 光线重建 预设</value>
-  </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
   </data>

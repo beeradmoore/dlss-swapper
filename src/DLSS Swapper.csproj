@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <AssemblyName>DLSS Swapper</AssemblyName>
@@ -433,6 +433,6 @@
     </Content>
   </ItemGroup>
 
-  <Import Project="RenamePriFile.targets" />
+  <Import Project="CopyPriFile.targets" />
 
 </Project>

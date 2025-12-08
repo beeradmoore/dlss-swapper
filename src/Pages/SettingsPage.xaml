@@ -184,7 +184,7 @@
                     Margin="0,40,0,0"
                     Text="{x:Bind ViewModel.TranslationProperties.LoggingText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0">
-                    <ComboBox x:Name="LoggingComboBox" ItemsSource="{x:Bind ViewModel.LoggingLevelOptions}" SelectedItem="{x:Bind ViewModel.LoggingLevel, Mode=TwoWay}" />
+                    <ComboBox x:Name="LoggingComboBox" ItemsSource="{x:Bind ViewModel.LoggingLevelOptions}" DisplayMemberPath="Label" SelectedItem="{x:Bind ViewModel.LoggingLevel, Mode=TwoWay}" />
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0">
                         <Run Text="{x:Bind ViewModel.TranslationProperties.YourCurrentLogfileText, Mode=OneWay}" /><Hyperlink ct_winui:HyperlinkExtensions.Command="{x:Bind ViewModel.OpenLogFileCommand}"><Run Text="{x:Bind ViewModel.CurrentLogPath}" /></Hyperlink>.
                     </TextBlock>

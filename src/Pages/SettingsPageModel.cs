@@ -113,6 +113,7 @@ public partial class SettingsPageModel : ObservableObject
         LanguageManager.Instance.OnLanguageChanged += () =>
         {
             DLSSOnScreenIndicatorOptions.RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            LoggingLevelOptions.RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 
             foreach (var dlssPresetOption in DlssPresetOptions)
             {

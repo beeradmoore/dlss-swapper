@@ -4,16 +4,16 @@ using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Data;
 
-public class DLSSOnScreenIndicatorSetting : LocalizedViewModelBase
+public class ComboBoxOption : LocalizedViewModelBase
 {
-    public string LabelTranslationProperty { get; init; } = "General_None";
+    public string LabelTranslationProperty { get; init; }
 
     [TranslationProperty]
     public string Label => ResourceHelper.GetString(LabelTranslationProperty);
 
     public int Value { get; init; }
 
-    public DLSSOnScreenIndicatorSetting(string labelLanguageProperty, int value)
+    public ComboBoxOption(string labelLanguageProperty, int value)
     {
         LabelTranslationProperty = labelLanguageProperty;
         Value = value;

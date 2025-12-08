@@ -18,8 +18,21 @@ jobs:
     - name: Output should sign
       shell: pwsh
       run: |
-        Write-Host $env:SHOULD_SIGN
-        Write-Host $env:github.ref
-        Write-Hoest ${{ github.workspace }}
-        Write-Hoest ${{ github }}
+        Write-Host "$env:SHOULD_SIGN"
+        Write-Host "$env:github.ref"
+        Write-Host ${{ github.workspace }}
+        Write-Host ${{ github }}
+      
+
+    - name: Should sign yes
+      if: ${{ env.SHOULD_SIGN == 'true' }}
+      shell: pwsh
+      run: |
+        Write-Host "yes"
+
+    - name: Should sign no
+      if: ${{ env.SHOULD_SIGN == 'false' }}
+      shell: pwsh
+      run: |
+        Write-Host "No"
       

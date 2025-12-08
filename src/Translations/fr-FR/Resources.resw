@@ -181,6 +181,15 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Échec du lancement</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer l'image de couverture personnalisée ?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Jeu actuellement en cours de traitement</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Supprimer la couverture personnalisée ?</value>
+  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Type d'actif</value>
   </data>
@@ -383,9 +392,6 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Nouvelles DLL</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Nouvelles DLL trouvées</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Créer un nouveau problème GitHub</value>
   </data>
@@ -416,6 +422,9 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Vous n'avez pas besoin de soumettre les DLL. Nous les retrouverons en fonction des informations fournies.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Nouvelles DLL trouvées</value>
+  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Recharger le jeux</value>
   </data>
@@ -433,15 +442,6 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Vue en liste</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer l'image de couverture personnalisée ?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Jeu actuellement en cours de traitement</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Supprimer la couverture personnalisée ?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Cette application s'exécute avec des privilèges administratifs.</value>

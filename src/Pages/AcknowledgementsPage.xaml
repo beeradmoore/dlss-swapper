@@ -6,7 +6,7 @@
     xmlns:local="using:DLSS_Swapper.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:communitytoolkitlabs="using:CommunityToolkit.Labs.WinUI.MarkdownTextBlock"
+    xmlns:communitytoolkitcontrols="using:CommunityToolkit.WinUI.Controls"
     xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
     xmlns:converters="using:DLSS_Swapper.Converters"
     mc:Ignorable="d">
@@ -40,7 +40,7 @@
         <ScrollView Grid.Row="1" Grid.Column="1">
             <StackPanel Padding="16" Spacing="16">
 
-                <communitytoolkitlabs:MarkdownTextBlock Visibility="{x:Bind ViewModel.SelectedItem.Notes, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}"
+                <communitytoolkitcontrols:MarkdownTextBlock Visibility="{x:Bind ViewModel.SelectedItem.Notes, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}"
                                                         Text="{x:Bind ViewModel.SelectedItem.Notes, FallbackValue='', Mode=OneWay}"
                                                         Config="{x:Bind ViewModel.MarkdownConfig, Mode=OneWay}" />
 

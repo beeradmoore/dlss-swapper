@@ -67,7 +67,12 @@ internal class EAAppGame : Game
                         var shinfo = new Windows.Win32.UI.Shell.SHFILEINFOW();
 
                         var flags = Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_ICON | Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_LARGEICON;
-                        PInvoke.SHGetFileInfo(DisplayIconPath, 0, &shinfo, (uint)System.Runtime.InteropServices.Marshal.SizeOf(shinfo), flags);
+
+                        PInvoke.SHGetFileInfo(
+                            DisplayIconPath,
+                            Windows.Win32.Storage.FileSystem.FILE_FLAGS_AND_ATTRIBUTES.SECURITY_ANONYMOUS,
+                            ref shinfo, flags);
+
                         if (shinfo.hIcon != IntPtr.Zero)
                         {
                             using (var icon = Icon.FromHandle(shinfo.hIcon))

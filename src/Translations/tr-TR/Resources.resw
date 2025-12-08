@@ -180,6 +180,15 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Başlatma başarısız</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Özel kapak resmini kaldırmak istediğinizden emin misiniz?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Oyun şu anda İşleniyor</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Özel kapak kaldırılsın mı?</value>
+  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>İçerik türü</value>
   </data>
@@ -215,6 +224,9 @@
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Favorilere eklemek için tıklayın</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>Gizlemek için tıkla</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>"{0}" yolu bulunamadı.</value>
@@ -304,9 +316,6 @@ Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran �
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} hala işleniyor. Lütfen açmadan önce yükleme göstergesinin tamamlanmasını bekleyin.</value>
   </data>
-  <data name="GamePage_ClickToHide" xml:space="preserve">
-    <value>Gizlemek için tıkla</value>
-  </data>
   <data name="GamePage_ResetAll" xml:space="preserve">
     <value>Hepsini sıfırla</value>
   </data>
@@ -370,9 +379,6 @@ Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran �
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Yeni DLL'ler</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Yeni DLL'ler Bulundu</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Yeni GitHub sorunu oluştur</value>
   </data>
@@ -403,6 +409,9 @@ Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran �
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>DLL'leri göndermenize gerek yok. Sağladığınız bilgilere dayanarak onları biz bulacağız.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Yeni DLL'ler Bulundu</value>
+  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Oyun yeniden yükleniyor</value>
   </data>
@@ -420,15 +429,6 @@ Hangi ön ayarın gerçekten kullanıldığını doğrulamak için, DLSS ekran �
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Liste Görünümü</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Özel kapak resmini kaldırmak istediğinizden emin misiniz?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Oyun şu anda İşleniyor</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Özel kapak kaldırılsın mı?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Bu uygulama yönetici ayrıcalıklarıyla çalışıyor.</value>

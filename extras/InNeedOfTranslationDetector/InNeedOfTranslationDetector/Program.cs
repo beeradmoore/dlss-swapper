@@ -58,7 +58,8 @@ var ignoredXamlMatches = new List<string>()
     "Text=\"XeSS Frame Generation\"",
     "Text=\"XeLL\"",
     "Text=\"&#xE8C8;\"",
-    "Text=\"DLSS Preset\""
+    "Text=\"DLSS Preset\"",
+	"FallbackValue='N/A'",
 };
 
 foreach (var xamlFile in allXamlFiles)
@@ -236,7 +237,10 @@ var ignoredCSharpMatches = new List<string>()
     " = $\"v{DisplayVersion} (v{Version})\"",
     " = $\"v{DisplayVersion} (v{dllVersion})\"",
     " = $\"v{DisplayVersion}\"",
-    "=\"languageKey\""
+    "=\"languageKey\"",
+	"= \"228980\"",
+	" = \"US\"",
+	" = $\"shell:appsFolder\\\\{xboxGame.PlatformId}!{xboxGame.ApplicationId}\"",
 
 };
 
@@ -270,6 +274,7 @@ var ignoredStringKeyPrefixes = new List<string>()
     "TranslationToolboxPage_",
     "GameHistoryEventType_",
     "GameHistoryControl_",
+	"DLSS_"
 };
 
 foreach (var csharpFiles in allCSharpFiles)

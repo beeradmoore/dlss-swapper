@@ -1,0 +1,34 @@
+<!-- via https://github.com/microsoft/WindowsAppSDK/issues/5832#issuecomment-3516368832 -->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
+  <Target Name="CopyPriFileAfterBuild" AfterTargets="AfterBuild">
+    <!-- Define variables for clarity. Adjust as necessary. -->
+    <PropertyGroup>
+      <!-- The default name of the generated .pri file is typically the AssemblyName + .pri -->
+      <OriginalPriFile>$(TargetDir)$(AssemblyName).pri</OriginalPriFile>
+      <!-- The new desired name for your .pri file -->
+      <NewPriFile>$(TargetDir)resources.pri</NewPriFile>
+    </PropertyGroup>
+
+    <!-- Use the "Copy" task to duplicate the file -->
+    <Copy SourceFiles="$(OriginalPriFile)"
+          DestinationFiles="$(NewPriFile)"
+          ContinueOnError="false" />
+  </Target>
+
+  <Target Name="CopyPriFilePublish" AfterTargets="Publish">
+    <!-- Define variables for clarity. Adjust as necessary. -->
+    <PropertyGroup>
+      <!-- The default name of the generated .pri file is typically the AssemblyName + .pri -->
+      <OriginalPriFile>$(PublishDir)$(AssemblyName).pri</OriginalPriFile>
+      <!-- The new desired name for your .pri file -->
+      <NewPriFile>$(PublishDir)resources.pri</NewPriFile>
+    </PropertyGroup>
+
+    <!-- Use the "Copy" task to duplicate the file -->
+    <Copy SourceFiles="$(OriginalPriFile)"
+          DestinationFiles="$(NewPriFile)"
+          ContinueOnError="false" />
+  </Target>
+
+</Project>

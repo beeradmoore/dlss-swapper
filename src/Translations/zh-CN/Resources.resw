@@ -201,6 +201,33 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>启动失败</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>确定要移除自定义封面吗？</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>游戏正在处理中</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>移除自定义封面？</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
+    <value>无法对GOG游戏目录返回的URL {0} 进行反序列化</value>
+  </data>
+  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
+    <value>无法对GOG嵌入筛选返回的URL {0} 进行反序列化</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
+    <value>未找到对应URL {0} 的GOG嵌入筛选结果</value>
+  </data>
+  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
+    <value>未找到与URL {0} 对应的GOG游戏目录</value>
+  </data>
+  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
+    <value>未能检测到Ubisoft Connect安装密钥</value>
+  </data>
+  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
+    <value>正在为未知游戏库 {0} 设置ID</value>
+  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>资产类型</value>
   </data>
@@ -414,9 +441,6 @@
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>发现新的 DLL！</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>发现新的 DLL 文件</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>创建一个新的 GitHub 问题报告</value>
   </data>
@@ -447,6 +471,9 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>请注意：无需提交 DLL 文件，我们会根据提交的报告信息查找 DLL</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>发现新的 DLL 文件</value>
+  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>重新载入现有游戏</value>
   </data>
@@ -464,33 +491,6 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>列表视图</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>确定要移除自定义封面吗？</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>游戏正在处理中</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>移除自定义封面？</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeCatalog" xml:space="preserve">
-    <value>无法对GOG游戏目录返回的URL {0} 进行反序列化</value>
-  </data>
-  <data name="Game_GOG_CouldNotDeserializeEmbedFilterResponse" xml:space="preserve">
-    <value>无法对GOG嵌入筛选返回的URL {0} 进行反序列化</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyEmbedFilteredProducts" xml:space="preserve">
-    <value>未找到对应URL {0} 的GOG嵌入筛选结果</value>
-  </data>
-  <data name="Game_GOG_CouldNotFindAnyProduct" xml:space="preserve">
-    <value>未找到与URL {0} 对应的GOG游戏目录</value>
-  </data>
-  <data name="Game_UbisoftConnect_CouldNotDetectInstallKey" xml:space="preserve">
-    <value>未能检测到Ubisoft Connect安装密钥</value>
-  </data>
-  <data name="Game_UnknownGameLibraryTemplate" xml:space="preserve">
-    <value>正在为未知游戏库 {0} 设置ID</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>程序正在以管理员身份运行</value>
@@ -555,9 +555,6 @@
   <data name="General_Name_DLSS" xml:space="preserve">
     <value>DLSS</value>
   </data>
-  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
-    <value>DLSSRR 预设</value>
-  </data>
   <data name="General_Name_DLSS_D" xml:space="preserve">
     <value>DLSSRR 光线重建</value>
   </data>
@@ -566,6 +563,9 @@
   </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>DLSS 预设</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>DLSSRR 预设</value>
   </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>

@@ -882,6 +882,24 @@ Pour cette raison, nous recommandons d'être prudent avec les jeux multijoueurs.
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>Journalisation</value>
   </data>
+  <data name="SettingsPage_Logging_Debug" xml:space="preserve">
+    <value>Débogage</value>
+  </data>
+  <data name="SettingsPage_Logging_Error" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="SettingsPage_Logging_Info" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="SettingsPage_Logging_Off" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
+    <value>Verbeux</value>
+  </data>
+  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
+    <value>Avertissement</value>
+  </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>Aucune nouvelle mise à jour n'est disponible.</value>
   </data>

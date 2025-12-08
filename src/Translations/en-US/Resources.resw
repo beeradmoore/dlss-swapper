@@ -961,6 +961,24 @@ Because of this we recommend using caution for multiplayer games.</value>
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>Logging</value>
   </data>
+  <data name="SettingsPage_Logging_Debug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="SettingsPage_Logging_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="SettingsPage_Logging_Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="SettingsPage_Logging_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
+    <value>Verbose</value>
+  </data>
+  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>No new updates are available.</value>
   </data>

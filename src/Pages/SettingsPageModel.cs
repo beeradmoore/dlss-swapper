@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,19 +24,17 @@ public partial class SettingsPageModel : ObservableObject
 {
     readonly WeakReference<SettingsPage> _weakPage;
     readonly DLSSSettingsManager _dlssSettingsManager;
-
-    public IEnumerable<LoggingLevel> LoggingLevels => Enum.GetValues<LoggingLevel>();
     public string CurrentLogPath => Logger.GetCurrentLogPath();
     public string AppVersion => App.CurrentApp.GetVersionString();
 
     [ObservableProperty]
-    public partial DLSSOnScreenIndicatorSetting SelectedDlssOnScreenIndicator { get; set; }
+    public partial ComboBoxOption SelectedDlssOnScreenIndicator { get; set; }
 
-    public RefreshableObservableCollection<DLSSOnScreenIndicatorSetting> DLSSOnScreenIndicatorOptions { get; init; } = new RefreshableObservableCollection<DLSSOnScreenIndicatorSetting>()
+    public RefreshableObservableCollection<ComboBoxOption> DLSSOnScreenIndicatorOptions { get; init; } = new RefreshableObservableCollection<ComboBoxOption>()
     {
-        new DLSSOnScreenIndicatorSetting("General_None", 0),
-        new DLSSOnScreenIndicatorSetting("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly", 1),
-        new DLSSOnScreenIndicatorSetting("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls", 1024)
+        new ComboBoxOption("General_None", 0),
+        new ComboBoxOption("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly", 1),
+        new ComboBoxOption("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls", 1024)
     };
 
     [ObservableProperty]
@@ -88,7 +85,17 @@ public partial class SettingsPageModel : ObservableObject
     public partial bool OnlyShowDownloadedDlls { get; set; } = false;
 
     [ObservableProperty]
-    public partial LoggingLevel LoggingLevel { get; set; } = LoggingLevel.Error;
+    public partial ComboBoxOption LoggingLevel { get; set; }
+
+    public RefreshableObservableCollection<ComboBoxOption> LoggingLevelOptions { get; init; } = new RefreshableObservableCollection<ComboBoxOption>()
+    {
+        new ComboBoxOption("SettingsPage_Logging_Off", (int)DLSS_Swapper.LoggingLevel.Off),
+        new ComboBoxOption("SettingsPage_Logging_Verbose", (int)DLSS_Swapper.LoggingLevel.Verbose),
+        new ComboBoxOption("SettingsPage_Logging_Debug", (int)DLSS_Swapper.LoggingLevel.Debug),
+        new ComboBoxOption("SettingsPage_Logging_Info", (int)DLSS_Swapper.LoggingLevel.Info),
+        new ComboBoxOption("SettingsPage_Logging_Warning", (int)DLSS_Swapper.LoggingLevel.Warning),
+        new ComboBoxOption("SettingsPage_Logging_Error", (int)DLSS_Swapper.LoggingLevel.Error),
+    };
 
     [ObservableProperty]
     public partial bool IsCheckingForUpdates { get; set; } = false;
@@ -146,7 +153,10 @@ public partial class SettingsPageModel : ObservableObject
         AllowUntrusted = Settings.Instance.AllowUntrusted;
         AllowDebugDlls = Settings.Instance.AllowDebugDlls;
         OnlyShowDownloadedDlls = Settings.Instance.OnlyShowDownloadedDlls;
-        LoggingLevel = Settings.Instance.LoggingLevel;
+
+
+        var loggingLevel = Settings.Instance.LoggingLevel;
+        LoggingLevel = LoggingLevelOptions.FirstOrDefault(x => x.Value == (int)loggingLevel) ?? LoggingLevelOptions.Last();
 
         IgnoredPaths = new ObservableCollection<string>(Settings.Instance.IgnoredPaths);
 
@@ -264,8 +274,9 @@ public partial class SettingsPageModel : ObservableObject
         }
         else if (e.PropertyName == nameof(LoggingLevel))
         {
-            Settings.Instance.LoggingLevel = LoggingLevel;
-            Logger.ChangeLoggingLevel(LoggingLevel);
+            var loggingLevel  = (DLSS_Swapper.LoggingLevel)LoggingLevel.Value;
+            Settings.Instance.LoggingLevel = loggingLevel;
+            Logger.ChangeLoggingLevel(loggingLevel);
         }
         else if (e.PropertyName == nameof(SelectedGlobalDlssPreset))
         {

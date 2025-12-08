@@ -107,7 +107,7 @@
     <None Remove="global.json" />
     <None Remove="Pages\AcknowledgementsPage.xaml" />
     <None Remove="Pages\NetworkTesterWindow.xaml" />
-    <None Remove="RenamePriFile.targets" />
+    <None Remove="CopyPriFile.targets" />
     <None Remove="Themes\FakeContentDialogStyle.xaml" />
     <None Remove="TranslationToolboxWindow.xaml" />
     <None Remove="UserControls\DLLPickerControl.xaml" />

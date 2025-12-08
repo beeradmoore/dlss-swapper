@@ -1,0 +1,25 @@
+name: Build DLSS Swapper (unsigned)
+
+on:
+  push:
+    tags:
+      - v1.*
+      - v2.*
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2025
+    env:
+      SHOULD_SIGN: ${{ startsWith(github.ref, 'refs/tags/') }}
+
+    steps:
+
+    - name: Output should sign
+      shell: pwsh
+      run: |
+        Write-Host $env:SHOULD_SIGN
+        Write-Host $env:github.ref
+        Write-Hoest ${{ github.workspace }}
+        Write-Hoest ${{ github }}
+      

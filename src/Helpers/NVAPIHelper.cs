@@ -307,7 +307,14 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
-            if (_driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID).CurrentValue is uint currentValue)
+            var profileSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            if (profileSetting is null)
+            {
+                Logger.Info("Current global profile setting is null, no DLSS preset exists.");
+                return new NVAPIResult<uint>(true, 0);
+            }
+
+            if (profileSetting.CurrentValue is uint currentValue)
             {
                 return new NVAPIResult<uint>(true, currentValue);
             }
@@ -349,7 +356,14 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
-            if (_driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID).CurrentValue is uint currentValue)
+            var profileSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            if (profileSetting is null)
+            {
+                Logger.Info("Current global profile setting is null, no get DLSS D preset exists.");
+                return new NVAPIResult<uint>(true, 0);
+            }
+
+            if (profileSetting.CurrentValue is uint currentValue)
             {
                 return new NVAPIResult<uint>(true, currentValue);
             }

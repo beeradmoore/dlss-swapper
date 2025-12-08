@@ -166,6 +166,18 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>Le fichier zip de la DLL était invalide (aucune DLL trouvée).</value>
   </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>Toujours utiliser la dernière version</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>Défaut</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>Préréglage {0}</value>
+  </data>
+  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
+    <value>Préréglage {0} (Deprecated)</value>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper a échoué au lancement</value>
   </data>

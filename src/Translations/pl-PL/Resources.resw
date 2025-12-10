@@ -253,7 +253,7 @@
     <value>Przywróć oryginalną bibliotekę DLL</value>
   </data>
   <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
-    <value>Wybierz {0} wersję</value>
+    <value>Wybierz wersję {0}</value>
   </data>
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
     <value>storageFile jest nullem</value>

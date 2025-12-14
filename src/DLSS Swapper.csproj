@@ -380,8 +380,8 @@
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.250402" />
     <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.250402" />
     <PackageReference Include="Google.Protobuf" Version="3.33.2" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3595.46" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.259">
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3650.58" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.264">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -395,8 +395,8 @@
     <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
-    <PackageReference Include="System.Drawing.Common" Version="10.0.0" />
-    <PackageReference Include="System.Management" Version="10.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="10.0.1" />
+    <PackageReference Include="System.Management" Version="10.0.1" />
     <PackageReference Include="ValveKeyValue" Version="0.20.0.417" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
     <Manifest Include="$(ApplicationManifest)" />

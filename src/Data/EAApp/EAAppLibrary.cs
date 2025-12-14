@@ -195,7 +195,7 @@ internal class EAAppLibrary : IGameLibrary
 
                                     if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
                                     {
-                                        activeGame.ProcessGame();
+                                        activeGame.ProcessGame(forceNeedsProcessing: forceNeedsProcessing);
                                     }
 
                                     lock (gameListLock)

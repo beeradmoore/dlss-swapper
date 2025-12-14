@@ -298,7 +298,7 @@ namespace DLSS_Swapper.Data.GOG
 
                 if (gogGame.NeedsProcessing == true || forceNeedsProcessing == true)
                 {
-                    gogGame.ProcessGame();
+                    gogGame.ProcessGame(forceNeedsProcessing: forceNeedsProcessing);
                 }
             }
 

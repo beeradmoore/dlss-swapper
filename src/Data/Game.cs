@@ -222,7 +222,7 @@ namespace DLSS_Swapper.Data
         /// <summary>
         /// Detects DLSS and updates cover image.
         /// </summary>
-        public void ProcessGame(bool autoSave = true)
+        public void ProcessGame(bool autoSave = true, bool forceNeedsProcessing = false)
         {
             // If we are alreayd procssing we don't need to process again
             if (Processing == true)
@@ -258,37 +258,46 @@ namespace DLSS_Swapper.Data
                 try
                 {
                     var shouldUpdatedCover = true;
-                    // This shouldn't crash, bit if it does lets not take down the entire processing.
-                    try
+
+                    if (forceNeedsProcessing == true && File.Exists(ExpectedCustomCoverImage) == false)
                     {
-                        FileInfo? fileInfo = null;
-                        if (File.Exists(ExpectedCustomCoverImage))
+                        // If we are forcing game load and custom cover image doesnt exist we will force load the cover no matter what.
+                    }
+                    else
+                    {
+                        // This shouldn't crash, bit if it does lets not take down the entire processing.
+                        try
                         {
-                            fileInfo = new FileInfo(ExpectedCustomCoverImage);
-                        }
-                        else if (File.Exists(ExpectedCoverImage))
-                        {
-                            fileInfo = new FileInfo(ExpectedCoverImage);
-                        }
-
-                        if (fileInfo is not null)
-                        {
-                            var daysSinceLastModified = (DateTime.Now - fileInfo.LastWriteTime).TotalDays;
-
-                            // Add +/- 2 days so not all will process at the same time.
-                            daysSinceLastModified += ((new Random()).NextDouble() - 0.5) * 4.0;
-
-                            // If its less than 7 days lets not try refresh.
-                            if (daysSinceLastModified < 7)
+                            FileInfo? fileInfo = null;
+                            if (File.Exists(ExpectedCustomCoverImage))
                             {
+                                // If we are using a custom cover we don't want to try reloading any cover so we don't set fileInfo.
                                 shouldUpdatedCover = false;
                             }
+                            else if (File.Exists(ExpectedCoverImage))
+                            {
+                                fileInfo = new FileInfo(ExpectedCoverImage);
+                            }
+
+                            if (fileInfo is not null)
+                            {
+                                var daysSinceLastModified = (DateTime.Now - fileInfo.LastWriteTime).TotalDays;
+
+                                // Add +/- 2 days so not all will process at the same time.
+                                daysSinceLastModified += ((new Random()).NextDouble() - 0.5) * 4.0;
+
+                                // If its less than 7 days lets not try refresh.
+                                if (daysSinceLastModified < 7)
+                                {
+                                    shouldUpdatedCover = false;
+                                }
+                            }
                         }
-                    }
-                    catch (Exception err)
-                    {
-                        Logger.Error(err);
-                        Debugger.Break();
+                        catch (Exception err)
+                        {
+                            Logger.Error(err);
+                            Debugger.Break();
+                        }
                     }
 
                     Task? coverImageTask = null;

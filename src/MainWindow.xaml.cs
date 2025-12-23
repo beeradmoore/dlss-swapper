@@ -27,6 +27,8 @@ namespace DLSS_Swapper
 
         IntPtr _windowIcon;
 
+        private readonly WindowPositionRect _trackedWindow = new();
+
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, string iconPath, ref IntPtr index);
 
@@ -41,6 +43,8 @@ namespace DLSS_Swapper
             if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
             {
                 var lastWindowSizeAndPosition = Settings.Instance.LastWindowSizeAndPosition;
+                _trackedWindow = new(lastWindowSizeAndPosition);
+
                 if (lastWindowSizeAndPosition.Width > 512 && lastWindowSizeAndPosition.Height > 512)
                 {
                     AppWindow.MoveAndResize(lastWindowSizeAndPosition.GetRectInt32());
@@ -51,16 +55,63 @@ namespace DLSS_Swapper
                 }
             }
 
+            AppWindow?.Changed += (AppWindow sender, AppWindowChangedEventArgs args) =>
+            {
+                if (args.DidPositionChange)
+                {
+                    if (sender.Presenter is OverlappedPresenter presenter)
+                    {
+                        var isCurrentlyMaximized = presenter.State == OverlappedPresenterState.Maximized;
+
+                        if (!isCurrentlyMaximized)
+                        {
+                            _trackedWindow.X = sender.Position.X;
+                            _trackedWindow.Y = sender.Position.Y;
+                        }
+                    }
+                }
+            };
+
+            SizeChanged += (object sender, WindowSizeChangedEventArgs args) =>
+            {
+                if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
+                {
+                    var isCurrentlyMaximized = overlappedPresenter.State == OverlappedPresenterState.Maximized;
+                    var isTrackedMaximized = _trackedWindow.State == OverlappedPresenterState.Maximized;
+
+                    // Detect transition TO maximized state
+                    if (isCurrentlyMaximized && !isTrackedMaximized)
+                    {
+                        // Don't track - maintain previous window size (not the maximized size)
+                    }
+                    // Detect transition FROM maximized state
+                    else if (!isCurrentlyMaximized && isTrackedMaximized)
+                    {
+                        // Just restored from maximize - save the new restore bounds
+                        _trackedWindow.Width = AppWindow.Size.Width;
+                        _trackedWindow.Height = AppWindow.Size.Height;
+                        _trackedWindow.X = AppWindow.Position.X;
+                        _trackedWindow.Y = AppWindow.Position.Y;
+                    }
+                    // User is resizing while NOT maximized
+                    else if (!isCurrentlyMaximized)
+                    {
+                        // Update restore bounds as user resizes
+                        _trackedWindow.Width = AppWindow.Size.Width;
+                        _trackedWindow.Height = AppWindow.Size.Height;
+                        _trackedWindow.X = AppWindow.Position.X;
+                        _trackedWindow.Y = AppWindow.Position.Y;
+                    }
+
+                    _trackedWindow.State = overlappedPresenter.State;
+                }
+            };
+
             Closed += (object sender, WindowEventArgs args) =>
             {
-                if (AppWindow?.Size is not null && AppWindow?.Position is not null && AppWindow.Presenter is OverlappedPresenter overlappedPresenter)
+                if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
                 {
-                    var windowPositionRect = new WindowPositionRect(AppWindow.Position.X, AppWindow.Position.Y, AppWindow.Size.Width, AppWindow.Size.Height);
-                    if (overlappedPresenter.State == OverlappedPresenterState.Maximized)
-                    {
-                        windowPositionRect.State = OverlappedPresenterState.Maximized;
-                    }
-                    Settings.Instance.LastWindowSizeAndPosition = windowPositionRect;
+                    Settings.Instance.LastWindowSizeAndPosition = new WindowPositionRect(_trackedWindow);
                 }
 
                 // Release the icon.

@@ -30,6 +30,17 @@ public class WindowPositionRect
 
     }
 
+    public WindowPositionRect(WindowPositionRect other)
+    {
+        ArgumentNullException.ThrowIfNull(other);
+
+        X = other.X;
+        Y = other.Y;
+        Width = other.Width;
+        Height = other.Height;
+        State = other.State;
+    }
+
     public WindowPositionRect(int x, int y, int width, int height)
     {
         X = x;

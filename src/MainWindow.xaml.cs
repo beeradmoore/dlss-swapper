@@ -65,8 +65,7 @@ namespace DLSS_Swapper
 
                         if (!isCurrentlyMaximized)
                         {
-                            _trackedWindow.X = sender.Position.X;
-                            _trackedWindow.Y = sender.Position.Y;
+                            _trackedWindow.UpdatePosition(sender.Position);
                         }
                     }
                 }
@@ -83,7 +82,7 @@ namespace DLSS_Swapper
 
                     if (!isTransitioningToMaximized && currentState != OverlappedPresenterState.Maximized)
                     {
-                        UpdateTrackedWindowBounds();
+                        _trackedWindow.UpdateFromAppWindow(AppWindow);
                     }
 
                     _trackedWindow.State = overlappedPresenter.State;
@@ -131,15 +130,6 @@ namespace DLSS_Swapper
             };
         }
 
-
-
-        void UpdateTrackedWindowBounds()
-        {
-            _trackedWindow.Width = AppWindow.Size.Width;
-            _trackedWindow.Height = AppWindow.Size.Height;
-            _trackedWindow.X = AppWindow.Position.X;
-            _trackedWindow.Y = AppWindow.Position.Y;
-        }
 
 
         /// <summary>

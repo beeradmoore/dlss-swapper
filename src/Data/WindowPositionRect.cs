@@ -53,4 +53,19 @@ public class WindowPositionRect
     {
         return new RectInt32(X, Y, Width, Height);
     }
+
+    public void UpdatePosition(PointInt32 position)
+    {
+        X = position.X;
+        Y = position.Y;
+    }
+
+    public void UpdateFromAppWindow(AppWindow appWindow)
+    {
+        Width = appWindow.Size.Width;
+        Height = appWindow.Size.Height;
+        X = appWindow.Position.X;
+        Y = appWindow.Position.Y;
+    }
+
 }

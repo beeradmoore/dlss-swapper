@@ -27,7 +27,7 @@ namespace DLSS_Swapper
 
         IntPtr _windowIcon;
 
-        private readonly WindowPositionRect _trackedWindow = new();
+        readonly WindowPositionRect _trackedWindow = new WindowPositionRect();
 
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, string iconPath, ref IntPtr index);
@@ -43,7 +43,7 @@ namespace DLSS_Swapper
             if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
             {
                 var lastWindowSizeAndPosition = Settings.Instance.LastWindowSizeAndPosition;
-                _trackedWindow = new(lastWindowSizeAndPosition);
+                _trackedWindow = new WindowPositionRect(lastWindowSizeAndPosition);
 
                 if (lastWindowSizeAndPosition.Width > 512 && lastWindowSizeAndPosition.Height > 512)
                 {
@@ -63,7 +63,7 @@ namespace DLSS_Swapper
                     {
                         var isCurrentlyMaximized = presenter.State == OverlappedPresenterState.Maximized;
 
-                        if (!isCurrentlyMaximized)
+                        if (isCurrentlyMaximized == false)
                         {
                             _trackedWindow.UpdatePosition(sender.Position);
                         }
@@ -80,7 +80,7 @@ namespace DLSS_Swapper
                         currentState == OverlappedPresenterState.Maximized &&
                         _trackedWindow.State != OverlappedPresenterState.Maximized;
 
-                    if (!isTransitioningToMaximized && currentState != OverlappedPresenterState.Maximized)
+                    if (isTransitioningToMaximized == false && currentState != OverlappedPresenterState.Maximized)
                     {
                         _trackedWindow.UpdateFromAppWindow(AppWindow);
                     }

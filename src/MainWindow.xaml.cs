@@ -76,31 +76,14 @@ namespace DLSS_Swapper
             {
                 if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
                 {
-                    var isCurrentlyMaximized = overlappedPresenter.State == OverlappedPresenterState.Maximized;
-                    var isTrackedMaximized = _trackedWindow.State == OverlappedPresenterState.Maximized;
+                    var currentState = overlappedPresenter.State;
+                    var isTransitioningToMaximized =
+                        currentState == OverlappedPresenterState.Maximized &&
+                        _trackedWindow.State != OverlappedPresenterState.Maximized;
 
-                    // Detect transition TO maximized state
-                    if (isCurrentlyMaximized && !isTrackedMaximized)
+                    if (!isTransitioningToMaximized && currentState != OverlappedPresenterState.Maximized)
                     {
-                        // Don't track - maintain previous window size (not the maximized size)
-                    }
-                    // Detect transition FROM maximized state
-                    else if (!isCurrentlyMaximized && isTrackedMaximized)
-                    {
-                        // Just restored from maximize - save the new restore bounds
-                        _trackedWindow.Width = AppWindow.Size.Width;
-                        _trackedWindow.Height = AppWindow.Size.Height;
-                        _trackedWindow.X = AppWindow.Position.X;
-                        _trackedWindow.Y = AppWindow.Position.Y;
-                    }
-                    // User is resizing while NOT maximized
-                    else if (!isCurrentlyMaximized)
-                    {
-                        // Update restore bounds as user resizes
-                        _trackedWindow.Width = AppWindow.Size.Width;
-                        _trackedWindow.Height = AppWindow.Size.Height;
-                        _trackedWindow.X = AppWindow.Position.X;
-                        _trackedWindow.Y = AppWindow.Position.Y;
+                        UpdateTrackedWindowBounds();
                     }
 
                     _trackedWindow.State = overlappedPresenter.State;
@@ -148,6 +131,15 @@ namespace DLSS_Swapper
             };
         }
 
+
+
+        void UpdateTrackedWindowBounds()
+        {
+            _trackedWindow.Width = AppWindow.Size.Width;
+            _trackedWindow.Height = AppWindow.Size.Height;
+            _trackedWindow.X = AppWindow.Position.X;
+            _trackedWindow.Y = AppWindow.Position.Y;
+        }
 
 
         /// <summary>

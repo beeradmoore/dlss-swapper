@@ -30,6 +30,17 @@ public class WindowPositionRect
 
     }
 
+    public WindowPositionRect(WindowPositionRect other)
+    {
+        ArgumentNullException.ThrowIfNull(other);
+
+        X = other.X;
+        Y = other.Y;
+        Width = other.Width;
+        Height = other.Height;
+        State = other.State;
+    }
+
     public WindowPositionRect(int x, int y, int width, int height)
     {
         X = x;
@@ -42,4 +53,19 @@ public class WindowPositionRect
     {
         return new RectInt32(X, Y, Width, Height);
     }
+
+    public void UpdatePosition(PointInt32 position)
+    {
+        X = position.X;
+        Y = position.Y;
+    }
+
+    public void UpdateFromAppWindow(AppWindow appWindow)
+    {
+        Width = appWindow.Size.Width;
+        Height = appWindow.Size.Height;
+        X = appWindow.Position.X;
+        Y = appWindow.Position.Y;
+    }
+
 }

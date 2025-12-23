@@ -27,6 +27,8 @@ namespace DLSS_Swapper
 
         IntPtr _windowIcon;
 
+        readonly WindowPositionRect _trackedWindow = new WindowPositionRect();
+
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, string iconPath, ref IntPtr index);
 
@@ -41,6 +43,8 @@ namespace DLSS_Swapper
             if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
             {
                 var lastWindowSizeAndPosition = Settings.Instance.LastWindowSizeAndPosition;
+                _trackedWindow = new WindowPositionRect(lastWindowSizeAndPosition);
+
                 if (lastWindowSizeAndPosition.Width > 512 && lastWindowSizeAndPosition.Height > 512)
                 {
                     AppWindow.MoveAndResize(lastWindowSizeAndPosition.GetRectInt32());
@@ -51,16 +55,45 @@ namespace DLSS_Swapper
                 }
             }
 
+            AppWindow?.Changed += (AppWindow sender, AppWindowChangedEventArgs args) =>
+            {
+                if (args.DidPositionChange)
+                {
+                    if (sender.Presenter is OverlappedPresenter presenter)
+                    {
+                        var isCurrentlyMaximized = presenter.State == OverlappedPresenterState.Maximized;
+
+                        if (isCurrentlyMaximized == false)
+                        {
+                            _trackedWindow.UpdatePosition(sender.Position);
+                        }
+                    }
+                }
+            };
+
+            SizeChanged += (object sender, WindowSizeChangedEventArgs args) =>
+            {
+                if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
+                {
+                    var currentState = overlappedPresenter.State;
+                    var isTransitioningToMaximized =
+                        currentState == OverlappedPresenterState.Maximized &&
+                        _trackedWindow.State != OverlappedPresenterState.Maximized;
+
+                    if (isTransitioningToMaximized == false && currentState != OverlappedPresenterState.Maximized)
+                    {
+                        _trackedWindow.UpdateFromAppWindow(AppWindow);
+                    }
+
+                    _trackedWindow.State = overlappedPresenter.State;
+                }
+            };
+
             Closed += (object sender, WindowEventArgs args) =>
             {
-                if (AppWindow?.Size is not null && AppWindow?.Position is not null && AppWindow.Presenter is OverlappedPresenter overlappedPresenter)
+                if (AppWindow?.Presenter is OverlappedPresenter overlappedPresenter)
                 {
-                    var windowPositionRect = new WindowPositionRect(AppWindow.Position.X, AppWindow.Position.Y, AppWindow.Size.Width, AppWindow.Size.Height);
-                    if (overlappedPresenter.State == OverlappedPresenterState.Maximized)
-                    {
-                        windowPositionRect.State = OverlappedPresenterState.Maximized;
-                    }
-                    Settings.Instance.LastWindowSizeAndPosition = windowPositionRect;
+                    Settings.Instance.LastWindowSizeAndPosition = new WindowPositionRect(_trackedWindow);
                 }
 
                 // Release the icon.

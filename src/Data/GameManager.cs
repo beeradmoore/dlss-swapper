@@ -3,12 +3,14 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.WinUI.Collections;
+using DLSS_Swapper.Data.BattleNet;
 using DLSS_Swapper.Data.Xbox;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
@@ -470,6 +472,18 @@ internal partial class GameManager : ObservableObject
             }
         }
 
+        // We can only launch Battle.net games if Battle.net client is installed
+        if (game.GameLibrary == GameLibrary.BattleNet)
+        {
+            if (game is BattleNetGame battleNetGame)
+            {
+                if (string.IsNullOrWhiteSpace(battleNetGame.LauncherId) == false)
+                {
+                    return true;
+                }
+            }
+        }
+
         return game.GameLibrary switch
         {
             GameLibrary.Steam => true,
@@ -506,6 +520,13 @@ internal partial class GameManager : ObservableObject
             {
                 var launchCode = $"shell:appsFolder\\{xboxGame.PlatformId}!{xboxGame.ApplicationId}";
                 Process.Start(new ProcessStartInfo("explorer.exe", launchCode) { UseShellExecute = true });
+            }
+        }
+        else if (game.GameLibrary == GameLibrary.BattleNet)
+        {
+            if (game is BattleNetGame battleNetGame && File.Exists(BattleNetLibrary.Instance.ClientPath))
+            {
+                Process.Start(new ProcessStartInfo(BattleNetLibrary.Instance.ClientPath,  $"--exec=\"launch {battleNetGame.LauncherId}\"") { UseShellExecute = true });
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using DLSS_Swapper.Data.BattleNet.Proto;
@@ -27,40 +28,71 @@ internal partial class BattleNetLibrary : IGameLibrary
 
     readonly string _productDbPath;
 
-    // Definitis are from Lutris https://github.com/lutris/lutris/blob/master/lutris/util/battlenet/definitions.py
-    private readonly Dictionary<string, string> _uidToTitles = new Dictionary<string, string>()
+    public string ClientPath { get; private set; } = string.Empty;
+    string _installPath = string.Empty;
+
+    // Definitions come from multiple places:
+    // - https://github.com/dafzor/bnetlauncher/blob/master/bnetlauncher/Resources/gamesdb.ini
+    // - https://github.com/lutris/lutris/blob/master/lutris/util/battlenet/definitions.py
+    // - BattleNet agent log on launch
+    //
+    // Key is Uid, not ProductCode
+    private readonly Dictionary<string, BattleNetLauncherGame> _knownGames = new Dictionary<string, BattleNetLauncherGame>()
     {
-        { "s1", "StarCraft" },
-        { "s2", "StarCraft II" },
-        { "wow", "World of Warcraft" },
-        { "wow_classic", "World of Warcraft Classic" },
-        { "pro", "Overwatch 2" },
-        { "w2bn", "Warcraft II: Battle.net Edition" },
-        { "w3", "Warcraft III" }, //
-        { "hsb", "Hearthstone" },
-        { "hero", "Heroes of the Storm" },
-        { "d3cn", "暗黑破壞神III" },
-        { "d3", "Diablo III" },
-        { "fenris", "Diablo IV" },
-        { "viper", "Call of Duty: Black Ops 4" },
-        { "odin", "Call of Duty: Modern Warfare" },
-        { "lazarus", "Call of Duty: MW2 Campaign Remastered" },
-        { "zeus", "Call of Duty: Black Ops Cold War" },
-        { "rtro", "Blizzard Arcade Collection" },
-        { "wlby", "Crash Bandicoot 4: It's About Time" },
-        { "osi", "Diablo® II: Resurrected" },
-        { "fore", "Call of Duty: Vanguard" },
+        { "rtro", new BattleNetLauncherGame("rtro", "rtro", "RTRO", "Blizzard Arcade Collection") },
+        { "auks", new BattleNetLauncherGame("auks", "auks", "AUKS", "Call of Duty") },
+        { "wlby", new BattleNetLauncherGame("wlby", "wlby", "WLBY", "Crash Bandicoot 4: It's About Time") },
+        { "w1r", new BattleNetLauncherGame("w1r", "w1r", "W1R", "Warcraft I: Remastered") },
+        { "diablo3", new BattleNetLauncherGame("diablo3", "d3", "D3", "Diablo III") },
+        { "aris", new BattleNetLauncherGame("aris", "aris", "ARIS", "Doom: The Dark Ages") },
+        { "heroes", new BattleNetLauncherGame("heroes", "hero", "Hero", "Heroes of the Storm") },
+        { "d3cn", new BattleNetLauncherGame("d3cn", "d3cn", "D3CN", "暗黑破壞神III") }, // to verify
+        { "aqua", new BattleNetLauncherGame("aqua", "aqua", "AQUA", "Avowed") },
+        { "s2", new BattleNetLauncherGame("s2", "s2", "S2", "StarCraft II") },
+        { "w2", new BattleNetLauncherGame("w2", "w2bn", "W2", "Warcraft II: Battle.net Edition") },
+        { "fenris", new BattleNetLauncherGame("fenris", "fenris", "Fen", "Diablo IV") },
+        { "d1", new BattleNetLauncherGame("d1", "drtl", "D1", "Diablo") },
+        { "scor", new BattleNetLauncherGame("scor", "scor", "SCOR", "Sea of Thieves") },
+        { "w3", new BattleNetLauncherGame("w3", "w3", "W3", "Warcraft III: Reforged") },
+        { "fore", new BattleNetLauncherGame("fore", "fore", "FORE", "Call of Duty: Vanguard") }, // to verify
+        { "s1", new BattleNetLauncherGame("s1", "s1", "S1", "StarCraft") },
+        { "wow", new BattleNetLauncherGame("wow", "wow", "WoW", "World of Warcraft") },
+        { "osi", new BattleNetLauncherGame("osi", "osi", "OSI", "Diablo II: Resurrected") },
+        { "lazarus", new BattleNetLauncherGame("lazarus", "lazr", "LAZR", "Call of Duty: MW2 Campaign Remastered") }, // to verify
+        { "odin", new BattleNetLauncherGame("odin", "odin", "ODIN", "Call of Duty: Modern Warfare") }, // to verify
+        { "pinta", new BattleNetLauncherGame("pinta", "pinta", "PNTA", "Call of Duty: Modern Warfare III") }, // to verify
+        { "prometheus", new BattleNetLauncherGame("prometheus", "pro", "Pro", "Overwatch") },
+        { "viper", new BattleNetLauncherGame("viper", "viper", "VIPR", "Call of Duty: Black Ops 4") }, // to verify
+        { "zeus", new BattleNetLauncherGame("zeus", "zeus", "ZEUS", "Call of Duty: Black Ops Cold War") }, // to verify
+        { "w1", new BattleNetLauncherGame("w1", "war1", "W1", "Warcraft: Orcs & Humans") },
+        { "w2r", new BattleNetLauncherGame("w2r", "w2r", "W2R", "Warcraft II Remastered") },
+        { "hs_beta", new BattleNetLauncherGame("hs_beta", "hsb", "WTCG", "Hearthstone") },
+        
+        // Launcher isnt working, but that is ok as WoW is hidden.
+        { "wow_classic", new BattleNetLauncherGame("wow_classic", "wow_classic", "Wow_wow_classic", "World of Warcraft Classic") }, // to verify
+
+        // Does not appear in aggregate.json so they have no cover photos.
+        { "lbra", new BattleNetLauncherGame("lbra", "lbra", "LBRA", "Tony Hawk's Pro Skater 3+4") },
+        { "ark", new BattleNetLauncherGame("ark", "ark", "ARK", "The Outer Worlds 2") },
+        { "nina", new BattleNetLauncherGame("nina", "nina", "NINA", "Call of Duty: Modern Warfare II") },
+
+
+        // Phone games have no need to show up in app.
+        //{ "anbs", new BattleNetLauncherGame("anbs", "anbs", "ANBS", "Diablo Immortal") },
+        //{ "gryphon", new BattleNetLauncherGame("gryphon", "gryphon", "GRY", "Warcraft Rumble") },
+        
+        /*
         { "d2", "Diablo® II" },
         { "d2LOD", "Diablo® II: Lord of Destruction®" },
         { "w3ROC", "Warcraft® III: Reign of Chaos" },
         { "w3tft", "Warcraft® III: The Frozen Throne®" },
         { "sca", "StarCraft® Anthology" },
-        { "anbs", "Diablo Immortal" }
+        */
     };
 
     // Ignore the Battle.net agent installation and all World of Warcraft installations.
     // WoW DLL swaps lead to disconnects without exception, and it only supports XeLL anyway.
-    [GeneratedRegex(@"^(agent|beta|battle\.net|wow.*)$", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^(agent|agent_beta|beta|battle\.net|wow.*)$", RegexOptions.IgnoreCase)]
     private static partial Regex IgnoredGameIdRegex();
 
 
@@ -114,6 +146,73 @@ internal partial class BattleNetLibrary : IGameLibrary
 
         try
         {
+            using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
+            {
+                using (var bnet = hklm.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Battle.net"))
+                {
+                    if (bnet is not null)
+                    {
+                        var installPath = bnet.GetValue("InstallLocation")?.ToString();
+                        if (string.IsNullOrWhiteSpace(installPath) == false)
+                        {
+                            var clientPath = Path.Combine(installPath, "Battle.net.exe");
+                            if (File.Exists(clientPath))
+                            {
+                                _installPath = installPath;
+                                ClientPath = clientPath;
+                            }
+                            else
+                            {
+                                Logger.Error($"Battle.net.exe not found at {clientPath}");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Could not get BattleNet client path.");
+        }
+
+        var installedAggregates = new Dictionary<string, AggregateItem>();
+
+        if (string.IsNullOrWhiteSpace(ClientPath) == false)
+        {
+            try
+            {
+                var aggregateJsonPath = Path.Combine(Directory.GetParent(_productDbPath)?.FullName ?? string.Empty, "aggregate.json");
+                if (File.Exists(aggregateJsonPath) == true)
+                {
+                    using (var fileStream = File.OpenRead(aggregateJsonPath))
+                    {
+                        var aggregate = JsonSerializer.Deserialize<Aggregate>(fileStream);
+                        if (aggregate is not null)
+                        {
+                            foreach (var aggregateItem in aggregate.Installed)
+                            {
+                                installedAggregates.Add(aggregateItem.ProductId, aggregateItem);
+                            }
+                        }
+                        else
+                        {
+                            Logger.Error($"Could not deserialize aggregate {aggregateJsonPath}");
+                        }
+                    }
+                }
+                else
+                {
+                    Logger.Error($"Could not find {aggregateJsonPath}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "Could not load installed aggregates.");
+            }
+        }
+
+        try
+        {
 
             File.Copy(_productDbPath, tempFile, true);
             ProductDb? productDb;
@@ -164,9 +263,11 @@ internal partial class BattleNetLibrary : IGameLibrary
 
                 var cachedGame = GameManager.Instance.GetGame<BattleNetGame>(gameId);
                 var activeGame = cachedGame ?? new BattleNetGame(gameId);
-                if (_uidToTitles.TryGetValue(product.Uid, out var title))
+
+                if (_knownGames.TryGetValue(product.Uid, out var battleNetLauncherGame))
                 {
-                    activeGame.Title = title;
+                    activeGame.Title = battleNetLauncherGame.Name;
+                    activeGame.LauncherId = battleNetLauncherGame.LauncherId;
                 }
                 else
                 {
@@ -176,9 +277,27 @@ internal partial class BattleNetLibrary : IGameLibrary
                     {
                         activeGame.Title = product.Uid;
                     }
+                    else
+                    {
+                        var directoryInfo = new DirectoryInfo(product.Settings.InstallPath);
+                        activeGame.Title = directoryInfo.Name;
+                    }
+                }
 
-                    var directoryInfo = new DirectoryInfo(product.Settings.InstallPath);
-                    activeGame.Title = directoryInfo.Name;
+                if (installedAggregates.TryGetValue(product.ProductCode, out var aggregate))
+                {
+                    // If title isn't set, try use it from the aggregates.
+                    if (string.IsNullOrWhiteSpace(activeGame.Title))
+                    {
+                        activeGame.Title = aggregate.Name;
+                    }
+
+                    // Set the cover photo.
+                    activeGame.RemoteCoverImage = aggregate.LogoArtUri;
+                }
+                else
+                {
+                    Logger.Error($"Battle.Net game aggregate not found for ProductCode ({product.ProductCode}).");
                 }
 
                 activeGame.InstallPath = PathHelpers.NormalizePath(gamePath);

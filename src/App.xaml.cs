@@ -30,33 +30,7 @@ namespace DLSS_Swapper
         public static App CurrentApp => (App)Application.Current;
 
 
-        internal HttpClient? _httpClient;
-        public HttpClient HttpClient
-        {
-            get
-            {
-                if (_httpClient is null)
-                {
-                    var version = GetVersion();
-                    var versionString = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
-
-                    var httpClientHandler = new HttpClientHandler()
-                    {
-                        AutomaticDecompression = System.Net.DecompressionMethods.All,
-                        UseCookies = true,
-                        CookieContainer = new System.Net.CookieContainer(),
-                        AllowAutoRedirect = true,
-                    };
-                    _httpClient = new HttpClient(httpClientHandler);
-                    _httpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper/{versionString}");
-                    _httpClient.Timeout = TimeSpan.FromMinutes(30);
-                    _httpClient.DefaultRequestVersion = new Version(2, 0);
-                    _httpClient.DefaultRequestHeaders.ConnectionClose = true;
-                }
-
-                return _httpClient;
-            }
-        }
+        public HttpClient HttpClient { get; init; }
 
 
         /// <summary>
@@ -66,6 +40,23 @@ namespace DLSS_Swapper
         public App()
         {
             Logger.Init();
+
+            // Setup HttpClient.
+            var version = GetVersion();
+            var versionString = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+
+            var httpClientHandler = new HttpClientHandler()
+            {
+                AutomaticDecompression = System.Net.DecompressionMethods.All,
+                UseCookies = true,
+                CookieContainer = new System.Net.CookieContainer(),
+                AllowAutoRedirect = true,
+            };
+            HttpClient = new HttpClient(httpClientHandler);
+            HttpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper/{versionString}");
+            HttpClient.Timeout = TimeSpan.FromMinutes(30);
+            HttpClient.DefaultRequestVersion = new Version(2, 0);
+            HttpClient.DefaultRequestHeaders.ConnectionClose = true;
 
             var language = Settings.Instance.Language;
 

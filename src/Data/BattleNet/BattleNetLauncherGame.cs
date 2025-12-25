@@ -17,8 +17,8 @@ internal class BattleNetLauncherGame
     // Battle.net.exe --exec="launch {LauncherId}"
     // There is no known on disk reference to this value.
 
-    public string Uid { get; set; } = string.Empty; // prometheus
-    public string ProductCode { get; set; } = string.Empty; // pro
+    public string Uid { get; set; } = string.Empty;
+    public string ProductCode { get; set; } = string.Empty;
     public string LauncherId { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
 

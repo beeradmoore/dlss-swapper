@@ -235,6 +235,9 @@
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Ajouter une couverture personnalisée</value>
   </data>
+  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>Le lancement de jeux à partir de votre bibliothèque {0} n'est actuellement pas pris en charge.</value>
+  </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Cliquez pour ajouter aux favoris</value>
   </data>
@@ -323,6 +326,18 @@ Pour vérifier quel préréglage est utilisé, veuillez activer l'indicateur DLS
   </data>
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>Ce jeu n'est pas dans un état prêt à être joué.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
+    <value>NVAPI a rencontré une erreur. Des informations supplémentaires ont été écrites dans le journal des erreurs.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
+    <value>NVAPI a rencontré une erreur. L'exécution de l'application en tant qu'administrateur peut résoudre le problème. De plus amples informations ont été écrites dans le journal des erreurs.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
+    <value>Erreur NVAPI</value>
+  </data>
+  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
+    <value>NVAPI a rencontré une erreur. Cliquez pour plus d'informations.</value>
   </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
     <value>Ouvrir l'emplacement de la DLL</value>
@@ -516,11 +531,44 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   <data name="General_Name" xml:space="preserve">
     <value>Nom</value>
   </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>DLSS Ray Reconstruction</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>DLSS Frame Generation</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>Préréglage DLSS</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>Préréglage DLSS RR</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>XeSS Frame Generation</value>
+  </data>
   <data name="General_No" xml:space="preserve">
     <value>Non</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>Aucun</value>
+  </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>Non trouvé</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
     <value>Non supporté</value>
@@ -533,6 +581,9 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   </data>
   <data name="General_OpenFolder" xml:space="preserve">
     <value>Ouvrir le dossier</value>
+  </data>
+  <data name="General_OpenLogsDirectory" xml:space="preserve">
+    <value>Ouvrir le répertoire des journaux</value>
   </data>
   <data name="General_Optional" xml:space="preserve">
     <value>(optionnel)</value>

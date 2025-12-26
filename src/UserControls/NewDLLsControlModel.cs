@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
-using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.System;

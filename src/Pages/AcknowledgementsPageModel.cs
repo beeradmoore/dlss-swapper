@@ -2,14 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.WinUI.Controls;
 using DLSS_Swapper.Acknowledgements;
-using DLSS_Swapper.Converters;
-using Microsoft.UI.Xaml;
 
 namespace DLSS_Swapper.Pages;
 

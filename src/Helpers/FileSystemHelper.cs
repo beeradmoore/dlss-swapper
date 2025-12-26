@@ -8,7 +8,6 @@ using Windows.Win32;
 using Windows.Win32.Foundation;
 using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace DLSS_Swapper.Helpers;
 

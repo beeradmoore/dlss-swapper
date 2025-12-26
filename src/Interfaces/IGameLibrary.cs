@@ -9,7 +9,6 @@ using DLSS_Swapper.Data.BattleNet;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Data.EAApp;
 
 namespace DLSS_Swapper.Interfaces

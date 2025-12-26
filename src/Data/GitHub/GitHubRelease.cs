@@ -1,13 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using DLSS_Swapper.Pages;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
-using Windows.System;
 
 namespace DLSS_Swapper.Data.GitHub
 {

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using DLSS_Swapper.Interfaces;
 using Microsoft.Win32;
-using FuzzySharp;
 
 namespace DLSS_Swapper.Data.EAApp;
 

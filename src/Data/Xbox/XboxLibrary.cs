@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Management;
-using System.Reflection;
 using System.Security.Principal;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
 using Windows.Management.Deployment;
-using Windows.UI.StartScreen;
-using Windows.UI.Text.Core;
 
 namespace DLSS_Swapper.Data.Xbox
 {

@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using DLSS_Swapper.Extensions;
-using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Helpers.FSR31;
 using SQLite;
 

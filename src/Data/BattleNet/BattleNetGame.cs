@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using DLSS_Swapper.Data.BattleNet.Proto;
 using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Data.BattleNet;

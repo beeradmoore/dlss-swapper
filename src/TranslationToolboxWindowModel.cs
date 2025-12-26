@@ -11,7 +11,6 @@ using System.Xml.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CsvHelper;
-using CsvHelper.Configuration;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Language;
 using DLSS_Swapper.UserControls;

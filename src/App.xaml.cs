@@ -304,7 +304,7 @@ public sealed partial class App : Application
 
     public bool RunOnUIThread(Action action)
     {
-        if (Thread.CurrentThread.ManagedThreadId == 1)
+        if (Environment.CurrentManagedThreadId == 1)
         {
             action();
             return true;
@@ -336,7 +336,7 @@ public sealed partial class App : Application
 
     public Task RunOnUIThreadAsync(Func<Task> function)
     {
-        if (Thread.CurrentThread.ManagedThreadId == 1)
+        if (Environment.CurrentManagedThreadId == 1)
         {
             return function();
         }

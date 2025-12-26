@@ -2,24 +2,23 @@ using ByteSizeLib;
 using Microsoft.UI.Xaml.Data;
 using System;
 
-namespace DLSS_Swapper.Converters
+namespace DLSS_Swapper.Converters;
+
+class BytesToMegaBytesConverter : IValueConverter
 {
-    class BytesToMegaBytesConverter : IValueConverter
+    public object Convert(object value, Type targetType, object parameter, string language)
     {
-        public object Convert(object value, Type targetType, object parameter, string language)
+
+        if (value is long bytes)
         {
-
-            if (value is long bytes)
-            {
-                return ByteSize.FromBytes(bytes).ToString("MB");
-            }
-
-            return string.Empty;
+            return ByteSize.FromBytes(bytes).ToString("MB");
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            throw new NotImplementedException();
-        }
+        return string.Empty;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, string language)
+    {
+        throw new NotImplementedException();
     }
 }

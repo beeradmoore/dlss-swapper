@@ -253,7 +253,7 @@
     <value>Iniciando descarga</value>
   </data>
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
-    <value> espera a que la descarga se complete antes de intercambiar</value>
+    <value>Por favor, espera a que la descarga se complete antes de intercambiar</value>
   </data>
   <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
     <value>Información de perfiles</value>
@@ -388,7 +388,7 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
     <value>Seleccionar Carpeta del Juego</value>
   </data>
   <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
-    <value> añade la raíz del directorio de tu juego.</value>
+    <value>No se admite añadir un directorio de nivel superior. Por favor, añade la raíz del directorio de tu juego.</value>
   </data>
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Nuevos DLLs</value>
@@ -1027,5 +1027,49 @@ Debido a esto, recomendamos tener precaución con los juegos multijugador.</valu
   </data>
   <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
     <value>Herramientas de traducción</value>
+  </data>
+  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
+    <value>Preajuste {0} (Obsoleto)</value>
+    <comment>Here {0} will be the letter of the preset, eg. Preset K</comment>
+  </data>
+  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>El lanzamiento de juegos desde tu biblioteca de {0} no es compatible actualmente.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
+    <value>NVAPI ha encontrado un error. Se ha escrito más información en el registro de errores.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
+    <value>NVAPI ha encontrado un error. Ejecutar la aplicación como administrador puede resolver el problema. Se ha escrito más información en el registro de errores.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
+    <value>Error de NVAPI</value>
+  </data>
+  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
+    <value>NVAPI ha encontrado un error. Haz clic para más información.</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>Preajuste DLSS RR</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_OpenLogsDirectory" xml:space="preserve">
+    <value>Abrir directorio de registros</value>
+  </data>
+  <data name="SettingsPage_Logging_Debug" xml:space="preserve">
+    <value>Depuración</value>
+  </data>
+  <data name="SettingsPage_Logging_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="SettingsPage_Logging_Info" xml:space="preserve">
+    <value>Información</value>
+  </data>
+  <data name="SettingsPage_Logging_Off" xml:space="preserve">
+    <value>Apagado</value>
+  </data>
+  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
+    <value>Detallado</value>
+  </data>
+  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
+    <value>Advertencia</value>
   </data>
 </root>

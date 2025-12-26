@@ -174,7 +174,10 @@
   <data name="DLSS_Preset_Letter" xml:space="preserve">
     <value>Preset {0}</value>
   </data>
-  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
+    <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
+    <value>__UNTRANSLATED__Preset {0} (Deprecated)</value>
+  </data>
+<data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>Impossibile avviare DLSS Swapper</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
@@ -231,7 +234,10 @@
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Aggiungi copertina personalizzata</value>
   </data>
-  <data name="GamePage_ClickToFavorite" xml:space="preserve">
+    <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>__UNTRANSLATED__Launching games from your {0} library is currently not supported.</value>
+  </data>
+<data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Clicca per aggiungere ai preferiti</value>
   </data>
   <data name="GamePage_ClickToHide" xml:space="preserve">
@@ -317,7 +323,19 @@ Per verificare quale preset stia venendo utilizzato, abilita l'overlay di DLSS.<
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>Questo gioco non è pronto per essere giocato.</value>
   </data>
-  <data name="GamePage_OpenDllLocation" xml:space="preserve">
+    <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
+    <value>__UNTRANSLATED__NVAPI has encountered an error. More information has been written to the error log.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
+    <value>__UNTRANSLATED__NVAPI has encountered an error. Running the application as admin may resolve the issue. More information has been written to the error log.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
+    <value>__UNTRANSLATED__NVAPI Error</value>
+  </data>
+  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
+    <value>__UNTRANSLATED__NVAPI has encountered an error. Click for more information.</value>
+  </data>
+<data name="GamePage_OpenDllLocation" xml:space="preserve">
     <value>Apri la posizione della DLL</value>
   </data>
   <data name="GamePage_OriginalDll" xml:space="preserve">
@@ -517,7 +535,10 @@ Se hai verificato queste opzioni e il tuo gioco continua a non essere visualizza
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>Preset DLSS</value>
   </data>
-  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>__UNTRANSLATED__DLSS RR Preset</value>
+  </data>
+<data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
   </data>
   <data name="General_Name_FSR_31_VK" xml:space="preserve">
@@ -553,7 +574,10 @@ Se hai verificato queste opzioni e il tuo gioco continua a non essere visualizza
   <data name="General_OpenFolder" xml:space="preserve">
     <value>Apri cartella</value>
   </data>
-  <data name="General_Optional" xml:space="preserve">
+    <data name="General_OpenLogsDirectory" xml:space="preserve">
+    <value>__UNTRANSLATED__Open logs directory</value>
+  </data>
+<data name="General_Optional" xml:space="preserve">
     <value>(facoltativo)</value>
   </data>
   <data name="General_Options" xml:space="preserve">
@@ -903,7 +927,25 @@ Per questo motivo, ti consigliamo di usare cautela nelle partite multi-giocatore
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>Logging</value>
   </data>
-  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
+    <data name="SettingsPage_Logging_Debug" xml:space="preserve">
+    <value>__UNTRANSLATED__Debug</value>
+  </data>
+  <data name="SettingsPage_Logging_Error" xml:space="preserve">
+    <value>__UNTRANSLATED__Error</value>
+  </data>
+  <data name="SettingsPage_Logging_Info" xml:space="preserve">
+    <value>__UNTRANSLATED__Info</value>
+  </data>
+  <data name="SettingsPage_Logging_Off" xml:space="preserve">
+    <value>__UNTRANSLATED__Off</value>
+  </data>
+  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
+    <value>__UNTRANSLATED__Verbose</value>
+  </data>
+  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
+    <value>__UNTRANSLATED__Warning</value>
+  </data>
+<data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>Nessun aggiornamento disponibile.</value>
   </data>
   <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">

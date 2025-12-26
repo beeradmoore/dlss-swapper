@@ -11,7 +11,7 @@ internal class CacheItem
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("keyImages")]
-    public CacheItemKeyImage[] KeyImages { get; set; } = new CacheItemKeyImage[0];
+    public CacheItemKeyImage[] KeyImages { get; set; } = System.Array.Empty<CacheItemKeyImage>();
 
 
     internal class CacheItemKeyImage

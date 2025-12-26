@@ -336,7 +336,7 @@ public class Settings
         }
     }
 
-    string[] _ignoredPaths = new string[0];
+    string[] _ignoredPaths = Array.Empty<string>();
     public string[] IgnoredPaths
     {
         get { return _ignoredPaths; }

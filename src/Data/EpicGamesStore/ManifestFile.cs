@@ -55,7 +55,7 @@ internal class ManifestFile
     //public string BuildLabel { get; set; }
 
     [JsonPropertyName("AppCategories")]
-    public string[] AppCategories { get; set; } = new string[0];
+    public string[] AppCategories { get; set; } = System.Array.Empty<string>();
 
     //[JsonPropertyName("ChunkDbs")]
     //public List<???> ChunkDbs { get; set; }

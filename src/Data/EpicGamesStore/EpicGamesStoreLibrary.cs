@@ -75,7 +75,7 @@ internal class EpicGamesStoreLibrary : IGameLibrary
         var catalogCacheFile = Path.Combine(epicRootDirectory, "EpicGamesLauncher", "Data", "Catalog", "catcache.bin");
         if (File.Exists(catalogCacheFile))
         {
-            var cacheItemsArray = new CacheItem[0];
+            var cacheItemsArray = Array.Empty<CacheItem>();
             using (var fileStream = File.OpenRead(catalogCacheFile))
             {
                 using (var memoryStream = new MemoryStream((int)fileStream.Length))

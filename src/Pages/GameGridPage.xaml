@@ -78,7 +78,7 @@
                                 </Border.Background>
                             </Border>
 
-                            <TextBlock Grid.Column="1" Text="{x:Bind Title}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Text="{x:Bind Title, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Center" />
                             <ProgressRing Grid.Column="2" VerticalAlignment="Center" Width="16" Height="16" Visibility="{x:Bind Processing, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" />
                             <TextBlock Grid.Column="3" VerticalAlignment="Center">
                                 <Run Text="DLSS: " />
@@ -132,7 +132,7 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Text="{x:Bind Title}" Visibility="{x:Bind CoverImage, Mode=OneWay, Converter={StaticResource InverseStringVisibilityConverter}}"  Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{ThemeResource ButtonForegroundColor}" />
+                            <TextBlock Text="{x:Bind Title, Mode=OneWay}" Margin="20" TextWrapping="WrapWholeWords" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{ThemeResource ButtonForegroundColor}" />
 
                             <!-- Weird, but allows image to strecth centered rather than left align -->
                             <Border BorderThickness="0" FlowDirection="LeftToRight">

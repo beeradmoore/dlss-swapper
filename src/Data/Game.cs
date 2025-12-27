@@ -318,7 +318,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                 GameAssets.Clear();
                 using (await Database.Instance.Mutex.LockAsync())
                 {
-                    await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+                    await Database.Instance.Connection.ExecuteAsync("DELETE FROM game_asset WHERE id = ?", ID).ConfigureAwait(false);
                 }
                 // TODO: See if changing these to filter specific files, or getting very *.dll and looking for our specific ones is faster
                 var dllPaths = Directory.GetFiles(InstallPath, "*.dll", enumerationOptions);
@@ -688,7 +688,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                 await Database.Instance.Connection.InsertAllAsync(dllHistory, false);
 
                 // Update game assets list by deleting and re-adding.
-                await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+                await Database.Instance.Connection.ExecuteAsync("DELETE FROM game_asset WHERE id = ?", ID).ConfigureAwait(false);
                 await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
             }
 
@@ -872,7 +872,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
         using (await Database.Instance.Mutex.LockAsync())
         {
             await Database.Instance.Connection.InsertAllAsync(dllHistory, false);
-            await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+            await Database.Instance.Connection.ExecuteAsync("DELETE FROM game_asset WHERE id = ?", ID).ConfigureAwait(false);
             await Database.Instance.Connection.InsertAllAsync(GameAssets, false).ConfigureAwait(false);
         }
 
@@ -1423,7 +1423,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
     {
         using (await Database.Instance.Mutex.LockAsync())
         {
-            await Database.Instance.Connection.ExecuteAsync("DELETE FROM GameAsset WHERE id = ?", ID).ConfigureAwait(false);
+            await Database.Instance.Connection.ExecuteAsync("DELETE FROM game_asset WHERE id = ?", ID).ConfigureAwait(false);
         }
     }
 

@@ -8,7 +8,7 @@ using SQLite;
 
 namespace DLSS_Swapper.Data.Xbox;
 
-[Table("XboxGame")]
+[Table("xbox_game")]
 public class XboxGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.XboxApp;

@@ -5,7 +5,7 @@ using SQLite;
 
 namespace DLSS_Swapper.Data.ManuallyAdded;
 
-[Table("ManuallyAddedGame")]
+[Table("manually_added_game")]
 public class ManuallyAddedGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.ManuallyAdded;

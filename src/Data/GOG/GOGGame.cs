@@ -6,16 +6,22 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
+using SQLite;
 
 namespace DLSS_Swapper.Data.GOG;
 
+[Table("gog_game")]
 internal class GOGGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.GOG;
 
     public override bool IsReadyToPlay => true;
 
+    [Ignore]
     public List<string> PotentialLocalHeaders { get; } = new List<string>();
+
+
+    [Column("fallback_header_url")]
     public string FallbackHeaderUrl { get; set; } = string.Empty;
 
     public GOGGame()

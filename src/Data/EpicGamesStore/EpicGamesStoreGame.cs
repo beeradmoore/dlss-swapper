@@ -4,7 +4,7 @@ using SQLite;
 
 namespace DLSS_Swapper.Data.EpicGamesStore;
 
-[Table("EpicGamesStoreGame")]
+[Table("epic_games_store_game")]
 internal class EpicGamesStoreGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.EpicGamesStore;

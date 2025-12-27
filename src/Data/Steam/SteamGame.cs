@@ -11,7 +11,7 @@ using SQLite;
 
 namespace DLSS_Swapper.Data.Steam;
 
-[Table("SteamGame")]
+[Table("steam_game")]
 internal partial class SteamGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.Steam;

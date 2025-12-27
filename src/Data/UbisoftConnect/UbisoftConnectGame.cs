@@ -4,7 +4,7 @@ using SQLite;
 
 namespace DLSS_Swapper.Data.UbisoftConnect;
 
-[Table("UbisoftConnectGame")]
+[Table("ubisoft_connect_game")]
 internal class UbisoftConnectGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.UbisoftConnect;

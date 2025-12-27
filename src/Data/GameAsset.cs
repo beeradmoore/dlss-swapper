@@ -8,6 +8,7 @@ using SQLite;
 
 namespace DLSS_Swapper.Data;
 
+[Table("game_asset")]
 public class GameAsset : IEquatable<GameAsset>
 {
     [Indexed]
@@ -134,7 +135,7 @@ public class GameAsset : IEquatable<GameAsset>
         }
     }
 
-    [property: Column("Hash")]
+    [property: Column("hash")]
     public string Hash { get; set; } = string.Empty;
 
     public void LoadVersionAndHash()

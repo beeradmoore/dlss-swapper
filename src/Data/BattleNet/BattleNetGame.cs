@@ -1,18 +1,24 @@
+using SQLite;
 using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Data.BattleNet;
 
+[Table("battlenet_game")]
 internal class BattleNetGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.BattleNet;
 
+    [Column("state_playable")]
     public bool StatePlayable { get; set; }
 
     public override bool IsReadyToPlay => StatePlayable;
 
+    [Column("remote_cover_image")]
     public string RemoteCoverImage { get; set; } = string.Empty;
 
+
+    [Column("launcher_id")]
     public string LauncherId { get; set; } = string.Empty;
 
     public BattleNetGame()

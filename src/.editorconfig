@@ -339,8 +339,8 @@ dotnet_diagnostic.IDE0161.severity = warning
 dotnet_diagnostic.IDE0200.severity = warning
 
 # IDE2000: Disallow multiple blank lines
-dotnet_style_allow_multiple_blank_lines_experimental = false
-dotnet_diagnostic.IDE2000.severity = warning
+dotnet_style_allow_multiple_blank_lines_experimental = true
+dotnet_diagnostic.IDE2000.severity = none
 
 # Verify settings
 [*.{received,verified}.{txt,xml,json}]

@@ -149,6 +149,7 @@ internal class Database
                 "fallback",
                 "header",
                 "url",
+                "launcher",
                 "hash",
             };
 

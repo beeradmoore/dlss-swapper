@@ -102,7 +102,7 @@ internal partial class NVAPIHelper : ObservableObject
             var dlssPresetsJsonPath = @"Assets\dlss_presets.json";
             if (File.Exists(dlssPresetsJsonPath) == true)
             {
-                var dlssPresetOptions = JsonSerializer.Deserialize<List<PresetOption>>(File.ReadAllText(dlssPresetsJsonPath))?.Where(x => x.Used == true)?.ToList();
+                var dlssPresetOptions = JsonSerializer.Deserialize(File.ReadAllText(dlssPresetsJsonPath), SourceGenerationContext.Default.ListPresetOption)?.Where(x => x.Used == true)?.ToList();
                 if (dlssPresetOptions is not null && dlssPresetOptions.Count > 0)
                 {
                     for (var i = 0; i < dlssPresetOptions.Count; ++i)
@@ -147,7 +147,7 @@ internal partial class NVAPIHelper : ObservableObject
             var dlssDPresetsJsonPath = @"Assets\dlss_d_presets.json";
             if (File.Exists(dlssDPresetsJsonPath) == true)
             {
-                var dlssDPresetOptions = JsonSerializer.Deserialize<List<PresetOption>>(File.ReadAllText(dlssDPresetsJsonPath))?.Where(x => x.Used == true)?.ToList();
+                var dlssDPresetOptions = JsonSerializer.Deserialize(File.ReadAllText(dlssDPresetsJsonPath), SourceGenerationContext.Default.ListPresetOption)?.Where(x => x.Used == true)?.ToList();
                 if (dlssDPresetOptions is not null && dlssDPresetOptions.Count > 0)
                 {
                     for (var i = 0; i < dlssDPresetOptions.Count; ++i)

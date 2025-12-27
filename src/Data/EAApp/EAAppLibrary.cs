@@ -39,7 +39,7 @@ internal class EAAppLibrary : IGameLibrary
             {
                 using (var fileStream = File.OpenRead(eaAppTitlesJsonPath))
                 {
-                    var gameSearchResults = JsonSerializer.Deserialize<List<GameSearchResult>>(fileStream);
+                    var gameSearchResults = JsonSerializer.Deserialize(fileStream, SourceGenerationContext.Default.ListGameSearchResult);
                     if (gameSearchResults is null || gameSearchResults.Count == 0)
                     {
                         throw new Exception($"{eaAppTitlesJsonPath} is empty or invalid.");

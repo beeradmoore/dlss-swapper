@@ -96,7 +96,7 @@ internal partial class SteamGame : Game
 
                 using (var responseStream = await steamApiResponse.Content.ReadAsStreamAsync().ConfigureAwait(false))
                 {
-                    var response = JsonSerializer.Deserialize<SteamAPIResponse<GetItemsResponse>>(responseStream, SourceGenerationContext.Default.SteamAPIResponseGetItemsResponse);
+                    var response = JsonSerializer.Deserialize(responseStream, SourceGenerationContext.Default.SteamAPIResponseGetItemsResponse);
                     if (response?.Response?.StoreItems.Any() == true)
                     {
                         // We are only doing one search, so we likely only care for the first item.

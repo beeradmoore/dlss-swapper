@@ -66,7 +66,7 @@ internal class GOGGame : Game
                 await fileDownloader.DownloadFileToStreamAsync(memoryStream);
                 memoryStream.Position = 0;
 
-                var catalogResponse = JsonSerializer.Deserialize<GOGCatalogResponse>(memoryStream);
+                var catalogResponse = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GOGCatalogResponse);
                 if (catalogResponse is null)
                 {
                     throw new Exception($"Could not deserialize GOGCatalogResponse for url, {url}");
@@ -164,7 +164,7 @@ internal class GOGGame : Game
 
                 memoryStream.Position = 0;
 
-                var gogProduct = JsonSerializer.Deserialize<GOGProduct>(memoryStream);
+                var gogProduct = JsonSerializer.Deserialize(memoryStream, SourceGenerationContext.Default.GOGProduct);
 
                 if (gogProduct?.Images is not null)
                 {

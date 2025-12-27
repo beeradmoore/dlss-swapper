@@ -185,7 +185,7 @@ internal partial class BattleNetLibrary : IGameLibrary
                 {
                     using (var fileStream = File.OpenRead(aggregateJsonPath))
                     {
-                        var aggregate = JsonSerializer.Deserialize<Aggregate>(fileStream);
+                        var aggregate = JsonSerializer.Deserialize(fileStream, SourceGenerationContext.Default.Aggregate);
                         if (aggregate is not null)
                         {
                             foreach (var aggregateItem in aggregate.Installed)

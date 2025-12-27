@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace DLSS_Swapper;
 
@@ -13,13 +12,6 @@ namespace DLSS_Swapper;
  */
 static class Storage
 {
-
-    static JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions()
-    {
-        WriteIndented = true,
-        TypeInfoResolver = SourceGenerationContext.Default,
-    };
-
     static string? _storagePath;
 #if   PORTABLE && DEBUG
     //public static string StoragePath => _storagePath ??= Path.Combine(AppContext.BaseDirectory, "StoredData", "DEBUG", Guid.NewGuid().ToString());

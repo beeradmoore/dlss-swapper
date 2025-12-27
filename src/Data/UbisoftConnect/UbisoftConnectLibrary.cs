@@ -152,7 +152,7 @@ internal class UbisoftConnectLibrary : IGameLibrary
         {
             // TODO: Remove htis true.
             // Only bother trying to read the game data if the install list
-            if (installedTitles.ContainsKey(configurationRecord.InstallId))
+            if (installedTitles.TryGetValue(configurationRecord.InstallId, out var installedTitle))
             {
                 // Copy the yaml out for the game into a memory stream to load.
                 using (var memoryStream = new MemoryStream(configurationRecord.Size))
@@ -221,7 +221,7 @@ internal class UbisoftConnectLibrary : IGameLibrary
                             var cachedGame = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString(CultureInfo.InvariantCulture));
                             var activeGame = cachedGame ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString(CultureInfo.InvariantCulture));
                             activeGame.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;  // TODO: Will this be a problem if the game is already loaded
-                            activeGame.InstallPath = PathHelpers.NormalizePath(installedTitles[configurationRecord.InstallId].InstallPath);
+                            activeGame.InstallPath = PathHelpers.NormalizePath(installedTitle.InstallPath);
                             activeGame.RemoteHeaderImage = remoteImage;
 
                             if (activeGame.IsInIgnoredPath())

@@ -119,9 +119,8 @@ internal class EpicGamesStoreLibrary : IGameLibrary
                 }
 
                 var remoteHeaderUrl = string.Empty;
-                if (cacheItemsDictionary.ContainsKey(manifest.CatalogItemId))
+                if (cacheItemsDictionary.TryGetValue(manifest.CatalogItemId, out var cacheItem))
                 {
-                    var cacheItem = cacheItemsDictionary[manifest.CatalogItemId];
                     if (cacheItem.KeyImages?.Any() == true)
                     {
                         // Try get desired image.

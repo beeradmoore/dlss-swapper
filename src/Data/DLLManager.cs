@@ -356,14 +356,14 @@ internal class DLLManager
         App.CurrentApp.RunOnUIThread(() =>
         {
             // Merge each of the manifests into the master DLL record list
-            MergeManifestsIntoMasterList(GameAssetType.DLSS, DLSSRecords, Manifest.DLSS, ImportedManifest?.DLSS);
-            MergeManifestsIntoMasterList(GameAssetType.DLSS_G, DLSSGRecords, Manifest.DLSS_G, ImportedManifest?.DLSS_G);
-            MergeManifestsIntoMasterList(GameAssetType.DLSS_D, DLSSDRecords, Manifest.DLSS_D, ImportedManifest?.DLSS_D);
-            MergeManifestsIntoMasterList(GameAssetType.FSR_31_DX12, FSR31DX12Records, Manifest.FSR_31_DX12, ImportedManifest?.FSR_31_DX12);
-            MergeManifestsIntoMasterList(GameAssetType.FSR_31_VK, FSR31VKRecords, Manifest.FSR_31_VK, ImportedManifest?.FSR_31_VK);
-            MergeManifestsIntoMasterList(GameAssetType.XeSS, XeSSRecords, Manifest.XeSS, ImportedManifest?.XeSS);
-            MergeManifestsIntoMasterList(GameAssetType.XeSS_FG, XeSSFGRecords, Manifest.XeSS_FG, ImportedManifest?.XeSS_FG);
-            MergeManifestsIntoMasterList(GameAssetType.XeLL, XeLLRecords, Manifest.XeLL, ImportedManifest?.XeLL);
+            MergeManifestsIntoMasterList(DLSSRecords, Manifest.DLSS, ImportedManifest?.DLSS);
+            MergeManifestsIntoMasterList(DLSSGRecords, Manifest.DLSS_G, ImportedManifest?.DLSS_G);
+            MergeManifestsIntoMasterList(DLSSDRecords, Manifest.DLSS_D, ImportedManifest?.DLSS_D);
+            MergeManifestsIntoMasterList(FSR31DX12Records, Manifest.FSR_31_DX12, ImportedManifest?.FSR_31_DX12);
+            MergeManifestsIntoMasterList(FSR31VKRecords, Manifest.FSR_31_VK, ImportedManifest?.FSR_31_VK);
+            MergeManifestsIntoMasterList(XeSSRecords, Manifest.XeSS, ImportedManifest?.XeSS);
+            MergeManifestsIntoMasterList(XeSSFGRecords, Manifest.XeSS_FG, ImportedManifest?.XeSS_FG);
+            MergeManifestsIntoMasterList(XeLLRecords, Manifest.XeLL, ImportedManifest?.XeLL);
         });
     }
 
@@ -666,12 +666,11 @@ internal class DLLManager
     /// <summary>
     /// Takes DLL list from manifest and imported manifest and inserts them into the master DLL records list which is bindable in the app.
     /// </summary>
-    /// <param name="gameAssetType"></param>
     /// <param name="records"></param>
     /// <param name="manifestRecords"></param>
     /// <param name="importedRecords"></param>
     /// <returns>Returns true if importedRecords was changed and requires saving</returns>
-    static void MergeManifestsIntoMasterList(GameAssetType gameAssetType, ObservableCollection<DLLRecord> records, List<DLLRecord> manifestRecords, List<DLLRecord>? importedManifestRecords)
+    static void MergeManifestsIntoMasterList(ObservableCollection<DLLRecord> records, List<DLLRecord> manifestRecords, List<DLLRecord>? importedManifestRecords)
     {
         // Sort the lists first to ensure local sort, not remote sort.
         manifestRecords.Sort();

@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Diagnostics;
-using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Helpers;

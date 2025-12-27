@@ -3,12 +3,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using DLSS_Swapper.Extensions;
-using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Helpers.FSR31;
 using SQLite;
 
 namespace DLSS_Swapper.Data;
 
+[Table("game_asset")]
 public class GameAsset : IEquatable<GameAsset>
 {
     [Indexed]
@@ -81,7 +81,7 @@ public class GameAsset : IEquatable<GameAsset>
             _displayVersion = version.ToString();
 
             // If the value is a single value, eg 1, make it 1.0
-            if (_displayVersion.Contains(".") == false)
+            if (_displayVersion.Contains('.') == false)
             {
                 _displayVersion = $"{_displayVersion}.0";
             }
@@ -135,7 +135,7 @@ public class GameAsset : IEquatable<GameAsset>
         }
     }
 
-    [property: Column("Hash")]
+    [property: Column("hash")]
     public string Hash { get; set; } = string.Empty;
 
     public void LoadVersionAndHash()

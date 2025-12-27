@@ -123,7 +123,7 @@ public partial class NetworkTesterWindowModel : ObservableObject
     [ObservableProperty]
     public partial string Test11Result { get; set; } = string.Empty;
 
-    CancellationTokenSource? _cancellationTokenSource = null;
+    CancellationTokenSource? _cancellationTokenSource;
 
     public NetworkTesterWindowModel(NetworkTesterWindow window) : base()
     {

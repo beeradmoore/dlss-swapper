@@ -9,7 +9,7 @@ using Windows.Win32;
 namespace DLSS_Swapper.Data.EAApp;
 
 
-[Table("eaapp_game")]
+[Table("ea_app_game")]
 internal class EAAppGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.EAApp;
@@ -31,7 +31,17 @@ internal class EAAppGame : Game
 
     public override bool UpdateFromGame(Game game)
     {
-        return true;
+        var didChange = ParentUpdateFromGame(game);
+
+        if (game is EAAppGame eaAppGame)
+        {
+            if (DisplayIconPath != eaAppGame.DisplayIconPath)
+            {
+                DisplayIconPath = eaAppGame.DisplayIconPath;
+                didChange = true;
+            }
+        }
+        return didChange;
     }
 
     protected override async Task UpdateCacheImageAsync()

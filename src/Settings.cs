@@ -4,486 +4,477 @@ using DLSS_Swapper.Interfaces;
 using DLSS_Swapper.Pages;
 using Microsoft.UI.Xaml;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Windows.Graphics;
 
-namespace DLSS_Swapper
+namespace DLSS_Swapper;
+
+public class Settings
 {
-    public class Settings
+    static Settings? _instance;
+
+    public static Settings Instance => _instance ??= Settings.FromJson();
+    //public event EnabledGameLibrariesChangedHandler EnabledGameLibrariesChanged;
+    //public delegate Task EnabledGameLibrariesChangedHandler(object sender, EventArgs e);
+
+    // We default this to false to prevent saves firing when loading from json.
+    bool _autoSave;
+
+    bool _hasShownWarning;
+    public bool HasShownWarning
     {
-        static Settings? _instance = null;
-
-        public static Settings Instance => _instance ??= Settings.FromJson();
-        //public event EnabledGameLibrariesChangedHandler EnabledGameLibrariesChanged;
-        //public delegate Task EnabledGameLibrariesChangedHandler(object sender, EventArgs e);
-
-        // We default this to false to prevent saves firing when loading from json.
-        bool _autoSave = false;
-
-        bool _hasShownWarning = false;
-        public bool HasShownWarning
+        get { return _hasShownWarning; }
+        set
         {
-            get { return _hasShownWarning; }
-            set
+            if (_hasShownWarning != value)
             {
-                if (_hasShownWarning != value)
+                _hasShownWarning = value;
+                if (_autoSave)
                 {
-                    _hasShownWarning = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-        bool _hasShownMultiplayerWarning = false;
-        public bool HasShownMultiplayerWarning
+    bool _hasShownMultiplayerWarning;
+    public bool HasShownMultiplayerWarning
+    {
+        get { return _hasShownMultiplayerWarning; }
+        set
         {
-            get { return _hasShownMultiplayerWarning; }
-            set
+            if (_hasShownMultiplayerWarning != value)
             {
-                if (_hasShownMultiplayerWarning != value)
+                _hasShownMultiplayerWarning = value;
+                if (_autoSave)
                 {
-                    _hasShownMultiplayerWarning = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-        bool _hideNonDLSSGames = false;
-        public bool HideNonDLSSGames
+    bool _hideNonDLSSGames;
+    public bool HideNonDLSSGames
+    {
+        get { return _hideNonDLSSGames; }
+        set
         {
-            get { return _hideNonDLSSGames; }
-            set
+            if (_hideNonDLSSGames != value)
             {
-                if (_hideNonDLSSGames != value)
+                _hideNonDLSSGames = value;
+                if (_autoSave)
                 {
-                    _hideNonDLSSGames = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
 
-        bool _groupGameLibrariesTogether = true;
-        public bool GroupGameLibrariesTogether
+    bool _groupGameLibrariesTogether = true;
+    public bool GroupGameLibrariesTogether
+    {
+        get { return _groupGameLibrariesTogether; }
+        set
         {
-            get { return _groupGameLibrariesTogether; }
-            set
+            if (_groupGameLibrariesTogether != value)
             {
-                if (_groupGameLibrariesTogether != value)
+                _groupGameLibrariesTogether = value;
+                if (_autoSave)
                 {
-                    _groupGameLibrariesTogether = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-        ElementTheme _appTheme = ElementTheme.Default;
-        public ElementTheme AppTheme
+    ElementTheme _appTheme = ElementTheme.Default;
+    public ElementTheme AppTheme
+    {
+        get { return _appTheme; }
+        set
         {
-            get { return _appTheme; }
-            set
+            if (_appTheme != value)
             {
-                if (_appTheme != value)
+                _appTheme = value;
+                if (_autoSave)
                 {
-                    _appTheme = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-        bool _allowDebugDlls = false;
-        public bool AllowDebugDlls
+    bool _allowDebugDlls;
+    public bool AllowDebugDlls
+    {
+        get { return _allowDebugDlls; }
+        set
         {
-            get { return _allowDebugDlls; }
-            set
+            if (_allowDebugDlls != value)
             {
-                if (_allowDebugDlls != value)
+                _allowDebugDlls = value;
+                if (_autoSave)
                 {
-                    _allowDebugDlls = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
 
 
-        bool _allowUntrusted = false;
-        public bool AllowUntrusted
+    bool _allowUntrusted;
+    public bool AllowUntrusted
+    {
+        get { return _allowUntrusted; }
+        set
         {
-            get { return _allowUntrusted; }
-            set
+            if (_allowUntrusted != value)
             {
-                if (_allowUntrusted != value)
+                _allowUntrusted = value;
+                if (_autoSave)
                 {
-                    _allowUntrusted = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
 
-        ulong _lastPromptWasForVersion = 0L;
-        public ulong LastPromptWasForVersion
+    ulong _lastPromptWasForVersion;
+    public ulong LastPromptWasForVersion
+    {
+        get { return _lastPromptWasForVersion; }
+        set
         {
-            get { return _lastPromptWasForVersion; }
-            set
+            if (_lastPromptWasForVersion != value)
             {
-                if (_lastPromptWasForVersion != value)
+                _lastPromptWasForVersion = value;
+                if (_autoSave)
                 {
-                    _lastPromptWasForVersion = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
 
-        // Don't forget to change this back to off.
+    // Don't forget to change this back to off.
 #if DEBUG
-        LoggingLevel _loggingLevel = LoggingLevel.Verbose;
+    LoggingLevel _loggingLevel = LoggingLevel.Verbose;
 #else
-        LoggingLevel _loggingLevel = LoggingLevel.Error;
+    LoggingLevel _loggingLevel = LoggingLevel.Error;
 #endif
-        public LoggingLevel LoggingLevel
+    public LoggingLevel LoggingLevel
+    {
+        get { return _loggingLevel; }
+        set
         {
-            get { return _loggingLevel; }
-            set
+            if (_loggingLevel != value)
             {
-                if (_loggingLevel != value)
+                _loggingLevel = value;
+                if (_autoSave)
                 {
-                    _loggingLevel = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-        uint _enabledGameLibraries = uint.MaxValue;
-        [Obsolete("This property is deprecated. Use GameLibrarySettings array instead.")]
-        public uint EnabledGameLibraries
+    uint _enabledGameLibraries = uint.MaxValue;
+    [Obsolete("This property is deprecated. Use GameLibrarySettings array instead.")]
+    public uint EnabledGameLibraries
+    {
+        get { return _enabledGameLibraries; }
+        set
         {
-            get { return _enabledGameLibraries; }
-            set
+            if (_enabledGameLibraries != value)
             {
-                if (_enabledGameLibraries != value)
+                _enabledGameLibraries = value;
+            }
+        }
+    }
+
+
+    bool _wasLoadingGames;
+    public bool WasLoadingGames
+    {
+        get { return _wasLoadingGames; }
+        set
+        {
+            if (_wasLoadingGames != value)
+            {
+                _wasLoadingGames = value;
+                if (_autoSave)
                 {
-                    _enabledGameLibraries = value;
+                    SaveJson();
                 }
             }
         }
+    }
 
 
-        bool _wasLoadingGames = false;
-        public bool WasLoadingGames
+    bool _dontShowManuallyAddingGamesNotice;
+    public bool DontShowManuallyAddingGamesNotice
+    {
+        get { return _dontShowManuallyAddingGamesNotice; }
+        set
         {
-            get { return _wasLoadingGames; }
-            set
+            if (_dontShowManuallyAddingGamesNotice != value)
             {
-                if (_wasLoadingGames != value)
+                _dontShowManuallyAddingGamesNotice = value;
+                if (_autoSave)
                 {
-                    _wasLoadingGames = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-
-        bool _dontShowManuallyAddingGamesNotice = false;
-        public bool DontShowManuallyAddingGamesNotice
+    bool _hasShownAddGameFolderMessage;
+    public bool HasShownAddGameFolderMessage
+    {
+        get { return _hasShownAddGameFolderMessage; }
+        set
         {
-            get { return _dontShowManuallyAddingGamesNotice; }
-            set
+            if (_hasShownAddGameFolderMessage != value)
             {
-                if (_dontShowManuallyAddingGamesNotice != value)
+                _hasShownAddGameFolderMessage = value;
+                if (_autoSave)
                 {
-                    _dontShowManuallyAddingGamesNotice = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-        bool _hasShownAddGameFolderMessage = false;
-        public bool HasShownAddGameFolderMessage
+    WindowPositionRect _lastWindowSizeAndPosition = new WindowPositionRect();
+    public WindowPositionRect LastWindowSizeAndPosition
+    {
+        get { return _lastWindowSizeAndPosition; }
+        set
         {
-            get { return _hasShownAddGameFolderMessage; }
-            set
+            if (_lastWindowSizeAndPosition != value)
             {
-                if (_hasShownAddGameFolderMessage != value)
+                _lastWindowSizeAndPosition = value;
+                if (_autoSave)
                 {
-                    _hasShownAddGameFolderMessage = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-        WindowPositionRect _lastWindowSizeAndPosition = new WindowPositionRect();
-        public WindowPositionRect LastWindowSizeAndPosition
+    GameGridViewType _gameGridViewType = GameGridViewType.GridView;
+    public GameGridViewType GameGridViewType
+    {
+        get { return _gameGridViewType; }
+        set
         {
-            get { return _lastWindowSizeAndPosition; }
-            set
+            if (_gameGridViewType != value)
             {
-                if (_lastWindowSizeAndPosition != value)
+                _gameGridViewType = value;
+                if (_autoSave)
                 {
-                    _lastWindowSizeAndPosition = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-        GameGridViewType _gameGridViewType = GameGridViewType.GridView;
-        public GameGridViewType GameGridViewType
+
+    int _gridViewItemWidth = 200;
+    public int GridViewItemWidth
+    {
+        get { return _gridViewItemWidth; }
+        set
         {
-            get { return _gameGridViewType; }
-            set
+            if (_gridViewItemWidth != value)
             {
-                if (_gameGridViewType != value)
+                _gridViewItemWidth = value;
+                if (_autoSave)
                 {
-                    _gameGridViewType = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-
-        int _gridViewItemWidth = 200;
-        public int GridViewItemWidth
+    bool _onlyShowDownloadedDlls;
+    public bool OnlyShowDownloadedDlls
+    {
+        get { return _onlyShowDownloadedDlls; }
+        set
         {
-            get { return _gridViewItemWidth; }
-            set
+            if (_onlyShowDownloadedDlls != value)
             {
-                if (_gridViewItemWidth != value)
+                _onlyShowDownloadedDlls = value;
+                if (_autoSave)
                 {
-                    _gridViewItemWidth = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-        bool _onlyShowDownloadedDlls = false;
-        public bool OnlyShowDownloadedDlls
+    string _language = string.Empty;
+    public string Language
+    {
+        get { return _language; }
+        set
         {
-            get { return _onlyShowDownloadedDlls; }
-            set
+            if (_language != value)
             {
-                if (_onlyShowDownloadedDlls != value)
+                _language = value;
+                if (_autoSave)
                 {
-                    _onlyShowDownloadedDlls = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-        string _language = string.Empty;
-        public string Language
+    string[] _ignoredPaths = Array.Empty<string>();
+    public string[] IgnoredPaths
+    {
+        get { return _ignoredPaths; }
+        set
         {
-            get { return _language; }
-            set
+            if (_ignoredPaths != value)
             {
-                if (_language != value)
+                _ignoredPaths = value;
+                if (_autoSave)
                 {
-                    _language = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
+                    SaveJson();
+                    WeakReferenceMessenger.Default.Send(new Messages.GameLibrariesStateChangedMessage());
                 }
             }
         }
+    }
 
-        string[] _ignoredPaths = new string[0];
-        public string[] IgnoredPaths
+    GameLibrarySettings[] _gameLibrarySettings = Array.Empty<GameLibrarySettings>();
+    public GameLibrarySettings[] GameLibrarySettings
+    {
+        get { return _gameLibrarySettings; }
+        set
         {
-            get { return _ignoredPaths; }
-            set
+            if (_gameLibrarySettings != value)
             {
-                if (_ignoredPaths != value)
+                _gameLibrarySettings = value;
+                if (_autoSave)
                 {
-                    _ignoredPaths = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                        WeakReferenceMessenger.Default.Send(new Messages.GameLibrariesStateChangedMessage());
-                    }
+                    SaveJson();
+                    WeakReferenceMessenger.Default.Send(new Messages.GameLibrariesOrderChangedMessage());
                 }
             }
         }
+    }
 
-        GameLibrarySettings[] _gameLibrarySettings = Array.Empty<GameLibrarySettings>();
-        public GameLibrarySettings[] GameLibrarySettings
+    string _lastLaunchVersion = string.Empty;
+    public string LastLaunchVersion
+    {
+        get { return _lastLaunchVersion; }
+        set
         {
-            get { return _gameLibrarySettings; }
-            set
+            if (_lastLaunchVersion != value)
             {
-                if (_gameLibrarySettings != value)
+                _lastLaunchVersion = value;
+                if (_autoSave)
                 {
-                    _gameLibrarySettings = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                        WeakReferenceMessenger.Default.Send(new Messages.GameLibrariesOrderChangedMessage());
-                    }
+                    SaveJson();
                 }
             }
         }
+    }
 
-        string _lastLaunchVersion = string.Empty;
-        public string LastLaunchVersion
+    internal void SaveJson()
+    {
+        Storage.SaveSettingsJson(this);
+    }
+
+    static Settings FromJson()
+    {
+        var settings = Storage.LoadSettingsJson();
+
+        // If we couldn't load settings then save the defaults.
+        if (settings is null)
         {
-            get { return _lastLaunchVersion; }
-            set
-            {
-                if (_lastLaunchVersion != value)
-                {
-                    _lastLaunchVersion = value;
-                    if (_autoSave)
-                    {
-                        SaveJson();
-                    }
-                }
-            }
+            settings = new Settings();
+            settings.SaveJson();
         }
 
-        internal void SaveJson()
+        var shouldSave = settings.CheckGameLibraries();
+        if (shouldSave)
         {
-            AsyncHelper.RunSync(() => Storage.SaveSettingsJsonAsync(this));
+            settings.SaveJson();
         }
 
-        static Settings FromJson()
+        // Re-enable auto save.
+        settings._autoSave = true;
+        return settings;
+    }
+
+    /// <summary>
+    /// Checks game libraries to see if there are any new ones to be added, or misconfigured settings.
+    /// </summary>
+    /// <returns></returns>
+    private bool CheckGameLibraries()
+    {
+        var gameLibraries = Enum.GetValues<GameLibrary>().ToList();
+
+        // Move manually added to the end of the list by default.
+        gameLibraries.Remove(GameLibrary.ManuallyAdded);
+        gameLibraries.Add(GameLibrary.ManuallyAdded);
+
+        // If no items are in the list we are migrating them all
+        // If there are some items in the list we are only checking and adding new libraries
+        if (_gameLibrarySettings.Length == 0)
         {
-            Settings? settings = null;
-
-            var settingsFromJson = AsyncHelper.RunSync(() => Storage.LoadSettingsJsonAsync());
-            // If we couldn't load settings then save the defaults.
-            if (settingsFromJson is null)
-            {
-                settings = new Settings();
-                settings.SaveJson();
-            }
-            else
-            {
-                settings = settingsFromJson;
-            }
-
-            var shouldSave = settings.CheckGameLibraries();
-            if (shouldSave)
-            {
-                settings.SaveJson();
-            }
-
-            // Re-enable auto save.
-            settings._autoSave = true;
-            return settings;
-        }
-
-        /// <summary>
-        /// Checks game libraries to see if there are any new ones to be added, or misconfigured settings.
-        /// </summary>
-        /// <returns></returns>
-        private bool CheckGameLibraries()
-        {
-            var gameLibraries = Enum.GetValues<GameLibrary>().ToList();
-
-            // Move manually added to the end of the list by default.
-            gameLibraries.Remove(GameLibrary.ManuallyAdded);
-            gameLibraries.Add(GameLibrary.ManuallyAdded);
-
-            // If no items are in the list we are migrating them all
-            // If there are some items in the list we are only checking and adding new libraries
-            if (_gameLibrarySettings.Length == 0)
-            {
 #pragma warning disable CS0618 // Type or member is obsolete
-                var enabledGameLibraries = (GameLibrary)EnabledGameLibraries;
+            var enabledGameLibraries = (GameLibrary)EnabledGameLibraries;
 #pragma warning restore CS0618 // Type or member is obsolete
 
-                var tempGameLibraries = new List<GameLibrarySettings>(gameLibraries.Count);
+            var tempGameLibraries = new List<GameLibrarySettings>(gameLibraries.Count);
+            foreach (var gameLibrary in gameLibraries)
+            {
+                // Enaable libraries based on EnabledGameLibraries property.
+                tempGameLibraries.Add(new GameLibrarySettings()
+                {
+                    GameLibrary = gameLibrary,
+                    IsEnabled = enabledGameLibraries.HasFlag(gameLibrary),
+                });
+            }
+            _gameLibrarySettings = tempGameLibraries.ToArray();
+            return true;
+        }
+        else
+        {
+            // Remove each one of the loaded gameLibraries from the list.
+            foreach (var gameLibrarySetting in _gameLibrarySettings)
+            {
+                gameLibraries.Remove(gameLibrarySetting.GameLibrary);
+            }
+
+            // If there are any items it could be a new launch, new library, or misconfigured settings.
+            if (gameLibraries.Count > 0)
+            {
+                var tempGameLibraries = new List<GameLibrarySettings>(_gameLibrarySettings);
                 foreach (var gameLibrary in gameLibraries)
                 {
-                    // Enaable libraries based on EnabledGameLibraries property.
+                    // Because this is not a full migration new libraries are enabled by default.
                     tempGameLibraries.Add(new GameLibrarySettings()
                     {
                         GameLibrary = gameLibrary,
-                        IsEnabled = enabledGameLibraries.HasFlag(gameLibrary),
+                        IsEnabled = true,
                     });
                 }
                 _gameLibrarySettings = tempGameLibraries.ToArray();
                 return true;
             }
-            else
-            {
-                // Remove each one of the loaded gameLibraries from the list.
-                foreach (var gameLibrarySetting in _gameLibrarySettings)
-                {
-                    gameLibraries.Remove(gameLibrarySetting.GameLibrary);
-                }
-
-                // If there are any items it could be a new launch, new library, or misconfigured settings.
-                if (gameLibraries.Count > 0)
-                {
-                    var tempGameLibraries = new List<GameLibrarySettings>(_gameLibrarySettings);
-                    foreach (var gameLibrary in gameLibraries)
-                    {
-                        // Because this is not a full migration new libraries are enabled by default.
-                        tempGameLibraries.Add(new GameLibrarySettings()
-                        {
-                            GameLibrary = gameLibrary,
-                            IsEnabled = true,
-                        });
-                    }
-                    _gameLibrarySettings = tempGameLibraries.ToArray();
-                    return true;
-                }
-            }
-
-            return false;
         }
+
+        return false;
     }
 }

@@ -5,14 +5,13 @@ using SQLite;
 
 namespace DLSS_Swapper.Data.ManuallyAdded;
 
-[Table("ManuallyAddedGame")]
+[Table("manually_added_game")]
 public class ManuallyAddedGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.ManuallyAdded;
 
     public override bool IsReadyToPlay => true;
 
-    //    public override string HeaderImage => string.Empty;
 
     public ManuallyAddedGame()
     {
@@ -42,10 +41,12 @@ public class ManuallyAddedGame : Game
     {
         var didChange = ParentUpdateFromGame(game);
 
+        /*
         if (game is ManuallyAddedGame manuallyAddedGame)
         {
 
         }
+        */
 
         return didChange;
     }

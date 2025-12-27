@@ -8,7 +8,7 @@ using SQLite;
 
 namespace DLSS_Swapper.Data.Xbox;
 
-[Table("XboxGame")]
+[Table("xbox_game")]
 public class XboxGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.XboxApp;
@@ -101,6 +101,15 @@ public class XboxGame : Game
     public override bool UpdateFromGame(Game game)
     {
         var didChange = ParentUpdateFromGame(game);
+
+        if (game is XboxGame xboxGame)
+        {
+            if (ApplicationId != xboxGame.ApplicationId)
+            {
+                ApplicationId = xboxGame.ApplicationId;
+                didChange = true;
+            }
+        }
 
         return didChange;
     }

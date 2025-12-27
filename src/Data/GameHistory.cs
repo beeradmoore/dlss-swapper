@@ -13,6 +13,7 @@ public enum GameHistoryEventType
     DLLBackupRemoved,
 }
 
+[Table("game_history")]
 public class GameHistory
 {
     [Indexed]

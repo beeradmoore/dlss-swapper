@@ -1,46 +1,40 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
-namespace DLSS_Swapper.Data.EpicGamesStore
+namespace DLSS_Swapper.Data.EpicGamesStore;
+
+internal class CacheItem
 {
-    internal class CacheItem
+    [JsonPropertyName("id")]
+    public string Id { get; set; } = string.Empty;
+
+    [JsonPropertyName("title")]
+    public string Title { get; set; } = string.Empty;
+
+    [JsonPropertyName("keyImages")]
+    public CacheItemKeyImage[] KeyImages { get; set; } = System.Array.Empty<CacheItemKeyImage>();
+
+
+    internal class CacheItemKeyImage
     {
-        [JsonPropertyName("id")]
-        public string Id { get; set; } = string.Empty;
+        [JsonPropertyName("type")]
+        public string Type { get; set; } = string.Empty;
 
-        [JsonPropertyName("title")]
-        public string Title { get; set; } = string.Empty;
+        [JsonPropertyName("url")]
+        public string Url { get; set; } = string.Empty;
 
-        [JsonPropertyName("keyImages")]
-        public CacheItemKeyImage[] KeyImages { get; set; } = new CacheItemKeyImage[0];
+        [JsonPropertyName("width")]
+        public int Width { get; set; }
 
+        [JsonPropertyName("height")]
+        public int Height { get; set; }
 
-        internal class CacheItemKeyImage
-        {
-            [JsonPropertyName("type")]
-            public string Type { get; set; } = string.Empty;
+        [JsonPropertyName("size")]
+        public int Size { get; set; }
 
-            [JsonPropertyName("url")]
-            public string Url { get; set; } = string.Empty;
+        [JsonPropertyName("uploadedDate")]
+        public string UploadedDate { get; set; } = string.Empty;
 
-            [JsonPropertyName("width")]
-            public int Width { get; set; }
-
-            [JsonPropertyName("height")]
-            public int Height { get; set; }
-
-            [JsonPropertyName("size")]
-            public int Size { get; set; }
-
-            [JsonPropertyName("uploadedDate")]
-            public string UploadedDate { get; set; } = string.Empty;
-
-            [JsonPropertyName("md5")]
-            public string MD5 { get; set; } = string.Empty;
-        }
+        [JsonPropertyName("md5")]
+        public string MD5 { get; set; } = string.Empty;
     }
 }

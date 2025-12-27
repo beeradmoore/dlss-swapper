@@ -52,24 +52,24 @@ public class NVIDIAApiException : Exception
 internal partial class NVAPIHelper : ObservableObject
 {
     // Via https://github.com/NVIDIA/nvapi/blob/main/NvApiDriverSettings.h
-    const uint NGX_DLAA_OVERRIDE_ID = 0x10E41DF4;
-    const uint NGX_DLSSG_MULTI_FRAME_COUNT_ID = 0x104D6667;
-    const uint NGX_DLSS_FG_OVERRIDE_ID = 0x10E41E03;
-    const uint NGX_DLSS_FG_OVERRIDE_RESERVED_KEY1_ID = 0x10C7D57E;
-    const uint NGX_DLSS_FG_OVERRIDE_RESERVED_KEY2_ID = 0x10C7D519;
-    const uint NGX_DLSS_OVERRIDE_OPTIMAL_SETTINGS_ID = 0x10AFB76C;
-    const uint NGX_DLSS_RR_MODE_ID = 0x10BD9423;
-    const uint NGX_DLSS_RR_OVERRIDE_ID = 0x10E41E02;
+    //const uint NGX_DLAA_OVERRIDE_ID = 0x10E41DF4;
+    //const uint NGX_DLSSG_MULTI_FRAME_COUNT_ID = 0x104D6667;
+    //const uint NGX_DLSS_FG_OVERRIDE_ID = 0x10E41E03;
+    //const uint NGX_DLSS_FG_OVERRIDE_RESERVED_KEY1_ID = 0x10C7D57E;
+    //const uint NGX_DLSS_FG_OVERRIDE_RESERVED_KEY2_ID = 0x10C7D519;
+    //const uint NGX_DLSS_OVERRIDE_OPTIMAL_SETTINGS_ID = 0x10AFB76C;
+    //const uint NGX_DLSS_RR_MODE_ID = 0x10BD9423;
+    //const uint NGX_DLSS_RR_OVERRIDE_ID = 0x10E41E02;
     const uint NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID = 0x10E41DF7;
-    const uint NGX_DLSS_RR_OVERRIDE_RESERVED_KEY1_ID = 0x10C7D86C;
-    const uint NGX_DLSS_RR_OVERRIDE_RESERVED_KEY2_ID = 0x10C7D597;
-    const uint NGX_DLSS_RR_OVERRIDE_SCALING_RATIO_ID = 0x10C7D4A2;
-    const uint NGX_DLSS_SR_MODE_ID = 0x10AFB768;
-    const uint NGX_DLSS_SR_OVERRIDE_ID = 0x10E41E01;
+    //const uint NGX_DLSS_RR_OVERRIDE_RESERVED_KEY1_ID = 0x10C7D86C;
+    //const uint NGX_DLSS_RR_OVERRIDE_RESERVED_KEY2_ID = 0x10C7D597;
+    //const uint NGX_DLSS_RR_OVERRIDE_SCALING_RATIO_ID = 0x10C7D4A2;
+    //const uint NGX_DLSS_SR_MODE_ID = 0x10AFB768;
+    //const uint NGX_DLSS_SR_OVERRIDE_ID = 0x10E41E01;
     const uint NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID = 0x10E41DF3;
-    const uint NGX_DLSS_SR_OVERRIDE_RESERVED_KEY1_ID = 0x10C7D684;
-    const uint NGX_DLSS_SR_OVERRIDE_RESERVED_KEY2_ID = 0x10C7D82C;
-    const uint NGX_DLSS_SR_OVERRIDE_SCALING_RATIO_ID = 0x10E41DF5;
+    //const uint NGX_DLSS_SR_OVERRIDE_RESERVED_KEY1_ID = 0x10C7D684;
+    //const uint NGX_DLSS_SR_OVERRIDE_RESERVED_KEY2_ID = 0x10C7D82C;
+    //const uint NGX_DLSS_SR_OVERRIDE_SCALING_RATIO_ID = 0x10E41DF5;
 
     [ObservableProperty]
     public partial bool IsSupported { get; set; }
@@ -102,7 +102,7 @@ internal partial class NVAPIHelper : ObservableObject
             var dlssPresetsJsonPath = @"Assets\dlss_presets.json";
             if (File.Exists(dlssPresetsJsonPath) == true)
             {
-                var dlssPresetOptions = JsonSerializer.Deserialize<List<PresetOption>>(File.ReadAllText(dlssPresetsJsonPath))?.Where(x => x.Used == true)?.ToList();
+                var dlssPresetOptions = JsonSerializer.Deserialize(File.ReadAllText(dlssPresetsJsonPath), SourceGenerationContext.Default.ListPresetOption)?.Where(x => x.Used == true)?.ToList();
                 if (dlssPresetOptions is not null && dlssPresetOptions.Count > 0)
                 {
                     for (var i = 0; i < dlssPresetOptions.Count; ++i)
@@ -147,7 +147,7 @@ internal partial class NVAPIHelper : ObservableObject
             var dlssDPresetsJsonPath = @"Assets\dlss_d_presets.json";
             if (File.Exists(dlssDPresetsJsonPath) == true)
             {
-                var dlssDPresetOptions = JsonSerializer.Deserialize<List<PresetOption>>(File.ReadAllText(dlssDPresetsJsonPath))?.Where(x => x.Used == true)?.ToList();
+                var dlssDPresetOptions = JsonSerializer.Deserialize(File.ReadAllText(dlssDPresetsJsonPath), SourceGenerationContext.Default.ListPresetOption)?.Where(x => x.Used == true)?.ToList();
                 if (dlssDPresetOptions is not null && dlssDPresetOptions.Count > 0)
                 {
                     for (var i = 0; i < dlssDPresetOptions.Count; ++i)

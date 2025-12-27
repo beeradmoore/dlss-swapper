@@ -369,16 +369,16 @@
     <PackageReference Include="AsyncAwaitBestPractices" Version="10.0.0" />
     <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="10.0.0" />
     <PackageReference Include="ByteSize" Version="2.1.2" />
-    <PackageReference Include="CommunityToolkit.Labs.WinUI.Controls.MarkdownTextBlock" Version="0.1.251030-build.2370" />
+    <PackageReference Include="CommunityToolkit.Labs.WinUI.Controls.MarkdownTextBlock" Version="0.1.251217-build.2437" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.DataGrid" Version="7.1.2" />
     <PackageReference Include="CsvHelper" Version="33.1.0" />
     <PackageReference Include="FuzzySharp" Version="2.0.2" />
     <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
-    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.2.250402" />
-    <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.2.250402" />
-    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.250402" />
-    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.250402" />
+    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.251219" />
     <PackageReference Include="Google.Protobuf" Version="3.33.2" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3650.58" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.264">

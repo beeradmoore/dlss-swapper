@@ -20,7 +20,7 @@ public class ResourceHelper
 
     static bool _translatorModeEnabled;
 #if DEBUG
-    static bool _langHunterEnabled = false;
+    static bool _langHunterEnabled;
 #endif
 
     internal static bool TranslatorModeEnabled

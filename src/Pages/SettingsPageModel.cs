@@ -102,7 +102,7 @@ public partial class SettingsPageModel : ObservableObject
 
     public ObservableCollection<string> IgnoredPaths { get; set; }
 
-    bool _hasSetDefaults = false;
+    bool _hasSetDefaults;
 
     public SettingsPageModelTranslationProperties TranslationProperties { get; } = new SettingsPageModelTranslationProperties();
 

@@ -140,7 +140,7 @@ dotnet_diagnostic.CA1810.severity = warning
 dotnet_diagnostic.CA1821.severity = warning
 
 # CA1822: Make member static
-dotnet_diagnostic.CA1822.severity = warning
+dotnet_diagnostic.CA1822.severity = none
 dotnet_code_quality.CA1822.api_surface = private, internal
 
 # CA1823: Avoid unused private fields
@@ -216,7 +216,7 @@ dotnet_diagnostic.CA1846.severity = warning
 dotnet_diagnostic.CA1847.severity = warning
 
 # CA1852: Seal internal types
-dotnet_diagnostic.CA1852.severity = warning
+dotnet_diagnostic.CA1852.severity = none
 
 # CA1854: Prefer the IDictionary.TryGetValue(TKey, out TValue) method
 dotnet_diagnostic.CA1854.severity = warning
@@ -339,8 +339,8 @@ dotnet_diagnostic.IDE0161.severity = warning
 dotnet_diagnostic.IDE0200.severity = warning
 
 # IDE2000: Disallow multiple blank lines
-dotnet_style_allow_multiple_blank_lines_experimental = false
-dotnet_diagnostic.IDE2000.severity = warning
+dotnet_style_allow_multiple_blank_lines_experimental = true
+dotnet_diagnostic.IDE2000.severity = none
 
 # Verify settings
 [*.{received,verified}.{txt,xml,json}]

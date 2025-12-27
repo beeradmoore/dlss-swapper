@@ -1,19 +1,24 @@
+using SQLite;
 using System.Threading.Tasks;
-using DLSS_Swapper.Data.BattleNet.Proto;
 using DLSS_Swapper.Interfaces;
 
 namespace DLSS_Swapper.Data.BattleNet;
 
+[Table("battlenet_game")]
 internal class BattleNetGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.BattleNet;
 
+    [Column("state_playable")]
     public bool StatePlayable { get; set; }
 
     public override bool IsReadyToPlay => StatePlayable;
 
+    [Column("remote_cover_image")]
     public string RemoteCoverImage { get; set; } = string.Empty;
 
+
+    [Column("launcher_id")]
     public string LauncherId { get; set; } = string.Empty;
 
     public BattleNetGame()
@@ -57,6 +62,18 @@ internal class BattleNetGame : Game
             if (StatePlayable != battleNetGame.StatePlayable)
             {
                 StatePlayable = battleNetGame.StatePlayable;
+                didChange = true;
+            }
+
+            if (RemoteCoverImage != battleNetGame.RemoteCoverImage)
+            {
+                RemoteCoverImage = battleNetGame.RemoteCoverImage;
+                didChange = true;
+            }
+
+            if (LauncherId != battleNetGame.LauncherId)
+            {
+                LauncherId = battleNetGame.LauncherId;
                 didChange = true;
             }
         }

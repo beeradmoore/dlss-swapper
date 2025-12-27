@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using DLSS_Swapper.Data.BattleNet;
+using DLSS_Swapper.Data.DLSS;
+using DLSS_Swapper.Data.EAApp;
 using DLSS_Swapper.Data.Steam.SteamAPI;
 using Microsoft.UI.Windowing;
 
@@ -13,6 +16,8 @@ namespace DLSS_Swapper;
 [JsonSerializable(typeof(Data.GOG.GamePiece.GamePieceOriginalImages))]
 [JsonSerializable(typeof(Data.GOG.ResourceImages))]
 [JsonSerializable(typeof(Data.GOG.GOGEmbedFilteredResponse))]
+[JsonSerializable(typeof(Data.GOG.GOGCatalogResponse))]
+[JsonSerializable(typeof(Data.GOG.GOGProduct))]
 [JsonSerializable(typeof(Data.Manifest))]
 [JsonSerializable(typeof(Data.DLLRecord))]
 [JsonSerializable(typeof(Settings))]
@@ -21,7 +26,11 @@ namespace DLSS_Swapper;
 [JsonSerializable(typeof(Data.HashedKnownDLL))]
 [JsonSerializable(typeof(Data.GameLibrarySettings))]
 [JsonSerializable(typeof(Dictionary<string, string>))]
-[JsonSerializable(typeof(Data.Steam.SteamAPI.SteamAPIResponse<GetItemsResponse>))]
+[JsonSerializable(typeof(SteamAPIResponse<GetItemsResponse>))]
+[JsonSerializable(typeof(Aggregate))]
+[JsonSerializable(typeof(List<GameSearchResult>))]
+[JsonSerializable(typeof(List<PresetOption>))]
+[JsonSerializable(typeof(GetItemsInput))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }

@@ -11,7 +11,7 @@ using SQLite;
 
 namespace DLSS_Swapper.Data.Steam;
 
-[Table("SteamGame")]
+[Table("steam_game")]
 internal partial class SteamGame : Game
 {
     public override GameLibrary GameLibrary => GameLibrary.Steam;
@@ -83,7 +83,7 @@ internal partial class SteamGame : Game
             getItemsInput.Ids.Add(new StoreItemId() { AppId = Int32.Parse(PlatformId, System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture) });
             getItemsInput.DataRequest.IncludeAssets = true;
 
-            var jsonPayload = JsonSerializer.Serialize(getItemsInput);
+            var jsonPayload = JsonSerializer.Serialize(getItemsInput, SourceGenerationContext.Default.GetItemsInput);
             var payloadUrlEncoded = HttpUtility.UrlEncode(jsonPayload);
 
             using (var steamApiResponse = await App.CurrentApp.HttpClient.GetAsync($"https://api.steampowered.com/IStoreBrowseService/GetItems/v1/?input_json={payloadUrlEncoded}", System.Net.Http.HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false))
@@ -96,7 +96,7 @@ internal partial class SteamGame : Game
 
                 using (var responseStream = await steamApiResponse.Content.ReadAsStreamAsync().ConfigureAwait(false))
                 {
-                    var response = JsonSerializer.Deserialize<SteamAPIResponse<GetItemsResponse>>(responseStream, SourceGenerationContext.Default.SteamAPIResponseGetItemsResponse);
+                    var response = JsonSerializer.Deserialize(responseStream, SourceGenerationContext.Default.SteamAPIResponseGetItemsResponse);
                     if (response?.Response?.StoreItems.Any() == true)
                     {
                         // We are only doing one search, so we likely only care for the first item.

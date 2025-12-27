@@ -146,18 +146,18 @@ static class Storage
     }
 
     /// <summary>
-    /// Saves teh current settings object to settings.json in the apps dynamic json folder.
+    /// Saves the current settings object to settings.json in the apps dynamic json folder.
     /// </summary>
     /// <param name="settings">Settings object to be saved</param>
     /// <returns>Task</returns>
-    internal static async Task SaveSettingsJsonAsync(Settings settings)
+    internal static void SaveSettingsJson(Settings settings)
     {
         var settingsFile = Path.Combine(GetDynamicJsonFolder(), "settings.json");
         try
         {
             using (var stream = File.Open(settingsFile, FileMode.Create))
             {
-                await JsonSerializer.SerializeAsync(stream, settings, SourceGenerationContext.Default.Settings);
+                JsonSerializer.Serialize(stream, settings, SourceGenerationContext.Default.Settings);
             }
         }
         catch (Exception err)
@@ -170,7 +170,7 @@ static class Storage
     /// Loads settings from settings.json in the apps dynamic json folder.
     /// </summary>
     /// <returns>Settings object, or null if it could not be loaded</returns>
-    internal static async Task<Settings?> LoadSettingsJsonAsync()
+    internal static Settings? LoadSettingsJson()
     {
         var settingsFile = Path.Combine(GetDynamicJsonFolder(), "settings.json");
 
@@ -182,9 +182,9 @@ static class Storage
 
         try
         {
-            using (var stream = File.Open(settingsFile, FileMode.Open))
+            using (var stream = File.OpenRead(settingsFile))
             {
-                return await JsonSerializer.DeserializeAsync(stream, SourceGenerationContext.Default.Settings);
+                return JsonSerializer.Deserialize(stream, SourceGenerationContext.Default.Settings);
             }
         }
         catch (Exception err)

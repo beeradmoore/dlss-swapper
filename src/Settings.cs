@@ -391,23 +391,18 @@ public class Settings
 
     internal void SaveJson()
     {
-        AsyncHelper.RunSync(() => Storage.SaveSettingsJsonAsync(this));
+        Storage.SaveSettingsJson(this);
     }
 
     static Settings FromJson()
     {
-        Settings? settings = null;
+        var settings = Storage.LoadSettingsJson();
 
-        var settingsFromJson = AsyncHelper.RunSync(() => Storage.LoadSettingsJsonAsync());
         // If we couldn't load settings then save the defaults.
-        if (settingsFromJson is null)
+        if (settings is null)
         {
             settings = new Settings();
             settings.SaveJson();
-        }
-        else
-        {
-            settings = settingsFromJson;
         }
 
         var shouldSave = settings.CheckGameLibraries();

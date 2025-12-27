@@ -102,6 +102,15 @@ public class XboxGame : Game
     {
         var didChange = ParentUpdateFromGame(game);
 
+        if (game is XboxGame xboxGame)
+        {
+            if (ApplicationId != xboxGame.ApplicationId)
+            {
+                ApplicationId = xboxGame.ApplicationId;
+                didChange = true;
+            }
+        }
+
         return didChange;
     }
 }

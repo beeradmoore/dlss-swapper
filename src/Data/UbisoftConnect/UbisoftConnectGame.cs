@@ -36,7 +36,11 @@ internal class UbisoftConnectGame : Game
 
         if (game is UbisoftConnectGame ubisoftConnectGame)
         {
-            //_localHeaderImages = xboxGame._localHeaderImages;
+            if (RemoteHeaderImage != ubisoftConnectGame.RemoteHeaderImage)
+            {
+                RemoteHeaderImage = ubisoftConnectGame.RemoteHeaderImage;
+                didChange = true;
+            }
         }
 
         return didChange;

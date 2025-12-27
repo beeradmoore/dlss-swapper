@@ -64,6 +64,18 @@ internal class BattleNetGame : Game
                 StatePlayable = battleNetGame.StatePlayable;
                 didChange = true;
             }
+
+            if (RemoteCoverImage != battleNetGame.RemoteCoverImage)
+            {
+                RemoteCoverImage = battleNetGame.RemoteCoverImage;
+                didChange = true;
+            }
+
+            if (LauncherId != battleNetGame.LauncherId)
+            {
+                LauncherId = battleNetGame.LauncherId;
+                didChange = true;
+            }
         }
 
         return didChange;

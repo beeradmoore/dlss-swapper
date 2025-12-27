@@ -31,7 +31,17 @@ internal class EAAppGame : Game
 
     public override bool UpdateFromGame(Game game)
     {
-        return true;
+        var didChange = ParentUpdateFromGame(game);
+
+        if (game is EAAppGame eaAppGame)
+        {
+            if (DisplayIconPath != eaAppGame.DisplayIconPath)
+            {
+                DisplayIconPath = eaAppGame.DisplayIconPath;
+                didChange = true;
+            }
+        }
+        return didChange;
     }
 
     protected override async Task UpdateCacheImageAsync()

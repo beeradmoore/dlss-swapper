@@ -12,7 +12,6 @@ public class ManuallyAddedGame : Game
 
     public override bool IsReadyToPlay => true;
 
-    //    public override string HeaderImage => string.Empty;
 
     public ManuallyAddedGame()
     {
@@ -42,10 +41,12 @@ public class ManuallyAddedGame : Game
     {
         var didChange = ParentUpdateFromGame(game);
 
+        /*
         if (game is ManuallyAddedGame manuallyAddedGame)
         {
 
         }
+        */
 
         return didChange;
     }

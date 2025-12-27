@@ -47,7 +47,11 @@ internal class EpicGamesStoreGame : Game
 
         if (game is EpicGamesStoreGame epicGamesStoreGame)
         {
-            //_localHeaderImages = xboxGame._localHeaderImages;
+            if (RemoteHeaderImage != epicGamesStoreGame.RemoteHeaderImage)
+            {
+                RemoteHeaderImage = epicGamesStoreGame.RemoteHeaderImage;
+                didChange = true;
+            }
         }
 
         return didChange;

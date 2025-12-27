@@ -197,7 +197,11 @@ internal class GOGGame : Game
 
         if (game is GOGGame gogGame)
         {
-            //_localHeaderImages = xboxGame._localHeaderImages;
+            if (FallbackHeaderUrl != gogGame.FallbackHeaderUrl)
+            {
+                FallbackHeaderUrl = gogGame.FallbackHeaderUrl;
+                didChange = true;
+            }
         }
 
         return didChange;

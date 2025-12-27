@@ -37,8 +37,8 @@ public sealed partial class GameGridPage : Page
     ObservableCollection<Game> AllGames = new ObservableCollection<Game>();
     */
 
-    bool _loadingGamesAndDlls = false;
-    Timer? _saveScrollSizeTimer = null;
+    bool _loadingGamesAndDlls;
+    Timer? _saveScrollSizeTimer;
 
     public GameGridPageModel ViewModel { get; private set; }
 
@@ -49,7 +49,7 @@ public sealed partial class GameGridPage : Page
         DataContext = ViewModel;
     }
 
-    bool hasFirstLoaded = false;
+    bool hasFirstLoaded;
     void Page_Loaded(object sender, RoutedEventArgs e)
     {
         if (hasFirstLoaded)

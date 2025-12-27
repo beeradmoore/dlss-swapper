@@ -18,7 +18,7 @@ internal class EpicGamesStoreLibrary : IGameLibrary
 
     public Type GameType => typeof(EpicGamesStoreGame);
 
-    static EpicGamesStoreLibrary? instance = null;
+    static EpicGamesStoreLibrary? instance;
     public static EpicGamesStoreLibrary Instance => instance ??= new EpicGamesStoreLibrary();
 
     GameLibrarySettings? _gameLibrarySettings;

@@ -6,8 +6,8 @@ namespace DLSS_Swapper.Data.UbisoftConnect;
 internal class UbisoftConnectConfigurationItem
 {
     public string Version { get; set; } = string.Empty;
-    public RootNode? Root { get; set; } = null;
-    public Dictionary<string, Dictionary<string, string>>? Localizations { get; set; } = null;
+    public RootNode? Root { get; set; }
+    public Dictionary<string, Dictionary<string, string>>? Localizations { get; set; }
 
     internal class RootNode
     {
@@ -19,8 +19,8 @@ internal class UbisoftConnectConfigurationItem
         public string IconImage { get; set; } = string.Empty;
         public string AppId { get; set; } = string.Empty;
         public string SpaceId { get; set; } = string.Empty;
-        public StartGameNode? StartGame { get; set; } = null;
-        public InstallerNode? Installer { get; set; } = null;
+        public StartGameNode? StartGame { get; set; }
+        public InstallerNode? Installer { get; set; }
     }
 
     public class InstallerNode
@@ -30,8 +30,8 @@ internal class UbisoftConnectConfigurationItem
 
     public class StartGameNode
     {
-        public StartGameModeNode? Online { get; set; } = null;
-        public StartGameModeNode? Offline { get; set; } = null;
+        public StartGameModeNode? Online { get; set; }
+        public StartGameModeNode? Offline { get; set; }
 
         public List<ExecutablesNode> GetUniqueExecutables()
         {
@@ -80,13 +80,13 @@ internal class UbisoftConnectConfigurationItem
 
     public class StartGameModeNode
     {
-        public List<ExecutablesNode>? Executables { get; set; } = null;
+        public List<ExecutablesNode>? Executables { get; set; }
     }
 
     public class ExecutablesNode
     {
         public string ShortcutName { get; set; } = string.Empty;
-        public WorkingDirectoryNode? WorkingDirectory { get; set; } = null;
+        public WorkingDirectoryNode? WorkingDirectory { get; set; }
     }
 
     public class WorkingDirectoryNode

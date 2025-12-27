@@ -19,7 +19,7 @@ internal partial class BattleNetLibrary : IGameLibrary
 
     public Type GameType => typeof(BattleNetGame);
 
-    static BattleNetLibrary? instance = null;
+    static BattleNetLibrary? instance;
     public static BattleNetLibrary Instance => instance ??= new BattleNetLibrary();
 
     GameLibrarySettings? _gameLibrarySettings;

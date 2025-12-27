@@ -317,7 +317,7 @@ public class FakeContentDialog : Control
         }
     }
 
-    bool hasSetTemplate = false;
+    bool hasSetTemplate;
     protected override void OnApplyTemplate()
     {
         base.OnApplyTemplate();

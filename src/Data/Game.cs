@@ -33,7 +33,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
     public partial string Title { get; set; } = string.Empty;
 
     // Used to cache the title as a base64 string
-    string? _titleBase64 = null;
+    string? _titleBase64;
     [Ignore]
     public string TitleBase64 => _titleBase64 ??= Convert.ToBase64String(Encoding.UTF8.GetBytes(Title));
 
@@ -122,7 +122,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
     [Ignore]
     public bool NeedsProcessing { get; set; } = false;
 
-    bool _isLoadingCoverImage = false;
+    bool _isLoadingCoverImage;
 
     [ObservableProperty]
     [Ignore]

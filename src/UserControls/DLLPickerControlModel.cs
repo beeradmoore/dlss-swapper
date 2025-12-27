@@ -43,7 +43,7 @@ public partial class DLLPickerControlModel : ObservableObject
     [ObservableProperty]
     public partial GameAsset? BackupGameAsset { get; set; } = null;
 
-    public bool CanCloseParentDialog { get; set; } = false;
+    public bool CanCloseParentDialog { get; set; }
 
     public DLLPickerControlModelTranslationProperties TranslationProperties { get; } = new DLLPickerControlModelTranslationProperties();
 

@@ -172,9 +172,9 @@ public sealed partial class MainWindow : Window
     }
 
 
-    GameGridPage? gameGridPage = null;
-    LibraryPage? libraryPage = null;
-    SettingsPage? settingsPage = null;
+    GameGridPage? gameGridPage;
+    LibraryPage? libraryPage;
+    SettingsPage? settingsPage;
 
     public GameGridPage? GameGridPage => gameGridPage;
 

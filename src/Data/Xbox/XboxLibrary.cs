@@ -20,7 +20,7 @@ internal class XboxLibrary : IGameLibrary
 
     public Type GameType => typeof(XboxGame);
 
-    static XboxLibrary? instance = null;
+    static XboxLibrary? instance;
     public static XboxLibrary Instance => instance ??= new XboxLibrary();
 
     GameLibrarySettings? _gameLibrarySettings;

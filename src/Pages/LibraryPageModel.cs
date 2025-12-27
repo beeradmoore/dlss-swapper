@@ -26,7 +26,7 @@ public partial class LibraryPageModel : ObservableObject
 {
     LibraryPage libraryPage;
 
-    internal ObservableCollection<DLLRecord>? SelectedLibraryList { get; private set; } = null;
+    internal ObservableCollection<DLLRecord>? SelectedLibraryList { get; private set; }
 
     [ObservableProperty]
     public partial bool IsRefreshing { get; set; }

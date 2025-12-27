@@ -186,7 +186,7 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
         }
     }
 
-    LocalRecord? _localRecord = null;
+    LocalRecord? _localRecord;
 
     [JsonIgnore]
     public LocalRecord? LocalRecord
@@ -244,7 +244,7 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
 
     #region INotifyPropertyChanged
 
-    public event PropertyChangedEventHandler? PropertyChanged = null;
+    public event PropertyChangedEventHandler? PropertyChanged;
     internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

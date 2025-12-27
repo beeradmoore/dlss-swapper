@@ -61,7 +61,7 @@ internal class LimitedDetail
     [Column("ProductDetailsResponseId")]
     public int ProductDetailsResponseId { get; set; }
 
-    LimitedDetailImages? _imagesData = null;
+    LimitedDetailImages? _imagesData;
     [SQLite.Ignore]
     public LimitedDetailImages? ImagesData
     {

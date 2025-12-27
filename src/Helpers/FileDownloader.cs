@@ -43,7 +43,7 @@ public partial class FileDownloader : ObservableObject
 
     public string LogPrefix { get; set; } = string.Empty;
 
-    int _timerInterval = 0;
+    int _timerInterval;
     public FileDownloader(string url, int timerInterval = 100)
     {
         _url = url;

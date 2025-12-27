@@ -145,7 +145,7 @@ internal class DLLManager
 
             // If the manifest is > 3h old
             var timeSinceLastUpdate = DateTimeOffset.Now - fileInfo.LastWriteTime;
-            if (timeSinceLastUpdate.TotalHours > 5)
+            if (timeSinceLastUpdate.TotalHours > 3)
             {
                 shouldUpdate = true;
             }

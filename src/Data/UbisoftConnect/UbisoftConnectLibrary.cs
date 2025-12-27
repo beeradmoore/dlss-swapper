@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using DLSS_Swapper.Helpers;
@@ -217,8 +218,8 @@ internal class UbisoftConnectLibrary : IGameLibrary
                                 }
                             }
 
-                            var cachedGame = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString());
-                            var activeGame = cachedGame ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString());
+                            var cachedGame = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString(CultureInfo.InvariantCulture));
+                            var activeGame = cachedGame ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString(CultureInfo.InvariantCulture));
                             activeGame.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;  // TODO: Will this be a problem if the game is already loaded
                             activeGame.InstallPath = PathHelpers.NormalizePath(installedTitles[configurationRecord.InstallId].InstallPath);
                             activeGame.RemoteHeaderImage = remoteImage;

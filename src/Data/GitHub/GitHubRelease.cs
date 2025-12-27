@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Text.Json.Serialization;
 
@@ -31,13 +32,13 @@ internal class GitHubRelease
     // 2022-01-29T04:57:30Z
 
     [JsonIgnore]
-    public DateTime CreateAtDateTime => DateTime.Parse(CreatedAt);
+    public DateTime CreateAtDateTime => DateTime.Parse(CreatedAt, CultureInfo.InvariantCulture);
 
     [JsonPropertyName("published_at")]
     public string PublishedAt { get; set; } = string.Empty;
     // 2022-01-29T05:02:29Z
 
-    public DateTime PublishedAtDateTime => DateTime.Parse(PublishedAt);
+    public DateTime PublishedAtDateTime => DateTime.Parse(PublishedAt, CultureInfo.InvariantCulture);
 
     [JsonPropertyName("body")]
     public string Body { get; set; } = string.Empty;

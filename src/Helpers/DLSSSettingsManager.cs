@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using Microsoft.Win32;
 
 namespace DLSS_Swapper.Helpers;
@@ -54,7 +55,7 @@ internal class DLSSSettingsManager
 
     public bool SetShowDlssIndicator(int value)
     {
-        return RunRegAdd(NGXCORE_REG_KEY, "ShowDlssIndicator", "REG_DWORD", value.ToString());
+        return RunRegAdd(NGXCORE_REG_KEY, "ShowDlssIndicator", "REG_DWORD", value.ToString(CultureInfo.InvariantCulture));
     }
 
     public int GetShowDlssIndicator()

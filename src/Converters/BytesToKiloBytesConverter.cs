@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using ByteSizeLib;
 using Microsoft.UI.Xaml.Data;
 
@@ -12,7 +13,7 @@ internal class BytesToKiloBytesConverter : IValueConverter
         if (value is long bytes)
         {
             var hBytes = ByteSize.FromBytes(bytes);
-            return Math.Ceiling(hBytes.KiloBytes).ToString("n0") + " KB";
+            return Math.Ceiling(hBytes.KiloBytes).ToString("n0", CultureInfo.CurrentCulture) + " KB";
         }
 
         return string.Empty;

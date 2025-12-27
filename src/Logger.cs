@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 using Serilog;
@@ -36,8 +37,8 @@ internal static class Logger
 
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.ControlledBy(levelSwitch)
-            .WriteTo.Debug()
-            .WriteTo.File(loggingFile, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7)
+            .WriteTo.Debug(formatProvider: CultureInfo.InvariantCulture)
+            .WriteTo.File(loggingFile, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7, formatProvider: CultureInfo.InvariantCulture)
             .CreateLogger();
 
         ChangeLoggingLevel(Settings.Instance.LoggingLevel);
@@ -47,7 +48,7 @@ internal static class Logger
     {
         var withoutExtension = Path.GetFileNameWithoutExtension(loggingFile);
         var justExtension = Path.GetExtension(loggingFile);
-        return Path.Combine(LogDirectory, $"{withoutExtension}{DateTime.Now.ToString("yyyyMMdd")}{justExtension}");
+        return Path.Combine(LogDirectory, $"{withoutExtension}{DateTime.Now.ToString("yyyyMMdd", CultureInfo.InvariantCulture)}{justExtension}");
     }
 
     public static void ChangeLoggingLevel(LoggingLevel loggingLevel)

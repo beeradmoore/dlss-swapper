@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -8,16 +11,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.WinUI;
 using DLSS_Swapper.Data;
-using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Extensions;
+using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
-using CommunityToolkit.WinUI;
-using System.Diagnostics;
-using Microsoft.UI.Xaml;
-using System.ComponentModel;
 
 namespace DLSS_Swapper.Pages;
 
@@ -257,7 +258,7 @@ public partial class LibraryPageModel : ObservableObject
                 progress.ProgressChanged += (s, i) =>
                 {
                     filesProgressBar.Value = i;
-                    progressRun.Text = i.ToString();
+                    progressRun.Text = i.ToString(CultureInfo.CurrentCulture);
                 };
 
                 await Task.Run(() =>
@@ -563,7 +564,7 @@ public partial class LibraryPageModel : ObservableObject
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
                                     {
-                                        progressRun.Text = totalDllsProcessed.ToString();
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
                                     });
                                     continue;
                                 }
@@ -577,7 +578,7 @@ public partial class LibraryPageModel : ObservableObject
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
                                     {
-                                        progressRun.Text = totalDllsProcessed.ToString();
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
                                     });
                                     continue;
                                 }
@@ -591,7 +592,7 @@ public partial class LibraryPageModel : ObservableObject
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
                                     {
-                                        progressRun.Text = totalDllsProcessed.ToString();
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
                                     });
                                     continue;
                                 }
@@ -605,7 +606,7 @@ public partial class LibraryPageModel : ObservableObject
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
                                     {
-                                        progressRun.Text = totalDllsProcessed.ToString();
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
                                     });
                                     continue;
                                 }
@@ -619,7 +620,7 @@ public partial class LibraryPageModel : ObservableObject
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
                                     {
-                                        progressRun.Text = totalDllsProcessed.ToString();
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
                                     });
                                     continue;
                                 }
@@ -633,7 +634,7 @@ public partial class LibraryPageModel : ObservableObject
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
                                     {
-                                        progressRun.Text = totalDllsProcessed.ToString();
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
                                     });
                                     continue;
                                 }
@@ -647,7 +648,7 @@ public partial class LibraryPageModel : ObservableObject
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
                                     {
-                                        progressRun.Text = totalDllsProcessed.ToString();
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
                                     });
                                     continue;
                                 }
@@ -661,7 +662,7 @@ public partial class LibraryPageModel : ObservableObject
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
                                     {
-                                        progressRun.Text = totalDllsProcessed.ToString();
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
                                     });
                                     continue;
                                 }
@@ -700,7 +701,7 @@ public partial class LibraryPageModel : ObservableObject
                                 App.CurrentApp.RunOnUIThread(() =>
                                 {
                                     dllInZipProgressBar.Value = processedDllsInZip;
-                                    progressRun.Text = totalDllsProcessed.ToString();
+                                    progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
                                 });
 
 
@@ -735,7 +736,7 @@ public partial class LibraryPageModel : ObservableObject
                         ++totalDllsProcessed;
                         App.CurrentApp.RunOnUIThread(() =>
                         {
-                            progressRun.Text = totalDllsProcessed.ToString();
+                            progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
                         });
                     }
                 }

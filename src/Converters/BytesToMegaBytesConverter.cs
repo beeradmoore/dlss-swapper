@@ -1,6 +1,7 @@
+using System;
+using System.Globalization;
 using ByteSizeLib;
 using Microsoft.UI.Xaml.Data;
-using System;
 
 namespace DLSS_Swapper.Converters;
 
@@ -11,7 +12,7 @@ class BytesToMegaBytesConverter : IValueConverter
 
         if (value is long bytes)
         {
-            return ByteSize.FromBytes(bytes).ToString("MB");
+            return ByteSize.FromBytes(bytes).ToString("MB", CultureInfo.CurrentCulture);
         }
 
         return string.Empty;

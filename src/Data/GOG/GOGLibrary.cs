@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -221,7 +222,7 @@ internal class GOGLibrary : IGameLibrary
                         var webCacheResource = (await db.QueryAsync<WebCacheResource>("SELECT * FROM WebCacheResources WHERE webCacheId=? AND webCacheResourceTypeId=? LIMIT 1", webCache.Id, webCacheResourceTypeId).ConfigureAwait(false)).FirstOrDefault();
                         if (webCacheResource is not null)
                         {
-                            var localCoverImage = Path.Combine(programDataDirectory, "GOG.com", "Galaxy", "webcache", webCache.UserId.ToString(), "gog", gogGame.PlatformId.ToString(), webCacheResource.Filename);
+                            var localCoverImage = Path.Combine(programDataDirectory, "GOG.com", "Galaxy", "webcache", webCache.UserId.ToString(CultureInfo.InvariantCulture), "gog", gogGame.PlatformId, webCacheResource.Filename);
                             if (File.Exists(localCoverImage))
                             {
                                 localCoverImages.Add(localCoverImage);
@@ -229,7 +230,7 @@ internal class GOGLibrary : IGameLibrary
                         }
                     }
 
-                    var productId = limitedDetail.ProductId.ToString();
+                    var productId = limitedDetail.ProductId.ToString(CultureInfo.InvariantCulture);
                     var currentGame = gogGames.FirstOrDefault<GOGGame>(game => game.PlatformId == productId);
                     if (currentGame is not null)
                     {

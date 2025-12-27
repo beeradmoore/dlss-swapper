@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -20,7 +21,7 @@ internal class SystemDetails
             var currentAssembly = Assembly.GetExecutingAssembly();
 
 
-            stringBuilder.AppendLine($"DLSS Swapper: {App.CurrentApp.GetVersionString()}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"DLSS Swapper: {App.CurrentApp.GetVersionString()}");
 #if PORTABLE
             stringBuilder.AppendLine("Portable: true");
 #else
@@ -36,44 +37,44 @@ internal class SystemDetails
 
                 foreach (var os in searcher.Get())
                 {
-                    stringBuilder.AppendLine($"OS: {os["Caption"]}");
+                    stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"OS: {os["Caption"]}");
                 }
             }
             catch (Exception)
             {
                 // NOOP
             }
-            stringBuilder.AppendLine($"OSVersion: {Environment.OSVersion.VersionString}");
-            stringBuilder.AppendLine($"Is64BitOperatingSystem: {Environment.Is64BitOperatingSystem}");
-            stringBuilder.AppendLine($"Is64BitProcess: {Environment.Is64BitProcess}");
-            stringBuilder.AppendLine($"Runtime: {Environment.Version}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"OSVersion: {Environment.OSVersion.VersionString}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"Is64BitOperatingSystem: {Environment.Is64BitOperatingSystem}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"Is64BitProcess: {Environment.Is64BitProcess}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"Runtime: {Environment.Version}");
 
 
             stringBuilder.AppendLine();
             stringBuilder.AppendLine("Permissions");
-            stringBuilder.AppendLine($"IsPrivilegedProcess: {Environment.IsPrivilegedProcess}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"IsPrivilegedProcess: {Environment.IsPrivilegedProcess}");
 
             using (var identity = WindowsIdentity.GetCurrent())
             {
                 var principal = new WindowsPrincipal(identity);
-                stringBuilder.AppendLine($"IsInRole Administrator: {principal.IsInRole(WindowsBuiltInRole.Administrator)}");
-                stringBuilder.AppendLine($"IsInRole User: {principal.IsInRole(WindowsBuiltInRole.User)}");
+                stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"IsInRole Administrator: {principal.IsInRole(WindowsBuiltInRole.Administrator)}");
+                stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"IsInRole User: {principal.IsInRole(WindowsBuiltInRole.User)}");
             }
 
 
             stringBuilder.AppendLine();
             stringBuilder.AppendLine("Paths");
-            stringBuilder.AppendLine($"StoragePath: {Storage.StoragePath}");
-            stringBuilder.AppendLine($"CurrentDirectory: {Environment.CurrentDirectory}");
-            stringBuilder.AppendLine($"GetCurrentDirectory: {Directory.GetCurrentDirectory()}");
-            stringBuilder.AppendLine($"AppDomain.CurrentDomain.BaseDirectory: {AppDomain.CurrentDomain.BaseDirectory}");
-            stringBuilder.AppendLine($"Assembly Location: {currentAssembly.Location}");
-            stringBuilder.AppendLine($"ProcessPath: {Environment.ProcessPath ?? string.Empty}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"StoragePath: {Storage.StoragePath}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"CurrentDirectory: {Environment.CurrentDirectory}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"GetCurrentDirectory: {Directory.GetCurrentDirectory()}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"AppDomain.CurrentDomain.BaseDirectory: {AppDomain.CurrentDomain.BaseDirectory}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"Assembly Location: {currentAssembly.Location}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"ProcessPath: {Environment.ProcessPath ?? string.Empty}");
 
         }
         catch (Exception err)
         {
-            stringBuilder.AppendLine($"ERROR: {err.Message}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"ERROR: {err.Message}");
         }
         finally
         {
@@ -95,17 +96,17 @@ internal class SystemDetails
             {
                 var gameLibrary = IGameLibrary.GetGameLibrary(gameLibraryEnum);
                 stringBuilder.AppendLine(gameLibrary.Name);
-                stringBuilder.AppendLine($"Status: {(gameLibrary.IsEnabled ? "Enabled" : "Disabled")}");
+                stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"Status: {(gameLibrary.IsEnabled ? "Enabled" : "Disabled")}");
                 if (gameLibrary.IsEnabled)
                 {
-                    stringBuilder.AppendLine($"Games: {gameList.Count(x => x.GameLibrary == gameLibrary.GameLibrary)}");
+                    stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"Games: {gameList.Count(x => x.GameLibrary == gameLibrary.GameLibrary)}");
                 }
                 stringBuilder.AppendLine();
             }
         }
         catch (Exception err)
         {
-            stringBuilder.AppendLine($"ERROR: {err.Message}");
+            stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"ERROR: {err.Message}");
         }
         finally
         {

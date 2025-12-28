@@ -117,10 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-    <data name="AcknowledgementsPage_Title" xml:space="preserve">
-    <value>__UNTRANSLATED__Licences &amp; Acknowledgements</value>
-  </data>
-<data name="ApplicationTitle" xml:space="preserve">
+  <data name="ApplicationTitle" xml:space="preserve">
     <value>DLSS Swapper</value>
   </data>
   <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
@@ -135,10 +132,7 @@
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
     <value>Funkcja importu jest wyłączona, nie można załadować manifestu importu.</value>
   </data>
-    <data name="DllManager_MigratingDlls" xml:space="preserve">
-    <value>__UNTRANSLATED__Migrating DLLs</value>
-  </data>
-<data name="DllManager_UnknownTypeDll" xml:space="preserve">
+  <data name="DllManager_UnknownTypeDll" xml:space="preserve">
     <value>Nieznany typ biblioteki DLL.</value>
   </data>
   <data name="DllManager_UntrustedDll" xml:space="preserve">
@@ -162,22 +156,7 @@
   <data name="DllRecord_RequiresDownload" xml:space="preserve">
     <value>Wymaga pobrania</value>
   </data>
-    <data name="DllZipInvalidNoDllFound" xml:space="preserve">
-    <value>__UNTRANSLATED__DLL zip was invalid (no DLL found).</value>
-  </data>
-  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
-    <value>__UNTRANSLATED__Always use latest</value>
-  </data>
-  <data name="DLSS_Preset_Default" xml:space="preserve">
-    <value>__UNTRANSLATED__Default</value>
-  </data>
-  <data name="DLSS_Preset_Letter" xml:space="preserve">
-    <value>__UNTRANSLATED__Preset {0}</value>
-  </data>
-  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
-    <value>__UNTRANSLATED__Preset {0} (Deprecated)</value>
-  </data>
-<data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
+  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>Nie udało się uruchomić DLSS Swapper</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
@@ -201,49 +180,13 @@
   <data name="Game_CustomCoverRemove" xml:space="preserve">
     <value>Usunąć własną okładkę?</value>
   </data>
-    <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
-    <value>__UNTRANSLATED__Asset Type</value>
-  </data>
-  <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
-    <value>__UNTRANSLATED__Event Time</value>
-  </data>
-  <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
-    <value>__UNTRANSLATED__Event Type</value>
-  </data>
-  <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
-    <value>__UNTRANSLATED__No history found.</value>
-  </data>
-  <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
-    <value>__UNTRANSLATED__Version</value>
-  </data>
-  <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
-    <value>__UNTRANSLATED__DLL backup removed</value>
-  </data>
-  <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
-    <value>__UNTRANSLATED__DLL was changed externally</value>
-  </data>
-  <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
-    <value>__UNTRANSLATED__DLL detected</value>
-  </data>
-  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
-    <value>__UNTRANSLATED__DLL reset</value>
-  </data>
-  <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
-    <value>__UNTRANSLATED__DLL swapped</value>
-  </data>
-<data name="GamePage_AddCustomCover" xml:space="preserve">
+  <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Dodaj własną okładkę</value>
   </data>
-    <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
-    <value>__UNTRANSLATED__Launching games from your {0} library is currently not supported.</value>
-  </data>
-<data name="GamePage_ClickToFavorite" xml:space="preserve">
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Dodaj do ulubionych</value>
   </data>
-    <data name="GamePage_ClickToHide" xml:space="preserve">
-    <value>__UNTRANSLATED__Click to hide</value>
-  </data>
-<data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+  <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>Nie można znaleźć ścieżki "{0}".</value>
   </data>
   <data name="GamePage_CurrentDll" xml:space="preserve">
@@ -261,41 +204,16 @@
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
     <value>Proszę zaczekać na zakończenie pobierania przed podmianą</value>
   </data>
-    <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
-    <value>__UNTRANSLATED__Preset information</value>
-  </data>
-  <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS presets are contained within DLSS DLL files contained within your games install directory. Different DLSS DLLs have different presets. For example preset K was not introduced until DLSS v310.2. So if you use DLSS v3.7 and you set preset to K it will not use preset K and instead it will fallback to whatever preset the game chooses to use.
-
-The same applies to global presets. If you select preset K but your game uses DLSS v3.7 you will not be using preset K and instead the game will fallback to whatever its default is.
-
-To verify what preset is being used please enable the DLSS on-screen indicator.</value>
-  </data>
-  <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
-    <value>__UNTRANSLATED__On-screen indicator information</value>
-  </data>
-  <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS preset information</value>
-  </data>
-  <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
-    <value>__UNTRANSLATED__Setting a DLSS preset does not guarantee that the preset is used.</value>
-  </data>
-<data name="GamePage_Favorited" xml:space="preserve">
+  <data name="GamePage_Favorited" xml:space="preserve">
     <value>Ulubiony</value>
   </data>
-    <data name="GamePage_History" xml:space="preserve">
-    <value>__UNTRANSLATED__History</value>
-  </data>
-<data name="GamePage_InstallPath" xml:space="preserve">
+  <data name="GamePage_InstallPath" xml:space="preserve">
     <value>Ścieżka instalacji</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
     <value>"{0}" nie jest właściwym typem pliku</value>
   </data>
-    <data name="GamePage_Launch" xml:space="preserve">
-    <value>__UNTRANSLATED__Launch</value>
-  </data>
-<data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
+  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
     <value>Ten tytuł nie został dodany ręcznie i nie można go usunąć.</value>
   </data>
   <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
@@ -322,19 +240,7 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>Ta gra nie jest gotowa do gry.</value>
   </data>
-    <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
-    <value>__UNTRANSLATED__NVAPI has encountered an error. More information has been written to the error log.</value>
-  </data>
-  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
-    <value>__UNTRANSLATED__NVAPI has encountered an error. Running the application as admin may resolve the issue. More information has been written to the error log.</value>
-  </data>
-  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
-    <value>__UNTRANSLATED__NVAPI Error</value>
-  </data>
-  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
-    <value>__UNTRANSLATED__NVAPI has encountered an error. Click for more information.</value>
-  </data>
-<data name="GamePage_OpenDllLocation" xml:space="preserve">
+  <data name="GamePage_OpenDllLocation" xml:space="preserve">
     <value>Otwórz lokalizację biblioteki DLL</value>
   </data>
   <data name="GamePage_OriginalDll" xml:space="preserve">
@@ -343,10 +249,7 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} wciąż się przetwarza. Prosimy poczekać aż ładowanie się zakończy zanim uruchomisz grę.</value>
   </data>
-    <data name="GamePage_ResetAll" xml:space="preserve">
-    <value>__UNTRANSLATED__Reset all</value>
-  </data>
-<data name="GamePage_RestoreOriginalDll" xml:space="preserve">
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>Przywróć oryginalną bibliotekę DLL</value>
   </data>
   <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
@@ -355,10 +258,7 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
     <value>storageFile jest nullem</value>
   </data>
-    <data name="GamePage_UnableToChangePreset" xml:space="preserve">
-    <value>__UNTRANSLATED__Unable to change preset. Please see your error log for more information.</value>
-  </data>
-<data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
+  <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
     <value>Możesz przeciągnąć tylko jeden plik jako okładkę</value>
   </data>
   <data name="GamesPage_AddGame" xml:space="preserve">
@@ -373,10 +273,7 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
   <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
     <value>Ukryj gry bez podmienialnych bibliotek DLL</value>
   </data>
-    <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
-    <value>__UNTRANSLATED__You may only drag over a single file for a cover</value>
-  </data>
-<data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
+  <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
     <value>Kolejna informacja dotycząca ręcznego dodawania gier</value>
   </data>
   <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
@@ -444,13 +341,7 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
     <value>Znaleziono nowe biblioteki DLL</value>
   </data>
-    <data name="GamesPage_ReloadingGame" xml:space="preserve">
-    <value>__UNTRANSLATED__Reloading game</value>
-  </data>
-  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
-    <value>__UNTRANSLATED__Show hidden games (defaults to off on launch)</value>
-  </data>
-<data name="GamesPage_Title" xml:space="preserve">
+  <data name="GamesPage_Title" xml:space="preserve">
     <value>Gry</value>
   </data>
   <data name="GamesPage_ViewType" xml:space="preserve">
@@ -495,76 +386,28 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="General_ExportAll" xml:space="preserve">
     <value>Eksport wszystkich</value>
   </data>
-    <data name="General_Failed" xml:space="preserve">
-    <value>__UNTRANSLATED__Failed</value>
-  </data>
-  <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
-    <value>__UNTRANSLATED__This feature is not supported if you are running the application as admin.</value>
-  </data>
-<data name="General_Filter" xml:space="preserve">
+  <data name="General_Filter" xml:space="preserve">
     <value>Filtr</value>
   </data>
   <data name="General_Help" xml:space="preserve">
     <value>Pomoc</value>
   </data>
-    <data name="General_Hidden" xml:space="preserve">
-    <value>__UNTRANSLATED__Hidden</value>
-  </data>
-<data name="General_Import" xml:space="preserve">
+  <data name="General_Import" xml:space="preserve">
     <value>Import</value>
   </data>
-    <data name="General_Load" xml:space="preserve">
-    <value>__UNTRANSLATED__Load</value>
-  </data>
-<data name="General_Loading" xml:space="preserve">
+  <data name="General_Loading" xml:space="preserve">
     <value>Ładowanie</value>
   </data>
   <data name="General_Name" xml:space="preserve">
     <value>Nazwa</value>
   </data>
-    <data name="General_Name_DLSS" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS</value>
-  </data>
-  <data name="General_Name_DLSS_D" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS Ray Reconstruction</value>
-  </data>
-  <data name="General_Name_DLSS_G" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS Frame Generation</value>
-  </data>
-  <data name="General_Name_DLSS_Preset" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS Preset</value>
-  </data>
-  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS RR Preset</value>
-  </data>
-  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
-    <value>__UNTRANSLATED__FSR 3.1 DirectX 12</value>
-  </data>
-  <data name="General_Name_FSR_31_VK" xml:space="preserve">
-    <value>__UNTRANSLATED__FSR 3.1 Vulkan</value>
-  </data>
-  <data name="General_Name_XeLL" xml:space="preserve">
-    <value>__UNTRANSLATED__XeLL</value>
-  </data>
-  <data name="General_Name_XeSS" xml:space="preserve">
-    <value>__UNTRANSLATED__XeSS</value>
-  </data>
-  <data name="General_Name_XeSS_FG" xml:space="preserve">
-    <value>__UNTRANSLATED__XeSS Frame Generation</value>
-  </data>
-<data name="General_No" xml:space="preserve">
+  <data name="General_No" xml:space="preserve">
     <value>Wyłączone</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>Brak</value>
   </data>
-    <data name="General_NotFound" xml:space="preserve">
-    <value>__UNTRANSLATED__Not found</value>
-  </data>
-  <data name="General_NotSupported" xml:space="preserve">
-    <value>__UNTRANSLATED__Not supported</value>
-  </data>
-<data name="General_Okay" xml:space="preserve">
+  <data name="General_Okay" xml:space="preserve">
     <value>Ok</value>
   </data>
   <data name="General_Oops" xml:space="preserve">
@@ -573,25 +416,16 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="General_OpenFolder" xml:space="preserve">
     <value>Otwórz folder</value>
   </data>
-    <data name="General_OpenLogsDirectory" xml:space="preserve">
-    <value>__UNTRANSLATED__Open logs directory</value>
-  </data>
-<data name="General_Optional" xml:space="preserve">
+  <data name="General_Optional" xml:space="preserve">
     <value>(opcjonalnie)</value>
   </data>
   <data name="General_Options" xml:space="preserve">
     <value>Opcje</value>
   </data>
-    <data name="General_Publish" xml:space="preserve">
-    <value>__UNTRANSLATED__Publish</value>
-  </data>
-<data name="General_Refresh" xml:space="preserve">
+  <data name="General_Refresh" xml:space="preserve">
     <value>Odśwież</value>
   </data>
-    <data name="General_Reload" xml:space="preserve">
-    <value>__UNTRANSLATED__Reload</value>
-  </data>
-<data name="General_Remove" xml:space="preserve">
+  <data name="General_Remove" xml:space="preserve">
     <value>Usuń</value>
   </data>
   <data name="General_ReportIssue" xml:space="preserve">
@@ -612,10 +446,7 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="General_Swap" xml:space="preserve">
     <value>Podmień</value>
   </data>
-    <data name="General_Unknown" xml:space="preserve">
-    <value>__UNTRANSLATED__Unknown</value>
-  </data>
-<data name="General_Update" xml:space="preserve">
+  <data name="General_Update" xml:space="preserve">
     <value>Aktualizuj</value>
   </data>
   <data name="General_Version" xml:space="preserve">
@@ -666,31 +497,10 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
     <value>Hash</value>
   </data>
-    <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
-    <value>__UNTRANSLATED__Internal Name</value>
-  </data>
-  <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
-    <value>__UNTRANSLATED__Internal Name Extra</value>
-  </data>
-<data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
+  <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Etykieta</value>
   </data>
-    <data name="LibraryPage_DownloadLatest" xml:space="preserve">
-    <value>__UNTRANSLATED__Download Latest</value>
-  </data>
-  <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
-    <value>__UNTRANSLATED__Started {0} new downloads.</value>
-  </data>
-  <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
-    <value>__UNTRANSLATED__Downloads started</value>
-  </data>
-  <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
-    <value>__UNTRANSLATED__Exported DLLs: </value>
-  </data>
-  <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
-    <value>__UNTRANSLATED__Exported {0} DLLs.</value>
-  </data>
-<data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
+  <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
     <value>Wyeksportowano DLL {0}.</value>
   </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
@@ -712,19 +522,10 @@ Umieszczenie podpięcie złośliwej biblioteki DLL do gry może być tak złe ja
 
 Importuj biblioteki DLL tylko z zaufanych źródeł.</value>
   </data>
-    <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
-    <value>__UNTRANSLATED__No DLLs found for export.</value>
-  </data>
-<data name="LibraryPage_NoDllsToExport" xml:space="preserve">
+  <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
     <value>Nie masz rekordów z bibliotekami DLL do eksportu.</value>
   </data>
-    <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
-    <value>__UNTRANSLATED__There were no new DLLs to download.</value>
-  </data>
-  <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
-    <value>__UNTRANSLATED__No new DLLs</value>
-  </data>
-<data name="LibraryPage_ProcessedDlls" xml:space="preserve">
+  <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
     <value>Przetworzone biblioteki DLL: </value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
@@ -825,10 +626,7 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
     <value>Kliknij przycisk Otwórz w przeglądarce lub skopiuj i wklej poniższy link do przeglądarki. Czy pobierany jest plik w przeglądarce?</value>
   </data>
-    <data name="NetworkTesterPage_Results" xml:space="preserve">
-    <value>__UNTRANSLATED__Results</value>
-  </data>
-<data name="NetworkTesterPage_RunTest" xml:space="preserve">
+  <data name="NetworkTesterPage_RunTest" xml:space="preserve">
     <value>Uruchom test</value>
   </data>
   <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
@@ -840,10 +638,7 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="SettingsPage_About" xml:space="preserve">
     <value>Informacje</value>
   </data>
-    <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
-    <value>__UNTRANSLATED__Add Ignored Path</value>
-  </data>
-<data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
+  <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
     <value>Zezwalaj na debugowanie bibliotek DLL</value>
   </data>
   <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
@@ -855,22 +650,10 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>Dotyczy to tylko selektora DLL, a nie strony biblioteki.</value>
   </data>
-    <data name="SettingsPage_BuildCommit" xml:space="preserve">
-    <value>__UNTRANSLATED__Build commit</value>
-  </data>
-  <data name="SettingsPage_BuildDate" xml:space="preserve">
-    <value>__UNTRANSLATED__Build date</value>
-  </data>
-<data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>Nie udało się otworzyć pliku z logami bezpośrednio z DLSS Swapper. Spróbuj otworzyć go ręcznie.</value>
   </data>
-    <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
-    <value>__UNTRANSLATED__Are you sure you want to delete the ignored path {0}?</value>
-  </data>
-  <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
-    <value>__UNTRANSLATED__Delete Ignored Path</value>
-  </data>
-<data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
+  <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
     <value>Opcje deweloperskie DLSS</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
@@ -891,13 +674,7 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>Logowanie z dużą ilością informacji</value>
   </data>
-    <data name="SettingsPage_DLSSOptions" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS Options</value>
-  </data>
-  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
-    <value>__UNTRANSLATED__Global preset</value>
-  </data>
-<data name="SettingsPage_GameLibraries" xml:space="preserve">
+  <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>Biblioteka Gier</value>
   </data>
   <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
@@ -909,10 +686,7 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
     <value>Możesz zasugerować funkcję lub zgłosić problem na DLSS Swapper</value>
   </data>
-    <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
-    <value>__UNTRANSLATED__Ignored Paths</value>
-  </data>
-<data name="SettingsPage_Language" xml:space="preserve">
+  <data name="SettingsPage_Language" xml:space="preserve">
     <value>Język</value>
   </data>
   <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
@@ -924,25 +698,7 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>Logowanie</value>
   </data>
-    <data name="SettingsPage_Logging_Debug" xml:space="preserve">
-    <value>__UNTRANSLATED__Debug</value>
-  </data>
-  <data name="SettingsPage_Logging_Error" xml:space="preserve">
-    <value>__UNTRANSLATED__Error</value>
-  </data>
-  <data name="SettingsPage_Logging_Info" xml:space="preserve">
-    <value>__UNTRANSLATED__Info</value>
-  </data>
-  <data name="SettingsPage_Logging_Off" xml:space="preserve">
-    <value>__UNTRANSLATED__Off</value>
-  </data>
-  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
-    <value>__UNTRANSLATED__Verbose</value>
-  </data>
-  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
-    <value>__UNTRANSLATED__Warning</value>
-  </data>
-<data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>Nie ma nowych aktualizacji.</value>
   </data>
   <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
@@ -954,13 +710,7 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
     <value>Tester Sieciowy</value>
   </data>
-    <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
-    <value>__UNTRANSLATED__Open translation toolbox</value>
-  </data>
-  <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
-    <value>__UNTRANSLATED__The path {0} is already ignored.</value>
-  </data>
-<data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
+  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
     <value>Zezwalaj niezaufanym źródłom</value>
   </data>
   <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
@@ -989,83 +739,5 @@ Jeśli tak się dzieje, prosimy o zgłoszenie tego w naszym module śledzenia b�
   </data>
   <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
     <value>Twój aktualny plik z logami </value>
-  </data>
-  <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
-    <value>__UNTRANSLATED__You can not use the translation tool while it is running as admin. Please restart the application.</value>
-  </data>
-  <data name="TranslationToolboxPage_Comment" xml:space="preserve">
-    <value>__UNTRANSLATED__Comment</value>
-  </data>
-  <data name="TranslationToolboxPage_ImportAsTranslation" xml:space="preserve">
-    <value>__UNTRANSLATED__Import language as translation</value>
-  </data>
-  <data name="TranslationToolboxPage_Key" xml:space="preserve">
-    <value>__UNTRANSLATED__Key</value>
-  </data>
-  <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
-    <value>__UNTRANSLATED__Load Existing</value>
-  </data>
-  <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
-    <value>__UNTRANSLATED__Could not load translation. Please see your error log for more information.</value>
-  </data>
-  <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
-    <value>__UNTRANSLATED__New translation</value>
-  </data>
-  <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
-    <value>__UNTRANSLATED__No translation data was found to publish.</value>
-  </data>
-  <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
-    <value>__UNTRANSLATED__No translation data was found to save.</value>
-  </data>
-  <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
-    <value>__UNTRANSLATED__Not a valid DLSS Swapper translation file.</value>
-  </data>
-  <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
-    <value>__UNTRANSLATED__Could not publish translation. Please see your error log for more information.</value>
-  </data>
-  <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
-    <value>__UNTRANSLATED__Reload app</value>
-  </data>
-  <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
-    <value>__UNTRANSLATED__Reset and continue</value>
-  </data>
-  <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
-    <value>__UNTRANSLATED__This will reset your current translation progress. Are you sure you want to continue?</value>
-  </data>
-  <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
-    <value>__UNTRANSLATED__Reset progress and continue?</value>
-  </data>
-  <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
-    <value>__UNTRANSLATED__Could not save translation. Please see your error log for more information.</value>
-  </data>
-  <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
-    <value>__UNTRANSLATED__Select language to load</value>
-  </data>
-  <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
-    <value>__UNTRANSLATED__Source language</value>
-  </data>
-  <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
-    <value>__UNTRANSLATED__Source translation</value>
-  </data>
-  <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
-    <value>__UNTRANSLATED__Translation guide</value>
-  </data>
-  <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
-    <value>__UNTRANSLATED__Your translation has been created. Please look at the DLSS Swapper translation guide as to what to do next with {0}.</value>
-  </data>
-  <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
-    <value>__UNTRANSLATED__Translation progress</value>
-  </data>
-  <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
-    <value>__UNTRANSLATED__Close without saving</value>
-  </data>
-  <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
-    <value>__UNTRANSLATED__You possibly have unsaved translation changes. If you close this window these will be lost.</value>
-  </data>
-  <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
-    <value>__UNTRANSLATED__Unsaved translation changes</value>
-  </data>
-  <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
-    <value>__UNTRANSLATED__Translation Toolbox</value>
   </data>
 </root>

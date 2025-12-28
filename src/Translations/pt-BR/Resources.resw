@@ -87,19 +87,7 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>O arquivo zip da DLL é inválido (nenhuma DLL encontrada).</value>
   </data>
-    <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
-    <value>__UNTRANSLATED__Always use latest</value>
-  </data>
-  <data name="DLSS_Preset_Default" xml:space="preserve">
-    <value>__UNTRANSLATED__Default</value>
-  </data>
-  <data name="DLSS_Preset_Letter" xml:space="preserve">
-    <value>__UNTRANSLATED__Preset {0}</value>
-  </data>
-  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
-    <value>__UNTRANSLATED__Preset {0} (Deprecated)</value>
-  </data>
-<data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
+  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>Falha ao iniciar o DLSS Swapper</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
@@ -156,16 +144,10 @@
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Adicionar capa personalizada</value>
   </data>
-    <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
-    <value>__UNTRANSLATED__Launching games from your {0} library is currently not supported.</value>
-  </data>
-<data name="GamePage_ClickToFavorite" xml:space="preserve">
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Clique para favoritar</value>
   </data>
-    <data name="GamePage_ClickToHide" xml:space="preserve">
-    <value>__UNTRANSLATED__Click to hide</value>
-  </data>
-<data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+  <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>Caminho não encontrado: "{0}".</value>
   </data>
   <data name="GamePage_CurrentDll" xml:space="preserve">
@@ -244,19 +226,7 @@ Para verificar qual predefinição está sendo usada, ative o indicador DLSS na 
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>Este jogo não está pronto para jogar.</value>
   </data>
-    <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
-    <value>__UNTRANSLATED__NVAPI has encountered an error. More information has been written to the error log.</value>
-  </data>
-  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
-    <value>__UNTRANSLATED__NVAPI has encountered an error. Running the application as admin may resolve the issue. More information has been written to the error log.</value>
-  </data>
-  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
-    <value>__UNTRANSLATED__NVAPI Error</value>
-  </data>
-  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
-    <value>__UNTRANSLATED__NVAPI has encountered an error. Click for more information.</value>
-  </data>
-<data name="GamePage_OpenDllLocation" xml:space="preserve">
+  <data name="GamePage_OpenDllLocation" xml:space="preserve">
     <value>Abrir localização da DLL</value>
   </data>
   <data name="GamePage_OriginalDll" xml:space="preserve">
@@ -265,10 +235,7 @@ Para verificar qual predefinição está sendo usada, ative o indicador DLSS na 
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} ainda está processando. Aguarde a conclusão do carregamento antes de abrir.</value>
   </data>
-    <data name="GamePage_ResetAll" xml:space="preserve">
-    <value>__UNTRANSLATED__Reset all</value>
-  </data>
-<data name="GamePage_RestoreOriginalDll" xml:space="preserve">
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>Restaurar DLL original</value>
   </data>
   <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
@@ -366,13 +333,7 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
     <value>Novas DLLs encontradas</value>
   </data>
-    <data name="GamesPage_ReloadingGame" xml:space="preserve">
-    <value>__UNTRANSLATED__Reloading game</value>
-  </data>
-  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
-    <value>__UNTRANSLATED__Show hidden games (defaults to off on launch)</value>
-  </data>
-<data name="GamesPage_Title" xml:space="preserve">
+  <data name="GamesPage_Title" xml:space="preserve">
     <value>Jogos</value>
   </data>
   <data name="GamesPage_ViewType" xml:space="preserve">
@@ -429,10 +390,7 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
   <data name="General_Help" xml:space="preserve">
     <value>Ajuda</value>
   </data>
-    <data name="General_Hidden" xml:space="preserve">
-    <value>__UNTRANSLATED__Hidden</value>
-  </data>
-<data name="General_Import" xml:space="preserve">
+  <data name="General_Import" xml:space="preserve">
     <value>Importar</value>
   </data>
   <data name="General_Load" xml:space="preserve">
@@ -444,46 +402,13 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
   <data name="General_Name" xml:space="preserve">
     <value>Nome</value>
   </data>
-    <data name="General_Name_DLSS" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS</value>
-  </data>
-  <data name="General_Name_DLSS_D" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS Ray Reconstruction</value>
-  </data>
-  <data name="General_Name_DLSS_G" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS Frame Generation</value>
-  </data>
-  <data name="General_Name_DLSS_Preset" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS Preset</value>
-  </data>
-  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
-    <value>__UNTRANSLATED__DLSS RR Preset</value>
-  </data>
-  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
-    <value>__UNTRANSLATED__FSR 3.1 DirectX 12</value>
-  </data>
-  <data name="General_Name_FSR_31_VK" xml:space="preserve">
-    <value>__UNTRANSLATED__FSR 3.1 Vulkan</value>
-  </data>
-  <data name="General_Name_XeLL" xml:space="preserve">
-    <value>__UNTRANSLATED__XeLL</value>
-  </data>
-  <data name="General_Name_XeSS" xml:space="preserve">
-    <value>__UNTRANSLATED__XeSS</value>
-  </data>
-  <data name="General_Name_XeSS_FG" xml:space="preserve">
-    <value>__UNTRANSLATED__XeSS Frame Generation</value>
-  </data>
-<data name="General_No" xml:space="preserve">
+  <data name="General_No" xml:space="preserve">
     <value>Não</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>Nenhum</value>
   </data>
-    <data name="General_NotFound" xml:space="preserve">
-    <value>__UNTRANSLATED__Not found</value>
-  </data>
-<data name="General_NotSupported" xml:space="preserve">
+  <data name="General_NotSupported" xml:space="preserve">
     <value>Não suportado</value>
   </data>
   <data name="General_Okay" xml:space="preserve">
@@ -495,10 +420,7 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
   <data name="General_OpenFolder" xml:space="preserve">
     <value>Abrir pasta</value>
   </data>
-    <data name="General_OpenLogsDirectory" xml:space="preserve">
-    <value>__UNTRANSLATED__Open logs directory</value>
-  </data>
-<data name="General_Optional" xml:space="preserve">
+  <data name="General_Optional" xml:space="preserve">
     <value>(opcional)</value>
   </data>
   <data name="General_Options" xml:space="preserve">
@@ -597,10 +519,7 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Rótulo</value>
   </data>
-    <data name="LibraryPage_DownloadLatest" xml:space="preserve">
-    <value>__UNTRANSLATED__Download Latest</value>
-  </data>
-<data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
+  <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>{0} novos downloads iniciados.</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
@@ -779,13 +698,7 @@ Recomendamos cautela ao usar isso em jogos multiplayer.</value>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>Isso se aplica apenas ao seletor de DLLs, não à página da biblioteca.</value>
   </data>
-    <data name="SettingsPage_BuildCommit" xml:space="preserve">
-    <value>__UNTRANSLATED__Build commit</value>
-  </data>
-  <data name="SettingsPage_BuildDate" xml:space="preserve">
-    <value>__UNTRANSLATED__Build date</value>
-  </data>
-<data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>Não foi possível abrir o arquivo de log diretamente pelo DLSS Swapper. Tente abrir manualmente.</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
@@ -848,25 +761,7 @@ Recomendamos cautela ao usar isso em jogos multiplayer.</value>
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>Registro (log)</value>
   </data>
-    <data name="SettingsPage_Logging_Debug" xml:space="preserve">
-    <value>__UNTRANSLATED__Debug</value>
-  </data>
-  <data name="SettingsPage_Logging_Error" xml:space="preserve">
-    <value>__UNTRANSLATED__Error</value>
-  </data>
-  <data name="SettingsPage_Logging_Info" xml:space="preserve">
-    <value>__UNTRANSLATED__Info</value>
-  </data>
-  <data name="SettingsPage_Logging_Off" xml:space="preserve">
-    <value>__UNTRANSLATED__Off</value>
-  </data>
-  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
-    <value>__UNTRANSLATED__Verbose</value>
-  </data>
-  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
-    <value>__UNTRANSLATED__Warning</value>
-  </data>
-<data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>Nenhuma nova atualização disponível.</value>
   </data>
   <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">

@@ -923,25 +923,7 @@
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>日志记录</value>
   </data>
-    <data name="SettingsPage_Logging_Debug" xml:space="preserve">
-    <value>__UNTRANSLATED__Debug</value>
-  </data>
-  <data name="SettingsPage_Logging_Error" xml:space="preserve">
-    <value>__UNTRANSLATED__Error</value>
-  </data>
-  <data name="SettingsPage_Logging_Info" xml:space="preserve">
-    <value>__UNTRANSLATED__Info</value>
-  </data>
-  <data name="SettingsPage_Logging_Off" xml:space="preserve">
-    <value>__UNTRANSLATED__Off</value>
-  </data>
-  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
-    <value>__UNTRANSLATED__Verbose</value>
-  </data>
-  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
-    <value>__UNTRANSLATED__Warning</value>
-  </data>
-<data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>当前已是最新版本</value>
   </data>
   <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">

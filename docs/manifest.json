@@ -3092,6 +3092,59 @@
       "dll_source": "XeSS_SDK_2.1.1.zip"
     }
   ],
+  "xess_dx11": [
+    {
+      "version": "2.0.1.41",
+      "version_number": 562949953486889,
+      "internal_name": "",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "155CC423A077A4F8435D3919F0F1DA80",
+      "zip_md5_hash": "1FC7C2987A0AE4C4A41DDE41D5B95761",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/xess_dx11/xess_dx11_v2.0.1.41_155CC423A077A4F8435D3919F0F1DA80.zip",
+      "file_description": "XeSS SDK",
+      "signed_datetime": "2025-03-12T17:49:26Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 147816,
+      "zip_file_size": 43905,
+      "dll_source": "XeSS_SDK_2.0.1.zip"
+    },
+    {
+      "version": "2.0.2.53",
+      "version_number": 562949953552437,
+      "internal_name": "",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "C74E52A82017D654E017279D8F374544",
+      "zip_md5_hash": "7EA3B053998A44F0F216232CE976E7E7",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/xess_dx11/xess_dx11_v2.0.2.53_C74E52A82017D654E017279D8F374544.zip",
+      "file_description": "XeSS SDK",
+      "signed_datetime": "2025-07-03T08:08:13Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 156024,
+      "zip_file_size": 45237,
+      "dll_source": "XeSS_SDK_2.1.0.zip"
+    },
+    {
+      "version": "2.0.2.68",
+      "version_number": 562949953552452,
+      "internal_name": "",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "E04C7F44BC073D164CBF603215E96EAA",
+      "zip_md5_hash": "684E69D6984964006924DAA794757C30",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/xess_dx11/xess_dx11_v2.0.2.68_E04C7F44BC073D164CBF603215E96EAA.zip",
+      "file_description": "XeSS SDK",
+      "signed_datetime": "2025-10-17T14:23:44Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 156016,
+      "zip_file_size": 45240,
+      "dll_source": "XeSS_SDK_2.1.1.zip"
+    }
+  ],
   "known_dlls": {
     "dlss": [
       {
@@ -10395,6 +10448,7 @@
           ]
         }
       }
-    ]
+    ],
+    "xess_dx11": []
   }
 }

@@ -124,6 +124,7 @@ public partial class LibraryPageModel : ObservableObject
     [RelayCommand]
     async Task ExportAllAsync()
     {
+        // NOTE: DLL type
         // Check that there are records to export first.
         var allDllRecords = new List<DLLRecord>();
         allDllRecords.AddRange(DLLManager.Instance.DLSSRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
@@ -559,6 +560,7 @@ public partial class LibraryPageModel : ObservableObject
 
                         if (string.IsNullOrWhiteSpace(newZipHash) == false)
                         {
+                            // NOTE: DLL type
                             var dlssRecord = DLLManager.Instance.DLSSRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
                             if (dlssRecord is not null)
                             {
@@ -1004,6 +1006,7 @@ public partial class LibraryPageModel : ObservableObject
     [RelayCommand]
     async Task DownloadLatestAsync()
     {
+        // NOTE: DLL type
         var startedDownloads = 0;
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.DLSSRecords);
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.DLSSDRecords);

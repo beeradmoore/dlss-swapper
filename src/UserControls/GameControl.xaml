@@ -426,6 +426,24 @@
 
 
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="3">
+                            <TextBlock Text="{x:Bind data:DLLManager.Instance.GetAssetTypeName(data:GameAssetType.XeSS_DX11)}" FontWeight="Bold" />
+                            <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleXeSSDX11Found, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.XeSS_DX11}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
+                                <Button.Content>
+                                    <FontIcon Style="{StaticResource InformationalFontIcon}" />
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <DropDownButton Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentXeSS_DX11, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeSS_DX11}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                            <DropDownButton.Content>
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind ViewModel.Game.CurrentXeSS_DX11.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentXeSS_DX11, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    <TextBlock Text="{x:Bind ViewModel.TranslationProperties.NotFoundText, Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentXeSS_DX11, Converter={StaticResource NullToInverseVisibilityConverter}}" />
+                                </StackPanel>
+                            </DropDownButton.Content>
+                        </DropDownButton>
+
+
+                        <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="1" Grid.Row="3">
                             <TextBlock Text="{x:Bind data:DLLManager.Instance.GetAssetTypeName(data:GameAssetType.XeLL)}" FontWeight="Bold" />
                             <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleXeLLFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.XeLL}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">
                                 <Button.Content>
@@ -433,7 +451,7 @@
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                        <DropDownButton Grid.Column="0" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentXeLL, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeLL}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                        <DropDownButton Grid.Column="1" Grid.Row="4" IsEnabled="{x:Bind ViewModel.Game.CurrentXeLL, Converter={StaticResource NullObjectToBoolConverter}}" Command="{x:Bind ViewModel.ChangeRecordCommand}" CommandParameter="{x:Bind data:GameAssetType.XeLL}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
                             <DropDownButton.Content>
                                 <StackPanel>
                                     <TextBlock Text="{x:Bind ViewModel.Game.CurrentXeLL.DisplayName, FallbackValue='', Mode=OneWay}" Visibility="{x:Bind ViewModel.Game.CurrentXeLL, Converter={StaticResource NullToVisibilityConverter}}" />

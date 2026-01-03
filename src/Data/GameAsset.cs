@@ -163,6 +163,7 @@ public class GameAsset : IEquatable<GameAsset>
             GameAssetType.XeSS => GameAssetType.XeSS_BACKUP,
             GameAssetType.XeLL => GameAssetType.XeLL_BACKUP,
             GameAssetType.XeSS_FG => GameAssetType.XeSS_FG_BACKUP,
+            GameAssetType.XeSS_DX11 => GameAssetType.XeSS_DX11_BACKUP,
             _ => GameAssetType.Unknown
         };
 

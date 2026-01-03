@@ -68,6 +68,7 @@ public partial class DLLPickerControlModel : ObservableObject
         parentDialog.PrimaryButtonCommand = SwapDllCommand;
         parentDialog.SecondaryButtonCommand = ResetDllCommand;
 
+        // NOTE: DLL type
         switch (GameAssetType)
         {
             case GameAssetType.DLSS:

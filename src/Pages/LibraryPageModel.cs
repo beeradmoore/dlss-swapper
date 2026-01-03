@@ -43,6 +43,7 @@ public partial class LibraryPageModel : ObservableObject
         var upscalerSelectorBar = libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
         if (upscalerSelectorBar is not null)
         {
+            // NOTE: DLL type
             // TODO: Change order based on prefered upscaler.
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DLSS), Tag = GameAssetType.DLSS });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DLSS_G), Tag = GameAssetType.DLSS_G });
@@ -981,6 +982,7 @@ public partial class LibraryPageModel : ObservableObject
 
     internal void SelectLibrary(GameAssetType gameAssetType)
     {
+        // NOTE: DLL type
         var newList = gameAssetType switch
         {
             GameAssetType.DLSS => DLLManager.Instance.DLSSRecords,

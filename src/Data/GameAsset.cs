@@ -153,6 +153,7 @@ public class GameAsset : IEquatable<GameAsset>
 
     public GameAsset? GetBackup()
     {
+        // NOTE: DLL type
         var backypType = AssetType switch
         {
             GameAssetType.DLSS => GameAssetType.DLSS_BACKUP,

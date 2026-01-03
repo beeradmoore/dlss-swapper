@@ -1,5 +1,6 @@
 namespace DLSS_Swapper.Data;
 
+// NOTE: DLL type
 public enum GameAssetType
 {
     Unknown,

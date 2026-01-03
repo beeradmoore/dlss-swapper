@@ -18,6 +18,7 @@ internal class DLLManager
 {
     public static DLLManager Instance { get; private set; } = new DLLManager();
 
+    // NOTE: DLL type
     public ObservableCollection<DLLRecord> DLSSRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> DLSSGRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> DLSSDRecords { get; } = new ObservableCollection<DLLRecord>();
@@ -260,6 +261,7 @@ internal class DLLManager
             _knownDLLsReadWriterLock.ExitWriteLock();
         }
 
+        // NOTE: DLL type
         // Cancel downloading of all current DLL records
         CancelDownloads(DLSSRecords);
         CancelDownloads(DLSSGRecords);
@@ -271,6 +273,7 @@ internal class DLLManager
         CancelDownloads(XeSSDX11Records);
         CancelDownloads(XeLLRecords);
 
+        // NOTE: DLL type
         // Update incoming DLL record game asset types
         SetGameAssetType(Manifest.DLSS, GameAssetType.DLSS);
         SetGameAssetType(Manifest.DLSS_D, GameAssetType.DLSS_D);
@@ -283,6 +286,7 @@ internal class DLLManager
         SetGameAssetType(Manifest.XeSS_DX11, GameAssetType.XeSS_DX11);
         if (ImportedManifest is not null)
         {
+            // NOTE: DLL type
             SetGameAssetType(ImportedManifest.DLSS, GameAssetType.DLSS);
             SetGameAssetType(ImportedManifest.DLSS_D, GameAssetType.DLSS_D);
             SetGameAssetType(ImportedManifest.DLSS_G, GameAssetType.DLSS_G);
@@ -363,6 +367,7 @@ internal class DLLManager
 
         App.CurrentApp.RunOnUIThread(() =>
         {
+            // NOTE: DLL type
             // Merge each of the manifests into the master DLL record list
             MergeManifestsIntoMasterList(DLSSRecords, Manifest.DLSS, ImportedManifest?.DLSS);
             MergeManifestsIntoMasterList(DLSSGRecords, Manifest.DLSS_G, ImportedManifest?.DLSS_G);
@@ -802,6 +807,7 @@ internal class DLLManager
 
     public string GetAssetTypeName(GameAssetType assetType)
     {
+        // NOTE: DLL type
         return assetType switch
         {
             GameAssetType.DLSS => ResourceHelper.GetString("General_Name_DLSS"),
@@ -820,6 +826,7 @@ internal class DLLManager
 
     public GameAssetType GetAssetBackupType(GameAssetType assetType)
     {
+        // NOTE: DLL type
         return assetType switch
         {
             GameAssetType.DLSS => GameAssetType.DLSS_BACKUP,
@@ -844,6 +851,7 @@ internal class DLLManager
     ///
     public bool IsInKnownGameAsset(GameAsset gameAsset, Game game)
     {
+        // NOTE: DLL type
         // For each asset type first check if is in the DLSS Swapper manifest
         if (gameAsset.AssetType == GameAssetType.DLSS || gameAsset.AssetType == GameAssetType.DLSS_BACKUP)
         {
@@ -1153,6 +1161,7 @@ internal class DLLManager
         List<DLLRecord>? importedRecordList = null;
         GameAssetType? gameAssetType = null;
 
+        // NOTE: DLL type
         if (fileName == "nvngx_dlss.dll")
         {
             gameAssetType = GameAssetType.DLSS;
@@ -1315,6 +1324,7 @@ internal class DLLManager
         ObservableCollection<DLLRecord>? recordList = null;
         List<DLLRecord>? importedRecordList = null;
 
+        // NOTE: DLL type
         if (dllRecord.AssetType == GameAssetType.DLSS)
         {
             recordList = DLSSRecords;
@@ -1374,6 +1384,7 @@ internal class DLLManager
 
     internal static string DllNameForGameAssetType(GameAssetType gameAssetType)
     {
+        // NOTE: DLL type
         return gameAssetType switch
         {
             GameAssetType.DLSS => "nvngx_dlss.dll",

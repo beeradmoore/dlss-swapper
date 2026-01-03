@@ -198,6 +198,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
+                        <!-- // NOTE: DLL type -->
                         <StackPanel Orientation="Horizontal" Padding="0" Spacing="6" Grid.Column="0" Grid.Row="0">
                             <TextBlock Text="{x:Bind data:DLLManager.Instance.GetAssetTypeName(data:GameAssetType.DLSS)}" FontWeight="Bold" VerticalAlignment="Center" Margin="0" Padding="0" />
                             <Button Style="{StaticResource TextBlockButtonStyle}" Visibility="{x:Bind ViewModel.Game.MultipleDLSSFound, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Command="{Binding MultipleDLLsFoundCommand}" CommandParameter="{x:Bind data:GameAssetType.DLSS}" Padding="0" ToolTipService.ToolTip="{x:Bind ViewModel.TranslationProperties.MultipleDllsFoundText, Mode=OneWay}">

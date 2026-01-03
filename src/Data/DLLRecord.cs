@@ -363,6 +363,7 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
 
     internal string GetRecordSimpleType()
     {
+        // NOTE: DLL type
         return AssetType switch
         {
             GameAssetType.DLSS => "dlss",

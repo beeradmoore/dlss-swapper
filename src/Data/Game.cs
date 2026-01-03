@@ -124,6 +124,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
 
     bool _isLoadingCoverImage;
 
+    // NOTE: DLL type
     [ObservableProperty]
     [Ignore]
     public partial GameAsset? CurrentDLSS { get; set; } = null;
@@ -420,6 +421,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                 {
                     var dllName = Path.GetFileName(dllPath);
 
+                    // NOTE: DLL type
                     // The case of these files should never change, right?
                     if (dllName == "nvngx_dlss.dll")
                     {
@@ -903,6 +905,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
     {
         App.CurrentApp.RunOnUIThread(() =>
         {
+            // NOTE: DLL type
             if (gameAssetType == GameAssetType.DLSS)
             {
                 CurrentDLSS = null;
@@ -1152,6 +1155,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             }
             foreach (var cachedGameAsset in gameAssets)
             {
+                // NOTE: DLL type
                 // If its a file we made we should attempt to delete it.
                 if (cachedGameAsset.AssetType == GameAssetType.DLSS_BACKUP ||
                     cachedGameAsset.AssetType == GameAssetType.DLSS_G_BACKUP ||
@@ -1319,6 +1323,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             didChange = true;
         }
 
+        // NOTE: DLL type
         if (CurrentDLSS != game.CurrentDLSS)
         {
             CurrentDLSS = game.CurrentDLSS;
@@ -1406,6 +1411,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
         CurrentXeSS_DX11 = null;
         CurrentXeLL = null;
 
+        // NOTE: DLL type
         MultipleDLSSFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS) > 1;
         MultipleDLSSGFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS_G) > 1;
         MultipleDLSSDFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS_D) > 1;
@@ -1416,6 +1422,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
         MultipleXeSSDX11Found = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS_DX11) > 1;
         MultipleXeLLFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeLL) > 1;
 
+        // NOTE: DLL type
         foreach (var gameAsset in GameAssets)
         {
             if (gameAsset.AssetType == GameAssetType.DLSS)

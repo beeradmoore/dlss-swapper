@@ -68,6 +68,7 @@ public partial class DLLPickerControlModel : ObservableObject
         parentDialog.PrimaryButtonCommand = SwapDllCommand;
         parentDialog.SecondaryButtonCommand = ResetDllCommand;
 
+        // NOTE: DLL type
         switch (GameAssetType)
         {
             case GameAssetType.DLSS:
@@ -118,19 +119,27 @@ public partial class DLLPickerControlModel : ObservableObject
                 }
                 break;
 
-            case GameAssetType.XeLL:
-                DLLRecords = [.. DLLManager.Instance.XeLLRecords];
-                if (Settings.Instance.OnlyShowDownloadedDlls == true)
-                {
-                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeLL?.Hash && x.LocalRecord?.IsDownloaded is false);
-                }
-                break;
-
             case GameAssetType.XeSS_FG:
                 DLLRecords = [.. DLLManager.Instance.XeSSFGRecords];
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeSS_FG?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.XeSS_DX11:
+                DLLRecords = [.. DLLManager.Instance.XeSSDX11Records];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeSS_DX11?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.XeLL:
+                DLLRecords = [.. DLLManager.Instance.XeLLRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeLL?.Hash && x.LocalRecord?.IsDownloaded is false);
                 }
                 break;
 

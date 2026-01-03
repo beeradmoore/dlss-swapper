@@ -1,5 +1,6 @@
 namespace DLSS_Swapper.Data;
 
+// NOTE: DLL type
 public enum GameAssetType
 {
     Unknown,
@@ -12,6 +13,7 @@ public enum GameAssetType
     XeSS,
     XeLL,
     XeSS_FG,
+    XeSS_DX11,
 
     DLSS_BACKUP,
     DLSS_G_BACKUP,
@@ -21,4 +23,5 @@ public enum GameAssetType
     XeSS_BACKUP,
     XeLL_BACKUP,
     XeSS_FG_BACKUP,
+    XeSS_DX11_BACKUP,
 }

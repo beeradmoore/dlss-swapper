@@ -18,6 +18,7 @@ internal class DLLManager
 {
     public static DLLManager Instance { get; private set; } = new DLLManager();
 
+    // NOTE: DLL type
     public ObservableCollection<DLLRecord> DLSSRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> DLSSGRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> DLSSDRecords { get; } = new ObservableCollection<DLLRecord>();
@@ -26,6 +27,7 @@ internal class DLLManager
     public ObservableCollection<DLLRecord> XeSSRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> XeLLRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> XeSSFGRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> XeSSDX11Records { get; } = new ObservableCollection<DLLRecord>();
 
     public KnownDLLs KnownDLLs { get; private set; } = new KnownDLLs();
 
@@ -145,7 +147,7 @@ internal class DLLManager
 
             // If the manifest is > 3h old
             var timeSinceLastUpdate = DateTimeOffset.Now - fileInfo.LastWriteTime;
-            if (timeSinceLastUpdate.TotalHours > 5)
+            if (timeSinceLastUpdate.TotalHours > 3)
             {
                 shouldUpdate = true;
             }
@@ -259,6 +261,7 @@ internal class DLLManager
             _knownDLLsReadWriterLock.ExitWriteLock();
         }
 
+        // NOTE: DLL type
         // Cancel downloading of all current DLL records
         CancelDownloads(DLSSRecords);
         CancelDownloads(DLSSGRecords);
@@ -267,8 +270,10 @@ internal class DLLManager
         CancelDownloads(FSR31VKRecords);
         CancelDownloads(XeSSRecords);
         CancelDownloads(XeSSFGRecords);
+        CancelDownloads(XeSSDX11Records);
         CancelDownloads(XeLLRecords);
 
+        // NOTE: DLL type
         // Update incoming DLL record game asset types
         SetGameAssetType(Manifest.DLSS, GameAssetType.DLSS);
         SetGameAssetType(Manifest.DLSS_D, GameAssetType.DLSS_D);
@@ -278,8 +283,10 @@ internal class DLLManager
         SetGameAssetType(Manifest.XeSS, GameAssetType.XeSS);
         SetGameAssetType(Manifest.XeSS_FG, GameAssetType.XeSS_FG);
         SetGameAssetType(Manifest.XeLL, GameAssetType.XeLL);
+        SetGameAssetType(Manifest.XeSS_DX11, GameAssetType.XeSS_DX11);
         if (ImportedManifest is not null)
         {
+            // NOTE: DLL type
             SetGameAssetType(ImportedManifest.DLSS, GameAssetType.DLSS);
             SetGameAssetType(ImportedManifest.DLSS_D, GameAssetType.DLSS_D);
             SetGameAssetType(ImportedManifest.DLSS_G, GameAssetType.DLSS_G);
@@ -288,6 +295,7 @@ internal class DLLManager
             SetGameAssetType(ImportedManifest.XeSS, GameAssetType.XeSS);
             SetGameAssetType(ImportedManifest.XeSS_FG, GameAssetType.XeSS_FG);
             SetGameAssetType(ImportedManifest.XeLL, GameAssetType.XeLL);
+            SetGameAssetType(ImportedManifest.XeSS_DX11, GameAssetType.XeSS_DX11);
         }
 
         // Migrate records from zip to raw dlls
@@ -308,6 +316,7 @@ internal class DLLManager
             CheckDllRecordsForMigration_117(Manifest.XeSS, ImportedManifest?.XeSS);
             CheckDllRecordsForMigration_117(Manifest.XeSS_FG, ImportedManifest?.XeSS_FG);
             CheckDllRecordsForMigration_117(Manifest.XeLL, ImportedManifest?.XeLL);
+            CheckDllRecordsForMigration_117(Manifest.XeSS_DX11, ImportedManifest?.XeSS_DX11);
 
             App.CurrentApp.RunOnUIThread(() =>
             {
@@ -324,6 +333,7 @@ internal class DLLManager
         LoadLocalRecords(Manifest.XeSS);
         LoadLocalRecords(Manifest.XeSS_FG);
         LoadLocalRecords(Manifest.XeLL);
+        LoadLocalRecords(Manifest.XeSS_DX11);
         if (ImportedManifest is not null)
         {
             LoadLocalRecords(ImportedManifest.DLSS, true);
@@ -334,6 +344,7 @@ internal class DLLManager
             LoadLocalRecords(ImportedManifest.XeSS, true);
             LoadLocalRecords(ImportedManifest.XeSS_FG, true);
             LoadLocalRecords(ImportedManifest.XeLL, true);
+            LoadLocalRecords(ImportedManifest.XeSS_DX11, true);
         }
 
         // See if there is any imported manifest items that are to be migrated to downloaded
@@ -347,6 +358,7 @@ internal class DLLManager
         didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeSS, ImportedManifest?.XeSS);
         didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeSS_FG, ImportedManifest?.XeSS_FG);
         didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeLL, ImportedManifest?.XeLL);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeSS_DX11, ImportedManifest?.XeSS_DX11);
 
         if (didChangeImportedManifest == true)
         {
@@ -355,6 +367,7 @@ internal class DLLManager
 
         App.CurrentApp.RunOnUIThread(() =>
         {
+            // NOTE: DLL type
             // Merge each of the manifests into the master DLL record list
             MergeManifestsIntoMasterList(DLSSRecords, Manifest.DLSS, ImportedManifest?.DLSS);
             MergeManifestsIntoMasterList(DLSSGRecords, Manifest.DLSS_G, ImportedManifest?.DLSS_G);
@@ -363,6 +376,7 @@ internal class DLLManager
             MergeManifestsIntoMasterList(FSR31VKRecords, Manifest.FSR_31_VK, ImportedManifest?.FSR_31_VK);
             MergeManifestsIntoMasterList(XeSSRecords, Manifest.XeSS, ImportedManifest?.XeSS);
             MergeManifestsIntoMasterList(XeSSFGRecords, Manifest.XeSS_FG, ImportedManifest?.XeSS_FG);
+            MergeManifestsIntoMasterList(XeSSDX11Records, Manifest.XeSS_DX11, ImportedManifest?.XeSS_DX11);
             MergeManifestsIntoMasterList(XeLLRecords, Manifest.XeLL, ImportedManifest?.XeLL);
         });
     }
@@ -793,6 +807,7 @@ internal class DLLManager
 
     public string GetAssetTypeName(GameAssetType assetType)
     {
+        // NOTE: DLL type
         return assetType switch
         {
             GameAssetType.DLSS => ResourceHelper.GetString("General_Name_DLSS"),
@@ -801,8 +816,9 @@ internal class DLLManager
             GameAssetType.FSR_31_DX12 => ResourceHelper.GetString("General_Name_FSR_31_DX12"),
             GameAssetType.FSR_31_VK => ResourceHelper.GetString("General_Name_FSR_31_VK"),
             GameAssetType.XeSS => ResourceHelper.GetString("General_Name_XeSS"),
-            GameAssetType.XeLL => ResourceHelper.GetString("General_Name_XeLL"),
             GameAssetType.XeSS_FG => ResourceHelper.GetString("General_Name_XeSS_FG"),
+            GameAssetType.XeSS_DX11 => ResourceHelper.GetString("General_Name_XeSS_DX11"),
+            GameAssetType.XeLL => ResourceHelper.GetString("General_Name_XeLL"),
             _ => throw new Exception($"Unknown AssetType: {assetType}"),
         };
     }
@@ -810,6 +826,7 @@ internal class DLLManager
 
     public GameAssetType GetAssetBackupType(GameAssetType assetType)
     {
+        // NOTE: DLL type
         return assetType switch
         {
             GameAssetType.DLSS => GameAssetType.DLSS_BACKUP,
@@ -818,8 +835,9 @@ internal class DLLManager
             GameAssetType.FSR_31_DX12 => GameAssetType.FSR_31_DX12_BACKUP,
             GameAssetType.FSR_31_VK => GameAssetType.FSR_31_VK_BACKUP,
             GameAssetType.XeSS => GameAssetType.XeSS_BACKUP,
-            GameAssetType.XeLL => GameAssetType.XeLL_BACKUP,
             GameAssetType.XeSS_FG => GameAssetType.XeSS_FG_BACKUP,
+            GameAssetType.XeSS_DX11 => GameAssetType.XeSS_DX11_BACKUP,
+            GameAssetType.XeLL => GameAssetType.XeLL_BACKUP,
             _ => throw new Exception($"Unknown AssetType: {assetType}"),
         };
     }
@@ -833,6 +851,7 @@ internal class DLLManager
     ///
     public bool IsInKnownGameAsset(GameAsset gameAsset, Game game)
     {
+        // NOTE: DLL type
         // For each asset type first check if is in the DLSS Swapper manifest
         if (gameAsset.AssetType == GameAssetType.DLSS || gameAsset.AssetType == GameAssetType.DLSS_BACKUP)
         {
@@ -1061,6 +1080,38 @@ internal class DLLManager
 
             return false;
         }
+        else if (gameAsset.AssetType == GameAssetType.XeSS_DX11 || gameAsset.AssetType == GameAssetType.XeSS_DX11_BACKUP)
+        {
+            if (XeSSDX11Records.Any(x => gameAsset.Hash.Equals(x.MD5Hash, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                return true;
+            }
+            HashedKnownDLL? hashedKnownDLL = null;
+            _knownDLLsReadWriterLock.EnterReadLock();
+            try
+            {
+                hashedKnownDLL = KnownDLLs.XeSS_DX11.FirstOrDefault(x => gameAsset.Hash.Equals(x.Hash, StringComparison.InvariantCultureIgnoreCase));
+            }
+            finally
+            {
+                _knownDLLsReadWriterLock.ExitReadLock();
+            }
+
+            if (hashedKnownDLL is null)
+            {
+                return false;
+            }
+
+            if (hashedKnownDLL.Sources.TryGetValue(game.GameLibrary.ToString(), out var gameHashes) == true)
+            {
+                if (gameHashes.Contains(game.TitleBase64) == true)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
         else if (gameAsset.AssetType == GameAssetType.XeSS_FG || gameAsset.AssetType == GameAssetType.XeSS_FG_BACKUP)
         {
             if (XeSSFGRecords.Any(x => gameAsset.Hash.Equals(x.MD5Hash, StringComparison.InvariantCultureIgnoreCase)))
@@ -1110,6 +1161,7 @@ internal class DLLManager
         List<DLLRecord>? importedRecordList = null;
         GameAssetType? gameAssetType = null;
 
+        // NOTE: DLL type
         if (fileName == "nvngx_dlss.dll")
         {
             gameAssetType = GameAssetType.DLSS;
@@ -1151,6 +1203,12 @@ internal class DLLManager
             gameAssetType = GameAssetType.XeLL;
             recordList = XeLLRecords;
             importedRecordList = ImportedManifest.XeLL;
+        }
+        else if (fileName == "libxess_dx11.dll")
+        {
+            gameAssetType = GameAssetType.XeSS_DX11;
+            recordList = XeSSDX11Records;
+            importedRecordList = ImportedManifest.XeSS_DX11;
         }
         else if (fileName == "libxess_fg.dll")
         {
@@ -1266,6 +1324,7 @@ internal class DLLManager
         ObservableCollection<DLLRecord>? recordList = null;
         List<DLLRecord>? importedRecordList = null;
 
+        // NOTE: DLL type
         if (dllRecord.AssetType == GameAssetType.DLSS)
         {
             recordList = DLSSRecords;
@@ -1296,15 +1355,20 @@ internal class DLLManager
             recordList = XeSSRecords;
             importedRecordList = ImportedManifest?.XeSS;
         }
-        else if (dllRecord.AssetType == GameAssetType.XeLL)
-        {
-            recordList = XeLLRecords;
-            importedRecordList = ImportedManifest?.XeLL;
-        }
         else if (dllRecord.AssetType == GameAssetType.XeSS_FG)
         {
             recordList = XeSSFGRecords;
             importedRecordList = ImportedManifest?.XeSS_FG;
+        }
+        else if (dllRecord.AssetType == GameAssetType.XeSS_DX11)
+        {
+            recordList = XeSSDX11Records;
+            importedRecordList = ImportedManifest?.XeSS_DX11;
+        }
+        else if (dllRecord.AssetType == GameAssetType.XeLL)
+        {
+            recordList = XeLLRecords;
+            importedRecordList = ImportedManifest?.XeLL;
         }
 
         if (recordList is null)
@@ -1320,6 +1384,7 @@ internal class DLLManager
 
     internal static string DllNameForGameAssetType(GameAssetType gameAssetType)
     {
+        // NOTE: DLL type
         return gameAssetType switch
         {
             GameAssetType.DLSS => "nvngx_dlss.dll",
@@ -1330,6 +1395,7 @@ internal class DLLManager
             GameAssetType.XeSS => "libxess.dll",
             GameAssetType.XeSS_FG => "libxess_fg.dll",
             GameAssetType.XeLL => "libxell.dll",
+            GameAssetType.XeSS_DX11 => "libxess_dx11.dll",
             _ => string.Empty,
         };
     }

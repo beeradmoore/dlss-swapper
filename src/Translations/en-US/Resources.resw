@@ -566,7 +566,6 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Name_XeLL" xml:space="preserve">
     <value>XeLL</value>
     <comment>If XeLL does not have a direct translation put in the English characters for it</comment>
-
   </data>
   <data name="General_Name_XeSS" xml:space="preserve">
     <value>XeSS</value>
@@ -575,7 +574,10 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Name_XeSS_FG" xml:space="preserve">
     <value>XeSS Frame Generation</value>
     <comment>If XeSS does not have a direct translation put in the English characters for it</comment>
-
+  </data>
+  <data name="General_Name_XeSS_DX11" xml:space="preserve">
+    <value>XeSS (DX11)</value>
+    <comment>If XeSS does not have a direct translation put in the English characters for it</comment>
   </data>
   <data name="General_No" xml:space="preserve">
     <value>No</value>

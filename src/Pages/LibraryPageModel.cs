@@ -43,6 +43,7 @@ public partial class LibraryPageModel : ObservableObject
         var upscalerSelectorBar = libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
         if (upscalerSelectorBar is not null)
         {
+            // NOTE: DLL type
             // TODO: Change order based on prefered upscaler.
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DLSS), Tag = GameAssetType.DLSS });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DLSS_G), Tag = GameAssetType.DLSS_G });
@@ -50,6 +51,7 @@ public partial class LibraryPageModel : ObservableObject
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.FSR_31_DX12), Tag = GameAssetType.FSR_31_DX12 });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.FSR_31_VK), Tag = GameAssetType.FSR_31_VK });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.XeSS), Tag = GameAssetType.XeSS });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.XeSS_DX11), Tag = GameAssetType.XeSS_DX11 });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.XeSS_FG), Tag = GameAssetType.XeSS_FG });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.XeLL), Tag = GameAssetType.XeLL });
 
@@ -131,6 +133,7 @@ public partial class LibraryPageModel : ObservableObject
         allDllRecords.AddRange(DLLManager.Instance.FSR31VKRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.XeSSRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.XeSSFGRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.XeSSDX11Records.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.XeLLRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
 
         if (allDllRecords.Count == 0)
@@ -654,6 +657,20 @@ public partial class LibraryPageModel : ObservableObject
                                 }
                             }
 
+                            var xessDX11Record = DLLManager.Instance.XeSSDX11Records.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (xessDX11Record is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, xessDX11Record, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
                             var xessFGRecord = DLLManager.Instance.XeSSFGRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
                             if (xessFGRecord is not null)
                             {
@@ -965,6 +982,7 @@ public partial class LibraryPageModel : ObservableObject
 
     internal void SelectLibrary(GameAssetType gameAssetType)
     {
+        // NOTE: DLL type
         var newList = gameAssetType switch
         {
             GameAssetType.DLSS => DLLManager.Instance.DLSSRecords,
@@ -974,6 +992,7 @@ public partial class LibraryPageModel : ObservableObject
             GameAssetType.FSR_31_VK => DLLManager.Instance.FSR31VKRecords,
             GameAssetType.XeSS => DLLManager.Instance.XeSSRecords,
             GameAssetType.XeLL => DLLManager.Instance.XeLLRecords,
+            GameAssetType.XeSS_DX11 => DLLManager.Instance.XeSSDX11Records,
             GameAssetType.XeSS_FG => DLLManager.Instance.XeSSFGRecords,
             _ => null,
         };
@@ -993,6 +1012,7 @@ public partial class LibraryPageModel : ObservableObject
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.FSR31VKRecords);
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.XeSSRecords);
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.XeSSFGRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.XeSSDX11Records);
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.XeLLRecords);
 
         if (startedDownloads == 0)

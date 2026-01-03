@@ -124,6 +124,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
 
     bool _isLoadingCoverImage;
 
+    // NOTE: DLL type
     [ObservableProperty]
     [Ignore]
     public partial GameAsset? CurrentDLSS { get; set; } = null;
@@ -187,6 +188,15 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
     [ObservableProperty]
     [Ignore]
     public partial bool MultipleXeSSFGFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentXeSS_DX11 { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleXeSSDX11Found { get; set; } = false;
+    
 
     [Ignore]
     public abstract bool IsReadyToPlay { get; }
@@ -411,6 +421,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                 {
                     var dllName = Path.GetFileName(dllPath);
 
+                    // NOTE: DLL type
                     // The case of these files should never change, right?
                     if (dllName == "nvngx_dlss.dll")
                     {
@@ -473,6 +484,17 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                         {
                             Id = ID,
                             AssetType = GameAssetType.XeSS,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "libxess_dx11.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.XeSS_DX11,
                             Path = dllPath,
                         };
                         ProcessGame_ProcessGameAsset(gameAsset);
@@ -883,6 +905,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
     {
         App.CurrentApp.RunOnUIThread(() =>
         {
+            // NOTE: DLL type
             if (gameAssetType == GameAssetType.DLSS)
             {
                 CurrentDLSS = null;
@@ -913,15 +936,20 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                 CurrentXeSS = null;
                 CurrentXeSS = newGameAsset;
             }
-            else if (gameAssetType == GameAssetType.XeLL)
-            {
-                CurrentXeLL = null;
-                CurrentXeLL = newGameAsset;
-            }
             else if (gameAssetType == GameAssetType.XeSS_FG)
             {
                 CurrentXeSS_FG = null;
                 CurrentXeSS_FG = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.XeSS_DX11)
+            {
+                CurrentXeSS_DX11 = null;
+                CurrentXeSS_DX11 = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.XeLL)
+            {
+                CurrentXeLL = null;
+                CurrentXeLL = newGameAsset;
             }
             else
             {
@@ -1127,6 +1155,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             }
             foreach (var cachedGameAsset in gameAssets)
             {
+                // NOTE: DLL type
                 // If its a file we made we should attempt to delete it.
                 if (cachedGameAsset.AssetType == GameAssetType.DLSS_BACKUP ||
                     cachedGameAsset.AssetType == GameAssetType.DLSS_G_BACKUP ||
@@ -1135,6 +1164,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                     cachedGameAsset.AssetType == GameAssetType.FSR_31_VK_BACKUP ||
                     cachedGameAsset.AssetType == GameAssetType.XeSS_BACKUP ||
                     cachedGameAsset.AssetType == GameAssetType.XeSS_FG_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.XeSS_DX11_BACKUP ||
                     cachedGameAsset.AssetType == GameAssetType.XeLL_BACKUP)
                 {
                     if (File.Exists(cachedGameAsset.Path))
@@ -1293,6 +1323,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             didChange = true;
         }
 
+        // NOTE: DLL type
         if (CurrentDLSS != game.CurrentDLSS)
         {
             CurrentDLSS = game.CurrentDLSS;
@@ -1341,15 +1372,21 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             didChange = true;
         }
 
-        if (CurrentXeLL != game.CurrentXeLL)
-        {
-            CurrentXeLL = game.CurrentXeLL;
-            didChange = true;
-        }
-
         if (CurrentXeSS_FG != game.CurrentXeSS_FG)
         {
             CurrentXeSS_FG = game.CurrentXeSS_FG;
+            didChange = true;
+        }
+
+        if (CurrentXeSS_DX11 != game.CurrentXeSS_DX11)
+        {
+            CurrentXeSS_DX11 = game.CurrentXeSS_DX11;
+            didChange = true;
+        }
+
+        if (CurrentXeLL != game.CurrentXeLL)
+        {
+            CurrentXeLL = game.CurrentXeLL;
             didChange = true;
         }
 
@@ -1370,18 +1407,22 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
         CurrentFSR_31_DX12 = null;
         CurrentFSR_31_VK = null;
         CurrentXeSS = null;
-        CurrentXeLL = null;
         CurrentXeSS_FG = null;
+        CurrentXeSS_DX11 = null;
+        CurrentXeLL = null;
 
+        // NOTE: DLL type
         MultipleDLSSFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS) > 1;
         MultipleDLSSGFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS_G) > 1;
         MultipleDLSSDFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS_D) > 1;
         MultipleFSR31DX12Found = GameAssets.Count(x => x.AssetType == GameAssetType.FSR_31_DX12) > 1;
         MultipleFSR31VKFound = GameAssets.Count(x => x.AssetType == GameAssetType.FSR_31_VK) > 1;
         MultipleXeSSFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS) > 1;
-        MultipleXeLLFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeLL) > 1;
         MultipleXeSSFGFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS_FG) > 1;
+        MultipleXeSSDX11Found = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS_DX11) > 1;
+        MultipleXeLLFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeLL) > 1;
 
+        // NOTE: DLL type
         foreach (var gameAsset in GameAssets)
         {
             if (gameAsset.AssetType == GameAssetType.DLSS)
@@ -1408,13 +1449,17 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             {
                 CurrentXeSS = gameAsset;
             }
-            else if (gameAsset.AssetType == GameAssetType.XeLL)
-            {
-                CurrentXeLL = gameAsset;
-            }
             else if (gameAsset.AssetType == GameAssetType.XeSS_FG)
             {
                 CurrentXeSS_FG = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.XeSS_DX11)
+            {
+                CurrentXeSS_DX11 = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.XeLL)
+            {
+                CurrentXeLL = gameAsset;
             }
         }
     }

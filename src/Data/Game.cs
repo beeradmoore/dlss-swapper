@@ -487,6 +487,17 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                         ProcessGame_ProcessGameAsset(gameAsset);
                         GameAssets.Add(gameAsset);
                     }
+                    else if (dllName == "libxess_dx11.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.XeSS_DX11,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
                     else if (dllName == "libxell.dll")
                     {
                         var gameAsset = new GameAsset()

@@ -372,6 +372,7 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
             GameAssetType.FSR_31_VK => "fsr_31_vk",
             GameAssetType.XeSS => "xess",
             GameAssetType.XeLL => "xell",
+            GameAssetType.XeSS_DX11 => "xess_dx11",
             GameAssetType.XeSS_FG => "xess_fg",
             _ => string.Empty,
         };

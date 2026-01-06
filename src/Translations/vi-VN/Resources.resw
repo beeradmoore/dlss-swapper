@@ -165,6 +165,18 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>Tệp zip DLL không hợp lệ (không tìm thấy DLL).</value>
   </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>Luôn sử dụng mới nhất</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>Mặc định</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>Preset {0}</value>
+  </data>
+  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
+    <value>Preset {0} (Đã lỗi thời)</value>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper không thể khởi chạy</value>
   </data>
@@ -181,7 +193,7 @@
     <value>Không thể khởi chạy</value>
   </data>
   <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Bạn có chắc chắn muốn xóa hình ảnh bìa tùy chỉnh không?</value>
+    <value>Bạn có chắc chắn muốn xóa hình bìa tùy chỉnh không?</value>
   </data>
   <data name="Game_CurrentlyProcessing" xml:space="preserve">
     <value>Trò Chơi Đang Xử Lý</value>
@@ -221,6 +233,9 @@
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Thêm Bìa Tùy Chỉnh</value>
+  </data>
+  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>Việc khởi chạy trò chơi từ thư viện {0} của bạn hiện không được hỗ trợ.</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Nhấp để yêu thích</value>
@@ -306,6 +321,18 @@ Tương tự áp dụng cho preset toàn cục. Nếu bạn chọn preset K như
   </data>
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>Trò chơi này chưa ở trạng thái sẵn sàng chơi.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
+    <value>NVAPI đã gặp lỗi. Thông tin thêm đã được ghi vào nhật ký lỗi.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
+    <value>NVAPI đã gặp lỗi. Chạy ứng dụng với quyền admin có thể giải quyết vấn đề. Thông tin thêm đã được ghi vào nhật ký lỗi.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
+    <value>Lỗi NVAPI</value>
+  </data>
+  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
+    <value>NVAPI đã gặp lỗi. Nhấp để biết thêm thông tin.</value>
   </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
     <value>Mở vị trí DLL</value>
@@ -412,7 +439,7 @@ Nếu bạn đã kiểm tra những điều này và trò chơi của bạn vẫ
     <value>Cảm ơn vì đã giúp đỡ!</value>
   </data>
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
-    <value>Bạn không cần gửi DLL. Chúng tôi sẽ theo dõi chúng dựa trên thông tin được cung cấp.</value>
+    <value>Bạn không cần phải gửi DLL. Chúng tôi sẽ theo dõi chúng dựa trên thông tin được cung cấp.</value>
   </data>
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
     <value>Tìm Thấy DLL Mới</value>
@@ -421,7 +448,7 @@ Nếu bạn đã kiểm tra những điều này và trò chơi của bạn vẫ
     <value>Đang tải lại trò chơi</value>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
-    <value>Hiển thị trò chơi ẩn (mặc định tắt khi khởi chạy)</value>
+    <value>Hiển thị trò chơi bị ẩn (mặc định tắt khi khởi động)</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Trò Chơi</value>
@@ -454,7 +481,7 @@ Nếu bạn đã kiểm tra những điều này và trò chơi của bạn vẫ
     <value>Xóa</value>
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
-    <value>Không hiển thị lại</value>
+    <value>Đừng hiển thị lại</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>Lỗi</value>
@@ -475,7 +502,7 @@ Nếu bạn đã kiểm tra những điều này và trò chơi của bạn vẫ
     <value>Tính năng này không được hỗ trợ nếu bạn đang chạy ứng dụng với quyền admin.</value>
   </data>
   <data name="General_Filter" xml:space="preserve">
-    <value>Bộ lọc</value>
+    <value>Lọc</value>
   </data>
   <data name="General_Help" xml:space="preserve">
     <value>Trợ giúp</value>
@@ -495,23 +522,59 @@ Nếu bạn đã kiểm tra những điều này và trò chơi của bạn vẫ
   <data name="General_Name" xml:space="preserve">
     <value>Tên</value>
   </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>DLSS Ray Reconstruction</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>DLSS Frame Generation</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>Preset DLSS</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>Preset DLSS RR</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>XeSS Frame Generation</value>
+  </data>
   <data name="General_No" xml:space="preserve">
     <value>Không</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>Không có</value>
   </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>Không tìm thấy</value>
+  </data>
   <data name="General_NotSupported" xml:space="preserve">
     <value>Không được hỗ trợ</value>
   </data>
   <data name="General_Okay" xml:space="preserve">
-    <value>Đồng ý</value>
+    <value>Okay</value>
   </data>
   <data name="General_Oops" xml:space="preserve">
     <value>Ối</value>
   </data>
   <data name="General_OpenFolder" xml:space="preserve">
     <value>Mở thư mục</value>
+  </data>
+  <data name="General_OpenLogsDirectory" xml:space="preserve">
+    <value>Mở thư mục nhật ký</value>
   </data>
   <data name="General_Optional" xml:space="preserve">
     <value>(tùy chọn)</value>
@@ -550,7 +613,7 @@ Nếu bạn đã kiểm tra những điều này và trò chơi của bạn vẫ
     <value>Hoán đổi</value>
   </data>
   <data name="General_Unknown" xml:space="preserve">
-    <value>Không xác định</value>
+    <value>Không rõ</value>
   </data>
   <data name="General_Update" xml:space="preserve">
     <value>Cập nhật</value>
@@ -571,7 +634,7 @@ Nếu bạn đã kiểm tra những điều này và trò chơi của bạn vẫ
     <value>DLSS Swapper vừa được cập nhật</value>
   </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
-    <value>Cập nhật Có Sẵn</value>
+    <value>Có Cập Nhật</value>
   </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>Đã tải xuống.</value>
@@ -607,19 +670,19 @@ Nếu bạn đã kiểm tra những điều này và trò chơi của bạn vẫ
     <value>Tên Nội Bộ</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
-    <value>Tên Nội Bộ Thêm</value>
+    <value>Tên Nội Bộ Bổ Sung</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Nhãn</value>
   </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
-    <value>Tải Xuống Mới Nhất</value>
+    <value>Tải Phiên Bản Mới Nhất</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
-    <value>Bắt đầu {0} tải xuống mới.</value>
+    <value>Đã bắt đầu {0} tải xuống mới.</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
-    <value>Tải xuống đã bắt đầu</value>
+    <value>Bắt đầu tải xuống</value>
   </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
     <value>DLL đã xuất: </value>
@@ -645,7 +708,7 @@ Nếu bạn đã kiểm tra những điều này và trò chơi của bạn vẫ
   <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
     <value>Việc thay thế dll trên máy tính của bạn có thể nguy hiểm.
 
-Việc đặt dll độc hại vào trò chơi cũng tệ như chạy Linking_park_-_nUmB_mp3.exe mà bạn vừa tải từ LimeWire.
+Việc đặt một dll độc hại vào trò chơi cũng tệ như chạy Linking_park_-_nUmB_mp3.exe mà bạn vừa tải từ LimeWire.
 
 Chỉ nhập dll từ nguồn bạn tin cậy.</value>
   </data>
@@ -699,7 +762,7 @@ Nếu điều này tiếp tục xảy ra, vui lòng báo cáo trong trình theo 
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
     <value>Mặc dù việc hoán đổi phiên bản DLSS không nên được coi là gian lận, một số hệ thống chống gian lận có thể không hài lòng nếu tệp trong thư mục trò chơi của bạn không phải là những gì trò chơi được phân phối.
 
-Vì lý do này, chúng tôi khuyến nghị cẩn thận với trò chơi nhiều người chơi.</value>
+Vì lý do này, chúng tôi khuyên nghịch cẩn thận với trò chơi nhiều người chơi.</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>Ghi chú cho trò chơi nhiều người chơi</value>
@@ -862,6 +925,24 @@ Vì lý do này, chúng tôi khuyến nghị cẩn thận với trò chơi nhi�
   </data>
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>Ghi Nhật Ký</value>
+  </data>
+  <data name="SettingsPage_Logging_Debug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="SettingsPage_Logging_Error" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="SettingsPage_Logging_Info" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="SettingsPage_Logging_Off" xml:space="preserve">
+    <value>Tắt</value>
+  </data>
+  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
+    <value>Chi tiết</value>
+  </data>
+  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
+    <value>Cảnh báo</value>
   </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>Không có cập nhật mới nào có sẵn.</value>

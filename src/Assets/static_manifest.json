@@ -1682,6 +1682,40 @@
       "file_size": 30135840,
       "zip_file_size": 17903428,
       "dll_source": "DLSS-310.4.0.zip"
+    },
+    {
+      "version": "310.5.0.0",
+      "version_number": 87257264255139840,
+      "internal_name": "CL 37081176",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "A30D0CFBEC9D48DCD5F314AEA1BDE86D",
+      "zip_md5_hash": "20D8DB121EDE3D04EFFF98B9BA99E6DD",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/dlss/dlss_v310.5.0.0_A30D0CFBEC9D48DCD5F314AEA1BDE86D.zip",
+      "file_description": "NVIDIA DLSS - DVS PRODUCTION",
+      "signed_datetime": "2025-12-20T01:52:02Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 54778992,
+      "zip_file_size": 27452486,
+      "dll_source": "DLSS-310.5.0.zip"
+    },
+    {
+      "version": "310.5.0.0",
+      "version_number": 87257264255139840,
+      "internal_name": "CL 37081176",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "87DB238E66C9D8E1016B65C6C109C9FC",
+      "zip_md5_hash": "099A4832781757A0E43D49BA5F6CD5A7",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/dlss/dlss_v310.5.0.0_87DB238E66C9D8E1016B65C6C109C9FC.zip",
+      "file_description": "NVIDIA DLSS - DVS PRODUCTION",
+      "signed_datetime": "2025-12-20T01:52:25Z",
+      "is_signature_valid": true,
+      "is_dev_file": true,
+      "file_size": 65523824,
+      "zip_file_size": 31489422,
+      "dll_source": "DLSS-310.5.0.zip"
     }
   ],
   "dlss_d": [
@@ -1905,6 +1939,40 @@
       "file_size": 28548208,
       "zip_file_size": 11104114,
       "dll_source": ""
+    },
+    {
+      "version": "310.5.0.0",
+      "version_number": 87257264255139840,
+      "internal_name": "CL 36965356",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "EA085A17325B420C267CD9ED5D12759B",
+      "zip_md5_hash": "DBE907E473A3EEBED13AB406BDF1E88C",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/dlss_d/dlss_d_v310.5.0.0_EA085A17325B420C267CD9ED5D12759B.zip",
+      "file_description": "NVIDIA DLSS - DVS PRODUCTION",
+      "signed_datetime": "2025-11-29T21:26:09Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 28590704,
+      "zip_file_size": 11125406,
+      "dll_source": "streamline-sdk-v2.10.0.zip"
+    },
+    {
+      "version": "310.5.0.0",
+      "version_number": 87257264255139840,
+      "internal_name": "CL 36965356",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "6026C85B9485CB40ED07763D9A411874",
+      "zip_md5_hash": "29D4D02CA40660FBAA9304CC35B45D00",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/dlss_d/dlss_d_v310.5.0.0_6026C85B9485CB40ED07763D9A411874.zip",
+      "file_description": "NVIDIA DLSS - DVS PRODUCTION",
+      "signed_datetime": "2025-11-29T21:27:48Z",
+      "is_signature_valid": true,
+      "is_dev_file": true,
+      "file_size": 39383664,
+      "zip_file_size": 15169704,
+      "dll_source": "streamline-sdk-v2.10.0.zip"
     }
   ],
   "dlss_g": [
@@ -2349,6 +2417,40 @@
       "file_size": 7509024,
       "zip_file_size": 3740762,
       "dll_source": ""
+    },
+    {
+      "version": "310.5.0.0",
+      "version_number": 87257264255139840,
+      "internal_name": "CL 36971775",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "2699EE09828839EFC1E43228C6708971",
+      "zip_md5_hash": "1A065A6815E0FDEE75C5557037ED1836",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/dlss_g/dlss_g_v310.5.0.0_2699EE09828839EFC1E43228C6708971.zip",
+      "file_description": "NVIDIA DLSS-G MFGLW - DVS PRODUCTION",
+      "signed_datetime": "2025-12-01T19:49:08Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 7518320,
+      "zip_file_size": 3742668,
+      "dll_source": "streamline-sdk-v2.10.0.zip"
+    },
+    {
+      "version": "310.5.0.0",
+      "version_number": 87257264255139840,
+      "internal_name": "CL 36971775",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "27D59D09717E4A9D96D295D051595BDE",
+      "zip_md5_hash": "1FFC31591796D03D8D0EB2A9C678E446",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/dlss_g/dlss_g_v310.5.0.0_27D59D09717E4A9D96D295D051595BDE.zip",
+      "file_description": "NVIDIA DLSS-G MFGLW - DVS PRODUCTION",
+      "signed_datetime": "2025-12-01T19:48:35Z",
+      "is_signature_valid": true,
+      "is_dev_file": true,
+      "file_size": 7955568,
+      "zip_file_size": 3930822,
+      "dll_source": "streamline-sdk-v2.10.0.zip"
     }
   ],
   "fsr_31_dx12": [
@@ -3089,6 +3191,59 @@
       "is_dev_file": false,
       "file_size": 47119216,
       "zip_file_size": 28426087,
+      "dll_source": "XeSS_SDK_2.1.1.zip"
+    }
+  ],
+  "xess_dx11": [
+    {
+      "version": "2.0.1.41",
+      "version_number": 562949953486889,
+      "internal_name": "",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "155CC423A077A4F8435D3919F0F1DA80",
+      "zip_md5_hash": "1FC7C2987A0AE4C4A41DDE41D5B95761",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/xess_dx11/xess_dx11_v2.0.1.41_155CC423A077A4F8435D3919F0F1DA80.zip",
+      "file_description": "XeSS SDK",
+      "signed_datetime": "2025-03-12T17:49:26Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 147816,
+      "zip_file_size": 43905,
+      "dll_source": "XeSS_SDK_2.0.1.zip"
+    },
+    {
+      "version": "2.0.2.53",
+      "version_number": 562949953552437,
+      "internal_name": "",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "C74E52A82017D654E017279D8F374544",
+      "zip_md5_hash": "7EA3B053998A44F0F216232CE976E7E7",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/xess_dx11/xess_dx11_v2.0.2.53_C74E52A82017D654E017279D8F374544.zip",
+      "file_description": "XeSS SDK",
+      "signed_datetime": "2025-07-03T08:08:13Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 156024,
+      "zip_file_size": 45237,
+      "dll_source": "XeSS_SDK_2.1.0.zip"
+    },
+    {
+      "version": "2.0.2.68",
+      "version_number": 562949953552452,
+      "internal_name": "",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "E04C7F44BC073D164CBF603215E96EAA",
+      "zip_md5_hash": "684E69D6984964006924DAA794757C30",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/xess_dx11/xess_dx11_v2.0.2.68_E04C7F44BC073D164CBF603215E96EAA.zip",
+      "file_description": "XeSS SDK",
+      "signed_datetime": "2025-10-17T14:23:44Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 156016,
+      "zip_file_size": 45240,
       "dll_source": "XeSS_SDK_2.1.1.zip"
     }
   ],
@@ -10395,6 +10550,7 @@
           ]
         }
       }
-    ]
+    ],
+    "xess_dx11": []
   }
 }

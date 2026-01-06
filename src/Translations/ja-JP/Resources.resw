@@ -165,6 +165,18 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>DLLファイルが破損しています(DLLファイルが見つかりません)</value>
   </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>常に最新版を使用</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>デフォルト</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>プリセット {0}</value>
+  </data>
+  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
+    <value>プリセット {0} (非推薦)</value>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapperが起動に失敗しました</value>
   </data>
@@ -179,15 +191,6 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>起動に失敗しました</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>カスタムカバー画像を削除してもよろしいですか?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>ゲームが現在実行中です</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>カスタムカバーを削除しますか?</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>アセットの種類</value>
@@ -221,6 +224,9 @@
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>カスタムカバーを追加する</value>
+  </data>
+  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>{0} ライブラリからのゲームの起動は現在サポートされていません</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>お気に入りに追加する</value>
@@ -307,6 +313,18 @@
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>このゲームはプレイ可能な状態ではありません</value>
   </data>
+  <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
+    <value>NVAPIエラーが発生しました。詳細情報はエラーログに書き込まれました</value>
+  </data>
+  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
+    <value>NVAPIエラーが発生しました。管理者としてアプリケーションを実行すると、問題が解決する場合があります。詳細情報はエラーログに記録されました</value>
+  </data>
+  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
+    <value>NVAPIエラー</value>
+  </data>
+  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
+    <value>NVAPIエラーが発生しました。詳細についてはクリックして下さい</value>
+  </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
     <value>DLLファイルの保存場所を開く</value>
   </data>
@@ -317,7 +335,7 @@
     <value>{0} は現在処理中です。読み込みインジケーターが完了するまでお待ち下さい</value>
   </data>
   <data name="GamePage_ResetAll" xml:space="preserve">
-    <value>全てをリセットする</value>
+    <value>全てリセット</value>
   </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>元のDLLを復元します</value>
@@ -388,6 +406,9 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>新しいDLLファイル</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>新しいDLLファイルが検出されました</value>
+  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>GitHubの新しい報告を作成する</value>
   </data>
@@ -418,14 +439,11 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>DLLを提出する必要はありません。提供された情報に基づいて、私達でDLLを特定致します</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>新しいDLLファイルが検出されました</value>
-  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>ゲームの再読み込み</value>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
-    <value>非表示のゲームを表示する（起動時はデフォルトでオフ）</value>
+    <value>非表示のゲームを表示する(起動時はデフォルトでオフ)</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>ゲーム</value>
@@ -438,6 +456,15 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>リスト表示</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>カスタムカバー画像を削除してもよろしいですか?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>ゲームが現在実行中です</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>カスタムカバーを削除しますか?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>このアプリは管理者権限で実行されています</value>
@@ -485,7 +512,7 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>ヘルプ</value>
   </data>
   <data name="General_Hidden" xml:space="preserve">
-    <value>非表示</value>
+    <value>隠す</value>
   </data>
   <data name="General_Import" xml:space="preserve">
     <value>インポート</value>
@@ -499,11 +526,47 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   <data name="General_Name" xml:space="preserve">
     <value>名前</value>
   </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>DLSS RRプリセット</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>DLSS Rayの再構成</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>DLSSフレーム生成</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>DLSSプリセット</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_DX11" xml:space="preserve">
+    <value>XeSS (DX11)</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>XeSSフレーム生成</value>
+  </data>
   <data name="General_No" xml:space="preserve">
     <value>No</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>なし</value>
+  </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>見つかりません</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
     <value>対応していません</value>
@@ -516,6 +579,9 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   </data>
   <data name="General_OpenFolder" xml:space="preserve">
     <value>フォルダを開く</value>
+  </data>
+  <data name="General_OpenLogsDirectory" xml:space="preserve">
+    <value>ログディレクトリを開く</value>
   </data>
   <data name="General_Optional" xml:space="preserve">
     <value>(任意)</value>
@@ -617,7 +683,7 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>ラベル</value>
   </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
-    <value>最新バージョンをダウンロード</value>
+    <value>最新版をダウンロード</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>{0} 件の新しいダウンロードを開始しました</value>
@@ -799,7 +865,7 @@ DLLは信頼できるソースからのみインポートして下さい</value>
     <value>これはDLL選択ツールにのみ適用され、ライブラリページには適用されません</value>
   </data>
   <data name="SettingsPage_BuildCommit" xml:space="preserve">
-    <value>コミットを作成する</value>
+    <value>ビルドコミット</value>
   </data>
   <data name="SettingsPage_BuildDate" xml:space="preserve">
     <value>ビルド日</value>
@@ -866,6 +932,24 @@ DLLは信頼できるソースからのみインポートして下さい</value>
   </data>
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>ログ記録</value>
+  </data>
+  <data name="SettingsPage_Logging_Debug" xml:space="preserve">
+    <value>デバック</value>
+  </data>
+  <data name="SettingsPage_Logging_Error" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="SettingsPage_Logging_Info" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="SettingsPage_Logging_Off" xml:space="preserve">
+    <value>オフ</value>
+  </data>
+  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
+    <value>冗長</value>
+  </data>
+  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
+    <value>警告</value>
   </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>新しい更新は現在ありません</value>

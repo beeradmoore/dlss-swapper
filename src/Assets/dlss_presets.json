@@ -61,17 +61,17 @@
   },
   {
     "name": "Preset L",
-    "value": "0x0000000B",
-    "used": false
+    "value": "0x0000000C",
+    "used": true
   },
   {
     "name": "Preset M",
-    "value": "0x0000000B",
-    "used": false
+    "value": "0x0000000D",
+    "used": true
   },
   {
     "name": "Preset N",
-    "value": "0x0000000B",
+    "value": "0x0000000E",
     "used": false
   },
   {

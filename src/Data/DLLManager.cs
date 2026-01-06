@@ -188,7 +188,7 @@ internal class DLLManager
                 // TODO: Check how quickly this takes to timeout if there is no internet connection. Consider
                 // adding a "fast UpdateManifest" which will quit early if we were unable to load in 10sec
                 // which would then fall back to loading local.
-                var fileDownloader = new FileDownloader("https://raw.githubusercontent.com/beeradmoore/dlss-swapper-manifest-builder/refs/heads/main/manifest.json", 0);
+                var fileDownloader = new FileDownloader("https://beeradmoore.github.io/dlss-swapper/manifest.json", 0);
                 await fileDownloader.DownloadFileToStreamAsync(memoryStream);
 
                 memoryStream.Position = 0;

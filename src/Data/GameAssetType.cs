@@ -1,6 +1,7 @@
 namespace DLSS_Swapper.Data;
 
 // NOTE: DLL type
+// NOTE: This ordering sucks because I (beeradmoore) forgot to keep enums numbered so adding new changed the values of existing.
 public enum GameAssetType
 {
     Unknown = 0,

@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -165,6 +165,18 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>Die DLL Zip Datei ist fehlerhaft (keine DLL gefunden).</value>
   </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>Immer neueste verwenden</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>Voreinstelung {0}</value>
+  </data>
+  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
+    <value>Voreinstellung {0} (veraltet)</value>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>DLSS Swapper konnte nicht gestartet werden.</value>
   </data>
@@ -179,15 +191,6 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Konnte nicht gestartet werden</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Bist Du dir sicher, dass Du dein hinzugefügtes Titelbild entfernen willst?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Spiel wird aktuell untersucht</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Titelbild entfernen?</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Asset Typ</value>
@@ -222,8 +225,14 @@
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Eigenes Titelbild hinzufügen</value>
   </data>
+  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>Das Starten von Spielen von der {0} Bibliothek wird derzeit nicht unterstützt.</value>
+  </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Zu Favoriten hinzufügen</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>Klicken zu Verstecken</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
     <value>Der Pfad "{0}" konnte nicht gefunden werden.</value>
@@ -257,10 +266,10 @@ Um zu überprüfen welches Preset gerade benutzt wird, aktiviere den DLSS On-Scr
     <value>On-Screen Indikator Informationen</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
-    <value>DLSS Preset Informationen</value>
+    <value>DLSS Voreinstellungs-Informationen</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
-    <value>Ein DLSS Preset zu setzen, garantiert nicht das es auch benutzt wird.</value>
+    <value>Eine DLSS Voreinstellung zu setzen, garantiert nicht das es auch benutzt wird.</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
     <value>Favorisiert</value>
@@ -304,6 +313,18 @@ Um zu überprüfen welches Preset gerade benutzt wird, aktiviere den DLSS On-Scr
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>Dieses Spiel befindet sich noch nicht in einem spielbaren Zustand.</value>
   </data>
+  <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
+    <value>NVAPI ist in einen Fehler gelaufen. Weitere Informationen sind im Fehler-Log zu finden.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
+    <value>NVAPI ist in einen Fehler gelaufen. Es könnte helfen, das Programm als Administrator auszuführen. Weitere Informationen sind im Fehler-Log zu finden.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
+    <value>NVAPI Fehler</value>
+  </data>
+  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
+    <value>NVAPI ist in einen Fehler gelaufen. Klicken, für weitere Informationen.</value>
+  </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
     <value>Öffne DLL Lokation</value>
   </data>
@@ -312,6 +333,9 @@ Um zu überprüfen welches Preset gerade benutzt wird, aktiviere den DLSS On-Scr
   </data>
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} wird immer noch untersucht. Bitte warte bis der Lade-Indikator vollendet ist bevor Du es öffnest.</value>
+  </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>Alles zurücksetzen</value>
   </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
     <value>Originale DLL wiederherstellen</value>
@@ -378,6 +402,9 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Neue DLLs</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Neue DLLs gefunden</value>
+  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Ein neues GitHub Issue erstellen</value>
   </data>
@@ -408,8 +435,11 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Du musst keine DLLs mit mitschicken. Wir finden sie anhand der hinzugefügten Informationen.</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Neue DLLs gefunden</value>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>Spiel wird neu geladen</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>Versteckte Spiele anzeigen (Standardmäßig beim Start deaktiviert)</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Spiele</value>
@@ -422,6 +452,15 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Listenansicht</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Bist Du dir sicher, dass Du dein hinzugefügtes Titelbild entfernen willst?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Spiel wird aktuell untersucht</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Titelbild entfernen?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Diese App läuft mit Administrativen Benutzerrechten.</value>
@@ -468,6 +507,9 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   <data name="General_Help" xml:space="preserve">
     <value>Hilfe</value>
   </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>Versteckt</value>
+  </data>
   <data name="General_Import" xml:space="preserve">
     <value>Importieren</value>
   </data>
@@ -480,11 +522,47 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   <data name="General_Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>DLSS SR Voreinstellung</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>DLSS Strahlenrekonstrultion</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>DLSS Bilderzeugung</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>DLSS Voreinstellung</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_DX11" xml:space="preserve">
+    <value>XeSS (DX11)</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>XeSS Bilderzeugung</value>
+  </data>
   <data name="General_No" xml:space="preserve">
     <value>Nein</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>Keine</value>
+  </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>Nicht gefunden</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
     <value>Nicht unterstützt</value>
@@ -497,6 +575,9 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   </data>
   <data name="General_OpenFolder" xml:space="preserve">
     <value>Öffne Verzeichnis</value>
+  </data>
+  <data name="General_OpenLogsDirectory" xml:space="preserve">
+    <value>Öffne Log-Verzeichnis</value>
   </data>
   <data name="General_Optional" xml:space="preserve">
     <value>(optional)</value>
@@ -596,6 +677,9 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Stichwort</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>Neueste herunterladen</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
     <value>{0} neue Downloads gestartet.</value>
@@ -776,6 +860,12 @@ Aus diesem Umstand empfehlen wir besondere Vorsicht im Umgang mit Multiplayer Sp
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>Diese Option gilt nur für den DLL Picker, nicht für die Bibliotheksseite.</value>
   </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>Build Commit</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>Build Datum</value>
+  </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>Konnte das Log-Verzeichnis nicht aus DLSS Swapper heraus öffnen. Bitte versuche es manuell zu öffnen.</value>
   </data>
@@ -838,6 +928,24 @@ Aus diesem Umstand empfehlen wir besondere Vorsicht im Umgang mit Multiplayer Sp
   </data>
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>Logging</value>
+  </data>
+  <data name="SettingsPage_Logging_Debug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="SettingsPage_Logging_Error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="SettingsPage_Logging_Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="SettingsPage_Logging_Off" xml:space="preserve">
+    <value>Deaktiviert</value>
+  </data>
+  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
+    <value>Ausführlich</value>
+  </data>
+  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
+    <value>Warnung</value>
   </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>Keine neuen Updates verfügbar.</value>

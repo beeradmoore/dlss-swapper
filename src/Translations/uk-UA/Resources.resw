@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AcknowledgementsPage_Title" xml:space="preserve">
-    <value>Ліцензії та Подяки</value>
+    <value>Ліцензії та подяки</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>DLSS Swapper</value>
   </data>
   <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
-    <value>Натисніть, щоб скопіювати наступні дані</value>
+    <value>Натисніть, щоб скопіювати ці дані</value>
   </data>
   <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
     <value>Діагностика</value>
@@ -133,7 +133,7 @@
     <value>(вже імпортовано)</value>
   </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
-    <value>Функцію імпорту вимкнено, маніфест імпорту не вдалося завантажити.</value>
+    <value>Функцію імпорту вимкнено — не вдалося завантажити маніфест імпорту.</value>
   </data>
   <data name="DllManager_MigratingDlls" xml:space="preserve">
     <value>Міграція DLL</value>
@@ -142,10 +142,10 @@
     <value>DLL невідомого типу</value>
   </data>
   <data name="DllManager_UntrustedDll" xml:space="preserve">
-    <value>DLL не є надійною для Windows.</value>
+    <value>Ця DLL не є довіреною в Windows.</value>
   </data>
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
-    <value>Не вдалося завантажити {0} DLL. Спробуйте ще раз пізніше або перевірте журнали, щоб дізнатися, чому завантаження не вдалося.</value>
+    <value>Не вдалося завантажити {0} DLL. Спробуйте пізніше або перегляньте журнали, щоб дізнатися причину.</value>
   </data>
   <data name="DllRecord_Download" xml:space="preserve">
     <value>Завантажити</value>
@@ -166,7 +166,7 @@
     <value>Архів DLL пошкоджено (DLL не знайдено).</value>
   </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
-    <value>DLSS Swapper не вдалося запустити</value>
+    <value>Не вдалося запустити DLSS Swapper</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
     <value>Будь ласка, відкрийте</value>
@@ -244,7 +244,7 @@
     <value>Початок завантаження</value>
   </data>
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
-    <value>Будь ласка, зачекайте завершення завантаження, перш ніж замінювати</value>
+    <value>Будь ласка, зачекайте завершення завантаження, перш ніж виконувати заміну.</value>
   </data>
   <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
     <value>Інформація про пресет</value>
@@ -266,7 +266,7 @@
     <value>Встановлення пресету DLSS не гарантує його використання.</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
-    <value>В обраному</value>
+    <value>В обраних</value>
   </data>
   <data name="GamePage_History" xml:space="preserve">
     <value>Історія</value>
@@ -281,13 +281,13 @@
     <value>Запустити</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
-    <value>Цей заголовок не додано вручну та не можна видалити.</value>
+    <value>Цей заголовок не додано вручну і його не можна видалити.</value>
   </data>
   <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
-    <value>Ви впевнені, що хочете видалити "{0}" з DLSS Swapper? Це не внесе жодних змін у файли DLSS, які вже були обмінені.</value>
+    <value>Ви впевнені, що хочете видалити "{0}" з DLSS Swapper? Це не внесе жодних змін у файли DLSS, які вже були замінені.</value>
   </data>
   <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
-    <value>Нижче показано кілька знайдених DLL. Ви все ще зможете обмінювати та відновлювати DLL як завжди, оскільки ми виконуватимемо ці дії з усіма DLL одночасно. Однак, оскільки ми не знаємо, яка з цих DLL використовується грою, показана версія першої виявленої DLL.</value>
+    <value>Нижче показано кілька знайдених DLL. Ви все ще зможете замінювати та відновлювати DLL як завжди, оскільки ми виконуватимемо ці дії з усіма DLL одночасно. Однак, оскільки ми не знаємо, яка з цих DLL використовується грою, показана версія першої виявленої DLL.</value>
   </data>
   <data name="GamePage_MultipleDllsFound" xml:space="preserve">
     <value>Знайдено кілька DLL</value>
@@ -323,16 +323,16 @@
     <value>Відновити оригінальну DLL</value>
   </data>
   <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
-    <value>Виберіть {0} версію</value>
+    <value>Виберіть версію {0}</value>
   </data>
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
-    <value>storageFile має значення null</value>
+    <value>Змінна storageFile має значення null</value>
   </data>
   <data name="GamePage_UnableToChangePreset" xml:space="preserve">
     <value>Не вдалося змінити пресет. Перегляньте журнал помилок для отримання додаткової інформації.</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
-    <value>Ви можете перетягнути лише один файл для обкладинки</value>
+    <value>Можна перетягнути лише один файл для обкладинки</value>
   </data>
   <data name="GamesPage_AddGame" xml:space="preserve">
     <value>Додати гру</value>
@@ -344,16 +344,16 @@
     <value>Групування</value>
   </data>
   <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
-    <value>Приховати ігри без елементів, які можна обміняти</value>
+    <value>Приховати ігри без елементів, які можна замінити</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
     <value>Ви можете перетягнути лише один файл для обкладинки</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
-    <value>Ще одна примітка для ігор доданих вручну</value>
+    <value>Ще одна примітка для ігор, доданих вручну</value>
   </data>
   <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
-    <value>Виникла проблема, і вашу гру наразі не вдалося додати. Будь ласка, повідомте про цю проблему.</value>
+    <value>Виникла проблема, через яку наразі не вдалося додати вашу гру. Будь ласка, повідомте про це.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
     <value>Помилка додавання гри</value>
@@ -364,13 +364,13 @@
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
     <value>DLSS Swapper має автоматично знаходити ігри з ваших встановлених бібліотек ігор. Якщо вашої гри немає у списку, можливо, цьому заважають деякі налаштування. Будь ласка, перевірте:
 
-- Фільтр списку ігор не встановлено на "Приховати ігри без елементів, які можна обміняти"
+- Фільтр списку ігор не встановлено на "Приховати ігри без елементів, які можна замінити"
 - У налаштуваннях увімкнено певну бібліотеку ігор
 
 Якщо ви перевірили ці пункти, а ваша гра все ще не відображається, можливо, це баг. Ми були б вдячні, якби ви повідомили про проблему в нашому репозиторії GitHub, щоб ми могли виправити її та покращити виявлення ваших ігор у майбутньому.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
-    <value>Примітка для ігор доданих вручну</value>
+    <value>Примітка для ігор, доданих вручну</value>
   </data>
   <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
     <value>Шлях встановлення "{0}" вже існує та не може бути доданий знову.</value>
@@ -547,7 +547,7 @@
     <value>Успіх</value>
   </data>
   <data name="General_Swap" xml:space="preserve">
-    <value>Обміняти</value>
+    <value>Замінити</value>
   </data>
   <data name="General_Unknown" xml:space="preserve">
     <value>Невідомо</value>
@@ -604,10 +604,10 @@
     <value>Хеш</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
-    <value>Внутрішня Назва</value>
+    <value>Внутрішня назва</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
-    <value>Внутрішня Назва Додатково</value>
+    <value>Внутрішня назва (додатково)</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Мітка</value>
@@ -680,10 +680,10 @@
     <value>Спроба оновлення</value>
   </data>
   <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
-    <value>DLSS Swapper не зміг завантажити файл маніфесту. Тепер він закриється.</value>
+    <value>DLSS Swapper не зміг завантажити файл маніфесту і зараз закриється.</value>
   </data>
   <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
-    <value>DLSS Swapper має бути закритий</value>
+    <value>DLSS Swapper буде закрито</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
     <value>Проблеми GitHub</value>
@@ -771,7 +771,7 @@
     <value>Виконати тест</value>
   </data>
   <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
-    <value>Використовуйте наданий агент користувача або введіть власний на ваш вибір.</value>
+    <value>Використайте запропонований агент користувача або введіть власний.</value>
   </data>
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>Мережевий тестер</value>
@@ -795,7 +795,7 @@
     <value>Це стосується лише засобу вибору DLL, а не сторінки бібліотеки.</value>
   </data>
   <data name="SettingsPage_BuildCommit" xml:space="preserve">
-    <value>Збірка коміту</value>
+    <value>Коміт збірки</value>
   </data>
   <data name="SettingsPage_BuildDate" xml:space="preserve">
     <value>Дата збірки</value>
@@ -810,7 +810,7 @@
     <value>Видалити проігнорований шлях</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
-    <value>DLSS Параметри Розробника</value>
+    <value>Параметри розробника DLSS</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
     <value>Увімкнути ведення журналу у вікні консолі</value>
@@ -831,7 +831,7 @@
     <value>Детальне ведення журналу</value>
   </data>
   <data name="SettingsPage_DLSSOptions" xml:space="preserve">
-    <value>DLSS Параметри</value>
+    <value>Параметри DLSS</value>
   </data>
   <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
     <value>Глобальний пресет</value>

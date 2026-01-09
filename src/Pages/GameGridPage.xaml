@@ -199,14 +199,29 @@
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <TextBox
-                    Width="300"
-                    Height="20"
-                    Margin="10,0,0,0"
-                    AcceptsReturn="True"
-                    IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}"
-                    PlaceholderText="{x:Bind ViewModel.TranslationProperties.SearchText, Mode=OneWay}"
-                    TextChanged="{x:Bind ViewModel.SearchForGameEvent}" />
+                <Grid Width="300" Margin="10,0,0,0">
+                    <TextBox x:Name="SearchBox"
+                        Height="20"
+                        Padding="8,5,32,0"
+                        AcceptsReturn="True"
+                        IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}"
+                        PlaceholderText="{x:Bind ViewModel.TranslationProperties.SearchText, Mode=OneWay}"
+                        TextChanged="{x:Bind ViewModel.SearchForGameEvent}" />
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,4,0">
+                        <Button x:Name="ClearButton"
+                            Width="26"
+                            Height="26"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="4"
+                            Visibility="{x:Bind SearchBox.Text, Mode=OneWay, Converter={StaticResource StringVisibilityConverter}}"
+                            Click="ClearSearchBox_Click">
+                            
+                            <FontIcon Glyph="&#xE711;" FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

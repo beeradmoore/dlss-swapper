@@ -187,4 +187,9 @@ public sealed partial class GameGridPage : Page
             e.Handled = true;
         }
     }
+
+    private void ClearSearchBox_Click(object sender, RoutedEventArgs e)
+    {
+        SearchBox.Text = string.Empty;
+    }
 }

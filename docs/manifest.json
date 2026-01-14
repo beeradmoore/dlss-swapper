@@ -1716,6 +1716,23 @@
       "file_size": 65523824,
       "zip_file_size": 31489422,
       "dll_source": "DLSS-310.5.0.zip"
+    },
+    {
+      "version": "310.5.2.0",
+      "version_number": 87257264255270912,
+      "internal_name": "CL 37149420",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "55F0FE991B9719186D19FDA4866E72E2",
+      "zip_md5_hash": "013FD918D87C4C2EAFC0970C16FD6BED",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/dlss/dlss_v310.5.2.0_55F0FE991B9719186D19FDA4866E72E2.zip",
+      "file_description": "NVIDIA DLSS - DVS PRODUCTION",
+      "signed_datetime": "2026-01-09T18:42:46Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 73818224,
+      "zip_file_size": 45216144,
+      "dll_source": ""
     }
   ],
   "dlss_d": [
@@ -1973,6 +1990,23 @@
       "file_size": 39383664,
       "zip_file_size": 15169704,
       "dll_source": "streamline-sdk-v2.10.0.zip"
+    },
+    {
+      "version": "310.5.2.0",
+      "version_number": 87257264255270912,
+      "internal_name": "CL 37149420",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "8CEE6D6A59252E5C235E07E07270964C",
+      "zip_md5_hash": "91AD135C48329ADB42C087288CED290E",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/dlss_d/dlss_d_v310.5.2.0_8CEE6D6A59252E5C235E07E07270964C.zip",
+      "file_description": "NVIDIA DLSS - DVS PRODUCTION",
+      "signed_datetime": "2026-01-09T18:41:56Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 59922544,
+      "zip_file_size": 27793653,
+      "dll_source": ""
     }
   ],
   "dlss_g": [
@@ -2451,6 +2485,23 @@
       "file_size": 7955568,
       "zip_file_size": 3930822,
       "dll_source": "streamline-sdk-v2.10.0.zip"
+    },
+    {
+      "version": "310.5.2.0",
+      "version_number": 87257264255270912,
+      "internal_name": "CL 37149420",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "285F625CD4CEC0ABCF35C9C869FE58D0",
+      "zip_md5_hash": "6C7001C952993EA4AD52D068C3FD08B8",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/dlss_g/dlss_g_v310.5.2.0_285F625CD4CEC0ABCF35C9C869FE58D0.zip",
+      "file_description": "NVIDIA DLSS-G MFGLW - DVS PRODUCTION",
+      "signed_datetime": "2026-01-09T18:41:16Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 7518320,
+      "zip_file_size": 3744295,
+      "dll_source": ""
     }
   ],
   "fsr_31_dx12": [
@@ -3313,7 +3364,8 @@
             "Qm9iYSBDYWZlIFNpbXVsYXRvciBEZW1v",
             "VFJZUCBGUFY=",
             "QmFja3Jvb20gQ29tcGFueQ==",
-            "UFVCRzogQmxhY2sgQnVkZ2V0IFBsYXl0ZXN0"
+            "UFVCRzogQmxhY2sgQnVkZ2V0IFBsYXl0ZXN0",
+            "QXNoZXMgb2YgQ3JlYXRpb24="
           ],
           "ManuallyAdded": [
             "Q3Jvbm9zIFRoZSBOZXcgRGF3bg==",
@@ -3321,7 +3373,10 @@
             "Q3Jvbm9zLiBUaGUgTmV3IERhd24=",
             "Q3Jvbm9zLlRoZS5OZXcuRGF3bi5EZWx1eGUuRWRpdGlvbi1JbnNhbmVSYW1aZXM=",
             "QUlPTjJfVFc=",
-            "Q3Jvbm9zIC0gVGhlIE5ldyBEYXdu"
+            "Q3Jvbm9zIC0gVGhlIE5ldyBEYXdu",
+            "UENMMg==",
+            "QUlPTjJfS1I=",
+            "QWlvbjI="
           ],
           "EpicGamesStore": [
             "UkVOTlNQT1JU",
@@ -3330,7 +3385,8 @@
           "XboxApp": [
             "UGF4IERlaQ==",
             "Q3Jvbm9zOiBUaGUgTmV3IERhd24=",
-            "Q2xhaXIgT2JzY3VyOiBFeHBlZGl0aW9uIDMz"
+            "Q2xhaXIgT2JzY3VyOiBFeHBlZGl0aW9uIDMz",
+            "UXVhcmFudGluZSBab25lOiBUaGUgTGFzdCBDaGVjaw=="
           ]
         }
       },
@@ -3464,7 +3520,10 @@
             "Um9hZENyYWZ0IERlbW8=",
             "Rmlyc3QgRHdhcmY=",
             "RHVuZTogQXdha2VuaW5nIEZyZWUgVHJpYWw=",
-            "UHJvamVjdCBXZXJld3VsZg=="
+            "UHJvamVjdCBXZXJld3VsZg==",
+            "VGhlIE9ydmlsbGUgLSBJbnRlcmFjdGl2ZSBGYW4gRXhwZXJpZW5jZQ==",
+            "R3JhbmQgVGhlZnQgQXV0byBWIExlZ2FjeQ==",
+            "VGhlIElzbGU="
           ],
           "XboxApp": [
             "RE9PTTogVGhlIERhcmsgQWdlcw==",
@@ -3560,7 +3619,13 @@
             "SW5kaWFuYS5Kb25lcy5hbmQudGhlLkdyZWF0LkNpcmNsZS5QcmVtaXVtLkVkaXRpb24tSW5zYW5lUmFtWmVz",
             "SW5kaWFuYSBKb25lcw==",
             "U3BhY2UgTWFyaW5lIDI=",
-            "R3JhbmQgVGhlZnQgQXV0byBWIFtTdGVhbSBFbmhhbmNlZF0gKDIwMTUtMjAyNSk="
+            "R3JhbmQgVGhlZnQgQXV0byBWIFtTdGVhbSBFbmhhbmNlZF0gKDIwMTUtMjAyNSk=",
+            "VGhlRmluYWxzKDIwMDIyNzAp",
+            "U3RlYW1MaWJyYXJ5",
+            "VGhlRmluYWxz5Zu95pyN",
+            "Q29tbWFuZG9zIC0gT3JpZ2lucw==",
+            "VGhlIExhc3Qgb2YgVXMgUGFydCBJSSBSZW1hc3RlcmVk",
+            "S2VlcGVy"
           ],
           "BattleNet": [
             "RGlhYmxvIElW",
@@ -3573,14 +3638,17 @@
             "Tm8gTWFuJ3MgU2t5",
             "TXlzdA==",
             "Uml2ZW4=",
-            "RnJvc3RwdW5rIDI="
+            "RnJvc3RwdW5rIDI=",
+            "RVZFUlNQQUNF4oSiIDI="
           ],
           "EpicGamesStore": [
             "R3JhbmQgVGhlZnQgQXV0byBWIEVuaGFuY2Vk",
             "RXJ0dWdydWwgb2YgVWx1a2F5aW4=",
             "U3RhcnNoaXAgVHJvb3BlcnM6IEV4dGVybWluYXRpb24=",
             "RHVuZTogQXdha2VuaW5n",
-            "V2lsZGdhdGU="
+            "V2lsZGdhdGU=",
+            "VHJpbmUgNDogRGVmaW5pdGl2ZSBFZGl0aW9u",
+            "44CKVHJpbmUgNDogRGVmaW5pdGl2ZSBFZGl0aW9u44CL"
           ],
           "UbisoftConnect": [
             "Rm9ySG9ub3I="
@@ -3859,7 +3927,12 @@
             "U3Bpcml0IG9mIHRoZSBOb3J0aCAy",
             "SG9yZGVzIG9mIEZhdGUgOiBBIEhhbmQgb2YgRmF0ZSBBZHZlbnR1cmUgRGVtbw==",
             "VGhlIExlZ2VuZCBvZiBIZXJvZXM6IFRyYWlscyBiZXlvbmQgdGhlIEhvcml6b24gRGVtbw==",
-            "VGhlIExlZ2VuZCBvZiBIZXJvZXM6IFRyYWlscyB0aHJvdWdoIERheWJyZWFr"
+            "VGhlIExlZ2VuZCBvZiBIZXJvZXM6IFRyYWlscyB0aHJvdWdoIERheWJyZWFr",
+            "RXhmaWwgRGVtbw==",
+            "TWVueXI=",
+            "TW90b0dQ4oSiMjU=",
+            "Wm9vY2hvc2lz",
+            "TmlnaHQgU2hpZnQgYXQgdGhlIE11c2V1bQ=="
           ],
           "XboxApp": [
             "Tm8gTWFuJ3MgU2t5",
@@ -3963,7 +4036,14 @@
             "cHJvZ3JhbQ==",
             "S2luZ2RvbS5Db21lLkRlbGl2ZXJhbmNlLklJLlJveWFsLkVkaXRpb24tSW5zYW5lUmFtWmVz",
             "Q29udGVudA==",
-            "TG9zdCBTb3VsIEFzaWRl"
+            "TG9zdCBTb3VsIEFzaWRl",
+            "V2luNjRy",
+            "VGhlRmluYWxzKDIwMDIyNzAp",
+            "R2FtZXM=",
+            "TWFydmVsJ3MuU3BpZGVyLU1hbi4yLkRpZ2l0YWwuRGVsdXhlLkVkaXRpb24tSW5zYW5lUmFtWmVz",
+            "Wlpa",
+            "R0FNRTEwMTEx",
+            "U3RlYW1MaWJyYXJ5"
           ],
           "GOG": [
             "Tm8gTWFuJ3MgU2t5",
@@ -4027,7 +4107,8 @@
             "SG9nd2FydHMgTGVnYWN5",
             "6ZyN5qC85rKD6Iyo5LmL6YGX",
             "RHppZWR6aWN0d28gSG9nd2FydHU=",
-            "0KXQvtCz0LLQsNGA0YLRgS4g0J3QsNGB0LvQtdC00LjQtQ=="
+            "0KXQvtCz0LLQsNGA0YLRgS4g0J3QsNGB0LvQtdC00LjQtQ==",
+            "SG9nd2FydHMgTGVnYWN5OiBMJ0jDqXJpdGFnZSBkZSBQb3VkbGFyZA=="
           ],
           "XboxApp": [
             "SG9nd2FydHMgTGVnYWN5"
@@ -4258,7 +4339,9 @@
             "RmluYWwgRmFudGFzeSBYVkkgQ29tcGxldGUgRWRpdGlvbg==",
             "5rWB5pS\u002B5LmL6Lev77ya6ZmN5Li0",
             "RHJhZ29uIEFnZSAtIFRoZSBWZWlsZ3VhcmQ=",
-            "5rWB5pS\u002B5LmL6LevKDUxMSk="
+            "5rWB5pS\u002B5LmL6LevKDUxMSk=",
+            "5rWB5pS\u002B5LmL6Lev77ya6ZmN5Li0KDIwMDIwNTIp",
+            "enM1"
           ],
           "EpicGamesStore": [
             "T25jZSBIdW1hbg==",
@@ -4386,6 +4469,9 @@
           ],
           "XboxApp": [
             "UmVkIERlYWQgUmVkZW1wdGlvbiAoUEMp"
+          ],
+          "EAApp": [
+            "SW1tb3J0YWxzIG9mIEF2ZXVt4oSi"
           ]
         }
       },
@@ -4543,7 +4629,8 @@
             "SElUTUFOIFdvcmxkIG9mIEFzc2Fzc2luYXRpb24=",
             "TWFydmVscyBTcGlkZXIgTWFuIE1pbGVzIE1vcmFsZXM=",
             "U3RhcmZpZWxkLkRpZ2l0YWwuUHJlbWl1bS5FZGl0aW9uLUluc2FuZVJhbVplcw==",
-            "SElUTUFOMw=="
+            "SElUTUFOMw==",
+            "TWFydmVsJ3MgU3BpZGVyLU1hbiBSZW1hc3RlcmVk"
           ],
           "GOG": [
             "QSBQbGFndWUgVGFsZTogUmVxdWllbQ=="
@@ -4737,7 +4824,11 @@
             "RGVhZCBTcGFjZQ=="
           ],
           "ManuallyAdded": [
-            "RGVhZCBTcGFjZSAoMjAyMyk="
+            "RGVhZCBTcGFjZSAoMjAyMyk=",
+            "RGVhZCBTcGFjZSBSZW1ha2U="
+          ],
+          "EAApp": [
+            "RGVhZCBTcGFjZeKEog=="
           ]
         }
       },
@@ -5484,7 +5575,8 @@
             "U25vdyB4IEhpbWU=",
             "UGF0aGxlc3MgV29vZHM=",
             "QXNoZXMgb2YgdGhlIFVuaW9u",
-            "RGF3biBBcGFydA=="
+            "RGF3biBBcGFydA==",
+            "TGVzc2FyaWEgRGVtbw=="
           ],
           "GOG": [
             "SVhJT04=",
@@ -5574,6 +5666,9 @@
           ],
           "XboxApp": [
             "TWFydmVsJ3MgQXZlbmdlcnM="
+          ],
+          "EpicGamesStore": [
+            "QmFjayA0IEJsb29k"
           ]
         }
       },
@@ -5654,6 +5749,9 @@
           ],
           "EAApp": [
             "Q3J5c2lzIFJlbWFzdGVyZWQ="
+          ],
+          "GOG": [
+            "Q3J5c2lzIFJlbWFzdGVyZWQ="
           ]
         }
       },
@@ -5672,6 +5770,9 @@
         "sources": {
           "Steam": [
             "RjEgMjAyMA=="
+          ],
+          "ManuallyAdded": [
+            "RjEgMjAyMCB2MS4xOA=="
           ]
         }
       },
@@ -5838,7 +5939,8 @@
         "version": "2.1.29.0",
         "sources": {
           "Steam": [
-            "V29sZmVuc3RlaW46IFlvdW5nYmxvb2Q="
+            "V29sZmVuc3RlaW46IFlvdW5nYmxvb2Q=",
+            "V29sZmVuc3RlaW46IFlvdW5nYmxvb2QgRGV1dHNjaGUgVmVyc2lvbg=="
           ],
           "XboxApp": [
             "V29sZmVuc3RlaW46IFlvdW5nYmxvb2Q="
@@ -5977,7 +6079,8 @@
             "RE9PTTogVGhlIERhcmsgQWdlcw==",
             "TWFydmVsIFJpdmFscw==",
             "SU5EVVNUUklBIDIgUGxheXRlc3Q=",
-            "M0RNYXJr"
+            "M0RNYXJr",
+            "RW5naW5lZmFsbCBQbGF5dGVzdA=="
           ],
           "EpicGamesStore": [
             "R2FtZSBvZiBUaHJvbmVzOiBLaW5nc3JvYWQ="
@@ -6195,7 +6298,8 @@
             "U1RPUlJPUiBQYXJrb3VyIFBybw==",
             "Rmlyc3QgRHdhcmY=",
             "RHVuZTogQXdha2VuaW5nIEZyZWUgVHJpYWw=",
-            "UHJvamVjdCBXZXJld3VsZg=="
+            "UHJvamVjdCBXZXJld3VsZg==",
+            "VGhlIE9ydmlsbGUgLSBJbnRlcmFjdGl2ZSBGYW4gRXhwZXJpZW5jZQ=="
           ],
           "ManuallyAdded": [
             "TWluZHNFeWU=",
@@ -6221,7 +6325,10 @@
             "T3RoZXJza2lu",
             "RnJvc3RwdW5rIDI=",
             "RXhwZWRpdGlvbiAzMw==",
-            "5peg6ZmQ5pqW5pqW"
+            "5peg6ZmQ5pqW5pqW",
+            "VGhlRmluYWxzKDIwMDIyNzAp",
+            "VGhlRmluYWxz5Zu95pyN",
+            "S2VlcGVy"
           ],
           "XboxApp": [
             "RnJvc3RwdW5rIDI6IFBDIEVkaXRpb24=",
@@ -6303,7 +6410,12 @@
             "TWFydmVsIFNwaWRlciBNYW4gMg==",
             "57ud5Yy66Zu2",
             "54eV5LqR5Y2B5YWt5aOw",
-            "cHJvZ3JhbQ=="
+            "cHJvZ3JhbQ==",
+            "V2luNjRy",
+            "R2FtZXM=",
+            "TWFydmVsJ3MuU3BpZGVyLU1hbi4yLkRpZ2l0YWwuRGVsdXhlLkVkaXRpb24tSW5zYW5lUmFtWmVz",
+            "Wlpa",
+            "U3RlYW1MaWJyYXJ5"
           ],
           "Steam": [
             "TWFydmVsJ3MgU3BpZGVyLU1hbiAy",
@@ -6388,7 +6500,9 @@
             "R2FtZSBvZiBUaHJvbmVzOiBLaW5nc3JvYWQ=",
             "RGVjZWl0IDI=",
             "U3Bpcml0IG9mIHRoZSBOb3J0aCAy",
-            "SG9yZGVzIG9mIEZhdGUgOiBBIEhhbmQgb2YgRmF0ZSBBZHZlbnR1cmUgRGVtbw=="
+            "SG9yZGVzIG9mIEZhdGUgOiBBIEhhbmQgb2YgRmF0ZSBBZHZlbnR1cmUgRGVtbw==",
+            "RXhmaWwgRGVtbw==",
+            "TmlnaHQgU2hpZnQgYXQgdGhlIE11c2V1bQ=="
           ],
           "XboxApp": [
             "QXZvd2Vk",
@@ -6445,7 +6559,8 @@
             "SG9nd2FydHMgTGVnYWN5",
             "6ZyN5qC85rKD6Iyo5LmL6YGX",
             "RHppZWR6aWN0d28gSG9nd2FydHU=",
-            "0KXQvtCz0LLQsNGA0YLRgS4g0J3QsNGB0LvQtdC00LjQtQ=="
+            "0KXQvtCz0LLQsNGA0YLRgS4g0J3QsNGB0LvQtdC00LjQtQ==",
+            "SG9nd2FydHMgTGVnYWN5OiBMJ0jDqXJpdGFnZSBkZSBQb3VkbGFyZA=="
           ],
           "XboxApp": [
             "SG9nd2FydHMgTGVnYWN5"
@@ -6561,7 +6676,8 @@
             "RGVsdGEgRm9yY2U=",
             "TWFydmVsIFJpdmFscw==",
             "SU5EVVNUUklBIDIgUGxheXRlc3Q=",
-            "M0RNYXJr"
+            "M0RNYXJr",
+            "RW5naW5lZmFsbCBQbGF5dGVzdA=="
           ],
           "EpicGamesStore": [
             "R2FtZSBvZiBUaHJvbmVzOiBLaW5nc3JvYWQ="
@@ -6685,7 +6801,8 @@
             "SG9nd2FydHMgTGVnYWN5",
             "6ZyN5qC85rKD6Iyo5LmL6YGX",
             "RHppZWR6aWN0d28gSG9nd2FydHU=",
-            "0KXQvtCz0LLQsNGA0YLRgS4g0J3QsNGB0LvQtdC00LjQtQ=="
+            "0KXQvtCz0LLQsNGA0YLRgS4g0J3QsNGB0LvQtdC00LjQtQ==",
+            "SG9nd2FydHMgTGVnYWN5OiBMJ0jDqXJpdGFnZSBkZSBQb3VkbGFyZA=="
           ],
           "XboxApp": [
             "SG9nd2FydHMgTGVnYWN5"
@@ -6825,7 +6942,9 @@
             "U3RhcmZpZWxk",
             "VmVudXMgVmFjYXRpb24gUFJJU00gLSBERUFEIE9SIEFMSVZFIFh0cmVtZSAt",
             "U3Bpcml0IG9mIHRoZSBOb3J0aCAy",
-            "QUNST0RSSUZUOiBGUFYgRHJvbmUgU2ltdWxhdG9yIERlbW8="
+            "QUNST0RSSUZUOiBGUFYgRHJvbmUgU2ltdWxhdG9yIERlbW8=",
+            "RXhmaWwgRGVtbw==",
+            "TmlnaHQgU2hpZnQgYXQgdGhlIE11c2V1bQ=="
           ],
           "XboxApp": [
             "Tm8gTWFuJ3MgU2t5",
@@ -6943,7 +7062,12 @@
             "54eV5LqR5Y2B5YWt5aOw",
             "cHJvZ3JhbQ==",
             "5pqX5Yy656qB5Zu077ya5peg6ZmQ",
-            "QXJlbmEgQnJlYWtvdXQgSW5maW5pdGU="
+            "QXJlbmEgQnJlYWtvdXQgSW5maW5pdGU=",
+            "V2luNjRy",
+            "TWFydmVsJ3MuU3BpZGVyLU1hbi4yLkRpZ2l0YWwuRGVsdXhlLkVkaXRpb24tSW5zYW5lUmFtWmVz",
+            "Wlpa",
+            "R0FNRTEwMTEx",
+            "U3RlYW1MaWJyYXJ5"
           ],
           "GOG": [
             "Tm8gTWFuJ3MgU2t5",
@@ -7178,7 +7302,8 @@
             "U1RBUiBXQVJTIEplZGkgLSBTdXJ2aXZvcg==",
             "WlhTSmNsaWVudA==",
             "SnVzYW50",
-            "WlhTSg=="
+            "WlhTSg==",
+            "SUNBUlVT"
           ],
           "XboxApp": [
             "SnVzYW50",
@@ -7253,7 +7378,8 @@
           ],
           "ManuallyAdded": [
             "VmVudXMgVmFjYXRpb24gUFJJU00gLSBEb0EgWHRyZW1l",
-            "V28gTG9uZyBGYWxsZW4gRHluYXN0eQ=="
+            "V28gTG9uZyBGYWxsZW4gRHluYXN0eQ==",
+            "VmVudXMgVmFjYXRpb24gUFJJU00gLSBERUFEIE9SIEFMSVZFIFh0cmVtZQ=="
           ]
         }
       },
@@ -7401,7 +7527,9 @@
             "U3RhciBSYWlsIEdhbWVz",
             "UEFZREFZIDM=",
             "V3V0aGVyaW5nIFdhdmVzIEdhbWU=",
-            "U3BpZGVyLW1hbiBSZW1hc3RlcmVk"
+            "U3BpZGVyLW1hbiBSZW1hc3RlcmVk",
+            "TW9uc3Rlckh1bnRlcldpbGRz",
+            "RklOQUwgRkFOVEFTWSBWSUkgUkVCSVJUSA=="
           ],
           "Steam": [
             "VGhlIE91dGxhc3QgVHJpYWxz",
@@ -8032,7 +8160,8 @@
             "U3Bpcml0IG9mIHRoZSBOb3J0aCAy",
             "RGFya2ZhbGxlbiBTdXJ2aXZvcnMgUGxheXRlc3Q=",
             "QmFja3Jvb20gQ29tcGFueQ==",
-            "RWNob2VzIG9mIHRoZSBFbmQ6IEVuaGFuY2VkIEVkaXRpb24="
+            "RWNob2VzIG9mIHRoZSBFbmQ6IEVuaGFuY2VkIEVkaXRpb24=",
+            "TW90b0dQ4oSiMjU="
           ],
           "GOG": [
             "S0FSTUE6IFRoZSBEYXJrIFdvcmxk",
@@ -8047,7 +8176,8 @@
             "VGhlIE1pZG5pZ2h0IFdhbGs=",
             "U3RhciBPdmVyZHJpdmU=",
             "RW5vdHJpYSBUaGUgTGFzdCBTb25n",
-            "RWNob2VzIG9mIHRoZSBFbmQ="
+            "RWNob2VzIG9mIHRoZSBFbmQ=",
+            "U2lsZW50IEhpbGwgMg=="
           ],
           "XboxApp": [
             "UmV2ZW5nZSBvZiB0aGUgU2F2YWdlIFBsYW5ldCBQQw=="
@@ -8214,6 +8344,12 @@
         "sources": {
           "Steam": [
             "VGhlIEVsZGVyIFNjcm9sbHMgVjogU2t5cmltIFNwZWNpYWwgRWRpdGlvbg=="
+          ],
+          "GOG": [
+            "RmFsbG91dCA0OiBHYW1lIG9mIHRoZSBZZWFyIEVkaXRpb24="
+          ],
+          "ManuallyAdded": [
+            "RnJhbWUgR2VuZXJhdGlvbg=="
           ]
         }
       },
@@ -9096,7 +9232,8 @@
         "version": "1.0.1.0",
         "sources": {
           "ManuallyAdded": [
-            "Z2FtZQ=="
+            "Z2FtZQ==",
+            "bnNobQ=="
           ]
         }
       },
@@ -9225,7 +9362,8 @@
             "V2FyaGFtbWVyIDQwLDAwMDogRGFya3RpZGU=",
             "U3RhcmZpZWxk",
             "TWFydmVsJ3MgU3BpZGVyLU1hbiAy",
-            "U2F0aXNmYWN0b3J5"
+            "U2F0aXNmYWN0b3J5",
+            "VGhlIEZpcnN0IEJlcnNlcmtlcjogS2hhemFu"
           ],
           "GOG": [
             "Q3liZXJwdW5rIDIwNzc="
@@ -9330,6 +9468,15 @@
         "sources": {
           "Steam": [
             "c2thdGUu"
+          ]
+        }
+      },
+      {
+        "hash": "655D4D6EC852D0B260919ADF18D4FCF9",
+        "version": "2.0.1.41",
+        "sources": {
+          "UbisoftConnect": [
+            "U3RhciBXYXJzIE91dGxhd3M="
           ]
         }
       },
@@ -9476,7 +9623,8 @@
         "version": "2.0.1.32",
         "sources": {
           "Steam": [
-            "RE9PTTogVGhlIERhcmsgQWdlcw=="
+            "RE9PTTogVGhlIERhcmsgQWdlcw==",
+            "R3JhbmQgVGhlZnQgQXV0byBWIExlZ2FjeQ=="
           ]
         }
       },
@@ -9618,7 +9766,8 @@
             "V2hlcmUgV2luZHMgTWVldA==",
             "d3dtX3N0YW5kYXJk",
             "eXlzbHNfbWVkaXVt",
-            "54eV5LqR5Y2B5YWt5aOw"
+            "54eV5LqR5Y2B5YWt5aOw",
+            "V2luNjRy"
           ],
           "EpicGamesStore": [
             "V2hlcmUgV2luZHMgTWVldA=="
@@ -10158,6 +10307,16 @@
         }
       },
       {
+        "hash": "57B9C6596B4CDEBA432558AE03223F21",
+        "version": "1.3.0.28",
+        "sources": {
+          "EpicGamesStore": [
+            "Rm9ydG5pdGU=",
+            "44CKRm9ydG5pdGXjgIs="
+          ]
+        }
+      },
+      {
         "hash": "5780C33262EAAEA1E92C39FA47B672A4",
         "version": "1.3.0.28",
         "sources": {
@@ -10175,6 +10334,15 @@
         "version": "1.3.0.28",
         "sources": {
           "EpicGamesStore": [
+            "Rm9ydG5pdGU="
+          ]
+        }
+      },
+      {
+        "hash": "4E45D87BAA85E09E9A38312BCB9A9C9C",
+        "version": "1.3.0.28",
+        "sources": {
+          "XboxApp": [
             "Rm9ydG5pdGU="
           ]
         }
@@ -10202,7 +10370,8 @@
         "version": "1.3.0.28",
         "sources": {
           "EpicGamesStore": [
-            "Rm9ydG5pdGU="
+            "Rm9ydG5pdGU=",
+            "44CKRm9ydG5pdGXjgIs="
           ]
         }
       },
@@ -10663,6 +10832,9 @@
         "sources": {
           "Steam": [
             "RUEgU1BPUlRTIEZD4oSiIDI0"
+          ],
+          "EAApp": [
+            "RUEgU1BPUlRTIEZDIDI0"
           ]
         }
       },
@@ -10954,7 +11126,8 @@
         "version": "2.0.1.34",
         "sources": {
           "Steam": [
-            "TWVjaGEgQlJFQUs="
+            "TWVjaGEgQlJFQUs=",
+            "S0FSTUE6IFRoZSBEYXJrIFdvcmxk"
           ]
         }
       },

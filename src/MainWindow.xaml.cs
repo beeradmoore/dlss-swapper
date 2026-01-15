@@ -351,7 +351,7 @@ public sealed partial class MainWindow : Window
         //FilterDLLRecords();
 
         // Yeet this into the void and let it load in the background.
-        _ = DLLManager.Instance.UpdateManifestIfOldAsync();
+        _ = DLLManager.Instance.UpdateManifestAsync();
 
         // We are now ready to show the games list.
         LoadingStackPanel.Visibility = Visibility.Collapsed;

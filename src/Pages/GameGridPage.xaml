@@ -208,19 +208,19 @@
                         PlaceholderText="{x:Bind ViewModel.TranslationProperties.SearchText, Mode=OneWay}"
                         TextChanged="{x:Bind ViewModel.SearchForGameEvent}" />
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,4,0">
-                        <Button x:Name="ClearButton"
+                    <Button x:Name="ClearButton"
                             Width="26"
                             Height="26"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
                             Background="Transparent"
                             BorderThickness="0"
+                            Margin="0,0,4,0"
                             Padding="4"
                             Visibility="{x:Bind SearchBox.Text, Mode=OneWay, Converter={StaticResource StringVisibilityConverter}}"
                             Click="ClearSearchBox_Click">
-                            
-                            <FontIcon Glyph="&#xE711;" FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
-                        </Button>
-                    </StackPanel>
+                        <FontIcon Glyph="&#xE711;" FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    </Button>
                 </Grid>
             </StackPanel>
 

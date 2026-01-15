@@ -75,7 +75,7 @@
     "used": false
   },
   {
-    "name": "Always use latest",
+    "name": "Recommended by NVIDIA",
     "value": "0x00FFFFFF",
     "used": true
   }

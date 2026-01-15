@@ -167,7 +167,7 @@
     <value>DLL zip was invalid (no DLL found).</value>
   </data>
   <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
-    <value>Always use latest</value>
+    <value>Recommended by NVIDIA</value>
   </data>
   <data name="DLSS_Preset_Default" xml:space="preserve">
     <value>Default</value>

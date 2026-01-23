@@ -45,6 +45,7 @@ public class LanguageManager
             "ar-SA",
             "ar-SY",
             "ca-ES",
+            "cs-CZ",
             "de-DE",
             "en-AU",
             "en-GB",
@@ -76,6 +77,7 @@ public class LanguageManager
             "ar-SA" => "اللغة العربية (المملكة العربية السعودية)", // Arabic (Saudi Arabia)
             "ar-SY" => " (سوريا) العربية", // Arabic (Syria)
             "ca-ES" => "Català", // Catalan
+            "cs-CZ" => "Čeština", // Czech
             "de-DE" => "Deutsch", // German (Germany)
             "en-AU" => "English (Australia)",
             "en-GB" => "English (United Kingdom)",
@@ -150,3 +152,4 @@ public class LanguageManager
         return rtlLanguages.Contains(languagePart);
     }
 }
+

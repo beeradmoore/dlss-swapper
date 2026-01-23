@@ -1,0 +1,1076 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcknowledgementsPage_Title" xml:space="preserve">
+    <value>Licence &amp; Poděkování</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
+    <value>Klikněte ke zkopírování detailů níže</value>
+  </data>
+  <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
+    <value>Diagnostika</value>
+  </data>
+  <data name="DllManager_AlreadyImported" xml:space="preserve">
+    <value>(již importováno)</value>
+  </data>
+  <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
+    <value>Funkce "importovat" je zakázána, manifest importu nemohl být načten. </value>
+  </data>
+  <data name="DllManager_MigratingDlls" xml:space="preserve">
+    <value>Migrace DLL</value>
+  </data>
+  <data name="DllManager_UnknownTypeDll" xml:space="preserve">
+    <value>Neznámý typ DLL</value>
+  </data>
+  <data name="DllManager_UntrustedDll" xml:space="preserve">
+    <value>DLL není důvěryhodné pro Windows</value>
+  </data>
+  <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
+    <value>Nebylo možné stáhnout {0} DLL, prosím zkuste to znovu později, nebo zkontrolujte protokol ke zjištění proč stahování selhalo.</value>
+  </data>
+  <data name="DllRecord_Download" xml:space="preserve">
+    <value>Stáhnout</value>
+  </data>
+  <data name="DllRecord_DownloadError" xml:space="preserve">
+    <value>Chyba stahování</value>
+  </data>
+  <data name="DllRecord_Downloading" xml:space="preserve">
+    <value>Stahuji</value>
+  </data>
+  <data name="DllRecord_Imported" xml:space="preserve">
+    <value>Importováno</value>
+  </data>
+  <data name="DllRecord_RequiresDownload" xml:space="preserve">
+    <value>Vyžaduje stažení</value>
+  </data>
+  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
+    <value>DLL zip archiv byl neplatný (nebyl nalezen soubor DLL).</value>
+  </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>Vždy použít nejnovější</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>Výchozí</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>Preset {0}</value>
+  </data>
+  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
+    <value>Preset {0} (Zastaralé)</value>
+  </data>
+  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
+    <value>DLL Swapper selhal při spouštění</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
+    <value>Prosím otevřete</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
+    <value>nový problém (new issue)</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
+    <value>v repozitáři DLSS Swapper na GitHub a v sekci s dalším kontextem (additional context) a poskytněte následující informace.</value>
+  </data>
+  <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
+    <value>Spuštění se nezdařilo</value>
+  </data>
+  <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
+    <value>Typ Aktiva</value>
+  </data>
+  <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
+    <value>Čas Události</value>
+  </data>
+  <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
+    <value>Typ Události</value>
+  </data>
+  <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
+    <value>Nebyla nalezena žádná historie.</value>
+  </data>
+  <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
+    <value>Verze</value>
+  </data>
+  <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
+    <value>Záloha DLL byla odstraněna</value>
+  </data>
+  <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
+    <value>DLL bylo změněno externě</value>
+  </data>
+  <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
+    <value>DLL bylo detekováno</value>
+  </data>
+  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
+    <value>DLL bylo resetováno</value>
+  </data>
+  <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
+    <value>DLL bylo vyměněno</value>
+  </data>
+  <data name="GamePage_AddCustomCover" xml:space="preserve">
+    <value>Přidat vlastní obal hry</value>
+  </data>
+  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>Spouštět hry z vaší {0} knihovny, není v tuto chvíli podporováno.</value>
+  </data>
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
+    <value>Klikněte pro přidání do oblíbených</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>Klikněte pro skrytí hry</value>
+  </data>
+  <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+    <value>Nebylo možné najít cestu „{0}“.</value>
+  </data>
+  <data name="GamePage_CurrentDll" xml:space="preserve">
+    <value>Současné DLL</value>
+  </data>
+  <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
+    <value>Nebylo možné najít soubor "{0}".</value>
+  </data>
+  <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
+    <value>DLL bylo resetováno na "{0}".</value>
+  </data>
+  <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
+    <value>Zahájení stahování</value>
+  </data>
+  <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
+    <value>Před výměnou prosím počkejte na dokončení stahování.</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
+    <value>Informace o presetu</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
+    <value>DLSS presety jsou obsaženy v DLL souborech DLSS v instalačním adresáři vaší hry. Různé knihovny DLSS DLL mají různé presety. Například preset K byl zaveden až od verze DLSS v310.2. Pokud tedy používáte DLSS v3.7 a nastavíte preset K, hra nepoužije preset K a místo toho se vrátí k presetu, který si hra zvolí.
+
+Totéž platí pro globální presety. Pokud vyberete preset K, ale vaše hra používá DLSS v3.7, nebudete preset K používat a místo toho se vrátí k jeho výchozí hodnotě.
+
+Chcete-li ověřit, který preset se používá, povolte prosím indikátor DLSS na obrazovce.</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
+    <value>Informace o indikátoru na obrazovce</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
+    <value>Informace o presetu DLSS</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
+    <value>Nastavení presetu DLSS negarantuje, že bude použit.</value>
+  </data>
+  <data name="GamePage_Favorited" xml:space="preserve">
+    <value>Oblíbené</value>
+  </data>
+  <data name="GamePage_History" xml:space="preserve">
+    <value>Historie</value>
+  </data>
+  <data name="GamePage_InstallPath" xml:space="preserve">
+    <value>Cesta instalace</value>
+  </data>
+  <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
+    <value>"{0}" je nesprávný typ souboru</value>
+  </data>
+  <data name="GamePage_Launch" xml:space="preserve">
+    <value>Spustit</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
+    <value>Tato hra není přidána manuálně a nemůže být odstraněna</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
+    <value>Opravdu chcete odstranit soubor "{0}" z nástroje DLSS Swapper? Tato akce neprovede žádné změny v souborech DLSS, které již byly vyměněny.</value>
+  </data>
+  <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
+    <value>Níže je zobrazeno několik nalezených DLL souborů. Stále bude možné DLL soubory vyměňovat a obnovovat jako obvykle, protože tyto akce budou provedeny se všemi DLL soubory najednou. Protože však není jasné, který z těchto DLL souborů hra používá, zobrazená verze DLL je první detekované DLL.</value>
+  </data>
+  <data name="GamePage_MultipleDllsFound" xml:space="preserve">
+    <value>Nalezeno více souborů DLL</value>
+  </data>
+  <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
+    <value>Nalezeno více {0} DLL souborů</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
+    <value>Prosím přejděte na stránku knihovny ke stažení nových souborů DLL.</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
+    <value>Nebyly nalezeny žádné soubory DLL</value>
+  </data>
+  <data name="GamePage_Notes" xml:space="preserve">
+    <value>Poznámky</value>
+  </data>
+  <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
+    <value>Tato hra není ve stavu připraveném ke hraní.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
+    <value>V rozhraní NVAPI došlo k chybě. Do protokolu chyb byly zapsány doplňující informace.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
+    <value>V rozhraní NVAPI došlo k chybě. Spuštění aplikace jako správce by mohlo problém vyřešit. Do protokolu chyb byly zapsány doplňující informace.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
+    <value>Chyba NVAPI</value>
+  </data>
+  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
+    <value>V rozhraní NVAPI došlo k chybě. Klikněte pro více informací.</value>
+  </data>
+  <data name="GamePage_OpenDllLocation" xml:space="preserve">
+    <value>Otevřít umístění souboru DLL</value>
+  </data>
+  <data name="GamePage_OriginalDll" xml:space="preserve">
+    <value>Originální soubor DLL</value>
+  </data>
+  <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
+    <value>{0} se stále zpracovává. Před otevřením prosím vyčkejte až indikátor načtení dojede ke konci.</value>
+  </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>Resetovat vše</value>
+  </data>
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
+    <value>Obnovit původní soubor DLL</value>
+  </data>
+  <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
+    <value>Zvolit {0} verzi</value>
+  </data>
+  <data name="GamePage_StorageFileIsNull" xml:space="preserve">
+    <value>storageFile je neplatný</value>
+  </data>
+  <data name="GamePage_UnableToChangePreset" xml:space="preserve">
+    <value>Nebylo možné změnit preset. Další informace naleznete v chybovém protokolu (log).</value>
+  </data>
+  <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
+    <value>Pro vytvoření obalu je možné přetáhnout pouze jeden soubor</value>
+  </data>
+  <data name="GamesPage_AddGame" xml:space="preserve">
+    <value>Přidat hru</value>
+  </data>
+  <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+    <value>Seskupit společně hry z jedné knihovny</value>
+  </data>
+  <data name="GamesPage_Grouping" xml:space="preserve">
+    <value>Seskupení</value>
+  </data>
+  <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
+    <value>Skrýt hry bez změnitelných souborů</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
+    <value>Pro vytvoření obalu je možné přetáhnout pouze jeden soubor</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
+    <value>Další poznámka pro ručně přidané hry</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
+    <value>Vyskytl se problém a hru momentálně nelze přidat. Nahlaste prosím tento problém.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
+    <value>Během přidávání hry se vyskytl problém</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
+    <value>Musíte vybrat adresář &lt;i&gt;s Vaší hrou&lt;/i&gt;, nikoli obecný adresář &lt;i&gt;všechny hry&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;Například, pokud máte hru v adresáři:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Vybrali byste adresář &lt;b&gt;MyFavGame&lt;/b&gt;, nikoli adresář &lt;b&gt;MyGamesFolder&lt;/b&gt;.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
+    <value>DLSS Swapper by měl automaticky najít všechny nainstalované hry. Pokud hra není v seznamu uvedena, může tomu bránit několik nastavení. Zkontrolujte prosím:
+
+- Filtr seznamu her není nastaven na „Skrýt hry bez změnitelných souborů“
+- Je v nastavení povolena konkrétní herní knihovna
+
+Pokud jste tyto možnosti zkontrolovali a hra se stále nezobrazuje, může se jednat o chybu. Ocenili bychom, kdybyste problém nahlásili v našem repozitáři GitHub, abychom jej mohli opravit a zajistit, aby Vaše hry byly v budoucnu lépe detekovány.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
+    <value>Poznámka pro ruční přidávání her</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
+    <value>Tato instalační cesta "{0}" již existuje a nemůže být znovu přidána.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
+    <value>Zvolte složku se hrou</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
+    <value>Přidání adresáře nejvyšší úrovně není podporováno. Přidejte prosím kořenový adresář hry.</value>
+  </data>
+  <data name="GamesPage_NewDlls" xml:space="preserve">
+    <value>Nový soubor DLL</value>
+  </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Byly nalezeny nové soubory DLL</value>
+  </data>
+  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
+    <value>Vytvořit nové hlášení problému na GitHub</value>
+  </data>
+  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
+    <value>Během načítání her byly objeveny nové soubory DLL, které nejsou v manifestu DLSS Swapperu.</value>
+  </data>
+  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
+    <value>(Je nutný GitHub účet)</value>
+  </data>
+  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
+    <value>Pokud tlačítko nefunguje, zkuste zde,</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
+    <value>Krok 4: Odešlete problémové hlášení (Submit your Issue)</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
+    <value>Krok 1: Založte nové problémové hlášení (Create new issue)</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
+    <value>Krok 3: Zkopírujte obsah</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
+    <value>Krok 2: Zkopírujte nadpis</value>
+  </data>
+  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
+    <value>Děkujeme za pomoc!</value>
+  </data>
+  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+    <value>Soubory DLL nemusíte odesílat. Na základě poskytnutých informací je vyhledáme sami.</value>
+  </data>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>Obnovuji hru</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>Zobrazit skryté hry (výchozí nastavení při spuštění je "vypnuto")</value>
+  </data>
+  <data name="GamesPage_Title" xml:space="preserve">
+    <value>Hry</value>
+  </data>
+  <data name="GamesPage_ViewType" xml:space="preserve">
+    <value>Zobrazení</value>
+  </data>
+  <data name="GamesPage_ViewType_GridView" xml:space="preserve">
+    <value>Mřížka</value>
+  </data>
+  <data name="GamesPage_ViewType_ListView" xml:space="preserve">
+    <value>Seznam</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Jste si jisti, že chcete odstranit vlastní náhledový obrázek?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Hra se právě zpracovává</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Ostranit vlastní obal?</value>
+  </data>
+  <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
+    <value>Aplikace je spuštěna s administrátorským oprávněním.</value>
+  </data>
+  <data name="General_Apply" xml:space="preserve">
+    <value>Použít</value>
+  </data>
+  <data name="General_Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="General_Close" xml:space="preserve">
+    <value>Zavřít</value>
+  </data>
+  <data name="General_Copy" xml:space="preserve">
+    <value>Kopírovat</value>
+  </data>
+  <data name="General_Delete" xml:space="preserve">
+    <value>Odstranit</value>
+  </data>
+  <data name="General_DontShowAgain" xml:space="preserve">
+    <value>Znovu nezobrazovat</value>
+  </data>
+  <data name="General_Error" xml:space="preserve">
+    <value>Chyba</value>
+  </data>
+  <data name="General_ErrorMessage" xml:space="preserve">
+    <value>Chybová zpráva</value>
+  </data>
+  <data name="General_Export" xml:space="preserve">
+    <value>Exportovat</value>
+  </data>
+  <data name="General_ExportAll" xml:space="preserve">
+    <value>Exportovat vše</value>
+  </data>
+  <data name="General_Failed" xml:space="preserve">
+    <value>Selhalo</value>
+  </data>
+  <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
+    <value>Pokud aplikaci spouštíte jako administrátor, není tato funkce podporována.</value>
+  </data>
+  <data name="General_Filter" xml:space="preserve">
+    <value>Filtr</value>
+  </data>
+  <data name="General_Help" xml:space="preserve">
+    <value>Nápověda</value>
+  </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>Skryto</value>
+  </data>
+  <data name="General_Import" xml:space="preserve">
+    <value>Importovat</value>
+  </data>
+  <data name="General_Load" xml:space="preserve">
+    <value>Načíst</value>
+  </data>
+  <data name="General_Loading" xml:space="preserve">
+    <value>Načítání</value>
+  </data>
+  <data name="General_Name" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>DLSS RR Preset</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>DLSS Ray Reconstruction</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>DLSS Frame Generation</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>DLSS Preset</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_DX11" xml:space="preserve">
+    <value>XeSS (DX11)</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>XeSS Frame Generation</value>
+  </data>
+  <data name="General_No" xml:space="preserve">
+    <value>Ne</value>
+  </data>
+  <data name="General_None" xml:space="preserve">
+    <value>Žádný</value>
+  </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>Nebylo nalezeno</value>
+  </data>
+  <data name="General_NotSupported" xml:space="preserve">
+    <value>Není podporováno</value>
+  </data>
+  <data name="General_Okay" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="General_Oops" xml:space="preserve">
+    <value>Ale né</value>
+  </data>
+  <data name="General_OpenFolder" xml:space="preserve">
+    <value>Otevřít složku</value>
+  </data>
+  <data name="General_OpenLogsDirectory" xml:space="preserve">
+    <value>Otevřít adresář protokolů</value>
+  </data>
+  <data name="General_Optional" xml:space="preserve">
+    <value>(volitelné)</value>
+  </data>
+  <data name="General_Options" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
+  <data name="General_Publish" xml:space="preserve">
+    <value>Publikovat</value>
+  </data>
+  <data name="General_Refresh" xml:space="preserve">
+    <value>Obnovit</value>
+  </data>
+  <data name="General_Reload" xml:space="preserve">
+    <value>Znovu načíst</value>
+  </data>
+  <data name="General_Remove" xml:space="preserve">
+    <value>Odstranit</value>
+  </data>
+  <data name="General_ReportIssue" xml:space="preserve">
+    <value>Nahlásit problém</value>
+  </data>
+  <data name="General_Save" xml:space="preserve">
+    <value>Uložit</value>
+  </data>
+  <data name="General_Search" xml:space="preserve">
+    <value>Vyhledat</value>
+  </data>
+  <data name="General_Sorry" xml:space="preserve">
+    <value>Omlouvám se</value>
+  </data>
+  <data name="General_Success" xml:space="preserve">
+    <value>Úspěch</value>
+  </data>
+  <data name="General_Swap" xml:space="preserve">
+    <value>Vyměnit</value>
+  </data>
+  <data name="General_Unknown" xml:space="preserve">
+    <value>Neznámé</value>
+  </data>
+  <data name="General_Update" xml:space="preserve">
+    <value>Aktualizace</value>
+  </data>
+  <data name="General_Version" xml:space="preserve">
+    <value>Verze</value>
+  </data>
+  <data name="General_Warning" xml:space="preserve">
+    <value>Upozornění</value>
+  </data>
+  <data name="General_Yes" xml:space="preserve">
+    <value>Ano</value>
+  </data>
+  <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
+    <value>V tuto chvíli máte nainstalovanou verzi {0}</value>
+  </data>
+  <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
+    <value>DLSS Swapper byl právě aktualizován</value>
+  </data>
+  <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
+    <value>Je dostupná aktualizace</value>
+  </data>
+  <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
+    <value>Již staženo.</value>
+  </data>
+  <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
+    <value>Nebylo možné načíst importované soubory DLL</value>
+  </data>
+  <data name="LibraryPage_CouldntDownload" xml:space="preserve">
+    <value>V tuto chvíli se nepodařilo stáhnout.</value>
+  </data>
+  <data name="LibraryPage_CouldntExportDll" xml:space="preserve">
+    <value>Nebylo možné exportovat soubory DLL</value>
+  </data>
+  <data name="LibraryPage_DeleteDll" xml:space="preserve">
+    <value>Odstranit soubor DLL</value>
+  </data>
+  <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
+    <value>Smazat {0} v{1}?</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
+    <value>Velikost staženého souboru</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
+    <value>Popis souboru</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
+    <value>Velikost souboru</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
+    <value>Hash</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
+    <value>Interní název</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
+    <value>Interní název extra</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
+    <value>Označení</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>Stáhnout nejnovější</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
+    <value>Počet nově zahájených stahování: {0}.</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
+    <value>Stahování začalo</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
+    <value>Exportované soubory DLL:</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
+    <value>Exportováno {0} souborů DLL.</value>
+  </data>
+  <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
+    <value>Exportovaný soubor DLL {0}.</value>
+  </data>
+  <data name="LibraryPage_FileNotFound" xml:space="preserve">
+    <value>Soubor nebyl nalezen.</value>
+  </data>
+  <data name="LibraryPage_Finished" xml:space="preserve">
+    <value>Dokončuji</value>
+  </data>
+  <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
+    <value>Importovat jako již existující záznam souboru DLL.</value>
+  </data>
+  <data name="LibraryPage_Importing" xml:space="preserve">
+    <value>Importuji</value>
+  </data>
+  <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
+    <value>Nahrazování DLL souborů může být nebezpečné!
+
+Umístění škodlivého DLL soubory do hry je stejně nebezpečné jako spuštění souboru SlunceSeno.mp4.exe, který jste si právě stáhli z UložTo.cz.
+
+Importujte DLL soubory pouze ze zdrojů, kterým důvěřujete!</value>
+  </data>
+  <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
+    <value>Nebyly nalezeny žádné soubory DLL k exportu.</value>
+  </data>
+  <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
+    <value>Nemáte žádné záznamy DLL souborů k exportu.</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
+    <value>Nebyly nalezeny žádné nové DLL soubory ke stažení.</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
+    <value>Žádné nové DLL soubory.</value>
+  </data>
+  <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
+    <value>Zpracované DLL soubory:</value>
+  </data>
+  <data name="LibraryPage_Title" xml:space="preserve">
+    <value>Knihovna</value>
+  </data>
+  <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
+    <value>Nebylo možné smazat {0} záznam.</value>
+  </data>
+  <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
+    <value>Nebylo možné aktualizovat záznamy DLL souboru.</value>
+  </data>
+  <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
+    <value>ZIP archív neobsahuje žádné soubory DLL.</value>
+  </data>
+  <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
+    <value>Pokus o aktualizaci</value>
+  </data>
+  <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
+    <value>DLSS Swapper nebyl schopen načíst soubor manifestu. Program bude nyní ukončen.</value>
+  </data>
+  <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
+    <value>DLSS Swapper se musí ukončit</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
+    <value>GitHub problémy (Issues)</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
+    <value>Nepodařilo se nám načíst soubor manifest.json z vašeho počítače ani z internetu.
+
+Pokud se to bude opakovat, nahlaste to prosím v našem systému pro sledování problémů na GitHubu.</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
+    <value>Aktualizovat manifest</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
+    <value>I když by výměna verzí DLSS neměla být považována za podvádění (cheating), některé systémy proti podvádění (anti-cheat) mohou detekovat, pokud soubory v adresáři vaší hry neodpovídají souborům, se kterými byla hra distribuována.
+
+Z tohoto důvodu doporučujeme být u multiplayerových her opatrní.</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
+    <value>Poznámka pro multiplayerové hry</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
+    <value>Stále nefunguje</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
+    <value>Funguje!</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
+    <value>Test v prohlížeči</value>
+  </data>
+  <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
+    <value>Zrušit současný test</value>
+  </data>
+  <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
+    <value>Kopírovat výsledky testu</value>
+  </data>
+  <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
+    <value>Vytvořit chybové hlášení</value>
+  </data>
+  <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
+    <value>Vlastní test uživatelského agenta</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
+    <value>Stahování souboru DLL DLSS Swapperu v rámci DLSS Swapperu s vlastním uživatelským agentem</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
+    <value>Stahování DLSS DLL souboru z mirroru UploadThing</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
+    <value>Přístup na google.com z DLSS Swapperu (testuje obecné připojení k internetu)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
+    <value>Přístup na bing.com z DLSS Swapperu (testuje obecné připojení k internetu)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
+    <value>Stahování souboru DLL DLSS Swapperu v rámci DLSS Swapperu</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
+    <value>Stahování souboru DLL DLSS Swapperu z prohlížeče</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
+    <value>Stahování obálky ze Steam</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
+    <value>Stahování obálky z Epic Game Store</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
+    <value>Stahování obálky ze serveru DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
+    <value>Stahování obálky z alternativního serveru DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
+    <value>Vyhledávání DNS na serveru DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
+    <value>Otevřít v prohlížeči</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
+    <value>Klikněte na tlačítko "Otevřít v prohlížeči" nebo zkopírujte a vložte následující odkaz do prohlížeče. Stáhne se soubor v prohlížeči?</value>
+  </data>
+  <data name="NetworkTesterPage_Results" xml:space="preserve">
+    <value>Výsledky</value>
+  </data>
+  <data name="NetworkTesterPage_RunTest" xml:space="preserve">
+    <value>Spustit test</value>
+  </data>
+  <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
+    <value>Použijte poskytnutého uživatelského agenta nebo zadejte vlastního dle vlastního výběru.</value>
+  </data>
+  <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
+    <value>Tester sítě</value>
+  </data>
+  <data name="SettingsPage_About" xml:space="preserve">
+    <value>O programu</value>
+  </data>
+  <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
+    <value>Přidat ignorovanou cestu</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
+    <value>Povolit ladicí (debug) soubory DLL</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
+    <value>Sady SDK někdy vydávají ladicí (debug) soubory DLL, které umožňují zobrazení dalších informací na obrazovce.</value>
+  </data>
+  <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
+    <value>DLL soubory se v systému Windows kontrolují, zda jsou důvěryhodné, a to ověřením podpisu před jejich přesunutím do složky hry. Pokud soubor DLL neprojde ověřením podpisu, nebude použit. Doporučuje se tuto funkci ponechat vypnutou.</value>
+  </data>
+  <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
+    <value>Toto se týká pouze výběru souboru DLL, nikoli stránky knihovny.</value>
+  </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>Commit sestavení</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>Datum sestavení</value>
+  </data>
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
+    <value>Soubor protokolu se nepodařilo otevřít přímo z DLSS Swapperu. Zkuste jej prosím otevřít ručně.</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
+    <value>Opravdu chcete smazat ignorovanou cestu {0}?</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
+    <value>Smazat ignorovanou cestu</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
+    <value>Možnosti pro vývojáře DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
+    <value>Povolit protokolování do konzole</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
+    <value>Povolit protokolování do souboru</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
+    <value>Povoleno pro všechny soubory DLL DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>Povoleno pouze pro ladění souborů DLL DLSS.</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
+    <value>Zobrazit indikátor na obrazovce</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
+    <value>Podrobné protokolování</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>DLSS nastavení</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>Globální preset</value>
+  </data>
+  <data name="SettingsPage_GameLibraries" xml:space="preserve">
+    <value>Herní knihovny</value>
+  </data>
+  <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
+    <value>Obecný průvodce řešením problémů</value>
+  </data>
+  <data name="SettingsPage_GiveFeedback" xml:space="preserve">
+    <value>Poskytnout zpětnou vazbu</value>
+  </data>
+  <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
+    <value>Navrhnout funkci nebo nahlásit problém DLSS Swapperu.</value>
+  </data>
+  <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
+    <value>Ignorované cesty</value>
+  </data>
+  <data name="SettingsPage_Language" xml:space="preserve">
+    <value>Jazyk</value>
+  </data>
+  <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
+    <value>{0} zakázáno</value>
+  </data>
+  <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
+    <value>{0} povoleno</value>
+  </data>
+  <data name="SettingsPage_Logging" xml:space="preserve">
+    <value>Protokolování</value>
+  </data>
+  <data name="SettingsPage_Logging_Debug" xml:space="preserve">
+    <value>Ladit</value>
+  </data>
+  <data name="SettingsPage_Logging_Error" xml:space="preserve">
+    <value>Chyba</value>
+  </data>
+  <data name="SettingsPage_Logging_Info" xml:space="preserve">
+    <value>Informace</value>
+  </data>
+  <data name="SettingsPage_Logging_Off" xml:space="preserve">
+    <value>Vypnout</value>
+  </data>
+  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
+    <value>Podrobný</value>
+  </data>
+  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
+    <value>Upozornění</value>
+  </data>
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
+    <value>Není k dispozici žádná aktualizace</value>
+  </data>
+  <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
+    <value>Poděkování</value>
+  </data>
+  <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
+    <value>Diagnostika</value>
+  </data>
+  <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
+    <value>Tester sítě</value>
+  </data>
+  <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
+    <value>Otevřít sadu nástrojů pro překlad</value>
+  </data>
+  <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
+    <value>Cesta {0} je již ignorována.</value>
+  </data>
+  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
+    <value>Povolit nedůvěryhodné</value>
+  </data>
+  <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
+    <value>Zkontrolovat aktualizace</value>
+  </data>
+  <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
+    <value>Pouze zobrazit stažené soubory DLL</value>
+  </data>
+  <data name="SettingsPage_ThemeDark" xml:space="preserve">
+    <value>Tmavý</value>
+  </data>
+  <data name="SettingsPage_ThemeLight" xml:space="preserve">
+    <value>Světlý</value>
+  </data>
+  <data name="SettingsPage_ThemeMode" xml:space="preserve">
+    <value>Téma</value>
+  </data>
+  <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
+    <value>Použít nastavení systému</value>
+  </data>
+  <data name="SettingsPage_Title" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
+  <data name="SettingsPage_Troubleshooting" xml:space="preserve">
+    <value>Odstraňování problémů</value>
+  </data>
+  <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
+    <value>Váš aktuální soubor protokolu je</value>
+  </data>
+  <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
+    <value>Překladový nástroj nemůžete používat, pokud je program spuštěn jako administrátor. Proveďte prosím restart programu bez administrátorského oprávnění.</value>
+  </data>
+  <data name="TranslationToolboxPage_Comment" xml:space="preserve">
+    <value>Komentář</value>
+  </data>
+  <data name="TranslationToolboxPage_ImportAsTranslation" xml:space="preserve">
+    <value>Importovat jazyk jako překlad</value>
+  </data>
+  <data name="TranslationToolboxPage_Key" xml:space="preserve">
+    <value>Klíč</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
+    <value>Načíst existující</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
+    <value>Nebylo možné načíst překlad. Další informace naleznete v protokolu chyb.</value>
+  </data>
+  <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
+    <value>Nový překlad</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
+    <value>Nebyly nalezeny žádné údaje překladu k publikaci.</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
+    <value>Nebyla nalezena žádná data překladu k uložení.</value>
+  </data>
+  <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
+    <value>Neplatný soubor překladu DLSS Swapper.</value>
+  </data>
+  <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
+    <value>Překlad nebylo možné publikovat. Další informace naleznete v protokolu chyb.</value>
+  </data>
+  <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
+    <value>Obnovit aplikaci</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
+    <value>Resetovat a pokračovat</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
+    <value>Tímto se resetuje váš aktuální průběh překladu. Opravdu chcete pokračovat?</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
+    <value>Resetovat postup a pokračovat?</value>
+  </data>
+  <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
+    <value>Nebylo možné uložit překlad. Další informace naleznete v protokolu chyb.</value>
+  </data>
+  <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
+    <value>Zvolte jazyk k načtení</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
+    <value>Zdrojový jazyk</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
+    <value>Zdrojový překlad</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
+    <value>Průvodce překladem</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
+    <value>Váš překlad byl vytvořen. Prostudujte si prosím průvodce překladem DLSS Swapper, kde najdete informace o dalším postupu s {0}.</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
+    <value>Přeloženo</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
+    <value>Zavřít bez uložení</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
+    <value>Pravděpodobně máte neuložené změny v překladu. Pokud toto okno zavřete, budou nenávratně ztraceny!</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
+    <value>Neuložené změny v překladu</value>
+  </data>
+  <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
+    <value>Překladatelské nástroje</value>
+  </data>
+</root>

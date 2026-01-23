@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
     Microsoft ResX Schema
@@ -191,6 +191,15 @@
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Spuštění se nezdařilo</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Jste si jisti, že chcete odstranit vlastní náhledový obrázek?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Hra se právě zpracovává</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Ostranit vlastní obal?</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Typ Aktiva</value>
@@ -402,9 +411,6 @@ Pokud jste tyto možnosti zkontrolovali a hra se stále nezobrazuje, může se j
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Nový soubor DLL</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Byly nalezeny nové soubory DLL</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Vytvořit nové hlášení problému na GitHub</value>
   </data>
@@ -435,6 +441,9 @@ Pokud jste tyto možnosti zkontrolovali a hra se stále nezobrazuje, může se j
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Soubory DLL nemusíte odesílat. Na základě poskytnutých informací je vyhledáme sami.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Byly nalezeny nové soubory DLL</value>
+  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Obnovuji hru</value>
   </data>
@@ -452,15 +461,6 @@ Pokud jste tyto možnosti zkontrolovali a hra se stále nezobrazuje, může se j
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Seznam</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Jste si jisti, že chcete odstranit vlastní náhledový obrázek?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Hra se právě zpracovává</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Ostranit vlastní obal?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Aplikace je spuštěna s administrátorským oprávněním.</value>
@@ -525,9 +525,6 @@ Pokud jste tyto možnosti zkontrolovali a hra se stále nezobrazuje, může se j
   <data name="General_Name_DLSS" xml:space="preserve">
     <value>DLSS</value>
   </data>
-  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
-    <value>DLSS RR Preset</value>
-  </data>
   <data name="General_Name_DLSS_D" xml:space="preserve">
     <value>DLSS Ray Reconstruction</value>
   </data>
@@ -536,6 +533,9 @@ Pokud jste tyto možnosti zkontrolovali a hra se stále nezobrazuje, může se j
   </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>DLSS Preset</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>DLSS RR Preset</value>
   </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>

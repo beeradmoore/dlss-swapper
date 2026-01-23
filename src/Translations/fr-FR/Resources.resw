@@ -570,12 +570,12 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
     <value>XeSS</value>
     <comment>Si XeSS n'a pas de traduction directe, utilisez les caractères anglais</comment>
   </data>
-  <data name="General_Name_XeSS_FG" xml:space="preserve">
-    <value>Génération d'images XeSS</value>
-    <comment>Si XeSS n'a pas de traduction directe, utilisez les caractères anglais</comment>
-  </data>
   <data name="General_Name_XeSS_DX11" xml:space="preserve">
     <value>XeSS (DX11)</value>
+    <comment>Si XeSS n'a pas de traduction directe, utilisez les caractères anglais</comment>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>Génération d'images XeSS</value>
     <comment>Si XeSS n'a pas de traduction directe, utilisez les caractères anglais</comment>
   </data>
   <data name="General_No" xml:space="preserve">

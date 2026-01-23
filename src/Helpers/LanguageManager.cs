@@ -56,6 +56,7 @@ public class LanguageManager
             "pl-PL",
             "pt-BR",
             "ru-RU",
+            "th-TH",
             "tr-TR",
             "uk-UA",
             "vi-VN",
@@ -86,6 +87,7 @@ public class LanguageManager
             "pl-PL" => "Polski", // Polish
             "pt-BR" => "Português BR", // Portuguese
             "ru-RU" => "Русский", // Russian
+            "th-TH" => "ไทย", // Thai 
             "tr-TR" => "Türkçe", // Turkish
             "uk-UA" => "Українська", // Ukrainian
             "vi-VN" => "Tiếng Việt", // Vietnamese

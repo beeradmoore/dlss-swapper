@@ -738,7 +738,7 @@ Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmist
   <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
     <value>DLL-tiedostojen korvaaminen tietokoneeltasi voi olla vaarallista.
 
-Pahantahtoisen DLL-tiedoston asettaminen peliin on yhtä huonoa kuin Linking_park_-_nUmB_mp3.exe-tiedoston ajaminen, jonka juuri latasit LimeWirestä.
+Pahantahtoisen DLL-tiedoston asettaminen peliin on yhtä huonoa kuin Darude_-_Sandstorm_mp3.exe-tiedoston ajaminen, jonka juuri latasit LimeWirestä.
 
 Tuo DLL-tiedostoja vain luotetuista lähteistä.</value>
   </data>

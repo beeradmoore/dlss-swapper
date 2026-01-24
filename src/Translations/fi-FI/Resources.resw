@@ -891,10 +891,10 @@ Tästä syystä suosittelemme varovaisuutta moninpeleille.</value>
     <value>Tämä koskee vain DLL-valitsijaa, ei kirjastosivua.</value>
   </data>
   <data name="SettingsPage_BuildCommit" xml:space="preserve">
-    <value>Koontitunniste</value>
+    <value>Koontiversiotunniste</value>
   </data>
   <data name="SettingsPage_BuildDate" xml:space="preserve">
-    <value>Koontipäivämäärä</value>
+    <value>Koontiversiopäivämäärä</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
     <value>Lokitiedostoa ei voitu avata suoraan DLSS Swapperista. Yritä avata se manuaalisesti.</value>

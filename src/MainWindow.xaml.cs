@@ -55,9 +55,11 @@ public sealed partial class MainWindow : Window
             {
                 if (sender.Presenter is OverlappedPresenter presenter)
                 {
-                    var isCurrentlyMaximized = presenter.State == OverlappedPresenterState.Maximized;
+                    var isCurrentlyMinimizedOrMaximized =
+                        presenter.State == OverlappedPresenterState.Minimized ||
+                        presenter.State == OverlappedPresenterState.Maximized;
 
-                    if (isCurrentlyMaximized == false)
+                    if (isCurrentlyMinimizedOrMaximized == false)
                     {
                         _trackedWindow.UpdatePosition(sender.Position);
                     }

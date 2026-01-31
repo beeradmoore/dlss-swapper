@@ -229,7 +229,7 @@
     <value>DLL sostituita</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
-    <value>Aggiungi copertina personalizzata</value>
+    <value>Cambia copertina</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Clicca per aggiungere ai preferiti</value>
@@ -452,7 +452,7 @@ Se hai verificato queste opzioni e il tuo gioco continua a non essere visualizza
     <value>Applica</value>
   </data>
   <data name="General_Cancel" xml:space="preserve">
-    <value>Cancella</value>
+    <value>Annulla</value>
   </data>
   <data name="General_Close" xml:space="preserve">
     <value>Chiudi</value>
@@ -461,7 +461,7 @@ Se hai verificato queste opzioni e il tuo gioco continua a non essere visualizza
     <value>Copia</value>
   </data>
   <data name="General_Delete" xml:space="preserve">
-    <value>Cancella</value>
+    <value>Elimina</value>
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>Non mostrare più</value>

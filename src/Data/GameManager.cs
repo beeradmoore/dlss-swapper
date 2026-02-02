@@ -390,12 +390,15 @@ internal partial class GameManager : ObservableObject
 
     public bool CheckIfGameIsAdded(string installPath)
     {
+        Logger.Info($"Checking for install path - {installPath}");
         lock (gameLock)
         {
             foreach (var game in _synchronisedAllGames)
             {
                 if (game.InstallPath?.Equals(installPath, StringComparison.OrdinalIgnoreCase) == true)
                 {
+                    Logger.Info($"Found {game.Title} ({game.ID}) with install path {game.InstallPath}");
+                    Logger.Info($"Game hidden: {game.IsHidden}");
                     return true;
                 }
             }

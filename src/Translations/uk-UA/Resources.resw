@@ -296,7 +296,7 @@
     <value>Запустити</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
-    <value>Цей заголовок не додано вручну і його не можна видалити.</value>
+    <value>Цю гру не додано вручну і її не можна видалити.</value>
   </data>
   <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
     <value>Ви впевнені, що хочете видалити "{0}" з DLSS Swapper? Це не внесе жодних змін у файли DLSS, які вже були замінені.</value>
@@ -852,7 +852,7 @@
     <value>Дозволити налагоджувальні DLL</value>
   </data>
   <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
-    <value>SDK іноді випускають налагоджувальні DLL, які дозволяють відображати додаткову інформацію на екрані.</value>
+    <value>SDK іноді випускає налагоджувальні DLL, які дозволяють відображати додаткову інформацію на екрані.</value>
   </data>
   <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
     <value>Перед перенесенням у папку гри DLL перевіряються на довіру до них у Windows шляхом перевірки підпису. Якщо DLL не проходить перевірку підпису, вона не використовуватиметься. Рекомендується вимкнути цю опцію.</value>

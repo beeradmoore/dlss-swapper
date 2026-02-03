@@ -165,6 +165,18 @@
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
     <value>Архів DLL пошкоджено (DLL не знайдено).</value>
   </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>Рекомендовано NVIDIA</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>За замовчуванням</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>Пресет {0}</value>
+  </data>
+  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
+    <value>Пресет {0} (застарілий)</value>
+  </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
     <value>Не вдалося запустити DLSS Swapper</value>
   </data>
@@ -190,7 +202,7 @@
     <value>Видалити власну обкладинку?</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
-    <value>Тип активу</value>
+    <value>Тип ресурсу</value>
   </data>
   <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
     <value>Час події</value>
@@ -277,6 +289,9 @@
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
     <value>"{0}" є недійсним типом файлу</value>
   </data>
+  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>Запуск ігор з вашої бібліотеки {0} наразі не підтримується.</value>
+  </data>
   <data name="GamePage_Launch" xml:space="preserve">
     <value>Запустити</value>
   </data>
@@ -306,6 +321,18 @@
   </data>
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
     <value>Ця гра не готова до запуску.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
+    <value>NVAPI зіткнувся з помилкою. Докладніша інформація записана до журналу помилок.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
+    <value>NVAPI зіткнувся з помилкою. Запуск програми від імені адміністратора може вирішити проблему. Докладніша інформація записана до журналу помилок.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
+    <value>Помилка NVAPI</value>
+  </data>
+  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
+    <value>NVAPI зіткнувся з помилкою. Натисніть для отримання додаткової інформації.</value>
   </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
     <value>Відкрити розташування DLL</value>
@@ -338,7 +365,7 @@
     <value>Додати гру</value>
   </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
-    <value>Групуйте ігри з однієї бібліотеки разом</value>
+    <value>Групувати ігри з однієї бібліотеки</value>
   </data>
   <data name="GamesPage_Grouping" xml:space="preserve">
     <value>Групування</value>
@@ -495,11 +522,47 @@
   <data name="General_Name" xml:space="preserve">
     <value>Назва</value>
   </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>DLSS Ray Reconstruction</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>DLSS Frame Generation</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>Пресет DLSS</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>Пресет DLSS RR</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_DX11" xml:space="preserve">
+    <value>XeSS (DX11)</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>XeSS Frame Generation</value>
+  </data>
   <data name="General_No" xml:space="preserve">
     <value>Ні</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>Немає</value>
+  </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>Не знайдено</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
     <value>Не підтримується</value>
@@ -513,11 +576,14 @@
   <data name="General_OpenFolder" xml:space="preserve">
     <value>Відкрити папку</value>
   </data>
+  <data name="General_OpenLogsDirectory" xml:space="preserve">
+    <value>Відкрити каталог журналів</value>
+  </data>
   <data name="General_Optional" xml:space="preserve">
     <value>(необов'язково)</value>
   </data>
   <data name="General_Options" xml:space="preserve">
-    <value>Налаштування</value>
+    <value>Параметри</value>
   </data>
   <data name="General_Publish" xml:space="preserve">
     <value>Опублікувати</value>
@@ -553,7 +619,7 @@
     <value>Невідомо</value>
   </data>
   <data name="General_Update" xml:space="preserve">
-    <value>Оновлення</value>
+    <value>Оновити</value>
   </data>
   <data name="General_Version" xml:space="preserve">
     <value>Версія</value>
@@ -571,7 +637,7 @@
     <value>DLSS Swapper щойно оновився</value>
   </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
-    <value>Доступне Оновлення</value>
+    <value>Доступне оновлення</value>
   </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>Вже завантажено.</value>
@@ -697,7 +763,7 @@
     <value>Оновити маніфест</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>Хоча заміну версій DLSS не слід вважати шахрайством, деякі античіт системи можуть бути незадоволені вами, якщо файли у вашому каталозі гри не відповідають тим, з якими розповсюджувалася гра.
+    <value>Хоча заміну версій DLSS не слід вважати шахрайством, деякі античіт-системи можуть бути незадоволені вами, якщо файли у вашому каталозі гри не відповідають тим, з якими розповсюджувалася гра.
 
 Через це ми рекомендуємо бути обережними в багатокористувацьких іграх.</value>
   </data>
@@ -711,7 +777,7 @@
     <value>Працює!</value>
   </data>
   <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
-    <value>Тест Браузера</value>
+    <value>Тест браузера</value>
   </data>
   <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
     <value>Скасувати поточний тест</value>
@@ -804,10 +870,10 @@
     <value>Не вдалося відкрити файл журналу безпосередньо з DLSS Swapper. Спробуйте відкрити його вручну.</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
-    <value>Ви впевнені, що хочете видалити проігнорований шлях {0}?</value>
+    <value>Ви впевнені, що хочете видалити ігнорований шлях {0}?</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
-    <value>Видалити проігнорований шлях</value>
+    <value>Видалити ігнорований шлях</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
     <value>Параметри розробника DLSS</value>
@@ -862,6 +928,24 @@
   </data>
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>Ведення журналу</value>
+  </data>
+  <data name="SettingsPage_Logging_Debug" xml:space="preserve">
+    <value>Налагодження</value>
+  </data>
+  <data name="SettingsPage_Logging_Error" xml:space="preserve">
+    <value>Помилка</value>
+  </data>
+  <data name="SettingsPage_Logging_Info" xml:space="preserve">
+    <value>Інформація</value>
+  </data>
+  <data name="SettingsPage_Logging_Off" xml:space="preserve">
+    <value>Вимкнено</value>
+  </data>
+  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
+    <value>Детально</value>
+  </data>
+  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
+    <value>Попередження</value>
   </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>Нових оновлень немає.</value>
@@ -963,10 +1047,10 @@
     <value>Виберіть мову для завантаження</value>
   </data>
   <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
-    <value>Мова джерела</value>
+    <value>Вихідна мова</value>
   </data>
   <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
-    <value>Переклад джерела</value>
+    <value>Вихідний переклад</value>
   </data>
   <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
     <value>Посібник з перекладу</value>

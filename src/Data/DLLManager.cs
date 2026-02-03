@@ -128,42 +128,6 @@ internal class DLLManager
         await ProcessManifestsAsync();
     }
 
-
-    /// <summary>
-    /// Checks if the manifest is out of date (3 hours old), and if it is we will attempt to reload it.
-    /// </summary>
-    internal async Task UpdateManifestIfOldAsync()
-    {
-        var shouldUpdate = false;
-        var manifestFile = Storage.GetManifestPath();
-
-        if (Manifest is null)
-        {
-            shouldUpdate = true;
-        }
-        else if (File.Exists(manifestFile))
-        {
-            var fileInfo = new FileInfo(manifestFile);
-
-            // If the manifest is > 3h old
-            var timeSinceLastUpdate = DateTimeOffset.Now - fileInfo.LastWriteTime;
-            if (timeSinceLastUpdate.TotalHours > 3)
-            {
-                shouldUpdate = true;
-            }
-        }
-        else
-        {
-            // Update manifest if it is not found.
-            shouldUpdate = true;
-        }
-
-        if (shouldUpdate)
-        {
-            await UpdateManifestAsync().ConfigureAwait(false);
-        }
-    }
-
     /// <summary>
     /// Loads a new manifest from the internet and saves it.
     /// </summary>

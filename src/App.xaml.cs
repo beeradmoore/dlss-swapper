@@ -160,7 +160,7 @@ public sealed partial class App : Application
                     }
                 }
 
-                Settings.Instance.LastLaunchVersion = lastLaunchVersion;
+                Settings.Instance.LastLaunchVersion = versionString;
             }
             catch (Exception err)
             {

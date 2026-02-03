@@ -1,17 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -118,995 +118,995 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AcknowledgementsPage_Title" xml:space="preserve">
-    <value>Licences et Remerciements</value>
+    <value>Lisenssit ja tunnustukset</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>DLSS Swapper</value>
   </data>
   <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
-    <value>Cliquez pour copier les détails ci-dessous</value>
+    <value>Klikkaa kopioidaksesi alla olevat tiedot</value>
   </data>
   <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
-    <value>Diagnostics</value>
+    <value>Diagnostiikka</value>
   </data>
   <data name="DllManager_AlreadyImported" xml:space="preserve">
-    <value>(déjà importé)</value>
+    <value>(jo tuotu)</value>
   </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
-    <value>La fonction d'import est désactivée, le manifeste d'import n'a pas pu être chargé.</value>
+    <value>Tuonti on poistettu käytöstä, tuontiluetteloa ei voitu ladata.</value>
   </data>
   <data name="DllManager_MigratingDlls" xml:space="preserve">
-    <value>Migration des DLL</value>
+    <value>Siirretään DLL-tiedostoja</value>
   </data>
   <data name="DllManager_UnknownTypeDll" xml:space="preserve">
-    <value>DLL de type inconnu.</value>
+    <value>DLL ei ole tunnettu tyyppi.</value>
   </data>
   <data name="DllManager_UntrustedDll" xml:space="preserve">
-    <value>La DLL n'est pas approuvée par Windows.</value>
+    <value>DLL ei ole Windows-luotettava.</value>
   </data>
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
-    <value>Impossible de télécharger la DLL {0}, veuillez réessayer plus tard ou consulter vos logs pour savoir pourquoi le téléchargement a échoué.</value>
-    <comment>{0} sera le type de DLL (par ex. DLSS, FSR, XeSS)</comment>
+    <value>Ei voitu ladata {0} DLL-tiedostoa. Yritä myöhemmin uudelleen tai tarkista lokit saadaksesi tietää miksi lataus epäonnistui.</value>
+    <comment>{0} will be the DLL type (eg. DLSS, FSR, XeSS)</comment>
   </data>
   <data name="DllRecord_Download" xml:space="preserve">
-    <value>Télécharger</value>
+    <value>Lataa</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
-    <value>Erreur de téléchargement</value>
+    <value>Latausvirhe</value>
   </data>
   <data name="DllRecord_Downloading" xml:space="preserve">
-    <value>Téléchargement en cours</value>
+    <value>Ladataan</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
-    <value>Importé</value>
+    <value>Tuotu</value>
   </data>
   <data name="DllRecord_RequiresDownload" xml:space="preserve">
-    <value>Nécessite un téléchargement</value>
+    <value>Vaatii latauksen</value>
   </data>
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
-    <value>Le fichier ZIP de la DLL est invalide (aucune DLL trouvée).</value>
+    <value>DLL-ZIP oli virheellinen (DLL-tiedostoa ei löytynyt).</value>
   </data>
   <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
-    <value>Recommandé par NVIDIA</value>
+    <value>NVIDIAn suosittelema</value>
   </data>
   <data name="DLSS_Preset_Default" xml:space="preserve">
-    <value>Par défaut</value>
+    <value>Oletus</value>
   </data>
   <data name="DLSS_Preset_Letter" xml:space="preserve">
-    <value>Préréglage {0}</value>
-    <comment>Ici, {0} sera la lettre du préréglage, par ex. Préréglage K</comment>
+    <value>Esiasetus {0}</value>
+    <comment>Here {0} will be the letter of the preset, eg. Preset K</comment>
   </data>
   <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
-    <value>Préréglage {0} (obsolète)</value>
-    <comment>Ici, {0} sera la lettre du préréglage, par ex. Préréglage K</comment>
+    <value>Esiasetus {0} (vanhentunut)</value>
+    <comment>Here {0} will be the letter of the preset, eg. Preset K</comment>
   </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
-    <value>DLSS Swapper n'a pas pu démarrer</value>
+    <value>DLSS Swapper ei käynnistynyt</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
-    <value>Veuillez ouvrir un </value>
+    <value>Avaa </value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
-    <value>nouveau ticket</value>
+    <value>uusi ilmoitus</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
-    <value> sur le dépôt GitHub de DLSS Swapper et fournir les informations suivantes dans la section contexte supplémentaire.</value>
+    <value> DLSS Swapperin GitHub-varastossa ja anna seuraavat tiedot lisäkontekstissa.</value>
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
-    <value>Échec du lancement</value>
+    <value>Käynnistäminen epäonnistui</value>
   </data>
   <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer l'image de couverture personnalisée ?</value>
+    <value>Haluatko varmasti poistaa mukautetun kansikuvan?</value>
   </data>
   <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Jeu en cours de traitement</value>
+    <value>Peliä käsitellään parhaillaan</value>
   </data>
   <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Supprimer la couverture personnalisée ?</value>
+    <value>Poista mukautettu kansi?</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
-    <value>Type d'actif</value>
+    <value>Resurssin tyyppi</value>
   </data>
   <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
-    <value>Heure de l'événement</value>
+    <value>Tapahtuman aika</value>
   </data>
   <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
-    <value>Type d'événement</value>
+    <value>Tapahtuman tyyppi</value>
   </data>
   <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
-    <value>Aucun historique trouvé.</value>
+    <value>Historiaa ei löytynyt.</value>
   </data>
   <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
-    <value>Version</value>
+    <value>Versio</value>
   </data>
   <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
-    <value>Sauvegarde de la DLL supprimée</value>
+    <value>DLL-varmuuskopio poistettu</value>
   </data>
   <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
-    <value>La DLL a été modifiée externement</value>
+    <value>DLL muuttui ulkoisesti</value>
   </data>
   <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
-    <value>DLL détectée</value>
+    <value>DLL havaittu</value>
   </data>
   <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
-    <value>DLL réinitialisée</value>
+    <value>DLL palautettu</value>
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
-    <value>DLL échangée</value>
+    <value>DLL vaihdettu</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
-    <value>Ajouter une couverture personnalisée</value>
+    <value>Lisää mukautettu kansi</value>
   </data>
   <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
-    <value>Le lancement des jeux depuis votre bibliothèque {0} n'est pas pris en charge pour le moment.</value>
+    <value>Pelien käynnistäminen {0}-kirjastosta ei ole tällä hetkellä tuettu.</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
-    <value>Cliquez pour ajouter aux favoris</value>
+    <value>Klikkaa merkitäksesi suosikiksi</value>
   </data>
   <data name="GamePage_ClickToHide" xml:space="preserve">
-    <value>Cliquez pour masquer</value>
+    <value>Klikkaa piilottaaksesi</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
-    <value>Impossible de trouver le chemin "{0}".</value>
-    <comment>{0} est le chemin d'installation du jeu</comment>
+    <value>Polkua "{0}" ei löytynyt.</value>
+    <comment>{0} is the game install path</comment>
   </data>
   <data name="GamePage_CurrentDll" xml:space="preserve">
-    <value>DLL actuelle</value>
+    <value>Nykyinen DLL</value>
   </data>
   <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
-    <value>Impossible de trouver le fichier "{0}".</value>
+    <value>Tiedostoa "{0}" ei löytynyt.</value>
   </data>
   <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
-    <value>La DLL a été réinitialisée à la version {0}.</value>
+    <value>DLL on palautettu versioon {0}.</value>
   </data>
   <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
-    <value>Début du téléchargement</value>
+    <value>Aloitetaan lataus</value>
   </data>
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
-    <value>Veuillez attendre la fin du téléchargement avant d'échanger</value>
+    <value>Odota latauksen valmistumista ennen vaihtamista</value>
   </data>
   <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
-    <value>Informations sur le préréglage</value>
+    <value>Tietoa esiasetuksista</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
-    <value>Les préréglages DLSS sont contenus dans les fichiers DLL DLSS situés dans le répertoire d'installation de vos jeux. Différentes DLL DLSS ont différents préréglages. Par exemple, le préréglage K n'a été introduit qu'à partir de la version DLSS v310.2. Donc, si vous utilisez DLSS v3.7 et que vous définissez le préréglage sur K, il ne sera pas utilisé et le jeu utilisera à la place le préréglage par défaut du jeu.
+    <value>DLSS-esiasetukset sisältyvät pelien asennushakemistossa oleviin DLSS-DLL-tiedostoihin. Käytettävissä olevat esiasetukset riippuvat DLL-versiosta. Esimerkiksi esiasetusta K ei ollut ennen DLSS v310.2. Joten jos käytät DLSS v3.7:ää ja asetat esiasetukseksi K, se ei käytä esiasetusta K, vaan palaa pelin valitsemaan esiasetukseen.
 
-Cela s'applique également aux préréglages globaux. Si vous sélectionnez le préréglage K mais que votre jeu utilise DLSS v3.7, vous n'utiliserez pas le préréglage K et le jeu utilisera à la place sa valeur par défaut.
+Sama koskee globaaleja esiasetuksia. Jos valitset esiasetuksen K, mutta pelissä käytetään DLSS v3.7:ää, et käytä esiasetusta K vaan pelin valitsemaa oletusesiasetusta.
 
-Pour vérifier quel préréglage est utilisé, veuillez activer l'indicateur DLSS à l'écran.</value>
+Varmista käytetty esiasetus ottamalla käyttöön DLSS-näyttöilmaisin.</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
-    <value>Informations sur l'indicateur à l'écran</value>
+    <value>Tietoa näyttöilmaisimesta</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
-    <value>Informations sur le préréglage DLSS</value>
+    <value>Tietoa DLSS-esiasetuksista</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
-    <value>Définir un préréglage DLSS ne garantit pas que le préréglage soit utilisé.</value>
+    <value>DLSS-esiasetuksen asettaminen ei takaa, että sitä käytetään.</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
-    <value>Ajouté aux favoris</value>
+    <value>Merkitty suosikiksi</value>
   </data>
   <data name="GamePage_History" xml:space="preserve">
-    <value>Historique</value>
+    <value>Historia</value>
   </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
-    <value>Chemin d'installation</value>
+    <value>Asennuspolku</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
-    <value>"{0}" est un type de fichier invalide</value>
+    <value>"{0}" on virheellinen tiedostotyyppi</value>
   </data>
   <data name="GamePage_Launch" xml:space="preserve">
-    <value>Lancer</value>
+    <value>Käynnistä</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
-    <value>Ce titre n'a pas été ajouté manuellement et ne peut pas être supprimé.</value>
+    <value>Tämä nimike ei ole manuaalisesti lisätty eikä sitä voi poistaa.</value>
   </data>
   <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer "{0}" de DLSS Swapper ? Cela n'apportera aucune modification aux fichiers DLSS déjà échangés.</value>
-    <comment>{0} est le nom du jeu</comment>
+    <value>Haluatko varmasti poistaa "{0}" DLSS Swapperista? Tämä ei muuta mitään DLSS-tiedostoja, jotka on jo vaihdettu.</value>
+    <comment>{0} is the game name</comment>
   </data>
   <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
-    <value>Voici les multiples DLL trouvées. Vous pourrez toujours échanger et restaurer les DLL comme d'habitude, car nous effectuerons ces actions sur toutes les DLL en même temps. Cependant, comme nous ne savons pas laquelle de ces DLL est utilisée par le jeu, la version de la DLL affichée est celle de la première DLL détectée.</value>
+    <value>Alla olevat ovat useat löydetyt DLL-tiedostot. Voit silti vaihtaa ja palauttaa DLL-tiedostoja tavalliseen tapaan, koska teemme nämä toiminnot kaikille DLL-tiedostoille kerralla. Koska emme tiedä mitä näistä DLL-tiedostoista peli käyttää, näytetty DLL-versio on ensimmäisen havaitun DLL-tiedoston versio.</value>
   </data>
   <data name="GamePage_MultipleDllsFound" xml:space="preserve">
-    <value>Plusieurs DLL trouvées</value>
+    <value>Useita DLL-tiedostoja löytyi</value>
   </data>
   <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
-    <value>Plusieurs DLL {0} trouvées</value>
-    <comment>{0} est le type de DLL (par ex. DLSS, FSR, XeSS)</comment>
+    <value>Useita {0} DLL-tiedostoja löytyi</value>
+    <comment>{0} is the DLL type (eg. DLSS, FSR, XeSS)</comment>
   </data>
   <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
-    <value>Veuillez vous rendre sur la page de la bibliothèque pour télécharger de nouvelles DLL.</value>
+    <value>Mene kirjastosivulle ladataksesi uusia DLL-tiedostoja.</value>
   </data>
   <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
-    <value>Aucune DLL trouvée</value>
+    <value>DLL-tiedostoja ei löytynyt</value>
   </data>
   <data name="GamePage_Notes" xml:space="preserve">
-    <value>Notes</value>
-    <comment>dans le contexte des Notes - {TitreDuJeu}</comment>
+    <value>Muistiinpanot</value>
+    <comment>in context of Notes - {GameTitle}</comment>
   </data>
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
-    <value>Ce jeu n'est pas prêt à être joué.</value>
+    <value>Tämä peli ei ole pelivalmiissa tilassa.</value>
   </data>
   <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
-    <value>NVAPI a rencontré une erreur. Plus d'informations ont été écrites dans le journal des erreurs.</value>
+    <value>NVAPI on kohdannut virheen. Lisätiedot on kirjoitettu virhelokiin.</value>
   </data>
   <data name="GamePage_NVAPIError_Message" xml:space="preserve">
-    <value>NVAPI a rencontré une erreur. L'exécution de l'application en tant qu'administrateur peut résoudre le problème. Plus d'informations ont été écrites dans le journal des erreurs.</value>
+    <value>NVAPI on kohdannut virheen. Sovelluksen käyttäminen järjestelmänvalvojana voi ratkaista ongelman. Lisätiedot on kirjoitettu virhelokiin.</value>
   </data>
   <data name="GamePage_NVAPIError_Title" xml:space="preserve">
-    <value>Erreur NVAPI</value>
+    <value>NVAPI-virhe</value>
   </data>
   <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
-    <value>NVAPI a rencontré une erreur. Cliquez pour plus d'informations.</value>
+    <value>NVAPI on kohdannut virheen. Klikkaa saadaksesi lisätietoja.</value>
   </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
-    <value>Ouvrir l'emplacement de la DLL</value>
+    <value>Avaa DLL-sijainti</value>
   </data>
   <data name="GamePage_OriginalDll" xml:space="preserve">
-    <value>DLL originale</value>
+    <value>Alkuperäinen DLL</value>
   </data>
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
-    <value>{0} est toujours en cours de traitement. Veuillez attendre que l'indicateur de chargement soit terminé avant d'ouvrir.</value>
-    <comment>{0} est le titre du jeu sélectionné.</comment>
+    <value>{0} käsitellään edelleen. Odota latauksen valmistumista ennen avaamista.</value>
+    <comment>{0} is the selected game title.</comment>
   </data>
   <data name="GamePage_ResetAll" xml:space="preserve">
-    <value>Tout réinitialiser</value>
+    <value>Palauta kaikki</value>
   </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
-    <value>Restaurer la DLL originale</value>
+    <value>Palauta alkuperäinen DLL</value>
   </data>
   <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
-    <value>Sélectionner la version {0}</value>
-    <comment>{0} est le type de DLL (par ex. DLSS, FSR, XeSS)</comment>
+    <value>Valitse {0}-versio</value>
+    <comment>{0} is the DLL type (eg. DLSS, FSR, XeSS)</comment>
   </data>
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
-    <value>storageFile est null</value>
+    <value>storageFile on null</value>
   </data>
   <data name="GamePage_UnableToChangePreset" xml:space="preserve">
-    <value>Impossible de changer de préréglage. Veuillez consulter votre journal d'erreurs pour plus d'informations.</value>
+    <value>Ei voitu muuttaa esiasetusta. Katso virhelokista lisätietoja.</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
-    <value>Vous ne pouvez déposer qu'un seul fichier pour une couverture</value>
+    <value>Voit vetää vain yhden tiedoston kansikuvaksi</value>
   </data>
   <data name="GamesPage_AddGame" xml:space="preserve">
-    <value>Ajouter un jeu</value>
+    <value>Lisää peli</value>
   </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
-    <value>Regrouper les jeux de la même bibliothèque ensemble</value>
+    <value>Ryhmitä pelit samasta kirjastosta yhteen</value>
   </data>
   <data name="GamesPage_Grouping" xml:space="preserve">
-    <value>Regroupement</value>
+    <value>Ryhmittely</value>
   </data>
   <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
-    <value>Masquer les jeux sans éléments échangeables</value>
+    <value>Piilota pelit, joissa ei ole vaihdettavia kohteita</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
-    <value>Vous ne pouvez déposer qu'un seul fichier pour une couverture</value>
+    <value>Voit vetää vain yhden tiedoston kansikuvaksi</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
-    <value>Une autre note pour l'ajout manuel de jeux</value>
+    <value>Toinen huomautus pelien manuaalisesta lisäämisestä</value>
   </data>
   <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
-    <value>Un problème est survenu et votre jeu n'a pas pu être ajouté pour le moment. Veuillez signaler ce problème.</value>
+    <value>Ongelma ilmeni ja peliä ei voitu lisätä tällä hetkellä. Ilmoita tästä ongelmasta.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
-    <value>Erreur lors de l'ajout de votre jeu</value>
+    <value>Virhe pelisi lisäämisessä</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value>Vous devez sélectionner votre répertoire de &lt;i&gt;jeu&lt;/i&gt;, et non votre répertoire de &lt;i&gt;jeux&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;Par exemple, si vous avez un jeu à l'emplacement suivant :&lt;br/&gt;&lt;b&gt;C:\Program Files\MonDossierDeJeux\MonJeuPréféré\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Vous devez sélectionner le répertoire &lt;b&gt;MonJeuPréféré&lt;/b&gt; et non le répertoire &lt;b&gt;MonDossierDeJeux&lt;/b&gt;.</value>
+    <value>Sinun on valittava &lt;i&gt;peli&lt;/i&gt;hakemisto, ei &lt;i&gt;pelien&lt;/i&gt; hakemistoa.&lt;br/&gt;&lt;br/&gt;Esimerkiksi, jos sinulla on peli hakemistossa:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Valitsisit &lt;b&gt;MyFavGame&lt;/b&gt;-hakemiston, etkä &lt;b&gt;MyGamesFolder&lt;/b&gt;-hakemistoa.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
-    <value>DLSS Swapper devrait trouver automatiquement les jeux de vos bibliothèques de jeux installées. Si votre jeu n'est pas listé, il peut y avoir quelques paramètres qui l'en empêchent. Veuillez vérifier :
+    <value>DLSS Swapperin tulisi löytää pelit asennetusta pelikirjastosta automaattisesti. Jos peliäsi ei ole listalla, saattaa olla muutamia asetuksia, jotka estävät sen. Tarkista:
 
-- Le filtre de la liste des jeux n'est pas réglé sur "Masquer les jeux sans éléments échangeables"
-- La bibliothèque de jeux spécifique est activée dans les paramètres
+- Pelilistan suodatin ei ole asetettu kohtaan "Piilota pelit, joissa ei ole vaihdettavia kohteita"
+- Kyseinen pelikirjasto on käytössä asetuksissa
 
-Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il peut y avoir un bug. Nous apprécierions que vous signaliez le problème sur notre dépôt GitHub afin que nous puissions le corriger et mieux détecter vos jeux à l'avenir.</value>
+Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmiston vika. Arvostaisimme, jos ilmoittaisit ongelmasta GitHub-varastossamme, jotta voimme tehdä korjauksen ja parantaa pelien havaitsemista tulevaisuudessa.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
-    <value>Note pour l'ajout manuel de jeux</value>
+    <value>Huomautus pelien manuaalisesta lisäämisestä</value>
   </data>
   <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
-    <value>Le chemin d'installation "{0}" existe déjà et ne peut pas être ajouté à nouveau.</value>
-    <comment>Laisser 0 tel quel et utiliser le format de chaîne sécurisé</comment>
+    <value>Asennuspolku "{0}" on jo olemassa eikä sitä voi lisätä uudelleen.</value>
+    <comment>Leave 0 as it is and use safe string format</comment>
   </data>
   <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
-    <value>Sélectionner le dossier du jeu</value>
+    <value>Valitse pelikansio</value>
   </data>
   <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
-    <value>L'ajout d'un répertoire de niveau supérieur n'est pas pris en charge. Veuillez ajouter la racine de votre répertoire de jeu.</value>
+    <value>Juurihakemiston lisääminen ei ole tuettu. Lisää pelin pääkansio.</value>
   </data>
   <data name="GamesPage_NewDlls" xml:space="preserve">
-    <value>Nouvelles DLL</value>
+    <value>Uusia DLL-tiedostoja</value>
   </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
-    <value>Créer un nouveau ticket GitHub</value>
+    <value>Luo uusi GitHub-ilmoitus</value>
   </data>
   <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
-    <value>Lors du chargement de vos jeux, de nouvelles DLL ont été découvertes qui ne sont pas dans le manifeste de DLSS Swapper.</value>
+    <value>Pelejäsi ladattaessa löytyi joitain uusia DLL-tiedostoja, jotka eivät ole DLSS Swapperin luettelossa.</value>
   </data>
   <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
-    <value>(Compte GitHub requis)</value>
+    <value>(vaatii GitHub-tilin)</value>
   </data>
   <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
-    <value>Si le bouton ne fonctionne pas, essayez ici,</value>
+    <value>Jos painike ei toimi, kokeile tätä,</value>
   </data>
   <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
-    <value>Étape 4 : Soumettre votre ticket</value>
+    <value>Vaihe 4: Lähetä ilmoituksesi</value>
   </data>
   <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
-    <value>Étape 1 : Créer un nouveau ticket</value>
+    <value>Vaihe 1: Luo uusi ilmoitus</value>
   </data>
   <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
-    <value>Étape 3 : Copier le corps</value>
+    <value>Vaihe 3: Kopioi runko</value>
   </data>
   <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
-    <value>Étape 2 : Copier le titre</value>
+    <value>Vaihe 2: Kopioi otsikko</value>
   </data>
   <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
-    <value>Merci pour votre aide !</value>
+    <value>Kiitos avusta!</value>
   </data>
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
-    <value>Vous n'avez pas besoin de soumettre les DLL. Nous les localiserons en fonction des informations fournies.</value>
+    <value>Sinun ei tarvitse lähettää DLL-tiedostoja. Jäljitämme ne annettujen tietojen perusteella.</value>
   </data>
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Nouvelles DLL trouvées</value>
+    <value>Uusia DLL-tiedostoja löytyi</value>
   </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
-    <comment>Utilisé comme titre de boîte de chargement lorsque l'utilisateur clique sur le bouton de rechargement du jeu sur la page de détail d'un jeu</comment>
-    <value>Rechargement du jeu</value>
+    <value>Ladataan peliä uudelleen</value>
+    <comment>Used as a loading box title when the user clicks reload game button on a games detail page</comment>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
-    <value>Afficher les jeux masqués (désactivé par défaut au lancement)</value>
+    <value>Näytä piilotetut pelit (oletuksena pois päältä käynnistettäessä)</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
-    <value>Jeux</value>
+    <value>Pelit</value>
   </data>
   <data name="GamesPage_ViewType" xml:space="preserve">
-    <value>Type de vue</value>
+    <value>Näkymä</value>
   </data>
   <data name="GamesPage_ViewType_GridView" xml:space="preserve">
-    <value>Vue Grille</value>
+    <value>Ruudukkonäkymä</value>
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
-    <value>Vue Liste</value>
+    <value>Luettelonäkymä</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
-    <value>Cette application s'exécute avec des privilèges administratifs.</value>
+    <value>Tämä sovellus on käynnissä järjestelmänvalvojan oikeuksilla.</value>
   </data>
   <data name="General_Apply" xml:space="preserve">
-    <value>Appliquer</value>
+    <value>Käytä</value>
   </data>
   <data name="General_Cancel" xml:space="preserve">
-    <value>Annuler</value>
+    <value>Peruuta</value>
   </data>
   <data name="General_Close" xml:space="preserve">
-    <value>Fermer</value>
+    <value>Sulje</value>
   </data>
   <data name="General_Copy" xml:space="preserve">
-    <value>Copier</value>
+    <value>Kopioi</value>
   </data>
   <data name="General_Delete" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>Poista</value>
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
-    <value>Ne plus afficher</value>
+    <value>Älä näytä uudelleen</value>
   </data>
   <data name="General_Error" xml:space="preserve">
-    <value>Erreur</value>
+    <value>Virhe</value>
   </data>
   <data name="General_ErrorMessage" xml:space="preserve">
-    <value>Message d'erreur</value>
-    <comment>Utilisé pour fournir un contexte, par ex. Message d'erreur : vous ne pouvez pas faire cela pour le moment.</comment>
+    <value>Virheviesti</value>
+    <comment>Would be used to provide context, eg. Error message: you can't do that at this time.</comment>
   </data>
   <data name="General_Export" xml:space="preserve">
-    <value>Exporter</value>
+    <value>Vie</value>
   </data>
   <data name="General_ExportAll" xml:space="preserve">
-    <value>Tout exporter</value>
+    <value>Vie kaikki</value>
   </data>
   <data name="General_Failed" xml:space="preserve">
-    <value>Échec</value>
+    <value>Epäonnistui</value>
   </data>
   <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
-    <value>Cette fonctionnalité n'est pas prise en charge si vous exécutez l'application en tant qu'administrateur.</value>
+    <value>Tätä ominaisuutta ei tueta, jos käytät sovellusta järjestelmänvalvojana.</value>
   </data>
   <data name="General_Filter" xml:space="preserve">
-    <value>Filtre</value>
+    <value>Suodatin</value>
   </data>
   <data name="General_Help" xml:space="preserve">
-    <value>Aide</value>
+    <value>Apu</value>
   </data>
   <data name="General_Hidden" xml:space="preserve">
-    <value>Masqué</value>
+    <value>Piilotettu</value>
   </data>
   <data name="General_Import" xml:space="preserve">
-    <value>Importer</value>
+    <value>Tuo</value>
   </data>
   <data name="General_Load" xml:space="preserve">
-    <value>Charger</value>
+    <value>Lataa</value>
   </data>
   <data name="General_Loading" xml:space="preserve">
-    <value>Chargement</value>
+    <value>Ladataan</value>
   </data>
   <data name="General_Name" xml:space="preserve">
-    <value>Nom</value>
+    <value>Nimi</value>
   </data>
   <data name="General_Name_DLSS" xml:space="preserve">
     <value>DLSS</value>
-    <comment>Si DLSS n'a pas de traduction directe, utilisez les caractères anglais</comment>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
   </data>
   <data name="General_Name_DLSS_D" xml:space="preserve">
-    <value>Reconstruction de rayons DLSS</value>
-    <comment>Si DLSS n'a pas de traduction directe, utilisez les caractères anglais</comment>
+    <value>DLSS Ray Reconstruction</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
   </data>
   <data name="General_Name_DLSS_G" xml:space="preserve">
-    <value>Génération d'images DLSS</value>
-    <comment>Si DLSS n'a pas de traduction directe, utilisez les caractères anglais</comment>
+    <value>DLSS Frame Generation</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
   </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
-    <value>Préréglage DLSS</value>
-    <comment>Si DLSS n'a pas de traduction directe, utilisez les caractères anglais</comment>
+    <value>DLSS-esiasetus</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
   </data>
   <data name="General_Name_DLSSD_Preset" xml:space="preserve">
-    <value>Préréglage RR DLSS</value>
-    <comment>Si DLSS n'a pas de traduction directe, utilisez les caractères anglais</comment>
+    <value>DLSS RR -esiasetus</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
   </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
-    <comment>Si FSR n'a pas de traduction directe, utilisez les caractères anglais</comment>
+    <comment>If FSR does not have a direct translation put in the English characters for it</comment>
   </data>
   <data name="General_Name_FSR_31_VK" xml:space="preserve">
     <value>FSR 3.1 Vulkan</value>
-    <comment>Si FSR n'a pas de traduction directe, utilisez les caractères anglais</comment>
+    <comment>If FSR does not have a direct translation put in the English characters for it</comment>
   </data>
   <data name="General_Name_XeLL" xml:space="preserve">
     <value>XeLL</value>
-    <comment>Si XeLL n'a pas de traduction directe, utilisez les caractères anglais</comment>
+    <comment>If XeLL does not have a direct translation put in the English characters for it</comment>
   </data>
   <data name="General_Name_XeSS" xml:space="preserve">
     <value>XeSS</value>
-    <comment>Si XeSS n'a pas de traduction directe, utilisez les caractères anglais</comment>
+    <comment>If XeSS does not have a direct translation put in the English characters for it</comment>
   </data>
   <data name="General_Name_XeSS_DX11" xml:space="preserve">
     <value>XeSS (DX11)</value>
-    <comment>Si XeSS n'a pas de traduction directe, utilisez les caractères anglais</comment>
+    <comment>If XeSS does not have a direct translation put in the English characters for it</comment>
   </data>
   <data name="General_Name_XeSS_FG" xml:space="preserve">
-    <value>Génération d'images XeSS</value>
-    <comment>Si XeSS n'a pas de traduction directe, utilisez les caractères anglais</comment>
+    <value>XeSS Frame Generation</value>
+    <comment>If XeSS does not have a direct translation put in the English characters for it</comment>
   </data>
   <data name="General_No" xml:space="preserve">
-    <value>Non</value>
+    <value>Ei</value>
   </data>
   <data name="General_None" xml:space="preserve">
-    <value>Aucun</value>
+    <value>Ei mitään</value>
   </data>
   <data name="General_NotFound" xml:space="preserve">
-    <value>Introuvable</value>
+    <value>Ei löytynyt</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
-    <value>Non pris en charge</value>
+    <value>Ei tuettu</value>
   </data>
   <data name="General_Okay" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="General_Oops" xml:space="preserve">
-    <value>Oups</value>
+    <value>Oho</value>
   </data>
   <data name="General_OpenFolder" xml:space="preserve">
-    <value>Ouvrir le dossier</value>
+    <value>Avaa kansio</value>
   </data>
   <data name="General_OpenLogsDirectory" xml:space="preserve">
-    <value>Ouvrir le répertoire des logs</value>
+    <value>Avaa lokihakemisto</value>
   </data>
   <data name="General_Optional" xml:space="preserve">
-    <value>(facultatif)</value>
+    <value>(valinnainen)</value>
   </data>
   <data name="General_Options" xml:space="preserve">
-    <value>Options</value>
+    <value>Asetukset</value>
   </data>
   <data name="General_Publish" xml:space="preserve">
-    <value>Publier</value>
+    <value>Julkaise</value>
   </data>
   <data name="General_Refresh" xml:space="preserve">
-    <value>Actualiser</value>
+    <value>Päivitä</value>
   </data>
   <data name="General_Reload" xml:space="preserve">
-    <value>Recharger</value>
+    <value>Lataa uudelleen</value>
   </data>
   <data name="General_Remove" xml:space="preserve">
-    <value>Retirer</value>
+    <value>Poista</value>
   </data>
   <data name="General_ReportIssue" xml:space="preserve">
-    <value>Signaler un problème</value>
+    <value>Ilmoita ongelmasta</value>
   </data>
   <data name="General_Save" xml:space="preserve">
-    <value>Enregistrer</value>
+    <value>Tallenna</value>
   </data>
   <data name="General_Search" xml:space="preserve">
-    <value>Rechercher</value>
+    <value>Etsi</value>
   </data>
   <data name="General_Sorry" xml:space="preserve">
-    <value>Désolé</value>
+    <value>Pahoittelut</value>
   </data>
   <data name="General_Success" xml:space="preserve">
-    <value>Succès</value>
+    <value>Onnistui</value>
   </data>
   <data name="General_Swap" xml:space="preserve">
-    <value>Échanger</value>
+    <value>Vaihda</value>
   </data>
   <data name="General_Unknown" xml:space="preserve">
-    <value>Inconnu</value>
+    <value>Tuntematon</value>
   </data>
   <data name="General_Update" xml:space="preserve">
-    <value>Mettre à jour</value>
+    <value>Päivitys</value>
   </data>
   <data name="General_Version" xml:space="preserve">
-    <value>Version</value>
+    <value>Versio</value>
   </data>
   <data name="General_Warning" xml:space="preserve">
-    <value>Avertissement</value>
+    <value>Varoitus</value>
   </data>
   <data name="General_Yes" xml:space="preserve">
-    <value>Oui</value>
+    <value>Kyllä</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
-    <value>Vous avez actuellement {0} installé.</value>
-    <comment>{0} est la version actuellement installée.</comment>
+    <value>Sinulla on tällä hetkellä {0} asennettuna.</value>
+    <comment>{0} is the currently installed version.</comment>
   </data>
   <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
-    <value>DLSS Swapper vient d'être mis à jour</value>
+    <value>DLSS Swapper päivitettiin juuri</value>
   </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
-    <value>Mise à jour disponible</value>
+    <value>Päivitys saatavilla</value>
   </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
-    <value>Déjà téléchargé.</value>
+    <value>Jo ladattu.</value>
   </data>
   <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
-    <value>Impossible de charger les DLL importées</value>
+    <value>Tuotuja DLL-tiedostoja ei voitu ladata</value>
   </data>
   <data name="LibraryPage_CouldntDownload" xml:space="preserve">
-    <value>Impossible de télécharger pour le moment.</value>
+    <value>Ei voitu ladata tällä hetkellä.</value>
   </data>
   <data name="LibraryPage_CouldntExportDll" xml:space="preserve">
-    <value>Impossible d'exporter les DLL.</value>
+    <value>DLL-tiedostoja ei voitu viedä.</value>
   </data>
   <data name="LibraryPage_DeleteDll" xml:space="preserve">
-    <value>Supprimer la DLL</value>
+    <value>Poista DLL</value>
   </data>
   <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
-    <value>Supprimer {0} v{1} ?</value>
+    <value>Poista {0} v{1}?</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
-    <value>Taille du fichier de téléchargement</value>
+    <value>Ladattavan tiedoston koko</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
-    <value>Description du fichier</value>
+    <value>Tiedoston kuvaus</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
-    <value>Taille du fichier</value>
+    <value>Tiedoston koko</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
-    <value>Hash</value>
+    <value>Tiiviste</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
-    <value>Nom interne</value>
+    <value>Sisäinen nimi</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
-    <value>Nom interne supplémentaire</value>
+    <value>Lisäsisäinen nimi</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
-    <value>Libellé</value>
+    <value>Etiketti</value>
   </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
-    <value>Télécharger la dernière version</value>
+    <value>Lataa uusin</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
-    <value>{0} nouveaux téléchargements démarrés.</value>
-    <comment>{0} est le nombre de téléchargements démarrés.</comment>
+    <value>Aloitettiin {0} uutta latausta.</value>
+    <comment>{0} is the number of downloads started.</comment>
   </data>
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
-    <value>Téléchargements démarrés</value>
+    <value>Lataukset aloitettu</value>
   </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
-    <value>DLL exportées : </value>
+    <value>Viedyt DLL-tiedostot: </value>
   </data>
   <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
-    <value>{0} DLL exportées.</value>
-    <comment>{0} est le nombre de DLL exportées.</comment>
+    <value>Viety {0} DLL-tiedostoa.</value>
+    <comment>{0} is the number of DLLs exported.</comment>
   </data>
   <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
-    <value>DLL exportée {0}.</value>
-    <comment>Laisser 0 tel quel et utiliser le format de chaîne sécurisé</comment>
+    <value>Viety DLL {0}.</value>
+    <comment>Leave 0 as it is and use safe string format</comment>
   </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
-    <value>Fichier introuvable.</value>
+    <value>Tiedostoa ei löytynyt.</value>
   </data>
   <data name="LibraryPage_Finished" xml:space="preserve">
-    <value>Terminé</value>
+    <value>Valmis</value>
   </data>
   <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
-    <value>Importé en tant qu'enregistrement de DLL existant.</value>
+    <value>Tuotu olemassa olevan DLL-tietueen mukaisesti.</value>
   </data>
   <data name="LibraryPage_Importing" xml:space="preserve">
-    <value>Importation</value>
+    <value>Tuodaan</value>
   </data>
   <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
-    <value>Remplacer des DLL sur votre ordinateur peut être dangereux.
+    <value>DLL-tiedostojen korvaaminen tietokoneeltasi voi olla vaarallista.
 
-Placer une DLL malveillante dans un jeu est aussi dangereux que d'exécuter Linking_park_-_nUmB_mp3.exe que vous venez de télécharger depuis LimeWire.
+Pahantahtoisen DLL-tiedoston asettaminen peliin on yhtä huonoa kuin Darude_-_Sandstorm_mp3.exe-tiedoston ajaminen, jonka juuri latasit LimeWirestä.
 
-N'importez des DLL que depuis des sources de confiance.</value>
+Tuo DLL-tiedostoja vain luotetuista lähteistä.</value>
   </data>
   <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
-    <value>Aucune DLL trouvée pour l'export.</value>
+    <value>Vietäväksi ei löytynyt DLL-tiedostoja.</value>
   </data>
   <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
-    <value>Vous n'avez aucun enregistrement de DLL à exporter.</value>
+    <value>Sinulla ei ole DLL-tietueita vietäväksi.</value>
   </data>
   <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
-    <value>Il n'y avait aucune nouvelle DLL à télécharger.</value>
+    <value>Uusia ladattavia DLL-tiedostoja ei ollut.</value>
   </data>
   <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
-    <value>Aucune nouvelle DLL</value>
+    <value>Ei uusia DLL-tiedostoja</value>
   </data>
   <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
-    <value>DLL traitées : </value>
+    <value>Käsitellyt DLL-tiedostot: </value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
-    <value>Bibliothèque</value>
+    <value>Kirjasto</value>
   </data>
   <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
-    <value>Impossible de supprimer l'enregistrement {0}.</value>
-    <comment>Laisser 0 tel quel et utiliser le format de chaîne sécurisé</comment>
+    <value>Ei voitu poistaa {0}-tietuetta.</value>
+    <comment>Leave 0 as it is and use safe string format</comment>
   </data>
   <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
-    <value>Impossible de mettre à jour les enregistrements de DLL.</value>
+    <value>Ei voitu päivittää DLL-tietueita.</value>
   </data>
   <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
-    <value>Le fichier ZIP ne contenait aucune DLL.</value>
+    <value>ZIP ei sisältänyt DLL-tiedostoja.</value>
   </data>
   <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
-    <value>Tentative de mise à jour</value>
+    <value>Yritetään päivittää</value>
   </data>
   <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
-    <value>DLSS Swapper n'a pas pu charger son fichier manifeste. Il va maintenant se fermer.</value>
+    <value>DLSS Swapper ei voinut ladata manifesti-tiedostoaan. Se sulkeutuu nyt.</value>
   </data>
   <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
-    <value>DLSS Swapper doit se fermer</value>
+    <value>DLSS Swapper täytyy sulkea</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
-    <value>Problèmes GitHub</value>
+    <value>GitHub-ilmoitukset</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
-    <value>Nous n'avons pas pu charger manifest.json depuis votre ordinateur ou depuis Internet.
+    <value>Emme voineet ladata manifest.json-tiedostoa tietokoneeltasi tai internetistä.
 
-Si cela persiste, veuillez déposer un rapport dans notre suivi de problèmes sur GitHub.</value>
+Jos tämä jatkuu, ilmoita ongelmasta GitHub-seurantajärjestelmässämme.</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
-    <value>Mettre à jour le manifeste</value>
+    <value>Päivitä manifesti</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>Bien que l'échange de versions DLSS ne soit pas considéré comme de la triche, certains systèmes anti-triche peuvent ne pas apprécier si les fichiers de votre répertoire de jeu ne sont pas ceux distribués avec le jeu.
+    <value>Vaikka DLSS-versioiden vaihtamista ei pidä pitää huijaamisena, tietyt petos-tunnistusjärjestelmät saattavat olla tyytymättömiä, jos pelikansion tiedostot eivät ole niitä, joilla peli jaettiin.
 
-Pour cette raison, nous vous recommandons d'être prudent avec les jeux multijoueurs.</value>
+Tästä syystä suosittelemme varovaisuutta moninpeleille.</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
-    <value>Note pour les jeux multijoueurs</value>
+    <value>Huomautus moninpeleistä</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
-    <value>Ne fonctionne toujours pas</value>
-    <comment>Signifie que le test a échoué.</comment>
+    <value>Ei silti toimi</value>
+    <comment>Meaning the test failed.</comment>
   </data>
   <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
-    <value>Fonctionne !</value>
-    <comment>Signifie que le test a réussi.</comment>
+    <value>Se toimii!</value>
+    <comment>Meaning the test was successful.</comment>
   </data>
   <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
-    <value>Test du navigateur</value>
+    <value>Selaimen testi</value>
   </data>
   <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
-    <value>Annuler le test en cours</value>
+    <value>Peruuta nykyinen testi</value>
   </data>
   <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
-    <value>Copier les résultats du test</value>
+    <value>Kopioi testitulokset</value>
   </data>
   <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
-    <value>Créer un rapport de bug</value>
+    <value>Luo virheraportti</value>
   </data>
   <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
-    <value>Test d'agent utilisateur personnalisé</value>
+    <value>Mukautettu käyttäjäagentin testi</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
-    <value>Téléchargement de la DLL DLSS Swapper dans DLSS Swapper avec un agent utilisateur personnalisé</value>
+    <value>Ladataan DLSS Swapperin DLL:ää sisäisesti mukautetulla käyttäjäagentilla</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
-    <value>Téléchargement de la DLL DLSS depuis le miroir UploadThing</value>
+    <value>Ladataan DLSS DLL:ää UploadThing-peilistä</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
-    <value>Accès à google.com depuis DLSS Swapper (teste la connectivité Internet générale)</value>
+    <value>Yhdistetään google.com‑sivustoon DLSS Swapperista (testaa yleisen internet‑yhteyden toimivuuden)</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
-    <value>Accès à bing.com depuis DLSS Swapper (teste la connectivité Internet générale)</value>
+    <value>Yhdistetään bing.com‑sivustoon DLSS Swapperista (testaa yleisen internet‑yhteyden toimivuuden)</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
-    <value>Téléchargement de la DLL DLSS Swapper dans DLSS Swapper</value>
+    <value>Ladataan DLSS Swapperin DLL:ää sisäisesti</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
-    <value>Téléchargement de la DLL DLSS Swapper depuis le navigateur</value>
+    <value>Ladataan DLSS Swapperin DLL:ää selaimesta</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
-    <value>Téléchargement de la couverture de jeu depuis Steam</value>
+    <value>Ladataan pelikansi Steamistä</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
-    <value>Téléchargement de la couverture de jeu depuis Epic Game Store</value>
+    <value>Ladataan pelikansi Epic Game Storesta</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
-    <value>Téléchargement de la couverture de jeu depuis le serveur de fichiers DLSS Swapper</value>
+    <value>Ladataan pelikansi DLSS Swapperin tiedostopalvelimelta</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
-    <value>Téléchargement de la couverture de jeu depuis un serveur de fichiers DLSS Swapper alternatif</value>
+    <value>Ladataan pelikansi vaihtoehtoisesta DLSS Swapperin tiedostopalvelimelta</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
-    <value>Recherche DNS du serveur de fichiers DLSS Swapper</value>
+    <value>DLSS Swapperin tiedostopalvelimen DNS-haku</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
-    <value>Ouvrir dans le navigateur</value>
+    <value>Avaa selaimessa</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
-    <value>Cliquez sur le bouton ouvrir dans le navigateur, ou copiez et collez le lien suivant dans votre navigateur. Est-ce qu'un fichier est téléchargé dans votre navigateur ?</value>
+    <value>Klikkaa avaa selaimessa -painiketta tai kopioi ja liitä seuraava linkki selaimeesi. Latautuuko tiedosto selaimessasi?</value>
   </data>
   <data name="NetworkTesterPage_Results" xml:space="preserve">
-    <value>Résultats</value>
+    <value>Tulokset</value>
   </data>
   <data name="NetworkTesterPage_RunTest" xml:space="preserve">
-    <value>Exécuter le test</value>
+    <value>Suorita testi</value>
   </data>
   <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
-    <value>Utilisez l'agent utilisateur fourni ou entrez un agent personnalisé de votre choix.</value>
+    <value>Käytä annettua käyttäjäagenttia tai anna omavalintainen.</value>
   </data>
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
-    <value>Testeur de réseau</value>
+    <value>Verkkoyhteystestaaja</value>
   </data>
   <data name="SettingsPage_About" xml:space="preserve">
-    <value>À propos</value>
+    <value>Tietoja</value>
   </data>
   <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
-    <value>Ajouter un chemin ignoré</value>
+    <value>Lisää ohitettu polku</value>
   </data>
   <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
-    <value>Autoriser les DLL de débogage</value>
+    <value>Salli debug-DLL-tiedostot</value>
   </data>
   <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
-    <value>Les SDK publient parfois des DLL de débogage qui permettent d'afficher des informations supplémentaires à l'écran.</value>
+    <value>SDK:t julkaisevat joskus debug-DLL-tiedostoja, jotka mahdollistavat lisätietojen näyttämisen näytöllä.</value>
   </data>
   <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
-    <value>Les DLL sont vérifiées pour s'assurer qu'elles sont approuvées par Windows en validant la signature avant d'être échangées dans un dossier de jeu. Si une DLL échoue à la validation de la signature, elle ne sera pas utilisée. Il est recommandé de laisser cette option désactivée.</value>
+    <value>DLL-tiedostot tarkistetaan Windows-luotettavuuden suhteen vahvistamalla allekirjoitus ennen pelikansioon vaihtamista. Jos DLL-tiedoston allekirjoituksen vahvistaminen epäonnistuu, sitä tiedostoa ei käytetä. On suositeltavaa pitää tämä pois käytöstä.</value>
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
-    <value>Cela s'applique uniquement au sélecteur de DLL, et non à la page de la bibliothèque.</value>
+    <value>Tämä koskee vain DLL-valitsijaa, ei kirjastosivua.</value>
   </data>
   <data name="SettingsPage_BuildCommit" xml:space="preserve">
-    <value>Commit de build</value>
+    <value>Koontiversiotunniste</value>
   </data>
   <data name="SettingsPage_BuildDate" xml:space="preserve">
-    <value>Date de build</value>
+    <value>Koontiversiopäivämäärä</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
-    <value>Impossible d'ouvrir directement votre fichier de log depuis DLSS Swapper. Veuillez essayer de l'ouvrir manuellement.</value>
+    <value>Lokitiedostoa ei voitu avata suoraan DLSS Swapperista. Yritä avata se manuaalisesti.</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer le chemin ignoré {0} ?</value>
-    <comment>{0} est le chemin de fichier que l'utilisateur supprime de la fonctionnalité de chemin ignoré.</comment>
+    <value>Haluatko varmasti poistaa ohitetun polun {0}?</value>
+    <comment>{0} is the file path that the user is removing from the ignored path feature.</comment>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
-    <value>Supprimer le chemin ignoré</value>
+    <value>Poista ohitettu polku</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
-    <value>Options pour développeurs DLSS</value>
+    <value>DLSS-kehittäjän asetukset</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
-    <value>Activer la journalisation vers la fenêtre de console</value>
+    <value>Kirjaa lokitapahtumat konsoli-ikkunaan</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
-    <value>Activer la journalisation vers un fichier</value>
+    <value>Kirjaa lokitapahtumat tiedostoon</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
-    <value>Activé pour toutes les DLL DLSS</value>
+    <value>Käytössä kaikille DLSS-DLL-tiedostoille</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
-    <value>Activé uniquement pour les DLL DLSS de débogage</value>
+    <value>Käytössä vain debug-käännetyille DLSS-DLL-tiedostoille</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
-    <value>Afficher l'indicateur à l'écran</value>
+    <value>Näytä näyttöilmaisin</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
-    <value>Journalisation détaillée</value>
+    <value>Yksityiskohtainen lokiin kirjaaminen</value>
   </data>
   <data name="SettingsPage_DLSSOptions" xml:space="preserve">
-    <value>Options DLSS</value>
+    <value>DLSS-asetukset</value>
   </data>
   <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
-    <value>Préréglage global</value>
+    <value>Globaali esiasetus</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
-    <value>Bibliothèques de jeux</value>
+    <value>Pelikirjastot</value>
   </data>
   <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
-    <value>Guide général de dépannage</value>
+    <value>Yleinen vianetsintäopas</value>
   </data>
   <data name="SettingsPage_GiveFeedback" xml:space="preserve">
-    <value>Donner un avis</value>
+    <value>Anna palautetta</value>
   </data>
   <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
-    <value>Vous pouvez suggérer une fonctionnalité ou signaler un problème sur DLSS Swapper</value>
+    <value>Voit ehdottaa ominaisuutta tai ilmoittaa ongelmasta DLSS Swapperin</value>
   </data>
   <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
-    <value>Chemins ignorés</value>
+    <value>Ohitetut polut</value>
   </data>
   <data name="SettingsPage_Language" xml:space="preserve">
-    <value>Langue</value>
+    <value>Kieli</value>
   </data>
   <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
-    <value>{0} désactivé</value>
-    <comment>{0} est le nom de la bibliothèque de jeux (par ex. Steam, GOG)</comment>
+    <value>{0} poistettu käytöstä</value>
+    <comment>{0} is the game library name (eg. Steam, GOG)</comment>
   </data>
   <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
-    <value>{0} activé</value>
-    <comment>{0} est le nom de la bibliothèque de jeux (par ex. Steam, GOG)</comment>
+    <value>{0} käytössä</value>
+    <comment>{0} is the game library name (eg. Steam, GOG)</comment>
   </data>
   <data name="SettingsPage_Logging" xml:space="preserve">
-    <value>Journalisation</value>
+    <value>Lokiin kirjaaminen</value>
   </data>
   <data name="SettingsPage_Logging_Debug" xml:space="preserve">
-    <value>Débogage</value>
+    <value>Virheenjäljitys</value>
   </data>
   <data name="SettingsPage_Logging_Error" xml:space="preserve">
-    <value>Erreur</value>
+    <value>Virheet</value>
   </data>
   <data name="SettingsPage_Logging_Info" xml:space="preserve">
-    <value>Info</value>
+    <value>Tiedot</value>
   </data>
   <data name="SettingsPage_Logging_Off" xml:space="preserve">
-    <value>Désactivé</value>
+    <value>Pois käytöstä</value>
   </data>
   <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
-    <value>Détaillé</value>
+    <value>Yksityiskohtainen</value>
   </data>
   <data name="SettingsPage_Logging_Warning" xml:space="preserve">
-    <value>Avertissement</value>
+    <value>Varoitukset</value>
   </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
-    <value>Aucune nouvelle mise à jour disponible.</value>
+    <value>Uusia päivityksiä ei ole saatavilla.</value>
   </data>
   <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
-    <value>Remerciements</value>
+    <value>Tunnustukset</value>
   </data>
   <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
-    <value>Diagnostics</value>
+    <value>Diagnostiikka</value>
   </data>
   <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
-    <value>Testeur de réseau</value>
+    <value>Verkkoyhteystestaaja</value>
   </data>
   <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
-    <value>Ouvrir la boîte à outils de traduction</value>
+    <value>Avaa käännöstyökalupakki</value>
   </data>
   <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
-    <value>Le chemin {0} est déjà ignoré.</value>
-    <comment>{0} est le chemin que l'utilisateur a tenté d'ajouter mais qui était déjà ignoré.</comment>
+    <value>Polku {0} on jo ohitettu.</value>
+    <comment>{0} is the path that the user tried to add but it was already ignored.</comment>
   </data>
   <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
-    <value>Autoriser les non approuvés</value>
+    <value>Salli epäluotetut</value>
   </data>
   <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
-    <value>Vérifier les mises à jour</value>
+    <value>Tarkista päivitykset</value>
   </data>
   <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
-    <value>Afficher uniquement les DLL téléchargées</value>
+    <value>Näytä vain ladatut DLL-tiedostot</value>
   </data>
   <data name="SettingsPage_ThemeDark" xml:space="preserve">
-    <value>Sombre</value>
+    <value>Tumma</value>
   </data>
   <data name="SettingsPage_ThemeLight" xml:space="preserve">
-    <value>Clair</value>
+    <value>Vaalea</value>
   </data>
   <data name="SettingsPage_ThemeMode" xml:space="preserve">
-    <value>Mode de thème</value>
+    <value>Teematila</value>
   </data>
   <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
-    <value>Utiliser le paramètre système</value>
+    <value>Käytä järjestelmäasetusta</value>
   </data>
   <data name="SettingsPage_Title" xml:space="preserve">
-    <value>Paramètres</value>
+    <value>Asetukset</value>
   </data>
   <data name="SettingsPage_Troubleshooting" xml:space="preserve">
-    <value>Dépannage</value>
+    <value>Vianetsintä</value>
   </data>
   <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
-    <value>Votre fichier de log actuel est </value>
+    <value>Nykyinen lokitiedostosi on </value>
   </data>
   <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
-    <value>Vous ne pouvez pas utiliser l'outil de traduction lorsqu'il est exécuté en tant qu'administrateur. Veuillez redémarrer l'application.</value>
+    <value>Et voi käyttää käännöstyökalua sen ollessa käynnissä järjestelmänvalvojana. Käynnistä sovellus uudelleen.</value>
   </data>
   <data name="TranslationToolboxPage_Comment" xml:space="preserve">
-    <value>Commentaire</value>
+    <value>Kommentti</value>
   </data>
   <data name="TranslationToolboxPage_ImportAsTranslation" xml:space="preserve">
-    <value>Importer la langue en tant que traduction</value>
+    <value>Tuo kieli käännökseksi</value>
   </data>
   <data name="TranslationToolboxPage_Key" xml:space="preserve">
-    <value>Clé</value>
+    <value>Avain</value>
   </data>
   <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
-    <value>Charger une traduction existante</value>
+    <value>Lataa olemassa oleva</value>
   </data>
   <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
-    <value>Impossible de charger la traduction. Veuillez consulter votre journal d'erreurs pour plus d'informations.</value>
+    <value>Käännöstä ei voitu ladata. Katso virhelokista lisätietoja.</value>
   </data>
   <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
-    <value>Nouvelle traduction</value>
+    <value>Uusi käännös</value>
   </data>
   <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
-    <value>Aucune donnée de traduction n'a été trouvée à publier.</value>
+    <value>Julkaistavaa käännösaineistoa ei löytynyt.</value>
   </data>
   <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
-    <value>Aucune donnée de traduction n'a été trouvée à enregistrer.</value>
+    <value>Tallennettavaksi ei löytynyt käännöstietoja.</value>
   </data>
   <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
-    <value>Ce n'est pas un fichier de traduction DLSS Swapper valide.</value>
-    <comment>Erreur indiquant que le fichier de traduction JSON ouvert par l'utilisateur n'est pas valide.</comment>
+    <value>Ei kelvollinen DLSS Swapperin käännöstiedosto.</value>
+    <comment>Error that the json translation file the user opened is not valid.</comment>
   </data>
   <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
-    <value>Impossible de publier la traduction. Veuillez consulter votre journal d'erreurs pour plus d'informations.</value>
+    <value>Käännöstä ei voitu julkaista. Katso virhelokista lisätietoja.</value>
   </data>
   <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
-    <value>Recharger l'application</value>
+    <value>Lataa sovellus uudelleen</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
-    <value>Réinitialiser et continuer</value>
+    <value>Nollaa ja jatka</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
-    <value>Cela réinitialisera votre progression de traduction actuelle. Êtes-vous sûr de vouloir continuer ?</value>
+    <value>Tämä nollaa nykyisen käännösedistymisesi. Haluatko varmasti jatkaa?</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
-    <value>Réinitialiser la progression et continuer ?</value>
+    <value>Nollaa edistyminen ja jatka?</value>
   </data>
   <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
-    <value>Impossible d'enregistrer la traduction. Veuillez consulter votre journal d'erreurs pour plus d'informations.</value>
+    <value>Käännöstä ei voitu tallentaa. Katso virhelokista lisätietoja.</value>
   </data>
   <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
-    <value>Sélectionner la langue à charger</value>
+    <value>Valitse ladattava kieli</value>
   </data>
   <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
-    <value>Langue source</value>
+    <value>Lähdekieli</value>
   </data>
   <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
-    <value>Traduction source</value>
+    <value>Lähdekäännös</value>
   </data>
   <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
-    <value>Guide de traduction</value>
+    <value>Käännösopas</value>
   </data>
   <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
-    <value>Votre traduction a été créée. Veuillez consulter le guide de traduction DLSS Swapper pour savoir quoi faire ensuite avec {0}.</value>
-    <comment>Ici, {0} sera le nom du fichier de traduction publié par l'utilisateur.</comment>
+    <value>Käännöksesi on luotu. Tarkista DLSS Swapperin käännösoppaasta, mitä tehdä seuraavaksi tiedoston {0} kanssa.</value>
+    <comment>Here {0} will be the filename of the translation file the user published.</comment>
   </data>
   <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
-    <value>Progression de la traduction</value>
+    <value>Käännöksen edistyminen</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
-    <value>Fermer sans enregistrer</value>
+    <value>Sulje ilman tallentamista</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
-    <value>Vous avez peut-être des modifications de traduction non enregistrées. Si vous fermez cette fenêtre, elles seront perdues.</value>
+    <value>Sinulla on mahdollisesti tallentamattomia käännösmuutoksia. Ne menetetään, jos suljet tämän ikkunan.</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
-    <value>Modifications de traduction non enregistrées</value>
+    <value>Tallentamattomia käännösmuutoksia</value>
   </data>
   <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
-    <value>Boîte à outils de traduction</value>
+    <value>Käännöstyökalupakki</value>
   </data>
 </root>

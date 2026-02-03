@@ -45,17 +45,20 @@ public class LanguageManager
             "ar-SA",
             "ar-SY",
             "ca-ES",
+            "cs-CZ",
             "de-DE",
             "en-AU",
             "en-GB",
             "en-US",
             "es-ES",
+            "fi-FI",
             "fr-FR",
             "it-IT",
             "ja-JP",
             "pl-PL",
             "pt-BR",
             "ru-RU",
+            "th-TH",
             "tr-TR",
             "uk-UA",
             "vi-VN",
@@ -75,17 +78,20 @@ public class LanguageManager
             "ar-SA" => "اللغة العربية (المملكة العربية السعودية)", // Arabic (Saudi Arabia)
             "ar-SY" => " (سوريا) العربية", // Arabic (Syria)
             "ca-ES" => "Català", // Catalan
+            "cs-CZ" => "Čeština", // Czech
             "de-DE" => "Deutsch", // German (Germany)
             "en-AU" => "English (Australia)",
             "en-GB" => "English (United Kingdom)",
             "en-US" => "English (United States)",
             "es-ES" => "Español", // Spanish
+            "fi-FI" => "Suomi", // Finnish (Finland)
             "fr-FR" => "Français", // French (France)
             "it-IT" => "Italiano", // Italian (Italy)
             "ja-JP" => "日本語", // Japanese
             "pl-PL" => "Polski", // Polish
             "pt-BR" => "Português BR", // Portuguese
             "ru-RU" => "Русский", // Russian
+            "th-TH" => "ไทย", // Thai 
             "tr-TR" => "Türkçe", // Turkish
             "uk-UA" => "Українська", // Ukrainian
             "vi-VN" => "Tiếng Việt", // Vietnamese
@@ -148,3 +154,4 @@ public class LanguageManager
         return rtlLanguages.Contains(languagePart);
     }
 }
+

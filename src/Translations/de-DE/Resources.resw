@@ -192,6 +192,15 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>Konnte nicht gestartet werden</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>Bist Du dir sicher, dass Du dein hinzugefügtes Titelbild entfernen willst?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>Spiel wird aktuell untersucht</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>Titelbild entfernen?</value>
+  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>Asset Typ</value>
   </data>
@@ -402,9 +411,6 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>Neue DLLs</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>Neue DLLs gefunden</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>Ein neues GitHub Issue erstellen</value>
   </data>
@@ -435,6 +441,9 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>Du musst keine DLLs mit mitschicken. Wir finden sie anhand der hinzugefügten Informationen.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>Neue DLLs gefunden</value>
+  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Spiel wird neu geladen</value>
   </data>
@@ -452,15 +461,6 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>Listenansicht</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>Bist Du dir sicher, dass Du dein hinzugefügtes Titelbild entfernen willst?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>Spiel wird aktuell untersucht</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>Titelbild entfernen?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>Diese App läuft mit Administrativen Benutzerrechten.</value>
@@ -525,9 +525,6 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   <data name="General_Name_DLSS" xml:space="preserve">
     <value>DLSS</value>
   </data>
-  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
-    <value>DLSS SR Voreinstellung</value>
-  </data>
   <data name="General_Name_DLSS_D" xml:space="preserve">
     <value>DLSS Strahlenrekonstrultion</value>
   </data>
@@ -536,6 +533,9 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>DLSS Voreinstellung</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>DLSS SR Voreinstellung</value>
   </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>

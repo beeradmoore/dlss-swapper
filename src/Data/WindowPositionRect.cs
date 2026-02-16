@@ -35,6 +35,18 @@ public class WindowPositionRect
         Width = other.Width;
         Height = other.Height;
         State = other.State;
+
+        // LEGACY: Restore broken windows to correct positions.
+        // -32000 is some magic number were windows go to die.
+        if (X == -32000)
+        {
+            X = 0;
+        }
+
+        if (Y == -32000)
+        {
+            Y = 0;
+        }
     }
 
     public WindowPositionRect(int x, int y, int width, int height)
@@ -47,6 +59,19 @@ public class WindowPositionRect
 
     public RectInt32 GetRectInt32()
     {
+        // LEGACY: Restore broken windows to correct positions.
+        // -32000 is some magic number were windows go to die.
+        // This is to help apps that are already broken to show the main window again.
+        if (X == -32000)
+        {
+            X = 0;
+        }
+
+        if (Y == -32000)
+        {
+            Y = 0;
+        }
+
         return new RectInt32(X, Y, Width, Height);
     }
 

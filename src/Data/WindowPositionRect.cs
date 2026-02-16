@@ -36,6 +36,7 @@ public class WindowPositionRect
         Height = other.Height;
         State = other.State;
 
+        // LEGACY: Restore broken windows to correct positions.
         // -32000 is some magic number were windows go to die.
         if (X == -32000)
         {
@@ -46,23 +47,10 @@ public class WindowPositionRect
         {
             Y = 0;
         }
-
     }
 
     public WindowPositionRect(int x, int y, int width, int height)
     {
-        // -32000 is some magic number were windows go to die.
-        // This is to help apps that are already broken to show the main window again.
-        if (x == -32000)
-        {
-            x = 0;
-        }
-
-        if (y == -32000)
-        {
-            y = 0;
-        }
-
         X = x;
         Y = y;
         Width = width;
@@ -71,6 +59,7 @@ public class WindowPositionRect
 
     public RectInt32 GetRectInt32()
     {
+        // LEGACY: Restore broken windows to correct positions.
         // -32000 is some magic number were windows go to die.
         // This is to help apps that are already broken to show the main window again.
         if (X == -32000)
@@ -88,24 +77,12 @@ public class WindowPositionRect
 
     public void UpdatePosition(PointInt32 position)
     {
-        // -32000 is some magic number were windows go to die.
-        if (position.X == -32000 || position.Y == -32000)
-        {
-            return;
-        }
-
         X = position.X;
         Y = position.Y;
     }
 
     public void UpdateFromAppWindow(AppWindow appWindow)
     {
-        // -32000 is some magic number were windows go to die.
-        if (appWindow.Position.X == -32000 || appWindow.Position.Y == -32000)
-        {
-            return;
-        }
-
         Width = appWindow.Size.Width;
         Height = appWindow.Size.Height;
         X = appWindow.Position.X;

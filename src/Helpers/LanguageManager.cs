@@ -116,8 +116,10 @@ public class LanguageManager
     public static bool IsRightToLeftLanguage(string languageKey)
     {
         if (string.IsNullOrWhiteSpace(languageKey))
+        {
             return false;
-    
+        }
+
         // List of RTL language codes (Semitic and other RTL languages)
         var rtlLanguages = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
@@ -146,11 +148,13 @@ public class LanguageManager
             "dv",      // Divehi
             "yi"       // Yiddish
         };
-    
+
         // Check exact match first
         if (rtlLanguages.Contains(languageKey))
+        {
             return true;
-    
+        }
+
         // Check language part only (e.g., "ar" from "ar-SY")
         var languagePart = languageKey.Split('-')[0];
         return rtlLanguages.Contains(languagePart);

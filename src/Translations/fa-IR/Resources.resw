@@ -1,0 +1,1077 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcknowledgementsPage_Title" xml:space="preserve">
+    <value>مجوزها و قدردانی‌ها</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>تعویض‌کننده DLSS</value>
+  </data>
+  <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
+    <value>برای کپی کردن جزئیات زیر کلیک کنید</value>
+  </data>
+  <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
+    <value>عیب‌یابی</value>
+  </data>
+  <data name="DllManager_AlreadyImported" xml:space="preserve">
+    <value>(قبلاً وارد شده)</value>
+  </data>
+  <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
+    <value>ویژگی وارد کردن غیرفعال است، مانیفست وارد کردن نتوانست بارگیری شود.</value>
+  </data>
+  <data name="DllManager_MigratingDlls" xml:space="preserve">
+    <value>انتقال DLLها</value>
+  </data>
+  <data name="DllManager_UnknownTypeDll" xml:space="preserve">
+    <value>نوع DLL شناخته شده‌ نیست.</value>
+  </data>
+  <data name="DllManager_UntrustedDll" xml:space="preserve">
+    <value>این DLL توسط ویندوز مورد اعتماد نیست.</value>
+  </data>
+  <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
+    <value>Could not download {0} DLL, please try again later or check your logs to see why the download failed.</value>
+  </data>
+  <data name="DllRecord_Download" xml:space="preserve">
+    <value>دانلود</value>
+  </data>
+  <data name="DllRecord_DownloadError" xml:space="preserve">
+    <value>خطای دانلود</value>
+  </data>
+  <data name="DllRecord_Downloading" xml:space="preserve">
+    <value>در حال دانلود</value>
+  </data>
+  <data name="DllRecord_Imported" xml:space="preserve">
+    <value>وارد شد</value>
+  </data>
+  <data name="DllRecord_RequiresDownload" xml:space="preserve">
+    <value>نیاز به دانلود دارد</value>
+  </data>
+  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
+    <value>فایل فشرده DLL نامعتبر بود (هیچ DLL یافت نشد).</value>
+  </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>توصیه انویدیا</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>پیش‌فرض</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>تنظیمات از پیش تعیین شده {0}</value>
+  </data>
+  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
+    <value>تنظیمات از پیش تعیین شده {0} (منسوخ شده)</value>
+  </data>
+  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
+    <value>راه‌اندازی DLSS Swapper با خطا مواجه شد</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
+    <value>Please open a </value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
+    <value>موضوع جدید</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
+    <value>در مخزن گیت‌هاب DLSS Swapper باز کنید و اطلاعات زیر را در بخش زمینه اضافی ارائه دهید.</value>
+  </data>
+  <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
+    <value>عدم موفقیت در راه‌اندازی</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>آیا مطمئن هستید که می‌خواهید تصویر جلد سفارشی را حذف کنید؟</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>بازی در حال پردازش است</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>حذف کاور سفارشی؟</value>
+  </data>
+  <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
+    <value>نوع اَسِت</value>
+  </data>
+  <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
+    <value>زمان رویداد</value>
+  </data>
+  <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
+    <value>نوع رویداد</value>
+  </data>
+  <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
+    <value>هیچ سابقه‌ای یافت نشد.</value>
+  </data>
+  <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
+    <value>نسخه</value>
+  </data>
+  <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
+    <value>نسخه پشتیبان DLL حذف شد</value>
+  </data>
+  <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
+    <value>به صورت خارجی DLL تغییر داده شد</value>
+  </data>
+  <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
+    <value>فایل DLL شناسایی شد</value>
+  </data>
+  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
+    <value>فایل DLL بازنشانی شد</value>
+  </data>
+  <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
+    <value>فایل DLL تعویض شد</value>
+  </data>
+  <data name="GamePage_AddCustomCover" xml:space="preserve">
+    <value>افزودن تصویر زمینه سفارشی</value>
+  </data>
+  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>اجرای بازی‌ها از کتابخانه {0} شما در حال حاضر پشتیبانی نمی‌شود.</value>
+  </data>
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
+    <value>برای افزودن به علاقه مندی ها کلیک کنید</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>برای پنهان کردن کلیک کنید</value>
+  </data>
+  <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+    <value>مسیر «{0}» یافت نشد.</value>
+  </data>
+  <data name="GamePage_CurrentDll" xml:space="preserve">
+    <value>فایل DLL فعلی</value>
+  </data>
+  <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
+    <value>فایل «{0}» یافت نشد.</value>
+  </data>
+  <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
+    <value>فایل DLL به {0} بازنشانی شد.</value>
+  </data>
+  <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
+    <value>شروع دانلود</value>
+  </data>
+  <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
+    <value>لطفا قبل از تعویض، منتظر بمانید تا دانلود کامل شود</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
+    <value>اطلاعات از پیش تنظیم شده</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
+    <value>DLSS presets are contained within DLSS DLL files contained within your games install directory. Different DLSS DLLs have different presets. For example preset K was not introduced until DLSS v310.2. So if you use DLSS v3.7 and you set preset to K it will not use preset K and instead it will fallback to whatever preset the game chooses to use.
+
+The same applies to global presets. If you select preset K but your game uses DLSS v3.7 you will not be using preset K and instead the game will fallback to whatever its default is.
+
+To verify what preset is being used please enable the DLSS on-screen indicator.</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
+    <value>اطلاعات نشانگر روی صفحه</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
+    <value>اطلاعات DLSS از پیش تنظیم شده </value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
+    <value>Setting a DLSS preset does not guarantee that the preset is used.</value>
+  </data>
+  <data name="GamePage_Favorited" xml:space="preserve">
+    <value>مورد علاقه</value>
+  </data>
+  <data name="GamePage_History" xml:space="preserve">
+    <value>تاریخچه</value>
+  </data>
+  <data name="GamePage_InstallPath" xml:space="preserve">
+    <value>مسیر نصب</value>
+  </data>
+  <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
+    <value>«{0}» یک نوع فایل نامعتبر است</value>
+  </data>
+  <data name="GamePage_Launch" xml:space="preserve">
+    <value>اجرا</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
+    <value>این عنوان به صورت دستی اضافه نشده است و قابل حذف نیست.</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
+    <value>آیا مطمئن هستید که می‌خواهید «{0}» را از DLSS Swapper حذف کنید؟ این کار هیچ تغییری در فایل‌های DLSS که قبلاً تعویض شده‌اند ایجاد نمی‌کند.</value>
+  </data>
+  <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
+    <value>Shown below are the multiple DLLs found. You will still be able to swap and restore DLLs as usual as we will do these actions to all DLLs at once. However because we don't know what one of these DLLs is used by the game the DLL version shown is of the first DLL detected.</value>
+  </data>
+  <data name="GamePage_MultipleDllsFound" xml:space="preserve">
+    <value>چندین DLL یافت شد</value>
+  </data>
+  <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
+    <value>چندین DLL {0} یافت شد</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
+    <value>لطفاً برای دانلود DLLهای جدید به صفحه کتابخانه مراجعه کنید.</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
+    <value>هیچ DLLای یافت نشد</value>
+  </data>
+  <data name="GamePage_Notes" xml:space="preserve">
+    <value>یادداشت‌ها</value>
+  </data>
+  <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
+    <value>این بازی در وضعیت آماده برای بازی نیست.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
+    <value>NVAPI با یک خطا مواجه شد. اطلاعات بیشتر در گزارش خطا نوشته شده است.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
+    <value>NVAPI has encountered an error. Running the application as admin may resolve the issue. More information has been written to the error log.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
+    <value>خطای NVAPI</value>
+  </data>
+  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
+    <value>NVAPI با یک خطا مواجه شد. برای اطلاعات بیشتر کلیک کنید.</value>
+  </data>
+  <data name="GamePage_OpenDllLocation" xml:space="preserve">
+    <value>باز کردن محل DLL</value>
+  </data>
+  <data name="GamePage_OriginalDll" xml:space="preserve">
+    <value>DLL اصلی</value>
+  </data>
+  <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
+    <value>{0} هنوز در حال پردازش است. لطفاً قبل از باز کردن منتظر بمانید تا نشانگر بارگیری کامل شود.</value>
+  </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>بازنشانی همه</value>
+  </data>
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
+    <value>بازگرداندن DLL اصلی</value>
+  </data>
+  <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
+    <value>انتخاب نسخه {0}</value>
+  </data>
+  <data name="GamePage_StorageFileIsNull" xml:space="preserve">
+    <value>storageFile خالی است</value>
+  </data>
+  <data name="GamePage_UnableToChangePreset" xml:space="preserve">
+    <value>Unable to change preset. Please see your error log for more information.</value>
+  </data>
+  <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
+    <value>شما فقط می‌توانید یک فایل را برای جلد بکشید</value>
+  </data>
+  <data name="GamesPage_AddGame" xml:space="preserve">
+    <value>افزودن بازی</value>
+  </data>
+  <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+    <value>بازی‌های یک کتابخانه را با هم گروه‌بندی کنید</value>
+  </data>
+  <data name="GamesPage_Grouping" xml:space="preserve">
+    <value>گروه‌بندی</value>
+  </data>
+  <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
+    <value>مخفی کردن بازی‌هایی که آیتم قابل تعویض ندارند</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
+    <value>شما فقط می‌توانید یک فایل را برای جلد بکشید</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
+    <value>یادداشت دیگری برای افزودن دستی بازی‌ها</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
+    <value>مشکلی پیش آمده است و بازی شما در این زمان اضافه نشد. لطفاً این مشکل را گزارش دهید.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
+    <value>خطا در افزودن بازی شما</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
+    <value>  شما باید دایرکتوری \u003Ci\u003Eبازی\u003C/i\u003E خود را انتخاب کنید، نه دایرکتوری \u003Ci\u003Eبازی‌ها\u003C/i\u003E خود.\u003Cbr/\u003E\u003Cbr/\u003Eبه عنوان مثال، اگر یک بازی در این مسیر دارید:\u003Cbr/\u003E\u003Cb\u003EC:\\Program Files\\MyGamesFolder\\MyFavGame\\\u003C/b\u003E\u003Cbr/\u003E\u003Cbr/\u003Eشما باید دایرکتوری \u003Cb\u003EMyFavGame\u003C/b\u003E را انتخاب کنید و نه دایرکتوری \u003Cb\u003EMyGamesFolder\u003C/b\u003E.
+</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
+    <value>DLSS Swapper should find games from your installed game libraries automatically. If your game is not listed there may be a few settings preventing it. Please check:
+
+- Games list filter is not set to "Hide games with no swappable items"
+- Specific game library is enabled in settings
+
+If you have checked these and your game is still not showing up there may be a bug. We would appreciate it if you could report the issue on our GitHub repository so we can make a fix and have your games better detected in the future.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
+    <value>یادداشت برای افزودن دستی بازی‌ها</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
+    <value>مسیر نصب «{0}» از قبل وجود دارد و نمی‌توان دوباره آن را اضافه کرد.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
+    <value>انتخاب پوشه بازی</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
+    <value>اضافه کردن دایرکتوری سطح بالا پشتیبانی نمی‌شود. لطفا ریشه دایرکتوری بازی خود را اضافه کنید.</value>
+  </data>
+  <data name="GamesPage_NewDlls" xml:space="preserve">
+    <value>DLLهای جدید</value>
+  </data>
+  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
+    <value>ایجاد مشکل جدید در گیت‌هاب</value>
+  </data>
+  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
+    <value>هنگام بارگیری بازی‌های شما، برخی DLLهای جدید کشف شده‌اند که در مانیفست DLSS Swapper وجود ندارند.</value>
+  </data>
+  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
+    <value>(حساب گیت‌هاب مورد نیاز است)</value>
+  </data>
+  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
+    <value>اگر دکمه کار نمی‌کند، اینجا را امتحان کنید،</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
+    <value>مرحله ۴: ارسال مشکل</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
+    <value>مرحله ۱: ایجاد مشکل جدید</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
+    <value>مرحله ۳: کپی بدنه</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
+    <value>مرحله ۲: کپی عنوان</value>
+  </data>
+  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
+    <value>ممنون بابت کمک!</value>
+  </data>
+  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+    <value>لازم نیست DLLها را ارسال کنید. ما آنها را بر اساس اطلاعات ارائه شده ردیابی خواهیم کرد.</value>
+  </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>DLLهای جدید یافت شد</value>
+  </data>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>بارگذاری مجدد بازی</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>نمایش بازی‌های مخفی (به طور پیش‌فرض در هنگام اجرا خاموش است)</value>
+  </data>
+  <data name="GamesPage_Title" xml:space="preserve">
+    <value>بازی‌ها</value>
+  </data>
+  <data name="GamesPage_ViewType" xml:space="preserve">
+    <value>نوع نمایش</value>
+  </data>
+  <data name="GamesPage_ViewType_GridView" xml:space="preserve">
+    <value>نمای شبکه‌ای</value>
+  </data>
+  <data name="GamesPage_ViewType_ListView" xml:space="preserve">
+    <value>نمای لیستی</value>
+  </data>
+  <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
+    <value>این برنامه با امتیازات مدیریتی در حال اجرا است.</value>
+  </data>
+  <data name="General_Apply" xml:space="preserve">
+    <value>اعمال</value>
+  </data>
+  <data name="General_Cancel" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="General_Close" xml:space="preserve">
+    <value>بستن</value>
+  </data>
+  <data name="General_Copy" xml:space="preserve">
+    <value>کپی</value>
+  </data>
+  <data name="General_Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="General_DontShowAgain" xml:space="preserve">
+    <value>دیگر نشان نده</value>
+  </data>
+  <data name="General_Error" xml:space="preserve">
+    <value>خطا</value>
+  </data>
+  <data name="General_ErrorMessage" xml:space="preserve">
+    <value>پیام خطا</value>
+  </data>
+  <data name="General_Export" xml:space="preserve">
+    <value>خروجی گرفتن</value>
+  </data>
+  <data name="General_ExportAll" xml:space="preserve">
+    <value>خروجی گرفتن از همه</value>
+  </data>
+  <data name="General_Failed" xml:space="preserve">
+    <value>ناموفق</value>
+  </data>
+  <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
+    <value>اگر برنامه را به عنوان مدیر سیستم اجرا می‌کنید، این ویژگی پشتیبانی نمی‌شود.</value>
+  </data>
+  <data name="General_Filter" xml:space="preserve">
+    <value>فیلتر</value>
+  </data>
+  <data name="General_Help" xml:space="preserve">
+    <value>راهنما</value>
+  </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>مخفی</value>
+  </data>
+  <data name="General_Import" xml:space="preserve">
+    <value>وارد کردن</value>
+  </data>
+  <data name="General_Load" xml:space="preserve">
+    <value>بارگیری</value>
+  </data>
+  <data name="General_Loading" xml:space="preserve">
+    <value>در حال بارگیری</value>
+  </data>
+  <data name="General_Name" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>DLSS Ray Reconstruction</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>DLSS Frame Generation</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>DLSS Preset</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>DLSS RR Preset</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_DX11" xml:space="preserve">
+    <value>XeSS (DX11)</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>XeSS Frame Generation</value>
+  </data>
+  <data name="General_No" xml:space="preserve">
+    <value>نه</value>
+  </data>
+  <data name="General_None" xml:space="preserve">
+    <value>هیچ</value>
+  </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>یافت نشد</value>
+  </data>
+  <data name="General_NotSupported" xml:space="preserve">
+    <value>پشتیبانی نمی‌شود</value>
+  </data>
+  <data name="General_Okay" xml:space="preserve">
+    <value>باشه</value>
+  </data>
+  <data name="General_Oops" xml:space="preserve">
+    <value>اوه اوه</value>
+  </data>
+  <data name="General_OpenFolder" xml:space="preserve">
+    <value>باز کردن پوشه</value>
+  </data>
+  <data name="General_OpenLogsDirectory" xml:space="preserve">
+    <value>باز کردن دایرکتوری لاگ‌ها</value>
+  </data>
+  <data name="General_Optional" xml:space="preserve">
+    <value>(اختیاری)</value>
+  </data>
+  <data name="General_Options" xml:space="preserve">
+    <value>تنظیمات</value>
+  </data>
+  <data name="General_Publish" xml:space="preserve">
+    <value>انتشار</value>
+  </data>
+  <data name="General_Refresh" xml:space="preserve">
+    <value>تازه‌سازی</value>
+  </data>
+  <data name="General_Reload" xml:space="preserve">
+    <value>بارگذاری مجدد</value>
+  </data>
+  <data name="General_Remove" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="General_ReportIssue" xml:space="preserve">
+    <value>Report issue</value>
+  </data>
+  <data name="General_Save" xml:space="preserve">
+    <value>ذخیره</value>
+  </data>
+  <data name="General_Search" xml:space="preserve">
+    <value>جستجو</value>
+  </data>
+  <data name="General_Sorry" xml:space="preserve">
+    <value>متاسفم</value>
+  </data>
+  <data name="General_Success" xml:space="preserve">
+    <value>موفقیت</value>
+  </data>
+  <data name="General_Swap" xml:space="preserve">
+    <value>تعویض</value>
+  </data>
+  <data name="General_Unknown" xml:space="preserve">
+    <value>ناشناخته</value>
+  </data>
+  <data name="General_Update" xml:space="preserve">
+    <value>به روزرسانی</value>
+  </data>
+  <data name="General_Version" xml:space="preserve">
+    <value>نسخه</value>
+  </data>
+  <data name="General_Warning" xml:space="preserve">
+    <value>هشدار</value>
+  </data>
+  <data name="General_Yes" xml:space="preserve">
+    <value>بله</value>
+  </data>
+  <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
+    <value>شما در حال حاضر {0} نصب شده دارید.</value>
+  </data>
+  <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
+    <value>برنامه د ال اس اس سواپر به‌روزرسانی شد</value>
+  </data>
+  <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
+    <value>به‌روزرسانی در دسترس است</value>
+  </data>
+  <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
+    <value>قبلا دانلود شده.</value>
+  </data>
+  <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
+    <value>امکان بارگیری دی‌ال‌ال‌های وارد شده وجود ندارد</value>
+  </data>
+  <data name="LibraryPage_CouldntDownload" xml:space="preserve">
+    <value>در حال حاضر امکان دانلود وجود ندارد.</value>
+  </data>
+  <data name="LibraryPage_CouldntExportDll" xml:space="preserve">
+    <value>امکان خروجی گرفتن از دی‌ال‌ال‌ها وجود ندارد.</value>
+  </data>
+  <data name="LibraryPage_DeleteDll" xml:space="preserve">
+    <value>حذف DLL</value>
+  </data>
+  <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
+    <value>حذف {0} نسخه {1}؟</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
+    <value>حجم فایل دانلود</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
+    <value>توضیحات فایل</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
+    <value>اندازه فایل</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
+    <value>هش</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
+    <value>نام داخلی</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
+    <value>نام داخلی اضافی</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
+    <value>برچسب</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>دانلود آخرین نسخه</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
+    <value>{0} دانلود جدید شروع شد.</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
+    <value>دانلودها شروع شدند</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
+    <value>DLL های خروجی گرفته شده :</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
+    <value>از {0} DLLs خروجی گرفته شد.</value>
+  </data>
+  <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
+    <value>از DLL {0} خروجی گرفته شد.</value>
+  </data>
+  <data name="LibraryPage_FileNotFound" xml:space="preserve">
+    <value>فایل یافت نشد.</value>
+  </data>
+  <data name="LibraryPage_Finished" xml:space="preserve">
+    <value>به پایان رسید</value>
+  </data>
+  <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
+    <value>به عنوان رکورد DLL موجود وارد شد.</value>
+  </data>
+  <data name="LibraryPage_Importing" xml:space="preserve">
+    <value>در حال وارد کردن</value>
+  </data>
+  <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
+    <value>Replacing dlls on your computer can be dangerous.
+
+Placing a malicious dll into a game is as bad as running Linking_park_-_nUmB_mp3.exe that you just downloaded from LimeWire.
+
+Only import dlls from sources you trust.</value>
+  </data>
+  <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
+    <value>هیچ DLLای برای خروجی گرفتن یافت نشد.</value>
+  </data>
+  <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
+    <value>شما هیچ رکورد DLL برای خروجی گرقتن ندارید.</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
+    <value>هیچ DLL جدیدی برای دانلود وجود نداشت.</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
+    <value>هیچ DLL جدیدی وجود ندارد</value>
+  </data>
+  <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
+    <value>DLLهای پردازش شده:</value>
+  </data>
+  <data name="LibraryPage_Title" xml:space="preserve">
+    <value>کتابخانه</value>
+  </data>
+  <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
+    <value>قادر به حذف رکورد {0} نیست.</value>
+  </data>
+  <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
+    <value>قادر به به‌روزرسانی رکوردهای DLL نیست.</value>
+  </data>
+  <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
+    <value>فایل زیپ حاوی هیچ DLLای نبود.</value>
+  </data>
+  <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
+    <value>تلاش برای به‌روزرسانی</value>
+  </data>
+  <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
+    <value>برنامه DLSS Swapper نتوانست فایل manifest خود را بارگیری کند. اکنون بسته خواهد شد.</value>
+  </data>
+  <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
+    <value>برنامه DLSS Swapper باید بسته شود</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
+    <value>مشکلات گیت‌هاب</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
+    <value>We were unable to load manifest.json from your computer or from the internet.
+
+If this keeps happening please file an report in our issue tracker on GitHub.</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
+    <value>به‌روزرسانی manifest</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
+    <value>While swapping DLSS versions should not be considered cheating, certain anti-cheat systems may not be happy with you if the files in your game directory are not what the game was distributed with.
+
+Because of this we recommend using caution for multiplayer games.</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
+    <value>نکته برای بازی‌های چند نفره</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
+    <value>هنوز کار نمی‌کند</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
+    <value>کار می‌کند!</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
+    <value>تست مرورگر</value>
+  </data>
+  <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
+    <value>لغو تست فعلی</value>
+  </data>
+  <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
+    <value>کپی نتایج تست</value>
+  </data>
+  <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
+    <value>یجاد گزارش باگ</value>
+  </data>
+  <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
+    <value>تست سفارشی یوزر ایجنت"</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
+    <value>دانلود DLL برنامه DLSS Swapper در داخل DLSS Swapper با یوزر ایجنت سفارشی</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
+    <value>دانلود DLL مربوط به DLSS از UploadThing mirror</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
+    <value>دسترسی به google.com از داخل DLSS Swapper (تست اتصال عمومی اینترنت</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
+    <value>دسترسی به bing.com از داخل DLSS Swapper (تست اتصال عمومی اینترنت)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
+    <value>دانلود DLL برنامه DLSS Swapper در داخل DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
+    <value>دانلود DLL برنامه DLSS Swapper از مرورگر</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
+    <value>دانلود کاور بازی از استیم</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
+    <value>دانلود کاور بازی از Epic Game Store</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
+    <value>دانلود کاور بازی از سرور فایل DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
+    <value>دانلود کاور بازی از سرور فایل جایگزین DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
+    <value>جستجوی DNS سرور فایل DLSS Swapper</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
+    <value>باز کردن در مرورگر</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
+    <value>Click the open in browser button, or copy and paste following link into your browser. Does it download a file in your browser?</value>
+  </data>
+  <data name="NetworkTesterPage_Results" xml:space="preserve">
+    <value>نتایج</value>
+  </data>
+  <data name="NetworkTesterPage_RunTest" xml:space="preserve">
+    <value>اجرای تست</value>
+  </data>
+  <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
+    <value>Use the provided user agent or enter a custom one of your choice.</value>
+  </data>
+  <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
+    <value>تست کننده شبکه</value>
+  </data>
+  <data name="SettingsPage_About" xml:space="preserve">
+    <value>درباره</value>
+  </data>
+  <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
+    <value>افزودن مسیر نادیده گرفته شده</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
+    <value>اجازه دادن به DLL های دیباگ</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
+    <value>SDKs sometimes release debug DLLs which allow additional on-screen information to be displayed.</value>
+  </data>
+  <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
+    <value>DLLs are checked if they are trusted in Windows by validating the signature before being swapped into a game folder. If a DLL fails signature validation then it will not be used. It is recommended to keep this off.</value>
+  </data>
+  <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
+    <value>این فقط برای انتخاب‌گر DLL اعمال می‌شود، نه صفحه کتابخانه.</value>
+  </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>بیلد کامیت</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>تاریخ بیلد</value>
+  </data>
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
+    <value>امکان باز کردن فایل گزارش شما به طور مستقیم از DLSS Swapper وجود ندارد. لطفا سعی کنید آن را به صورت دستی باز کنید.</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
+    <value>آیا مطمئن هستید که می‌خواهید مسیر نادیده گرفته شده {0} را حذف کنید؟</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
+    <value>حذف مسیر نادیده گرفته شده</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
+    <value>گزینه‌های توسعه‌دهنده DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
+    <value>فعال کردن ثبت گزارش در پنجره کنسول</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
+    <value>فعال کردن ثبت گزارش در فایل</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
+    <value>فعال شده برای همه DLLهای DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>فقط برای DLLهای دیباگ DLSS فعال شده است</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
+    <value>نمایش نشانگر روی صفحه</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
+    <value>ثبت گزارش با جزئیات</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>گزینه‌های DLSS</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>تنظیمات از پیش تعیین شده سراسری</value>
+  </data>
+  <data name="SettingsPage_GameLibraries" xml:space="preserve">
+    <value>کتابخانه‌های بازی</value>
+  </data>
+  <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
+    <value>راهنمای عیب‌یابی عمومی</value>
+  </data>
+  <data name="SettingsPage_GiveFeedback" xml:space="preserve">
+    <value>ارسال بازخورد</value>
+  </data>
+  <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
+    <value>شما می‌توانید یک ویژگی را پیشنهاد دهید یا یک مشکل را در DLSS Swapper گزارش دهید</value>
+  </data>
+  <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
+    <value>مسیرهای نادیده گرفته شده</value>
+  </data>
+  <data name="SettingsPage_Language" xml:space="preserve">
+    <value>زبان</value>
+  </data>
+  <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
+    <value>{0} غیرفعال شد</value>
+  </data>
+  <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
+    <value>{0} فعال شد</value>
+  </data>
+  <data name="SettingsPage_Logging" xml:space="preserve">
+    <value>ثبت گزارش</value>
+  </data>
+  <data name="SettingsPage_Logging_Debug" xml:space="preserve">
+    <value>اشکال‌زدایی</value>
+  </data>
+  <data name="SettingsPage_Logging_Error" xml:space="preserve">
+    <value>خطا</value>
+  </data>
+  <data name="SettingsPage_Logging_Info" xml:space="preserve">
+    <value>اطلاعات</value>
+  </data>
+  <data name="SettingsPage_Logging_Off" xml:space="preserve">
+    <value>خاموش</value>
+  </data>
+  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
+    <value>با جزئیات</value>
+  </data>
+  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
+    <value>هشدار</value>
+  </data>
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
+    <value>هیچ به‌روزرسانی جدیدی در دسترس نیست.</value>
+  </data>
+  <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
+    <value>تقدیر و تشکر</value>
+  </data>
+  <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
+    <value>عیب‌یابی</value>
+  </data>
+  <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
+    <value>تست کننده شبکه</value>
+  </data>
+  <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
+    <value>باز کردن جعبه ابزار ترجمه</value>
+  </data>
+  <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
+    <value>مسیر {0} قبلاً نادیده گرفته شده است.</value>
+  </data>
+  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
+    <value>اجازه دادن به منابع غیرقابل اعتماد</value>
+  </data>
+  <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
+    <value>بررسی برای به‌روزرسانی‌ها</value>
+  </data>
+  <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
+    <value>فقط نمایش فایل‌های DLL دانلود شده</value>
+  </data>
+  <data name="SettingsPage_ThemeDark" xml:space="preserve">
+    <value>تیره</value>
+  </data>
+  <data name="SettingsPage_ThemeLight" xml:space="preserve">
+    <value>روشن</value>
+  </data>
+  <data name="SettingsPage_ThemeMode" xml:space="preserve">
+    <value>حالت تم</value>
+  </data>
+  <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
+    <value>استفاده از تنظیمات سیستم</value>
+  </data>
+  <data name="SettingsPage_Title" xml:space="preserve">
+    <value>تنظیمات</value>
+  </data>
+  <data name="SettingsPage_Troubleshooting" xml:space="preserve">
+    <value>رفع مشکل</value>
+  </data>
+  <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
+    <value>فایل گزارش فعلی شما این است</value>
+  </data>
+  <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
+    <value>You can not use the translation tool while it is running as admin. Please restart the application.</value>
+  </data>
+  <data name="TranslationToolboxPage_Comment" xml:space="preserve">
+    <value>توضیح</value>
+  </data>
+  <data name="TranslationToolboxPage_ImportAsTranslation" xml:space="preserve">
+    <value>وارد کردن زبان به عنوان ترجمه</value>
+  </data>
+  <data name="TranslationToolboxPage_Key" xml:space="preserve">
+    <value>کلید</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
+    <value>بارگیری ترجمه موجود</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
+    <value>امکان بارگیری ترجمه وجود ندارد. لطفا برای اطلاعات بیشتر به گزارش خطا مراجعه کنید.</value>
+  </data>
+  <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
+    <value>ترجمه جدید</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
+    <value>هیچ داده ترجمه ای برای انتشار یافت نشد.</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
+    <value>هیچ داده ترجمه ای برای ذخیره یافت نشد.</value>
+  </data>
+  <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
+    <value>این یک فایل ترجمه معتبر DLSS Swapper نیست.</value>
+  </data>
+  <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
+    <value>امکان انتشار ترجمه وجود ندارد. لطفا برای اطلاعات بیشتر به گزارش خطا مراجعه کنید.</value>
+  </data>
+  <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
+    <value>بارگذاری مجدد برنامه</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
+    <value>بازنشانی و ادامه</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
+    <value>این کار پیشرفت ترجمه فعلی شما را بازنشانی می‌کند. آیا مطمئن هستید که می‌خواهید ادامه دهید؟</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
+    <value>بازنشانی پیشرفت و ادامه؟</value>
+  </data>
+  <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
+    <value>ذخیره ترجمه انجام نشد. لطفا برای اطلاعات بیشتر به گزارش خطا مراجعه کنید.</value>
+  </data>
+  <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
+    <value>انتخاب زبان برای بارگیری</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
+    <value>زبان مبدا</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
+    <value>ترجمه مبدا</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
+    <value>راهنمای ترجمه</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
+    <value>Your translation has been created. Please look at the DLSS Swapper translation guide as to what to do next with {0}.</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
+    <value>پیشرفت ترجمه</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
+    <value>بستن بدون ذخیره</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
+    <value>You possibly have unsaved translation changes. If you close this window these will be lost.</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
+    <value>تغییرات ترجمه ذخیره نشده</value>
+  </data>
+  <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
+    <value>جعبه ابزار ترجمه</value>
+  </data>
+</root>

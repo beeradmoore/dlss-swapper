@@ -51,6 +51,7 @@ public class LanguageManager
             "en-GB",
             "en-US",
             "es-ES",
+            "fa-IR",
             "fi-FI",
             "fr-FR",
             "it-IT",
@@ -84,6 +85,7 @@ public class LanguageManager
             "en-GB" => "English (United Kingdom)",
             "en-US" => "English (United States)",
             "es-ES" => "Español", // Spanish
+            "fa-IR" => "فارسی", // Farsi
             "fi-FI" => "Suomi", // Finnish (Finland)
             "fr-FR" => "Français", // French (France)
             "it-IT" => "Italiano", // Italian (Italy)

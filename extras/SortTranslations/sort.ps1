@@ -22,5 +22,16 @@ foreach ($file in $reswFiles)
         $xml.root.AppendChild($importedNode) | Out-Null
     }
 
-    $xml.Save($file.FullName)
+    $settings = [System.Xml.XmlWriterSettings]::new()
+    $settings.Indent = $true
+    $settings.NewLineChars = "`r`n"
+    $settings.NewLineHandling = [System.Xml.NewLineHandling]::Replace
+
+    $writer = [System.Xml.XmlWriter]::Create($file.FullName, $settings)
+    try {
+        $xml.Save($writer)
+    }
+    finally {
+        $writer.Dispose()
+    }
 }

@@ -168,7 +168,7 @@
 
                                         />-->
 
-                                <TextBox Text="{Binding NewTranslation, Mode=TwoWay}" Padding="4" Background="Transparent" BorderBrush="Transparent" TextWrapping="Wrap" AcceptsReturn="false" LostFocus="TextBox_LostFocus" PreviewKeyDown="TextBox_PreviewKeyDown">
+                                <TextBox Text="{Binding NewTranslation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="4" Background="Transparent" BorderBrush="Transparent" TextWrapping="Wrap" AcceptsReturn="false" LostFocus="TextBox_LostFocus" PreviewKeyDown="TextBox_PreviewKeyDown">
                                     <TextBox.Resources>
                                         <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent" />
                                         <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent" />

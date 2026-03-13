@@ -314,6 +314,8 @@ public partial class TranslationToolboxWindowModel : ObservableObject
     {
         if (_weakWindow.TryGetTarget(out var window))
         {
+            RecalculateTranslationProgress();
+
             var outputData = new Dictionary<string, string>();
             foreach (var translation in TranslationRows)
             {
@@ -535,6 +537,8 @@ public partial class TranslationToolboxWindowModel : ObservableObject
     {
         if (_weakWindow.TryGetTarget(out var window))
         {
+            RecalculateTranslationProgress();
+
             var outputData = new Dictionary<string, string>();
             foreach (var translation in TranslationRows)
             {

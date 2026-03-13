@@ -234,6 +234,9 @@
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>Додати власну обкладинку</value>
   </data>
+  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>Запуск ігор з вашої бібліотеки {0} наразі не підтримується.</value>
+  </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>Додати до обраного</value>
   </data>
@@ -288,9 +291,6 @@
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
     <value>"{0}" є недійсним типом файлу</value>
-  </data>
-  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
-    <value>Запуск ігор з вашої бібліотеки {0} наразі не підтримується.</value>
   </data>
   <data name="GamePage_Launch" xml:space="preserve">
     <value>Запустити</value>

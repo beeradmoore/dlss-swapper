@@ -191,7 +191,7 @@ internal class GitHubUpdater
             var dialog = new EasyContentDialog(xamlRoot)
             {
                 Title = $"{ResourceHelper.GetString("GitHubUpdater_UpdateAvailable")} - {gitHubRelease.Name}",
-                SecondaryButtonText = "View Release",
+                SecondaryButtonText = ResourceHelper.GetString("GitHubUpdater_ViewUpdate"),
                 DefaultButton = ContentDialogButton.Secondary,
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 Content = new ScrollViewer()
@@ -298,26 +298,6 @@ internal class GitHubUpdater
         };
 
 
-        var cancellationTokenSource = new CancellationTokenSource();
-
-        var downloadingDialog = new EasyContentDialog(xamlRoot)
-        {
-            Title = "Downloading Update",
-            Content = progressStackPanel,
-            CloseButtonText = ResourceHelper.GetString("General_Cancel"), 
-        };
-        downloadingDialog.CloseButtonClick += (sender, args) =>
-        {
-            try
-            {
-                cancellationTokenSource.Cancel();
-            }
-            catch (Exception)
-            {
-                // NOOP
-            }
-        };
-        _ = downloadingDialog.ShowAsync();
 
 
         var updatesFolder = Storage.GetUpdatesFolder();
@@ -343,6 +323,27 @@ internal class GitHubUpdater
 
         if (shouldDownload)
         {
+            var cancellationTokenSource = new CancellationTokenSource();
+
+            var downloadingDialog = new EasyContentDialog(xamlRoot)
+            {
+                Title = "Downloading Update",
+                Content = progressStackPanel,
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+            };
+            downloadingDialog.CloseButtonClick += (sender, args) =>
+            {
+                try
+                {
+                    cancellationTokenSource.Cancel();
+                }
+                catch (Exception)
+                {
+                    // NOOP
+                }
+            };
+            _ = downloadingDialog.ShowAsync();
+
             var totalSizeString = ByteSize.FromBytes(gitHubAsset.Size).ToString("MB", CultureInfo.CurrentCulture);
             var fileDownloader = new FileDownloader(gitHubAsset.BrowserDownloadUrl);
 
@@ -382,9 +383,9 @@ internal class GitHubUpdater
 
                 var downloadErrorDialog = new EasyContentDialog(xamlRoot)
                 {
-                    Title = "Error",
+                    Title = ResourceHelper.GetString("General_Error"),
                     Content = "Could not download update.",
-                    PrimaryButtonText = "View Release",
+                    PrimaryButtonText = ResourceHelper.GetString("GitHubUpdater_ViewUpdate"),
                     CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                     DefaultButton = ContentDialogButton.Primary,
                 };
@@ -408,19 +409,58 @@ internal class GitHubUpdater
             CloseButtonText = ResourceHelper.GetString("General_Cancel"),
             DefaultButton = ContentDialogButton.Primary,
         };
-        var result = await installDialog.ShowAsync();
+        var installDialogResult = await installDialog.ShowAsync();
 
-        if (result == ContentDialogResult.Primary)
+        if (installDialogResult == ContentDialogResult.Primary)
         {
-            var processStartInfo = new ProcessStartInfo()
-            {
-                FileName = tempDownloadFile,
-                UseShellExecute = true,
-            };
-            Process.Start(processStartInfo);
 
-            // Close DLSS Swapper so the installer can install
-            Application.Current.Exit();
+            var updatingDialog = new EasyContentDialog(xamlRoot)
+            {
+                Title = "Updating",
+                Content = new ProgressRing() { IsIndeterminate = true },
+            };
+            _ = updatingDialog.ShowAsync();
+
+            // Give the popup time to show.
+            await Task.Delay(500);
+
+            try
+            {
+                var processStartInfo = new ProcessStartInfo()
+                {
+                    FileName = tempDownloadFile,
+                    UseShellExecute = true,
+                };
+                var installerProcess = Process.Start(processStartInfo);
+                if (installerProcess is null)
+                {
+                    throw new Exception("Could not launch installer");
+                }
+
+                // Close DLSS Swapper so the installer can install
+                Application.Current.Exit();
+            }
+            catch (Exception err)
+            {
+                Logger.Error(err);
+
+                updatingDialog.Hide();
+
+                var errorDialog = new EasyContentDialog(xamlRoot)
+                {
+                    Title = ResourceHelper.GetString("General_Error"),
+                    Content = "Could not run the installer at this time. Please try again later, or manually install the update.",
+                    PrimaryButtonText = ResourceHelper.GetString("GitHubUpdater_ViewUpdate"),
+                    CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+                    DefaultButton = ContentDialogButton.Primary,
+                };
+                var errorDialogResult = await errorDialog.ShowAsync();
+
+                if (errorDialogResult == ContentDialogResult.Primary)
+                {
+                    await Launcher.LaunchUriAsync(new Uri(gitHubRelease.HtmlUrl));
+                }
+            }
         }
 
     }

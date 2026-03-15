@@ -39,11 +39,11 @@ public partial class FileDownloader : ObservableObject
 
     public const int BufferSize = 65536;
 
-    string _url;
-
     public string LogPrefix { get; set; } = string.Empty;
 
-    int _timerInterval;
+    readonly string _url;
+    readonly int _timerInterval;
+
     public FileDownloader(string url, int timerInterval = 100)
     {
         _url = url;

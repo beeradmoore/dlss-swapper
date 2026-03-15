@@ -233,8 +233,14 @@ internal class GitHubUpdater
                     continue;
                 }
 
+                if (installerAsset is not null)
+                {
+                    // Something happened, we found TWO installer assets. Because we don't know what one should be used we will use none and auto-update will be disabled.
+                    installerAsset = null;
+                    break;
+                }
+
                 installerAsset = gitHubAsset;
-                break;
             }
 
             // If the installer asset is found we add the update button and make it the primary response.

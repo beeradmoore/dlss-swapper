@@ -282,7 +282,7 @@ internal class GitHubUpdater
         };
         progressTextBlock.Inlines.Add(new Run()
         {
-            Text = "Progress: "
+            Text = $"{ResourceHelper.GetString("GitHubUpdater_DownloadProgress")}: "
         });
         var progressRun = new Run() { Text = "-" };
         progressTextBlock.Inlines.Add(progressRun);
@@ -327,7 +327,7 @@ internal class GitHubUpdater
 
             var downloadingDialog = new EasyContentDialog(xamlRoot)
             {
-                Title = "Downloading Update",
+                Title = ResourceHelper.GetString("GitHubUpdater_DownloadingUpdate_Title"),
                 Content = progressStackPanel,
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
             };
@@ -384,7 +384,7 @@ internal class GitHubUpdater
                 var downloadErrorDialog = new EasyContentDialog(xamlRoot)
                 {
                     Title = ResourceHelper.GetString("General_Error"),
-                    Content = "Could not download update.",
+                    Content = ResourceHelper.GetString("GitHubUpdater_UpdateDownloadFailed"),
                     PrimaryButtonText = ResourceHelper.GetString("GitHubUpdater_ViewUpdate"),
                     CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                     DefaultButton = ContentDialogButton.Primary,
@@ -403,9 +403,9 @@ internal class GitHubUpdater
 
         var installDialog = new EasyContentDialog(xamlRoot)
         {
-            Title = "Download Complete",
-            Content = "Update is now ready to install.",
-            PrimaryButtonText = "Install",
+            Title = ResourceHelper.GetString("GitHubUpdater_DownloadComplete_Title"),
+            Content = ResourceHelper.GetString("GitHubUpdater_UpdateReadyToInstall"),
+            PrimaryButtonText = ResourceHelper.GetString("GitHubUpdater_Install"),
             CloseButtonText = ResourceHelper.GetString("General_Cancel"),
             DefaultButton = ContentDialogButton.Primary,
         };
@@ -416,7 +416,7 @@ internal class GitHubUpdater
 
             var updatingDialog = new EasyContentDialog(xamlRoot)
             {
-                Title = "Updating",
+                Title = ResourceHelper.GetString("GitHubUpdater_Updating_Title"),
                 Content = new ProgressRing() { IsIndeterminate = true },
             };
             _ = updatingDialog.ShowAsync();
@@ -449,7 +449,7 @@ internal class GitHubUpdater
                 var errorDialog = new EasyContentDialog(xamlRoot)
                 {
                     Title = ResourceHelper.GetString("General_Error"),
-                    Content = "Could not run the installer at this time. Please try again later, or manually install the update.",
+                    Content = ResourceHelper.GetString("GitHubUpdater_CouldNotRunInstaller"),
                     PrimaryButtonText = ResourceHelper.GetString("GitHubUpdater_ViewUpdate"),
                     CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                     DefaultButton = ContentDialogButton.Primary,

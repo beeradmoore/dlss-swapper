@@ -654,6 +654,9 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="GitHubUpdater_CouldNotRunInstaller" xml:space="preserve">
+    <value>Could not run the installer at this time. Please try again later, or manually install the update.</value>
+  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>You currently have {0} installed.</value>
     <comment>{0} is the currently installed version.</comment>
@@ -661,11 +664,32 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
     <value>DLSS Swapper just updated</value>
   </data>
-  <data name="GitHubUpdater_ViewUpdate" xml:space="preserve">
-    <value>View Update</value>
+  <data name="GitHubUpdater_DownloadComplete_Title" xml:space="preserve">
+    <value>Download Complete</value>
+  </data>
+  <data name="GitHubUpdater_DownloadingUpdate_Title" xml:space="preserve">
+    <value>Downloading Update</value>
+  </data>
+  <data name="GitHubUpdater_DownloadProgress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="GitHubUpdater_Install" xml:space="preserve">
+    <value>Install</value>
   </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
     <value>Update Available</value>
+  </data>
+  <data name="GitHubUpdater_UpdateDownloadFailed" xml:space="preserve">
+    <value>Could not download update.</value>
+  </data>
+  <data name="GitHubUpdater_UpdateReadyToInstall" xml:space="preserve">
+    <value>Update is now ready to install.</value>
+  </data>
+  <data name="GitHubUpdater_Updating_Title" xml:space="preserve">
+    <value>Updating</value>
+  </data>
+  <data name="GitHubUpdater_ViewUpdate" xml:space="preserve">
+    <value>View Update</value>
   </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>Already downloaded.</value>

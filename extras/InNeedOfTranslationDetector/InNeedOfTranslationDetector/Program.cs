@@ -241,7 +241,10 @@ var ignoredCSharpMatches = new List<string>()
 	"= \"228980\"",
 	" = \"US\"",
 	" = $\"shell:appsFolder\\\\{xboxGame.PlatformId}!{xboxGame.ApplicationId}\"",
-
+	"= \"libxess_dx11.dll\"",
+	"=\"%1\"",
+	"=\"launch {LauncherId}\"",
+	" = \"-\"",
 };
 
 

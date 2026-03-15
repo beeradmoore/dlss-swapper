@@ -179,8 +179,9 @@ public partial class FileDownloader : ObservableObject
             Logger.Verbose($"{LogPrefix}Complete. Read {totalBytesRead} bytes from {_url}");
             return true;
         }
-        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested == false)
+        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
         {
+            // Still throw the exception, but don't log it because it was cancelled by the user.
             throw;
         }
         catch (Exception err)

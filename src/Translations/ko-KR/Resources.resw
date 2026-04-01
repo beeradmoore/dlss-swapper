@@ -544,10 +544,12 @@ DLL 버전마다 지원하는 프리셋이 다릅니다.
     <value>DLSS RR 프리셋</value>
   </data>
   <data name="General_Name_DLSS_D" xml:space="preserve">
-    <value>DLSS Ray Reconstruction (광선 재구성)</value>
+    <value>DLSS Ray Reconstruction
+(광선 재구성)</value>
   </data>
   <data name="General_Name_DLSS_G" xml:space="preserve">
-    <value>DLSS Frame Generation (프레임 생성)</value>
+    <value>DLSS Frame Generation
+(프레임 생성)</value>
   </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>DLSS 프리셋</value>
@@ -568,7 +570,8 @@ DLL 버전마다 지원하는 프리셋이 다릅니다.
     <value>XeSS (DX11)</value>
   </data>
   <data name="General_Name_XeSS_FG" xml:space="preserve">
-    <value>XeSS Frame Generation (프레임 생성)</value>
+    <value>XeSS Frame Generation
+(프레임 생성)</value>
   </data>
   <data name="General_No" xml:space="preserve">
     <value>아니요</value>

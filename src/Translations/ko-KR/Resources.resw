@@ -1,0 +1,1099 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcknowledgementsPage_Title" xml:space="preserve">
+    <value>라이선스 및 크레딧</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>DLSS Swapper</value>
+  </data>
+  <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
+    <value>아래 세부 정보를 복사하려면 클릭하세요</value>
+  </data>
+  <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
+    <value>진단</value>
+  </data>
+  <data name="DllManager_AlreadyImported" xml:space="preserve">
+    <value>(이미 가져옴)</value>
+  </data>
+  <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
+    <value>가져오기 기능이 비활성화되었습니다. 매니페스트를 불러올 수 없습니다.</value>
+  </data>
+  <data name="DllManager_MigratingDlls" xml:space="preserve">
+    <value>DLL 마이그레이션 중</value>
+  </data>
+  <data name="DllManager_UnknownTypeDll" xml:space="preserve">
+    <value>알려지지 않은 형식의 DLL입니다.</value>
+  </data>
+  <data name="DllManager_UntrustedDll" xml:space="preserve">
+    <value>Windows에서 신뢰할 수 없는 DLL입니다.</value>
+  </data>
+  <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
+    <value>{0} DLL을 다운로드할 수 없습니다. 
+나중에 다시 시도하거나 로그를 확인하여 실패 원인을 파악하세요.</value>
+  </data>
+  <data name="DllRecord_Download" xml:space="preserve">
+    <value>다운로드</value>
+  </data>
+  <data name="DllRecord_DownloadError" xml:space="preserve">
+    <value>다운로드 오류</value>
+  </data>
+  <data name="DllRecord_Downloading" xml:space="preserve">
+    <value>다운로드 중</value>
+  </data>
+  <data name="DllRecord_Imported" xml:space="preserve">
+    <value>가져오기 완료</value>
+  </data>
+  <data name="DllRecord_RequiresDownload" xml:space="preserve">
+    <value>다운로드 필요</value>
+  </data>
+  <data name="DllZipInvalidNoDllFound" xml:space="preserve">
+    <value>DLL 압축파일(zip)이 잘못되었습니다 (DLL을 찾을 수 없음).</value>
+  </data>
+  <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
+    <value>NVIDIA 권장</value>
+  </data>
+  <data name="DLSS_Preset_Default" xml:space="preserve">
+    <value>기본값</value>
+  </data>
+  <data name="DLSS_Preset_Letter" xml:space="preserve">
+    <value>프리셋 {0}</value>
+  </data>
+  <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
+    <value>프리셋 {0} (권장되지 않음)</value>
+  </data>
+  <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
+    <value>DLSS Swapper를 실행하지 못했습니다</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
+    <value>다음에서</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
+    <value>새 이슈를 생성하고</value>
+  </data>
+  <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
+    <value>DLSS Swapper GitHub 저장소의 'additional context' 섹션에 다음 정보를 제공해 주세요.</value>
+  </data>
+  <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
+    <value>실행 실패</value>
+  </data>
+  <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
+    <value>에셋 유형</value>
+  </data>
+  <data name="GameHistoryControl_EventTimeHeader" xml:space="preserve">
+    <value>이벤트 시간</value>
+  </data>
+  <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
+    <value>이벤트 유형</value>
+  </data>
+  <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
+    <value>기록을 찾을 수 없습니다.</value>
+  </data>
+  <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
+    <value>버전</value>
+  </data>
+  <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
+    <value>DLL 백업이 삭제됨</value>
+  </data>
+  <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
+    <value>DLL이 외부에서 변경됨</value>
+  </data>
+  <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
+    <value>DLL 감지됨</value>
+  </data>
+  <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
+    <value>DLL 초기화됨</value>
+  </data>
+  <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
+    <value>DLL 교체됨</value>
+  </data>
+  <data name="GamePage_AddCustomCover" xml:space="preserve">
+    <value>커스텀 커버 추가</value>
+  </data>
+  <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
+    <value>{0} 라이브러리에서 게임을 실행하는 기능은 현재 지원되지 않습니다.</value>
+  </data>
+  <data name="GamePage_ClickToFavorite" xml:space="preserve">
+    <value>클릭하여 즐겨찾기에 추가</value>
+  </data>
+  <data name="GamePage_ClickToHide" xml:space="preserve">
+    <value>클릭하여 숨기기</value>
+  </data>
+  <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
+    <value>"{0}" 경로를 찾을 수 없습니다.</value>
+  </data>
+  <data name="GamePage_CurrentDll" xml:space="preserve">
+    <value>현재 DLL</value>
+  </data>
+  <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
+    <value>"{0}" 파일을 찾을 수 없습니다.</value>
+  </data>
+  <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
+    <value>DLL이 {0}(으)로 초기화되었습니다.</value>
+  </data>
+  <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
+    <value>다운로드 시작 중</value>
+  </data>
+  <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
+    <value>교체(Swap)하기 전에 다운로드가 완료될 때까지 기다려 주세요</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
+    <value>프리셋 정보</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
+    <value>DLSS 프리셋은 게임 설치 디렉토리에 포함된 DLSS DLL 파일 내에 들어있습니다. 
+DLL 버전마다 지원하는 프리셋이 다릅니다. 
+예를 들어, 프리셋 K는 DLSS v3.10.2부터 도입되었습니다. 
+따라서 v3.7 DLL을 사용하면서 프리셋을 K로 설정하면 작동하지 않으며, 
+대신 게임이 기본으로 지정한 프리셋이 사용됩니다.
+글로벌 프리셋도 마찬가지입니다. 
+프리셋 K를 선택했더라도 게임이 사용하는 DLSS 버전이 v3.7이라면 프리셋 K는 무시되고 게임의 기본값으로 대체됩니다.
+현재 어떤 프리셋이 사용 중인지 확인하려면 'DLSS 온스크린 인디케이터(On-screen indicator)'를 활성화하세요.</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
+    <value>온스크린 인디케이터 정보</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
+    <value>DLSS 프리셋 정보</value>
+  </data>
+  <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
+    <value>DLSS 프리셋을 설정한다고 해서 해당 프리셋의 사용이 반드시 보장되는 것은 아닙니다.</value>
+  </data>
+  <data name="GamePage_Favorited" xml:space="preserve">
+    <value>즐겨찾기에 추가됨</value>
+  </data>
+  <data name="GamePage_History" xml:space="preserve">
+    <value>기록</value>
+  </data>
+  <data name="GamePage_InstallPath" xml:space="preserve">
+    <value>설치 경로</value>
+  </data>
+  <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
+    <value>"{0}"은(는) 유효하지 않은 파일 형식입니다.</value>
+  </data>
+  <data name="GamePage_Launch" xml:space="preserve">
+    <value>실행</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
+    <value>이 타이틀은 수동으로 추가된 것이 아니므로 삭제할 수 없습니다.</value>
+  </data>
+  <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
+    <value>DLSS Swapper에서 '{0}'을(를) 제거하시겠습니까? 이미 교체된 DLSS 파일은 변경되지 않습니다.</value>
+  </data>
+  <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
+    <value>아래에 발견된 여러 개의 DLL이 표시됩니다. 
+평소처럼 DLL을 교체하거나 복구할 수 있지만, 모든 DLL에 동시에 적용됩니다. 
+단, 게임이 이 중 어떤 DLL을 사용하는지 알 수 없으므로 표시된 버전은 처음 감지된 DLL 기준입니다.</value>
+  </data>
+  <data name="GamePage_MultipleDllsFound" xml:space="preserve">
+    <value>여러 개의 DLL 발견됨</value>
+  </data>
+  <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
+    <value>여러 개의 {0} DLL 발견됨</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
+    <value>새로운 DLL을 다운로드하려면 라이브러리 페이지로 이동해 주세요.</value>
+  </data>
+  <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
+    <value>DLL을 찾을 수 없음</value>
+  </data>
+  <data name="GamePage_Notes" xml:space="preserve">
+    <value>참고 사항</value>
+  </data>
+  <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
+    <value>이 게임은 현재 플레이 가능한 상태가 아닙니다.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
+    <value>NVAPI 오류가 발생했습니다. 자세한 내용은 오류 로그에 기록되었습니다.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Message" xml:space="preserve">
+    <value>NVAPI 오류가 발생했습니다. 관리자 권한으로 실행하면 문제가 해결될 수 있습니다. 
+자세한 내용은 오류 로그에 기록되었습니다.</value>
+  </data>
+  <data name="GamePage_NVAPIError_Title" xml:space="preserve">
+    <value>NVAPI 오류</value>
+  </data>
+  <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
+    <value>NVAPI 오류가 발생했습니다. 클릭하여 자세한 정보를 확인하세요.</value>
+  </data>
+  <data name="GamePage_OpenDllLocation" xml:space="preserve">
+    <value>DLL 위치 열기</value>
+  </data>
+  <data name="GamePage_OriginalDll" xml:space="preserve">
+    <value>원본 DLL</value>
+  </data>
+  <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
+    <value>{0}을(를) 처리 중입니다. 로딩 표시가 사라질 때까지 기다린 후 열어주세요.</value>
+  </data>
+  <data name="GamePage_ResetAll" xml:space="preserve">
+    <value>모두 초기화</value>
+  </data>
+  <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
+    <value>원본 DLL 복구</value>
+  </data>
+  <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
+    <value>{0} 버전 선택</value>
+  </data>
+  <data name="GamePage_StorageFileIsNull" xml:space="preserve">
+    <value>storageFile이 null입니다</value>
+  </data>
+  <data name="GamePage_UnableToChangePreset" xml:space="preserve">
+    <value>프리셋을 변경할 수 없습니다. 자세한 내용은 오류 로그를 확인하세요.</value>
+  </data>
+  <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
+    <value>커버 이미지는 파일 하나만 드래그할 수 있습니다</value>
+  </data>
+  <data name="GamesPage_AddGame" xml:space="preserve">
+    <value>게임 추가</value>
+  </data>
+  <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
+    <value>같은 라이브러리의 게임을 그룹화하기</value>
+  </data>
+  <data name="GamesPage_Grouping" xml:space="preserve">
+    <value>그룹화</value>
+  </data>
+  <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
+    <value>교체 가능한 항목이 없는 게임 숨기기</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
+    <value>커버 이미지는 파일 하나만 드래그할 수 있습니다</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
+    <value>게임 수동 추가 시 참고 사항</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
+    <value>문제가 발생하여 현재 게임을 추가할 수 없습니다. 이 이슈를 제보해 주세요.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
+    <value>게임 추가 오류</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
+    <value>&lt;i&gt;games&lt;/i&gt; 디렉토리가 아닌 해당 &lt;i&gt;game&lt;/i&gt; 디렉토리를 선택해야 합니다.
+예를 들어, 게임이 다음 경로에 있다면:
+&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame&lt;/b&gt;
+
+&lt;b&gt;MyGamesFolder&lt;/b&gt; 디렉토리가 아닌 &lt;b&gt;MyFavGame&lt;/b&gt; 디렉토리를 선택해야 합니다.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
+    <value>DLSS Swapper는 설치된 게임 라이브러리에서 자동으로 게임을 찾아야 합니다.
+ 게임이 목록에 보이지 않는다면 몇 가지 설정이 원인일 수 있습니다. 다음을 확인해 보세요:
+
+- 게임 목록 필터가 "교체 가능한 항목이 없는 게임 숨기기"로 설정되어 있지 않은지 확인
+
+- 설정에서 특정 게임 라이브러리가 활성화되어 있는지 확인
+
+이 사항들을 확인했음에도 게임이 나타나지 않는다면 버그일 수 있습니다. 
+저희 GitHub 저장소에 이슈를 제보해 주시면 수정하여 향후 게임이 더 잘 감지되도록 개선하겠습니다.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
+    <value>게임 수동 추가 참고 사항</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
+    <value>설치 경로 "{0}"은(는) 이미 존재하며 다시 추가할 수 없습니다.</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
+    <value>게임 폴더 선택</value>
+  </data>
+  <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
+    <value>최상위 디렉토리 추가는 지원되지 않습니다. 게임 디렉토리의 루트(최상위 폴더)를 추가해 주세요.</value>
+  </data>
+  <data name="GamesPage_NewDlls" xml:space="preserve">
+    <value>새로운 DLL</value>
+  </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>새로운 DLL 발견됨</value>
+  </data>
+  <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
+    <value>새 GitHub 이슈 생성</value>
+  </data>
+  <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
+    <value>게임을 불러오는 동안 DLSS Swapper 매니페스트에 없는 몇 가지 새로운 DLL이 발견되었습니다.</value>
+  </data>
+  <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
+    <value>(GitHub 계정 필요)</value>
+  </data>
+  <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
+    <value>버튼이 작동하지 않으면 여기를 시도해 보세요,</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
+    <value>4단계: 이슈 제출</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
+    <value>1단계: 새 이슈 생성</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
+    <value>3단계: 본문 복사</value>
+  </data>
+  <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
+    <value>2단계: 제목 복사</value>
+  </data>
+  <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
+    <value>도와주셔서 감사합니다!</value>
+  </data>
+  <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
+    <value>DLL 파일을 직접 제출하실 필요는 없습니다. 
+제공해주신 정보를 바탕으로 저희가 추적하겠습니다.</value>
+  </data>
+  <data name="GamesPage_ReloadingGame" xml:space="preserve">
+    <value>게임 다시 불러오는 중</value>
+  </data>
+  <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
+    <value>숨겨진 게임 표시 (실행 시 기본값은 꺼짐)</value>
+  </data>
+  <data name="GamesPage_Title" xml:space="preserve">
+    <value>게임</value>
+  </data>
+  <data name="GamesPage_ViewType" xml:space="preserve">
+    <value>보기 방식</value>
+  </data>
+  <data name="GamesPage_ViewType_GridView" xml:space="preserve">
+    <value>그리드 보기</value>
+  </data>
+  <data name="GamesPage_ViewType_ListView" xml:space="preserve">
+    <value>목록 보기</value>
+  </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>커스텀 커버 이미지를 제거하시겠습니까?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>게임 처리 중</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>커스텀 커버를 제거할까요?</value>
+  </data>
+  <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
+    <value>이 앱은 관리자 권한으로 실행 중입니다.</value>
+  </data>
+  <data name="General_Apply" xml:space="preserve">
+    <value>적용</value>
+  </data>
+  <data name="General_Cancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="General_Close" xml:space="preserve">
+    <value>닫기</value>
+  </data>
+  <data name="General_Copy" xml:space="preserve">
+    <value>복사</value>
+  </data>
+  <data name="General_Delete" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="General_DontShowAgain" xml:space="preserve">
+    <value>다시 보지 않기</value>
+  </data>
+  <data name="General_Error" xml:space="preserve">
+    <value>오류</value>
+  </data>
+  <data name="General_ErrorMessage" xml:space="preserve">
+    <value>오류 메시지</value>
+  </data>
+  <data name="General_Export" xml:space="preserve">
+    <value>내보내기</value>
+  </data>
+  <data name="General_ExportAll" xml:space="preserve">
+    <value>모두 내보내기</value>
+  </data>
+  <data name="General_Failed" xml:space="preserve">
+    <value>실패함</value>
+  </data>
+  <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
+    <value>이 기능은 앱을 관리자 권한으로 실행 중일 때는 지원되지 않습니다.</value>
+  </data>
+  <data name="General_Filter" xml:space="preserve">
+    <value>필터</value>
+  </data>
+  <data name="General_Help" xml:space="preserve">
+    <value>도움말</value>
+  </data>
+  <data name="General_Hidden" xml:space="preserve">
+    <value>숨김</value>
+  </data>
+  <data name="General_Import" xml:space="preserve">
+    <value>가져오기</value>
+  </data>
+  <data name="General_Load" xml:space="preserve">
+    <value>불러오기</value>
+  </data>
+  <data name="General_Loading" xml:space="preserve">
+    <value>불러오는 중</value>
+  </data>
+  <data name="General_Name" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="General_Name_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>DLSS RR 프리셋</value>
+  </data>
+  <data name="General_Name_DLSS_D" xml:space="preserve">
+    <value>DLSS Ray Reconstruction (광선 재구성)</value>
+  </data>
+  <data name="General_Name_DLSS_G" xml:space="preserve">
+    <value>DLSS Frame Generation (프레임 생성)</value>
+  </data>
+  <data name="General_Name_DLSS_Preset" xml:space="preserve">
+    <value>DLSS 프리셋</value>
+  </data>
+  <data name="General_Name_FSR_31_DX12" xml:space="preserve">
+    <value>FSR 3.1 DirectX 12</value>
+  </data>
+  <data name="General_Name_FSR_31_VK" xml:space="preserve">
+    <value>FSR 3.1 Vulkan</value>
+  </data>
+  <data name="General_Name_XeLL" xml:space="preserve">
+    <value>XeLL</value>
+  </data>
+  <data name="General_Name_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_DX11" xml:space="preserve">
+    <value>XeSS (DX11)</value>
+  </data>
+  <data name="General_Name_XeSS_FG" xml:space="preserve">
+    <value>XeSS Frame Generation (프레임 생성)</value>
+  </data>
+  <data name="General_No" xml:space="preserve">
+    <value>아니요</value>
+  </data>
+  <data name="General_None" xml:space="preserve">
+    <value>없음</value>
+  </data>
+  <data name="General_NotFound" xml:space="preserve">
+    <value>찾을 수 없음</value>
+  </data>
+  <data name="General_NotSupported" xml:space="preserve">
+    <value>지원되지 않음</value>
+  </data>
+  <data name="General_Okay" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="General_Oops" xml:space="preserve">
+    <value>문제가 발생했습니다!</value>
+  </data>
+  <data name="General_OpenFolder" xml:space="preserve">
+    <value>폴더 열기</value>
+  </data>
+  <data name="General_OpenLogsDirectory" xml:space="preserve">
+    <value>로그 디렉토리 열기</value>
+  </data>
+  <data name="General_Optional" xml:space="preserve">
+    <value>(선택 사항)</value>
+  </data>
+  <data name="General_Options" xml:space="preserve">
+    <value>옵션</value>
+  </data>
+  <data name="General_Publish" xml:space="preserve">
+    <value>게시(배포)</value>
+  </data>
+  <data name="General_Refresh" xml:space="preserve">
+    <value>새로고침</value>
+  </data>
+  <data name="General_Reload" xml:space="preserve">
+    <value>다시 불러오기</value>
+  </data>
+  <data name="General_Remove" xml:space="preserve">
+    <value>제거</value>
+  </data>
+  <data name="General_ReportIssue" xml:space="preserve">
+    <value>이슈 제보</value>
+  </data>
+  <data name="General_Save" xml:space="preserve">
+    <value>저장</value>
+  </data>
+  <data name="General_Search" xml:space="preserve">
+    <value>검색</value>
+  </data>
+  <data name="General_Sorry" xml:space="preserve">
+    <value>죄송합니다</value>
+  </data>
+  <data name="General_Success" xml:space="preserve">
+    <value>성공</value>
+  </data>
+  <data name="General_Swap" xml:space="preserve">
+    <value>교체</value>
+  </data>
+  <data name="General_Unknown" xml:space="preserve">
+    <value>알 수 없음</value>
+  </data>
+  <data name="General_Update" xml:space="preserve">
+    <value>업데이트</value>
+  </data>
+  <data name="General_Version" xml:space="preserve">
+    <value>버전</value>
+  </data>
+  <data name="General_Warning" xml:space="preserve">
+    <value>경고</value>
+  </data>
+  <data name="General_Yes" xml:space="preserve">
+    <value>예</value>
+  </data>
+  <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
+    <value>현재 {0} 버전이 설치되어 있습니다.</value>
+  </data>
+  <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
+    <value>DLSS Swapper가 방금 업데이트되었습니다</value>
+  </data>
+  <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
+    <value>업데이트 가능</value>
+  </data>
+  <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
+    <value>이미 다운로드됨.</value>
+  </data>
+  <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
+    <value>가져온 DLL을 불러올 수 없습니다</value>
+  </data>
+  <data name="LibraryPage_CouldntDownload" xml:space="preserve">
+    <value>지금은 다운로드할 수 없습니다.</value>
+  </data>
+  <data name="LibraryPage_CouldntExportDll" xml:space="preserve">
+    <value>DLL을 내보낼 수 없습니다.</value>
+  </data>
+  <data name="LibraryPage_DeleteDll" xml:space="preserve">
+    <value>DLL 삭제</value>
+  </data>
+  <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
+    <value>{0} v{1} 버전을 삭제할까요?</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
+    <value>다운로드 파일 크기</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
+    <value>파일 설명</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
+    <value>파일 크기</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
+    <value>해시</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
+    <value>내부 이름</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
+    <value>추가 내부 이름</value>
+  </data>
+  <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
+    <value>라벨</value>
+  </data>
+  <data name="LibraryPage_DownloadLatest" xml:space="preserve">
+    <value>최신 버전 다운로드</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
+    <value>{0}개의 새로운 다운로드를 시작했습니다.</value>
+  </data>
+  <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
+    <value>다운로드 시작됨</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
+    <value>내보낸 DLL:</value>
+  </data>
+  <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
+    <value>{0}개의 DLL을 내보냈습니다.</value>
+  </data>
+  <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
+    <value>{0} DLL을 내보냈습니다.</value>
+  </data>
+  <data name="LibraryPage_FileNotFound" xml:space="preserve">
+    <value>파일을 찾을 수 없습니다.</value>
+  </data>
+  <data name="LibraryPage_Finished" xml:space="preserve">
+    <value>완료됨</value>
+  </data>
+  <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
+    <value>기존 DLL 기록으로 가져왔습니다.</value>
+  </data>
+  <data name="LibraryPage_Importing" xml:space="preserve">
+    <value>가져오는 중</value>
+  </data>
+  <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
+    <value>컴퓨터의 DLL을 교체하는 작업은 위험할 수 있습니다.
+
+출처가 불분명한 악성 DLL을 게임에 넣는 것은 어디서 받았는지도 모를
+'스타크래프트 립버전 1.16.1.exe'를 아무 의심 없이 실행하는 것만큼이나 위험합니다.
+당신의 컴퓨터가 채굴, DDOS 좀비 PC, 개인정보 탈취가 발생 할 수 있습니다.
+
+반드시 신뢰할 수 있는 소스의 DLL만 가져오십시오</value>
+  </data>
+  <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
+    <value>내보낼 DLL을 찾을 수 없습니다.</value>
+  </data>
+  <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
+    <value>내보낼 DLL 기록이 없습니다.</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
+    <value>다운로드할 새로운 DLL이 없습니다.</value>
+  </data>
+  <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
+    <value>새로운 DLL 없음</value>
+  </data>
+  <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
+    <value>처리된 DLL:</value>
+  </data>
+  <data name="LibraryPage_Title" xml:space="preserve">
+    <value>라이브러리</value>
+  </data>
+  <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
+    <value>{0} 기록을 삭제할 수 없습니다.</value>
+  </data>
+  <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
+    <value>DLL 기록을 업데이트할 수 없습니다.</value>
+  </data>
+  <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
+    <value>압축 파일에 DLL이 포함되어 있지 않습니다.</value>
+  </data>
+  <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
+    <value>업데이트 시도 중</value>
+  </data>
+  <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
+    <value>매니페스트 파일을 불러올 수 없어 DLSS Swapper를 종료합니다.</value>
+  </data>
+  <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
+    <value>DLSS Swapper를 종료해야 합니다</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
+    <value>GitHub 이슈</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
+    <value>컴퓨터 또는 인터넷에서 manifest.json을 불러올 수 없습니다. 
+문제가 지속되면 GitHub 이슈 트래커에 보고해 주세요.</value>
+  </data>
+  <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
+    <value>매니페스트 업데이트</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
+    <value>DLSS 버전을 교체하는 것 자체가 치트로 간주되어서는 안 되지만, 
+일부 안티 치트 시스템은 게임 디렉토리 내의 파일이 원본과 다를 경우 제재를 가할 수도 있습니다.
+
+이러한 이유로 멀티플레이 게임에서는 사용 시 주의를 권장합니다.</value>
+  </data>
+  <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
+    <value>멀티플레이 게임 시 주의사항</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
+    <value>여전히 작동하지 않음</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
+    <value>정상 작동함!</value>
+  </data>
+  <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
+    <value>브라우저 테스트</value>
+  </data>
+  <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
+    <value>현재 테스트 취소</value>
+  </data>
+  <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
+    <value>테스트 결과 복사</value>
+  </data>
+  <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
+    <value>버그 리포트 생성</value>
+  </data>
+  <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
+    <value>커스텀 User Agent 테스트</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
+    <value>커스텀 User Agent를 사용하여 DLSS Swapper 내에서 DLL 다운로드</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
+    <value>UploadThing 미러 서버에서 DLSS DLL 다운로드</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
+    <value>DLSS Swapper 내에서 https://www.google.com/search?q=google.com 접속 
+(일반 인터넷 연결 테스트)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
+    <value>DLSS Swapper 내에서 bing.com 접속 (일반 인터넷 연결 테스트)</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
+    <value>DLSS Swapper 내에서 DLSS Swapper DLL 다운로드</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
+    <value>브라우저에서 DLSS Swapper DLL 다운로드</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
+    <value>Steam에서 게임 커버 다운로드</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
+    <value>에픽 게임즈 스토어에서 게임 커버 다운로드</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
+    <value>DLSS Swapper 파일 서버에서 게임 커버 다운로드</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
+    <value>대체 DLSS Swapper 파일 서버에서 게임 커버 다운로드</value>
+  </data>
+  <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
+    <value>DLSS Swapper 파일 서버의 DNS 조회</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
+    <value>브라우저에서 열기</value>
+  </data>
+  <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
+    <value>'브라우저에서 열기' 버튼을 클릭하거나 다음 링크를 복사하여 브라우저에 붙여넣으세요. 
+브라우저에서 파일이 다운로드되나요?</value>
+  </data>
+  <data name="NetworkTesterPage_Results" xml:space="preserve">
+    <value>결과</value>
+  </data>
+  <data name="NetworkTesterPage_RunTest" xml:space="preserve">
+    <value>테스트 실행</value>
+  </data>
+  <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
+    <value>제공된 User Agent를 사용하거나 원하는 커스텀 값을 입력하세요.</value>
+  </data>
+  <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
+    <value>네트워크 테스터</value>
+  </data>
+  <data name="SettingsPage_About" xml:space="preserve">
+    <value>정보</value>
+  </data>
+  <data name="SettingsPage_AddIgnoredPath" xml:space="preserve">
+    <value>제외할 경로 추가</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
+    <value>디버그 DLL 허용</value>
+  </data>
+  <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
+    <value>SDK 배포 시 가끔 화면에 추가적인 정보를 표시해 주는 디버그용 DLL이 포함될 때가 있습니다.</value>
+  </data>
+  <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
+    <value>DLL을 게임 폴더로 교체하기 전, 
+디지털 서명을 검증하여 Windows에서 신뢰할 수 있는 파일인지 확인합니다. 
+서명 검증에 실패한 DLL은 사용되지 않습니다. 
+이 옵션은 꺼두는 것을 권장합니다.</value>
+  </data>
+  <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
+    <value>이 설정은 DLL 선택기(Picker)에만 적용되며, 라이브러리 페이지에는 적용되지 않습니다.</value>
+  </data>
+  <data name="SettingsPage_BuildCommit" xml:space="preserve">
+    <value>빌드 커밋</value>
+  </data>
+  <data name="SettingsPage_BuildDate" xml:space="preserve">
+    <value>빌드 날짜</value>
+  </data>
+  <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
+    <value>DLSS Swapper에서 로그 파일을 직접 열 수 없습니다. 수동으로 열어주세요.</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
+    <value>제외된 경로 {0}을(를) 삭제하시겠습니까?</value>
+  </data>
+  <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
+    <value>제외할 경로 삭제</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
+    <value>DLSS 개발자 옵션</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
+    <value>콘솔 창에 로그 기록 활성화</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToFile" xml:space="preserve">
+    <value>파일에 로그 기록 활성화</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
+    <value>모든 DLSS DLL에 대해 활성화</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
+    <value>디버그용 DLSS DLL에만 활성화</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
+    <value>온스크린 인디케이터 표시</value>
+  </data>
+  <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
+    <value>상세 로깅 (Verbose)</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>DLSS 옵션</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>글로벌 프리셋</value>
+  </data>
+  <data name="SettingsPage_GameLibraries" xml:space="preserve">
+    <value>게임 라이브러리</value>
+  </data>
+  <data name="SettingsPage_GeneralTroubleshootingGuide" xml:space="preserve">
+    <value>일반 문제 해결 가이드</value>
+  </data>
+  <data name="SettingsPage_GiveFeedback" xml:space="preserve">
+    <value>피드백 보내기</value>
+  </data>
+  <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
+    <value>DLSS Swapper에 기능을 제안하거나 문제를 보고할 수 있습니다.</value>
+  </data>
+  <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
+    <value>제외된 경로</value>
+  </data>
+  <data name="SettingsPage_Language" xml:space="preserve">
+    <value>언어</value>
+  </data>
+  <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
+    <value>{0} 비활성화됨</value>
+  </data>
+  <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
+    <value>{0} 활성화됨</value>
+  </data>
+  <data name="SettingsPage_Logging" xml:space="preserve">
+    <value>로깅</value>
+  </data>
+  <data name="SettingsPage_Logging_Debug" xml:space="preserve">
+    <value>디버그 (Debug)</value>
+  </data>
+  <data name="SettingsPage_Logging_Error" xml:space="preserve">
+    <value>오류 (Error)</value>
+  </data>
+  <data name="SettingsPage_Logging_Info" xml:space="preserve">
+    <value>정보 (Info)</value>
+  </data>
+  <data name="SettingsPage_Logging_Off" xml:space="preserve">
+    <value>끔</value>
+  </data>
+  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
+    <value>상세 (Verbose)</value>
+  </data>
+  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
+    <value>경고 (Warning)</value>
+  </data>
+  <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
+    <value>새로운 업데이트가 없습니다.</value>
+  </data>
+  <data name="SettingsPage_OpenAcknowledgements" xml:space="preserve">
+    <value>크레딧</value>
+  </data>
+  <data name="SettingsPage_OpenDiagnostics" xml:space="preserve">
+    <value>진단</value>
+  </data>
+  <data name="SettingsPage_OpenNetworkTester" xml:space="preserve">
+    <value>네트워크 테스터</value>
+  </data>
+  <data name="SettingsPage_OpenTranslationToolbox" xml:space="preserve">
+    <value>번역 툴박스 열기</value>
+  </data>
+  <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
+    <value>경로 {0}은(는) 이미 제외 목록에 있습니다.</value>
+  </data>
+  <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
+    <value>신뢰할 수 없는 항목 허용</value>
+  </data>
+  <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
+    <value>업데이트 확인</value>
+  </data>
+  <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
+    <value>다운로드된 DLL만 표시</value>
+  </data>
+  <data name="SettingsPage_ThemeDark" xml:space="preserve">
+    <value>다크 모드</value>
+  </data>
+  <data name="SettingsPage_ThemeLight" xml:space="preserve">
+    <value>라이트 모드</value>
+  </data>
+  <data name="SettingsPage_ThemeMode" xml:space="preserve">
+    <value>테마 모드</value>
+  </data>
+  <data name="SettingsPage_ThemeSystemSettingDefault" xml:space="preserve">
+    <value>시스템 설정 사용</value>
+  </data>
+  <data name="SettingsPage_Title" xml:space="preserve">
+    <value>설정</value>
+  </data>
+  <data name="SettingsPage_Troubleshooting" xml:space="preserve">
+    <value>문제 해결</value>
+  </data>
+  <data name="SettingsPage_YourCurrentLogFile" xml:space="preserve">
+    <value>현재 로그 파일 위치:</value>
+  </data>
+  <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
+    <value>앱이 관리자 권한으로 실행 중일 때는 번역 툴을 사용할 수 없습니다. 앱을 다시 시작해 주세요.</value>
+  </data>
+  <data name="TranslationToolboxPage_Comment" xml:space="preserve">
+    <value>설명</value>
+  </data>
+  <data name="TranslationToolboxPage_ImportAsTranslation" xml:space="preserve">
+    <value>언어 파일을 번역으로 가져오기</value>
+  </data>
+  <data name="TranslationToolboxPage_Key" xml:space="preserve">
+    <value>키 (Key)</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
+    <value>기존 번역 불러오기</value>
+  </data>
+  <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
+    <value>번역을 불러올 수 없습니다. 자세한 내용은 오류 로그를 확인하세요.</value>
+  </data>
+  <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
+    <value>신규 번역 (New translation)</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
+    <value>게시할 번역 데이터가 없습니다.</value>
+  </data>
+  <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
+    <value>저장할 번역 데이터가 없습니다.</value>
+  </data>
+  <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
+    <value>유효한 DLSS Swapper 번역 파일이 아닙니다.</value>
+  </data>
+  <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
+    <value>번역을 게시할 수 없습니다. 자세한 내용은 오류 로그를 확인하세요.</value>
+  </data>
+  <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
+    <value>앱 다시 불러오기</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
+    <value>초기화 후 계속하기</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
+    <value>현재까지의 번역 진행 상황이 초기화됩니다. 정말 계속하시겠습니까?</value>
+  </data>
+  <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
+    <value>진행 상황을 초기화하고 계속할까요?</value>
+  </data>
+  <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
+    <value>번역을 저장할 수 없습니다. 자세한 내용은 오류 로그를 확인하세요.</value>
+  </data>
+  <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
+    <value>불러올 언어 선택</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
+    <value>원본 언어</value>
+  </data>
+  <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
+    <value>원본 텍스트</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
+    <value>번역 가이드</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
+    <value>번역 파일이 생성되었습니다. 
+생성된 {0} 파일을 어떻게 처리해야 하는지는 DLSS Swapper 번역 가이드를 참조해 주세요.</value>
+  </data>
+  <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
+    <value>번역 진행 상황</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesButton" xml:space="preserve">
+    <value>저장하지 않고 닫기</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
+    <value>저장되지 않은 번역 변경 사항이 있습니다. 이 창을 닫으면 변경 사항을 잃게 됩니다.</value>
+  </data>
+  <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
+    <value>저장되지 않은 번역 변경 사항</value>
+  </data>
+  <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
+    <value>번역 툴박스</value>
+  </data>
+</root>

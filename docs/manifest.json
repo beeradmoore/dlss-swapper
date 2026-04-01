@@ -1767,6 +1767,23 @@
       "file_size": 65523824,
       "zip_file_size": 31514190,
       "dll_source": "DLSS-310.5.3.zip"
+    },
+    {
+      "version": "310.6.0.0",
+      "version_number": 87257268550107136,
+      "internal_name": "CL 37460577",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "63E0CA4CA70193C7AC45DEC070DF1A27",
+      "zip_md5_hash": "52EA36DDA53B6D5657F286AD84F0B067",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/dlss/dlss_v310.6.0.0_63E0CA4CA70193C7AC45DEC070DF1A27.zip",
+      "file_description": "NVIDIA DLSS - DVS PRODUCTION",
+      "signed_datetime": "2026-03-06T21:04:12Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 74061936,
+      "zip_file_size": 45297612,
+      "dll_source": ""
     }
   ],
   "dlss_d": [
@@ -2075,6 +2092,23 @@
       "file_size": 39390320,
       "zip_file_size": 15176308,
       "dll_source": "DLSS-310.5.3.zip"
+    },
+    {
+      "version": "310.6.0.0",
+      "version_number": 87257268550107136,
+      "internal_name": "CL 37445600",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "295FB560CF80C7F2643E4CB062C27830",
+      "zip_md5_hash": "BA514385D29CF646D5258380C4FC141E",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/dlss_d/dlss_d_v310.6.0.0_295FB560CF80C7F2643E4CB062C27830.zip",
+      "file_description": "NVIDIA DLSS - DVS PRODUCTION",
+      "signed_datetime": "2026-03-04T21:49:55Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 59918960,
+      "zip_file_size": 27791040,
+      "dll_source": ""
     }
   ],
   "dlss_g": [
@@ -2604,6 +2638,23 @@
       "file_size": 7955568,
       "zip_file_size": 3934082,
       "dll_source": "DLSS-310.5.3.zip"
+    },
+    {
+      "version": "310.6.0.0",
+      "version_number": 87257268550107136,
+      "internal_name": "CL 37453033",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "8187325390F03F2FE0B23BCBF28FE615",
+      "zip_md5_hash": "FF32F4D20F30A55CD79841D6B59CD464",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/dlss_g/dlss_g_v310.6.0.0_8187325390F03F2FE0B23BCBF28FE615.zip",
+      "file_description": "NVIDIA DLSS-G MFGLW - DVS PRODUCTION",
+      "signed_datetime": "2026-03-05T20:25:15Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 7499376,
+      "zip_file_size": 3736946,
+      "dll_source": ""
     }
   ],
   "fsr_31_dx12": [

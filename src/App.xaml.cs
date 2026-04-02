@@ -21,8 +21,8 @@ public sealed partial class App : Application
 {
     public ElementTheme GlobalElementTheme { get; set; }
 
-    MainWindow? _window;
-    public MainWindow MainWindow => _window ??= new MainWindow();
+    MainWindow? _mainWindow;
+    public MainWindow MainWindow => _mainWindow;
     public WindowManager WindowManager { get; } = new WindowManager();
 
     public static App CurrentApp => (App)Application.Current;
@@ -170,7 +170,11 @@ public sealed partial class App : Application
 
         Database.Instance.Init();
 
-        WindowManager.ShowWindow(MainWindow);
+        if (_mainWindow is null)
+        {
+            _mainWindow = new MainWindow();
+        }
+        WindowManager.ShowWindow(_mainWindow);
 
 #if !PORTABLE
         // No need to calculate this for portable app.
@@ -310,9 +314,9 @@ public sealed partial class App : Application
             return true;
         }
 
-        if (MainWindow?.DispatcherQueue is not null)
+        if (_mainWindow?.DispatcherQueue is not null)
         {
-            var didEnqueue = MainWindow.DispatcherQueue.TryEnqueue(new DispatcherQueueHandler(action));
+            var didEnqueue = _mainWindow.DispatcherQueue.TryEnqueue(new DispatcherQueueHandler(action));
 
             if (didEnqueue == false)
             {
@@ -341,9 +345,9 @@ public sealed partial class App : Application
             return function();
         }
 
-        if (MainWindow?.DispatcherQueue is not null)
+        if (_mainWindow?.DispatcherQueue is not null)
         {
-            return MainWindow.DispatcherQueue.EnqueueAsync(function);
+            return _mainWindow.DispatcherQueue.EnqueueAsync(function);
         }
 
         return Task.CompletedTask;

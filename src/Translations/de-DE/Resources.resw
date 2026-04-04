@@ -172,7 +172,7 @@
     <value>Standard</value>
   </data>
   <data name="DLSS_Preset_Letter" xml:space="preserve">
-    <value>Voreinstelung {0}</value>
+    <value>Voreinstellung {0}</value>
   </data>
   <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
     <value>Voreinstellung {0} (veraltet)</value>

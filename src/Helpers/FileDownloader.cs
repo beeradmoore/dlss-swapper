@@ -183,6 +183,11 @@ public partial class FileDownloader : ObservableObject
         {
             throw;
         }
+        catch (HttpRequestException err) when (err.StatusCode == HttpStatusCode.NotFound)
+        {
+            Logger.Error(err, $"{LogPrefix} could not download {_url}");
+            throw;
+        }
         catch (Exception err)
         {
             Logger.Error(err, $"{LogPrefix} could not download {_url}");

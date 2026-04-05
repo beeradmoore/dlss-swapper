@@ -44,11 +44,23 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <AppBarButton HorizontalAlignment="Right"  Label="{x:Bind ViewModel.TranslationProperties.ImportText, Mode=OneWay}" Command="{x:Bind ViewModel.ImportCommand}">
+
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.ImportText, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE8B5;"  />
                     </AppBarButton.Content>
+                    <AppBarButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="Single DLL file" Command="{x:Bind ViewModel.ImportCommand}" />
+                            <MenuFlyoutItem Text="Single zip file" Command="{x:Bind ViewModel.ImportCommand}" />
+                            <MenuFlyoutSubItem Text="NVIDIA">
+                                <MenuFlyoutItem Text="From driver" Command="{x:Bind ViewModel.ImportFromNVIDIADriverCommand}" />
+                                <MenuFlyoutItem Text="Download from OTA server" Command="{x:Bind ViewModel.ImportFromNVIDIAServerCommand}" />
+                            </MenuFlyoutSubItem>
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
                 </AppBarButton>
+
                 <AppBarButton HorizontalAlignment="Right" Label="{x:Bind ViewModel.TranslationProperties.ExportAllText, Mode=OneWay}" Command="{x:Bind ViewModel.ExportAllCommand}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xEDE1;" />

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.DLSS;
+using DLSS_Swapper.Data.NVIDIA;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -672,5 +673,72 @@ internal partial class NVAPIHelper : ObservableObject
         {
             FileSystemHelper.OpenFolderInExplorer(Logger.LogDirectory);
         }
+    }
+
+    public List<NGXModel> GetNGXModels()
+    {
+    
+        var ngxModelsPath = Path.Combine(Environment.ExpandEnvironmentVariables("%ProgramData%"), "NVIDIA", "NGX", "models");
+        if (Directory.Exists(ngxModelsPath) == false)
+        {
+            return [];
+        }
+
+        var ngxModels = new List<NGXModel>();
+
+        var dlssPath = Path.Combine(ngxModelsPath, "dlss", "versions");
+        var dlssdPath = Path.Combine(ngxModelsPath, "dlssd", "versions");
+        var dlssgPath = Path.Combine(ngxModelsPath, "dlssg", "versions");
+
+        // Local function so we can handle all DLSS at once.
+        List<NGXModel> LocalNgxModelSearch(string path, GameAssetType gameAssetType, string[] validProductNames)
+        {
+            var tempList = new List<NGXModel>();
+
+            if (Directory.Exists(path))
+            {
+                var binFiles = Directory.GetFiles(path, "*.bin", SearchOption.AllDirectories);
+                foreach (var binFile in binFiles)
+                {
+                    var fileVersionInfo = FileVersionInfo.GetVersionInfo(binFile);
+                    var isTrusted = WinTrust.VerifyEmbeddedSignature(binFile);
+
+                    var isValid = true;
+
+                    // Ignore a game if it is not trusted.
+                    if (isTrusted == false)
+                    {
+                        isValid = false;
+                    }
+
+                    // Ignore games where we don't know if it is the correct product name
+                    if (validProductNames.Contains(fileVersionInfo.ProductName) == false)
+                    {
+                        isValid = false;
+                    }
+
+                    // If everything matches OR AllowUntrusted is on allow the game
+                    if (isValid || Settings.Instance.AllowUntrusted)
+                    {
+                        ngxModels.Add(new NGXModel(binFile, new Version(fileVersionInfo.FileMajorPart, fileVersionInfo.FileMinorPart, fileVersionInfo.FileBuildPart, fileVersionInfo.FilePrivatePart), gameAssetType));
+                    }
+                }
+            }
+
+            return tempList;
+        }
+
+        ngxModels.AddRange(LocalNgxModelSearch(dlssPath, GameAssetType.DLSS, [
+            "NVIDIA Deep Learning SuperSampling",
+            "NGX DL SuperSampling"
+        ]));
+        ngxModels.AddRange(LocalNgxModelSearch(dlssdPath, GameAssetType.DLSS_D, [
+            "NVIDIA DLSS Ray Reconstruction"
+        ]));
+        ngxModels.AddRange(LocalNgxModelSearch(dlssgPath, GameAssetType.DLSS_G, [
+            "NVIDIA DLSS-G MFGLW"
+        ]));
+
+        return ngxModels;
     }
 }

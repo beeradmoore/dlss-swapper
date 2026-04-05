@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="DLSS_Swapper.UserControls.NGXModelImporter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DLSS_Swapper.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tv="using:WinUI.TableView"
+    xmlns:nvidia="using:DLSS_Swapper.Data.NVIDIA"
+    mc:Ignorable="d">
+
+    
+
+    <Grid>
+        <tv:TableView x:Name="MainTableView" Grid.Row="0" CornerButtonMode="SelectAll" SelectionMode="None" SelectionUnit="Row" GridLinesVisibility="All" VerticalAlignment="Stretch" AutoGenerateColumns="False" ItemsSource="{x:Bind ViewModel.Models, Mode=OneWay}">
+
+            <tv:TableView.Columns>
+
+                <tv:TableViewCheckBoxColumn Binding="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Checked" IsReadOnly="False" CanSort="False" CanFilter="False" CanReorder="False" CanResize="False" />
+
+                <tv:TableViewTextColumn Width="*" Header="{x:Bind ViewModel.TranslationProperties.ColumnHeaderAssetTypeText, Mode=OneWay}" Tag="GameAssetType" Binding="{Binding NGXModel.GameAssetTypeString, Mode=OneTime}" IsReadOnly="True" />
+
+                <tv:TableViewTextColumn Width="*" Header="{x:Bind ViewModel.TranslationProperties.ColumnHeaderVersionText, Mode=OneWay}" Tag="Version" Binding="{Binding NGXModel.Version, Mode=OneTime}" IsReadOnly="True" />
+
+            </tv:TableView.Columns>
+
+            <tv:TableView.ItemTemplate>
+                <DataTemplate x:DataType="nvidia:NGXModelRow">
+                    <tv:TableViewRowPresenter IsEnabled="{x:Bind Path=IsEnabled}" />
+                </DataTemplate>
+            </tv:TableView.ItemTemplate>
+
+        </tv:TableView>
+    </Grid>
+</UserControl>

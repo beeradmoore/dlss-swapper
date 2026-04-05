@@ -703,6 +703,17 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Label</value>
   </data>
+
+
+
+  <data name="LibraryPage_Exportingx" xml:space="preserve">
+    <value>Exporting</value>
+  </data>
+
+  <data name="LibraryPage_Importingx" xml:space="preserve">
+    <value>Importing</value>
+  </data>
+
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
     <value>Download Latest</value>
   </data>
@@ -715,6 +726,9 @@ If you have checked these and your game is still not showing up there may be a b
   </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
     <value>Exported DLLs: </value>
+  </data>
+  <data name="LibraryPage_ImportedDLLs" xml:space="preserve">
+    <value>Imported DLLs: </value>
   </data>
   <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
     <value>Exported {0} DLLs.</value>

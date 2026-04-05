@@ -13,6 +13,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.WinUI;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.NVIDIA;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
@@ -800,6 +801,126 @@ public partial class LibraryPageModel : ObservableObject
             Content = new ImportDLLSummaryControl(importResults),
         };
         await dialog.ShowAsync();
+    }
+
+    [RelayCommand]
+    async Task ImportFromNVIDIADriver()
+    {
+        var models = NVAPIHelper.Instance.GetNGXModels();
+
+        if (models.Count == 0)
+        {
+            var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("General_Error"),
+                Content = "Could not import locate any DLLs in the driver to import.",
+                CloseButtonText = ResourceHelper.GetString("General_Close"),
+            };
+            await errorDialog.ShowAsync();
+            return;
+        }
+                
+        var ngxModelImporter = new NGXModelImporter(models);
+        var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+        {
+            Title = "Import from NVIDIA driver",
+            DefaultButton = ContentDialogButton.Primary,
+            Content = ngxModelImporter,
+            PrimaryButtonText = ResourceHelper.GetString("General_Import"),
+            CloseButtonText = ResourceHelper.GetString("General_Close"),
+        };
+        dialog.Resources["ContentDialogMinWidth"] = 700;
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            var modelsToImport = new List<NGXModel>();
+            foreach (var modelRow in ngxModelImporter.ViewModel.Models)
+            {
+                if (modelRow.IsChecked == true)
+                {
+                    modelsToImport.Add(modelRow.NGXModel);
+                }
+            }
+
+            if (modelsToImport.Count == 0)
+            {
+                return;
+            }
+
+
+            var filesProgressBar = new ProgressBar()
+            {
+                IsIndeterminate = true
+            };
+            var progressTextBlock = new TextBlock()
+            {
+                Text = string.Empty,
+                HorizontalAlignment = HorizontalAlignment.Left,
+            };
+            progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ImportedDLLs") });
+            var progressRun = new Run() { Text = "0" };
+            progressTextBlock.Inlines.Add(progressRun);
+            var progressStackPanel = new StackPanel()
+            {
+                Spacing = 16,
+                Orientation = Orientation.Vertical,
+                Children =
+                {
+                    filesProgressBar,
+                    progressTextBlock,
+                }
+            };
+
+
+            var importingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("LibraryPage_Importing"),
+                Content = progressStackPanel,
+            };
+
+            filesProgressBar.IsIndeterminate = false;
+            filesProgressBar.Value = 0;
+            filesProgressBar.Maximum = modelsToImport.Count;
+
+            var progress = new Progress<int>();
+            progress.ProgressChanged += (s, i) =>
+            {
+                filesProgressBar.Value = i;
+                progressRun.Text = i.ToString(CultureInfo.CurrentCulture);
+            };
+
+            _ = importingDialog.ShowAsync();
+
+            await Task.Run(() => {
+                for (var i = 0; i < modelsToImport.Count; ++i)
+                {
+                    try
+                    {
+                        DLLManager.Instance.ImportDll(modelsToImport[i].FilePath, overrideFileName: DLLManager.DllNameForGameAssetType(modelsToImport[i].GameAssetType));
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex, "Error importing NGX model.");
+                    }
+                    finally
+                    {
+                        if (progress is IProgress<int> iProgress)
+                        {
+                            iProgress.Report(i + 1);
+                        }
+                    }
+                }
+            });
+
+            importingDialog.Hide();
+        }
+    }
+
+
+    [RelayCommand]
+    async Task ImportFromNVIDIAServerAsync()
+    {
+        
     }
 
     [RelayCommand]

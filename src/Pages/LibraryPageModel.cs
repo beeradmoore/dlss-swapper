@@ -23,13 +23,12 @@ using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
-using Windows.UI.Text;
 
 namespace DLSS_Swapper.Pages;
 
 public partial class LibraryPageModel : ObservableObject
 {
-    LibraryPage libraryPage;
+    readonly LibraryPage _libraryPage;
 
     internal ObservableCollection<DLLRecord>? SelectedLibraryList { get; private set; }
 
@@ -43,9 +42,9 @@ public partial class LibraryPageModel : ObservableObject
 
     public LibraryPageModel(LibraryPage libraryPage)
     {
-        this.libraryPage = libraryPage;
+        _libraryPage = libraryPage;
 
-        var upscalerSelectorBar = libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
+        var upscalerSelectorBar = _libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
         if (upscalerSelectorBar is not null)
         {
             // NOTE: DLL type
@@ -68,7 +67,7 @@ public partial class LibraryPageModel : ObservableObject
 
     void OnLanguageChanged()
     {
-        var upscalerSelectorBar = libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
+        var upscalerSelectorBar = _libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
         if (upscalerSelectorBar is null)
         {
             return;
@@ -113,7 +112,7 @@ public partial class LibraryPageModel : ObservableObject
         }
         else
         {
-            var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var errorDialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -144,7 +143,7 @@ public partial class LibraryPageModel : ObservableObject
 
         if (allDllRecords.Count == 0)
         {
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
@@ -181,7 +180,7 @@ public partial class LibraryPageModel : ObservableObject
         };
 
         var str = ResourceHelper.GetString("LibraryPage_Exporting");
-        var exportingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var exportingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_Exporting"),
             Content = progressStackPanel,
@@ -248,7 +247,7 @@ public partial class LibraryPageModel : ObservableObject
             {
                 exportingDialog.Hide();
 
-                var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+                var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
                 {
                     Title = ResourceHelper.GetString("General_Error"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -279,7 +278,7 @@ public partial class LibraryPageModel : ObservableObject
 
                 if (exportError is null)
                 {
-                    var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+                    var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
                     {
                         CloseButtonText = ResourceHelper.GetString("General_Okay"),
                         DefaultButton = ContentDialogButton.Close,
@@ -317,7 +316,7 @@ public partial class LibraryPageModel : ObservableObject
             Logger.Error(err);
 
             // If the fullExpectedPath does not exist, or there was an error writing it.
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -377,7 +376,7 @@ public partial class LibraryPageModel : ObservableObject
     {
         if (DLLManager.Instance.ImportedManifest is null)
         {
-            var couldNotImportDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var couldNotImportDialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("LibraryPage_CouldNotLoadImportedDlls"),
                 DefaultButton = ContentDialogButton.Close,
@@ -390,7 +389,7 @@ public partial class LibraryPageModel : ObservableObject
 
         if (Settings.Instance.HasShownWarning == false)
         {
-            var warningDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var warningDialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Warning"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -448,7 +447,7 @@ public partial class LibraryPageModel : ObservableObject
             }
         };
 
-        var loadingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var loadingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_Importing"),
             // I would like this to be a progress ring but for some reason the ring will not show.
@@ -797,7 +796,7 @@ public partial class LibraryPageModel : ObservableObject
 
         loadingDialog.Hide();
 
-        var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             CloseButtonText = ResourceHelper.GetString("General_Okay"),
             DefaultButton = ContentDialogButton.Close,
@@ -814,7 +813,7 @@ public partial class LibraryPageModel : ObservableObject
         {
             IsIndeterminate = true
         };
-        var loadingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var loadingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_ImportFromNVIDIADriver"),
             Content = loadingProgressRing,
@@ -842,7 +841,7 @@ public partial class LibraryPageModel : ObservableObject
 
         if (models.Count == 0)
         {
-            var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var errorDialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
                 Content = ResourceHelper.GetString("LibraryPage_CouldNotImportFromDriver"),
@@ -853,7 +852,7 @@ public partial class LibraryPageModel : ObservableObject
         }
                 
         var ngxModelImporter = new NGXModelImporter(models);
-        var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_ImportFromNVIDIADriver"),
             DefaultButton = ContentDialogButton.Primary,
@@ -904,7 +903,7 @@ public partial class LibraryPageModel : ObservableObject
             };
 
 
-            var importingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var importingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("LibraryPage_Importing"),
                 Content = progressStackPanel,
@@ -952,14 +951,14 @@ public partial class LibraryPageModel : ObservableObject
 
             importingDialog.Hide();
 
-            var completeDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var completeDialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("LibraryPage_ImportFromNVIDIADriver"),
                 DefaultButton = ContentDialogButton.Close,
                 Content = $"{ResourceHelper.GetString("General_Success")}: {successCount}\n{ResourceHelper.GetString("General_Failed")}: {failedCount}",
                 CloseButtonText = ResourceHelper.GetString("General_Close"),
             };
-            completeDialog.ShowAsync();
+            await completeDialog.ShowAsync();
 
         }
     }
@@ -975,7 +974,7 @@ public partial class LibraryPageModel : ObservableObject
         {
             IsIndeterminate = true
         };
-        var loadingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var loadingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_FetchingFileList"),
             Content = loadingProgressRing,
@@ -1077,7 +1076,7 @@ public partial class LibraryPageModel : ObservableObject
 
                 loadingDialog.Hide();
 
-                var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+                var errorDialog = new EasyContentDialog(_libraryPage.XamlRoot)
                 {
                     Title = ResourceHelper.GetString("General_Error"),
                     Content = ResourceHelper.GetString("LibraryPage_Error_NVIDIA_Importing"),
@@ -1092,7 +1091,7 @@ public partial class LibraryPageModel : ObservableObject
         if (availableModels.Count == 0)
         {
             loadingDialog.Hide();
-            var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var errorDialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
                 Content = ResourceHelper.GetString("LibraryPage_Error_NVIDIA_Downloading"),
@@ -1153,7 +1152,7 @@ public partial class LibraryPageModel : ObservableObject
 
         loadingDialog.Hide();
 
-        var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_DownloadFromNVIDIA"),
             DefaultButton = ContentDialogButton.Primary,
@@ -1221,7 +1220,7 @@ public partial class LibraryPageModel : ObservableObject
             }
         };
 
-        var downloadingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var downloadingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("General_Downloading"),
             Content = progressStackPanel,
@@ -1314,7 +1313,7 @@ public partial class LibraryPageModel : ObservableObject
 
             downloadingDialog.Hide();
 
-            var completeDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var completeDialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("LibraryPage_DownloadFromNVIDIA"),
                 DefaultButton = ContentDialogButton.Close,
@@ -1341,7 +1340,7 @@ public partial class LibraryPageModel : ObservableObject
         }
 
         var assetTypeName = DLLManager.Instance.GetAssetTypeName(record.AssetType);
-        var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_DeleteDll"),
             PrimaryButtonText = ResourceHelper.GetString("General_Delete"),
@@ -1369,7 +1368,7 @@ public partial class LibraryPageModel : ObservableObject
             }
             else
             {
-                var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+                var errorDialog = new EasyContentDialog(_libraryPage.XamlRoot)
                 {
                     Title = ResourceHelper.GetString("General_Error"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -1387,7 +1386,7 @@ public partial class LibraryPageModel : ObservableObject
         var result = await record.DownloadAsync();
         if (result.Success is false && result.Cancelled is false)
         {
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -1414,7 +1413,7 @@ public partial class LibraryPageModel : ObservableObject
             return;
         }
 
-        var exportingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var exportingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_Exporting"),
             // I would like this to be a progress ring but for some reason the ring will not show.
@@ -1473,7 +1472,7 @@ public partial class LibraryPageModel : ObservableObject
 
             exportingDialog.Hide();
 
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Success"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -1488,7 +1487,7 @@ public partial class LibraryPageModel : ObservableObject
             Logger.Error(err);
 
             // If the fullExpectedPath does not exist, or there was an error writing it.
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -1502,7 +1501,7 @@ public partial class LibraryPageModel : ObservableObject
     [RelayCommand]
     async Task ShowDownloadErrorAsync(DLLRecord record)
     {
-        var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("General_Error"),
             CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -1549,7 +1548,7 @@ public partial class LibraryPageModel : ObservableObject
 
         if (startedDownloads == 0)
         {
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("LibraryPage_NoNewDLLs_Title"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -1560,7 +1559,7 @@ public partial class LibraryPageModel : ObservableObject
         }
         else
         {
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("LibraryPage_DownloadsStarted_Title"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),

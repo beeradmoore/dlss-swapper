@@ -63,6 +63,9 @@ var ignoredXamlMatches = new List<string>()
 	"Text=\"NVIDIA\"",
 	"Text=\"AMD\"",
 	"Text=\"Intel\"",
+	"Text=\"https://my-proxy-server.goes-here:8080\"",
+	"Text=\"John\"",
+	"Text=\"chief117\"",
 };
 
 foreach (var xamlFile in allXamlFiles)
@@ -284,7 +287,8 @@ var ignoredStringKeyPrefixes = new List<string>()
     "TranslationToolboxPage_",
     "GameHistoryEventType_",
     "GameHistoryControl_",
-	"DLSS_"
+	"DLSS_",
+	"ProxySettings_",
 };
 
 foreach (var csharpFiles in allCSharpFiles)

@@ -119,6 +119,7 @@
     <None Remove="UserControls\MultipleDLLsFoundControl.xaml" />
     <None Remove="UserControls\NewDLLsControl.xaml" />
     <None Remove="UserControls\NGXModelImporter.xaml" />
+    <None Remove="UserControls\ProxySettingsControl.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -323,6 +324,9 @@
             <PackagePath>\</PackagePath>
         </None>
         <Page Update="UserControls\NGXModelImporter.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Update="UserControls\ProxySettingsControl.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>
         <Page Update="UserControls\GameHistoryControl.xaml">

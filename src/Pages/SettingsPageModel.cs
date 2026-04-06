@@ -17,6 +17,7 @@ using System.Collections.Specialized;
 using DLSS_Swapper.Data.DLSS;
 using Windows.System;
 using Windows.ApplicationModel.DataTransfer;
+using System.Text;
 
 namespace DLSS_Swapper.Pages;
 
@@ -551,6 +552,35 @@ public partial class SettingsPageModel : ObservableObject
         if (_weakPage.TryGetTarget(out var page))
         {
             await NVAPIHelper.Instance.DisplayNVAPIErrorAsync(page.XamlRoot);
+        }
+    }
+
+    [RelayCommand]
+    async Task OpenProxySettingsAsync()
+    {
+        if (_weakPage.TryGetTarget(out var page))
+        {
+            var proxySettingsControl = new ProxySettingsControl();
+            var dialog = new EasyContentDialog(page.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("SettingsPage_ProxySettings"),
+                PrimaryButtonText = ResourceHelper.GetString("General_Save"),
+                CloseButtonText = ResourceHelper.GetString("General_Close"),
+                DefaultButton = ContentDialogButton.Primary,
+                Content = proxySettingsControl,
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                var server = proxySettingsControl.ViewModel.UseProxySettings ? proxySettingsControl.ViewModel.Server : null;
+                var username = proxySettingsControl.ViewModel.UseProxySettings && proxySettingsControl.ViewModel.UseAuthentication ? proxySettingsControl.ViewModel.Username : null;
+                var password = proxySettingsControl.ViewModel.UseProxySettings && proxySettingsControl.ViewModel.UseAuthentication ? proxySettingsControl.ViewModel.Password : null;
+                Settings.ProxySettings.SaveIfRequired(server, username, password);
+                App.CurrentApp.CreateHttpClient();
+
+                
+            }
         }
     }
 }

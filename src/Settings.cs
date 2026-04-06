@@ -389,6 +389,8 @@ public class Settings
         }
     }
 
+    internal static ProxySettings ProxySettings { get; } = new ProxySettings();
+
     internal void SaveJson()
     {
         Storage.SaveSettingsJson(this);

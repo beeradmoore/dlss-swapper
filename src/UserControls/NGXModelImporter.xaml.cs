@@ -16,5 +16,6 @@ public sealed partial class NGXModelImporter : UserControl
         InitializeComponent();
 
         ViewModel = new NGXModelImporterModel(this, models);
+        DataContext = ViewModel;
     }
 }

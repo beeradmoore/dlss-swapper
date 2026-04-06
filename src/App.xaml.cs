@@ -1,16 +1,18 @@
-using CommunityToolkit.WinUI;
-using DLSS_Swapper.Helpers;
-using Microsoft.UI.Dispatching;
-using Microsoft.UI.Xaml;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Security.Principal;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using CommunityToolkit.WinUI;
+using DLSS_Swapper.Helpers;
+using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml;
 
 namespace DLSS_Swapper;
 
@@ -29,9 +31,7 @@ public sealed partial class App : Application
 
     public static App CurrentApp => (App)Application.Current;
 
-
-    public HttpClient HttpClient { get; init; }
-
+    public HttpClient HttpClient { get; private set; }
 
     /// <summary>
     /// Initializes the singleton application object.  This is the first line of authored code
@@ -41,22 +41,7 @@ public sealed partial class App : Application
     {
         Logger.Init();
 
-        // Setup HttpClient.
-        var version = GetVersion();
-        var versionString = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
-
-        var httpClientHandler = new HttpClientHandler()
-        {
-            AutomaticDecompression = System.Net.DecompressionMethods.All,
-            UseCookies = true,
-            CookieContainer = new System.Net.CookieContainer(),
-            AllowAutoRedirect = true,
-        };
-        HttpClient = new HttpClient(httpClientHandler);
-        HttpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper/{versionString}");
-        HttpClient.Timeout = TimeSpan.FromMinutes(30);
-        HttpClient.DefaultRequestVersion = new Version(2, 0);
-        HttpClient.DefaultRequestHeaders.ConnectionClose = true;
+        CreateHttpClient();
 
         var language = Settings.Instance.Language;
 
@@ -93,6 +78,69 @@ public sealed partial class App : Application
 
         this.InitializeComponent();
     }
+
+
+
+    internal void CreateHttpClient()
+    {
+        // Setup HttpClient.
+        var version = GetVersion();
+        var versionString = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+
+        var httpClientHandler = new HttpClientHandler()
+        {
+            AutomaticDecompression = DecompressionMethods.All,
+            UseCookies = true,
+            CookieContainer = new CookieContainer(),
+            AllowAutoRedirect = true,
+        };
+
+        Settings.ProxySettings.LoadIfNeeded();
+
+        if (string.IsNullOrWhiteSpace(Settings.ProxySettings.Server) == false)
+        {
+            try
+            {
+                var server = Settings.ProxySettings.Server;
+                if (server.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                    server.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+                {
+                    var proxy = new WebProxy
+                    {
+                        BypassProxyOnLocal = false,
+                        UseDefaultCredentials = false,
+                        Address = new Uri(server),
+                    };
+
+                    if (string.IsNullOrWhiteSpace(Settings.ProxySettings.Username) == false && string.IsNullOrWhiteSpace(Settings.ProxySettings.Password) == false)
+                    {
+                        proxy.Credentials = new NetworkCredential(Settings.ProxySettings.Username, Settings.ProxySettings.Password);
+                    }
+
+                    httpClientHandler.UseProxy = true;
+                    httpClientHandler.Proxy = proxy;
+                }
+                else
+                {
+                    Logger.Error($"Tried to set proxy with server address \"{server}\"");
+                }               
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Unable to set proxy for HttpClient");
+                Logger.Error(ex);
+            }
+        }
+
+        var newHttpClient = new HttpClient(httpClientHandler);
+        newHttpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper/{versionString}");
+        newHttpClient.Timeout = TimeSpan.FromMinutes(30);
+        newHttpClient.DefaultRequestVersion = new Version(2, 0);
+        newHttpClient.DefaultRequestHeaders.ConnectionClose = true;
+
+        HttpClient = newHttpClient;
+    }
+
 
     private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
     {

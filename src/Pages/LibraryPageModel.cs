@@ -808,9 +808,37 @@ public partial class LibraryPageModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task ImportFromNVIDIADriver()
+    async Task ImportFromNVIDIADriverAsync()
     {
-        var models = NVAPIHelper.Instance.GetNGXModels();
+        var loadingProgressRing = new ProgressRing()
+        {
+            IsIndeterminate = true
+        };
+        var loadingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        {
+            Title = ResourceHelper.GetString("LibraryPage_ImportFromNVIDIADriver"),
+            Content = loadingProgressRing,
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+        };
+        using var cancellationTokenSource = new CancellationTokenSource();
+        loadingDialog.CloseButtonClick += (ContentDialog sender, ContentDialogButtonClickEventArgs args) => {
+            cancellationTokenSource.Cancel();
+        };
+
+        _ = loadingDialog.ShowAsync();
+
+        var models = new List<NGXModel>();
+        await Task.Run(() =>
+        {
+            models.AddRange(NVAPIHelper.Instance.GetNGXModels());
+        });
+
+        loadingDialog.Hide();
+
+        if (cancellationTokenSource.IsCancellationRequested)
+        {
+            return;
+        }
 
         if (models.Count == 0)
         {

@@ -7,8 +7,10 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.WinUI;
@@ -917,10 +919,369 @@ public partial class LibraryPageModel : ObservableObject
     }
 
 
+    [GeneratedRegex(@"^d6e9b45e-d4f6-4a84-a460-bf61decae3e8\/(?<asset_type>dlss|dlssg|dlssd)\/versions\/(?<version_packed>\d*)\/files\/160_E658700\.bin$", RegexOptions.IgnoreCase)]
+    private static partial Regex IsNGXModelWeCanUse();
+
     [RelayCommand]
     async Task ImportFromNVIDIAServerAsync()
     {
-        
+        var loadingProgressRing = new ProgressRing()
+        {
+            IsIndeterminate = true
+        };
+        var loadingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        {
+            Title = "Fetching File List",
+            Content = loadingProgressRing,
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+        };
+        using var cancellationTokenSource = new CancellationTokenSource();
+        loadingDialog.CloseButtonClick += (ContentDialog sender, ContentDialogButtonClickEventArgs args) => {
+            cancellationTokenSource.Cancel();
+        };
+
+        _ = loadingDialog.ShowAsync();
+
+        var ngxOtaUrl = "https://ngx.download.nvidia.com";
+        var xmlDownloader = new FileDownloader(ngxOtaUrl);
+
+        var availableModels = new List<NGXModel>();
+
+        using (var memoryStream = new MemoryStream())
+        {
+            try
+            {
+                var didDownload = await xmlDownloader.DownloadFileToStreamAsync(memoryStream, cancellationTokenSource.Token);
+                if (didDownload == false)
+                {
+                    throw new Exception("Could not download xml stream.");
+                }
+
+                memoryStream.Position = 0;
+
+                var serializer = new XmlSerializer(typeof(ListBucketResult));
+                var listBucketResult = serializer.Deserialize(memoryStream) as ListBucketResult;
+
+                if (listBucketResult is null)
+                {
+                    throw new Exception("ListBucketResult was null.");
+                }
+
+
+                foreach (var content in listBucketResult.Contents)
+                {
+                    if (content is null || content.Size == 0)
+                    {
+                        continue;
+                    }
+
+                    // We only give the option of 160_E658700.bin. Other files do exist.
+                    // 160 is from NV_GPU_ARCHITECTURE_ID of Turing GPUs. But it appears everyone has this for DLSS files.
+                    // As for what E658700, no idea.
+                    // https://github.com/SimonMacer/AnWave/issues/52#issuecomment-3025720063
+                    // https://docs.nvidia.com/nvapi/group__gpu.html
+                    if (content.Key.EndsWith("files/160_E658700.bin") == false)
+                    {
+                        continue;
+                    }
+
+                    var match = IsNGXModelWeCanUse().Match(content.Key);
+                    if (match.Success == false)
+                    {
+                        continue;
+                    }
+
+                    GameAssetType? gameAssetType = match.Groups["asset_type"].Value switch
+                    {
+                        "dlss" => GameAssetType.DLSS,
+                        "dlssd" => GameAssetType.DLSS_D,
+                        "dlssg" => GameAssetType.DLSS_G,
+                        _ => null,
+                    };
+
+
+                    if (gameAssetType == null)
+                    {
+                        continue;
+                    }
+
+                    if (Int32.TryParse(match.Groups["version_packed"].ValueSpan, out var versionInt) == false)
+                    {
+                        Logger.Error($"Could not convert {match.Groups["version_packed"].Value} to a version number.");
+                        continue;
+                    }
+
+                    var major = (versionInt >> 16) & 0xFFFF;
+                    var minor = (versionInt >> 8) & 0xFF;
+                    var build = versionInt & 0xFF;
+                    var version = new Version(major, minor, build, 0);
+
+                    availableModels.Add(new NGXModel($"{ngxOtaUrl}/{content.Key}", version, gameAssetType.Value, (long)content.Size, content.ETag));
+                }
+
+            }
+            catch (TaskCanceledException) when (cancellationTokenSource.IsCancellationRequested)
+            {
+                // NOOP: User cancelled
+                return;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+
+                loadingDialog.Hide();
+
+                var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+                {
+                    Title = ResourceHelper.GetString("General_Error"),
+                    Content = "Unable to import from NVIDIA servers. Please try again later or check for DLSS Swapper updates.",
+                    CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+                };
+                await errorDialog.ShowAsync();
+                return;
+            }
+        }
+
+
+        if (availableModels.Count == 0)
+        {
+            loadingDialog.Hide();
+            var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("General_Error"),
+                Content = "Unable to fetch file list from NVIDIA servers. Please try again later or check for DLSS Swapper updates.",
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+            };
+            await errorDialog.ShowAsync();
+            return;
+        }
+
+        var ngxModelImporter = new NGXModelImporter(availableModels);
+
+        foreach (var modelRow in ngxModelImporter.ViewModel.Models)
+        {
+            var versionNumber = modelRow.NGXModel.Version.GetVersionNumber();
+
+            var existingRecordsToTest = new List<DLLRecord>();
+
+            if (modelRow.NGXModel.GameAssetType == GameAssetType.DLSS)
+            {
+                var existingDLLRecords = DLLManager.Instance.DLSSRecords.Where(x => x.VersionNumber == versionNumber && x.LocalRecord is not null && x.LocalRecord.IsDownloaded);
+                existingRecordsToTest.AddRange(existingDLLRecords);
+            }
+            else if (modelRow.NGXModel.GameAssetType == GameAssetType.DLSS_D)
+            {
+                var existingDLLRecords = DLLManager.Instance.DLSSDRecords.Where(x => x.VersionNumber == versionNumber && x.LocalRecord is not null && x.LocalRecord.IsDownloaded);
+                existingRecordsToTest.AddRange(existingDLLRecords);
+            }
+            else if (modelRow.NGXModel.GameAssetType == GameAssetType.DLSS_G)
+            {
+                var existingDLLRecords = DLLManager.Instance.DLSSGRecords.Where(x => x.VersionNumber == versionNumber && x.LocalRecord is not null && x.LocalRecord.IsDownloaded);
+                existingRecordsToTest.AddRange(existingDLLRecords);
+            }
+
+            foreach (var existingRecordToTest in existingRecordsToTest)
+            {
+                try
+                {
+                    if (File.Exists(existingRecordToTest?.LocalRecord?.ExpectedPath))
+                    {
+                        using (var fileStream = File.OpenRead(existingRecordToTest.LocalRecord.ExpectedPath))
+                        {
+                            var isValid = NVAPIHelper.Instance.ValidateNVIDIAOtaHash(fileStream, modelRow.NGXModel.ETag);
+                            if (isValid)
+                            {
+                                modelRow.IsEnabled = false;
+                                modelRow.StatusMessage = "Already downloaded";
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                }
+            }
+        }
+
+        loadingDialog.Hide();
+
+        var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+        {
+            Title = "Download from NVIDIA",
+            DefaultButton = ContentDialogButton.Primary,
+            Content = ngxModelImporter,
+            PrimaryButtonText = ResourceHelper.GetString("General_Download"),
+            CloseButtonText = ResourceHelper.GetString("General_Close"),
+        };
+        dialog.Resources["ContentDialogMinWidth"] = 700;
+        var result = await dialog.ShowAsync();
+
+        if (result != ContentDialogResult.Primary)
+        {
+            return;
+        }
+
+        var modelsToDownload = ngxModelImporter.ViewModel.Models.Where(x => x.IsChecked).ToList();
+        if (modelsToDownload.Count == 0)
+        {
+            return;
+        }
+
+
+        var totalFilesProgressBar = new ProgressBar()
+        {
+            IsIndeterminate = false,
+            Value = 0,
+            Maximum = modelsToDownload.Count,
+        };
+        var totalFilesTextBlock = new TextBlock()
+        {
+            Text = string.Empty,
+            HorizontalAlignment = HorizontalAlignment.Left,
+        };
+        totalFilesTextBlock.Inlines.Add(new Run() { Text = "Downloaded: " });
+        var totalFilesProgressRun = new Run() { Text = "0" };
+        totalFilesTextBlock.Inlines.Add(totalFilesProgressRun);
+
+
+        var currentFileProgressBar = new ProgressBar()
+        {
+            IsIndeterminate = false,
+            Value = 0,
+            Maximum = 1,
+            Margin = new Thickness(0, 8, 0, 0),
+        };
+        var currentFileTextBlock = new TextBlock()
+        {
+            Text = string.Empty,
+            HorizontalAlignment = HorizontalAlignment.Left,
+        };
+        currentFileTextBlock.Inlines.Add(new Run() { Text = "Progress: " });
+        var currentFileProgressRun = new Run() { Text = "0" };
+        currentFileTextBlock.Inlines.Add(currentFileProgressRun);
+
+        var progressStackPanel = new StackPanel()
+        {
+            Spacing = 16,
+            Orientation = Orientation.Vertical,
+            Children =
+            {
+                totalFilesProgressBar,
+                totalFilesTextBlock,
+                currentFileProgressBar,
+                currentFileTextBlock,
+            }
+        };
+
+        var downloadingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        {
+            Title = ResourceHelper.GetString("General_Downloading"),
+            Content = progressStackPanel,
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+        };
+
+        downloadingDialog.CloseButtonClick += (ContentDialog sender, ContentDialogButtonClickEventArgs args) => {
+            cancellationTokenSource.Cancel();
+        };
+
+        _ = downloadingDialog.ShowAsync();
+
+        var successCount = 0;
+        var failCount = 0;
+
+        await Task.Run(async () => {
+            for (var i = 0; i < modelsToDownload.Count; ++i)
+            {
+                if (cancellationTokenSource.IsCancellationRequested)
+                {
+                    return;
+                }
+
+                App.CurrentApp.RunOnUIThread(() =>
+                {
+                    currentFileProgressBar.Value = 0;
+                });
+
+                try
+                {
+                    var tempFileName = $"{Guid.NewGuid().ToString("D")}.tmp";
+                    var tempFilePath = Path.Combine(Storage.GetTemp(), tempFileName);
+
+                    var didDownload = false;
+                    using (var fileStream = File.Create(tempFilePath))
+                    {
+                        var fileDownloader = new FileDownloader(modelsToDownload[i].NGXModel.FilePath);
+                        didDownload = await fileDownloader.DownloadFileToStreamAsync(fileStream, cancellationTokenSource.Token, progressCallback: (DownloadedBytes, TotalBytesToDownload, Percent) =>
+                        {
+                            App.CurrentApp.RunOnUIThread(() =>
+                            {
+                                var smallPercent = Percent / 100.0;
+                                currentFileProgressBar.Value = smallPercent;
+                                currentFileProgressRun.Text = smallPercent.ToString("P", CultureInfo.CurrentCulture);
+                            });
+                        });
+                    }
+
+                    if (didDownload)
+                    {
+                        var didImport = DLLManager.Instance.ImportDll(tempFilePath, overrideFileName: DLLManager.DllNameForGameAssetType(modelsToDownload[i].NGXModel.GameAssetType));
+                        if (didImport.Success)
+                        {
+                            ++successCount;
+                        }
+                        else
+                        {
+                            ++failCount;
+                        }
+                    }
+                    else
+                    {
+                        ++failCount;
+                    }
+                }
+                catch (TaskCanceledException) when (cancellationTokenSource.IsCancellationRequested)
+                {
+                    // NOOP
+                }
+                catch (Exception ex)
+                {
+                    ++failCount;
+                    Logger.Error(ex, "Error downloading or importing NGX model.");
+                }
+                finally
+                {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        totalFilesProgressBar.Value += 1;
+                        totalFilesProgressRun.Text = totalFilesProgressBar.Value.ToString(CultureInfo.CurrentCulture);
+                    });
+                }
+            }
+        });
+
+
+        if (cancellationTokenSource.IsCancellationRequested == false)
+        {
+            await DLLManager.Instance.SaveImportedManifestJsonAsync();
+
+            downloadingDialog.Hide();
+
+            var completeDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = "Download from NVIDIA",
+                DefaultButton = ContentDialogButton.Close,
+                Content = $"Success: {successCount}\nFailed: {failCount}",
+                CloseButtonText = ResourceHelper.GetString("General_Close"),
+            };
+            await completeDialog.ShowAsync();
+
+        }
+        else
+        {
+            downloadingDialog.Hide();
+        }
     }
 
     [RelayCommand]

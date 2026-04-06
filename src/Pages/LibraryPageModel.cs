@@ -19,9 +19,11 @@ using DLSS_Swapper.Data.NVIDIA;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
+using Windows.UI.Text;
 
 namespace DLSS_Swapper.Pages;
 
@@ -164,7 +166,7 @@ public partial class LibraryPageModel : ObservableObject
             Text = string.Empty,
             HorizontalAlignment = HorizontalAlignment.Left,
         };
-        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ExportedDLLs") });
+        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ExportedDLLs"), FontWeight = FontWeights.Bold });
         var progressRun = new Run() { Text = "0" };
         progressTextBlock.Inlines.Add(progressRun);
         var progressStackPanel = new StackPanel()
@@ -178,7 +180,7 @@ public partial class LibraryPageModel : ObservableObject
             }
         };
 
-
+        var str = ResourceHelper.GetString("LibraryPage_Exporting");
         var exportingDialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_Exporting"),
@@ -431,7 +433,7 @@ public partial class LibraryPageModel : ObservableObject
             Text = string.Empty,
             HorizontalAlignment = HorizontalAlignment.Left,
         };
-        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ProcessedDlls") });
+        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ProcessedDlls"), FontWeight = FontWeights.Bold });
         var progressRun = new Run() { Text = "0" };
         progressTextBlock.Inlines.Add(progressRun);
         var progressStackPanel = new StackPanel()
@@ -815,7 +817,7 @@ public partial class LibraryPageModel : ObservableObject
             var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
-                Content = "Could not locate any DLLs in the driver to import.",
+                Content = ResourceHelper.GetString("LibraryPage_CouldNotImportFromDriver"),
                 CloseButtonText = ResourceHelper.GetString("General_Close"),
             };
             await errorDialog.ShowAsync();
@@ -825,7 +827,7 @@ public partial class LibraryPageModel : ObservableObject
         var ngxModelImporter = new NGXModelImporter(models);
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = "Import from NVIDIA driver",
+            Title = ResourceHelper.GetString("LibraryPage_ImportFromNVIDIADriver"),
             DefaultButton = ContentDialogButton.Primary,
             Content = ngxModelImporter,
             PrimaryButtonText = ResourceHelper.GetString("General_Import"),
@@ -859,7 +861,7 @@ public partial class LibraryPageModel : ObservableObject
                 Text = string.Empty,
                 HorizontalAlignment = HorizontalAlignment.Left,
             };
-            progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ImportedDLLs") });
+            progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ImportedDLLs"), FontWeight = FontWeights.Bold });
             var progressRun = new Run() { Text = "0" };
             progressTextBlock.Inlines.Add(progressRun);
             var progressStackPanel = new StackPanel()
@@ -931,7 +933,7 @@ public partial class LibraryPageModel : ObservableObject
         };
         var loadingDialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = "Fetching File List",
+            Title = ResourceHelper.GetString("LibraryPage_FetchingFileList"),
             Content = loadingProgressRing,
             CloseButtonText = ResourceHelper.GetString("General_Cancel"),
         };
@@ -1034,7 +1036,7 @@ public partial class LibraryPageModel : ObservableObject
                 var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
                 {
                     Title = ResourceHelper.GetString("General_Error"),
-                    Content = "Unable to import from NVIDIA servers. Please try again later or check for DLSS Swapper updates.",
+                    Content = ResourceHelper.GetString("LibraryPage_Error_NVIDIA_Importing"),
                     CloseButtonText = ResourceHelper.GetString("General_Cancel"),
                 };
                 await errorDialog.ShowAsync();
@@ -1049,7 +1051,7 @@ public partial class LibraryPageModel : ObservableObject
             var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
-                Content = "Unable to fetch file list from NVIDIA servers. Please try again later or check for DLSS Swapper updates.",
+                Content = ResourceHelper.GetString("LibraryPage_Error_NVIDIA_Downloading"),
                 CloseButtonText = ResourceHelper.GetString("General_Cancel"),
             };
             await errorDialog.ShowAsync();
@@ -1092,7 +1094,7 @@ public partial class LibraryPageModel : ObservableObject
                             if (isValid)
                             {
                                 modelRow.IsEnabled = false;
-                                modelRow.StatusMessage = "Already downloaded";
+                                modelRow.StatusMessage = ResourceHelper.GetString("LibraryPage_AlreadyDownloaded");
                                 break;
                             }
                         }
@@ -1109,7 +1111,7 @@ public partial class LibraryPageModel : ObservableObject
 
         var dialog = new EasyContentDialog(libraryPage.XamlRoot)
         {
-            Title = "Download from NVIDIA",
+            Title = ResourceHelper.GetString("LibraryPage_DownloadFromNVIDIA"),
             DefaultButton = ContentDialogButton.Primary,
             Content = ngxModelImporter,
             PrimaryButtonText = ResourceHelper.GetString("General_Download"),
@@ -1141,7 +1143,7 @@ public partial class LibraryPageModel : ObservableObject
             Text = string.Empty,
             HorizontalAlignment = HorizontalAlignment.Left,
         };
-        totalFilesTextBlock.Inlines.Add(new Run() { Text = "Downloaded: " });
+        totalFilesTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_DownloadedCount"), FontWeight = FontWeights.Bold });
         var totalFilesProgressRun = new Run() { Text = "0" };
         totalFilesTextBlock.Inlines.Add(totalFilesProgressRun);
 
@@ -1158,7 +1160,7 @@ public partial class LibraryPageModel : ObservableObject
             Text = string.Empty,
             HorizontalAlignment = HorizontalAlignment.Left,
         };
-        currentFileTextBlock.Inlines.Add(new Run() { Text = "Progress: " });
+        currentFileTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ProgressPercent"), FontWeight = FontWeights.Bold });
         var currentFileProgressRun = new Run() { Text = "0" };
         currentFileTextBlock.Inlines.Add(currentFileProgressRun);
 
@@ -1270,11 +1272,12 @@ public partial class LibraryPageModel : ObservableObject
 
             var completeDialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
-                Title = "Download from NVIDIA",
+                Title = ResourceHelper.GetString("LibraryPage_DownloadFromNVIDIA"),
                 DefaultButton = ContentDialogButton.Close,
-                Content = $"Success: {successCount}\nFailed: {failCount}",
+                Content = $"{ResourceHelper.GetString("General_Success")}: {successCount}\n{ResourceHelper.GetString("General_Failed")}: {failCount}",
                 CloseButtonText = ResourceHelper.GetString("General_Close"),
             };
+
             await completeDialog.ShowAsync();
 
         }

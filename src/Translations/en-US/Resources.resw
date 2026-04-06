@@ -672,6 +672,20 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
     <value>Update Available</value>
   </data>
+
+
+  <data name="LibraryPage_ImportFrom_LocalFiles" xml:space="preserve">
+    <value>From local files</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_Driver" xml:space="preserve">
+    <value>From driver</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_DownloadFromServer" xml:space="preserve">
+    <value>Download from server</value>
+  </data>
+
+
+
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>Already downloaded.</value>
   </data>
@@ -714,11 +728,11 @@ If you have checked these and your game is still not showing up there may be a b
 
 
 
-  <data name="LibraryPage_Exportingx" xml:space="preserve">
+  <data name="LibraryPage_Exporting" xml:space="preserve">
     <value>Exporting</value>
   </data>
 
-  <data name="LibraryPage_Importingx" xml:space="preserve">
+  <data name="LibraryPage_Importing" xml:space="preserve">
     <value>Importing</value>
   </data>
 
@@ -1132,4 +1146,34 @@ Because of this we recommend using caution for multiplayer games.</value>
   <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
     <value>Translation Toolbox</value>
   </data>
+
+
+  <data name="LibraryPage_CouldNotImportFromDriver" xml:space="preserve">
+    <value>Could not locate any DLLs to import from the driver</value>
+  </data>
+  <data name="LibraryPage_ImportFromNVIDIADriver" xml:space="preserve">
+    <value>Import from NVIDIA driver</value>
+  </data>
+  <data name="LibraryPage_FetchingFileList" xml:space="preserve">
+    <value>Fetching File List</value>
+  </data>
+  <data name="LibraryPage_Error_NVIDIA_Importing" xml:space="preserve">
+    <value>Unable to import from NVIDIA servers. Please try again later or check for DLSS Swapper updates.</value>
+  </data>
+  <data name="LibraryPage_Error_NVIDIA_Downloading" xml:space="preserve">
+    <value>Unable to fetch file list from NVIDIA servers. Please try again later or check for DLSS Swapper updates.</value>
+  </data>
+
+
+  <data name="LibraryPage_DownloadFromNVIDIA" xml:space="preserve">
+    <value>Download from NVIDIA</value>
+  </data>
+  <data name="LibraryPage_DownloadedCount" xml:space="preserve">
+    <value>Downloaded: </value>
+  </data>
+  <data name="LibraryPage_ProgressPercent" xml:space="preserve">
+    <value>Progress: </value>
+  </data>
+
+
 </root>

@@ -1,6 +1,7 @@
 using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DLSS_Swapper.Pages;
 
@@ -29,4 +30,14 @@ public class LibraryPageModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string PageTitle => ResourceHelper.GetString("LibraryPage_Title");
+
+    [TranslationProperty]
+    public string ImportFromLocalFilesText => ResourceHelper.GetString("LibraryPage_ImportFrom_LocalFiles");
+
+    [TranslationProperty]
+    public string ImportFromDriverText => ResourceHelper.GetString("LibraryPage_ImportFrom_Driver");
+
+    [TranslationProperty]
+    public string ImportFromDownloadServerText => ResourceHelper.GetString("LibraryPage_ImportFrom_DownloadFromServer");
+
 }

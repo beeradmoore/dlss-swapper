@@ -8,9 +8,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tv="using:WinUI.TableView"
     xmlns:nvidia="using:DLSS_Swapper.Data.NVIDIA"
+    xmlns:converters="using:DLSS_Swapper.Converters"
     mc:Ignorable="d">
 
-    
+    <UserControl.Resources>
+        <converters:BytesToMegaBytesConverter x:Key="BytesToMegaBytesConverter" />
+    </UserControl.Resources>
 
     <Grid>
         <tv:TableView x:Name="MainTableView" Grid.Row="0" CornerButtonMode="SelectAll" SelectionMode="None" SelectionUnit="Row" GridLinesVisibility="All" VerticalAlignment="Stretch" AutoGenerateColumns="False" ItemsSource="{x:Bind ViewModel.Models, Mode=OneWay}">
@@ -19,9 +22,13 @@
 
                 <tv:TableViewCheckBoxColumn Binding="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Checked" IsReadOnly="False" CanSort="False" CanFilter="False" CanReorder="False" CanResize="False" />
 
-                <tv:TableViewTextColumn Width="*" Header="{x:Bind ViewModel.TranslationProperties.ColumnHeaderAssetTypeText, Mode=OneWay}" Tag="GameAssetType" Binding="{Binding NGXModel.GameAssetTypeString, Mode=OneTime}" IsReadOnly="True" />
+                <tv:TableViewTextColumn Width="*" Header="{x:Bind ViewModel.TranslationProperties.ColumnHeaderAssetTypeText, Mode=OneWay}" Tag="GameAssetType" Binding="{Binding NGXModel.GameAssetTypeString, Mode=OneWay}" IsReadOnly="True" />
 
-                <tv:TableViewTextColumn Width="*" Header="{x:Bind ViewModel.TranslationProperties.ColumnHeaderVersionText, Mode=OneWay}" Tag="Version" Binding="{Binding NGXModel.Version, Mode=OneTime}" IsReadOnly="True" />
+                <tv:TableViewTextColumn Width="*" Header="{x:Bind ViewModel.TranslationProperties.ColumnHeaderVersionText, Mode=OneWay}" Tag="Version" Binding="{Binding NGXModel.Version, Mode=OneWay}" IsReadOnly="True" />
+
+                <tv:TableViewTextColumn Width="*" Header="{x:Bind ViewModel.TranslationProperties.ColumnHeaderSizeText, Mode=OneWay}" Tag="Size" Binding="{Binding NGXModel.Size, Mode=OneWay, Converter={StaticResource BytesToMegaBytesConverter}}" IsReadOnly="True" />
+
+                <tv:TableViewTextColumn Width="*" Header="{x:Bind ViewModel.TranslationProperties.ColumnHeaderStatusText, Mode=OneWay}" Tag="Status" Binding="{Binding StatusMessage, Mode=OneWay}" IsReadOnly="True" />
 
             </tv:TableView.Columns>
 

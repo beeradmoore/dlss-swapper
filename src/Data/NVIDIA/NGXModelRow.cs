@@ -9,8 +9,11 @@ public partial class NGXModelRow : ObservableObject
     [ObservableProperty]
     public partial bool IsChecked { get; set; } = false;
 
-    // TODO: Disable rows for already imported content?
-    public bool IsEnabled { get; } = true;
+    [ObservableProperty]
+    public partial bool IsEnabled { get; set; } = true;
+
+    [ObservableProperty]
+    public partial string StatusMessage { get; set; } = string.Empty;
 
     public NGXModelRow(NGXModel ngxModel)
     {

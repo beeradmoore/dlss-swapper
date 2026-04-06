@@ -813,7 +813,7 @@ public partial class LibraryPageModel : ObservableObject
             var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
-                Content = "Could not import locate any DLLs in the driver to import.",
+                Content = "Could not locate any DLLs in the driver to import.",
                 CloseButtonText = ResourceHelper.GetString("General_Close"),
             };
             await errorDialog.ShowAsync();

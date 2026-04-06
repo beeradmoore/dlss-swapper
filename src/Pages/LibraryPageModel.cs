@@ -92,7 +92,7 @@ public partial class LibraryPageModel : ObservableObject
         }
     }
 
-    [RelayCommand()]
+    [RelayCommand]
     async Task RefreshAsync()
     {
         IsRefreshing = true;

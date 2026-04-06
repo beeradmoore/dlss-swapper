@@ -118,6 +118,7 @@
     <None Remove="UserControls\ManuallyAddGameControl.xaml" />
     <None Remove="UserControls\MultipleDLLsFoundControl.xaml" />
     <None Remove="UserControls\NewDLLsControl.xaml" />
+    <None Remove="UserControls\NGXModelImporter.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -321,6 +322,9 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Page Update="UserControls\NGXModelImporter.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </Page>
         <Page Update="UserControls\GameHistoryControl.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>
@@ -397,7 +401,8 @@
     <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
     <PackageReference Include="System.Drawing.Common" Version="10.0.5" />
     <PackageReference Include="System.Management" Version="10.0.5" />
-    <PackageReference Include="ValveKeyValue" Version="0.51.0.482" />
+    <PackageReference Include="ValveKeyValue" Version="0.60.0.494" />
+    <PackageReference Include="WinUI.TableView" Version="1.4.0" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>

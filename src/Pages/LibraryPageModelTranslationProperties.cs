@@ -29,4 +29,14 @@ public class LibraryPageModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string PageTitle => ResourceHelper.GetString("LibraryPage_Title");
+
+    [TranslationProperty]
+    public string ImportFromLocalFilesText => ResourceHelper.GetString("LibraryPage_ImportFrom_LocalFiles");
+
+    [TranslationProperty]
+    public string ImportFromDriverText => ResourceHelper.GetString("LibraryPage_ImportFrom_Driver");
+
+    [TranslationProperty]
+    public string ImportFromDownloadServerText => ResourceHelper.GetString("LibraryPage_ImportFrom_DownloadFromServer");
+
 }

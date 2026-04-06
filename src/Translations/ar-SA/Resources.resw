@@ -147,14 +147,8 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>تعذّر تنزيل {0} DLL. يُرجى المحاولة لاحقًا أو التحقق من السجلات لمعرفة سبب فشل التنزيل.</value>
   </data>
-  <data name="DllRecord_Download" xml:space="preserve">
-    <value>تنزيل</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>خطأ في التنزيل</value>
-  </data>
-  <data name="DllRecord_Downloading" xml:space="preserve">
-    <value>جارٍ التنزيل</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>تم الاستيراد</value>
@@ -452,6 +446,12 @@
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>لا تُظهر هذا مرة أخرى</value>
   </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>تنزيل</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>جارٍ التنزيل</value>
+  </data>
   <data name="General_Error" xml:space="preserve">
     <value>خطأ</value>
   </data>
@@ -681,7 +681,7 @@
     <value>تحديث manifest</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>على الرغم من أن تبديل إصدارات DLSS لا يُعتبر غشًا، إلا أن بعض أنظمة مكافحة الغش قد لا تقبل بذلك إذا كانت الملفات في مجلد لعبتك تختلف عن الملفات الأصلية التي تم توزيعها مع اللعبة. 
+    <value>على الرغم من أن تبديل إصدارات DLSS لا يُعتبر غشًا، إلا أن بعض أنظمة مكافحة الغش قد لا تقبل بذلك إذا كانت الملفات في مجلد لعبتك تختلف عن الملفات الأصلية التي تم توزيعها مع اللعبة.
 لذلك نوصي بالحذر عند استخدام هذه الأداة في العاب الاونلاين (متعددة اللاعبين).</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">

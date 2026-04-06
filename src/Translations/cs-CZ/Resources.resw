@@ -147,14 +147,8 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Nebylo možné stáhnout {0} DLL, prosím zkuste to znovu později, nebo zkontrolujte protokol ke zjištění proč stahování selhalo.</value>
   </data>
-  <data name="DllRecord_Download" xml:space="preserve">
-    <value>Stáhnout</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Chyba stahování</value>
-  </data>
-  <data name="DllRecord_Downloading" xml:space="preserve">
-    <value>Stahuji</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>Importováno</value>
@@ -482,6 +476,12 @@ Pokud jste tyto možnosti zkontrolovali a hra se stále nezobrazuje, může se j
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>Znovu nezobrazovat</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>Stáhnout</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>Stahuji</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>Chyba</value>

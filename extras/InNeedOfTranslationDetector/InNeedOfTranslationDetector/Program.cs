@@ -60,6 +60,9 @@ var ignoredXamlMatches = new List<string>()
     "Text=\"&#xE8C8;\"",
     "Text=\"DLSS Preset\"",
 	"FallbackValue='N/A'",
+	"Text=\"NVIDIA\"",
+	"Text=\"AMD\"",
+	"Text=\"Intel\"",
 };
 
 foreach (var xamlFile in allXamlFiles)
@@ -241,9 +244,13 @@ var ignoredCSharpMatches = new List<string>()
 	"= \"228980\"",
 	" = \"US\"",
 	" = $\"shell:appsFolder\\\\{xboxGame.PlatformId}!{xboxGame.ApplicationId}\"",
+	"=\"filePath\"",
+	"=\"zippedDllFullName\"",
+	"=\"overrideFileName\"",
 	"= \"libxess_dx11.dll\"",
 	"=\"%1\"",
 	"=\"launch {LauncherId}\"",
+	" = \"http://s3.amazonaws.com/doc/2006-03-01/\"",
 	" = \"-\"",
 };
 

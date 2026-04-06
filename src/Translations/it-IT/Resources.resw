@@ -147,14 +147,8 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Impossibile scaricare {0} DLL. Riprova più tardi o controlla i log per scoprire perché il download non sia riuscito.</value>
   </data>
-  <data name="DllRecord_Download" xml:space="preserve">
-    <value>Download</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Errore nel download</value>
-  </data>
-  <data name="DllRecord_Downloading" xml:space="preserve">
-    <value>Download in corso</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>Importazione riuscita</value>
@@ -465,6 +459,12 @@ Se hai verificato queste opzioni e il tuo gioco continua a non essere visualizza
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>Non mostrare più</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>Download in corso</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>Errore</value>

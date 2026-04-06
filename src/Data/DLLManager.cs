@@ -1112,14 +1112,22 @@ internal class DLLManager
         return false;
     }
 
-    internal DLLImportResult ImportDll(string filePath, string? zippedDllFullName = null)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="filePath">Path of the DLL you wish to import.</param>
+    /// <param name="zippedDllFullName"></param>
+    /// <param name="overrideFileName">Override the filename for importing NGX models that are not .dlls yet.</param>
+    /// <returns></returns>
+
+    internal DLLImportResult ImportDll(string filePath, string? zippedDllFullName = null, string? overrideFileName = null)
     {
         if (ImportedManifest is null)
         {
             return DLLImportResult.FromFail(zippedDllFullName ?? filePath, ResourceHelper.GetString("DllManager_ImportFeatureDisabled"));
         }
 
-        var fileName = Path.GetFileName(filePath);
+        var fileName = overrideFileName ?? Path.GetFileName(filePath);
 
         ObservableCollection<DLLRecord>? recordList = null;
         List<DLLRecord>? importedRecordList = null;
@@ -1389,4 +1397,5 @@ internal class DLLManager
             entry.ExtractToFile(dllRecord.LocalRecord.ExpectedPath, true);
         }
     }
+
 }

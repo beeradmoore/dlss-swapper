@@ -147,14 +147,8 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Не удалось загрузить {0} DLL, попробуйте позже или проверьте журналы, чтобы узнать причину сбоя загрузки.</value>
   </data>
-  <data name="DllRecord_Download" xml:space="preserve">
-    <value>Загрузить</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Ошибка загрузки</value>
-  </data>
-  <data name="DllRecord_Downloading" xml:space="preserve">
-    <value>Загрузка</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>Импортировано</value>
@@ -482,6 +476,12 @@
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>Не показывать больше</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>Загрузить</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>Загрузка</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>Ошибка</value>

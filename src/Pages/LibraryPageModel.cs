@@ -7,15 +7,19 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.WinUI;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.NVIDIA;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
@@ -24,7 +28,7 @@ namespace DLSS_Swapper.Pages;
 
 public partial class LibraryPageModel : ObservableObject
 {
-    LibraryPage libraryPage;
+    readonly LibraryPage _libraryPage;
 
     internal ObservableCollection<DLLRecord>? SelectedLibraryList { get; private set; }
 
@@ -38,9 +42,9 @@ public partial class LibraryPageModel : ObservableObject
 
     public LibraryPageModel(LibraryPage libraryPage)
     {
-        this.libraryPage = libraryPage;
+        _libraryPage = libraryPage;
 
-        var upscalerSelectorBar = libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
+        var upscalerSelectorBar = _libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
         if (upscalerSelectorBar is not null)
         {
             // NOTE: DLL type
@@ -63,7 +67,7 @@ public partial class LibraryPageModel : ObservableObject
 
     void OnLanguageChanged()
     {
-        var upscalerSelectorBar = libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
+        var upscalerSelectorBar = _libraryPage.FindChild("UpscalerSelectorBar") as SelectorBar;
         if (upscalerSelectorBar is null)
         {
             return;
@@ -91,7 +95,7 @@ public partial class LibraryPageModel : ObservableObject
         }
     }
 
-    [RelayCommand()]
+    [RelayCommand]
     async Task RefreshAsync()
     {
         IsRefreshing = true;
@@ -108,7 +112,7 @@ public partial class LibraryPageModel : ObservableObject
         }
         else
         {
-            var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var errorDialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -139,7 +143,7 @@ public partial class LibraryPageModel : ObservableObject
 
         if (allDllRecords.Count == 0)
         {
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
                 DefaultButton = ContentDialogButton.Close,
@@ -161,7 +165,7 @@ public partial class LibraryPageModel : ObservableObject
             Text = string.Empty,
             HorizontalAlignment = HorizontalAlignment.Left,
         };
-        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ExportedDLLs") });
+        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ExportedDLLs"), FontWeight = FontWeights.Bold });
         var progressRun = new Run() { Text = "0" };
         progressTextBlock.Inlines.Add(progressRun);
         var progressStackPanel = new StackPanel()
@@ -175,8 +179,8 @@ public partial class LibraryPageModel : ObservableObject
             }
         };
 
-
-        var exportingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var str = ResourceHelper.GetString("LibraryPage_Exporting");
+        var exportingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_Exporting"),
             Content = progressStackPanel,
@@ -243,7 +247,7 @@ public partial class LibraryPageModel : ObservableObject
             {
                 exportingDialog.Hide();
 
-                var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+                var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
                 {
                     Title = ResourceHelper.GetString("General_Error"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -274,7 +278,7 @@ public partial class LibraryPageModel : ObservableObject
 
                 if (exportError is null)
                 {
-                    var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+                    var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
                     {
                         CloseButtonText = ResourceHelper.GetString("General_Okay"),
                         DefaultButton = ContentDialogButton.Close,
@@ -312,7 +316,7 @@ public partial class LibraryPageModel : ObservableObject
             Logger.Error(err);
 
             // If the fullExpectedPath does not exist, or there was an error writing it.
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -372,7 +376,7 @@ public partial class LibraryPageModel : ObservableObject
     {
         if (DLLManager.Instance.ImportedManifest is null)
         {
-            var couldNotImportDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var couldNotImportDialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("LibraryPage_CouldNotLoadImportedDlls"),
                 DefaultButton = ContentDialogButton.Close,
@@ -385,7 +389,7 @@ public partial class LibraryPageModel : ObservableObject
 
         if (Settings.Instance.HasShownWarning == false)
         {
-            var warningDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var warningDialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Warning"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -428,7 +432,7 @@ public partial class LibraryPageModel : ObservableObject
             Text = string.Empty,
             HorizontalAlignment = HorizontalAlignment.Left,
         };
-        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ProcessedDlls") });
+        progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ProcessedDlls"), FontWeight = FontWeights.Bold });
         var progressRun = new Run() { Text = "0" };
         progressTextBlock.Inlines.Add(progressRun);
         var progressStackPanel = new StackPanel()
@@ -443,7 +447,7 @@ public partial class LibraryPageModel : ObservableObject
             }
         };
 
-        var loadingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var loadingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_Importing"),
             // I would like this to be a progress ring but for some reason the ring will not show.
@@ -792,7 +796,7 @@ public partial class LibraryPageModel : ObservableObject
 
         loadingDialog.Hide();
 
-        var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             CloseButtonText = ResourceHelper.GetString("General_Okay"),
             DefaultButton = ContentDialogButton.Close,
@@ -800,6 +804,584 @@ public partial class LibraryPageModel : ObservableObject
             Content = new ImportDLLSummaryControl(importResults),
         };
         await dialog.ShowAsync();
+    }
+
+    [RelayCommand]
+    async Task ImportFromNVIDIADriverAsync()
+    {
+        var loadingProgressRing = new ProgressRing()
+        {
+            IsIndeterminate = true
+        };
+        var loadingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
+        {
+            Title = ResourceHelper.GetString("LibraryPage_ImportFromNVIDIADriver"),
+            Content = loadingProgressRing,
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+        };
+        using var cancellationTokenSource = new CancellationTokenSource();
+        loadingDialog.CloseButtonClick += (ContentDialog sender, ContentDialogButtonClickEventArgs args) => {
+            cancellationTokenSource.Cancel();
+        };
+
+        _ = loadingDialog.ShowAsync();
+
+        var models = new List<NGXModel>();
+        await Task.Run(() =>
+        {
+            models.AddRange(NVAPIHelper.Instance.GetNGXModels());
+        });
+
+        if (cancellationTokenSource.IsCancellationRequested)
+        {
+
+            loadingDialog.Hide();
+            return;
+        }
+
+        if (models.Count == 0)
+        {
+
+            loadingDialog.Hide();
+            var errorDialog = new EasyContentDialog(_libraryPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("General_Error"),
+                Content = ResourceHelper.GetString("LibraryPage_CouldNotImportFromDriver"),
+                CloseButtonText = ResourceHelper.GetString("General_Close"),
+            };
+            await errorDialog.ShowAsync();
+            return;
+        }
+                
+        var ngxModelImporter = new NGXModelImporter(models);
+
+        await Task.Run(() =>
+        {
+            foreach (var modelRow in ngxModelImporter.ViewModel.Models)
+            {
+                var versionNumber = modelRow.NGXModel.Version.GetVersionNumber();
+
+                var existingRecordsToTest = new List<DLLRecord>();
+
+                if (modelRow.NGXModel.GameAssetType == GameAssetType.DLSS)
+                {
+                    var existingDLLRecords = DLLManager.Instance.DLSSRecords.Where(x => x.VersionNumber == versionNumber && x.LocalRecord is not null && x.LocalRecord.IsDownloaded);
+                    existingRecordsToTest.AddRange(existingDLLRecords);
+                }
+                else if (modelRow.NGXModel.GameAssetType == GameAssetType.DLSS_D)
+                {
+                    var existingDLLRecords = DLLManager.Instance.DLSSDRecords.Where(x => x.VersionNumber == versionNumber && x.LocalRecord is not null && x.LocalRecord.IsDownloaded);
+                    existingRecordsToTest.AddRange(existingDLLRecords);
+                }
+                else if (modelRow.NGXModel.GameAssetType == GameAssetType.DLSS_G)
+                {
+                    var existingDLLRecords = DLLManager.Instance.DLSSGRecords.Where(x => x.VersionNumber == versionNumber && x.LocalRecord is not null && x.LocalRecord.IsDownloaded);
+                    existingRecordsToTest.AddRange(existingDLLRecords);
+                }
+
+                foreach (var existingRecordToTest in existingRecordsToTest)
+                {
+                    try
+                    {
+                        using (var fileStream = File.OpenRead(modelRow.NGXModel.FilePath))
+                        {
+                            var md5Hash = fileStream.GetMD5Hash();
+                            if (string.Equals(md5Hash, existingRecordToTest.MD5Hash))
+                            {
+                                modelRow.IsEnabled = false;
+                                modelRow.StatusMessage = ResourceHelper.GetString("LibraryPage_AlreadyDownloaded");
+                                break;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex);
+                    }
+                }
+            }
+        });
+
+        loadingDialog.Hide();
+
+        var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
+        {
+            Title = ResourceHelper.GetString("LibraryPage_ImportFromNVIDIADriver"),
+            DefaultButton = ContentDialogButton.Primary,
+            Content = ngxModelImporter,
+            PrimaryButtonText = ResourceHelper.GetString("General_Import"),
+            CloseButtonText = ResourceHelper.GetString("General_Close"),
+        };
+        dialog.Resources["ContentDialogMinWidth"] = 700;
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            var modelsToImport = new List<NGXModel>();
+            foreach (var modelRow in ngxModelImporter.ViewModel.Models)
+            {
+                if (modelRow.IsChecked == true)
+                {
+                    modelsToImport.Add(modelRow.NGXModel);
+                }
+            }
+
+            if (modelsToImport.Count == 0)
+            {
+                return;
+            }
+
+
+            var filesProgressBar = new ProgressBar()
+            {
+                IsIndeterminate = true
+            };
+            var progressTextBlock = new TextBlock()
+            {
+                Text = string.Empty,
+                HorizontalAlignment = HorizontalAlignment.Left,
+            };
+            progressTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ImportedDLLs"), FontWeight = FontWeights.Bold });
+            var progressRun = new Run() { Text = "0" };
+            progressTextBlock.Inlines.Add(progressRun);
+            var progressStackPanel = new StackPanel()
+            {
+                Spacing = 16,
+                Orientation = Orientation.Vertical,
+                Children =
+                {
+                    filesProgressBar,
+                    progressTextBlock,
+                }
+            };
+
+
+            var importingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("LibraryPage_Importing"),
+                Content = progressStackPanel,
+            };
+
+            filesProgressBar.IsIndeterminate = false;
+            filesProgressBar.Value = 0;
+            filesProgressBar.Maximum = modelsToImport.Count;
+
+            _ = importingDialog.ShowAsync();
+
+            var successCount = 0;
+            var failedCount = 0;
+
+            await Task.Run(() => {
+                for (var i = 0; i < modelsToImport.Count; ++i)
+                {
+                    try
+                    {
+                        var didImport = DLLManager.Instance.ImportDll(modelsToImport[i].FilePath, overrideFileName: DLLManager.DllNameForGameAssetType(modelsToImport[i].GameAssetType));
+                        if (didImport.Success)
+                        {
+                            ++successCount;
+                        }
+                        else
+                        {
+                            ++failedCount;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ++failedCount;
+                        Logger.Error(ex, "Error importing NGX model.");
+                    }
+                    finally
+                    {
+                        App.CurrentApp.RunOnUIThread(() =>
+                        {
+                            filesProgressBar.Value = i;
+                            progressRun.Text = i.ToString(CultureInfo.CurrentCulture);
+                        });
+                    }
+                }
+            });
+
+            await DLLManager.Instance.SaveImportedManifestJsonAsync();
+
+            importingDialog.Hide();
+
+            var completeDialog = new EasyContentDialog(_libraryPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("LibraryPage_ImportFromNVIDIADriver"),
+                DefaultButton = ContentDialogButton.Close,
+                Content = $"{ResourceHelper.GetString("General_Success")}: {successCount}\n{ResourceHelper.GetString("General_Failed")}: {failedCount}",
+                CloseButtonText = ResourceHelper.GetString("General_Close"),
+            };
+            await completeDialog.ShowAsync();
+
+        }
+    }
+
+
+    [GeneratedRegex(@"^d6e9b45e-d4f6-4a84-a460-bf61decae3e8\/(?<asset_type>dlss|dlssg|dlssd)\/versions\/(?<version_packed>\d*)\/files\/160_E658700\.bin$", RegexOptions.IgnoreCase)]
+    private static partial Regex IsNGXModelWeCanUse();
+
+    [RelayCommand]
+    async Task ImportFromNVIDIAServerAsync()
+    {
+        var loadingProgressRing = new ProgressRing()
+        {
+            IsIndeterminate = true
+        };
+        var loadingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
+        {
+            Title = ResourceHelper.GetString("LibraryPage_FetchingFileList"),
+            Content = loadingProgressRing,
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+        };
+        using var cancellationTokenSource = new CancellationTokenSource();
+        loadingDialog.CloseButtonClick += (ContentDialog sender, ContentDialogButtonClickEventArgs args) => {
+            cancellationTokenSource.Cancel();
+        };
+
+        _ = loadingDialog.ShowAsync();
+
+        var ngxOtaUrl = "https://ngx.download.nvidia.com";
+        var xmlDownloader = new FileDownloader(ngxOtaUrl);
+
+        var availableModels = new List<NGXModel>();
+
+        using (var memoryStream = new MemoryStream())
+        {
+            try
+            {
+                var didDownload = await xmlDownloader.DownloadFileToStreamAsync(memoryStream, cancellationTokenSource.Token);
+                if (didDownload == false)
+                {
+                    throw new Exception("Could not download xml stream.");
+                }
+
+                memoryStream.Position = 0;
+
+                var serializer = new XmlSerializer(typeof(ListBucketResult));
+                var listBucketResult = serializer.Deserialize(memoryStream) as ListBucketResult;
+
+                if (listBucketResult is null)
+                {
+                    throw new Exception("ListBucketResult was null.");
+                }
+
+
+                foreach (var content in listBucketResult.Contents)
+                {
+                    if (content is null || content.Size == 0)
+                    {
+                        continue;
+                    }
+
+                    // We only give the option of 160_E658700.bin. Other files do exist.
+                    // 160 is from NV_GPU_ARCHITECTURE_ID of Turing GPUs. But it appears everyone has this for DLSS files.
+                    // As for what E658700, no idea.
+                    // https://github.com/SimonMacer/AnWave/issues/52#issuecomment-3025720063
+                    // https://docs.nvidia.com/nvapi/group__gpu.html
+                    if (content.Key.EndsWith("files/160_E658700.bin") == false)
+                    {
+                        continue;
+                    }
+
+                    var match = IsNGXModelWeCanUse().Match(content.Key);
+                    if (match.Success == false)
+                    {
+                        continue;
+                    }
+
+                    GameAssetType? gameAssetType = match.Groups["asset_type"].Value switch
+                    {
+                        "dlss" => GameAssetType.DLSS,
+                        "dlssd" => GameAssetType.DLSS_D,
+                        "dlssg" => GameAssetType.DLSS_G,
+                        _ => null,
+                    };
+
+
+                    if (gameAssetType == null)
+                    {
+                        continue;
+                    }
+
+                    if (Int32.TryParse(match.Groups["version_packed"].ValueSpan, out var versionInt) == false)
+                    {
+                        Logger.Error($"Could not convert {match.Groups["version_packed"].Value} to a version number.");
+                        continue;
+                    }
+
+                    var major = (versionInt >> 16) & 0xFFFF;
+                    var minor = (versionInt >> 8) & 0xFF;
+                    var build = versionInt & 0xFF;
+                    var version = new Version(major, minor, build, 0);
+
+                    availableModels.Add(new NGXModel($"{ngxOtaUrl}/{content.Key}", version, gameAssetType.Value, (long)content.Size, content.ETag));
+                }
+
+            }
+            catch (TaskCanceledException) when (cancellationTokenSource.IsCancellationRequested)
+            {
+                // NOOP: User cancelled
+                return;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+
+                loadingDialog.Hide();
+
+                var errorDialog = new EasyContentDialog(_libraryPage.XamlRoot)
+                {
+                    Title = ResourceHelper.GetString("General_Error"),
+                    Content = ResourceHelper.GetString("LibraryPage_Error_NVIDIA_Importing"),
+                    CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+                };
+                await errorDialog.ShowAsync();
+                return;
+            }
+        }
+
+
+        if (availableModels.Count == 0)
+        {
+            loadingDialog.Hide();
+            var errorDialog = new EasyContentDialog(_libraryPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("General_Error"),
+                Content = ResourceHelper.GetString("LibraryPage_Error_NVIDIA_Downloading"),
+                CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+            };
+            await errorDialog.ShowAsync();
+            return;
+        }
+
+        var ngxModelImporter = new NGXModelImporter(availableModels);
+
+        foreach (var modelRow in ngxModelImporter.ViewModel.Models)
+        {
+            var versionNumber = modelRow.NGXModel.Version.GetVersionNumber();
+
+            var existingRecordsToTest = new List<DLLRecord>();
+
+            if (modelRow.NGXModel.GameAssetType == GameAssetType.DLSS)
+            {
+                var existingDLLRecords = DLLManager.Instance.DLSSRecords.Where(x => x.VersionNumber == versionNumber && x.LocalRecord is not null && x.LocalRecord.IsDownloaded);
+                existingRecordsToTest.AddRange(existingDLLRecords);
+            }
+            else if (modelRow.NGXModel.GameAssetType == GameAssetType.DLSS_D)
+            {
+                var existingDLLRecords = DLLManager.Instance.DLSSDRecords.Where(x => x.VersionNumber == versionNumber && x.LocalRecord is not null && x.LocalRecord.IsDownloaded);
+                existingRecordsToTest.AddRange(existingDLLRecords);
+            }
+            else if (modelRow.NGXModel.GameAssetType == GameAssetType.DLSS_G)
+            {
+                var existingDLLRecords = DLLManager.Instance.DLSSGRecords.Where(x => x.VersionNumber == versionNumber && x.LocalRecord is not null && x.LocalRecord.IsDownloaded);
+                existingRecordsToTest.AddRange(existingDLLRecords);
+            }
+
+            foreach (var existingRecordToTest in existingRecordsToTest)
+            {
+                try
+                {
+                    if (File.Exists(existingRecordToTest?.LocalRecord?.ExpectedPath))
+                    {
+                        using (var fileStream = File.OpenRead(existingRecordToTest.LocalRecord.ExpectedPath))
+                        {
+                            var isValid = NVAPIHelper.Instance.ValidateNVIDIAOtaHash(fileStream, modelRow.NGXModel.ETag);
+                            if (isValid)
+                            {
+                                modelRow.IsEnabled = false;
+                                modelRow.StatusMessage = ResourceHelper.GetString("LibraryPage_AlreadyDownloaded");
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                }
+            }
+        }
+
+        loadingDialog.Hide();
+
+        var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
+        {
+            Title = ResourceHelper.GetString("LibraryPage_DownloadFromNVIDIA"),
+            DefaultButton = ContentDialogButton.Primary,
+            Content = ngxModelImporter,
+            PrimaryButtonText = ResourceHelper.GetString("General_Download"),
+            CloseButtonText = ResourceHelper.GetString("General_Close"),
+        };
+        dialog.Resources["ContentDialogMinWidth"] = 700;
+        var result = await dialog.ShowAsync();
+
+        if (result != ContentDialogResult.Primary)
+        {
+            return;
+        }
+
+        var modelsToDownload = ngxModelImporter.ViewModel.Models.Where(x => x.IsChecked).ToList();
+        if (modelsToDownload.Count == 0)
+        {
+            return;
+        }
+
+
+        var totalFilesProgressBar = new ProgressBar()
+        {
+            IsIndeterminate = false,
+            Value = 0,
+            Maximum = modelsToDownload.Count,
+        };
+        var totalFilesTextBlock = new TextBlock()
+        {
+            Text = string.Empty,
+            HorizontalAlignment = HorizontalAlignment.Left,
+        };
+        totalFilesTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_DownloadedCount"), FontWeight = FontWeights.Bold });
+        var totalFilesProgressRun = new Run() { Text = "0" };
+        totalFilesTextBlock.Inlines.Add(totalFilesProgressRun);
+
+
+        var currentFileProgressBar = new ProgressBar()
+        {
+            IsIndeterminate = false,
+            Value = 0,
+            Maximum = 1,
+            Margin = new Thickness(0, 8, 0, 0),
+        };
+        var currentFileTextBlock = new TextBlock()
+        {
+            Text = string.Empty,
+            HorizontalAlignment = HorizontalAlignment.Left,
+        };
+        currentFileTextBlock.Inlines.Add(new Run() { Text = ResourceHelper.GetString("LibraryPage_ProgressPercent"), FontWeight = FontWeights.Bold });
+        var currentFileProgressRun = new Run() { Text = "0" };
+        currentFileTextBlock.Inlines.Add(currentFileProgressRun);
+
+        var progressStackPanel = new StackPanel()
+        {
+            Spacing = 16,
+            Orientation = Orientation.Vertical,
+            Children =
+            {
+                totalFilesProgressBar,
+                totalFilesTextBlock,
+                currentFileProgressBar,
+                currentFileTextBlock,
+            }
+        };
+
+        var downloadingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
+        {
+            Title = ResourceHelper.GetString("General_Downloading"),
+            Content = progressStackPanel,
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+        };
+
+        downloadingDialog.CloseButtonClick += (ContentDialog sender, ContentDialogButtonClickEventArgs args) => {
+            cancellationTokenSource.Cancel();
+        };
+
+        _ = downloadingDialog.ShowAsync();
+
+        var successCount = 0;
+        var failCount = 0;
+
+        await Task.Run(async () => {
+            for (var i = 0; i < modelsToDownload.Count; ++i)
+            {
+                if (cancellationTokenSource.IsCancellationRequested)
+                {
+                    return;
+                }
+
+                App.CurrentApp.RunOnUIThread(() =>
+                {
+                    currentFileProgressBar.Value = 0;
+                });
+
+                try
+                {
+                    var tempFileName = $"{Guid.NewGuid().ToString("D")}.tmp";
+                    var tempFilePath = Path.Combine(Storage.GetTemp(), tempFileName);
+
+                    var didDownload = false;
+                    using (var fileStream = File.Create(tempFilePath))
+                    {
+                        var fileDownloader = new FileDownloader(modelsToDownload[i].NGXModel.FilePath);
+                        didDownload = await fileDownloader.DownloadFileToStreamAsync(fileStream, cancellationTokenSource.Token, progressCallback: (DownloadedBytes, TotalBytesToDownload, Percent) =>
+                        {
+                            App.CurrentApp.RunOnUIThread(() =>
+                            {
+                                var smallPercent = Percent / 100.0;
+                                currentFileProgressBar.Value = smallPercent;
+                                currentFileProgressRun.Text = smallPercent.ToString("P", CultureInfo.CurrentCulture);
+                            });
+                        });
+                    }
+
+                    if (didDownload)
+                    {
+                        var didImport = DLLManager.Instance.ImportDll(tempFilePath, overrideFileName: DLLManager.DllNameForGameAssetType(modelsToDownload[i].NGXModel.GameAssetType));
+                        if (didImport.Success)
+                        {
+                            ++successCount;
+                        }
+                        else
+                        {
+                            ++failCount;
+                        }
+                    }
+                    else
+                    {
+                        ++failCount;
+                    }
+                }
+                catch (TaskCanceledException) when (cancellationTokenSource.IsCancellationRequested)
+                {
+                    // NOOP
+                }
+                catch (Exception ex)
+                {
+                    ++failCount;
+                    Logger.Error(ex, "Error downloading or importing NGX model.");
+                }
+                finally
+                {
+                    App.CurrentApp.RunOnUIThread(() =>
+                    {
+                        totalFilesProgressBar.Value += 1;
+                        totalFilesProgressRun.Text = totalFilesProgressBar.Value.ToString(CultureInfo.CurrentCulture);
+                    });
+                }
+            }
+        });
+
+
+        if (cancellationTokenSource.IsCancellationRequested == false)
+        {
+            await DLLManager.Instance.SaveImportedManifestJsonAsync();
+
+            downloadingDialog.Hide();
+
+            var completeDialog = new EasyContentDialog(_libraryPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("LibraryPage_DownloadFromNVIDIA"),
+                DefaultButton = ContentDialogButton.Close,
+                Content = $"{ResourceHelper.GetString("General_Success")}: {successCount}\n{ResourceHelper.GetString("General_Failed")}: {failCount}",
+                CloseButtonText = ResourceHelper.GetString("General_Close"),
+            };
+
+            await completeDialog.ShowAsync();
+
+        }
+        else
+        {
+            downloadingDialog.Hide();
+        }
     }
 
     [RelayCommand]
@@ -812,7 +1394,7 @@ public partial class LibraryPageModel : ObservableObject
         }
 
         var assetTypeName = DLLManager.Instance.GetAssetTypeName(record.AssetType);
-        var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_DeleteDll"),
             PrimaryButtonText = ResourceHelper.GetString("General_Delete"),
@@ -840,7 +1422,7 @@ public partial class LibraryPageModel : ObservableObject
             }
             else
             {
-                var errorDialog = new EasyContentDialog(libraryPage.XamlRoot)
+                var errorDialog = new EasyContentDialog(_libraryPage.XamlRoot)
                 {
                     Title = ResourceHelper.GetString("General_Error"),
                     CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -858,7 +1440,7 @@ public partial class LibraryPageModel : ObservableObject
         var result = await record.DownloadAsync();
         if (result.Success is false && result.Cancelled is false)
         {
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -885,7 +1467,7 @@ public partial class LibraryPageModel : ObservableObject
             return;
         }
 
-        var exportingDialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var exportingDialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_Exporting"),
             // I would like this to be a progress ring but for some reason the ring will not show.
@@ -944,7 +1526,7 @@ public partial class LibraryPageModel : ObservableObject
 
             exportingDialog.Hide();
 
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Success"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -959,7 +1541,7 @@ public partial class LibraryPageModel : ObservableObject
             Logger.Error(err);
 
             // If the fullExpectedPath does not exist, or there was an error writing it.
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -973,7 +1555,7 @@ public partial class LibraryPageModel : ObservableObject
     [RelayCommand]
     async Task ShowDownloadErrorAsync(DLLRecord record)
     {
-        var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+        var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("General_Error"),
             CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -1020,7 +1602,7 @@ public partial class LibraryPageModel : ObservableObject
 
         if (startedDownloads == 0)
         {
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("LibraryPage_NoNewDLLs_Title"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),
@@ -1031,7 +1613,7 @@ public partial class LibraryPageModel : ObservableObject
         }
         else
         {
-            var dialog = new EasyContentDialog(libraryPage.XamlRoot)
+            var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("LibraryPage_DownloadsStarted_Title"),
                 CloseButtonText = ResourceHelper.GetString("General_Okay"),

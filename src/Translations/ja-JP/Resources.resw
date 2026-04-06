@@ -147,14 +147,8 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>{0} DLL のダウンロードに失敗しました。後で再試行するか、ログを確認してダウンロードが失敗した原因を確認して下さい。</value>
   </data>
-  <data name="DllRecord_Download" xml:space="preserve">
-    <value>ダウンロード</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>ダウンロードエラー</value>
-  </data>
-  <data name="DllRecord_Downloading" xml:space="preserve">
-    <value>ダウンロード中</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>インポートされました</value>
@@ -486,6 +480,12 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>再び表示しない</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>ダウンロード</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>ダウンロード中</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>エラー</value>

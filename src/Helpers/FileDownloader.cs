@@ -184,9 +184,17 @@ public partial class FileDownloader : ObservableObject
             // Still throw the exception, but don't log it because it was cancelled by the user.
             throw;
         }
-        catch (Exception err)
+        catch (HttpRequestException err) when (err.StatusCode == HttpStatusCode.NotFound)
         {
             Logger.Error(err, $"{LogPrefix} could not download {_url}");
+            throw;
+        }
+        catch (Exception err)
+        {
+            if (cancellationToken.IsCancellationRequested == false)
+            {
+                Logger.Error(err, $"{LogPrefix} could not download {_url}");
+            }
             throw;
         }
         finally

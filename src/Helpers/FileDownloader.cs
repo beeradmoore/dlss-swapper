@@ -190,7 +190,10 @@ public partial class FileDownloader : ObservableObject
         }
         catch (Exception err)
         {
-            Logger.Error(err, $"{LogPrefix} could not download {_url}");
+            if (cancellationToken.IsCancellationRequested == false)
+            {
+                Logger.Error(err, $"{LogPrefix} could not download {_url}");
+            }
             throw;
         }
         finally

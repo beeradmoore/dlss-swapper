@@ -148,14 +148,8 @@
     <value>Ei voitu ladata {0} DLL-tiedostoa. Yritä myöhemmin uudelleen tai tarkista lokit saadaksesi tietää miksi lataus epäonnistui.</value>
     <comment>{0} will be the DLL type (eg. DLSS, FSR, XeSS)</comment>
   </data>
-  <data name="General_Download" xml:space="preserve">
-    <value>Lataa</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Latausvirhe</value>
-  </data>
-  <data name="General_Downloading" xml:space="preserve">
-    <value>Ladataan</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>Tuotu</value>
@@ -493,6 +487,12 @@ Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmist
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>Älä näytä uudelleen</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>Lataa</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>Ladataan</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>Virhe</value>

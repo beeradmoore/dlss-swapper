@@ -147,14 +147,8 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>ไม่สามารถดาวน์โหลดไฟล์ DLL {0} ได้โปรดลองใหม่หรือตรวจสอบ Logs เพื่อดูสาเหตุที่ล้มเหลว</value>
   </data>
-  <data name="General_Download" xml:space="preserve">
-    <value>ดาวน์โหลด</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>การดาวน์โหลดผิดพลาด</value>
-  </data>
-  <data name="General_Downloading" xml:space="preserve">
-    <value>กำลังดาวน์โหลด</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>นำเข้าแล้ว</value>
@@ -482,6 +476,12 @@
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>ไม่ต้องแสดงอีก</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>ดาวน์โหลด</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>กำลังดาวน์โหลด</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>ข้อผิดพลาด</value>

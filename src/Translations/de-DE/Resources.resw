@@ -147,14 +147,8 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Die {0} DLL konnte nicht heruntergeladen werden. Bitte versuche es später noch einmal oder schau in der Log Datei nach, warum der Download nicht geklappt hat.</value>
   </data>
-  <data name="General_Download" xml:space="preserve">
-    <value>Herunterladen</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Fehler beim herunterladen</value>
-  </data>
-  <data name="General_Downloading" xml:space="preserve">
-    <value>Lädt herunter</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>Importiert</value>
@@ -482,6 +476,12 @@ Wenn Du alles überprüft hast und dein Spiel taucht immer noch nicht auf, liegt
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>Nicht mehr anzeigen</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>Herunterladen</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>Lädt herunter</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>Fehler</value>

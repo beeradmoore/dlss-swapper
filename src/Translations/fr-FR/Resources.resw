@@ -148,14 +148,8 @@
     <value>Impossible de télécharger la DLL {0}, veuillez réessayer plus tard ou consulter vos logs pour savoir pourquoi le téléchargement a échoué.</value>
     <comment>{0} sera le type de DLL (par ex. DLSS, FSR, XeSS)</comment>
   </data>
-  <data name="General_Download" xml:space="preserve">
-    <value>Télécharger</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Erreur de téléchargement</value>
-  </data>
-  <data name="General_Downloading" xml:space="preserve">
-    <value>Téléchargement en cours</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>Importé</value>
@@ -493,6 +487,12 @@ Si vous avez vérifié ces points et que votre jeu n'apparaît toujours pas, il 
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>Ne plus afficher</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>Téléchargement en cours</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>Erreur</value>

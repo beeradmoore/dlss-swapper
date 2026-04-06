@@ -147,14 +147,8 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>تعذّر تنزيل {0} DLL. يُرجى المحاولة لاحقًا أو التحقق من السجلات لمعرفة سبب فشل التنزيل.</value>
   </data>
-  <data name="General_Download" xml:space="preserve">
-    <value>تنزيل</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>خطأ في التنزيل</value>
-  </data>
-  <data name="General_Downloading" xml:space="preserve">
-    <value>جارٍ التنزيل</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>تم الاستيراد</value>
@@ -451,6 +445,12 @@
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>لا تُظهر هذا مرة أخرى</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>تنزيل</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>جارٍ التنزيل</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>خطأ</value>

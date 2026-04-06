@@ -147,14 +147,8 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Не вдалося завантажити {0} DLL. Спробуйте пізніше або перегляньте журнали, щоб дізнатися причину.</value>
   </data>
-  <data name="General_Download" xml:space="preserve">
-    <value>Завантажити</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Помилка завантаження</value>
-  </data>
-  <data name="General_Downloading" xml:space="preserve">
-    <value>Завантажується</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>Імпортовано</value>
@@ -482,6 +476,12 @@
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>Більше не показувати</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>Завантажити</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>Завантажується</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>Помилка</value>

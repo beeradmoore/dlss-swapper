@@ -148,14 +148,8 @@
     <value>Could not download {0} DLL, please try again later or check your logs to see why the download failed.</value>
     <comment>{0} will be the DLL type (eg. DLSS, FSR, XeSS)</comment>
   </data>
-  <data name="General_Download" xml:space="preserve">
-    <value>Download</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Download Error</value>
-  </data>
-  <data name="General_Downloading" xml:space="preserve">
-    <value>Downloading</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>Imported</value>
@@ -491,16 +485,14 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="General_Status" xml:space="preserve">
-    <value>Status</value>
-  </data>
-
-
-  <data name="General_Size" xml:space="preserve">
-    <value>Size</value>
-  </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>Don't show again</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>Downloading</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>Error</value>
@@ -638,8 +630,14 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="General_Size" xml:space="preserve">
+    <value>Size</value>
+  </data>
   <data name="General_Sorry" xml:space="preserve">
     <value>Sorry</value>
+  </data>
+  <data name="General_Status" xml:space="preserve">
+    <value>Status</value>
   </data>
   <data name="General_Success" xml:space="preserve">
     <value>Success</value>
@@ -672,22 +670,11 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
     <value>Update Available</value>
   </data>
-
-
-  <data name="LibraryPage_ImportFrom_LocalFiles" xml:space="preserve">
-    <value>From local files</value>
-  </data>
-  <data name="LibraryPage_ImportFrom_Driver" xml:space="preserve">
-    <value>From driver</value>
-  </data>
-  <data name="LibraryPage_ImportFrom_DownloadFromServer" xml:space="preserve">
-    <value>Download from server</value>
-  </data>
-
-
-
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>Already downloaded.</value>
+  </data>
+  <data name="LibraryPage_CouldNotImportFromDriver" xml:space="preserve">
+    <value>Could not locate any DLLs to import from the driver</value>
   </data>
   <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
     <value>Could not load imported DLLs</value>
@@ -725,17 +712,12 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Label</value>
   </data>
-
-
-
-  <data name="LibraryPage_Exporting" xml:space="preserve">
-    <value>Exporting</value>
+  <data name="LibraryPage_DownloadedCount" xml:space="preserve">
+    <value>Downloaded: </value>
   </data>
-
-  <data name="LibraryPage_Importing" xml:space="preserve">
-    <value>Importing</value>
+  <data name="LibraryPage_DownloadFromNVIDIA" xml:space="preserve">
+    <value>Download from NVIDIA</value>
   </data>
-
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
     <value>Download Latest</value>
   </data>
@@ -746,11 +728,14 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
     <value>Downloads started</value>
   </data>
+  <data name="LibraryPage_Error_NVIDIA_Downloading" xml:space="preserve">
+    <value>Unable to fetch file list from NVIDIA servers. Please try again later or check for DLSS Swapper updates.</value>
+  </data>
+  <data name="LibraryPage_Error_NVIDIA_Importing" xml:space="preserve">
+    <value>Unable to import from NVIDIA servers. Please try again later or check for DLSS Swapper updates.</value>
+  </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
     <value>Exported DLLs: </value>
-  </data>
-  <data name="LibraryPage_ImportedDLLs" xml:space="preserve">
-    <value>Imported DLLs: </value>
   </data>
   <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
     <value>Exported {0} DLLs.</value>
@@ -760,6 +745,12 @@ If you have checked these and your game is still not showing up there may be a b
     <value>Exported DLL {0}.</value>
     <comment>Leave 0 as it is and use safe string format</comment>
   </data>
+  <data name="LibraryPage_Exporting" xml:space="preserve">
+    <value>Exporting</value>
+  </data>
+  <data name="LibraryPage_FetchingFileList" xml:space="preserve">
+    <value>Fetching File List</value>
+  </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
     <value>File not found.</value>
   </data>
@@ -768,6 +759,24 @@ If you have checked these and your game is still not showing up there may be a b
   </data>
   <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
     <value>Imported as existing DLL record.</value>
+  </data>
+  <data name="LibraryPage_ImportedDLLs" xml:space="preserve">
+    <value>Imported DLLs: </value>
+  </data>
+  <data name="LibraryPage_ImportFrom_DownloadFromServer" xml:space="preserve">
+    <value>Download from server</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_Driver" xml:space="preserve">
+    <value>From driver</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_LocalFiles" xml:space="preserve">
+    <value>From local files</value>
+  </data>
+  <data name="LibraryPage_ImportFromNVIDIADriver" xml:space="preserve">
+    <value>Import from NVIDIA driver</value>
+  </data>
+  <data name="LibraryPage_Importing" xml:space="preserve">
+    <value>Importing</value>
   </data>
   <data name="LibraryPage_Importing" xml:space="preserve">
     <value>Importing</value>
@@ -793,6 +802,9 @@ Only import dlls from sources you trust.</value>
   </data>
   <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
     <value>Processed DLLs: </value>
+  </data>
+  <data name="LibraryPage_ProgressPercent" xml:space="preserve">
+    <value>Progress: </value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
     <value>Library</value>
@@ -1146,34 +1158,4 @@ Because of this we recommend using caution for multiplayer games.</value>
   <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
     <value>Translation Toolbox</value>
   </data>
-
-
-  <data name="LibraryPage_CouldNotImportFromDriver" xml:space="preserve">
-    <value>Could not locate any DLLs to import from the driver</value>
-  </data>
-  <data name="LibraryPage_ImportFromNVIDIADriver" xml:space="preserve">
-    <value>Import from NVIDIA driver</value>
-  </data>
-  <data name="LibraryPage_FetchingFileList" xml:space="preserve">
-    <value>Fetching File List</value>
-  </data>
-  <data name="LibraryPage_Error_NVIDIA_Importing" xml:space="preserve">
-    <value>Unable to import from NVIDIA servers. Please try again later or check for DLSS Swapper updates.</value>
-  </data>
-  <data name="LibraryPage_Error_NVIDIA_Downloading" xml:space="preserve">
-    <value>Unable to fetch file list from NVIDIA servers. Please try again later or check for DLSS Swapper updates.</value>
-  </data>
-
-
-  <data name="LibraryPage_DownloadFromNVIDIA" xml:space="preserve">
-    <value>Download from NVIDIA</value>
-  </data>
-  <data name="LibraryPage_DownloadedCount" xml:space="preserve">
-    <value>Downloaded: </value>
-  </data>
-  <data name="LibraryPage_ProgressPercent" xml:space="preserve">
-    <value>Progress: </value>
-  </data>
-
-
 </root>

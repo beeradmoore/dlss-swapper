@@ -147,14 +147,8 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>No se pudo descargar el DLL {0}, por favor inténtalo de nuevo más tarde o revisa tus registros para ver por qué falló la descarga.</value>
   </data>
-  <data name="General_Download" xml:space="preserve">
-    <value>Descargar</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Error de Descarga</value>
-  </data>
-  <data name="General_Downloading" xml:space="preserve">
-    <value>Descargando</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>Importado</value>
@@ -464,6 +458,12 @@ Si has comprobado esto y tu juego sigue sin aparecer, puede que haya un error. A
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>No volver a mostrar</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>Descargar</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>Descargando</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>Error</value>

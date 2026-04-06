@@ -141,14 +141,8 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Nie można pobrać {0} DLL, proszę spróbować później lub lub sprawdzić swoje logi żeby sprawdzić czemu pobieranie się nie powiodło.</value>
   </data>
-  <data name="General_Download" xml:space="preserve">
-    <value>Pobierz</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Błąd pobierania</value>
-  </data>
-  <data name="General_Downloading" xml:space="preserve">
-    <value>Pobieranie</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>Zaimportowano</value>
@@ -373,6 +367,12 @@ Jeśli sprawdziłeś te ustawienia, a Twoja gra nadal nie jest wyświetlana, mo�
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>Nie pokazuj ponownie</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>Pobierz</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>Pobieranie</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>Błąd</value>

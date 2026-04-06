@@ -147,14 +147,8 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>無法下載 {0} DLL 檔案，請稍後再試一次或檢查日誌來確認下載錯誤的原因。</value>
   </data>
-  <data name="General_Download" xml:space="preserve">
-    <value>下載</value>
-  </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>下載錯誤</value>
-  </data>
-  <data name="General_Downloading" xml:space="preserve">
-    <value>下載中</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">
     <value>已匯入</value>
@@ -455,6 +449,12 @@
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
     <value>不再顯示</value>
+  </data>
+  <data name="General_Download" xml:space="preserve">
+    <value>下載</value>
+  </data>
+  <data name="General_Downloading" xml:space="preserve">
+    <value>下載中</value>
   </data>
   <data name="General_Error" xml:space="preserve">
     <value>錯誤</value>

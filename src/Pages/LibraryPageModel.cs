@@ -914,37 +914,53 @@ public partial class LibraryPageModel : ObservableObject
             filesProgressBar.Value = 0;
             filesProgressBar.Maximum = modelsToImport.Count;
 
-            var progress = new Progress<int>();
-            progress.ProgressChanged += (s, i) =>
-            {
-                filesProgressBar.Value = i;
-                progressRun.Text = i.ToString(CultureInfo.CurrentCulture);
-            };
-
             _ = importingDialog.ShowAsync();
+
+            var successCount = 0;
+            var failedCount = 0;
 
             await Task.Run(() => {
                 for (var i = 0; i < modelsToImport.Count; ++i)
                 {
                     try
                     {
-                        DLLManager.Instance.ImportDll(modelsToImport[i].FilePath, overrideFileName: DLLManager.DllNameForGameAssetType(modelsToImport[i].GameAssetType));
+                        var didImport = DLLManager.Instance.ImportDll(modelsToImport[i].FilePath, overrideFileName: DLLManager.DllNameForGameAssetType(modelsToImport[i].GameAssetType));
+                        if (didImport.Success)
+                        {
+                            ++successCount;
+                        }
+                        else
+                        {
+                            ++failedCount;
+                        }
                     }
                     catch (Exception ex)
                     {
+                        ++failedCount;
                         Logger.Error(ex, "Error importing NGX model.");
                     }
                     finally
                     {
-                        if (progress is IProgress<int> iProgress)
+                        App.CurrentApp.RunOnUIThread(() =>
                         {
-                            iProgress.Report(i + 1);
-                        }
+                            filesProgressBar.Value = i;
+                            progressRun.Text = i.ToString(CultureInfo.CurrentCulture);
+                        });
                     }
                 }
             });
 
             importingDialog.Hide();
+
+            var completeDialog = new EasyContentDialog(libraryPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("LibraryPage_ImportFromNVIDIADriver"),
+                DefaultButton = ContentDialogButton.Close,
+                Content = $"{ResourceHelper.GetString("General_Success")}: {successCount}\n{ResourceHelper.GetString("General_Failed")}: {failedCount}",
+                CloseButtonText = ResourceHelper.GetString("General_Close"),
+            };
+            completeDialog.ShowAsync();
+
         }
     }
 

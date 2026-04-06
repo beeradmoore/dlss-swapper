@@ -251,6 +251,7 @@ var ignoredCSharpMatches = new List<string>()
 	"=\"%1\"",
 	"=\"launch {LauncherId}\"",
 	" = \"http://s3.amazonaws.com/doc/2006-03-01/\"",
+	" = \"-\"",
 };
 
 

@@ -183,6 +183,21 @@ public sealed partial class App : Application
         var calculateInstallSizeThread = new Thread(CalculateInstallSize);
         calculateInstallSizeThread.Start();
 #endif
+
+        // Delete updates folder
+        var updatesFolder = Storage.GetUpdatesFolder();
+        if (Directory.Exists(updatesFolder))
+        {
+            try
+            {
+                Directory.Delete(updatesFolder, true);
+            }
+            catch (Exception err)
+            {
+                // If we failed 
+                Logger.Error(err);
+            }
+        }
     }
 
 #if !PORTABLE

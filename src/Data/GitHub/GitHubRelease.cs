@@ -44,6 +44,9 @@ internal class GitHubRelease
     public string Body { get; set; } = string.Empty;
     // ## What's Changed\r\n* Fixed issue where circular symbolic links would...
 
+    [JsonPropertyName("assets")]
+    public GitHubReleaseAsset[] Assets { get; set; } = [];
+
     internal ulong GetVersionNumber()
     {
         // Name should always start with a version, it could be in the format v1, v1.1, v1.1.1, or v1.1.1.1

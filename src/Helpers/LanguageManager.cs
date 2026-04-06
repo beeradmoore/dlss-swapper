@@ -56,6 +56,7 @@ public class LanguageManager
             "fr-FR",
             "it-IT",
             "ja-JP",
+            "ko-KR",
             "pl-PL",
             "pt-BR",
             "ru-RU",
@@ -90,6 +91,7 @@ public class LanguageManager
             "fr-FR" => "Français", // French (France)
             "it-IT" => "Italiano", // Italian (Italy)
             "ja-JP" => "日本語", // Japanese
+            "ko-KR" => "한국어", // Republic of Korea
             "pl-PL" => "Polski", // Polish
             "pt-BR" => "Português BR", // Portuguese
             "ru-RU" => "Русский", // Russian

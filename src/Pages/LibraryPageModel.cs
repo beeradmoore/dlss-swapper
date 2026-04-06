@@ -832,15 +832,17 @@ public partial class LibraryPageModel : ObservableObject
             models.AddRange(NVAPIHelper.Instance.GetNGXModels());
         });
 
-        loadingDialog.Hide();
-
         if (cancellationTokenSource.IsCancellationRequested)
         {
+
+            loadingDialog.Hide();
             return;
         }
 
         if (models.Count == 0)
         {
+
+            loadingDialog.Hide();
             var errorDialog = new EasyContentDialog(_libraryPage.XamlRoot)
             {
                 Title = ResourceHelper.GetString("General_Error"),
@@ -852,6 +854,56 @@ public partial class LibraryPageModel : ObservableObject
         }
                 
         var ngxModelImporter = new NGXModelImporter(models);
+
+        await Task.Run(() =>
+        {
+            foreach (var modelRow in ngxModelImporter.ViewModel.Models)
+            {
+                var versionNumber = modelRow.NGXModel.Version.GetVersionNumber();
+
+                var existingRecordsToTest = new List<DLLRecord>();
+
+                if (modelRow.NGXModel.GameAssetType == GameAssetType.DLSS)
+                {
+                    var existingDLLRecords = DLLManager.Instance.DLSSRecords.Where(x => x.VersionNumber == versionNumber && x.LocalRecord is not null && x.LocalRecord.IsDownloaded);
+                    existingRecordsToTest.AddRange(existingDLLRecords);
+                }
+                else if (modelRow.NGXModel.GameAssetType == GameAssetType.DLSS_D)
+                {
+                    var existingDLLRecords = DLLManager.Instance.DLSSDRecords.Where(x => x.VersionNumber == versionNumber && x.LocalRecord is not null && x.LocalRecord.IsDownloaded);
+                    existingRecordsToTest.AddRange(existingDLLRecords);
+                }
+                else if (modelRow.NGXModel.GameAssetType == GameAssetType.DLSS_G)
+                {
+                    var existingDLLRecords = DLLManager.Instance.DLSSGRecords.Where(x => x.VersionNumber == versionNumber && x.LocalRecord is not null && x.LocalRecord.IsDownloaded);
+                    existingRecordsToTest.AddRange(existingDLLRecords);
+                }
+
+                foreach (var existingRecordToTest in existingRecordsToTest)
+                {
+                    try
+                    {
+                        using (var fileStream = File.OpenRead(modelRow.NGXModel.FilePath))
+                        {
+                            var md5Hash = fileStream.GetMD5Hash();
+                            if (string.Equals(md5Hash, existingRecordToTest.MD5Hash))
+                            {
+                                modelRow.IsEnabled = false;
+                                modelRow.StatusMessage = ResourceHelper.GetString("LibraryPage_AlreadyDownloaded");
+                                break;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex);
+                    }
+                }
+            }
+        });
+
+        loadingDialog.Hide();
+
         var dialog = new EasyContentDialog(_libraryPage.XamlRoot)
         {
             Title = ResourceHelper.GetString("LibraryPage_ImportFromNVIDIADriver"),

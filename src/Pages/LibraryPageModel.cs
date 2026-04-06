@@ -1001,6 +1001,8 @@ public partial class LibraryPageModel : ObservableObject
                 }
             });
 
+            await DLLManager.Instance.SaveImportedManifestJsonAsync();
+
             importingDialog.Hide();
 
             var completeDialog = new EasyContentDialog(_libraryPage.XamlRoot)

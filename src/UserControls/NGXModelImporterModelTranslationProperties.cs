@@ -11,4 +11,12 @@ public class NGXModelImporterModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string ColumnHeaderVersionText => ResourceHelper.GetString("General_Version");
+
+    [TranslationProperty]
+    public string ColumnHeaderSizeText => ResourceHelper.GetString("General_Size");
+
+    [TranslationProperty]
+    public string ColumnHeaderStatusText => ResourceHelper.GetString("General_Status");
+
+    
 }

@@ -147,7 +147,7 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>{0} DLL のダウンロードに失敗しました。後で再試行するか、ログを確認してダウンロードが失敗した原因を確認して下さい。</value>
   </data>
-  <data name="DllRecord_Download" xml:space="preserve">
+  <data name="General_Download" xml:space="preserve">
     <value>ダウンロード</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">

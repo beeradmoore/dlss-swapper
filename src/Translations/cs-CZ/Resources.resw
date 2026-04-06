@@ -147,7 +147,7 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Nebylo možné stáhnout {0} DLL, prosím zkuste to znovu později, nebo zkontrolujte protokol ke zjištění proč stahování selhalo.</value>
   </data>
-  <data name="DllRecord_Download" xml:space="preserve">
+  <data name="General_Download" xml:space="preserve">
     <value>Stáhnout</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">

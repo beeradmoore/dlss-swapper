@@ -147,7 +147,7 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>無法下載 {0} DLL 檔案，請稍後再試一次或檢查日誌來確認下載錯誤的原因。</value>
   </data>
-  <data name="DllRecord_Download" xml:space="preserve">
+  <data name="General_Download" xml:space="preserve">
     <value>下載</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">

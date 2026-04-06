@@ -148,7 +148,7 @@
     <value>Impossible de télécharger la DLL {0}, veuillez réessayer plus tard ou consulter vos logs pour savoir pourquoi le téléchargement a échoué.</value>
     <comment>{0} sera le type de DLL (par ex. DLSS, FSR, XeSS)</comment>
   </data>
-  <data name="DllRecord_Download" xml:space="preserve">
+  <data name="General_Download" xml:space="preserve">
     <value>Télécharger</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">

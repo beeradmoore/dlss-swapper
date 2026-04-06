@@ -13,7 +13,7 @@ public class DLLRecordModelTranslationProperties : LocalizedViewModelBase
     public string DeleteText => ResourceHelper.GetString("General_Delete");
 
     [TranslationProperty]
-    public string DownloadText => ResourceHelper.GetString("DllRecord_Download");
+    public string DownloadText => ResourceHelper.GetString("General_Download");
 
     [TranslationProperty]
     public string DownloadErrorText => ResourceHelper.GetString("DllRecord_DownloadError");

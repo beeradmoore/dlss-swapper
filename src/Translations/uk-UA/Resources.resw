@@ -147,7 +147,7 @@
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
     <value>Не вдалося завантажити {0} DLL. Спробуйте пізніше або перегляньте журнали, щоб дізнатися причину.</value>
   </data>
-  <data name="DllRecord_Download" xml:space="preserve">
+  <data name="General_Download" xml:space="preserve">
     <value>Завантажити</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">

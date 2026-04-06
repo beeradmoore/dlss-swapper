@@ -57,6 +57,11 @@ static class Storage
         return Path.Combine(StoragePath, "json");
     }
 
+    public static string GetUpdatesFolder()
+    {
+        return Path.Combine(GetTemp(), "updates");
+    }
+
     public static string GetDBPath()
     {
         CreateDirectoryIfNotExists(StoragePath);

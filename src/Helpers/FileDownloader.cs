@@ -39,11 +39,11 @@ public partial class FileDownloader : ObservableObject
 
     public const int BufferSize = 65536;
 
-    string _url;
-
     public string LogPrefix { get; set; } = string.Empty;
 
-    int _timerInterval;
+    readonly string _url;
+    readonly int _timerInterval;
+
     public FileDownloader(string url, int timerInterval = 100)
     {
         _url = url;
@@ -179,8 +179,9 @@ public partial class FileDownloader : ObservableObject
             Logger.Verbose($"{LogPrefix}Complete. Read {totalBytesRead} bytes from {_url}");
             return true;
         }
-        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested == false)
+        catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
         {
+            // Still throw the exception, but don't log it because it was cancelled by the user.
             throw;
         }
         catch (Exception err)

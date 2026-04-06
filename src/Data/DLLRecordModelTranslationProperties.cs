@@ -22,7 +22,7 @@ public class DLLRecordModelTranslationProperties : LocalizedViewModelBase
     public string CancelText => ResourceHelper.GetString("General_Cancel");
 
     [TranslationProperty]
-    public string DownloadingText => ResourceHelper.GetString("DllRecord_Downloading");
+    public string DownloadingText => ResourceHelper.GetString("General_Downloading");
 
     [TranslationProperty]
     public string RequiresDownloadText => ResourceHelper.GetString("DllRecord_RequiresDownload");

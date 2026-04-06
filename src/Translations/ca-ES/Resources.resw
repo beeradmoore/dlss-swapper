@@ -153,7 +153,7 @@
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>Error de descàrrega</value>
   </data>
-  <data name="DllRecord_Downloading" xml:space="preserve">
+  <data name="General_Downloading" xml:space="preserve">
     <value>Descarregant</value>
   </data>
   <data name="DllRecord_Imported" xml:space="preserve">

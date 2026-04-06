@@ -660,9 +660,6 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="ProxySettings_WarningMessage" xml:space="preserve">
-    <value>To ensure proxy settings are kept secure they are stored in the Windows Credential Manager. This means it breaks the portability of the "portable" app.</value>
-  </data>
   <data name="GitHubUpdater_CouldNotRunInstaller" xml:space="preserve">
     <value>Could not run the installer at this time. Please try again later, or manually install the update.</value>
   </data>
@@ -951,6 +948,27 @@ Because of this we recommend using caution for multiplayer games.</value>
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>Network Tester</value>
   </data>
+  <data name="ProxySettings_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ProxySettings_Server" xml:space="preserve">
+    <value>Server</value>
+  </data>
+  <data name="ProxySettings_ServerPrefixWarning" xml:space="preserve">
+    <value>Ensure your proxy server URL is valid and starts with http:// or https://</value>
+  </data>
+  <data name="ProxySettings_UseAuthentication" xml:space="preserve">
+    <value>Use authentication</value>
+  </data>
+  <data name="ProxySettings_UseProxySettings" xml:space="preserve">
+    <value>Use proxy settings</value>
+  </data>
+  <data name="ProxySettings_Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="ProxySettings_WarningMessage" xml:space="preserve">
+    <value>To ensure proxy settings are kept secure they are stored in the Windows Credential Manager. This means it breaks the portability of the "portable" app.</value>
+  </data>
   <data name="SettingsPage_About" xml:space="preserve">
     <value>About</value>
   </data>
@@ -1059,6 +1077,9 @@ Because of this we recommend using caution for multiplayer games.</value>
   <data name="SettingsPage_Logging_Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
+  <data name="SettingsPage_Networking" xml:space="preserve">
+    <value>Networking</value>
+  </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>No new updates are available.</value>
   </data>
@@ -1077,6 +1098,9 @@ Because of this we recommend using caution for multiplayer games.</value>
   <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
     <value>The path {0} is already ignored.</value>
     <comment>{0} is the path that the user tried to add but it was already ignored.</comment>
+  </data>
+  <data name="SettingsPage_ProxySettings" xml:space="preserve">
+    <value>Proxy Settings</value>
   </data>
   <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
     <value>Allow Untrusted</value>

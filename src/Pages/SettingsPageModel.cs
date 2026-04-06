@@ -563,7 +563,7 @@ public partial class SettingsPageModel : ObservableObject
             var proxySettingsControl = new ProxySettingsControl();
             var dialog = new EasyContentDialog(page.XamlRoot)
             {
-                Title = "Proxy Settings",
+                Title = ResourceHelper.GetString("SettingsPage_ProxySettings"),
                 PrimaryButtonText = ResourceHelper.GetString("General_Save"),
                 CloseButtonText = ResourceHelper.GetString("General_Close"),
                 DefaultButton = ContentDialogButton.Primary,

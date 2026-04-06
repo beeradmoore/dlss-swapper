@@ -7,10 +7,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
     xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d">
 
     <UserControl.Resources>
         <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <ct_converters:BoolToVisibilityConverter x:Key="BoolToInvisibleConverter" TrueValue="Collapsed" FalseValue="Visible" />
     </UserControl.Resources>
 
     <StackPanel Spacing="8">
@@ -23,19 +25,25 @@
             Message="{x:Bind ViewModel.TranslationProperties.WarningMessageText, Mode=OneWay}"
             Visibility="{x:Bind ViewModel.IsPortable, Converter={StaticResource BoolToVisibilityConverter}}" />
 
-        <CheckBox Grid.Row="0" Grid.ColumnSpan="2" Content="Use proxy settings" IsChecked="{x:Bind ViewModel.UseProxySettings, Mode=TwoWay}" />
+        <CheckBox Grid.Row="0" Grid.ColumnSpan="2" Content="{x:Bind ViewModel.TranslationProperties.UseProxySettingsText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.UseProxySettings, Mode=TwoWay}" />
 
-        <TextBox Grid.Row="1" Grid.ColumnSpan="2" Header="Server" PlaceholderText="https://my-proxy-server.goes-here:8080" Text="{x:Bind ViewModel.Server, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.UseProxySettings, Mode=OneWay}" />
+        <TextBox Grid.Row="1" x:Name="ServerTextBox" Grid.ColumnSpan="2" Header="{x:Bind ViewModel.TranslationProperties.ServerText, Mode=OneWay}"
+        PlaceholderText="https://my-proxy-server.goes-here:8080" Text="{x:Bind ViewModel.Server, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        IsEnabled="{x:Bind ViewModel.UseProxySettings, Mode=OneWay}" ui:TextBoxExtensions.Regex="^(|http:\/\/(.*)|https:\/\/(.*))$">
+   
+        </TextBox>
 
-        <CheckBox Grid.Row="2" Grid.ColumnSpan="2" Content="Use authentication" IsChecked="{x:Bind ViewModel.UseAuthentication, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.UseProxySettings, Mode=OneWay}" />
+        <TextBlock Text="{x:Bind ViewModel.TranslationProperties.ServerPrefixWarningText}" Visibility="{Binding (ui:TextBoxExtensions.IsValid), ElementName=ServerTextBox, Converter={StaticResource BoolToInvisibleConverter}}" />
+
+        <CheckBox Grid.Row="2" Grid.ColumnSpan="2" Content="{x:Bind ViewModel.TranslationProperties.UseAuthenticationText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.UseAuthentication, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.UseProxySettings, Mode=OneWay}" />
 
         <Grid ColumnSpacing="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" Header="Username" PlaceholderText="John" Text="{x:Bind ViewModel.Username, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.CanUseAuthentication, Mode=OneWay}" />
-            <PasswordBox Grid.Column="1" Header="Password" PlaceholderText="chief117" Password="{x:Bind ViewModel.Password, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.CanUseAuthentication, Mode=OneWay}" />
+            <TextBox Grid.Column="0" Header="{x:Bind ViewModel.TranslationProperties.UsernameText, Mode=OneWay}" PlaceholderText="John" Text="{x:Bind ViewModel.Username, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.CanUseAuthentication, Mode=OneWay}" />
+            <PasswordBox Grid.Column="1" Header="{x:Bind ViewModel.TranslationProperties.PasswordText, Mode=OneWay}" PlaceholderText="chief117" Password="{x:Bind ViewModel.Password, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.CanUseAuthentication, Mode=OneWay}" />
         </Grid>
     </StackPanel>
 </UserControl>

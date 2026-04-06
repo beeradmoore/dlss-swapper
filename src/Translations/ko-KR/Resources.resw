@@ -193,6 +193,15 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>실행 실패</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>커스텀 커버 이미지를 제거하시겠습니까?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>게임 처리 중</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>커스텀 커버를 제거할까요?</value>
+  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>에셋 유형</value>
   </data>
@@ -416,9 +425,6 @@ DLL 버전마다 지원하는 프리셋이 다릅니다.
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>새로운 DLL</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>새로운 DLL 발견됨</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>새 GitHub 이슈 생성</value>
   </data>
@@ -450,6 +456,9 @@ DLL 버전마다 지원하는 프리셋이 다릅니다.
     <value>DLL 파일을 직접 제출하실 필요는 없습니다. 
 제공해주신 정보를 바탕으로 저희가 추적하겠습니다.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>새로운 DLL 발견됨</value>
+  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>게임 다시 불러오는 중</value>
   </data>
@@ -467,15 +476,6 @@ DLL 버전마다 지원하는 프리셋이 다릅니다.
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>목록 보기</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>커스텀 커버 이미지를 제거하시겠습니까?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>게임 처리 중</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>커스텀 커버를 제거할까요?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>이 앱은 관리자 권한으로 실행 중입니다.</value>
@@ -540,9 +540,6 @@ DLL 버전마다 지원하는 프리셋이 다릅니다.
   <data name="General_Name_DLSS" xml:space="preserve">
     <value>DLSS</value>
   </data>
-  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
-    <value>DLSS RR 프리셋</value>
-  </data>
   <data name="General_Name_DLSS_D" xml:space="preserve">
     <value>DLSS Ray Reconstruction
 (광선 재구성)</value>
@@ -553,6 +550,9 @@ DLL 버전마다 지원하는 프리셋이 다릅니다.
   </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>DLSS 프리셋</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>DLSS RR 프리셋</value>
   </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>

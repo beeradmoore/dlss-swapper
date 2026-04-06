@@ -140,4 +140,10 @@ public class SettingsPageModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string NVAPIErrorTooltipText => ResourceHelper.GetString("GamePage_NVAPIError_Tooltip");
+
+    [TranslationProperty]
+    public string NetworkingText => ResourceHelper.GetString("SettingsPage_Networking");
+
+    [TranslationProperty]
+    public string ProxySettingsText => ResourceHelper.GetString("SettingsPage_ProxySettings");
 }

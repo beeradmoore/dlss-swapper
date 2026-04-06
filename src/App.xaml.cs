@@ -99,27 +99,46 @@ public sealed partial class App : Application
 
         if (string.IsNullOrWhiteSpace(Settings.ProxySettings.Server) == false)
         {
-            var proxy = new WebProxy
+            try
             {
-                BypassProxyOnLocal = false,
-                UseDefaultCredentials = false,
-                Address = new Uri(Settings.ProxySettings.Server),
-            };
+                var server = Settings.ProxySettings.Server;
+                if (server.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                    server.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+                {
+                    var proxy = new WebProxy
+                    {
+                        BypassProxyOnLocal = false,
+                        UseDefaultCredentials = false,
+                        Address = new Uri(server),
+                    };
 
-            if (string.IsNullOrWhiteSpace(Settings.ProxySettings.Username) == false && string.IsNullOrWhiteSpace(Settings.ProxySettings.Password) == false)
-            {
-                proxy.Credentials = new NetworkCredential(Settings.ProxySettings.Username, Settings.ProxySettings.Password);
+                    if (string.IsNullOrWhiteSpace(Settings.ProxySettings.Username) == false && string.IsNullOrWhiteSpace(Settings.ProxySettings.Password) == false)
+                    {
+                        proxy.Credentials = new NetworkCredential(Settings.ProxySettings.Username, Settings.ProxySettings.Password);
+                    }
+
+                    httpClientHandler.UseProxy = true;
+                    httpClientHandler.Proxy = proxy;
+                }
+                else
+                {
+                    Logger.Error($"Tried to set proxy with server address \"{server}\"");
+                }               
             }
-
-            httpClientHandler.UseProxy = true;
-            httpClientHandler.Proxy = proxy;
+            catch (Exception ex)
+            {
+                Logger.Error("Unable to set proxy for HttpClient");
+                Logger.Error(ex);
+            }
         }
 
-        HttpClient = new HttpClient(httpClientHandler);
-        HttpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper/{versionString}");
-        HttpClient.Timeout = TimeSpan.FromMinutes(30);
-        HttpClient.DefaultRequestVersion = new Version(2, 0);
-        HttpClient.DefaultRequestHeaders.ConnectionClose = true;
+        var newHttpClient = new HttpClient(httpClientHandler);
+        newHttpClient.DefaultRequestHeaders.Add("User-Agent", $"dlss-swapper/{versionString}");
+        newHttpClient.Timeout = TimeSpan.FromMinutes(30);
+        newHttpClient.DefaultRequestVersion = new Version(2, 0);
+        newHttpClient.DefaultRequestHeaders.ConnectionClose = true;
+
+        HttpClient = newHttpClient;
     }
 
 

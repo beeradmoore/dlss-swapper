@@ -101,7 +101,16 @@ public class ResourceHelper
         Debug.WriteLine($"Translation not found: {resourceName}");
 
         // If not we fallback to the original language.
-        return _resourceLoader.GetString(resourceName);
+        var fallbackString = _resourceLoader.GetString(resourceName);
+
+#if DEBUG
+        if (string.IsNullOrWhiteSpace(fallbackString))
+        {
+            Debug.WriteLine($"Translation not found: {resourceName}");
+            Debugger.Break();
+        }
+#endif
+        return fallbackString;
     }
 
     public static string GetFormattedResourceTemplate(string templateResourceName, params object[] args)

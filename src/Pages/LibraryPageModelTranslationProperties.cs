@@ -1,7 +1,6 @@
 using DLSS_Swapper.Attributes;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DLSS_Swapper.Pages;
 

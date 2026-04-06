@@ -22,7 +22,9 @@ public sealed partial class App : Application
     public ElementTheme GlobalElementTheme { get; set; }
 
     MainWindow? _mainWindow;
+#pragma warning disable CS8603 // Possible null reference return.
     public MainWindow MainWindow => _mainWindow;
+#pragma warning restore CS8603 // Possible null reference return.
     public WindowManager WindowManager { get; } = new WindowManager();
 
     public static App CurrentApp => (App)Application.Current;

@@ -28,22 +28,30 @@ public partial class GameControlModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(GameTitleHasChanged))]
     public partial string GameTitle { get; set; }
 
-    public List<PresetOption> DlssPresetOptions { get; } = new List<PresetOption>();
-
     [ObservableProperty]
     public partial PresetOption? SelectedDlssPreset { get; set; }
-
-    public bool CanSelectDlssPreset { get; private set; }
-
-    public bool CanSelectDlssDPreset { get; private set; }
-        
-    public List<PresetOption> DlssDPresetOptions { get; } = new List<PresetOption>();
 
     [ObservableProperty]
     public partial PresetOption? SelectedDlssDPreset { get; set; }
 
+    [ObservableProperty]
+    public partial PresetOption? SelectedDlssGPreset { get; set; }
+
+    public bool CanSelectDlssPreset { get; private set; }
+
+    public bool CanSelectDlssDPreset { get; private set; }
+
+    public bool CanSelectDlssGPreset { get; private set; }
+
+    public List<PresetOption> DlssPresetOptions { get; } = new List<PresetOption>();
+
+    public List<PresetOption> DlssDPresetOptions { get; } = new List<PresetOption>();
+
+    public List<PresetOption> DlssGPresetOptions { get; } = new List<PresetOption>();
+
     PresetOption? _previousDlssPreset;
     PresetOption? _previousDlssDPreset;
+    PresetOption? _previousDlssGPreset;
 
     public bool GameTitleHasChanged
     {
@@ -117,6 +125,28 @@ public partial class GameControlModel : ObservableObject
                             }
                         }
                     }
+
+
+                    if (Game.CurrentDLSS_G is not null)
+                    {
+                        var gameDLSSGPresetResult = NVAPIHelper.Instance.GetGameDLSSGPreset(game);
+                        if (gameDLSSGPresetResult.Success)
+                        {
+                            CanSelectDlssGPreset = true;
+
+                            game.DlssGPreset = gameDLSSGPresetResult.Result;
+                            DlssGPresetOptions.AddRange(NVAPIHelper.Instance.DlssGPresetOptions);
+                            if (game.DlssGPreset is null)
+                            {
+                                // If it was never set, ensure it goes to default.
+                                SelectedDlssGPreset = DlssGPresetOptions.FirstOrDefault(x => x.Value == 0);
+                            }
+                            else
+                            {
+                                SelectedDlssGPreset = DlssGPresetOptions.FirstOrDefault(x => x.Value == game.DlssGPreset);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -134,6 +164,13 @@ public partial class GameControlModel : ObservableObject
             DlssDPresetOptions.Add(disabledPresetOption);
             SelectedDlssDPreset = disabledPresetOption;
         }
+
+        if (CanSelectDlssGPreset == false)
+        {
+            var disabledPresetOption = new PresetOption(ResourceHelper.GetString("General_NotSupported"), 0);
+            DlssGPresetOptions.Add(disabledPresetOption);
+            SelectedDlssGPreset = disabledPresetOption;
+        }
     }
 
     partial void OnSelectedDlssPresetChanging(PresetOption? value)
@@ -144,6 +181,11 @@ public partial class GameControlModel : ObservableObject
     partial void OnSelectedDlssDPresetChanging(PresetOption? value)
     {
         _previousDlssDPreset = SelectedDlssDPreset;
+    }
+
+    partial void OnSelectedDlssGPresetChanging(PresetOption? value)
+    {
+        _previousDlssGPreset = SelectedDlssGPreset;
     }
 
 
@@ -181,6 +223,24 @@ public partial class GameControlModel : ObservableObject
                         gameControl.DispatcherQueue.TryEnqueue(() =>
                         {
                             SelectedDlssDPreset = _previousDlssDPreset;
+                        });
+                        _ = NVAPIHelper.Instance.DisplayNVAPIErrorAsync(gameControl.XamlRoot);
+                    }
+                }
+            }
+        }
+        else if (e.PropertyName == nameof(SelectedDlssGPreset))
+        {
+            if (CanSelectDlssGPreset == true && SelectedDlssGPreset is not null && SelectedDlssGPreset.Value != Game.DlssGPreset)
+            {
+                var result = NVAPIHelper.Instance.SetGameDLSSGPreset(Game, SelectedDlssGPreset.Value);
+                if (result.Success == false)
+                {
+                    if (gameControlWeakReference.TryGetTarget(out GameControl? gameControl))
+                    {
+                        gameControl.DispatcherQueue.TryEnqueue(() =>
+                        {
+                            SelectedDlssGPreset = _previousDlssGPreset;
                         });
                         _ = NVAPIHelper.Instance.DisplayNVAPIErrorAsync(gameControl.XamlRoot);
                     }

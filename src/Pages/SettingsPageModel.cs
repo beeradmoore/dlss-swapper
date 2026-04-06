@@ -17,7 +17,6 @@ using System.Collections.Specialized;
 using DLSS_Swapper.Data.DLSS;
 using Windows.System;
 using Windows.ApplicationModel.DataTransfer;
-using System.Text;
 
 namespace DLSS_Swapper.Pages;
 
@@ -38,20 +37,24 @@ public partial class SettingsPageModel : ObservableObject
         new ComboBoxOption("SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls", 1024)
     };
 
-    [ObservableProperty]
-    public partial PresetOption? SelectedGlobalDlssPreset { get; set; }
-
     PresetOption? _previousGlobalDlssPreset;
+    PresetOption? _previousGlobalDlssDPreset;
+    PresetOption? _previousGlobalDlssGPreset;
 
     public List<PresetOption> DlssPresetOptions { get; } = new List<PresetOption>();
+    public List<PresetOption> DlssDPresetOptions { get; } = new List<PresetOption>();
+    public List<PresetOption> DlssGPresetOptions { get; } = new List<PresetOption>();
 
     // Setting global preset for DLSS D does not perform as expected so it is currently disabled.
-    /*
+
+    [ObservableProperty]
+    public partial PresetOption? SelectedGlobalDlssPreset { get; set; }
+    
     [ObservableProperty]
     public partial PresetOption? SelectedGlobalDlssDPreset { get; set; }
 
-    public List<PresetOption> DlssDPresetOptions { get; } = new List<PresetOption>();
-    */
+    [ObservableProperty]
+    public partial PresetOption? SelectedGlobalDlssGPreset { get; set; }
 
     public ObservableCollection<KeyValuePair<string, string>> Languages { get; init; } = new ObservableCollection<KeyValuePair<string, string>>();
 
@@ -120,6 +123,14 @@ public partial class SettingsPageModel : ObservableObject
             {
                 dlssPresetOption.UpdateNameFromTranslation();
             }
+            foreach (var dlssPresetOption in DlssDPresetOptions)
+            {
+                dlssPresetOption.UpdateNameFromTranslation();
+            }
+            foreach (var dlssPresetOption in DlssGPresetOptions)
+            {
+                dlssPresetOption.UpdateNameFromTranslation();
+            }
         };
 
         var knownLanguages = LanguageManager.Instance.GetKnownLanguages();
@@ -171,21 +182,34 @@ public partial class SettingsPageModel : ObservableObject
                 SelectedGlobalDlssPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == dlssGlobalPreset.Result);
             }
 
-            /*
-            DlssDPresetOptions.AddRange(NVAPIHelper.Instance.DlssPresetOptions);
+            DlssDPresetOptions.AddRange(NVAPIHelper.Instance.DlssDPresetOptions);
             var dlssDGlobalPreset = NVAPIHelper.Instance.GetGlobalDLSSDPreset();
-            SelectedGlobalDlssDPreset = NVAPIHelper.Instance.DlssPresetOptions.FirstOrDefault(x => x.Value == dlssDGlobalPreset);
-            */
+            if (dlssDGlobalPreset.Success)
+            {
+                SelectedGlobalDlssDPreset = NVAPIHelper.Instance.DlssDPresetOptions.FirstOrDefault(x => x.Value == dlssDGlobalPreset.Result);
+            }
+
+            DlssGPresetOptions.AddRange(NVAPIHelper.Instance.DlssGPresetOptions);
+            var dlssGGlobalPreset = NVAPIHelper.Instance.GetGlobalDLSSGPreset();
+            if (dlssGGlobalPreset.Success)
+            {
+                SelectedGlobalDlssGPreset = NVAPIHelper.Instance.DlssGPresetOptions.FirstOrDefault(x => x.Value == dlssGGlobalPreset.Result);
+            }
+
         }
         else
         {
             var notSupportedPresetOption = new PresetOption(ResourceHelper.GetString("General_NotSupported"), 0);
+
             DlssPresetOptions.Add(notSupportedPresetOption);
             SelectedGlobalDlssPreset = notSupportedPresetOption;
-            /*
+
             DlssDPresetOptions.AddRange(notSupportedPresetOption);
             SelectedGlobalDlssDPreset = notSupportedPresetOption;
-            */
+
+            DlssGPresetOptions.AddRange(notSupportedPresetOption);
+            SelectedGlobalDlssGPreset = notSupportedPresetOption;
+
         }
 
         _hasSetDefaults = true;
@@ -194,6 +218,16 @@ public partial class SettingsPageModel : ObservableObject
     partial void OnSelectedGlobalDlssPresetChanging(PresetOption? value)
     {
         _previousGlobalDlssPreset = SelectedGlobalDlssPreset;
+    }
+
+    partial void OnSelectedGlobalDlssDPresetChanging(PresetOption? value)
+    {
+        _previousGlobalDlssDPreset = SelectedGlobalDlssDPreset;
+    }
+
+    partial void OnSelectedGlobalDlssGPresetChanging(PresetOption? value)
+    {
+        _previousGlobalDlssGPreset = SelectedGlobalDlssGPreset;
     }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
@@ -299,28 +333,44 @@ public partial class SettingsPageModel : ObservableObject
                 }
             }
         }
-        /*
         else if (e.PropertyName == nameof(SelectedGlobalDlssDPreset))
         {
-            if (NVAPIHelper.Instance.Supported && SelectedGlobalDlssDPreset is not null)
+            if (NVAPIHelper.Instance.IsSupported && SelectedGlobalDlssDPreset is not null)
             {
-                var didSet = NVAPIHelper.Instance.SetGlobalDLSSDPreset(SelectedGlobalDlssDPreset.Value);
-                if (didSet == false)
+                var setDLSSDPresetResult = NVAPIHelper.Instance.SetGlobalDLSSDPreset(SelectedGlobalDlssDPreset.Value);
+                if (setDLSSDPresetResult.Success == false)
                 {
                     if (_weakPage.TryGetTarget(out var page))
                     {
-                        var dialog = new EasyContentDialog(page.XamlRoot)
+                        page.DispatcherQueue.TryEnqueue(() =>
                         {
-                            Title = ResourceHelper.GetString("General_Error"),
-                            CloseButtonText = ResourceHelper.GetString("General_Okay"),
-                            Content = ResourceHelper.GetString("GamePage_UnableToChangePreset"),
-                        };
-                        _ = dialog.ShowAsync();
+                            SelectedGlobalDlssDPreset = _previousGlobalDlssDPreset;
+                        });
+
+                        _ = NVAPIHelper.Instance.DisplayNVAPIErrorAsync(page.XamlRoot);
                     }
                 }
             }
         }
-        */
+        else if (e.PropertyName == nameof(SelectedGlobalDlssGPreset))
+        {
+            if (NVAPIHelper.Instance.IsSupported && SelectedGlobalDlssGPreset is not null)
+            {
+                var setDLSSGPresetResult = NVAPIHelper.Instance.SetGlobalDLSSGPreset(SelectedGlobalDlssGPreset.Value);
+                if (setDLSSGPresetResult.Success == false)
+                {
+                    if (_weakPage.TryGetTarget(out var page))
+                    {
+                        page.DispatcherQueue.TryEnqueue(() =>
+                        {
+                            SelectedGlobalDlssGPreset = _previousGlobalDlssGPreset;
+                        });
+
+                        _ = NVAPIHelper.Instance.DisplayNVAPIErrorAsync(page.XamlRoot);
+                    }
+                }
+            }
+        }
     }
 
     [RelayCommand]
@@ -578,8 +628,6 @@ public partial class SettingsPageModel : ObservableObject
                 var password = proxySettingsControl.ViewModel.UseProxySettings && proxySettingsControl.ViewModel.UseAuthentication ? proxySettingsControl.ViewModel.Password : null;
                 Settings.ProxySettings.SaveIfRequired(server, username, password);
                 App.CurrentApp.CreateHttpClient();
-
-                
             }
         }
     }

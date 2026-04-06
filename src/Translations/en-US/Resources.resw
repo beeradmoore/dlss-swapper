@@ -554,10 +554,13 @@ If you have checked these and your game is still not showing up there may be a b
     <value>DLSS RR Preset</value>
     <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
   </data>
+  <data name="General_Name_DLSSG_Preset" xml:space="preserve">
+    <value>DLSS FG Preset</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
+  </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
     <comment>If FSR does not have a direct translation put in the English characters for it</comment>
-
   </data>
   <data name="General_Name_FSR_31_VK" xml:space="preserve">
     <value>FSR 3.1 Vulkan</value>
@@ -1028,7 +1031,13 @@ Because of this we recommend using caution for multiplayer games.</value>
     <value>DLSS Options</value>
   </data>
   <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
-    <value>Global preset</value>
+    <value>Global Super Resolution preset</value>
+  </data>
+  <data name="SettingsPage_DLSSDOptions_GlobalPreset" xml:space="preserve">
+    <value>Global Ray Reconstruction preset</value>
+  </data>
+  <data name="SettingsPage_DLSSGOptions_GlobalPreset" xml:space="preserve">
+    <value>Global Frame Generation preset</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>Game Libraries</value>

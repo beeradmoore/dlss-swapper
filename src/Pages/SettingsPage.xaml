@@ -182,6 +182,15 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
+                    Text="Networking" />
+                <StackPanel Margin="0,10,0,0">
+                    <Button Content="Proxy settings" Command="{x:Bind ViewModel.OpenProxySettingsCommand}" Margin="0,0,0,4" />
+                </StackPanel>
+
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
                     Text="{x:Bind ViewModel.TranslationProperties.LoggingText, Mode=OneWay}" />
                 <StackPanel Margin="0,10,0,0">
                     <ComboBox x:Name="LoggingComboBox" ItemsSource="{x:Bind ViewModel.LoggingLevelOptions}" DisplayMemberPath="Label" SelectedItem="{x:Bind ViewModel.LoggingLevel, Mode=TwoWay}" />

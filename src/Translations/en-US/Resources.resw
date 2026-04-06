@@ -660,6 +660,9 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="ProxySettings_WarningMessage" xml:space="preserve">
+    <value>To ensure proxy settings are kept secure they are stored in the Windows Credential Manager. This means it breaks the portability of the "portable" app.</value>
+  </data>
   <data name="GitHubUpdater_CouldNotRunInstaller" xml:space="preserve">
     <value>Could not run the installer at this time. Please try again later, or manually install the update.</value>
   </data>

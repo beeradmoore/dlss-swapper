@@ -31,7 +31,7 @@
   },
   {
     "name": "NVIDIA recommended",
-    "value": "0x00FFFFFF",
+    "value": "0x00FFFFFE",
     "used": true
   }
 ]

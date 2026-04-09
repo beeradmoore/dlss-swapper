@@ -237,7 +237,7 @@ internal partial class NVAPIHelper : ObservableObject
                 // new DlssPresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "I"), 0x00000009),
                 //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "J"), 0x0000000A),
                 //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "K"), 0x0000000B),
-                new PresetOption(ResourceHelper.GetString("DLSS_Preset_AlwaysUseLatest"), 0x00FFFFFF)
+                new PresetOption(ResourceHelper.GetString("DLSS_Preset_AlwaysUseLatest"), 0x00FFFFFE)
             ];
         }
 

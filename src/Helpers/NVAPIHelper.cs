@@ -363,6 +363,18 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
+            var overrideSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_SR_OVERRIDE_ID);
+            if (overrideSetting is null)
+            {
+                Logger.Info("Current global override setting is null, no DLSS preset exists.");
+                return new NVAPIResult<uint>(true, 0);
+            }
+
+            if (overrideSetting.CurrentValue is uint overrideSettingValue && overrideSettingValue == 0)
+            {
+                return new NVAPIResult<uint>(true, 0);
+            }
+
             var profileSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
             if (profileSetting is null)
             {
@@ -370,9 +382,9 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(true, 0);
             }
 
-            if (profileSetting.CurrentValue is uint currentValue)
+            if (profileSetting.CurrentValue is uint profileSettingValue)
             {
-                return new NVAPIResult<uint>(true, currentValue);
+                return new NVAPIResult<uint>(true, profileSettingValue);
             }
 
             // No default value found.
@@ -410,6 +422,18 @@ internal partial class NVAPIHelper : ObservableObject
             {
                 Logger.Error("Current global profile is null, cannot get DLSS D preset.");
                 return new NVAPIResult<uint>(false, 0);
+            }
+
+            var overrideSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_RR_OVERRIDE_ID);
+            if (overrideSetting is null)
+            {
+                Logger.Info("Current global override setting is null, no DLSS D preset exists.");
+                return new NVAPIResult<uint>(true, 0);
+            }
+
+            if (overrideSetting.CurrentValue is uint overrideSettingValue && overrideSettingValue == 0)
+            {
+                return new NVAPIResult<uint>(true, 0);
             }
 
             var profileSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
@@ -459,6 +483,18 @@ internal partial class NVAPIHelper : ObservableObject
             {
                 Logger.Error("Current global profile is null, cannot get DLSS G preset.");
                 return new NVAPIResult<uint>(false, 0);
+            }
+
+            var overrideSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_FG_OVERRIDE_ID);
+            if (overrideSetting is null)
+            {
+                Logger.Info("Current global override setting is null, no DLSS G preset exists.");
+                return new NVAPIResult<uint>(true, 0);
+            }
+
+            if (overrideSetting.CurrentValue is uint overrideSettingValue && overrideSettingValue == 0)
+            {
+                return new NVAPIResult<uint>(true, 0);
             }
 
             var profileSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_FG_OVERRIDE_RENDER_PRESET_SELECTION_ID);
@@ -632,10 +668,14 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
-            var settings = closestProfile.Settings;
-            var dlssPreset = settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            var overrideSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_SR_OVERRIDE_ID);
+            if (overrideSetting is not null && overrideSetting.CurrentValue is uint overrideValue && overrideValue == 0)
+            {
+                return new NVAPIResult<uint>(true, 0);
+            }
 
-            if (dlssPreset is ProfileSetting profileSetting && profileSetting.CurrentValue is uint currentValue)
+            var profileSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            if (profileSetting is not null && profileSetting.CurrentValue is uint currentValue)
             {
                 return new NVAPIResult<uint>(true, currentValue);
             }
@@ -678,10 +718,15 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
-            var settings = closestProfile.Settings;
-            var dlssDPreset = settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
 
-            if (dlssDPreset is ProfileSetting profileSetting && profileSetting.CurrentValue is uint currentValue)
+            var overrideSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_RR_OVERRIDE_ID);
+            if (overrideSetting is not null && overrideSetting.CurrentValue is uint overrideValue && overrideValue == 0)
+            {
+                return new NVAPIResult<uint>(true, 0);
+            }
+
+            var profileSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            if (profileSetting is not null && profileSetting.CurrentValue is uint currentValue)
             {
                 return new NVAPIResult<uint>(true, currentValue);
             }
@@ -724,10 +769,14 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
-            var settings = closestProfile.Settings;
-            var dlssGPreset = settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_FG_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            var overrideSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_FG_OVERRIDE_ID);
+            if (overrideSetting is not null && overrideSetting.CurrentValue is uint overrideValue && overrideValue == 0)
+            {
+                return new NVAPIResult<uint>(true, 0);
+            }
 
-            if (dlssGPreset is ProfileSetting profileSetting && profileSetting.CurrentValue is uint currentValue)
+            var profileSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_FG_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            if (profileSetting is not null && profileSetting.CurrentValue is uint currentValue)
             {
                 return new NVAPIResult<uint>(true, currentValue);
             }

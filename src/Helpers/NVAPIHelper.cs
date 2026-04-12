@@ -72,6 +72,10 @@ internal partial class NVAPIHelper : ObservableObject
     //const uint NGX_DLSS_SR_OVERRIDE_RESERVED_KEY1_ID = 0x10C7D684;
     //const uint NGX_DLSS_SR_OVERRIDE_RESERVED_KEY2_ID = 0x10C7D82C;
     //const uint NGX_DLSS_SR_OVERRIDE_SCALING_RATIO_ID = 0x10E41DF5;
+    //const uint NGX_DLSS_FG_OVERRIDE_ID = 0x10E41E03,
+    const uint NGX_DLSS_FG_OVERRIDE_RENDER_PRESET_SELECTION_ID = 0x10E41DF1;
+    //const uint NGX_DLSS_FG_OVERRIDE_RESERVED_KEY1_ID = 0x10C7D57E;
+    //const uint NGX_DLSS_FG_OVERRIDE_RESERVED_KEY2_ID = 0x10C7D519;
 
     [ObservableProperty]
     public partial bool IsSupported { get; set; }
@@ -82,6 +86,8 @@ internal partial class NVAPIHelper : ObservableObject
     public IReadOnlyList<PresetOption> DlssPresetOptions { get; init; }
 
     public IReadOnlyList<PresetOption> DlssDPresetOptions { get; init; }
+
+    public IReadOnlyList<PresetOption> DlssGPresetOptions { get; init; }
 
     public static NVAPIHelper Instance { get; private set; } = new NVAPIHelper();
 
@@ -176,7 +182,7 @@ internal partial class NVAPIHelper : ObservableObject
         }
         catch (Exception err)
         {
-            Logger.Error(err, "Could not load dlss_presets.json, using default presets.");
+            Logger.Error(err, "Could not load dlss_d_presets.json, using default presets.");
             DlssDPresetOptions = [
                 new PresetOption(ResourceHelper.GetString("DLSS_Preset_Default"), 0x00000000),
                 new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter_Deprecated", "A"), 0x00000001),
@@ -190,7 +196,48 @@ internal partial class NVAPIHelper : ObservableObject
                 // new DlssPresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "I"), 0x00000009),
                 //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "J"), 0x0000000A),
                 //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "K"), 0x0000000B),
-                //new PresetOption(ResourceHelper.GetString("DLSS_Preset_AlwaysUseLatest"), 0x00FFFFFF),
+                new PresetOption(ResourceHelper.GetString("DLSS_Preset_AlwaysUseLatest"), 0x00FFFFFF),
+            ];
+        }
+
+        // Load DLSS G presets
+        try
+        {
+            var dlssgPresetsJsonPath = @"Assets\dlss_g_presets.json";
+            if (File.Exists(dlssgPresetsJsonPath) == true)
+            {
+                var dlssGPresetOptions = JsonSerializer.Deserialize(File.ReadAllText(dlssgPresetsJsonPath), SourceGenerationContext.Default.ListPresetOption)?.Where(x => x.Used == true)?.ToList();
+                if (dlssGPresetOptions is not null && dlssGPresetOptions.Count > 0)
+                {
+                    DlssGPresetOptions = dlssGPresetOptions.AsReadOnly();
+                }
+                else
+                {
+                    throw new Exception("dlss_g_presets.json is empty or invalid.");
+                }
+            }
+            else
+            {
+                throw new Exception("dlss_g_presets.json not found.");
+            }
+        }
+        catch (Exception err)
+        {
+            Logger.Error(err, "Could not load dlss_g_presets.json, using default presets.");
+            DlssGPresetOptions = [
+                new PresetOption(ResourceHelper.GetString("DLSS_Preset_Default"), 0x00000000),
+                new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "A"), 0x00000001),
+                new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "B"), 0x00000002),
+                //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "C"), 0x00000003),
+                //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "D"), 0x00000004),
+                //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "E"), 0x00000005),
+                //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "F"), 0x00000006),
+                // new DlssPresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "G"), 0x00000007),
+                // new DlssPresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "H"), 0x00000008),
+                // new DlssPresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "I"), 0x00000009),
+                //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "J"), 0x0000000A),
+                //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "K"), 0x0000000B),
+                new PresetOption(ResourceHelper.GetString("DLSS_Preset_AlwaysUseLatest"), 0x00FFFFFE)
             ];
         }
 
@@ -254,6 +301,11 @@ internal partial class NVAPIHelper : ObservableObject
         {
             dlssDPresetOption.UpdateNameFromTranslation();
         }
+
+        foreach (var dlssGPresetOption in DlssGPresetOptions)
+        {
+            dlssGPresetOption.UpdateNameFromTranslation();
+        }
     }
 
     public DriverSettingsProfile? FindGameProfile(Game game)
@@ -311,6 +363,20 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
+            /*
+            var overrideSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_SR_OVERRIDE_ID);
+            if (overrideSetting is null)
+            {
+                Logger.Info("Current global override setting is null, no DLSS preset exists.");
+                return new NVAPIResult<uint>(true, 0);
+            }
+
+            if (overrideSetting.CurrentValue is uint overrideSettingValue && overrideSettingValue == 0)
+            {
+                return new NVAPIResult<uint>(true, 0);
+            }
+            */
+
             var profileSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
             if (profileSetting is null)
             {
@@ -318,9 +384,9 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(true, 0);
             }
 
-            if (profileSetting.CurrentValue is uint currentValue)
+            if (profileSetting.CurrentValue is uint profileSettingValue)
             {
-                return new NVAPIResult<uint>(true, currentValue);
+                return new NVAPIResult<uint>(true, profileSettingValue);
             }
 
             // No default value found.
@@ -360,6 +426,20 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
+            /*
+            var overrideSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_RR_OVERRIDE_ID);
+            if (overrideSetting is null)
+            {
+                Logger.Info("Current global override setting is null, no DLSS D preset exists.");
+                return new NVAPIResult<uint>(true, 0);
+            }
+
+            if (overrideSetting.CurrentValue is uint overrideSettingValue && overrideSettingValue == 0)
+            {
+                return new NVAPIResult<uint>(true, 0);
+            }
+            */
+
             var profileSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
             if (profileSetting is null)
             {
@@ -394,6 +474,69 @@ internal partial class NVAPIHelper : ObservableObject
         }
     }
 
+    public NVAPIResult<uint> GetGlobalDLSSGPreset()
+    {
+        if (IsSupported == false || _driverSettingSession is null)
+        {
+            return new NVAPIResult<uint>(false, 0);
+        }
+
+        try
+        {
+            if (_driverSettingSession.CurrentGlobalProfile is null)
+            {
+                Logger.Error("Current global profile is null, cannot get DLSS G preset.");
+                return new NVAPIResult<uint>(false, 0);
+            }
+
+            /*
+            var overrideSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_FG_OVERRIDE_ID);
+            if (overrideSetting is null)
+            {
+                Logger.Info("Current global override setting is null, no DLSS G preset exists.");
+                return new NVAPIResult<uint>(true, 0);
+            }
+
+            if (overrideSetting.CurrentValue is uint overrideSettingValue && overrideSettingValue == 0)
+            {
+                return new NVAPIResult<uint>(true, 0);
+            }
+            */
+
+            var profileSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_FG_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            if (profileSetting is null)
+            {
+                Logger.Info("Current global profile setting is null, no get DLSS G preset exists.");
+                return new NVAPIResult<uint>(true, 0);
+            }
+
+            if (profileSetting.CurrentValue is uint currentValue)
+            {
+                return new NVAPIResult<uint>(true, currentValue);
+            }
+
+            // No default value found.
+            return new NVAPIResult<uint>(true, 0);
+        }
+        catch (NVIDIAApiException ex)
+        {
+            _lastErrorStatus = ex.Status;
+            if (ex.Status == Status.InvalidUserPrivilege)
+            {
+                PermissionIssue = true;
+            }
+            Logger.Error(ex, $"Could not get setting for GetGlobalDLSSGPreset. ({ex.Status})");
+            Debugger.Break();
+            return new NVAPIResult<uint>(false, 0, ex.Status);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Could not get setting for GetGlobalDLSSGPreset.");
+            Debugger.Break();
+            return new NVAPIResult<uint>(false, 0);
+        }
+    }
+
     public NVAPIResult<bool> SetGlobalDLSSPreset(uint preset)
     {
         if (IsSupported == false || _driverSettingSession is null)
@@ -410,6 +553,7 @@ internal partial class NVAPIHelper : ObservableObject
             }
 
             _driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID, preset);
+            //_driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_SR_OVERRIDE_ID, preset == 0 ? 0u : 1u);
             _driverSettingSession.Save();
 
             return new NVAPIResult<bool>(true, true);
@@ -449,6 +593,7 @@ internal partial class NVAPIHelper : ObservableObject
             }
 
             _driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID, preset);
+            //_driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_RR_OVERRIDE_ID, preset == 0 ? 0u : 1u);
             _driverSettingSession.Save();
 
             return new NVAPIResult<bool>(true, true);
@@ -472,6 +617,46 @@ internal partial class NVAPIHelper : ObservableObject
         }
     }
 
+    public NVAPIResult<bool> SetGlobalDLSSGPreset(uint preset)
+    {
+        if (IsSupported == false || _driverSettingSession is null)
+        {
+            return new NVAPIResult<bool>(false, false);
+        }
+
+        try
+        {
+            if (_driverSettingSession.CurrentGlobalProfile is null)
+            {
+                Logger.Error("Current global profile is null, cannot set DLSS G preset.");
+                return new NVAPIResult<bool>(false, false);
+            }
+
+            _driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_FG_OVERRIDE_RENDER_PRESET_SELECTION_ID, preset);
+            //_driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_FG_OVERRIDE_ID, preset == 0 ? 0u : 1u);
+            _driverSettingSession.Save();
+
+            return new NVAPIResult<bool>(true, true);
+        }
+        catch (NVIDIAApiException ex)
+        {
+            _lastErrorStatus = ex.Status;
+            if (ex.Status == Status.InvalidUserPrivilege)
+            {
+                PermissionIssue = true;
+            }
+            Logger.Error(ex, $"Could not set setting for SetGlobalDLSSGPreset with preset {preset}. ({ex.Status})");
+            Debugger.Break();
+            return new NVAPIResult<bool>(false, false, ex.Status);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, $"Could not set setting for SetGlobalDLSSGPreset with preset {preset}.");
+            Debugger.Break();
+            return new NVAPIResult<bool>(false, false);
+        }
+    }
+
     public NVAPIResult<uint> GetGameDLSSPreset(Game game)
     {
         if (IsSupported == false)
@@ -488,10 +673,16 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
-            var settings = closestProfile.Settings;
-            var dlssPreset = settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            /*
+            var overrideSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_SR_OVERRIDE_ID);
+            if (overrideSetting is not null && overrideSetting.CurrentValue is uint overrideValue && overrideValue == 0)
+            {
+                return new NVAPIResult<uint>(true, 0);
+            }
+            */
 
-            if (dlssPreset is ProfileSetting profileSetting && profileSetting.CurrentValue is uint currentValue)
+            var profileSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            if (profileSetting is not null && profileSetting.CurrentValue is uint currentValue)
             {
                 return new NVAPIResult<uint>(true, currentValue);
             }
@@ -534,10 +725,16 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
-            var settings = closestProfile.Settings;
-            var dlssDPreset = settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            /*
+            var overrideSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_RR_OVERRIDE_ID);
+            if (overrideSetting is not null && overrideSetting.CurrentValue is uint overrideValue && overrideValue == 0)
+            {
+                return new NVAPIResult<uint>(true, 0);
+            }
+            */
 
-            if (dlssDPreset is ProfileSetting profileSetting && profileSetting.CurrentValue is uint currentValue)
+            var profileSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            if (profileSetting is not null && profileSetting.CurrentValue is uint currentValue)
             {
                 return new NVAPIResult<uint>(true, currentValue);
             }
@@ -564,6 +761,58 @@ internal partial class NVAPIHelper : ObservableObject
         }
     }
 
+    public NVAPIResult<uint> GetGameDLSSGPreset(Game game)
+    {
+        if (IsSupported == false)
+        {
+            return new NVAPIResult<uint>(false, 0);
+        }
+
+        try
+        {
+            var closestProfile = FindGameProfile(game);
+            if (closestProfile is null)
+            {
+                Logger.Error($"Could not find profile for game {game.Title}.");
+                return new NVAPIResult<uint>(false, 0);
+            }
+
+            /*
+            var overrideSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_FG_OVERRIDE_ID);
+            if (overrideSetting is not null && overrideSetting.CurrentValue is uint overrideValue && overrideValue == 0)
+            {
+                return new NVAPIResult<uint>(true, 0);
+            }
+            */
+
+            var profileSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_FG_OVERRIDE_RENDER_PRESET_SELECTION_ID);
+            if (profileSetting is not null && profileSetting.CurrentValue is uint currentValue)
+            {
+                return new NVAPIResult<uint>(true, currentValue);
+            }
+
+            // No default value found.
+            return new NVAPIResult<uint>(true, 0);
+        }
+        catch (NVIDIAApiException ex)
+        {
+            _lastErrorStatus = ex.Status;
+            if (ex.Status == Status.InvalidUserPrivilege)
+            {
+                PermissionIssue = true;
+            }
+            Logger.Error(ex, $"Could not get setting for GetGameDLSSGPreset for game {game.Title}. ({ex.Status})");
+            Debugger.Break();
+            return new NVAPIResult<uint>(false, 0, ex.Status);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, $"Could not get setting for GetGameDLSSGPreset for game {game.Title}.");
+            Debugger.Break();
+            return new NVAPIResult<uint>(false, 0);
+        }
+    }
+
     public NVAPIResult<bool> SetGameDLSSPreset(Game game, uint preset)
     {
         if (IsSupported == false || _driverSettingSession is null)
@@ -581,6 +830,7 @@ internal partial class NVAPIHelper : ObservableObject
             }
 
             gameProfile.SetSetting(NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID, preset);
+            //gameProfile.SetSetting(NGX_DLSS_SR_OVERRIDE_ID, preset == 0 ? 0u : 1u);
             _driverSettingSession.Save();
 
             game.DlssPreset = preset;
@@ -623,6 +873,7 @@ internal partial class NVAPIHelper : ObservableObject
             }
 
             gameProfile.SetSetting(NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID, preset);
+            //gameProfile.SetSetting(NGX_DLSS_RR_OVERRIDE_ID, preset == 0 ? 0u : 1u);
             _driverSettingSession.Save();
 
             game.DlssDPreset = preset;
@@ -643,6 +894,49 @@ internal partial class NVAPIHelper : ObservableObject
         catch (Exception ex)
         {
             Logger.Error(ex, $"Could not set setting for SetGameDLSSDPreset for game {game.Title} with preset {preset}.");
+            Debugger.Break();
+            return new NVAPIResult<bool>(false, false);
+        }
+    }
+
+    public NVAPIResult<bool> SetGameDLSSGPreset(Game game, uint preset)
+    {
+        if (IsSupported == false || _driverSettingSession is null)
+        {
+            return new NVAPIResult<bool>(false, false);
+        }
+
+        try
+        {
+            var gameProfile = FindGameProfile(game);
+            if (gameProfile is null)
+            {
+                Logger.Error($"Could not find profile for game {game.Title}.");
+                return new NVAPIResult<bool>(false, false);
+            }
+
+            gameProfile.SetSetting(NGX_DLSS_FG_OVERRIDE_RENDER_PRESET_SELECTION_ID, preset);
+            //gameProfile.SetSetting(NGX_DLSS_FG_OVERRIDE_ID, preset == 0 ? 0u : 1u);
+            _driverSettingSession.Save();
+
+            game.DlssGPreset = preset;
+
+            return new NVAPIResult<bool>(true, false);
+        }
+        catch (NVIDIAApiException ex)
+        {
+            _lastErrorStatus = ex.Status;
+            if (ex.Status == Status.InvalidUserPrivilege)
+            {
+                PermissionIssue = true;
+            }
+            Logger.Error(ex, $"Could not set setting for SetGameDLSSGPreset for game {game.Title} with preset {preset}. ({ex.Status})");
+            Debugger.Break();
+            return new NVAPIResult<bool>(false, false, ex.Status);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, $"Could not set setting for SetGameDLSSGPreset for game {game.Title} with preset {preset}.");
             Debugger.Break();
             return new NVAPIResult<bool>(false, false);
         }

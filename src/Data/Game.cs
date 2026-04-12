@@ -52,6 +52,11 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
     [Ignore]
     public partial uint? DlssDPreset { get; set; }
 
+
+    [ObservableProperty]
+    [Ignore]
+    public partial uint? DlssGPreset { get; set; }
+
     [Ignore]
     public DriverSettingsProfile? DriverSettingsProfile { get; set; }
 

@@ -5,33 +5,33 @@
     "used": true
   },
   {
-    "name": "Preset A (Deprecated)",
+    "name": "Preset A",
     "value": "0x00000001",
     "used": true
   },
   {
-    "name": "Preset B (Deprecated)",
+    "name": "Preset B",
     "value": "0x00000002",
     "used": true
   },
   {
-    "name": "Preset C (Deprecated)",
+    "name": "Preset C",
     "value": "0x00000003",
-    "used": true
+    "used": false
   },
   {
     "name": "Preset D",
     "value": "0x00000004",
-    "used": true
+    "used": false
   },
   {
     "name": "Preset E",
     "value": "0x00000005",
-    "used": true
+    "used": false
   },
   {
     "name": "NVIDIA recommended",
-    "value": "0x00FFFFFF",
+    "value": "0x00FFFFFE",
     "used": true
   }
 ]

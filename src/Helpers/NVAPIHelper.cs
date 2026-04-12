@@ -919,7 +919,7 @@ internal partial class NVAPIHelper : ObservableObject
             //gameProfile.SetSetting(NGX_DLSS_FG_OVERRIDE_ID, preset == 0 ? 0u : 1u);
             _driverSettingSession.Save();
 
-            game.DlssDPreset = preset;
+            game.DlssGPreset = preset;
 
             return new NVAPIResult<bool>(true, false);
         }

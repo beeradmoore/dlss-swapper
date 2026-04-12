@@ -160,7 +160,7 @@
     <value>DLL 压缩包无效（未找到 DLL 文件）</value>
   </data>
   <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
-    <value>始终使用最新版本</value>
+    <value>NVIDIA 推荐设置</value>
   </data>
   <data name="DLSS_Preset_Default" xml:space="preserve">
     <value>默认</value>
@@ -229,7 +229,7 @@
     <value>自定义封面</value>
   </data>
   <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
-    <value>目前不支持从您的 {0} 库中启动游戏</value>
+    <value>目前不支持从 {0} 库中启动游戏</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>添加收藏</value>
@@ -535,7 +535,10 @@
     <value>DLSS 预设</value>
   </data>
   <data name="General_Name_DLSSD_Preset" xml:space="preserve">
-    <value>DLSSRR 预设</value>
+    <value>DLSS RR 光线重建 预设</value>
+  </data>
+  <data name="General_Name_DLSSG_Preset" xml:space="preserve">
+    <value>DLSS FG 预设</value>
   </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
@@ -549,8 +552,11 @@
   <data name="General_Name_XeSS" xml:space="preserve">
     <value>XeSS</value>
   </data>
+  <data name="General_Name_XeSS_DX11" xml:space="preserve">
+    <value>XeSS (DX11)</value>
+  </data>
   <data name="General_Name_XeSS_FG" xml:space="preserve">
-    <value>XeSSFG 帧生成</value>
+    <value>XeSS FG 帧生成</value>
   </data>
   <data name="General_No" xml:space="preserve">
     <value>关闭</value>
@@ -603,8 +609,14 @@
   <data name="General_Search" xml:space="preserve">
     <value>搜索</value>
   </data>
+  <data name="General_Size" xml:space="preserve">
+    <value>大小</value>
+  </data>
   <data name="General_Sorry" xml:space="preserve">
     <value>抱歉</value>
+  </data>
+  <data name="General_Status" xml:space="preserve">
+    <value>状态</value>
   </data>
   <data name="General_Success" xml:space="preserve">
     <value>完成</value>
@@ -627,17 +639,47 @@
   <data name="General_Yes" xml:space="preserve">
     <value>开启</value>
   </data>
+  <data name="GitHubUpdater_CouldNotRunInstaller" xml:space="preserve">
+    <value>无法运行安装程序，请稍后重试，或手动安装更新。</value>
+  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>当前有 {0} 已经安装</value>
   </data>
   <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
     <value>DLSS Swapper 已更新</value>
   </data>
+  <data name="GitHubUpdater_DownloadComplete_Title" xml:space="preserve">
+    <value>下载完成</value>
+  </data>
+  <data name="GitHubUpdater_DownloadingUpdate_Title" xml:space="preserve">
+    <value>正在下载更新</value>
+  </data>
+  <data name="GitHubUpdater_DownloadProgress" xml:space="preserve">
+    <value>进度</value>
+  </data>
+  <data name="GitHubUpdater_Install" xml:space="preserve">
+    <value>安装</value>
+  </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
     <value>有可用的更新</value>
   </data>
+  <data name="GitHubUpdater_UpdateDownloadFailed" xml:space="preserve">
+    <value>无法下载更新</value>
+  </data>
+  <data name="GitHubUpdater_UpdateReadyToInstall" xml:space="preserve">
+    <value>更新现已准备就绪，可以安装。</value>
+  </data>
+  <data name="GitHubUpdater_Updating_Title" xml:space="preserve">
+    <value>正在更新</value>
+  </data>
+  <data name="GitHubUpdater_ViewUpdate" xml:space="preserve">
+    <value>查看更新</value>
+  </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>已下载</value>
+  </data>
+  <data name="LibraryPage_CouldNotImportFromDriver" xml:space="preserve">
+    <value>无法从驱动程序中找到任何要导入的 DLL 文件</value>
   </data>
   <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
     <value>无法加载导入的 DLL 文件</value>
@@ -675,6 +717,12 @@
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>标签</value>
   </data>
+  <data name="LibraryPage_DownloadedCount" xml:space="preserve">
+    <value>已下载: </value>
+  </data>
+  <data name="LibraryPage_DownloadFromNVIDIA" xml:space="preserve">
+    <value>从 NVIDIA 下载</value>
+  </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
     <value>下载最新版本文件</value>
   </data>
@@ -683,6 +731,12 @@
   </data>
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
     <value>下载已开始</value>
+  </data>
+  <data name="LibraryPage_Error_NVIDIA_Downloading" xml:space="preserve">
+    <value>无法从 NVIDIA 服务器获取文件列表，请稍后重试或检查 DLSS Swapper 更新。</value>
+  </data>
+  <data name="LibraryPage_Error_NVIDIA_Importing" xml:space="preserve">
+    <value>无法从 NVIDIA 服务器导入，请稍后重试或检查 DLSS Swapper 更新。</value>
   </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
     <value>导出的 DLL ：</value>
@@ -693,6 +747,12 @@
   <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
     <value>已导出 DLL 文件 {0}</value>
   </data>
+  <data name="LibraryPage_Exporting" xml:space="preserve">
+    <value>正在导出</value>
+  </data>
+  <data name="LibraryPage_FetchingFileList" xml:space="preserve">
+    <value>正在获取文件列表</value>
+  </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
     <value>未能找到文件</value>
   </data>
@@ -701,6 +761,21 @@
   </data>
   <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
     <value>已作为现有 DLL 记录导入</value>
+  </data>
+  <data name="LibraryPage_ImportedDLLs" xml:space="preserve">
+    <value>已导入 DLL: </value>
+  </data>
+  <data name="LibraryPage_ImportFrom_DownloadFromServer" xml:space="preserve">
+    <value>从服务器下载</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_Driver" xml:space="preserve">
+    <value>从驱动程序</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_LocalFiles" xml:space="preserve">
+    <value>从本地文件</value>
+  </data>
+  <data name="LibraryPage_ImportFromNVIDIADriver" xml:space="preserve">
+    <value>从 NVIDIA 驱动程序导入</value>
   </data>
   <data name="LibraryPage_Importing" xml:space="preserve">
     <value>导入中</value>
@@ -723,6 +798,9 @@
   </data>
   <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
     <value>已处理的 DLL 文件：</value>
+  </data>
+  <data name="LibraryPage_ProgressPercent" xml:space="preserve">
+    <value>进度: </value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
     <value>DLL 库</value>
@@ -836,6 +914,27 @@
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>网络测试</value>
   </data>
+  <data name="ProxySettings_Password" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="ProxySettings_Server" xml:space="preserve">
+    <value>服务器</value>
+  </data>
+  <data name="ProxySettings_ServerPrefixWarning" xml:space="preserve">
+    <value>请确保代理服务器 URL 有效且以 http:// 或 https:// 开头</value>
+  </data>
+  <data name="ProxySettings_UseAuthentication" xml:space="preserve">
+    <value>使用身份验证</value>
+  </data>
+  <data name="ProxySettings_UseProxySettings" xml:space="preserve">
+    <value>使用代理设置</value>
+  </data>
+  <data name="ProxySettings_Username" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="ProxySettings_WarningMessage" xml:space="preserve">
+    <value>确保代理设置的安全，它们存储在 Windows 凭据管理器中，这意味着它会破坏「绿色版」的便携性。</value>
+  </data>
   <data name="SettingsPage_About" xml:space="preserve">
     <value>关于</value>
   </data>
@@ -896,6 +995,12 @@
   <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
     <value>全局预设</value>
   </data>
+  <data name="SettingsPage_DLSSDOptions_GlobalPreset" xml:space="preserve">
+    <value>全局光线重建预设</value>
+  </data>
+  <data name="SettingsPage_DLSSGOptions_GlobalPreset" xml:space="preserve">
+    <value>全局帧生成预设</value>
+  </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>游戏库</value>
   </data>
@@ -923,6 +1028,27 @@
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>日志记录</value>
   </data>
+  <data name="SettingsPage_Logging_Debug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="SettingsPage_Logging_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="SettingsPage_Logging_Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="SettingsPage_Logging_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
+    <value>Verbose</value>
+  </data>
+  <data name="SettingsPage_Logging_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="SettingsPage_Networking" xml:space="preserve">
+    <value>网络</value>
+  </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>当前已是最新版本</value>
   </data>
@@ -940,6 +1066,9 @@
   </data>
   <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
     <value>路径 {0} 已被忽略</value>
+  </data>
+  <data name="SettingsPage_ProxySettings" xml:space="preserve">
+    <value>代理设置</value>
   </data>
   <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
     <value>允许不受信任的文件</value>

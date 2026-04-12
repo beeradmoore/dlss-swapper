@@ -227,7 +227,7 @@ internal class GitHubUpdater
                     continue;
                 }
 
-                // Check if we are looking at something like "DLSS.Swapper-1.2.3.2-installer.exe"
+                // Check if we are looking at something like "DLSS.Swapper-a.b.c.d-installer.exe"
                 if (gitHubAsset.Name.EndsWith("-installer.exe", StringComparison.OrdinalIgnoreCase) == false)
                 {
                     continue;

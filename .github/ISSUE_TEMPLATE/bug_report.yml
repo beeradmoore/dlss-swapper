@@ -65,7 +65,7 @@ body:
   id: dlss_swapper_version
   attributes:
     label: DLSS Swapper version
-    placeholder: e.g. 1.2.3
+    placeholder: e.g. 1.2.4.0
   validations:
     required: true
 

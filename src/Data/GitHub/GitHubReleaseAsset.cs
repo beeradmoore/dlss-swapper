@@ -14,7 +14,7 @@ internal class GitHubReleaseAsset
     public string NodeId { get; set; } = string.Empty;
 
     [JsonPropertyName("name")]
-    public string Name { get; set; } = string.Empty; //  "DLSS.Swapper-1.2.3.2-installer.exe",
+    public string Name { get; set; } = string.Empty;
 
     [JsonPropertyName("label")]
     public string Label { get; set; } = string.Empty;

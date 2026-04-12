@@ -56,18 +56,18 @@ internal partial class NVAPIHelper : ObservableObject
     // Via https://github.com/NVIDIA/nvapi/blob/main/NvApiDriverSettings.h
     //const uint NGX_DLAA_OVERRIDE_ID = 0x10E41DF4;
     //const uint NGX_DLSSG_MULTI_FRAME_COUNT_ID = 0x104D6667;
-    const uint NGX_DLSS_FG_OVERRIDE_ID = 0x10E41E03;
+    //const uint NGX_DLSS_FG_OVERRIDE_ID = 0x10E41E03;
     //const uint NGX_DLSS_FG_OVERRIDE_RESERVED_KEY1_ID = 0x10C7D57E;
     //const uint NGX_DLSS_FG_OVERRIDE_RESERVED_KEY2_ID = 0x10C7D519;
     //const uint NGX_DLSS_OVERRIDE_OPTIMAL_SETTINGS_ID = 0x10AFB76C;
     //const uint NGX_DLSS_RR_MODE_ID = 0x10BD9423;
-    const uint NGX_DLSS_RR_OVERRIDE_ID = 0x10E41E02;
+    //const uint NGX_DLSS_RR_OVERRIDE_ID = 0x10E41E02;
     const uint NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID = 0x10E41DF7;
     //const uint NGX_DLSS_RR_OVERRIDE_RESERVED_KEY1_ID = 0x10C7D86C;
     //const uint NGX_DLSS_RR_OVERRIDE_RESERVED_KEY2_ID = 0x10C7D597;
     //const uint NGX_DLSS_RR_OVERRIDE_SCALING_RATIO_ID = 0x10C7D4A2;
     //const uint NGX_DLSS_SR_MODE_ID = 0x10AFB768;
-    const uint NGX_DLSS_SR_OVERRIDE_ID = 0x10E41E01;
+    //const uint NGX_DLSS_SR_OVERRIDE_ID = 0x10E41E01;
     const uint NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID = 0x10E41DF3;
     //const uint NGX_DLSS_SR_OVERRIDE_RESERVED_KEY1_ID = 0x10C7D684;
     //const uint NGX_DLSS_SR_OVERRIDE_RESERVED_KEY2_ID = 0x10C7D82C;
@@ -363,6 +363,7 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
+            /*
             var overrideSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_SR_OVERRIDE_ID);
             if (overrideSetting is null)
             {
@@ -374,6 +375,7 @@ internal partial class NVAPIHelper : ObservableObject
             {
                 return new NVAPIResult<uint>(true, 0);
             }
+            */
 
             var profileSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
             if (profileSetting is null)
@@ -424,6 +426,7 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
+            /*
             var overrideSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_RR_OVERRIDE_ID);
             if (overrideSetting is null)
             {
@@ -435,6 +438,7 @@ internal partial class NVAPIHelper : ObservableObject
             {
                 return new NVAPIResult<uint>(true, 0);
             }
+            */
 
             var profileSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
             if (profileSetting is null)
@@ -485,6 +489,7 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
+            /*
             var overrideSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_FG_OVERRIDE_ID);
             if (overrideSetting is null)
             {
@@ -496,6 +501,7 @@ internal partial class NVAPIHelper : ObservableObject
             {
                 return new NVAPIResult<uint>(true, 0);
             }
+            */
 
             var profileSetting = _driverSettingSession.CurrentGlobalProfile.GetSetting(NGX_DLSS_FG_OVERRIDE_RENDER_PRESET_SELECTION_ID);
             if (profileSetting is null)
@@ -547,8 +553,7 @@ internal partial class NVAPIHelper : ObservableObject
             }
 
             _driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID, preset);
-            _driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_SR_OVERRIDE_ID, preset == 0 ? 0u : 1u);
-
+            //_driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_SR_OVERRIDE_ID, preset == 0 ? 0u : 1u);
             _driverSettingSession.Save();
 
             return new NVAPIResult<bool>(true, true);
@@ -588,7 +593,7 @@ internal partial class NVAPIHelper : ObservableObject
             }
 
             _driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID, preset);
-            _driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_RR_OVERRIDE_ID, preset == 0 ? 0u : 1u);
+            //_driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_RR_OVERRIDE_ID, preset == 0 ? 0u : 1u);
             _driverSettingSession.Save();
 
             return new NVAPIResult<bool>(true, true);
@@ -628,7 +633,7 @@ internal partial class NVAPIHelper : ObservableObject
             }
 
             _driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_FG_OVERRIDE_RENDER_PRESET_SELECTION_ID, preset);
-            _driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_FG_OVERRIDE_ID, preset == 0 ? 0u : 1u);
+            //_driverSettingSession.CurrentGlobalProfile.SetSetting(NGX_DLSS_FG_OVERRIDE_ID, preset == 0 ? 0u : 1u);
             _driverSettingSession.Save();
 
             return new NVAPIResult<bool>(true, true);
@@ -668,11 +673,13 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
+            /*
             var overrideSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_SR_OVERRIDE_ID);
             if (overrideSetting is not null && overrideSetting.CurrentValue is uint overrideValue && overrideValue == 0)
             {
                 return new NVAPIResult<uint>(true, 0);
             }
+            */
 
             var profileSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
             if (profileSetting is not null && profileSetting.CurrentValue is uint currentValue)
@@ -718,12 +725,13 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
-
+            /*
             var overrideSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_RR_OVERRIDE_ID);
             if (overrideSetting is not null && overrideSetting.CurrentValue is uint overrideValue && overrideValue == 0)
             {
                 return new NVAPIResult<uint>(true, 0);
             }
+            */
 
             var profileSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID);
             if (profileSetting is not null && profileSetting.CurrentValue is uint currentValue)
@@ -769,11 +777,13 @@ internal partial class NVAPIHelper : ObservableObject
                 return new NVAPIResult<uint>(false, 0);
             }
 
+            /*
             var overrideSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_FG_OVERRIDE_ID);
             if (overrideSetting is not null && overrideSetting.CurrentValue is uint overrideValue && overrideValue == 0)
             {
                 return new NVAPIResult<uint>(true, 0);
             }
+            */
 
             var profileSetting = closestProfile.Settings.FirstOrDefault(x => x.SettingId == NGX_DLSS_FG_OVERRIDE_RENDER_PRESET_SELECTION_ID);
             if (profileSetting is not null && profileSetting.CurrentValue is uint currentValue)
@@ -820,7 +830,7 @@ internal partial class NVAPIHelper : ObservableObject
             }
 
             gameProfile.SetSetting(NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION_ID, preset);
-            gameProfile.SetSetting(NGX_DLSS_SR_OVERRIDE_ID, preset == 0 ? 0u : 1u);
+            //gameProfile.SetSetting(NGX_DLSS_SR_OVERRIDE_ID, preset == 0 ? 0u : 1u);
             _driverSettingSession.Save();
 
             game.DlssPreset = preset;
@@ -863,7 +873,7 @@ internal partial class NVAPIHelper : ObservableObject
             }
 
             gameProfile.SetSetting(NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION_ID, preset);
-            gameProfile.SetSetting(NGX_DLSS_RR_OVERRIDE_ID, preset == 0 ? 0u : 1u);
+            //gameProfile.SetSetting(NGX_DLSS_RR_OVERRIDE_ID, preset == 0 ? 0u : 1u);
             _driverSettingSession.Save();
 
             game.DlssDPreset = preset;
@@ -906,7 +916,7 @@ internal partial class NVAPIHelper : ObservableObject
             }
 
             gameProfile.SetSetting(NGX_DLSS_FG_OVERRIDE_RENDER_PRESET_SELECTION_ID, preset);
-            gameProfile.SetSetting(NGX_DLSS_FG_OVERRIDE_ID, preset == 0 ? 0u : 1u);
+            //gameProfile.SetSetting(NGX_DLSS_FG_OVERRIDE_ID, preset == 0 ? 0u : 1u);
             _driverSettingSession.Save();
 
             game.DlssDPreset = preset;

@@ -3430,6 +3430,23 @@
       "file_size": 22955384,
       "zip_file_size": 13164543,
       "dll_source": "XeSS_SDK_3.0.0.zip"
+    },
+    {
+      "version": "1.3.1.78",
+      "version_number": 281487861678158,
+      "internal_name": "",
+      "internal_name_extra": "",
+      "additional_label": "",
+      "md5_hash": "E5DA7E91E3AF8A8340B3FEF922912E6E",
+      "zip_md5_hash": "6B5B8017D35CC7FDC09A20CEE5D333A6",
+      "download_url": "https://dlss-swapper-downloads.beeradmoore.com/xess_fg/xess_fg_v1.3.1.78_E5DA7E91E3AF8A8340B3FEF922912E6E.zip",
+      "file_description": "XeSS Frame Generation SDK",
+      "signed_datetime": "2026-03-31T00:05:48Z",
+      "is_signature_valid": true,
+      "is_dev_file": false,
+      "file_size": 22957432,
+      "zip_file_size": 13170843,
+      "dll_source": "XeSS_SDK_3.0.1.zip"
     }
   ],
   "xess_dx11": [

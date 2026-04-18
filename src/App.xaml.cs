@@ -6,7 +6,6 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Security.Principal;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.WinUI;
@@ -41,7 +40,7 @@ public sealed partial class App : Application
     {
         Logger.Init();
 
-        CreateHttpClient();
+        HttpClient = GenerateNewHttpClient();
 
         var language = Settings.Instance.Language;
 
@@ -79,9 +78,13 @@ public sealed partial class App : Application
         this.InitializeComponent();
     }
 
+    internal void RegenerateHttpClient()
+    {
+        HttpClient = GenerateNewHttpClient();
+    }
 
 
-    internal void CreateHttpClient()
+    HttpClient GenerateNewHttpClient()
     {
         // Setup HttpClient.
         var version = GetVersion();
@@ -137,8 +140,7 @@ public sealed partial class App : Application
         newHttpClient.Timeout = TimeSpan.FromMinutes(30);
         newHttpClient.DefaultRequestVersion = new Version(2, 0);
         newHttpClient.DefaultRequestHeaders.ConnectionClose = true;
-
-        HttpClient = newHttpClient;
+        return newHttpClient;
     }
 
 

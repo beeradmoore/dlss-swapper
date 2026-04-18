@@ -1,6 +1,5 @@
 using System;
 using System.Text;
-using DLSS_Swapper.UserControls;
 
 namespace DLSS_Swapper;
 

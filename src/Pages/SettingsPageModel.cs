@@ -625,7 +625,7 @@ public partial class SettingsPageModel : ObservableObject
                 var username = proxySettingsControl.ViewModel.UseProxySettings && proxySettingsControl.ViewModel.UseAuthentication ? proxySettingsControl.ViewModel.Username : null;
                 var password = proxySettingsControl.ViewModel.UseProxySettings && proxySettingsControl.ViewModel.UseAuthentication ? proxySettingsControl.ViewModel.Password : null;
                 Settings.ProxySettings.SaveIfRequired(server, username, password);
-                App.CurrentApp.CreateHttpClient();
+                App.CurrentApp.RegenerateHttpClient();
             }
         }
     }

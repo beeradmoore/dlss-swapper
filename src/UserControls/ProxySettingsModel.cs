@@ -26,7 +26,7 @@ public partial class ProxySettingsModel : ObservableObject
 #if PORTABLE
     public bool IsPortable { get; } = true;
 #else
-    public bool IsPortable { get; } = false;
+    public bool IsPortable { get; }
 #endif
 
     public ProxySettingsTranslationProperties TranslationProperties { get; set; } = new ProxySettingsTranslationProperties();

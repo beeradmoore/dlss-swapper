@@ -269,8 +269,7 @@ internal class GitHubUpdater
 #if PORTABLE
         // You should not have got here.
         return;
-#endif
-
+#else
         var filesProgressBar = new ProgressBar()
         {
             IsIndeterminate = true
@@ -462,7 +461,7 @@ internal class GitHubUpdater
                 }
             }
         }
-
+#endif
     }
 
     internal async Task DisplayWhatsNewDialog(GitHubRelease gitHubRelease, XamlRoot xamlRoot)

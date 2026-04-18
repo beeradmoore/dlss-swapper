@@ -1027,17 +1027,17 @@ Because of this we recommend using caution for multiplayer games.</value>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>Verbose logging</value>
   </data>
-  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
-    <value>DLSS Options</value>
-  </data>
-  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
-    <value>Global Super Resolution preset</value>
-  </data>
   <data name="SettingsPage_DLSSDOptions_GlobalPreset" xml:space="preserve">
     <value>Global Ray Reconstruction preset</value>
   </data>
   <data name="SettingsPage_DLSSGOptions_GlobalPreset" xml:space="preserve">
     <value>Global Frame Generation preset</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>DLSS Options</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>Global Super Resolution preset</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>Game Libraries</value>

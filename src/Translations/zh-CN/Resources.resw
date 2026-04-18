@@ -989,17 +989,17 @@
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>详细日志记录</value>
   </data>
-  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
-    <value>DLSS 选项</value>
-  </data>
-  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
-    <value>全局预设</value>
-  </data>
   <data name="SettingsPage_DLSSDOptions_GlobalPreset" xml:space="preserve">
     <value>全局光线重建预设</value>
   </data>
   <data name="SettingsPage_DLSSGOptions_GlobalPreset" xml:space="preserve">
     <value>全局帧生成预设</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions" xml:space="preserve">
+    <value>DLSS 选项</value>
+  </data>
+  <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
+    <value>全局预设</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>游戏库</value>

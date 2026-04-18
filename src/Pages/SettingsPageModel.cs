@@ -377,8 +377,6 @@ public partial class SettingsPageModel : ObservableObject
     async Task CheckForUpdatesAsync()
     {
         IsCheckingForUpdates = true;
-
-        await Task.Delay(2500);
         var githubUpdater = new Data.GitHub.GitHubUpdater();
         var newUpdate = await githubUpdater.CheckForNewGitHubRelease(true);
 

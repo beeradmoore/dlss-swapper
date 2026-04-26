@@ -25,4 +25,7 @@ public enum GameAssetType
     XeLL_BACKUP = 15,
     XeSS_FG_BACKUP = 16,
     XeSS_DX11_BACKUP = 18,
+
+    Streamline = 19,
+    Streamline_BACKUP = 20,
 }

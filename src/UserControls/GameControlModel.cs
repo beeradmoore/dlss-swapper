@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.Streamline;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using System.Diagnostics;
@@ -42,6 +43,10 @@ public partial class GameControlModel : ObservableObject
     public bool CanSelectDlssDPreset { get; private set; }
 
     public bool CanSelectDlssGPreset { get; private set; }
+
+    public bool CanUpdateStreamline { get; private set; }
+
+    public string StreamlineVersionDisplay { get; private set; } = "Unknown";
 
     public List<PresetOption> DlssPresetOptions { get; } = new List<PresetOption>();
 
@@ -171,6 +176,50 @@ public partial class GameControlModel : ObservableObject
             DlssGPresetOptions.Add(disabledPresetOption);
             SelectedDlssGPreset = disabledPresetOption;
         }
+
+        // Initialize Streamline computed properties.
+        UpdateStreamlineProperties();
+    }
+
+    /// <summary>
+    /// Updates the computed Streamline properties based on current game state and staging readiness.
+    /// </summary>
+    void UpdateStreamlineProperties()
+    {
+        // StreamlineVersionDisplay: show the current version from the game, or "Unknown".
+        StreamlineVersionDisplay = string.IsNullOrWhiteSpace(Game.CurrentStreamlineVersion)
+            ? "Unknown"
+            : Game.CurrentStreamlineVersion;
+
+        // CanUpdateStreamline: true when the game has Streamline DLLs AND staging is ready,
+        // and either the game version is unknown or the staged version is newer.
+        if (Game.HasStreamline && StreamlineManager.Instance.IsStagingReady)
+        {
+            if (string.IsNullOrWhiteSpace(Game.CurrentStreamlineVersion))
+            {
+                // Unknown game version — allow update per Req 4.4.
+                CanUpdateStreamline = true;
+            }
+            else if (string.IsNullOrWhiteSpace(StreamlineManager.Instance.StagedVersion))
+            {
+                // Staged version unknown — allow update as a fallback.
+                CanUpdateStreamline = true;
+            }
+            else
+            {
+                // Compare versions: staged > game means update is available.
+                var gameVersion = new Version(Game.CurrentStreamlineVersion);
+                var stagedVersion = new Version(StreamlineManager.Instance.StagedVersion);
+                CanUpdateStreamline = stagedVersion > gameVersion;
+            }
+        }
+        else
+        {
+            CanUpdateStreamline = false;
+        }
+
+        OnPropertyChanged(nameof(CanUpdateStreamline));
+        OnPropertyChanged(nameof(StreamlineVersionDisplay));
     }
 
     partial void OnSelectedDlssPresetChanging(PresetOption? value)
@@ -593,5 +642,85 @@ public partial class GameControlModel : ObservableObject
         {
             await NVAPIHelper.Instance.DisplayNVAPIErrorAsync(control.XamlRoot);
         }
+    }
+
+    [RelayCommand]
+    async Task UpdateStreamlineAsync()
+    {
+        var result = await StreamlineUpdater.UpdateAsync(Game);
+
+        if (result.Success == false)
+        {
+            if (gameControlWeakReference.TryGetTarget(out var gameControl))
+            {
+                if (result.PromptToRelaunchAsAdmin)
+                {
+                    var dialog = new EasyContentDialog(gameControl.XamlRoot)
+                    {
+                        Title = ResourceHelper.GetString("General_Error"),
+                        PrimaryButtonText = ResourceHelper.GetString("General_Okay"),
+                        DefaultButton = ContentDialogButton.Primary,
+                        Content = result.Message,
+                    };
+                    await dialog.ShowAsync();
+                }
+                else
+                {
+                    var dialog = new EasyContentDialog(gameControl.XamlRoot)
+                    {
+                        Title = ResourceHelper.GetString("General_Error"),
+                        CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                        Content = result.Message,
+                    };
+                    await dialog.ShowAsync();
+                }
+            }
+
+            return;
+        }
+
+        // Success — refresh UI state.
+        Game.UpdateCurrentDLLsFromGameAssets();
+        UpdateStreamlineProperties();
+    }
+
+    [RelayCommand]
+    async Task RestoreStreamlineAsync()
+    {
+        var result = await StreamlineUpdater.RestoreAsync(Game);
+
+        if (result.Success == false)
+        {
+            if (gameControlWeakReference.TryGetTarget(out var gameControl))
+            {
+                if (result.PromptToRelaunchAsAdmin)
+                {
+                    var dialog = new EasyContentDialog(gameControl.XamlRoot)
+                    {
+                        Title = ResourceHelper.GetString("General_Error"),
+                        PrimaryButtonText = ResourceHelper.GetString("General_Okay"),
+                        DefaultButton = ContentDialogButton.Primary,
+                        Content = result.Message,
+                    };
+                    await dialog.ShowAsync();
+                }
+                else
+                {
+                    var dialog = new EasyContentDialog(gameControl.XamlRoot)
+                    {
+                        Title = ResourceHelper.GetString("General_Error"),
+                        CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                        Content = result.Message,
+                    };
+                    await dialog.ShowAsync();
+                }
+            }
+
+            return;
+        }
+
+        // Success — refresh UI state.
+        Game.UpdateCurrentDLLsFromGameAssets();
+        UpdateStreamlineProperties();
     }
 }

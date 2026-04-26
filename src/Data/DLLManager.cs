@@ -783,6 +783,7 @@ internal class DLLManager
             GameAssetType.XeSS_FG => ResourceHelper.GetString("General_Name_XeSS_FG"),
             GameAssetType.XeSS_DX11 => ResourceHelper.GetString("General_Name_XeSS_DX11"),
             GameAssetType.XeLL => ResourceHelper.GetString("General_Name_XeLL"),
+            GameAssetType.Streamline => "Streamline",
             _ => throw new Exception($"Unknown AssetType: {assetType}"),
         };
     }
@@ -802,6 +803,7 @@ internal class DLLManager
             GameAssetType.XeSS_FG => GameAssetType.XeSS_FG_BACKUP,
             GameAssetType.XeSS_DX11 => GameAssetType.XeSS_DX11_BACKUP,
             GameAssetType.XeLL => GameAssetType.XeLL_BACKUP,
+            GameAssetType.Streamline => GameAssetType.Streamline_BACKUP,
             _ => throw new Exception($"Unknown AssetType: {assetType}"),
         };
     }
@@ -1107,6 +1109,12 @@ internal class DLLManager
             }
 
             return false;
+        }
+        else if (gameAsset.AssetType == GameAssetType.Streamline || gameAsset.AssetType == GameAssetType.Streamline_BACKUP)
+        {
+            // Streamline DLLs are not part of the manifest system, so we always return true
+            // to skip unknown-asset reporting for Streamline DLLs.
+            return true;
         }
 
         return false;

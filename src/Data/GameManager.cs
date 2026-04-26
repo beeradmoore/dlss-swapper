@@ -241,6 +241,12 @@ internal partial class GameManager : ObservableObject
                 AddGame(game);
             }
         }
+
+        // Mark that we've scanned for Streamline DLLs so we don't force re-process on every launch.
+        if (Settings.Instance.HasScannedForStreamline == false)
+        {
+            Settings.Instance.HasScannedForStreamline = true;
+        }
     }
 
     public ICollectionView GetGameCollection(string? filterText = null)

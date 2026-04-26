@@ -389,6 +389,57 @@ public class Settings
         }
     }
 
+    string _streamlineLastCheckedTag = string.Empty;
+    public string StreamlineLastCheckedTag
+    {
+        get { return _streamlineLastCheckedTag; }
+        set
+        {
+            if (_streamlineLastCheckedTag != value)
+            {
+                _streamlineLastCheckedTag = value;
+                if (_autoSave)
+                {
+                    SaveJson();
+                }
+            }
+        }
+    }
+
+    DateTime _streamlineLastCheckedTime = DateTime.MinValue;
+    public DateTime StreamlineLastCheckedTime
+    {
+        get { return _streamlineLastCheckedTime; }
+        set
+        {
+            if (_streamlineLastCheckedTime != value)
+            {
+                _streamlineLastCheckedTime = value;
+                if (_autoSave)
+                {
+                    SaveJson();
+                }
+            }
+        }
+    }
+
+    bool _hasScannedForStreamline;
+    public bool HasScannedForStreamline
+    {
+        get { return _hasScannedForStreamline; }
+        set
+        {
+            if (_hasScannedForStreamline != value)
+            {
+                _hasScannedForStreamline = value;
+                if (_autoSave)
+                {
+                    SaveJson();
+                }
+            }
+        }
+    }
+
     internal static ProxySettings ProxySettings { get; } = new ProxySettings();
 
     internal void SaveJson()

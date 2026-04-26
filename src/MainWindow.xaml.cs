@@ -1,4 +1,5 @@
 using DLSS_Swapper.Data;
+using DLSS_Swapper.Data.Streamline;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Pages;
 using DLSS_Swapper.UserControls;
@@ -313,8 +314,10 @@ public sealed partial class MainWindow : Window
                 };
 
                 var updateTask = DLLManager.Instance.UpdateManifestAsync();
+                var streamlineTask = StreamlineManager.Instance.FetchAndStageLatestAsync();
                 _ = dialog.ShowAsync();
                 await updateTask;
+                await streamlineTask;
                 dialog.Hide();
 
                 if (DLLManager.Instance.HasLoadedManifest() == true)
@@ -354,6 +357,7 @@ public sealed partial class MainWindow : Window
 
         // Yeet this into the void and let it load in the background.
         _ = DLLManager.Instance.UpdateManifestAsync();
+        _ = StreamlineManager.Instance.FetchAndStageLatestAsync();
 
         // We are now ready to show the games list.
         LoadingStackPanel.Visibility = Visibility.Collapsed;

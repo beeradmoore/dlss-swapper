@@ -16,6 +16,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.WinUI;
 using DLSS_Swapper.Data;
 using DLSS_Swapper.Data.NVIDIA;
+using DLSS_Swapper.Data.Streamline;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.UserControls;
@@ -101,6 +102,7 @@ public partial class LibraryPageModel : ObservableObject
         IsRefreshing = true;
 
         var didUpdate = await DLLManager.Instance.UpdateManifestAsync();
+        _ = StreamlineManager.Instance.FetchAndStageLatestAsync();
 
         if (didUpdate)
         {

@@ -165,6 +165,7 @@ public class GameAsset : IEquatable<GameAsset>
             GameAssetType.XeLL => GameAssetType.XeLL_BACKUP,
             GameAssetType.XeSS_FG => GameAssetType.XeSS_FG_BACKUP,
             GameAssetType.XeSS_DX11 => GameAssetType.XeSS_DX11_BACKUP,
+            GameAssetType.Streamline => GameAssetType.Streamline_BACKUP,
             _ => GameAssetType.Unknown
         };
 

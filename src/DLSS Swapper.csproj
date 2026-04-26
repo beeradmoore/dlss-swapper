@@ -26,6 +26,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="DLSS Swapper.Tests" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(Configuration)'=='Release' OR '$(Configuration)'=='Release_Portable'">
     <Optimize>True</Optimize>
   </PropertyGroup>

@@ -16,6 +16,9 @@ public class GameGridPageModelTranslationProperties : LocalizedViewModelBase
     public string RefreshText => ResourceHelper.GetString("General_Refresh");
 
     [TranslationProperty]
+    public string UpdateAllText => ResourceHelper.GetString("GamesPage_UpdateAll");
+
+    [TranslationProperty]
     public string FilterText => ResourceHelper.GetString("General_Filter");
 
     [TranslationProperty]

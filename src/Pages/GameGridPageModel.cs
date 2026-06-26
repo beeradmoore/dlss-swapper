@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -289,6 +291,199 @@ public partial class GameGridPageModel : ObservableObject
         await GameManager.Instance.LoadGamesAsync(true);
 
         IsDLSSLoading = false;
+    }
+
+    [RelayCommand]
+    async Task UpdateAllGamesButtonAsync()
+    {
+        var games = GameManager.Instance.GetSynchronisedGamesListCopy();
+        if (games.Count == 0)
+        {
+            var noGamesDialog = new EasyContentDialog(gameGridPage.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("GamesPage_UpdateAll_Title"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                Content = ResourceHelper.GetString("GamesPage_UpdateAll_NoGames"),
+            };
+            await noGamesDialog.ShowAsync();
+            return;
+        }
+
+        // Confirmation, with the option to download any missing DLLs as part of the update.
+        var downloadCheckbox = new CheckBox()
+        {
+            Content = new TextBlock()
+            {
+                Text = ResourceHelper.GetString("GamesPage_UpdateAll_DownloadIfNeeded"),
+                TextWrapping = TextWrapping.Wrap,
+            },
+            IsChecked = true,
+        };
+
+        var confirmDialog = new EasyContentDialog(gameGridPage.XamlRoot)
+        {
+            Title = ResourceHelper.GetString("GamesPage_UpdateAll_Title"),
+            PrimaryButtonText = ResourceHelper.GetString("GamesPage_UpdateAll_Confirm"),
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+            DefaultButton = ContentDialogButton.Primary,
+            Content = new StackPanel()
+            {
+                Orientation = Orientation.Vertical,
+                Spacing = 16,
+                Children =
+                {
+                    new TextBlock()
+                    {
+                        TextWrapping = TextWrapping.Wrap,
+                        Text = ResourceHelper.GetString("GamesPage_UpdateAll_Message"),
+                    },
+                    downloadCheckbox,
+                },
+            },
+        };
+
+        var confirmResult = await confirmDialog.ShowAsync();
+        if (confirmResult != ContentDialogResult.Primary)
+        {
+            return;
+        }
+
+        var allowDownloading = downloadCheckbox.IsChecked == true;
+
+        // Progress UI. The Close button doubles as a Cancel button while the update is running.
+        using var cancellationTokenSource = new CancellationTokenSource();
+
+        var progressBar = new ProgressBar()
+        {
+            Minimum = 0,
+            Maximum = games.Count,
+            Value = 0,
+        };
+        var statusTextBlock = new TextBlock()
+        {
+            TextWrapping = TextWrapping.Wrap,
+        };
+        var detailTextBlock = new TextBlock()
+        {
+            TextWrapping = TextWrapping.Wrap,
+            Opacity = 0.7,
+        };
+
+        var progressDialog = new EasyContentDialog(gameGridPage.XamlRoot)
+        {
+            Title = ResourceHelper.GetString("GamesPage_UpdateAll_Updating"),
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+            Content = new StackPanel()
+            {
+                Orientation = Orientation.Vertical,
+                Spacing = 12,
+                Children = { progressBar, statusTextBlock, detailTextBlock },
+            },
+        };
+        progressDialog.CloseButtonClick += (sender, args) =>
+        {
+            // Don't let the dialog close instantly, let the in-flight game finish and the work loop exit cleanly.
+            args.Cancel = true;
+            cancellationTokenSource.Cancel();
+            statusTextBlock.Text = ResourceHelper.GetString("GamesPage_UpdateAll_Status_Cancelling");
+        };
+
+        // Progress<T> captures the current (UI) SynchronizationContext so these callbacks are safe to touch UI.
+        var progress = new Progress<BulkUpdateProgress>(update =>
+        {
+            progressBar.Maximum = update.TotalGames;
+            progressBar.Value = update.ProcessedGames;
+            statusTextBlock.Text = ResourceHelper.GetFormattedResourceTemplate("GamesPage_UpdateAll_Status_ProgressTemplate", update.ProcessedGames, update.TotalGames, update.CurrentGameTitle);
+            detailTextBlock.Text = update.CurrentAction;
+        });
+
+        var workTask = Task.Run(() => BulkDllUpdater.UpdateAllAsync(games, allowDownloading, progress, cancellationTokenSource.Token));
+
+        // Start showing the progress dialog, wait for the work to finish, then close it. Hiding after the work
+        // completes (rather than auto-hiding from a continuation) avoids a race when the work finishes instantly.
+        var showDialogTask = progressDialog.ShowAsync().AsTask();
+        var summary = await workTask;
+        progressDialog.Hide();
+        await showDialogTask;
+
+        await ShowBulkUpdateSummaryAsync(summary);
+    }
+
+    async Task ShowBulkUpdateSummaryAsync(BulkUpdateSummary summary)
+    {
+        var messageLines = new List<string>()
+        {
+            ResourceHelper.GetFormattedResourceTemplate("GamesPage_UpdateAll_Summary_GamesUpdatedTemplate", summary.GamesUpdated),
+            ResourceHelper.GetFormattedResourceTemplate("GamesPage_UpdateAll_Summary_DllsUpdatedTemplate", summary.DllsUpdated),
+            ResourceHelper.GetFormattedResourceTemplate("GamesPage_UpdateAll_Summary_AlreadyUpToDateTemplate", summary.GamesAlreadyUpToDate),
+        };
+
+        if (summary.GamesFailed > 0)
+        {
+            messageLines.Add(ResourceHelper.GetFormattedResourceTemplate("GamesPage_UpdateAll_Summary_FailedTemplate", summary.GamesFailed));
+        }
+
+        if (summary.Cancelled)
+        {
+            messageLines.Add(ResourceHelper.GetString("GamesPage_UpdateAll_Summary_Cancelled"));
+        }
+
+        var content = new StackPanel()
+        {
+            Orientation = Orientation.Vertical,
+            Spacing = 12,
+            Children =
+            {
+                new TextBlock()
+                {
+                    TextWrapping = TextWrapping.Wrap,
+                    Text = string.Join("\n", messageLines),
+                },
+            },
+        };
+
+        // Show details of any failures so the user knows what went wrong.
+        if (summary.Errors.Count > 0)
+        {
+            content.Children.Add(new TextBlock()
+            {
+                TextWrapping = TextWrapping.Wrap,
+                FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
+                Text = ResourceHelper.GetString("GamesPage_UpdateAll_Summary_Errors"),
+            });
+
+            content.Children.Add(new ScrollViewer()
+            {
+                MaxHeight = 200,
+                Content = new TextBlock()
+                {
+                    TextWrapping = TextWrapping.Wrap,
+                    Opacity = 0.8,
+                    Text = string.Join("\n", summary.Errors),
+                },
+            });
+        }
+
+        var summaryDialog = new EasyContentDialog(gameGridPage.XamlRoot)
+        {
+            Title = ResourceHelper.GetString("GamesPage_UpdateAll_Summary_Title"),
+            CloseButtonText = ResourceHelper.GetString("General_Okay"),
+            DefaultButton = ContentDialogButton.Close,
+            Content = content,
+        };
+
+        // Offer to relaunch as admin if a write was blocked by permissions.
+        if (summary.PromptToRelaunchAsAdmin && App.CurrentApp.IsAdminUser() == false)
+        {
+            summaryDialog.PrimaryButtonText = ResourceHelper.GetString("General_RestartAsAdministrator");
+            summaryDialog.DefaultButton = ContentDialogButton.Primary;
+        }
+
+        var result = await summaryDialog.ShowAsync();
+        if (result == ContentDialogResult.Primary && summary.PromptToRelaunchAsAdmin)
+        {
+            App.CurrentApp.RestartAsAdmin();
+        }
     }
 
     [RelayCommand]

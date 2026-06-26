@@ -458,6 +458,70 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Games</value>
   </data>
+  <data name="GamesPage_UpdateAll" xml:space="preserve">
+    <value>Update All</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Title" xml:space="preserve">
+    <value>Update all games</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Message" xml:space="preserve">
+    <value>This will update every game in your library to the latest available version of each DLL it currently uses (DLSS, FSR, XeSS, etc.). A backup of each original DLL is kept so you can reset later.</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Confirm" xml:space="preserve">
+    <value>Update all</value>
+  </data>
+  <data name="GamesPage_UpdateAll_DownloadIfNeeded" xml:space="preserve">
+    <value>Download the latest DLLs if they are not already downloaded</value>
+  </data>
+  <data name="GamesPage_UpdateAll_NoGames" xml:space="preserve">
+    <value>There are no games to update.</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Updating" xml:space="preserve">
+    <value>Updating games</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Status_Checking" xml:space="preserve">
+    <value>Checking for updates…</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Status_Cancelling" xml:space="preserve">
+    <value>Cancelling…</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Status_ProgressTemplate" xml:space="preserve">
+    <comment>{0} = processed game count, {1} = total game count, {2} = current game title</comment>
+    <value>{0} of {1} — {2}</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Status_DownloadingTemplate" xml:space="preserve">
+    <comment>{0} = DLL type name, {1} = DLL version</comment>
+    <value>Downloading {0} {1}…</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Status_SwappingTemplate" xml:space="preserve">
+    <comment>{0} = DLL type name, {1} = DLL version</comment>
+    <value>Swapping {0} {1}…</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Summary_Title" xml:space="preserve">
+    <value>Update complete</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Summary_GamesUpdatedTemplate" xml:space="preserve">
+    <comment>{0} = number of games updated</comment>
+    <value>Games updated: {0}</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Summary_DllsUpdatedTemplate" xml:space="preserve">
+    <comment>{0} = number of DLLs swapped</comment>
+    <value>DLLs swapped: {0}</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Summary_AlreadyUpToDateTemplate" xml:space="preserve">
+    <comment>{0} = number of games already up to date</comment>
+    <value>Already up to date: {0}</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Summary_FailedTemplate" xml:space="preserve">
+    <comment>{0} = number of games with errors</comment>
+    <value>Games with errors: {0}</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Summary_Cancelled" xml:space="preserve">
+    <value>The update was cancelled before all games were processed.</value>
+  </data>
+  <data name="GamesPage_UpdateAll_Summary_Errors" xml:space="preserve">
+    <value>Details:</value>
+  </data>
   <data name="GamesPage_ViewType" xml:space="preserve">
     <value>View Type</value>
   </data>
@@ -626,6 +690,9 @@ If you have checked these and your game is still not showing up there may be a b
   </data>
   <data name="General_ReportIssue" xml:space="preserve">
     <value>Report issue</value>
+  </data>
+  <data name="General_RestartAsAdministrator" xml:space="preserve">
+    <value>Restart as administrator</value>
   </data>
   <data name="General_Save" xml:space="preserve">
     <value>Save</value>

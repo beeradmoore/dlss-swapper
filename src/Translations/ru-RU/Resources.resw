@@ -537,6 +537,9 @@
   <data name="General_Name_DLSSD_Preset" xml:space="preserve">
     <value>DLSS RR Пресет</value>
   </data>
+  <data name="General_Name_DLSSG_Preset" xml:space="preserve">
+    <value>DLSS FG Пресет</value>
+  </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
   </data>
@@ -548,6 +551,9 @@
   </data>
   <data name="General_Name_XeSS" xml:space="preserve">
     <value>XeSS</value>
+  </data>
+  <data name="General_Name_XeSS_DX11" xml:space="preserve">
+    <value>XeSS (DX11)</value>
   </data>
   <data name="General_Name_XeSS_FG" xml:space="preserve">
     <value>Генерация кадров XeSS</value>
@@ -603,8 +609,14 @@
   <data name="General_Search" xml:space="preserve">
     <value>Поиск</value>
   </data>
+  <data name="General_Size" xml:space="preserve">
+    <value>Размер</value>
+  </data>
   <data name="General_Sorry" xml:space="preserve">
     <value>Простите</value>
+  </data>
+  <data name="General_Status" xml:space="preserve">
+    <value>Статус</value>
   </data>
   <data name="General_Success" xml:space="preserve">
     <value>Успешно</value>
@@ -627,17 +639,48 @@
   <data name="General_Yes" xml:space="preserve">
     <value>Да</value>
   </data>
+  <data name="GitHubUpdater_CouldNotRunInstaller" xml:space="preserve">
+    <value>Не удалось запустить установщик в данный момент. Пожалуйста, попробуйте снова позже или установите обновление вручную.
+</value>
+  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>В настоящее время у вас установлено {0}.</value>
   </data>
   <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
     <value>DLSS Swapper был обновлен</value>
   </data>
+  <data name="GitHubUpdater_DownloadComplete_Title" xml:space="preserve">
+    <value>Загрузка завершена</value>
+  </data>
+  <data name="GitHubUpdater_DownloadingUpdate_Title" xml:space="preserve">
+    <value>Загрузка обновления</value>
+  </data>
+  <data name="GitHubUpdater_DownloadProgress" xml:space="preserve">
+    <value>Прогресс</value>
+  </data>
+  <data name="GitHubUpdater_Install" xml:space="preserve">
+    <value>Установка</value>
+  </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
     <value>Доступно обновление</value>
   </data>
+  <data name="GitHubUpdater_UpdateDownloadFailed" xml:space="preserve">
+    <value>Не удалось загрузить обновление.</value>
+  </data>
+  <data name="GitHubUpdater_UpdateReadyToInstall" xml:space="preserve">
+    <value>Обновление готово к установке.</value>
+  </data>
+  <data name="GitHubUpdater_Updating_Title" xml:space="preserve">
+    <value>Обновление</value>
+  </data>
+  <data name="GitHubUpdater_ViewUpdate" xml:space="preserve">
+    <value>Просмотреть обновление</value>
+  </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>Уже загружено.</value>
+  </data>
+  <data name="LibraryPage_CouldNotImportFromDriver" xml:space="preserve">
+    <value>Не удалось найти ни одной DLL для импорта из драйвера</value>
   </data>
   <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
     <value>Не удалось загрузить импортированные DLL</value>
@@ -675,6 +718,12 @@
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Метка</value>
   </data>
+  <data name="LibraryPage_DownloadedCount" xml:space="preserve">
+    <value>Загружено:</value>
+  </data>
+  <data name="LibraryPage_DownloadFromNVIDIA" xml:space="preserve">
+    <value>Скачать с NVIDIA</value>
+  </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
     <value>Скачать последнюю версию</value>
   </data>
@@ -683,6 +732,12 @@
   </data>
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
     <value>Скачивание началось</value>
+  </data>
+  <data name="LibraryPage_Error_NVIDIA_Downloading" xml:space="preserve">
+    <value>Не удалось получить список файлов с серверов NVIDIA. Пожалуйста, попробуйте позже или проверьте наличие обновлений для DLSS Swapper.</value>
+  </data>
+  <data name="LibraryPage_Error_NVIDIA_Importing" xml:space="preserve">
+    <value>Не удалось импортировать данные с серверов NVIDIA. Пожалуйста, попробуйте позже или проверьте наличие обновлений для DLSS Swapper.</value>
   </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
     <value>Экспортированные DLL:</value>
@@ -693,6 +748,12 @@
   <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
     <value>Экспортированная DLL {0}.</value>
   </data>
+  <data name="LibraryPage_Exporting" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="LibraryPage_FetchingFileList" xml:space="preserve">
+    <value>Получение списка файлов</value>
+  </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
     <value>Файл не найден.</value>
   </data>
@@ -701,6 +762,21 @@
   </data>
   <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
     <value>Импортировано как существующая запись DLL.</value>
+  </data>
+  <data name="LibraryPage_ImportedDLLs" xml:space="preserve">
+    <value>Импортированные DLL:</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_DownloadFromServer" xml:space="preserve">
+    <value>Загрузить с сервера</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_Driver" xml:space="preserve">
+    <value>Из драйвера</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_LocalFiles" xml:space="preserve">
+    <value>Из локальных файлов</value>
+  </data>
+  <data name="LibraryPage_ImportFromNVIDIADriver" xml:space="preserve">
+    <value>Импортировать из драйвера NVIDIA</value>
   </data>
   <data name="LibraryPage_Importing" xml:space="preserve">
     <value>Импорт</value>
@@ -726,6 +802,9 @@
   </data>
   <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
     <value>Обработанные DLL:</value>
+  </data>
+  <data name="LibraryPage_ProgressPercent" xml:space="preserve">
+    <value>Прогресс:</value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
     <value>Библиотека</value>
@@ -839,6 +918,27 @@
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>Сетевой тестер</value>
   </data>
+  <data name="ProxySettings_Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="ProxySettings_Server" xml:space="preserve">
+    <value>Сервер</value>
+  </data>
+  <data name="ProxySettings_ServerPrefixWarning" xml:space="preserve">
+    <value>Убедитесь, что URL прокси-сервера корректный и начинается с http:// или https://</value>
+  </data>
+  <data name="ProxySettings_UseAuthentication" xml:space="preserve">
+    <value>Использовать аутентификацию</value>
+  </data>
+  <data name="ProxySettings_UseProxySettings" xml:space="preserve">
+    <value>Использовать настройки прокси</value>
+  </data>
+  <data name="ProxySettings_Username" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="ProxySettings_WarningMessage" xml:space="preserve">
+    <value>Чтобы обеспечить безопасность настроек прокси, они хранятся в Windows Credential Manager. Это означает, что нарушается переносимость «портативного» приложения.</value>
+  </data>
   <data name="SettingsPage_About" xml:space="preserve">
     <value>О нас</value>
   </data>
@@ -893,6 +993,12 @@
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>Подробное логирование</value>
   </data>
+  <data name="SettingsPage_DLSSDOptions_GlobalPreset" xml:space="preserve">
+    <value>Глобальный пресет реконструкции лучей</value>
+  </data>
+  <data name="SettingsPage_DLSSGOptions_GlobalPreset" xml:space="preserve">
+    <value>Глобальный пресет генерации кадров</value>
+  </data>
   <data name="SettingsPage_DLSSOptions" xml:space="preserve">
     <value>Параметры DLSS</value>
   </data>
@@ -944,6 +1050,9 @@
   <data name="SettingsPage_Logging_Warning" xml:space="preserve">
     <value>Предупреждение</value>
   </data>
+  <data name="SettingsPage_Networking" xml:space="preserve">
+    <value>Сеть</value>
+  </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>Новых обновлений нет.</value>
   </data>
@@ -961,6 +1070,9 @@
   </data>
   <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
     <value>Путь {0} уже проигнорирован.</value>
+  </data>
+  <data name="SettingsPage_ProxySettings" xml:space="preserve">
+    <value>Настройки прокси</value>
   </data>
   <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
     <value>Разрешить непроверенные</value>

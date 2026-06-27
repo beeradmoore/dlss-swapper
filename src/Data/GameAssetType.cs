@@ -56,6 +56,9 @@ public enum GameAssetType
     XeSS_FG_BACKUP = 16,
     XeSS_DX11_BACKUP = 18,
 
+    Streamline = 119, // TO BE REMOVED
+    Streamline_BACKUP = 120, // TO BE REMOVED
+
     DirectStorage_BACKUP = 20,
     DirectStorageCore_BACKUP = 22,
 

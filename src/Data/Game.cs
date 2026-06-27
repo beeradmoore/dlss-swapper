@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using DLSS_Swapper.Data.Streamline;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Interfaces;
@@ -201,6 +202,18 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
     [ObservableProperty]
     [Ignore]
     public partial bool MultipleXeSSDX11Found { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial string? CurrentStreamlineVersion { get; set; }
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool HasStreamline { get; set; }
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool HasStreamlineBackup { get; set; }
     
 
     [Ignore]
@@ -522,6 +535,18 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                         {
                             Id = ID,
                             AssetType = GameAssetType.XeSS_FG,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+
+                    if (StreamlineManager.KnownStreamlineDlls.Contains(dllName, StringComparer.OrdinalIgnoreCase))
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline,
                             Path = dllPath,
                         };
                         ProcessGame_ProcessGameAsset(gameAsset);
@@ -1404,7 +1429,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
 
     public abstract bool UpdateFromGame(Game game);
 
-    void UpdateCurrentDLLsFromGameAssets()
+    internal void UpdateCurrentDLLsFromGameAssets()
     {
         CurrentDLSS = null;
         CurrentDLSS_G = null;
@@ -1415,6 +1440,7 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
         CurrentXeSS_FG = null;
         CurrentXeSS_DX11 = null;
         CurrentXeLL = null;
+        CurrentStreamlineVersion = null;
 
         // NOTE: DLL type
         MultipleDLSSFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS) > 1;
@@ -1426,6 +1452,9 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
         MultipleXeSSFGFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS_FG) > 1;
         MultipleXeSSDX11Found = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS_DX11) > 1;
         MultipleXeLLFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeLL) > 1;
+
+        HasStreamline = GameAssets.Any(x => x.AssetType == GameAssetType.Streamline);
+        HasStreamlineBackup = GameAssets.Any(x => x.AssetType == GameAssetType.Streamline_BACKUP);
 
         // NOTE: DLL type
         foreach (var gameAsset in GameAssets)
@@ -1465,6 +1494,15 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             else if (gameAsset.AssetType == GameAssetType.XeLL)
             {
                 CurrentXeLL = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline)
+            {
+                // Read version from sl.interposer.dll to determine the Streamline SDK version
+                var fileName = Path.GetFileName(gameAsset.Path);
+                if (string.Equals(fileName, StreamlineManager.VersionIndicatorDll, StringComparison.OrdinalIgnoreCase))
+                {
+                    CurrentStreamlineVersion = string.IsNullOrWhiteSpace(gameAsset.DisplayVersion) ? null : gameAsset.DisplayVersion;
+                }
             }
         }
     }
@@ -1541,6 +1579,12 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             // TODO: Also add a time last reloaded here.
             NeedsProcessing = true;
             return;
+        }
+
+        // One-time migration: force re-scan to detect Streamline DLLs for existing games.
+        if (NeedsProcessing == false && Settings.Instance.HasScannedForStreamline == false)
+        {
+            NeedsProcessing = true;
         }
     }
 

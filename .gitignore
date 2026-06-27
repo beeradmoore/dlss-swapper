@@ -16,6 +16,7 @@ package/Output/
 .vscode/
 package/NSIS/FileList.nsh
 .idea/
+.kiro/
 docs/_site/
 docs/.sass-cache/
 src/DLSS Swapper.net8.csproj

@@ -73,6 +73,11 @@ static class Storage
         return Path.Combine(StoragePath, "image_cache");
     }
 
+    public static string GetStreamlineStagingPath()
+    {
+        return Path.Combine(StoragePath, "streamline");
+    }
+
     public static string GetReleasesPath()
     {
         return Path.Combine(GetDynamicJsonFolder(), "releases.json");

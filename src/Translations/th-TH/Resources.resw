@@ -537,6 +537,9 @@
   <data name="General_Name_DLSSD_Preset" xml:space="preserve">
     <value>ค่าพรีเซ็ต DLSS RR</value>
   </data>
+  <data name="General_Name_DLSSG_Preset" xml:space="preserve">
+    <value>ค่าพรีเซ็ต DLSS FG</value>
+  </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
   </data>
@@ -606,8 +609,14 @@
   <data name="General_Search" xml:space="preserve">
     <value>ค้นหา</value>
   </data>
+  <data name="General_Size" xml:space="preserve">
+    <value>ขนาด</value>
+  </data>
   <data name="General_Sorry" xml:space="preserve">
     <value>ขออภัย</value>
+  </data>
+  <data name="General_Status" xml:space="preserve">
+    <value>สถานะ</value>
   </data>
   <data name="General_Success" xml:space="preserve">
     <value>สำเร็จ</value>
@@ -630,17 +639,47 @@
   <data name="General_Yes" xml:space="preserve">
     <value>ใช่</value>
   </data>
+  <data name="GitHubUpdater_CouldNotRunInstaller" xml:space="preserve">
+    <value>ไม่สามารถเรียกใช้โปรแกรมติดตั้งได้ในขณะนี้ โปรดลองอีกครั้งในภายหลัง หรือติดตั้งการอัปเดตด้วยตนเอง</value>
+  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>คุณได้ติดตั้ง {0} ไว้อยู่แล้ว</value>
   </data>
   <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
     <value>DLSS Swapper เพิ่งได้รับการอัปเดต</value>
   </data>
+  <data name="GitHubUpdater_DownloadComplete_Title" xml:space="preserve">
+    <value>ดาวน์โหลดเสร็จสมบูรณ์</value>
+  </data>
+  <data name="GitHubUpdater_DownloadingUpdate_Title" xml:space="preserve">
+    <value>กำลังดาวน์โหลดอัปเดต</value>
+  </data>
+  <data name="GitHubUpdater_DownloadProgress" xml:space="preserve">
+    <value>ความคืบหน้า</value>
+  </data>
+  <data name="GitHubUpdater_Install" xml:space="preserve">
+    <value>ติดตั้ง</value>
+  </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
     <value>มีอัปเดตใหม่</value>
   </data>
+  <data name="GitHubUpdater_UpdateDownloadFailed" xml:space="preserve">
+    <value>ไม่สามารถดาวน์โหลดการอัปเดตได้</value>
+  </data>
+  <data name="GitHubUpdater_UpdateReadyToInstall" xml:space="preserve">
+    <value>การอัปเดตพร้อมติดตั้งแล้ว</value>
+  </data>
+  <data name="GitHubUpdater_Updating_Title" xml:space="preserve">
+    <value>กำลังอัปเดต</value>
+  </data>
+  <data name="GitHubUpdater_ViewUpdate" xml:space="preserve">
+    <value>ดูการอัปเดต</value>
+  </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>ดาวน์โหลดเรียบร้อยแล้ว</value>
+  </data>
+  <data name="LibraryPage_CouldNotImportFromDriver" xml:space="preserve">
+    <value>ไม่พบไฟล์ DLL ใดๆ ที่จะนำเข้าจากไดรเวอร์</value>
   </data>
   <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
     <value>ไม่สามารถโหลดไฟล์ DLLs ที่นำเข้าได้</value>
@@ -678,6 +717,12 @@
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>ป้ายกำกับ</value>
   </data>
+  <data name="LibraryPage_DownloadedCount" xml:space="preserve">
+    <value>ดาวน์โหลดแล้ว:</value>
+  </data>
+  <data name="LibraryPage_DownloadFromNVIDIA" xml:space="preserve">
+    <value>ดาวน์โหลดจาก NVIDIA</value>
+  </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
     <value>ดาวน์โหลดเวอร์ชันล่าสุด</value>
   </data>
@@ -686,6 +731,12 @@
   </data>
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
     <value>การดาวน์โหลดเริ่มต้นแล้ว</value>
+  </data>
+  <data name="LibraryPage_Error_NVIDIA_Downloading" xml:space="preserve">
+    <value>ไม่สามารถดึงรายการไฟล์จากเซิร์ฟเวอร์ NVIDIA ได้ โปรดลองอีกครั้งในภายหลัง หรือตรวจสอบการอัปเดต DLSS Swapper</value>
+  </data>
+  <data name="LibraryPage_Error_NVIDIA_Importing" xml:space="preserve">
+    <value>ไม่สามารถนำเข้าจากเซิร์ฟเวอร์ NVIDIA ได้ โปรดลองอีกครั้งในภายหลัง หรือตรวจสอบการอัปเดต DLSS Swapper</value>
   </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
     <value>ไฟล์ DLLs ที่ส่งออก:</value>
@@ -696,6 +747,12 @@
   <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
     <value>ส่งออกไฟล์ DLL {0} แล้ว</value>
   </data>
+  <data name="LibraryPage_Exporting" xml:space="preserve">
+    <value>กำลังส่งออก</value>
+  </data>
+  <data name="LibraryPage_FetchingFileList" xml:space="preserve">
+    <value>กำลังดึงรายการไฟล์</value>
+  </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
     <value>ไม่พบไฟล์</value>
   </data>
@@ -704,6 +761,21 @@
   </data>
   <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
     <value>นำเข้าในฐานะรายการ DLL ที่มีอยู่แล้ว</value>
+  </data>
+  <data name="LibraryPage_ImportedDLLs" xml:space="preserve">
+    <value>ไฟล์ DLL ที่นำเข้า:</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_DownloadFromServer" xml:space="preserve">
+    <value>ดาวน์โหลดจากเซิร์ฟเวอร์</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_Driver" xml:space="preserve">
+    <value>จากไดรเวอร์</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_LocalFiles" xml:space="preserve">
+    <value>จากไฟล์ในเครื่อง</value>
+  </data>
+  <data name="LibraryPage_ImportFromNVIDIADriver" xml:space="preserve">
+    <value>นำเข้าจากไดรเวอร์ NVIDIA</value>
   </data>
   <data name="LibraryPage_Importing" xml:space="preserve">
     <value>กำลังนำเข้า</value>
@@ -729,6 +801,9 @@
   </data>
   <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
     <value>ไฟล์ DLLs ที่ประมวลผลแล้ว:</value>
+  </data>
+  <data name="LibraryPage_ProgressPercent" xml:space="preserve">
+    <value>ความคืบหน้า:</value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
     <value>คลัง</value>
@@ -843,6 +918,27 @@
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>เครื่องมือทดสอบเครือข่าย</value>
   </data>
+  <data name="ProxySettings_Password" xml:space="preserve">
+    <value>รหัสผ่าน</value>
+  </data>
+  <data name="ProxySettings_Server" xml:space="preserve">
+    <value>เซิร์ฟเวอร์</value>
+  </data>
+  <data name="ProxySettings_ServerPrefixWarning" xml:space="preserve">
+    <value>ตรวจสอบให้แน่ใจว่า URL ของพร็อกซีเซิร์ฟเวอร์ของคุณถูกต้องและขึ้นต้นด้วย http:// หรือ https://</value>
+  </data>
+  <data name="ProxySettings_UseAuthentication" xml:space="preserve">
+    <value>ใช้ Authentication</value>
+  </data>
+  <data name="ProxySettings_UseProxySettings" xml:space="preserve">
+    <value>ใช้การตั้งค่าพร็อกซี</value>
+  </data>
+  <data name="ProxySettings_Username" xml:space="preserve">
+    <value>ชื่อผู้ใช้</value>
+  </data>
+  <data name="ProxySettings_WarningMessage" xml:space="preserve">
+    <value>เพื่อให้มั่นใจว่าการตั้งค่าพร็อกซีได้รับการรักษาความปลอดภัย การตั้งค่าเหล่านั้นจะถูกจัดเก็บไว้ใน Windows Credential Manager ซึ่งหมายความว่ามันจะทำให้แอปพลิเคชัน "แบบพกพา" นั้นใช้งานไม่ได้ในเครื่องอื่น</value>
+  </data>
   <data name="SettingsPage_About" xml:space="preserve">
     <value>เกี่ยวกับ</value>
   </data>
@@ -897,11 +993,17 @@
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>การบันทึก Log แบบละเอียด</value>
   </data>
+  <data name="SettingsPage_DLSSDOptions_GlobalPreset" xml:space="preserve">
+    <value>พรีเซ็ตของ Ray Reconstruction</value>
+  </data>
+  <data name="SettingsPage_DLSSGOptions_GlobalPreset" xml:space="preserve">
+    <value>พรีเซ็ตของ Frame Generation</value>
+  </data>
   <data name="SettingsPage_DLSSOptions" xml:space="preserve">
     <value>ตัวเลือก DLSS</value>
   </data>
   <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
-    <value>พรีเซ็ตส่วนกลาง</value>
+    <value>พรีเซ็ตของ Super Resolution</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>คลังเกม</value>
@@ -948,6 +1050,9 @@
   <data name="SettingsPage_Logging_Warning" xml:space="preserve">
     <value>คำเตือน</value>
   </data>
+  <data name="SettingsPage_Networking" xml:space="preserve">
+    <value>เครือข่าย</value>
+  </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>ไม่มีการอัปเดตใหม่</value>
   </data>
@@ -965,6 +1070,9 @@
   </data>
   <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
     <value>เส้นทางโฟลเดอร์ {0} ถูกตั้งให้เพิกเฉยแล้ว</value>
+  </data>
+  <data name="SettingsPage_ProxySettings" xml:space="preserve">
+    <value>การตั้งค่าพร็อกซี</value>
   </data>
   <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
     <value>อนุญาตไฟล์ที่ไม่น่าเชื่อถือ</value>
@@ -1072,6 +1180,6 @@
     <value>การเปลี่ยนแปลงการแปลที่ยังไม่ได้บันทึก</value>
   </data>
   <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
-    <value>กล่องเครื่องมือการแปล</value>
+    <value>Translation Toolbox</value>
   </data>
 </root>

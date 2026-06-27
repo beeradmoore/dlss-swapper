@@ -156,10 +156,9 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <Grid  Grid.Column="0" VerticalAlignment="Center" >
+                            <Grid  Grid.Column="0" VerticalAlignment="Center">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
@@ -167,18 +166,15 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <ProgressBar Grid.Row="0" Grid.ColumnSpan="3" Minimum="0" Maximum="100" IsIndeterminate="{x:Bind LocalRecord.FileDownloader.IsIndeterminate, Mode=OneWay}" Value="{x:Bind LocalRecord.FileDownloader.Percent, Mode=OneWay}" VerticalAlignment="Top" />
+                                <ProgressBar Grid.Row="0" Grid.ColumnSpan="2" Minimum="0" Maximum="100" IsIndeterminate="{x:Bind LocalRecord.FileDownloader.IsIndeterminate, Mode=OneWay}" Value="{x:Bind LocalRecord.FileDownloader.Percent, Mode=OneWay}" VerticalAlignment="Top" />
 
                                 <TextBlock Grid.Row="1" Grid.Column="0" Visibility="{x:Bind LocalRecord.FileDownloader.TotalBytesToDownload, Mode=OneWay, Converter={StaticResource TotalBytesVisbilityConverter}}" Text="{x:Bind system:String.Format('{0:0.0}%', LocalRecord.FileDownloader.Percent), Mode=OneWay}" />
 
-                                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">
-                                    <Run Text="{x:Bind LocalRecord.FileDownloader.DownloadedBytes, Mode=OneWay, Converter={StaticResource BytesToMegaBytesConverter}}" />
-                                </TextBlock>
-
-                                <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Visibility="{x:Bind LocalRecord.FileDownloader.TotalBytesToDownload, Mode=OneWay, Converter={StaticResource TotalBytesVisbilityConverter}}">
-                                    <Run Text=" / " />
-                                    <Run Text="{x:Bind LocalRecord.FileDownloader.TotalBytesToDownload, Mode=OneWay, Converter={StaticResource BytesToMegaBytesConverter}}" />
-                                </TextBlock>
+                                <StackPanel Grid.Row="1" Grid.Column="1" Spacing="2" Orientation="Horizontal" Visibility="{x:Bind LocalRecord.FileDownloader.TotalBytesToDownload, Mode=OneWay, Converter={StaticResource TotalBytesVisbilityConverter}}">
+                                    <TextBlock Text="{x:Bind LocalRecord.FileDownloader.DownloadedBytes, Mode=OneWay, Converter={StaticResource BytesToMegaBytesConverter}}" />
+                                    <TextBlock Text="/" />
+                                    <TextBlock Text="{x:Bind LocalRecord.FileDownloader.TotalBytesToDownload, Mode=OneWay, Converter={StaticResource BytesToMegaBytesConverter}}" />
+                                </StackPanel>
 
                             </Grid>
 

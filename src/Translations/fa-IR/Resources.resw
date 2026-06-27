@@ -145,7 +145,7 @@
     <value>این DLL توسط ویندوز مورد اعتماد نیست.</value>
   </data>
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
-    <value>Could not download {0} DLL, please try again later or check your logs to see why the download failed.</value>
+    <value>امکان دانلود فایل {0} DLL وجود نداشت؛ لطفاً بعداً دوباره تلاش کنید یا برای بررسی علت عدم موفقیت دانلود، گزارش‌ها (Logs) را بازبینی کنید.</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>خطای دانلود</value>
@@ -259,11 +259,11 @@
     <value>اطلاعات از پیش تنظیم شده</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
-    <value>DLSS presets are contained within DLSS DLL files contained within your games install directory. Different DLSS DLLs have different presets. For example preset K was not introduced until DLSS v310.2. So if you use DLSS v3.7 and you set preset to K it will not use preset K and instead it will fallback to whatever preset the game chooses to use.
+    <value>پریست DLSS درون فایل‌های DLSS DLL واقع در مسیر نصب بازی‌های شما قرار دارند. فایل‌های DLSS DLL مختلف، دارای پیش‌فرض‌های متفاوتی هستند. به عنوان مثال، پیش‌فرض K تا زمان انتشار نسخه DLSS v310.2 معرفی نشده بود. بنابراین اگر از DLSS v3.7 استفاده می‌کنید و پریست را روی K تنظیم می‌کنید، از پریست K استفاده نخواهد شد و در عوض، به هر پریست که خود بازی تصمیم به استفاده از آن بگیرد، بازمی‌گردد.
 
-The same applies to global presets. If you select preset K but your game uses DLSS v3.7 you will not be using preset K and instead the game will fallback to whatever its default is.
+همین امر در مورد پریست گلوبال نیز صدق می‌کند. اگر پریست K را انتخاب کنید اما بازی شما از DLSS v3.7 استفاده کند، پریست K اعمال نخواهد شد و در عوض، بازی به حالت پیش‌فرض خود بازمی‌گردد.
 
-To verify what preset is being used please enable the DLSS on-screen indicator.</value>
+برای بررسی و تایید اینکه چه پریستی در حال استفاده است، لطفاً نشانگر روی صفحه DLSS (on-screen indicator) را فعال کنید.</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
     <value>اطلاعات نشانگر روی صفحه</value>
@@ -272,7 +272,7 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
     <value>اطلاعات DLSS از پیش تنظیم شده </value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
-    <value>Setting a DLSS preset does not guarantee that the preset is used.</value>
+    <value>تنظیم یک پریست DLSS تضمین نمی‌کند که حتماً از آن استفاده شود.</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
     <value>مورد علاقه</value>
@@ -284,7 +284,7 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
     <value>مسیر نصب</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
-    <value>«{0}» یک نوع فایل نامعتبر است</value>
+    <value>فایل «{0}» یک نوع فایل نامعتبر است</value>
   </data>
   <data name="GamePage_Launch" xml:space="preserve">
     <value>اجرا</value>
@@ -296,7 +296,7 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
     <value>آیا مطمئن هستید که می‌خواهید «{0}» را از DLSS Swapper حذف کنید؟ این کار هیچ تغییری در فایل‌های DLSS که قبلاً تعویض شده‌اند ایجاد نمی‌کند.</value>
   </data>
   <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
-    <value>Shown below are the multiple DLLs found. You will still be able to swap and restore DLLs as usual as we will do these actions to all DLLs at once. However because we don't know what one of these DLLs is used by the game the DLL version shown is of the first DLL detected.</value>
+    <value>چندین فایل DLL یافت‌شده در زیر نمایش داده شده‌اند. شما همچنان می‌توانید مانند روال عادی فایل‌های DLL را تعویض و بازیابی کنید، زیرا ما این اقدامات را روی همه DLLها به صورت همزمان انجام خواهیم داد. با این حال، چون نمی‌دانیم بازی دقیقاً از کدام یک از این DLLها استفاده می‌کند، نسخه DLL نمایش داده شده مربوط به اولین DLL شناسایی‌شده است.</value>
   </data>
   <data name="GamePage_MultipleDllsFound" xml:space="preserve">
     <value>چندین DLL یافت شد</value>
@@ -317,22 +317,22 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
     <value>این بازی در وضعیت آماده برای بازی نیست.</value>
   </data>
   <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
-    <value>NVAPI با یک خطا مواجه شد. اطلاعات بیشتر در گزارش خطا نوشته شده است.</value>
+    <value>فرایند NVAPI با یک خطا مواجه شد. اطلاعات بیشتر در گزارش خطا نوشته شده است.</value>
   </data>
   <data name="GamePage_NVAPIError_Message" xml:space="preserve">
-    <value>NVAPI has encountered an error. Running the application as admin may resolve the issue. More information has been written to the error log.</value>
+    <value>خطایی در NVAPI رخ داده است. اجرای برنامه به عنوان ادمین ممکن است این مشکل را برطرف کند. اطلاعات بیشتر در لاگ خطا ثبت شده است.</value>
   </data>
   <data name="GamePage_NVAPIError_Title" xml:space="preserve">
     <value>خطای NVAPI</value>
   </data>
   <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
-    <value>NVAPI با یک خطا مواجه شد. برای اطلاعات بیشتر کلیک کنید.</value>
+    <value>فرایند NVAPI با یک خطا مواجه شد. برای اطلاعات بیشتر کلیک کنید.</value>
   </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
     <value>باز کردن محل DLL</value>
   </data>
   <data name="GamePage_OriginalDll" xml:space="preserve">
-    <value>DLL اصلی</value>
+    <value>فایل DLL اصلی</value>
   </data>
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
     <value>{0} هنوز در حال پردازش است. لطفاً قبل از باز کردن منتظر بمانید تا نشانگر بارگیری کامل شود.</value>
@@ -347,10 +347,10 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
     <value>انتخاب نسخه {0}</value>
   </data>
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
-    <value>storageFile خالی است</value>
+    <value>محل ذخیره فایل (storageFile) خالی است</value>
   </data>
   <data name="GamePage_UnableToChangePreset" xml:space="preserve">
-    <value>Unable to change preset. Please see your error log for more information.</value>
+    <value>خطا در تغییر پریست. لطفا برای اطلاعات بیشتر، لاگ خطای خود را بررسی کنید.</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
     <value>شما فقط می‌توانید یک فایل را برای جلد بکشید</value>
@@ -380,16 +380,16 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
     <value>خطا در افزودن بازی شما</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value>  شما باید دایرکتوری \u003Ci\u003Eبازی\u003C/i\u003E خود را انتخاب کنید، نه دایرکتوری \u003Ci\u003Eبازی‌ها\u003C/i\u003E خود.\u003Cbr/\u003E\u003Cbr/\u003Eبه عنوان مثال، اگر یک بازی در این مسیر دارید:\u003Cbr/\u003E\u003Cb\u003EC:\\Program Files\\MyGamesFolder\\MyFavGame\\\u003C/b\u003E\u003Cbr/\u003E\u003Cbr/\u003Eشما باید دایرکتوری \u003Cb\u003EMyFavGame\u003C/b\u003E را انتخاب کنید و نه دایرکتوری \u003Cb\u003EMyGamesFolder\u003C/b\u003E.
-</value>
+    <value>شما باید پوشه &lt;i&gt;game&lt;/i&gt; خود را اد کنید نه پوشه &lt;i&gt;games&lt;/i&gt; خود.&lt;br/&gt;&lt;br/&gt;به عنوان مثال اگر یک بازی در مسیر:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;دارید، شما باید پوشه &lt;b&gt;MyFavGame&lt;/b&gt; رو انتخاب کنید. نه اینکه کل پوشه &lt;b&gt;MyGamesFolder&lt;/b&gt; رو انتخاب کنید.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
-    <value>DLSS Swapper should find games from your installed game libraries automatically. If your game is not listed there may be a few settings preventing it. Please check:
+    <value>برنامه DLSS Swapper باید بازی‌ها را به صورت خودکار از میان کتابخانه‌های بازی نصب‌شده شما پیدا کند. اگر بازی شما در لیست نیست، ممکن است چند تنظیم مختلف مانع از این کار شده باشد. لطفاً موارد زیر را بررسی کنید:
 
-- Games list filter is not set to "Hide games with no swappable items"
-- Specific game library is enabled in settings
+فیلتر لیست بازی‌ها روی گزینه پنهان کردن بازی‌های بدون آیتم قابل تعویض تنظیم نشده باشد.
 
-If you have checked these and your game is still not showing up there may be a bug. We would appreciate it if you could report the issue on our GitHub repository so we can make a fix and have your games better detected in the future.</value>
+کتابخانه بازی مورد نظر (سرویس یا مسیر بازی) در تنظیمات فعال شده باشد.
+
+اگر این موارد را بررسی کردید و بازی شما همچنان نشان داده نمی‌شود، ممکن است یک باگ وجود داشته باشد. ممنون می‌شویم اگر این مشکل را در ریپازیتوری گیت‌هاب (GitHub) ما گزارش کنید تا بتوانیم آن را برطرف کرده و در آینده شناسایی بازی‌های شما را بهبود ببخشیم.</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
     <value>یادداشت برای افزودن دستی بازی‌ها</value>
@@ -404,7 +404,7 @@ If you have checked these and your game is still not showing up there may be a b
     <value>اضافه کردن دایرکتوری سطح بالا پشتیبانی نمی‌شود. لطفا ریشه دایرکتوری بازی خود را اضافه کنید.</value>
   </data>
   <data name="GamesPage_NewDlls" xml:space="preserve">
-    <value>DLLهای جدید</value>
+    <value>فایل DLLهای جدید</value>
   </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>ایجاد مشکل جدید در گیت‌هاب</value>
@@ -437,7 +437,7 @@ If you have checked these and your game is still not showing up there may be a b
     <value>لازم نیست DLLها را ارسال کنید. ما آنها را بر اساس اطلاعات ارائه شده ردیابی خواهیم کرد.</value>
   </data>
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>DLLهای جدید یافت شد</value>
+    <value>فایل DLLهای جدید یافت شد</value>
   </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>بارگذاری مجدد بازی</value>
@@ -538,6 +538,9 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Name_DLSSD_Preset" xml:space="preserve">
     <value>DLSS RR Preset</value>
   </data>
+  <data name="General_Name_DLSSG_Preset" xml:space="preserve">
+    <value>DLSS FG Preset</value>
+  </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
   </data>
@@ -607,8 +610,14 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Search" xml:space="preserve">
     <value>جستجو</value>
   </data>
+  <data name="General_Size" xml:space="preserve">
+    <value>اندازه</value>
+  </data>
   <data name="General_Sorry" xml:space="preserve">
     <value>متاسفم</value>
+  </data>
+  <data name="General_Status" xml:space="preserve">
+    <value>وضعیت</value>
   </data>
   <data name="General_Success" xml:space="preserve">
     <value>موفقیت</value>
@@ -631,17 +640,47 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Yes" xml:space="preserve">
     <value>بله</value>
   </data>
+  <data name="GitHubUpdater_CouldNotRunInstaller" xml:space="preserve">
+    <value>در حال حاضر اجرای اینستالر امکان‌پذیر نیست. لطفاً بعداً دوباره تلاش کنید، یا آپدیت را به صورت دستی نصب کنید.</value>
+  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>شما در حال حاضر {0} نصب شده دارید.</value>
   </data>
   <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
     <value>برنامه د ال اس اس سواپر به‌روزرسانی شد</value>
   </data>
+  <data name="GitHubUpdater_DownloadComplete_Title" xml:space="preserve">
+    <value>دانلود به پایان رسید</value>
+  </data>
+  <data name="GitHubUpdater_DownloadingUpdate_Title" xml:space="preserve">
+    <value>در حال دانلود آپدیت</value>
+  </data>
+  <data name="GitHubUpdater_DownloadProgress" xml:space="preserve">
+    <value>میزان پیشرفت</value>
+  </data>
+  <data name="GitHubUpdater_Install" xml:space="preserve">
+    <value>نصب</value>
+  </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
     <value>به‌روزرسانی در دسترس است</value>
   </data>
+  <data name="GitHubUpdater_UpdateDownloadFailed" xml:space="preserve">
+    <value>امکان دانلود آپدیت وجود ندارد.</value>
+  </data>
+  <data name="GitHubUpdater_UpdateReadyToInstall" xml:space="preserve">
+    <value>آپدیت اکنون آماده نصب است.</value>
+  </data>
+  <data name="GitHubUpdater_Updating_Title" xml:space="preserve">
+    <value>در حال آپدیت شدن</value>
+  </data>
+  <data name="GitHubUpdater_ViewUpdate" xml:space="preserve">
+    <value>مشاهده آپدیت</value>
+  </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>قبلا دانلود شده.</value>
+  </data>
+  <data name="LibraryPage_CouldNotImportFromDriver" xml:space="preserve">
+    <value>هیچ فایل DLL جهت وارد کردن از درایور یافت نشد.</value>
   </data>
   <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
     <value>امکان بارگیری دی‌ال‌ال‌های وارد شده وجود ندارد</value>
@@ -679,6 +718,12 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>برچسب</value>
   </data>
+  <data name="LibraryPage_DownloadedCount" xml:space="preserve">
+    <value>دانلود شد:</value>
+  </data>
+  <data name="LibraryPage_DownloadFromNVIDIA" xml:space="preserve">
+    <value>دانلود از انویدیا</value>
+  </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
     <value>دانلود آخرین نسخه</value>
   </data>
@@ -688,14 +733,26 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
     <value>دانلودها شروع شدند</value>
   </data>
+  <data name="LibraryPage_Error_NVIDIA_Downloading" xml:space="preserve">
+    <value>امکان دریافت لیست فایل‌ها از سرورهای انویدیا وجود ندارد. لطفاً بعداً دوباره تلاش کنید یا آپدیت برنامه DLSS Swapper را بررسی کنید.</value>
+  </data>
+  <data name="LibraryPage_Error_NVIDIA_Importing" xml:space="preserve">
+    <value>امکان وارد کردن از سرورهای انویدیا وجود ندارد. لطفاً بعداً دوباره تلاش کنید یا آپدیت برنامه DLSS Swapper را بررسی کنید.</value>
+  </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
-    <value>DLL های خروجی گرفته شده :</value>
+    <value>فایل DLL های خروجی گرفته شده :</value>
   </data>
   <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
     <value>از {0} DLLs خروجی گرفته شد.</value>
   </data>
   <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
     <value>از DLL {0} خروجی گرفته شد.</value>
+  </data>
+  <data name="LibraryPage_Exporting" xml:space="preserve">
+    <value>در حال خروجی گرفتن</value>
+  </data>
+  <data name="LibraryPage_FetchingFileList" xml:space="preserve">
+    <value>در حال دریافت لیست فایل‌ها</value>
   </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
     <value>فایل یافت نشد.</value>
@@ -706,15 +763,30 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
     <value>به عنوان رکورد DLL موجود وارد شد.</value>
   </data>
+  <data name="LibraryPage_ImportedDLLs" xml:space="preserve">
+    <value>فایل DLL های وارد شده</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_DownloadFromServer" xml:space="preserve">
+    <value>دانلود از سرور</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_Driver" xml:space="preserve">
+    <value>از درایور</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_LocalFiles" xml:space="preserve">
+    <value>از فایل محلی</value>
+  </data>
+  <data name="LibraryPage_ImportFromNVIDIADriver" xml:space="preserve">
+    <value>وارد کردن از طریق درایور انویدیا</value>
+  </data>
   <data name="LibraryPage_Importing" xml:space="preserve">
     <value>در حال وارد کردن</value>
   </data>
   <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
-    <value>Replacing dlls on your computer can be dangerous.
+    <value>تعویض فایل‌های DLL در کامپیوتر شما می‌تواند خطرناک باشد.
 
-Placing a malicious dll into a game is as bad as running Linking_park_-_nUmB_mp3.exe that you just downloaded from LimeWire.
+قرار دادن یک فایل DLL مخرب در پوشه بازی، به همان اندازه خطرناک است که فایل Linking_park_-_nUmB_mp3.exe را که تازه از LimeWire دانلود کرده‌اید، اجرا کنید!
 
-Only import dlls from sources you trust.</value>
+فقط فایل‌های DLL را از منابعی که به آن‌ها اعتماد دارید وارد کنید.</value>
   </data>
   <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
     <value>هیچ DLLای برای خروجی گرفتن یافت نشد.</value>
@@ -729,7 +801,10 @@ Only import dlls from sources you trust.</value>
     <value>هیچ DLL جدیدی وجود ندارد</value>
   </data>
   <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
-    <value>DLLهای پردازش شده:</value>
+    <value>فایل DLLهای پردازش شده:</value>
+  </data>
+  <data name="LibraryPage_ProgressPercent" xml:space="preserve">
+    <value>میزان پیشرفت:</value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
     <value>کتابخانه</value>
@@ -756,17 +831,17 @@ Only import dlls from sources you trust.</value>
     <value>مشکلات گیت‌هاب</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
-    <value>We were unable to load manifest.json from your computer or from the internet.
+    <value>ما نتوانستیم فایل manifest.json را از کامپیوتر شما یا از اینترنت بارگذاری کنیم.
 
-If this keeps happening please file an report in our issue tracker on GitHub.</value>
+اگر این مشکل همچنان ادامه داشت، لطفاً آن را در بخش گزارش مشکلات (Issue Tracker) ما در گیت‌هاب ثبت کنید.</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
     <value>به‌روزرسانی manifest</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>While swapping DLSS versions should not be considered cheating, certain anti-cheat systems may not be happy with you if the files in your game directory are not what the game was distributed with.
+    <value>اگرچه تعویض نسخه‌های DLSS نباید تقلب (Cheating) محسوب شود، اما برخی از سیستم‌های ضد تقلب (Anti-cheat) در صورتی که فایل‌های موجود در پوشه بازی با فایل‌های اصلی توزیع‌شده بازی مطابقت نداشته باشند، ممکن است با شما برخورد کنند.
 
-Because of this we recommend using caution for multiplayer games.</value>
+به همین دلیل، توصیه می‌کنیم برای بازی‌های آنلاین و چندنفره (Multiplayer) با احتیاط عمل کنید.</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>نکته برای بازی‌های چند نفره</value>
@@ -790,7 +865,7 @@ Because of this we recommend using caution for multiplayer games.</value>
     <value>یجاد گزارش باگ</value>
   </data>
   <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
-    <value>تست سفارشی یوزر ایجنت"</value>
+    <value>تست سفارشی یوزر ایجنت</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
     <value>دانلود DLL برنامه DLSS Swapper در داخل DLSS Swapper با یوزر ایجنت سفارشی</value>
@@ -799,7 +874,7 @@ Because of this we recommend using caution for multiplayer games.</value>
     <value>دانلود DLL مربوط به DLSS از UploadThing mirror</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
-    <value>دسترسی به google.com از داخل DLSS Swapper (تست اتصال عمومی اینترنت</value>
+    <value>دسترسی به google.com از داخل DLSS Swapper (تست اتصال عمومی اینترنت)</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
     <value>دسترسی به bing.com از داخل DLSS Swapper (تست اتصال عمومی اینترنت)</value>
@@ -829,7 +904,7 @@ Because of this we recommend using caution for multiplayer games.</value>
     <value>باز کردن در مرورگر</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
-    <value>Click the open in browser button, or copy and paste following link into your browser. Does it download a file in your browser?</value>
+    <value>روی دکمه "باز کردن در مرورگر" کلیک کنید، یا لینک زیر را کپی کرده و در مرورگر خود پیست کنید. آیا فایلی در مرورگر شما دانلود می‌شود؟</value>
   </data>
   <data name="NetworkTesterPage_Results" xml:space="preserve">
     <value>نتایج</value>
@@ -838,10 +913,31 @@ Because of this we recommend using caution for multiplayer games.</value>
     <value>اجرای تست</value>
   </data>
   <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
-    <value>Use the provided user agent or enter a custom one of your choice.</value>
+    <value>از user agent ارائه شده استفاده کنید یا یک user agent سفارشی به دلخواه خود وارد کنید.</value>
   </data>
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>تست کننده شبکه</value>
+  </data>
+  <data name="ProxySettings_Password" xml:space="preserve">
+    <value>رمز</value>
+  </data>
+  <data name="ProxySettings_Server" xml:space="preserve">
+    <value>سرور</value>
+  </data>
+  <data name="ProxySettings_ServerPrefixWarning" xml:space="preserve">
+    <value>مطمئن شوید که URL سرور پروکسی شما معتبر است و با `http://` یا `https://` شروع می‌شود.</value>
+  </data>
+  <data name="ProxySettings_UseAuthentication" xml:space="preserve">
+    <value>استفاده از احراز هویت</value>
+  </data>
+  <data name="ProxySettings_UseProxySettings" xml:space="preserve">
+    <value>استفاده از تنظیمات پروکسی</value>
+  </data>
+  <data name="ProxySettings_Username" xml:space="preserve">
+    <value>نام کاربری</value>
+  </data>
+  <data name="ProxySettings_WarningMessage" xml:space="preserve">
+    <value>برای اینکه امنیت تنظیمات پروکسی حفظ شود، این تنظیمات در Windows Credential Manager ذخیره می‌شوند. این کار باعث می‌شود که قابلیت جابه‌جایی (Portability) نسخه «پرتابل» برنامه از بین برود.</value>
   </data>
   <data name="SettingsPage_About" xml:space="preserve">
     <value>درباره</value>
@@ -853,10 +949,10 @@ Because of this we recommend using caution for multiplayer games.</value>
     <value>اجازه دادن به DLL های دیباگ</value>
   </data>
   <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
-    <value>SDKs sometimes release debug DLLs which allow additional on-screen information to be displayed.</value>
+    <value>کیت‌های توسعه نرم‌افزار (SDKها) گاهی اوقات فایل‌های DLL مخصوص عیب‌یابی (Debug DLLs) منتشر می‌کنند که اجازه می‌دهند اطلاعات تکمیلی و اضافی روی صفحه (On-screen) نمایش داده شوند.</value>
   </data>
   <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
-    <value>DLLs are checked if they are trusted in Windows by validating the signature before being swapped into a game folder. If a DLL fails signature validation then it will not be used. It is recommended to keep this off.</value>
+    <value>فایل‌های DLL پیش از انتقال به پوشه بازی، با اعتبارسنجی امضای دیجیتال (Signature Validation) بررسی می‌شوند تا مطمئن شویم قابل اعتماد هستند یا خیر. اگر یک DLL در اعتبارسنجی امضا رد شود، استفاده نخواهد شد. توصیه می‌شود این گزینه را غیرفعال (Off) نگه دارید.</value>
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
     <value>این فقط برای انتخاب‌گر DLL اعمال می‌شود، نه صفحه کتابخانه.</value>
@@ -896,6 +992,12 @@ Because of this we recommend using caution for multiplayer games.</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>ثبت گزارش با جزئیات</value>
+  </data>
+  <data name="SettingsPage_DLSSDOptions_GlobalPreset" xml:space="preserve">
+    <value>تنظیم پریست بازسازی پرتو جهانی</value>
+  </data>
+  <data name="SettingsPage_DLSSGOptions_GlobalPreset" xml:space="preserve">
+    <value>تنظیم پریست فریم جنریشن جهانی</value>
   </data>
   <data name="SettingsPage_DLSSOptions" xml:space="preserve">
     <value>گزینه‌های DLSS</value>
@@ -948,6 +1050,9 @@ Because of this we recommend using caution for multiplayer games.</value>
   <data name="SettingsPage_Logging_Warning" xml:space="preserve">
     <value>هشدار</value>
   </data>
+  <data name="SettingsPage_Networking" xml:space="preserve">
+    <value>اتصالات شبکه</value>
+  </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>هیچ به‌روزرسانی جدیدی در دسترس نیست.</value>
   </data>
@@ -965,6 +1070,9 @@ Because of this we recommend using caution for multiplayer games.</value>
   </data>
   <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
     <value>مسیر {0} قبلاً نادیده گرفته شده است.</value>
+  </data>
+  <data name="SettingsPage_ProxySettings" xml:space="preserve">
+    <value>تنظیمات پروکسی</value>
   </data>
   <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
     <value>اجازه دادن به منابع غیرقابل اعتماد</value>
@@ -997,7 +1105,7 @@ Because of this we recommend using caution for multiplayer games.</value>
     <value>فایل گزارش فعلی شما این است</value>
   </data>
   <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
-    <value>You can not use the translation tool while it is running as admin. Please restart the application.</value>
+    <value>هنگامی که برنامه با دسترسی ادمین (Run as admin) در حال اجراست، نمی‌توانید از ابزار ترجمه استفاده کنید. لطفاً برنامه را مجدداً راه‌اندازی (Restart) کنید.</value>
   </data>
   <data name="TranslationToolboxPage_Comment" xml:space="preserve">
     <value>توضیح</value>
@@ -1057,7 +1165,7 @@ Because of this we recommend using caution for multiplayer games.</value>
     <value>راهنمای ترجمه</value>
   </data>
   <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
-    <value>Your translation has been created. Please look at the DLSS Swapper translation guide as to what to do next with {0}.</value>
+    <value>ترجمه شما ساخته شد. لطفا برای مراحل بعدی در مورد فایلهای {0}، راهنمای ترجمه DLSS Swapper را مطالعه کنید.</value>
   </data>
   <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
     <value>پیشرفت ترجمه</value>
@@ -1066,7 +1174,7 @@ Because of this we recommend using caution for multiplayer games.</value>
     <value>بستن بدون ذخیره</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
-    <value>You possibly have unsaved translation changes. If you close this window these will be lost.</value>
+    <value>احتمالاً تغییرات ذخیره‌نشده‌ای در ترجمه دارید. در صورت بستن این پنجره، این تغییرات از دست خواهند رفت.</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
     <value>تغییرات ترجمه ذخیره نشده</value>

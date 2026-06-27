@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Windows.Win32.UI.Shell;
-using Windows.Win32.System.Com;
-using System.Runtime.InteropServices;
-using Windows.Win32.UI.Shell.Common;
-using Windows.Win32;
-using Windows.Win32.Foundation;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.System.Com;
+using Windows.Win32.UI.Shell;
+using Windows.Win32.UI.Shell.Common;
 
 namespace DLSS_Swapper.Helpers;
 
@@ -48,7 +48,7 @@ internal class FileSystemHelper
             }
 
             // Set the default folder.
-            hResult = PInvoke.SHCreateItemFromParsingName(defaultPath, null, typeof(IShellItem).GUID, out var directoryShellItem);
+            hResult = PInvoke.SHCreateItemFromParsingName<IShellItem>(defaultPath, null, out var directoryShellItem);
             if (hResult < 0)
             {
                 Marshal.ThrowExceptionForHR(hResult);
@@ -138,7 +138,7 @@ internal class FileSystemHelper
 
 
             // Set the default folder.
-            hResult = PInvoke.SHCreateItemFromParsingName(defaultPath, null, typeof(IShellItem).GUID, out var directoryShellItem);
+            hResult = PInvoke.SHCreateItemFromParsingName<IShellItem>(defaultPath, null, out var directoryShellItem);
             if (hResult < 0)
             {
                 Marshal.ThrowExceptionForHR(hResult);
@@ -266,7 +266,7 @@ internal class FileSystemHelper
 
 
             // Set the default folder.
-            hResult = PInvoke.SHCreateItemFromParsingName(defaultPath, null, typeof(IShellItem).GUID, out var directoryShellItem);
+            hResult = PInvoke.SHCreateItemFromParsingName<IShellItem>(defaultPath, null, out var directoryShellItem);
             if (hResult < 0)
             {
                 Marshal.ThrowExceptionForHR(hResult);

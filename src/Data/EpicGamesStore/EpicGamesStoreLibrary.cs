@@ -113,7 +113,7 @@ internal class EpicGamesStoreLibrary : IGameLibrary
                 }
 
                 // Check that is is the base game
-                if (manifest.AppName != manifest.MainGameAppName)
+                if (string.IsNullOrWhiteSpace(manifest.MainGameAppName) == false)
                 {
                     continue;
                 }

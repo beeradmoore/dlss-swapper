@@ -113,10 +113,10 @@ internal class EpicGamesStoreLibrary : IGameLibrary
                 }
 
                 // Check that is is the base game
-                if (string.IsNullOrWhiteSpace(manifest.MainGameAppName) == false)
-                {
-                    continue;
-                }
+                //if (string.IsNullOrWhiteSpace(manifest.MainGameAppName) == false)
+                //{
+                //    continue;
+                //}
 
                 var remoteHeaderUrl = string.Empty;
                 if (cacheItemsDictionary.TryGetValue(manifest.CatalogItemId, out var cacheItem))

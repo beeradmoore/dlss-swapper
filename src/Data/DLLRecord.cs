@@ -283,6 +283,11 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
         try
         {
             LocalRecord.FileDownloader = fileDownloader;
+            // Reset stale error state from a previous failed attempt, otherwise a
+            // cancelled retry is misreported as an error by observers that
+            // distinguish cancel from error via HasDownloadError.
+            LocalRecord.HasDownloadError = false;
+            LocalRecord.DownloadErrorMessage = string.Empty;
             NotifyPropertyChanged(nameof(LocalRecord));
 
 

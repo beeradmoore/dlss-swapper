@@ -367,6 +367,113 @@ To verify what preset is being used please enable the DLSS on-screen indicator.<
   <data name="GamesPage_AddGame" xml:space="preserve">
     <value>Add Game</value>
   </data>
+  <data name="GamesPage_ApplyDll" xml:space="preserve">
+    <value>Apply DLL</value>
+  </data>
+  <data name="GamesPage_Batch_ApplyingTemplate" xml:space="preserve">
+    <value>Applying… ({0} of {1})</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Preset" xml:space="preserve">
+    <value>Preset</value>
+    <comment>Column header above the preset dropdowns in the batch picker</comment>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Version" xml:space="preserve">
+    <value>Version</value>
+    <comment>Column header above the DLL version dropdowns in the batch picker</comment>
+  </data>
+  <data name="GamesPage_Batch_DllLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+    <comment>{0} = DLL type name (e.g. DLSS), {1} = DLL version display name</comment>
+  </data>
+  <data name="GamesPage_Batch_DownloadFailedTemplate" xml:space="preserve">
+    <value>Could not download {0}. No games were changed.</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadingTemplate" xml:space="preserve">
+    <value>Downloading {0}…</value>
+  </data>
+  <data name="GamesPage_Batch_Error_Generic" xml:space="preserve">
+    <value>Failed (state possibly partial — verify this game)</value>
+  </data>
+  <data name="GamesPage_Batch_Error_PossiblyPartialTemplate" xml:space="preserve">
+    <value>{0} (state possibly partial — verify this game)</value>
+  </data>
+  <data name="GamesPage_Batch_Group_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="GamesPage_Batch_Group_FSR" xml:space="preserve">
+    <value>FSR</value>
+  </data>
+  <data name="GamesPage_Batch_Group_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="GamesPage_Batch_NeedsAdminTemplate" xml:space="preserve">
+    <value>{0} game(s) require running DLSS Swapper as administrator</value>
+  </data>
+  <data name="GamesPage_Batch_NoChange" xml:space="preserve">
+    <value>Don't change</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoAsset" xml:space="preserve">
+    <value>Game does not have this DLL</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoProfile" xml:space="preserve">
+    <value>No NVIDIA driver profile found for this game</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_Unsupported" xml:space="preserve">
+    <value>NVIDIA presets are not available</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_UnsupportedMessage" xml:space="preserve">
+    <value>Presets are unavailable because no supported NVIDIA driver was detected on this system.</value>
+  </data>
+  <data name="GamesPage_Batch_PresetForTypeTemplate" xml:space="preserve">
+    <value>{0} preset</value>
+    <comment>Accessible name for a preset dropdown. {0} = DLL type name (e.g. DLSS)</comment>
+  </data>
+  <data name="GamesPage_Batch_PresetLabelTemplate" xml:space="preserve">
+    <value>Preset {0} → {1}</value>
+    <comment>{0} = DLL type name (e.g. DLSS), {1} = preset name (e.g. D)</comment>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Incompatible" xml:space="preserve">
+    <value>Incompatible DLSS generation</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_MixedGenerations" xml:space="preserve">
+    <value>Game mixes DLSS generations</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_NoAsset" xml:space="preserve">
+    <value>Game does not use this DLL type</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Processing" xml:space="preserve">
+    <value>Game is currently processing</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Errors" xml:space="preserve">
+    <value>Errors:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_NotApplicableTemplate" xml:space="preserve">
+    <value>{0} change(s) did not apply because the game does not use that DLL type.</value>
+    <comment>{0} = number of planned changes that were not applicable</comment>
+  </data>
+  <data name="GamesPage_Batch_Summary_Skipped" xml:space="preserve">
+    <value>Skipped:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Swapped" xml:space="preserve">
+    <value>Swapped:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_SwappedTemplate" xml:space="preserve">
+    <value>{0} change(s) across {1} game(s)</value>
+    <comment>{0} = number of DLL/preset changes made, {1} = number of games they were made in</comment>
+  </data>
+  <data name="GamesPage_Batch_SummaryTitle" xml:space="preserve">
+    <value>Batch swap summary</value>
+  </data>
+  <data name="GamesPage_Batch_Title" xml:space="preserve">
+    <value>Apply DLL to selected games</value>
+  </data>
+  <data name="GamesPage_Batch_VersionForTypeTemplate" xml:space="preserve">
+    <value>{0} version</value>
+    <comment>Accessible name for a DLL version dropdown. {0} = DLL type name (e.g. DLSS)</comment>
+  </data>
+  <data name="GamesPage_Batch_WaitingForDownload" xml:space="preserve">
+    <value>Waiting for the current download to finish…</value>
+  </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
     <value>Group games from the same library together</value>
   </data>
@@ -452,6 +559,23 @@ If you have checked these and your game is still not showing up there may be a b
     <comment>Used as a loading box title when the user clicks reload game button on a games detail page</comment>
     <value>Reloading game</value>
   </data>
+  <data name="GamesPage_Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="GamesPage_SelectionMode_CountTemplate" xml:space="preserve">
+    <value>{0} selected</value>
+  </data>
+  <data name="GamesPage_SelectionMode_DeselectAll" xml:space="preserve">
+    <comment>Button in the selection bar, shown when every currently visible game is already selected</comment>
+    <value>Deselect all</value>
+  </data>
+  <data name="GamesPage_SelectionMode_Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectAll" xml:space="preserve">
+    <comment>Button in the selection bar, selects every game currently visible after filter and search</comment>
+    <value>Select all</value>
+  </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
     <value>Show hidden games (defaults to off on launch)</value>
   </data>
@@ -475,6 +599,9 @@ If you have checked these and your game is still not showing up there may be a b
   </data>
   <data name="General_Cancel" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="General_Clear" xml:space="preserve">
+    <value>Clear</value>
   </data>
   <data name="General_Close" xml:space="preserve">
     <value>Close</value>

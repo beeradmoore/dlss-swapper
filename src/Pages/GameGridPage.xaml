@@ -97,6 +97,20 @@
 
             <GridView PointerWheelChanged="MainGridView_PointerWheelChanged" ManipulationMode="None" x:Name="MainGridView" ItemsSource="{x:Bind CurrentCollectionView, Mode=OneWay}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="GridAndListView_ItemClick" Padding="20"  >
 
+                <GridView.Resources>
+                    <!-- White selection checkmark backdrop for contrast against varied cover art (default uses the accent color). -->
+                    <SolidColorBrush x:Key="GridViewItemCheckBoxSelectedBrush" Color="White" />
+                    <SolidColorBrush x:Key="GridViewItemCheckBoxSelectedPointerOverBrush" Color="White" />
+                    <SolidColorBrush x:Key="GridViewItemCheckBoxSelectedPressedBrush" Color="#DDDDDD" />
+                    <SolidColorBrush x:Key="GridViewItemCheckBrush" Color="Black" />
+
+                    <!-- The item container draws behind the cover art, so its selected background only
+                         shows through the padding added below, reading as an accent frame. -->
+                    <StaticResource x:Key="GridViewItemBackgroundSelected" ResourceKey="AccentFillColorDefaultBrush" />
+                    <StaticResource x:Key="GridViewItemBackgroundSelectedPointerOver" ResourceKey="AccentFillColorSecondaryBrush" />
+                    <StaticResource x:Key="GridViewItemBackgroundSelectedPressed" ResourceKey="AccentFillColorTertiaryBrush" />
+                </GridView.Resources>
+
                 <GridView.GroupStyle>
                     <GroupStyle HidesIfEmpty="True">
                         <GroupStyle.HeaderTemplate>
@@ -115,6 +129,10 @@
                         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
                         <Setter Property="Margin" Value="8"/>
                         <Setter Property="BorderThickness" Value="0"/>
+                        <!-- Padding + matching corner radius are what make the selected background
+                             visible as a frame around the 8px-rounded card content. -->
+                        <Setter Property="Padding" Value="3"/>
+                        <Setter Property="CornerRadius" Value="11"/>
                     </Style>
                 </GridView.ItemContainerStyle>
 
@@ -231,22 +249,27 @@
                         <FontIcon Glyph="&#xE946;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.AddGameText, Mode=OneWay}" Command="{x:Bind ViewModel.AddManualGameButtonCommand}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.AddGameText, Mode=OneWay}" Command="{x:Bind ViewModel.AddManualGameButtonCommand}" IsEnabled="{x:Bind ViewModel.CanUseFilterAndView, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE710;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.RefreshText, Mode=OneWay}" Command="{x:Bind ViewModel.RefreshGamesButtonCommand}" IsEnabled="{x:Bind ViewModel.IsLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.RefreshText, Mode=OneWay}" Command="{x:Bind ViewModel.RefreshGamesButtonCommand}" IsEnabled="{x:Bind ViewModel.CanRefresh, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE72C;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Icon="Filter" Label="{x:Bind ViewModel.TranslationProperties.FilterText, Mode=OneWay}" Command="{x:Bind ViewModel.FilterGamesButtonCommand}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.SelectText, Mode=OneWay}" Command="{x:Bind ViewModel.ToggleSelectionModeCommand}" IsEnabled="{x:Bind ViewModel.IsGameListLoading, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}">
+                    <AppBarButton.Content>
+                        <FontIcon Glyph="&#xE762;" />
+                    </AppBarButton.Content>
+                </AppBarButton>
+                <AppBarButton Icon="Filter" Label="{x:Bind ViewModel.TranslationProperties.FilterText, Mode=OneWay}" Command="{x:Bind ViewModel.FilterGamesButtonCommand}" IsEnabled="{x:Bind ViewModel.CanUseFilterAndView, Mode=OneWay}">
                     <AppBarButton.Content>
                         <FontIcon Glyph="&#xE71C;" />
                     </AppBarButton.Content>
                 </AppBarButton>
-                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.ViewTypeText, Mode=OneWay}" Content="{x:Bind ViewModel.GameGridViewIcon, Mode=OneWay}">
+                <AppBarButton Label="{x:Bind ViewModel.TranslationProperties.ViewTypeText, Mode=OneWay}" Content="{x:Bind ViewModel.GameGridViewIcon, Mode=OneWay}" IsEnabled="{x:Bind ViewModel.CanUseFilterAndView, Mode=OneWay}">
                     <AppBarButton.Flyout>
                         <MenuFlyout>
                             <MenuFlyoutItem Text="{x:Bind ViewModel.TranslationProperties.GridViewText, Mode=OneWay}" Command="{x:Bind ViewModel.ChangeGameGridViewCommand}" CommandParameter="{x:Bind pages:GameGridViewType.GridView}" />
@@ -267,6 +290,25 @@
         </Grid>
 
         <ContentControl x:Name="MainContentControl" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" Content="{x:Bind ViewModel, Mode=OneWay}" ContentTemplateSelector="{StaticResource TemplateSelector}" />
-        
+
+        <Border Grid.Row="1"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,24"
+                Padding="16,8"
+                CornerRadius="8"
+                BorderThickness="1"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                Visibility="{x:Bind ViewModel.IsSelectionMode, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Orientation="Horizontal" Spacing="12">
+                <TextBlock Text="{x:Bind ViewModel.SelectedGamesCountText, Mode=OneWay}" VerticalAlignment="Center" />
+                <Button Content="{x:Bind ViewModel.SelectAllButtonText, Mode=OneWay}" Command="{x:Bind ViewModel.ToggleSelectAllCommand}" />
+                <Button Style="{StaticResource AccentButtonStyle}" Content="{x:Bind ViewModel.TranslationProperties.ApplyDllText, Mode=OneWay}" Command="{x:Bind ViewModel.ApplyBatchDllCommand}" />
+                <Button Content="{x:Bind ViewModel.TranslationProperties.ClearText, Mode=OneWay}" Command="{x:Bind ViewModel.ClearSelectionCommand}" />
+                <Button Content="{x:Bind ViewModel.TranslationProperties.DoneText, Mode=OneWay}" Command="{x:Bind ViewModel.ToggleSelectionModeCommand}" />
+            </StackPanel>
+        </Border>
+
     </Grid>
 </Page>

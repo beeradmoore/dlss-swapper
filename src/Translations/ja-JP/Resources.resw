@@ -124,28 +124,28 @@
     <value>DLSS Swapper</value>
   </data>
   <data name="DiagnosticsPage_ClickToCopyDetails" xml:space="preserve">
-    <value>以下の詳細をクリックしてコピーして下さい</value>
+    <value>以下の詳細をクリックしてコピーしてください</value>
   </data>
   <data name="DiagnosticsPage_WindowTitle" xml:space="preserve">
     <value>診断</value>
   </data>
   <data name="DllManager_AlreadyImported" xml:space="preserve">
-    <value>(既にインポート済み)</value>
+    <value>（すでにインポートされています）</value>
   </data>
   <data name="DllManager_ImportFeatureDisabled" xml:space="preserve">
-    <value>インポート機能が無効になっている為、インポート マニフェストを読み込む事が出来ませんでした</value>
+    <value>インポート機能が無効になっているため、インポートマニフェストを読み込むことができませんでした。</value>
   </data>
   <data name="DllManager_MigratingDlls" xml:space="preserve">
-    <value>DLLの移動</value>
+    <value>DLL を移行中</value>
   </data>
   <data name="DllManager_UnknownTypeDll" xml:space="preserve">
-    <value>DLLが未知のタイプ</value>
+    <value>DLL が未知のタイプです。</value>
   </data>
   <data name="DllManager_UntrustedDll" xml:space="preserve">
-    <value>このDLLは、Windowsによって信頼されていません</value>
+    <value>DLL は Windows によって信頼されていません。</value>
   </data>
   <data name="DllRecord_CouldNotDownloadAssetTypeTemplate" xml:space="preserve">
-    <value>{0} DLL のダウンロードに失敗しました。後で再試行するか、ログを確認してダウンロードが失敗した原因を確認して下さい。</value>
+    <value>{0} DLL をダウンロードできませんでした。しばらくしてからもう一度お試しいただくか、ログを確認してダウンロードが失敗した理由を確認してください。</value>
   </data>
   <data name="DllRecord_DownloadError" xml:space="preserve">
     <value>ダウンロードエラー</value>
@@ -157,10 +157,10 @@
     <value>ダウンロードが必要です</value>
   </data>
   <data name="DllZipInvalidNoDllFound" xml:space="preserve">
-    <value>DLLファイルが破損しています(DLLファイルが見つかりません)</value>
+    <value>DLL zip が無効です（DLL が見つかりませんでした）。</value>
   </data>
   <data name="DLSS_Preset_AlwaysUseLatest" xml:space="preserve">
-    <value>常に最新版を使用</value>
+    <value>NVIDIA 推奨</value>
   </data>
   <data name="DLSS_Preset_Default" xml:space="preserve">
     <value>デフォルト</value>
@@ -169,31 +169,31 @@
     <value>プリセット {0}</value>
   </data>
   <data name="DLSS_Preset_Letter_Deprecated" xml:space="preserve">
-    <value>プリセット {0} (非推薦)</value>
+    <value>プリセット {0}（非推奨）</value>
   </data>
   <data name="FailedToLaunchPage_DlssSwapperFailedToLaunch" xml:space="preserve">
-    <value>DLSS Swapperの起動に失敗しました</value>
+    <value>DLSS Swapper の起動に失敗しました</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial1" xml:space="preserve">
-    <value>Aを開いて下さい</value>
+    <value>DLSS Swapper の GitHub リポジトリにアクセスして</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial2" xml:space="preserve">
-    <value>新たな問題</value>
+    <value>新しい Issue を作成してください。</value>
   </data>
   <data name="FailedToLaunchPage_PleaseOpenIssuePartial3" xml:space="preserve">
-    <value>DLSS Swapper GitHubリポジトリにアクセスし、追加のコンテキスト セクションに以下の情報を提供して下さい</value>
+    <value>追加情報セクションに以下の情報を提供してください。</value>
   </data>
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>起動に失敗しました</value>
   </data>
   <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>カスタムカバー画像を削除してもよろしいですか?</value>
+    <value>カスタムカバー画像を削除してもよろしいですか？</value>
   </data>
   <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>ゲームが現在実行中</value>
+    <value>現在ゲームを処理中です</value>
   </data>
   <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>カスタムカバーを削除しますか?</value>
+    <value>カスタムカバーを削除しますか？</value>
   </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>アセットの種類</value>
@@ -205,74 +205,74 @@
     <value>イベントの種類</value>
   </data>
   <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
-    <value>履歴が見つかりませんでした</value>
+    <value>履歴が見つかりませんでした。</value>
   </data>
   <data name="GameHistoryControl_VersionHeader" xml:space="preserve">
     <value>バージョン</value>
   </data>
   <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
-    <value>DLLのバックアップが削除されました</value>
+    <value>DLL のバックアップが削除されました</value>
   </data>
   <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
-    <value>DLLが外部から変更されました</value>
+    <value>DLL が外部から変更されました</value>
   </data>
   <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
-    <value>DLLが検出されました</value>
+    <value>DLL が検出されました</value>
   </data>
   <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
-    <value>DLLのリセット</value>
+    <value>DLL がリセットされました</value>
   </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
-    <value>DLLの置き換えました</value>
+    <value>DLL が置き換えられました</value>
   </data>
   <data name="GamePage_AddCustomCover" xml:space="preserve">
     <value>カスタムカバーを追加</value>
   </data>
   <data name="GamePage_CantLaunchFromLibraryTemplate" xml:space="preserve">
-    <value>{0} ライブラリからのゲームの起動は現在サポートされていません</value>
+    <value>{0} ライブラリからのゲーム起動は現在サポートされていません。</value>
   </data>
   <data name="GamePage_ClickToFavorite" xml:space="preserve">
     <value>お気に入りに追加</value>
   </data>
   <data name="GamePage_ClickToHide" xml:space="preserve">
-    <value>クリックして非表示にする</value>
+    <value>クリックして非表示</value>
   </data>
   <data name="GamePage_CouldNotFindGameInstallPathTemplate" xml:space="preserve">
-    <value>パス "{0}" が見つかりませんでした</value>
+    <value>パス「{0}」が見つかりませんでした。</value>
   </data>
   <data name="GamePage_CurrentDll" xml:space="preserve">
-    <value>現在のDLL</value>
+    <value>現在の DLL</value>
   </data>
   <data name="GamePage_DllPicker_CouldNotFindFileTemplate" xml:space="preserve">
-    <value>ファイル "{0}" が見つかりませんでした</value>
+    <value>ファイル「{0}」が見つかりませんでした。</value>
   </data>
   <data name="GamePage_DllPicker_ResetDllToVersionTemplate" xml:space="preserve">
-    <value>DLL が {0} にリセットされました</value>
+    <value>DLL が {0} にリセットされました。</value>
   </data>
   <data name="GamePage_DllPicker_StartingDownload" xml:space="preserve">
     <value>ダウンロードを開始します</value>
   </data>
   <data name="GamePage_DllPicker_WaitToDownloadBeforeSwapping" xml:space="preserve">
-    <value>ダウンロードが完了するまでお待ち下さい。その後、切り替えて下さい</value>
+    <value>置き換えはダウンロードが完了してから行ってください。</value>
   </data>
   <data name="GamePage_DLSSPresetInfo" xml:space="preserve">
     <value>プリセット情報</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Message" xml:space="preserve">
-    <value>DLSSプリセットは、ゲームインストールディレクトリ内に含まれるDLSS DLLファイル内に格納されています。異なるDLSS DLLには異なるプリセットが設定されています。例えば、プリセットKはDLSS v310.2以降で初めて導入されました。したがって、DLSS v3.7を使用しプリセットをKに設定した場合、プリセットKは使用されず、代わりにゲームが選択するデフォルトのプリセットにフォールバックします。
+    <value>DLSS プリセットは、ゲームのインストールディレクトリ内にある DLSS DLL ファイルに格納されています。DLSS DLL によってプリセットは異なります。例えば、プリセット K は DLSS v310.2 で初めて導入されました。そのため、DLSS v3.7 を使用し、プリセットを K に設定しても、プリセット K は使用されず、ゲームが選択したプリセットが使用されます。
 
-グローバルプリセットにも同じことが適用されます。プリセットKを選択しても、ゲームがDLSS v3.7を使用している場合、プリセットKは使用されず、代わりにゲームのデフォルト設定にフォールバックします。
+グローバルプリセットについても同様です。プリセット K を選択しても、ゲームが DLSS v3.7 を使用している場合、プリセット K は使用されず、代わりにゲームのデフォルト設定が使用されます。
 
-使用されているプリセットを確認するには、DLSSの画面表示インジケーターを有効にして下さい。</value>
+使用されているプリセットを確認するには、DLSS 画面表示インジケーターを有効にしてください。</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_OnScreenIndicator" xml:space="preserve">
-    <value>画面表示のインジケーター情報</value>
+    <value>画面表示インジケーターに関する情報</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Title" xml:space="preserve">
-    <value>DLSSプリセット情報</value>
+    <value>DLSS プリセット情報</value>
   </data>
   <data name="GamePage_DLSSPresetInfo_Tooltip" xml:space="preserve">
-    <value>DLSSプリセットを設定しても、そのプリセットが使用される事を保証するものではありません</value>
+    <value>DLSS プリセットを設定しても、そのプリセットが必ず使用されるとは限りません。</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
     <value>お気に入り</value>
@@ -284,175 +284,171 @@
     <value>インストール先パス</value>
   </data>
   <data name="GamePage_InvalidFileTypeTemplate" xml:space="preserve">
-    <value>"{0}" は有効なファイル形式ではありません</value>
+    <value>「{0}」は無効なファイル形式です</value>
   </data>
   <data name="GamePage_Launch" xml:space="preserve">
     <value>起動</value>
   </data>
   <data name="GamePage_ManuallyAdded_CantBeRemoved" xml:space="preserve">
-    <value>このタイトルは手動で追加されたものではなく、削除出来ません</value>
+    <value>このタイトルは手動で追加されたものではなく、削除することもできません。</value>
   </data>
   <data name="GamePage_ManuallyAdded_RemoveGameTemplate" xml:space="preserve">
-    <value>DLSS Swapperから "{0}" を削除してもよろしいですか？すでに切り替えたDLSSファイルには何の変更も加わらないです</value>
+    <value>DLSS Swapper から「{0}」を削除してもよろしいですか？既に置き換え済みの DLSS ファイルには変更は加えられません。</value>
   </data>
   <data name="GamePage_MultipleDllFound_Notice" xml:space="preserve">
-    <value>以下は、検出された複数のDLLを示しています。これらの操作は全てのDLLに対して一度に行われる為、通常通りDLLを切り替えたり復元したりする事が出来ます。但し、これらのDLLのうちどれがゲームで使用されているかは不明である為、表示されているDLLバージョンは最初に検出されたDLLのものです</value>
+    <value>以下に、検出された複数の DLL を表示します。すべての DLL に対して一括で処理を行うため、DLL の置き換えや復元は通常通り行うことができます。ただし、これらの DLL のうちどれがゲームで使用されているかは不明であるため、表示されている DLL のバージョンは最初に検出された DLL のものです。</value>
   </data>
   <data name="GamePage_MultipleDllsFound" xml:space="preserve">
-    <value>複数のDLLが見つかりました</value>
+    <value>複数の DLL が見つかりました</value>
   </data>
   <data name="GamePage_MultipleDllsFoundTemplate" xml:space="preserve">
-    <value>複数の {0} DLLが見つかりました</value>
+    <value>複数の {0} DLL が見つかりました</value>
   </data>
   <data name="GamePage_NoDllsFoundError_Message" xml:space="preserve">
-    <value>新しいDLLをダウンロードするには、ライブラリページに移動して下さい</value>
+    <value>新しい DLL をダウンロードするには、ライブラリページに移動してください。</value>
   </data>
   <data name="GamePage_NoDllsFoundError_Title" xml:space="preserve">
-    <value>DLLファイルが見つかりませんでした</value>
+    <value>DLL が見つかりませんでした</value>
   </data>
   <data name="GamePage_Notes" xml:space="preserve">
     <value>注記</value>
   </data>
   <data name="GamePage_NotReadyToPlayState" xml:space="preserve">
-    <value>このゲームはプレイ可能な状態ではありません</value>
+    <value>このゲームはプレイできる状態ではありません。</value>
   </data>
   <data name="GamePage_NVAPIError_Admin_Message" xml:space="preserve">
-    <value>NVAPIエラーが発生しました。詳細情報はエラーログに書き込まれました</value>
+    <value>NVAPI エラーが発生しました。詳細はエラーログに記録されています。</value>
   </data>
   <data name="GamePage_NVAPIError_Message" xml:space="preserve">
-    <value>NVAPIエラーが発生しました。管理者としてアプリケーションを実行すると、問題が解決する場合があります。詳細情報はエラーログに記録されました</value>
+    <value>NVAPI エラーが発生しました。アプリを管理者として実行すると、問題が解決する可能性があります。詳細はエラーログに記録されています。</value>
   </data>
   <data name="GamePage_NVAPIError_Title" xml:space="preserve">
-    <value>NVAPIエラー</value>
+    <value>NVAPI エラー</value>
   </data>
   <data name="GamePage_NVAPIError_Tooltip" xml:space="preserve">
-    <value>NVAPIエラーが発生しました。詳細についてはクリックして下さい</value>
+    <value>NVAPI エラーが発生しました。詳細については、こちらをクリックしてください。</value>
   </data>
   <data name="GamePage_OpenDllLocation" xml:space="preserve">
-    <value>DLLファイルの保存場所を開く</value>
+    <value>DLL ファイルの場所を開く</value>
   </data>
   <data name="GamePage_OriginalDll" xml:space="preserve">
     <value>オリジナル DLL</value>
   </data>
   <data name="GamePage_ProcessingPleaseWaitTemplate" xml:space="preserve">
-    <value>{0} は現在処理中です。読み込みインジケーターが完了するまでお待ち下さい</value>
+    <value>{0} は現在処理中です。読み込みが完了するまでお待ちください。</value>
   </data>
   <data name="GamePage_ResetAll" xml:space="preserve">
-    <value>全てリセット</value>
+    <value>すべてリセット</value>
   </data>
   <data name="GamePage_RestoreOriginalDll" xml:space="preserve">
-    <value>元のDLLを復元します</value>
+    <value>オリジナル DLL を復元</value>
   </data>
   <data name="GamePage_SelectDllTemplateTitle" xml:space="preserve">
-    <value>{0} バージョンを選択して下さい</value>
+    <value>{0} のバージョンを選択</value>
   </data>
   <data name="GamePage_StorageFileIsNull" xml:space="preserve">
-    <value>storageFileはnullです</value>
+    <value>storageFile は null です</value>
   </data>
   <data name="GamePage_UnableToChangePreset" xml:space="preserve">
-    <value>プリセットを変更出来ません。詳細については、エラーログをご確認下さい</value>
+    <value>プリセットを変更できません。詳細については、エラーログを参照してください。</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
-    <value>カバーとして使用するには、1つのファイルのみをドラッグ出来ます</value>
+    <value>カバー画像には、1 つのファイルのみをドラッグして配置できます</value>
   </data>
   <data name="GamesPage_AddGame" xml:space="preserve">
     <value>ゲームを追加</value>
   </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
-    <value>同じライブラリ内のゲームをグループ化します</value>
+    <value>同じライブラリのゲームをグループ化</value>
   </data>
   <data name="GamesPage_Grouping" xml:space="preserve">
     <value>グループ化</value>
   </data>
   <data name="GamesPage_HideGamesWithNoSwappableItems" xml:space="preserve">
-    <value>交換可能なアイテムがないゲームを非表示にする</value>
+    <value>置き換え可能なアイテムがないゲームを非表示</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AddCoverErrorSingleFile" xml:space="preserve">
-    <value>カバーとして使用するには、1つのファイルのみをドラッグ出来ます</value>
+    <value>カバー画像には、1 つのファイルのみをドラッグして配置できます</value>
   </data>
   <data name="GamesPage_ManuallyAdding_AnotherNoteTitle" xml:space="preserve">
-    <value>手動でゲームを追加する際の注意点</value>
+    <value>ゲームを手動で追加する際の注意事項</value>
   </data>
   <data name="GamesPage_ManuallyAdding_CouldntAddError" xml:space="preserve">
-    <value>問題が発生した為、現在ゲームを追加出来ませんでした。この問題を報告して下さい</value>
+    <value>問題が発生したため、現時点ではゲームを追加できませんでした。この問題を報告してください。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_ErrorTitle" xml:space="preserve">
-    <value>ゲームを追加中にエラーが発生しました</value>
+    <value>ゲームの追加中にエラーが発生しました</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value>&lt;i&gt;ゲーム&lt;/i&gt; ディレクトリを選択する必要があります。
-&lt;i&gt;ゲーム&lt;/i&gt; フォルダーディレクトリではありません。&lt;br/&gt;&lt;br/&gt;
-例えば、ゲームが次のようなパスにある場合：&lt;br/&gt;&lt;b&gt;
-C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
-&lt;b&gt;MyFavGame&lt;/b&gt;ディレクトリを選択し、&lt;b&gt;MyGamesFolder&lt;/b&gt;ディレクトリは選択しません。</value>
+    <value>&lt;i&gt;games&lt;/i&gt; ディレクトリではなく、&lt;i&gt;game&lt;/i&gt; ディレクトリを選択する必要があります。&lt;br/&gt;&lt;br/&gt;例えば、ゲームが以下のフォルダーにある場合:&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;&lt;b&gt;MyGamesFolder&lt;/b&gt; ディレクトリではなく、&lt;b&gt;MyFavGame&lt;/b&gt; ディレクトリを選択します。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
-    <value>DLSS Swapperは、インストール済みのゲームライブラリからゲームを自動的に検出します。ゲームがリストに表示されない場合は、いくつかの設定が原因で表示されない可能性があります。以下の点を確認して下さい:
+    <value>DLSS Swapper は、インストール済みのゲームライブラリからゲームを自動的に検出します。もしゲームがリストに表示されない場合は、いくつかの設定がリストへの表示を妨げている可能性があります。以下の点をご確認ください。
 
-- ゲームリストのフィルターが「交換可能なアイテムがないゲームを非表示にする」に設定されていない事
-- 設定で特定のゲームライブラリが有効になっている
+- ゲームリストのフィルターが「置き換え可能なアイテムがないゲームを非表示」に設定されていないか
+- 設定で該当のゲームライブラリが有効になっているか
 
-これらの確認を行ってもゲームが表示されない場合は、バグの可能性があります。問題をご報告頂ければ幸いです。当社のGitHubリポジトリで報告頂ければ、修正を行い、今後のゲーム検出を改善できるよう努めます。</value>
+これらを確認してもゲームが表示されない場合は、バグの可能性があります。今後の検出精度向上と修正のため、GitHub リポジトリにて問題を報告していただければ幸いです。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteTitle" xml:space="preserve">
-    <value>手動でゲームを追加する際の注意事項</value>
+    <value>ゲームを手動で追加する際の注意事項</value>
   </data>
   <data name="GamesPage_ManuallyAdding_PathExistsTemplate" xml:space="preserve">
-    <value>インストールパス "{0}" は既に存在する為、再度追加出来ません</value>
+    <value>インストールパス「{0}」はすでに存在しており、再度追加することはできません。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_SelectGameFolder" xml:space="preserve">
-    <value>ゲームフォルダーを選択して下さい</value>
+    <value>ゲームフォルダーを選択</value>
   </data>
   <data name="GamesPage_ManuallyAdding_TopLevelDirectoryNotSupported" xml:space="preserve">
-    <value>最上位ディレクトリの追加はサポートされていません。ゲームのディレクトリのルートを追加して下さい</value>
+    <value>最上位ディレクトリの追加はサポートされていません。ゲームディレクトリのルートを追加してください。</value>
   </data>
   <data name="GamesPage_NewDlls" xml:space="preserve">
-    <value>新しいDLLファイル</value>
+    <value>新しい DLL</value>
   </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
-    <value>GitHubの新しい報告を作成</value>
+    <value>GitHub で新しい Issue を作成</value>
   </data>
   <data name="GamesPage_NewDlls_DiscoveredHelpUs" xml:space="preserve">
-    <value>ゲームを読み込む際に、DLSS Swapperマニフェストに存在しない新しいDLLが検出されました</value>
+    <value>ゲームのロード中に、DLSS Swapper マニフェストに存在しないいくつかの新しい DLL が検出されました。</value>
   </data>
   <data name="GamesPage_NewDlls_GitHubAccountRequired" xml:space="preserve">
-    <value>(GitHubアカウントが必要です)</value>
+    <value>（GitHub アカウントが必要です）</value>
   </data>
   <data name="GamesPage_NewDlls_IfButtonDoesntWorkTryHere" xml:space="preserve">
-    <value>ボタンが動作しない場合は、こちらを試して下さい</value>
+    <value>ボタンが機能しない場合は、こちらをお試しください。</value>
   </data>
   <data name="GamesPage_NewDlls_StepFourSubmitYourIssue" xml:space="preserve">
-    <value>ステップ4:問題を提出する</value>
+    <value>ステップ 4：Issue を送信</value>
   </data>
   <data name="GamesPage_NewDlls_StepOneCreateNewIssue" xml:space="preserve">
-    <value>ステップ1:新たな問題を作成する</value>
+    <value>ステップ 1：新しい Issue を作成</value>
   </data>
   <data name="GamesPage_NewDlls_StepThreeCopyBody" xml:space="preserve">
-    <value>ステップ3:本文をコピーする</value>
+    <value>ステップ 3：本文をコピー</value>
   </data>
   <data name="GamesPage_NewDlls_StepTwoCopyTitle" xml:space="preserve">
-    <value>ステップ2:タイトルをコピーする</value>
+    <value>ステップ 2：タイトルをコピー</value>
   </data>
   <data name="GamesPage_NewDlls_ThanksForHelping" xml:space="preserve">
-    <value>ご協力ありがとうございます</value>
+    <value>ご協力ありがとうございます！</value>
   </data>
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
-    <value>DLLを提出する必要はありません。提供された情報に基づいて、私達でDLLを特定致します</value>
+    <value>DLL を提出していただく必要はありません。ご提供いただいた情報をもとに、こちらで追跡・特定いたします。</value>
   </data>
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>新しいDLLファイルが検出されました</value>
+    <value>新しい DLL が見つかりました</value>
   </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
-    <value>ゲームの再読み込み</value>
+    <value>ゲームを再読み込み中</value>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
-    <value>非表示のゲームを表示する(起動時はデフォルトでオフ)</value>
+    <value>非表示のゲームを表示（起動時はデフォルトでオフ）</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>ゲーム</value>
   </data>
   <data name="GamesPage_ViewType" xml:space="preserve">
-    <value>表示タイプ</value>
+    <value>表示形式</value>
   </data>
   <data name="GamesPage_ViewType_GridView" xml:space="preserve">
     <value>グリッド表示</value>
@@ -461,7 +457,7 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>リスト表示</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
-    <value>このアプリは管理者権限で実行されています</value>
+    <value>このアプリは管理者として実行されています。</value>
   </data>
   <data name="General_Apply" xml:space="preserve">
     <value>適用</value>
@@ -479,7 +475,7 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>削除</value>
   </data>
   <data name="General_DontShowAgain" xml:space="preserve">
-    <value>再び表示しない</value>
+    <value>再度表示しない</value>
   </data>
   <data name="General_Download" xml:space="preserve">
     <value>ダウンロード</value>
@@ -494,16 +490,16 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>エラーメッセージ</value>
   </data>
   <data name="General_Export" xml:space="preserve">
-    <value>出力</value>
+    <value>エクスポート</value>
   </data>
   <data name="General_ExportAll" xml:space="preserve">
-    <value>全て出力</value>
+    <value>すべてエクスポート</value>
   </data>
   <data name="General_Failed" xml:space="preserve">
     <value>失敗しました</value>
   </data>
   <data name="General_FeatureNotSupportedWhenAdmin" xml:space="preserve">
-    <value>この機能は、アプリケーションを管理者権限で実行している場合、利用出来ません</value>
+    <value>この機能は、アプリを管理者として実行している場合は利用できません。</value>
   </data>
   <data name="General_Filter" xml:space="preserve">
     <value>フィルター</value>
@@ -512,13 +508,13 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>ヘルプ</value>
   </data>
   <data name="General_Hidden" xml:space="preserve">
-    <value>隠す</value>
+    <value>非表示</value>
   </data>
   <data name="General_Import" xml:space="preserve">
     <value>インポート</value>
   </data>
   <data name="General_Load" xml:space="preserve">
-    <value>読み込み</value>
+    <value>読み込む</value>
   </data>
   <data name="General_Loading" xml:space="preserve">
     <value>読み込み中</value>
@@ -530,19 +526,19 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>DLSS</value>
   </data>
   <data name="General_Name_DLSS_D" xml:space="preserve">
-    <value>DLSS Rayの再構成</value>
+    <value>DLSS レイ再構成</value>
   </data>
   <data name="General_Name_DLSS_G" xml:space="preserve">
-    <value>DLSSフレーム生成</value>
+    <value>DLSS フレーム生成</value>
   </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
-    <value>DLSSプリセット</value>
+    <value>DLSS プリセット</value>
   </data>
   <data name="General_Name_DLSSD_Preset" xml:space="preserve">
-    <value>DLSS RRプリセット</value>
+    <value>DLSS RR プリセット</value>
   </data>
   <data name="General_Name_DLSSG_Preset" xml:space="preserve">
-    <value>DLSS FGプリセット</value>
+    <value>DLSS FG プリセット</value>
   </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
@@ -560,19 +556,19 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>XeSS (DX11)</value>
   </data>
   <data name="General_Name_XeSS_FG" xml:space="preserve">
-    <value>XeSSフレーム生成</value>
+    <value>XeSS フレーム生成</value>
   </data>
   <data name="General_No" xml:space="preserve">
-    <value>No</value>
+    <value>いいえ</value>
   </data>
   <data name="General_None" xml:space="preserve">
     <value>なし</value>
   </data>
   <data name="General_NotFound" xml:space="preserve">
-    <value>見つかりません</value>
+    <value>見つかりませんでした</value>
   </data>
   <data name="General_NotSupported" xml:space="preserve">
-    <value>対応していません</value>
+    <value>サポートしていません</value>
   </data>
   <data name="General_Okay" xml:space="preserve">
     <value>OK</value>
@@ -581,22 +577,22 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>おっと</value>
   </data>
   <data name="General_OpenFolder" xml:space="preserve">
-    <value>フォルダを開く</value>
+    <value>フォルダーを開く</value>
   </data>
   <data name="General_OpenLogsDirectory" xml:space="preserve">
     <value>ログディレクトリを開く</value>
   </data>
   <data name="General_Optional" xml:space="preserve">
-    <value>(任意)</value>
+    <value>（任意）</value>
   </data>
   <data name="General_Options" xml:space="preserve">
     <value>設定</value>
   </data>
   <data name="General_Publish" xml:space="preserve">
-    <value>公開</value>
+    <value>提出</value>
   </data>
   <data name="General_Refresh" xml:space="preserve">
-    <value>リフレッシュ</value>
+    <value>更新</value>
   </data>
   <data name="General_Reload" xml:space="preserve">
     <value>再読み込み</value>
@@ -614,19 +610,19 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>検索</value>
   </data>
   <data name="General_Size" xml:space="preserve">
-    <value>容量</value>
+    <value>サイズ</value>
   </data>
   <data name="General_Sorry" xml:space="preserve">
     <value>申し訳ありません</value>
   </data>
   <data name="General_Status" xml:space="preserve">
-    <value>ステータス</value>
+    <value>状態</value>
   </data>
   <data name="General_Success" xml:space="preserve">
     <value>成功</value>
   </data>
   <data name="General_Swap" xml:space="preserve">
-    <value>切り替え</value>
+    <value>置き換え</value>
   </data>
   <data name="General_Unknown" xml:space="preserve">
     <value>不明</value>
@@ -641,22 +637,22 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>警告</value>
   </data>
   <data name="General_Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>はい</value>
   </data>
   <data name="GitHubUpdater_CouldNotRunInstaller" xml:space="preserve">
-    <value>現在、インストーラーを実行出来ませんでした。後ほど再度お試し頂くか、手動でアップデートをインストールして下さい。</value>
+    <value>現在、インストーラーを実行できませんでした。後で再試行するか、手動で更新をインストールしてください。</value>
   </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>現在、 {0} がインストールされています</value>
   </data>
   <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
-    <value>DLSS Swapperが更新されました</value>
+    <value>DLSS Swapper が更新されました</value>
   </data>
   <data name="GitHubUpdater_DownloadComplete_Title" xml:space="preserve">
     <value>ダウンロードが完了しました</value>
   </data>
   <data name="GitHubUpdater_DownloadingUpdate_Title" xml:space="preserve">
-    <value>更新をダウンロード中</value>
+    <value>更新をダウンロード中です</value>
   </data>
   <data name="GitHubUpdater_DownloadProgress" xml:space="preserve">
     <value>進捗</value>
@@ -665,109 +661,109 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>インストール</value>
   </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
-    <value>更新が利用可能</value>
+    <value>更新が利用可能です</value>
   </data>
   <data name="GitHubUpdater_UpdateDownloadFailed" xml:space="preserve">
-    <value>アップデートのダウンロードに失敗しました</value>
+    <value>更新をダウンロードできませんでした。</value>
   </data>
   <data name="GitHubUpdater_UpdateReadyToInstall" xml:space="preserve">
-    <value>アップデートのインストール準備が完了しました</value>
+    <value>更新のインストール準備が整いました。</value>
   </data>
   <data name="GitHubUpdater_Updating_Title" xml:space="preserve">
     <value>更新中</value>
   </data>
   <data name="GitHubUpdater_ViewUpdate" xml:space="preserve">
-    <value>更新を表示</value>
+    <value>更新内容を表示</value>
   </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
-    <value>既にダウンロード済みです</value>
+    <value>すでにダウンロードされています。</value>
   </data>
   <data name="LibraryPage_CouldNotImportFromDriver" xml:space="preserve">
-    <value>ドライバからインポートする DLL が見つかりませんでした</value>
+    <value>ドライバーからインポートする DLL が見つかりませんでした</value>
   </data>
   <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
-    <value>インポートされたDLLを正常に読み込めませんでした</value>
+    <value>インポートされた DLL を読み込めませんでした</value>
   </data>
   <data name="LibraryPage_CouldntDownload" xml:space="preserve">
-    <value>現在、ダウンロード出来ません</value>
+    <value>現在ダウンロードできません。</value>
   </data>
   <data name="LibraryPage_CouldntExportDll" xml:space="preserve">
-    <value>DLLの出力に失敗しました</value>
+    <value>DLL をエクスポートできませんでした。</value>
   </data>
   <data name="LibraryPage_DeleteDll" xml:space="preserve">
-    <value>DLLを削除</value>
+    <value>DLL を削除</value>
   </data>
   <data name="LibraryPage_DeleteDllVersionTemplate" xml:space="preserve">
-    <value>{0} v{1} を削除しますか?</value>
+    <value>{0} v{1} を削除しますか？</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_DownloadFileSize" xml:space="preserve">
-    <value>ダウンロードファイルの容量</value>
+    <value>ダウンロードファイルのサイズ</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_FileDescription" xml:space="preserve">
     <value>ファイルの説明</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_FileSize" xml:space="preserve">
-    <value>ファイルの容量</value>
+    <value>ファイルサイズ</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Hash" xml:space="preserve">
     <value>ハッシュ値</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalName" xml:space="preserve">
-    <value>内部名称</value>
+    <value>内部名</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_InternalNameExtra" xml:space="preserve">
-    <value>内部名称追加</value>
+    <value>内部名（拡張）</value>
   </data>
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>ラベル</value>
   </data>
   <data name="LibraryPage_DownloadedCount" xml:space="preserve">
-    <value>ダウンロード済み:</value>
+    <value>ダウンロード済み：</value>
   </data>
   <data name="LibraryPage_DownloadFromNVIDIA" xml:space="preserve">
-    <value>NVIDIAから入手</value>
+    <value>NVIDIA からダウンロード</value>
   </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
     <value>最新版をダウンロード</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Message" xml:space="preserve">
-    <value>{0} 件の新しいダウンロードを開始しました</value>
+    <value>{0} 件の新しいダウンロードを開始しました。</value>
   </data>
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
     <value>ダウンロードが開始されました</value>
   </data>
   <data name="LibraryPage_Error_NVIDIA_Downloading" xml:space="preserve">
-    <value>NVIDIAサーバーからファイル一覧を取得出来ませんでした。しばらくしてから再度お試し頂くか、DLSS Swapperの更新を確認して下さい。</value>
+    <value>NVIDIA サーバーからファイルリストを取得できませんでした。後ほど再試行するか、DLSS Swapper の更新を確認してください。</value>
   </data>
   <data name="LibraryPage_Error_NVIDIA_Importing" xml:space="preserve">
-    <value>NVIDIAサーバーからのインポートに失敗しました。しばらくしてから再度お試し頂くか、DLSS Swapperのアップデートをご確認下さい。</value>
+    <value>NVIDIA サーバーからインポートできませんでした。後ほど再試行するか、DLSS Swapper の更新を確認してください。</value>
   </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
-    <value>出力されたDLLファイル:</value>
+    <value>エクスポートされた DLL:</value>
   </data>
   <data name="LibraryPage_ExportedDLLsCount_Message" xml:space="preserve">
-    <value>{0} 個のDLLを出力しました</value>
+    <value>{0} 個の DLL をエクスポートしました</value>
   </data>
   <data name="LibraryPage_ExportedDllTemplate" xml:space="preserve">
-    <value>出力されたDLL {0}</value>
+    <value>DLL {0} をエクスポートしました。</value>
   </data>
   <data name="LibraryPage_Exporting" xml:space="preserve">
-    <value>出力中</value>
+    <value>エクスポート中</value>
   </data>
   <data name="LibraryPage_FetchingFileList" xml:space="preserve">
-    <value>ファイル一覧の取得</value>
+    <value>ファイルリストを取得中</value>
   </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
-    <value>ファイルが見つかりません</value>
+    <value>ファイルが見つかりませんでした。</value>
   </data>
   <data name="LibraryPage_Finished" xml:space="preserve">
-    <value>完了</value>
+    <value>完了しました</value>
   </data>
   <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
-    <value>既存のDLLレコードとしてインポートされました</value>
+    <value>既存の DLL レコードとしてインポートされました。</value>
   </data>
   <data name="LibraryPage_ImportedDLLs" xml:space="preserve">
-    <value>インポートされたDLL:</value>
+    <value>インポートされた DLL:</value>
   </data>
   <data name="LibraryPage_ImportFrom_DownloadFromServer" xml:space="preserve">
     <value>サーバーからダウンロード</value>
@@ -779,135 +775,135 @@ C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
     <value>ローカルファイルから</value>
   </data>
   <data name="LibraryPage_ImportFromNVIDIADriver" xml:space="preserve">
-    <value>NVIDIAドライバーからのインポート</value>
+    <value>NVIDIA ドライバーからインポート</value>
   </data>
   <data name="LibraryPage_Importing" xml:space="preserve">
     <value>インポート</value>
   </data>
   <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
-    <value>コンピュータのDLLを置き換える事は危険です。
+    <value>コンピュータ上の DLL を置き換えることは、危険を伴う可能性があります。
 
-ゲームに悪意のあるDLLを挿入する事は、LimeWireからダウンロードしたばかりのLinking_park_-_nUmB_mp3.exeを実行するのと同程度の危険性があります。
+ゲームに悪意のある DLL を仕込むことは、LimeWire からダウンロードしたばかりの「Linking_park_-_nUmB_mp3.exe」を実行するのと同じくらい危険な行為です。
 
-DLLは信頼できるソースからのみインポートして下さい</value>
+信頼できるソースからのみ、DLL をインポートしてください。</value>
   </data>
   <data name="LibraryPage_NoDLLsForExport_Message" xml:space="preserve">
-    <value>エクスポート用のDLLが見つかりませんでした</value>
+    <value>エクスポート対象の DLL が見つかりませんでした。</value>
   </data>
   <data name="LibraryPage_NoDllsToExport" xml:space="preserve">
-    <value>エクスポートするDLLの記録がありません</value>
+    <value>エクスポートする DLL レコードがありません。</value>
   </data>
   <data name="LibraryPage_NoNewDLLs_Message" xml:space="preserve">
-    <value>新しいDLLはダウンロードする必要がありませんでした</value>
+    <value>ダウンロードすべき新しい DLL はありませんでした。</value>
   </data>
   <data name="LibraryPage_NoNewDLLs_Title" xml:space="preserve">
-    <value>新しいDLLは追加されません</value>
+    <value>新しい DLL はありません</value>
   </data>
   <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
-    <value>処理済みDLL:</value>
+    <value>処理済みの DLL:</value>
   </data>
   <data name="LibraryPage_ProgressPercent" xml:space="preserve">
-    <value>進捗:</value>
+    <value>進捗：</value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
     <value>ライブラリ</value>
   </data>
   <data name="LibraryPage_UnableToDeleteRecord" xml:space="preserve">
-    <value>{0} 件の記録を削除出来ませんでした</value>
+    <value>{0} 件の記録を削除できませんでした。</value>
   </data>
   <data name="LibraryPage_UnableToUpdateDllRecord" xml:space="preserve">
-    <value>DLLの記録を更新出来ません</value>
+    <value>DLL の記録を更新できませんでした。</value>
   </data>
   <data name="LibraryPage_ZipDidNotContainAnyDlls" xml:space="preserve">
-    <value>ZipファイルにはDLLファイルが含まれていませんでした</value>
+    <value>Zip には DLL が含まれていませんでした。</value>
   </data>
   <data name="MainWindow_AttemptingManifestUpdate" xml:space="preserve">
     <value>更新を試行中</value>
   </data>
   <data name="MainWindow_DlssSwapperCloseDueToManifest" xml:space="preserve">
-    <value>DLSS Swapperはマニフェスト ファイルを読み込む事が出来ませんでした。その為、ソフトウェアを閉じています。</value>
+    <value>DLSS Swapper はマニフェストファイルを読み込めませんでした。プログラムを終了します。</value>
   </data>
   <data name="MainWindow_DlssSwapperMustClose" xml:space="preserve">
-    <value>DLSS Swapperを終了する必要があります</value>
+    <value>DLSS Swapper を終了する必要があります</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_GitHubIssues" xml:space="preserve">
-    <value>GitHubの報告</value>
+    <value>GitHub Issues</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_Message" xml:space="preserve">
-    <value>お使いのコンピュータ又はインターネットから manifest.jsonを読み込む事が出来ませんでした。
+    <value>お使いのコンピューターまたはインターネットから manifest.json を読み込めませんでした。
 
-この問題が解決しない場合は、GitHubの問題追跡システムに報告して下さい</value>
+同様の現象が続く場合は、GitHub の Issue トラッカーに報告してください。</value>
   </data>
   <data name="MainWindow_ManifestCouldNotBeLoaded_UpdateManifest" xml:space="preserve">
     <value>マニフェストを更新</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Message" xml:space="preserve">
-    <value>DLSSバージョンの切り替えは不正行為とはみなされませんが、ゲームディレクトリ内のファイルがゲームに付属のファイルと一致しない場合、一部の不正行為防止システムによって問題となる場合があります。
+    <value>DLSS のバージョンを変更すること自体は不正行為とはみなされませんが、ゲームのインストールフォルダー内のファイルが配布時のものと異なっていると、一部のアンチチートシステムでは問題視される可能性があります。
 
-その為、マルチプレイヤーゲームでは注意してご利用頂く事をお勧めします</value>
+そのため、マルチプレイヤーゲームをプレイする際は十分にご注意いただくことをお勧めします。</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>マルチプレイヤーゲームに関する注意事項</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
-    <value>まだ動作しません</value>
+    <value>動作しません</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterWorks" xml:space="preserve">
-    <value>動作します</value>
+    <value>動作します！</value>
   </data>
   <data name="NetworkTesterPage_BrowserTestTitle" xml:space="preserve">
-    <value>ブラウザテスト</value>
+    <value>ブラウザーテスト</value>
   </data>
   <data name="NetworkTesterPage_CancelCurrentTest" xml:space="preserve">
     <value>現在のテストを中止</value>
   </data>
   <data name="NetworkTesterPage_CopyTestResults" xml:space="preserve">
-    <value>テスト結果のコピー</value>
+    <value>テスト結果をコピー</value>
   </data>
   <data name="NetworkTesterPage_CreateBugReport" xml:space="preserve">
     <value>バグ報告を作成</value>
   </data>
   <data name="NetworkTesterPage_CustomUserAgentTest" xml:space="preserve">
-    <value>カスタムユーザーエージェントテスト</value>
+    <value>カスタムユーザーエージェントのテスト</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest10Title" xml:space="preserve">
-    <value>DLSS Swapper内でカスタム ユーザー エージェントを使用してDLSS Swapper DLLをダウンロードする</value>
+    <value>DLSS Swapper 内で、カスタムユーザーエージェントを使用して DLSS Swapper DLL をダウンロードします</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest11Title" xml:space="preserve">
-    <value>UploadThingミラーからDLSS DLLをダウンロードする</value>
+    <value>UploadThing ミラーから DLSS DLL をダウンロードします</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest1Title" xml:space="preserve">
-    <value>DLSS Swapper内からgoogle.comにアクセスする(一般的なインターネット接続を確認する)</value>
+    <value>DLSS Swapper 内から google.com にアクセスします（一般的なインターネット接続を確認します）</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest2Title" xml:space="preserve">
-    <value>DLSS Swapper内からbing.comにアクセスする(一般的なインターネット接続を確認する)</value>
+    <value>DLSS Swapper 内から bing.com にアクセスします（一般的なインターネット接続を確認します）</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest3Title" xml:space="preserve">
-    <value>DLSS Swapper内でDLSS Swapper DLLをダウンロードする</value>
+    <value>DLSS Swapper 内で DLSS Swapper DLL をダウンロードします</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest4Title" xml:space="preserve">
-    <value>ブラウザからDLSS Swapper DLLをダウンロードする</value>
+    <value>ブラウザーから DLSS Swapper DLL をダウンロードします</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest5Title" xml:space="preserve">
-    <value>Steamからゲームカバーをダウンロードする</value>
+    <value>Steam からゲームのカバー画像をダウンロードします</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest6Title" xml:space="preserve">
-    <value>Epic Games Storeからゲームカバーをダウンロードする</value>
+    <value>Epic Games Store からゲームのカバー画像をダウンロードします</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest7Title" xml:space="preserve">
-    <value>DLSS Swapperファイルサーバーからゲームカバーをダウンロードする</value>
+    <value>DLSS Swapper ファイルサーバーからゲームのカバー画像をダウンロードします</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest8Title" xml:space="preserve">
-    <value>代替のDLSS Swapperファイルサーバーからゲームカバーをダウンロードする</value>
+    <value>代替の DLSS Swapper ファイルサーバーからゲームのカバー画像をダウンロードします</value>
   </data>
   <data name="NetworkTesterPage_DiagnosticsTest9Title" xml:space="preserve">
-    <value>DLSS Swapperファイル サーバーのDNS解決</value>
+    <value>DLSS Swapper ファイルサーバーの DNS 検索</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowser" xml:space="preserve">
-    <value>ブラウザで開く</value>
+    <value>ブラウザーで開く</value>
   </data>
   <data name="NetworkTesterPage_OpenInBrowserInfo" xml:space="preserve">
-    <value>ブラウザで開くボタンをクリックするか、以下のリンクをブラウザにコピーして貼り付けて下さい。ブラウザでファイルをダウンロードされますか?</value>
+    <value>「ブラウザーで開く」ボタンをクリックするか、以下のリンクをコピーしてブラウザーに貼り付けてください。ブラウザーでファイルがダウンロードされますか？</value>
   </data>
   <data name="NetworkTesterPage_Results" xml:space="preserve">
     <value>結果</value>
@@ -916,7 +912,7 @@ DLLは信頼できるソースからのみインポートして下さい</value>
     <value>テストを実行</value>
   </data>
   <data name="NetworkTesterPage_UseUserAgentInfo" xml:space="preserve">
-    <value>提供されているユーザーエージェントを使用するか、お好みのカスタムユーザーエージェントを入力して下さい</value>
+    <value>提供されているユーザーエージェントを使用するか、任意のユーザーエージェントを入力してください。</value>
   </data>
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>ネットワーク診断ツール</value>
@@ -928,7 +924,7 @@ DLLは信頼できるソースからのみインポートして下さい</value>
     <value>サーバー</value>
   </data>
   <data name="ProxySettings_ServerPrefixWarning" xml:space="preserve">
-    <value>プロキシサーバーのURLが有効であり、http:// 又は https:// で始まることを確認して下さい</value>
+    <value>プロキシサーバーの URL が有効であり、http:// または https:// で始まっていることを確認してください</value>
   </data>
   <data name="ProxySettings_UseAuthentication" xml:space="preserve">
     <value>認証を使用</value>
@@ -940,7 +936,7 @@ DLLは信頼できるソースからのみインポートして下さい</value>
     <value>ユーザー名</value>
   </data>
   <data name="ProxySettings_WarningMessage" xml:space="preserve">
-    <value>プロキシ設定のセキュリティを確保する為、これらの設定は Windows の資格情報マネージャーに保存されます。これにより、「ポータブル」アプリのポータビリティが損なわれてしまいます。</value>
+    <value>プロキシ設定を安全に保つため、それらの設定は Windows の「資格情報マネージャー」に保存されます。そのため、「ポータブル」アプリとしての可搬性が損なわれることになります。</value>
   </data>
   <data name="SettingsPage_About" xml:space="preserve">
     <value>概要</value>
@@ -949,34 +945,34 @@ DLLは信頼できるソースからのみインポートして下さい</value>
     <value>無視するパスを追加</value>
   </data>
   <data name="SettingsPage_AllowDebugDlls" xml:space="preserve">
-    <value>デバッグDLLの使用を許可</value>
+    <value>デバッグ DLL の使用を許可</value>
   </data>
   <data name="SettingsPage_AllowDebugDllsInfo" xml:space="preserve">
-    <value>SDKは、画面上に追加の情報を表示出来るようにするデバッグ用DLLをリリースする事があります</value>
+    <value>SDK によっては、画面上に追加情報を表示できるデバッグ用 DLL がリリースされることがあります。</value>
   </data>
   <data name="SettingsPage_AllowUntrustedInfo" xml:space="preserve">
-    <value>DLLは、ゲームフォルダに切り替える前に、Windowsで署名検証を行って信頼性があるかどうかが確認されます。DLLが署名検証に失敗した場合、そのDLLは使用されません。この設定はオフのままにしておく事をお勧めします</value>
+    <value>ゲームフォルダに DLLを置き換える際、Windows による署名検証が行われ、その DLL が信頼できるものかどうかが確認されます。署名検証に失敗した DLL は使用されません。この機能は無効にしておくことをお勧めします。</value>
   </data>
   <data name="SettingsPage_AppliesOnlyToDllPickerNotLibrary" xml:space="preserve">
-    <value>これはDLL選択ツールにのみ適用され、ライブラリページには適用されません</value>
+    <value>これは DLL ピッカーにのみ適用され、ライブラリページには適用されません。</value>
   </data>
   <data name="SettingsPage_BuildCommit" xml:space="preserve">
     <value>ビルドコミット</value>
   </data>
   <data name="SettingsPage_BuildDate" xml:space="preserve">
-    <value>ビルド日</value>
+    <value>ビルド日時</value>
   </data>
   <data name="SettingsPage_CouldNotOpenLogFileTryManual" xml:space="preserve">
-    <value>DLSS Swapperから直接ログファイルを開く事ができませんでした。手動で開いてみて下さい</value>
+    <value>DLSS Swapper から直接ログファイルを開くことができませんでした。手動で開いてみてください。</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathMessage" xml:space="preserve">
-    <value>無視されたパス {0} を削除してもよろしいですか?</value>
+    <value>無視されているパス {0} を削除してもよろしいですか？</value>
   </data>
   <data name="SettingsPage_DeleteIgnoredPathTitle" xml:space="preserve">
-    <value>無視されたパスを削除</value>
+    <value>無視されているパスを削除</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions" xml:space="preserve">
-    <value>DLSS開発者向け設定</value>
+    <value>DLSS 開発者向け設定</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_EnableLoggingToConsoleWindow" xml:space="preserve">
     <value>コンソールウィンドウへのログ出力を有効にする</value>
@@ -985,28 +981,28 @@ DLLは信頼できるソースからのみインポートして下さい</value>
     <value>ファイルへのログ記録を有効にする</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForAllDlssDlls" xml:space="preserve">
-    <value>全てのDLSS DLLで有効化されています</value>
+    <value>すべての DLSS DLL で有効化</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_IndicatorEnabledForDebugDlssDllOnly" xml:space="preserve">
-    <value>デバッグ用DLSS DLLのみ有効化されています</value>
+    <value>デバッグ用 DLSS SLL のみ有効化</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_ShowOnScreenIndicator" xml:space="preserve">
-    <value>画面に表示するインジケーターを表示</value>
+    <value>画面表示インジケーターの表示</value>
   </data>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>詳細なログ記録</value>
   </data>
   <data name="SettingsPage_DLSSDOptions_GlobalPreset" xml:space="preserve">
-    <value>Ray再構成既定プリセット</value>
+    <value>グローバルレイ再構成プリセット</value>
   </data>
   <data name="SettingsPage_DLSSGOptions_GlobalPreset" xml:space="preserve">
-    <value>フレーム生成既定プリセット</value>
+    <value>グローバルフレーム生成プリセット</value>
   </data>
   <data name="SettingsPage_DLSSOptions" xml:space="preserve">
-    <value>DLSS設定</value>
+    <value>DLSS 設定</value>
   </data>
   <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
-    <value>既定プリセット</value>
+    <value>グローバルプリセット</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>ゲームライブラリ</value>
@@ -1018,7 +1014,7 @@ DLLは信頼できるソースからのみインポートして下さい</value>
     <value>フィードバックを送信</value>
   </data>
   <data name="SettingsPage_GiveFeedbackInfo" xml:space="preserve">
-    <value>機能の提案や問題の報告は、DLSS Swapperで行う事が出来ます</value>
+    <value>DLSS Swapper に関する機能の提案や問題の報告を行うことができます</value>
   </data>
   <data name="SettingsPage_IgnoredPaths" xml:space="preserve">
     <value>無視されたパス</value>
@@ -1027,34 +1023,34 @@ DLLは信頼できるソースからのみインポートして下さい</value>
     <value>言語</value>
   </data>
   <data name="SettingsPage_LibraryDisabled" xml:space="preserve">
-    <value>{0} 無効</value>
+    <value>{0} は無効です</value>
   </data>
   <data name="SettingsPage_LibraryEnabled" xml:space="preserve">
-    <value>{0} 有効</value>
+    <value>{0} は有効です</value>
   </data>
   <data name="SettingsPage_Logging" xml:space="preserve">
     <value>ログ記録</value>
   </data>
   <data name="SettingsPage_Logging_Debug" xml:space="preserve">
-    <value>デバック</value>
+    <value>Debug</value>
   </data>
   <data name="SettingsPage_Logging_Error" xml:space="preserve">
-    <value>エラー</value>
+    <value>Error</value>
   </data>
   <data name="SettingsPage_Logging_Info" xml:space="preserve">
-    <value>情報</value>
+    <value>Info</value>
   </data>
   <data name="SettingsPage_Logging_Off" xml:space="preserve">
-    <value>オフ</value>
+    <value>Off</value>
   </data>
   <data name="SettingsPage_Logging_Verbose" xml:space="preserve">
-    <value>冗長</value>
+    <value>Verbose</value>
   </data>
   <data name="SettingsPage_Logging_Warning" xml:space="preserve">
-    <value>警告</value>
+    <value>Warning</value>
   </data>
   <data name="SettingsPage_Networking" xml:space="preserve">
-    <value>ネットワーク形成</value>
+    <value>ネットワーク</value>
   </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>新しい更新は現在ありません</value>
@@ -1072,19 +1068,19 @@ DLLは信頼できるソースからのみインポートして下さい</value>
     <value>翻訳ツールボックスを開く</value>
   </data>
   <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
-    <value>パス {0} は既に無視されています</value>
+    <value>パス {0} はすでに無視されています。</value>
   </data>
   <data name="SettingsPage_ProxySettings" xml:space="preserve">
     <value>プロキシ設定</value>
   </data>
   <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
-    <value>信頼できない物を許可</value>
+    <value>信頼できないものを許可</value>
   </data>
   <data name="SettingsPage_SettingsCheckForUpdates" xml:space="preserve">
     <value>更新を確認</value>
   </data>
   <data name="SettingsPage_ShowOnlyDownloadedDlls" xml:space="preserve">
-    <value>ダウンロード済みのDLLのみを表示</value>
+    <value>ダウンロード済みの DLL のみ表示</value>
   </data>
   <data name="SettingsPage_ThemeDark" xml:space="preserve">
     <value>ダーク</value>
@@ -1108,7 +1104,7 @@ DLLは信頼できるソースからのみインポートして下さい</value>
     <value>現在のログファイルは</value>
   </data>
   <data name="TranslationToolboxPage_AdminError" xml:space="preserve">
-    <value>管理者権限で実行中の間は、翻訳ツールを使用出来ません。アプリケーションを再起動して下さい</value>
+    <value>管理者として実行中は、翻訳ツールを使用できません。アプリを再起動してください。</value>
   </data>
   <data name="TranslationToolboxPage_Comment" xml:space="preserve">
     <value>コメント</value>
@@ -1120,55 +1116,55 @@ DLLは信頼できるソースからのみインポートして下さい</value>
     <value>キー</value>
   </data>
   <data name="TranslationToolboxPage_LoadExistingTranslation" xml:space="preserve">
-    <value>既存のデータを読み込み</value>
+    <value>既存の翻訳を読み込む</value>
   </data>
   <data name="TranslationToolboxPage_LoadFailedMessage" xml:space="preserve">
-    <value>翻訳を読み込めませんでした。詳細についてはエラーログをご確認下さい</value>
+    <value>翻訳を読み込めませんでした。詳細については、エラーログをご確認ください。</value>
   </data>
   <data name="TranslationToolboxPage_NewTranslation" xml:space="preserve">
     <value>新しい翻訳</value>
   </data>
   <data name="TranslationToolboxPage_NoDataToPublish" xml:space="preserve">
-    <value>公開する為の翻訳データが見つかりませんでした</value>
+    <value>公開する翻訳データが見つかりませんでした。</value>
   </data>
   <data name="TranslationToolboxPage_NoDataToSave" xml:space="preserve">
-    <value>翻訳データが見つからなかった為、保存出来ませんでした</value>
+    <value>保存する翻訳データが見つかりませんでした。</value>
   </data>
   <data name="TranslationToolboxPage_NotValidTranslationFile" xml:space="preserve">
-    <value>有効なDLSS Swapper翻訳ファイルではありません</value>
+    <value>有効な DLSS Swapper 翻訳ファイルではありません。</value>
   </data>
   <data name="TranslationToolboxPage_PublishFailedMessage" xml:space="preserve">
-    <value>翻訳の公開に失敗しました。詳細についてはエラーログをご確認下さい</value>
+    <value>翻訳を公開できませんでした。詳細については、エラーログをご確認ください。</value>
   </data>
   <data name="TranslationToolboxPage_ReloadApp" xml:space="preserve">
     <value>アプリを再読み込み</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressButton" xml:space="preserve">
-    <value>初期化して再開</value>
+    <value>リセットして続行</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressMessage" xml:space="preserve">
-    <value>現在の翻訳の進捗が初期化されます。本当に続行しますか?</value>
+    <value>これにより、現在の翻訳の進捗状況がリセットされます。続行してもよろしいですか？</value>
   </data>
   <data name="TranslationToolboxPage_ResetProgressTitle" xml:space="preserve">
-    <value>進行状況を初期化して再開しますか?</value>
+    <value>進捗状況をリセットして続行しますか？</value>
   </data>
   <data name="TranslationToolboxPage_SaveFailedMessage" xml:space="preserve">
-    <value>翻訳を保存出来ませんでした。詳細については、エラーログをご確認下さい</value>
+    <value>翻訳を保存できませんでした。詳細については、エラーログをご確認ください。</value>
   </data>
   <data name="TranslationToolboxPage_SelectLanguageToLoad" xml:space="preserve">
     <value>言語を選択して読み込む</value>
   </data>
   <data name="TranslationToolboxPage_SourceLanguage" xml:space="preserve">
-    <value>ソース言語</value>
+    <value>原文の言語</value>
   </data>
   <data name="TranslationToolboxPage_SourceTranslation" xml:space="preserve">
-    <value>原文翻訳</value>
+    <value>元の翻訳</value>
   </data>
   <data name="TranslationToolboxPage_TranslationGuideButton" xml:space="preserve">
     <value>翻訳ガイド</value>
   </data>
   <data name="TranslationToolboxPage_TranslationGuideMessage" xml:space="preserve">
-    <value>翻訳が完了しました。{0} の次に何をすべきかについては、DLSS Swapper翻訳ガイドをご確認下さい</value>
+    <value>翻訳が完了しました。{0} に関する今後の手順については、DLSS Swapper の翻訳ガイドをご確認ください。</value>
   </data>
   <data name="TranslationToolboxPage_TranslationProgress" xml:space="preserve">
     <value>翻訳の進捗状況</value>
@@ -1177,7 +1173,7 @@ DLLは信頼できるソースからのみインポートして下さい</value>
     <value>保存せずに閉じる</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesMessage" xml:space="preserve">
-    <value>未保存の翻訳変更がある可能性があります。このウィンドウを閉じると、これらの変更が失われます</value>
+    <value>保存されていない翻訳の変更がある可能性があります。このウィンドウを閉じると、それらの変更は失われます。</value>
   </data>
   <data name="TranslationToolboxPage_UnsavedChangesTitle" xml:space="preserve">
     <value>保存されていない翻訳の変更</value>

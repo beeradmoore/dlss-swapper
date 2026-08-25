@@ -190,7 +190,7 @@ internal partial class NVAPIHelper : ObservableObject
                 new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter_Deprecated", "C"), 0x00000003),
                 new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "D"), 0x00000004),
                 new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "E"), 0x00000005),
-                //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "F"), 0x00000006),
+                new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "F"), 0x00000006),
                 // new DlssPresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "G"), 0x00000007),
                 // new DlssPresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "H"), 0x00000008),
                 // new DlssPresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "I"), 0x00000009),
@@ -316,7 +316,7 @@ internal partial class NVAPIHelper : ObservableObject
             return game.DriverSettingsProfile;
         }
 
-        // If this is directly accessed from the cached profiles list it there. 
+        // If this is directly accessed from the cached profiles list it there.
         if (_cachedProfiles.TryGetValue(game.Title, out var exactProfile))
         {
             game.DriverSettingsProfile = exactProfile;
@@ -338,7 +338,7 @@ internal partial class NVAPIHelper : ObservableObject
             {
                 if (executables.Contains(application.ApplicationName, StringComparer.OrdinalIgnoreCase))
                 {
-                    // If matched, cache 
+                    // If matched, cache
                     game.DriverSettingsProfile = possibleProfile;
                     return possibleProfile;
                 }

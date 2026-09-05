@@ -159,17 +159,40 @@ public class GameAsset : IEquatable<GameAsset>
             GameAssetType.DLSS => GameAssetType.DLSS_BACKUP,
             GameAssetType.DLSS_G => GameAssetType.DLSS_G_BACKUP,
             GameAssetType.DLSS_D => GameAssetType.DLSS_D_BACKUP,
+            GameAssetType.DLSS_NR => GameAssetType.DLSS_NR_BACKUP,
             GameAssetType.FSR_31_DX12 => GameAssetType.FSR_31_DX12_BACKUP,
             GameAssetType.FSR_31_VK => GameAssetType.FSR_31_VK_BACKUP,
             GameAssetType.XeSS => GameAssetType.XeSS_BACKUP,
             GameAssetType.XeLL => GameAssetType.XeLL_BACKUP,
             GameAssetType.XeSS_FG => GameAssetType.XeSS_FG_BACKUP,
             GameAssetType.XeSS_DX11 => GameAssetType.XeSS_DX11_BACKUP,
+            GameAssetType.DirectStorage => GameAssetType.DirectStorage_BACKUP,
+            GameAssetType.DirectStorageCore => GameAssetType.DirectStorageCore_BACKUP,
+            GameAssetType.FidelityFX_SDK2_Denoiser_DX12 => GameAssetType.FidelityFX_SDK2_Denoiser_DX12_BACKUP,
+            GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12 => GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12_BACKUP,
+            GameAssetType.FidelityFX_SDK2_Loader_DX12 => GameAssetType.FidelityFX_SDK2_Loader_DX12_BACKUP,
+            GameAssetType.FidelityFX_SDK2_RadianceCache_DX12 => GameAssetType.FidelityFX_SDK2_RadianceCache_DX12_BACKUP,
+            GameAssetType.FidelityFX_SDK2_Upscaler_DX12 => GameAssetType.FidelityFX_SDK2_Upscaler_DX12_BACKUP,
+            GameAssetType.Streamline_Reflex => GameAssetType.Streamline_Reflex_BACKUP,
+            GameAssetType.Streamline_PCL => GameAssetType.Streamline_PCL_BACKUP,
+            GameAssetType.Streamline_NvPerf => GameAssetType.Streamline_NvPerf_BACKUP,
+            GameAssetType.Streamline_NIS => GameAssetType.Streamline_NIS_BACKUP,
+            GameAssetType.Streamline_Interposer => GameAssetType.Streamline_Interposer_BACKUP,
+            GameAssetType.Streamline_DLSS_G => GameAssetType.Streamline_DLSS_G_BACKUP,
+            GameAssetType.Streamline_DLSS_D => GameAssetType.Streamline_DLSS_D_BACKUP,
+            GameAssetType.Streamline_DLSS => GameAssetType.Streamline_DLSS_BACKUP,
+            GameAssetType.Streamline_DirectSR => GameAssetType.Streamline_DirectSR_BACKUP,
+            GameAssetType.Streamline_DeepDVC => GameAssetType.Streamline_DeepDVC_BACKUP,
+            GameAssetType.Streamline_Common => GameAssetType.Streamline_Common_BACKUP,
+            GameAssetType.DeepDVC => GameAssetType.DeepDVC_BACKUP,
+            GameAssetType.NvLowLatencyVK => GameAssetType.NvLowLatencyVK_BACKUP,
             _ => GameAssetType.Unknown
         };
 
         if (backypType == GameAssetType.Unknown)
         {
+            Logger.Error($"Unkown GameAssetType backup found for {AssetType}");
+            Debugger.Break();
             return null;
         }
 

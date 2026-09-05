@@ -10,11 +10,45 @@ using System.Threading.Tasks;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Helpers.FSR31;
+using Serilog;
 
 namespace DLSS_Swapper.Data;
 
 public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
 {
+    public const string DLSS = "dlss";
+    public const string DLSS_D = "dlss_d";
+    public const string DLSS_G = "dlss_g";
+    public const string DLSS_NR = "dlss_nr";
+    public const string FSR_31_DX12 = "fsr_31_dx12";
+    public const string FSR_31_VK = "fsr_31_vk";
+    public const string XeSS = "xess";
+    public const string XeLL = "xell";
+    public const string XeSS_FG = "xess_fg";
+    public const string XeSS_DX11 = "xess_dx11";
+    public const string DirectStorage = "directstorage";
+    public const string DirectStorageCore = "directstorage_core";
+    public const string FidelityFX_SDK2_Denoiser_DX12 = "fidelityfx_sdk2_denoiser_dx12";
+    public const string FidelityFX_SDK2_FrameGeneration_DX12 = "fidelityfx_sdk2_framegeneration_dx12";
+    public const string FidelityFX_SDK2_Loader_DX12 = "fidelityfx_sdk2_loader_dx12";
+    public const string FidelityFX_SDK2_RadianceCache_DX12 = "fidelityfx_sdk2_radiancecache_dx12";
+    public const string FidelityFX_SDK2_Upscaler_DX12 = "fidelityfx_sdk2_upscaler_dx12";
+    public const string Streamline_Reflex = "sl_reflex";
+    public const string Streamline_PCL = "sl_pcl";
+    public const string Streamline_NvPerf = "sl_nvperf";
+    public const string Streamline_NIS = "sl_nis";
+    public const string Streamline_Interposer = "sl_interposer";
+    public const string Streamline_DLSS_G = "sl_dlss_g";
+    public const string Streamline_DLSS_D = "sl_dlss_d";
+    public const string Streamline_DLSS = "sl_dlss";
+    public const string Streamline_DirectSR = "sl_directsr";
+    public const string Streamline_DeepDVC = "sl_deepdvc";
+    public const string Streamline_Common = "sl_common";
+    public const string DeepDVC = "deepdvc";
+    public const string NvLowLatencyVK = "nvlowlatencyvk";
+
+
+
     [JsonPropertyName("version")]
     public string Version { get; set; } = string.Empty;
 
@@ -364,19 +398,48 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
     internal string GetRecordSimpleType()
     {
         // NOTE: DLL type
-        return AssetType switch
+        var result = AssetType switch
         {
-            GameAssetType.DLSS => "dlss",
-            GameAssetType.DLSS_G => "dlss_g",
-            GameAssetType.DLSS_D => "dlss_d",
-            GameAssetType.FSR_31_DX12 => "fsr_31_dx12",
-            GameAssetType.FSR_31_VK => "fsr_31_vk",
-            GameAssetType.XeSS => "xess",
-            GameAssetType.XeLL => "xell",
-            GameAssetType.XeSS_DX11 => "xess_dx11",
-            GameAssetType.XeSS_FG => "xess_fg",
+            GameAssetType.DLSS => DLSS,
+            GameAssetType.DLSS_G => DLSS_G,
+            GameAssetType.DLSS_D => DLSS_D,
+            GameAssetType.DLSS_NR => DLSS_NR,
+            GameAssetType.FSR_31_DX12 => FSR_31_DX12,
+            GameAssetType.FSR_31_VK => FSR_31_VK,
+            GameAssetType.XeSS => XeSS,
+            GameAssetType.XeLL => XeLL,
+            GameAssetType.XeSS_DX11 => XeSS_DX11,
+            GameAssetType.XeSS_FG => XeSS_FG,
+            GameAssetType.DirectStorage => DirectStorage,
+            GameAssetType.DirectStorageCore => DirectStorageCore,
+            GameAssetType.FidelityFX_SDK2_Denoiser_DX12 => FidelityFX_SDK2_Denoiser_DX12,
+            GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12 => FidelityFX_SDK2_FrameGeneration_DX12,
+            GameAssetType.FidelityFX_SDK2_Loader_DX12 => FidelityFX_SDK2_Loader_DX12,
+            GameAssetType.FidelityFX_SDK2_RadianceCache_DX12 => FidelityFX_SDK2_RadianceCache_DX12,
+            GameAssetType.FidelityFX_SDK2_Upscaler_DX12 => FidelityFX_SDK2_Upscaler_DX12,
+            GameAssetType.Streamline_Reflex => Streamline_Reflex,
+            GameAssetType.Streamline_PCL => Streamline_PCL,
+            GameAssetType.Streamline_NvPerf => Streamline_NvPerf,
+            GameAssetType.Streamline_NIS => Streamline_NIS,
+            GameAssetType.Streamline_Interposer => Streamline_Interposer,
+            GameAssetType.Streamline_DLSS_G => Streamline_DLSS_G,
+            GameAssetType.Streamline_DLSS_D => Streamline_DLSS_D,
+            GameAssetType.Streamline_DLSS => Streamline_DLSS,
+            GameAssetType.Streamline_DirectSR => Streamline_DirectSR,
+            GameAssetType.Streamline_DeepDVC => Streamline_DeepDVC,
+            GameAssetType.Streamline_Common => Streamline_Common,
+            GameAssetType.DeepDVC => DeepDVC,
+            GameAssetType.NvLowLatencyVK => NvLowLatencyVK,
             _ => string.Empty,
         };
+
+        if (string.IsNullOrWhiteSpace(result))
+        {
+            Logger.Error($"Could not match GameAssetType for {AssetType}");
+            Debugger.Break();
+        }
+
+        return result;
     }
 
     internal void CopyFrom(DLLRecord newDllRecord)

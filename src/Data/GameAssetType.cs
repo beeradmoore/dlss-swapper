@@ -42,6 +42,7 @@ public enum GameAssetType
     DeepDVC = 55,
     NvLowLatencyVK = 57,
     DLSS_NR = 59,
+    Streamline_DLSS_NR = 61,
 
     // Backup
 
@@ -81,4 +82,5 @@ public enum GameAssetType
     DeepDVC_BACKUP = 56,
     NvLowLatencyVK_BACKUP = 58,
     DLSS_NR_BACKUP = 60,
+    Streamline_DLSS_NR_BACKUP = 62,
 }

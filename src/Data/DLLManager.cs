@@ -675,296 +675,62 @@ internal class DLLManager
     {
         // NOTE: DLL type
         // For each asset type first check if is in the DLSS Swapper manifest
-        if (gameAsset.AssetType == GameAssetType.DLSS || gameAsset.AssetType == GameAssetType.DLSS_BACKUP)
+        var recordList = gameAsset.AssetType switch
         {
-            if (DLSSRecords.Any(x => gameAsset.Hash.Equals(x.MD5Hash, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                return true;
-            }
+            GameAssetType.DLSS or GameAssetType.DLSS_BACKUP => DLSSRecords,
+            GameAssetType.DLSS_D or GameAssetType.DLSS_D_BACKUP => DLSSDRecords,
+            GameAssetType.DLSS_G or GameAssetType.DLSS_G_BACKUP => DLSSGRecords,
+            GameAssetType.FSR_31_DX12 or GameAssetType.FSR_31_DX12_BACKUP => FSR31DX12Records,
+            GameAssetType.FSR_31_VK or GameAssetType.FSR_31_VK_BACKUP => FSR31VKRecords,
+            GameAssetType.XeSS or GameAssetType.XeSS_BACKUP => XeSSRecords,
+            GameAssetType.XeLL or GameAssetType.XeLL_BACKUP => XeLLRecords,
+            GameAssetType.XeSS_FG or GameAssetType.XeSS_FG_BACKUP => XeSSFGRecords,
+            GameAssetType.XeSS_DX11 or GameAssetType.XeSS_DX11_BACKUP => XeSSDX11Records,
+            _ => new ObservableCollection<DLLRecord>(),
+        };
 
-            HashedKnownDLL? hashedKnownDLL = null;
-            _knownDLLsReadWriterLock.EnterReadLock();
-            try
-            {
-                hashedKnownDLL = KnownDLLs.DLSS.FirstOrDefault(x => gameAsset.Hash.Equals(x.Hash, StringComparison.InvariantCultureIgnoreCase));
-            }
-            finally
-            {
-                _knownDLLsReadWriterLock.ExitReadLock();
-            }
+        var knownDllList = gameAsset.AssetType switch
+        {
+            GameAssetType.DLSS or GameAssetType.DLSS_BACKUP => KnownDLLs.DLSS,
+            GameAssetType.DLSS_D or GameAssetType.DLSS_D_BACKUP => KnownDLLs.DLSS_D,
+            GameAssetType.DLSS_G or GameAssetType.DLSS_G_BACKUP => KnownDLLs.DLSS_G,
+            GameAssetType.FSR_31_DX12 or GameAssetType.FSR_31_DX12_BACKUP => KnownDLLs.FSR_31_DX12,
+            GameAssetType.FSR_31_VK or GameAssetType.FSR_31_VK_BACKUP => KnownDLLs.FSR_31_VK,
+            GameAssetType.XeSS or GameAssetType.XeSS_BACKUP => KnownDLLs.XeSS,
+            GameAssetType.XeLL or GameAssetType.XeLL_BACKUP => KnownDLLs.XeLL,
+            GameAssetType.XeSS_FG or GameAssetType.XeSS_FG_BACKUP => KnownDLLs.XeSS_FG,
+            GameAssetType.XeSS_DX11 or GameAssetType.XeSS_DX11_BACKUP => KnownDLLs.XeSS_DX11,
+            _ => new List<HashedKnownDLL>(),
+        };
 
-            if (hashedKnownDLL is null)
-            {
-                return false;
-            }
 
-            if (hashedKnownDLL.Sources.TryGetValue(game.GameLibrary.ToString(), out var gameHashes) == true)
-            {
-                if (gameHashes.Contains(game.TitleBase64) == true)
-                {
-                    return true;
-                }
-            }
+        if (recordList.Any(x => gameAsset.Hash.Equals(x.MD5Hash, StringComparison.InvariantCultureIgnoreCase)))
+        {
+            return true;
+        }
 
+        HashedKnownDLL? hashedKnownDLL = null;
+        _knownDLLsReadWriterLock.EnterReadLock();
+        try
+        {
+            hashedKnownDLL = knownDllList.FirstOrDefault(x => gameAsset.Hash.Equals(x.Hash, StringComparison.InvariantCultureIgnoreCase));
+        }
+        finally
+        {
+            _knownDLLsReadWriterLock.ExitReadLock();
+        }
+
+        if (hashedKnownDLL is null)
+        {
             return false;
         }
-        else if (gameAsset.AssetType == GameAssetType.DLSS_D || gameAsset.AssetType == GameAssetType.DLSS_D_BACKUP)
+
+        if (hashedKnownDLL.Sources.TryGetValue(game.GameLibrary.ToString(), out var gameHashes) == true)
         {
-            if (DLSSDRecords.Any(x => gameAsset.Hash.Equals(x.MD5Hash, StringComparison.InvariantCultureIgnoreCase)))
+            if (gameHashes.Contains(game.TitleBase64) == true)
             {
                 return true;
             }
-
-            HashedKnownDLL? hashedKnownDLL = null;
-            _knownDLLsReadWriterLock.EnterReadLock();
-            try
-            {
-                hashedKnownDLL = KnownDLLs.DLSS_D.FirstOrDefault(x => gameAsset.Hash.Equals(x.Hash, StringComparison.InvariantCultureIgnoreCase));
-            }
-            finally
-            {
-                _knownDLLsReadWriterLock.ExitReadLock();
-            }
-
-            if (hashedKnownDLL is null)
-            {
-                return false;
-            }
-
-            if (hashedKnownDLL.Sources.TryGetValue(game.GameLibrary.ToString(), out var gameHashes) == true)
-            {
-                if (gameHashes.Contains(game.TitleBase64) == true)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        else if (gameAsset.AssetType == GameAssetType.DLSS_G || gameAsset.AssetType == GameAssetType.DLSS_G_BACKUP)
-        {
-            if (DLSSGRecords.Any(x => gameAsset.Hash.Equals(x.MD5Hash, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                return true;
-            }
-
-            HashedKnownDLL? hashedKnownDLL = null;
-            _knownDLLsReadWriterLock.EnterReadLock();
-            try
-            {
-                hashedKnownDLL = KnownDLLs.DLSS_G.FirstOrDefault(x => gameAsset.Hash.Equals(x.Hash, StringComparison.InvariantCultureIgnoreCase));
-            }
-            finally
-            {
-                _knownDLLsReadWriterLock.ExitReadLock();
-            }
-
-            if (hashedKnownDLL is null)
-            {
-                return false;
-            }
-
-            if (hashedKnownDLL.Sources.TryGetValue(game.GameLibrary.ToString(), out var gameHashes) == true)
-            {
-                if (gameHashes.Contains(game.TitleBase64) == true)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        else if (gameAsset.AssetType == GameAssetType.FSR_31_DX12 || gameAsset.AssetType == GameAssetType.FSR_31_DX12_BACKUP)
-        {
-            if (FSR31DX12Records.Any(x => gameAsset.Hash.Equals(x.MD5Hash, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                return true;
-            }
-            HashedKnownDLL? hashedKnownDLL = null;
-            _knownDLLsReadWriterLock.EnterReadLock();
-            try
-            {
-                hashedKnownDLL = KnownDLLs.FSR_31_DX12.FirstOrDefault(x => gameAsset.Hash.Equals(x.Hash, StringComparison.InvariantCultureIgnoreCase));
-            }
-            finally
-            {
-                _knownDLLsReadWriterLock.ExitReadLock();
-            }
-
-            if (hashedKnownDLL is null)
-            {
-                return false;
-            }
-
-            if (hashedKnownDLL.Sources.TryGetValue(game.GameLibrary.ToString(), out var gameHashes) == true)
-            {
-                if (gameHashes.Contains(game.TitleBase64) == true)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        else if (gameAsset.AssetType == GameAssetType.FSR_31_VK || gameAsset.AssetType == GameAssetType.FSR_31_VK_BACKUP)
-        {
-            if (FSR31VKRecords.Any(x => gameAsset.Hash.Equals(x.MD5Hash, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                return true;
-            }
-            HashedKnownDLL? hashedKnownDLL = null;
-            _knownDLLsReadWriterLock.EnterReadLock();
-            try
-            {
-                hashedKnownDLL = KnownDLLs.FSR_31_VK.FirstOrDefault(x => gameAsset.Hash.Equals(x.Hash, StringComparison.InvariantCultureIgnoreCase));
-            }
-            finally
-            {
-                _knownDLLsReadWriterLock.ExitReadLock();
-            }
-
-            if (hashedKnownDLL is null)
-            {
-                return false;
-            }
-
-            if (hashedKnownDLL.Sources.TryGetValue(game.GameLibrary.ToString(), out var gameHashes) == true)
-            {
-                if (gameHashes.Contains(game.TitleBase64) == true)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        else if (gameAsset.AssetType == GameAssetType.XeSS || gameAsset.AssetType == GameAssetType.XeSS_BACKUP)
-        {
-            if (XeSSRecords.Any(x => gameAsset.Hash.Equals(x.MD5Hash, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                return true;
-            }
-            HashedKnownDLL? hashedKnownDLL = null;
-            _knownDLLsReadWriterLock.EnterReadLock();
-            try
-            {
-                hashedKnownDLL = KnownDLLs.XeSS.FirstOrDefault(x => gameAsset.Hash.Equals(x.Hash, StringComparison.InvariantCultureIgnoreCase));
-            }
-            finally
-            {
-                _knownDLLsReadWriterLock.ExitReadLock();
-            }
-
-            if (hashedKnownDLL is null)
-            {
-                return false;
-            }
-
-            if (hashedKnownDLL.Sources.TryGetValue(game.GameLibrary.ToString(), out var gameHashes) == true)
-            {
-                if (gameHashes.Contains(game.TitleBase64) == true)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        else if (gameAsset.AssetType == GameAssetType.XeLL || gameAsset.AssetType == GameAssetType.XeLL_BACKUP)
-        {
-            if (XeLLRecords.Any(x => gameAsset.Hash.Equals(x.MD5Hash, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                return true;
-            }
-            HashedKnownDLL? hashedKnownDLL = null;
-            _knownDLLsReadWriterLock.EnterReadLock();
-            try
-            {
-                hashedKnownDLL = KnownDLLs.XeLL.FirstOrDefault(x => gameAsset.Hash.Equals(x.Hash, StringComparison.InvariantCultureIgnoreCase));
-            }
-            finally
-            {
-                _knownDLLsReadWriterLock.ExitReadLock();
-            }
-
-            if (hashedKnownDLL is null)
-            {
-                return false;
-            }
-
-            if (hashedKnownDLL.Sources.TryGetValue(game.GameLibrary.ToString(), out var gameHashes) == true)
-            {
-                if (gameHashes.Contains(game.TitleBase64) == true)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        else if (gameAsset.AssetType == GameAssetType.XeSS_DX11 || gameAsset.AssetType == GameAssetType.XeSS_DX11_BACKUP)
-        {
-            if (XeSSDX11Records.Any(x => gameAsset.Hash.Equals(x.MD5Hash, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                return true;
-            }
-            HashedKnownDLL? hashedKnownDLL = null;
-            _knownDLLsReadWriterLock.EnterReadLock();
-            try
-            {
-                hashedKnownDLL = KnownDLLs.XeSS_DX11.FirstOrDefault(x => gameAsset.Hash.Equals(x.Hash, StringComparison.InvariantCultureIgnoreCase));
-            }
-            finally
-            {
-                _knownDLLsReadWriterLock.ExitReadLock();
-            }
-
-            if (hashedKnownDLL is null)
-            {
-                return false;
-            }
-
-            if (hashedKnownDLL.Sources.TryGetValue(game.GameLibrary.ToString(), out var gameHashes) == true)
-            {
-                if (gameHashes.Contains(game.TitleBase64) == true)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        else if (gameAsset.AssetType == GameAssetType.XeSS_FG || gameAsset.AssetType == GameAssetType.XeSS_FG_BACKUP)
-        {
-            if (XeSSFGRecords.Any(x => gameAsset.Hash.Equals(x.MD5Hash, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                return true;
-            }
-            HashedKnownDLL? hashedKnownDLL = null;
-            _knownDLLsReadWriterLock.EnterReadLock();
-            try
-            {
-                hashedKnownDLL = KnownDLLs.XeSS_FG.FirstOrDefault(x => gameAsset.Hash.Equals(x.Hash, StringComparison.InvariantCultureIgnoreCase));
-            }
-            finally
-            {
-                _knownDLLsReadWriterLock.ExitReadLock();
-            }
-
-            if (hashedKnownDLL is null)
-            {
-                return false;
-            }
-
-            if (hashedKnownDLL.Sources.TryGetValue(game.GameLibrary.ToString(), out var gameHashes) == true)
-            {
-                if (gameHashes.Contains(game.TitleBase64) == true)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         return false;
@@ -977,7 +743,6 @@ internal class DLLManager
     /// <param name="zippedDllFullName"></param>
     /// <param name="overrideFileName">Override the filename for importing NGX models that are not .dlls yet.</param>
     /// <returns></returns>
-
     internal DLLImportResult ImportDll(string filePath, string? zippedDllFullName = null, string? overrideFileName = null)
     {
         if (ImportedManifest is null)

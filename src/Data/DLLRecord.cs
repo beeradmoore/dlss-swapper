@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 using DLSS_Swapper.Extensions;
 using DLSS_Swapper.Helpers;
 using DLSS_Swapper.Helpers.FSR31;
-using Serilog;
 
 namespace DLSS_Swapper.Data;
 
 public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
 {
+    // NOTE: DLL type
     public const string DLSS = "dlss";
     public const string DLSS_D = "dlss_d";
     public const string DLSS_G = "dlss_g";

@@ -158,7 +158,7 @@ internal class GitHubUpdater
         {
             return false;
         }
-        else if (thisVersion < lastVersionPromptedFor)
+        else if (thisVersion > lastVersionPromptedFor)
         {
             return false;
         }

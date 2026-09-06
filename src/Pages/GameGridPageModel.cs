@@ -79,13 +79,21 @@ public partial class GameGridPageModel : ObservableObject
         IsGameListLoading = true;
         IsDLSSLoading = true;
 
-        await GameManager.Instance.LoadGamesFromCacheAsync();
+        try
+        {
+            await GameManager.Instance.LoadGamesFromCacheAsync();
 
-        IsGameListLoading = false;
+            IsGameListLoading = false;
 
-        await GameManager.Instance.LoadGamesAsync(false);
-
-        IsDLSSLoading = false;
+            await GameManager.Instance.LoadGamesAsync(false);
+        }
+        finally
+        {
+            // Even if a game library throws, don't leave the UI stuck showing a loading spinner forever.
+            // GameGridPage.xaml.cs's SafeFireAndForget call already logs the exception.
+            IsGameListLoading = false;
+            IsDLSSLoading = false;
+        }
     }
 
     public void SearchForGameEvent(object sender, TextChangedEventArgs e)

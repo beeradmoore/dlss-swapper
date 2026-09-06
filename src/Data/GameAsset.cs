@@ -181,6 +181,7 @@ public class GameAsset : IEquatable<GameAsset>
             GameAssetType.Streamline_DLSS_G => GameAssetType.Streamline_DLSS_G_BACKUP,
             GameAssetType.Streamline_DLSS_D => GameAssetType.Streamline_DLSS_D_BACKUP,
             GameAssetType.Streamline_DLSS => GameAssetType.Streamline_DLSS_BACKUP,
+            GameAssetType.Streamline_DLSS_NR => GameAssetType.Streamline_DLSS_NR_BACKUP,
             GameAssetType.Streamline_DirectSR => GameAssetType.Streamline_DirectSR_BACKUP,
             GameAssetType.Streamline_DeepDVC => GameAssetType.Streamline_DeepDVC_BACKUP,
             GameAssetType.Streamline_Common => GameAssetType.Streamline_Common_BACKUP,

@@ -22,12 +22,34 @@ internal class DLLManager
     public ObservableCollection<DLLRecord> DLSSRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> DLSSGRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> DLSSDRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> DLSSNRRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> FSR31DX12Records { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> FSR31VKRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> XeSSRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> XeLLRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> XeSSFGRecords { get; } = new ObservableCollection<DLLRecord>();
     public ObservableCollection<DLLRecord> XeSSDX11Records { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> DirectStorageRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> DirectStorageCoreRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> FidelityFXSDK2DenoiserDX12Records { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> FidelityFXSDK2FrameGenerationDX12Records { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> FidelityFXSDK2LoaderDX12Records { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> FidelityFXSDK2RadianceCacheDX12Records { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> FidelityFXSDK2UpscalerDX12Records { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> StreamlineReflexRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> StreamlinePCLRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> StreamlineNvPerfRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> StreamlineNISRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> StreamlineInterposerRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> StreamlineDLSSGRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> StreamlineDLSSDRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> StreamlineDLSSNRRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> StreamlineDLSSRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> StreamlineDirectSRRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> StreamlineDeepDVCRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> StreamlineCommonRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> DeepDVCRecords { get; } = new ObservableCollection<DLLRecord>();
+    public ObservableCollection<DLLRecord> NvLowLatencyVKRecords { get; } = new ObservableCollection<DLLRecord>();
 
     public KnownDLLs KnownDLLs { get; private set; } = new KnownDLLs();
 
@@ -230,36 +252,102 @@ internal class DLLManager
         CancelDownloads(DLSSRecords);
         CancelDownloads(DLSSGRecords);
         CancelDownloads(DLSSDRecords);
+        CancelDownloads(DLSSNRRecords);
         CancelDownloads(FSR31DX12Records);
         CancelDownloads(FSR31VKRecords);
         CancelDownloads(XeSSRecords);
         CancelDownloads(XeSSFGRecords);
         CancelDownloads(XeSSDX11Records);
         CancelDownloads(XeLLRecords);
+        CancelDownloads(DirectStorageRecords);
+        CancelDownloads(DirectStorageCoreRecords);
+        CancelDownloads(FidelityFXSDK2DenoiserDX12Records);
+        CancelDownloads(FidelityFXSDK2FrameGenerationDX12Records);
+        CancelDownloads(FidelityFXSDK2LoaderDX12Records);
+        CancelDownloads(FidelityFXSDK2RadianceCacheDX12Records);
+        CancelDownloads(FidelityFXSDK2UpscalerDX12Records);
+        CancelDownloads(StreamlineReflexRecords);
+        CancelDownloads(StreamlinePCLRecords);
+        CancelDownloads(StreamlineNvPerfRecords);
+        CancelDownloads(StreamlineNISRecords);
+        CancelDownloads(StreamlineInterposerRecords);
+        CancelDownloads(StreamlineDLSSGRecords);
+        CancelDownloads(StreamlineDLSSDRecords);
+        CancelDownloads(StreamlineDLSSNRRecords);
+        CancelDownloads(StreamlineDLSSRecords);
+        CancelDownloads(StreamlineDirectSRRecords);
+        CancelDownloads(StreamlineDeepDVCRecords);
+        CancelDownloads(StreamlineCommonRecords);
+        CancelDownloads(DeepDVCRecords);
+        CancelDownloads(NvLowLatencyVKRecords);
 
         // NOTE: DLL type
         // Update incoming DLL record game asset types
         SetGameAssetType(Manifest.DLSS, GameAssetType.DLSS);
         SetGameAssetType(Manifest.DLSS_D, GameAssetType.DLSS_D);
         SetGameAssetType(Manifest.DLSS_G, GameAssetType.DLSS_G);
+        SetGameAssetType(Manifest.DLSS_NR, GameAssetType.DLSS_NR);
         SetGameAssetType(Manifest.FSR_31_DX12, GameAssetType.FSR_31_DX12);
         SetGameAssetType(Manifest.FSR_31_VK, GameAssetType.FSR_31_VK);
         SetGameAssetType(Manifest.XeSS, GameAssetType.XeSS);
         SetGameAssetType(Manifest.XeSS_FG, GameAssetType.XeSS_FG);
         SetGameAssetType(Manifest.XeLL, GameAssetType.XeLL);
         SetGameAssetType(Manifest.XeSS_DX11, GameAssetType.XeSS_DX11);
+        SetGameAssetType(Manifest.DirectStorage, GameAssetType.DirectStorage);
+        SetGameAssetType(Manifest.DirectStorageCore, GameAssetType.DirectStorageCore);
+        SetGameAssetType(Manifest.FidelityFX_SDK2_Denoiser_DX12, GameAssetType.FidelityFX_SDK2_Denoiser_DX12);
+        SetGameAssetType(Manifest.FidelityFX_SDK2_FrameGeneration_DX12, GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12);
+        SetGameAssetType(Manifest.FidelityFX_SDK2_Loader_DX12, GameAssetType.FidelityFX_SDK2_Loader_DX12);
+        SetGameAssetType(Manifest.FidelityFX_SDK2_RadianceCache_DX12, GameAssetType.FidelityFX_SDK2_RadianceCache_DX12);
+        SetGameAssetType(Manifest.FidelityFX_SDK2_Upscaler_DX12, GameAssetType.FidelityFX_SDK2_Upscaler_DX12);
+        SetGameAssetType(Manifest.Streamline_Reflex, GameAssetType.Streamline_Reflex);
+        SetGameAssetType(Manifest.Streamline_PCL, GameAssetType.Streamline_PCL);
+        SetGameAssetType(Manifest.Streamline_NvPerf, GameAssetType.Streamline_NvPerf);
+        SetGameAssetType(Manifest.Streamline_NIS, GameAssetType.Streamline_NIS);
+        SetGameAssetType(Manifest.Streamline_Interposer, GameAssetType.Streamline_Interposer);
+        SetGameAssetType(Manifest.Streamline_DLSS_G, GameAssetType.Streamline_DLSS_G);
+        SetGameAssetType(Manifest.Streamline_DLSS_D, GameAssetType.Streamline_DLSS_D);
+        SetGameAssetType(Manifest.Streamline_DLSS_NR, GameAssetType.Streamline_DLSS_NR);
+        SetGameAssetType(Manifest.Streamline_DLSS, GameAssetType.Streamline_DLSS);
+        SetGameAssetType(Manifest.Streamline_DirectSR, GameAssetType.Streamline_DirectSR);
+        SetGameAssetType(Manifest.Streamline_DeepDVC, GameAssetType.Streamline_DeepDVC);
+        SetGameAssetType(Manifest.Streamline_Common, GameAssetType.Streamline_Common);
+        SetGameAssetType(Manifest.DeepDVC, GameAssetType.DeepDVC);
+        SetGameAssetType(Manifest.NvLowLatencyVK, GameAssetType.NvLowLatencyVK);
         if (ImportedManifest is not null)
         {
             // NOTE: DLL type
             SetGameAssetType(ImportedManifest.DLSS, GameAssetType.DLSS);
             SetGameAssetType(ImportedManifest.DLSS_D, GameAssetType.DLSS_D);
             SetGameAssetType(ImportedManifest.DLSS_G, GameAssetType.DLSS_G);
+            SetGameAssetType(ImportedManifest.DLSS_NR, GameAssetType.DLSS_NR);
             SetGameAssetType(ImportedManifest.FSR_31_DX12, GameAssetType.FSR_31_DX12);
             SetGameAssetType(ImportedManifest.FSR_31_VK, GameAssetType.FSR_31_VK);
             SetGameAssetType(ImportedManifest.XeSS, GameAssetType.XeSS);
             SetGameAssetType(ImportedManifest.XeSS_FG, GameAssetType.XeSS_FG);
             SetGameAssetType(ImportedManifest.XeLL, GameAssetType.XeLL);
             SetGameAssetType(ImportedManifest.XeSS_DX11, GameAssetType.XeSS_DX11);
+            SetGameAssetType(ImportedManifest.DirectStorage, GameAssetType.DirectStorage);
+            SetGameAssetType(ImportedManifest.DirectStorageCore, GameAssetType.DirectStorageCore);
+            SetGameAssetType(ImportedManifest.FidelityFX_SDK2_Denoiser_DX12, GameAssetType.FidelityFX_SDK2_Denoiser_DX12);
+            SetGameAssetType(ImportedManifest.FidelityFX_SDK2_FrameGeneration_DX12, GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12);
+            SetGameAssetType(ImportedManifest.FidelityFX_SDK2_Loader_DX12, GameAssetType.FidelityFX_SDK2_Loader_DX12);
+            SetGameAssetType(ImportedManifest.FidelityFX_SDK2_RadianceCache_DX12, GameAssetType.FidelityFX_SDK2_RadianceCache_DX12);
+            SetGameAssetType(ImportedManifest.FidelityFX_SDK2_Upscaler_DX12, GameAssetType.FidelityFX_SDK2_Upscaler_DX12);
+            SetGameAssetType(ImportedManifest.Streamline_Reflex, GameAssetType.Streamline_Reflex);
+            SetGameAssetType(ImportedManifest.Streamline_PCL, GameAssetType.Streamline_PCL);
+            SetGameAssetType(ImportedManifest.Streamline_NvPerf, GameAssetType.Streamline_NvPerf);
+            SetGameAssetType(ImportedManifest.Streamline_NIS, GameAssetType.Streamline_NIS);
+            SetGameAssetType(ImportedManifest.Streamline_Interposer, GameAssetType.Streamline_Interposer);
+            SetGameAssetType(ImportedManifest.Streamline_DLSS_G, GameAssetType.Streamline_DLSS_G);
+            SetGameAssetType(ImportedManifest.Streamline_DLSS_D, GameAssetType.Streamline_DLSS_D);
+            SetGameAssetType(ImportedManifest.Streamline_DLSS_NR, GameAssetType.Streamline_DLSS_NR);
+            SetGameAssetType(ImportedManifest.Streamline_DLSS, GameAssetType.Streamline_DLSS);
+            SetGameAssetType(ImportedManifest.Streamline_DirectSR, GameAssetType.Streamline_DirectSR);
+            SetGameAssetType(ImportedManifest.Streamline_DeepDVC, GameAssetType.Streamline_DeepDVC);
+            SetGameAssetType(ImportedManifest.Streamline_Common, GameAssetType.Streamline_Common);
+            SetGameAssetType(ImportedManifest.DeepDVC, GameAssetType.DeepDVC);
+            SetGameAssetType(ImportedManifest.NvLowLatencyVK, GameAssetType.NvLowLatencyVK);
         }
 
 
@@ -267,23 +355,67 @@ internal class DLLManager
         LoadLocalRecords(Manifest.DLSS);
         LoadLocalRecords(Manifest.DLSS_D);
         LoadLocalRecords(Manifest.DLSS_G);
+        LoadLocalRecords(Manifest.DLSS_NR);
         LoadLocalRecords(Manifest.FSR_31_DX12);
         LoadLocalRecords(Manifest.FSR_31_VK);
         LoadLocalRecords(Manifest.XeSS);
         LoadLocalRecords(Manifest.XeSS_FG);
         LoadLocalRecords(Manifest.XeLL);
         LoadLocalRecords(Manifest.XeSS_DX11);
+        LoadLocalRecords(Manifest.DirectStorage);
+        LoadLocalRecords(Manifest.DirectStorageCore);
+        LoadLocalRecords(Manifest.FidelityFX_SDK2_Denoiser_DX12);
+        LoadLocalRecords(Manifest.FidelityFX_SDK2_FrameGeneration_DX12);
+        LoadLocalRecords(Manifest.FidelityFX_SDK2_Loader_DX12);
+        LoadLocalRecords(Manifest.FidelityFX_SDK2_RadianceCache_DX12);
+        LoadLocalRecords(Manifest.FidelityFX_SDK2_Upscaler_DX12);
+        LoadLocalRecords(Manifest.Streamline_Reflex);
+        LoadLocalRecords(Manifest.Streamline_PCL);
+        LoadLocalRecords(Manifest.Streamline_NvPerf);
+        LoadLocalRecords(Manifest.Streamline_NIS);
+        LoadLocalRecords(Manifest.Streamline_Interposer);
+        LoadLocalRecords(Manifest.Streamline_DLSS_G);
+        LoadLocalRecords(Manifest.Streamline_DLSS_D);
+        LoadLocalRecords(Manifest.Streamline_DLSS_NR);
+        LoadLocalRecords(Manifest.Streamline_DLSS);
+        LoadLocalRecords(Manifest.Streamline_DirectSR);
+        LoadLocalRecords(Manifest.Streamline_DeepDVC);
+        LoadLocalRecords(Manifest.Streamline_Common);
+        LoadLocalRecords(Manifest.DeepDVC);
+        LoadLocalRecords(Manifest.NvLowLatencyVK);
         if (ImportedManifest is not null)
         {
             LoadLocalRecords(ImportedManifest.DLSS, true);
             LoadLocalRecords(ImportedManifest.DLSS_D, true);
             LoadLocalRecords(ImportedManifest.DLSS_G, true);
+            LoadLocalRecords(ImportedManifest.DLSS_NR, true);
             LoadLocalRecords(ImportedManifest.FSR_31_DX12, true);
             LoadLocalRecords(ImportedManifest.FSR_31_VK, true);
             LoadLocalRecords(ImportedManifest.XeSS, true);
             LoadLocalRecords(ImportedManifest.XeSS_FG, true);
             LoadLocalRecords(ImportedManifest.XeLL, true);
             LoadLocalRecords(ImportedManifest.XeSS_DX11, true);
+            LoadLocalRecords(ImportedManifest.DirectStorage, true);
+            LoadLocalRecords(ImportedManifest.DirectStorageCore, true);
+            LoadLocalRecords(ImportedManifest.FidelityFX_SDK2_Denoiser_DX12, true);
+            LoadLocalRecords(ImportedManifest.FidelityFX_SDK2_FrameGeneration_DX12, true);
+            LoadLocalRecords(ImportedManifest.FidelityFX_SDK2_Loader_DX12, true);
+            LoadLocalRecords(ImportedManifest.FidelityFX_SDK2_RadianceCache_DX12, true);
+            LoadLocalRecords(ImportedManifest.FidelityFX_SDK2_Upscaler_DX12, true);
+            LoadLocalRecords(ImportedManifest.Streamline_Reflex, true);
+            LoadLocalRecords(ImportedManifest.Streamline_PCL, true);
+            LoadLocalRecords(ImportedManifest.Streamline_NvPerf, true);
+            LoadLocalRecords(ImportedManifest.Streamline_NIS, true);
+            LoadLocalRecords(ImportedManifest.Streamline_Interposer, true);
+            LoadLocalRecords(ImportedManifest.Streamline_DLSS_G, true);
+            LoadLocalRecords(ImportedManifest.Streamline_DLSS_D, true);
+            LoadLocalRecords(ImportedManifest.Streamline_DLSS_NR, true);
+            LoadLocalRecords(ImportedManifest.Streamline_DLSS, true);
+            LoadLocalRecords(ImportedManifest.Streamline_DirectSR, true);
+            LoadLocalRecords(ImportedManifest.Streamline_DeepDVC, true);
+            LoadLocalRecords(ImportedManifest.Streamline_Common, true);
+            LoadLocalRecords(ImportedManifest.DeepDVC, true);
+            LoadLocalRecords(ImportedManifest.NvLowLatencyVK, true);
         }
 
         // See if there is any imported manifest items that are to be migrated to downloaded
@@ -292,12 +424,34 @@ internal class DLLManager
         didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DLSS, ImportedManifest?.DLSS);
         didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DLSS_D, ImportedManifest?.DLSS_D);
         didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DLSS_G, ImportedManifest?.DLSS_G);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DLSS_NR, ImportedManifest?.DLSS_NR);
         didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.FSR_31_DX12, ImportedManifest?.FSR_31_DX12);
         didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.FSR_31_VK, ImportedManifest?.FSR_31_VK);
         didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeSS, ImportedManifest?.XeSS);
         didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeSS_FG, ImportedManifest?.XeSS_FG);
         didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeLL, ImportedManifest?.XeLL);
         didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.XeSS_DX11, ImportedManifest?.XeSS_DX11);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DirectStorage, ImportedManifest?.DirectStorage);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DirectStorageCore, ImportedManifest?.DirectStorageCore);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.FidelityFX_SDK2_Denoiser_DX12, ImportedManifest?.FidelityFX_SDK2_Denoiser_DX12);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.FidelityFX_SDK2_FrameGeneration_DX12, ImportedManifest?.FidelityFX_SDK2_FrameGeneration_DX12);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.FidelityFX_SDK2_Loader_DX12, ImportedManifest?.FidelityFX_SDK2_Loader_DX12);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.FidelityFX_SDK2_RadianceCache_DX12, ImportedManifest?.FidelityFX_SDK2_RadianceCache_DX12);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.FidelityFX_SDK2_Upscaler_DX12, ImportedManifest?.FidelityFX_SDK2_Upscaler_DX12);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.Streamline_Reflex, ImportedManifest?.Streamline_Reflex);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.Streamline_PCL, ImportedManifest?.Streamline_PCL);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.Streamline_NvPerf, ImportedManifest?.Streamline_NvPerf);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.Streamline_NIS, ImportedManifest?.Streamline_NIS);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.Streamline_Interposer, ImportedManifest?.Streamline_Interposer);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.Streamline_DLSS_G, ImportedManifest?.Streamline_DLSS_G);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.Streamline_DLSS_D, ImportedManifest?.Streamline_DLSS_D);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.Streamline_DLSS_NR, ImportedManifest?.Streamline_DLSS_NR);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.Streamline_DLSS, ImportedManifest?.Streamline_DLSS);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.Streamline_DirectSR, ImportedManifest?.Streamline_DirectSR);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.Streamline_DeepDVC, ImportedManifest?.Streamline_DeepDVC);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.Streamline_Common, ImportedManifest?.Streamline_Common);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.DeepDVC, ImportedManifest?.DeepDVC);
+        didChangeImportedManifest |= CheckImportedManifestForCleanUp(Manifest.NvLowLatencyVK, ImportedManifest?.NvLowLatencyVK);
 
         if (didChangeImportedManifest == true)
         {
@@ -311,12 +465,35 @@ internal class DLLManager
             MergeManifestsIntoMasterList(DLSSRecords, Manifest.DLSS, ImportedManifest?.DLSS);
             MergeManifestsIntoMasterList(DLSSGRecords, Manifest.DLSS_G, ImportedManifest?.DLSS_G);
             MergeManifestsIntoMasterList(DLSSDRecords, Manifest.DLSS_D, ImportedManifest?.DLSS_D);
+            MergeManifestsIntoMasterList(DLSSNRRecords, Manifest.DLSS_NR, ImportedManifest?.DLSS_NR);
             MergeManifestsIntoMasterList(FSR31DX12Records, Manifest.FSR_31_DX12, ImportedManifest?.FSR_31_DX12);
             MergeManifestsIntoMasterList(FSR31VKRecords, Manifest.FSR_31_VK, ImportedManifest?.FSR_31_VK);
             MergeManifestsIntoMasterList(XeSSRecords, Manifest.XeSS, ImportedManifest?.XeSS);
             MergeManifestsIntoMasterList(XeSSFGRecords, Manifest.XeSS_FG, ImportedManifest?.XeSS_FG);
             MergeManifestsIntoMasterList(XeSSDX11Records, Manifest.XeSS_DX11, ImportedManifest?.XeSS_DX11);
             MergeManifestsIntoMasterList(XeLLRecords, Manifest.XeLL, ImportedManifest?.XeLL);
+            MergeManifestsIntoMasterList(DirectStorageRecords, Manifest.DirectStorage, ImportedManifest?.DirectStorage);
+            MergeManifestsIntoMasterList(DirectStorageCoreRecords, Manifest.DirectStorageCore, ImportedManifest?.DirectStorageCore);
+            MergeManifestsIntoMasterList(FidelityFXSDK2DenoiserDX12Records, Manifest.FidelityFX_SDK2_Denoiser_DX12, ImportedManifest?.FidelityFX_SDK2_Denoiser_DX12);
+            MergeManifestsIntoMasterList(FidelityFXSDK2FrameGenerationDX12Records, Manifest.FidelityFX_SDK2_FrameGeneration_DX12, ImportedManifest?.FidelityFX_SDK2_FrameGeneration_DX12);
+            MergeManifestsIntoMasterList(FidelityFXSDK2LoaderDX12Records, Manifest.FidelityFX_SDK2_Loader_DX12, ImportedManifest?.FidelityFX_SDK2_Loader_DX12);
+            MergeManifestsIntoMasterList(FidelityFXSDK2RadianceCacheDX12Records, Manifest.FidelityFX_SDK2_RadianceCache_DX12, ImportedManifest?.FidelityFX_SDK2_RadianceCache_DX12);
+            MergeManifestsIntoMasterList(FidelityFXSDK2UpscalerDX12Records, Manifest.FidelityFX_SDK2_Upscaler_DX12, ImportedManifest?.FidelityFX_SDK2_Upscaler_DX12);
+            MergeManifestsIntoMasterList(StreamlineReflexRecords, Manifest.Streamline_Reflex, ImportedManifest?.Streamline_Reflex);
+            MergeManifestsIntoMasterList(StreamlinePCLRecords, Manifest.Streamline_PCL, ImportedManifest?.Streamline_PCL);
+            MergeManifestsIntoMasterList(StreamlineNvPerfRecords, Manifest.Streamline_NvPerf, ImportedManifest?.Streamline_NvPerf);
+            MergeManifestsIntoMasterList(StreamlineNISRecords, Manifest.Streamline_NIS, ImportedManifest?.Streamline_NIS);
+            MergeManifestsIntoMasterList(StreamlineInterposerRecords, Manifest.Streamline_Interposer, ImportedManifest?.Streamline_Interposer);
+            MergeManifestsIntoMasterList(StreamlineDLSSGRecords, Manifest.Streamline_DLSS_G, ImportedManifest?.Streamline_DLSS_G);
+            MergeManifestsIntoMasterList(StreamlineDLSSDRecords, Manifest.Streamline_DLSS_D, ImportedManifest?.Streamline_DLSS_D);
+            MergeManifestsIntoMasterList(StreamlineDLSSNRRecords, Manifest.Streamline_DLSS_NR, ImportedManifest?.Streamline_DLSS_NR);
+            MergeManifestsIntoMasterList(StreamlineDLSSRecords, Manifest.Streamline_DLSS, ImportedManifest?.Streamline_DLSS);
+            MergeManifestsIntoMasterList(StreamlineDirectSRRecords, Manifest.Streamline_DirectSR, ImportedManifest?.Streamline_DirectSR);
+            MergeManifestsIntoMasterList(StreamlineDeepDVCRecords, Manifest.Streamline_DeepDVC, ImportedManifest?.Streamline_DeepDVC);
+            MergeManifestsIntoMasterList(StreamlineCommonRecords, Manifest.Streamline_Common, ImportedManifest?.Streamline_Common);
+            MergeManifestsIntoMasterList(DeepDVCRecords, Manifest.DeepDVC, ImportedManifest?.DeepDVC);
+            MergeManifestsIntoMasterList(NvLowLatencyVKRecords, Manifest.NvLowLatencyVK, ImportedManifest?.NvLowLatencyVK);
+
         });
     }
 
@@ -635,12 +812,35 @@ internal class DLLManager
             GameAssetType.DLSS => ResourceHelper.GetString("General_Name_DLSS"),
             GameAssetType.DLSS_G => ResourceHelper.GetString("General_Name_DLSS_G"),
             GameAssetType.DLSS_D => ResourceHelper.GetString("General_Name_DLSS_D"),
+            GameAssetType.DLSS_NR => ResourceHelper.GetString("General_Name_DLSS_NR"),
             GameAssetType.FSR_31_DX12 => ResourceHelper.GetString("General_Name_FSR_31_DX12"),
             GameAssetType.FSR_31_VK => ResourceHelper.GetString("General_Name_FSR_31_VK"),
             GameAssetType.XeSS => ResourceHelper.GetString("General_Name_XeSS"),
             GameAssetType.XeSS_FG => ResourceHelper.GetString("General_Name_XeSS_FG"),
             GameAssetType.XeSS_DX11 => ResourceHelper.GetString("General_Name_XeSS_DX11"),
             GameAssetType.XeLL => ResourceHelper.GetString("General_Name_XeLL"),
+            GameAssetType.DirectStorage => ResourceHelper.GetString("General_Name_DirectStorage"),
+            GameAssetType.DirectStorageCore => ResourceHelper.GetString("General_Name_DirectStorageCore"),
+            GameAssetType.FidelityFX_SDK2_Denoiser_DX12 => ResourceHelper.GetString("General_Name_FidelityFX_SDK2_Denoiser_DX12"),
+            GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12 => ResourceHelper.GetString("General_Name_FidelityFX_SDK2_FrameGeneration_DX12"),
+            GameAssetType.FidelityFX_SDK2_Loader_DX12 => ResourceHelper.GetString("General_Name_FidelityFX_SDK2_Loader_DX12"),
+            GameAssetType.FidelityFX_SDK2_RadianceCache_DX12 => ResourceHelper.GetString("General_Name_FidelityFX_SDK2_RadianceCache_DX12"),
+            GameAssetType.FidelityFX_SDK2_Upscaler_DX12 => ResourceHelper.GetString("General_Name_FidelityFX_SDK2_Upscaler_DX12"),
+            GameAssetType.Streamline_Reflex => ResourceHelper.GetString("General_Name_Streamline_Reflex"),
+            GameAssetType.Streamline_PCL => ResourceHelper.GetString("General_Name_Streamline_PCL"),
+            GameAssetType.Streamline_NvPerf => ResourceHelper.GetString("General_Name_Streamline_NvPerf"),
+            GameAssetType.Streamline_NIS => ResourceHelper.GetString("General_Name_Streamline_NIS"),
+            GameAssetType.Streamline_Interposer => ResourceHelper.GetString("General_Name_Streamline_Interposer"),
+            GameAssetType.Streamline_DLSS_G => ResourceHelper.GetString("General_Name_Streamline_DLSS_G"),
+            GameAssetType.Streamline_DLSS_D => ResourceHelper.GetString("General_Name_Streamline_DLSS_D"),
+            GameAssetType.Streamline_DLSS_NR => ResourceHelper.GetString("General_Name_Streamline_DLSS_NR"),
+            GameAssetType.Streamline_DLSS => ResourceHelper.GetString("General_Name_Streamline_DLSS"),
+            GameAssetType.Streamline_DirectSR => ResourceHelper.GetString("General_Name_Streamline_DirectSR"),
+            GameAssetType.Streamline_DeepDVC => ResourceHelper.GetString("General_Name_Streamline_DeepDVC"),
+            GameAssetType.Streamline_Common => ResourceHelper.GetString("General_Name_Streamline_Common"),
+            GameAssetType.DeepDVC => ResourceHelper.GetString("General_Name_DeepDVC"),
+            GameAssetType.NvLowLatencyVK => ResourceHelper.GetString("General_Name_NvLowLatencyVK"),
+
             _ => throw new Exception($"Unknown AssetType: {assetType}"),
         };
     }
@@ -654,12 +854,34 @@ internal class DLLManager
             GameAssetType.DLSS => GameAssetType.DLSS_BACKUP,
             GameAssetType.DLSS_G => GameAssetType.DLSS_G_BACKUP,
             GameAssetType.DLSS_D => GameAssetType.DLSS_D_BACKUP,
+            GameAssetType.DLSS_NR => GameAssetType.DLSS_NR_BACKUP,
             GameAssetType.FSR_31_DX12 => GameAssetType.FSR_31_DX12_BACKUP,
             GameAssetType.FSR_31_VK => GameAssetType.FSR_31_VK_BACKUP,
             GameAssetType.XeSS => GameAssetType.XeSS_BACKUP,
             GameAssetType.XeSS_FG => GameAssetType.XeSS_FG_BACKUP,
             GameAssetType.XeSS_DX11 => GameAssetType.XeSS_DX11_BACKUP,
             GameAssetType.XeLL => GameAssetType.XeLL_BACKUP,
+            GameAssetType.DirectStorage => GameAssetType.DirectStorage_BACKUP,
+            GameAssetType.DirectStorageCore => GameAssetType.DirectStorageCore_BACKUP,
+            GameAssetType.FidelityFX_SDK2_Denoiser_DX12 => GameAssetType.FidelityFX_SDK2_Denoiser_DX12_BACKUP,
+            GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12 => GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12_BACKUP,
+            GameAssetType.FidelityFX_SDK2_Loader_DX12 => GameAssetType.FidelityFX_SDK2_Loader_DX12_BACKUP,
+            GameAssetType.FidelityFX_SDK2_RadianceCache_DX12 => GameAssetType.FidelityFX_SDK2_RadianceCache_DX12_BACKUP,
+            GameAssetType.FidelityFX_SDK2_Upscaler_DX12 => GameAssetType.FidelityFX_SDK2_Upscaler_DX12_BACKUP,
+            GameAssetType.Streamline_Reflex => GameAssetType.Streamline_Reflex_BACKUP,
+            GameAssetType.Streamline_PCL => GameAssetType.Streamline_PCL_BACKUP,
+            GameAssetType.Streamline_NvPerf => GameAssetType.Streamline_NvPerf_BACKUP,
+            GameAssetType.Streamline_NIS => GameAssetType.Streamline_NIS_BACKUP,
+            GameAssetType.Streamline_Interposer => GameAssetType.Streamline_Interposer_BACKUP,
+            GameAssetType.Streamline_DLSS_G => GameAssetType.Streamline_DLSS_G_BACKUP,
+            GameAssetType.Streamline_DLSS_D => GameAssetType.Streamline_DLSS_D_BACKUP,
+            GameAssetType.Streamline_DLSS_NR => GameAssetType.Streamline_DLSS_NR_BACKUP,
+            GameAssetType.Streamline_DLSS => GameAssetType.Streamline_DLSS_BACKUP,
+            GameAssetType.Streamline_DirectSR => GameAssetType.Streamline_DirectSR_BACKUP,
+            GameAssetType.Streamline_DeepDVC => GameAssetType.Streamline_DeepDVC_BACKUP,
+            GameAssetType.Streamline_Common => GameAssetType.Streamline_Common_BACKUP,
+            GameAssetType.DeepDVC => GameAssetType.DeepDVC_BACKUP,
+            GameAssetType.NvLowLatencyVK => GameAssetType.NvLowLatencyVK_BACKUP,
             _ => throw new Exception($"Unknown AssetType: {assetType}"),
         };
     }
@@ -680,12 +902,34 @@ internal class DLLManager
             GameAssetType.DLSS or GameAssetType.DLSS_BACKUP => DLSSRecords,
             GameAssetType.DLSS_D or GameAssetType.DLSS_D_BACKUP => DLSSDRecords,
             GameAssetType.DLSS_G or GameAssetType.DLSS_G_BACKUP => DLSSGRecords,
+            GameAssetType.DLSS_NR or GameAssetType.DLSS_NR_BACKUP => DLSSNRRecords,
             GameAssetType.FSR_31_DX12 or GameAssetType.FSR_31_DX12_BACKUP => FSR31DX12Records,
             GameAssetType.FSR_31_VK or GameAssetType.FSR_31_VK_BACKUP => FSR31VKRecords,
             GameAssetType.XeSS or GameAssetType.XeSS_BACKUP => XeSSRecords,
             GameAssetType.XeLL or GameAssetType.XeLL_BACKUP => XeLLRecords,
             GameAssetType.XeSS_FG or GameAssetType.XeSS_FG_BACKUP => XeSSFGRecords,
             GameAssetType.XeSS_DX11 or GameAssetType.XeSS_DX11_BACKUP => XeSSDX11Records,
+            GameAssetType.DirectStorage or GameAssetType.DirectStorage_BACKUP => DirectStorageRecords,
+            GameAssetType.DirectStorageCore or GameAssetType.DirectStorageCore_BACKUP => DirectStorageCoreRecords,
+            GameAssetType.FidelityFX_SDK2_Denoiser_DX12 or GameAssetType.FidelityFX_SDK2_Denoiser_DX12_BACKUP => FidelityFXSDK2DenoiserDX12Records,
+            GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12 or GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12_BACKUP => FidelityFXSDK2FrameGenerationDX12Records,
+            GameAssetType.FidelityFX_SDK2_Loader_DX12 or GameAssetType.FidelityFX_SDK2_Loader_DX12_BACKUP => FidelityFXSDK2LoaderDX12Records,
+            GameAssetType.FidelityFX_SDK2_RadianceCache_DX12 or GameAssetType.FidelityFX_SDK2_RadianceCache_DX12_BACKUP => FidelityFXSDK2RadianceCacheDX12Records,
+            GameAssetType.FidelityFX_SDK2_Upscaler_DX12 or GameAssetType.FidelityFX_SDK2_Upscaler_DX12_BACKUP => FidelityFXSDK2UpscalerDX12Records,
+            GameAssetType.Streamline_Reflex or GameAssetType.Streamline_Reflex_BACKUP => StreamlineReflexRecords,
+            GameAssetType.Streamline_PCL or GameAssetType.Streamline_PCL_BACKUP => StreamlinePCLRecords,
+            GameAssetType.Streamline_NvPerf or GameAssetType.Streamline_NvPerf_BACKUP => StreamlineNvPerfRecords,
+            GameAssetType.Streamline_NIS or GameAssetType.Streamline_NIS_BACKUP => StreamlineNISRecords,
+            GameAssetType.Streamline_Interposer or GameAssetType.Streamline_Interposer_BACKUP => StreamlineInterposerRecords,
+            GameAssetType.Streamline_DLSS_G or GameAssetType.Streamline_DLSS_G_BACKUP => StreamlineDLSSGRecords,
+            GameAssetType.Streamline_DLSS_D or GameAssetType.Streamline_DLSS_D_BACKUP => StreamlineDLSSDRecords,
+            GameAssetType.Streamline_DLSS_NR or GameAssetType.Streamline_DLSS_NR_BACKUP => StreamlineDLSSNRRecords,
+            GameAssetType.Streamline_DLSS or GameAssetType.Streamline_DLSS_BACKUP => StreamlineDLSSRecords,
+            GameAssetType.Streamline_DirectSR or GameAssetType.Streamline_DirectSR_BACKUP => StreamlineDirectSRRecords,
+            GameAssetType.Streamline_DeepDVC or GameAssetType.Streamline_DeepDVC_BACKUP => StreamlineDeepDVCRecords,
+            GameAssetType.Streamline_Common or GameAssetType.Streamline_Common_BACKUP => StreamlineCommonRecords,
+            GameAssetType.DeepDVC or GameAssetType.DeepDVC_BACKUP => DeepDVCRecords,
+            GameAssetType.NvLowLatencyVK or GameAssetType.NvLowLatencyVK_BACKUP => NvLowLatencyVKRecords,
             _ => new ObservableCollection<DLLRecord>(),
         };
 
@@ -694,12 +938,34 @@ internal class DLLManager
             GameAssetType.DLSS or GameAssetType.DLSS_BACKUP => KnownDLLs.DLSS,
             GameAssetType.DLSS_D or GameAssetType.DLSS_D_BACKUP => KnownDLLs.DLSS_D,
             GameAssetType.DLSS_G or GameAssetType.DLSS_G_BACKUP => KnownDLLs.DLSS_G,
+            GameAssetType.DLSS_NR or GameAssetType.DLSS_NR_BACKUP => KnownDLLs.DLSS_NR,
             GameAssetType.FSR_31_DX12 or GameAssetType.FSR_31_DX12_BACKUP => KnownDLLs.FSR_31_DX12,
             GameAssetType.FSR_31_VK or GameAssetType.FSR_31_VK_BACKUP => KnownDLLs.FSR_31_VK,
             GameAssetType.XeSS or GameAssetType.XeSS_BACKUP => KnownDLLs.XeSS,
             GameAssetType.XeLL or GameAssetType.XeLL_BACKUP => KnownDLLs.XeLL,
             GameAssetType.XeSS_FG or GameAssetType.XeSS_FG_BACKUP => KnownDLLs.XeSS_FG,
             GameAssetType.XeSS_DX11 or GameAssetType.XeSS_DX11_BACKUP => KnownDLLs.XeSS_DX11,
+            GameAssetType.DirectStorage or GameAssetType.DirectStorage_BACKUP => KnownDLLs.DirectStorage,
+            GameAssetType.DirectStorageCore or GameAssetType.DirectStorageCore_BACKUP => KnownDLLs.DirectStorageCore,
+            GameAssetType.FidelityFX_SDK2_Denoiser_DX12 or GameAssetType.FidelityFX_SDK2_Denoiser_DX12_BACKUP => KnownDLLs.FidelityFX_SDK2_Denoiser_DX12,
+            GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12 or GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12_BACKUP => KnownDLLs.FidelityFX_SDK2_FrameGeneration_DX12,
+            GameAssetType.FidelityFX_SDK2_Loader_DX12 or GameAssetType.FidelityFX_SDK2_Loader_DX12_BACKUP => KnownDLLs.FidelityFX_SDK2_Loader_DX12,
+            GameAssetType.FidelityFX_SDK2_RadianceCache_DX12 or GameAssetType.FidelityFX_SDK2_RadianceCache_DX12_BACKUP => KnownDLLs.FidelityFX_SDK2_RadianceCache_DX12,
+            GameAssetType.FidelityFX_SDK2_Upscaler_DX12 or GameAssetType.FidelityFX_SDK2_Upscaler_DX12_BACKUP => KnownDLLs.FidelityFX_SDK2_Upscaler_DX12,
+            GameAssetType.Streamline_Reflex or GameAssetType.Streamline_Reflex_BACKUP => KnownDLLs.Streamline_Reflex,
+            GameAssetType.Streamline_PCL or GameAssetType.Streamline_PCL_BACKUP => KnownDLLs.Streamline_PCL,
+            GameAssetType.Streamline_NvPerf or GameAssetType.Streamline_NvPerf_BACKUP => KnownDLLs.Streamline_NvPerf,
+            GameAssetType.Streamline_NIS or GameAssetType.Streamline_NIS_BACKUP => KnownDLLs.Streamline_NIS,
+            GameAssetType.Streamline_Interposer or GameAssetType.Streamline_Interposer_BACKUP => KnownDLLs.Streamline_Interposer,
+            GameAssetType.Streamline_DLSS_G or GameAssetType.Streamline_DLSS_G_BACKUP => KnownDLLs.Streamline_DLSS_G,
+            GameAssetType.Streamline_DLSS_D or GameAssetType.Streamline_DLSS_D_BACKUP => KnownDLLs.Streamline_DLSS_D,
+            GameAssetType.Streamline_DLSS_NR or GameAssetType.Streamline_DLSS_NR_BACKUP => KnownDLLs.Streamline_DLSS_NR,
+            GameAssetType.Streamline_DLSS or GameAssetType.Streamline_DLSS_BACKUP => KnownDLLs.Streamline_DLSS,
+            GameAssetType.Streamline_DirectSR or GameAssetType.Streamline_DirectSR_BACKUP => KnownDLLs.Streamline_DirectSR,
+            GameAssetType.Streamline_DeepDVC or GameAssetType.Streamline_DeepDVC_BACKUP => KnownDLLs.Streamline_DeepDVC,
+            GameAssetType.Streamline_Common or GameAssetType.Streamline_Common_BACKUP => KnownDLLs.Streamline_Common,
+            GameAssetType.DeepDVC or GameAssetType.DeepDVC_BACKUP => KnownDLLs.DeepDVC,
+            GameAssetType.NvLowLatencyVK or GameAssetType.NvLowLatencyVK_BACKUP => KnownDLLs.NvLowLatencyVK,
             _ => new List<HashedKnownDLL>(),
         };
 
@@ -775,6 +1041,12 @@ internal class DLLManager
             recordList = DLSSDRecords;
             importedRecordList = ImportedManifest.DLSS_D;
         }
+        else if (fileName == "nvngx_dlssnr.dll")
+        {
+            gameAssetType = GameAssetType.DLSS_NR;
+            recordList = DLSSNRRecords;
+            importedRecordList = ImportedManifest.DLSS_NR;
+        }
         else if (fileName == "amd_fidelityfx_dx12.dll")
         {
             gameAssetType = GameAssetType.FSR_31_DX12;
@@ -811,6 +1083,133 @@ internal class DLLManager
             recordList = XeSSFGRecords;
             importedRecordList = ImportedManifest.XeSS_FG;
         }
+        else if (fileName == "dstorage.dll")
+        {
+            gameAssetType = GameAssetType.DirectStorage;
+            recordList = DirectStorageRecords;
+            importedRecordList = ImportedManifest.DirectStorage;
+        }
+        else if (fileName == "dstoragecore.dll")
+        {
+            gameAssetType = GameAssetType.DirectStorageCore;
+            recordList = DirectStorageCoreRecords;
+            importedRecordList = ImportedManifest.DirectStorageCore;
+        }
+        else if (fileName == "amd_fidelityfx_denoiser_dx12.dll")
+        {
+            gameAssetType = GameAssetType.FidelityFX_SDK2_Denoiser_DX12;
+            recordList = FidelityFXSDK2DenoiserDX12Records;
+            importedRecordList = ImportedManifest.FidelityFX_SDK2_Denoiser_DX12;
+        }
+        else if (fileName == "amd_fidelityfx_framegeneration_dx12.dll")
+        {
+            gameAssetType = GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12;
+            recordList = FidelityFXSDK2FrameGenerationDX12Records;
+            importedRecordList = ImportedManifest.FidelityFX_SDK2_FrameGeneration_DX12;
+        }
+        else if (fileName == "amd_fidelityfx_loader_dx12.dll")
+        {
+            gameAssetType = GameAssetType.FidelityFX_SDK2_Loader_DX12;
+            recordList = FidelityFXSDK2LoaderDX12Records;
+            importedRecordList = ImportedManifest.FidelityFX_SDK2_Loader_DX12;
+        }
+        else if (fileName == "amd_fidelityfx_radiancecache_dx12.dll")
+        {
+            gameAssetType = GameAssetType.FidelityFX_SDK2_RadianceCache_DX12;
+            recordList = FidelityFXSDK2RadianceCacheDX12Records;
+            importedRecordList = ImportedManifest.FidelityFX_SDK2_RadianceCache_DX12;
+        }
+        else if (fileName == "amd_fidelityfx_upscaler_dx12.dll")
+        {
+            gameAssetType = GameAssetType.FidelityFX_SDK2_Upscaler_DX12;
+            recordList = FidelityFXSDK2UpscalerDX12Records;
+            importedRecordList = ImportedManifest.FidelityFX_SDK2_Upscaler_DX12;
+        }
+        else if (fileName == "sl.reflex.dll")
+        {
+            gameAssetType = GameAssetType.Streamline_Reflex;
+            recordList = StreamlineReflexRecords;
+            importedRecordList = ImportedManifest.Streamline_Reflex;
+        }
+        else if (fileName == "sl.pcl.dll")
+        {
+            gameAssetType = GameAssetType.Streamline_PCL;
+            recordList = StreamlinePCLRecords;
+            importedRecordList = ImportedManifest.Streamline_PCL;
+        }
+        else if (fileName == "sl.nvperf.dll")
+        {
+            gameAssetType = GameAssetType.Streamline_NvPerf;
+            recordList = StreamlineNvPerfRecords;
+            importedRecordList = ImportedManifest.Streamline_NvPerf;
+        }
+        else if (fileName == "sl.nis.dll")
+        {
+            gameAssetType = GameAssetType.Streamline_NIS;
+            recordList = StreamlineNISRecords;
+            importedRecordList = ImportedManifest.Streamline_NIS;
+        }
+        else if (fileName == "sl.interposer.dll")
+        {
+            gameAssetType = GameAssetType.Streamline_Interposer;
+            recordList = StreamlineInterposerRecords;
+            importedRecordList = ImportedManifest.Streamline_Interposer;
+        }
+        else if (fileName == "sl.dlss_d.dll")
+        {
+            gameAssetType = GameAssetType.Streamline_DLSS_G;
+            recordList = StreamlineDLSSGRecords;
+            importedRecordList = ImportedManifest.Streamline_DLSS_G;
+        }
+        else if (fileName == "sl.dlss_g.dll")
+        {
+            gameAssetType = GameAssetType.Streamline_DLSS_D;
+            recordList = StreamlineDLSSDRecords;
+            importedRecordList = ImportedManifest.Streamline_DLSS_D;
+        }
+        else if (fileName == "sl.dlss_nr.dll")
+        {
+            gameAssetType = GameAssetType.Streamline_DLSS_NR;
+            recordList = StreamlineDLSSNRRecords;
+            importedRecordList = ImportedManifest.Streamline_DLSS_NR;
+        }
+        else if (fileName == "sl.dlss.dll")
+        {
+            gameAssetType = GameAssetType.Streamline_DLSS;
+            recordList = StreamlineDLSSRecords;
+            importedRecordList = ImportedManifest.Streamline_DLSS;
+        }
+        else if (fileName == "sl.directsr.dll")
+        {
+            gameAssetType = GameAssetType.Streamline_DirectSR;
+            recordList = StreamlineDirectSRRecords;
+            importedRecordList = ImportedManifest.Streamline_DirectSR;
+        }
+        else if (fileName == "sl.deepdvc.dll")
+        {
+            gameAssetType = GameAssetType.Streamline_DeepDVC;
+            recordList = StreamlineDeepDVCRecords;
+            importedRecordList = ImportedManifest.Streamline_DeepDVC;
+        }
+        else if (fileName == "sl.common.dll")
+        {
+            gameAssetType = GameAssetType.Streamline_Common;
+            recordList = StreamlineCommonRecords;
+            importedRecordList = ImportedManifest.Streamline_Common;
+        }
+        else if (fileName == "nvngx_deepdvc.dll")
+        {
+            gameAssetType = GameAssetType.DeepDVC;
+            recordList = DeepDVCRecords;
+            importedRecordList = ImportedManifest.DeepDVC;
+        }
+        else if (fileName == "NvLowLatencyVk.dll")
+        {
+            gameAssetType = GameAssetType.NvLowLatencyVK;
+            recordList = NvLowLatencyVKRecords;
+            importedRecordList = ImportedManifest.NvLowLatencyVK;
+        }
+
 
         if (gameAssetType is null || recordList is null || importedRecordList is null)
         {
@@ -935,6 +1334,11 @@ internal class DLLManager
             recordList = DLSSDRecords;
             importedRecordList = ImportedManifest?.DLSS_D;
         }
+        else if (dllRecord.AssetType == GameAssetType.DLSS_NR)
+        {
+            recordList = DLSSNRRecords;
+            importedRecordList = ImportedManifest?.DLSS_NR;
+        }
         else if (dllRecord.AssetType == GameAssetType.FSR_31_DX12)
         {
             recordList = FSR31DX12Records;
@@ -965,6 +1369,111 @@ internal class DLLManager
             recordList = XeLLRecords;
             importedRecordList = ImportedManifest?.XeLL;
         }
+        else if (dllRecord.AssetType == GameAssetType.DirectStorage)
+        {
+            recordList = DirectStorageRecords;
+            importedRecordList = ImportedManifest?.DirectStorage;
+        }
+        else if (dllRecord.AssetType == GameAssetType.DirectStorageCore)
+        {
+            recordList = DirectStorageCoreRecords;
+            importedRecordList = ImportedManifest?.DirectStorageCore;
+        }
+        else if (dllRecord.AssetType == GameAssetType.FidelityFX_SDK2_Denoiser_DX12)
+        {
+            recordList = FidelityFXSDK2DenoiserDX12Records;
+            importedRecordList = ImportedManifest?.FidelityFX_SDK2_Denoiser_DX12;
+        }
+        else if (dllRecord.AssetType == GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12)
+        {
+            recordList = FidelityFXSDK2FrameGenerationDX12Records;
+            importedRecordList = ImportedManifest?.FidelityFX_SDK2_FrameGeneration_DX12;
+        }
+        else if (dllRecord.AssetType == GameAssetType.FidelityFX_SDK2_Loader_DX12)
+        {
+            recordList = FidelityFXSDK2LoaderDX12Records;
+            importedRecordList = ImportedManifest?.FidelityFX_SDK2_Loader_DX12;
+        }
+        else if (dllRecord.AssetType == GameAssetType.FidelityFX_SDK2_RadianceCache_DX12)
+        {
+            recordList = FidelityFXSDK2RadianceCacheDX12Records;
+            importedRecordList = ImportedManifest?.FidelityFX_SDK2_RadianceCache_DX12;
+        }
+        else if (dllRecord.AssetType == GameAssetType.FidelityFX_SDK2_Upscaler_DX12)
+        {
+            recordList = FidelityFXSDK2UpscalerDX12Records;
+            importedRecordList = ImportedManifest?.FidelityFX_SDK2_Upscaler_DX12;
+        }
+        else if (dllRecord.AssetType == GameAssetType.Streamline_Reflex)
+        {
+            recordList = StreamlineReflexRecords;
+            importedRecordList = ImportedManifest?.Streamline_Reflex;
+        }
+        else if (dllRecord.AssetType == GameAssetType.Streamline_PCL)
+        {
+            recordList = StreamlinePCLRecords;
+            importedRecordList = ImportedManifest?.Streamline_PCL;
+        }
+        else if (dllRecord.AssetType == GameAssetType.Streamline_NvPerf)
+        {
+            recordList = StreamlineNvPerfRecords;
+            importedRecordList = ImportedManifest?.Streamline_NvPerf;
+        }
+        else if (dllRecord.AssetType == GameAssetType.Streamline_NIS)
+        {
+            recordList = StreamlineNISRecords;
+            importedRecordList = ImportedManifest?.Streamline_NIS;
+        }
+        else if (dllRecord.AssetType == GameAssetType.Streamline_Interposer)
+        {
+            recordList = StreamlineInterposerRecords;
+            importedRecordList = ImportedManifest?.Streamline_Interposer;
+        }
+        else if (dllRecord.AssetType == GameAssetType.Streamline_DLSS_G)
+        {
+            recordList = StreamlineDLSSGRecords;
+            importedRecordList = ImportedManifest?.Streamline_DLSS_G;
+        }
+        else if (dllRecord.AssetType == GameAssetType.Streamline_DLSS_D)
+        {
+            recordList = StreamlineDLSSDRecords;
+            importedRecordList = ImportedManifest?.Streamline_DLSS_D;
+        }
+        else if (dllRecord.AssetType == GameAssetType.Streamline_DLSS_NR)
+        {
+            recordList = StreamlineDLSSNRRecords;
+            importedRecordList = ImportedManifest?.Streamline_DLSS_NR;
+        }
+        else if (dllRecord.AssetType == GameAssetType.Streamline_DLSS)
+        {
+            recordList = StreamlineDLSSRecords;
+            importedRecordList = ImportedManifest?.Streamline_DLSS;
+        }
+        else if (dllRecord.AssetType == GameAssetType.Streamline_DirectSR)
+        {
+            recordList = StreamlineDirectSRRecords;
+            importedRecordList = ImportedManifest?.Streamline_DirectSR;
+        }
+        else if (dllRecord.AssetType == GameAssetType.Streamline_DeepDVC)
+        {
+            recordList = StreamlineDeepDVCRecords;
+            importedRecordList = ImportedManifest?.Streamline_DeepDVC;
+        }
+        else if (dllRecord.AssetType == GameAssetType.Streamline_Common)
+        {
+            recordList = StreamlineCommonRecords;
+            importedRecordList = ImportedManifest?.Streamline_Common;
+        }
+        else if (dllRecord.AssetType == GameAssetType.DeepDVC)
+        {
+            recordList = DeepDVCRecords;
+            importedRecordList = ImportedManifest?.DeepDVC;
+        }
+        else if (dllRecord.AssetType == GameAssetType.NvLowLatencyVK)
+        {
+            recordList = NvLowLatencyVKRecords;
+            importedRecordList = ImportedManifest?.NvLowLatencyVK;
+        }
 
         if (recordList is null)
         {
@@ -985,12 +1494,34 @@ internal class DLLManager
             GameAssetType.DLSS => "nvngx_dlss.dll",
             GameAssetType.DLSS_G => "nvngx_dlssg.dll",
             GameAssetType.DLSS_D => "nvngx_dlssd.dll",
+            GameAssetType.DLSS_NR => "nvngx_dlssnr.dll",
             GameAssetType.FSR_31_DX12 => "amd_fidelityfx_dx12.dll",
             GameAssetType.FSR_31_VK => "amd_fidelityfx_vk.dll",
             GameAssetType.XeSS => "libxess.dll",
             GameAssetType.XeSS_FG => "libxess_fg.dll",
             GameAssetType.XeLL => "libxell.dll",
             GameAssetType.XeSS_DX11 => "libxess_dx11.dll",
+            GameAssetType.DirectStorage => "dstorage.dll",
+            GameAssetType.DirectStorageCore => "dstoragecore.dll",
+            GameAssetType.FidelityFX_SDK2_Denoiser_DX12 => "amd_fidelityfx_denoiser_dx12.dll",
+            GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12 => "amd_fidelityfx_framegeneration_dx12.dll",
+            GameAssetType.FidelityFX_SDK2_Loader_DX12 => "amd_fidelityfx_loader_dx12.dll",
+            GameAssetType.FidelityFX_SDK2_RadianceCache_DX12 => "amd_fidelityfx_radiancecache_dx12.dll",
+            GameAssetType.FidelityFX_SDK2_Upscaler_DX12 => "amd_fidelityfx_upscaler_dx12.dll",
+            GameAssetType.Streamline_Reflex => "sl.reflex.dll",
+            GameAssetType.Streamline_PCL => "sl.pcl.dll",
+            GameAssetType.Streamline_NvPerf => "sl.nvperf.dll",
+            GameAssetType.Streamline_NIS => "sl.nis.dll",
+            GameAssetType.Streamline_Interposer => "sl.interposer.dll",
+            GameAssetType.Streamline_DLSS_G => "sl.dlss_d.dll",
+            GameAssetType.Streamline_DLSS_D => "sl.dlss_g.dll",
+            GameAssetType.Streamline_DLSS_NR => "sl.dlss_nr.dll",
+            GameAssetType.Streamline_DLSS => "sl.dlss.dll",
+            GameAssetType.Streamline_DirectSR => "sl.directsr.dll",
+            GameAssetType.Streamline_DeepDVC => "sl.deepdvc.dll",
+            GameAssetType.Streamline_Common => "sl.common.dll",
+            GameAssetType.DeepDVC => "nvngx_deepdvc.dll",
+            GameAssetType.NvLowLatencyVK => "NvLowLatencyVk.dll",
             _ => string.Empty,
         };
     }

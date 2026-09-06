@@ -95,6 +95,14 @@ public partial class DLLPickerControlModel : ObservableObject
                 }
                 break;
 
+            case GameAssetType.DLSS_NR:
+                DLLRecords = [.. DLLManager.Instance.DLSSNRRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDLSS_NR?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
             case GameAssetType.FSR_31_DX12:
                 DLLRecords = [.. DLLManager.Instance.FSR31DX12Records];
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
@@ -140,6 +148,174 @@ public partial class DLLPickerControlModel : ObservableObject
                 if (Settings.Instance.OnlyShowDownloadedDlls == true)
                 {
                     _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentXeLL?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.DirectStorage:
+                DLLRecords = [.. DLLManager.Instance.DirectStorageRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDirectStorage?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.DirectStorageCore:
+                DLLRecords = [.. DLLManager.Instance.DirectStorageCoreRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDirectStorageCore?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.FidelityFX_SDK2_Denoiser_DX12:
+                DLLRecords = [.. DLLManager.Instance.FidelityFXSDK2DenoiserDX12Records];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentFidelityFX_SDK2_Denoiser_DX12?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12:
+                DLLRecords = [.. DLLManager.Instance.FidelityFXSDK2FrameGenerationDX12Records];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentFidelityFX_SDK2_FrameGeneration_DX12?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.FidelityFX_SDK2_Loader_DX12:
+                DLLRecords = [.. DLLManager.Instance.FidelityFXSDK2LoaderDX12Records];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentFidelityFX_SDK2_Loader_DX12?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.FidelityFX_SDK2_RadianceCache_DX12:
+                DLLRecords = [.. DLLManager.Instance.FidelityFXSDK2RadianceCacheDX12Records];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentFidelityFX_SDK2_RadianceCache_DX12?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.FidelityFX_SDK2_Upscaler_DX12:
+                DLLRecords = [.. DLLManager.Instance.FidelityFXSDK2UpscalerDX12Records];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentFidelityFX_SDK2_Upscaler_DX12?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.Streamline_Reflex:
+                DLLRecords = [.. DLLManager.Instance.StreamlineReflexRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentStreamline_Reflex?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.Streamline_PCL:
+                DLLRecords = [.. DLLManager.Instance.StreamlinePCLRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentStreamline_PCL?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.Streamline_NvPerf:
+                DLLRecords = [.. DLLManager.Instance.StreamlineNvPerfRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentStreamline_NvPerf?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.Streamline_NIS:
+                DLLRecords = [.. DLLManager.Instance.StreamlineNISRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentStreamline_NIS?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.Streamline_Interposer:
+                DLLRecords = [.. DLLManager.Instance.StreamlineInterposerRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentStreamline_Interposer?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.Streamline_DLSS_G:
+                DLLRecords = [.. DLLManager.Instance.StreamlineDLSSGRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentStreamline_DLSS_G?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.Streamline_DLSS_D:
+                DLLRecords = [.. DLLManager.Instance.StreamlineDLSSDRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentStreamline_DLSS_D?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.Streamline_DLSS_NR:
+                DLLRecords = [.. DLLManager.Instance.StreamlineDLSSNRRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentStreamline_DLSS_NR?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.Streamline_DLSS:
+                DLLRecords = [.. DLLManager.Instance.StreamlineDLSSRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentStreamline_DLSS?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.Streamline_DirectSR:
+                DLLRecords = [.. DLLManager.Instance.StreamlineDirectSRRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentStreamline_DirectSR?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.Streamline_DeepDVC:
+                DLLRecords = [.. DLLManager.Instance.StreamlineDeepDVCRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentStreamline_DeepDVC?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.Streamline_Common:
+                DLLRecords = [.. DLLManager.Instance.StreamlineCommonRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentStreamline_Common?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.DeepDVC:
+                DLLRecords = [.. DLLManager.Instance.DeepDVCRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentDeepDVC?.Hash && x.LocalRecord?.IsDownloaded is false);
+                }
+                break;
+
+            case GameAssetType.NvLowLatencyVK:
+                DLLRecords = [.. DLLManager.Instance.NvLowLatencyVKRecords];
+                if (Settings.Instance.OnlyShowDownloadedDlls == true)
+                {
+                    _ = DLLRecords.RemoveAll(x => x.MD5Hash != Game.CurrentNvLowLatencyVK?.Hash && x.LocalRecord?.IsDownloaded is false);
                 }
                 break;
 

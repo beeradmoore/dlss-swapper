@@ -156,6 +156,14 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
 
     [ObservableProperty]
     [Ignore]
+    public partial GameAsset? CurrentDLSS_NR { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleDLSSNRFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
     public partial GameAsset? CurrentFSR_31_DX12 { get; set; } = null;
 
     [ObservableProperty]
@@ -201,7 +209,175 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
     [ObservableProperty]
     [Ignore]
     public partial bool MultipleXeSSDX11Found { get; set; } = false;
-    
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentDirectStorage { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleDirectStorageFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentDirectStorageCore { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleDirectStorageCoreFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentFidelityFX_SDK2_Denoiser_DX12 { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleFidelityFXSDK2DenoiserDX12Found { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentFidelityFX_SDK2_FrameGeneration_DX12 { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleFidelityFXSDK2FrameGenerationDX12Found { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentFidelityFX_SDK2_Loader_DX12 { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleFidelityFXSDK2LoaderDX12Found { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentFidelityFX_SDK2_RadianceCache_DX12 { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleFidelityFXSDK2RadianceCacheDX12Found { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentFidelityFX_SDK2_Upscaler_DX12 { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleFidelityFXSDK2UpscalerDX12Found { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentStreamline_Reflex { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleStreamlineReflexFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentStreamline_PCL { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleStreamlinePCLFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentStreamline_NvPerf { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleStreamlineNvPerfFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentStreamline_NIS { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleStreamlineNISFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentStreamline_Interposer { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleStreamlineInterposerFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentStreamline_DLSS_G { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleStreamlineDLSSGFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentStreamline_DLSS_D { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleStreamlineDLSSDFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentStreamline_DLSS_NR { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleStreamlineDLSSNRFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentStreamline_DLSS { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleStreamlineDLSSFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentStreamline_DirectSR { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleStreamlineDirectSRFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentStreamline_DeepDVC { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleStreamlineDeepDVCFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentStreamline_Common { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleStreamlineCommonFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentDeepDVC { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleDeepDVCFound { get; set; } = false;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial GameAsset? CurrentNvLowLatencyVK { get; set; } = null;
+
+    [ObservableProperty]
+    [Ignore]
+    public partial bool MultipleNvLowLatencyVKFound { get; set; } = false;
+
 
     [Ignore]
     public abstract bool IsReadyToPlay { get; }
@@ -461,6 +637,17 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                         ProcessGame_ProcessGameAsset(gameAsset);
                         GameAssets.Add(gameAsset);
                     }
+                    else if (dllName == "nvngx_dlssnr.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.DLSS_NR,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
                     else if (dllName == "amd_fidelityfx_dx12.dll")
                     {
                         var gameAsset = new GameAsset()
@@ -522,6 +709,237 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                         {
                             Id = ID,
                             AssetType = GameAssetType.XeSS_FG,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "dstorage.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.DirectStorage,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "dstoragecore.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.DirectStorageCore,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "amd_fidelityfx_denoiser_dx12.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.FidelityFX_SDK2_Denoiser_DX12,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "amd_fidelityfx_framegeneration_dx12.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "amd_fidelityfx_loader_dx12.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.FidelityFX_SDK2_Loader_DX12,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "amd_fidelityfx_radiancecache_dx12.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.FidelityFX_SDK2_RadianceCache_DX12,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "amd_fidelityfx_upscaler_dx12.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.FidelityFX_SDK2_Upscaler_DX12,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "sl.reflex.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline_Reflex,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "sl.pcl.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline_PCL,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "sl.nvperf.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline_NvPerf,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "sl.nis.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline_NIS,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "sl.interposer.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline_Interposer,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "sl.dlss_d.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline_DLSS_G,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "sl.dlss_g.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline_DLSS_D,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "sl.dlss_nr.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline_DLSS_NR,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "sl.dlss.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline_DLSS,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "sl.directsr.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline_DirectSR,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "sl.deepdvc.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline_DeepDVC,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "sl.common.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.Streamline_Common,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "nvngx_deepdvc.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.DeepDVC,
+                            Path = dllPath,
+                        };
+                        ProcessGame_ProcessGameAsset(gameAsset);
+                        GameAssets.Add(gameAsset);
+                    }
+                    else if (dllName == "NvLowLatencyVk.dll")
+                    {
+                        var gameAsset = new GameAsset()
+                        {
+                            Id = ID,
+                            AssetType = GameAssetType.NvLowLatencyVK,
                             Path = dllPath,
                         };
                         ProcessGame_ProcessGameAsset(gameAsset);
@@ -926,6 +1344,11 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                 CurrentDLSS_D = null;
                 CurrentDLSS_D = newGameAsset;
             }
+            else if (gameAssetType == GameAssetType.DLSS_NR)
+            {
+                CurrentDLSS_NR = null;
+                CurrentDLSS_NR = newGameAsset;
+            }
             else if (gameAssetType == GameAssetType.FSR_31_DX12)
             {
                 CurrentFSR_31_DX12 = null;
@@ -955,6 +1378,111 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             {
                 CurrentXeLL = null;
                 CurrentXeLL = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.DirectStorage)
+            {
+                CurrentDirectStorage = null;
+                CurrentDirectStorage = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.DirectStorageCore)
+            {
+                CurrentDirectStorageCore = null;
+                CurrentDirectStorageCore = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.FidelityFX_SDK2_Denoiser_DX12)
+            {
+                CurrentFidelityFX_SDK2_Denoiser_DX12 = null;
+                CurrentFidelityFX_SDK2_Denoiser_DX12 = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12)
+            {
+                CurrentFidelityFX_SDK2_FrameGeneration_DX12 = null;
+                CurrentFidelityFX_SDK2_FrameGeneration_DX12 = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.FidelityFX_SDK2_Loader_DX12)
+            {
+                CurrentFidelityFX_SDK2_Loader_DX12 = null;
+                CurrentFidelityFX_SDK2_Loader_DX12 = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.FidelityFX_SDK2_RadianceCache_DX12)
+            {
+                CurrentFidelityFX_SDK2_RadianceCache_DX12 = null;
+                CurrentFidelityFX_SDK2_RadianceCache_DX12 = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.FidelityFX_SDK2_Upscaler_DX12)
+            {
+                CurrentFidelityFX_SDK2_Upscaler_DX12 = null;
+                CurrentFidelityFX_SDK2_Upscaler_DX12 = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.Streamline_Reflex)
+            {
+                CurrentStreamline_Reflex = null;
+                CurrentStreamline_Reflex = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.Streamline_PCL)
+            {
+                CurrentStreamline_PCL = null;
+                CurrentStreamline_PCL = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.Streamline_NvPerf)
+            {
+                CurrentStreamline_NvPerf = null;
+                CurrentStreamline_NvPerf = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.Streamline_NIS)
+            {
+                CurrentStreamline_NIS = null;
+                CurrentStreamline_NIS = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.Streamline_Interposer)
+            {
+                CurrentStreamline_Interposer = null;
+                CurrentStreamline_Interposer = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.Streamline_DLSS_G)
+            {
+                CurrentStreamline_DLSS_G = null;
+                CurrentStreamline_DLSS_G = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.Streamline_DLSS_D)
+            {
+                CurrentStreamline_DLSS_D = null;
+                CurrentStreamline_DLSS_D = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.Streamline_DLSS_NR)
+            {
+                CurrentStreamline_DLSS_NR = null;
+                CurrentStreamline_DLSS_NR = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.Streamline_DLSS)
+            {
+                CurrentStreamline_DLSS = null;
+                CurrentStreamline_DLSS = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.Streamline_DirectSR)
+            {
+                CurrentStreamline_DirectSR = null;
+                CurrentStreamline_DirectSR = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.Streamline_DeepDVC)
+            {
+                CurrentStreamline_DeepDVC = null;
+                CurrentStreamline_DeepDVC = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.Streamline_Common)
+            {
+                CurrentStreamline_Common = null;
+                CurrentStreamline_Common = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.DeepDVC)
+            {
+                CurrentDeepDVC = null;
+                CurrentDeepDVC = newGameAsset;
+            }
+            else if (gameAssetType == GameAssetType.NvLowLatencyVK)
+            {
+                CurrentNvLowLatencyVK = null;
+                CurrentNvLowLatencyVK = newGameAsset;
             }
             else
             {
@@ -1165,12 +1693,34 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
                 if (cachedGameAsset.AssetType == GameAssetType.DLSS_BACKUP ||
                     cachedGameAsset.AssetType == GameAssetType.DLSS_G_BACKUP ||
                     cachedGameAsset.AssetType == GameAssetType.DLSS_D_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.DLSS_NR_BACKUP ||
                     cachedGameAsset.AssetType == GameAssetType.FSR_31_DX12_BACKUP ||
                     cachedGameAsset.AssetType == GameAssetType.FSR_31_VK_BACKUP ||
                     cachedGameAsset.AssetType == GameAssetType.XeSS_BACKUP ||
                     cachedGameAsset.AssetType == GameAssetType.XeSS_FG_BACKUP ||
                     cachedGameAsset.AssetType == GameAssetType.XeSS_DX11_BACKUP ||
-                    cachedGameAsset.AssetType == GameAssetType.XeLL_BACKUP)
+                    cachedGameAsset.AssetType == GameAssetType.XeLL_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.DirectStorage_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.DirectStorageCore_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.FidelityFX_SDK2_Denoiser_DX12_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.FidelityFX_SDK2_Loader_DX12_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.FidelityFX_SDK2_RadianceCache_DX12_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.FidelityFX_SDK2_Upscaler_DX12_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.Streamline_Reflex_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.Streamline_PCL_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.Streamline_NvPerf_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.Streamline_NIS_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.Streamline_Interposer_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.Streamline_DLSS_G_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.Streamline_DLSS_D_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.Streamline_DLSS_NR_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.Streamline_DLSS_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.Streamline_DirectSR_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.Streamline_DeepDVC_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.Streamline_Common_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.DeepDVC_BACKUP ||
+                    cachedGameAsset.AssetType == GameAssetType.NvLowLatencyVK_BACKUP)
                 {
                     if (File.Exists(cachedGameAsset.Path))
                     {
@@ -1359,6 +1909,12 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             didChange = true;
         }
 
+        if (CurrentDLSS_NR != game.CurrentDLSS_NR)
+        {
+            CurrentDLSS_NR = game.CurrentDLSS_NR;
+            didChange = true;
+        }
+
         if (CurrentFSR_31_DX12 != game.CurrentFSR_31_DX12)
         {
             CurrentFSR_31_DX12 = game.CurrentFSR_31_DX12;
@@ -1395,6 +1951,132 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             didChange = true;
         }
 
+        if (CurrentDirectStorage != game.CurrentDirectStorage)
+        {
+            CurrentDirectStorage = game.CurrentDirectStorage;
+            didChange = true;
+        }
+
+        if (CurrentDirectStorageCore != game.CurrentDirectStorageCore)
+        {
+            CurrentDirectStorageCore = game.CurrentDirectStorageCore;
+            didChange = true;
+        }
+
+        if (CurrentFidelityFX_SDK2_Denoiser_DX12 != game.CurrentFidelityFX_SDK2_Denoiser_DX12)
+        {
+            CurrentFidelityFX_SDK2_Denoiser_DX12 = game.CurrentFidelityFX_SDK2_Denoiser_DX12;
+            didChange = true;
+        }
+
+        if (CurrentFidelityFX_SDK2_FrameGeneration_DX12 != game.CurrentFidelityFX_SDK2_FrameGeneration_DX12)
+        {
+            CurrentFidelityFX_SDK2_FrameGeneration_DX12 = game.CurrentFidelityFX_SDK2_FrameGeneration_DX12;
+            didChange = true;
+        }
+
+        if (CurrentFidelityFX_SDK2_Loader_DX12 != game.CurrentFidelityFX_SDK2_Loader_DX12)
+        {
+            CurrentFidelityFX_SDK2_Loader_DX12 = game.CurrentFidelityFX_SDK2_Loader_DX12;
+            didChange = true;
+        }
+
+        if (CurrentFidelityFX_SDK2_RadianceCache_DX12 != game.CurrentFidelityFX_SDK2_RadianceCache_DX12)
+        {
+            CurrentFidelityFX_SDK2_RadianceCache_DX12 = game.CurrentFidelityFX_SDK2_RadianceCache_DX12;
+            didChange = true;
+        }
+
+        if (CurrentFidelityFX_SDK2_Upscaler_DX12 != game.CurrentFidelityFX_SDK2_Upscaler_DX12)
+        {
+            CurrentFidelityFX_SDK2_Upscaler_DX12 = game.CurrentFidelityFX_SDK2_Upscaler_DX12;
+            didChange = true;
+        }
+
+        if (CurrentStreamline_Reflex != game.CurrentStreamline_Reflex)
+        {
+            CurrentStreamline_Reflex = game.CurrentStreamline_Reflex;
+            didChange = true;
+        }
+
+        if (CurrentStreamline_PCL != game.CurrentStreamline_PCL)
+        {
+            CurrentStreamline_PCL = game.CurrentStreamline_PCL;
+            didChange = true;
+        }
+
+        if (CurrentStreamline_NvPerf != game.CurrentStreamline_NvPerf)
+        {
+            CurrentStreamline_NvPerf = game.CurrentStreamline_NvPerf;
+            didChange = true;
+        }
+
+        if (CurrentStreamline_NIS != game.CurrentStreamline_NIS)
+        {
+            CurrentStreamline_NIS = game.CurrentStreamline_NIS;
+            didChange = true;
+        }
+
+        if (CurrentStreamline_Interposer != game.CurrentStreamline_Interposer)
+        {
+            CurrentStreamline_Interposer = game.CurrentStreamline_Interposer;
+            didChange = true;
+        }
+
+        if (CurrentStreamline_DLSS_G != game.CurrentStreamline_DLSS_G)
+        {
+            CurrentStreamline_DLSS_G = game.CurrentStreamline_DLSS_G;
+            didChange = true;
+        }
+
+        if (CurrentStreamline_DLSS_D != game.CurrentStreamline_DLSS_D)
+        {
+            CurrentStreamline_DLSS_D = game.CurrentStreamline_DLSS_D;
+            didChange = true;
+        }
+
+        if (CurrentStreamline_DLSS_NR != game.CurrentStreamline_DLSS_NR)
+        {
+            CurrentStreamline_DLSS_NR = game.CurrentStreamline_DLSS_NR;
+            didChange = true;
+        }
+
+        if (CurrentStreamline_DLSS != game.CurrentStreamline_DLSS)
+        {
+            CurrentStreamline_DLSS = game.CurrentStreamline_DLSS;
+            didChange = true;
+        }
+
+        if (CurrentStreamline_DirectSR != game.CurrentStreamline_DirectSR)
+        {
+            CurrentStreamline_DirectSR = game.CurrentStreamline_DirectSR;
+            didChange = true;
+        }
+
+        if (CurrentStreamline_DeepDVC != game.CurrentStreamline_DeepDVC)
+        {
+            CurrentStreamline_DeepDVC = game.CurrentStreamline_DeepDVC;
+            didChange = true;
+        }
+
+        if (CurrentStreamline_Common != game.CurrentStreamline_Common)
+        {
+            CurrentStreamline_Common = game.CurrentStreamline_Common;
+            didChange = true;
+        }
+
+        if (CurrentDeepDVC != game.CurrentDeepDVC)
+        {
+            CurrentDeepDVC = game.CurrentDeepDVC;
+            didChange = true;
+        }
+
+        if (CurrentNvLowLatencyVK != game.CurrentNvLowLatencyVK)
+        {
+            CurrentNvLowLatencyVK = game.CurrentNvLowLatencyVK;
+            didChange = true;
+        }
+
         // We don't copy across the following properties as it is assume this object has the latest revisions:
         // - Notes
         // - IsFavourite
@@ -1409,23 +2091,67 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
         CurrentDLSS = null;
         CurrentDLSS_G = null;
         CurrentDLSS_D = null;
+        CurrentDLSS_NR = null;
         CurrentFSR_31_DX12 = null;
         CurrentFSR_31_VK = null;
         CurrentXeSS = null;
         CurrentXeSS_FG = null;
         CurrentXeSS_DX11 = null;
         CurrentXeLL = null;
+        CurrentDirectStorage = null;
+        CurrentDirectStorageCore = null;
+        CurrentFidelityFX_SDK2_Denoiser_DX12 = null;
+        CurrentFidelityFX_SDK2_FrameGeneration_DX12 = null;
+        CurrentFidelityFX_SDK2_Loader_DX12 = null;
+        CurrentFidelityFX_SDK2_RadianceCache_DX12 = null;
+        CurrentFidelityFX_SDK2_Upscaler_DX12 = null;
+        CurrentStreamline_Reflex = null;
+        CurrentStreamline_PCL = null;
+        CurrentStreamline_NvPerf = null;
+        CurrentStreamline_NIS = null;
+        CurrentStreamline_Interposer = null;
+        CurrentStreamline_DLSS_G = null;
+        CurrentStreamline_DLSS_D = null;
+        CurrentStreamline_DLSS_NR = null;
+        CurrentStreamline_DLSS = null;
+        CurrentStreamline_DirectSR = null;
+        CurrentStreamline_DeepDVC = null;
+        CurrentStreamline_Common = null;
+        CurrentDeepDVC = null;
+        CurrentNvLowLatencyVK = null;
 
         // NOTE: DLL type
         MultipleDLSSFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS) > 1;
         MultipleDLSSGFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS_G) > 1;
         MultipleDLSSDFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS_D) > 1;
+        MultipleDLSSNRFound = GameAssets.Count(x => x.AssetType == GameAssetType.DLSS_NR) > 1;
         MultipleFSR31DX12Found = GameAssets.Count(x => x.AssetType == GameAssetType.FSR_31_DX12) > 1;
         MultipleFSR31VKFound = GameAssets.Count(x => x.AssetType == GameAssetType.FSR_31_VK) > 1;
         MultipleXeSSFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS) > 1;
         MultipleXeSSFGFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS_FG) > 1;
         MultipleXeSSDX11Found = GameAssets.Count(x => x.AssetType == GameAssetType.XeSS_DX11) > 1;
         MultipleXeLLFound = GameAssets.Count(x => x.AssetType == GameAssetType.XeLL) > 1;
+        MultipleDirectStorageFound = GameAssets.Count(x => x.AssetType == GameAssetType.DirectStorage) > 1;
+        MultipleDirectStorageCoreFound = GameAssets.Count(x => x.AssetType == GameAssetType.DirectStorageCore) > 1;
+        MultipleFidelityFXSDK2DenoiserDX12Found = GameAssets.Count(x => x.AssetType == GameAssetType.FidelityFX_SDK2_Denoiser_DX12) > 1;
+        MultipleFidelityFXSDK2FrameGenerationDX12Found = GameAssets.Count(x => x.AssetType == GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12) > 1;
+        MultipleFidelityFXSDK2LoaderDX12Found = GameAssets.Count(x => x.AssetType == GameAssetType.FidelityFX_SDK2_Loader_DX12) > 1;
+        MultipleFidelityFXSDK2RadianceCacheDX12Found = GameAssets.Count(x => x.AssetType == GameAssetType.FidelityFX_SDK2_RadianceCache_DX12) > 1;
+        MultipleFidelityFXSDK2UpscalerDX12Found = GameAssets.Count(x => x.AssetType == GameAssetType.FidelityFX_SDK2_Upscaler_DX12) > 1;
+        MultipleStreamlineReflexFound = GameAssets.Count(x => x.AssetType == GameAssetType.Streamline_Reflex) > 1;
+        MultipleStreamlinePCLFound = GameAssets.Count(x => x.AssetType == GameAssetType.Streamline_PCL) > 1;
+        MultipleStreamlineNvPerfFound = GameAssets.Count(x => x.AssetType == GameAssetType.Streamline_NvPerf) > 1;
+        MultipleStreamlineNISFound = GameAssets.Count(x => x.AssetType == GameAssetType.Streamline_NIS) > 1;
+        MultipleStreamlineInterposerFound = GameAssets.Count(x => x.AssetType == GameAssetType.Streamline_Interposer) > 1;
+        MultipleStreamlineDLSSGFound = GameAssets.Count(x => x.AssetType == GameAssetType.Streamline_DLSS_G) > 1;
+        MultipleStreamlineDLSSDFound = GameAssets.Count(x => x.AssetType == GameAssetType.Streamline_DLSS_D) > 1;
+        MultipleStreamlineDLSSNRFound = GameAssets.Count(x => x.AssetType == GameAssetType.Streamline_DLSS_NR) > 1;
+        MultipleStreamlineDLSSFound = GameAssets.Count(x => x.AssetType == GameAssetType.Streamline_DLSS) > 1;
+        MultipleStreamlineDirectSRFound = GameAssets.Count(x => x.AssetType == GameAssetType.Streamline_DirectSR) > 1;
+        MultipleStreamlineDeepDVCFound = GameAssets.Count(x => x.AssetType == GameAssetType.Streamline_DeepDVC) > 1;
+        MultipleStreamlineCommonFound = GameAssets.Count(x => x.AssetType == GameAssetType.Streamline_Common) > 1;
+        MultipleDeepDVCFound = GameAssets.Count(x => x.AssetType == GameAssetType.DeepDVC) > 1;
+        MultipleNvLowLatencyVKFound = GameAssets.Count(x => x.AssetType == GameAssetType.NvLowLatencyVK) > 1;
 
         // NOTE: DLL type
         foreach (var gameAsset in GameAssets)
@@ -1441,6 +2167,10 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             else if (gameAsset.AssetType == GameAssetType.DLSS_D)
             {
                 CurrentDLSS_D = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.DLSS_NR)
+            {
+                CurrentDLSS_NR = gameAsset;
             }
             else if (gameAsset.AssetType == GameAssetType.FSR_31_DX12)
             {
@@ -1466,6 +2196,91 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             {
                 CurrentXeLL = gameAsset;
             }
+            else if (gameAsset.AssetType == GameAssetType.DirectStorage)
+            {
+                CurrentDirectStorage = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.DirectStorageCore)
+            {
+                CurrentDirectStorageCore = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.FidelityFX_SDK2_Denoiser_DX12)
+            {
+                CurrentFidelityFX_SDK2_Denoiser_DX12 = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12)
+            {
+                CurrentFidelityFX_SDK2_FrameGeneration_DX12 = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.FidelityFX_SDK2_Loader_DX12)
+            {
+                CurrentFidelityFX_SDK2_Loader_DX12 = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.FidelityFX_SDK2_RadianceCache_DX12)
+            {
+                CurrentFidelityFX_SDK2_RadianceCache_DX12 = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.FidelityFX_SDK2_Upscaler_DX12)
+            {
+                CurrentFidelityFX_SDK2_Upscaler_DX12 = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline_Reflex)
+            {
+                CurrentStreamline_Reflex = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline_PCL)
+            {
+                CurrentStreamline_PCL = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline_NvPerf)
+            {
+                CurrentStreamline_NvPerf = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline_NIS)
+            {
+                CurrentStreamline_NIS = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline_Interposer)
+            {
+                CurrentStreamline_Interposer = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline_DLSS_G)
+            {
+                CurrentStreamline_DLSS_G = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline_DLSS_D)
+            {
+                CurrentStreamline_DLSS_D = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline_DLSS_NR)
+            {
+                CurrentStreamline_DLSS_NR = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline_DLSS)
+            {
+                CurrentStreamline_DLSS = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline_DirectSR)
+            {
+                CurrentStreamline_DirectSR = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline_DeepDVC)
+            {
+                CurrentStreamline_DeepDVC = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.Streamline_Common)
+            {
+                CurrentStreamline_Common = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.DeepDVC)
+            {
+                CurrentDeepDVC = gameAsset;
+            }
+            else if (gameAsset.AssetType == GameAssetType.NvLowLatencyVK)
+            {
+                CurrentNvLowLatencyVK = gameAsset;
+            }
+
         }
     }
 

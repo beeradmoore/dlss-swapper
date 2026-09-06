@@ -80,6 +80,9 @@ public class KnownDLLs
     [JsonPropertyName(DLLRecord.Streamline_DLSS)]
     public List<HashedKnownDLL> Streamline_DLSS { get; set; } = new List<HashedKnownDLL>();
 
+    [JsonPropertyName(DLLRecord.Streamline_DLSS_NR)]
+    public List<HashedKnownDLL> Streamline_DLSS_NR { get; set; } = new List<HashedKnownDLL>();
+
     [JsonPropertyName(DLLRecord.Streamline_DirectSR)]
     public List<HashedKnownDLL> Streamline_DirectSR { get; set; } = new List<HashedKnownDLL>();
 

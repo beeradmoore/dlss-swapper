@@ -41,6 +41,7 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
     public const string Streamline_DLSS_G = "sl_dlss_g";
     public const string Streamline_DLSS_D = "sl_dlss_d";
     public const string Streamline_DLSS = "sl_dlss";
+    public const string Streamline_DLSS_NR = "sl_dlss_nr";
     public const string Streamline_DirectSR = "sl_directsr";
     public const string Streamline_DeepDVC = "sl_deepdvc";
     public const string Streamline_Common = "sl_common";
@@ -425,6 +426,7 @@ public class DLLRecord : IComparable<DLLRecord>, INotifyPropertyChanged
             GameAssetType.Streamline_DLSS_G => Streamline_DLSS_G,
             GameAssetType.Streamline_DLSS_D => Streamline_DLSS_D,
             GameAssetType.Streamline_DLSS => Streamline_DLSS,
+            GameAssetType.Streamline_DLSS_NR => Streamline_DLSS_NR,
             GameAssetType.Streamline_DirectSR => Streamline_DirectSR,
             GameAssetType.Streamline_DeepDVC => Streamline_DeepDVC,
             GameAssetType.Streamline_Common => Streamline_Common,

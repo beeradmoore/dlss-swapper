@@ -80,6 +80,9 @@ internal class Manifest
     [JsonPropertyName(DLLRecord.Streamline_DLSS)]
     public List<DLLRecord> Streamline_DLSS { get; set; } = new List<DLLRecord>();
 
+    [JsonPropertyName(DLLRecord.Streamline_DLSS_NR)]
+    public List<DLLRecord> Streamline_DLSS_NR { get; set; } = new List<DLLRecord>();
+
     [JsonPropertyName(DLLRecord.Streamline_DirectSR)]
     public List<DLLRecord> Streamline_DirectSR { get; set; } = new List<DLLRecord>();
 

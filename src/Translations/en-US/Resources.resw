@@ -546,6 +546,10 @@ If you have checked these and your game is still not showing up there may be a b
     <value>DLSS Frame Generation</value>
     <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
   </data>
+  <data name="General_Name_DLSS_NR" xml:space="preserve">
+    <value>DLSS Neural Rendering</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
+  </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>DLSS Preset</value>
     <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
@@ -581,6 +585,91 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="General_Name_XeSS_FG" xml:space="preserve">
     <value>XeSS Frame Generation</value>
     <comment>If XeSS does not have a direct translation put in the English characters for it</comment>
+  </data>
+
+  <data name="General_Name_DirectStorage" xml:space="preserve">
+    <value>DirectStorage</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_DirectStorageCore" xml:space="preserve">
+    <value>DirectStorage Core</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_FidelityFX_SDK2_Denoiser_DX12" xml:space="preserve">
+    <value>General_Name_FidelityFX_SDK2_Denoiser_DX12</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_FidelityFX_SDK2_FrameGeneration_DX12" xml:space="preserve">
+    <value>General_Name_FidelityFX_SDK2_FrameGeneration_DX12</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_FidelityFX_SDK2_Loader_DX12" xml:space="preserve">
+    <value>General_Name_FidelityFX_SDK2_Loader_DX12</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_FidelityFX_SDK2_RadianceCache_DX12" xml:space="preserve">
+    <value>General_Name_FidelityFX_SDK2_RadianceCache_DX12</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_FidelityFX_SDK2_Upscaler_DX12" xml:space="preserve">
+    <value>General_Name_FidelityFX_SDK2_Upscaler_DX12</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_Streamline_Reflex" xml:space="preserve">
+    <value>Reflex</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_Streamline_PCL" xml:space="preserve">
+    <value>PCL</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_Streamline_NvPerf" xml:space="preserve">
+    <value>NvPerf</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_Streamline_NIS" xml:space="preserve">
+    <value>NIS</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_Streamline_Interposer" xml:space="preserve">
+    <value>Interposer</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_Streamline_DLSS_G" xml:space="preserve">
+    <value>Streamline DLSS Frame Generation</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_Streamline_DLSS_D" xml:space="preserve">
+    <value>General_Name_Streamline_DLSS_D</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_Streamline_DLSS_NR" xml:space="preserve">
+    <value>General_Name_Streamline_DLSS_NR</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_Streamline_DLSS" xml:space="preserve">
+    <value>General_Name_Streamline_DLSS</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_Streamline_DirectSR" xml:space="preserve">
+    <value>General_Name_Streamline_DirectSR</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_Streamline_DeepDVC" xml:space="preserve">
+    <value>General_Name_Streamline_DeepDVC</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_Streamline_Common" xml:space="preserve">
+    <value>General_Name_Streamline_Common</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_DeepDVC" xml:space="preserve">
+    <value>DeepDVC</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
+  </data>
+  <data name="General_Name_NvLowLatencyVK" xml:space="preserve">
+    <value>NvLowLatencyVK</value>
+    <comment>If the product name (DLSS/XeSS,FSR, etc) does not have a reasonable direct translation put in the English characters for it</comment>
   </data>
   <data name="General_No" xml:space="preserve">
     <value>No</value>

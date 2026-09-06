@@ -52,12 +52,35 @@ public partial class LibraryPageModel : ObservableObject
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DLSS), Tag = GameAssetType.DLSS });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DLSS_G), Tag = GameAssetType.DLSS_G });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DLSS_D), Tag = GameAssetType.DLSS_D });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DLSS_NR), Tag = GameAssetType.DLSS_NR });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.FSR_31_DX12), Tag = GameAssetType.FSR_31_DX12 });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.FSR_31_VK), Tag = GameAssetType.FSR_31_VK });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.XeSS), Tag = GameAssetType.XeSS });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.XeSS_DX11), Tag = GameAssetType.XeSS_DX11 });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.XeSS_FG), Tag = GameAssetType.XeSS_FG });
             upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.XeLL), Tag = GameAssetType.XeLL });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DirectStorage), Tag = GameAssetType.DirectStorage });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DirectStorageCore), Tag = GameAssetType.DirectStorageCore });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.FidelityFX_SDK2_Denoiser_DX12), Tag = GameAssetType.FidelityFX_SDK2_Denoiser_DX12 });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12), Tag = GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12 });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.FidelityFX_SDK2_Loader_DX12), Tag = GameAssetType.FidelityFX_SDK2_Loader_DX12 });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.FidelityFX_SDK2_RadianceCache_DX12), Tag = GameAssetType.FidelityFX_SDK2_RadianceCache_DX12 });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.FidelityFX_SDK2_Upscaler_DX12), Tag = GameAssetType.FidelityFX_SDK2_Upscaler_DX12 });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.Streamline_Reflex), Tag = GameAssetType.Streamline_Reflex });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.Streamline_PCL), Tag = GameAssetType.Streamline_PCL });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.Streamline_NvPerf), Tag = GameAssetType.Streamline_NvPerf });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.Streamline_NIS), Tag = GameAssetType.Streamline_NIS });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.Streamline_Interposer), Tag = GameAssetType.Streamline_Interposer });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.Streamline_DLSS_G), Tag = GameAssetType.Streamline_DLSS_G });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.Streamline_DLSS_D), Tag = GameAssetType.Streamline_DLSS_D });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.Streamline_DLSS_NR), Tag = GameAssetType.Streamline_DLSS_NR });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.Streamline_DLSS), Tag = GameAssetType.Streamline_DLSS });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.Streamline_DirectSR), Tag = GameAssetType.Streamline_DirectSR });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.Streamline_DeepDVC), Tag = GameAssetType.Streamline_DeepDVC });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.Streamline_Common), Tag = GameAssetType.Streamline_Common });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.DeepDVC), Tag = GameAssetType.DeepDVC });
+            upscalerSelectorBar.Items.Add(new SelectorBarItem() { Text = DLLManager.Instance.GetAssetTypeName(GameAssetType.NvLowLatencyVK), Tag = GameAssetType.NvLowLatencyVK });
+
 
             SelectedSelectorBarItem = upscalerSelectorBar.Items[0];
         }
@@ -134,12 +157,34 @@ public partial class LibraryPageModel : ObservableObject
         allDllRecords.AddRange(DLLManager.Instance.DLSSRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.DLSSGRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.DLSSDRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.DLSSNRRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.FSR31DX12Records.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.FSR31VKRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.XeSSRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.XeSSFGRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.XeSSDX11Records.Where(x => x.LocalRecord?.IsDownloaded == true));
         allDllRecords.AddRange(DLLManager.Instance.XeLLRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.DirectStorageRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.DirectStorageCoreRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.FidelityFXSDK2DenoiserDX12Records.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.FidelityFXSDK2FrameGenerationDX12Records.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.FidelityFXSDK2LoaderDX12Records.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.FidelityFXSDK2RadianceCacheDX12Records.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.FidelityFXSDK2UpscalerDX12Records.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.StreamlineReflexRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.StreamlinePCLRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.StreamlineNvPerfRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.StreamlineNISRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.StreamlineInterposerRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.StreamlineDLSSGRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.StreamlineDLSSDRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.StreamlineDLSSNRRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.StreamlineDLSSRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.StreamlineDirectSRRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.StreamlineDeepDVCRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.StreamlineCommonRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.DeepDVCRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
+        allDllRecords.AddRange(DLLManager.Instance.NvLowLatencyVKRecords.Where(x => x.LocalRecord?.IsDownloaded == true));
 
         if (allDllRecords.Count == 0)
         {
@@ -564,11 +609,12 @@ public partial class LibraryPageModel : ObservableObject
 
                         if (string.IsNullOrWhiteSpace(newZipHash) == false)
                         {
+                            DLLRecord? dllRecord;
                             // NOTE: DLL type
-                            var dlssRecord = DLLManager.Instance.DLSSRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
-                            if (dlssRecord is not null)
+                            dllRecord = DLLManager.Instance.DLSSRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
                             {
-                                if (HandleLocalDLLRecordZip(importFile, dlssRecord, importResults))
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
                                 {
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
@@ -579,10 +625,10 @@ public partial class LibraryPageModel : ObservableObject
                                 }
                             }
 
-                            var dlssDRecord = DLLManager.Instance.DLSSDRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
-                            if (dlssDRecord is not null)
+                            dllRecord = DLLManager.Instance.DLSSDRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
                             {
-                                if (HandleLocalDLLRecordZip(importFile, dlssDRecord, importResults))
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
                                 {
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
@@ -593,10 +639,10 @@ public partial class LibraryPageModel : ObservableObject
                                 }
                             }
 
-                            var dlssGRecord = DLLManager.Instance.DLSSGRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
-                            if (dlssGRecord is not null)
+                            dllRecord = DLLManager.Instance.DLSSGRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
                             {
-                                if (HandleLocalDLLRecordZip(importFile, dlssGRecord, importResults))
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
                                 {
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
@@ -607,10 +653,10 @@ public partial class LibraryPageModel : ObservableObject
                                 }
                             }
 
-                            var fsr31dx12Record = DLLManager.Instance.FSR31DX12Records.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
-                            if (fsr31dx12Record is not null)
+                            dllRecord = DLLManager.Instance.DLSSNRRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
                             {
-                                if (HandleLocalDLLRecordZip(importFile, fsr31dx12Record, importResults))
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
                                 {
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
@@ -621,10 +667,10 @@ public partial class LibraryPageModel : ObservableObject
                                 }
                             }
 
-                            var fsr32vkRecord = DLLManager.Instance.FSR31VKRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
-                            if (fsr32vkRecord is not null)
+                            dllRecord = DLLManager.Instance.FSR31DX12Records.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
                             {
-                                if (HandleLocalDLLRecordZip(importFile, fsr32vkRecord, importResults))
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
                                 {
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
@@ -635,10 +681,10 @@ public partial class LibraryPageModel : ObservableObject
                                 }
                             }
 
-                            var xessRecord = DLLManager.Instance.XeSSRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
-                            if (xessRecord is not null)
+                            dllRecord = DLLManager.Instance.FSR31VKRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
                             {
-                                if (HandleLocalDLLRecordZip(importFile, xessRecord, importResults))
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
                                 {
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
@@ -649,10 +695,10 @@ public partial class LibraryPageModel : ObservableObject
                                 }
                             }
 
-                            var xellRecord = DLLManager.Instance.XeLLRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
-                            if (xellRecord is not null)
+                            dllRecord = DLLManager.Instance.XeSSRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
                             {
-                                if (HandleLocalDLLRecordZip(importFile, xellRecord, importResults))
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
                                 {
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
@@ -663,10 +709,10 @@ public partial class LibraryPageModel : ObservableObject
                                 }
                             }
 
-                            var xessDX11Record = DLLManager.Instance.XeSSDX11Records.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
-                            if (xessDX11Record is not null)
+                            dllRecord = DLLManager.Instance.XeLLRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
                             {
-                                if (HandleLocalDLLRecordZip(importFile, xessDX11Record, importResults))
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
                                 {
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
@@ -677,10 +723,318 @@ public partial class LibraryPageModel : ObservableObject
                                 }
                             }
 
-                            var xessFGRecord = DLLManager.Instance.XeSSFGRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
-                            if (xessFGRecord is not null)
+                            dllRecord = DLLManager.Instance.XeSSDX11Records.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
                             {
-                                if (HandleLocalDLLRecordZip(importFile, xessFGRecord, importResults))
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.XeSSFGRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.DirectStorageRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.DirectStorageCoreRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.FidelityFXSDK2DenoiserDX12Records.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.FidelityFXSDK2FrameGenerationDX12Records.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.FidelityFXSDK2LoaderDX12Records.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.FidelityFXSDK2RadianceCacheDX12Records.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.FidelityFXSDK2UpscalerDX12Records.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.StreamlineReflexRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.StreamlinePCLRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.StreamlineNvPerfRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.StreamlineNISRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.StreamlineInterposerRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.StreamlineDLSSGRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.StreamlineDLSSDRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.StreamlineDLSSNRRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.StreamlineDLSSRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.StreamlineDirectSRRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.StreamlineDeepDVCRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.StreamlineCommonRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.DeepDVCRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
+                                {
+                                    ++totalDllsProcessed;
+                                    App.CurrentApp.RunOnUIThread(() =>
+                                    {
+                                        progressRun.Text = totalDllsProcessed.ToString(CultureInfo.CurrentCulture);
+                                    });
+                                    continue;
+                                }
+                            }
+
+                            dllRecord = DLLManager.Instance.NvLowLatencyVKRecords.FirstOrDefault(x => string.Equals(x.ZipMD5Hash, newZipHash, StringComparison.InvariantCultureIgnoreCase));
+                            if (dllRecord is not null)
+                            {
+                                if (HandleLocalDLLRecordZip(importFile, dllRecord, importResults))
                                 {
                                     ++totalDllsProcessed;
                                     App.CurrentApp.RunOnUIThread(() =>
@@ -1572,12 +1926,34 @@ public partial class LibraryPageModel : ObservableObject
             GameAssetType.DLSS => DLLManager.Instance.DLSSRecords,
             GameAssetType.DLSS_G => DLLManager.Instance.DLSSGRecords,
             GameAssetType.DLSS_D => DLLManager.Instance.DLSSDRecords,
+            GameAssetType.DLSS_NR => DLLManager.Instance.DLSSNRRecords,
             GameAssetType.FSR_31_DX12 => DLLManager.Instance.FSR31DX12Records,
             GameAssetType.FSR_31_VK => DLLManager.Instance.FSR31VKRecords,
             GameAssetType.XeSS => DLLManager.Instance.XeSSRecords,
             GameAssetType.XeLL => DLLManager.Instance.XeLLRecords,
             GameAssetType.XeSS_DX11 => DLLManager.Instance.XeSSDX11Records,
             GameAssetType.XeSS_FG => DLLManager.Instance.XeSSFGRecords,
+            GameAssetType.DirectStorage => DLLManager.Instance.DirectStorageRecords,
+            GameAssetType.DirectStorageCore => DLLManager.Instance.DirectStorageCoreRecords,
+            GameAssetType.FidelityFX_SDK2_Denoiser_DX12 => DLLManager.Instance.FidelityFXSDK2DenoiserDX12Records,
+            GameAssetType.FidelityFX_SDK2_FrameGeneration_DX12 => DLLManager.Instance.FidelityFXSDK2FrameGenerationDX12Records,
+            GameAssetType.FidelityFX_SDK2_Loader_DX12 => DLLManager.Instance.FidelityFXSDK2LoaderDX12Records,
+            GameAssetType.FidelityFX_SDK2_RadianceCache_DX12 => DLLManager.Instance.FidelityFXSDK2RadianceCacheDX12Records,
+            GameAssetType.FidelityFX_SDK2_Upscaler_DX12 => DLLManager.Instance.FidelityFXSDK2UpscalerDX12Records,
+            GameAssetType.Streamline_Reflex => DLLManager.Instance.StreamlineReflexRecords,
+            GameAssetType.Streamline_PCL => DLLManager.Instance.StreamlinePCLRecords,
+            GameAssetType.Streamline_NvPerf => DLLManager.Instance.StreamlineNvPerfRecords,
+            GameAssetType.Streamline_NIS => DLLManager.Instance.StreamlineNISRecords,
+            GameAssetType.Streamline_Interposer => DLLManager.Instance.StreamlineInterposerRecords,
+            GameAssetType.Streamline_DLSS_G => DLLManager.Instance.StreamlineDLSSGRecords,
+            GameAssetType.Streamline_DLSS_D => DLLManager.Instance.StreamlineDLSSDRecords,
+            GameAssetType.Streamline_DLSS_NR => DLLManager.Instance.StreamlineDLSSNRRecords,
+            GameAssetType.Streamline_DLSS => DLLManager.Instance.StreamlineDLSSRecords,
+            GameAssetType.Streamline_DirectSR => DLLManager.Instance.StreamlineDirectSRRecords,
+            GameAssetType.Streamline_DeepDVC => DLLManager.Instance.StreamlineDeepDVCRecords,
+            GameAssetType.Streamline_Common => DLLManager.Instance.StreamlineCommonRecords,
+            GameAssetType.DeepDVC => DLLManager.Instance.DeepDVCRecords,
+            GameAssetType.NvLowLatencyVK => DLLManager.Instance.NvLowLatencyVKRecords,
             _ => null,
         };
         SelectedLibraryList = null;
@@ -1593,12 +1969,34 @@ public partial class LibraryPageModel : ObservableObject
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.DLSSRecords);
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.DLSSDRecords);
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.DLSSGRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.DLSSNRRecords);
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.FSR31DX12Records);
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.FSR31VKRecords);
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.XeSSRecords);
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.XeSSFGRecords);
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.XeSSDX11Records);
         startedDownloads += DownloadLatestRecord(DLLManager.Instance.XeLLRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.DirectStorageRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.DirectStorageCoreRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.FidelityFXSDK2DenoiserDX12Records);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.FidelityFXSDK2FrameGenerationDX12Records);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.FidelityFXSDK2LoaderDX12Records);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.FidelityFXSDK2RadianceCacheDX12Records);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.FidelityFXSDK2UpscalerDX12Records);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.StreamlineReflexRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.StreamlinePCLRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.StreamlineNvPerfRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.StreamlineNISRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.StreamlineInterposerRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.StreamlineDLSSGRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.StreamlineDLSSDRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.StreamlineDLSSNRRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.StreamlineDLSSRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.StreamlineDirectSRRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.StreamlineDeepDVCRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.StreamlineCommonRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.DeepDVCRecords);
+        startedDownloads += DownloadLatestRecord(DLLManager.Instance.NvLowLatencyVKRecords);
 
         if (startedDownloads == 0)
         {

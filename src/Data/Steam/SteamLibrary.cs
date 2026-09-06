@@ -220,15 +220,22 @@ internal partial class SteamLibrary : IGameLibrary
             var cachedGame = GameManager.Instance.GetGame<SteamGame>(game.PlatformId);
             var activeGame = cachedGame ?? game;
 
-            if (activeGame.IsHidden is null && _defaultHiddenGames.Contains(activeGame.PlatformId))
+            // These are UI-bound properties. Once the SaveToDatabaseAsync().ConfigureAwait(false) below has run for
+            // an earlier game in this loop we are no longer on the UI thread, so these must be marshalled explicitly
+            // or WinUI throws RPC_E_WRONGTHREAD when a bound control is updated from a background thread.
+            await App.CurrentApp.RunOnUIThreadAsync(() =>
             {
-                activeGame.IsHidden = true;
-            }
+                if (activeGame.IsHidden is null && _defaultHiddenGames.Contains(activeGame.PlatformId))
+                {
+                    activeGame.IsHidden = true;
+                }
 
+                activeGame.Title = game.Title;
+                activeGame.InstallPath = game.InstallPath;
+                activeGame.StateFlags = game.StateFlags;
 
-            activeGame.Title = game.Title;  // TODO: Will this be a problem if the game is already loaded
-            activeGame.InstallPath = game.InstallPath;
-            activeGame.StateFlags = game.StateFlags;
+                return Task.CompletedTask;
+            }).ConfigureAwait(false);
 
             if (activeGame.IsInIgnoredPath())
             {

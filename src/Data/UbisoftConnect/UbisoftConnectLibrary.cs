@@ -220,9 +220,18 @@ internal class UbisoftConnectLibrary : IGameLibrary
 
                             var cachedGame = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString(CultureInfo.InvariantCulture));
                             var activeGame = cachedGame ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString(CultureInfo.InvariantCulture));
-                            activeGame.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;  // TODO: Will this be a problem if the game is already loaded
-                            activeGame.InstallPath = PathHelpers.NormalizePath(installedTitle.InstallPath);
-                            activeGame.RemoteHeaderImage = remoteImage;
+
+                            // These are UI-bound properties. The File.ReadAllBytesAsync().ConfigureAwait(false) earlier
+                            // has already taken us off the UI thread, so these must be marshalled explicitly or WinUI
+                            // throws RPC_E_WRONGTHREAD when a bound control is updated from a background thread.
+                            await App.CurrentApp.RunOnUIThreadAsync(() =>
+                            {
+                                activeGame.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;
+                                activeGame.InstallPath = PathHelpers.NormalizePath(installedTitle.InstallPath);
+                                activeGame.RemoteHeaderImage = remoteImage;
+
+                                return Task.CompletedTask;
+                            }).ConfigureAwait(false);
 
                             if (activeGame.IsInIgnoredPath())
                             {

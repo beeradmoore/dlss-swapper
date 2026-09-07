@@ -178,6 +178,9 @@ public sealed partial class MainWindow : Window
     LibraryPage? libraryPage;
     SettingsPage? settingsPage;
 
+    Data.GitHub.GitHubUpdater? _gitHubUpdater;
+    Data.GitHub.GitHubRelease? _availableGitHubRelease;
+
     public GameGridPage? GameGridPage => gameGridPage;
 
     void GoToPage(string page)
@@ -258,7 +261,7 @@ public sealed partial class MainWindow : Window
         }
         */
 
-        var gitHubUpdater = new Data.GitHub.GitHubUpdater();
+        var gitHubUpdater = _gitHubUpdater ??= new Data.GitHub.GitHubUpdater();
 
         // If this is a GitHub build check if there is a new version.
         var newUpdateTask = gitHubUpdater.CheckForNewGitHubRelease(false);
@@ -376,11 +379,31 @@ public sealed partial class MainWindow : Window
         await newUpdateTask;
         if (newUpdateTask.Result is not null)
         {
+            _availableGitHubRelease = newUpdateTask.Result;
+
+            // Show a persistent, low-key indicator so the user can't miss that an
+            // update is available even if they dismiss (or never see) the dialog below.
+            ViewModel.UpdateAvailableText = ResourceHelper.GetFormattedResourceTemplate("MainWindow_UpdateAvailableBannerTemplate", newUpdateTask.Result.Name);
+            ViewModel.UpdateAvailableVisibility = Visibility.Visible;
+
+            // The dialog itself is still only auto-shown once per version so we don't
+            // nag the user with a popup every single time they open the app.
             if (gitHubUpdater.HasPromptedBefore(newUpdateTask.Result) == false)
             {
                 await gitHubUpdater.DisplayNewUpdateDialog(newUpdateTask.Result, MainNavigationView.XamlRoot);
             }
         }
+    }
+
+    async void UpdateAvailableButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (_availableGitHubRelease is null)
+        {
+            return;
+        }
+
+        var gitHubUpdater = _gitHubUpdater ??= new Data.GitHub.GitHubUpdater();
+        await gitHubUpdater.DisplayNewUpdateDialog(_availableGitHubRelease, MainNavigationView.XamlRoot);
     }
 
     /// <summary>

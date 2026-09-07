@@ -18,6 +18,12 @@ public partial class MainWindowModel : ObservableObject
     [ObservableProperty]
     public partial FlowDirection AppFlowDirection { get; set; } = FlowDirection.LeftToRight;
 
+    [ObservableProperty]
+    public partial Visibility UpdateAvailableVisibility { get; set; } = Visibility.Collapsed;
+
+    [ObservableProperty]
+    public partial string UpdateAvailableText { get; set; } = string.Empty;
+
     public MainWindowModelTranslationProperties TranslationProperties { get; } = new MainWindowModelTranslationProperties();
 
     public MainWindowModel()

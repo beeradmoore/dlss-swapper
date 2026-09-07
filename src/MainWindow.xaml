@@ -71,5 +71,32 @@
             <TextBlock Grid.Row="1" x:Name="LoadingProgressText" VerticalAlignment="Top" Text="{x:Bind ViewModel.LoadingMessage, Mode=OneWay}" HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" />
 
         </Grid>
+
+        <!--
+            Persistent, low-key indicator that a new version is available.
+            Unlike the update dialog (which only appears once per version) this stays
+            visible for as long as an update is available, so it can't be missed if the
+            dialog was dismissed. Clicking it re-opens the update dialog.
+        -->
+        <Button x:Name="UpdateAvailableButton"
+                Grid.Row="1"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Margin="0,0,16,16"
+                Padding="14,8"
+                CornerRadius="999"
+                BorderThickness="1"
+                Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}"
+                BorderBrush="{ThemeResource SystemFillColorSuccessBrush}"
+                Visibility="{x:Bind ViewModel.UpdateAvailableVisibility, Mode=OneWay}"
+                Click="UpdateAvailableButton_Click">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Ellipse Width="8" Height="8" Fill="{ThemeResource SystemFillColorSuccessBrush}" VerticalAlignment="Center" />
+                <TextBlock Text="{x:Bind ViewModel.UpdateAvailableText, Mode=OneWay}"
+                           Foreground="{ThemeResource SystemFillColorSuccessBrush}"
+                           FontSize="12"
+                           VerticalAlignment="Center" />
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>

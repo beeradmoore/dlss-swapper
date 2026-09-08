@@ -12,6 +12,7 @@ using DLSS_Swapper.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using DLSS_Swapper.Data.DLSS;
+using DLSS_Swapper.Data.DLSS5;
 using System.ComponentModel;
 
 namespace DLSS_Swapper.UserControls;
@@ -73,11 +74,18 @@ public partial class GameControlModel : ObservableObject
 
     public GameControlModelTranslationProperties TranslationProperties { get; } = new GameControlModelTranslationProperties();
 
+    [ObservableProperty]
+    public partial bool IsDLSS5Installed { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsDLSS5Busy { get; set; }
+
     public GameControlModel(GameControl gameControl, Game game) : base()
     {
         gameControlWeakReference = new WeakReference<GameControl>(gameControl);
         Game = game;
         GameTitle = game.Title;
+        IsDLSS5Installed = DLSS5AutopilotManager.IsInstalled(game.InstallPath);
 
 
         // Make sure NVAPIHelper is supported and the game has DLSS.
@@ -277,6 +285,104 @@ public partial class GameControlModel : ObservableObject
                 };
                 await dialog.ShowAsync();
             }
+        }
+    }
+
+    [RelayCommand]
+    async Task InstallDLSS5Async()
+    {
+        if (IsDLSS5Busy)
+        {
+            return;
+        }
+
+        if (gameControlWeakReference.TryGetTarget(out var gameControl) == false)
+        {
+            return;
+        }
+
+        var dialog = new EasyContentDialog(gameControl.XamlRoot)
+        {
+            Title = TranslationProperties.DLSS5InstallText,
+            PrimaryButtonText = TranslationProperties.DLSS5InstallText,
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+            DefaultButton = ContentDialogButton.Primary,
+            Content = TranslationProperties.DLSS5WarningText,
+        };
+        if (await dialog.ShowAsync() != ContentDialogResult.Primary)
+        {
+            return;
+        }
+
+        IsDLSS5Busy = true;
+        try
+        {
+            await new DLSS5AutopilotManager().InstallAsync(Game.InstallPath);
+            IsDLSS5Installed = DLSS5AutopilotManager.IsInstalled(Game.InstallPath);
+        }
+        catch (Exception err)
+        {
+            Logger.Error(err);
+            var errorDialog = new EasyContentDialog(gameControl.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                Content = err.Message,
+            };
+            await errorDialog.ShowAsync();
+        }
+        finally
+        {
+            IsDLSS5Busy = false;
+        }
+    }
+
+    [RelayCommand]
+    async Task RemoveDLSS5Async()
+    {
+        if (IsDLSS5Busy || DLSS5AutopilotManager.IsInstalled(Game.InstallPath) == false)
+        {
+            return;
+        }
+
+        if (gameControlWeakReference.TryGetTarget(out var gameControl) == false)
+        {
+            return;
+        }
+
+        var dialog = new EasyContentDialog(gameControl.XamlRoot)
+        {
+            Title = TranslationProperties.DLSS5RemoveText,
+            PrimaryButtonText = TranslationProperties.DLSS5RemoveText,
+            CloseButtonText = ResourceHelper.GetString("General_Cancel"),
+            DefaultButton = ContentDialogButton.Primary,
+            Content = TranslationProperties.DLSS5RemoveWarningText,
+        };
+        if (await dialog.ShowAsync() != ContentDialogResult.Primary)
+        {
+            return;
+        }
+
+        IsDLSS5Busy = true;
+        try
+        {
+            await new DLSS5AutopilotManager().RemoveAsync(Game.InstallPath);
+            IsDLSS5Installed = DLSS5AutopilotManager.IsInstalled(Game.InstallPath);
+        }
+        catch (Exception err)
+        {
+            Logger.Error(err);
+            var errorDialog = new EasyContentDialog(gameControl.XamlRoot)
+            {
+                Title = ResourceHelper.GetString("General_Error"),
+                CloseButtonText = ResourceHelper.GetString("General_Okay"),
+                Content = err.Message,
+            };
+            await errorDialog.ShowAsync();
+        }
+        finally
+        {
+            IsDLSS5Busy = false;
         }
     }
 

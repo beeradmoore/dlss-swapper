@@ -80,4 +80,22 @@ public class GameControlModelTranslationProperties : LocalizedViewModelBase
 
     [TranslationProperty]
     public string NVAPIErrorTooltipText => ResourceHelper.GetString("GamePage_NVAPIError_Tooltip");
+
+    [TranslationProperty]
+    public string DLSS5InstallText => ResourceHelper.GetString("GamePage_DLSS5_Install");
+
+    [TranslationProperty]
+    public string DLSS5RemoveText => ResourceHelper.GetString("GamePage_DLSS5_Remove");
+
+    [TranslationProperty]
+    public string DLSS5WarningText => ResourceHelper.GetString("GamePage_DLSS5_Warning");
+
+    [TranslationProperty]
+    public string DLSS5RemoveWarningText => ResourceHelper.GetString("GamePage_DLSS5_RemoveWarning");
+
+    [TranslationProperty]
+    public string DLSS5DescriptionText => ResourceHelper.GetString("GamePage_DLSS5_Description");
+
+    [TranslationProperty]
+    public string DLSS5TitleText => ResourceHelper.GetString("GamePage_DLSS5_Title");
 }

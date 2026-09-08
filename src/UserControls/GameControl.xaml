@@ -181,6 +181,15 @@
                         </Button>
                     </Grid>
 
+                    <StackPanel Padding="0,12,0,0" Spacing="6">
+                        <TextBlock Text="{x:Bind ViewModel.TranslationProperties.DLSS5TitleText, Mode=OneWay}" FontWeight="Bold" />
+                        <TextBlock Text="{x:Bind ViewModel.TranslationProperties.DLSS5DescriptionText, Mode=OneWay}" TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Content="{x:Bind ViewModel.TranslationProperties.DLSS5InstallText, Mode=OneWay}" Command="{x:Bind ViewModel.InstallDLSS5Command}" IsEnabled="{x:Bind ViewModel.IsDLSS5Busy, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}" />
+                            <Button Content="{x:Bind ViewModel.TranslationProperties.DLSS5RemoveText, Mode=OneWay}" Command="{x:Bind ViewModel.RemoveDLSS5Command}" Visibility="{x:Bind ViewModel.IsDLSS5Installed, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" IsEnabled="{x:Bind ViewModel.IsDLSS5Busy, Converter={StaticResource BoolNegationConverter}, Mode=OneWay}" />
+                        </StackPanel>
+                    </StackPanel>
+
                     <Grid HorizontalAlignment="Stretch" ColumnSpacing="16" RowSpacing="4" Padding="0,8,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />

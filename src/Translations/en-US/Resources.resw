@@ -558,6 +558,24 @@ If you have checked these and your game is still not showing up there may be a b
     <value>DLSS FG Preset</value>
     <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
   </data>
+  <data name="GamePage_DLSS5_Install" xml:space="preserve">
+    <value>Install / Update</value>
+  </data>
+  <data name="GamePage_DLSS5_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="GamePage_DLSS5_Warning" xml:space="preserve">
+    <value>This downloads the latest DLSS5-Autopilot release, verifies its SHA-256 checksum, and installs an unofficial OptiScaler integration into this game. Close the game first. Do not use it with multiplayer or anti-cheat games.</value>
+  </data>
+  <data name="GamePage_DLSS5_RemoveWarning" xml:space="preserve">
+    <value>This removes files recorded by DLSS5-Autopilot and restores its backups. Close the game first.</value>
+  </data>
+  <data name="GamePage_DLSS5_Description" xml:space="preserve">
+    <value>Install or remove the generic DLSS 5 integration for this game.</value>
+  </data>
+  <data name="GamePage_DLSS5_Title" xml:space="preserve">
+    <value>DLSS 5 Neural Rendering</value>
+  </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
     <comment>If FSR does not have a direct translation put in the English characters for it</comment>

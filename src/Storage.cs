@@ -62,6 +62,13 @@ static class Storage
         return Path.Combine(GetTemp(), "updates");
     }
 
+    public static string GetToolsPath()
+    {
+        var path = Path.Combine(GetStorageFolder(), "tools");
+        CreateDirectoryIfNotExists(path);
+        return path;
+    }
+
     public static string GetDBPath()
     {
         CreateDirectoryIfNotExists(StoragePath);

@@ -144,9 +144,18 @@ internal class EpicGamesStoreLibrary : IGameLibrary
 
                 var cachedGame = GameManager.Instance.GetGame<EpicGamesStoreGame>(manifest.CatalogItemId);
                 var activeGame = cachedGame ?? new EpicGamesStoreGame(manifest.CatalogItemId);
-                activeGame.RemoteHeaderImage = remoteHeaderUrl;
-                activeGame.Title = manifest.DisplayName; // TODO: Will this be a problem if the game is already loaded
-                activeGame.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
+
+                // These are UI-bound properties. The File.ReadAllTextAsync().ConfigureAwait(false) above has already
+                // taken us off the UI thread, so these must be marshalled explicitly or WinUI throws RPC_E_WRONGTHREAD
+                // when a bound control is updated from a background thread.
+                await App.CurrentApp.RunOnUIThreadAsync(() =>
+                {
+                    activeGame.RemoteHeaderImage = remoteHeaderUrl;
+                    activeGame.Title = manifest.DisplayName;
+                    activeGame.InstallPath = PathHelpers.NormalizePath(manifest.InstallLocation);
+
+                    return Task.CompletedTask;
+                }).ConfigureAwait(false);
 
                 if (activeGame.IsInIgnoredPath())
                 {

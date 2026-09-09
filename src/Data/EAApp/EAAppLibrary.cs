@@ -176,9 +176,18 @@ internal class EAAppLibrary : IGameLibrary
                                     var cachedGame = GameManager.Instance.GetGame<EAAppGame>(contentId);
                                     var activeGame = cachedGame ?? new EAAppGame(contentId);
 
-                                    activeGame.Title = name;
-                                    activeGame.InstallPath = installPath;
-                                    activeGame.DisplayIconPath = programUninstallSubKey.GetValue("DisplayIcon")?.ToString()?.Trim('"') ?? string.Empty;
+                                    // These are UI-bound properties. Parallel.ForEachAsync above always schedules its
+                                    // work on the thread pool, never the UI thread, so these must be marshalled
+                                    // explicitly or WinUI throws RPC_E_WRONGTHREAD when a bound control is updated
+                                    // from a background thread.
+                                    await App.CurrentApp.RunOnUIThreadAsync(() =>
+                                    {
+                                        activeGame.Title = name;
+                                        activeGame.InstallPath = installPath;
+                                        activeGame.DisplayIconPath = programUninstallSubKey.GetValue("DisplayIcon")?.ToString()?.Trim('"') ?? string.Empty;
+
+                                        return Task.CompletedTask;
+                                    }).ConfigureAwait(false);
 
                                     if (activeGame.IsInIgnoredPath())
                                     {

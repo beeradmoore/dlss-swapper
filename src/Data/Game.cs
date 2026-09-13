@@ -234,6 +234,11 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
         };
     }
 
+    // Bounds how many games can be scanned for DLLs/covers at once. Every game with no previously known
+    // DLLs is re-queued for processing on every launch, so without a limit a large library fires off
+    // hundreds of concurrent recursive directory scans and UI-thread updates at startup.
+    static readonly SemaphoreSlim processGameSemaphore = new SemaphoreSlim(4);
+
     /// <summary>
     /// Detects DLSS and updates cover image.
     /// </summary>
@@ -268,6 +273,8 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
 
         ThreadPool.QueueUserWorkItem(async (stateInfo) =>
         {
+            await processGameSemaphore.WaitAsync().ConfigureAwait(false);
+
             var newHasSwappableItems = false;
 
             try
@@ -564,6 +571,8 @@ public abstract partial class Game : ObservableObject, IComparable<Game>, IEquat
             }
             finally
             {
+                processGameSemaphore.Release();
+
                 // Now update all the data on the UI therad.
                 await App.CurrentApp.RunOnUIThreadAsync(async () =>
                 {

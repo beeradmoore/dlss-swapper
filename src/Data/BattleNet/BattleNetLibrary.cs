@@ -263,44 +263,52 @@ internal partial class BattleNetLibrary : IGameLibrary
                 var cachedGame = GameManager.Instance.GetGame<BattleNetGame>(gameId);
                 var activeGame = cachedGame ?? new BattleNetGame(gameId);
 
-                if (_knownGames.TryGetValue(product.Uid, out var battleNetLauncherGame))
+                // These are UI-bound properties. Once the SaveToDatabaseAsync().ConfigureAwait(false) below has run for
+                // an earlier game in this loop we are no longer on the UI thread, so these must be marshalled explicitly
+                // or WinUI throws RPC_E_WRONGTHREAD when a bound control is updated from a background thread.
+                await App.CurrentApp.RunOnUIThreadAsync(() =>
                 {
-                    activeGame.Title = battleNetLauncherGame.Name;
-                    activeGame.LauncherId = battleNetLauncherGame.LauncherId;
-                }
-                else
-                {
-                    Logger.Error($"Battle.Net game title not found for UID ({product.Uid}) in install path ({product.Settings.InstallPath}).");
-
-                    if (string.IsNullOrWhiteSpace(product.Settings.InstallPath))
+                    if (_knownGames.TryGetValue(product.Uid, out var battleNetLauncherGame))
                     {
-                        activeGame.Title = product.Uid;
+                        activeGame.Title = battleNetLauncherGame.Name;
+                        activeGame.LauncherId = battleNetLauncherGame.LauncherId;
                     }
                     else
                     {
-                        var directoryInfo = new DirectoryInfo(product.Settings.InstallPath);
-                        activeGame.Title = directoryInfo.Name;
-                    }
-                }
+                        Logger.Error($"Battle.Net game title not found for UID ({product.Uid}) in install path ({product.Settings.InstallPath}).");
 
-                if (installedAggregates.TryGetValue(product.ProductCode, out var aggregate))
-                {
-                    // If title isn't set, try use it from the aggregates.
-                    if (string.IsNullOrWhiteSpace(activeGame.Title))
+                        if (string.IsNullOrWhiteSpace(product.Settings.InstallPath))
+                        {
+                            activeGame.Title = product.Uid;
+                        }
+                        else
+                        {
+                            var directoryInfo = new DirectoryInfo(product.Settings.InstallPath);
+                            activeGame.Title = directoryInfo.Name;
+                        }
+                    }
+
+                    if (installedAggregates.TryGetValue(product.ProductCode, out var aggregate))
                     {
-                        activeGame.Title = aggregate.Name;
+                        // If title isn't set, try use it from the aggregates.
+                        if (string.IsNullOrWhiteSpace(activeGame.Title))
+                        {
+                            activeGame.Title = aggregate.Name;
+                        }
+
+                        // Set the cover photo.
+                        activeGame.RemoteCoverImage = aggregate.LogoArtUri;
+                    }
+                    else
+                    {
+                        Logger.Error($"Battle.Net game aggregate not found for ProductCode ({product.ProductCode}).");
                     }
 
-                    // Set the cover photo.
-                    activeGame.RemoteCoverImage = aggregate.LogoArtUri;
-                }
-                else
-                {
-                    Logger.Error($"Battle.Net game aggregate not found for ProductCode ({product.ProductCode}).");
-                }
+                    activeGame.InstallPath = PathHelpers.NormalizePath(gamePath);
+                    activeGame.StatePlayable = product.CachedProductState.BaseProductState.Playable;
 
-                activeGame.InstallPath = PathHelpers.NormalizePath(gamePath);
-                activeGame.StatePlayable = product.CachedProductState.BaseProductState.Playable;
+                    return Task.CompletedTask;
+                }).ConfigureAwait(false);
 
                 if (activeGame.IsInIgnoredPath())
                 {

@@ -787,6 +787,40 @@ internal class DLLManager
         };
     }
 
+    /// <summary>
+    /// Decides if a batch swap can apply dllRecord to game. ReasonKey is a resource
+    /// key describing why not. Mirrors the DLSS 1.x vs 2/3 rule from
+    /// DLLPickerControlModel, but evaluates every DLSS asset instead of only the
+    /// first: UpdateDllAsync overwrites every matching asset with the same dll, so
+    /// games mixing generations must be skipped.
+    /// </summary>
+    internal static (bool Compatible, string ReasonKey) GetBatchCompatibility(Game game, DLLRecord dllRecord)
+    {
+        var existingAssets = game.GameAssets.Where(x => x.AssetType == dllRecord.AssetType).ToList();
+        if (existingAssets.Count == 0)
+        {
+            return (false, "GamesPage_Batch_Skipped_NoAsset");
+        }
+
+        if (dllRecord.AssetType == GameAssetType.DLSS)
+        {
+            var hasV1Assets = existingAssets.Any(x => x.Version.StartsWith("1."));
+            var hasV2PlusAssets = existingAssets.Any(x => x.Version.StartsWith("1.") == false);
+
+            if (hasV1Assets == true && hasV2PlusAssets == true)
+            {
+                return (false, "GamesPage_Batch_Skipped_MixedGenerations");
+            }
+
+            var recordIsV1 = dllRecord.Version.StartsWith("1.");
+            if (hasV1Assets != recordIsV1)
+            {
+                return (false, "GamesPage_Batch_Skipped_Incompatible");
+            }
+        }
+
+        return (true, string.Empty);
+    }
 
     public GameAssetType GetAssetBackupType(GameAssetType assetType)
     {

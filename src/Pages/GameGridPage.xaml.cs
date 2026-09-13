@@ -192,4 +192,143 @@ public sealed partial class GameGridPage : Page
     {
         SearchBox.Text = string.Empty;
     }
+
+    bool _isSyncingSelection;
+
+    ListViewBase? GetActiveListControl()
+    {
+        return MainContentControl.ContentTemplateRoot as ListViewBase;
+    }
+
+    internal void EnterSelectionMode()
+    {
+        var listControl = GetActiveListControl();
+        if (listControl is null)
+        {
+            return;
+        }
+
+        listControl.SelectionMode = ListViewSelectionMode.Multiple;
+        listControl.IsItemClickEnabled = false;
+        listControl.SelectionChanged += ListControl_SelectionChanged;
+    }
+
+    internal void ExitSelectionMode()
+    {
+        var listControl = GetActiveListControl();
+        if (listControl is null)
+        {
+            return;
+        }
+
+        listControl.SelectionChanged -= ListControl_SelectionChanged;
+        _isSyncingSelection = true;
+        try
+        {
+            listControl.SelectedItems.Clear();
+        }
+        finally
+        {
+            _isSyncingSelection = false;
+        }
+        listControl.SelectionMode = ListViewSelectionMode.None;
+        listControl.IsItemClickEnabled = true;
+    }
+
+    // Number of items the active list is currently showing, which is what
+    // "select all" acts on -- the current filter and search already applied.
+    internal int GetVisibleItemCount()
+    {
+        return GetActiveListControl()?.Items.Count ?? 0;
+    }
+
+    // Number of currently visible items that are also selected. SelectedGames can
+    // contain games hidden by the current search filter, so SelectedGames.Count
+    // alone says nothing about the visible items.
+    internal int GetVisibleSelectedCount()
+    {
+        var listControl = GetActiveListControl();
+        if (listControl is null)
+        {
+            return 0;
+        }
+
+        var count = 0;
+        foreach (var game in ViewModel.SelectedGames)
+        {
+            if (listControl.Items.Contains(game))
+            {
+                ++count;
+            }
+        }
+        return count;
+    }
+
+    internal void SelectAllVisible()
+    {
+        // SelectAll raises SelectionChanged, so the view model picks the games up
+        // through the usual UpdateSelection path.
+        GetActiveListControl()?.SelectAll();
+    }
+
+    void ListControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_isSyncingSelection == true)
+        {
+            return;
+        }
+
+        ViewModel.UpdateSelection(e.AddedItems, e.RemovedItems);
+    }
+
+    internal void BeginSuppressSelectionEvents()
+    {
+        _isSyncingSelection = true;
+    }
+
+    // Called after CurrentCollectionView changes while selection mode is active.
+    // The binding applies the new ItemsSource asynchronously, so the visual
+    // selection is re-applied at low priority, after the list picked it up.
+    internal void ResyncVisualSelectionAfterViewChange()
+    {
+        var enqueued = DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+        {
+            ResyncVisualSelection();
+        });
+
+        // BeginSuppressSelectionEvents set _isSyncingSelection before the ItemsSource
+        // swap; if the resync could not be queued, nothing else would ever reset it
+        // and all selection events would be ignored from here on.
+        if (enqueued == false)
+        {
+            _isSyncingSelection = false;
+        }
+    }
+
+    internal void ResyncVisualSelection()
+    {
+        var listControl = GetActiveListControl();
+        if (listControl is null)
+        {
+            _isSyncingSelection = false;
+            return;
+        }
+
+        _isSyncingSelection = true;
+        try
+        {
+            listControl.SelectedItems.Clear();
+            foreach (var game in ViewModel.SelectedGames)
+            {
+                if (listControl.Items.Contains(game))
+                {
+                    listControl.SelectedItems.Add(game);
+                }
+            }
+        }
+        finally
+        {
+            _isSyncingSelection = false;
+        }
+    }
 }

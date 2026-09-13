@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="DLSS_Swapper.UserControls.BatchDllPickerControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:usercontrols="using:DLSS_Swapper.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ct_converters="using:CommunityToolkit.WinUI.Converters"
+    d:DataContext="{d:DesignInstance Type=usercontrols:BatchDllPickerControlModel, IsDesignTimeCreatable=True}"
+    mc:Ignorable="d"
+    MinWidth="600">
+
+    <UserControl.Resources>
+        <ct_converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+    </UserControl.Resources>
+
+    <!-- Tall enough for every DLL type at once; the scroll bar is only there for
+         short displays, where the dialog itself gets capped by the window. -->
+    <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Disabled" MaxHeight="640">
+        <!-- Stays under ContentDialogMaxWidth minus the dialog padding and the
+             scroll bar, otherwise the right-hand combos get clipped. -->
+        <StackPanel Orientation="Vertical" Spacing="20" MinWidth="600">
+
+            <!-- DLSS group (always shown; presets live here) -->
+            <StackPanel Orientation="Vertical" Spacing="8">
+                <TextBlock Text="{x:Bind ViewModel.TranslationProperties.DlssGroupText, Mode=OneWay}" Style="{ThemeResource SubtitleTextBlockStyle}" />
+
+                <!-- Only this group has two combos per row, so without headers there is
+                     nothing telling the version dropdown apart from the preset one. -->
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="1.3*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.TranslationProperties.VersionColumnText, Mode=OneWay}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <TextBlock Grid.Column="2" Text="{x:Bind ViewModel.TranslationProperties.PresetColumnText, Mode=OneWay}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                </Grid>
+
+                <TextBlock Text="{x:Bind ViewModel.TranslationProperties.PresetsUnsupportedText, Mode=OneWay}"
+                           TextWrapping="Wrap"
+                           Style="{ThemeResource CaptionTextBlockStyle}"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           Visibility="{x:Bind ViewModel.PresetsUnsupported, Converter={StaticResource BoolToVisibilityConverter}}" />
+
+                <ItemsControl ItemsSource="{x:Bind ViewModel.DlssRows}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="usercontrols:BatchDllRowModel">
+                            <Grid ColumnSpacing="12" Padding="0,4" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <!-- Same width in all three groups so the version combos line up. -->
+                                    <ColumnDefinition Width="180" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="1.3*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{x:Bind TypeName}" FontWeight="SemiBold" VerticalAlignment="Center" TextWrapping="Wrap" />
+                                <ComboBox Grid.Column="1" HorizontalAlignment="Stretch"
+                                          AutomationProperties.Name="{x:Bind DllAutomationName}"
+                                          ItemsSource="{x:Bind DllOptions}"
+                                          DisplayMemberPath="DisplayName"
+                                          SelectedItem="{x:Bind SelectedDllOption, Mode=TwoWay}" />
+                                <ComboBox Grid.Column="2" HorizontalAlignment="Stretch"
+                                          AutomationProperties.Name="{x:Bind PresetAutomationName}"
+                                          ItemsSource="{x:Bind PresetOptions}"
+                                          DisplayMemberPath="Name"
+                                          SelectedItem="{x:Bind SelectedPreset, Mode=TwoWay}"
+                                          IsEnabled="{x:Bind PresetEnabled}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <!-- FSR group (hidden when no versions available) -->
+            <StackPanel Orientation="Vertical" Spacing="8" Visibility="{x:Bind ViewModel.HasFsrRows, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBlock Text="{x:Bind ViewModel.TranslationProperties.FsrGroupText, Mode=OneWay}" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <ItemsControl ItemsSource="{x:Bind ViewModel.FsrRows}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="usercontrols:BatchDllRowModel">
+                            <Grid ColumnSpacing="12" Padding="0,4" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <!-- Same width in all three groups so the version combos line up. -->
+                                    <ColumnDefinition Width="180" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="1.3*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{x:Bind TypeName}" FontWeight="SemiBold" VerticalAlignment="Center" TextWrapping="Wrap" />
+                                <ComboBox Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"
+                                          AutomationProperties.Name="{x:Bind DllAutomationName}"
+                                          ItemsSource="{x:Bind DllOptions}"
+                                          DisplayMemberPath="DisplayName"
+                                          SelectedItem="{x:Bind SelectedDllOption, Mode=TwoWay}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <!-- XeSS group (hidden when no versions available) -->
+            <StackPanel Orientation="Vertical" Spacing="8" Visibility="{x:Bind ViewModel.HasXeSSRows, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBlock Text="{x:Bind ViewModel.TranslationProperties.XessGroupText, Mode=OneWay}" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <ItemsControl ItemsSource="{x:Bind ViewModel.XeSSRows}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="usercontrols:BatchDllRowModel">
+                            <Grid ColumnSpacing="12" Padding="0,4" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <!-- Same width in all three groups so the version combos line up. -->
+                                    <ColumnDefinition Width="180" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="1.3*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{x:Bind TypeName}" FontWeight="SemiBold" VerticalAlignment="Center" TextWrapping="Wrap" />
+                                <ComboBox Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"
+                                          AutomationProperties.Name="{x:Bind DllAutomationName}"
+                                          ItemsSource="{x:Bind DllOptions}"
+                                          DisplayMemberPath="DisplayName"
+                                          SelectedItem="{x:Bind SelectedDllOption, Mode=TwoWay}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

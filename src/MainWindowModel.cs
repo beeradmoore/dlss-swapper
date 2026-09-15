@@ -28,6 +28,22 @@ public partial class MainWindowModel : ObservableObject
     public partial string UpdateAvailableText { get; set; } = string.Empty;
 
     public MainWindowModelTranslationProperties TranslationProperties { get; } = new MainWindowModelTranslationProperties();
+    private GitHubRelease? _availableGitHubRelease;
+
+[RelayCommand]
+private async Task UpdateAvailableAsync(XamlRoot xamlRoot)
+{
+    if (_availableGitHubRelease is null)
+    {
+        return;
+    }
+
+    var gitHubUpdater = new GitHubUpdater();
+
+    await gitHubUpdater.DisplayNewUpdateDialog(
+        _availableGitHubRelease,
+        xamlRoot);
+}
 
     public MainWindowModel()
     {

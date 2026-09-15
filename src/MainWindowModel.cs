@@ -1,6 +1,9 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Data.GitHub;
 using DLSS_Swapper.Helpers;
 using Microsoft.UI.Xaml;
+using System.Threading.Tasks;
 
 namespace DLSS_Swapper;
 

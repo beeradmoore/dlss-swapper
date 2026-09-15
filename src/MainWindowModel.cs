@@ -22,7 +22,7 @@ public partial class MainWindowModel : ObservableObject
     public partial FlowDirection AppFlowDirection { get; set; } = FlowDirection.LeftToRight;
 
     [ObservableProperty]
-    public partial Visibility UpdateAvailableVisibility { get; set; } = Visibility.Collapsed;
+public partial bool IsUpdateAvailable { get; set; }
 
     [ObservableProperty]
     public partial string UpdateAvailableText { get; set; } = string.Empty;

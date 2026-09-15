@@ -30,6 +30,17 @@ public partial bool IsUpdateAvailable { get; set; }
     public MainWindowModelTranslationProperties TranslationProperties { get; } = new MainWindowModelTranslationProperties();
     private GitHubRelease? _availableGitHubRelease;
 
+    public void SetAvailableUpdate(GitHubRelease release)
+{
+    _availableGitHubRelease = release;
+
+    UpdateAvailableText = ResourceHelper.GetFormattedResourceTemplate(
+        "MainWindow_UpdateAvailableBannerTemplate",
+        release.Name);
+
+    IsUpdateAvailable = true;
+}
+
 [RelayCommand]
 private async Task UpdateAvailableAsync(XamlRoot xamlRoot)
 {

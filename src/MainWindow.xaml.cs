@@ -179,8 +179,6 @@ public sealed partial class MainWindow : Window
     SettingsPage? settingsPage;
 
     Data.GitHub.GitHubUpdater? _gitHubUpdater;
-    Data.GitHub.GitHubRelease? _availableGitHubRelease;
-
     public GameGridPage? GameGridPage => gameGridPage;
 
     void GoToPage(string page)

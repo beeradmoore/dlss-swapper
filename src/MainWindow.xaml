@@ -71,5 +71,30 @@
             <TextBlock Grid.Row="1" x:Name="LoadingProgressText" VerticalAlignment="Top" Text="{x:Bind ViewModel.LoadingMessage, Mode=OneWay}" HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" />
 
         </Grid>
+
+        <!--
+            Persistent, low-key indicator that a new version is available.
+            Unlike the update dialog (which only appears once per version) this stays
+            visible for as long as an update is available, so it can't be missed if the
+            dialog was dismissed. Clicking it re-opens the update dialog.
+        -->
+      <InfoBar
+    x:Name="UpdateAvailableInfoBar"
+    Grid.Row="1"
+    Margin="16"
+    IsOpen="{x:Bind ViewModel.IsUpdateAvailable, Mode=OneWay}"
+    Severity="Informational"
+    Title="New version available"
+    Message="{x:Bind ViewModel.UpdateAvailableText, Mode=OneWay}"
+    IsClosable="False">
+
+    <InfoBar.Action>
+        <Button
+            Content="Update"
+            Command="{x:Bind ViewModel.UpdateAvailableCommand}"
+            CommandParameter="{x:Bind MainNavigationView.XamlRoot}" />
+    </InfoBar.Action>
+
+</InfoBar>
     </Grid>
 </Window>

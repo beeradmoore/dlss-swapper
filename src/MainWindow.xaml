@@ -78,25 +78,21 @@
             visible for as long as an update is available, so it can't be missed if the
             dialog was dismissed. Clicking it re-opens the update dialog.
         -->
-        <Button x:Name="UpdateAvailableButton"
-                Grid.Row="1"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Margin="0,0,16,16"
-                Padding="14,8"
-                CornerRadius="999"
-                BorderThickness="1"
-                Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}"
-                BorderBrush="{ThemeResource SystemFillColorSuccessBrush}"
-                Visibility="{x:Bind ViewModel.UpdateAvailableVisibility, Mode=OneWay}"
-                Click="UpdateAvailableButton_Click">
-            <StackPanel Orientation="Horizontal" Spacing="8">
-                <Ellipse Width="8" Height="8" Fill="{ThemeResource SystemFillColorSuccessBrush}" VerticalAlignment="Center" />
-                <TextBlock Text="{x:Bind ViewModel.UpdateAvailableText, Mode=OneWay}"
-                           Foreground="{ThemeResource SystemFillColorSuccessBrush}"
-                           FontSize="12"
-                           VerticalAlignment="Center" />
-            </StackPanel>
-        </Button>
+       <InfoBar
+    x:Name="UpdateAvailableInfoBar"
+    Grid.Row="1"
+    Margin="0,0,16,16"
+    IsOpen="{x:Bind ViewModel.IsUpdateAvailable, Mode=OneWay}"
+    Severity="Informational"
+    Title="New version available"
+    Message="{x:Bind ViewModel.UpdateAvailableText, Mode=OneWay}"
+    IsClosable="False">
+
+    <InfoBar.Action>
+        <Button
+            Content="Update"
+            Command="{x:Bind ViewModel.UpdateAvailableCommand}" />
+    </InfoBar.Action>
+</InfoBar>
     </Grid>
 </Window>

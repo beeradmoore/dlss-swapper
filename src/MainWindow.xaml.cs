@@ -392,16 +392,6 @@ ViewModel.SetAvailableUpdate(newUpdateTask.Result);
         }
     }
 
-    async void UpdateAvailableButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (_availableGitHubRelease is null)
-        {
-            return;
-        }
-
-        var gitHubUpdater = _gitHubUpdater ??= new Data.GitHub.GitHubUpdater();
-        await gitHubUpdater.DisplayNewUpdateDialog(_availableGitHubRelease, MainNavigationView.XamlRoot);
-    }
 
     /// <summary>
     ///

@@ -81,9 +81,7 @@
       <InfoBar
     x:Name="UpdateAvailableInfoBar"
     Grid.Row="1"
-    HorizontalAlignment="Right"
-    VerticalAlignment="Bottom"
-    Margin="0,0,16,16"
+    Margin="16"
     IsOpen="{x:Bind ViewModel.IsUpdateAvailable, Mode=OneWay}"
     Severity="Informational"
     Title="New version available"
@@ -93,8 +91,10 @@
     <InfoBar.Action>
         <Button
             Content="Update"
-            Command="{x:Bind ViewModel.UpdateAvailableCommand}" />
+            Command="{x:Bind ViewModel.UpdateAvailableCommand}"
+            CommandParameter="{x:Bind MainNavigationView.XamlRoot}" />
     </InfoBar.Action>
+
 </InfoBar>
     </Grid>
 </Window>

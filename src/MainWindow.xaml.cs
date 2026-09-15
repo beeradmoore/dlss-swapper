@@ -379,12 +379,14 @@ public sealed partial class MainWindow : Window
         await newUpdateTask;
         if (newUpdateTask.Result is not null)
         {
-            _availableGitHubRelease = newUpdateTask.Result;
+          _availableGitHubRelease = newUpdateTask.Result;
 
-            // Show a persistent, low-key indicator so the user can't miss that an
-            // update is available even if they dismiss (or never see) the dialog below.
-            ViewModel.UpdateAvailableText = ResourceHelper.GetFormattedResourceTemplate("MainWindow_UpdateAvailableBannerTemplate", newUpdateTask.Result.Name);
-            ViewModel.UpdateAvailableVisibility = Visibility.Visible;
+// Show a persistent indicator so the user can see that an update is available.
+ViewModel.UpdateAvailableText = ResourceHelper.GetFormattedResourceTemplate(
+    "MainWindow_UpdateAvailableBannerTemplate",
+    newUpdateTask.Result.Name);
+
+ViewModel.IsUpdateAvailable = true;
 
             // The dialog itself is still only auto-shown once per version so we don't
             // nag the user with a popup every single time they open the app.

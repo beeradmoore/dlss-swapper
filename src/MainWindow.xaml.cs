@@ -381,12 +381,7 @@ public sealed partial class MainWindow : Window
         {
           _availableGitHubRelease = newUpdateTask.Result;
 
-// Show a persistent indicator so the user can see that an update is available.
-ViewModel.UpdateAvailableText = ResourceHelper.GetFormattedResourceTemplate(
-    "MainWindow_UpdateAvailableBannerTemplate",
-    newUpdateTask.Result.Name);
-
-ViewModel.IsUpdateAvailable = true;
+ViewModel.SetAvailableUpdate(newUpdateTask.Result);
 
             // The dialog itself is still only auto-shown once per version so we don't
             // nag the user with a popup every single time they open the app.

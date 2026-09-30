@@ -54,6 +54,7 @@ public class LanguageManager
             "fa-IR",
             "fi-FI",
             "fr-FR",
+            "he-IL",
             "it-IT",
             "ja-JP",
             "ko-KR",
@@ -89,6 +90,7 @@ public class LanguageManager
             "fa-IR" => "فارسی", // Farsi
             "fi-FI" => "Suomi", // Finnish (Finland)
             "fr-FR" => "Français", // French (France)
+            "he-IL" => "עברית", // Hebrew
             "it-IT" => "Italiano", // Italian (Italy)
             "ja-JP" => "日本語", // Japanese
             "ko-KR" => "한국어", // Republic of Korea

@@ -2,8 +2,11 @@ using DLSS_Swapper.Data;
 using DLSS_Swapper.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.System;
 using AsyncAwaitBestPractices;
@@ -191,5 +194,135 @@ public sealed partial class GameGridPage : Page
     private void ClearSearchBox_Click(object sender, RoutedEventArgs e)
     {
         SearchBox.Text = string.Empty;
+    }
+
+    internal string SearchText => SearchBox.Text;
+
+    bool _isSyncingSelection;
+    int _viewSyncGeneration;
+
+    ListViewBase? GetActiveListControl()
+    {
+        return MainContentControl.ContentTemplateRoot as ListViewBase;
+    }
+
+    internal void EnterSelectionMode()
+    {
+        var listControl = GetActiveListControl();
+        if (listControl is null)
+        {
+            return;
+        }
+
+        listControl.SelectionMode = ListViewSelectionMode.Multiple;
+        listControl.IsItemClickEnabled = false;
+        listControl.SelectionChanged += ListControl_SelectionChanged;
+        ResyncVisualSelection();
+    }
+
+    internal void ExitSelectionMode()
+    {
+        var listControl = GetActiveListControl();
+        if (listControl is null)
+        {
+            return;
+        }
+
+        listControl.SelectionChanged -= ListControl_SelectionChanged;
+        _isSyncingSelection = true;
+        try
+        {
+            if (listControl.Items.Count > 0)
+            {
+                listControl.DeselectRange(new ItemIndexRange(0, (uint)listControl.Items.Count));
+            }
+        }
+        finally
+        {
+            _isSyncingSelection = false;
+        }
+        listControl.SelectionMode = ListViewSelectionMode.None;
+        listControl.IsItemClickEnabled = true;
+    }
+
+    internal IEnumerable<Game> GetDistinctVisibleGames()
+    {
+        var list = GetActiveListControl();
+        return list is null ? Enumerable.Empty<Game>() : list.Items.OfType<Game>().Distinct().ToList();
+    }
+
+    void ListControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_isSyncingSelection == true)
+        {
+            return;
+        }
+
+        ViewModel.UpdateSelection(e.AddedItems, e.RemovedItems);
+        ResyncVisualSelection();
+    }
+
+    internal void BeginSuppressSelectionEvents()
+    {
+        _isSyncingSelection = true;
+        _viewSyncGeneration++;
+    }
+
+    // Called after CurrentCollectionView changes while selection mode is active.
+    // Swapping the ItemsSource clears the list's visual selection, so it is
+    // re-applied from the view model's SelectedGames afterwards.
+    internal void ResyncVisualSelectionAfterViewChange()
+    {
+        var generation = _viewSyncGeneration;
+        var enqueued = DispatcherQueue.TryEnqueue(() =>
+        {
+            if (generation != _viewSyncGeneration)
+            {
+                // A newer view change has already been requested; ignore this stale callback.
+                return;
+            }
+
+            ResyncVisualSelection();
+            ViewModel.NotifySelectionChanged();
+        });
+
+        // BeginSuppressSelectionEvents set _isSyncingSelection before the ItemsSource
+        // swap; if the resync could not be queued, nothing else would ever reset it
+        // and all selection events would be ignored from here on.
+        if (enqueued == false)
+        {
+            _isSyncingSelection = false;
+        }
+    }
+
+    internal void ResyncVisualSelection()
+    {
+        var listControl = GetActiveListControl();
+        if (listControl is null)
+        {
+            _isSyncingSelection = false;
+            return;
+        }
+
+        _isSyncingSelection = true;
+        try
+        {
+            if (listControl.Items.Count > 0)
+            {
+                listControl.DeselectRange(new ItemIndexRange(0, (uint)listControl.Items.Count));
+            }
+
+            for (var index = 0; index < listControl.Items.Count; index++)
+            {
+                if (listControl.Items[index] is Game game && ViewModel.SelectedGames.Contains(game))
+                {
+                    listControl.SelectRange(new ItemIndexRange(index, 1));
+                }
+            }
+        }
+        finally
+        {
+            _isSyncingSelection = false;
+        }
     }
 }

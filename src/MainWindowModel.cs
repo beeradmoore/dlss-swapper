@@ -1,6 +1,9 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using DLSS_Swapper.Data.GitHub;
 using DLSS_Swapper.Helpers;
 using Microsoft.UI.Xaml;
+using System.Threading.Tasks;
 
 namespace DLSS_Swapper;
 
@@ -18,7 +21,40 @@ public partial class MainWindowModel : ObservableObject
     [ObservableProperty]
     public partial FlowDirection AppFlowDirection { get; set; } = FlowDirection.LeftToRight;
 
+    [ObservableProperty]
+public partial bool IsUpdateAvailable { get; set; }
+
+    [ObservableProperty]
+    public partial string UpdateAvailableText { get; set; } = string.Empty;
+
     public MainWindowModelTranslationProperties TranslationProperties { get; } = new MainWindowModelTranslationProperties();
+    private GitHubRelease? _availableGitHubRelease;
+
+    public void SetAvailableUpdate(GitHubRelease release)
+{
+    _availableGitHubRelease = release;
+
+    UpdateAvailableText = ResourceHelper.GetFormattedResourceTemplate(
+        "MainWindow_UpdateAvailableBannerTemplate",
+        release.Name);
+
+    IsUpdateAvailable = true;
+}
+
+[RelayCommand]
+private async Task UpdateAvailableAsync(XamlRoot xamlRoot)
+{
+    if (_availableGitHubRelease is null)
+    {
+        return;
+    }
+
+    var gitHubUpdater = new GitHubUpdater();
+
+    await gitHubUpdater.DisplayNewUpdateDialog(
+        _availableGitHubRelease,
+        xamlRoot);
+}
 
     public MainWindowModel()
     {

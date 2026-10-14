@@ -228,7 +228,7 @@ internal partial class NVAPIHelper : ObservableObject
                 new PresetOption(ResourceHelper.GetString("DLSS_Preset_Default"), 0x00000000),
                 new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "A"), 0x00000001),
                 new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "B"), 0x00000002),
-                //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "C"), 0x00000003),
+                new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "C"), 0x00000003),
                 //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "D"), 0x00000004),
                 //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "E"), 0x00000005),
                 //new PresetOption(ResourceHelper.GetFormattedResourceTemplate("DLSS_Preset_Letter", "F"), 0x00000006),

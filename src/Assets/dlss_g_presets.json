@@ -17,7 +17,7 @@
   {
     "name": "Preset C",
     "value": "0x00000003",
-    "used": false
+    "used": true
   },
   {
     "name": "Preset D",

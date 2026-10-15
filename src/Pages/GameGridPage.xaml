@@ -298,7 +298,7 @@
                 Padding="16,8"
                 CornerRadius="8"
                 BorderThickness="1"
-                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                Background="{ThemeResource SolidBackgroundFillColorQuarternaryBrush}"
                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                 Visibility="{x:Bind ViewModel.IsSelectionMode, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
             <StackPanel Orientation="Horizontal" Spacing="12">

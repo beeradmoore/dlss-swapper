@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace DLSS_Swapper.Data.GitHub;
 
-internal class GitHubRelease
+public class GitHubRelease
 {
     [JsonPropertyName("html_url")]
     public string HtmlUrl { get; set; } = string.Empty;

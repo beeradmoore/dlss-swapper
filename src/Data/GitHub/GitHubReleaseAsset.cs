@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace DLSS_Swapper.Data.GitHub;
 
-internal class GitHubReleaseAsset
+public class GitHubReleaseAsset
 {
     [JsonPropertyName("url")]
     public string Url { get; set; } = string.Empty;

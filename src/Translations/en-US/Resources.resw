@@ -823,6 +823,9 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
     <value>Update Available</value>
   </data>
+ <data name="MainWindow_UpdateAvailableBannerTitle" xml:space="preserve">
+    <value>New version available:</value>
+</data>
   <data name="GitHubUpdater_UpdateDownloadFailed" xml:space="preserve">
     <value>Could not download update.</value>
   </data>

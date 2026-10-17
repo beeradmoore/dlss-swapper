@@ -177,7 +177,6 @@ public sealed partial class MainWindow : Window
     GameGridPage? gameGridPage;
     LibraryPage? libraryPage;
     SettingsPage? settingsPage;
-
     public GameGridPage? GameGridPage => gameGridPage;
 
     void GoToPage(string page)
@@ -376,12 +375,18 @@ public sealed partial class MainWindow : Window
         await newUpdateTask;
         if (newUpdateTask.Result is not null)
         {
+            // CheckForNewGitHubRelease only returns an object IF there is a new release.
+            ViewModel.NewUpdateGitHubRelease = newUpdateTask.Result;
+
+            // The dialog itself is still only auto-shown once per version so we don't
+            // nag the user with a popup every single time they open the app.
             if (gitHubUpdater.HasPromptedBefore(newUpdateTask.Result) == false)
             {
                 await gitHubUpdater.DisplayNewUpdateDialog(newUpdateTask.Result, MainNavigationView.XamlRoot);
             }
         }
     }
+
 
     /// <summary>
     ///

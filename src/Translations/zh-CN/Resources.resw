@@ -358,6 +358,129 @@
   <data name="GamesPage_AddGame" xml:space="preserve">
     <value>添加游戏</value>
   </data>
+  <data name="GamesPage_Batch_ApplyingTemplate" xml:space="preserve">
+    <value>正在应用…（{0}/{1}）</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Preset" xml:space="preserve">
+    <value>预设</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Version" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="GamesPage_Batch_DllLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadFailedTemplate" xml:space="preserve">
+    <value>无法下载 {0}，未更改任何游戏。</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadingTemplate" xml:space="preserve">
+    <value>正在下载 {0}…</value>
+  </data>
+  <data name="GamesPage_Batch_Error_Generic" xml:space="preserve">
+    <value>失败（状态可能不完整，请检查此游戏）</value>
+  </data>
+  <data name="GamesPage_Batch_Error_OrphanBackup" xml:space="preserve">
+    <value>备份 DLL 没有对应的游戏文件（请手动修复游戏文件）</value>
+  </data>
+  <data name="GamesPage_Batch_Error_PossiblyPartialTemplate" xml:space="preserve">
+    <value>{0}（状态可能不完整，请检查此游戏）</value>
+  </data>
+  <data name="GamesPage_Batch_Group_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="GamesPage_Batch_Group_FSR" xml:space="preserve">
+    <value>FSR</value>
+  </data>
+  <data name="GamesPage_Batch_Group_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="GamesPage_Batch_NeedsAdminTemplate" xml:space="preserve">
+    <value>有 {0} 个游戏需要以管理员身份运行 DLSS Swapper</value>
+  </data>
+  <data name="GamesPage_Batch_NoChange" xml:space="preserve">
+    <value>不更改</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoAsset" xml:space="preserve">
+    <value>游戏没有此 DLL</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoProfile" xml:space="preserve">
+    <value>未找到此游戏的 NVIDIA 驱动程序配置文件</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_Unsupported" xml:space="preserve">
+    <value>NVIDIA 预设不可用</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_UnsupportedMessage" xml:space="preserve">
+    <value>未在系统中检测到受支持的 NVIDIA 驱动程序，预设不可用。</value>
+  </data>
+  <data name="GamesPage_Batch_PresetForTypeTemplate" xml:space="preserve">
+    <value>{0} 预设</value>
+  </data>
+  <data name="GamesPage_Batch_PresetLabelTemplate" xml:space="preserve">
+    <value>{0} 预设 → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_RestoreLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_AlreadyOriginal" xml:space="preserve">
+    <value>游戏已使用原始 DLL</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Incompatible" xml:space="preserve">
+    <value>DLSS 世代不兼容</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_MixedGenerations" xml:space="preserve">
+    <value>游戏混用了多个 DLSS 版本</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_NoAsset" xml:space="preserve">
+    <value>游戏未使用此类型的 DLL</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Processing" xml:space="preserve">
+    <value>游戏正在处理中</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Errors" xml:space="preserve">
+    <value>错误：</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_NotApplicableTemplate" xml:space="preserve">
+    <value>有 {0} 项更改已跳过，因为不适用于该游戏或无需更改。</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Skipped" xml:space="preserve">
+    <value>已跳过：</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Swapped" xml:space="preserve">
+    <value>已应用：</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_SwappedTemplate" xml:space="preserve">
+    <value>{0} 项更改，涉及 {1} 个游戏</value>
+  </data>
+  <data name="GamesPage_Batch_SummaryTitle" xml:space="preserve">
+    <value>批量替换摘要</value>
+  </data>
+  <data name="GamesPage_Batch_Title" xml:space="preserve">
+    <value>将 DLL 应用到选中的游戏</value>
+  </data>
+  <data name="GamesPage_Batch_VersionForTypeTemplate" xml:space="preserve">
+    <value>{0} 版本</value>
+  </data>
+  <data name="GamesPage_Batch_WaitingForDownload" xml:space="preserve">
+    <value>正在等待当前下载完成…</value>
+  </data>
+  <data name="GamesPage_BulkSwap" xml:space="preserve">
+    <value>批量替换</value>
+  </data>
+  <data name="GamesPage_SelectionMode_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="GamesPage_SelectionMode_CountTemplate" xml:space="preserve">
+    <value>已选择 {0} 个游戏</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectAll" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectDlls" xml:space="preserve">
+    <value>选择 DLL</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectNone" xml:space="preserve">
+    <value>取消全选</value>
+  </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
     <value>将不同平台的游戏分组显示</value>
   </data>

@@ -78,23 +78,21 @@
             visible for as long as an update is available, so it can't be missed if the
             dialog was dismissed. Clicking it re-opens the update dialog.
         -->
-      <InfoBar
-    x:Name="UpdateAvailableInfoBar"
-    Grid.Row="1"
-    Margin="16"
-    IsOpen="{x:Bind ViewModel.IsUpdateAvailable, Mode=OneWay}"
-    Severity="Informational"
-    Title="New version available"
-    Message="{x:Bind ViewModel.UpdateAvailableText, Mode=OneWay}"
-    IsClosable="False">
-
-    <InfoBar.Action>
-        <Button
-            Content="Update"
-            Command="{x:Bind ViewModel.UpdateAvailableCommand}"
-            CommandParameter="{x:Bind MainNavigationView.XamlRoot}" />
-    </InfoBar.Action>
-
-</InfoBar>
+        <InfoBar
+            Grid.Row="1"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="16"
+            Background="{ThemeResource SolidBackgroundFillColorQuarternaryBrush}"
+            IsOpen="{x:Bind ViewModel.IsUpdateAvailable, Mode=OneWay}"
+            Severity="Informational"
+            Title="{x:Bind ViewModel.TranslationProperties.UpdateAvailableBannerTitleText, Mode=OneWay}"
+            Message="{x:Bind ViewModel.UpdateAvailableText, Mode=OneWay}">
+            <InfoBar.ActionButton>
+                <Button
+                    Content="{x:Bind ViewModel.TranslationProperties.UpdateText, Mode=OneWay}"
+                    Command="{x:Bind ViewModel.UpdateAvailableClickedCommand}" />
+            </InfoBar.ActionButton>
+        </InfoBar>
     </Grid>
 </Window>

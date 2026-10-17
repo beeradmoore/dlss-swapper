@@ -384,6 +384,9 @@ public partial class SettingsPageModel : ObservableObject
         {
             if (newUpdate is not null)
             {
+                // Update the main banner as well.
+                App.CurrentApp.MainWindow.ViewModel.NewUpdateGitHubRelease = newUpdate;
+
                 await githubUpdater.DisplayNewUpdateDialog(newUpdate, settingsPage.XamlRoot);
             }
             else

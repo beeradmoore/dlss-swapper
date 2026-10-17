@@ -24,5 +24,11 @@ public class MainWindowModelTranslationProperties : LocalizedViewModelBase
     [TranslationProperty]
     public string LoadingProgressText => ResourceHelper.GetString("General_Loading");
 
+    [TranslationProperty]
+    public string UpdateText => ResourceHelper.GetString("General_Update");
+
+    [TranslationProperty]
+    public string UpdateAvailableBannerTitleText => ResourceHelper.GetString("MainWindow_UpdateAvailableBannerTitle");
+
 
 }

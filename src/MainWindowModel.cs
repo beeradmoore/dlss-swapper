@@ -22,39 +22,24 @@ public partial class MainWindowModel : ObservableObject
     public partial FlowDirection AppFlowDirection { get; set; } = FlowDirection.LeftToRight;
 
     [ObservableProperty]
-public partial bool IsUpdateAvailable { get; set; }
+    [NotifyPropertyChangedFor(nameof(IsUpdateAvailable))]
+    [NotifyPropertyChangedFor(nameof(UpdateAvailableText))]
+    public partial GitHubRelease? NewUpdateGitHubRelease { get; set; }
+    public bool IsUpdateAvailable
+    {
+        get
+        {
+            if (NewUpdateGitHubRelease is null)
+            {
+                return false;
+            }
 
-    [ObservableProperty]
-    public partial string UpdateAvailableText { get; set; } = string.Empty;
+            return true;
+        }
+    }
+    public string UpdateAvailableText => NewUpdateGitHubRelease?.Name ?? string.Empty;
 
     public MainWindowModelTranslationProperties TranslationProperties { get; } = new MainWindowModelTranslationProperties();
-    private GitHubRelease? _availableGitHubRelease;
-
-    public void SetAvailableUpdate(GitHubRelease release)
-{
-    _availableGitHubRelease = release;
-
-    UpdateAvailableText = ResourceHelper.GetFormattedResourceTemplate(
-        "MainWindow_UpdateAvailableBannerTemplate",
-        release.Name);
-
-    IsUpdateAvailable = true;
-}
-
-[RelayCommand]
-private async Task UpdateAvailableAsync(XamlRoot xamlRoot)
-{
-    if (_availableGitHubRelease is null)
-    {
-        return;
-    }
-
-    var gitHubUpdater = new GitHubUpdater();
-
-    await gitHubUpdater.DisplayNewUpdateDialog(
-        _availableGitHubRelease,
-        xamlRoot);
-}
 
     public MainWindowModel()
     {
@@ -71,5 +56,18 @@ private async Task UpdateAvailableAsync(XamlRoot xamlRoot)
         AppFlowDirection = LanguageManager.IsRightToLeftLanguage(currentLanguage) 
             ? FlowDirection.RightToLeft 
             : FlowDirection.LeftToRight;
+    }
+
+    [RelayCommand]
+    async Task UpdateAvailableClickedAsync()
+    {        
+        if (NewUpdateGitHubRelease is null)
+        {
+            return;
+        }
+
+        var gitHubUpdater = new GitHubUpdater();
+
+        await gitHubUpdater.DisplayNewUpdateDialog(NewUpdateGitHubRelease, App.CurrentApp.MainWindow.Content.XamlRoot);
     }
 }

@@ -247,6 +247,114 @@ Para verificar qual predefinição está sendo usada, ative o indicador DLSS na 
   <data name="GamesPage_AddGame" xml:space="preserve">
     <value>Adicionar jogo</value>
   </data>
+  <data name="GamesPage_Batch_ApplyingTemplate" xml:space="preserve">
+    <value>Aplicando… ({0} de {1})</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Preset" xml:space="preserve">
+    <value>Predefinição</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Version" xml:space="preserve">
+    <value>Versão</value>
+  </data>
+  <data name="GamesPage_Batch_DllLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadFailedTemplate" xml:space="preserve">
+    <value>Não foi possível baixar {0}. Nenhum jogo foi alterado.</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadingTemplate" xml:space="preserve">
+    <value>Baixando {0}…</value>
+  </data>
+  <data name="GamesPage_Batch_Error_Generic" xml:space="preserve">
+    <value>Falhou (o estado pode ter ficado parcial — verifique este jogo)</value>
+  </data>
+  <data name="GamesPage_Batch_Error_OrphanBackup" xml:space="preserve">
+    <value>O backup da DLL não tem arquivo correspondente no jogo (repare os arquivos do jogo manualmente)</value>
+  </data>
+  <data name="GamesPage_Batch_Error_PossiblyPartialTemplate" xml:space="preserve">
+    <value>{0} (o estado pode ter ficado parcial — verifique este jogo)</value>
+  </data>
+  <data name="GamesPage_Batch_Group_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="GamesPage_Batch_Group_FSR" xml:space="preserve">
+    <value>FSR</value>
+  </data>
+  <data name="GamesPage_Batch_Group_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="GamesPage_Batch_NeedsAdminTemplate" xml:space="preserve">
+    <value>{0} jogo(s) exigem executar o DLSS Swapper como administrador</value>
+  </data>
+  <data name="GamesPage_Batch_NoChange" xml:space="preserve">
+    <value>Não alterar</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoAsset" xml:space="preserve">
+    <value>O jogo não tem esta DLL</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoProfile" xml:space="preserve">
+    <value>Nenhum perfil do driver NVIDIA encontrado para este jogo</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_Unsupported" xml:space="preserve">
+    <value>Predefinições da NVIDIA indisponíveis</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_UnsupportedMessage" xml:space="preserve">
+    <value>As predefinições estão indisponíveis porque nenhum driver NVIDIA compatível foi detectado neste sistema.</value>
+  </data>
+  <data name="GamesPage_Batch_PresetForTypeTemplate" xml:space="preserve">
+    <value>Predefinição do {0}</value>
+  </data>
+  <data name="GamesPage_Batch_PresetLabelTemplate" xml:space="preserve">
+    <value>Predefinição do {0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_RestoreLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_AlreadyOriginal" xml:space="preserve">
+    <value>O jogo já usa a DLL original</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Incompatible" xml:space="preserve">
+    <value>Geração do DLSS incompatível</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_MixedGenerations" xml:space="preserve">
+    <value>O jogo mistura gerações do DLSS</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_NoAsset" xml:space="preserve">
+    <value>O jogo não usa este tipo de DLL</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Processing" xml:space="preserve">
+    <value>Jogo em processamento</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Errors" xml:space="preserve">
+    <value>Erros:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_NotApplicableTemplate" xml:space="preserve">
+    <value>{0} alteração(ões) ignorada(s) porque não se aplicavam ao jogo ou não eram necessárias.</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Skipped" xml:space="preserve">
+    <value>Ignoradas:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Swapped" xml:space="preserve">
+    <value>Aplicadas:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_SwappedTemplate" xml:space="preserve">
+    <value>{0} alteração(ões) em {1} jogo(s)</value>
+  </data>
+  <data name="GamesPage_Batch_SummaryTitle" xml:space="preserve">
+    <value>Resumo da troca em massa</value>
+  </data>
+  <data name="GamesPage_Batch_Title" xml:space="preserve">
+    <value>Aplicar DLL aos jogos selecionados</value>
+  </data>
+  <data name="GamesPage_Batch_VersionForTypeTemplate" xml:space="preserve">
+    <value>Versão do {0}</value>
+  </data>
+  <data name="GamesPage_Batch_WaitingForDownload" xml:space="preserve">
+    <value>Aguardando o download atual terminar…</value>
+  </data>
+  <data name="GamesPage_BulkSwap" xml:space="preserve">
+    <value>Troca em massa</value>
+  </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
     <value>Agrupar jogos da mesma biblioteca</value>
   </data>
@@ -326,6 +434,21 @@ Se você verificou tudo isso e seu jogo ainda não aparece, pode ser um bug. Agr
   </data>
   <data name="GamesPage_NewDllsFound" xml:space="preserve">
     <value>Novas DLLs encontradas</value>
+  </data>
+  <data name="GamesPage_SelectionMode_Close" xml:space="preserve">
+    <value>Fechar</value>
+  </data>
+  <data name="GamesPage_SelectionMode_CountTemplate" xml:space="preserve">
+    <value>{0} selecionado(s)</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectAll" xml:space="preserve">
+    <value>Selecionar todos</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectDlls" xml:space="preserve">
+    <value>Selecionar DLLs</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectNone" xml:space="preserve">
+    <value>Desmarcar todos</value>
   </data>
   <data name="GamesPage_Title" xml:space="preserve">
     <value>Jogos</value>

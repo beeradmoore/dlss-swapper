@@ -466,21 +466,6 @@
   <data name="GamesPage_BulkSwap" xml:space="preserve">
     <value>批量替换</value>
   </data>
-  <data name="GamesPage_SelectionMode_Close" xml:space="preserve">
-    <value>关闭</value>
-  </data>
-  <data name="GamesPage_SelectionMode_CountTemplate" xml:space="preserve">
-    <value>已选择 {0} 个游戏</value>
-  </data>
-  <data name="GamesPage_SelectionMode_SelectAll" xml:space="preserve">
-    <value>全选</value>
-  </data>
-  <data name="GamesPage_SelectionMode_SelectDlls" xml:space="preserve">
-    <value>选择 DLL</value>
-  </data>
-  <data name="GamesPage_SelectionMode_SelectNone" xml:space="preserve">
-    <value>取消全选</value>
-  </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
     <value>将不同平台的游戏分组显示</value>
   </data>
@@ -563,6 +548,21 @@
   </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>重新载入现有游戏</value>
+  </data>
+  <data name="GamesPage_SelectionMode_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="GamesPage_SelectionMode_CountTemplate" xml:space="preserve">
+    <value>已选择 {0} 个游戏</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectAll" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectDlls" xml:space="preserve">
+    <value>选择 DLL</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectNone" xml:space="preserve">
+    <value>取消全选</value>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
     <value>显示隐藏游戏（启动时默认为关闭状态）</value>

@@ -186,6 +186,15 @@
   <data name="FailedToLaunchPage_WindowTitle" xml:space="preserve">
     <value>ההפעלה נכשלה</value>
   </data>
+  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
+    <value>האם אתה בטוח שברצונך להסיר את תמונת העטיפה המותאמת אישית?</value>
+  </data>
+  <data name="Game_CurrentlyProcessing" xml:space="preserve">
+    <value>המשחק נמצא כעת בעיבוד</value>
+  </data>
+  <data name="Game_CustomCoverRemove" xml:space="preserve">
+    <value>להסיר עטיפה מותאמת אישית?</value>
+  </data>
   <data name="GameHistoryControl_AssetTypeHeader" xml:space="preserve">
     <value>סוג משאב</value>
   </data>
@@ -396,9 +405,6 @@
   <data name="GamesPage_NewDlls" xml:space="preserve">
     <value>קובצי DLL חדשים</value>
   </data>
-  <data name="GamesPage_NewDllsFound" xml:space="preserve">
-    <value>נמצאו קובצי DLL חדשים</value>
-  </data>
   <data name="GamesPage_NewDlls_CreateNewGitHubIssue" xml:space="preserve">
     <value>צור פנייה (issue) חדשה ב-GitHub</value>
   </data>
@@ -429,6 +435,9 @@
   <data name="GamesPage_NewDlls_YouDoNotHaveToSubmitDllAutoTrack" xml:space="preserve">
     <value>אינך חייב להעלות את קובצי ה-DLL. אנו נאתר אותם על סמך המידע שסופק.</value>
   </data>
+  <data name="GamesPage_NewDllsFound" xml:space="preserve">
+    <value>נמצאו קובצי DLL חדשים</value>
+  </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>טוען מחדש את המשחק</value>
   </data>
@@ -446,15 +455,6 @@
   </data>
   <data name="GamesPage_ViewType_ListView" xml:space="preserve">
     <value>תצוגת רשימה</value>
-  </data>
-  <data name="Game_AreYouSureRemoveCustomCover" xml:space="preserve">
-    <value>האם אתה בטוח שברצונך להסיר את תמונת העטיפה המותאמת אישית?</value>
-  </data>
-  <data name="Game_CurrentlyProcessing" xml:space="preserve">
-    <value>המשחק נמצא כעת בעיבוד</value>
-  </data>
-  <data name="Game_CustomCoverRemove" xml:space="preserve">
-    <value>להסיר עטיפה מותאמת אישית?</value>
   </data>
   <data name="General_ApplicationRunningAsAdmin" xml:space="preserve">
     <value>יישום זה פועל עם הרשאות מנהל.</value>
@@ -525,12 +525,6 @@
   <data name="General_Name_DLSS" xml:space="preserve">
     <value>DLSS</value>
   </data>
-  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
-    <value>פריסט DLSS RR</value>
-  </data>
-  <data name="General_Name_DLSSG_Preset" xml:space="preserve">
-    <value>פריסט DLSS FG</value>
-  </data>
   <data name="General_Name_DLSS_D" xml:space="preserve">
     <value>DLSS Ray Reconstruction</value>
   </data>
@@ -539,6 +533,12 @@
   </data>
   <data name="General_Name_DLSS_Preset" xml:space="preserve">
     <value>פריסט DLSS</value>
+  </data>
+  <data name="General_Name_DLSSD_Preset" xml:space="preserve">
+    <value>פריסט DLSS RR</value>
+  </data>
+  <data name="General_Name_DLSSG_Preset" xml:space="preserve">
+    <value>פריסט DLSS FG</value>
   </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
@@ -765,9 +765,6 @@
   <data name="LibraryPage_ImportedDLLs" xml:space="preserve">
     <value>קובצי DLL שיובאו: </value>
   </data>
-  <data name="LibraryPage_ImportFromNVIDIADriver" xml:space="preserve">
-    <value>ייבא ממנהל ההתקן של NVIDIA</value>
-  </data>
   <data name="LibraryPage_ImportFrom_DownloadFromServer" xml:space="preserve">
     <value>הורד מהשרת</value>
   </data>
@@ -776,6 +773,9 @@
   </data>
   <data name="LibraryPage_ImportFrom_LocalFiles" xml:space="preserve">
     <value>מקבצים מקומיים</value>
+  </data>
+  <data name="LibraryPage_ImportFromNVIDIADriver" xml:space="preserve">
+    <value>ייבא ממנהל ההתקן של NVIDIA</value>
   </data>
   <data name="LibraryPage_Importing" xml:space="preserve">
     <value>מייבא</value>

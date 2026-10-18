@@ -41,7 +41,24 @@ public sealed partial class MainWindow : Window
 
             if (lastWindowSizeAndPosition.Width > 512 && lastWindowSizeAndPosition.Height > 512)
             {
-                AppWindow.MoveAndResize(lastWindowSizeAndPosition.GetRectInt32());
+                try
+                {
+                    var targetWindowSize = lastWindowSizeAndPosition.GetRectInt32();
+
+                    var displayAreas = DisplayArea.FindAll();
+                    foreach (var displayArea in displayAreas)
+                    {
+                        // Calculate if targetWindowSize is within 
+                    }
+
+                    AppWindow.MoveAndResize(targetWindowSize);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "Could not restore original window size.");
+
+                }
+
             }
             if (lastWindowSizeAndPosition.State == OverlappedPresenterState.Maximized)
             {

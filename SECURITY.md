@@ -5,11 +5,19 @@
 | Version | Supported          |
 | ------- | ------------------ |
 | 1.2.x   | :white_check_mark: |
+| 1.1.x   | :cross_mark:       |
+| 1.0.x   | :cross_mark:       |
+| 0.x.x   | :cross_mark:       |
+
+Always download latest releases from our [supported locations](https://github.com/beeradmoore/dlss-swapper#how-do-i-get-it).
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you discover a security vulnerability, please do not report it through public GitHub issues. Instead either:
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+- Email `dlss-swapper@beeradmoore.com`
+- Send a direct [message on Twitter](https://twitter.com/dlss_swapper)
+
+## Bug Bounty Program
+
+Unfortunately there is no monetary reward for reporting bugs or vulnerabilities.

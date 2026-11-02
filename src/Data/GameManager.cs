@@ -486,6 +486,7 @@ internal partial class GameManager : ObservableObject
             GameLibrary.Steam => true,
             GameLibrary.EpicGamesStore => true,
             GameLibrary.EAApp => true,
+            GameLibrary.UbisoftConnect => true,
             _ => false,
         };
     }
@@ -525,6 +526,10 @@ internal partial class GameManager : ObservableObject
             {
                 Process.Start(new ProcessStartInfo(BattleNetLibrary.Instance.ClientPath,  $"--exec=\"launch {battleNetGame.LauncherId}\"") { UseShellExecute = true });
             }
+        }
+        else if (game.GameLibrary == GameLibrary.UbisoftConnect)
+        {
+            await Launcher.LaunchUriAsync(new Uri($"uplay://launch/{game.PlatformId}/0"));
         }
     }
 }

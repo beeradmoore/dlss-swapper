@@ -124,144 +124,219 @@ internal class UbisoftConnectLibrary : IGameLibrary
 
         // Cache path used to be relative to the install path, but now it appears to be in %LOCALAPPDATA%\Ubisoft Game Launcher\
         // Check both paths just to be sure.
-        var configurationPath = Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "Ubisoft Game Launcher", "cache", "configuration", "configurations");
-        if (File.Exists(configurationPath) == false)
+        // Also cache path just may no longer exist, in that case we fall back to no covers.
+        var possibleConfigurationPaths = new string[]
         {
-            configurationPath = Path.Combine(GetInstallPath(), "cache", "configuration", "configurations");
-            if (File.Exists(configurationPath) == false)
+             Path.Combine(Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%"), "Ubisoft Game Launcher", "cache", "configuration", "configurations"),
+             Path.Combine(GetInstallPath(), "cache", "configuration", "configurations"),
+        };
+
+        var latestConfigurationFile = string.Empty;
+        var latestConfigurationLastWriteTime = DateTime.MinValue;
+
+        foreach (var possibleConfigurationPath in possibleConfigurationPaths)
+        {
+            if (File.Exists(possibleConfigurationPath))
             {
-                return games;
+                var lastWriteTime = new FileInfo(possibleConfigurationPath).LastWriteTime;
+                if (latestConfigurationFile == string.Empty || lastWriteTime > latestConfigurationLastWriteTime)
+                {
+                    latestConfigurationFile = possibleConfigurationPath;
+                    latestConfigurationLastWriteTime = lastWriteTime;
+                }
             }
         }
 
-        //var yamlDeserializer = new StaticDeserializerBuilder(new Helpers.StaticContext())
-        var yamlDeserializer = new DeserializerBuilder()
-            .IgnoreUnmatchedProperties()
-            .WithNamingConvention(UnderscoredNamingConvention.Instance)
-            .Build();
-
-        // Load data from the configurations file. This is the data the game+dlc that the user has access.
-        // Not sure what happens if you are on a shared PC.
-        var configurationFileData = await File.ReadAllBytesAsync(configurationPath).ConfigureAwait(false);
-
-        // This file contains multiple game records seperated by some custom header.
-        // We split this apart base on the methods from https://github.com/lutris/lutris/blob/d908066d97e61b2f33715fe9bdff6c02cc7fbc80/lutris/util/ubisoft/parser.py
-        // and then return it as a list of games which we then check to see if it is in the installed list above.
-        var configurationRecords = ParseConfiguration(configurationFileData);
-        foreach (var configurationRecord in configurationRecords)
+        if (latestConfigurationFile == string.Empty)
         {
-            // TODO: Remove htis true.
-            // Only bother trying to read the game data if the install list
-            if (installedTitles.TryGetValue(configurationRecord.InstallId, out var installedTitle))
-            {
-                // Copy the yaml out for the game into a memory stream to load.
-                using (var memoryStream = new MemoryStream(configurationRecord.Size))
+            // On newer updates Ubisoft Connect no longer makes the above two files.
+            // There is a file %LOCALAPPDATA%\Ubisoft Game Launcher\cache\configuration\configurations.vdat
+            // which may be the new file?
+            // For now we will proceed with reg data and not have any game cover art.
+            // We can use proto of uplay_install.state or uplay_install.manifest to get real game title if this fails.
+
+            foreach (var installedTitle in installedTitles.Values)
+            { 
+                var cachedGame = GameManager.Instance.GetGame<UbisoftConnectGame>(installedTitle.InstallId.ToString(CultureInfo.InvariantCulture));
+                var activeGame = cachedGame ?? new UbisoftConnectGame(installedTitle.InstallId.ToString(CultureInfo.InvariantCulture));
+
+                var installPath = PathHelpers.NormalizePath(installedTitle.InstallPath);
+
+                if (Directory.Exists(installPath) == false)
                 {
-                    memoryStream.Write(configurationFileData, configurationRecord.Offset, configurationRecord.Size);
-                    memoryStream.Position = 0;
+                    Logger.Warning($"{Name} library could not load game {activeGame.Title} ({activeGame.PlatformId}) because install path does not exist: {activeGame.InstallPath}");
+                    continue;
+                }
 
-                    using (var reader = new StreamReader(memoryStream))
+                var directoryInfo = new DirectoryInfo(installPath);
+                var gameTitle = directoryInfo.Name;
+                
+
+                // These are UI-bound properties. The File.ReadAllBytesAsync().ConfigureAwait(false) earlier
+                // has already taken us off the UI thread, so these must be marshalled explicitly or WinUI
+                // throws RPC_E_WRONGTHREAD when a bound control is updated from a background thread.
+                await App.CurrentApp.RunOnUIThreadAsync(() =>
+                {
+                    activeGame.Title = gameTitle;
+                    activeGame.InstallPath = installPath;
+                    //activeGame.RemoteHeaderImage = ???;
+
+                    return Task.CompletedTask;
+                }).ConfigureAwait(false);
+
+                if (activeGame.IsInIgnoredPath())
+                {
+                    continue;
+                }
+
+                await activeGame.SaveToDatabaseAsync();
+
+                // If the game is not from cache, force processing
+                if (cachedGame is null)
+                {
+                    activeGame.NeedsProcessing = true;
+                }
+
+                if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+                {
+                    activeGame.ProcessGame(forceNeedsProcessing: forceNeedsProcessing);
+                }
+
+                games.Add(activeGame);
+            }
+        }
+        else // Fallback to old method
+        {
+
+            //var yamlDeserializer = new StaticDeserializerBuilder(new Helpers.StaticContext())
+            var yamlDeserializer = new DeserializerBuilder()
+                .IgnoreUnmatchedProperties()
+                .WithNamingConvention(UnderscoredNamingConvention.Instance)
+                .Build();
+
+            // Load data from the configurations file. This is the data the game+dlc that the user has access.
+            // Not sure what happens if you are on a shared PC.
+            var configurationFileData = await File.ReadAllBytesAsync(latestConfigurationFile).ConfigureAwait(false);
+
+            // This file contains multiple game records seperated by some custom header.
+            // We split this apart base on the methods from https://github.com/lutris/lutris/blob/d908066d97e61b2f33715fe9bdff6c02cc7fbc80/lutris/util/ubisoft/parser.py
+            // and then return it as a list of games which we then check to see if it is in the installed list above.
+            var configurationRecords = ParseConfiguration(configurationFileData);
+            foreach (var configurationRecord in configurationRecords)
+            {
+                // TODO: Remove htis true.
+                // Only bother trying to read the game data if the install list
+                if (installedTitles.TryGetValue(configurationRecord.InstallId, out var installedTitle))
+                {
+                    // Copy the yaml out for the game into a memory stream to load.
+                    using (var memoryStream = new MemoryStream(configurationRecord.Size))
                     {
-                        try
+                        memoryStream.Write(configurationFileData, configurationRecord.Offset, configurationRecord.Size);
+                        memoryStream.Position = 0;
+
+                        using (var reader = new StreamReader(memoryStream))
                         {
-                            var ubisoftConnectConfigurationItem = yamlDeserializer.Deserialize<UbisoftConnectConfigurationItem>(reader);
-
-                            // This is less than ideal. This usually happens with DLC or pre-orders.
-                            if (ubisoftConnectConfigurationItem is null || ubisoftConnectConfigurationItem.Root is null)
+                            try
                             {
-                                Logger.Info("Could not load Ubisoft Connect item. This is sometimes expected for certain titles.");
-                                continue;
-                            }
+                                var ubisoftConnectConfigurationItem = yamlDeserializer.Deserialize<UbisoftConnectConfigurationItem>(reader);
 
-                            // Unsure if we care about version at the moment.
-                            /*
-                            if (ubisoftConnectConfigurationItem.Version != "2.0")
-                            {
-                                // If Version isn't 2.0 we will just not load any games.
-                                Logger.Error($"Unknown item version. Expected 2.0, found {ubisoftConnectConfigurationItem.Version}");
-                                continue;
-                            }
-                            */
-
-                            // This can be expected. If there is no installer item there is no game to install.
-                            if (ubisoftConnectConfigurationItem.Root.Installer is null)
-                            {
-                                continue;
-                            }
-
-                            // This is not expected.
-                            if (ubisoftConnectConfigurationItem.Root.StartGame is null)
-                            {
-                                Logger.Info($"StartGameNode is null for {ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier}. This is likely a region specific installer.");
-                                continue;
-                            }
-
-
-                            var remoteImage = string.Empty;
-                            if (ubisoftConnectConfigurationItem.Root.LogoImage is not null)
-                            {
-                                if (ubisoftConnectConfigurationItem.Root.ThumbImage.EndsWith(".jpg", StringComparison.InvariantCultureIgnoreCase) || ubisoftConnectConfigurationItem.Root.ThumbImage.EndsWith(".png", StringComparison.InvariantCultureIgnoreCase))
+                                // This is less than ideal. This usually happens with DLC or pre-orders.
+                                if (ubisoftConnectConfigurationItem is null || ubisoftConnectConfigurationItem.Root is null)
                                 {
-                                    remoteImage = $"https://ubistatic3-a.akamaihd.net/orbit/uplay_launcher_3_0/assets/{ubisoftConnectConfigurationItem.Root.ThumbImage}";
+                                    Logger.Info("Could not load Ubisoft Connect item. This is sometimes expected for certain titles.");
+                                    continue;
                                 }
-                                else
+
+                                // Unsure if we care about version at the moment.
+                                /*
+                                if (ubisoftConnectConfigurationItem.Version != "2.0")
                                 {
-                                    // Hopefully if we need to check localizations that it is in the default key.
-                                    // In future if we do actual localization then we need to check persons locale and apply that here.
-                                    if (ubisoftConnectConfigurationItem.Localizations?.ContainsKey("default") == true)
+                                    // If Version isn't 2.0 we will just not load any games.
+                                    Logger.Error($"Unknown item version. Expected 2.0, found {ubisoftConnectConfigurationItem.Version}");
+                                    continue;
+                                }
+                                */
+
+            // This can be expected. If there is no installer item there is no game to install.
+            if (ubisoftConnectConfigurationItem.Root.Installer is null)
+                                {
+                                    continue;
+                                }
+
+                                // This is not expected.
+                                if (ubisoftConnectConfigurationItem.Root.StartGame is null)
+                                {
+                                    Logger.Info($"StartGameNode is null for {ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier}. This is likely a region specific installer.");
+                                    continue;
+                                }
+
+
+                                var remoteImage = string.Empty;
+                                if (ubisoftConnectConfigurationItem.Root.LogoImage is not null)
+                                {
+                                    if (ubisoftConnectConfigurationItem.Root.ThumbImage.EndsWith(".jpg", StringComparison.InvariantCultureIgnoreCase) || ubisoftConnectConfigurationItem.Root.ThumbImage.EndsWith(".png", StringComparison.InvariantCultureIgnoreCase))
                                     {
-                                        if (ubisoftConnectConfigurationItem.Localizations["default"]?.ContainsKey(ubisoftConnectConfigurationItem.Root.ThumbImage) == true)
+                                        remoteImage = $"https://ubistatic3-a.akamaihd.net/orbit/uplay_launcher_3_0/assets/{ubisoftConnectConfigurationItem.Root.ThumbImage}";
+                                    }
+                                    else
+                                    {
+                                        // Hopefully if we need to check localizations that it is in the default key.
+                                        // In future if we do actual localization then we need to check persons locale and apply that here.
+                                        if (ubisoftConnectConfigurationItem.Localizations?.ContainsKey("default") == true)
                                         {
-                                            remoteImage = $"https://ubistatic3-a.akamaihd.net/orbit/uplay_launcher_3_0/assets/{ubisoftConnectConfigurationItem.Localizations["default"][ubisoftConnectConfigurationItem.Root.ThumbImage]}";
+                                            if (ubisoftConnectConfigurationItem.Localizations["default"]?.ContainsKey(ubisoftConnectConfigurationItem.Root.ThumbImage) == true)
+                                            {
+                                                remoteImage = $"https://ubistatic3-a.akamaihd.net/orbit/uplay_launcher_3_0/assets/{ubisoftConnectConfigurationItem.Localizations["default"][ubisoftConnectConfigurationItem.Root.ThumbImage]}";
+                                            }
                                         }
                                     }
                                 }
+
+                                var cachedGame = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString(CultureInfo.InvariantCulture));
+                                var activeGame = cachedGame ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString(CultureInfo.InvariantCulture));
+
+                                // These are UI-bound properties. The File.ReadAllBytesAsync().ConfigureAwait(false) earlier
+                                // has already taken us off the UI thread, so these must be marshalled explicitly or WinUI
+                                // throws RPC_E_WRONGTHREAD when a bound control is updated from a background thread.
+                                await App.CurrentApp.RunOnUIThreadAsync(() =>
+                                {
+                                    activeGame.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;
+                                    activeGame.InstallPath = PathHelpers.NormalizePath(installedTitle.InstallPath);
+                                    activeGame.RemoteHeaderImage = remoteImage;
+
+                                    return Task.CompletedTask;
+                                }).ConfigureAwait(false);
+
+                                if (activeGame.IsInIgnoredPath())
+                                {
+                                    continue;
+                                }
+
+                                if (Directory.Exists(activeGame.InstallPath) == false)
+                                {
+                                    Logger.Warning($"{Name} library could not load game {activeGame.Title} ({activeGame.PlatformId}) because install path does not exist: {activeGame.InstallPath}");
+                                    continue;
+                                }
+
+                                await activeGame.SaveToDatabaseAsync();
+
+                                // If the game is not from cache, force processing
+                                if (cachedGame is null)
+                                {
+                                    activeGame.NeedsProcessing = true;
+                                }
+
+                                if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
+                                {
+                                    activeGame.ProcessGame(forceNeedsProcessing: forceNeedsProcessing);
+                                }
+
+                                games.Add(activeGame);
                             }
-
-                            var cachedGame = GameManager.Instance.GetGame<UbisoftConnectGame>(configurationRecord.InstallId.ToString(CultureInfo.InvariantCulture));
-                            var activeGame = cachedGame ?? new UbisoftConnectGame(configurationRecord.InstallId.ToString(CultureInfo.InvariantCulture));
-
-                            // These are UI-bound properties. The File.ReadAllBytesAsync().ConfigureAwait(false) earlier
-                            // has already taken us off the UI thread, so these must be marshalled explicitly or WinUI
-                            // throws RPC_E_WRONGTHREAD when a bound control is updated from a background thread.
-                            await App.CurrentApp.RunOnUIThreadAsync(() =>
+                            catch (Exception err)
                             {
-                                activeGame.Title = ubisoftConnectConfigurationItem.Root.Installer.GameIdentifier;
-                                activeGame.InstallPath = PathHelpers.NormalizePath(installedTitle.InstallPath);
-                                activeGame.RemoteHeaderImage = remoteImage;
-
-                                return Task.CompletedTask;
-                            }).ConfigureAwait(false);
-
-                            if (activeGame.IsInIgnoredPath())
-                            {
-                                continue;
+                                Logger.Error(err, "Error loading UbisoftConnectConfigurationItem");
                             }
-
-                            if (Directory.Exists(activeGame.InstallPath) == false)
-                            {
-                                Logger.Warning($"{Name} library could not load game {activeGame.Title} ({activeGame.PlatformId}) because install path does not exist: {activeGame.InstallPath}");
-                                continue;
-                            }
-
-                            await activeGame.SaveToDatabaseAsync();
-
-                            // If the game is not from cache, force processing
-                            if (cachedGame is null)
-                            {
-                                activeGame.NeedsProcessing = true;
-                            }
-
-                            if (activeGame.NeedsProcessing == true || forceNeedsProcessing == true)
-                            {
-                                activeGame.ProcessGame(forceNeedsProcessing: forceNeedsProcessing);
-                            }
-
-                            games.Add(activeGame);
-                        }
-                        catch (Exception err)
-                        {
-                            Logger.Error(err, "Error loading UbisoftConnectConfigurationItem");
                         }
                     }
                 }

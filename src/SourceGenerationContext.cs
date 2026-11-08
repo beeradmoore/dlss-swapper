@@ -12,6 +12,8 @@ namespace DLSS_Swapper;
 [JsonSerializable(typeof(Data.GitHub.GitHubRelease))]
 [JsonSerializable(typeof(Data.EpicGamesStore.CacheItem[]))]
 [JsonSerializable(typeof(Data.EpicGamesStore.ManifestFile))]
+[JsonSerializable(typeof(Data.EpicGamesStore.InstallationEntry))]
+[JsonSerializable(typeof(Data.EpicGamesStore.LauncherCatalogCache))]
 [JsonSerializable(typeof(Data.GOG.LimitedDetail.LimitedDetailImages))]
 [JsonSerializable(typeof(Data.GOG.GamePiece.GamePieceOriginalImages))]
 [JsonSerializable(typeof(Data.GOG.ResourceImages))]

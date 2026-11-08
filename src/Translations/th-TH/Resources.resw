@@ -358,6 +358,114 @@
   <data name="GamesPage_AddGame" xml:space="preserve">
     <value>เพิ่มเกม</value>
   </data>
+  <data name="GamesPage_Batch_ApplyingTemplate" xml:space="preserve">
+    <value>กำลังนำไปใช้</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Preset" xml:space="preserve">
+    <value>พรีเซ็ต</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Version" xml:space="preserve">
+    <value>เวอร์ชัน</value>
+  </data>
+  <data name="GamesPage_Batch_DllLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadFailedTemplate" xml:space="preserve">
+    <value>ไม่สามารถดาวน์โหลด {0} ได้ ไม่มีเกมใดถูกเปลี่ยนแปลง.</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadingTemplate" xml:space="preserve">
+    <value>กำลังดาวน์โหลด {0}…</value>
+  </data>
+  <data name="GamesPage_Batch_Error_Generic" xml:space="preserve">
+    <value>ล้มเหลว (สถานะอาจไม่สมบูรณ์ — ตรวจสอบเกมนี้)</value>
+  </data>
+  <data name="GamesPage_Batch_Error_OrphanBackup" xml:space="preserve">
+    <value>DLL สำรองไม่มีไฟล์เกมที่ตรงกัน (ซ่อมแซมไฟล์เกมด้วยตนเอง)</value>
+  </data>
+  <data name="GamesPage_Batch_Error_PossiblyPartialTemplate" xml:space="preserve">
+    <value>{0} (สถานะอาจไม่สมบูรณ์ — ตรวจสอบเกมนี้)</value>
+  </data>
+  <data name="GamesPage_Batch_Group_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="GamesPage_Batch_Group_FSR" xml:space="preserve">
+    <value>FSR</value>
+  </data>
+  <data name="GamesPage_Batch_Group_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="GamesPage_Batch_NeedsAdminTemplate" xml:space="preserve">
+    <value>เกม {0} เกมจำเป็นต้องเรียกใช้ DLSS Swapper ในฐานะผู้ดูแลระบบ</value>
+  </data>
+  <data name="GamesPage_Batch_NoChange" xml:space="preserve">
+    <value>ไม่เปลี่ยน</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoAsset" xml:space="preserve">
+    <value>เกมไม่มี DLL นี้</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoProfile" xml:space="preserve">
+    <value>ไม่พบโปรไฟล์ไดรเวอร์ NVIDIA สำหรับเกมนี้</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_Unsupported" xml:space="preserve">
+    <value>พรีเซ็ตของ NVIDIA ไม่พร้อมใช้งาน</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_UnsupportedMessage" xml:space="preserve">
+    <value>ไม่สามารถใช้งานพรีเซ็ตได้ เนื่องจากตรวจไม่พบไดรเวอร์ NVIDIA ที่รองรับในระบบนี้</value>
+  </data>
+  <data name="GamesPage_Batch_PresetForTypeTemplate" xml:space="preserve">
+    <value>{0} พรีเซ็ต</value>
+  </data>
+  <data name="GamesPage_Batch_PresetLabelTemplate" xml:space="preserve">
+    <value>พรีเซ็ต {0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_RestoreLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_AlreadyOriginal" xml:space="preserve">
+    <value>เกมใช้ DLL ต้นฉบับอยู่แล้ว</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Incompatible" xml:space="preserve">
+    <value>เจเนอเรชัน DLSS ที่ไม่เข้ากัน</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_MixedGenerations" xml:space="preserve">
+    <value>เกมผสมผสาน DLSS ต่างเจเนอเรชัน</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_NoAsset" xml:space="preserve">
+    <value>เกมไม่ได้ใช้ DLL ประเภทนี้</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Processing" xml:space="preserve">
+    <value>เกมกำลังประมวลผลอยู่</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Errors" xml:space="preserve">
+    <value>ข้อผิดพลาด:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_NotApplicableTemplate" xml:space="preserve">
+    <value>การเปลี่ยนแปลง {0} รายการถูกข้ามไปเนื่องจากไม่เกี่ยวข้องกับเกมหรือไม่จำเป็น.</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Skipped" xml:space="preserve">
+    <value>ข้ามแล้ว:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Swapped" xml:space="preserve">
+    <value>นำไปใช้แล้ว:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_SwappedTemplate" xml:space="preserve">
+    <value>การเปลี่ยนแปลง {0} รายการ(s) ในเกม {1} เกม(s)</value>
+  </data>
+  <data name="GamesPage_Batch_SummaryTitle" xml:space="preserve">
+    <value>สรุปการสลับรายการแบบกลุ่ม</value>
+  </data>
+  <data name="GamesPage_Batch_Title" xml:space="preserve">
+    <value>ใช้ DLL กับเกมที่เลือก</value>
+  </data>
+  <data name="GamesPage_Batch_VersionForTypeTemplate" xml:space="preserve">
+    <value>{0} เวอร์ชัน</value>
+  </data>
+  <data name="GamesPage_Batch_WaitingForDownload" xml:space="preserve">
+    <value>กำลังรอให้การดาวน์โหลดปัจจุบันเสร็จสิ้น…</value>
+  </data>
+  <data name="GamesPage_BulkSwap" xml:space="preserve">
+    <value>สลับแบบกลุ่ม</value>
+  </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
     <value>จัดกลุ่มเกมที่มาจากคลังเดียวกันไว้ด้วยกัน</value>
   </data>
@@ -440,6 +548,21 @@
   </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>กำลังโหลดข้อมูลเกมใหม่</value>
+  </data>
+  <data name="GamesPage_SelectionMode_Close" xml:space="preserve">
+    <value>ปิด</value>
+  </data>
+  <data name="GamesPage_SelectionMode_CountTemplate" xml:space="preserve">
+    <value>{0} รายการที่เลือก</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectAll" xml:space="preserve">
+    <value>เลือกทั้งหมด</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectDlls" xml:space="preserve">
+    <value>เลือกไฟล์ DLL</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectNone" xml:space="preserve">
+    <value>ล้างที่เลือกทั้งหมด</value>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
     <value>แสดงเกมที่ถูกซ่อนไว้ (ค่าเริ่มต้นคือปิดเมื่อเปิดโปรแกรม)</value>
@@ -845,6 +968,9 @@
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>หมายเหตุสำหรับเกมมัลติเพลเยอร์</value>
+  </data>
+  <data name="MainWindow_UpdateAvailableBannerTitle" xml:space="preserve">
+    <value>มีเวอร์ชันใหม่พร้อมใช้งาน:</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
     <value>ยังใช้งานไม่ได้</value>

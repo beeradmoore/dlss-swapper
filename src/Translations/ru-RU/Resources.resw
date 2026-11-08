@@ -358,6 +358,114 @@
   <data name="GamesPage_AddGame" xml:space="preserve">
     <value>Добавить игру</value>
   </data>
+  <data name="GamesPage_Batch_ApplyingTemplate" xml:space="preserve">
+    <value>Применение… ({0} из {1})</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Preset" xml:space="preserve">
+    <value>Пресет</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Version" xml:space="preserve">
+    <value>Версия</value>
+  </data>
+  <data name="GamesPage_Batch_DllLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadFailedTemplate" xml:space="preserve">
+    <value>Не удалось скачать {0}. Игры не были изменены.</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadingTemplate" xml:space="preserve">
+    <value>Загрузка {0}…</value>
+  </data>
+  <data name="GamesPage_Batch_Error_Generic" xml:space="preserve">
+    <value>Невыполненно (возможно, применено частично — проверьте эту игру)</value>
+  </data>
+  <data name="GamesPage_Batch_Error_OrphanBackup" xml:space="preserve">
+    <value>Для резервной DLL не найден соответствующий файл игры (восстановите файлы игры вручную)</value>
+  </data>
+  <data name="GamesPage_Batch_Error_PossiblyPartialTemplate" xml:space="preserve">
+    <value>{0} (возможно, применено частично — проверьте эту игру)</value>
+  </data>
+  <data name="GamesPage_Batch_Group_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="GamesPage_Batch_Group_FSR" xml:space="preserve">
+    <value>FSR</value>
+  </data>
+  <data name="GamesPage_Batch_Group_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="GamesPage_Batch_NeedsAdminTemplate" xml:space="preserve">
+    <value>{0} игре(ам) требуется запуск DLSS Swapper от имени администратора</value>
+  </data>
+  <data name="GamesPage_Batch_NoChange" xml:space="preserve">
+    <value>Не изменить</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoAsset" xml:space="preserve">
+    <value>В игре отсутствует эта DLL</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoProfile" xml:space="preserve">
+    <value>Для этой игры не найден профиль драйвера NVIDIA</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_Unsupported" xml:space="preserve">
+    <value>NVIDIA пресеты недоступны</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_UnsupportedMessage" xml:space="preserve">
+    <value>Пресеты недоступны, поскольку в системе не обнаружен поддерживаемый драйвер NVIDIA.</value>
+  </data>
+  <data name="GamesPage_Batch_PresetForTypeTemplate" xml:space="preserve">
+    <value>{0} пресет</value>
+  </data>
+  <data name="GamesPage_Batch_PresetLabelTemplate" xml:space="preserve">
+    <value>Пресет {0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_RestoreLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_AlreadyOriginal" xml:space="preserve">
+    <value>Игра уже использует исходную DLL</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Incompatible" xml:space="preserve">
+    <value>Несовместимая генерация DLSS</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_MixedGenerations" xml:space="preserve">
+    <value>В игре используются смешанные генерации DLSS</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_NoAsset" xml:space="preserve">
+    <value>Игра не использует DLL этого типа</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Processing" xml:space="preserve">
+    <value>Игра уже обрабатывается</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Errors" xml:space="preserve">
+    <value>Ошибки:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_NotApplicableTemplate" xml:space="preserve">
+    <value>{0} изменение(й) было пропущено, поскольку не подходит для этой игры или не требуется.</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Skipped" xml:space="preserve">
+    <value>Пропущено:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Swapped" xml:space="preserve">
+    <value>Применено:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_SwappedTemplate" xml:space="preserve">
+    <value>{0} изменение(й) в {1} игре(ах)</value>
+  </data>
+  <data name="GamesPage_Batch_SummaryTitle" xml:space="preserve">
+    <value>Сводка массовой замены</value>
+  </data>
+  <data name="GamesPage_Batch_Title" xml:space="preserve">
+    <value>Применить DLL к выбранным играм</value>
+  </data>
+  <data name="GamesPage_Batch_VersionForTypeTemplate" xml:space="preserve">
+    <value>{0} версия</value>
+  </data>
+  <data name="GamesPage_Batch_WaitingForDownload" xml:space="preserve">
+    <value>Ожидание завершения текущей загрузки…</value>
+  </data>
+  <data name="GamesPage_BulkSwap" xml:space="preserve">
+    <value>Массовая замена</value>
+  </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
     <value>Группировать игры из одной библиотеки вместе</value>
   </data>
@@ -440,6 +548,21 @@
   </data>
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Перезагрузка игры</value>
+  </data>
+  <data name="GamesPage_SelectionMode_Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="GamesPage_SelectionMode_CountTemplate" xml:space="preserve">
+    <value>{0} выбрано</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectAll" xml:space="preserve">
+    <value>Выбрать все</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectDlls" xml:space="preserve">
+    <value>Выбрать DLL</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectNone" xml:space="preserve">
+    <value>Ничего не выбирать</value>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
     <value>Показать скрытые игры (по умолчанию отключено при запуске)</value>
@@ -845,6 +968,9 @@
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>Примечание для многопользовательских игр</value>
+  </data>
+  <data name="MainWindow_UpdateAvailableBannerTitle" xml:space="preserve">
+    <value>Доступна новая версия:</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
     <value>Все еще не работает</value>

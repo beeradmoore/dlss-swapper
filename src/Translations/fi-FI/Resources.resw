@@ -1034,7 +1034,7 @@ Tästä syystä suosittelemme varovaisuutta moninpeleille.</value>
     <value>DLSS-asetukset</value>
   </data>
   <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
-    <value>Globaali esiasetus</value>
+    <value>Globaali Super Resolution -esiasetus</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>Pelikirjastot</value>

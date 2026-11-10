@@ -367,6 +367,121 @@ Varmista käytetty esiasetus ottamalla käyttöön DLSS-näyttöilmaisin.</value
   <data name="GamesPage_AddGame" xml:space="preserve">
     <value>Lisää peli</value>
   </data>
+  <data name="GamesPage_Batch_ApplyingTemplate" xml:space="preserve">
+    <value>Toteutetaan… ({0}/{1})</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Preset" xml:space="preserve">
+    <value>Esiasetus</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Version" xml:space="preserve">
+    <value>Versio</value>
+  </data>
+  <data name="GamesPage_Batch_DllLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadFailedTemplate" xml:space="preserve">
+    <value>{0} ei pystytty lataamaan. Yhtäkään peliä ei muutettu.</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadingTemplate" xml:space="preserve">
+    <value>Ladataan {0}…</value>
+  </data>
+  <data name="GamesPage_Batch_Error_Generic" xml:space="preserve">
+    <value>Epäonnistui (tila mahdollisesti puutteellinen – tarkista tämä peli)</value>
+  </data>
+  <data name="GamesPage_Batch_Error_OrphanBackup" xml:space="preserve">
+    <value>Varmuuskopio-DLL-tiedostolle ei löydy vastaavaa pelitiedostoa (korjaa pelitiedostot manuaalisesti)</value>
+  </data>
+  <data name="GamesPage_Batch_Error_PossiblyPartialTemplate" xml:space="preserve">
+    <value>{0} (tila mahdollisesti puutteellinen – tarkista tämä peli)</value>
+  </data>
+  <data name="GamesPage_Batch_Group_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="GamesPage_Batch_Group_FSR" xml:space="preserve">
+    <value>FSR</value>
+  </data>
+  <data name="GamesPage_Batch_Group_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="GamesPage_Batch_NeedsAdminTemplate" xml:space="preserve">
+    <value>{0} peliä vaatii DLSS Swapperin suorittamista järjestelmänvalvojana</value>
+  </data>
+  <data name="GamesPage_Batch_NoChange" xml:space="preserve">
+    <value>Älä muuta</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoAsset" xml:space="preserve">
+    <value>Pelistä puuttuu tämä DLL-tiedosto</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoProfile" xml:space="preserve">
+    <value>Tälle pelille ei löytynyt NVIDIA-ajuriprofiilia</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_Unsupported" xml:space="preserve">
+    <value>NVIDIA-esiasetukset eivät ole käytettävissä</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_UnsupportedMessage" xml:space="preserve">
+    <value>Esiasetukset eivät ole käytettävissä, koska järjestelmästä ei löytynyt tuettua NVIDIA-ajuria.</value>
+  </data>
+  <data name="GamesPage_Batch_PresetForTypeTemplate" xml:space="preserve">
+    <value>{0} esiasetus</value>
+    <comment>Accessible name for a preset dropdown. {0} = DLL type name (e.g. DLSS)</comment>
+  </data>
+  <data name="GamesPage_Batch_PresetLabelTemplate" xml:space="preserve">
+    <value>Esiasetus {0} → {1}</value>
+    <comment>{0} = DLL type name (e.g. DLSS), {1} = preset name (e.g. D)</comment>
+  </data>
+  <data name="GamesPage_Batch_RestoreLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+    <comment>{0} = DLL type name (e.g. DLSS), {1} = restore action name (e.g. Restore original DLL)</comment>
+  </data>
+  <data name="GamesPage_Batch_Skipped_AlreadyOriginal" xml:space="preserve">
+    <value>Peli käyttää jo alkuperäistä DLL-tiedostoa</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Incompatible" xml:space="preserve">
+    <value>Yhteensopimaton DLSS-sukupolvi</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_MixedGenerations" xml:space="preserve">
+    <value>Peli käyttää useampaa DLSS-sukupolvea</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_NoAsset" xml:space="preserve">
+    <value>Peli ei käytä tämän tyyppistä DLL-tiedostoa</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Processing" xml:space="preserve">
+    <value>Peliä käsitellään parhaillaan</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Errors" xml:space="preserve">
+    <value>Virheet:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_NotApplicableTemplate" xml:space="preserve">
+    <value>{0} muutosta jätettiin väliin, koska ne eivät koskeneet peliä tai niitä ei tarvittu.</value>
+    <comment>{0} = number of planned changes that were not applicable (game does not use that DLL type, already uses the original DLL, or presets are unsupported)</comment>
+  </data>
+  <data name="GamesPage_Batch_Summary_Skipped" xml:space="preserve">
+    <value>Ohitettu:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Swapped" xml:space="preserve">
+    <value>Toteutettu:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_SwappedTemplate" xml:space="preserve">
+    <value>{0} muutosta {1} pelissä</value>
+    <comment>{0} = number of DLL/preset changes made, {1} = number of games they were made in</comment>
+  </data>
+  <data name="GamesPage_Batch_SummaryTitle" xml:space="preserve">
+    <value>Joukkovaihdon yhteenveto</value>
+  </data>
+  <data name="GamesPage_Batch_Title" xml:space="preserve">
+    <value>Käytä DLL-tiedostoa valittuihin peleihin</value>
+  </data>
+  <data name="GamesPage_Batch_VersionForTypeTemplate" xml:space="preserve">
+    <value>{0} versio</value>
+    <comment>Accessible name for a DLL version dropdown. {0} = DLL type name (e.g. DLSS)</comment>
+  </data>
+  <data name="GamesPage_Batch_WaitingForDownload" xml:space="preserve">
+    <value>Odotetaan tämän hetkisen latauksen valmistumista…</value>
+  </data>
+  <data name="GamesPage_BulkSwap" xml:space="preserve">
+    <value>Joukko-vaihto</value>
+    <comment>Note the Finnish translation forced hyphen so the compound word is split to two lines at balanced position with limited horizontal space.</comment>
+  </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
     <value>Ryhmitä pelit samasta kirjastosta yhteen</value>
   </data>
@@ -451,6 +566,24 @@ Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmist
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Ladataan peliä uudelleen</value>
     <comment>Used as a loading box title when the user clicks reload game button on a games detail page</comment>
+  </data>
+  <data name="GamesPage_SelectionMode_Close" xml:space="preserve">
+    <value>Sulje</value>
+  </data>
+  <data name="GamesPage_SelectionMode_CountTemplate" xml:space="preserve">
+    <value>{0} valittu</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectAll" xml:space="preserve">
+    <value>Valitse kaikki</value>
+    <comment>Button in the selection bar, selects every game currently visible after filter and search</comment>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectDlls" xml:space="preserve">
+    <value>Valitse DLL:t</value>
+    <comment>Primary action button in the selection bar, opens the batch DLL picker</comment>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectNone" xml:space="preserve">
+    <value>Tyhjennä valinnat</value>
+    <comment>Button in the selection bar, clears selection for all games</comment>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
     <value>Näytä piilotetut pelit (oletuksena pois päältä käynnistettäessä)</value>
@@ -874,6 +1007,9 @@ Tästä syystä suosittelemme varovaisuutta moninpeleille.</value>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>Huomautus moninpeleistä</value>
   </data>
+  <data name="MainWindow_UpdateAvailableBannerTitle" xml:space="preserve">
+    <value>Uusi versio on saatavilla:</value>
+  </data>
   <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
     <value>Ei silti toimi</value>
     <comment>Meaning the test failed.</comment>
@@ -1217,141 +1353,5 @@ Tästä syystä suosittelemme varovaisuutta moninpeleille.</value>
   </data>
   <data name="TranslationToolboxPage_WindowTitle" xml:space="preserve">
     <value>Käännöstyökalupakki</value>
-  </data>
-  <data name="MainWindow_UpdateAvailableBannerTitle" xml:space="preserve">
-    <value>Uusi versio on saatavilla:</value>
-  </data>
-  <data name="GamesPage_SelectionMode_Close" xml:space="preserve">
-    <value>Sulje</value>
-  </data>
-  <data name="GamesPage_SelectionMode_CountTemplate" xml:space="preserve">
-    <value>{0} valittu</value>
-  </data>
-  <data name="GamesPage_SelectionMode_SelectAll" xml:space="preserve">
-    <value>Valitse kaikki</value>
-    <comment>Button in the selection bar, selects every game currently visible after filter and search</comment>
-  </data>
-  <data name="GamesPage_SelectionMode_SelectDlls" xml:space="preserve">
-    <value>Valitse DLL:t</value>
-    <comment>Primary action button in the selection bar, opens the batch DLL picker</comment>
-  </data>
-  <data name="GamesPage_SelectionMode_SelectNone" xml:space="preserve">
-    <value>Tyhjennä valinnat</value>
-    <comment>Button in the selection bar, clears selection for all games</comment>
-  </data>
-  <data name="GamesPage_Batch_ApplyingTemplate" xml:space="preserve">
-    <value>Toteutetaan… ({0}/{1})</value>
-  </data>
-  <data name="GamesPage_Batch_ColumnHeader_Preset" xml:space="preserve">
-    <value>Esiasetus</value>
-  </data>
-  <data name="GamesPage_Batch_ColumnHeader_Version" xml:space="preserve">
-    <value>Versio</value>
-  </data>
-  <data name="GamesPage_Batch_DllLabelTemplate" xml:space="preserve">
-    <value>{0} → {1}</value>
-  </data>
-  <data name="GamesPage_Batch_DownloadFailedTemplate" xml:space="preserve">
-    <value>{0} ei pystytty lataamaan. Yhtäkään peliä ei muutettu.</value>
-  </data>
-  <data name="GamesPage_Batch_DownloadingTemplate" xml:space="preserve">
-    <value>Ladataan {0}…</value>
-  </data>
-  <data name="GamesPage_Batch_Error_Generic" xml:space="preserve">
-    <value>Epäonnistui (tila mahdollisesti puutteellinen – tarkista tämä peli)</value>
-  </data>
-  <data name="GamesPage_Batch_Error_OrphanBackup" xml:space="preserve">
-    <value>Varmuuskopio-DLL-tiedostolle ei löydy vastaavaa pelitiedostoa (korjaa pelitiedostot manuaalisesti)</value>
-  </data>
-  <data name="GamesPage_Batch_Error_PossiblyPartialTemplate" xml:space="preserve">
-    <value>{0} (tila mahdollisesti puutteellinen – tarkista tämä peli)</value>
-  </data>
-  <data name="GamesPage_Batch_Group_DLSS" xml:space="preserve">
-    <value>DLSS</value>
-  </data>
-  <data name="GamesPage_Batch_Group_FSR" xml:space="preserve">
-    <value>FSR</value>
-  </data>
-  <data name="GamesPage_Batch_Group_XeSS" xml:space="preserve">
-    <value>XeSS</value>
-  </data>
-  <data name="GamesPage_Batch_NeedsAdminTemplate" xml:space="preserve">
-    <value>{0} peliä vaatii DLSS Swapperin suorittamista järjestelmänvalvojana</value>
-  </data>
-  <data name="GamesPage_Batch_NoChange" xml:space="preserve">
-    <value>Älä muuta</value>
-  </data>
-  <data name="GamesPage_Batch_Preset_Skipped_NoAsset" xml:space="preserve">
-    <value>Pelistä puuttuu tämä DLL-tiedosto</value>
-  </data>
-  <data name="GamesPage_Batch_Preset_Skipped_NoProfile" xml:space="preserve">
-    <value>Tälle pelille ei löytynyt NVIDIA-ajuriprofiilia</value>
-  </data>
-  <data name="GamesPage_Batch_Preset_Skipped_Unsupported" xml:space="preserve">
-    <value>NVIDIA-esiasetukset eivät ole käytettävissä</value>
-  </data>
-  <data name="GamesPage_Batch_Preset_UnsupportedMessage" xml:space="preserve">
-    <value>Esiasetukset eivät ole käytettävissä, koska järjestelmästä ei löytynyt tuettua NVIDIA-ajuria.</value>
-  </data>
-  <data name="GamesPage_Batch_PresetForTypeTemplate" xml:space="preserve">
-    <value>{0} esiasetus</value>
-    <comment>Accessible name for a preset dropdown. {0} = DLL type name (e.g. DLSS)</comment>
-  </data>
-  <data name="GamesPage_Batch_PresetLabelTemplate" xml:space="preserve">
-    <value>Esiasetus {0} → {1}</value>
-    <comment>{0} = DLL type name (e.g. DLSS), {1} = preset name (e.g. D)</comment>
-  </data>
-  <data name="GamesPage_Batch_RestoreLabelTemplate" xml:space="preserve">
-    <value>{0} → {1}</value>
-    <comment>{0} = DLL type name (e.g. DLSS), {1} = restore action name (e.g. Restore original DLL)</comment>
-  </data>
-  <data name="GamesPage_Batch_Skipped_AlreadyOriginal" xml:space="preserve">
-    <value>Peli käyttää jo alkuperäistä DLL-tiedostoa</value>
-  </data>
-  <data name="GamesPage_Batch_Skipped_Incompatible" xml:space="preserve">
-    <value>Yhteensopimaton DLSS-sukupolvi</value>
-  </data>
-  <data name="GamesPage_Batch_Skipped_MixedGenerations" xml:space="preserve">
-    <value>Peli käyttää useampaa DLSS-sukupolvea</value>
-  </data>
-  <data name="GamesPage_Batch_Skipped_NoAsset" xml:space="preserve">
-    <value>Peli ei käytä tämän tyyppistä DLL-tiedostoa</value>
-  </data>
-  <data name="GamesPage_Batch_Skipped_Processing" xml:space="preserve">
-    <value>Peliä käsitellään parhaillaan</value>
-  </data>
-  <data name="GamesPage_Batch_Summary_Errors" xml:space="preserve">
-    <value>Virheet:</value>
-  </data>
-  <data name="GamesPage_Batch_Summary_NotApplicableTemplate" xml:space="preserve">
-    <value>{0} muutosta jätettiin väliin, koska ne eivät koskeneet peliä tai niitä ei tarvittu.</value>
-    <comment>{0} = number of planned changes that were not applicable (game does not use that DLL type, already uses the original DLL, or presets are unsupported)</comment>
-  </data>
-  <data name="GamesPage_Batch_Summary_Skipped" xml:space="preserve">
-    <value>Ohitettu:</value>
-  </data>
-  <data name="GamesPage_Batch_Summary_Swapped" xml:space="preserve">
-    <value>Toteutettu:</value>
-  </data>
-  <data name="GamesPage_Batch_Summary_SwappedTemplate" xml:space="preserve">
-    <value>{0} muutosta {1} pelissä</value>
-    <comment>{0} = number of DLL/preset changes made, {1} = number of games they were made in</comment>
-  </data>
-  <data name="GamesPage_Batch_SummaryTitle" xml:space="preserve">
-    <value>Joukkovaihdon yhteenveto</value>
-  </data>
-  <data name="GamesPage_Batch_Title" xml:space="preserve">
-    <value>Käytä DLL-tiedostoa valittuihin peleihin</value>
-  </data>
-  <data name="GamesPage_Batch_VersionForTypeTemplate" xml:space="preserve">
-    <value>{0} versio</value>
-    <comment>Accessible name for a DLL version dropdown. {0} = DLL type name (e.g. DLSS)</comment>
-  </data>
-  <data name="GamesPage_Batch_WaitingForDownload" xml:space="preserve">
-    <value>Odotetaan tämän hetkisen latauksen valmistumista…</value>
-  </data>
-  <data name="GamesPage_BulkSwap" xml:space="preserve">
-    <value>Joukko-vaihto</value>
-    <comment>Note the Finnish translation forced hyphen so the compound word is split to two lines at balanced position with limited horizontal space.</comment>
   </data>
 </root>

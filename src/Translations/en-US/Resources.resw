@@ -943,9 +943,6 @@ If you have checked these and your game is still not showing up there may be a b
   <data name="LibraryPage_Importing" xml:space="preserve">
     <value>Importing</value>
   </data>
-  <data name="LibraryPage_Importing" xml:space="preserve">
-    <value>Importing</value>
-  </data>
   <data name="LibraryPage_MaliciousDllsInfo" xml:space="preserve">
     <value>Replacing dlls on your computer can be dangerous.
 

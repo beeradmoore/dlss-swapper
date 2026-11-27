@@ -367,6 +367,121 @@ Varmista käytetty esiasetus ottamalla käyttöön DLSS-näyttöilmaisin.</value
   <data name="GamesPage_AddGame" xml:space="preserve">
     <value>Lisää peli</value>
   </data>
+  <data name="GamesPage_Batch_ApplyingTemplate" xml:space="preserve">
+    <value>Toteutetaan… ({0}/{1})</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Preset" xml:space="preserve">
+    <value>Esiasetus</value>
+  </data>
+  <data name="GamesPage_Batch_ColumnHeader_Version" xml:space="preserve">
+    <value>Versio</value>
+  </data>
+  <data name="GamesPage_Batch_DllLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadFailedTemplate" xml:space="preserve">
+    <value>{0} ei pystytty lataamaan. Yhtäkään peliä ei muutettu.</value>
+  </data>
+  <data name="GamesPage_Batch_DownloadingTemplate" xml:space="preserve">
+    <value>Ladataan {0}…</value>
+  </data>
+  <data name="GamesPage_Batch_Error_Generic" xml:space="preserve">
+    <value>Epäonnistui (tila mahdollisesti puutteellinen – tarkista tämä peli)</value>
+  </data>
+  <data name="GamesPage_Batch_Error_OrphanBackup" xml:space="preserve">
+    <value>Varmuuskopio-DLL-tiedostolle ei löydy vastaavaa pelitiedostoa (korjaa pelitiedostot manuaalisesti)</value>
+  </data>
+  <data name="GamesPage_Batch_Error_PossiblyPartialTemplate" xml:space="preserve">
+    <value>{0} (tila mahdollisesti puutteellinen – tarkista tämä peli)</value>
+  </data>
+  <data name="GamesPage_Batch_Group_DLSS" xml:space="preserve">
+    <value>DLSS</value>
+  </data>
+  <data name="GamesPage_Batch_Group_FSR" xml:space="preserve">
+    <value>FSR</value>
+  </data>
+  <data name="GamesPage_Batch_Group_XeSS" xml:space="preserve">
+    <value>XeSS</value>
+  </data>
+  <data name="GamesPage_Batch_NeedsAdminTemplate" xml:space="preserve">
+    <value>{0} peliä vaatii DLSS Swapperin suorittamista järjestelmänvalvojana</value>
+  </data>
+  <data name="GamesPage_Batch_NoChange" xml:space="preserve">
+    <value>Älä muuta</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoAsset" xml:space="preserve">
+    <value>Pelistä puuttuu tämä DLL-tiedosto</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_NoProfile" xml:space="preserve">
+    <value>Tälle pelille ei löytynyt NVIDIA-ajuriprofiilia</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_Skipped_Unsupported" xml:space="preserve">
+    <value>NVIDIA-esiasetukset eivät ole käytettävissä</value>
+  </data>
+  <data name="GamesPage_Batch_Preset_UnsupportedMessage" xml:space="preserve">
+    <value>Esiasetukset eivät ole käytettävissä, koska järjestelmästä ei löytynyt tuettua NVIDIA-ajuria.</value>
+  </data>
+  <data name="GamesPage_Batch_PresetForTypeTemplate" xml:space="preserve">
+    <value>{0} esiasetus</value>
+    <comment>Accessible name for a preset dropdown. {0} = DLL type name (e.g. DLSS)</comment>
+  </data>
+  <data name="GamesPage_Batch_PresetLabelTemplate" xml:space="preserve">
+    <value>Esiasetus {0} → {1}</value>
+    <comment>{0} = DLL type name (e.g. DLSS), {1} = preset name (e.g. D)</comment>
+  </data>
+  <data name="GamesPage_Batch_RestoreLabelTemplate" xml:space="preserve">
+    <value>{0} → {1}</value>
+    <comment>{0} = DLL type name (e.g. DLSS), {1} = restore action name (e.g. Restore original DLL)</comment>
+  </data>
+  <data name="GamesPage_Batch_Skipped_AlreadyOriginal" xml:space="preserve">
+    <value>Peli käyttää jo alkuperäistä DLL-tiedostoa</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Incompatible" xml:space="preserve">
+    <value>Yhteensopimaton DLSS-sukupolvi</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_MixedGenerations" xml:space="preserve">
+    <value>Peli käyttää useampaa DLSS-sukupolvea</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_NoAsset" xml:space="preserve">
+    <value>Peli ei käytä tämän tyyppistä DLL-tiedostoa</value>
+  </data>
+  <data name="GamesPage_Batch_Skipped_Processing" xml:space="preserve">
+    <value>Peliä käsitellään parhaillaan</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Errors" xml:space="preserve">
+    <value>Virheet:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_NotApplicableTemplate" xml:space="preserve">
+    <value>{0} muutosta jätettiin väliin, koska ne eivät koskeneet peliä tai niitä ei tarvittu.</value>
+    <comment>{0} = number of planned changes that were not applicable (game does not use that DLL type, already uses the original DLL, or presets are unsupported)</comment>
+  </data>
+  <data name="GamesPage_Batch_Summary_Skipped" xml:space="preserve">
+    <value>Ohitettu:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_Swapped" xml:space="preserve">
+    <value>Toteutettu:</value>
+  </data>
+  <data name="GamesPage_Batch_Summary_SwappedTemplate" xml:space="preserve">
+    <value>{0} muutosta {1} pelissä</value>
+    <comment>{0} = number of DLL/preset changes made, {1} = number of games they were made in</comment>
+  </data>
+  <data name="GamesPage_Batch_SummaryTitle" xml:space="preserve">
+    <value>Joukkovaihdon yhteenveto</value>
+  </data>
+  <data name="GamesPage_Batch_Title" xml:space="preserve">
+    <value>Käytä DLL-tiedostoa valittuihin peleihin</value>
+  </data>
+  <data name="GamesPage_Batch_VersionForTypeTemplate" xml:space="preserve">
+    <value>{0} versio</value>
+    <comment>Accessible name for a DLL version dropdown. {0} = DLL type name (e.g. DLSS)</comment>
+  </data>
+  <data name="GamesPage_Batch_WaitingForDownload" xml:space="preserve">
+    <value>Odotetaan tämän hetkisen latauksen valmistumista…</value>
+  </data>
+  <data name="GamesPage_BulkSwap" xml:space="preserve">
+    <value>Joukko-vaihto</value>
+    <comment>Note the Finnish translation forced hyphen so the compound word is split to two lines at balanced position with limited horizontal space.</comment>
+  </data>
   <data name="GamesPage_GroupGamesFromTheSameLibraryTogether" xml:space="preserve">
     <value>Ryhmitä pelit samasta kirjastosta yhteen</value>
   </data>
@@ -451,6 +566,24 @@ Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmist
   <data name="GamesPage_ReloadingGame" xml:space="preserve">
     <value>Ladataan peliä uudelleen</value>
     <comment>Used as a loading box title when the user clicks reload game button on a games detail page</comment>
+  </data>
+  <data name="GamesPage_SelectionMode_Close" xml:space="preserve">
+    <value>Sulje</value>
+  </data>
+  <data name="GamesPage_SelectionMode_CountTemplate" xml:space="preserve">
+    <value>{0} valittu</value>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectAll" xml:space="preserve">
+    <value>Valitse kaikki</value>
+    <comment>Button in the selection bar, selects every game currently visible after filter and search</comment>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectDlls" xml:space="preserve">
+    <value>Valitse DLL:t</value>
+    <comment>Primary action button in the selection bar, opens the batch DLL picker</comment>
+  </data>
+  <data name="GamesPage_SelectionMode_SelectNone" xml:space="preserve">
+    <value>Tyhjennä valinnat</value>
+    <comment>Button in the selection bar, clears selection for all games</comment>
   </data>
   <data name="GamesPage_ShowHiddenGamesText" xml:space="preserve">
     <value>Näytä piilotetut pelit (oletuksena pois päältä käynnistettäessä)</value>
@@ -554,6 +687,10 @@ Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmist
     <value>DLSS RR -esiasetus</value>
     <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
   </data>
+  <data name="General_Name_DLSSG_Preset" xml:space="preserve">
+    <value>DLSS FG -esiasetus</value>
+    <comment>If DLSS does not have a direct translation put in the English characters for it</comment>
+  </data>
   <data name="General_Name_FSR_31_DX12" xml:space="preserve">
     <value>FSR 3.1 DirectX 12</value>
     <comment>If FSR does not have a direct translation put in the English characters for it</comment>
@@ -629,8 +766,14 @@ Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmist
   <data name="General_Search" xml:space="preserve">
     <value>Etsi</value>
   </data>
+  <data name="General_Size" xml:space="preserve">
+    <value>Koko</value>
+  </data>
   <data name="General_Sorry" xml:space="preserve">
     <value>Pahoittelut</value>
+  </data>
+  <data name="General_Status" xml:space="preserve">
+    <value>Tila</value>
   </data>
   <data name="General_Success" xml:space="preserve">
     <value>Onnistui</value>
@@ -653,6 +796,9 @@ Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmist
   <data name="General_Yes" xml:space="preserve">
     <value>Kyllä</value>
   </data>
+  <data name="GitHubUpdater_CouldNotRunInstaller" xml:space="preserve">
+    <value>Asennusohjelmaa ei pystytty tällä hetkellä suorittamaan. Yritä myöhemmin uudelleen tai asenna päivitys manuaalisesti.</value>
+  </data>
   <data name="GitHubUpdater_CurrentVersionIsActualTemplate" xml:space="preserve">
     <value>Sinulla on tällä hetkellä {0} asennettuna.</value>
     <comment>{0} is the currently installed version.</comment>
@@ -660,11 +806,38 @@ Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmist
   <data name="GitHubUpdater_DlssSwapperUpdated" xml:space="preserve">
     <value>DLSS Swapper päivitettiin juuri</value>
   </data>
+  <data name="GitHubUpdater_DownloadComplete_Title" xml:space="preserve">
+    <value>Lataus valmis</value>
+  </data>
+  <data name="GitHubUpdater_DownloadingUpdate_Title" xml:space="preserve">
+    <value>Ladataan päivitystä</value>
+  </data>
+  <data name="GitHubUpdater_DownloadProgress" xml:space="preserve">
+    <value>Edistyminen</value>
+  </data>
+  <data name="GitHubUpdater_Install" xml:space="preserve">
+    <value>Asenna</value>
+  </data>
   <data name="GitHubUpdater_UpdateAvailable" xml:space="preserve">
     <value>Päivitys saatavilla</value>
   </data>
+  <data name="GitHubUpdater_UpdateDownloadFailed" xml:space="preserve">
+    <value>Päivityksen lataus epäonnistui.</value>
+  </data>
+  <data name="GitHubUpdater_UpdateReadyToInstall" xml:space="preserve">
+    <value>Päivitys on nyt valmis asennettavaksi.</value>
+  </data>
+  <data name="GitHubUpdater_Updating_Title" xml:space="preserve">
+    <value>Päivitetään</value>
+  </data>
+  <data name="GitHubUpdater_ViewUpdate" xml:space="preserve">
+    <value>Näytä päivitys</value>
+  </data>
   <data name="LibraryPage_AlreadyDownloaded" xml:space="preserve">
     <value>Jo ladattu.</value>
+  </data>
+  <data name="LibraryPage_CouldNotImportFromDriver" xml:space="preserve">
+    <value>Ajurista ei löytynyt tuotavia DLL-tiedostoja</value>
   </data>
   <data name="LibraryPage_CouldNotLoadImportedDlls" xml:space="preserve">
     <value>Tuotuja DLL-tiedostoja ei voitu ladata</value>
@@ -702,6 +875,12 @@ Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmist
   <data name="LibraryPage_DllRecordInfo_Label" xml:space="preserve">
     <value>Etiketti</value>
   </data>
+  <data name="LibraryPage_DownloadedCount" xml:space="preserve">
+    <value>Ladattu: </value>
+  </data>
+  <data name="LibraryPage_DownloadFromNVIDIA" xml:space="preserve">
+    <value>Lataa NVIDIAlta</value>
+  </data>
   <data name="LibraryPage_DownloadLatest" xml:space="preserve">
     <value>Lataa uusin</value>
   </data>
@@ -711,6 +890,12 @@ Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmist
   </data>
   <data name="LibraryPage_DownloadsStarted_Title" xml:space="preserve">
     <value>Lataukset aloitettu</value>
+  </data>
+  <data name="LibraryPage_Error_NVIDIA_Downloading" xml:space="preserve">
+    <value>Tiedostoluettelon noutaminen NVIDIAn palvelimilta epäonnistui. Yritä myöhemmin uudelleen tai tarkista DLSS Swapper -ohjelman päivitykset.</value>
+  </data>
+  <data name="LibraryPage_Error_NVIDIA_Importing" xml:space="preserve">
+    <value>Tuonti NVIDIAn palvelimilta epäonnistui. Yritä myöhemmin uudelleen tai tarkista DLSS Swapper -ohjelman päivitykset.</value>
   </data>
   <data name="LibraryPage_ExportedDLLs" xml:space="preserve">
     <value>Viedyt DLL-tiedostot: </value>
@@ -723,6 +908,12 @@ Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmist
     <value>Viety DLL {0}.</value>
     <comment>Leave 0 as it is and use safe string format</comment>
   </data>
+  <data name="LibraryPage_Exporting" xml:space="preserve">
+    <value>Viedään</value>
+  </data>
+  <data name="LibraryPage_FetchingFileList" xml:space="preserve">
+    <value>Noudetaan tiedostolistaa</value>
+  </data>
   <data name="LibraryPage_FileNotFound" xml:space="preserve">
     <value>Tiedostoa ei löytynyt.</value>
   </data>
@@ -731,6 +922,21 @@ Jos olet tarkistanut nämä ja peliäsi ei silti näy, saattaa se olla ohjelmist
   </data>
   <data name="LibraryPage_ImportedAsExistingRecord" xml:space="preserve">
     <value>Tuotu olemassa olevan DLL-tietueen mukaisesti.</value>
+  </data>
+  <data name="LibraryPage_ImportedDLLs" xml:space="preserve">
+    <value>Tuodut DLL-tiedostot: </value>
+  </data>
+  <data name="LibraryPage_ImportFrom_DownloadFromServer" xml:space="preserve">
+    <value>Lataa palvelimelta</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_Driver" xml:space="preserve">
+    <value>Ajurista</value>
+  </data>
+  <data name="LibraryPage_ImportFrom_LocalFiles" xml:space="preserve">
+    <value>Paikallisista tiedostoista</value>
+  </data>
+  <data name="LibraryPage_ImportFromNVIDIADriver" xml:space="preserve">
+    <value>Tuo NVIDIAn ajurista</value>
   </data>
   <data name="LibraryPage_Importing" xml:space="preserve">
     <value>Tuodaan</value>
@@ -756,6 +962,9 @@ Tuo DLL-tiedostoja vain luotetuista lähteistä.</value>
   </data>
   <data name="LibraryPage_ProcessedDlls" xml:space="preserve">
     <value>Käsitellyt DLL-tiedostot: </value>
+  </data>
+  <data name="LibraryPage_ProgressPercent" xml:space="preserve">
+    <value>Edistyminen: </value>
   </data>
   <data name="LibraryPage_Title" xml:space="preserve">
     <value>Kirjasto</value>
@@ -797,6 +1006,9 @@ Tästä syystä suosittelemme varovaisuutta moninpeleille.</value>
   </data>
   <data name="MainWindow_NoteForMultiplayerGames_Title" xml:space="preserve">
     <value>Huomautus moninpeleistä</value>
+  </data>
+  <data name="MainWindow_UpdateAvailableBannerTitle" xml:space="preserve">
+    <value>Uusi versio on saatavilla:</value>
   </data>
   <data name="NetworkTesterPage_BrowserTesterStillDoesNotWork" xml:space="preserve">
     <value>Ei silti toimi</value>
@@ -872,6 +1084,27 @@ Tästä syystä suosittelemme varovaisuutta moninpeleille.</value>
   <data name="NetworkTesterPage_WindowTitle" xml:space="preserve">
     <value>Verkkoyhteystestaaja</value>
   </data>
+  <data name="ProxySettings_Password" xml:space="preserve">
+    <value>Salasana</value>
+  </data>
+  <data name="ProxySettings_Server" xml:space="preserve">
+    <value>Palvelin</value>
+  </data>
+  <data name="ProxySettings_ServerPrefixWarning" xml:space="preserve">
+    <value>Varmista, että välityspalvelimen URL on kelvollinen ja alkaa http:// tai https://</value>
+  </data>
+  <data name="ProxySettings_UseAuthentication" xml:space="preserve">
+    <value>Käytä todennusta</value>
+  </data>
+  <data name="ProxySettings_UseProxySettings" xml:space="preserve">
+    <value>Käytä välityspalvelinasetuksia</value>
+  </data>
+  <data name="ProxySettings_Username" xml:space="preserve">
+    <value>Käyttäjänimi</value>
+  </data>
+  <data name="ProxySettings_WarningMessage" xml:space="preserve">
+    <value>Välityspalvelinasetukset tallennetaan Windowsin tunnistetietojen hallintaan (Windows Credential Manager), jotta ne pysyvät turvassa. Tämä rikkoo ohjelman siirrettävyyden.</value>
+  </data>
   <data name="SettingsPage_About" xml:space="preserve">
     <value>Tietoja</value>
   </data>
@@ -927,11 +1160,17 @@ Tästä syystä suosittelemme varovaisuutta moninpeleille.</value>
   <data name="SettingsPage_DLSSDeveloperOptions_VerboseLogging" xml:space="preserve">
     <value>Yksityiskohtainen lokiin kirjaaminen</value>
   </data>
+  <data name="SettingsPage_DLSSDOptions_GlobalPreset" xml:space="preserve">
+    <value>Globaali Ray Reconstruction -esiasetus</value>
+  </data>
+  <data name="SettingsPage_DLSSGOptions_GlobalPreset" xml:space="preserve">
+    <value>Globaali Frame Generation -esiasetus</value>
+  </data>
   <data name="SettingsPage_DLSSOptions" xml:space="preserve">
     <value>DLSS-asetukset</value>
   </data>
   <data name="SettingsPage_DLSSOptions_GlobalPreset" xml:space="preserve">
-    <value>Globaali esiasetus</value>
+    <value>Globaali Super Resolution -esiasetus</value>
   </data>
   <data name="SettingsPage_GameLibraries" xml:space="preserve">
     <value>Pelikirjastot</value>
@@ -980,6 +1219,9 @@ Tästä syystä suosittelemme varovaisuutta moninpeleille.</value>
   <data name="SettingsPage_Logging_Warning" xml:space="preserve">
     <value>Varoitukset</value>
   </data>
+  <data name="SettingsPage_Networking" xml:space="preserve">
+    <value>Verkko</value>
+  </data>
   <data name="SettingsPage_NoNewUpdatesAvailable" xml:space="preserve">
     <value>Uusia päivityksiä ei ole saatavilla.</value>
   </data>
@@ -998,6 +1240,9 @@ Tästä syystä suosittelemme varovaisuutta moninpeleille.</value>
   <data name="SettingsPage_PathAlreadyIgnored" xml:space="preserve">
     <value>Polku {0} on jo ohitettu.</value>
     <comment>{0} is the path that the user tried to add but it was already ignored.</comment>
+  </data>
+  <data name="SettingsPage_ProxySettings" xml:space="preserve">
+    <value>Välityspalvelinasetukset</value>
   </data>
   <data name="SettingsPage_SettingsAllowUntrusted" xml:space="preserve">
     <value>Salli epäluotetut</value>

@@ -260,7 +260,7 @@
     <value>設定預設狀態下為全域套用的 DLSS 預設。(變更此選項無法保證一定能讓該預設成功生效)</value>
   </data>
   <data name="GamePage_Favorited" xml:space="preserve">
-    <value>從我的最愛移除</value>
+    <value>已加入我的最愛</value>
   </data>
   <data name="GamePage_History" xml:space="preserve">
     <value>歷史紀錄</value>
@@ -326,7 +326,7 @@
     <value>無法變更預設，請參閱錯誤日誌以取得更多資訊。</value>
   </data>
   <data name="GamePage_YouMayOnlyDragOneFileCover" xml:space="preserve">
-    <value>您只能拖曳單張圖片來作為封面。</value>
+    <value>您只能拖曳單個圖片作為封面。</value>
   </data>
   <data name="GamesPage_AddGame" xml:space="preserve">
     <value>新增遊戲</value>
@@ -353,7 +353,7 @@
     <value>新增遊戲時發生錯誤</value>
   </data>
   <data name="GamesPage_ManuallyAdding_InfoHtml" xml:space="preserve">
-    <value>您必須選取您的 &lt;i&gt;遊戲&lt;/i&gt; 目錄，而不是 &lt;i&gt;遊戲平台&lt;/i&gt; 目錄。&lt;br/&gt;&lt;br/&gt;舉例來說，若您的遊戲安裝於：&lt;br/&gt;&lt;b&gt;C:\Program Files\MyGamesFolder\MyFavGame\&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;您應該選取 &lt;b&gt;MyFavGame&lt;/b&gt; 目錄，而不是 &lt;b&gt;MyGamesFolder&lt;/b&gt; 目錄。</value>
+    <value>您必須選取您的 <i>遊戲</i> 目錄，而不是 <i>遊戲平台</i> 目錄。<br /><br />舉例來說，若您的遊戲安裝於：<br /><b>C:\Program Files\MyGamesFolder\MyFavGame\</b><br /><br />您應該選取 <b>MyFavGame</b> 目錄，而不是 <b>MyGamesFolder</b> 目錄。</value>
   </data>
   <data name="GamesPage_ManuallyAdding_NoteMessage" xml:space="preserve">
     <value>DLSS Swapper 通常會自動從您已安裝的遊戲平台中掃描到遊戲。如果您的遊戲沒有顯示，可能有幾項設定阻礙了它。請檢查以下因素：

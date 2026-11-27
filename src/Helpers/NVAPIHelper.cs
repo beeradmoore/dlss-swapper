@@ -162,6 +162,8 @@ internal partial class NVAPIHelper : ObservableObject
                 {
                     for (var i = 0; i < dlssDPresetOptions.Count; ++i)
                     {
+                        dlssDPresetOptions[i].UpdateNameFromTranslation();
+
                         if (dlssDPresetOptions[i].Value == 1 || dlssDPresetOptions[i].Value == 2 || dlssDPresetOptions[i].Value == 3)
                         {
                             dlssDPresetOptions[i].Deprecated = true;
@@ -209,6 +211,10 @@ internal partial class NVAPIHelper : ObservableObject
                 var dlssGPresetOptions = JsonSerializer.Deserialize(File.ReadAllText(dlssgPresetsJsonPath), SourceGenerationContext.Default.ListPresetOption)?.Where(x => x.Used == true)?.ToList();
                 if (dlssGPresetOptions is not null && dlssGPresetOptions.Count > 0)
                 {
+                    for (var i = 0; i < dlssGPresetOptions.Count; ++i)
+                    {
+                        dlssGPresetOptions[i].UpdateNameFromTranslation();
+                    }
                     DlssGPresetOptions = dlssGPresetOptions.AsReadOnly();
                 }
                 else

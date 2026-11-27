@@ -47,6 +47,7 @@ public class PresetOption : INotifyPropertyChanged
             0x0000000B => ResourceHelper.GetFormattedResourceTemplate(Deprecated ? "DLSS_Preset_Letter_Deprecated" : "DLSS_Preset_Letter", "K"),
             0x0000000C => ResourceHelper.GetFormattedResourceTemplate(Deprecated ? "DLSS_Preset_Letter_Deprecated" : "DLSS_Preset_Letter", "L"),
             0x0000000D => ResourceHelper.GetFormattedResourceTemplate(Deprecated ? "DLSS_Preset_Letter_Deprecated" : "DLSS_Preset_Letter", "M"),
+            0x00FFFFFE => ResourceHelper.GetString("DLSS_Preset_AlwaysUseLatest"),
             0x00FFFFFF => ResourceHelper.GetString("DLSS_Preset_AlwaysUseLatest"),
             _ => string.Empty
         };

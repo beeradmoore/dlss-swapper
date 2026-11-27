@@ -233,13 +233,13 @@
   </data>
   <data name="GameHistoryEventType_DLLBackupRemoved" xml:space="preserve">
     <value>DLL 備份已移除</value>
-   </data>
+  </data>
   <data name="GameHistoryEventType_DLLChangedExternally" xml:space="preserve">
     <value>DLL 已被外部修改</value>
-   </data>
+  </data>
   <data name="GameHistoryEventType_DLLDetected" xml:space="preserve">
     <value>已刪除 DLL</value>
-   </data>
+  </data>
   <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
     <value>重置 DLL</value>
   </data>

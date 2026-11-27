@@ -224,7 +224,7 @@
   </data>
   <data name="GameHistoryControl_EventTypeHeader" xml:space="preserve">
     <value>活動類型</value>
-    </data>
+  </data>
   <data name="GameHistoryControl_NoHistoryLabel" xml:space="preserve">
     <value>未找到歷史紀錄</value>
   </data>
@@ -242,10 +242,10 @@
    </data>
   <data name="GameHistoryEventType_DLLReset" xml:space="preserve">
     <value>重置 DLL</value>
-    </data>
+  </data>
   <data name="GameHistoryEventType_DLLSwapped" xml:space="preserve">
     <value>已替換 DLL</value>
-     </data>
+  </data>
   <data name="GameLibrary_UnknownGameLibraryTemplate" xml:space="preserve">
     <value>無法載入收藏庫 {0}</value>
   </data>
@@ -300,7 +300,7 @@
   </data>
   <data name="GamePage_History" xml:space="preserve">
     <value>歷史紀錄</value>
-    </data>
+  </data>
   <data name="GamePage_InstallPath" xml:space="preserve">
     <value>安裝路徑</value>
   </data>

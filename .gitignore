@@ -1,6 +1,7 @@
 
 bin/
 obj/
+publish/
 .vs/
 .DS_Store
 *.user

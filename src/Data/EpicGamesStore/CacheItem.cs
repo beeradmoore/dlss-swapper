@@ -13,6 +13,15 @@ internal class CacheItem
     [JsonPropertyName("keyImages")]
     public CacheItemKeyImage[] KeyImages { get; set; } = System.Array.Empty<CacheItemKeyImage>();
 
+    [JsonPropertyName("categories")]
+    public CacheItemCategory[] Categories { get; set; } = System.Array.Empty<CacheItemCategory>();
+
+
+    internal class CacheItemCategory
+    {
+        [JsonPropertyName("path")]
+        public string Path { get; set; } = string.Empty;
+    }
 
     internal class CacheItemKeyImage
     {

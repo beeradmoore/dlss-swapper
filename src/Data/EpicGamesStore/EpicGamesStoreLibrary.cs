@@ -249,6 +249,7 @@ internal class EpicGamesStoreLibrary : IGameLibrary
     // Handles the new (eglv2 / "beta") Epic Games Launcher which stores its installed
     // games as an append-only installations.jsonl file (one JSON object per line) under
     // %LOCALAPPDATA%\com.epicgames.eglv2 instead of individual *.item manifest files.
+    // This system is accurate as of Epic Games Launcher v0.123.0 (Nov 25th 2026)
     async Task<List<Game>> ListNewLauncherGamesAsync(bool forceNeedsProcessing)
     {
         var games = new List<Game>();

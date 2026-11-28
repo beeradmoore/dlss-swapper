@@ -151,6 +151,8 @@ internal class Database
                 "url",
                 "launcher",
                 "hash",
+                "local",
+                "cache",
             };
 
             var hasIssues = false;

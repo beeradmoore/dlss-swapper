@@ -31,11 +31,16 @@ internal class EpicGamesStoreLibrary : IGameLibrary
 
     public bool IsInstalled()
     {
-        if (string.IsNullOrEmpty(GetEpicRootDirectory()) == false)
-        {
-            return true;
-        }
+        return IsLegacyInstalled() || IsNewInstalled();
+    }
 
+    bool IsLegacyInstalled()
+    {
+        return string.IsNullOrEmpty(GetLegacyEpicRootDirectory()) == false;
+    }
+
+    bool IsNewInstalled()
+    {
         var newLauncherRootDirectory = GetNewEpicLauncherRootDirectory();
         return string.IsNullOrEmpty(newLauncherRootDirectory) == false && File.Exists(Path.Combine(newLauncherRootDirectory, "installations.jsonl"));
     }
@@ -46,18 +51,27 @@ internal class EpicGamesStoreLibrary : IGameLibrary
 
         var cachedGames = GameManager.Instance.GetGames<EpicGamesStoreGame>();
 
-        var legacyLauncherGames = await ListLegacyLauncherGamesAsync(forceNeedsProcessing).ConfigureAwait(false);
-        games.AddRange(legacyLauncherGames);
-
-        // The new (eglv2 / "beta") launcher uses a completely different data format
-        // to the legacy launcher. If a game somehow shows up in both (e.g. during a
-        // migration) we keep the legacy entry we have already added above.
-        var newLauncherGames = await ListNewLauncherGamesAsync(forceNeedsProcessing).ConfigureAwait(false);
-        foreach (var newLauncherGame in newLauncherGames)
+        // Check for games from the legacy launcher
+        if (IsLegacyInstalled())
         {
-            if (games.Any(x => x.PlatformId == newLauncherGame.PlatformId) == false)
+            var legacyLauncherGames = await ListLegacyLauncherGamesAsync(forceNeedsProcessing).ConfigureAwait(false);
+            games.AddRange(legacyLauncherGames);
+        }
+
+
+        // Check for games from the new launcher
+        if (IsNewInstalled())
+        {
+            // The new (eglv2 / "beta") launcher uses a completely different data format
+            // to the legacy launcher. If a game somehow shows up in both (e.g. during a
+            // migration) we keep the legacy entry we have already added above.
+            var newLauncherGames = await ListNewLauncherGamesAsync(forceNeedsProcessing).ConfigureAwait(false);
+            foreach (var newLauncherGame in newLauncherGames)
             {
-                games.Add(newLauncherGame);
+                if (games.Any(x => x.PlatformId == newLauncherGame.PlatformId) == false)
+                {
+                    games.Add(newLauncherGame);
+                }
             }
         }
 
@@ -79,7 +93,7 @@ internal class EpicGamesStoreLibrary : IGameLibrary
     async Task<List<Game>> ListLegacyLauncherGamesAsync(bool forceNeedsProcessing)
     {
         var games = new List<Game>();
-        var epicRootDirectory = GetEpicRootDirectory();
+        var epicRootDirectory = GetLegacyEpicRootDirectory();
 
         // EGS can be installed and pass this check even if there are no games installed.
         if (string.IsNullOrWhiteSpace(epicRootDirectory) || Directory.Exists(epicRootDirectory) == false)
@@ -104,7 +118,7 @@ internal class EpicGamesStoreLibrary : IGameLibrary
         }
         */
 
-        var manifestsDirectory = Path.Combine(epicRootDirectory, "EpicGamesLauncher", "Data", "Manifests");
+        var manifestsDirectory = Path.Combine(epicRootDirectory, "Data", "Manifests");
         if (Directory.Exists(manifestsDirectory) == false)
         {
             return games;
@@ -112,7 +126,7 @@ internal class EpicGamesStoreLibrary : IGameLibrary
 
 
         var cacheItemsDictionary = new Dictionary<string, CacheItem>();
-        var catalogCacheFile = Path.Combine(epicRootDirectory, "EpicGamesLauncher", "Data", "Catalog", "catcache.bin");
+        var catalogCacheFile = Path.Combine(epicRootDirectory, "Data", "Catalog", "catcache.bin");
         if (File.Exists(catalogCacheFile))
         {
             var cacheItemsArray = Array.Empty<CacheItem>();
@@ -403,9 +417,9 @@ internal class EpicGamesStoreLibrary : IGameLibrary
         return games;
     }
 
-    string GetEpicRootDirectory()
+    string GetLegacyEpicRootDirectory()
     {
-        var epicRootDirectory = Path.Combine(Environment.ExpandEnvironmentVariables("%ProgramData%"), "Epic");
+        var epicRootDirectory = Path.Combine(Environment.ExpandEnvironmentVariables("%ProgramData%"), "Epic", "EpicGamesLauncher");
         if (Directory.Exists(epicRootDirectory))
         {
             return epicRootDirectory;

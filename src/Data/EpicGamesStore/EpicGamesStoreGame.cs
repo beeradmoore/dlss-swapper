@@ -1,3 +1,4 @@
+using System.IO;
 using System.Threading.Tasks;
 using DLSS_Swapper.Interfaces;
 using SQLite;
@@ -14,6 +15,9 @@ internal class EpicGamesStoreGame : Game
     [Column("remote_header_image")]
     public string RemoteHeaderImage { get; set; } = string.Empty;
 
+    [Column("local_cache_image")]
+    public string LocalCacheImage { get; set; } = string.Empty;
+
     public EpicGamesStoreGame()
     {
 
@@ -27,6 +31,18 @@ internal class EpicGamesStoreGame : Game
 
     protected override async Task UpdateCacheImageAsync()
     {
+        // If we have a local image use it.
+        if (string.IsNullOrWhiteSpace(LocalCacheImage) == false && File.Exists(LocalCacheImage))
+        {
+            using (var fileStream = File.Open(LocalCacheImage, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                await ResizeCoverAsync(fileStream).ConfigureAwait(false);
+            }
+
+            return;
+        }
+
+        // Otherise fallback to try remote.
         if (string.IsNullOrEmpty(RemoteHeaderImage))
         {
             return;
@@ -47,6 +63,12 @@ internal class EpicGamesStoreGame : Game
 
         if (game is EpicGamesStoreGame epicGamesStoreGame)
         {
+            if (LocalCacheImage != epicGamesStoreGame.LocalCacheImage)
+            {
+                LocalCacheImage = epicGamesStoreGame.LocalCacheImage;
+                didChange = true;
+            }
+
             if (RemoteHeaderImage != epicGamesStoreGame.RemoteHeaderImage)
             {
                 RemoteHeaderImage = epicGamesStoreGame.RemoteHeaderImage;

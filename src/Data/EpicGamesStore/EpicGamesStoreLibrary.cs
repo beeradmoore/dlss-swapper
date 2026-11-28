@@ -319,6 +319,8 @@ internal class EpicGamesStoreLibrary : IGameLibrary
             }
         }
 
+        var imagesFolder = Path.Combine(newLauncherRootDirectory, "images");
+
         foreach (var installation in installationsByIdDictionary.Values)
         {
             try
@@ -343,6 +345,7 @@ internal class EpicGamesStoreLibrary : IGameLibrary
                 }
 
                 var remoteHeaderUrl = string.Empty;
+                var localCacheImage = string.Empty;
                 if (catalogItem?.KeyImages?.Any() == true)
                 {
                     // Try get desired image.
@@ -350,6 +353,16 @@ internal class EpicGamesStoreLibrary : IGameLibrary
                     if (dieselGameBoxTall is not null && string.IsNullOrEmpty(dieselGameBoxTall.Url) == false)
                     {
                         remoteHeaderUrl = dieselGameBoxTall.Url;
+
+                        if (string.IsNullOrWhiteSpace(dieselGameBoxTall.MD5) == false)
+                        {
+                            var expectedLocalCacheImage = Path.Combine(imagesFolder, $"{dieselGameBoxTall.MD5}.jpg");
+                            if (File.Exists(expectedLocalCacheImage))
+                            {
+                                localCacheImage = expectedLocalCacheImage;
+                            }
+                        }
+
                     }
                     else
                     {
@@ -358,6 +371,15 @@ internal class EpicGamesStoreLibrary : IGameLibrary
                         if (dieselGameBox is not null && string.IsNullOrEmpty(dieselGameBox.Url) == false)
                         {
                             remoteHeaderUrl = dieselGameBox.Url;
+
+                            if (string.IsNullOrWhiteSpace(dieselGameBox.MD5) == false)
+                            {
+                                var expectedLocalCacheImage = Path.Combine(imagesFolder, $"{dieselGameBox.MD5}.jpg");
+                                if (File.Exists(expectedLocalCacheImage))
+                                {
+                                    localCacheImage = expectedLocalCacheImage;
+                                }
+                            }
                         }
                     }
                 }
@@ -371,12 +393,15 @@ internal class EpicGamesStoreLibrary : IGameLibrary
                 var cachedGame = GameManager.Instance.GetGame<EpicGamesStoreGame>(installation.ItemId);
                 var activeGame = cachedGame ?? new EpicGamesStoreGame(installation.ItemId);
 
+
+                activeGame.RemoteHeaderImage = remoteHeaderUrl;
+                activeGame.LocalCacheImage = localCacheImage;
+
                 // These are UI-bound properties. The File.ReadAllLinesAsync().ConfigureAwait(false) above has already
                 // taken us off the UI thread, so these must be marshalled explicitly or WinUI throws RPC_E_WRONGTHREAD
                 // when a bound control is updated from a background thread.
                 await App.CurrentApp.RunOnUIThreadAsync(() =>
                 {
-                    activeGame.RemoteHeaderImage = remoteHeaderUrl;
                     activeGame.Title = title;
                     activeGame.InstallPath = PathHelpers.NormalizePath(installation.Dir);
 
